@@ -766,5 +766,76 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
         }
+
+        /**************
+         * TIED HOUSE *
+         **************/
+
+        /// <summary>
+        /// Get TiedHouseConnection by accountId
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpGet("{accountId}/tiedhouseconnection")]
+        public JsonResult GetTiedHouseConnection(string accountId)
+        {
+            var result = new List<ViewModels.TiedHouseConnection>();
+            IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
+            String accountfilter = null;
+
+            // set account filter
+            accountfilter = "_adoxio_accountid_value eq " + accountId;
+            _logger.LogError("Account filter = " + accountfilter);
+
+            tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
+
+            foreach (var tiedHouse in tiedHouseConnections)
+            {
+                result.Add(tiedHouse.ToViewModel());
+            }
+
+            return Json(result.FirstOrDefault());
+        }
+
+        /// <summary>
+        /// Add Tied House connection
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        [HttpPost("{accountId}/tiedhouseconnection")]
+        public ActionResult AddTiedHouseConnection([FromBody] ViewModels.TiedHouseConnection item, string accountId)
+        {
+            if (item == null)
+            {
+                return BadRequest();
+            }
+            
+            var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
+
+            // copy values over from the data provided
+            tiedHouse.CopyValues(item);
+            tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", accountId);
+            try
+            {
+                tiedHouse = _dynamicsClient.Tiedhouseconnections.Create(tiedHouse);
+            }
+            catch (OdataerrorException odee)
+            {
+                tiedHouse.AdoxioTiedhouseconnectionid = _dynamicsClient.GetCreatedRecord(odee, null);
+                if (string.IsNullOrEmpty(tiedHouse.AdoxioTiedhouseconnectionid))
+                {
+                    _logger.LogError("Error creating tiedhouse connection");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    throw new Exception("Unable to update tied house connections");
+                }
+            }
+
+            return Json(tiedHouse.ToViewModel());
+        }
+
+
     }
 }

@@ -6,9 +6,11 @@ import { Router } from '@angular/router';
 import { AdoxioApplication } from '@app/models/adoxio-application.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
+import { DynamicsAccount } from './../models/dynamics-account.model';
 
 
-const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
 
 const ACTIVE = 'Active';
 const PAYMENT_REQUIRED = 'Payment Required';
@@ -26,13 +28,15 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
+  readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
+  @Input() account: DynamicsAccount;
   dataLoaded = false;
 
   constructor(
-    private adoxioApplicationDataService: AdoxioApplicationDataService,
+    private applicationDataService: AdoxioApplicationDataService,
     private router: Router,
     private paymentService: PaymentDataService,
     private snackBar: MatSnackBar,
@@ -45,30 +49,64 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   /**
    *
    * */
-  private  displayApplications() {
+  private displayApplications() {
     this.inProgressApplications = [];
     this.licencedApplications = [];
-    this.busy = this.adoxioApplicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
-      adoxioApplications.forEach((licAppSum: AdoxioApplication | any) => {
-        licAppSum.applicationStatus = this.transformStatus(licAppSum);
-        if (!licAppSum.assignedLicence) {
-          this.inProgressApplications.push(licAppSum);
+    this.busy = this.applicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
+      adoxioApplications.forEach((application: AdoxioApplication | any) => {
+        if (application.assignedLicence && application.applicationStatus === 'Approved') {
+        this.licencedApplications.push(application);
         } else {
-          this.busy = this.adoxioApplicationDataService.getFileListAttachedToApplication(licAppSum.id, 'Licence Application Main')
-            .subscribe((files: FileSystemItem[]) => {
-              if (files && files.length) {
-                licAppSum.applicationFormFileUrl = files[0].serverrelativeurl;
-                licAppSum.fileName = files[0].name;
-              }
-            });
-          this.licencedApplications.push(licAppSum);
+          this.inProgressApplications.push(application);
         }
+        application.applicationStatus = this.transformStatus(application);
       });
     });
   }
 
   uploadMoreFiles(application: AdoxioApplication) {
-    this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
+    this.router.navigate([`/application/${application.id}`, { mode: TRANSFER_LICENCE_MODE }]);
+  }
+
+  transferLicence(application: AdoxioApplication) {
+    const newLicenceApplicationData: AdoxioApplication = <AdoxioApplication>{
+      licenseType: 'Cannabis Retail Store',
+      applicantType: this.account.businessType,
+      account: this.account,
+
+      establishmentName: application.establishmentName,
+      establishmentparcelid: application.establishmentparcelid,
+
+      establishmentaddressstreet: application.establishmentaddressstreet,
+      establishmentaddresscity: application.establishmentaddresscity,
+      establishmentaddresspostalcode: application.establishmentaddresspostalcode,
+
+      serviceHoursSundayOpen: application.serviceHoursSundayOpen,
+      serviceHoursMondayOpen: application.serviceHoursMondayOpen,
+      serviceHoursTuesdayOpen: application.serviceHoursTuesdayOpen,
+      serviceHoursWednesdayOpen: application.serviceHoursWednesdayOpen,
+      serviceHoursThursdayOpen: application.serviceHoursThursdayOpen,
+      serviceHoursFridayOpen: application.serviceHoursFridayOpen,
+      serviceHoursSaturdayOpen: application.serviceHoursSaturdayOpen,
+      serviceHoursSundayClose: application.serviceHoursSundayClose,
+      serviceHoursMondayClose: application.serviceHoursMondayClose,
+      serviceHoursTuesdayClose: application.serviceHoursTuesdayClose,
+      serviceHoursWednesdayClose: application.serviceHoursWednesdayClose,
+      serviceHoursThursdayClose: application.serviceHoursThursdayClose,
+      serviceHoursFridayClose: application.serviceHoursFridayClose,
+      serviceHoursSaturdayClose: application.serviceHoursSaturdayClose,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigate([`/application/${application.id}`, { mode: TRANSFER_LICENCE_MODE }]);
+      },
+      () => {
+        this.snackBar.open('Error starting a Licence Transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Licence Transfer');
+      }
+    );
+
   }
 
   /**
@@ -96,7 +134,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
       cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.adoxioApplicationDataService.cancelApplication(applicationId).subscribe(
+          this.busy = this.applicationDataService.cancelApplication(applicationId).subscribe(
             () => {
               this.displayApplications();
             });
@@ -109,23 +147,32 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   transformStatus(application: AdoxioApplication): string {
     const status = application.applicationStatus;
     let shownStatus = status;
-    if (!application.assignedLicence) {
-      if (status === 'Intake' && !application.isPaid) {
-        shownStatus = 'Not Submitted';
-      } else if (status === 'In progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
-        shownStatus = 'Application Under Review';
-      } else if (status === 'Incomplete') {
-        shownStatus = 'Application Incomplete';
-      } else if (status === 'PendingForLGFNPFeedback') {
-        shownStatus = 'Pending External Review';
-      }
-    } else {
+
+    if (application.assignedLicence && application.applicationStatus === 'Approved') {
       shownStatus = ACTIVE;
-      if (application.licenceFeeInvoicePaid !== true) {
+      if (application.licenceFeeInvoicePaid !== true && application.licenseType === 'Cannabis Retail Store') {
         shownStatus = PAYMENT_REQUIRED;
       }
       if (application.assignedLicence && (new Date() > new Date(application.assignedLicence.expiryDate))) {
         shownStatus = RENEWAL_DUE;
+      }
+    } else {
+      if (status === 'Intake' && !application.isPaid) {
+        if (application.licenseType === 'CRS Transfer of Ownership') {
+          shownStatus = 'Transfer Initiated';
+        } else {
+          shownStatus = 'Not Submitted';
+        }
+      } else if (status === 'In progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
+        if (application.licenseType === 'CRS Transfer of Ownership') {
+          shownStatus = 'Transfer Application Under Review';
+        } else {
+          shownStatus = 'Application Under Review';
+        }
+      } else if (status === 'Incomplete') {
+        shownStatus = 'Application Incomplete';
+      } else if (status === 'PendingForLGFNPFeedback') {
+        shownStatus = 'Pending External Review';
       }
     }
     return shownStatus;
