@@ -1,0 +1,11 @@
+#=========================================================
+# OpenShift Jenkins pipeline template parameters for:
+# Jenkinsfile: ./Jenkinsfile
+# JSON Template File: https://raw.githubusercontent.com/BCDevOps/openshift-tools/master/provisioning/pipeline/resources/pipeline-build.json
+#=========================================================
+NAME=full-scan
+# GITHUB_WEBHOOK_SECRET=[a-zA-Z0-9]{40}
+SOURCE_REPOSITORY_URL=https://github.com/bcgov/ag-lclb-cllc-public.git
+SOURCE_REPOSITORY_REF=master
+CONTEXT_DIR=
+JENKINSFILE_PATH=Full-Scan-Jenkinsfile
