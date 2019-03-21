@@ -163,7 +163,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogError("User id = " + userSettings.AccountId);
 
             ViewModels.AdoxioApplication result = null;
-            var dynamicsApplication = await _dynamicsClient.GetApplicationById(Guid.Parse(id));
+            var dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
             if (dynamicsApplication == null)
             {
                 return NotFound();
@@ -175,6 +175,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
                 result = await dynamicsApplication.ToViewModel(_dynamicsClient);
+            }
+
+            if (dynamicsApplication.AdoxioApplicationSharePointDocumentLocations.Count == 0)
+            {
+                initializeSharepoint(dynamicsApplication);
             }
 
             return Json(result);
@@ -283,7 +288,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // fail if we can't create.
                     throw (odee);
                 }
-                
+
             }
 
             // in case the job number is not there, try getting the record from the server.
@@ -300,6 +305,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error creating Licence Application.");
             }
 
+            initializeSharepoint(adoxioApplication);
+
+            return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
+
+        }
+
+        private async void initializeSharepoint(MicrosoftDynamicsCRMadoxioApplication adoxioApplication)
+        {
             // create a SharePointDocumentLocation link
             string folderName = GetApplicationFolderName(adoxioApplication);
             string name = adoxioApplication.AdoxioJobnumber + " Files";
@@ -351,7 +364,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                     mdcsdl = null;
                 }
-                    
+
             }
             if (mdcsdl != null)
             {
@@ -395,9 +408,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                 }
             }
-
-            return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
-
         }
 
         /// <summary>
