@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             // Get licence from dynamics
             var filter = $"adoxio_licencenumber eq '{licenceNumber}'";
-            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenses.Get(filter: filter).Value.FirstOrDefault();
+            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.Licenceses.Get(filter: filter).Value.FirstOrDefault();
             if (licence == null)
             {
                 _logger.LogInformation("licence is null - returning 400.");
@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 _logger.LogInformation($"Sending update to Dynamics for BusinessProgramAccountNumber.");
                 try
                 {
-                    _dynamicsClient.Licenses.Update(licence.AdoxioLicencesid, pathLicence);
+                    _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, pathLicence);
                     _logger.LogInformation($"Updated Licence record {licence.AdoxioLicencesid} to {businessProgramAccountNumber}");
                 }
                 catch (OdataerrorException odee)
