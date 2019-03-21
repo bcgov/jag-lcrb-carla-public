@@ -99,7 +99,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        this.router.navigate([`/application/${application.id}`, { mode: TRANSFER_LICENCE_MODE }]);
+        this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
       },
       () => {
         this.snackBar.open('Error starting a Licence Transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
