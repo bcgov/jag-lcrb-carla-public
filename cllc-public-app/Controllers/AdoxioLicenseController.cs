@@ -71,6 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // set license type relationship 
                 application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+
                 try
                 {
                     application = _dynamicsClient.Applications.Create(application);
