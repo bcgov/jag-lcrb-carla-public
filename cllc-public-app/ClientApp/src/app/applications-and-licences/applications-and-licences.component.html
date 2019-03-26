@@ -169,7 +169,7 @@
                 <a *ngIf="item.applicationStatus != PAYMENT_REQUIRED" href="javascript:void(0);"
                    (click)="changeLicenceLocation(item)">
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>CHANGE OF LOCATION</span>
-                </a>
+                </a><br *ngIf="item.applicationStatus != PAYMENT_REQUIRED" />
                 <a *ngIf="item.applicationStatus == RENEWAL_DUE" href="javascript:void(0);"
                    (click)="renewLicence(item)">
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>RENEW LICENCE</span>

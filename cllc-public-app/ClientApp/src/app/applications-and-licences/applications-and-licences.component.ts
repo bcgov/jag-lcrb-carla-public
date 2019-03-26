@@ -116,7 +116,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
         data => {
-          this.router.navigateByUrl(`/account-profile/${data.id}`);
+          this.router.navigateByUrl('/account-profile/' + data.id + ';mode=ChangeOfLocationMode');
         },
         () => {
           this.snackBar.open('Error starting a Change Licence Location Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
