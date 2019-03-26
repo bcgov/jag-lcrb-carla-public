@@ -17,8 +17,9 @@ import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
 import {
   ApplicationCancellationDialogComponent,
+  CHANGE_OF_LOCATION_MODE,
   TRANSFER_LICENCE_MODE,
-  UPLOAD_FILES_MODE
+  UPLOAD_FILES_MODE  
 } from '@appapplications-and-licences/applications-and-licences.component';
 
 const ServiceHours = [
@@ -59,6 +60,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
+  readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
   mode: string;
   account: any;
 
@@ -113,7 +115,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       this.form.get('establishmentaddressstreet').disable();
       this.form.get('establishmentaddresscity').disable();
       this.form.get('establishmentaddresspostalcode').disable();
-
+      this.form.get('establishmentName').disable();
       this.form.get('establishmentparcelid').disable();
 
       this.form.get('serviceHoursSundayOpen').disable();
@@ -130,6 +132,29 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       this.form.get('serviceHoursThursdayClose').disable();
       this.form.get('serviceHoursFridayClose').disable();
       this.form.get('serviceHoursSaturdayClose').disable();
+    }
+
+    if (this.mode === CHANGE_OF_LOCATION_MODE) {
+
+      this.form.get('establishmentName').disable();
+      this.form.get('establishmentaddresscity').disable();
+      
+
+      this.form.get('serviceHoursSundayOpen').disable();
+      this.form.get('serviceHoursMondayOpen').disable();
+      this.form.get('serviceHoursTuesdayOpen').disable();
+      this.form.get('serviceHoursWednesdayOpen').disable();
+      this.form.get('serviceHoursThursdayOpen').disable();
+      this.form.get('serviceHoursFridayOpen').disable();
+      this.form.get('serviceHoursSaturdayOpen').disable();
+      this.form.get('serviceHoursSundayClose').disable();
+      this.form.get('serviceHoursMondayClose').disable();
+      this.form.get('serviceHoursTuesdayClose').disable();
+      this.form.get('serviceHoursWednesdayClose').disable();
+      this.form.get('serviceHoursThursdayClose').disable();
+      this.form.get('serviceHoursFridayClose').disable();
+      this.form.get('serviceHoursSaturdayClose').disable();
+
     }
 
     this.applicationDataService.getSubmittedApplicationCount()
@@ -266,14 +291,19 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = [];
-    if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
-      valid = false;
-      this.validationMessages.push('Associate form is required.');
+
+    if (this.mode !== CHANGE_OF_LOCATION_MODE)
+    {
+      if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
+        valid = false;
+        this.validationMessages.push('Associate form is required.');
+      }
+      if (!this.financialIntegrityDocuments || !this.financialIntegrityDocuments.files || this.financialIntegrityDocuments.files.length < 1) {
+        valid = false;
+        this.validationMessages.push('Financial Integrity form is required.');
+      }
     }
-    if (!this.financialIntegrityDocuments || !this.financialIntegrityDocuments.files || this.financialIntegrityDocuments.files.length < 1) {
-      valid = false;
-      this.validationMessages.push('Financial Integrity form is required.');
-    }
+    
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
@@ -282,7 +312,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
-    if (this.submittedApplications >= 8) {
+    if (this.mode !== CHANGE_OF_LOCATION_MODE && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }
