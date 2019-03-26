@@ -73,9 +73,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             //}
         }
 
+        public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from)
+        {
+            to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
+            
+            to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
+            to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
+            to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
+            to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;                       
+        }
+        
 
-
-        public async static Task<AdoxioApplication> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
+            public async static Task<AdoxioApplication> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
         {
             AdoxioApplication adoxioApplicationVM = new ViewModels.AdoxioApplication();
 
