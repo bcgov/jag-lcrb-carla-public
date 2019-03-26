@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// Create a change of location application
         [HttpPost("{licenceId}/create-change-of-location")]
-        public async Task<IActionResult> CreateChangeOfLocation(string licenceId)
+        public async Task<JsonResult> CreateChangeOfLocation(string licenceId)
         {
             // for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
