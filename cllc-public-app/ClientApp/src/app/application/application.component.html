@@ -4,7 +4,7 @@
 
     <h1 *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">Submit the Cannabis Retail Store Licence Application</h1>
     <h1 *ngIf="mode === TRANSFER_LICENCE_MODE">Submit the Cannabis Retail Store Transfer of Ownership Application</h1>
-    <h1 *ngIf="mode === CHANGE_OF_LOCATION_MODE">Submit the Cannabis Retail Store Change of Location Application</h1>
+    <h1 *ngIf="mode === CHANGE_OF_LOCATION_MODE">[Beta] Submit the Cannabis Retail Store Change of Location Application</h1>
   </div>
   <div [formGroup]="form" class="application-wrapper">
     <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">
@@ -87,7 +87,7 @@
     <section class="padded-section">
       <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
         <div [ngBusy]="busy"></div>
-        <section *ngIf="mode !== TRANSFER_LICENCE_MODE">
+        <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">
           <label for="">Establishment Name</label>
           <br>
 
@@ -109,10 +109,10 @@
               Process</a>.</p>
         </section>
 
-        <app-field [label]="mode === TRANSFER_LICENCE_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'" [required]="true"
+        <app-field [label]="mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'" [required]="true"
           [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
           errorMessage="Please enter the name of the proposed establishment">
-          <input class="form-control" style="width: 500px;" type="text" formControlName="establishmentName">
+          <input class="form-control" style="width: 500px;" type="text" readonly formControlName="establishmentName">
         </app-field>
 
       </div>
