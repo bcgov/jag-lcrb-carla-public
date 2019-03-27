@@ -61,6 +61,10 @@
                 <p *ngIf="item.applicationStatus === 'Transfer Application Under Review'">
                   Your transfer application has been received and is being reviewed by the LCRB.
                 </p>
+                <p *ngIf="item.applicationStatus === 'Change of Location Application Under Review'">
+                  Your location change application has been received and is being reviewed by the LCRB.
+                </p>
+
                 <p *ngIf="item.applicationStatus === 'Application Incomplete'">
                   Your application is incomplete. You must provide additional information for it to be processed.
                 </p>
@@ -120,13 +124,12 @@
       Application
     </a>
   </div> -->
-                <div *ngIf="['Change of Location Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
+                <div *ngIf="['Change of Location Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
                     <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Add Supporting Documents</span>
                   </a>
                 </div>
-              </td>
             </tr>
           </table>
           <p></p>
