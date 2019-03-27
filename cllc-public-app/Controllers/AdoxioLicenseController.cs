@@ -63,10 +63,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication()
                 {
-
+                    // START WITH BLANK FIELDS.
                 };
 
                 application.CopyValuesForChangeOfLocation(adoxioLicense);
+
+                // get the previous application for the licence.
+
+                application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
 
                 // set license type relationship 
                 application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
@@ -117,7 +121,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                 }
 
-                return Json(application.ToViewModel(_dynamicsClient));
+                return Json(await application.ToViewModel(_dynamicsClient));
 
             }
         }

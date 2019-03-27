@@ -77,10 +77,17 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
             
+            /*
             to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
             to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
             to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
-            to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;                       
+            to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
+            if (from.AdoxioEstablishment != null)
+            {
+                to.AdoxioEstablishmentparcelid = from.AdoxioEstablishment.AdoxioParcelid;
+            }
+            */
+            
         }
         
 
