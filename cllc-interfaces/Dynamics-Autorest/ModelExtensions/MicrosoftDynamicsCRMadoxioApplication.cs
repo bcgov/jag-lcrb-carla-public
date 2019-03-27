@@ -37,5 +37,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         
         [JsonProperty(PropertyName = "adoxio_localgovindigenousnationid@odata.bind")]
         public string AdoxioLocalgovindigenousnationidODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_LicenceEstablishment@odata.bind")]
+        public string AdoxioLicenceEstablishmentODataBind { get; set; }
+        
     }
 }
