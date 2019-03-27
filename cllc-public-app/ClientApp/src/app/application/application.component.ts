@@ -82,7 +82,14 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
-      establishmentName: ['', Validators.required],
+      assignedLicence: this.fb.group({
+          id: [''],
+          establishmentAddressStreet: [''],
+          establishmentAddressCity: [''],
+          establishmentAddressPostalCode: [''],
+          establishmentParcelid: ['']
+      }),
+      establishmentName: [''],
       establishmentparcelid: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
       contactpersonfirstname: ['', Validators.required],
       contactpersonlastname: ['', Validators.required],
@@ -136,10 +143,8 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
     if (this.mode === CHANGE_OF_LOCATION_MODE) {
 
-      this.form.get('establishmentName').disable();
-      this.form.get('establishmentaddresscity').disable();
+      //this.form.get('establishmentName').disable();
       
-
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
       this.form.get('serviceHoursTuesdayOpen').disable();

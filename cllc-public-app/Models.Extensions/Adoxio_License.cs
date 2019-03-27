@@ -58,6 +58,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             // fetch license number
             adoxioLicenseVM.licenseNumber = dynamicsLicense.AdoxioLicencenumber;
 
+            adoxioLicenseVM.establishmentAddressCity = dynamicsLicense.AdoxioEstablishmentaddresscity;
+            adoxioLicenseVM.establishmentAddressPostalCode = dynamicsLicense.AdoxioEstablishmentaddresspostalcode;
+            adoxioLicenseVM.establishmentAddressStreet = dynamicsLicense.AdoxioEstablishmentaddressstreet;
+            
+            if (dynamicsLicense.AdoxioEstablishment != null)
+            {
+                adoxioLicenseVM.establishmentParcelid = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
+            }
+
             return adoxioLicenseVM;
         }
     }
