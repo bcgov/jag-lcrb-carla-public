@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// Create a change of location application
         [HttpPost("{licenceId}/create-change-of-location")]
-        public async Task<IActionResult> CreateChangeOfLocation(string licenceId)
+        public async Task<JsonResult> CreateChangeOfLocation(string licenceId)
         {
             // for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -63,14 +63,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication()
                 {
-
+                    // START WITH BLANK FIELDS.
                 };
 
                 application.CopyValuesForChangeOfLocation(adoxioLicense);
 
+                // get the previous application for the licence.
+
+                application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
+
                 // set license type relationship 
                 application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+
+                application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
+
                 try
                 {
                     application = _dynamicsClient.Applications.Create(application);
@@ -116,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                 }
 
-                return Json(application.ToViewModel(_dynamicsClient));
+                return Json(await application.ToViewModel(_dynamicsClient));
 
             }
         }

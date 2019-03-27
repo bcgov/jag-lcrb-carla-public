@@ -116,7 +116,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
         data => {
-          this.router.navigateByUrl(`/account-profile/${data.id}`);
+          this.router.navigateByUrl('/account-profile/' + data.id + ';mode=ChangeOfLocationMode');
         },
         () => {
           this.snackBar.open('Error starting a Change Licence Location Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -153,7 +153,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
         if (application.licenseType === 'CRS Transfer of Ownership') {
           shownStatus = 'Transfer Application Under Review';
         } else if (application.licenseType === 'CRS Location Change') {
-          shownStatus = 'Change of Location Under Review';
+          shownStatus = 'Change of Location Application Under Review';
         } else
         {
           shownStatus = 'Application Under Review';
