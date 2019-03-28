@@ -177,6 +177,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result = await dynamicsApplication.ToViewModel(_dynamicsClient);
             }
 
+            
+
+
             if (dynamicsApplication.AdoxioApplicationSharePointDocumentLocations.Count == 0)
             {
                 await initializeSharepoint(dynamicsApplication);
