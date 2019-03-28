@@ -49,8 +49,8 @@
                 <p *ngIf="item.applicationStatus === 'Not Submitted'">
                   This application has not yet been submitted.
                 </p>
-                <p *ngIf="item.applicationStatus === 'Change of Location Initiated'">
-                  This location change application has not yet been submitted
+                <p *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                  This relocation application has not yet been submitted
                 </p>
                 <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
                   This transfer application has not yet been submitted
@@ -61,8 +61,8 @@
                 <p *ngIf="item.applicationStatus === 'Transfer Application Under Review'">
                   Your transfer application has been received and is being reviewed by the LCRB.
                 </p>
-                <p *ngIf="item.applicationStatus === 'Change of Location Application Under Review'">
-                  Your location change application has been received and is being reviewed by the LCRB.
+                <p *ngIf="item.applicationStatus === 'Relocation Application Under Review'">
+                  Your relocation application has been received and is being reviewed by the LCRB.
                 </p>
 
                 <p *ngIf="item.applicationStatus === 'Application Incomplete'">
@@ -84,10 +84,10 @@
                     <span>Complete Application</span>
                   </a>
                 </div>
-                <div *ngIf="item.applicationStatus === 'Change of Location Initiated'">
+                <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
                   <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
-                    <span>Complete Change of Location</span>
+                    <span>Complete Relocation</span>
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
@@ -103,11 +103,11 @@
                     <span>Cancel Application</span>
                   </a>
                 </div>
-                <div *ngIf="item.applicationStatus === 'Change of Location Initiated'" style="margin-top: 5px;"
+                <div *ngIf="item.applicationStatus === 'Relocation Initiated'" style="margin-top: 5px;"
                      (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
-                    <span>Cancel Location Change</span>
+                    <span>Cancel Relocation</span>
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
@@ -124,7 +124,7 @@
       Application
     </a>
   </div> -->
-                <div *ngIf="['Change of Location Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
+                <div *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
                     <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Add Supporting Documents</span>
@@ -181,7 +181,7 @@
                 <br *ngIf="item.applicationStatus != PAYMENT_REQUIRED" />
                 <a *ngIf="item.applicationStatus != PAYMENT_REQUIRED" href="javascript:void(0);"
                    (click)="changeLicenceLocation(item)">
-                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>[Beta] Request Change of Location</span>
+                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>[Beta] Request Relocation</span>
                 </a>
               </td>
             </tr>
