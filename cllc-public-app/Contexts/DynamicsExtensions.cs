@@ -355,7 +355,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations" };
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence" };
 
                 // fetch from Dynamics.
                 result = await system.Applications.GetByKeyAsync(id.ToString(), expand: expand);
@@ -368,6 +368,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (result._adoxioApplicantValue != null)
                 {
                     result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                }
+
+                if (result.AdoxioAssignedLicence != null && result.AdoxioAssignedLicence._adoxioEstablishmentValue != null)
+                {
+                    result.AdoxioAssignedLicence.AdoxioEstablishment = system.GetEstablishmentById(Guid.Parse(result.AdoxioAssignedLicence._adoxioEstablishmentValue));
                 }
             }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)

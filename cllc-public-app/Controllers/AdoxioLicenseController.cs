@@ -3,19 +3,17 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using System;
-using System.Linq;
-using System.Net;
-using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -37,6 +35,97 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _httpContextAccessor = httpContextAccessor;
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(AdoxioApplicationController));
+        }
+
+        /// Create a change of location application
+        [HttpPost("{licenceId}/create-change-of-location")]
+        public async Task<JsonResult> CreateChangeOfLocation(string licenceId)
+        {
+            // for association with current user
+            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+
+            var expand = new List<string> {
+                "adoxio_Licencee",
+                "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
+                "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                "adoxio_establishment"
+            };
+
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(licenceId, expand: expand);
+            if (adoxioLicense == null)
+            {
+                throw new Exception("Error getting license.");
+            }
+            else
+            {
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName("CRS Location Change");
+
+                MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication()
+                {
+                    // START WITH BLANK FIELDS.
+                };
+
+                application.CopyValuesForChangeOfLocation(adoxioLicense);
+
+                // get the previous application for the licence.
+
+                application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
+
+                // set license type relationship 
+                application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+                application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+
+                application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
+
+                try
+                {
+                    application = _dynamicsClient.Applications.Create(application);
+                }
+                catch (OdataerrorException odee)
+                {
+                    string applicationId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
+                    {
+                        application = await _dynamicsClient.GetApplicationById(applicationGuid);
+                    }
+                    else
+                    {
+
+                        _logger.LogError("Error creating application");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        // fail if we can't create.
+                        throw (odee);
+                    }
+
+                }
+
+                // now bind the new application to the given licence.
+
+                var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                {
+                    AdoxioAssignedLicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", licenceId)
+                };
+
+                try
+                {
+                    _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchApplication);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error updating application");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+
+                return Json(await application.ToViewModel(_dynamicsClient));
+
+            }
         }
 
         private async Task<List<AdoxioLicense>> GetLicensesByLicencee(string licenceeId)
