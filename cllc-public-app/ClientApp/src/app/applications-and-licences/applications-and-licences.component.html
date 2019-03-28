@@ -49,6 +49,9 @@
                 <p *ngIf="item.applicationStatus === 'Not Submitted'">
                   This application has not yet been submitted.
                 </p>
+                <p *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                  This relocation application has not yet been submitted
+                </p>
                 <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
                   This transfer application has not yet been submitted
                 </p>
@@ -58,6 +61,10 @@
                 <p *ngIf="item.applicationStatus === 'Transfer Application Under Review'">
                   Your transfer application has been received and is being reviewed by the LCRB.
                 </p>
+                <p *ngIf="item.applicationStatus === 'Relocation Application Under Review'">
+                  Your relocation application has been received and is being reviewed by the LCRB.
+                </p>
+
                 <p *ngIf="item.applicationStatus === 'Application Incomplete'">
                   Your application is incomplete. You must provide additional information for it to be processed.
                 </p>
@@ -77,41 +84,52 @@
                     <span>Complete Application</span>
                   </a>
                 </div>
+                <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                  <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Relocation</span>
+                  </a>
+                </div>
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
-                  <a [routerLink]="['/account-profile/' +  item.id, { mode: TRANSFER_LICENCE_MODE }]">
+                  <a [routerLink]="['/account-profile/' + item.id, { mode: TRANSFER_LICENCE_MODE }]">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Transfer</span>
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
-                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                     (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Cancel Application</span>
                   </a>
                 </div>
+                <div *ngIf="item.applicationStatus === 'Relocation Initiated'" style="margin-top: 5px;"
+                     (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Relocation</span>
+                  </a>
+                </div>
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
-                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                     (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Cancel Transfer</span>
                   </a>
                 </div>
                 <!-- <div
-                  *ngIf="['Application Under Review','Pending External Review', 'Approved In Principle'].indexOf(item.applicationStatus) !==                                                                                                                                                                                                                                                                                                                                                                                          -1">
-                  <a routerLink="/application/{{item.id}}">
-                    <i class="fas fa-eye-alt" style="color: #1a5a96; margin-right: 10px;"></i>Review Submitted
-                    Application
-                  </a>
-                </div> -->
-                <div
-                  *ngIf="['Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
+    *ngIf="['Application Under Review','Pending External Review', 'Approved In Principle'].indexOf(item.applicationStatus) !==                                                                                                                                                                                                                                                                                                                                                                                          -1">
+    <a routerLink="/application/{{item.id}}">
+      <i class="fas fa-eye-alt" style="color: #1a5a96; margin-right: 10px;"></i>Review Submitted
+      Application
+    </a>
+  </div> -->
+                <div *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
                     <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Add Supporting Documents</span>
                   </a>
                 </div>
-              </td>
             </tr>
           </table>
           <p></p>
@@ -148,17 +166,22 @@
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <a *ngIf="item.applicationStatus == PAYMENT_REQUIRED" href="javascript:void(0);"
-                  (click)="payLicenceFee(item)">
-                  <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>PAY LICENCE FEE</span>
+                   (click)="payLicenceFee(item)">
+                  <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
                 </a>
                 <a *ngIf="item.applicationStatus == RENEWAL_DUE" href="javascript:void(0);"
-                  (click)="renewLicence(item)">
-                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>RENEW LICENCE</span>
+                   (click)="renewLicence(item)">
+                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>Renew Licence</span>
                 </a>
                 <a *ngIf="item.assignedLicence && item.applicationStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
-                  [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf/' + item?.assignedLicence?.licenseNumber + '.pdf'"
-                  download>
-                  <span><i class="fas fa-download" style="margin-right: 10px;"></i> DOWNLOAD LICENCE</span>
+                   [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf/' + item?.assignedLicence?.licenseNumber + '.pdf'"
+                   download>
+                  <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
+                </a>
+                <br *ngIf="item.applicationStatus != PAYMENT_REQUIRED" />
+                <a *ngIf="item.applicationStatus != PAYMENT_REQUIRED" href="javascript:void(0);"
+                   (click)="changeLicenceLocation(item)">
+                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>[Beta] Request Relocation</span>
                 </a>
               </td>
             </tr>

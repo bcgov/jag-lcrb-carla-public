@@ -2,11 +2,12 @@
   <div [formGroup]="form" style="padding-left: 45px; position: relative">
     <div [ngBusy]="busy"></div>
 
-    <h1 *ngIf="mode !== TRANSFER_LICENCE_MODE">Submit the Cannabis Retail Store Licence Application</h1>
+    <h1 *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">Submit the Cannabis Retail Store Licence Application</h1>
     <h1 *ngIf="mode === TRANSFER_LICENCE_MODE">Submit the Cannabis Retail Store Transfer of Ownership Application</h1>
+    <h1 *ngIf="mode === CHANGE_OF_LOCATION_MODE">[Beta] Submit the Cannabis Retail Store Relocation Application</h1>
   </div>
   <div [formGroup]="form" class="application-wrapper">
-    <section *ngIf="mode !== TRANSFER_LICENCE_MODE">
+    <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">
       <p>
         A $7,500.00 application fee will be required at the time of application submission. If
         your application for a licence is approved, a $1,500.00 first year licensing fee will be required prior to the
@@ -36,8 +37,8 @@
       </ul>
       <hr>
     </section>
-    <h3 *ngIf="mode !== TRANSFER_LICENCE_MODE" class="blue-header">BEFORE STARTING THE APPLICATION</h3>
-    <section *ngIf="mode !== TRANSFER_LICENCE_MODE" class="padded-section">
+    <h3 *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE" class="blue-header">BEFORE STARTING THE APPLICATION</h3>
+    <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE" class="padded-section">
       <p>Before starting the application, ensure that:</p>
       <section *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
         class="padded-section">
@@ -86,7 +87,7 @@
     <section class="padded-section">
       <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
         <div [ngBusy]="busy"></div>
-        <section *ngIf="mode !== TRANSFER_LICENCE_MODE">
+        <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">
           <label for="">Establishment Name</label>
           <br>
 
@@ -108,80 +109,119 @@
               Process</a>.</p>
         </section>
 
-        <app-field [label]="mode === TRANSFER_LICENCE_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'" [required]="true"
+        <app-field [label]="mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'" [required]="true"
           [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
           errorMessage="Please enter the name of the proposed establishment">
-          <input class="form-control" style="width: 500px;" type="text" formControlName="establishmentName">
+          <input class="form-control" style="width: 500px;" type="text" ng-readonly="mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE" formControlName="establishmentName">
         </app-field>
 
       </div>
-      <div>&nbsp;
+      <div formGroupName="assignedLicence" *ngIf="mode === CHANGE_OF_LOCATION_MODE">
+        <h3 class="blue-header">CURRENT ADDRESS</h3>
         <address class="row">
-          <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
-            [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
-            errorMessage="Please enter the street address">
-            <input class="form-control" type="text" autocomplete="address-line1"
-              formControlName="establishmentaddressstreet">
+          <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
+            <input class="form-control" type="text" readonly
+                   formControlName="establishmentAddressStreet">
           </app-field>
-          <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
-            [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
-            errorMessage="Please enter the city">
-            <input class="form-control" type="text" autocomplete="address-level2"
-              formControlName="establishmentaddresscity">
+          <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
+            <input class="form-control" type="text" readonly 
+                   formControlName="establishmentAddressCity">
           </app-field>
           <section class="col-md-4 col-xs-12">
-            <app-field label="Province" [isFullWidth]="true" [isFullWidth]="true">
-              <input class="form-control" autocomplete="address-level1" readonly type="text" value="British Columbia">
+            <app-field label="Province" [isFullWidth]="true">
+              <input class="form-control" readonly type="text" value="British Columbia">
             </app-field>
           </section>
           <section class="col-md-4 col-xs-12">
-            <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
-              [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
-              errorMessage="Please enter the postal code">
-              <input class="form-control" type="text" autocomplete="postal-code"
-                formControlName="establishmentaddresspostalcode">
+            <app-field label="Postal Code">
+              <input class="form-control" type="text" readonly
+                     formControlName="establishmentAddressPostalCode">
             </app-field>
           </section>
           <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
             <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
           </app-field>
         </address>
-
         <div class="light-blue-bg" style="display: flex;">
           <div style="flex: 0 0 210px;">
-            <app-field label="Parcel Identifier (PID)"
-              [valid]="!form.get('establishmentparcelid').touched || form.get('establishmentparcelid').valid"
-              errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
-              <input type="text" class="form-control" style="width: 200px;" maxlength=9
-                formControlName="establishmentparcelid">
+            <app-field label="Parcel Identifier (PID)">
+              <input type="text" readonly class="form-control" style="width: 200px;"
+                     formControlName="establishmentParcelid">
             </app-field>
           </div>
-          <div style="flex: 1; font-size: 11px;">
-            <span>
+        </div>
+        </div>
+        <h3 class="blue-header" *ngIf="mode === CHANGE_OF_LOCATION_MODE">PROPOSED ADDRESS</h3>
+        <div>
+          &nbsp;
+          <address class="row">
+            <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
+                       [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
+                       errorMessage="Please enter the street address">
+              <input class="form-control" type="text" autocomplete="address-line1"
+                     formControlName="establishmentaddressstreet">
+            </app-field>
+            <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+                       [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
+                       errorMessage="Please enter the city">
+              <input class="form-control" type="text" autocomplete="address-level2"
+                     formControlName="establishmentaddresscity">
+            </app-field>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Province" [isFullWidth]="true">
+                <input class="form-control" autocomplete="address-level1" readonly type="text" value="British Columbia">
+              </app-field>
+            </section>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
+                         [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
+                         errorMessage="Please enter the postal code">
+                <input class="form-control" type="text" autocomplete="postal-code"
+                       formControlName="establishmentaddresspostalcode">
+              </app-field>
+            </section>
+            <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+              <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+            </app-field>
+          </address>
 
-              <span><i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be found
-                on</span> <br>
+          <div class="light-blue-bg" style="display: flex;">
+            <div style="flex: 0 0 210px;">
+              <app-field label="Parcel Identifier (PID)"
+                         [valid]="!form.get('establishmentparcelid').touched || form.get('establishmentparcelid').valid"
+                         errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+                <input type="text" class="form-control" style="width: 200px;" maxlength=9
+                       formControlName="establishmentparcelid">
+              </app-field>
+            </div>
+            <div style="flex: 1; font-size: 11px;">
+              <span>
+
+                <span>
+                  <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be found
+                  on
+                </span> <br>
+                <ul style="display: inline-block">
+                  <li>The title to the property</li>
+                  <li>Through the B.C. Land Title and Survey Authority</li>
+                  <li>The tax assessment notice from BC Assessment</li>
+                </ul>
+              </span>
+
               <ul style="display: inline-block">
-                <li>The title to the property</li>
-                <li>Through the B.C. Land Title and Survey Authority</li>
-                <li>The tax assessment notice from BC Assessment</li>
+                <li>BC Assessment’s e-valueBC website </li>
+                <li>The municipal tax notice</li>
+                <li>The property lease</li>
               </ul>
-            </span>
-
-            <ul style="display: inline-block">
-              <li>BC Assessment’s e-valueBC website </li>
-              <li>The municipal tax notice</li>
-              <li>The property lease</li>
-            </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+</section>
     <p>&nbsp;</p>
 
-
-    <h3 class="blue-header">HOURS OF SALE</h3>
-    <div class="padded-section">
+    
+    <h3 class="blue-header" *ngIf="mode !== CHANGE_OF_LOCATION_MODE">HOURS OF SALE</h3>
+    <div class="padded-section" *ngIf="mode !== CHANGE_OF_LOCATION_MODE">
       <p *ngIf="mode !== TRANSFER_LICENCE_MODE">Indicate the store's proposed hours for cannabis sales below. Proposed hours must fall between 9 a.m. and 11
         p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed at
         times they are licensed to be open.
@@ -330,52 +370,58 @@
     <hr>
     <p>&nbsp;</p>
 
-    <label for="">Associates Form</label>
-    <br>
-    <i>
-      Please download
-      <a *ngIf="account?.businessType === 'SoleProprietor'"
-        href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
-        and complete
-      </a>
-      <a *ngIf="account?.businessType === 'Society'"
-        href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
-        and complete
-      </a>
-      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
-        href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
-        and complete
-      </a>
-      <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
-        href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
-        and complete
-      </a>
-      &nbsp;the Associate Form..
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
-      </app-file-uploader>
-    </section>
-    <br>
-    <hr>
-    <br>
+    <div *ngIf="mode !== CHANGE_OF_LOCATION_MODE">
 
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank">and complete</a> the financial integrity form.</i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
-        #financialIntegrityDocuments></app-file-uploader>
-    </section>
-    <br>
-    <hr>
+      <label for="">Associates Form</label>
+      <br>
+      <i>
+        Please download
+        <a *ngIf="account?.businessType === 'SoleProprietor'"
+           href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
+          and complete
+        </a>
+        <a *ngIf="account?.businessType === 'Society'"
+           href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
+          and complete
+        </a>
+        <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+           href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
+          and complete
+        </a>
+        <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+           href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
+          and complete
+        </a>
+        &nbsp;the Associate Form..
+      </i>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                           [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
+        </app-file-uploader>
+      </section>
+      <br>
+      <hr>
+      <br>
+
+      <label for="">Financial Integrity Form</label>
+      <br>
+      <i>
+        Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+                           target="_blank">and complete</a> the financial integrity form.
+      </i>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                           [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+                           #financialIntegrityDocuments></app-file-uploader>
+      </section>
+      <br>
+      <hr>
+
+    </div>
 
     <label for="">Supporting Documents</label>
     <br>
@@ -396,7 +442,9 @@
         href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
         Document Checklist
       </a>
-      and assemble all required documents.</p>
+      <span *ngIf="mode !== CHANGE_OF_LOCATION_MODE">and assemble all required documents.</span>
+      <span *ngIf="mode === CHANGE_OF_LOCATION_MODE">and assemble all required documents listed in the 'Documents Related to the Proposed Store' section.</span>
+      </p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
         fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
@@ -528,55 +576,59 @@
     <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
     <br>
 
-    <label for="">Associates Form</label>
-    <br>
-    <i>
-      Please download
-      <a *ngIf="account?.businessType === 'SoleProprietor'"
-        href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
-        and complete
-      </a>
-      <a *ngIf="account?.businessType === 'Society'"
-        href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
-        and complete
-      </a>
-      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
-        href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
-        and complete
-      </a>
-      <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
-        href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
-        and complete
-      </a>
-      &nbsp;the Associate Form..
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        [enableFileDeletion]="false" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
-      </app-file-uploader>
-    </section>
-    <br>
-    <hr>
-    <br>
+    <div *ngIf="mode !== CHANGE_OF_LOCATION_MODE">
 
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank">and complete</a> the financial integrity form.</i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        [enableFileDeletion]="false" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
-    </section>
-    <br>
-    <hr>
+      <label for="">Associates Form</label>
+      <br>
+      <i>
+        Please download
+        <a *ngIf="account?.businessType === 'SoleProprietor'"
+           href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
+          and complete
+        </a>
+        <a *ngIf="account?.businessType === 'Society'"
+           href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
+          and complete
+        </a>
+        <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+           href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
+          and complete
+        </a>
+        <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+           href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
+          and complete
+        </a>
+        &nbsp;the Associate Form..
+      </i>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Main"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                           [enableFileDeletion]="false" [entityId]="applicationId"
+                           [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
+        </app-file-uploader>
+      </section>
+      <br>
+      <hr>
+      <br>
 
+      <label for="">Financial Integrity Form</label>
+      <br>
+      <i>
+        Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+                           target="_blank">and complete</a> the financial integrity form.
+      </i>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+                           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                           [enableFileDeletion]="false" [entityId]="applicationId"
+                           [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+      <br>
+      <hr>
+    </div>
     <label for="">Supporting Documents</label>
     <br>
     <p>Please download the
