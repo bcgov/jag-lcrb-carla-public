@@ -112,7 +112,7 @@
         <app-field [label]="mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'" [required]="true"
           [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
           errorMessage="Please enter the name of the proposed establishment">
-          <input class="form-control" style="width: 500px;" type="text" ng-readonly="mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE" formControlName="establishmentName">
+          <input class="form-control" style="width: 500px;" type="text" ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)" formControlName="establishmentName">
         </app-field>
 
       </div>
