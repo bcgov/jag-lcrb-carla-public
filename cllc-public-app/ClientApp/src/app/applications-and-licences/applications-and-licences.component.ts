@@ -109,7 +109,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   }
 
   changeLicenceLocation(application: AdoxioApplication) {
-     // create an application for Change of Location, linked to the given licence.
+     // create an application for relocation, linked to the given licence.
     
     var licenceId = application.assignedLicence.id;
 
@@ -144,7 +144,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
           shownStatus = 'Transfer Initiated';
         } else
           if (application.licenseType === 'CRS Location Change') {
-            shownStatus = 'Change of Location Initiated';
+            shownStatus = 'Relocation Initiated';
           } else
         {
           shownStatus = 'Not Submitted';
@@ -153,7 +153,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
         if (application.licenseType === 'CRS Transfer of Ownership') {
           shownStatus = 'Transfer Application Under Review';
         } else if (application.licenseType === 'CRS Location Change') {
-          shownStatus = 'Change of Location Application Under Review';
+          shownStatus = 'Relocation Application Under Review';
         } else
         {
           shownStatus = 'Application Under Review';
