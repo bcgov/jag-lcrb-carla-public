@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { AdoxioApplicationDataService } from '@app/services/adoxio-application-data.service';
+import { AdoxioLicenseDataService } from '@app/services/adoxio-license-data.service';
 import { Router } from '@angular/router';
 import { AdoxioApplication } from '@app/models/adoxio-application.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
@@ -11,6 +12,8 @@ import { DynamicsAccount } from './../models/dynamics-account.model';
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
+export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
+
 
 const ACTIVE = 'Active';
 const PAYMENT_REQUIRED = 'Payment Required';
@@ -29,6 +32,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
   readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
+  readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
@@ -37,6 +41,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
   constructor(
     private applicationDataService: AdoxioApplicationDataService,
+    private licenceDataService: AdoxioLicenseDataService,
     private router: Router,
     private paymentService: PaymentDataService,
     private snackBar: MatSnackBar,
@@ -103,6 +108,24 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
   }
 
+  changeLicenceLocation(application: AdoxioApplication) {
+     // create an application for relocation, linked to the given licence.
+    
+    var licenceId = application.assignedLicence.id;
+
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
+        data => {
+          this.router.navigateByUrl('/account-profile/' + data.id + ';mode=ChangeOfLocationMode');
+        },
+        () => {
+          this.snackBar.open('Error starting a Change Licence Location Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          console.log('Error starting a Change Licence Location Application');
+        }
+      );
+    
+  }
+
   transformStatus(application: AdoxioApplication): string {
     const status = application.applicationStatus;
     let shownStatus = status;
@@ -119,13 +142,20 @@ export class ApplicationsAndLicencesComponent implements OnInit {
       if (status === 'Intake' && !application.isPaid) {
         if (application.licenseType === 'CRS Transfer of Ownership') {
           shownStatus = 'Transfer Initiated';
-        } else {
+        } else
+          if (application.licenseType === 'CRS Location Change') {
+            shownStatus = 'Relocation Initiated';
+          } else
+        {
           shownStatus = 'Not Submitted';
         }
       } else if (status === 'In progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
         if (application.licenseType === 'CRS Transfer of Ownership') {
           shownStatus = 'Transfer Application Under Review';
-        } else {
+        } else if (application.licenseType === 'CRS Location Change') {
+          shownStatus = 'Relocation Application Under Review';
+        } else
+        {
           shownStatus = 'Application Under Review';
         }
       } else if (status === 'Incomplete') {
