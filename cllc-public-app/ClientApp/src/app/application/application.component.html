@@ -4,7 +4,7 @@
 
     <h1 *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">Submit the Cannabis Retail Store Licence Application</h1>
     <h1 *ngIf="mode === TRANSFER_LICENCE_MODE">Submit the Cannabis Retail Store Transfer of Ownership Application</h1>
-    <h1 *ngIf="mode === CHANGE_OF_LOCATION_MODE">[Beta] Submit the Cannabis Retail Store Change of Location Application</h1>
+    <h1 *ngIf="mode === CHANGE_OF_LOCATION_MODE">[Beta] Submit the Cannabis Retail Store Relocation Application</h1>
   </div>
   <div [formGroup]="form" class="application-wrapper">
     <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">
