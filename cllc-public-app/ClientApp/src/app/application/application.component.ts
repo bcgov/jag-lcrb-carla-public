@@ -143,7 +143,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
     if (this.mode === CHANGE_OF_LOCATION_MODE) {
 
-      //this.form.get('establishmentName').disable();
+      this.form.get('establishmentName').disable();
       
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
