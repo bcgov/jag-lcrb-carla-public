@@ -219,10 +219,10 @@
 </section>
     <p>&nbsp;</p>
 
-
-    <h3 class="blue-header">HOURS OF SALE</h3>
-    <div class="padded-section">
-      <p *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">Indicate the store's proposed hours for cannabis sales below. Proposed hours must fall between 9 a.m. and 11
+    
+    <h3 class="blue-header" *ngIf="mode !== CHANGE_OF_LOCATION_MODE">HOURS OF SALE</h3>
+    <div class="padded-section" *ngIf="mode !== CHANGE_OF_LOCATION_MODE">
+      <p *ngIf="mode !== TRANSFER_LICENCE_MODE">Indicate the store's proposed hours for cannabis sales below. Proposed hours must fall between 9 a.m. and 11
         p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed at
         times they are licensed to be open.
       </p>
@@ -442,7 +442,9 @@
         href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
         Document Checklist
       </a>
-      and assemble all required documents.</p>
+      <span *ngIf="mode !== CHANGE_OF_LOCATION_MODE">and assemble all required documents.</span>
+      <span *ngIf="mode === CHANGE_OF_LOCATION_MODE">and assemble all required documents listed in the 'Documents Related to the Proposed Store' section.</span>
+      </p>
     <section>
       <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
         fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
