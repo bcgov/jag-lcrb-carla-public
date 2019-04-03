@@ -333,6 +333,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError("Error creating Sharepoint Folder");
                     _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
                     _logger.LogError($"FolderName is: {folderName}");
+                    _logger.LogError($"Error is: {e.Message} {e.StackTrace}");
                     throw e;
                 }
 
