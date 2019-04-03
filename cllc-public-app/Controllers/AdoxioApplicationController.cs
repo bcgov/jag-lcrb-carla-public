@@ -328,6 +328,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     await _sharePointFileManager.CreateFolder(ApplicationDocumentUrlTitle, folderName);
                 }
+                catch (SharePointRestException spre)
+                {
+                    _logger.LogError("Error creating Sharepoint Folder");
+                    _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
+                    _logger.LogError($"FolderName is: {folderName}");
+                    _logger.LogError($"Request is: {spre.Request.Content}");
+                    _logger.LogError($"Response is: {spre.Response.Content}");
+                    _logger.LogError($"Error is: {spre.Message} {spre.StackTrace}");
+                    throw spre;
+                }
                 catch (Exception e)
                 {
                     _logger.LogError("Error creating Sharepoint Folder");
