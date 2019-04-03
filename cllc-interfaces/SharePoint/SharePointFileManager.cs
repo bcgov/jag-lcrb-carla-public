@@ -259,14 +259,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             //string jsonString = "{ '__metadata': { 'type': 'SP.Folder' }, 'ServerRelativeUrl': '" + relativeUrl + "'}";
 
-            //StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
-            //strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            StringContent strContent = new StringContent("", Encoding.UTF8);
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
 
-            //endpointRequest.Content = strContent;
+            endpointRequest.Content = strContent;
 
-            // make the request.
-
-            endpointRequest.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json;odata=verbose");
+            // make the request.            
 
             var response = await client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
