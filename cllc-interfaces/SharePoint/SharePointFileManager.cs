@@ -266,7 +266,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // make the request.
 
-            endpointRequest.Headers.Add("Content-Type", "application/json;odata=verbose");
+            endpointRequest.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json;odata=verbose");
 
             var response = await client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
