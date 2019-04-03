@@ -256,7 +256,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
              relativeUrl = "";
 
-            
+
             //string jsonString = "{ '__metadata': { 'type': 'SP.Folder' }, 'ServerRelativeUrl': '" + relativeUrl + "'}";
 
             //StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
@@ -265,6 +265,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             //endpointRequest.Content = strContent;
 
             // make the request.
+
+            endpointRequest.Headers.Add("Content-Type", "application/json;odata=verbose");
+
             var response = await client.SendAsync(endpointRequest);
             HttpStatusCode _statusCode = response.StatusCode;
 
