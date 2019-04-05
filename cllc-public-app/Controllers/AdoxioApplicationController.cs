@@ -90,6 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private int GetSubmittedCountByApplicant(string applicantId)
         {
+
             var result = 0;
             if (!string.IsNullOrEmpty(applicantId))
             {
@@ -97,6 +98,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName("Cannabis Retail Store");
+                if (adoxioLicencetype != null)
+                {
+                    filter += $" and _adoxio_licencetype_value eq {adoxioLicencetype.AdoxioLicencetypeid} ";
+                }
+
                 try
                 {
                     result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
