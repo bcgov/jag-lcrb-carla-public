@@ -79,9 +79,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
                     }
                 }
+
+                // second pass to determine if transfer or location change is in progress.
+
+                foreach (var item in result)
+                {
+                    if (item.licenseType == "Cannabis Retail Store" && item.applicationStatus == AdoxioApplicationStatusCodes.Approved
+                        && item.assignedLicence != null && item.assignedLicence.expiryDate < DateTime.Now
+                        )
+                    {
+                        // determine if there is a transfer in progress.
+                        item.isLocationChangeInProgress = FindRelatedApplication(result, item, "CRS Location Change");                        
+                        // item.isTransferInProgress = FindRelatedApplication(result, item, "CRS Transfer of Ownership");
+                    }
+                }
+
             }
             return result;
         }
+
+        bool FindRelatedApplication (List<ViewModels.AdoxioApplication> applicationList, ViewModels.AdoxioApplication application, string licenseType)
+        {
+            bool result = false;
+            foreach (var item in applicationList)
+            {
+                if (item.licenseType == licenseType && item.assignedLicence != null && item.assignedLicence.id == application.assignedLicence.id)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
 
         /// <summary>
         /// Gets the number of applications that are submitted
