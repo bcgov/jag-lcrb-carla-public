@@ -41,11 +41,39 @@ Developer Prerequisites
 - .Net Core SDK (Dotnet Core 2 is used for all components)
 - Node.js version 8 LTS
 - .NET Core IDE such as Visual Studio or VS Code
+- Local instance of SQL Server
 
 **DevOps**
 - RedHat OpenShift tools
 - Docker
 - A familiarity with Jenkins
+
+Microsoft Dynamics Instance
+---------------------------
+A MS Dynamics instance containing the necessary solution files is required.  
+
+Define the following secrets in your development environment:
+1. DYNAMICS_NATIVE_ODATA_URI: The URI to the Dynamics Web API endpoint.  Example:  `https://<hostname>/<tenant name>/api/data/v8.2/`
+
+Local Instance of SQL Server
+----------------------------
+This application makes light use of SQL Server for some aspects of the public facing portal.  You may use SQL 2008 R2 or newer; SQL 2017 is recommended.  A docker deployment of SQL Server is suggested.  
+
+To run a local instance with Docker:  
+1. `docker volume create mssql` - This line creates persistent storage.  Note that this storage will be created within the Linux VM rather than in the host operating system; that is the recommended approach.
+2. `docker run -m 4G -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Express' -p 1433:1433 -v  -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu` - This line runs the database container, selecting the Express variant.  The Express variant is free and is sufficient to run the CARLA application.
+3. Download and install Azure Data Studio, a Microsoft supported cross platform SQL client
+	1. https://github.com/Microsoft/azuredatastudio
+4. Connect to the local instance using the SA password specified and do the following:
+	1. Create a working database, with a name such as "carla"
+	2. Create a user with sufficient access to this database to create tables and read / write data
+	3. Define the following Secrets in your development environment:
+		1. "DB_ADMIN_PASSWORD": the sa password
+		2. "DB_USER": the username for the user you created in step 4.2
+  		3. "DB_PASSWORD": The password for the user create in step 4.2
+  		4. "DB_DATABASE": The database name for the database created in step 4.1
+  		5. "DATABASE_SERVICE_NAME": The hostname for the database server.  If using Docker, this will be 127.0.0.1.  You may add a comma and port if you are not using the standard port of 1433.
+	4. Verify that the application runs 
 
 DevOps Process
 -------------
