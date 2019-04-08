@@ -6,11 +6,12 @@ Technology Stack
 
 | Layer   | Technology | 
 | ------- | ------------ |
-| Presentation | Angular 5 |
+| Presentation | Angular 7 |
 | Business Logic | C Sharp - Dotnet Core 2.1 |
 | Web Server | Kestrel |
 | Data    | SQL Server 2017 |
-| Data    | MS Dynamics |   
+| Data    | MS Dynamics |
+| Document Management    | MS SharePoint |   
 
 Repository Map
 --------------
@@ -48,12 +49,22 @@ Developer Prerequisites
 - Docker
 - A familiarity with Jenkins
 
-Microsoft Dynamics Instance
+Microsoft Dynamics, SharePoint
 ---------------------------
-A MS Dynamics instance containing the necessary solution files is required.  
+A MS Dynamics instance containing the necessary solution files is required.  A SharePoint connection is optional.  If no SharePoint connection is available then file operations will not be executed.
 
-Define the following secrets in your development environment:
-1. DYNAMICS_NATIVE_ODATA_URI: The URI to the Dynamics Web API endpoint.  Example:  `https://<hostname>/<tenant name>/api/data/v8.2/`
+Define the following secrets in your development environment (secrets or environment variables):
+1. DYNAMICS_NATIVE_ODATA_URI: The URI to the Dynamics Web API endpoint.  Example:  `https://<hostname>/<tenant name>/api/data/v8.2/`.  This URI can be a proxy.
+2. DYNAMICS_NATIVE_ODATA_URI: The native URI to the Dynamics Web API endpoint, in other words as the server identifies itself in responses to WebAPI requests.  Do not put a proxy URI here.
+3. SSG_USERNAME: API gateway username, if using an API gateway
+4. SSG_PASSWORD: API gateway password, if using an API gateway
+5. DYNAMICS_AAD_TENANT_ID: ADFS Tenant ID, if using ADFS authentication.  Leave blank if using an API gateway
+6. DYNAMICS_SERVER_APP_ID_URI: ADFS Server App ID URI. Leave blank if using an API gateway
+7. DYNAMICS_CLIENT_ID: Public Key for the ADFS Enterprise Application app registration. Leave blank if using an API gateway
+8. SHAREPOINT_ODATA_URI: Endpoint to be used for SharePoint, exclusive of _api.  Can be a proxy.  Leave blank if not using SharePoint.
+9. SHAREPOINT_NATIVE_BASE_URI:  The SharePoint URI as configured in SharePoint.  Do not set to a proxy.
+10. SHAREPOINT_SSG_USERNAME, SHAREPOINT_SSG_PASSWORD - optional API Gateway credentials for SharePoint
+11. SharePoint may also use the same ADFS credentials as Dynamics.  If that is to be used, leave all SSG parameters empty or undefined.
 
 Local Instance of SQL Server
 ----------------------------
@@ -64,16 +75,36 @@ To run a local instance with Docker:
 2. `docker run -m 4G -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Express' -p 1433:1433 -v mssql:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu` - This line runs the database container, selecting the Express variant.  The Express variant is free and is sufficient to run the CARLA application.
 3. Download and install Azure Data Studio, a Microsoft supported cross platform SQL client
 	1. https://github.com/Microsoft/azuredatastudio
-4. Connect to the local instance using the SA password specified and do the following:
-	1. Create a working database, with a name such as "carla"
-	2. Create a user with sufficient access to this database to create tables and read / write data
-	3. Define the following Secrets in your development environment:
+4. Connect to the local instance using the SA password specified and verify operation of the database.
+5. Define the following Secrets in your development environment:
 		1. "DB_ADMIN_PASSWORD": the sa password
-		2. "DB_USER": the username for the user you created in step 4.2
-  		3. "DB_PASSWORD": The password for the user create in step 4.2
-  		4. "DB_DATABASE": The database name for the database created in step 4.1
+		2. "DB_USER": the database username you would like to use 
+  		3. "DB_PASSWORD": The password you would like to use
+  		4. "DB_DATABASE": The database name you would like to use
   		5. "DATABASE_SERVICE_NAME": The hostname for the database server.  If using Docker, this will be 127.0.0.1.  You may add a comma and port if you are not using the standard port of 1433.
-	4. Verify that the application runs 
+6. Run the application and verify that the database was created properly 
+
+Mac Environment
+---------------
+A Mac computer can be used for development.  The easiest way to prepare the Mac for development is to install Visual Studio 2019 for Mac.  
+
+Prior to running the application for the first time, change directory to the "ClientApp" sub directory of cllc-public-app and execute `npm install`.  This will allow the node dependencies for the software to be downloaded.
+
+A script `go-cllc.sh` has been provided to allow the application to be run on a mac.
+
+Edit this file with the various settings you need to run the application.
+
+If you wish to use a port other than 50001 for the app, change the last line to:
+
+dotnet run --server.urls http://0.0.0.0:5000
+
+(Where 5000 is your chosen port).
+
+
+Note that for development purposes you should set ASPNETCORE_ENVIRONMENT to Development
+
+(It can be set to Staging or Production after you execute a dotnet publish command to build static files)
+
 
 DevOps Process
 -------------
