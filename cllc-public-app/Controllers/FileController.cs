@@ -538,7 +538,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        private async void CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
+        private async Task CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
         {
             var exists = await _sharePointFileManager.DocumentLibraryExists(listTitle);
             if (!exists)
