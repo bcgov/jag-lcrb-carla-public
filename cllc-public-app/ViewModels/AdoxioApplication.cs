@@ -412,6 +412,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public ServiceHours? ServiceHoursSaturdayClose { get; set; }
 
-
+        // public bool isTransferInProgress { get; set; }
+        public bool isLocationChangeInProgress { get; set; }
     }
 }
