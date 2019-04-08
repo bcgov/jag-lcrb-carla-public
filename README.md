@@ -61,7 +61,7 @@ This application makes light use of SQL Server for some aspects of the public fa
 
 To run a local instance with Docker:  
 1. `docker volume create mssql` - This line creates persistent storage.  Note that this storage will be created within the Linux VM rather than in the host operating system; that is the recommended approach.
-2. `docker run -m 4G -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Express' -p 1433:1433 -v  -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu` - This line runs the database container, selecting the Express variant.  The Express variant is free and is sufficient to run the CARLA application.
+2. `docker run -m 4G -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=yourStrong(!)Password' -e 'MSSQL_PID=Express' -p 1433:1433 -v mssql:/var/opt/mssql -d mcr.microsoft.com/mssql/server:2017-latest-ubuntu` - This line runs the database container, selecting the Express variant.  The Express variant is free and is sufficient to run the CARLA application.
 3. Download and install Azure Data Studio, a Microsoft supported cross platform SQL client
 	1. https://github.com/Microsoft/azuredatastudio
 4. Connect to the local instance using the SA password specified and do the following:
