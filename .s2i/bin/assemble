@@ -220,14 +220,13 @@ if [ -n "$SONAR_TOKEN" ]; then
 	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe begin /d:sonar.login=$SONAR_TOKEN /k:$SONAR_PROJECT /d:sonar.host.url=$SONAR_URL /v:$VERSION_PREFIX$BUILDNUMBER 
 	dotnet build "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" /m:1 -c "$DOTNET_CONFIGURATION" 
 	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe end /d:sonar.login=$SONAR_TOKEN 
+	exit 0
 elif [ -n "$SNYK_TOKEN" ]; then
 		# run the snyk scan.  Note SNYK_TOKEN is automatically used by the snyk scanner for authentication.
 		snyk test --file="$DOTNET_STARTUP_PROJECT"
 elif [ -n "$DOTNET_TEST" ]; then
 	dotnet test "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" /m:1 -c "$DOTNET_CONFIGURATION"
-else	
-
-  
+else	  
   # publish application
   echo "---> Restoring application dependencies..."
   if [ -n "$INCREMENTAL_SOURCE_OPTION" ]; then
@@ -237,8 +236,7 @@ else
   dotnet restore "$DOTNET_STARTUP_PROJECT" $RESTORE_OPTIONS $RESTORE_SOURCE_OPTIONS $VERBOSITY_OPTION
   echo "---> Publishing application..."
   dotnet publish "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" $VERBOSITY_OPTION \
-         --self-contained false /p:PublishWithAspNetCoreTargetManifest=false --no-restore -o "$DOTNET_APP_PATH"
-		 
+         --self-contained false /p:PublishWithAspNetCoreTargetManifest=false --no-restore -o "$DOTNET_APP_PATH"		 
 	# do a npm install if necessary.
 	if [ -f $DOTNET_APP_PATH/package.json ]; then
 		echo "Restoring Node.js packages"
