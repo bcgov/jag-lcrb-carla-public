@@ -104,14 +104,18 @@
             trademarks and any type of branding.
           </p>
 
-          <p>Establishment names will be reviewed for approval during the application process. For more information,
-            please see the <a routerLink="/policy-document/store-name">Non-Medical Cannabis Retail Store Name Approval
-              Process</a>.</p>
+          <p>
+            Establishment names will be reviewed for approval during the application process. For more information,
+            please see the <a routerLink="/policy-document/store-name">
+              Non-Medical Cannabis Retail Store Name Approval
+              Process
+            </a>.
+          </p>
         </section>
 
         <app-field [label]="mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'" [required]="true"
-          [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
-          errorMessage="Please enter the name of the proposed establishment">
+                   [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+                   errorMessage="Please enter the name of the proposed establishment">
           <input class="form-control" style="width: 500px;" type="text" ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)" formControlName="establishmentName">
         </app-field>
 
@@ -124,7 +128,7 @@
                    formControlName="establishmentAddressStreet">
           </app-field>
           <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
-            <input class="form-control" type="text" readonly 
+            <input class="form-control" type="text" readonly
                    formControlName="establishmentAddressCity">
           </app-field>
           <section class="col-md-4 col-xs-12">
@@ -146,77 +150,101 @@
           <div style="flex: 0 0 210px;">
             <app-field label="Parcel Identifier (PID)">
               <input type="text" readonly class="form-control" style="width: 200px;"
-                     formControlName="establishmentParcelid">
+                     formControlName="establishmentParcelId">
             </app-field>
           </div>
         </div>
-        </div>
-        <h3 class="blue-header" *ngIf="mode === CHANGE_OF_LOCATION_MODE">PROPOSED ADDRESS</h3>
-        <div>
-          &nbsp;
-          <address class="row">
-            <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
-                       [valid]="form.get('establishmentaddressstreet').valid || !form.get('establishmentaddressstreet').touched"
-                       errorMessage="Please enter the street address">
-              <input class="form-control" type="text" autocomplete="address-line1"
-                     formControlName="establishmentaddressstreet">
+      </div>
+      <h3 class="blue-header" *ngIf="mode === CHANGE_OF_LOCATION_MODE">PROPOSED ADDRESS</h3>
+      <div>
+        &nbsp;
+        <address class="row">
+          <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
+                     [valid]="form.get('establishmentAddressStreet').valid || !form.get('establishmentAddressStreet').touched"
+                     errorMessage="Please enter the street address">
+            <input class="form-control" type="text" autocomplete="address-line1"
+                   formControlName="establishmentAddressStreet">
+          </app-field>
+          <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+                     [valid]="form.get('establishmentAddressCity').valid || !form.get('establishmentAddressCity').touched"
+                     errorMessage="Please enter the city">
+            <input class="form-control" type="text" autocomplete="address-level2"
+                   formControlName="establishmentAddressCity">
+          </app-field>
+          <section class="col-md-4 col-xs-12">
+            <app-field label="Province" [isFullWidth]="true">
+              <input class="form-control" autocomplete="address-level1" readonly type="text" value="British Columbia">
             </app-field>
-            <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
-                       [valid]="form.get('establishmentaddresscity').valid || !form.get('establishmentaddresscity').touched"
-                       errorMessage="Please enter the city">
-              <input class="form-control" type="text" autocomplete="address-level2"
-                     formControlName="establishmentaddresscity">
+          </section>
+          <section class="col-md-4 col-xs-12">
+            <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
+                       [valid]="form.get('establishmentAddressPostalCode').valid || !form.get('establishmentAddressPostalCode').touched"
+                       errorMessage="Please enter the postal code">
+              <input class="form-control" type="text" autocomplete="postal-code"
+                     formControlName="establishmentAddressPostalCode">
             </app-field>
-            <section class="col-md-4 col-xs-12">
-              <app-field label="Province" [isFullWidth]="true">
-                <input class="form-control" autocomplete="address-level1" readonly type="text" value="British Columbia">
-              </app-field>
-            </section>
-            <section class="col-md-4 col-xs-12">
-              <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
-                         [valid]="form.get('establishmentaddresspostalcode').valid || !form.get('establishmentaddresspostalcode').touched"
-                         errorMessage="Please enter the postal code">
-                <input class="form-control" type="text" autocomplete="postal-code"
-                       formControlName="establishmentaddresspostalcode">
-              </app-field>
-            </section>
-            <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-              <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
-            </app-field>
-          </address>
+          </section>
+          <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+            <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+          </app-field>
+        </address>
 
-          <div class="light-blue-bg" style="display: flex;">
-            <div style="flex: 0 0 210px;">
-              <app-field label="Parcel Identifier (PID)"
-                         [valid]="!form.get('establishmentparcelid').touched || form.get('establishmentparcelid').valid"
-                         errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
-                <input type="text" class="form-control" style="width: 200px;" maxlength=9
-                       formControlName="establishmentparcelid">
-              </app-field>
-            </div>
-            <div style="flex: 1; font-size: 11px;">
+        <div class="light-blue-bg" style="display: flex;">
+          <div style="flex: 0 0 210px;">
+            <app-field label="Parcel Identifier (PID)"
+                       [valid]="!form.get('establishmentParcelId').touched || form.get('establishmentParcelId').valid"
+                       errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+              <input type="text" class="form-control" style="width: 200px;" maxlength=9
+                     formControlName="establishmentParcelId">
+            </app-field>
+          </div>
+          <div style="flex: 1; font-size: 11px;">
+            <span>
+
               <span>
-
-                <span>
-                  <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be found
-                  on
-                </span> <br>
-                <ul style="display: inline-block">
-                  <li>The title to the property</li>
-                  <li>Through the B.C. Land Title and Survey Authority</li>
-                  <li>The tax assessment notice from BC Assessment</li>
-                </ul>
-              </span>
-
+                <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be found
+                on
+              </span> <br>
               <ul style="display: inline-block">
-                <li>BC Assessment’s e-valueBC website </li>
-                <li>The municipal tax notice</li>
-                <li>The property lease</li>
+                <li>The title to the property</li>
+                <li>Through the B.C. Land Title and Survey Authority</li>
+                <li>The tax assessment notice from BC Assessment</li>
               </ul>
-            </div>
+            </span>
+
+            <ul style="display: inline-block">
+              <li>BC Assessment’s e-valueBC website </li>
+              <li>The municipal tax notice</li>
+              <li>The property lease</li>
+            </ul>
           </div>
         </div>
-</section>
+
+
+      </div>
+
+      <p>&nbsp;</p>
+
+        <div style="flex: 0 0 210px;">
+          <app-field label="Store Email"  [required]="false"
+                     [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
+                     errorMessage="Please enter an email address">
+            <input type="text" class="form-control" style="width: 200px;"
+                   formControlName="establishmentEmail">
+          </app-field>
+        </div>
+        <div style="flex: 0 0 210px;">
+          <app-field label="Store Phone"  [required]="false"
+                     [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
+                     errorMessage="Please enter a phone number ">
+            <input type="text" class="form-control" style="width: 200px;"
+                   autocomplete="tel"
+          (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
+          </app-field>
+        </div>
+      
+
+    </section>
     <p>&nbsp;</p>
 
     
@@ -335,35 +363,35 @@
     <address class="padded-section">
 
       <app-field label="First Name" [required]="true"
-        [valid]="form.get('contactpersonfirstname').valid || !form.get('contactpersonfirstname').touched"
+        [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
         errorMessage="Please enter the business contact's first name">
         <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-          formControlName="contactpersonfirstname">
+          formControlName="contactPersonFirstName">
       </app-field>
 
       <app-field label="Last Name" [required]="true"
-        [valid]="form.get('contactpersonlastname').valid || !form.get('contactpersonlastname').touched"
+        [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
         errorMessage="Please enter the business contact's last name">
         <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-          formControlName="contactpersonlastname">
+          formControlName="contactPersonLastName">
       </app-field>
 
       <app-field label="Title/ Position" [required]="false" [valid]="true">
-        <input class="form-control" style="width: 350px;" type="text" formControlName="contactpersonrole">
+        <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
       </app-field>
 
       <app-field label="Phone Number (main)" [required]="true"
-        [valid]="form.get('contactpersonphone').valid || !form.get('contactpersonphone').touched"
+        [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
         errorMessage="Please enter the business contact's 10-digit phone number">
         <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-          (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactpersonphone">
+          (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
       </app-field>
 
       <app-field label="Email" [required]="true"
-        [valid]="form.get('contactpersonemail').valid || !form.get('contactpersonemail').touched"
+        [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
         errorMessage="Please enter the business contact's email address">
         <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-          formControlName="contactpersonemail" (blur)="trimValue(form.get('contactpersonemail'))">
+          formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
       </app-field>
     </address>
 
@@ -453,15 +481,18 @@
     <br>
     <hr>
     <p>Proceed to pay online using a credit card through the secure web portal.</p>
-    <i>
+    
       <p>
-        <b>Please note:</b> Applications which are submitted without all required information or documents will not be
-        processed.
-        Applicants will be contacted and provided the opportunity to submit missing information. Once applicants
-        provide
-        all
-        required documents to the LCRB, the application will be submitted for processing.</p>
-    </i>
+        <i>
+          <b>Please note:</b> Applications which are submitted without all required information or documents will not be
+          processed.
+          Applicants will be contacted and provided the opportunity to submit missing information. Once applicants
+          provide
+          all
+          required documents to the LCRB, the application will be submitted for processing.
+        </i>
+</p>
+    
     <br>
 
     <h3 class="blue-header">DECLARATIONS</h3>
@@ -475,7 +506,7 @@
         <span *ngIf="account?.businessType === 'Society'"
           href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
           Typically, an appropriate individual for a society will be a director or a
-          senior manager (as defi ned in the Societies Act).
+          senior manager (as defined in the Societies Act).
         </span>
         <span
           *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">
