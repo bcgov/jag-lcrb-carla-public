@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdoxioApplicationDataService } from '@services/adoxio-application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
-import { Application } from '@models/application.model.ts';
+import { Application } from '@models/application.model';
 import { FormBase, postalRegex } from '@shared/form-base';
 import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
