@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Response, ResponseContentType } from '@angular/http';
 
 import { FileSystemItem } from '../models/file-system-item.model';
-import { AdoxioApplication } from '../models/adoxio-application.model';
+import { Application } from '../models/application.model';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -22,8 +22,8 @@ export class AdoxioApplicationDataService extends DataService {
   /**
    * Get all Dynamics Applications for the current user
    * */
-  getAdoxioApplications(): Observable<AdoxioApplication[]> {
-    return this.http.get<AdoxioApplication[]>(this.apiPath + 'current', { headers: this.headers })
+  getAdoxioApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -35,8 +35,8 @@ export class AdoxioApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getAllCurrentApplications(): Observable<AdoxioApplication[]> {
-    return this.http.get<AdoxioApplication[]>(this.apiPath + 'current', { headers: this.headers })
+  getAllCurrentApplications(): Observable<Application[]> {
+    return this.http.get<Application[]>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -44,8 +44,8 @@ export class AdoxioApplicationDataService extends DataService {
    * Get a Dynamics Application by application ID
    * @param applicationId
    */
-  getApplicationById(applicationId: string): Observable<AdoxioApplication> {
-    return this.http.get<AdoxioApplication>(this.apiPath + applicationId, { headers: this.headers })
+  getApplicationById(applicationId: string): Observable<Application> {
+    return this.http.get<Application>(this.apiPath + applicationId, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -86,10 +86,10 @@ export class AdoxioApplicationDataService extends DataService {
    * Create a Dynamics Application
    * @param applicationData
    */
-  createApplication(applicationData: any): Observable<AdoxioApplication> {
+  createApplication(applicationData: any): Observable<Application> {
     // call API
     // console.log("===== AdoxioApplicationDataService.createApplication: ", applicationData);
-    return this.http.post<AdoxioApplication>(this.apiPath, applicationData, { headers: this.headers });
+    return this.http.post<Application>(this.apiPath, applicationData, { headers: this.headers });
   }
 
 

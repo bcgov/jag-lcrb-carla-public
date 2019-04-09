@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 
 
-import { AdoxioApplication } from '../models/adoxio-application.model';
+import { Application } from '../models/application.model';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';
