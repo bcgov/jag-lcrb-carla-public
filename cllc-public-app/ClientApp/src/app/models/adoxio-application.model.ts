@@ -52,4 +52,7 @@ export class AdoxioApplication {
 
   authorizedToSubmit: boolean;
   signatureAgreement: boolean;
+
+  //isTransferInProgress: boolean;
+  isLocationChangeInProgress: boolean;
 }
