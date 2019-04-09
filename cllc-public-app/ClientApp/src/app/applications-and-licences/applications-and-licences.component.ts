@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/
 import { AdoxioApplicationDataService } from '@app/services/adoxio-application-data.service';
 import { AdoxioLicenseDataService } from '@app/services/adoxio-license-data.service';
 import { Router } from '@angular/router';
-import { AdoxioApplication } from '@app/models/adoxio-application.model';
+import { Application } from '@app/models/application.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { DynamicsAccount } from './../models/dynamics-account.model';
@@ -57,8 +57,8 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   private displayApplications() {
     this.inProgressApplications = [];
     this.licencedApplications = [];
-    this.busy = this.applicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: AdoxioApplication[]) => {
-      adoxioApplications.forEach((application: AdoxioApplication | any) => {
+    this.busy = this.applicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: Application[]) => {
+      adoxioApplications.forEach((application: Application | any) => {
         if (application.assignedLicence && application.applicationStatus === 'Approved') {
         this.licencedApplications.push(application);
         } else {
@@ -69,7 +69,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     });
   }
 
-  uploadMoreFiles(application: AdoxioApplication) {
+  uploadMoreFiles(application: Application) {
     this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
   }
 
@@ -108,7 +108,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
   }
 
-  changeLicenceLocation(application: AdoxioApplication) {
+  changeLicenceLocation(application: Application) {
      // create an application for relocation, linked to the given licence.
     
     var licenceId = application.assignedLicence.id;
@@ -126,7 +126,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     
   }
 
-  transformStatus(application: AdoxioApplication): string {
+  transformStatus(application: Application): string {
     const status = application.applicationStatus;
     let shownStatus = status;
 
