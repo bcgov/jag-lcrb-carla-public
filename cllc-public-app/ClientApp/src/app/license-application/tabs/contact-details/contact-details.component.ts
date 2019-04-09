@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
-import { AdoxioApplication } from '../../../models/adoxio-application.model';
+import { Application } from '../../../models/application.model';
 
 @Component({
   selector: 'app-contact-details',
@@ -64,11 +64,11 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   createForm() {
     this.contactDetailsForm = this.fb.group({
       id: [''],
-      contactpersonfirstname: [''], // Validators.required
-      contactpersonlastname: [''],
-      contactpersonrole: [''],
-      contactpersonemail: ['', Validators.email],
-      contactpersonphone: ['']
+      contactPersonFirstName: [''], // Validators.required
+      contactPersonLastName: [''],
+      contactPersonRole: [''],
+      contactPersonEmail: ['', Validators.email],
+      contactPersonPhone: ['']
     });
   }
 
@@ -110,7 +110,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication) => {
+      (data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );

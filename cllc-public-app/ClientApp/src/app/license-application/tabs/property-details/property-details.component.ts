@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
-import { AdoxioApplication } from '../../../models/adoxio-application.model';
+import { Application } from '../../../models/application.model';
 
 @Component({
   selector: 'app-property-details',
@@ -79,7 +79,7 @@ export class PropertyDetailsComponent implements OnInit, OnDestroy {
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication) => {
+      (data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );

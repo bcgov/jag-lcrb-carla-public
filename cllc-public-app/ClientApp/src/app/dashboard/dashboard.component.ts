@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
-import { AdoxioApplication } from '../models/adoxio-application.model';
+import { Application } from '../models/application.model';
 import { DynamicsDataService } from '../services/dynamics-data.service';
 import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
 import { Subscription } from 'rxjs';
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
   }
 
   verify_payment() {
-    const newLicenceApplicationData: AdoxioApplication = new AdoxioApplication();
+    const newLicenceApplicationData: Application = new Application();
     newLicenceApplicationData.licenseType = 'Cannabis Retail Store';
     newLicenceApplicationData.applicantType = this.account.businessType;
     newLicenceApplicationData.account = this.account;
@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit {
   }
 
   startNewLicenceApplication() {
-    const newLicenceApplicationData: AdoxioApplication = <AdoxioApplication>{
+    const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Cannabis Retail Store',
       applicantType: this.account.businessType,
       account: this.account,

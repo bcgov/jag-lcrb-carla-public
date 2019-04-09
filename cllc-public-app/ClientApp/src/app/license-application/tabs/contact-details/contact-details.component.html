@@ -5,12 +5,12 @@
   <form [formGroup]='contactDetailsForm' class="form-horizontal" (ngSubmit)="save()">
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('contactpersonfirstname')}">
+      <div [ngClass]="{'has-error': this.isFieldError('contactPersonFirstName')}">
         <label for="">First Name</label>
         <br>
-        <input class="form-control" style="width: 200px;" type="text" id="contactpersonfirstname" formControlName="contactpersonfirstname">
-        <div *ngIf="this.isFieldError('contactpersonfirstname')" class="alert alert-danger" style="width: 200px;">
-          <div *ngIf="contactDetailsForm.controls['contactpersonfirstname'].hasError('required') ">
+        <input class="form-control" style="width: 200px;" type="text" id="contactPersonFirstName" formControlName="contactPersonFirstName">
+        <div *ngIf="this.isFieldError('contactPersonFirstName')" class="alert alert-danger" style="width: 200px;">
+          <div *ngIf="contactDetailsForm.controls['contactPersonFirstName'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -18,12 +18,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('contactpersonlastname')}">
+      <div [ngClass]="{'has-error': this.isFieldError('contactPersonLastName')}">
         <label for="">Last Name</label>
         <br>
-        <input class="form-control" style="width: 200px;" type="text" id="contactpersonlastname" formControlName="contactpersonlastname">
-        <div *ngIf="this.isFieldError('contactpersonlastname')" class="alert alert-danger" style="width: 200px;">
-          <div *ngIf="contactDetailsForm.controls['contactpersonlastname'].hasError('required') ">
+        <input class="form-control" style="width: 200px;" type="text" id="contactPersonLastName" formControlName="contactPersonLastName">
+        <div *ngIf="this.isFieldError('contactPersonLastName')" class="alert alert-danger" style="width: 200px;">
+          <div *ngIf="contactDetailsForm.controls['contactPersonLastName'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -31,12 +31,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('contactpersonrole')}">
+      <div [ngClass]="{'has-error': this.isFieldError('contactPersonRole')}">
         <label for="">Role</label>
         <p>What role do they have in relation to your business?</p>
-        <input class="form-control" style="width: 200px;" type="text" id="contactpersonrole" formControlName="contactpersonrole">
-        <div *ngIf="this.isFieldError('contactpersonrole')" class="alert alert-danger" style="width: 200px;">
-          <div *ngIf="contactDetailsForm.controls['contactpersonrole'].hasError('required') ">
+        <input class="form-control" style="width: 200px;" type="text" id="contactPersonRole" formControlName="contactPersonRole">
+        <div *ngIf="this.isFieldError('contactPersonRole')" class="alert alert-danger" style="width: 200px;">
+          <div *ngIf="contactDetailsForm.controls['contactPersonRole'].hasError('required') ">
             This is required
           </div>
         </div>
@@ -47,12 +47,12 @@
       <div [ngClass]="{'has-error': this.isFieldError('contactpersonemail')}">
         <label for="">Email</label>
         <br>
-        <input class="form-control" style="width: 200px;" type="text" id="contactpersonemail" formControlName="contactpersonemail">
-        <div *ngIf="this.isFieldError('contactpersonemail')" class="alert alert-danger" style="width: 200px;">
-          <div *ngIf="contactDetailsForm.controls['contactpersonemail'].hasError('required') ">
+        <input class="form-control" style="width: 200px;" type="text" id="contactPersonEmail" formControlName="contactPersonEmail">
+        <div *ngIf="this.isFieldError('contactPersonEmail')" class="alert alert-danger" style="width: 200px;">
+          <div *ngIf="contactDetailsForm.controls['contactPersonEmail'].hasError('required') ">
             This is required
           </div>
-          <div *ngIf="contactDetailsForm.controls['contactpersonemail'].hasError('email') ">
+          <div *ngIf="contactDetailsForm.controls['contactPersonEmail'].hasError('email') ">
             Email is invalid
           </div>
         </div>
@@ -60,12 +60,12 @@
     </section>
 
     <section>
-      <div [ngClass]="{'has-error': this.isFieldError('contactpersonphone')}">
+      <div [ngClass]="{'has-error': this.isFieldError('contactPersonPhone')}">
         <label for="">Phone</label>
         <br>
-        <input class="form-control" style="width: 150px;" type="text" id="contactpersonphone" formControlName="contactpersonphone">
-        <div *ngIf="this.isFieldError('contactpersonphone')" class="alert alert-danger" style="width: 100px;">
-          <div *ngIf="contactDetailsForm.controls['contactpersonphone'].hasError('required') ">
+        <input class="form-control" style="width: 150px;" type="text" id="contactPersonPhone" formControlName="contactPersonPhone">
+        <div *ngIf="this.isFieldError('contactPersonPhone')" class="alert alert-danger" style="width: 100px;">
+          <div *ngIf="contactDetailsForm.controls['contactPersonPhone'].hasError('required') ">
             This is required
           </div>
         </div>
