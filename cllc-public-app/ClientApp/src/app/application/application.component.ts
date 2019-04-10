@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdoxioApplicationDataService } from '@services/adoxio-application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
-import { AdoxioApplication } from '@models/adoxio-application.model';
+import { Application } from '@models/application.model';
 import { FormBase, postalRegex } from '@shared/form-base';
 import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
@@ -42,7 +42,7 @@ const ServiceHours = [
   styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent extends FormBase implements OnInit, OnDestroy {
-  application: AdoxioApplication;
+  application: Application;
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
@@ -90,15 +90,17 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
           establishmentParcelid: ['']
       }),
       establishmentName: [''],
-      establishmentparcelid: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
-      contactpersonfirstname: ['', Validators.required],
-      contactpersonlastname: ['', Validators.required],
-      contactpersonrole: [''],
-      contactpersonemail: ['', Validators.required],
-      contactpersonphone: ['', Validators.required],
-      establishmentaddressstreet: ['', Validators.required],
-      establishmentaddresscity: ['', Validators.required],
-      establishmentaddresspostalcode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+      establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+      contactPersonFirstName: ['', Validators.required],
+      contactPersonLastName: ['', Validators.required],
+      contactPersonRole: [''],
+      contactPersonEmail: ['', Validators.required],
+      contactPersonPhone: ['', Validators.required],
+      establishmentAddressStreet: ['', Validators.required],
+      establishmentAddressCity: ['', Validators.required],
+      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+      establishmentEmail: ['', Validators.email],
+      establishmentPhone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
 
       serviceHoursSundayOpen: ['', Validators.required],
       serviceHoursMondayOpen: ['', Validators.required],
@@ -119,11 +121,11 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     });
 
     if (this.mode === TRANSFER_LICENCE_MODE) {
-      this.form.get('establishmentaddressstreet').disable();
-      this.form.get('establishmentaddresscity').disable();
-      this.form.get('establishmentaddresspostalcode').disable();
+      this.form.get('establishmentAddressStreet').disable();
+      this.form.get('establishmentAddressCity').disable();
+      this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentName').disable();
-      this.form.get('establishmentparcelid').disable();
+      this.form.get('establishmentParcelId').disable();
 
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
@@ -178,12 +180,20 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       });
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication) => {
-        if (data.establishmentparcelid) {
-          data.establishmentparcelid = data.establishmentparcelid.replace(/-/g, '');
+      (data: Application) => {
+        if (data.establishmentParcelId) {
+          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
         this.application = data;
-        this.form.patchValue(data);
+
+        var noNulls = Object.keys(data)
+          .filter(e => data[e] !== null)
+          .reduce((o, e) => {
+            o[e] = data[e]
+            return o;
+          }, {});
+
+        this.form.patchValue(noNulls);
         if (data.isPaid) {
           this.form.disable();
         }
@@ -249,7 +259,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication) => {
+      (data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );

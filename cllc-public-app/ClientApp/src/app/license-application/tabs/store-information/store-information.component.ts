@@ -11,7 +11,7 @@ import { UserDataService } from '../../../services/user-data.service';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
-import { AdoxioApplication } from '../../../models/adoxio-application.model';
+import { Application } from '../../../models/application.model';
 
 @Component({
   selector: 'app-store-information',
@@ -110,7 +110,7 @@ export class StoreInformationComponent implements OnInit, OnDestroy {
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication ) => {
+      (data: Application ) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );

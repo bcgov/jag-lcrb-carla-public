@@ -4,7 +4,7 @@ import { PaymentDataService } from '../../../services/payment-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Subject ,  Observable ,  zip } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
-import { AdoxioApplication } from '../../../models/adoxio-application.model';
+import { Application } from '../../../models/application.model';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class SubmitPayComponent implements OnInit {
   ngOnInit() {
     // get application data, display form
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication) => {
+      (data: Application) => {
         this.isSubmitted = data.isSubmitted;
         this.isPaid = data.isPaid;
         this.prevPaymentFailed = data.prevPaymentFailed;
@@ -57,21 +57,21 @@ export class SubmitPayComponent implements OnInit {
     const result = new Subject<boolean>();
     // get application data and validate all required fields are entered
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication) => {
+      (data: Application) => {
         // validate contact details
-        if (this.isNullOrEmpty(data.contactpersonfirstname)
-          || this.isNullOrEmpty(data.contactpersonlastname)
-          || this.isNullOrEmpty(data.contactpersonrole)
-          || this.isNullOrEmpty(data.contactpersonemail)
-          || this.isNullOrEmpty(data.contactpersonphone)) {
+        if (this.isNullOrEmpty(data.contactPersonFirstName)
+          || this.isNullOrEmpty(data.contactPersonLastName)
+          || this.isNullOrEmpty(data.contactPersonRole)
+          || this.isNullOrEmpty(data.contactPersonEmail)
+          || this.isNullOrEmpty(data.contactPersonPhone)) {
           this.isApplicationValid = false;
           this.validationMessages.push('Contact details are not complete.');
         }
         // validate property details
-        if (this.isNullOrEmpty(data.establishmentaddressstreet)
-          || this.isNullOrEmpty(data.establishmentaddresscity)
-          || this.isNullOrEmpty(data.establishmentaddresspostalcode)
-          || this.isNullOrEmpty(data.establishmentparcelid)) {
+        if (this.isNullOrEmpty(data.establishmentAddressStreet)
+          || this.isNullOrEmpty(data.establishmentAddressCity)
+          || this.isNullOrEmpty(data.establishmentAddressPostalCode)
+          || this.isNullOrEmpty(data.establishmentParcelId)) {
           this.isApplicationValid = false;
           this.validationMessages.push('Property details are not complete.');
         }
@@ -81,7 +81,7 @@ export class SubmitPayComponent implements OnInit {
           this.validationMessages.push('Store Information details are not complete.');
         }
         // validate declaration
-        // if (this.isNullOrEmpty(data.authorizedtosubmit)
+        // if (this.isNullOrEmpty(data.authorizedToSubmit)
         //   || this.isNullOrEmpty(data.signatureagreement)) {
         //   this.isApplicationValid = false;
         //   this.validationMessages.push('Declaration details are not complete.');
