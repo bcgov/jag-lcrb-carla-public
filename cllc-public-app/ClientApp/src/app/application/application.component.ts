@@ -125,7 +125,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       this.form.get('establishmentAddressCity').disable();
       this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentName').disable();
-      this.form.get('establishmentparcelid').disable();
+      this.form.get('establishmentParcelId').disable();
 
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
