@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
         {
-            Application adoxioApplicationVM = new ViewModels.Application()
+            Application applicationVM = new ViewModels.Application()
             {
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
@@ -130,11 +130,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
 
-                LicenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid == true),
+                LicenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid != null && dynamicsApplication.AdoxioLicencefeeinvoicepaid == true),
 
-                //get application status
-                ApplicationStatus = (AdoxioApplicationStatusCodes)dynamicsApplication.Statuscode,
-                ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype,
+                
 
                 // set a couple of read-only flags to indicate status
                 IsPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved),
@@ -164,20 +162,29 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // id
             if (dynamicsApplication.AdoxioApplicationid != null)
-                adoxioApplicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+                applicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
 
-            
+            if (dynamicsApplication.Statuscode != null)
+            {
+                applicationVM.ApplicationStatus = (AdoxioApplicationStatusCodes)dynamicsApplication.Statuscode;
+            }
+
+            if (dynamicsApplication.AdoxioApplicanttype != null)
+            {
+                applicationVM.ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype;
+            }
+
             //get applying person from Contact entity
             if (dynamicsApplication._adoxioApplyingpersonValue != null)
             {
                 Guid applyingPersonId = Guid.Parse(dynamicsApplication._adoxioApplyingpersonValue);
                 var contact = await dynamicsClient.GetContactById(applyingPersonId);
-                adoxioApplicationVM.ApplyingPerson = contact.Fullname;
+                applicationVM.ApplyingPerson = contact.Fullname;
             }
             if (dynamicsApplication._adoxioApplicantValue != null)
             {
                 var applicant = await dynamicsClient.GetAccountById(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
-                adoxioApplicationVM.Applicant = applicant.ToViewModel();
+                applicationVM.Applicant = applicant.ToViewModel();
             }
 
             //get license type from Adoxio_licencetype entity
@@ -185,39 +192,39 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
                 var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
-                adoxioApplicationVM.LicenseType = adoxio_licencetype.AdoxioName;
+                applicationVM.LicenseType = adoxio_licencetype.AdoxioName;
             }
 
             if (dynamicsApplication.AdoxioAppchecklistfinaldecision != null)
             {
-                adoxioApplicationVM.AppChecklistFinalDecision = (AdoxioFinalDecisionCodes)dynamicsApplication.AdoxioAppchecklistfinaldecision;
+                applicationVM.AppChecklistFinalDecision = (AdoxioFinalDecisionCodes)dynamicsApplication.AdoxioAppchecklistfinaldecision;
             }
 
             //get payment info
-            if (dynamicsApplication.AdoxioInvoicetrigger == 1)
+            if (dynamicsApplication.AdoxioInvoicetrigger != null && dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
-                adoxioApplicationVM.AdoxioInvoiceTrigger = GeneralYesNo.Yes;
-                adoxioApplicationVM.IsSubmitted = true;
+                applicationVM.AdoxioInvoiceTrigger = GeneralYesNo.Yes;
+                applicationVM.IsSubmitted = true;
             }
             else
             {
-                adoxioApplicationVM.AdoxioInvoiceTrigger = GeneralYesNo.No;
-                adoxioApplicationVM.IsSubmitted = false;
+                applicationVM.AdoxioInvoiceTrigger = GeneralYesNo.No;
+                applicationVM.IsSubmitted = false;
             }
 
             if (dynamicsApplication.AdoxioLicenceFeeInvoice != null)
             {
-                adoxioApplicationVM.LicenceFeeInvoice = dynamicsApplication.AdoxioLicenceFeeInvoice.ToViewModel();
+                applicationVM.LicenceFeeInvoice = dynamicsApplication.AdoxioLicenceFeeInvoice.ToViewModel();
             }
 
             if (dynamicsApplication.AdoxioAssignedLicence != null)
             {
-                adoxioApplicationVM.AssignedLicence = dynamicsApplication.AdoxioAssignedLicence.ToViewModel(dynamicsClient);
+                applicationVM.AssignedLicence = dynamicsApplication.AdoxioAssignedLicence.ToViewModel(dynamicsClient);
             }
 
-            adoxioApplicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.IsSubmitted);
+            applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
 
-            return adoxioApplicationVM;
+            return applicationVM;
         }
     }
 }
