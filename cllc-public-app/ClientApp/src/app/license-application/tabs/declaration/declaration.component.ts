@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
-import { AdoxioApplication } from '../../../models/adoxio-application.model';
+import { Application } from '../../../models/application.model';
 
 @Component({
   selector: 'app-declaration',
@@ -17,8 +17,8 @@ import { AdoxioApplication } from '../../../models/adoxio-application.model';
 })
 export class DeclarationComponent implements OnInit {
   @Input() applicationId: string;
-  authorizedtosubmit: boolean;
-  signatureagreement: boolean;
+  authorizedToSubmit: boolean;
+  signatureAgreement: boolean;
   busy: Subscription;
   subscriptions: Subscription[] = [];
   application: any;
@@ -36,22 +36,22 @@ export class DeclarationComponent implements OnInit {
     const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
       filter(state => !!state))
       .subscribe(currentApplication => {
-        this.signatureagreement = currentApplication.signatureagreement;
-        this.authorizedtosubmit = currentApplication.authorizedtosubmit;
+        this.signatureAgreement = currentApplication.signatureAgreement;
+        this.authorizedToSubmit = currentApplication.authorizedToSubmit;
         if (currentApplication.isPaid) {
           this.isReadOnly = true;
         }
         this.savedFormData = {
-          authorizedtosubmit: currentApplication.authorizedtosubmit,
-          signatureagreement: currentApplication.signatureagreement,
+          authorizedToSubmit: currentApplication.authorizedToSubmit,
+          signatureAgreement: currentApplication.signatureAgreement,
         };
       });
     this.subscriptions.push(sub);
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (this.signatureagreement === this.savedFormData.signatureagreement &&
-      this.authorizedtosubmit === this.savedFormData.authorizedtosubmit) {
+    if (this.signatureAgreement === this.savedFormData.signatureAgreement &&
+      this.authorizedToSubmit === this.savedFormData.authorizedToSubmit) {
       return true;
     } else {
       return this.save(true);
@@ -62,16 +62,16 @@ export class DeclarationComponent implements OnInit {
     const saveResult = new Subject<boolean>();
     const declarationValues = {
       id: this.applicationId,
-      signatureagreement: this.signatureagreement,
-      authorizedtosubmit: this.authorizedtosubmit
+      signatureAgreement: this.signatureAgreement,
+      authorizedToSubmit: this.authorizedToSubmit
     };
     const subscription = this.applicationDataService.updateApplication(declarationValues).subscribe(
       res => {
         saveResult.next(true);
         this.updateApplicationInStore();
         this.savedFormData = {
-          authorizedtosubmit: declarationValues.authorizedtosubmit,
-          signatureagreement: declarationValues.signatureagreement,
+          authorizedTosubmit: declarationValues.authorizedToSubmit,
+          signatureAgreement: declarationValues.signatureAgreement,
         };
         if (showProgress === true) {
           this.snackBar.open('Declaration Details have been saved', 'Success', { duration: 2500, panelClass: ['red-snackbar'] });
@@ -90,7 +90,7 @@ export class DeclarationComponent implements OnInit {
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: AdoxioApplication) => {
+      (data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
     );

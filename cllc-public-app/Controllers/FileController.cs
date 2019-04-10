@@ -124,7 +124,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
+            await CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
 
             var hasAccess = await CanAccessEntity(entityName, entityId);
             if (!hasAccess)
@@ -363,7 +363,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
+                await CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
 
                 string folderName = await GetFolderName(entityName, entityId, _dynamicsClient); ;
                 // Get the file details list in folder
@@ -538,7 +538,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        private async void CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
+        private async Task CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
         {
             var exists = await _sharePointFileManager.DocumentLibraryExists(listTitle);
             if (!exists)
