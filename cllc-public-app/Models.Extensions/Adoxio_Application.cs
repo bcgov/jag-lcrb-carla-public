@@ -22,6 +22,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentaddresspostalcode = from.EstablishmentAddressPostalCode;
             to.AdoxioAddresscity = from.EstablishmentAddressCity;
             to.AdoxioEstablishmentparcelid = from.EstablishmentParcelId;
+            to.AdoxioEstablishmentphone = from.EstablishmentPhone;
+            to.AdoxioEstablishmentemail = from.EstablishmentEmail;
+
             to.AdoxioContactpersonfirstname = from.ContactPersonFirstName;
             to.AdoxioContactpersonlastname = from.ContactPersonLastName;
             to.AdoxioRole = from.ContactPersonRole;
@@ -105,6 +108,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
                                                     + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
                                                     + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
+                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
 
                 ServicehHoursStandardHours = dynamicsApplication.AdoxioServicehoursstandardhours,
                 ServiceHoursSundayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayopen,
