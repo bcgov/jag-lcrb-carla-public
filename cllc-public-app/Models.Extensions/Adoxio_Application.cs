@@ -12,24 +12,27 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class Adoxio_ApplicationExtensions
     {
 
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.AdoxioApplication from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.Application from)
         {
-            to.AdoxioName = from.name;
+            to.AdoxioName = from.Name;
             //to.Adoxio_jobnumber = from.jobNumber;            
-            to.AdoxioEstablishmentpropsedname = from.establishmentName;
-            to.AdoxioEstablishmentaddressstreet = from.establishmentaddressstreet;
-            to.AdoxioEstablishmentaddresscity = from.establishmentaddresscity;
-            to.AdoxioEstablishmentaddresspostalcode = from.establishmentaddresspostalcode;
-            to.AdoxioAddresscity = from.establishmentaddresscity;
-            to.AdoxioEstablishmentparcelid = from.establishmentparcelid;
-            to.AdoxioContactpersonfirstname = from.contactpersonfirstname;
-            to.AdoxioContactpersonlastname = from.contactpersonlastname;
-            to.AdoxioRole = from.contactpersonrole;
-            to.AdoxioEmail = from.contactpersonemail;
-            to.AdoxioContactpersonphone = from.contactpersonphone;
-            to.AdoxioAuthorizedtosubmit = from.authorizedtosubmit;
-            to.AdoxioSignatureagreement = from.signatureagreement;
-            to.AdoxioAdditionalpropertyinformation = from.additionalpropertyinformation;
+            to.AdoxioEstablishmentpropsedname = from.EstablishmentName;
+            to.AdoxioEstablishmentaddressstreet = from.EstablishmentAddressStreet;
+            to.AdoxioEstablishmentaddresscity = from.EstablishmentAddressCity;
+            to.AdoxioEstablishmentaddresspostalcode = from.EstablishmentAddressPostalCode;
+            to.AdoxioAddresscity = from.EstablishmentAddressCity;
+            to.AdoxioEstablishmentparcelid = from.EstablishmentParcelId;
+            to.AdoxioEstablishmentphone = from.EstablishmentPhone;
+            to.AdoxioEstablishmentemail = from.EstablishmentEmail;
+
+            to.AdoxioContactpersonfirstname = from.ContactPersonFirstName;
+            to.AdoxioContactpersonlastname = from.ContactPersonLastName;
+            to.AdoxioRole = from.ContactPersonRole;
+            to.AdoxioEmail = from.ContactPersonEmail;
+            to.AdoxioContactpersonphone = from.ContactPersonPhone;
+            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
+            to.AdoxioSignatureagreement = from.SignatureAgreement;
+            to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
 
 
             to.AdoxioServicehoursstandardhours = from.ServicehHoursStandardHours;
@@ -91,130 +94,128 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
         
 
-            public async static Task<AdoxioApplication> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
+            public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
         {
-            AdoxioApplication adoxioApplicationVM = new ViewModels.AdoxioApplication();
+            Application adoxioApplicationVM = new ViewModels.Application()
+            {
+                Name = dynamicsApplication.AdoxioName,
+                JobNumber = dynamicsApplication.AdoxioJobnumber,
+                //get establishment name and address
+                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
+                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
+                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
+                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
+                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
+                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
+                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
+
+                ServicehHoursStandardHours = dynamicsApplication.AdoxioServicehoursstandardhours,
+                ServiceHoursSundayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayopen,
+                ServiceHoursSundayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayclose,
+                ServiceHoursMondayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursmondayopen,
+                ServiceHoursMondayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursmondayclose,
+                ServiceHoursTuesdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourstuesdayopen,
+                ServiceHoursTuesdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourstuesdayclose,
+                ServiceHoursWednesdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourswednesdayopen,
+                ServiceHoursWednesdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourswednesdayclose,
+                ServiceHoursThursdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursthursdayopen,
+                ServiceHoursThursdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursthursdayclose,
+                ServiceHoursFridayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayopen,
+                ServiceHoursFridayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayclose,
+                ServiceHoursSaturdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayopen,
+                ServiceHoursSaturdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayclose,
+
+                AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
+                SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
+
+                LicenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid == true),
+
+                //get application status
+                ApplicationStatus = (AdoxioApplicationStatusCodes)dynamicsApplication.Statuscode,
+                ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype,
+
+                // set a couple of read-only flags to indicate status
+                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved),
+
+                //get parcel id
+                EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
+
+                //get additional property info
+                AdditionalPropertyInformation = dynamicsApplication.AdoxioAdditionalpropertyinformation,
+                AdoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue,
+            
+                PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
+            
+                //get contact details
+                ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
+                ContactPersonLastName = dynamicsApplication.AdoxioContactpersonlastname,
+                ContactPersonRole = dynamicsApplication.AdoxioRole,
+                ContactPersonEmail = dynamicsApplication.AdoxioEmail,
+                ContactPersonPhone = dynamicsApplication.AdoxioContactpersonphone,
+
+                //get record audit info
+                CreatedOn = dynamicsApplication.Createdon,
+                ModifiedOn = dynamicsApplication.Modifiedon
+
+            };
+
 
             // id
             if (dynamicsApplication.AdoxioApplicationid != null)
-                adoxioApplicationVM.id = dynamicsApplication.AdoxioApplicationid.ToString();
+                adoxioApplicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
 
-            //get name
-            adoxioApplicationVM.name = dynamicsApplication.AdoxioName;
-
+            
             //get applying person from Contact entity
             if (dynamicsApplication._adoxioApplyingpersonValue != null)
             {
                 Guid applyingPersonId = Guid.Parse(dynamicsApplication._adoxioApplyingpersonValue);
                 var contact = await dynamicsClient.GetContactById(applyingPersonId);
-                adoxioApplicationVM.applyingPerson = contact.Fullname;
+                adoxioApplicationVM.ApplyingPerson = contact.Fullname;
             }
             if (dynamicsApplication._adoxioApplicantValue != null)
             {
                 var applicant = await dynamicsClient.GetAccountById(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
-                adoxioApplicationVM.applicant = applicant.ToViewModel();
+                adoxioApplicationVM.Applicant = applicant.ToViewModel();
             }
-
-            //get job number
-            adoxioApplicationVM.jobNumber = dynamicsApplication.AdoxioJobnumber;
 
             //get license type from Adoxio_licencetype entity
             if (dynamicsApplication._adoxioLicencetypeValue != null)
             {
                 Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
                 var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
-                adoxioApplicationVM.licenseType = adoxio_licencetype.AdoxioName;
+                adoxioApplicationVM.LicenseType = adoxio_licencetype.AdoxioName;
             }
-
-            //get establishment name and address
-            adoxioApplicationVM.establishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname;
-            adoxioApplicationVM.establishmentaddressstreet = dynamicsApplication.AdoxioEstablishmentaddressstreet;
-            adoxioApplicationVM.establishmentaddresscity = dynamicsApplication.AdoxioEstablishmentaddresscity;
-            adoxioApplicationVM.establishmentaddresspostalcode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode;
-            adoxioApplicationVM.establishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
-                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
-                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode;
-
-            adoxioApplicationVM.ServicehHoursStandardHours = dynamicsApplication.AdoxioServicehoursstandardhours;
-            adoxioApplicationVM.ServiceHoursSundayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayopen;
-            adoxioApplicationVM.ServiceHoursSundayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayclose;
-            adoxioApplicationVM.ServiceHoursMondayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursmondayopen;
-            adoxioApplicationVM.ServiceHoursMondayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursmondayclose;
-            adoxioApplicationVM.ServiceHoursTuesdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourstuesdayopen;
-            adoxioApplicationVM.ServiceHoursTuesdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourstuesdayclose;
-            adoxioApplicationVM.ServiceHoursWednesdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourswednesdayopen;
-            adoxioApplicationVM.ServiceHoursWednesdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourswednesdayclose;
-            adoxioApplicationVM.ServiceHoursThursdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursthursdayopen;
-            adoxioApplicationVM.ServiceHoursThursdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursthursdayclose;
-            adoxioApplicationVM.ServiceHoursFridayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayopen;
-            adoxioApplicationVM.ServiceHoursFridayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayclose;
-            adoxioApplicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayopen;
-            adoxioApplicationVM.ServiceHoursSaturdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayclose;
-
-            adoxioApplicationVM.AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
-            adoxioApplicationVM.SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement;
-
-            adoxioApplicationVM.licenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid == true);
-
-            //get application status
-            adoxioApplicationVM.applicationStatus = (AdoxioApplicationStatusCodes)dynamicsApplication.Statuscode;
 
             if (dynamicsApplication.AdoxioAppchecklistfinaldecision != null)
             {
                 adoxioApplicationVM.AppChecklistFinalDecision = (AdoxioFinalDecisionCodes)dynamicsApplication.AdoxioAppchecklistfinaldecision;
             }
 
-            // set a couple of read-only flags to indicate status
-            adoxioApplicationVM.isPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved);
-
-            //get parcel id
-            adoxioApplicationVM.establishmentparcelid = dynamicsApplication.AdoxioEstablishmentparcelid;
-
-            //get additional property info
-            adoxioApplicationVM.additionalpropertyinformation = dynamicsApplication.AdoxioAdditionalpropertyinformation;
-
             //get payment info
             if (dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
-                adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.Yes;
-                adoxioApplicationVM.isSubmitted = true;
+                adoxioApplicationVM.AdoxioInvoiceTrigger = GeneralYesNo.Yes;
+                adoxioApplicationVM.IsSubmitted = true;
             }
             else
             {
-                adoxioApplicationVM.adoxioInvoiceTrigger = GeneralYesNo.No;
-                adoxioApplicationVM.isSubmitted = false;
+                adoxioApplicationVM.AdoxioInvoiceTrigger = GeneralYesNo.No;
+                adoxioApplicationVM.IsSubmitted = false;
             }
-            adoxioApplicationVM.adoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue;
-            //TODO set in autorest
-            adoxioApplicationVM.paymentreceiveddate = dynamicsApplication.AdoxioPaymentreceiveddate; //DateTime.Now;
-            adoxioApplicationVM.prevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.isSubmitted);
-
-            //get declarations
-            adoxioApplicationVM.authorizedtosubmit = dynamicsApplication.AdoxioAuthorizedtosubmit;
-            adoxioApplicationVM.signatureagreement = dynamicsApplication.AdoxioSignatureagreement;
-
-            //get contact details
-            adoxioApplicationVM.contactpersonfirstname = dynamicsApplication.AdoxioContactpersonfirstname;
-            adoxioApplicationVM.contactpersonlastname = dynamicsApplication.AdoxioContactpersonlastname;
-            adoxioApplicationVM.contactpersonrole = dynamicsApplication.AdoxioRole;
-            adoxioApplicationVM.contactpersonemail = dynamicsApplication.AdoxioEmail;
-            adoxioApplicationVM.contactpersonphone = dynamicsApplication.AdoxioContactpersonphone;
-
-            adoxioApplicationVM.modifiedOn = dynamicsApplication.Modifiedon;
-
-            //get record audit info
-            adoxioApplicationVM.createdon = dynamicsApplication.Createdon;
-            adoxioApplicationVM.modifiedon = dynamicsApplication.Modifiedon;
 
             if (dynamicsApplication.AdoxioLicenceFeeInvoice != null)
             {
-                adoxioApplicationVM.licenceFeeInvoice = dynamicsApplication.AdoxioLicenceFeeInvoice.ToViewModel();
+                adoxioApplicationVM.LicenceFeeInvoice = dynamicsApplication.AdoxioLicenceFeeInvoice.ToViewModel();
             }
 
             if (dynamicsApplication.AdoxioAssignedLicence != null)
             {
-                adoxioApplicationVM.assignedLicence = dynamicsApplication.AdoxioAssignedLicence.ToViewModel(dynamicsClient);
+                adoxioApplicationVM.AssignedLicence = dynamicsApplication.AdoxioAssignedLicence.ToViewModel(dynamicsClient);
             }
+
+            adoxioApplicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!adoxioApplicationVM.IsSubmitted);
 
             return adoxioApplicationVM;
         }

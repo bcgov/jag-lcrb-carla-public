@@ -1,6 +1,6 @@
 import { AdoxioLegalEntity } from '../../models/adoxio-legalentities.model';
 import { DynamicsAccount } from '../../models/dynamics-account.model';
-import { AdoxioApplication } from '../../models/adoxio-application.model';
+import { Application } from '../../models/application.model';
 import { User } from '../../models/user.model';
 
 export interface AppState {
@@ -17,7 +17,7 @@ export interface LegalEntitiesState {
 }
 
 export interface ApplicationsState {
-    applications: AdoxioApplication[];
+    applications: Application[];
 }
 
 export interface CurrentAccountState {
@@ -29,7 +29,7 @@ export interface CurrentUserState {
 }
 
 export interface CurrentApplicationState {
-    currentApplication: AdoxioApplication;
+    currentApplication: Application;
 }
 
 export interface CurrentLegalEntityState {

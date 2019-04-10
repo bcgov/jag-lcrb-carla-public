@@ -30,7 +30,7 @@
           <table *ngIf="inProgressApplications?.length > 0" class="eq-table">
             <tr>
               <th colspan=2>Application</th>
-              <th style="width: 95px">Last Updated</th>
+              <!-- <th style="width: 95px">Last Updated</th> -->
               <th style="width: 235px">Status</th>
               <th>Actions</th>
             </tr>
@@ -41,9 +41,11 @@
                 <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
                 <span>Reference #: {{item.name}} </span> <span></span> <br>
               </td>
-              <td style="padding: 10px; width: 110px;">
-                {{item.modifiedon | date:'mediumDate'}}
-              </td>
+              <!--
+                <td style="padding: 10px; width: 110px;">
+                  {{item.modifiedon | date:'mediumDate'}}
+                </td>
+              -->
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div style="text-transform: uppercase; font-weight: 600;">{{item.applicationStatus}}</div>
                 <p *ngIf="item.applicationStatus === 'Not Submitted'">
@@ -118,12 +120,12 @@
                   </a>
                 </div>
                 <!-- <div
-    *ngIf="['Application Under Review','Pending External Review', 'Approved In Principle'].indexOf(item.applicationStatus) !==                                                                                                                                                                                                                                                                                                                                                                                          -1">
-    <a routerLink="/application/{{item.id}}">
-      <i class="fas fa-eye-alt" style="color: #1a5a96; margin-right: 10px;"></i>Review Submitted
-      Application
-    </a>
-  </div> -->
+      *ngIf="['Application Under Review','Pending External Review', 'Approved In Principle'].indexOf(item.applicationStatus) !==                                                                                                                                                                                                                                                                                                                                                                                          -1">
+      <a routerLink="/application/{{item.id}}">
+        <i class="fas fa-eye-alt" style="color: #1a5a96; margin-right: 10px;"></i>Review Submitted
+        Application
+      </a>
+    </div> -->
                 <div *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
                     <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
@@ -158,10 +160,10 @@
                 <span>Reference #: {{item.name}} </span> <span></span>
               </td>
               <td style="padding: 10px;">
-                {{item?.establishmentaddressstreet}} <br>
-                {{item?.establishmentaddresscity}} <br>
+                {{item?.establishmentAddressStreet}} <br>
+                {{item?.establishmentAddressCity}} <br>
                 British Columbia <br>
-                {{item?.establishmentaddresspostalcode}} <br>
+                {{item?.establishmentAddressPostalCode}} <br>
                 Canada <br>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
@@ -178,8 +180,8 @@
                    download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                 </a>
-                <br *ngIf="item.applicationStatus != PAYMENT_REQUIRED" />
-                <a *ngIf="item.applicationStatus != PAYMENT_REQUIRED" href="javascript:void(0);"
+                <br *ngIf="item.applicationStatus != PAYMENT_REQUIRED && !item.isLocationChangeInProgress" />
+                <a *ngIf="item.applicationStatus != PAYMENT_REQUIRED && !item.isLocationChangeInProgress" href="javascript:void(0);"
                    (click)="changeLicenceLocation(item)">
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>[Beta] Request Relocation</span>
                 </a>

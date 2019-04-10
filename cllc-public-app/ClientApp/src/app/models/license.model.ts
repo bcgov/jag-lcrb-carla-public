@@ -1,4 +1,4 @@
-export class AdoxioLicense {
+export class License {
   id: string;
   licenseType: string;
   licenseStatus: string;

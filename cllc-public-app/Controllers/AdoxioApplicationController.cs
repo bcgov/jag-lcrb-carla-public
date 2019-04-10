@@ -41,9 +41,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private async Task<List<ViewModels.AdoxioApplication>> GetApplicationsByApplicant(string applicantId)
+        private async Task<List<ViewModels.Application>> GetApplicationsByApplicant(string applicantId)
         {
-            List<ViewModels.AdoxioApplication> result = new List<ViewModels.AdoxioApplication>();
+            List<ViewModels.Application> result = new List<ViewModels.Application>();
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
@@ -79,9 +79,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         result.Add(await dynamicsApplication.ToViewModel(_dynamicsClient));
                     }
                 }
+
+                // second pass to determine if transfer or location change is in progress.
+
+                foreach (var item in result)
+                {
+                    if (item.LicenseType == "Cannabis Retail Store" && item.ApplicationStatus == AdoxioApplicationStatusCodes.Approved
+                        && item.AssignedLicence != null && item.AssignedLicence.expiryDate > DateTime.Now
+                        )
+                    {
+                        // determine if there is a transfer in progress.
+                        item.IsLocationChangeInProgress = FindRelatedApplication(result, item, "CRS Location Change");                        
+                        // item.isTransferInProgress = FindRelatedApplication(result, item, "CRS Transfer of Ownership");
+                    }
+                }
+
             }
             return result;
         }
+
+        bool FindRelatedApplication (List<ViewModels.Application> applicationList, ViewModels.Application application, string licenseType)
+        {
+            bool result = false;
+            foreach (var item in applicationList)
+            {
+                if (item.LicenseType == licenseType && item.AssignedLicence != null && item.AssignedLicence.id == application.AssignedLicence.id)
+                {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+
 
         /// <summary>
         /// Gets the number of applications that are submitted
@@ -125,7 +155,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet()]
         public async Task<JsonResult> GetDynamicsApplications(string applicantId)
         {
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByApplicant(applicantId);
+            List<ViewModels.Application> adoxioApplications = await GetApplicationsByApplicant(applicantId);
             return Json(adoxioApplications);
         }
 
@@ -138,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            List<ViewModels.AdoxioApplication> adoxioApplications = await GetApplicationsByApplicant(userSettings.AccountId);
+            List<ViewModels.Application> adoxioApplications = await GetApplicationsByApplicant(userSettings.AccountId);
             return Json(adoxioApplications);
         }
 
@@ -170,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogError("Application id = " + id);
             _logger.LogError("User id = " + userSettings.AccountId);
 
-            ViewModels.AdoxioApplication result = null;
+            ViewModels.Application result = null;
             var dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
             if (dynamicsApplication == null)
             {
@@ -257,7 +287,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost()]
-        public async Task<IActionResult> CreateApplication([FromBody] ViewModels.AdoxioApplication item)
+        public async Task<IActionResult> CreateApplication([FromBody] ViewModels.Application item)
         {
 
             // for association with current user
@@ -271,10 +301,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication();
             // copy received values to Dynamics Application
             adoxioApplication.CopyValues(item);
-            adoxioApplication.AdoxioApplicanttype = (int?)item.applicantType;
+            adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
             try
             {
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.licenseType);
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
 
                 // set license type relationship 
                 adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
@@ -439,9 +469,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateApplication([FromBody] ViewModels.AdoxioApplication item, string id)
+        public async Task<IActionResult> UpdateApplication([FromBody] ViewModels.Application item, string id)
         {
-            if (id != item.id)
+            if (id != item.Id)
             {
                 return BadRequest();
             }

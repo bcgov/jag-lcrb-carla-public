@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AdoxioApplication } from '../../models/adoxio-application.model';
+import { Application } from '../../models/application.model';
 
 export const APPLICATION = 'APPLICATION';
 export const SET_APPLICATION = 'SET_APPLICATION';
@@ -11,7 +11,7 @@ export class ApplicationsAction implements Action {
 export class SetApplicationsAction implements Action {
   readonly type = SET_APPLICATION;
 
-  constructor(public payload: AdoxioApplication[]) { }
+  constructor(public payload: Application[]) { }
 }
 
 export type Actions =
