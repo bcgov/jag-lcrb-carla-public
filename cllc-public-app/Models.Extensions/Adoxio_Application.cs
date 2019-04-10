@@ -130,7 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
 
-                LicenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid == true),
+                LicenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid != null && dynamicsApplication.AdoxioLicencefeeinvoicepaid == true),
 
                 //get application status
                 ApplicationStatus = (AdoxioApplicationStatusCodes)dynamicsApplication.Statuscode,
@@ -194,7 +194,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             //get payment info
-            if (dynamicsApplication.AdoxioInvoicetrigger == 1)
+            if (dynamicsApplication.AdoxioInvoicetrigger != null && dynamicsApplication.AdoxioInvoicetrigger == 1)
             {
                 adoxioApplicationVM.AdoxioInvoiceTrigger = GeneralYesNo.Yes;
                 adoxioApplicationVM.IsSubmitted = true;
