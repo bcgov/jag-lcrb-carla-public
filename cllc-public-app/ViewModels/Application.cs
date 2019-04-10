@@ -35,6 +35,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum AdoxioFinalDecisionCodes
     {
+        [EnumMember(Value = null)]
+        Unknown = 0,
         Approved = 845280000,
         Denied = 845280001
     }
@@ -330,59 +332,65 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         sh2345 = 845280095
     }
 
-    public class AdoxioApplication
+    public class Application
     {
-        public string id { get; set; } //adoxio_applicationid
-        public string name { get; set; } //adoxio_name
-        public string applyingPerson { get; set; } //_adoxio_applyingperson_value
-        public string jobNumber { get; set; } //adoxio_jobnumber
-        public string licenseType { get; set; } //_adoxio_licencetype_value
-        public string establishmentName { get; set; } //adoxio_establishmentpropsedname
-        public string establishmentaddressstreet { get; set; } //adoxio_establishmentaddressstreet
-        public string establishmentaddresscity { get; set; } //adoxio_establishmentaddresscity
-        public string establishmentaddresspostalcode { get; set; } //adoxio_establishmentaddresspostalcode
-        public string establishmentAddress { get; set; } //adoxio_establishmentaddress
+        public string Id { get; set; } //adoxio_applicationid
+        
         [JsonConverter(typeof(StringEnumConverter))]
-        public AdoxioApplicationStatusCodes applicationStatus { get; set; } //statuscode
-        public AdoxioApplicantTypeCodes applicantType { get; set; } //adoxio_applicanttype
-        public GeneralYesNo registeredEstablishment { get; set; } //adoxio_registeredestablishment
-        public string establishmentparcelid { get; set; } //adoxio_establishmentparcelid
-        public string additionalpropertyinformation { get; set; } //adoxio_additionalpropertyinformation
-        public bool? authorizedtosubmit { get; set; } //adoxio_authorizedtosubmit
-        public bool? signatureagreement { get; set; } //adoxio_signatureagreement
-        public string contactpersonfirstname { get; set; } //adoxio_contactpersonfirstname
-        public string contactpersonlastname { get; set; } //adoxio_contactpersonlastname
-        public string contactpersonrole { get; set; } //adoxio_role
-        public string contactpersonemail { get; set; } //adoxio_email
-        public string contactpersonphone { get; set; } //adoxio_contactpersonphone
+        public AdoxioApplicationStatusCodes ApplicationStatus { get; set; } //statuscode
 
-        public GeneralYesNo adoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
-
-        public bool? AuthorizedToSubmit { get; set; }
-        public bool? SignatureAgreement { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AdoxioApplicantTypeCodes ApplicantType { get; set; } //adoxio_applicanttype
 
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioFinalDecisionCodes AppChecklistFinalDecision { get; set; } //adoxioFinaldecision
-        public string adoxioInvoiceId;
-        public bool isSubmitted { get; set; }
-        public bool isPaid { get; set; }
-        public bool prevPaymentFailed { get; set; }
-        public DateTimeOffset? paymentreceiveddate { get; set; }
-        public DateTimeOffset? modifiedOn { get; set; }
 
-        public bool licenceFeeInvoicePaid { get; set; }
+        public GeneralYesNo AdoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
+        public ViewModels.Account Applicant { get; set; }
+        public ViewModels.AdoxioLicense AssignedLicence { get; set; }
+        public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
+        public string AdoxioInvoiceId;
+        public string ApplyingPerson { get; set; } //_adoxio_applyingperson_value
+        public bool? AuthorizedToSubmit { get; set; } //adoxio_authorizedtosubmit        
 
-        public DateTimeOffset? createdon { get; set; }
-        public DateTimeOffset? modifiedon { get; set; }
+        public DateTimeOffset? CreatedOn { get; set; }
+        public string ContactPersonEmail { get; set; } //adoxio_email
+        public string ContactPersonFirstName { get; set; } //adoxio_contactpersonfirstname
+        public string ContactPersonLastName { get; set; } //adoxio_contactpersonlastname
+        public string ContactPersonPhone { get; set; } //adoxio_contactpersonphone
+        public string ContactPersonRole { get; set; } //adoxio_role
 
+        public string EstablishmentAddress { get; set; } //adoxio_establishmentaddress
+        public string EstablishmentName { get; set; } //adoxio_establishmentpropsedname
+        public string EstablishmentAddressCity { get; set; } //adoxio_establishmentaddresscity
+        public string EstablishmentAddressPostalCode { get; set; } //adoxio_establishmentaddresspostalcode
+        public string EstablishmentAddressStreet { get; set; } //adoxio_establishmentaddressstreet
+        public string EstablishmentEmail { get; set; }
+        public string EstablishmentParcelId { get; set; } //adoxio_establishmentparcelid
+        public string EstablishmentPhone { get; set; }
 
-        public ViewModels.Account applicant { get; set; }
+        public bool IsLocationChangeInProgress { get; set; }
+        public bool IsPaid { get; set; }
+        public bool IsSubmitted { get; set; }
 
-        public ViewModels.Invoice licenceFeeInvoice { get; set; }
+        public string JobNumber { get; set; } //adoxio_jobnumber
 
-        public ViewModels.AdoxioLicense assignedLicence { get; set; }
+        public string LicenseType { get; set; } //_adoxio_licencetype_value		
+        public ViewModels.Invoice LicenceFeeInvoice { get; set; }
+        public bool LicenceFeeInvoicePaid { get; set; }
+
+        public DateTimeOffset? ModifiedOn { get; set; }
+
+        public string Name { get; set; } //adoxio_name
+
+        public DateTimeOffset? PaymentReceivedDate { get; set; }
+        public bool PrevPaymentFailed { get; set; }
+
+        public GeneralYesNo RegisteredEstablishment { get; set; } //adoxio_registeredestablishment
 
         public bool? ServicehHoursStandardHours { get; set; }
+        public bool? SignatureAgreement { get; set; } //adoxio_signatureagreement  
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ServiceHours? ServiceHoursSundayOpen { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
@@ -411,7 +419,5 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ServiceHours? ServiceHoursSaturdayOpen { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ServiceHours? ServiceHoursSaturdayClose { get; set; }
-
-
     }
 }
