@@ -237,7 +237,7 @@
           <app-field label="Store Phone"  [required]="false"
                      [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
                      errorMessage="Please enter a phone number ">
-            <input type="text" class="form-control" style="width: 200px;"
+            <input type="text" class="form-control" style="width: 200px;" maxlength="10"
                    autocomplete="tel"
           (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
           </app-field>
