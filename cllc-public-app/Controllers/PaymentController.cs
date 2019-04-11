@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
             if (adoxioApplication.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
-            {
+            {                
                 return NotFound("Payment already made");
             }
 
@@ -150,6 +150,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (adoxioApplication.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
             {
+                if (adoxioApplication.AdoxioLicencefeeinvoicepaid == false)
+                {
+                    try
+                    {
+                        MicrosoftDynamicsCRMadoxioApplication fixApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                        {
+                            AdoxioLicencefeeinvoicepaid = true
+                        };
+                        _dynamicsClient.Applications.Update(id, fixApplication);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error updating application");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        // fail 
+                        throw (odee);
+                    }
+                }
                 return NotFound("Payment already made");
             }
 

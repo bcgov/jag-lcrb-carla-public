@@ -9,7 +9,7 @@ export class License {
   establishmentAddressStreet: string;
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
-  establishmentParcelid: string;
+  establishmentParcelId: string;
 
   expiryDate: Date;
 }

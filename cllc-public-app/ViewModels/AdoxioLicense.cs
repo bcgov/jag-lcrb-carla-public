@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string establishmentAddressStreet { get; set; }
         public string establishmentAddressCity { get; set; }
         public string establishmentAddressPostalCode { get; set; }
-        public string establishmentParcelid { get; set; }
+        public string establishmentParcelId { get; set; }
 
         public string licenseStatus { get; set; }
         public string licenseType { get; set; }
