@@ -87,7 +87,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
           establishmentAddressStreet: [''],
           establishmentAddressCity: [''],
           establishmentAddressPostalCode: [''],
-          establishmentParcelid: ['']
+          establishmentParcelId: ['']
       }),
       establishmentName: [''],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
