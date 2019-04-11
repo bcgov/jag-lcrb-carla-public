@@ -64,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             
             if (dynamicsLicense.AdoxioEstablishment != null)
             {
-                adoxioLicenseVM.establishmentParcelid = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
+                adoxioLicenseVM.establishmentParcelId = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
             }
 
             return adoxioLicenseVM;
