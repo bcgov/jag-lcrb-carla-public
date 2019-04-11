@@ -229,7 +229,7 @@
           <app-field label="Store Email"  [required]="false"
                      [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
                      errorMessage="Please enter an email address">
-            <input type="text" class="form-control" style="width: 200px;"
+            <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
                    formControlName="establishmentEmail">
           </app-field>
         </div>
