@@ -89,7 +89,7 @@ def deployAndVerify(srcHash, environment, imageStream) {
   tagImage(srcHash, environment, "cllc-public-prod")
   // verify deployment to an environment; e.g. [your-project-name]-dev
   openshiftVerifyDeployment(
-    deploymentConfig: "cllc-public-prod",
+    deploymentConfig: "cllc-public",
     namespace: "${PROJECT_NAMESPACE}-${environment}",
     waitTime: '900000'
   )
