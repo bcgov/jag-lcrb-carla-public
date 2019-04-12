@@ -32,9 +32,11 @@ namespace DataTool
                     Console.Out.WriteLine(odee.Response.Content);
                 }
             }
-      
-            // remove all BusinessContacts.
-            var applications = _dynamicsClient.Applications.Get().Value;
+
+            // remove all Applications
+            var select = new List<String> { "adoxio_applicationid" };
+            var applications = _dynamicsClient.Applications.Get(select: select).Value;
+            
 
             foreach (var application in applications)
             {
