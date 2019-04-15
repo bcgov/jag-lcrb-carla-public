@@ -738,9 +738,9 @@ namespace DataTool
 
             };
 
-            if (application.AdoxioEstablishmentaddressstreet != null && application.AdoxioEstablishmentaddressstreet.Length > 40)
+            if (newItem.AdoxioEstablishmentaddressstreet != null && newItem.AdoxioEstablishmentaddressstreet.Length > 40)
             {
-                application.AdoxioEstablishmentaddressstreet = application.AdoxioEstablishmentaddressstreet.Substring(0, 40);
+                newItem.AdoxioEstablishmentaddressstreet = newItem.AdoxioEstablishmentaddressstreet.Substring(0, 40);
             }
 
 
