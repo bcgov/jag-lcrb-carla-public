@@ -24,7 +24,7 @@ namespace SpdSync
 
             // fix for unexpected spaces in header
             config.PrepareHeaderForMatch =
-                header => header = header.Trim();
+                (string header, int index) => header = header.Trim();
 
             TextReader textReader = new StringReader(csvData);
             var csv = new CsvReader(textReader, config);
