@@ -29,14 +29,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcontact
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcontact(string address3City = default(string), bool? adoxioIsassociate = default(bool?), bool? adoxioCansignpermanentchangeapplications = default(bool?), int? leadsourcecode = default(int?), string firstname = default(string), string address2Line2 = default(string), string assistantphone = default(string), string lastname = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), string address1County = default(string), string address3Line3 = default(string), string yomimiddlename = default(string), string ftpsiteurl = default(string), string adoxioUnstructuredaddress = default(string), double? address1Longitude = default(double?), int? accountrolecode = default(int?), string address1Postalcode = default(string), string _accountidValue = default(string), int? adoxioStateprovince = default(int?), bool? marketingonly = default(bool?), string pager = default(string), string address3Postalcode = default(string), string _createdbyexternalpartyValue = default(string), bool? adoxioCansigntemporarychangeapplications = default(bool?), string address1Composite = default(string), string assistantname = default(string), System.DateTimeOffset? anniversary = default(System.DateTimeOffset?), long? versionnumber = default(long?), string governmentid = default(string), string emailaddress3 = default(string), string address2Telephone1 = default(string), bool? adoxioInvited = default(bool?), string address1Upszone = default(string), int? address3Utcoffset = default(int?), string address2Stateorprovince = default(string), string yomifullname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _defaultpricelevelidValue = default(string), string address3Telephone3 = default(string), string salutation = default(string), bool? donotbulkpostalmail = default(bool?), string address1Telephone3 = default(string), System.DateTimeOffset? birthdate = default(System.DateTimeOffset?), int? familystatuscode = default(int?), string yomilastname = default(string), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), string address2Country = default(string), object aging60 = default(object), object creditlimitBase = default(object), string address1Telephone2 = default(string), double? address2Longitude = default(double?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string nickname = default(string), string address1Country = default(string), string _owninguserValue = default(string), int? paymenttermscode = default(int?), string address1Telephone1 = default(string), string _parentcustomeridValue = default(string), string _parentcontactidValue = default(string), string entityimageUrl = default(string), double? address3Longitude = default(double?), string mobilephone = default(string), bool? merged = default(bool?), int? shippingmethodcode = default(int?), bool? adoxioIsauthorizedrepresentative = default(bool?), string address2City = default(string), bool? donotpostalmail = default(bool?), int? address1Freighttermscode = default(int?), string externaluseridentifier = default(string), string address3Name = default(string), object entityimage = default(object), string _owneridValue = default(string), bool? donotfax = default(bool?), string subscriptionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string yomifirstname = default(string), System.DateTimeOffset? adoxioLastsecurityupdate = default(System.DateTimeOffset?), string address1Primarycontactname = default(string), string processid = default(string), string adoxioScopeofthelicenseeinstructions = default(string), string _masteridValue = default(string), string managerphone = default(string), bool? adoxioIsworker = default(bool?), int? address1Utcoffset = default(int?), double? address2Latitude = default(double?), string address1City = default(string), double? address3Latitude = default(double?), string callback = default(string), string middlename = default(string), string address3Addressid = default(string), object aging30 = default(object), string contactid = default(string), string company = default(string), int? address2Utcoffset = default(int?), bool? creditonhold = default(bool?), string adoxioExternalid = default(string), int? numberofchildren = default(int?), int? gendercode = default(int?), string _modifiedbyexternalpartyValue = default(string), string address2Line3 = default(string), string telephone2 = default(string), bool? followemail = default(bool?), string address3Upszone = default(string), string address3Line1 = default(string), string emailaddress1 = default(string), string address1Stateorprovince = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string _originatingleadidValue = default(string), object aging30Base = default(object), System.DateTimeOffset? adoxioEmploymentstartdate = default(System.DateTimeOffset?), object annualincomeBase = default(object), int? statecode = default(int?), int? preferredcontactmethodcode = default(int?), string childrensnames = default(string), bool? donotbulkemail = default(bool?), string address3Line2 = default(string), bool? adoxioIsstaffadmin = default(bool?), int? preferredappointmenttimecode = default(int?), string address1Name = default(string), string adoxioContactportalurl = default(string), string department = default(string), int? educationcode = default(int?), string address2Telephone3 = default(string), string business2 = default(string), string entityimageid = default(string), int? address2Addresstypecode = default(int?), bool? adoxioIsmarketer = default(bool?), double? address1Latitude = default(double?), int? statuscode = default(int?), string address1Postofficebox = default(string), string spousesname = default(string), System.DateTimeOffset? adoxioSecurityexpirydate = default(System.DateTimeOffset?), string home2 = default(string), bool? adoxioCanobtainlicenceinfofrombranch = default(bool?), string address2County = default(string), string traversedpath = default(string), string _transactioncurrencyidValue = default(string), string address2Fax = default(string), string address2Composite = default(string), int? customersizecode = default(int?), object exchangerate = default(object), object creditlimit = default(object), int? haschildrencode = default(int?), int? preferredappointmentdaycode = default(int?), string _preferredsystemuseridValue = default(string), string address1Line2 = default(string), string jobtitle = default(string), string _preferredserviceidValue = default(string), string address2Line1 = default(string), int? importsequencenumber = default(int?), string address3Telephone1 = default(string), string address2Telephone2 = default(string), string timespentbymeonemailandmeetings = default(string), string telephone1 = default(string), string _adoxioRelatedlicenceValue = default(string), string address1Line3 = default(string), string description = default(string), string _adoxioApplicationidValue = default(string), string _adoxioEstablishmentValue = default(string), string _slaidValue = default(string), bool? isbackofficecustomer = default(bool?), long? entityimageTimestamp = default(long?), string address3Primarycontactname = default(string), string address3Stateorprovince = default(string), bool? donotphone = default(bool?), string address2Upszone = default(string), int? timezoneruleversionnumber = default(int?), string address3Country = default(string), string _preferredequipmentidValue = default(string), string address2Postofficebox = default(string), string telephone3 = default(string), string websiteurl = default(string), string address2Postalcode = default(string), object annualincome = default(object), object aging90 = default(object), string fax = default(string), int? address1Shippingmethodcode = default(int?), string _owningbusinessunitValue = default(string), bool? adoxioCanattendcompliancemeetings = default(bool?), string _createdbyValue = default(string), int? customertypecode = default(int?), int? address3Addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), string address1Line1 = default(string), string address3Postofficebox = default(string), int? address2Shippingmethodcode = default(int?), string address3Composite = default(string), string address2Name = default(string), string suffix = default(string), string adoxioPreferredname = default(string), string fullname = default(string), int? address3Freighttermscode = default(int?), int? address3Shippingmethodcode = default(int?), string employeeid = default(string), string managername = default(string), string address2Primarycontactname = default(string), string stageid = default(string), int? adoxioSecuritycheckstatus = default(int?), int? address2Freighttermscode = default(int?), object aging60Base = default(object), string address1Addressid = default(string), int? address1Addresstypecode = default(int?), bool? adoxioCanattendeducationsessions = default(bool?), bool? donotemail = default(bool?), string adoxioRole = default(string), string address3County = default(string), string _createdonbehalfbyValue = default(string), int? territorycode = default(int?), string address3Telephone2 = default(string), string address1Fax = default(string), string address2Addressid = default(string), bool? adoxioCanrepresentlicenseeathearings = default(bool?), string emailaddress2 = default(string), object aging90Base = default(object), int? onholdtime = default(int?), string address3Fax = default(string), bool? adoxioCansigngrocerystoreproofofsalesrevenue = default(bool?), bool? participatesinworkflow = default(bool?), string _slainvokedidValue = default(string), bool? donotsendmm = default(bool?), IList<MicrosoftDynamicsCRMquote> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMlist> listcontactAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMinvoice> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMsalesorder> contactordersAssociation = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcontract> servicecontractcontactsAssociation = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMlead> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementContactId = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMbookableresource> contactBookableresourceContactId = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMconnection> contactConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMopportunity> opportunityParentContact = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMfeedback> contactFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivitypointer> contactActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsocialactivity> contactSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMpostfollow> contactPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> contactPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthorContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMinvoice> invoiceCustomerContacts = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMquote> quoteCustomerContacts = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMphonecall> contactPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> contactTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMsyncerror> contactSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMentitlement> entitlementcontactsAssociation = default(IList<MicrosoftDynamicsCRMentitlement>), MicrosoftDynamicsCRMsla slainvokedidContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slaContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadCustomerContacts = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMannotation> contactAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcontact masterid = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactMasterContact = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMlead originatingleadid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMserviceappointment> contactServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMaccount> accountPrimaryContact = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractCustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMactioncard> contactActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMcontract> contractBillingcustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementCustomer = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthoraccountContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsocialprofile> socialprofileCustomerContacts = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMcustomeraddress> contactCustomerAddress = default(IList<MicrosoftDynamicsCRMcustomeraddress>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMincident> incidentCustomerContacts = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount parentcustomeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceContact = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMsalesorder> orderCustomerContacts = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser preferredsystemuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> contactFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincident> contactAsPrimaryContact = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMservice preferredserviceid = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMincident> contactAsResponsibleContact = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMappointment> contactAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadParentContact = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMequipment preferredequipmentid = default(MicrosoftDynamicsCRMequipment), IList<MicrosoftDynamicsCRMasyncoperation> contactAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> contactRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contactBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact parentcustomeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactCustomerContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMconnection> contactConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMcontractdetail> contractlineitemCustomerContacts = default(IList<MicrosoftDynamicsCRMcontractdetail>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMopportunity> opportunityCustomerContacts = default(IList<MicrosoftDynamicsCRMopportunity>), MicrosoftDynamicsCRMpricelevel defaultpricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMactivityparty> contactActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMletter> contactLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> contactAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioRelatedLicence = default(MicrosoftDynamicsCRMadoxioLicences), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> adoxioContactAdoxioAgencycommunicationLGorFNorPolicePrimaryContact = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioContactAdoxioApplicationApplyingPerson = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioContactAdoxioComplaintComplainant = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityContact = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityProfileName = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> adoxioContactAdoxioPreviousaddressContactId = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioAlias> adoxioContactAliases = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> adoxioContactCorporateroles = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioContactInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioContactPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioContactTiedhouseconnections = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioContactWorkerregistration = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioIndividualDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>))
+        public MicrosoftDynamicsCRMcontact(string address3City = default(string), int? leadsourcecode = default(int?), string firstname = default(string), string address2Line2 = default(string), string adoxioUnstructuredaddress = default(string), string assistantphone = default(string), string lastname = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), string address1County = default(string), string address3Line3 = default(string), string yomimiddlename = default(string), string ftpsiteurl = default(string), double? address1Longitude = default(double?), int? accountrolecode = default(int?), string address1Postalcode = default(string), bool? marketingonly = default(bool?), string pager = default(string), string address3Postalcode = default(string), string _createdbyexternalpartyValue = default(string), string address1Composite = default(string), string assistantname = default(string), System.DateTimeOffset? anniversary = default(System.DateTimeOffset?), long? versionnumber = default(long?), string governmentid = default(string), string emailaddress3 = default(string), string address2Telephone1 = default(string), string address1Upszone = default(string), int? address3Utcoffset = default(int?), string address2Stateorprovince = default(string), string yomifullname = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _defaultpricelevelidValue = default(string), string address3Telephone3 = default(string), string salutation = default(string), bool? donotbulkpostalmail = default(bool?), string address1Telephone3 = default(string), System.DateTimeOffset? birthdate = default(System.DateTimeOffset?), int? familystatuscode = default(int?), bool? adoxioIsstaffadmin = default(bool?), string yomilastname = default(string), System.DateTimeOffset? lastusedincampaign = default(System.DateTimeOffset?), string _parentcustomeridValue = default(string), string address2Country = default(string), bool? adoxioCansignpermanentchangeapplications = default(bool?), object aging60 = default(object), string address1Telephone2 = default(string), double? address2Longitude = default(double?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string nickname = default(string), string address1Country = default(string), string _owninguserValue = default(string), int? paymenttermscode = default(int?), string address1Telephone1 = default(string), bool? adoxioCanrepresentlicenseeathearings = default(bool?), string _accountidValue = default(string), bool? adoxioCansigngrocerystoreproofofsalesrevenue = default(bool?), string _parentcontactidValue = default(string), string entityimageUrl = default(string), double? address3Longitude = default(double?), string mobilephone = default(string), bool? merged = default(bool?), string adoxioPreferredname = default(string), int? shippingmethodcode = default(int?), System.DateTimeOffset? adoxioEmploymentstartdate = default(System.DateTimeOffset?), string address2City = default(string), bool? donotpostalmail = default(bool?), int? address1Freighttermscode = default(int?), string externaluseridentifier = default(string), string address3Name = default(string), object entityimage = default(object), string _owneridValue = default(string), bool? donotfax = default(bool?), string subscriptionid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string yomifirstname = default(string), string address1Primarycontactname = default(string), string processid = default(string), int? address3Freighttermscode = default(int?), string _masteridValue = default(string), string managerphone = default(string), int? address1Utcoffset = default(int?), double? address2Latitude = default(double?), object creditlimitBase = default(object), string address1City = default(string), double? address3Latitude = default(double?), string callback = default(string), string middlename = default(string), string address3Addressid = default(string), object aging30 = default(object), string contactid = default(string), string company = default(string), int? address2Utcoffset = default(int?), bool? creditonhold = default(bool?), int? numberofchildren = default(int?), int? gendercode = default(int?), string adoxioExternalid = default(string), string _modifiedbyexternalpartyValue = default(string), string address2Line3 = default(string), string telephone2 = default(string), bool? followemail = default(bool?), string address3Upszone = default(string), string address3Line1 = default(string), string adoxioScopeofthelicenseeinstructions = default(string), string emailaddress1 = default(string), string address1Stateorprovince = default(string), int? adoxioSecuritycheckstatus = default(int?), string _originatingleadidValue = default(string), bool? adoxioIsauthorizedrepresentative = default(bool?), object aging30Base = default(object), object annualincomeBase = default(object), int? statecode = default(int?), int? preferredcontactmethodcode = default(int?), string childrensnames = default(string), bool? donotbulkemail = default(bool?), string address3Line2 = default(string), int? territorycode = default(int?), bool? adoxioCanobtainlicenceinfofrombranch = default(bool?), int? preferredappointmenttimecode = default(int?), string address1Name = default(string), string department = default(string), int? educationcode = default(int?), string address2Telephone3 = default(string), string business2 = default(string), string _adoxioEstablishmentValue = default(string), string entityimageid = default(string), string _adoxioApplicationidValue = default(string), int? address2Addresstypecode = default(int?), double? address1Latitude = default(double?), bool? adoxioIsmarketer = default(bool?), string adoxioContactportalurl = default(string), int? statuscode = default(int?), string address1Postofficebox = default(string), string spousesname = default(string), string home2 = default(string), string adoxioRole = default(string), string address2County = default(string), string traversedpath = default(string), string _transactioncurrencyidValue = default(string), string address2Fax = default(string), string address2Composite = default(string), int? customersizecode = default(int?), object exchangerate = default(object), object creditlimit = default(object), int? haschildrencode = default(int?), int? preferredappointmentdaycode = default(int?), string _preferredsystemuseridValue = default(string), string address1Line2 = default(string), string jobtitle = default(string), string _preferredserviceidValue = default(string), string address2Line1 = default(string), int? importsequencenumber = default(int?), string address3Telephone1 = default(string), string address2Telephone2 = default(string), string timespentbymeonemailandmeetings = default(string), string telephone1 = default(string), string address1Line3 = default(string), string description = default(string), bool? adoxioIsworker = default(bool?), string _slaidValue = default(string), bool? isbackofficecustomer = default(bool?), long? entityimageTimestamp = default(long?), string address3Primarycontactname = default(string), string address3Stateorprovince = default(string), bool? donotphone = default(bool?), string address2Upszone = default(string), bool? adoxioInvited = default(bool?), bool? adoxioCanattendeducationsessions = default(bool?), int? timezoneruleversionnumber = default(int?), string address3Country = default(string), string _preferredequipmentidValue = default(string), string address2Postofficebox = default(string), string telephone3 = default(string), string websiteurl = default(string), string address2Postalcode = default(string), object annualincome = default(object), object aging90 = default(object), string fax = default(string), int? address1Shippingmethodcode = default(int?), string _owningbusinessunitValue = default(string), string _adoxioRelatedlicenceValue = default(string), string _createdbyValue = default(string), int? customertypecode = default(int?), int? address3Addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), string address1Line1 = default(string), string address3Postofficebox = default(string), int? address2Shippingmethodcode = default(int?), string address3Composite = default(string), string address2Name = default(string), string suffix = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string fullname = default(string), System.DateTimeOffset? adoxioSecurityexpirydate = default(System.DateTimeOffset?), int? address3Shippingmethodcode = default(int?), string employeeid = default(string), string managername = default(string), string address2Primarycontactname = default(string), string stageid = default(string), bool? adoxioIsassociate = default(bool?), int? address2Freighttermscode = default(int?), object aging60Base = default(object), string address1Addressid = default(string), int? address1Addresstypecode = default(int?), System.DateTimeOffset? adoxioLastsecurityupdate = default(System.DateTimeOffset?), bool? adoxioCansigntemporarychangeapplications = default(bool?), bool? donotemail = default(bool?), string address3County = default(string), string _createdonbehalfbyValue = default(string), string address3Telephone2 = default(string), string address1Fax = default(string), string address2Addressid = default(string), string emailaddress2 = default(string), object aging90Base = default(object), bool? adoxioCanattendcompliancemeetings = default(bool?), int? onholdtime = default(int?), string address3Fax = default(string), int? adoxioStateprovince = default(int?), bool? participatesinworkflow = default(bool?), string _slainvokedidValue = default(string), bool? donotsendmm = default(bool?), IList<MicrosoftDynamicsCRMquote> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMlist> listcontactAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMinvoice> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMsalesorder> contactordersAssociation = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcontract> servicecontractcontactsAssociation = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMlead> contactleadsAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementContactId = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMbookableresource> contactBookableresourceContactId = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMconnection> contactConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMopportunity> opportunityParentContact = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMfeedback> contactFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivitypointer> contactActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsocialactivity> contactSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedonbehalfby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMpostfollow> contactPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> contactPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthorContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMinvoice> invoiceCustomerContacts = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMquote> quoteCustomerContacts = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMphonecall> contactPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMtask> contactTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMsyncerror> contactSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMentitlement> entitlementcontactsAssociation = default(IList<MicrosoftDynamicsCRMentitlement>), MicrosoftDynamicsCRMsla slainvokedidContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slaContactSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadCustomerContacts = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMannotation> contactAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMcontact masterid = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactMasterContact = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMlead originatingleadid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMserviceappointment> contactServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMaccount> accountPrimaryContact = default(IList<MicrosoftDynamicsCRMaccount>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractCustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMactioncard> contactActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMcontract> contractBillingcustomerContacts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMentitlement> contactEntitlementCustomer = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMsocialactivity> socialactivityPostauthoraccountContacts = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsocialprofile> socialprofileCustomerContacts = default(IList<MicrosoftDynamicsCRMsocialprofile>), IList<MicrosoftDynamicsCRMcustomeraddress> contactCustomerAddress = default(IList<MicrosoftDynamicsCRMcustomeraddress>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMincident> incidentCustomerContacts = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount parentcustomeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMfeedback> lkContactFeedbackCreatedby = default(IList<MicrosoftDynamicsCRMfeedback>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceContact = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMsalesorder> orderCustomerContacts = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMsystemuser preferredsystemuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> contactFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMincident> contactAsPrimaryContact = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMservice preferredserviceid = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMincident> contactAsResponsibleContact = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMappointment> contactAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMlead> leadParentContact = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMequipment preferredequipmentid = default(MicrosoftDynamicsCRMequipment), IList<MicrosoftDynamicsCRMasyncoperation> contactAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkoperationlog> sourceContactBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> contactRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contactBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMcontact parentcustomeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMcontact> contactCustomerContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMconnection> contactConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMduplicaterecord> contactDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMcontractdetail> contractlineitemCustomerContacts = default(IList<MicrosoftDynamicsCRMcontractdetail>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> contactEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMopportunity> opportunityCustomerContacts = default(IList<MicrosoftDynamicsCRMopportunity>), MicrosoftDynamicsCRMpricelevel defaultpricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMactivityparty> contactActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMletter> contactLetters = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioRelatedLicence = default(MicrosoftDynamicsCRMadoxioLicences), IList<MicrosoftDynamicsCRMadoxioAgencycommunication> adoxioContactAdoxioAgencycommunicationLGorFNorPolicePrimaryContact = default(IList<MicrosoftDynamicsCRMadoxioAgencycommunication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioContactAdoxioApplicationApplyingPerson = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioContactAdoxioComplaintComplainant = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityContact = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> adoxioContactCorporateroles = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioContactPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioContactAdoxioLegalentityProfileName = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioContactTiedhouseconnections = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioContactInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> adoxioContactAdoxioPreviousaddressContactId = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioAlias> adoxioContactAliases = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioContactWorkerregistration = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> contactSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> contactAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioIndividualDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>))
         {
             Address3City = address3City;
-            AdoxioIsassociate = adoxioIsassociate;
-            AdoxioCansignpermanentchangeapplications = adoxioCansignpermanentchangeapplications;
             Leadsourcecode = leadsourcecode;
             Firstname = firstname;
             Address2Line2 = address2Line2;
+            AdoxioUnstructuredaddress = adoxioUnstructuredaddress;
             Assistantphone = assistantphone;
             Lastname = lastname;
             Utcconversiontimezonecode = utcconversiontimezonecode;
@@ -45,17 +44,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address3Line3 = address3Line3;
             Yomimiddlename = yomimiddlename;
             Ftpsiteurl = ftpsiteurl;
-            AdoxioUnstructuredaddress = adoxioUnstructuredaddress;
             Address1Longitude = address1Longitude;
             Accountrolecode = accountrolecode;
             Address1Postalcode = address1Postalcode;
-            this._accountidValue = _accountidValue;
-            AdoxioStateprovince = adoxioStateprovince;
             Marketingonly = marketingonly;
             Pager = pager;
             Address3Postalcode = address3Postalcode;
             this._createdbyexternalpartyValue = _createdbyexternalpartyValue;
-            AdoxioCansigntemporarychangeapplications = adoxioCansigntemporarychangeapplications;
             Address1Composite = address1Composite;
             Assistantname = assistantname;
             Anniversary = anniversary;
@@ -63,7 +58,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Governmentid = governmentid;
             Emailaddress3 = emailaddress3;
             Address2Telephone1 = address2Telephone1;
-            AdoxioInvited = adoxioInvited;
             Address1Upszone = address1Upszone;
             Address3Utcoffset = address3Utcoffset;
             Address2Stateorprovince = address2Stateorprovince;
@@ -76,11 +70,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address1Telephone3 = address1Telephone3;
             Birthdate = birthdate;
             Familystatuscode = familystatuscode;
+            AdoxioIsstaffadmin = adoxioIsstaffadmin;
             Yomilastname = yomilastname;
             Lastusedincampaign = lastusedincampaign;
+            this._parentcustomeridValue = _parentcustomeridValue;
             Address2Country = address2Country;
+            AdoxioCansignpermanentchangeapplications = adoxioCansignpermanentchangeapplications;
             Aging60 = aging60;
-            CreditlimitBase = creditlimitBase;
             Address1Telephone2 = address1Telephone2;
             Address2Longitude = address2Longitude;
             Modifiedon = modifiedon;
@@ -90,14 +86,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owninguserValue = _owninguserValue;
             Paymenttermscode = paymenttermscode;
             Address1Telephone1 = address1Telephone1;
-            this._parentcustomeridValue = _parentcustomeridValue;
+            AdoxioCanrepresentlicenseeathearings = adoxioCanrepresentlicenseeathearings;
+            this._accountidValue = _accountidValue;
+            AdoxioCansigngrocerystoreproofofsalesrevenue = adoxioCansigngrocerystoreproofofsalesrevenue;
             this._parentcontactidValue = _parentcontactidValue;
             EntityimageUrl = entityimageUrl;
             Address3Longitude = address3Longitude;
             Mobilephone = mobilephone;
             Merged = merged;
+            AdoxioPreferredname = adoxioPreferredname;
             Shippingmethodcode = shippingmethodcode;
-            AdoxioIsauthorizedrepresentative = adoxioIsauthorizedrepresentative;
+            AdoxioEmploymentstartdate = adoxioEmploymentstartdate;
             Address2City = address2City;
             Donotpostalmail = donotpostalmail;
             Address1Freighttermscode = address1Freighttermscode;
@@ -109,15 +108,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Subscriptionid = subscriptionid;
             Overriddencreatedon = overriddencreatedon;
             Yomifirstname = yomifirstname;
-            AdoxioLastsecurityupdate = adoxioLastsecurityupdate;
             Address1Primarycontactname = address1Primarycontactname;
             Processid = processid;
-            AdoxioScopeofthelicenseeinstructions = adoxioScopeofthelicenseeinstructions;
+            Address3Freighttermscode = address3Freighttermscode;
             this._masteridValue = _masteridValue;
             Managerphone = managerphone;
-            AdoxioIsworker = adoxioIsworker;
             Address1Utcoffset = address1Utcoffset;
             Address2Latitude = address2Latitude;
+            CreditlimitBase = creditlimitBase;
             Address1City = address1City;
             Address3Latitude = address3Latitude;
             Callback = callback;
@@ -128,45 +126,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Company = company;
             Address2Utcoffset = address2Utcoffset;
             Creditonhold = creditonhold;
-            AdoxioExternalid = adoxioExternalid;
             Numberofchildren = numberofchildren;
             Gendercode = gendercode;
+            AdoxioExternalid = adoxioExternalid;
             this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
             Address2Line3 = address2Line3;
             Telephone2 = telephone2;
             Followemail = followemail;
             Address3Upszone = address3Upszone;
             Address3Line1 = address3Line1;
+            AdoxioScopeofthelicenseeinstructions = adoxioScopeofthelicenseeinstructions;
             Emailaddress1 = emailaddress1;
             Address1Stateorprovince = address1Stateorprovince;
-            Lastonholdtime = lastonholdtime;
+            AdoxioSecuritycheckstatus = adoxioSecuritycheckstatus;
             this._originatingleadidValue = _originatingleadidValue;
+            AdoxioIsauthorizedrepresentative = adoxioIsauthorizedrepresentative;
             Aging30Base = aging30Base;
-            AdoxioEmploymentstartdate = adoxioEmploymentstartdate;
             AnnualincomeBase = annualincomeBase;
             Statecode = statecode;
             Preferredcontactmethodcode = preferredcontactmethodcode;
             Childrensnames = childrensnames;
             Donotbulkemail = donotbulkemail;
             Address3Line2 = address3Line2;
-            AdoxioIsstaffadmin = adoxioIsstaffadmin;
+            Territorycode = territorycode;
+            AdoxioCanobtainlicenceinfofrombranch = adoxioCanobtainlicenceinfofrombranch;
             Preferredappointmenttimecode = preferredappointmenttimecode;
             Address1Name = address1Name;
-            AdoxioContactportalurl = adoxioContactportalurl;
             Department = department;
             Educationcode = educationcode;
             Address2Telephone3 = address2Telephone3;
             Business2 = business2;
+            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
             Entityimageid = entityimageid;
+            this._adoxioApplicationidValue = _adoxioApplicationidValue;
             Address2Addresstypecode = address2Addresstypecode;
-            AdoxioIsmarketer = adoxioIsmarketer;
             Address1Latitude = address1Latitude;
+            AdoxioIsmarketer = adoxioIsmarketer;
+            AdoxioContactportalurl = adoxioContactportalurl;
             Statuscode = statuscode;
             Address1Postofficebox = address1Postofficebox;
             Spousesname = spousesname;
-            AdoxioSecurityexpirydate = adoxioSecurityexpirydate;
             Home2 = home2;
-            AdoxioCanobtainlicenceinfofrombranch = adoxioCanobtainlicenceinfofrombranch;
+            AdoxioRole = adoxioRole;
             Address2County = address2County;
             Traversedpath = traversedpath;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
@@ -187,11 +188,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address2Telephone2 = address2Telephone2;
             Timespentbymeonemailandmeetings = timespentbymeonemailandmeetings;
             Telephone1 = telephone1;
-            this._adoxioRelatedlicenceValue = _adoxioRelatedlicenceValue;
             Address1Line3 = address1Line3;
             Description = description;
-            this._adoxioApplicationidValue = _adoxioApplicationidValue;
-            this._adoxioEstablishmentValue = _adoxioEstablishmentValue;
+            AdoxioIsworker = adoxioIsworker;
             this._slaidValue = _slaidValue;
             Isbackofficecustomer = isbackofficecustomer;
             EntityimageTimestamp = entityimageTimestamp;
@@ -199,6 +198,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address3Stateorprovince = address3Stateorprovince;
             Donotphone = donotphone;
             Address2Upszone = address2Upszone;
+            AdoxioInvited = adoxioInvited;
+            AdoxioCanattendeducationsessions = adoxioCanattendeducationsessions;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Address3Country = address3Country;
             this._preferredequipmentidValue = _preferredequipmentidValue;
@@ -211,7 +212,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Fax = fax;
             Address1Shippingmethodcode = address1Shippingmethodcode;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioCanattendcompliancemeetings = adoxioCanattendcompliancemeetings;
+            this._adoxioRelatedlicenceValue = _adoxioRelatedlicenceValue;
             this._createdbyValue = _createdbyValue;
             Customertypecode = customertypecode;
             Address3Addresstypecode = address3Addresstypecode;
@@ -222,34 +223,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Address3Composite = address3Composite;
             Address2Name = address2Name;
             Suffix = suffix;
-            AdoxioPreferredname = adoxioPreferredname;
+            Lastonholdtime = lastonholdtime;
             Fullname = fullname;
-            Address3Freighttermscode = address3Freighttermscode;
+            AdoxioSecurityexpirydate = adoxioSecurityexpirydate;
             Address3Shippingmethodcode = address3Shippingmethodcode;
             Employeeid = employeeid;
             Managername = managername;
             Address2Primarycontactname = address2Primarycontactname;
             Stageid = stageid;
-            AdoxioSecuritycheckstatus = adoxioSecuritycheckstatus;
+            AdoxioIsassociate = adoxioIsassociate;
             Address2Freighttermscode = address2Freighttermscode;
             Aging60Base = aging60Base;
             Address1Addressid = address1Addressid;
             Address1Addresstypecode = address1Addresstypecode;
-            AdoxioCanattendeducationsessions = adoxioCanattendeducationsessions;
+            AdoxioLastsecurityupdate = adoxioLastsecurityupdate;
+            AdoxioCansigntemporarychangeapplications = adoxioCansigntemporarychangeapplications;
             Donotemail = donotemail;
-            AdoxioRole = adoxioRole;
             Address3County = address3County;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            Territorycode = territorycode;
             Address3Telephone2 = address3Telephone2;
             Address1Fax = address1Fax;
             Address2Addressid = address2Addressid;
-            AdoxioCanrepresentlicenseeathearings = adoxioCanrepresentlicenseeathearings;
             Emailaddress2 = emailaddress2;
             Aging90Base = aging90Base;
+            AdoxioCanattendcompliancemeetings = adoxioCanattendcompliancemeetings;
             Onholdtime = onholdtime;
             Address3Fax = address3Fax;
-            AdoxioCansigngrocerystoreproofofsalesrevenue = adoxioCansigngrocerystoreproofofsalesrevenue;
+            AdoxioStateprovince = adoxioStateprovince;
             Participatesinworkflow = participatesinworkflow;
             this._slainvokedidValue = _slainvokedidValue;
             Donotsendmm = donotsendmm;
@@ -332,7 +332,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Defaultpricelevelid = defaultpricelevelid;
             ContactActivityParties = contactActivityParties;
             ContactLetters = contactLetters;
-            ContactAbsScheduledprocessexecutions = contactAbsScheduledprocessexecutions;
             AdoxioApplicationId = adoxioApplicationId;
             AdoxioEstablishment = adoxioEstablishment;
             AdoxioRelatedLicence = adoxioRelatedLicence;
@@ -340,14 +339,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioContactAdoxioApplicationApplyingPerson = adoxioContactAdoxioApplicationApplyingPerson;
             AdoxioContactAdoxioComplaintComplainant = adoxioContactAdoxioComplaintComplainant;
             AdoxioContactAdoxioLegalentityContact = adoxioContactAdoxioLegalentityContact;
+            AdoxioContactCorporateroles = adoxioContactCorporateroles;
+            AdoxioContactPersonalhistorysummary = adoxioContactPersonalhistorysummary;
             AdoxioContactAdoxioLegalentityProfileName = adoxioContactAdoxioLegalentityProfileName;
+            AdoxioContactTiedhouseconnections = adoxioContactTiedhouseconnections;
+            AdoxioContactInvestigation = adoxioContactInvestigation;
             AdoxioContactAdoxioPreviousaddressContactId = adoxioContactAdoxioPreviousaddressContactId;
             AdoxioContactAliases = adoxioContactAliases;
-            AdoxioContactCorporateroles = adoxioContactCorporateroles;
-            AdoxioContactInvestigation = adoxioContactInvestigation;
-            AdoxioContactPersonalhistorysummary = adoxioContactPersonalhistorysummary;
-            AdoxioContactTiedhouseconnections = adoxioContactTiedhouseconnections;
             AdoxioContactWorkerregistration = adoxioContactWorkerregistration;
+            ContactSharePointDocumentLocations = contactSharePointDocumentLocations;
+            ContactAbsScheduledprocessexecutions = contactAbsScheduledprocessexecutions;
             AdoxioIndividualDocuments = adoxioIndividualDocuments;
             CustomInit();
         }
@@ -364,16 +365,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isassociate")]
-        public bool? AdoxioIsassociate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cansignpermanentchangeapplications")]
-        public bool? AdoxioCansignpermanentchangeapplications { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "leadsourcecode")]
         public int? Leadsourcecode { get; set; }
 
@@ -386,6 +377,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address2_line2")]
         public string Address2Line2 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_unstructuredaddress")]
+        public string AdoxioUnstructuredaddress { get; set; }
 
         /// <summary>
         /// </summary>
@@ -429,11 +425,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_unstructuredaddress")]
-        public string AdoxioUnstructuredaddress { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_longitude")]
         public double? Address1Longitude { get; set; }
 
@@ -446,16 +437,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address1_postalcode")]
         public string Address1Postalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_stateprovince")]
-        public int? AdoxioStateprovince { get; set; }
 
         /// <summary>
         /// </summary>
@@ -476,11 +457,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
         public string _createdbyexternalpartyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cansigntemporarychangeapplications")]
-        public bool? AdoxioCansigntemporarychangeapplications { get; set; }
 
         /// <summary>
         /// </summary>
@@ -516,11 +492,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address2_telephone1")]
         public string Address2Telephone1 { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_invited")]
-        public bool? AdoxioInvited { get; set; }
 
         /// <summary>
         /// </summary>
@@ -584,6 +555,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isstaffadmin")]
+        public bool? AdoxioIsstaffadmin { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "yomilastname")]
         public string Yomilastname { get; set; }
 
@@ -594,18 +570,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_parentcustomerid_value")]
+        public string _parentcustomeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "address2_country")]
         public string Address2Country { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "aging60")]
-        public object Aging60 { get; set; }
+        [JsonProperty(PropertyName = "adoxio_cansignpermanentchangeapplications")]
+        public bool? AdoxioCansignpermanentchangeapplications { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "creditlimit_base")]
-        public object CreditlimitBase { get; set; }
+        [JsonProperty(PropertyName = "aging60")]
+        public object Aging60 { get; set; }
 
         /// <summary>
         /// </summary>
@@ -654,8 +635,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_parentcustomerid_value")]
-        public string _parentcustomeridValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_canrepresentlicenseeathearings")]
+        public bool? AdoxioCanrepresentlicenseeathearings { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_accountid_value")]
+        public string _accountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cansigngrocerystoreproofofsalesrevenue")]
+        public bool? AdoxioCansigngrocerystoreproofofsalesrevenue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -684,13 +675,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_preferredname")]
+        public string AdoxioPreferredname { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "shippingmethodcode")]
         public int? Shippingmethodcode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isauthorizedrepresentative")]
-        public bool? AdoxioIsauthorizedrepresentative { get; set; }
+        [JsonProperty(PropertyName = "adoxio_employmentstartdate")]
+        public System.DateTimeOffset? AdoxioEmploymentstartdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -749,11 +745,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lastsecurityupdate")]
-        public System.DateTimeOffset? AdoxioLastsecurityupdate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_primarycontactname")]
         public string Address1Primarycontactname { get; set; }
 
@@ -764,8 +755,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_scopeofthelicenseeinstructions")]
-        public string AdoxioScopeofthelicenseeinstructions { get; set; }
+        [JsonProperty(PropertyName = "address3_freighttermscode")]
+        public int? Address3Freighttermscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -779,11 +770,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isworker")]
-        public bool? AdoxioIsworker { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_utcoffset")]
         public int? Address1Utcoffset { get; set; }
 
@@ -791,6 +777,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address2_latitude")]
         public double? Address2Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "creditlimit_base")]
+        public object CreditlimitBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -844,11 +835,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_externalid")]
-        public string AdoxioExternalid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "numberofchildren")]
         public int? Numberofchildren { get; set; }
 
@@ -856,6 +842,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "gendercode")]
         public int? Gendercode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_externalid")]
+        public string AdoxioExternalid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -889,6 +880,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_scopeofthelicenseeinstructions")]
+        public string AdoxioScopeofthelicenseeinstructions { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "emailaddress1")]
         public string Emailaddress1 { get; set; }
 
@@ -899,8 +895,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "lastonholdtime")]
-        public System.DateTimeOffset? Lastonholdtime { get; set; }
+        [JsonProperty(PropertyName = "adoxio_securitycheckstatus")]
+        public int? AdoxioSecuritycheckstatus { get; set; }
 
         /// <summary>
         /// </summary>
@@ -909,13 +905,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "aging30_base")]
-        public object Aging30Base { get; set; }
+        [JsonProperty(PropertyName = "adoxio_isauthorizedrepresentative")]
+        public bool? AdoxioIsauthorizedrepresentative { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_employmentstartdate")]
-        public System.DateTimeOffset? AdoxioEmploymentstartdate { get; set; }
+        [JsonProperty(PropertyName = "aging30_base")]
+        public object Aging30Base { get; set; }
 
         /// <summary>
         /// </summary>
@@ -949,8 +945,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isstaffadmin")]
-        public bool? AdoxioIsstaffadmin { get; set; }
+        [JsonProperty(PropertyName = "territorycode")]
+        public int? Territorycode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_canobtainlicenceinfofrombranch")]
+        public bool? AdoxioCanobtainlicenceinfofrombranch { get; set; }
 
         /// <summary>
         /// </summary>
@@ -961,11 +962,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address1_name")]
         public string Address1Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contactportalurl")]
-        public string AdoxioContactportalurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -989,8 +985,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
+        public string _adoxioEstablishmentValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
         public string Entityimageid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
+        public string _adoxioApplicationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -999,13 +1005,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "address1_latitude")]
+        public double? Address1Latitude { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_ismarketer")]
         public bool? AdoxioIsmarketer { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address1_latitude")]
-        public double? Address1Latitude { get; set; }
+        [JsonProperty(PropertyName = "adoxio_contactportalurl")]
+        public string AdoxioContactportalurl { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1024,18 +1035,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_securityexpirydate")]
-        public System.DateTimeOffset? AdoxioSecurityexpirydate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "home2")]
         public string Home2 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canobtainlicenceinfofrombranch")]
-        public bool? AdoxioCanobtainlicenceinfofrombranch { get; set; }
+        [JsonProperty(PropertyName = "adoxio_role")]
+        public string AdoxioRole { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1139,11 +1145,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_relatedlicence_value")]
-        public string _adoxioRelatedlicenceValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "address1_line3")]
         public string Address1Line3 { get; set; }
 
@@ -1154,13 +1155,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
-        public string _adoxioApplicationidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_establishment_value")]
-        public string _adoxioEstablishmentValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_isworker")]
+        public bool? AdoxioIsworker { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1196,6 +1192,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "address2_upszone")]
         public string Address2Upszone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_invited")]
+        public bool? AdoxioInvited { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_canattendeducationsessions")]
+        public bool? AdoxioCanattendeducationsessions { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1259,8 +1265,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canattendcompliancemeetings")]
-        public bool? AdoxioCanattendcompliancemeetings { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_relatedlicence_value")]
+        public string _adoxioRelatedlicenceValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1314,8 +1320,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_preferredname")]
-        public string AdoxioPreferredname { get; set; }
+        [JsonProperty(PropertyName = "lastonholdtime")]
+        public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1324,8 +1330,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "address3_freighttermscode")]
-        public int? Address3Freighttermscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_securityexpirydate")]
+        public System.DateTimeOffset? AdoxioSecurityexpirydate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1354,8 +1360,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_securitycheckstatus")]
-        public int? AdoxioSecuritycheckstatus { get; set; }
+        [JsonProperty(PropertyName = "adoxio_isassociate")]
+        public bool? AdoxioIsassociate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1379,18 +1385,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canattendeducationsessions")]
-        public bool? AdoxioCanattendeducationsessions { get; set; }
+        [JsonProperty(PropertyName = "adoxio_lastsecurityupdate")]
+        public System.DateTimeOffset? AdoxioLastsecurityupdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_cansigntemporarychangeapplications")]
+        public bool? AdoxioCansigntemporarychangeapplications { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "donotemail")]
         public bool? Donotemail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_role")]
-        public string AdoxioRole { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1401,11 +1407,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "territorycode")]
-        public int? Territorycode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1424,11 +1425,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_canrepresentlicenseeathearings")]
-        public bool? AdoxioCanrepresentlicenseeathearings { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "emailaddress2")]
         public string Emailaddress2 { get; set; }
 
@@ -1436,6 +1432,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "aging90_base")]
         public object Aging90Base { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_canattendcompliancemeetings")]
+        public bool? AdoxioCanattendcompliancemeetings { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1449,8 +1450,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_cansigngrocerystoreproofofsalesrevenue")]
-        public bool? AdoxioCansigngrocerystoreproofofsalesrevenue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_stateprovince")]
+        public int? AdoxioStateprovince { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1864,11 +1865,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contact_abs_scheduledprocessexecutions")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> ContactAbsScheduledprocessexecutions { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_ApplicationId")]
         public MicrosoftDynamicsCRMadoxioApplication AdoxioApplicationId { get; set; }
 
@@ -1904,8 +1900,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_corporateroles")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> AdoxioContactCorporateroles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_personalhistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> AdoxioContactPersonalhistorysummary { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_contact_adoxio_legalentity_ProfileName")]
         public IList<MicrosoftDynamicsCRMadoxioLegalentity> AdoxioContactAdoxioLegalentityProfileName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_tiedhouseconnections")]
+        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> AdoxioContactTiedhouseconnections { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_contact_investigation")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioContactInvestigation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1919,28 +1935,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_corporateroles")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporaterole> AdoxioContactCorporateroles { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_investigation")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigation> AdoxioContactInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_personalhistorysummary")]
-        public IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> AdoxioContactPersonalhistorysummary { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contact_tiedhouseconnections")]
-        public IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> AdoxioContactTiedhouseconnections { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_contact_workerregistration")]
         public IList<MicrosoftDynamicsCRMadoxioWorker> AdoxioContactWorkerregistration { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contact_SharePointDocumentLocations")]
+        public IList<MicrosoftDynamicsCRMsharepointdocumentlocation> ContactSharePointDocumentLocations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contact_abs_scheduledprocessexecutions")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> ContactAbsScheduledprocessexecutions { get; set; }
 
         /// <summary>
         /// </summary>
