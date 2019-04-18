@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { AdoxioApplicationDataService } from '@app/services/adoxio-application-data.service';
 import { AdoxioLicenseDataService } from '@app/services/adoxio-license-data.service';
 import { Router } from '@angular/router';
 import { Application } from '@app/models/application.model';
+import { License } from '@app/models/license.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { DynamicsAccount } from './../models/dynamics-account.model';
@@ -26,7 +27,7 @@ const RENEWAL_DUE = 'Renewal Due';
 })
 export class ApplicationsAndLicencesComponent implements OnInit {
   inProgressApplications: any[] = [];
-  licencedApplications: any[] = [];
+  licenses: any[] = [];
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
@@ -56,16 +57,19 @@ export class ApplicationsAndLicencesComponent implements OnInit {
    * */
   private displayApplications() {
     this.inProgressApplications = [];
-    this.licencedApplications = [];
-    this.busy = this.applicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: Application[]) => {
-      adoxioApplications.forEach((application: Application | any) => {
-        if (application.assignedLicence && application.applicationStatus === 'Approved') {
-        this.licencedApplications.push(application);
-        } else {
+    this.licenses = [];
+    this.busy =
+      forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
+        ).subscribe(([applications, licenses]) => {
+      applications.forEach((application: Application | any) => {
+          application.applicationStatus = this.transformStatus(application);
           this.inProgressApplications.push(application);
-        }
-        application.applicationStatus = this.transformStatus(application);
       });
+
+      licenses.forEach((licence: License | any) => {        
+        this.licenses.push(licence);
+      });
+
     });
   }
 

@@ -40,6 +40,7 @@ export class AdoxioApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+
   /**
    * Get a Dynamics Application by application ID
    * @param applicationId
