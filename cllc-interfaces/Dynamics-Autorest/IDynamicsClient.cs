@@ -11,7 +11,8 @@ namespace Gov.Lclb.Cllb.Interfaces
     using Newtonsoft.Json;
 
     /// <summary>
-    /// This OData service is located at https://localhost:8888/dynamics
+    /// This OData service is located at
+    /// https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/
     /// </summary>
     public partial interface IDynamicsClient : System.IDisposable
     {
@@ -113,6 +114,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IComplaints Complaints { get; }
 
         /// <summary>
+        /// Gets the IComplianceinvestigations.
+        /// </summary>
+        IComplianceinvestigations Complianceinvestigations { get; }
+
+        /// <summary>
         /// Gets the ICompliancemeetings.
         /// </summary>
         ICompliancemeetings Compliancemeetings { get; }
@@ -163,6 +169,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishments Establishments { get; }
 
         /// <summary>
+        /// Gets the IFiainvestigationlogs.
+        /// </summary>
+        IFiainvestigationlogs Fiainvestigationlogs { get; }
+
+        /// <summary>
         /// Gets the IFundingsources.
         /// </summary>
         IFundingsources Fundingsources { get; }
@@ -196,6 +207,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILegalentities.
         /// </summary>
         ILegalentities Legalentities { get; }
+
+        /// <summary>
+        /// Gets the ILicencechangeapplications.
+        /// </summary>
+        ILicencechangeapplications Licencechangeapplications { get; }
 
         /// <summary>
         /// Gets the ILicenceses.

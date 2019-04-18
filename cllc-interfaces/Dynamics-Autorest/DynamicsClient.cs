@@ -16,7 +16,8 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Net.Http;
 
     /// <summary>
-    /// This OData service is located at https://localhost:8888/dynamics
+    /// This OData service is located at
+    /// https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/
     /// </summary>
     public partial class DynamicsClient : ServiceClient<DynamicsClient>, IDynamicsClient
     {
@@ -116,6 +117,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IComplaints Complaints { get; private set; }
 
         /// <summary>
+        /// Gets the IComplianceinvestigations.
+        /// </summary>
+        public virtual IComplianceinvestigations Complianceinvestigations { get; private set; }
+
+        /// <summary>
         /// Gets the ICompliancemeetings.
         /// </summary>
         public virtual ICompliancemeetings Compliancemeetings { get; private set; }
@@ -166,6 +172,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
+        /// Gets the IFiainvestigationlogs.
+        /// </summary>
+        public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
+
+        /// <summary>
         /// Gets the IFundingsources.
         /// </summary>
         public virtual IFundingsources Fundingsources { get; private set; }
@@ -199,6 +210,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILegalentities.
         /// </summary>
         public virtual ILegalentities Legalentities { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencechangeapplications.
+        /// </summary>
+        public virtual ILicencechangeapplications Licencechangeapplications { get; private set; }
 
         /// <summary>
         /// Gets the ILicenceses.
@@ -616,6 +632,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Citydistricts = new Citydistricts(this);
             Complaintpublicbpfs = new Complaintpublicbpfs(this);
             Complaints = new Complaints(this);
+            Complianceinvestigations = new Complianceinvestigations(this);
             Compliancemeetings = new Compliancemeetings(this);
             Contraventionadmins = new Contraventionadmins(this);
             Contraventions = new Contraventions(this);
@@ -626,6 +643,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Documentadmins = new Documentadmins(this);
             Documents = new Documents(this);
             Establishments = new Establishments(this);
+            Fiainvestigationlogs = new Fiainvestigationlogs(this);
             Fundingsources = new Fundingsources(this);
             Incidentlicencetypeset = new Incidentlicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
@@ -633,6 +651,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Investigationactivities = new Investigationactivities(this);
             Investigations = new Investigations(this);
             Legalentities = new Legalentities(this);
+            Licencechangeapplications = new Licencechangeapplications(this);
             Licenceses = new Licenceses(this);
             Licencetypeprerequisites = new Licencetypeprerequisites(this);
             Licencetypes = new Licencetypes(this);
@@ -665,7 +684,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
-            BaseUri = new System.Uri("https://localhost:8888/dynamics");
+            BaseUri = new System.Uri("https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(string adoxioIncidentAdoxioLicencetypeid = default(string), string adoxioLicencetypeid = default(string), string incidentid = default(string), long? versionnumber = default(long?))
+        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(long? versionnumber = default(long?), string adoxioLicencetypeid = default(string), string adoxioIncidentAdoxioLicencetypeid = default(string), string incidentid = default(string))
         {
-            AdoxioIncidentAdoxioLicencetypeid = adoxioIncidentAdoxioLicencetypeid;
-            AdoxioLicencetypeid = adoxioLicencetypeid;
-            Incidentid = incidentid;
             Versionnumber = versionnumber;
+            AdoxioLicencetypeid = adoxioLicencetypeid;
+            AdoxioIncidentAdoxioLicencetypeid = adoxioIncidentAdoxioLicencetypeid;
+            Incidentid = incidentid;
             CustomInit();
         }
 
@@ -43,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_incident_adoxio_licencetypeid")]
-        public string AdoxioIncidentAdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,13 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "incidentid")]
-        public string Incidentid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_incident_adoxio_licencetypeid")]
+        public string AdoxioIncidentAdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "incidentid")]
+        public string Incidentid { get; set; }
 
     }
 }

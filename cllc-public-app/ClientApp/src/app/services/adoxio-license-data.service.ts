@@ -18,7 +18,7 @@ export class AdoxioLicenseDataService extends DataService {
     super();
   }
 
-  getAdoxioLicenses(): Observable<License[]> {
+  getAllCurrentLicenses(): Observable<License[]> {
     return this.http.get<License[]>(this.apiPath + 'current', {
       headers: this.headers
     })
