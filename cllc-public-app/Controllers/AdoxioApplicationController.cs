@@ -52,6 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
@@ -161,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all applications in Dynamics for the current user
         [HttpGet("current")]
-        public async Task<JsonResult> GetCurrentUserDyanamicsApplications()
+        public async Task<JsonResult> GetCurrentUserApplications()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
