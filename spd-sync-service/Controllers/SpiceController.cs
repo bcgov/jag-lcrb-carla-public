@@ -30,11 +30,11 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpPost("receive")]
-        public ActionResult Receive([FromBody] List<WorkerResponse> items)
+        public ActionResult Receive([FromBody] List<WorkerResponse> responses)
         {
-            // Process the updates received from the SPICE system.  
-            // This will preferably enqueue a hangfire job that will process the data (as it could take some time).
-            // 
+            // Process the updates received from the SPICE system.
+            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveImportJob(null, responses));
+            _logger.LogInformation("Started receive import job");
             return Ok();
         }        
     }
