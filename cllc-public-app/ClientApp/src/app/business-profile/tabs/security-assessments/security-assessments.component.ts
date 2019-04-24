@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
-import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
+import { LegalEntity } from '../../../models/legal-entity.model';
+import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,15 +17,15 @@ export class SecurityAssessmentsComponent implements OnInit {
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
 
-  adoxioLegalEntityList: AdoxioLegalEntity[] = [];
-  dataSource = new MatTableDataSource<AdoxioLegalEntity>();
+  adoxioLegalEntityList: LegalEntity[] = [];
+  dataSource = new MatTableDataSource<LegalEntity>();
   displayedColumns = ['sendConsentRequest', 'firstname', 'lastname', 'email', 'position', 'emailsent'];
   busy: Promise<any>;
   busyObsv: Subscription;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
+  constructor(private legalEntityDataservice: LegalEntityDataService,
     private route: ActivatedRoute,
     private dynamicsDataService: DynamicsDataService,
     public snackBar: MatSnackBar,
@@ -36,7 +36,7 @@ export class SecurityAssessmentsComponent implements OnInit {
     this.route.parent.params.subscribe(p => {
       this.parentLegalEntityId = p.legalEntityId;
       this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('account', this.accountId)
+      this.dynamicsDataService.getRecord('accounts', this.accountId)
         .subscribe((data) => {
           this.businessType = data.businessType;
         });
@@ -59,7 +59,7 @@ export class SecurityAssessmentsComponent implements OnInit {
       });
   }
 
-  getRoles(legalEntity: AdoxioLegalEntity): string {
+  getRoles(legalEntity: LegalEntity): string {
     const roles = [];
     if (legalEntity.isDirector === true) {
       roles.push('Director');

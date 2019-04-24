@@ -29,51 +29,55 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioContraventionadmin class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioContraventionadmin(string _owningbusinessunitValue = default(string), object adoxioFirstcontraventionmaxvalue = default(object), string _owningteamValue = default(string), object adoxioThirdcontraventionmaxvalue = default(object), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string adoxioInterpretation = default(string), object adoxioFirstcontraventionminvalueBase = default(object), string _modifiedbyValue = default(string), int? statuscode = default(int?), string _owneridValue = default(string), int? adoxioSecondcontraventionmaxperiod = default(int?), object adoxioThirdcontraventionmaxvalueBase = default(object), object exchangerate = default(object), object adoxioSecondcontraventionminvalueBase = default(object), int? adoxioCategory = default(int?), int? utcconversiontimezonecode = default(int?), int? adoxioSecondcontraventionminperiod = default(int?), int? adoxioFirstcontraventionmaxperiod = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string adoxioContraventionadminid = default(string), int? adoxioItemnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), object adoxioFirstcontraventionmaxvalueBase = default(object), int? statecode = default(int?), object adoxioThirdcontraventionminvalueBase = default(object), int? adoxioThirdcontraventionminperiod = default(int?), object adoxioSecondcontraventionminvalue = default(object), string _owninguserValue = default(string), long? versionnumber = default(long?), int? importsequencenumber = default(int?), int? adoxioThirdcontraventionmaxperiod = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), object adoxioThirdcontraventionminvalue = default(object), object adoxioSecondcontraventionmaxvalue = default(object), string adoxioName = default(string), int? adoxioFirstcontraventionminperiod = default(int?), object adoxioFirstcontraventionminvalue = default(object), int? timezoneruleversionnumber = default(int?), string adoxioReference = default(string), object adoxioSecondcontraventionmaxvalueBase = default(object), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionadminSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionadminAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionadminBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioContraventionadminContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>))
+        public MicrosoftDynamicsCRMadoxioContraventionadmin(object adoxioFirstcontraventionminvalue = default(object), int? statuscode = default(int?), string adoxioName = default(string), int? adoxioItemnumber = default(int?), string adoxioContraventionadminid = default(string), object adoxioSecondcontraventionmaxvalueBase = default(object), int? adoxioThirdcontraventionminperiod = default(int?), object adoxioFirstcontraventionmaxvalue = default(object), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), object adoxioSecondcontraventionminvalueBase = default(object), int? adoxioFirstcontraventionmaxperiod = default(int?), string _transactioncurrencyidValue = default(string), int? adoxioThirdcontraventionmaxperiod = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioSecondcontraventionminperiod = default(int?), object exchangerate = default(object), object adoxioThirdcontraventionminvalue = default(object), int? timezoneruleversionnumber = default(int?), bool? adoxioIswqr = default(bool?), bool? adoxioIsreg = default(bool?), string _owneridValue = default(string), long? versionnumber = default(long?), int? adoxioCategory = default(int?), string _modifiedonbehalfbyValue = default(string), object adoxioFirstcontraventionmaxvalueBase = default(object), object adoxioSecondcontraventionminvalue = default(object), object adoxioThirdcontraventionmaxvalueBase = default(object), string adoxioInterpretation = default(string), int? importsequencenumber = default(int?), int? adoxioSecondcontraventionmaxperiod = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioFirstcontraventionminperiod = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), object adoxioThirdcontraventionminvalueBase = default(object), string _owningbusinessunitValue = default(string), object adoxioThirdcontraventionmaxvalue = default(object), bool? adoxioIstandc = default(bool?), bool? adoxioIsact = default(bool?), object adoxioSecondcontraventionmaxvalue = default(object), object adoxioFirstcontraventionminvalueBase = default(object), string _owningteamValue = default(string), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), string adoxioReference = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioContraventionadminSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioContraventionadminDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioContraventionadminAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioContraventionadminBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioContraventionadminContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            AdoxioFirstcontraventionmaxvalue = adoxioFirstcontraventionmaxvalue;
-            this._owningteamValue = _owningteamValue;
-            AdoxioThirdcontraventionmaxvalue = adoxioThirdcontraventionmaxvalue;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            AdoxioInterpretation = adoxioInterpretation;
-            AdoxioFirstcontraventionminvalueBase = adoxioFirstcontraventionminvalueBase;
-            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioFirstcontraventionminvalue = adoxioFirstcontraventionminvalue;
             Statuscode = statuscode;
-            this._owneridValue = _owneridValue;
-            AdoxioSecondcontraventionmaxperiod = adoxioSecondcontraventionmaxperiod;
-            AdoxioThirdcontraventionmaxvalueBase = adoxioThirdcontraventionmaxvalueBase;
-            Exchangerate = exchangerate;
-            AdoxioSecondcontraventionminvalueBase = adoxioSecondcontraventionminvalueBase;
-            AdoxioCategory = adoxioCategory;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioSecondcontraventionminperiod = adoxioSecondcontraventionminperiod;
-            AdoxioFirstcontraventionmaxperiod = adoxioFirstcontraventionmaxperiod;
-            Modifiedon = modifiedon;
-            this._transactioncurrencyidValue = _transactioncurrencyidValue;
-            AdoxioContraventionadminid = adoxioContraventionadminid;
+            AdoxioName = adoxioName;
             AdoxioItemnumber = adoxioItemnumber;
-            Overriddencreatedon = overriddencreatedon;
+            AdoxioContraventionadminid = adoxioContraventionadminid;
+            AdoxioSecondcontraventionmaxvalueBase = adoxioSecondcontraventionmaxvalueBase;
+            AdoxioThirdcontraventionminperiod = adoxioThirdcontraventionminperiod;
+            AdoxioFirstcontraventionmaxvalue = adoxioFirstcontraventionmaxvalue;
+            this._owninguserValue = _owninguserValue;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioSecondcontraventionminvalueBase = adoxioSecondcontraventionminvalueBase;
+            AdoxioFirstcontraventionmaxperiod = adoxioFirstcontraventionmaxperiod;
+            this._transactioncurrencyidValue = _transactioncurrencyidValue;
+            AdoxioThirdcontraventionmaxperiod = adoxioThirdcontraventionmaxperiod;
+            Modifiedon = modifiedon;
+            AdoxioSecondcontraventionminperiod = adoxioSecondcontraventionminperiod;
+            Exchangerate = exchangerate;
+            AdoxioThirdcontraventionminvalue = adoxioThirdcontraventionminvalue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioIswqr = adoxioIswqr;
+            AdoxioIsreg = adoxioIsreg;
+            this._owneridValue = _owneridValue;
+            Versionnumber = versionnumber;
+            AdoxioCategory = adoxioCategory;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioFirstcontraventionmaxvalueBase = adoxioFirstcontraventionmaxvalueBase;
-            Statecode = statecode;
-            AdoxioThirdcontraventionminvalueBase = adoxioThirdcontraventionminvalueBase;
-            AdoxioThirdcontraventionminperiod = adoxioThirdcontraventionminperiod;
             AdoxioSecondcontraventionminvalue = adoxioSecondcontraventionminvalue;
-            this._owninguserValue = _owninguserValue;
-            Versionnumber = versionnumber;
+            AdoxioThirdcontraventionmaxvalueBase = adoxioThirdcontraventionmaxvalueBase;
+            AdoxioInterpretation = adoxioInterpretation;
             Importsequencenumber = importsequencenumber;
-            AdoxioThirdcontraventionmaxperiod = adoxioThirdcontraventionmaxperiod;
+            AdoxioSecondcontraventionmaxperiod = adoxioSecondcontraventionmaxperiod;
             Createdon = createdon;
-            AdoxioThirdcontraventionminvalue = adoxioThirdcontraventionminvalue;
-            AdoxioSecondcontraventionmaxvalue = adoxioSecondcontraventionmaxvalue;
-            AdoxioName = adoxioName;
             AdoxioFirstcontraventionminperiod = adoxioFirstcontraventionminperiod;
-            AdoxioFirstcontraventionminvalue = adoxioFirstcontraventionminvalue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._createdbyValue = _createdbyValue;
+            Overriddencreatedon = overriddencreatedon;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioThirdcontraventionminvalueBase = adoxioThirdcontraventionminvalueBase;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioThirdcontraventionmaxvalue = adoxioThirdcontraventionmaxvalue;
+            AdoxioIstandc = adoxioIstandc;
+            AdoxioIsact = adoxioIsact;
+            AdoxioSecondcontraventionmaxvalue = adoxioSecondcontraventionmaxvalue;
+            AdoxioFirstcontraventionminvalueBase = adoxioFirstcontraventionminvalueBase;
+            this._owningteamValue = _owningteamValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Statecode = statecode;
             AdoxioReference = adoxioReference;
-            AdoxioSecondcontraventionmaxvalueBase = adoxioSecondcontraventionmaxvalueBase;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -87,8 +91,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioContraventionadminDuplicateBaseRecord = adoxioContraventionadminDuplicateBaseRecord;
             AdoxioContraventionadminAsyncOperations = adoxioContraventionadminAsyncOperations;
             AdoxioContraventionadminBulkDeleteFailures = adoxioContraventionadminBulkDeleteFailures;
-            Transactioncurrencyid = transactioncurrencyid;
             AdoxioContraventionadminContraventions = adoxioContraventionadminContraventions;
+            Transactioncurrencyid = transactioncurrencyid;
             CustomInit();
         }
 
@@ -99,48 +103,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstcontraventionmaxvalue")]
-        public object AdoxioFirstcontraventionmaxvalue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thirdcontraventionmaxvalue")]
-        public object AdoxioThirdcontraventionmaxvalue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_interpretation")]
-        public string AdoxioInterpretation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstcontraventionminvalue_base")]
-        public object AdoxioFirstcontraventionminvalueBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_firstcontraventionminvalue")]
+        public object AdoxioFirstcontraventionminvalue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -149,63 +113,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_secondcontraventionmaxperiod")]
-        public int? AdoxioSecondcontraventionmaxperiod { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thirdcontraventionmaxvalue_base")]
-        public object AdoxioThirdcontraventionmaxvalueBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_secondcontraventionminvalue_base")]
-        public object AdoxioSecondcontraventionminvalueBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_category")]
-        public int? AdoxioCategory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_secondcontraventionminperiod")]
-        public int? AdoxioSecondcontraventionminperiod { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstcontraventionmaxperiod")]
-        public int? AdoxioFirstcontraventionmaxperiod { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionadminid")]
-        public string AdoxioContraventionadminid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,8 +123,103 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_contraventionadminid")]
+        public string AdoxioContraventionadminid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_secondcontraventionmaxvalue_base")]
+        public object AdoxioSecondcontraventionmaxvalueBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_thirdcontraventionminperiod")]
+        public int? AdoxioThirdcontraventionminperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_firstcontraventionmaxvalue")]
+        public object AdoxioFirstcontraventionmaxvalue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_secondcontraventionminvalue_base")]
+        public object AdoxioSecondcontraventionminvalueBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_firstcontraventionmaxperiod")]
+        public int? AdoxioFirstcontraventionmaxperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
+        public string _transactioncurrencyidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_thirdcontraventionmaxperiod")]
+        public int? AdoxioThirdcontraventionmaxperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_secondcontraventionminperiod")]
+        public int? AdoxioSecondcontraventionminperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "exchangerate")]
+        public object Exchangerate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_thirdcontraventionminvalue")]
+        public object AdoxioThirdcontraventionminvalue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_iswqr")]
+        public bool? AdoxioIswqr { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isreg")]
+        public bool? AdoxioIsreg { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_category")]
+        public int? AdoxioCategory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -229,33 +233,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thirdcontraventionminvalue_base")]
-        public object AdoxioThirdcontraventionminvalueBase { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thirdcontraventionminperiod")]
-        public int? AdoxioThirdcontraventionminperiod { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_secondcontraventionminvalue")]
         public object AdoxioSecondcontraventionminvalue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_thirdcontraventionmaxvalue_base")]
+        public object AdoxioThirdcontraventionmaxvalueBase { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_interpretation")]
+        public string AdoxioInterpretation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -264,8 +253,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thirdcontraventionmaxperiod")]
-        public int? AdoxioThirdcontraventionmaxperiod { get; set; }
+        [JsonProperty(PropertyName = "adoxio_secondcontraventionmaxperiod")]
+        public int? AdoxioSecondcontraventionmaxperiod { get; set; }
 
         /// <summary>
         /// </summary>
@@ -274,8 +263,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thirdcontraventionminvalue")]
-        public object AdoxioThirdcontraventionminvalue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_firstcontraventionminperiod")]
+        public int? AdoxioFirstcontraventionminperiod { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_thirdcontraventionminvalue_base")]
+        public object AdoxioThirdcontraventionminvalueBase { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_thirdcontraventionmaxvalue")]
+        public object AdoxioThirdcontraventionmaxvalue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_istandc")]
+        public bool? AdoxioIstandc { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isact")]
+        public bool? AdoxioIsact { get; set; }
 
         /// <summary>
         /// </summary>
@@ -284,33 +313,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "adoxio_firstcontraventionminvalue_base")]
+        public object AdoxioFirstcontraventionminvalueBase { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstcontraventionminperiod")]
-        public int? AdoxioFirstcontraventionminperiod { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstcontraventionminvalue")]
-        public object AdoxioFirstcontraventionminvalue { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_reference")]
         public string AdoxioReference { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_secondcontraventionmaxvalue_base")]
-        public object AdoxioSecondcontraventionmaxvalueBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -379,13 +403,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "transactioncurrencyid")]
-        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_contraventionadmin_contraventions")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioContraventionadminContraventions { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contraventionadmin_contraventions")]
-        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioContraventionadminContraventions { get; set; }
+        [JsonProperty(PropertyName = "transactioncurrencyid")]
+        public MicrosoftDynamicsCRMtransactioncurrency Transactioncurrencyid { get; set; }
 
     }
 }

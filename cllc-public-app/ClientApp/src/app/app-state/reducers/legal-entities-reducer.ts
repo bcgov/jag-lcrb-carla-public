@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { AdoxioLegalEntity } from '../../models/adoxio-legalentities.model';
+import { LegalEntity } from '../../models/legal-entity.model';
 import * as LegalEntityActions from '../actions/legal-entities.action';
 import { LegalEntitiesState } from '../models/app-state';
 

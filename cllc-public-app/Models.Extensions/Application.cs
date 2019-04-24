@@ -1,7 +1,9 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -9,7 +11,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
-    public static class Adoxio_ApplicationExtensions
+    public static class ApplicationExtensions
     {
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.Application from)
@@ -92,9 +94,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             */
             
         }
-        
 
-            public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
+        public static void PopulateLicenceType(this MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient)
+        {
+            if (application._adoxioLicencetypeValue != null)
+            {
+                application.AdoxioLicenceType = dynamicsClient.GetAdoxioLicencetypeById(Guid.Parse(application._adoxioLicencetypeValue));
+            }
+        }
+
+        public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
         {
             Application applicationVM = new ViewModels.Application()
             {
@@ -131,8 +140,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
 
                 LicenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid != null && dynamicsApplication.AdoxioLicencefeeinvoicepaid == true),
-
-                
 
                 // set a couple of read-only flags to indicate status
                 IsPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved),
@@ -226,5 +233,70 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             return applicationVM;
         }
+
+
+        public static ApplicationSummary ToSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication)
+        {
+            ApplicationSummary applicationSummary = new ViewModels.ApplicationSummary()
+            {                
+                Name = dynamicsApplication.AdoxioName,
+                JobNumber = dynamicsApplication.AdoxioJobnumber,
+                //get establishment name and address
+                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname
+            };
+
+            // id
+            if (dynamicsApplication.AdoxioApplicationid != null)
+            {
+                applicationSummary.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+            }
+                
+            if (dynamicsApplication.Statuscode != null)
+            {
+                applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus (dynamicsApplication);
+            }
+
+            return applicationSummary;
+        }
+
+        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication)
+        {
+            ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
+            {
+                Name = dynamicsApplication.AdoxioName,
+                JobNumber = dynamicsApplication.AdoxioJobnumber,
+                //get establishment name and address
+                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
+                AllowedActions = new List<ApplicationType>()
+            };
+
+            // id
+            if (dynamicsApplication.AdoxioApplicationid != null)
+            {
+                licenseSummary.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+            }
+
+            if (dynamicsApplication.Statuscode != null)
+            {
+                licenseSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus(dynamicsApplication);
+            }
+
+            
+
+            if (dynamicsApplication.AdoxioAssignedLicence != null &&
+                dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType != null &&
+                dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypeApplicationtypes != null)
+            {
+                foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypeApplicationtypes)
+                {
+                    licenseSummary.AllowedActions.Add(item.ToViewModel());
+                }
+            }
+
+            return licenseSummary;
+        }
+
+        
+
     }
 }

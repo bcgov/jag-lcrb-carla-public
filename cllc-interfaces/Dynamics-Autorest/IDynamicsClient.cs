@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
     /// <summary>
     /// This OData service is located at
-    /// https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/
+    /// https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2/
     /// </summary>
     public partial interface IDynamicsClient : System.IDisposable
     {
@@ -87,6 +87,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtypes.
+        /// </summary>
+        IApplicationtypes Applicationtypes { get; }
 
         /// <summary>
         /// Gets the IAreas.

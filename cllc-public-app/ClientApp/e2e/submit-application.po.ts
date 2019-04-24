@@ -9,7 +9,7 @@ export class BrowserXhr implements XhrFactory {
 }
 
 export class SubmitApplication {
-    apiPath = 'api/account/';
+    apiPath = 'api/accounts/';
     accountDataService: AccountDataService;
 
     constructor() {

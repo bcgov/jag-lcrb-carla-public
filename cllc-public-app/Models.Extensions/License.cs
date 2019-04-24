@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 
@@ -8,12 +9,13 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
-    public static class Adoxio_LicenseExtensions
+    public static class LicenseExtensions
     {
+        
 
-        public static AdoxioLicense ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
+        public static License ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
         {
-            AdoxioLicense adoxioLicenseVM = new AdoxioLicense();
+            License adoxioLicenseVM = new License();
 
             adoxioLicenseVM.id = dynamicsLicense.AdoxioLicencesid;
 

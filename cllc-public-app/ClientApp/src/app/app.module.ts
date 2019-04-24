@@ -45,9 +45,9 @@ import { CdkTableModule } from '@angular/cdk/table';
 
 import { AccountDataService } from './services/account-data.service';
 import { ContactDataService } from './services/contact-data.service';
-import { AdoxioApplicationDataService } from './services/adoxio-application-data.service';
-import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
-import { AdoxioLicenseDataService } from './services/adoxio-license-data.service';
+import { ApplicationDataService } from './services/application-data.service';
+import { LegalEntityDataService } from './services/legal-entity-data.service';
+import { LicenseDataService } from './services/license-data.service';
 import { PaymentDataService } from './services/payment-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from './bceid-confirmation/bceid-confirmation.component';
@@ -325,9 +325,9 @@ import {
   ],
   providers: [
     AccountDataService,
-    AdoxioApplicationDataService,
-    AdoxioLegalEntityDataService,
-    AdoxioLicenseDataService,
+    ApplicationDataService,
+    LegalEntityDataService,
+    LicenseDataService,
     AliasDataService,
     BCeidAuthGuard,
     CanDeactivateGuard,

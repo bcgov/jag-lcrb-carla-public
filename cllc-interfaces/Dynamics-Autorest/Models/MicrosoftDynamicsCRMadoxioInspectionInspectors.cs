@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioInspectionInspectors class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioInspectionInspectors(long? versionnumber = default(long?), string adoxioInspectionInspectorsid = default(string), string incidentid = default(string), string systemuserid = default(string))
+        public MicrosoftDynamicsCRMadoxioInspectionInspectors(string incidentid = default(string), long? versionnumber = default(long?), string systemuserid = default(string), string adoxioInspectionInspectorsid = default(string))
         {
-            Versionnumber = versionnumber;
-            AdoxioInspectionInspectorsid = adoxioInspectionInspectorsid;
             Incidentid = incidentid;
+            Versionnumber = versionnumber;
             Systemuserid = systemuserid;
+            AdoxioInspectionInspectorsid = adoxioInspectionInspectorsid;
             CustomInit();
         }
 
@@ -43,23 +43,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_inspection_inspectorsid")]
-        public string AdoxioInspectionInspectorsid { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "incidentid")]
         public string Incidentid { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "systemuserid")]
         public string Systemuserid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_inspection_inspectorsid")]
+        public string AdoxioInspectionInspectorsid { get; set; }
 
     }
 }

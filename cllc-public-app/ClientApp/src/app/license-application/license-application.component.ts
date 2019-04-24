@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
-import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
+import { ApplicationDataService } from '../services/application-data.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -32,7 +32,7 @@ export class LicenseApplicationComponent implements OnInit {
   };
   tabStructure: any[] = this.tabs.application;
 
-  constructor(private applicationDataService: AdoxioApplicationDataService,
+  constructor(private applicationDataService: ApplicationDataService,
     private store: Store<AppState>,
     private userDataService: UserDataService,
     private router: Router,
