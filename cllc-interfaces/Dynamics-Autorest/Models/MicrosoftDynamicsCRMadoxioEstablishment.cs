@@ -29,67 +29,67 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioEstablishment class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioEstablishment(int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string adoxioAddressstreet = default(string), bool? adoxioIsstandalonepatio = default(bool?), string adoxioAddresspostalcode = default(string), bool? adoxioHasduallicence = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? adoxioAlreadyopen = default(bool?), int? adoxioThursdayclose = default(int?), string adoxioEmail = default(string), int? statuscode = default(int?), int? adoxioThursdayopen = default(int?), string _owninguserValue = default(string), string adoxioName = default(string), string _adoxioLginValue = default(string), string _adoxioPdjurisdictionValue = default(string), string _modifiedonbehalfbyValue = default(string), bool? adoxioMailsenttorestaurant = default(bool?), int? adoxioSaturdayclose = default(int?), int? adoxioSaturdayopen = default(int?), string _adoxioAreaValue = default(string), int? adoxioWednesdayclose = default(int?), int? adoxioIsrural = default(int?), string _createdbyValue = default(string), int? adoxioTuesdayclose = default(int?), int? utcconversiontimezonecode = default(int?), int? adoxioTuesdayopen = default(int?), System.DateTimeOffset? adoxioExpectedopendate = default(System.DateTimeOffset?), int? adoxioMondayopen = default(int?), bool? adoxioStandardhours = default(bool?), bool? adoxioLocatedonfirstnationland = default(bool?), int? adoxioOccupantload = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioPrimaryinspectoridValue = default(string), long? versionnumber = default(long?), string adoxioEstablishmentid = default(string), int? adoxioFridayopen = default(int?), int? adoxioSendmailtoestablishmentuponapproval = default(int?), bool? adoxioLocatedatwinery = default(bool?), string _owningbusinessunitValue = default(string), int? timezoneruleversionnumber = default(int?), int? adoxioSundayclose = default(int?), int? adoxioSundayopen = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioParcelid = default(string), string adoxioPhone = default(string), int? adoxioWednesdayopen = default(int?), bool? adoxioPatronparticipation = default(bool?), string _adoxioLicenceeValue = default(string), int? adoxioMondayclose = default(int?), int? adoxioOccupantcapacity = default(int?), int? adoxioFridayclose = default(int?), string _adoxioTerritoryValue = default(string), string _owneridValue = default(string), int? statecode = default(int?), string _adoxioLicencetypeidValue = default(string), string _owningteamValue = default(string), string _modifiedbyValue = default(string), string adoxioAddresscity = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEstablishmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEstablishmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEstablishmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioLicencee = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioEstablishmentAdoxioApplicationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioEstablishmentAdoxioInvestigationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioEstablishmentAdoxioLicencesEstablishment = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioEstablishmentContactEstablishment = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioEstablishmentIncidentEstablishment = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMsystemuser adoxioPrimaryInspectorId = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGIN = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPDJurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioEstablishmentComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioEstablishmentCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioEstablishmentContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioEstablishmentInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>))
+        public MicrosoftDynamicsCRMadoxioEstablishment(string _adoxioLicencetypeidValue = default(string), string adoxioEstablishmentid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? adoxioExpectedopendate = default(System.DateTimeOffset?), string _owneridValue = default(string), int? adoxioMondayclose = default(int?), int? adoxioSaturdayclose = default(int?), string _adoxioPrimaryinspectoridValue = default(string), bool? adoxioLocatedonfirstnationland = default(bool?), string _owninguserValue = default(string), int? adoxioSendmailtoestablishmentuponapproval = default(int?), string _owningteamValue = default(string), int? adoxioSundayclose = default(int?), string adoxioParcelid = default(string), bool? adoxioLocatedatwinery = default(bool?), int? adoxioSundayopen = default(int?), int? adoxioTuesdayclose = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioOccupantcapacity = default(int?), string _owningbusinessunitValue = default(string), string _adoxioLginValue = default(string), int? adoxioSaturdayopen = default(int?), int? adoxioMondayopen = default(int?), string adoxioAddressstreet = default(string), int? adoxioThursdayclose = default(int?), string adoxioName = default(string), bool? adoxioPatronparticipation = default(bool?), string _createdbyValue = default(string), string _adoxioLicenceeValue = default(string), string _adoxioTerritoryValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string _adoxioPdjurisdictionValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioWednesdayclose = default(int?), string adoxioAddresscity = default(string), int? adoxioFridayopen = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioOccupantload = default(int?), long? versionnumber = default(long?), bool? adoxioAlreadyopen = default(bool?), bool? adoxioIsstandalonepatio = default(bool?), int? adoxioTuesdayopen = default(int?), bool? adoxioStandardhours = default(bool?), bool? adoxioHasduallicence = default(bool?), string _modifiedonbehalfbyValue = default(string), string adoxioPhone = default(string), int? timezoneruleversionnumber = default(int?), string _adoxioAreaValue = default(string), string adoxioEmail = default(string), int? statecode = default(int?), int? adoxioThursdayopen = default(int?), bool? adoxioMailsenttorestaurant = default(bool?), int? importsequencenumber = default(int?), string adoxioAddresspostalcode = default(string), int? adoxioWednesdayopen = default(int?), int? adoxioFridayclose = default(int?), int? adoxioIsrural = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEstablishmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEstablishmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEstablishmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioLicencee = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioEstablishmentAdoxioApplicationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioEstablishmentAdoxioInvestigationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioEstablishmentAdoxioLicencesEstablishment = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioEstablishmentContactEstablishment = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioEstablishmentIncidentEstablishment = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGIN = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPDJurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), MicrosoftDynamicsCRMsystemuser adoxioPrimaryInspectorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioEstablishmentContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioEstablishmentComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioEstablishmentCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioEstablishmentInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>))
         {
-            Importsequencenumber = importsequencenumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioAddressstreet = adoxioAddressstreet;
-            AdoxioIsstandalonepatio = adoxioIsstandalonepatio;
-            AdoxioAddresspostalcode = adoxioAddresspostalcode;
-            AdoxioHasduallicence = adoxioHasduallicence;
-            Modifiedon = modifiedon;
-            AdoxioAlreadyopen = adoxioAlreadyopen;
-            AdoxioThursdayclose = adoxioThursdayclose;
-            AdoxioEmail = adoxioEmail;
-            Statuscode = statuscode;
-            AdoxioThursdayopen = adoxioThursdayopen;
-            this._owninguserValue = _owninguserValue;
-            AdoxioName = adoxioName;
-            this._adoxioLginValue = _adoxioLginValue;
-            this._adoxioPdjurisdictionValue = _adoxioPdjurisdictionValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioMailsenttorestaurant = adoxioMailsenttorestaurant;
-            AdoxioSaturdayclose = adoxioSaturdayclose;
-            AdoxioSaturdayopen = adoxioSaturdayopen;
-            this._adoxioAreaValue = _adoxioAreaValue;
-            AdoxioWednesdayclose = adoxioWednesdayclose;
-            AdoxioIsrural = adoxioIsrural;
-            this._createdbyValue = _createdbyValue;
-            AdoxioTuesdayclose = adoxioTuesdayclose;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            AdoxioTuesdayopen = adoxioTuesdayopen;
-            AdoxioExpectedopendate = adoxioExpectedopendate;
-            AdoxioMondayopen = adoxioMondayopen;
-            AdoxioStandardhours = adoxioStandardhours;
-            AdoxioLocatedonfirstnationland = adoxioLocatedonfirstnationland;
-            AdoxioOccupantload = adoxioOccupantload;
-            Overriddencreatedon = overriddencreatedon;
-            this._adoxioPrimaryinspectoridValue = _adoxioPrimaryinspectoridValue;
-            Versionnumber = versionnumber;
-            AdoxioEstablishmentid = adoxioEstablishmentid;
-            AdoxioFridayopen = adoxioFridayopen;
-            AdoxioSendmailtoestablishmentuponapproval = adoxioSendmailtoestablishmentuponapproval;
-            AdoxioLocatedatwinery = adoxioLocatedatwinery;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioSundayclose = adoxioSundayclose;
-            AdoxioSundayopen = adoxioSundayopen;
-            Createdon = createdon;
-            AdoxioParcelid = adoxioParcelid;
-            AdoxioPhone = adoxioPhone;
-            AdoxioWednesdayopen = adoxioWednesdayopen;
-            AdoxioPatronparticipation = adoxioPatronparticipation;
-            this._adoxioLicenceeValue = _adoxioLicenceeValue;
-            AdoxioMondayclose = adoxioMondayclose;
-            AdoxioOccupantcapacity = adoxioOccupantcapacity;
-            AdoxioFridayclose = adoxioFridayclose;
-            this._adoxioTerritoryValue = _adoxioTerritoryValue;
-            this._owneridValue = _owneridValue;
-            Statecode = statecode;
             this._adoxioLicencetypeidValue = _adoxioLicencetypeidValue;
+            AdoxioEstablishmentid = adoxioEstablishmentid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioExpectedopendate = adoxioExpectedopendate;
+            this._owneridValue = _owneridValue;
+            AdoxioMondayclose = adoxioMondayclose;
+            AdoxioSaturdayclose = adoxioSaturdayclose;
+            this._adoxioPrimaryinspectoridValue = _adoxioPrimaryinspectoridValue;
+            AdoxioLocatedonfirstnationland = adoxioLocatedonfirstnationland;
+            this._owninguserValue = _owninguserValue;
+            AdoxioSendmailtoestablishmentuponapproval = adoxioSendmailtoestablishmentuponapproval;
             this._owningteamValue = _owningteamValue;
-            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioSundayclose = adoxioSundayclose;
+            AdoxioParcelid = adoxioParcelid;
+            AdoxioLocatedatwinery = adoxioLocatedatwinery;
+            AdoxioSundayopen = adoxioSundayopen;
+            AdoxioTuesdayclose = adoxioTuesdayclose;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioOccupantcapacity = adoxioOccupantcapacity;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._adoxioLginValue = _adoxioLginValue;
+            AdoxioSaturdayopen = adoxioSaturdayopen;
+            AdoxioMondayopen = adoxioMondayopen;
+            AdoxioAddressstreet = adoxioAddressstreet;
+            AdoxioThursdayclose = adoxioThursdayclose;
+            AdoxioName = adoxioName;
+            AdoxioPatronparticipation = adoxioPatronparticipation;
+            this._createdbyValue = _createdbyValue;
+            this._adoxioLicenceeValue = _adoxioLicenceeValue;
+            this._adoxioTerritoryValue = _adoxioTerritoryValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Statuscode = statuscode;
+            this._adoxioPdjurisdictionValue = _adoxioPdjurisdictionValue;
+            Createdon = createdon;
+            AdoxioWednesdayclose = adoxioWednesdayclose;
             AdoxioAddresscity = adoxioAddresscity;
+            AdoxioFridayopen = adoxioFridayopen;
+            this._modifiedbyValue = _modifiedbyValue;
+            Modifiedon = modifiedon;
+            AdoxioOccupantload = adoxioOccupantload;
+            Versionnumber = versionnumber;
+            AdoxioAlreadyopen = adoxioAlreadyopen;
+            AdoxioIsstandalonepatio = adoxioIsstandalonepatio;
+            AdoxioTuesdayopen = adoxioTuesdayopen;
+            AdoxioStandardhours = adoxioStandardhours;
+            AdoxioHasduallicence = adoxioHasduallicence;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioPhone = adoxioPhone;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            this._adoxioAreaValue = _adoxioAreaValue;
+            AdoxioEmail = adoxioEmail;
+            Statecode = statecode;
+            AdoxioThursdayopen = adoxioThursdayopen;
+            AdoxioMailsenttorestaurant = adoxioMailsenttorestaurant;
+            Importsequencenumber = importsequencenumber;
+            AdoxioAddresspostalcode = adoxioAddresspostalcode;
+            AdoxioWednesdayopen = adoxioWednesdayopen;
+            AdoxioFridayclose = adoxioFridayclose;
+            AdoxioIsrural = adoxioIsrural;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -110,14 +110,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAdoxioEstablishmentContactEstablishment = adoxioAdoxioEstablishmentContactEstablishment;
             AdoxioAdoxioEstablishmentIncidentEstablishment = adoxioAdoxioEstablishmentIncidentEstablishment;
             AdoxioTerritory = adoxioTerritory;
-            AdoxioLicenceTypeId = adoxioLicenceTypeId;
-            AdoxioPrimaryInspectorId = adoxioPrimaryInspectorId;
             AdoxioArea = adoxioArea;
+            AdoxioLicenceTypeId = adoxioLicenceTypeId;
             AdoxioLGIN = adoxioLGIN;
             AdoxioPDJurisdiction = adoxioPDJurisdiction;
+            AdoxioPrimaryInspectorId = adoxioPrimaryInspectorId;
+            AdoxioEstablishmentContraventions = adoxioEstablishmentContraventions;
             AdoxioEstablishmentComplaints = adoxioEstablishmentComplaints;
             AdoxioEstablishmentCompliancemeetings = adoxioEstablishmentCompliancemeetings;
-            AdoxioEstablishmentContraventions = adoxioEstablishmentContraventions;
             AdoxioEstablishmentInvestigations = adoxioEstablishmentInvestigations;
             CustomInit();
         }
@@ -129,178 +129,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_addressstreet")]
-        public string AdoxioAddressstreet { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isstandalonepatio")]
-        public bool? AdoxioIsstandalonepatio { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_addresspostalcode")]
-        public string AdoxioAddresspostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_hasduallicence")]
-        public bool? AdoxioHasduallicence { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_alreadyopen")]
-        public bool? AdoxioAlreadyopen { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thursdayclose")]
-        public int? AdoxioThursdayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_email")]
-        public string AdoxioEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_thursdayopen")]
-        public int? AdoxioThursdayopen { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_lgin_value")]
-        public string _adoxioLginValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_pdjurisdiction_value")]
-        public string _adoxioPdjurisdictionValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mailsenttorestaurant")]
-        public bool? AdoxioMailsenttorestaurant { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_saturdayclose")]
-        public int? AdoxioSaturdayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_saturdayopen")]
-        public int? AdoxioSaturdayopen { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_area_value")]
-        public string _adoxioAreaValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_wednesdayclose")]
-        public int? AdoxioWednesdayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isrural")]
-        public int? AdoxioIsrural { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_tuesdayclose")]
-        public int? AdoxioTuesdayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_tuesdayopen")]
-        public int? AdoxioTuesdayopen { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_expectedopendate")]
-        public System.DateTimeOffset? AdoxioExpectedopendate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mondayopen")]
-        public int? AdoxioMondayopen { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_standardhours")]
-        public bool? AdoxioStandardhours { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_locatedonfirstnationland")]
-        public bool? AdoxioLocatedonfirstnationland { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_occupantload")]
-        public int? AdoxioOccupantload { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_primaryinspectorid_value")]
-        public string _adoxioPrimaryinspectoridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
+        public string _adoxioLicencetypeidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -309,88 +139,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_fridayopen")]
-        public int? AdoxioFridayopen { get; set; }
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sendmailtoestablishmentuponapproval")]
-        public int? AdoxioSendmailtoestablishmentuponapproval { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_locatedatwinery")]
-        public bool? AdoxioLocatedatwinery { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sundayclose")]
-        public int? AdoxioSundayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sundayopen")]
-        public int? AdoxioSundayopen { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_parcelid")]
-        public string AdoxioParcelid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phone")]
-        public string AdoxioPhone { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_wednesdayopen")]
-        public int? AdoxioWednesdayopen { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_patronparticipation")]
-        public bool? AdoxioPatronparticipation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licencee_value")]
-        public string _adoxioLicenceeValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_mondayclose")]
-        public int? AdoxioMondayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_occupantcapacity")]
-        public int? AdoxioOccupantcapacity { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_fridayclose")]
-        public int? AdoxioFridayclose { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_territory_value")]
-        public string _adoxioTerritoryValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_expectedopendate")]
+        public System.DateTimeOffset? AdoxioExpectedopendate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -399,13 +154,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_mondayclose")]
+        public int? AdoxioMondayclose { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
-        public string _adoxioLicencetypeidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_saturdayclose")]
+        public int? AdoxioSaturdayclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_primaryinspectorid_value")]
+        public string _adoxioPrimaryinspectoridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_locatedonfirstnationland")]
+        public bool? AdoxioLocatedonfirstnationland { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sendmailtoestablishmentuponapproval")]
+        public int? AdoxioSendmailtoestablishmentuponapproval { get; set; }
 
         /// <summary>
         /// </summary>
@@ -414,13 +189,238 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sundayclose")]
+        public int? AdoxioSundayclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_parcelid")]
+        public string AdoxioParcelid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_locatedatwinery")]
+        public bool? AdoxioLocatedatwinery { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sundayopen")]
+        public int? AdoxioSundayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tuesdayclose")]
+        public int? AdoxioTuesdayclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_occupantcapacity")]
+        public int? AdoxioOccupantcapacity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_lgin_value")]
+        public string _adoxioLginValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_saturdayopen")]
+        public int? AdoxioSaturdayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_mondayopen")]
+        public int? AdoxioMondayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_addressstreet")]
+        public string AdoxioAddressstreet { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_thursdayclose")]
+        public int? AdoxioThursdayclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_patronparticipation")]
+        public bool? AdoxioPatronparticipation { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licencee_value")]
+        public string _adoxioLicenceeValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_territory_value")]
+        public string _adoxioTerritoryValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_pdjurisdiction_value")]
+        public string _adoxioPdjurisdictionValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_wednesdayclose")]
+        public int? AdoxioWednesdayclose { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_addresscity")]
         public string AdoxioAddresscity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fridayopen")]
+        public int? AdoxioFridayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_occupantload")]
+        public int? AdoxioOccupantload { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_alreadyopen")]
+        public bool? AdoxioAlreadyopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isstandalonepatio")]
+        public bool? AdoxioIsstandalonepatio { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_tuesdayopen")]
+        public int? AdoxioTuesdayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_standardhours")]
+        public bool? AdoxioStandardhours { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_hasduallicence")]
+        public bool? AdoxioHasduallicence { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phone")]
+        public string AdoxioPhone { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_area_value")]
+        public string _adoxioAreaValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_email")]
+        public string AdoxioEmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_thursdayopen")]
+        public int? AdoxioThursdayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_mailsenttorestaurant")]
+        public bool? AdoxioMailsenttorestaurant { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_addresspostalcode")]
+        public string AdoxioAddresspostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_wednesdayopen")]
+        public int? AdoxioWednesdayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fridayclose")]
+        public int? AdoxioFridayclose { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isrural")]
+        public int? AdoxioIsrural { get; set; }
 
         /// <summary>
         /// </summary>
@@ -524,18 +524,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_LicenceTypeId")]
-        public MicrosoftDynamicsCRMadoxioLicencetype AdoxioLicenceTypeId { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_PrimaryInspectorId")]
-        public MicrosoftDynamicsCRMsystemuser AdoxioPrimaryInspectorId { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_Area")]
         public MicrosoftDynamicsCRMadoxioArea AdoxioArea { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_LicenceTypeId")]
+        public MicrosoftDynamicsCRMadoxioLicencetype AdoxioLicenceTypeId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -549,6 +544,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_PrimaryInspectorId")]
+        public MicrosoftDynamicsCRMsystemuser AdoxioPrimaryInspectorId { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_establishment_contraventions")]
+        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioEstablishmentContraventions { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_establishment_complaints")]
         public IList<MicrosoftDynamicsCRMadoxioComplaint> AdoxioEstablishmentComplaints { get; set; }
 
@@ -556,11 +561,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_establishment_compliancemeetings")]
         public IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> AdoxioEstablishmentCompliancemeetings { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishment_contraventions")]
-        public IList<MicrosoftDynamicsCRMadoxioContravention> AdoxioEstablishmentContraventions { get; set; }
 
         /// <summary>
         /// </summary>

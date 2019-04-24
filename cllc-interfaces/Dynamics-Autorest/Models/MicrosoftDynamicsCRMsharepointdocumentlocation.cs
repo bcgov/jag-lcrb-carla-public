@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsharepointdocumentlocation class.
         /// </summary>
-        public MicrosoftDynamicsCRMsharepointdocumentlocation(int? importsequencenumber = default(int?), string description = default(string), string _owneridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _owninguserValue = default(string), string absoluteurl = default(string), string name = default(string), string _createdbyValue = default(string), int? locationtype = default(int?), string _modifiedonbehalfbyValue = default(string), string _regardingobjectidValue = default(string), string _parentsiteorlocationValue = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), object exchangerate = default(object), int? statecode = default(int?), string _owningteamValue = default(string), string sitecollectionid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string relativeurl = default(string), string userid = default(string), string _modifiedbyValue = default(string), string sharepointdocumentlocationid = default(string), int? servicetype = default(int?), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsharepointdocumentlocation parentsiteorlocationSharepointdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature regardingobjectidSalesliterature = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsharepointsite parentsiteorlocationSharepointsite = default(MicrosoftDynamicsCRMsharepointsite), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle regardingobjectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointDocumentLocationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> sharePointDocumentLocationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioLegalentity regardingobjectidAdoxioLegalentity = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioPersonalhistorysummary regardingobjectidAdoxioPersonalhistorysummary = default(MicrosoftDynamicsCRMadoxioPersonalhistorysummary), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioSpddatarow regardingobjectidAdoxioSpddatarow = default(MicrosoftDynamicsCRMadoxioSpddatarow), MicrosoftDynamicsCRMadoxioSpdexports regardingobjectidAdoxioSpdexports = default(MicrosoftDynamicsCRMadoxioSpdexports), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioDocument regardingobjectidAdoxioDocument = default(MicrosoftDynamicsCRMadoxioDocument))
+        public MicrosoftDynamicsCRMsharepointdocumentlocation(int? importsequencenumber = default(int?), string description = default(string), string _owneridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _owninguserValue = default(string), string absoluteurl = default(string), string name = default(string), string _createdbyValue = default(string), int? locationtype = default(int?), string _modifiedonbehalfbyValue = default(string), string _regardingobjectidValue = default(string), string _parentsiteorlocationValue = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), object exchangerate = default(object), int? statecode = default(int?), string _owningteamValue = default(string), string sitecollectionid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string relativeurl = default(string), string userid = default(string), string _modifiedbyValue = default(string), string sharepointdocumentlocationid = default(string), int? servicetype = default(int?), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsharepointdocumentlocation parentsiteorlocationSharepointdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature regardingobjectidSalesliterature = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsharepointsite parentsiteorlocationSharepointsite = default(MicrosoftDynamicsCRMsharepointsite), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle regardingobjectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointDocumentLocationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> sharePointDocumentLocationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLegalentity regardingobjectidAdoxioLegalentity = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioPersonalhistorysummary regardingobjectidAdoxioPersonalhistorysummary = default(MicrosoftDynamicsCRMadoxioPersonalhistorysummary), MicrosoftDynamicsCRMadoxioSpdexports regardingobjectidAdoxioSpdexports = default(MicrosoftDynamicsCRMadoxioSpdexports), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioDocument regardingobjectidAdoxioDocument = default(MicrosoftDynamicsCRMadoxioDocument))
         {
             Importsequencenumber = importsequencenumber;
             Description = description;
@@ -87,14 +87,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             SharePointDocumentLocationAsyncOperations = sharePointDocumentLocationAsyncOperations;
             RegardingobjectidAdoxioApplication = regardingobjectidAdoxioApplication;
             RegardingobjectidAdoxioComplaint = regardingobjectidAdoxioComplaint;
+            RegardingobjectidAdoxioInvestigation = regardingobjectidAdoxioInvestigation;
             RegardingobjectidAdoxioLegalentity = regardingobjectidAdoxioLegalentity;
             RegardingobjectidAdoxioPersonalhistorysummary = regardingobjectidAdoxioPersonalhistorysummary;
-            RegardingobjectidIncident = regardingobjectidIncident;
-            RegardingobjectidAdoxioSpddatarow = regardingobjectidAdoxioSpddatarow;
             RegardingobjectidAdoxioSpdexports = regardingobjectidAdoxioSpdexports;
-            RegardingobjectidAdoxioInvestigation = regardingobjectidAdoxioInvestigation;
-            RegardingobjectidContact = regardingobjectidContact;
             RegardingobjectidAdoxioWorker = regardingobjectidAdoxioWorker;
+            RegardingobjectidIncident = regardingobjectidIncident;
             RegardingobjectidAdoxioDocument = regardingobjectidAdoxioDocument;
             CustomInit();
         }
@@ -386,6 +384,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation")]
+        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigation { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_legalentity")]
         public MicrosoftDynamicsCRMadoxioLegalentity RegardingobjectidAdoxioLegalentity { get; set; }
 
@@ -396,33 +399,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_incident")]
-        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_spddatarow")]
-        public MicrosoftDynamicsCRMadoxioSpddatarow RegardingobjectidAdoxioSpddatarow { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_spdexports")]
         public MicrosoftDynamicsCRMadoxioSpdexports RegardingobjectidAdoxioSpdexports { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_adoxio_investigation")]
-        public MicrosoftDynamicsCRMadoxioInvestigation RegardingobjectidAdoxioInvestigation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "regardingobjectid_contact")]
-        public MicrosoftDynamicsCRMcontact RegardingobjectidContact { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_worker")]
         public MicrosoftDynamicsCRMadoxioWorker RegardingobjectidAdoxioWorker { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_incident")]
+        public MicrosoftDynamicsCRMincident RegardingobjectidIncident { get; set; }
 
         /// <summary>
         /// </summary>
