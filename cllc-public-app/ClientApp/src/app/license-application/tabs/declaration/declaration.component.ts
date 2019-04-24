@@ -1,7 +1,7 @@
 
 import {filter} from 'rxjs/operators';
 import { Component, OnInit, Input } from '@angular/core';
-import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
+import { ApplicationDataService } from '../../../services/application-data.service';
 import { Subscription ,  Observable ,  Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
@@ -25,7 +25,7 @@ export class DeclarationComponent implements OnInit {
   savedFormData: any = {};
   isReadOnly = false;
 
-  constructor(private applicationDataService: AdoxioApplicationDataService,
+  constructor(private applicationDataService: ApplicationDataService,
     private store: Store<AppState>,
     private route: ActivatedRoute,
     public snackBar: MatSnackBar) {

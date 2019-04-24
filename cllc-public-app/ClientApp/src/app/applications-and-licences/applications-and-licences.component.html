@@ -163,15 +163,15 @@
                 Canada <br>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <a *ngIf="item.licenseStatus == PAYMENT_REQUIRED" href="javascript:void(0);"
+                <a *ngIf="item.applicationStatus == PAYMENT_REQUIRED" href="javascript:void(0);"
                    (click)="payLicenceFee(item)">
                   <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
                 </a>
-                <a *ngIf="item.licenseStatus == RENEWAL_DUE" href="javascript:void(0);"
+                <a *ngIf="item.applicationStatus == RENEWAL_DUE" href="javascript:void(0);"
                    (click)="renewLicence(item)">
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>Renew Licence</span>
                 </a>
-                <a *ngIf="item.licenseStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
+                <a *ngIf="item.applicationStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
                    [href]="'api/adoxiolicense/' + item?.id + '/pdf/' + item?.licenseNumber + '.pdf'"
                    download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>

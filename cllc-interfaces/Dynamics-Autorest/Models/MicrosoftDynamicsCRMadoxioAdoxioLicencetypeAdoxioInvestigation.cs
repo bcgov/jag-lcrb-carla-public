@@ -29,12 +29,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(long? versionnumber = default(long?), string adoxioLicencetypeid = default(string), string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), string adoxioInvestigationid = default(string))
+        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioInvestigationid = default(string), string adoxioLicencetypeid = default(string), string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), long? versionnumber = default(long?))
         {
-            Versionnumber = versionnumber;
+            AdoxioInvestigationid = adoxioInvestigationid;
             AdoxioLicencetypeid = adoxioLicencetypeid;
             AdoxioAdoxioLicencetypeAdoxioInvestigationid = adoxioAdoxioLicencetypeAdoxioInvestigationid;
-            AdoxioInvestigationid = adoxioInvestigationid;
+            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -45,8 +45,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_investigationid")]
+        public string AdoxioInvestigationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -60,8 +60,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_investigationid")]
-        public string AdoxioInvestigationid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
     }
 }

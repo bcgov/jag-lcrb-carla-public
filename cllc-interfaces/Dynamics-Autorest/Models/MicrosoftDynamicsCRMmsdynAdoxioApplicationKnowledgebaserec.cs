@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgebaserec class.
         /// </summary>
-        public MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgebaserec(long? versionnumber = default(long?), string knowledgebaserecordid = default(string), string adoxioApplicationid = default(string), string msdynAdoxioApplicationKnowledgebaserecid = default(string))
+        public MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgebaserec(string adoxioApplicationid = default(string), string msdynAdoxioApplicationKnowledgebaserecid = default(string), string knowledgebaserecordid = default(string), long? versionnumber = default(long?))
         {
-            Versionnumber = versionnumber;
-            Knowledgebaserecordid = knowledgebaserecordid;
             AdoxioApplicationid = adoxioApplicationid;
             MsdynAdoxioApplicationKnowledgebaserecid = msdynAdoxioApplicationKnowledgebaserecid;
+            Knowledgebaserecordid = knowledgebaserecordid;
+            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -43,8 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_applicationid")]
+        public string AdoxioApplicationid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "msdyn_adoxio_application_knowledgebaserecid")]
+        public string MsdynAdoxioApplicationKnowledgebaserecid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,13 +58,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_applicationid")]
-        public string AdoxioApplicationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "msdyn_adoxio_application_knowledgebaserecid")]
-        public string MsdynAdoxioApplicationKnowledgebaserecid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
 
     }
 }
