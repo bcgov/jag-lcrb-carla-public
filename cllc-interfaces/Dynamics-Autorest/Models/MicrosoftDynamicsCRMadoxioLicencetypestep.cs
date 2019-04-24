@@ -29,34 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicencetypestep class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLicencetypestep(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioStepinstructions = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), bool? adoxioDisableprerequisitesuponcompletion = default(bool?), string _adoxioModuleValue = default(string), string _owneridValue = default(string), int? adoxioDisplayorder = default(int?), string adoxioName = default(string), string _owningbusinessunitValue = default(string), string _adoxioLicencetypeValue = default(string), int? utcconversiontimezonecode = default(int?), int? importsequencenumber = default(int?), string _owningteamValue = default(string), long? versionnumber = default(long?), int? statuscode = default(int?), bool? adoxioDisableuntilprerequisitescomplete = default(bool?), int? statecode = default(int?), string _modifiedbyValue = default(string), string adoxioStepinstructiontitle = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioLicencetypestepid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencetypestepSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencetypestepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencetypestepBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplicationmodule adoxioModule = default(MicrosoftDynamicsCRMadoxioApplicationmodule), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMadoxioApplicantstep> adoxioLicencetypestepAdoxioApplicantstepLicenceTypeStep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationLastCompletedStep = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationMarkStepIncomplete = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisiteAppliesTo = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisitePrerequisiteStep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>))
+        public MicrosoftDynamicsCRMadoxioLicencetypestep(int? utcconversiontimezonecode = default(int?), string adoxioStepinstructiontitle = default(string), int? adoxioDisplayorder = default(int?), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string _adoxioLicencetypeValue = default(string), string adoxioName = default(string), long? versionnumber = default(long?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), bool? adoxioDisableuntilprerequisitescomplete = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? adoxioDisableprerequisitesuponcompletion = default(bool?), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string adoxioLicencetypestepid = default(string), string _adoxioModuleValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), string adoxioStepinstructions = default(string), string _owningteamValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioLicencetypestepSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLicencetypestepDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLicencetypestepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLicencetypestepBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplicationmodule adoxioModule = default(MicrosoftDynamicsCRMadoxioApplicationmodule), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), IList<MicrosoftDynamicsCRMadoxioApplicantstep> adoxioLicencetypestepAdoxioApplicantstepLicenceTypeStep = default(IList<MicrosoftDynamicsCRMadoxioApplicantstep>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationLastCompletedStep = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLicencetypestepAdoxioApplicationMarkStepIncomplete = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisiteAppliesTo = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>), IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite> adoxioLicencetypestepAdoxioLicencetypestepprerequisitePrerequisiteStep = default(IList<MicrosoftDynamicsCRMadoxioLicencetypestepprerequisite>))
         {
-            Overriddencreatedon = overriddencreatedon;
-            AdoxioStepinstructions = adoxioStepinstructions;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            this._createdbyValue = _createdbyValue;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioDisableprerequisitesuponcompletion = adoxioDisableprerequisitesuponcompletion;
-            this._adoxioModuleValue = _adoxioModuleValue;
-            this._owneridValue = _owneridValue;
-            AdoxioDisplayorder = adoxioDisplayorder;
-            AdoxioName = adoxioName;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._adoxioLicencetypeValue = _adoxioLicencetypeValue;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Importsequencenumber = importsequencenumber;
-            this._owningteamValue = _owningteamValue;
-            Versionnumber = versionnumber;
-            Statuscode = statuscode;
-            AdoxioDisableuntilprerequisitescomplete = adoxioDisableuntilprerequisitescomplete;
-            Statecode = statecode;
-            this._modifiedbyValue = _modifiedbyValue;
             AdoxioStepinstructiontitle = adoxioStepinstructiontitle;
-            Createdon = createdon;
+            AdoxioDisplayorder = adoxioDisplayorder;
+            Importsequencenumber = importsequencenumber;
             this._owninguserValue = _owninguserValue;
-            Modifiedon = modifiedon;
+            this._adoxioLicencetypeValue = _adoxioLicencetypeValue;
+            AdoxioName = adoxioName;
+            Versionnumber = versionnumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioDisableuntilprerequisitescomplete = adoxioDisableuntilprerequisitescomplete;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Createdon = createdon;
+            AdoxioDisableprerequisitesuponcompletion = adoxioDisableprerequisitesuponcompletion;
+            this._owneridValue = _owneridValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioLicencetypestepid = adoxioLicencetypestepid;
+            this._adoxioModuleValue = _adoxioModuleValue;
+            Statuscode = statuscode;
+            Overriddencreatedon = overriddencreatedon;
+            Statecode = statecode;
+            AdoxioStepinstructions = adoxioStepinstructions;
+            this._owningteamValue = _owningteamValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            Modifiedon = modifiedon;
+            this._createdbyValue = _createdbyValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -87,108 +87,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_stepinstructions")]
-        public string AdoxioStepinstructions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_disableprerequisitesuponcompletion")]
-        public bool? AdoxioDisableprerequisitesuponcompletion { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_module_value")]
-        public string _adoxioModuleValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_displayorder")]
-        public int? AdoxioDisplayorder { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licencetype_value")]
-        public string _adoxioLicencetypeValue { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_disableuntilprerequisitescomplete")]
-        public bool? AdoxioDisableuntilprerequisitescomplete { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -197,8 +97,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_displayorder")]
+        public int? AdoxioDisplayorder { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,13 +112,108 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_licencetype_value")]
+        public string _adoxioLicencetypeValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_disableuntilprerequisitescomplete")]
+        public bool? AdoxioDisableuntilprerequisitescomplete { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_disableprerequisitesuponcompletion")]
+        public bool? AdoxioDisableprerequisitesuponcompletion { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licencetypestepid")]
         public string AdoxioLicencetypestepid { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_module_value")]
+        public string _adoxioModuleValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_stepinstructions")]
+        public string AdoxioStepinstructions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

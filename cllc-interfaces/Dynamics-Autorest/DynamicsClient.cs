@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
     /// <summary>
     /// This OData service is located at
-    /// https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2/
+    /// https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2/
     /// </summary>
     public partial class DynamicsClient : ServiceClient<DynamicsClient>, IDynamicsClient
     {
@@ -90,6 +90,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypes.
+        /// </summary>
+        public virtual IApplicationtypes Applicationtypes { get; private set; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -627,6 +632,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationmodules = new Applicationmodules(this);
             Applications = new Applications(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
+            Applicationtypes = new Applicationtypes(this);
             Areas = new Areas(this);
             Businessaccounts = new Businessaccounts(this);
             Citydistricts = new Citydistricts(this);
@@ -684,7 +690,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
-            BaseUri = new System.Uri("https://wsgw.jag.gov.bc.ca/clb/crmuat/api/data/v8.2");
+            BaseUri = new System.Uri("https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

@@ -10,7 +10,7 @@ export class BrowserXhr implements XhrFactory {
 }
 
 export class LoginPage {
-    apiPath = 'api/account/';
+    apiPath = 'api/accounts/';
     accountDataService: AccountDataService;
 
     constructor() {

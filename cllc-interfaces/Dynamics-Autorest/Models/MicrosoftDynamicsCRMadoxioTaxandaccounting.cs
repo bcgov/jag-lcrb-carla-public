@@ -29,34 +29,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioTaxandaccounting class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioTaxandaccounting(bool? adoxioIsaccountant = default(bool?), string _adoxioAccountidValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), int? adoxioRecordtype = default(int?), bool? adoxioIsbookkeeper = default(bool?), string _owningteamValue = default(string), string adoxioPhonenumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioTaxfilingtype = default(int?), int? importsequencenumber = default(int?), long? versionnumber = default(long?), string adoxioEmail = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), string _owninguserValue = default(string), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), string adoxioTaxandaccountingid = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioTaxandaccountingSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTaxandaccountingDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTaxandaccountingDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioTaxandaccountingAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioTaxandaccountingBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
+        public MicrosoftDynamicsCRMadoxioTaxandaccounting(int? adoxioTaxfilingtype = default(int?), int? statecode = default(int?), bool? adoxioIsaccountant = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioName = default(string), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), long? versionnumber = default(long?), int? importsequencenumber = default(int?), string _owneridValue = default(string), string adoxioPhonenumber = default(string), bool? adoxioIsbookkeeper = default(bool?), string _owningteamValue = default(string), int? statuscode = default(int?), string adoxioEmail = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioTaxandaccountingid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? adoxioRecordtype = default(int?), string _adoxioAccountidValue = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioTaxandaccountingSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTaxandaccountingDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTaxandaccountingDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioTaxandaccountingAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioTaxandaccountingBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount))
         {
+            AdoxioTaxfilingtype = adoxioTaxfilingtype;
+            Statecode = statecode;
             AdoxioIsaccountant = adoxioIsaccountant;
-            this._adoxioAccountidValue = _adoxioAccountidValue;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioName = adoxioName;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Createdon = createdon;
-            this._owneridValue = _owneridValue;
             this._owningbusinessunitValue = _owningbusinessunitValue;
-            this._createdbyValue = _createdbyValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            this._modifiedbyValue = _modifiedbyValue;
-            AdoxioRecordtype = adoxioRecordtype;
+            Versionnumber = versionnumber;
+            Importsequencenumber = importsequencenumber;
+            this._owneridValue = _owneridValue;
+            AdoxioPhonenumber = adoxioPhonenumber;
             AdoxioIsbookkeeper = adoxioIsbookkeeper;
             this._owningteamValue = _owningteamValue;
-            AdoxioPhonenumber = adoxioPhonenumber;
-            Modifiedon = modifiedon;
-            Overriddencreatedon = overriddencreatedon;
-            AdoxioTaxfilingtype = adoxioTaxfilingtype;
-            Importsequencenumber = importsequencenumber;
-            Versionnumber = versionnumber;
-            AdoxioEmail = adoxioEmail;
-            Statecode = statecode;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioName = adoxioName;
-            this._owninguserValue = _owninguserValue;
             Statuscode = statuscode;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioEmail = adoxioEmail;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioTaxandaccountingid = adoxioTaxandaccountingid;
+            Modifiedon = modifiedon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            this._modifiedbyValue = _modifiedbyValue;
+            Createdon = createdon;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioRecordtype = adoxioRecordtype;
+            this._adoxioAccountidValue = _adoxioAccountidValue;
+            this._owninguserValue = _owninguserValue;
+            this._createdbyValue = _createdbyValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -81,13 +81,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_taxfilingtype")]
+        public int? AdoxioTaxfilingtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_isaccountant")]
         public bool? AdoxioIsaccountant { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_accountid_value")]
-        public string _adoxioAccountidValue { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -96,8 +111,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -106,28 +131,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_recordtype")]
-        public int? AdoxioRecordtype { get; set; }
+        [JsonProperty(PropertyName = "adoxio_phonenumber")]
+        public string AdoxioPhonenumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,33 +146,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phonenumber")]
-        public string AdoxioPhonenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_taxfilingtype")]
-        public int? AdoxioTaxfilingtype { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -176,28 +156,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "adoxio_taxandaccountingid")]
+        public string AdoxioTaxandaccountingid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
         /// </summary>
@@ -206,8 +191,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_taxandaccountingid")]
-        public string AdoxioTaxandaccountingid { get; set; }
+        [JsonProperty(PropertyName = "adoxio_recordtype")]
+        public int? AdoxioRecordtype { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_accountid_value")]
+        public string _adoxioAccountidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -1,7 +1,7 @@
 
 import {filter,  auditTime } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
+import { ApplicationDataService } from '../../../services/application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription ,  Observable ,  Subject } from 'rxjs';
@@ -23,7 +23,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   saveFormData: any = {};
 
-  constructor(private applicationDataService: AdoxioApplicationDataService,
+  constructor(private applicationDataService: ApplicationDataService,
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
