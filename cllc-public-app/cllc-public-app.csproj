@@ -100,10 +100,7 @@
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\models\invoice.model.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\models\adoxio-legalentities.model.ts" />
-  </ItemGroup>
+ 
 
   <ItemGroup>
     <Compile Update="Contexts\ODataClient.cs">
