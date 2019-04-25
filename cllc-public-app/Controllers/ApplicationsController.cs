@@ -36,34 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
         }
 
-        private IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(string applicantId)
-        {
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
-            if (string.IsNullOrEmpty(applicantId))
-            {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get(expand: expand).Value;
-            }
-            else
-            {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-    filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
-                
-                try
-                {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
-                }
-                catch (OdataerrorException)
-                {
-                    dynamicsApplicationList = null;
-                }
-            }
-            return dynamicsApplicationList;
-        }
-
+        
 
         /// <summary>
         /// Get a license application by applicant id
@@ -74,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.ApplicationSummary> result = new List<ViewModels.ApplicationSummary>();
 
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = GetApplicationListByApplicant(applicantId);
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
             if (dynamicsApplicationList != null)
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
@@ -102,7 +75,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<ViewModels.Application> result = new List<ViewModels.Application>();
 
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = GetApplicationListByApplicant(applicantId);
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = _dynamicsClient.GetApplicationListByApplicant(applicantId);
             if (dynamicsApplicationList != null)
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)

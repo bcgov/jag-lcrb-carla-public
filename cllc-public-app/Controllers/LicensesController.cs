@@ -130,16 +130,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task<List<ApplicationLicenseSummary>> GetLicensesByLicencee(string licenceeId)
         {
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(licenceeId))
             {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get().Value;
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(expand: expand).Value;
             }
             else
             {
                 var filter = $"_adoxio_applicant_value eq {licenceeId} and statuscode eq {(int)AdoxioApplicationStatusCodes.Approved}";
-                var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
+                
                 try
                 {
                     dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
@@ -152,12 +153,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (dynamicsApplicationList != null)
             {
+                IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationListByApplicant(licenceeId);
+
                 foreach (var dynamicsApplication in dynamicsApplicationList)
                 {
                     // populate the licence type.
                     dynamicsApplication.PopulateLicenceType(_dynamicsClient);
 
-                    licenseSummaryList.Add(dynamicsApplication.ToLicenseSummaryViewModel());
+                    licenseSummaryList.Add(dynamicsApplication.ToLicenseSummaryViewModel(applicationsInProgress));
                 }
             }
 
