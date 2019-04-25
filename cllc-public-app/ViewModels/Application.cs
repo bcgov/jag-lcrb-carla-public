@@ -347,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public GeneralYesNo AdoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
         public ViewModels.Account Applicant { get; set; }
-        public ViewModels.AdoxioLicense AssignedLicence { get; set; }
+        public ViewModels.License AssignedLicence { get; set; }
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
         public string AdoxioInvoiceId;
         public string ApplyingPerson { get; set; } //_adoxio_applyingperson_value

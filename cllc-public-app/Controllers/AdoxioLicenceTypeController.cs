@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet()]
         public async Task<JsonResult> GetDynamicsLicenseTypes()
         {
-            List<AdoxioLicenseType> adoxioLiceseVMList = new List<AdoxioLicenseType>();
+            List<LicenseType> adoxioLiceseVMList = new List<LicenseType>();
             // get all licence types in Dynamics
             var adoxioLicenceTypes = await _dynamicsClient.Licencetypes.GetAsync();
 
