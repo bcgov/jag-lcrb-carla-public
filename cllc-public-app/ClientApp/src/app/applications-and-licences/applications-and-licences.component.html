@@ -10,7 +10,7 @@
         </section>
       </div>
       <mat-tab-group
-        [selectedIndex]="(inProgressApplications?.length > 0 || licencedApplications?.length == 0) ? 0 : 1">
+        [selectedIndex]="(inProgressApplications?.length > 0 || licensedApplications?.length == 0) ? 0 : 1">
         <mat-tab label="In Progress Applications">
           <section *ngIf="inProgressApplications?.length > 0">
             <label>Please note:</label> <br>
@@ -137,18 +137,18 @@
           <p></p>          
         </mat-tab>
         <mat-tab label="Licensed Stores">
-          <p *ngIf="licenses?.length > 0">Here are your current approved Cannabis Retail Store Licences.
+          <p *ngIf="licensedApplications?.length > 0">Here are your current approved Cannabis Retail Store Licences.
           </p>
-          <p *ngIf="licenses?.length == 0">
+          <p *ngIf="licensedApplications?.length == 0">
             You do not have any Licenced Stores.
           </p>
-          <table *ngIf="licenses?.length > 0" class="eq-table">
+          <table *ngIf="licensedApplications?.length > 0" class="eq-table">
             <tr>
               <th colspan=2>Licence</th>
               <th>Location</th>
               <th style="width: 335px">Actions</th>
             </tr>
-            <tr *ngFor="let item of licenses; let i = index;" style="border: 1px solid #ccc; ">
+            <tr *ngFor="let item of licensedApplications; let i = index;" style="border: 1px solid #ccc; ">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
               <td style="padding: 10px;">
                 <span style="color: #1a5a96;">{{item.establishmentName}}</span> <br>
