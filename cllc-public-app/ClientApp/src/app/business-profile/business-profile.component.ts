@@ -22,7 +22,7 @@ import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '../services/account-data.service';
 import { DynamicsAccount } from '../models/dynamics-account.model';
 import { FormBase, postalRegex } from '../shared/form-base';
-import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
+import { LegalEntityDataService } from '../services/legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 const moment = _rollupMoment || _moment;
 
@@ -73,7 +73,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
     private contactDataService: ContactDataService,
-    private legalEntityDataService: AdoxioLegalEntityDataService,
+    private legalEntityDataService: LegalEntityDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
