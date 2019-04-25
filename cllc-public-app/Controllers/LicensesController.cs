@@ -183,16 +183,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Json(adoxioLicenses);
         }
 
-        /// GET all licenses in Dynamics
-        [HttpGet()]
-        public async Task<JsonResult> GetDynamicsLicenses()
-        {
-            // get all licenses in Dynamics
-            List<ApplicationLicenseSummary> adoxioLicenses = await GetLicensesByLicencee(null);
-
-            return Json(adoxioLicenses);
-        }
-
 
 
         /// GET all licenses in Dynamics filtered by the GUID of the licencee
