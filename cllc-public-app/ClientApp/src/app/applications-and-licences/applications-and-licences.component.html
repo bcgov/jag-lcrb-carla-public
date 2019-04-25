@@ -172,7 +172,7 @@
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>Renew Licence</span>
                 </a>
                 <a *ngIf="item.applicationStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
-                   [href]="'api/adoxiolicense/' + item?.id + '/pdf/' + item?.licenseNumber + '.pdf'"
+                   [href]="'api/licenses/' + item?.id + '/pdf/' + item?.licenseNumber + '.pdf'"
                    download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                 </a>
