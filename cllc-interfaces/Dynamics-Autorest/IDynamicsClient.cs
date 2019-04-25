@@ -11,7 +11,8 @@ namespace Gov.Lclb.Cllb.Interfaces
     using Newtonsoft.Json;
 
     /// <summary>
-    /// This OData service is located at https://localhost:8888/dynamics
+    /// This OData service is located at
+    /// https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2/
     /// </summary>
     public partial interface IDynamicsClient : System.IDisposable
     {
@@ -88,6 +89,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
 
         /// <summary>
+        /// Gets the IApplicationtypes.
+        /// </summary>
+        IApplicationtypes Applicationtypes { get; }
+
+        /// <summary>
         /// Gets the IAreas.
         /// </summary>
         IAreas Areas { get; }
@@ -111,6 +117,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IComplaints.
         /// </summary>
         IComplaints Complaints { get; }
+
+        /// <summary>
+        /// Gets the IComplianceinvestigations.
+        /// </summary>
+        IComplianceinvestigations Complianceinvestigations { get; }
 
         /// <summary>
         /// Gets the ICompliancemeetings.
@@ -163,6 +174,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishments Establishments { get; }
 
         /// <summary>
+        /// Gets the IFiainvestigationlogs.
+        /// </summary>
+        IFiainvestigationlogs Fiainvestigationlogs { get; }
+
+        /// <summary>
         /// Gets the IFundingsources.
         /// </summary>
         IFundingsources Fundingsources { get; }
@@ -198,6 +214,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILegalentities Legalentities { get; }
 
         /// <summary>
+        /// Gets the ILicencechangeapplications.
+        /// </summary>
+        ILicencechangeapplications Licencechangeapplications { get; }
+
+        /// <summary>
         /// Gets the ILicenceses.
         /// </summary>
         ILicenceses Licenceses { get; }
@@ -211,6 +232,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypes.
         /// </summary>
         ILicencetypes Licencetypes { get; }
+
+        /// <summary>
+        /// Gets the ILicencetypesapplicationtypesset.
+        /// </summary>
+        ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; }
 
         /// <summary>
         /// Gets the ILicencetypestepprerequisites.

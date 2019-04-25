@@ -8,6 +8,7 @@ using SpdSync;
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
     [Route("api/spd")]
+    [ApiController]
     public class SpdController : Controller
     {
         private readonly IConfiguration Configuration;
@@ -51,7 +52,8 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             _logger.LogInformation("Started receive import job");
             return Ok();
 
-        }
+        }        
+
 
         /// <summary>
         /// GET api/apd/receive

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 
 
-import { License } from '../models/license.model';
+import { ApplicationLicenseSummary } from '../models/application-license-summary.model';
 import { Application } from '../models/application.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -10,16 +10,16 @@ import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 
 @Injectable()
-export class AdoxioLicenseDataService extends DataService {
+export class LicenseDataService extends DataService {
 
-  apiPath = 'api/adoxiolicense/';
+  apiPath = 'api/licenses/';
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  getAdoxioLicenses(): Observable<License[]> {
-    return this.http.get<License[]>(this.apiPath + 'current', {
+  getAllCurrentLicenses(): Observable<ApplicationLicenseSummary[]> {
+    return this.http.get<ApplicationLicenseSummary[]>(this.apiPath + 'current', {
       headers: this.headers
     })
       .pipe(catchError(this.handleError));

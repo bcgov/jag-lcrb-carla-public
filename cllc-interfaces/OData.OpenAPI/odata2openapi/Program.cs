@@ -349,7 +349,7 @@ namespace odata2openapi
                             bool hasValue = false;
                             var schema = val.Schema;
 
-                            foreach (var property in val.Schema.Properties)
+                            foreach (var property in schema.Properties)
                             {
                                 if (property.Key.Equals("value"))
                                 {
@@ -372,7 +372,8 @@ namespace odata2openapi
 
 
                                 }
-
+                                // ODATA - experimental
+                                //operation.Operation.ExtensionData.Add ("x-ms-odata", "#/definitions/")
 
                             }
 
