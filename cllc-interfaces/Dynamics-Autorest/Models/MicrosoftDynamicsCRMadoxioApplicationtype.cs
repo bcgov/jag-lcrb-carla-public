@@ -29,22 +29,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioApplicationtype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioApplicationtype(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), bool? adoxioIsshowpropertydetails = default(bool?), int? statuscode = default(int?), bool? adoxioIsshowcurrentproperty = default(bool?), string _owningteamValue = default(string), long? versionnumber = default(long?), string adoxioPreamble = default(string), bool? adoxioIsshowassociatesformupload = default(bool?), string _owneridValue = default(string), bool? adoxioIsshowhoursofsale = default(bool?), string _owningbusinessunitValue = default(string), bool? adoxioIsshowdeclarations = default(bool?), string _adoxioLicencetypeidValue = default(string), int? adoxioCategory = default(int?), bool? adoxioIsshowsupportingdocuments = default(bool?), string adoxioActiontext = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string adoxioApplicationtypeid = default(string), int? utcconversiontimezonecode = default(int?), string adoxioNextsteps = default(string), string _owninguserValue = default(string), string adoxioBeforestarting = default(string), int? statecode = default(int?), bool? adoxioIsshowfinancialintegrityformupload = default(bool?), string _createdbyValue = default(string), string adoxioTitletext = default(string), string adoxioName = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioApplicationtypeApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype))
+        public MicrosoftDynamicsCRMadoxioApplicationtype(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), bool? adoxioIsshowpropertydetails = default(bool?), int? statuscode = default(int?), bool? adoxioIsshowcurrentproperty = default(bool?), string _createdbyValue = default(string), string _owningteamValue = default(string), string adoxioDefaultbpmid = default(string), long? versionnumber = default(long?), string _owneridValue = default(string), string adoxioPreamble = default(string), bool? adoxioIsshowassociatesformupload = default(bool?), string adoxioDefaultbpfid = default(string), bool? adoxioIsshowhoursofsale = default(bool?), string _owningbusinessunitValue = default(string), bool? adoxioIsshowdeclarations = default(bool?), int? adoxioCategory = default(int?), bool? adoxioIsshowsupportingdocuments = default(bool?), string adoxioActiontext = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string adoxioApplicationtypeid = default(string), int? utcconversiontimezonecode = default(int?), string adoxioNextsteps = default(string), string _owninguserValue = default(string), string adoxioBeforestarting = default(string), int? statecode = default(int?), bool? adoxioIsshowfinancialintegrityformupload = default(bool?), string adoxioTitletext = default(string), string adoxioName = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationtypeSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationtypeDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationtypeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationtypeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioApplicationtypeApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioLicencetype> adoxioLicencetypesApplicationtypes = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>))
         {
             Overriddencreatedon = overriddencreatedon;
             Importsequencenumber = importsequencenumber;
             AdoxioIsshowpropertydetails = adoxioIsshowpropertydetails;
             Statuscode = statuscode;
             AdoxioIsshowcurrentproperty = adoxioIsshowcurrentproperty;
+            this._createdbyValue = _createdbyValue;
             this._owningteamValue = _owningteamValue;
+            AdoxioDefaultbpmid = adoxioDefaultbpmid;
             Versionnumber = versionnumber;
+            this._owneridValue = _owneridValue;
             AdoxioPreamble = adoxioPreamble;
             AdoxioIsshowassociatesformupload = adoxioIsshowassociatesformupload;
-            this._owneridValue = _owneridValue;
+            AdoxioDefaultbpfid = adoxioDefaultbpfid;
             AdoxioIsshowhoursofsale = adoxioIsshowhoursofsale;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioIsshowdeclarations = adoxioIsshowdeclarations;
-            this._adoxioLicencetypeidValue = _adoxioLicencetypeidValue;
             AdoxioCategory = adoxioCategory;
             AdoxioIsshowsupportingdocuments = adoxioIsshowsupportingdocuments;
             AdoxioActiontext = adoxioActiontext;
@@ -57,7 +59,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioBeforestarting = adoxioBeforestarting;
             Statecode = statecode;
             AdoxioIsshowfinancialintegrityformupload = adoxioIsshowfinancialintegrityformupload;
-            this._createdbyValue = _createdbyValue;
             AdoxioTitletext = adoxioTitletext;
             AdoxioName = adoxioName;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -78,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioApplicationtypeAsyncOperations = adoxioApplicationtypeAsyncOperations;
             AdoxioApplicationtypeBulkDeleteFailures = adoxioApplicationtypeBulkDeleteFailures;
             AdoxioApplicationtypeApplications = adoxioApplicationtypeApplications;
-            AdoxioLicenceTypeId = adoxioLicenceTypeId;
+            AdoxioLicencetypesApplicationtypes = adoxioLicencetypesApplicationtypes;
             CustomInit();
         }
 
@@ -114,13 +115,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_defaultbpmid")]
+        public string AdoxioDefaultbpmid { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public long? Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -134,8 +150,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_defaultbpfid")]
+        public string AdoxioDefaultbpfid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -151,11 +167,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_isshowdeclarations")]
         public bool? AdoxioIsshowdeclarations { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
-        public string _adoxioLicencetypeidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -216,11 +227,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_isshowfinancialintegrityformupload")]
         public bool? AdoxioIsshowfinancialintegrityformupload { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -324,8 +330,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_LicenceTypeId")]
-        public MicrosoftDynamicsCRMadoxioLicencetype AdoxioLicenceTypeId { get; set; }
+        [JsonProperty(PropertyName = "adoxio_licencetypes_applicationtypes")]
+        public IList<MicrosoftDynamicsCRMadoxioLicencetype> AdoxioLicencetypesApplicationtypes { get; set; }
 
     }
 }

@@ -6,6 +6,7 @@ import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
 import { Application } from '@app/models/application.model';
 import { ApplicationSummary } from '@app/models/application-summary.model';
+import { ApplicationType } from '@app/models/application-type.model';
 import { License } from '@app/models/license.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
@@ -110,6 +111,32 @@ export class ApplicationsAndLicencesComponent implements OnInit {
       }
     );
 
+  }
+
+  doAction(licenceId: string, actionName: string) {
+      
+    
+    var mode = 'ChangeOfLocationMode';
+    if (actionName === 'CRS Transfer of Ownership') {
+      mode = "ChangeOfOwnershipMode";
+    }
+    if (actionName === 'CRS Location Change') {
+      mode = "ChangeOfLocationMode";
+    }
+    if (actionName === 'CRS Structural Change') {
+      mode = "StructuralChangeMode";
+    }
+
+      // newLicenceApplicationData. = this.account.businessType;
+      this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
+        data => {
+          this.router.navigateByUrl('/account-profile/' + data.id + ';mode=' + mode);
+        },
+        () => {
+          this.snackBar.open('Error starting a Change Licence Location Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          console.log('Error starting a Change Licence Location Application');
+        }
+      );
   }
 
   changeLicenceLocation(application: Application) {
