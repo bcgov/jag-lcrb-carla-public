@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
                         shownStatus = "Not Submitted";
                     }
                 }
-                else if (shownStatus == "In progress" || shownStatus == "Under Review" || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
+                else if (shownStatus == "In progress" || shownStatus == "Under Review" || shownStatus == "UnderReview" || (shownStatus == "Intake" && application.AdoxioPaymentrecieved == true))
                 {
                     if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Transfer of Ownership")
                     {
