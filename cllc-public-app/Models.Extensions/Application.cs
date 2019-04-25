@@ -273,6 +273,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
                 //get establishment name and address
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
+                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
+                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
+                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
                 AllowedActions = new List<ApplicationType>()
             };
 

@@ -17,6 +17,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ApplicationStatus { get; set; } 
 
         public string EstablishmentName { get; set; } //adoxio_establishmentpropsedname
+        public string EstablishmentAddressStreet { get; set; }
+        public string EstablishmentAddressCity { get; set; }
+        public string EstablishmentAddressPostalCode { get; set; }
 
         public string Name { get; set; } //adoxio_name
 
