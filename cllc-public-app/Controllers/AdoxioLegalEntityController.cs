@@ -368,7 +368,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            var adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
             adoxioLegalEntity.CopyValues(item);
 
             if (item.isindividual != true)

@@ -134,25 +134,21 @@
                 </div>
             </tr>
           </table>
-          <p></p>
-          <!-- <div class="notes" style="display: flex;">
-            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-              dolore magna aliqua. </span>
-          </div> -->
+          <p></p>          
         </mat-tab>
         <mat-tab label="Licensed Stores">
-          <p *ngIf="licencedApplications?.length > 0">Here are your current approved Cannabis Retail Store Licences.
+          <p *ngIf="licenses?.length > 0">Here are your current approved Cannabis Retail Store Licences.
           </p>
-          <p *ngIf="licencedApplications?.length == 0">
+          <p *ngIf="licenses?.length == 0">
             You do not have any Licenced Stores.
           </p>
-          <table *ngIf="licencedApplications?.length > 0" class="eq-table">
+          <table *ngIf="licenses?.length > 0" class="eq-table">
             <tr>
               <th colspan=2>Licence</th>
               <th>Location</th>
               <th style="width: 335px">Actions</th>
             </tr>
-            <tr *ngFor="let item of licencedApplications; let i = index;" style="border: 1px solid #ccc; ">
+            <tr *ngFor="let item of licenses; let i = index;" style="border: 1px solid #ccc; ">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
               <td style="padding: 10px;">
                 <span style="color: #1a5a96;">{{item.establishmentName}}</span> <br>
@@ -175,16 +171,23 @@
                    (click)="renewLicence(item)">
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>Renew Licence</span>
                 </a>
-                <a *ngIf="item.assignedLicence && item.applicationStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
-                   [href]="'api/adoxiolicense/' + item?.assignedLicence?.id + '/pdf/' + item?.assignedLicence?.licenseNumber + '.pdf'"
+                <a *ngIf="item.applicationStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
+                   [href]="'api/adoxiolicense/' + item?.id + '/pdf/' + item?.licenseNumber + '.pdf'"
                    download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                 </a>
-                <br *ngIf="item.applicationStatus != PAYMENT_REQUIRED && !item.isLocationChangeInProgress" />
-                <a *ngIf="item.applicationStatus != PAYMENT_REQUIRED && !item.isLocationChangeInProgress" href="javascript:void(0);"
-                   (click)="changeLicenceLocation(item)">
-                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>[Beta] Request Relocation</span>
-                </a>
+                <div *ngIf="item.applicationStatus != PAYMENT_REQUIRED">
+                  <p *ngFor="let action of item.allowedActions">
+                    <a href="javascript:void(0);"
+                       (click)="doAction(item.licenseId,action.name)">
+                      <span><i class="fas fa-sync" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
+
+                    </a>
+                  </p>
+                </div>
+
+               
+                
               </td>
             </tr>
           </table>

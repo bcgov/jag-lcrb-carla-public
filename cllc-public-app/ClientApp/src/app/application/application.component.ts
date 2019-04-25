@@ -8,7 +8,7 @@ import { Subscription, Subject, Observable } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AdoxioApplicationDataService } from '@services/adoxio-application-data.service';
+import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
@@ -68,7 +68,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
-    private applicationDataService: AdoxioApplicationDataService,
+    private applicationDataService: ApplicationDataService,
     private userDataService: UserDataService,
     private dynamicsDataService: DynamicsDataService,
     private route: ActivatedRoute,
@@ -171,7 +171,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       .subscribe((user) => {
         if (user.accountid != null) {
           // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('account', user.accountid)
+          this.dynamicsDataService.getRecord('accounts', user.accountid)
             .subscribe((result) => {
               this.account = result;
             });

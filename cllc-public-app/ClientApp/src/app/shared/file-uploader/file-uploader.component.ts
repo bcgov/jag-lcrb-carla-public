@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FileSystemItem } from '@models/file-system-item.model';
 import { Subscription } from 'rxjs';
-import { AdoxioApplicationDataService } from '@services/adoxio-application-data.service';
+import { ApplicationDataService } from '@services/application-data.service';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -32,7 +32,7 @@ export class FileUploaderComponent implements OnInit {
   public files: FileSystemItem[] = [];
 
   // TODO: move http call to a service
-  constructor(private http: HttpClient, private adoxioApplicationDataService: AdoxioApplicationDataService) {
+  constructor(private http: HttpClient, private adoxioApplicationDataService: ApplicationDataService) {
   }
 
   ngOnInit(): void {

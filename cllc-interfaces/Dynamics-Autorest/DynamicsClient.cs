@@ -16,7 +16,8 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Net.Http;
 
     /// <summary>
-    /// This OData service is located at https://localhost:8888/dynamics
+    /// This OData service is located at
+    /// https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2/
     /// </summary>
     public partial class DynamicsClient : ServiceClient<DynamicsClient>, IDynamicsClient
     {
@@ -91,6 +92,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationtypes.
+        /// </summary>
+        public virtual IApplicationtypes Applicationtypes { get; private set; }
+
+        /// <summary>
         /// Gets the IAreas.
         /// </summary>
         public virtual IAreas Areas { get; private set; }
@@ -114,6 +120,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IComplaints.
         /// </summary>
         public virtual IComplaints Complaints { get; private set; }
+
+        /// <summary>
+        /// Gets the IComplianceinvestigations.
+        /// </summary>
+        public virtual IComplianceinvestigations Complianceinvestigations { get; private set; }
 
         /// <summary>
         /// Gets the ICompliancemeetings.
@@ -166,6 +177,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
+        /// Gets the IFiainvestigationlogs.
+        /// </summary>
+        public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
+
+        /// <summary>
         /// Gets the IFundingsources.
         /// </summary>
         public virtual IFundingsources Fundingsources { get; private set; }
@@ -201,6 +217,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILegalentities Legalentities { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencechangeapplications.
+        /// </summary>
+        public virtual ILicencechangeapplications Licencechangeapplications { get; private set; }
+
+        /// <summary>
         /// Gets the ILicenceses.
         /// </summary>
         public virtual ILicenceses Licenceses { get; private set; }
@@ -214,6 +235,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypes.
         /// </summary>
         public virtual ILicencetypes Licencetypes { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicencetypesapplicationtypesset.
+        /// </summary>
+        public virtual ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; private set; }
 
         /// <summary>
         /// Gets the ILicencetypestepprerequisites.
@@ -611,11 +637,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationmodules = new Applicationmodules(this);
             Applications = new Applications(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
+            Applicationtypes = new Applicationtypes(this);
             Areas = new Areas(this);
             Businessaccounts = new Businessaccounts(this);
             Citydistricts = new Citydistricts(this);
             Complaintpublicbpfs = new Complaintpublicbpfs(this);
             Complaints = new Complaints(this);
+            Complianceinvestigations = new Complianceinvestigations(this);
             Compliancemeetings = new Compliancemeetings(this);
             Contraventionadmins = new Contraventionadmins(this);
             Contraventions = new Contraventions(this);
@@ -626,6 +654,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Documentadmins = new Documentadmins(this);
             Documents = new Documents(this);
             Establishments = new Establishments(this);
+            Fiainvestigationlogs = new Fiainvestigationlogs(this);
             Fundingsources = new Fundingsources(this);
             Incidentlicencetypeset = new Incidentlicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
@@ -633,9 +662,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             Investigationactivities = new Investigationactivities(this);
             Investigations = new Investigations(this);
             Legalentities = new Legalentities(this);
+            Licencechangeapplications = new Licencechangeapplications(this);
             Licenceses = new Licenceses(this);
             Licencetypeprerequisites = new Licencetypeprerequisites(this);
             Licencetypes = new Licencetypes(this);
+            Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licencetypestepprerequisites = new Licencetypestepprerequisites(this);
             Licencetypesteps = new Licencetypesteps(this);
             Loans = new Loans(this);
@@ -665,7 +696,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
-            BaseUri = new System.Uri("https://localhost:8888/dynamics");
+            BaseUri = new System.Uri("https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

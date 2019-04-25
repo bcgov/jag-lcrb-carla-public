@@ -29,14 +29,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioTiedhouseconnection class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioTiedhouseconnection(int? adoxioShare20plusfamilyconnectionproducer = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _adoxioAccountidValue = default(string), int? adoxioOwnershiptype = default(int?), int? adoxioFamilymemberfederalproducer = default(int?), int? timezoneruleversionnumber = default(int?), string _owningteamValue = default(string), int? adoxioShare20plusconnectionproducer = default(int?), int? adoxioCorpconnectionfederalproducer = default(int?), int? statuscode = default(int?), int? adoxioAssociateconnectionfederalproducer = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioAssociateconnectionfederalproducerdetails = default(string), string adoxioSharetype = default(string), int? adoxioFederalproducerconnectiontocorp = default(int?), string adoxioPartnersconnectionfederalproducerdetails = default(string), string adoxioShare20plusfamilyconnectionproducerdetail = default(string), int? adoxioSocietyconnectionfederalproducer = default(int?), string adoxioFamilymemberfederalproducerdetails = default(string), string adoxioSocietyconnectionfederalproducerdetails = default(string), string _owneridValue = default(string), int? adoxioPartnersconnectionfederalproducer = default(int?), int? adoxioIsconnection = default(int?), int? statecode = default(int?), string adoxioTiedhouseconnectionid = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _createdonbehalfbyValue = default(string), string adoxioFederalproducerconnectiontocorpdetails = default(string), int? adoxioConnectiontype = default(int?), string _createdbyValue = default(string), string adoxioShare20plusconnectionproducerdetails = default(string), string adoxioCorpconnectionfederalproducerdetails = default(string), string _adoxioContactidValue = default(string), int? adoxioPercentageofownership = default(int?), string adoxioName = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string adoxioAdditionaldetails = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioApplicationValue = default(string), string _adoxioTiedhouseValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioTiedhouseconnectionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseconnectionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseconnectionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioTiedhouseconnectionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioTiedhouseconnectionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioTiedhouseassociation adoxioTiedHouse = default(MicrosoftDynamicsCRMadoxioTiedhouseassociation))
+        public MicrosoftDynamicsCRMadoxioTiedhouseconnection(int? adoxioShare20plusfamilyconnectionproducer = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _adoxioAccountidValue = default(string), int? adoxioOwnershiptype = default(int?), int? adoxioSolepropconnectiontofederalproducer = default(int?), int? timezoneruleversionnumber = default(int?), string _owningteamValue = default(string), int? adoxioShare20plusconnectionproducer = default(int?), int? adoxioCorpconnectionfederalproducer = default(int?), int? statuscode = default(int?), int? adoxioAssociateconnectionfederalproducer = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioAssociateconnectionfederalproducerdetails = default(string), string adoxioSharetype = default(string), int? adoxioFederalproducerconnectiontocorp = default(int?), string adoxioPartnersconnectionfederalproducerdetails = default(string), string adoxioShare20plusfamilyconnectionproducerdetail = default(string), int? adoxioSocietyconnectionfederalproducer = default(int?), string adoxioFamilymemberfederalproducerdetails = default(string), string adoxioSocietyconnectionfederalproducerdetails = default(string), string _owneridValue = default(string), int? adoxioPartnersconnectionfederalproducer = default(int?), int? adoxioFamilymemberfederalproducer = default(int?), int? adoxioIsconnection = default(int?), int? statecode = default(int?), string adoxioTiedhouseconnectionid = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _createdonbehalfbyValue = default(string), string adoxioFederalproducerconnectiontocorpdetails = default(string), int? adoxioConnectiontype = default(int?), string _createdbyValue = default(string), string adoxioShare20plusconnectionproducerdetails = default(string), string adoxioSolepropconnectiontofederalproducerdetail = default(string), string _adoxioContactidValue = default(string), string adoxioCorpconnectionfederalproducerdetails = default(string), int? adoxioPercentageofownership = default(int?), string adoxioName = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string adoxioAdditionaldetails = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _adoxioApplicationValue = default(string), string _adoxioTiedhouseValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioTiedhouseconnectionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseconnectionDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseconnectionDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioTiedhouseconnectionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioTiedhouseconnectionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioAccountId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioApplication adoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMcontact adoxioContactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioTiedhouseassociation adoxioTiedHouse = default(MicrosoftDynamicsCRMadoxioTiedhouseassociation))
         {
             AdoxioShare20plusfamilyconnectionproducer = adoxioShare20plusfamilyconnectionproducer;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._owninguserValue = _owninguserValue;
             this._adoxioAccountidValue = _adoxioAccountidValue;
             AdoxioOwnershiptype = adoxioOwnershiptype;
-            AdoxioFamilymemberfederalproducer = adoxioFamilymemberfederalproducer;
+            AdoxioSolepropconnectiontofederalproducer = adoxioSolepropconnectiontofederalproducer;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             this._owningteamValue = _owningteamValue;
             AdoxioShare20plusconnectionproducer = adoxioShare20plusconnectionproducer;
@@ -54,6 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioSocietyconnectionfederalproducerdetails = adoxioSocietyconnectionfederalproducerdetails;
             this._owneridValue = _owneridValue;
             AdoxioPartnersconnectionfederalproducer = adoxioPartnersconnectionfederalproducer;
+            AdoxioFamilymemberfederalproducer = adoxioFamilymemberfederalproducer;
             AdoxioIsconnection = adoxioIsconnection;
             Statecode = statecode;
             AdoxioTiedhouseconnectionid = adoxioTiedhouseconnectionid;
@@ -65,8 +66,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioConnectiontype = adoxioConnectiontype;
             this._createdbyValue = _createdbyValue;
             AdoxioShare20plusconnectionproducerdetails = adoxioShare20plusconnectionproducerdetails;
-            AdoxioCorpconnectionfederalproducerdetails = adoxioCorpconnectionfederalproducerdetails;
+            AdoxioSolepropconnectiontofederalproducerdetail = adoxioSolepropconnectiontofederalproducerdetail;
             this._adoxioContactidValue = _adoxioContactidValue;
+            AdoxioCorpconnectionfederalproducerdetails = adoxioCorpconnectionfederalproducerdetails;
             AdoxioPercentageofownership = adoxioPercentageofownership;
             AdoxioName = adoxioName;
             this._modifiedbyValue = _modifiedbyValue;
@@ -128,8 +130,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_familymemberfederalproducer")]
-        public int? AdoxioFamilymemberfederalproducer { get; set; }
+        [JsonProperty(PropertyName = "adoxio_solepropconnectiontofederalproducer")]
+        public int? AdoxioSolepropconnectiontofederalproducer { get; set; }
 
         /// <summary>
         /// </summary>
@@ -218,6 +220,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_familymemberfederalproducer")]
+        public int? AdoxioFamilymemberfederalproducer { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_isconnection")]
         public int? AdoxioIsconnection { get; set; }
 
@@ -273,13 +280,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_corpconnectionfederalproducerdetails")]
-        public string AdoxioCorpconnectionfederalproducerdetails { get; set; }
+        [JsonProperty(PropertyName = "adoxio_solepropconnectiontofederalproducerdetail")]
+        public string AdoxioSolepropconnectiontofederalproducerdetail { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_contactid_value")]
         public string _adoxioContactidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_corpconnectionfederalproducerdetails")]
+        public string AdoxioCorpconnectionfederalproducerdetails { get; set; }
 
         /// <summary>
         /// </summary>

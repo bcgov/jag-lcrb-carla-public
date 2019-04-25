@@ -1,4 +1,5 @@
 ﻿
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
@@ -409,16 +410,41 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
         {
+            return _dynamicsClient.GetAdoxioLicencetypeById(id.ToString());
+        }
+
+
+        public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, string id)
+        {
             MicrosoftDynamicsCRMadoxioLicencetype result = null;
 
             try
             {
-                result = _dynamicsClient.Licencetypes.GetByKey(id.ToString());
+                // EXPAND the list of application types for this licence type
+                string[] expand = { "adoxio_licencetypes_applicationtypes" };
+                result = _dynamicsClient.Licencetypes.GetByKey(adoxioLicencetypeid: id, expand: expand);
+                
             }
             catch (OdataerrorException)
             {
                 result = null;
             }
+
+            // additional pass to populate the applicationtypes licencetype.
+           /*
+           if (result.AdoxioLicencetypesApplicationtypes != null)
+           {
+               foreach (var item in result.AdoxioLicencetypesApplicationtypes)
+               {
+
+                   if (item._adoxioLicencetypeidValue != null)
+                   {
+                       item.AdoxioLicenceTypeId = _dynamicsClient.GetAdoxioLicencetypeById(item._adoxioLicencetypeidValue);
+                   }
+               }
+            }
+           */
+
 
             return result;
         }
