@@ -234,6 +234,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencetypes Licencetypes { get; }
 
         /// <summary>
+        /// Gets the ILicencetypesapplicationtypesset.
+        /// </summary>
+        ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; }
+
+        /// <summary>
         /// Gets the ILicencetypestepprerequisites.
         /// </summary>
         ILicencetypestepprerequisites Licencetypestepprerequisites { get; }

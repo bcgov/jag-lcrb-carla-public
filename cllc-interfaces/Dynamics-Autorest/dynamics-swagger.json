@@ -5508,24 +5508,28 @@
                 "statuscode desc",
                 "adoxio_isshowcurrentproperty",
                 "adoxio_isshowcurrentproperty desc",
+                "_createdby_value",
+                "_createdby_value desc",
                 "_owningteam_value",
                 "_owningteam_value desc",
+                "adoxio_defaultbpmid",
+                "adoxio_defaultbpmid desc",
                 "versionnumber",
                 "versionnumber desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
                 "adoxio_preamble",
                 "adoxio_preamble desc",
                 "adoxio_isshowassociatesformupload",
                 "adoxio_isshowassociatesformupload desc",
-                "_ownerid_value",
-                "_ownerid_value desc",
+                "adoxio_defaultbpfid",
+                "adoxio_defaultbpfid desc",
                 "adoxio_isshowhoursofsale",
                 "adoxio_isshowhoursofsale desc",
                 "_owningbusinessunit_value",
                 "_owningbusinessunit_value desc",
                 "adoxio_isshowdeclarations",
                 "adoxio_isshowdeclarations desc",
-                "_adoxio_licencetypeid_value",
-                "_adoxio_licencetypeid_value desc",
                 "adoxio_category",
                 "adoxio_category desc",
                 "adoxio_isshowsupportingdocuments",
@@ -5550,8 +5554,6 @@
                 "statecode desc",
                 "adoxio_isshowfinancialintegrityformupload",
                 "adoxio_isshowfinancialintegrityformupload desc",
-                "_createdby_value",
-                "_createdby_value desc",
                 "adoxio_titletext",
                 "adoxio_titletext desc",
                 "adoxio_name",
@@ -5580,15 +5582,17 @@
                 "adoxio_isshowpropertydetails",
                 "statuscode",
                 "adoxio_isshowcurrentproperty",
+                "_createdby_value",
                 "_owningteam_value",
+                "adoxio_defaultbpmid",
                 "versionnumber",
+                "_ownerid_value",
                 "adoxio_preamble",
                 "adoxio_isshowassociatesformupload",
-                "_ownerid_value",
+                "adoxio_defaultbpfid",
                 "adoxio_isshowhoursofsale",
                 "_owningbusinessunit_value",
                 "adoxio_isshowdeclarations",
-                "_adoxio_licencetypeid_value",
                 "adoxio_category",
                 "adoxio_isshowsupportingdocuments",
                 "adoxio_actiontext",
@@ -5601,7 +5605,6 @@
                 "adoxio_beforestarting",
                 "statecode",
                 "adoxio_isshowfinancialintegrityformupload",
-                "_createdby_value",
                 "adoxio_titletext",
                 "adoxio_name",
                 "_createdonbehalfby_value",
@@ -5634,7 +5637,7 @@
                 "adoxio_applicationtype_AsyncOperations",
                 "adoxio_applicationtype_BulkDeleteFailures",
                 "adoxio_applicationtype_applications",
-                "adoxio_LicenceTypeId"
+                "adoxio_licencetypes_applicationtypes"
               ]
             }
           }
@@ -5718,15 +5721,17 @@
                 "adoxio_isshowpropertydetails",
                 "statuscode",
                 "adoxio_isshowcurrentproperty",
+                "_createdby_value",
                 "_owningteam_value",
+                "adoxio_defaultbpmid",
                 "versionnumber",
+                "_ownerid_value",
                 "adoxio_preamble",
                 "adoxio_isshowassociatesformupload",
-                "_ownerid_value",
+                "adoxio_defaultbpfid",
                 "adoxio_isshowhoursofsale",
                 "_owningbusinessunit_value",
                 "adoxio_isshowdeclarations",
-                "_adoxio_licencetypeid_value",
                 "adoxio_category",
                 "adoxio_isshowsupportingdocuments",
                 "adoxio_actiontext",
@@ -5739,7 +5744,6 @@
                 "adoxio_beforestarting",
                 "statecode",
                 "adoxio_isshowfinancialintegrityformupload",
-                "_createdby_value",
                 "adoxio_titletext",
                 "adoxio_name",
                 "_createdonbehalfby_value",
@@ -5772,7 +5776,7 @@
                 "adoxio_applicationtype_AsyncOperations",
                 "adoxio_applicationtype_BulkDeleteFailures",
                 "adoxio_applicationtype_applications",
-                "adoxio_LicenceTypeId"
+                "adoxio_licencetypes_applicationtypes"
               ]
             }
           }
@@ -16896,6 +16900,8 @@
                 "_owningteam_value desc",
                 "createdon",
                 "createdon desc",
+                "adoxio_defaultbpfid",
+                "adoxio_defaultbpfid desc",
                 "utcconversiontimezonecode",
                 "utcconversiontimezonecode desc",
                 "adoxio_name",
@@ -16952,6 +16958,7 @@
                 "_createdonbehalfby_value",
                 "_owningteam_value",
                 "createdon",
+                "adoxio_defaultbpfid",
                 "utcconversiontimezonecode",
                 "adoxio_name",
                 "statuscode",
@@ -17012,7 +17019,7 @@
                 "adoxio_licencetype_establishment",
                 "adoxio_ApplicationFeeProduct",
                 "adoxio_LicenceFeeProduct",
-                "adoxio_licencetype_applicationtypes"
+                "adoxio_licencetypes_applicationtypes"
               ]
             }
           }
@@ -17094,6 +17101,7 @@
                 "_createdonbehalfby_value",
                 "_owningteam_value",
                 "createdon",
+                "adoxio_defaultbpfid",
                 "utcconversiontimezonecode",
                 "adoxio_name",
                 "statuscode",
@@ -17154,7 +17162,7 @@
                 "adoxio_licencetype_establishment",
                 "adoxio_ApplicationFeeProduct",
                 "adoxio_LicenceFeeProduct",
-                "adoxio_licencetype_applicationtypes"
+                "adoxio_licencetypes_applicationtypes"
               ]
             }
           }
@@ -17223,6 +17231,259 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_licencetypes_applicationtypesset": {
+      "get": {
+        "tags": [
+          "licencetypes_applicationtypesset"
+        ],
+        "summary": "Get entities from adoxio_licencetypes_applicationtypesset",
+        "operationId": "Licencetypesapplicationtypesset_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "versionnumber desc",
+                "adoxio_licencetypes_applicationtypesid",
+                "adoxio_licencetypes_applicationtypesid desc",
+                "adoxio_applicationtypeid",
+                "adoxio_applicationtypeid desc",
+                "adoxio_licencetypeid",
+                "adoxio_licencetypeid desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "adoxio_licencetypes_applicationtypesid",
+                "adoxio_applicationtypeid",
+                "adoxio_licencetypeid"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Licencetypesapplicationtypesset_GetResponseModel"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "licencetypes_applicationtypesset"
+        ],
+        "summary": "Add new entity to adoxio_licencetypes_applicationtypesset",
+        "operationId": "Licencetypesapplicationtypesset_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_licencetypes_applicationtypesset({adoxio_licencetypes_applicationtypesid})": {
+      "get": {
+        "tags": [
+          "licencetypes_applicationtypesset"
+        ],
+        "summary": "Get entity from adoxio_licencetypes_applicationtypesset by key",
+        "operationId": "Licencetypesapplicationtypesset_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_licencetypes_applicationtypesid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_licencetypes_applicationtypesid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "adoxio_licencetypes_applicationtypesid",
+                "adoxio_applicationtypeid",
+                "adoxio_licencetypeid"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "licencetypes_applicationtypesset"
+        ],
+        "summary": "Delete entity from adoxio_licencetypes_applicationtypesset",
+        "operationId": "Licencetypesapplicationtypesset_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_licencetypes_applicationtypesid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_licencetypes_applicationtypesid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "licencetypes_applicationtypesset"
+        ],
+        "summary": "Update entity in adoxio_licencetypes_applicationtypesset",
+        "operationId": "Licencetypesapplicationtypesset_Update",
+        "parameters": [
+          {
+            "name": "adoxio_licencetypes_applicationtypesid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_licencetypes_applicationtypesid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes"
             },
             "description": "New property values"
           }
@@ -35020,13 +35281,25 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_defaultbpmid": {
           "type": "string",
           "x-nullable": true
         },
         "versionnumber": {
           "type": "integer",
           "format": "int64",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_preamble": {
@@ -35037,7 +35310,7 @@
           "type": "boolean",
           "x-nullable": true
         },
-        "_ownerid_value": {
+        "adoxio_defaultbpfid": {
           "type": "string",
           "x-nullable": true
         },
@@ -35051,10 +35324,6 @@
         },
         "adoxio_isshowdeclarations": {
           "type": "boolean",
-          "x-nullable": true
-        },
-        "_adoxio_licencetypeid_value": {
-          "type": "string",
           "x-nullable": true
         },
         "adoxio_category": {
@@ -35103,10 +35372,6 @@
         },
         "adoxio_isshowfinancialintegrityformupload": {
           "type": "boolean",
-          "x-nullable": true
-        },
-        "_createdby_value": {
-          "type": "string",
           "x-nullable": true
         },
         "adoxio_titletext": {
@@ -35193,8 +35458,11 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
           }
         },
-        "adoxio_LicenceTypeId": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
+        "adoxio_licencetypes_applicationtypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
+          }
         }
       }
     },
@@ -41088,6 +41356,10 @@
           "type": "string",
           "format": "date-time"
         },
+        "adoxio_defaultbpfid": {
+          "type": "string",
+          "x-nullable": true
+        },
         "utcconversiontimezonecode": {
           "type": "integer",
           "x-nullable": true
@@ -41305,11 +41577,34 @@
         "adoxio_LicenceFeeProduct": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.product"
         },
-        "adoxio_licencetype_applicationtypes": {
+        "adoxio_licencetypes_applicationtypes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
           }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes": {
+      "title": "adoxio_licencetypes_applicationtypes",
+      "type": "object",
+      "properties": {
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "adoxio_licencetypes_applicationtypesid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_applicationtypeid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_licencetypeid": {
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -105146,6 +105441,18 @@
         }
       }
     },
+    "Licencetypesapplicationtypesset_GetResponseModel": {
+      "title": "Collection of adoxio_licencetypes_applicationtypesset",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes"
+          }
+        }
+      }
+    },
     "Licencetypestepprerequisites_GetResponseModel": {
       "title": "Collection of adoxio_licencetypestepprerequisites",
       "type": "object",
@@ -108500,6 +108807,9 @@
     },
     {
       "name": "adoxio_licencetypes"
+    },
+    {
+      "name": "adoxio_licencetypes_applicationtypesset"
     },
     {
       "name": "adoxio_licencetypestepprerequisites"
