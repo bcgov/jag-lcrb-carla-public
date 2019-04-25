@@ -176,11 +176,18 @@
                    download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                 </a>
-                <br *ngIf="item.applicationStatus != PAYMENT_REQUIRED && !item.isLocationChangeInProgress" />
-                <a *ngIf="item.applicationStatus != PAYMENT_REQUIRED && !item.isLocationChangeInProgress" href="javascript:void(0);"
-                   (click)="changeLicenceLocation(item)">
-                  <span><i class="fas fa-sync" style="margin-right: 10px;"></i>[Beta] Request Relocation</span>
-                </a>
+                <div *ngIf="item.applicationStatus != PAYMENT_REQUIRED">
+                  <p *ngFor="let action of item.allowedActions">
+                    <a href="javascript:void(0);"
+                       (click)="doAction(item.licenseId,action.name)">
+                      <span><i class="fas fa-sync" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
+
+                    </a>
+                  </p>
+                </div>
+
+               
+                
               </td>
             </tr>
           </table>
