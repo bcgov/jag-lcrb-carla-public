@@ -329,7 +329,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 foreach (var inProgressApplication in applicationsInProgress)
                 {
                     // do not add actions if there is already an action in progress.
-                    if (inProgressApplication.AdoxioAssignedLicence.AdoxioLicencesid == dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid)
+                    if (inProgressApplication.AdoxioAssignedLicence != null &&
+                        inProgressApplication.AdoxioAssignedLicence.AdoxioLicencesid == dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid)
                     {
                         addActions = false;
                         break;
