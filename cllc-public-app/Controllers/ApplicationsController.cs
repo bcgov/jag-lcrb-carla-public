@@ -38,10 +38,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(string applicantId)
         {
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get().Value;
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(expand: expand).Value;
             }
             else
             {
@@ -50,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
-                var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
+                
                 try
                 {
                     dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
