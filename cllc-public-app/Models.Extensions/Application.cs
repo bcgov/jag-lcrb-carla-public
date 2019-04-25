@@ -37,9 +37,34 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
 
 
-            to.AdoxioServicehoursstandardhours = from.ServicehHoursStandardHours;
-            to.AdoxioServicehourssundayopen = (int?)from.ServiceHoursSundayOpen;
-            to.AdoxioServicehourssundayclose = (int?)from.ServiceHoursSundayClose;
+            
+
+            // standard service hours are 9 to 11, 7 days a week.
+            if (
+                from.ServiceHoursSundayOpen != ServiceHours.sh0900 ||
+                from.ServiceHoursSundayClose != ServiceHours.sh2300 ||
+                from.ServiceHoursMondayOpen != ServiceHours.sh0900 ||
+                from.ServiceHoursMondayClose != ServiceHours.sh2300 ||
+                from.ServiceHoursTuesdayOpen != ServiceHours.sh0900 ||
+                from.ServiceHoursTuesdayClose != ServiceHours.sh2300 ||
+                from.ServiceHoursWednesdayOpen != ServiceHours.sh0900 ||
+                from.ServiceHoursWednesdayClose != ServiceHours.sh2300 ||
+                from.ServiceHoursThursdayOpen != ServiceHours.sh0900 ||
+                from.ServiceHoursThursdayClose != ServiceHours.sh2300 ||
+                from.ServiceHoursFridayOpen != ServiceHours.sh0900 ||
+                from.ServiceHoursFridayClose != ServiceHours.sh2300 ||
+                from.ServiceHoursSaturdayOpen != ServiceHours.sh0900 ||
+                from.ServiceHoursSaturdayClose != ServiceHours.sh2300
+                
+                )
+            {
+                to.AdoxioServicehoursstandardhours = false;
+            }
+            else
+            {
+                to.AdoxioServicehoursstandardhours = true;
+            }
+
             to.AdoxioServicehoursmondayopen = (int?)from.ServiceHoursMondayOpen;
             to.AdoxioServicehoursmondayclose = (int?)from.ServiceHoursMondayClose;
             to.AdoxioServicehourstuesdayopen = (int?)from.ServiceHoursTuesdayOpen;
@@ -265,7 +290,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             return applicationSummary;
         }
 
-        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication)
+        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IEnumerable<MicrosoftDynamicsCRMadoxioApplication>  applicationsInProgress )
         {
             ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
             {
@@ -293,15 +318,31 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (dynamicsApplication.AdoxioAssignedLicence != null)
             {
                 licenseSummary.LicenseId = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid;
+                licenseSummary.LicenseNumber = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencenumber;
             }
 
             if (dynamicsApplication.AdoxioAssignedLicence != null &&
                 dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType != null &&
                 dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
-                foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
+                bool addActions = true;
+                foreach (var inProgressApplication in applicationsInProgress)
                 {
-                    licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    // do not add actions if there is already an action in progress.
+                    if (inProgressApplication.AdoxioAssignedLicence.AdoxioLicencesid == dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid)
+                    {
+                        addActions = false;
+                        break;
+                    }
+                }
+                if (addActions)
+                {
+                    foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
+                    { 
+                        // check to see if there is an existing action on this licence.
+                        licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    }
+                    
                 }
             }
 
