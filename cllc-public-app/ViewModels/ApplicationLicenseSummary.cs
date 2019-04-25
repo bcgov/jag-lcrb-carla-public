@@ -24,6 +24,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public License AssignedLicense { get; set; }
 
+        public string LicenseId { get; set; }
+
         public List<ApplicationType> AllowedActions { get; set; }
 
     }

@@ -33,10 +33,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowSupportingDocuments = dynamicsApplicationType.AdoxioIsshowsupportingdocuments
                 };
 
+                /*
                 if (dynamicsApplicationType.AdoxioLicenceTypeId != null)
                 {
                     result.LicenseType = dynamicsApplicationType.AdoxioLicenceTypeId.ToViewModel();
                 }
+                */
             }
             
 

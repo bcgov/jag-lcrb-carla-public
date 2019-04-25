@@ -4458,6 +4458,13 @@
         <Property Name="adoxio_isshowcurrentproperty" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="_createdby_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="_owningteam_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the team that owns the record." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -4465,11 +4472,17 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="adoxio_defaultbpmid" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
           <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="_ownerid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Owner Id" />
         </Property>
         <Property Name="adoxio_preamble" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -4477,8 +4490,8 @@
         <Property Name="adoxio_isshowassociatesformupload" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="_ownerid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Owner Id" />
+        <Property Name="adoxio_defaultbpfid" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_isshowhoursofsale" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -4492,13 +4505,6 @@
         </Property>
         <Property Name="adoxio_isshowdeclarations" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="_adoxio_licencetypeid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Licence Type associated with Application Type." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
         </Property>
         <Property Name="adoxio_category" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -4542,13 +4548,6 @@
         </Property>
         <Property Name="adoxio_isshowfinancialintegrityformupload" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="_createdby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
         </Property>
         <Property Name="adoxio_titletext" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -4613,9 +4612,7 @@
         <NavigationProperty Name="adoxio_applicationtype_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_applicationtype" />
         <NavigationProperty Name="adoxio_applicationtype_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_applicationtype" />
         <NavigationProperty Name="adoxio_applicationtype_applications" Type="Collection(mscrm.adoxio_application)" Partner="adoxio_ApplicationTypeId" />
-        <NavigationProperty Name="adoxio_LicenceTypeId" Type="mscrm.adoxio_licencetype" Nullable="false" Partner="adoxio_licencetype_applicationtypes">
-          <ReferentialConstraint Property="_adoxio_licencetypeid_value" ReferencedProperty="adoxio_licencetypeid" />
-        </NavigationProperty>
+        <NavigationProperty Name="adoxio_licencetypes_applicationtypes" Type="Collection(mscrm.adoxio_licencetype)" Partner="adoxio_licencetypes_applicationtypes" />
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_area" BaseType="mscrm.crmbaseentity">
@@ -9943,6 +9940,9 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="adoxio_defaultbpfid" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
         </Property>
@@ -10087,7 +10087,37 @@
         <NavigationProperty Name="adoxio_LicenceFeeProduct" Type="mscrm.product" Nullable="false" Partner="adoxio_product_adoxio_licencetype_LicenceFeeProduct">
           <ReferentialConstraint Property="_adoxio_licencefeeproduct_value" ReferencedProperty="productid" />
         </NavigationProperty>
-        <NavigationProperty Name="adoxio_licencetype_applicationtypes" Type="Collection(mscrm.adoxio_applicationtype)" Partner="adoxio_LicenceTypeId" />
+        <NavigationProperty Name="adoxio_licencetypes_applicationtypes" Type="Collection(mscrm.adoxio_applicationtype)" Partner="adoxio_licencetypes_applicationtypes" />
+        <Annotation Term="Org.OData.Core.V1.Description" String="" />
+      </EntityType>
+      <EntityType Name="adoxio_licencetypes_applicationtypes" BaseType="mscrm.crmbaseentity">
+        <Key>
+          <PropertyRef Name="adoxio_licencetypes_applicationtypesid" />
+        </Key>
+        <Property Name="versionnumber" Type="Edm.Int64">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="adoxio_licencetypes_applicationtypesid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="adoxio_applicationtypeid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
+        <Property Name="adoxio_licencetypeid" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_licencetypestepprerequisite" BaseType="mscrm.crmbaseentity">
@@ -60380,7 +60410,7 @@
           <NavigationPropertyBinding Path="adoxio_applicationtype_AsyncOperations" Target="asyncoperations" />
           <NavigationPropertyBinding Path="adoxio_applicationtype_BulkDeleteFailures" Target="bulkdeletefailures" />
           <NavigationPropertyBinding Path="adoxio_applicationtype_applications" Target="adoxio_applications" />
-          <NavigationPropertyBinding Path="adoxio_LicenceTypeId" Target="adoxio_licencetypes" />
+          <NavigationPropertyBinding Path="adoxio_licencetypes_applicationtypes" Target="adoxio_licencetypes" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -61633,7 +61663,7 @@
           <NavigationPropertyBinding Path="adoxio_licencetype_establishment" Target="adoxio_establishments" />
           <NavigationPropertyBinding Path="adoxio_ApplicationFeeProduct" Target="products" />
           <NavigationPropertyBinding Path="adoxio_LicenceFeeProduct" Target="products" />
-          <NavigationPropertyBinding Path="adoxio_licencetype_applicationtypes" Target="adoxio_applicationtypes" />
+          <NavigationPropertyBinding Path="adoxio_licencetypes_applicationtypes" Target="adoxio_applicationtypes" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -61656,6 +61686,32 @@
           <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
             <Record>
               <PropertyValue Property="Supported" Bool="true" />
+            </Record>
+          </Annotation>
+        </EntitySet>
+        <EntitySet Name="adoxio_licencetypes_applicationtypesset" EntityType="Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes">
+          <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
+          <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
+          <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
+            <Record>
+              <PropertyValue Property="Searchable" Bool="false" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
+            <Record>
+              <PropertyValue Property="Countable" Bool="true" />
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.NavigationRestrictions">
+            <Record>
+              <PropertyValue Property="Navigability">
+                <EnumMember>Org.OData.Capabilities.V1.NavigationType/Single</EnumMember>
+              </PropertyValue>
+            </Record>
+          </Annotation>
+          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
+            <Record>
+              <PropertyValue Property="Supported" Bool="false" />
             </Record>
           </Annotation>
         </EntitySet>

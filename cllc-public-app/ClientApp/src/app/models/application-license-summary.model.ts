@@ -6,6 +6,7 @@ export class ApplicationLicenseSummary {
   establishmentName: string;
   establishmentAddress: string;
   applicationStatus: string;
+  licenseId: string;
   licenseType: string;
   licenseNumber: string;
   name: string;

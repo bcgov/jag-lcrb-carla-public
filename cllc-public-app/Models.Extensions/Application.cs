@@ -99,8 +99,14 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             if (application._adoxioLicencetypeValue != null)
             {
-                application.AdoxioLicenceType = dynamicsClient.GetAdoxioLicencetypeById(Guid.Parse(application._adoxioLicencetypeValue));
+                application.AdoxioLicenceType = dynamicsClient.GetAdoxioLicencetypeById(application._adoxioLicencetypeValue);
             }
+            
+            if (application.AdoxioAssignedLicence != null && application.AdoxioAssignedLicence._adoxioLicencetypeValue != null)
+            {
+                application.AdoxioAssignedLicence.AdoxioLicenceType = dynamicsClient.GetAdoxioLicencetypeById(application.AdoxioAssignedLicence._adoxioLicencetypeValue);
+            }
+
         }
 
         public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
@@ -281,13 +287,16 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus(dynamicsApplication);
             }
 
-            
+            if (dynamicsApplication.AdoxioAssignedLicence != null)
+            {
+                licenseSummary.LicenseId = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid;
+            }
 
             if (dynamicsApplication.AdoxioAssignedLicence != null &&
                 dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType != null &&
-                dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypeApplicationtypes != null)
+                dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
-                foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypeApplicationtypes)
+                foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
                 {
                     licenseSummary.AllowedActions.Add(item.ToViewModel());
                 }

@@ -237,6 +237,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencetypes Licencetypes { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencetypesapplicationtypesset.
+        /// </summary>
+        public virtual ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencetypestepprerequisites.
         /// </summary>
         public virtual ILicencetypestepprerequisites Licencetypestepprerequisites { get; private set; }
@@ -661,6 +666,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licenceses = new Licenceses(this);
             Licencetypeprerequisites = new Licencetypeprerequisites(this);
             Licencetypes = new Licencetypes(this);
+            Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licencetypestepprerequisites = new Licencetypestepprerequisites(this);
             Licencetypesteps = new Licencetypesteps(this);
             Loans = new Loans(this);
