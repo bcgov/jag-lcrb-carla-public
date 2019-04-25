@@ -634,6 +634,27 @@ namespace DataTool
                     };
                 }
 
+                if (licence._adoxioLginValue != null && LocalgovindigenousnationMap.ContainsKey (licence._adoxioLginValue))
+                {
+                    newItem.AdoxioLGIN = new MicrosoftDynamicsCRMadoxioLocalgovindigenousnation
+                    {
+                        AdoxioLocalgovindigenousnationid = LocalgovindigenousnationMap[licence._adoxioLginValue]
+                    };
+                }
+                if (licence._adoxioAccountidValue != null && AccountMap.ContainsKey (licence._adoxioAccountidValue))
+                {
+                    newItem.AdoxioAccountId = new MicrosoftDynamicsCRMaccount
+                    {
+                        Accountid = AccountMap[licence._adoxioAccountidValue]
+                    };
+                }
+                if (licence._adoxioLicenceeValue != null && AccountMap.ContainsKey(licence._adoxioLicenceeValue))
+                {
+                    newItem.AdoxioLicencee = new MicrosoftDynamicsCRMaccount
+                    {
+                        Accountid = AccountMap[licence._adoxioLicenceeValue]
+                    };
+                }
                 if (!LicenceMap.ContainsKey(licence.AdoxioLicencesid))
                 {
                     LicenceMap.Add(licence.AdoxioLicencesid, newItem.AdoxioLicencesid);

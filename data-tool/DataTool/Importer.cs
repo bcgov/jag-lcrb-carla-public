@@ -738,6 +738,11 @@ namespace DataTool
 
             };
 
+            if (newItem.AdoxioEstablishmentaddressstreet != null && newItem.AdoxioEstablishmentaddressstreet.Length > 40)
+            {
+                newItem.AdoxioEstablishmentaddressstreet = newItem.AdoxioEstablishmentaddressstreet.Substring(0, 40);
+            }
+
 
 
             if (application.AdoxioLicenceType != null)
@@ -761,7 +766,7 @@ namespace DataTool
 
             // TODO add licence and invoice links.
 
-            if (application.AdoxioInvoice != null)
+            if (application.AdoxioInvoice != null && InvoiceMap.ContainsKey(application.AdoxioInvoice.Invoiceid))
             {
                 MicrosoftDynamicsCRMadoxioApplication invoiceLinkItem = new MicrosoftDynamicsCRMadoxioApplication()
                 {
@@ -916,6 +921,10 @@ namespace DataTool
         {
             string accountId = null;
             string establishmentId = null;
+            string lginId = null;
+            string licenceeId = null;
+
+
             if (licence.AdoxioAccountId != null)
             {
                 accountId = licence.AdoxioAccountId.Accountid;
@@ -924,7 +933,14 @@ namespace DataTool
             {
                 establishmentId = licence.AdoxioEstablishment.AdoxioEstablishmentid;
             }
-
+            if (licence.AdoxioLGIN != null)
+            {
+                lginId = licence.AdoxioLGIN.AdoxioLocalgovindigenousnationid;
+            }
+            if (licence.AdoxioLicencee != null)
+            {
+                licenceeId = licence.AdoxioLicencee.Accountid;
+            }
 
             MicrosoftDynamicsCRMadoxioLicences newLicence = new MicrosoftDynamicsCRMadoxioLicences()
             {
@@ -986,6 +1002,49 @@ namespace DataTool
                     Console.WriteLine(odee.Response.Content);
                 }
             }
+
+            if (lginId != null && LocalgovindigenousnationMap.ContainsKey (lginId))
+            {
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    AdoxioLginODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", LocalgovindigenousnationMap[lginId])
+                };
+
+                try
+                {
+                    _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, patchLicence);
+                    Console.Out.WriteLine("Updated licence " + licence.AdoxioName);
+                }
+                catch (OdataerrorException odee)
+                {
+                    Console.WriteLine("Error updating licence");
+                    Console.WriteLine(odee.Message);
+                    Console.WriteLine(odee.Request.Content);
+                    Console.WriteLine(odee.Response.Content);
+                }
+            }
+
+            if (licenceeId != null && AccountMap.ContainsKey(licenceeId))
+            {
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    LicenceeODataBind = _dynamicsClient.GetEntityURI("accounts", AccountMap[licenceeId])
+                };
+
+                try
+                {
+                    _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, patchLicence);
+                    Console.Out.WriteLine("Updated licence " + licence.AdoxioName);
+                }
+                catch (OdataerrorException odee)
+                {
+                    Console.WriteLine("Error updating licence");
+                    Console.WriteLine(odee.Message);
+                    Console.WriteLine(odee.Request.Content);
+                    Console.WriteLine(odee.Response.Content);
+                }
+            }
+
         }
 
         static List<MicrosoftDynamicsCRMadoxioLicences> GetCurrentLicences(DynamicsClient _dynamicsClient)
@@ -1388,7 +1447,7 @@ namespace DataTool
             {
                 invoice.Invoiceid = _dynamicsClient.GetCreatedRecord(odee, "Error creating contact");
             }
-            if (accountId != null)
+            if (accountId != null && AccountMap.ContainsKey(accountId))
             {
                 var patchAccount = new MicrosoftDynamicsCRMinvoice()
                 {

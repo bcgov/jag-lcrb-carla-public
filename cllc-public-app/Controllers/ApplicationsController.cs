@@ -19,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     [Authorize(Policy = "Business-User")]
-    public class AdoxioApplicationController : Controller
+    public class ApplicationsController : Controller
     {
         private readonly IConfiguration Configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -27,13 +27,70 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
-        public AdoxioApplicationController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public ApplicationsController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _sharePointFileManager = sharePointFileManager;
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioApplicationController));
+            _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
+        }
+
+        private IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(string applicantId)
+        {
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
+            if (string.IsNullOrEmpty(applicantId))
+            {
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(expand: expand).Value;
+            }
+            else
+            {
+                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+    filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+                
+                try
+                {
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                }
+                catch (OdataerrorException)
+                {
+                    dynamicsApplicationList = null;
+                }
+            }
+            return dynamicsApplicationList;
+        }
+
+
+        /// <summary>
+        /// Get a license application by applicant id
+        /// </summary>
+        /// <param name="applicantId"></param>
+        /// <returns></returns>
+        private async Task<List<ViewModels.ApplicationSummary>> GetApplicationSummariesByApplicant(string applicantId)
+        {
+            List<ViewModels.ApplicationSummary> result = new List<ViewModels.ApplicationSummary>();
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = GetApplicationListByApplicant(applicantId);
+            if (dynamicsApplicationList != null)
+            {
+                foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
+                {
+                    // hide terminated applications from view.
+                    if (dynamicsApplication.Statuscode == null || (dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Terminated
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Denied
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.Cancelled
+                        && dynamicsApplication.Statuscode != (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded))
+                    {
+                        result.Add(dynamicsApplication.ToSummaryViewModel());
+                    }
+                }
+
+            }
+            return result;
         }
 
         /// <summary>
@@ -44,28 +101,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<List<ViewModels.Application>> GetApplicationsByApplicant(string applicantId)
         {
             List<ViewModels.Application> result = new List<ViewModels.Application>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
-            if (string.IsNullOrEmpty(applicantId))
-            {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get().Value;
-            }
-            else
-            {
-                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
-                filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
-                var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence" };
-                try
-                {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
-                }
-                catch (OdataerrorException)
-                {
-                    dynamicsApplicationList = null;
-                }
-            }
 
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = GetApplicationListByApplicant(applicantId);
             if (dynamicsApplicationList != null)
             {
                 foreach (MicrosoftDynamicsCRMadoxioApplication dynamicsApplication in dynamicsApplicationList)
@@ -161,14 +198,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all applications in Dynamics for the current user
         [HttpGet("current")]
-        public async Task<JsonResult> GetCurrentUserDyanamicsApplications()
+        public async Task<JsonResult> GetCurrentUserApplications()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            List<ViewModels.Application> adoxioApplications = await GetApplicationsByApplicant(userSettings.AccountId);
+            List<ViewModels.ApplicationSummary> adoxioApplications = await GetApplicationSummariesByApplicant(userSettings.AccountId);
             return Json(adoxioApplications);
         }
 
