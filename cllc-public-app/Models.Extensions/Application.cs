@@ -265,7 +265,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             return applicationSummary;
         }
 
-        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication)
+        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IEnumerable<MicrosoftDynamicsCRMadoxioApplication>  applicationsInProgress )
         {
             ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
             {
@@ -299,9 +299,24 @@ namespace Gov.Lclb.Cllb.Public.Models
                 dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType != null &&
                 dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
-                foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
+                bool addActions = true;
+                foreach (var inProgressApplication in applicationsInProgress)
                 {
-                    licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    // do not add actions if there is already an action in progress.
+                    if (inProgressApplication.AdoxioAssignedLicence.AdoxioLicencesid == dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid)
+                    {
+                        addActions = false;
+                        break;
+                    }
+                }
+                if (addActions)
+                {
+                    foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
+                    { 
+                        // check to see if there is an existing action on this licence.
+                        licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    }
+                    
                 }
             }
 
