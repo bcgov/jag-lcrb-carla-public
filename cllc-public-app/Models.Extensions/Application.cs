@@ -77,8 +77,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioServicehoursfridayclose = (int?)from.ServiceHoursFridayClose;
             to.AdoxioServicehourssaturdayopen = (int?)from.ServiceHoursSaturdayOpen;
             to.AdoxioServicehourssaturdayclose = (int?)from.ServiceHoursSaturdayClose;
+            to.AdoxioServicehourssundayopen = (int?)from.ServiceHoursSundayOpen;
+            to.AdoxioServicehourssundayclose = (int?)from.ServiceHoursSundayClose;
+
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
-             to.AdoxioSignatureagreement = from.SignatureAgreement;
+            to.AdoxioSignatureagreement = from.SignatureAgreement;
 
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
@@ -106,6 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from)
         {
             to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
+
             
             /*
             to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
