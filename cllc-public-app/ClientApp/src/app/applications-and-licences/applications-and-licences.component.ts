@@ -1,10 +1,13 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { AdoxioApplicationDataService } from '@app/services/adoxio-application-data.service';
-import { AdoxioLicenseDataService } from '@app/services/adoxio-license-data.service';
+import { ApplicationDataService } from '@app/services/application-data.service';
+import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
 import { Application } from '@app/models/application.model';
+import { ApplicationSummary } from '@app/models/application-summary.model';
+import { ApplicationType } from '@app/models/application-type.model';
+import { License } from '@app/models/license.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { DynamicsAccount } from './../models/dynamics-account.model';
@@ -26,7 +29,7 @@ const RENEWAL_DUE = 'Renewal Due';
 })
 export class ApplicationsAndLicencesComponent implements OnInit {
   inProgressApplications: any[] = [];
-  licencedApplications: any[] = [];
+  licenses: any[] = [];
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
@@ -40,8 +43,8 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   dataLoaded = false;
 
   constructor(
-    private applicationDataService: AdoxioApplicationDataService,
-    private licenceDataService: AdoxioLicenseDataService,
+    private applicationDataService: ApplicationDataService,
+    private licenceDataService: LicenseDataService,
     private router: Router,
     private paymentService: PaymentDataService,
     private snackBar: MatSnackBar,
@@ -56,16 +59,18 @@ export class ApplicationsAndLicencesComponent implements OnInit {
    * */
   private displayApplications() {
     this.inProgressApplications = [];
-    this.licencedApplications = [];
-    this.busy = this.applicationDataService.getAllCurrentApplications().subscribe((adoxioApplications: Application[]) => {
-      adoxioApplications.forEach((application: Application | any) => {
-        if (application.assignedLicence && application.applicationStatus === 'Approved') {
-        this.licencedApplications.push(application);
-        } else {
+    this.licenses = [];
+    this.busy =
+      forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
+        ).subscribe(([applications, licenses]) => {
+      applications.forEach((application: ApplicationSummary | any) => {
           this.inProgressApplications.push(application);
-        }
-        application.applicationStatus = this.transformStatus(application);
       });
+
+      licenses.forEach((licence: License | any) => {        
+        this.licenses.push(licence);
+      });
+
     });
   }
 
@@ -108,6 +113,32 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
   }
 
+  doAction(licenceId: string, actionName: string) {
+      
+    
+    var mode = 'ChangeOfLocationMode';
+    if (actionName === 'CRS Transfer of Ownership') {
+      mode = "ChangeOfOwnershipMode";
+    }
+    if (actionName === 'CRS Location Change') {
+      mode = "ChangeOfLocationMode";
+    }
+    if (actionName === 'CRS Structural Change') {
+      mode = "StructuralChangeMode";
+    }
+
+      // newLicenceApplicationData. = this.account.businessType;
+      this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
+        data => {
+          this.router.navigateByUrl('/account-profile/' + data.id + ';mode=' + mode);
+        },
+        () => {
+          this.snackBar.open('Error starting a Change Licence Location Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          console.log('Error starting a Change Licence Location Application');
+        }
+      );
+  }
+
   changeLicenceLocation(application: Application) {
      // create an application for relocation, linked to the given licence.
     
@@ -126,46 +157,6 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     
   }
 
-  transformStatus(application: Application): string {
-    const status = application.applicationStatus;
-    let shownStatus = status;
-
-    if (application.assignedLicence && application.applicationStatus === 'Approved') {
-      shownStatus = ACTIVE;
-      if (application.licenceFeeInvoicePaid !== true && application.licenseType === 'Cannabis Retail Store') {
-        shownStatus = PAYMENT_REQUIRED;
-      }
-      if (application.assignedLicence && (new Date() > new Date(application.assignedLicence.expiryDate))) {
-        shownStatus = RENEWAL_DUE;
-      }
-    } else {
-      if (status === 'Intake' && !application.isPaid) {
-        if (application.licenseType === 'CRS Transfer of Ownership') {
-          shownStatus = 'Transfer Initiated';
-        } else
-          if (application.licenseType === 'CRS Location Change') {
-            shownStatus = 'Relocation Initiated';
-          } else
-        {
-          shownStatus = 'Not Submitted';
-        }
-      } else if (status === 'In progress' || status === 'Under Review' || (status === 'Intake' && application.isPaid)) {
-        if (application.licenseType === 'CRS Transfer of Ownership') {
-          shownStatus = 'Transfer Application Under Review';
-        } else if (application.licenseType === 'CRS Location Change') {
-          shownStatus = 'Relocation Application Under Review';
-        } else
-        {
-          shownStatus = 'Application Under Review';
-        }
-      } else if (status === 'Incomplete') {
-        shownStatus = 'Application Incomplete';
-      } else if (status === 'PendingForLGFNPFeedback') {
-        shownStatus = 'Pending External Review';
-      }
-    }
-    return shownStatus;
-  }
 
   downloadLicence() {
 

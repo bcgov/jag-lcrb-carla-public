@@ -11,7 +11,7 @@ import { TiedHouseConnection } from '@models/tied-house-connection.model';
 @Injectable()
 export class AccountDataService extends DataService {
 
-  apiPath = 'api/account/';
+  apiPath = 'api/accounts/';
 
   constructor(private http: HttpClient) {
     super();

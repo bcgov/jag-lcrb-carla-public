@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AdoxioApplicationDataService } from '../../../services/adoxio-application-data.service';
+import { ApplicationDataService } from '../../../services/application-data.service';
 import { PaymentDataService } from '../../../services/payment-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription, Subject ,  Observable ,  zip } from 'rxjs';
@@ -26,7 +26,7 @@ export class SubmitPayComponent implements OnInit {
   displayValidationMessages = false;
 
   constructor(private paymentDataService: PaymentDataService,
-    private applicationDataService: AdoxioApplicationDataService,
+    private applicationDataService: ApplicationDataService,
     public snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router) {

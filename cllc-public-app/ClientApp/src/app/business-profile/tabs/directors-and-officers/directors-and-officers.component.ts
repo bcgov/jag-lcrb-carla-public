@@ -4,8 +4,8 @@ import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, 
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
-import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
+import { LegalEntity } from '../../../models/legal-entity.model';
+import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
@@ -23,14 +23,14 @@ export class DirectorsAndOfficersComponent implements OnInit {
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
 
-  adoxioLegalEntityList: AdoxioLegalEntity[] = [];
-  dataSource = new MatTableDataSource<AdoxioLegalEntity>();
+  adoxioLegalEntityList: LegalEntity[] = [];
+  dataSource = new MatTableDataSource<LegalEntity>();
   displayedColumns = ['name', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
   subscriptions: Subscription[] = [];
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
+  constructor(private legalEntityDataservice: LegalEntityDataService,
     public dialog: MatDialog,
     private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService,
@@ -83,8 +83,8 @@ export class DirectorsAndOfficersComponent implements OnInit {
       });
   }
 
-  formDataToModelData(formData: any): AdoxioLegalEntity {
-    const adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+  formDataToModelData(formData: any): LegalEntity {
+    const adoxioLegalEntity: LegalEntity = new LegalEntity();
     adoxioLegalEntity.isShareholder = false;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     adoxioLegalEntity.id = formData.id;
@@ -112,7 +112,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   // Open Person shareholder dialog
-  openPersonDialog(person: AdoxioLegalEntity) {
+  openPersonDialog(person: LegalEntity) {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
@@ -150,7 +150,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   }
 
-  deleteIndividual(person: AdoxioLegalEntity) {
+  deleteIndividual(person: LegalEntity) {
     if (confirm('Delete person?')) {
       this.legalEntityDataservice.deleteLegalEntity(person.id).subscribe(data => {
         this.getDirectorsAndOfficers();

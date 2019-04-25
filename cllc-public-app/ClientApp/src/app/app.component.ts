@@ -5,8 +5,8 @@ import { InsertService } from './insert/insert.service';
 import { UserDataService } from './services/user-data.service';
 import { User } from './models/user.model';
 import { isDevMode } from '@angular/core';
-import { AdoxioLegalEntityDataService } from './services/adoxio-legal-entity-data.service';
-import { AdoxioLegalEntity } from './models/adoxio-legalentities.model';
+import { LegalEntityDataService } from './services/legal-entity-data.service';
+import { LegalEntity } from './models/legal-entity.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
 import { Observable } from '../../node_modules/rxjs';
@@ -19,7 +19,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  businessProfiles: AdoxioLegalEntity[];
+  businessProfiles: LegalEntity[];
   title = '';
   previousUrl: string;
   public currentUser: User;
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private userDataService: UserDataService,
     private store: Store<AppState>,
-    private adoxioLegalEntityDataService: AdoxioLegalEntityDataService
+    private adoxioLegalEntityDataService: LegalEntityDataService
   ) {
     this.isDevMode = isDevMode();
     this.router.events.subscribe((event) => {

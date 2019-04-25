@@ -31,7 +31,7 @@ namespace SpdSync
         {
             this.Configuration = Configuration;
             _logger = loggerFactory.CreateLogger(typeof(WorkerUpdater));
-            _dynamics = SpdUtils.SetupDynamics(Configuration);
+            _dynamics = DynamicsUtil.SetupDynamics(Configuration);
             _sharePointFileManager = sharePointFileManager;
         }
 

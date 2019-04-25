@@ -4,7 +4,7 @@ import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 import { Application } from '../models/application.model';
 import { DynamicsDataService } from '../services/dynamics-data.service';
-import { AdoxioApplicationDataService } from '../services/adoxio-application-data.service';
+import { ApplicationDataService } from '../services/application-data.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { PaymentDataService } from '../services/payment-data.service';
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   constructor(private paymentDataService: PaymentDataService,
     private userDataService: UserDataService, private router: Router,
     private dynamicsDataService: DynamicsDataService,
-    private applicationDataService: AdoxioApplicationDataService,
+    private applicationDataService: ApplicationDataService,
     public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
         this.currentUser = data;
         if (this.currentUser.accountid != null) {
           // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('account', this.currentUser.accountid)
+          this.dynamicsDataService.getRecord('accounts', this.currentUser.accountid)
             .subscribe((result) => {
               this.account = result;
               if (result.primarycontact) {

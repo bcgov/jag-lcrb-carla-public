@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+[assembly: ApiController]
 namespace Gov.Lclb.Cllb.SpdSync
 {
     public class Startup
@@ -40,7 +42,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         {
             
             services.AddMvc(config =>
-            {
+            {                
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
                 {
                      var policy = new AuthorizationPolicyBuilder()
@@ -48,7 +50,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                                   .Build();
                      config.Filters.Add(new AuthorizeFilter(policy));
                 }
-            });
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Other ConfigureServices() code...
 
@@ -123,8 +125,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+        {            
 
             if (env.IsDevelopment())
             {

@@ -3,15 +3,16 @@ import { Headers, Response, ResponseContentType } from '@angular/http';
 
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Application } from '../models/application.model';
+import { ApplicationSummary } from '../models/application-summary.model';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 
 @Injectable()
-export class AdoxioApplicationDataService extends DataService {
+export class ApplicationDataService extends DataService {
 
-  apiPath = 'api/adoxioapplication/';
+  apiPath = 'api/applications/';
 
   public files: FileSystemItem[] = [];
 
@@ -35,10 +36,11 @@ export class AdoxioApplicationDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getAllCurrentApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>(this.apiPath + 'current', { headers: this.headers })
+  getAllCurrentApplications(): Observable<ApplicationSummary[]> {
+    return this.http.get<ApplicationSummary[]>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
+
 
   /**
    * Get a Dynamics Application by application ID
@@ -103,7 +105,6 @@ export class AdoxioApplicationDataService extends DataService {
     const attachmentURL = 'api/adoxioapplication/' + applicationId + '/attachments';
     const getFileURL = attachmentURL + '/' + documentType;
     return this.http.get<FileSystemItem[]>(getFileURL, { headers: headers });
-
   }
 
   downloadFile(serverRelativeUrl: string, applicationId: string) {
