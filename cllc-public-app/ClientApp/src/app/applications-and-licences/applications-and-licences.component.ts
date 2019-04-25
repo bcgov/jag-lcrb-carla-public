@@ -29,7 +29,7 @@ const RENEWAL_DUE = 'Renewal Due';
 })
 export class ApplicationsAndLicencesComponent implements OnInit {
   inProgressApplications: any[] = [];
-  licenses: any[] = [];
+  licensedApplications: any[] = [];
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
@@ -59,7 +59,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
    * */
   private displayApplications() {
     this.inProgressApplications = [];
-    this.licenses = [];
+    this.licensedApplications = [];
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
         ).subscribe(([applications, licenses]) => {
@@ -68,7 +68,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
       });
 
       licenses.forEach((licence: License | any) => {        
-        this.licenses.push(licence);
+        this.licensedApplications.push(licence);
       });
 
     });
