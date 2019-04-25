@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-    public class AdoxioLicense
+    public class License
     {
         public string id { get; set; }
         public string establishmentName { get; set; }

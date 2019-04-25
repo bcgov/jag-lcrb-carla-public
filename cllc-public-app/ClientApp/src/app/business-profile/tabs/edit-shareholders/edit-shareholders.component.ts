@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
-import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
+import { LegalEntity } from '../../../models/legal-entity.model';
+import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { Store } from '@ngrx/store';
@@ -25,14 +25,14 @@ export class EditShareholdersComponent implements OnInit {
   @Input() businessType: string;
 
   shareholderForm: FormGroup;
-  shareholderList: AdoxioLegalEntity[] = [];
-  dataSource = new MatTableDataSource<AdoxioLegalEntity>();
+  shareholderList: LegalEntity[] = [];
+  dataSource = new MatTableDataSource<LegalEntity>();
   displayedColumns = ['position', 'name', 'email', 'commonvotingshares', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
 
 
-  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
+  constructor(private legalEntityDataservice: LegalEntityDataService,
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService,
@@ -71,7 +71,7 @@ export class EditShareholdersComponent implements OnInit {
       position = 'partners';
     }
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, position)
-      .subscribe((data: AdoxioLegalEntity[]) => {
+      .subscribe((data: LegalEntity[]) => {
         data.forEach(d => {
           d.position = this.getPosition(d);
         });
@@ -80,7 +80,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
 
-  getPosition(shareholder: AdoxioLegalEntity): string {
+  getPosition(shareholder: LegalEntity): string {
     let position = '';
     if (shareholder.isindividual) {
       position = 'Individual';
@@ -129,8 +129,8 @@ export class EditShareholdersComponent implements OnInit {
     return position;
   }
 
-  formDataToModelData(formData: any, shareholderType: string): AdoxioLegalEntity {
-    const adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
+  formDataToModelData(formData: any, shareholderType: string): LegalEntity {
+    const adoxioLegalEntity: LegalEntity = new LegalEntity();
     adoxioLegalEntity.id = formData.id;
     if (['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(this.businessType) !== -1) {
       adoxioLegalEntity.isPartner = true;
@@ -170,7 +170,7 @@ export class EditShareholdersComponent implements OnInit {
     return adoxioLegalEntity;
   }
 
-  editShareholder(shareholder: AdoxioLegalEntity) {
+  editShareholder(shareholder: LegalEntity) {
     if (shareholder.isindividual === true) {
       this.openPersonDialog(shareholder);
     } else {
@@ -178,7 +178,7 @@ export class EditShareholdersComponent implements OnInit {
     }
   }
 
-  deleteShareholder(shareholder: AdoxioLegalEntity) {
+  deleteShareholder(shareholder: LegalEntity) {
     if (confirm('Delete shareholder?')) {
       this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
         this.getShareholders();
@@ -187,7 +187,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   // Open Person shareholder dialog
-  openPersonDialog(shareholder: AdoxioLegalEntity) {
+  openPersonDialog(shareholder: LegalEntity) {
     // set dialogConfig settings
     const dialogConfig: any = {
       disableClose: true,
