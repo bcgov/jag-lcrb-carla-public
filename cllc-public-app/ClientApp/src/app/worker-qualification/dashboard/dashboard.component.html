@@ -7,17 +7,79 @@
           <!-- <div [ngBusy]="busy"></div> -->
           <h1>Worker Dashboard</h1>
           <div>
-            <p>
-              You can return to this page to complete and submit
-              your application with payment at any time.
-            </p>
+            <!--<p>
+      You can return to this page to complete and submit
+      your application with payment at any time.
+    </p>
 
-            <p>You’ll be informed of the results of your screening.</p>
+    <p>You’ll be informed of the results of your screening.</p>-->
 
-            <h2>Security Verification Status</h2>
+            <h2>Security Verification Status: {{currentApplication?.clientSideStatus}}</h2>
 
             <section>
-              <mat-table class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
+              <div *ngIf="!currentApplication">
+                <p>
+                  Select the link below to start your Worker Security Verification and Consent for Cannabis Security
+                  Screening application.
+                </p>
+                <p>
+                  You can save the application and return later to complete and submit it with payment.
+                </p>
+                <a routerLink="/worker-qualification/application/{{currentApplication.id}}">
+                  {{currentApplication?.firstname}}
+                  {{currentApplication?.middlename}}
+                  {{currentApplication?.lastname}}
+                </a>
+              </div>
+              <div *ngIf="currentApplication?.clientSideStatus === 'Not Completed'">
+                <p>
+                  Select the link below to start your Worker Security Verification and Consent for Cannabis Security
+                  Screening application.
+                </p>
+                <p>
+                  You can save the application and return later to complete and submit it with payment.
+                </p>
+                <a routerLink="/worker-qualification/application/{{currentApplication.id}}">
+                  {{currentApplication?.firstname}}
+                  {{currentApplication?.middlename}}
+                  {{currentApplication?.lastname}}
+                </a>
+              </div>
+              <div *ngIf="currentApplication?.clientSideStatus === 'Pending Review'">
+                <p>
+                  We've received your Worker Security Verification and Consent for Cannabis Security Screening
+                  application. You'll be contacted if you have submitted any incorrect or unclear information.
+                </p>
+                <p>
+                  We'll let you know the result of your application as soon as it is available.
+                </p>
+              </div>
+              <div *ngIf="currentApplication?.clientSideStatus === 'Active'">
+                <p>
+                  We've received your Worker Security Verification and Consent for Cannabis Security Screening
+                  application. You'll be contacted if you have submitted any incorrect or unclear information.
+                </p>
+                <p>
+                  We'll let you know the result of your application as soon as it is available.
+                </p>
+                <a class="btn btn-primary" [href]="'api/worker/' + currentApplication?.id + '/pdf'">
+                  <i class="fas fa-download"></i>
+                  Download Security Verification Letter
+                </a>
+              </div>
+              <div *ngIf="currentApplication?.clientSideStatus === 'Rejected'">
+                <p>
+                  You have been denied a security verification. This result cannot be appealed.
+                </p>
+                <p>
+                  You have been issued a letter outlining the results of your application. For more information, please
+                  refer to the letter.
+                </p>
+              </div>
+
+              <p style="margin-top: 5px;">Last updated: {{ currentApplication?.modifiedOn | date : 'MMM dd, yyyy'}}</p>
+
+              <mat-table *ngIf="false" class="mat-elevation-z0 detail-table" [dataSource]="dataSource">
 
                 <!-- Column -->
                 <ng-container matColumnDef="lastUpdated">
@@ -31,11 +93,14 @@
                 <ng-container matColumnDef="worker">
                   <mat-header-cell *matHeaderCellDef> WORKER </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <a *ngIf="element.status === 'Application Incomplete'" routerLink="/worker-qualification/application/{{element.id}}">{{element?.firstname}}
+                    <a *ngIf="element.status === 'Application Incomplete'"
+                      routerLink="/worker-qualification/application/{{element.id}}">
+                      {{element?.firstname}}
                       {{element?.middlename}}
                       {{element.lastname}}
                     </a>
-                    <span *ngIf="element.status !== 'Application Incomplete'">{{element?.firstname}}
+                    <span *ngIf="element.status !== 'Application Incomplete'">
+                      {{element?.firstname}}
                       {{element?.middlename}}
                       {{element.lastname}}
                     </span>
@@ -45,7 +110,8 @@
                 <!-- Column -->
                 <ng-container matColumnDef="status">
                   <mat-header-cell *matHeaderCellDef> STATUS </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.status}}
+                  <mat-cell *matCellDef="let element">
+                    {{element.status}}
                   </mat-cell>
                 </ng-container>
 
@@ -53,14 +119,17 @@
                 <ng-container matColumnDef="actions">
                   <mat-header-cell *matHeaderCellDef> </mat-header-cell>
                   <mat-cell *matCellDef="let element">
-                    <a *ngIf="element?.status === 'Active'" class="btn btn-primary" [href]="'api/worker/' + element?.id + '/pdf'">
+                    <a *ngIf="element?.status === 'Active'" class="btn btn-primary"
+                      [href]="'api/worker/' + element?.id + '/pdf'">
                       <i class="fas fa-download"></i>
-                      Download Security Verification Letter</a>
+                      Download Security Verification Letter
+                    </a>
                   </mat-cell>
                 </ng-container>
 
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row [ngClass]="{'grey-background' : i%2 == 1}" *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
+                <mat-row [ngClass]="{'grey-background' : i%2 == 1}"
+                  *matRowDef="let row; let i = index; columns: displayedColumns;"></mat-row>
               </mat-table>
             </section>
 
@@ -84,7 +153,10 @@
         </table>
         <div class="submit-content">
           <p>
-            If you find an error in your personal information, please contact <a style="color:#fff" href="https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc">Service BC</a>, <a style="color:#fff" href="https://www.icbc.com">ICBC</a> or <a style="color:#fff" href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a> to
+            If you find an error in your personal information, please contact <a style="color:#fff"
+              href="https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/citizens-services/servicebc">Service
+              BC</a>, <a style="color:#fff" href="https://www.icbc.com">ICBC</a> or <a style="color:#fff"
+              href="https://www.addresschange.gov.bc.ca/">AddressChangeBC</a> to
             correct
             it.
           </p>
