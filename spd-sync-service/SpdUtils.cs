@@ -252,8 +252,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                     string payload = Encoding.Default.GetString(attachments[0].GetData());
                     if (payload != null) // parse the payload
                     {
-                        List<WorkerResponse> responses = WorkerResponseParser.ParseWorkerResponse(payload, _logger);
-                        foreach (WorkerResponse workerResponse in responses)
+                        List<WorkerScreeningResponse> responses = WorkerResponseParser.ParseWorkerResponse(payload, _logger);
+                        foreach (WorkerScreeningResponse workerResponse in responses)
                         {
                             // search for the Personal History Record.
                             MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamics.Personalhistorysummaries.GetByWorkerJobNumber(workerResponse.RecordIdentifier);
