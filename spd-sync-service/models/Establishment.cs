@@ -10,6 +10,7 @@ namespace SpdSync.models
         public string Name { get; set; }
 
         public Address Address { get; set; }
+        public string ParcelId { get; set; }
 
         public string PrimaryPhone { get; set; }
         public string PrimaryEmail { get; set; }
