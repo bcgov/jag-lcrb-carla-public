@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <summary>
         /// Hangfire job to receive an import from SPICE.
         /// </summary>
-        public void ReceiveImportJob(PerformContext hangfireContext, List<WorkerResponse> responses)
+        public void ReceiveImportJob(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
         {
             hangfireContext.WriteLine("Starting SPICE Import Job.");
             _logger.LogError("Starting SPICE Import Job.");
@@ -44,9 +44,9 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Import responses to Dynamics.
         /// </summary>
         /// <returns></returns>
-        private void ImportResponses(PerformContext hangfireContext, List<WorkerResponse> responses)
+        private void ImportResponses(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
         {
-            foreach (WorkerResponse workerResponse in responses)
+            foreach (WorkerScreeningResponse workerResponse in responses)
             {
                 // search for the Personal History Record.
                 MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamics.Personalhistorysummaries.GetByWorkerJobNumber(workerResponse.RecordIdentifier);
