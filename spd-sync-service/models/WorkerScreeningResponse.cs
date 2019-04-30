@@ -2,7 +2,7 @@
 
 namespace SpdSync.models
 {
-    public class WorkerResponse
+    public class WorkerScreeningResponse
     {
         public string RecordIdentifier { get; set; }
         public string Name { get; set; }
