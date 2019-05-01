@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using SpdSync;
 using System.Collections.Generic;
 using SpdSync.models;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -40,15 +42,31 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
 
 
         /// <summary>
-        /// Send a worker record to SPICE for test purposes.  Normally this would occur from a polling process.
+        /// Send an application record to SPICE for test purposes.  Normally this would occur from a polling process.
         /// </summary>
         /// <returns></returns>
         [HttpPost("send/{applicationId}")]
-        public ActionResult SendApplicationScreeningResponse(string applicationId)
+        public async Task<ActionResult> SendApplicationScreeningResponse(string applicationId)
         {
-            // Process the updates received from the SPICE system.
-            //BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveImportJob(null, responses));
-            _logger.LogInformation("Started send Application Screening result job");
+            // Generate the application request
+            SpiceUtils spiceUtils = new SpiceUtils(Configuration, _loggerFactory);
+            var applicationRequest = await spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+
+            _logger.LogError("Data to send:");
+            _logger.LogError(JsonConvert.SerializeObject(applicationRequest));
+
+            List<Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Interfaces.Spice.Models.ApplicationScreeningRequest>();
+            payload.Add(applicationRequest);
+
+            var result = await spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+
+            _logger.LogError("Response code was");
+
+            _logger.LogError("" + result.Response.StatusCode);
+            _logger.LogError("Response text was");
+            _logger.LogError(await result.Response.Content.ReadAsStringAsync());
+
+            _logger.LogInformation("Done Send Application Screening");
             return Ok();
         }
 
