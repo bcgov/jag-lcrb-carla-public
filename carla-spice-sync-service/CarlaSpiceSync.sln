@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpiceSync", "SpiceSync.csproj", "{853AEF1A-6BA4-4996-83E7-51C396E3AE32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarlaSpiceSync", "CarlaSpiceSync.csproj", "{853AEF1A-6BA4-4996-83E7-51C396E3AE32}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{309D775B-CF5B-4194-9E63-3410A95D20F4}"
 EndProject

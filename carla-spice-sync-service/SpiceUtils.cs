@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static SpdSync.models.Contact;
 
 namespace Gov.Lclb.Cllb.SpdSync
 {
@@ -24,7 +23,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         public SpiceUtils(IConfiguration Configuration, ILoggerFactory loggerFactory)
         {
             this.Configuration = Configuration;
-            _logger = loggerFactory.CreateLogger(typeof(SpdUtils));
+            _logger = loggerFactory.CreateLogger(typeof(SpiceUtils));
             _dynamicsClient = DynamicsUtil.SetupDynamics(Configuration);
         }
 
@@ -35,8 +34,8 @@ namespace Gov.Lclb.Cllb.SpdSync
         {
             hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
             _logger.LogError("Starting SPICE Import Job for Application Screening..");
-            // TODO - implement this
-            // ImportResponses(hangfireContext, responses);
+
+             ImportApplicationResponses(hangfireContext, responses);
 
             hangfireContext.WriteLine("Done.");
             _logger.LogError("Done.");
@@ -89,6 +88,46 @@ namespace Gov.Lclb.Cllb.SpdSync
                         hangfireContext.WriteLine(odee.Response.Content);
 
                         _logger.LogError("Error updating worker personal history");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Import application responses to Dynamics.
+        /// </summary>
+        /// <returns></returns>
+        private async void ImportApplicationResponses(PerformContext hangfireContext, List<ApplicationScreeningResponse> responses)
+        {
+            foreach (ApplicationScreeningResponse applicationResponse in responses)
+            {
+                MicrosoftDynamicsCRMadoxioApplication applicationRecord = await _dynamicsClient.GetApplicationByIdWithChildren(applicationResponse.RecordIdentifier);
+
+                if (applicationRecord != null)
+                {
+                    // update the record.
+                    MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
+                    {
+                       
+                    };
+
+                    try
+                    {
+                        _dynamicsClient.Applications.Update(applicationRecord.AdoxioJobnumber, patchRecord);
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        hangfireContext.WriteLine("Error updating application");
+                        hangfireContext.WriteLine("Request:");
+                        hangfireContext.WriteLine(odee.Request.Content);
+                        hangfireContext.WriteLine("Response:");
+                        hangfireContext.WriteLine(odee.Response.Content);
+
+                        _logger.LogError("Error updating application");
                         _logger.LogError("Request:");
                         _logger.LogError(odee.Request.Content);
                         _logger.LogError("Response:");
