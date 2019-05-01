@@ -79,7 +79,7 @@ namespace SpdSync
                     hangfireContext.WriteLine("Updating worker.");
                     _logger.LogError("Updating worker.");
                     string data = System.Text.Encoding.Default.GetString(fileContents);
-                    List<WorkerResponse> parsedData = WorkerResponseParser.ParseWorkerResponse(data, _logger);
+                    List<WorkerScreeningResponse> parsedData = WorkerResponseParser.ParseWorkerResponse(data, _logger);
 
                     foreach (var spdResponse in parsedData)
                     {
@@ -210,7 +210,7 @@ namespace SpdSync
             return fileSystemItemVMList;
         }
 
-        public async Task UpdateSecurityClearance(PerformContext hangfireContext, WorkerResponse spdResponse, string id)
+        public async Task UpdateSecurityClearance(PerformContext hangfireContext, WorkerScreeningResponse spdResponse, string id)
         {
             var filter = "adoxio_workerjobnumber eq '" + id + "'";
             List<string> expand = new List<string> { "adoxio_WorkerId" };
