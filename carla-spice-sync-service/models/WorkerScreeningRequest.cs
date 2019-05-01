@@ -33,6 +33,7 @@ namespace SpdSync.models
         public string DriversLicence { get; set; }
         public Contact Contact { get; set; }
         
+        //TODO - do we need this?
         public Address Address { get; set; }
         public List<Alias> Aliases { get; set; }
 

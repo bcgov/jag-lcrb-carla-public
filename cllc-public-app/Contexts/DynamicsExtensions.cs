@@ -247,20 +247,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
-        public static async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(this IDynamicsClient system, Guid id)
-        {
-            MicrosoftDynamicsCRMadoxioWorker result;
-            try
-            {
-                // fetch from Dynamics.
-                result = await system.Workers.GetByKeyAsync(id.ToString());
-            }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
-            {
-                result = null;
-            }
-            return result;
-        }
 
         public static async Task<MicrosoftDynamicsCRMadoxioAlias> GetAliasById(this IDynamicsClient system, Guid id)
         {
