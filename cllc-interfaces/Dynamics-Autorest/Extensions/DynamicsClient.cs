@@ -226,5 +226,27 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return result;
         }
+
+
+        public async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(string id)
+        {
+            MicrosoftDynamicsCRMadoxioWorker result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await Workers.GetByKeyAsync(id);
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
+        public async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(Guid id)
+        {
+            return await GetWorkerById(id.ToString());
+        }
+
+        }
     }
-}
