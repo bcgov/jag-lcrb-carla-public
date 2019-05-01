@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using SpdSync;
 using System.Collections.Generic;
 using SpdSync.models;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -43,11 +45,35 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("send/{workerId}")]
-        public ActionResult SendWorkerScreeningRequest(string workerId )
+        public async Task<ActionResult> SendWorkerScreeningRequest(string workerId )
         {
-            // Process the updates received from the SPICE system.
-            //BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveImportJob(null, responses));
-            _logger.LogInformation("Started SendWorkerScreening job");
+            // Generate the Worker Request.
+
+            SpiceUtils spiceUtils = new SpiceUtils(Configuration, _loggerFactory);
+
+            var workerRequest = await spiceUtils.GenerateWorkerScreeningRequest(workerId);
+
+            _logger.LogError("Data to send:");
+
+            string jsonString = JsonConvert.SerializeObject(workerRequest);
+
+            _logger.LogError(jsonString);
+
+            // send the data
+
+            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>();
+
+            payload.Add(workerRequest);
+
+            var result = await spiceUtils.SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+            
+            _logger.LogError("Response code was");
+
+            _logger.LogError("" + result.Response.StatusCode);
+            _logger.LogError("Response text was");
+            _logger.LogError(await result.Response.Content.ReadAsStringAsync());
+
+            _logger.LogInformation("Done Send Worker Screening");
             return Ok();
         }
 
