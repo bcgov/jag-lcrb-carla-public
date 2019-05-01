@@ -29,14 +29,28 @@ namespace Gov.Lclb.Cllb.SpdSync
         }
 
         /// <summary>
+        /// Hangfire job to receive an application screening import from SPICE.
+        /// </summary>
+        public void ReceiveApplicationImportJob(PerformContext hangfireContext, List<ApplicationScreeningResponse> responses)
+        {
+            hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
+            _logger.LogError("Starting SPICE Import Job for Application Screening..");
+            // TODO - implement this
+            // ImportResponses(hangfireContext, responses);
+
+            hangfireContext.WriteLine("Done.");
+            _logger.LogError("Done.");
+        }
+
+        /// <summary>
         /// Hangfire job to receive an import from SPICE.
         /// </summary>
-        public void ReceiveImportJob(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
+        public void ReceiveWorkerImportJob(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
         {
-            hangfireContext.WriteLine("Starting SPICE Import Job.");
-            _logger.LogError("Starting SPICE Import Job.");
+            hangfireContext.WriteLine("Starting SPICE Import Job for Worker Screening.");
+            _logger.LogError("Starting SPICE Import Job for Worker Screening.");
 
-            ImportResponses(hangfireContext, responses);
+            ImportWorkerResponses(hangfireContext, responses);
 
             hangfireContext.WriteLine("Done.");
             _logger.LogError("Done.");
@@ -46,7 +60,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Import responses to Dynamics.
         /// </summary>
         /// <returns></returns>
-        private void ImportResponses(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
+        private void ImportWorkerResponses(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
         {
             foreach (WorkerScreeningResponse workerResponse in responses)
             {
