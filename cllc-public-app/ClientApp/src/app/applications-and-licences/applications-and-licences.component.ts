@@ -114,23 +114,10 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   }
 
   doAction(licenceId: string, actionName: string) {
-
-
-    let mode = 'ChangeOfLocationMode';
-    if (actionName === 'CRS Transfer of Ownership') {
-      mode = 'ChangeOfOwnershipMode';
-    }
-    if (actionName === 'CRS Location Change') {
-      mode = 'ChangeOfLocationMode';
-    }
-    if (actionName === 'CRS Structural Change') {
-      mode = 'StructuralChangeMode';
-    }
-
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
       data => {
-        this.router.navigateByUrl('/account-profile/' + data.id + ';mode=' + mode);
+        this.router.navigateByUrl('/account-profile/' + data.id);
       },
       () => {
         this.snackBar.open('Error starting a Change Licence Location Application', 'Fail',
@@ -148,7 +135,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
       data => {
-        this.router.navigateByUrl('/account-profile/' + data.id + ';mode=ChangeOfLocationMode');
+        this.router.navigateByUrl('/account-profile/' + data.id);
       },
       () => {
         this.snackBar.open('Error starting a Change Licence Location Application', 'Fail',
