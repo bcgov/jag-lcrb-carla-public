@@ -1,6 +1,6 @@
 
 import { filter } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -15,11 +15,12 @@ import { Application } from '@models/application.model';
 import { FormBase, postalRegex } from '@shared/form-base';
 import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
+import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
   CHANGE_OF_LOCATION_MODE,
   TRANSFER_LICENCE_MODE,
-  UPLOAD_FILES_MODE  
+  UPLOAD_FILES_MODE
 } from '@appapplications-and-licences/applications-and-licences.component';
 
 const ServiceHours = [
@@ -34,6 +35,13 @@ const ServiceHours = [
   '22:45', '23:00'
   // , '23:15', '23:30', '23:45'
 ];
+
+class ApplicationHTMLContent {
+  title: string;
+  preamble: SafeHtml;
+  beforeStarting: SafeHtml;
+  nextSteps: SafeHtml;
+}
 
 
 @Component({
@@ -58,6 +66,10 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   submittedApplications = 8;
   ServiceHours = ServiceHours;
 
+  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+
+
+
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
   readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
@@ -71,6 +83,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     private applicationDataService: ApplicationDataService,
     private userDataService: UserDataService,
     private dynamicsDataService: DynamicsDataService,
+    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog) {
@@ -83,11 +96,11 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.form = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
-          id: [''],
-          establishmentAddressStreet: [''],
-          establishmentAddressCity: [''],
-          establishmentAddressPostalCode: [''],
-          establishmentParcelId: ['']
+        id: [''],
+        establishmentAddressStreet: [''],
+        establishmentAddressCity: [''],
+        establishmentAddressPostalCode: [''],
+        establishmentParcelId: ['']
       }),
       establishmentName: [''],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
@@ -146,7 +159,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     if (this.mode === CHANGE_OF_LOCATION_MODE) {
 
       this.form.get('establishmentName').disable();
-      
+
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
       this.form.get('serviceHoursTuesdayOpen').disable();
@@ -186,10 +199,19 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         }
         this.application = data;
 
-        var noNulls = Object.keys(data)
+        if (this.application.applicationType) {
+          this.htmlContent = {
+            title: this.application.applicationType.title,
+            preamble: this.application.applicationType.preamble,
+            beforeStarting: this.application.applicationType.beforeStarting,
+            nextSteps: this.application.applicationType.nextSteps,
+          };
+        }
+
+        const noNulls = Object.keys(data)
           .filter(e => data[e] !== null)
           .reduce((o, e) => {
-            o[e] = data[e]
+            o[e] = data[e];
             return o;
           }, {});
 
@@ -307,18 +329,19 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     let valid = true;
     this.validationMessages = [];
 
-    if (this.mode !== CHANGE_OF_LOCATION_MODE)
-    {
+    if (this.mode !== CHANGE_OF_LOCATION_MODE) {
       if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
         valid = false;
         this.validationMessages.push('Associate form is required.');
       }
-      if (!this.financialIntegrityDocuments || !this.financialIntegrityDocuments.files || this.financialIntegrityDocuments.files.length < 1) {
+      if (!this.financialIntegrityDocuments
+        || !this.financialIntegrityDocuments.files
+        || this.financialIntegrityDocuments.files.length < 1) {
         valid = false;
         this.validationMessages.push('Financial Integrity form is required.');
       }
     }
-    
+
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');

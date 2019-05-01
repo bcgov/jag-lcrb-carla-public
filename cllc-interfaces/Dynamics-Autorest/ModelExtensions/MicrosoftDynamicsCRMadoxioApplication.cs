@@ -20,6 +20,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_LicenceType@odata.bind")]
         public string AdoxioLicenceTypeODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_ApplicationTypeId@odata.bind")]
+        public string AdoxioApplicationTypeIdODataBind { get; set; }
+
         [JsonProperty(PropertyName = "adoxio_LicenceFeeInvoice@odata.bind")]
         public string AdoxioLicenceFeeInvoiceODataBind { get; set; }
 
