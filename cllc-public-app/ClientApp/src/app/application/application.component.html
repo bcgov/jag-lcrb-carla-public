@@ -7,9 +7,9 @@
   </div>
   <div [formGroup]="form" class="application-wrapper">
     <section [innerHTML]="htmlContent?.preamble"></section>
-    <h3 *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE" class="blue-header">BEFORE STARTING
+    <h3 *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore" class="blue-header">BEFORE STARTING
       THE APPLICATION</h3>
-    <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE" class="padded-section">
+    <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore" class="padded-section">
       <div #container></div>
       <p>Before starting the application, ensure that:</p>
       <section *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1"
@@ -59,7 +59,7 @@
     <section class="padded-section" *ngIf="application?.applicationType?.showPropertyDetails">
       <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
         <div [ngBusy]="busy"></div>
-        <section *ngIf="mode !== TRANSFER_LICENCE_MODE && mode !== CHANGE_OF_LOCATION_MODE">
+        <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
           <label for="">Establishment Name</label>
           <br>
 
@@ -86,7 +86,7 @@
         </section>
 
         <app-field
-          [label]="mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE ? 'Establishment Name' : 'Name of the Proposed Establishment'"
+          [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) ? 'Establishment Name' : 'Name of the Proposed Establishment'"
           [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
           errorMessage="Please enter the name of the proposed establishment">
           <input class="form-control" style="width: 500px;" type="text"
@@ -95,7 +95,7 @@
         </app-field>
 
       </div>
-      <div formGroupName="assignedLicence" *ngIf="mode === CHANGE_OF_LOCATION_MODE">
+      <div formGroupName="assignedLicence" *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
         <h3 class="blue-header">CURRENT ADDRESS</h3>
         <address class="row">
           <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
@@ -127,8 +127,8 @@
           </div>
         </div>
       </div>
-      <h3 class="blue-header" *ngIf="mode === CHANGE_OF_LOCATION_MODE">PROPOSED ADDRESS</h3>
-      <div>
+      <div *ngIf="application?.applicationType?.showCurrentProperty">
+          <h3 class="blue-header" *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">PROPOSED ADDRESS</h3>
         &nbsp;
         <address class="row">
           <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
@@ -221,7 +221,7 @@
 
     <h3 class="blue-header" *ngIf="application?.applicationType?.showHoursOfSale">HOURS OF SALE</h3>
     <div class="padded-section" *ngIf="application?.applicationType?.showHoursOfSale">
-      <p *ngIf="mode !== TRANSFER_LICENCE_MODE">Indicate the store's proposed hours for cannabis sales below. Proposed
+      <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">Indicate the store's proposed hours for cannabis sales below. Proposed
         hours must fall between 9 a.m. and 11
         p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed at
         times they are licensed to be open.
@@ -445,8 +445,8 @@
           href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
           Document Checklist
         </a>
-        <span *ngIf="mode !== CHANGE_OF_LOCATION_MODE">and assemble all required documents.</span>
-        <span *ngIf="mode === CHANGE_OF_LOCATION_MODE">and assemble all required documents listed in the 'Documents
+        <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">and assemble all required documents.</span>
+        <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">and assemble all required documents listed in the 'Documents
           Related to the Proposed Store' section.</span>
       </p>
       <section>
@@ -585,7 +585,7 @@
     <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
     <br>
 
-    <div *ngIf="mode !== CHANGE_OF_LOCATION_MODE">
+    <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">
 
       <label for="">Associates Form</label>
       <br>
