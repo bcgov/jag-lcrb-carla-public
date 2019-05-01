@@ -14,5 +14,7 @@ namespace SpdSync.models
         public string StateProvince { get; set; }
         public string Postal { get; set; }
         public string Country { get; set; }
+        public DateTimeOffset? ToDate { get; set; }
+        public DateTimeOffset? FromDate { get; set; }
     }
 }

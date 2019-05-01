@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             // get associates from dynamics
             string applicationfilter = "_adoxio_application_value eq " + ApplicationId;
-            string[] expand = {"adoxio_Contact"};
+            string[] expand = {"adoxio_Contact", "adoxio_legalentity_adoxio_previousaddress_LegalEntityId"};
             try
             {
                 IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
@@ -208,9 +208,22 @@ namespace Gov.Lclb.Cllb.SpdSync
                         //ContactPhone = legalEntity.AdoxioPhonenumber,
                         //ContactEmail = legalEntity.AdoxioEmail,
                     };
-                    
-                    //legalEntity.AdoxioLegalentityAdoxioPreviousaddressLegalEntityId
-                    /* TODO Add previous addresses */
+
+                    /* Add previous addresses */
+                    foreach (var address in legalEntity.AdoxioLegalentityAdoxioPreviousaddressLegalEntityId)
+                    {
+                        var newAddress = new Address()
+                        {
+                            AddressStreet1 = address.AdoxioStreetaddress,
+                            City = address.AdoxioCity,
+                            StateProvince = address.AdoxioProvstate,
+                            Postal = address.AdoxioPostalcode,
+                            Country = address.AdoxioCountry,
+                            ToDate = address.AdoxioTodate,
+                            FromDate = address.AdoxioFromdate
+                        };
+                        associate.PreviousAddresses.Add(newAddress);
+                    }
 
                     /* Add aliases */
                     var aliases = legalEntity.AdoxioLegalentityAliases;
@@ -224,7 +237,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         });
                     }
 
-                    /* Add worker to application */
+                    /* Add associate to application */
                     request.Associates.Add(associate);
                 }
             }

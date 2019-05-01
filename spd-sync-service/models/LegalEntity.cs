@@ -12,5 +12,6 @@ namespace SpdSync.models
         public DateTimeOffset? DateSharesIssued { get; set; }
         public DateTimeOffset? DateAppointed { get; set; }
         public List<Alias> Aliases { get; set; }
+        public List<Address> PreviousAddresses { get; set; }
     }
 }
