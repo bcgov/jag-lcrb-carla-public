@@ -357,13 +357,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence" };
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
 
                 // fetch from Dynamics.
                 result = await system.Applications.GetByKeyAsync(id.ToString(), expand: expand);
 
                 if (result._adoxioLicencetypeValue != null)
                 {
+                    string filter = $" eq {result._adoxioLicencetypeValue}";
                     result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
                 }
 
@@ -505,6 +506,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.Licencetypes.Get(filter: typeFilter).Value;
 
             result = licenceTypes.FirstOrDefault();
+
+            return result;
+        }
+
+        public static MicrosoftDynamicsCRMadoxioApplicationtype GetApplicationTypeByName(this IDynamicsClient _dynamicsClient, string name)
+        {
+            MicrosoftDynamicsCRMadoxioApplicationtype result = null;
+            string typeFilter = "adoxio_name eq '" + name + "'";
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplicationtype> applicationTypes = _dynamicsClient.Applicationtypes.Get(filter: typeFilter).Value;
+
+            result = applicationTypes.FirstOrDefault();
 
             return result;
         }

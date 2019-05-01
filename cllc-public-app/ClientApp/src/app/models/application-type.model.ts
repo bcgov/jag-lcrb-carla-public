@@ -2,7 +2,7 @@
 import { LicenseType } from './license-type.model';
 
 export class ApplicationType {
-  id: string;  
+  id: string;
   actionText: string;
   name: string;
   licenseType: LicenseType;
