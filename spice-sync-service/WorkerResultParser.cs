@@ -10,7 +10,7 @@ namespace SpdSync
 {
     public class WorkerResponseParser
     {
-        static public List<WorkerResponse> ParseWorkerResponse (string csvData, ILogger _logger)
+        static public List<WorkerScreeningResponse> ParseWorkerResponse (string csvData, ILogger _logger)
         {
             CsvHelper.Configuration.Configuration config = new CsvHelper.Configuration.Configuration();
             config.SanitizeForInjection = true;
@@ -31,7 +31,7 @@ namespace SpdSync
 
             try
             {
-                List<WorkerResponse> result = csv.GetRecords<WorkerResponse>().ToList();
+                List<WorkerScreeningResponse> result = csv.GetRecords<WorkerScreeningResponse>().ToList();
                 return result;
             }
             catch (Exception e)
@@ -40,7 +40,7 @@ namespace SpdSync
                 _logger.LogError("Message:");
                 _logger.LogError(e.Message);
                 // return an empty list so we continue processing other files.
-               return new List<WorkerResponse>();
+               return new List<WorkerScreeningResponse>();
             }
         }
     }
