@@ -23,7 +23,7 @@ export class ApplicationType {
   showDeclarations: boolean;
 }
 
-export enum ApplicationTypeName {
+export enum ApplicationTypeNames {
   CannabisRetailStore = 'Cannabis Retail Store',
   CRSLocationChange = 'CRS Location Change',
   CRSStructuralChange = 'CRS Structural Change',
