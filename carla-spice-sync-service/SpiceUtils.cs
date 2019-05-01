@@ -1,9 +1,11 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Interfaces.Spice;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using SpdSync;
 using SpdSync.models;
 using System;
@@ -19,13 +21,27 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private IConfiguration Configuration { get; }
         private IDynamicsClient _dynamicsClient;
+        public ISpiceClient SpiceClient;
 
         public SpiceUtils(IConfiguration Configuration, ILoggerFactory loggerFactory)
         {
             this.Configuration = Configuration;
             _logger = loggerFactory.CreateLogger(typeof(SpiceUtils));
             _dynamicsClient = DynamicsUtil.SetupDynamics(Configuration);
+
+            // TODO - move this into a seperate routine.
+
+            string spiceURI = Configuration["SPICE_URI"];
+            string token = Configuration["SPICE_JWT_TOKEN"];
+
+            // create JWT credentials
+            TokenCredentials credentials = new TokenCredentials(token);
+
+            SpiceClient = new SpiceClient(new Uri(spiceURI), credentials);
         }
+
+
+
 
         /// <summary>
         /// Hangfire job to receive an application screening import from SPICE.
@@ -54,6 +70,8 @@ namespace Gov.Lclb.Cllb.SpdSync
             hangfireContext.WriteLine("Done.");
             _logger.LogError("Done.");
         }
+
+        
 
         /// <summary>
         /// Import responses to Dynamics.
@@ -142,7 +160,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// </summary>
         /// <returns></returns>
 
-        private async Task<ApplicationScreeningRequest> GenerateScreeningRequest(string ApplicationId)
+        public async Task<ApplicationScreeningRequest> GenerateApplicationScreeningRequest(string ApplicationId)
         {
             // Query Dynamics for application data
             MicrosoftDynamicsCRMadoxioApplication application = await _dynamicsClient.GetApplicationByIdWithChildren(ApplicationId);
@@ -298,6 +316,53 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 _logger.LogError("Error retrieving legal entities");
             }
+
+            return request;
+        }
+
+        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId)
+        {
+            // Query Dynamics for application data
+            var worker = await _dynamicsClient.GetWorkerById(WorkerId);
+
+            /* Create application */
+            Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest()
+            {
+                RecordIdentifier = worker.AdoxioWorkerid,
+                Name = worker.AdoxioName,
+                BirthDate = worker.AdoxioDateofbirth,
+                SelfDisclosure =  worker.AdoxioSelfdisclosure, // (Interfaces.Spice.Models.WorkerScreeningRequest.General_YesNo)
+                Gender = worker.AdoxioGendercode, // (Interfaces.Spice.Models.WorkerScreeningRequest.Adoxio_GenderCode)
+                Birthplace = worker.AdoxioBirthplace,
+                //BCIdCardNumber = worker.AdoxioBcidcardnumber,
+                DriversLicence = worker.AdoxioDriverslicencenumber
+            };
+
+            /* Add applicant details */
+            if (worker.AdoxioContactId != null)
+            {
+                request.Contact = new Interfaces.Spice.Models.Contact()
+                {
+                    FirstName = worker.AdoxioContactId.Firstname,
+                    LastName = worker.AdoxioContactId.Lastname,
+                    MiddleName = worker.AdoxioContactId.Middlename,
+                    ContactEmail = worker.AdoxioContactId.Emailaddress1,
+                    ContactPhone = worker.AdoxioContactId.Telephone1,
+                    Address = new Interfaces.Spice.Models.Address()
+                    {
+                        AddressStreet1 = worker.AdoxioContactId.Address1Line1,
+                        AddressStreet2 = worker.AdoxioContactId.Address1Line2,
+                        AddressStreet3 = worker.AdoxioContactId.Address1Line3,
+                        City = worker.AdoxioContactId.Address1City,
+                        StateProvince = worker.AdoxioContactId.Address1Stateorprovince,
+                        Postal = worker.AdoxioContactId.Address1Postalcode,
+                        Country = worker.AdoxioContactId.Address1Country
+                    }
+                };
+
+            }
+
+            // TODO - add aliases, previous addresses.
 
             return request;
         }
