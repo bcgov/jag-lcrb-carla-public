@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Spice;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Rest;
 using SpdSync;
 using Splunk;
 using Splunk.Configurations;
@@ -89,6 +91,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                 SetupSharePoint(services);
             }
 
+            // determine if we wire up the SPICE service
+            if (!string.IsNullOrEmpty(Configuration["SPICE_URI"]))
+            {
+                SetupSpice(services);
+            }
+
             services.AddHangfire(config =>
             {
                 // Change this line if you wish to have Hangfire use persistent storage.
@@ -121,6 +129,20 @@ namespace Gov.Lclb.Cllb.SpdSync
             string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
 
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword, sharePointNativeBaseURI));
+        }
+
+        private void SetupSpice(IServiceCollection services)
+        {
+            string spiceSsgUsername = Configuration["SPICE_SSG_USERNAME"];
+            string spiceSsgPassword = Configuration["SPICE_SSG_PASSWORD"];
+            string spiceURI = Configuration["SPICE_URI"];
+            string token = Configuration["SPICE_JWT_TOKEN"];
+
+
+            // create JWT credentials
+            TokenCredentials credentials = new TokenCredentials(token);
+
+            services.AddSingleton(_ => new SpiceClient(new Uri( spiceURI ), credentials));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
