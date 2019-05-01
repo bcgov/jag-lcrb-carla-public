@@ -30,42 +30,12 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpPost("receive")]
-        public ActionResult Receive([FromBody] List<WorkerScreeningResponse> responses)
+        public ActionResult Receive([FromBody] List<WorkerResponse> responses)
         {
             // Process the updates received from the SPICE system.
             BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveImportJob(null, responses));
             _logger.LogInformation("Started receive import job");
             return Ok();
-        }
-
-        /// <summary>
-        /// Send a worker record to SPICE for test purposes.  Normally this would occur from a polling process.
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost("sendWorkerScreening/{workerId}")]
-        public ActionResult SendWorker(string workerId )
-        {
-            // Process the updates received from the SPICE system.
-            //BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveImportJob(null, responses));
-            _logger.LogInformation("Started SendWorkerScreening job");
-            return Ok();
-        }
-
-        /// <summary>
-        /// Send a application screening process to SPICE for test purposes.  Normally this would occur from a polling process.
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost("sendApplicationScreening/{applicationId}")]
-        public ActionResult SendApplicationScreening(string applicationId)
-        {
-            // Process the updates received from the SPICE system.
-            //BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveImportJob(null, responses));
-            _logger.LogInformation("Started SendApplicationScreening job");
-            return Ok();
-        }
-
-
-
-
+        }        
     }
 }
