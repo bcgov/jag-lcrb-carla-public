@@ -18,10 +18,11 @@ import { DynamicsDataService } from '@appservices/dynamics-data.service';
 import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
-  CHANGE_OF_LOCATION_MODE,
-  TRANSFER_LICENCE_MODE,
   UPLOAD_FILES_MODE
 } from '@appapplications-and-licences/applications-and-licences.component';
+import { DynamicsAccount } from '@appmodels/dynamics-account.model';
+import { ApplicationContentType } from '@appmodels/application-content-type.model';
+import { ApplicationTypeName as ApplicationTypeNames } from '@appmodels/application-type.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -38,9 +39,9 @@ const ServiceHours = [
 
 class ApplicationHTMLContent {
   title: string;
-  preamble: SafeHtml;
-  beforeStarting: SafeHtml;
-  nextSteps: SafeHtml;
+  preamble: string;
+  beforeStarting: string;
+  nextSteps: string;
 }
 
 
@@ -71,10 +72,9 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
 
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
-  readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
-  readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
+  ApplicationTypeNames = ApplicationTypeNames;
   mode: string;
-  account: any;
+  account: DynamicsAccount;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -133,7 +133,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-    if (this.mode === TRANSFER_LICENCE_MODE) {
+    if (this.application.applicationType.name === ApplicationTypeNames.CRSTransferofOwnership) {
       this.form.get('establishmentAddressStreet').disable();
       this.form.get('establishmentAddressCity').disable();
       this.form.get('establishmentAddressPostalCode').disable();
@@ -156,7 +156,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       this.form.get('serviceHoursSaturdayClose').disable();
     }
 
-    if (this.mode === CHANGE_OF_LOCATION_MODE) {
+    if (this.application.applicationType.name === ApplicationTypeNames.CRSLocationChange) {
 
       this.form.get('establishmentName').disable();
 
@@ -202,9 +202,9 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         if (this.application.applicationType) {
           this.htmlContent = {
             title: this.application.applicationType.title,
-            preamble: this.application.applicationType.preamble,
-            beforeStarting: this.application.applicationType.beforeStarting,
-            nextSteps: this.application.applicationType.nextSteps,
+            preamble: this.getApplicationContent('preamble'),
+            beforeStarting: this.getApplicationContent('beforeStarting'),
+            nextSteps: this.getApplicationContent('nextSteps'),
           };
         }
 
@@ -236,6 +236,17 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         this.savedFormData = this.form.value;
       });
     this.subscriptions.push(sub);
+  }
+
+  private getApplicationContent(contentCartegory: string) {
+    let body = '';
+    const contents =
+      this.application.applicationType.typeContents
+        .filter(t => t.cartegory === contentCartegory && t.businessTypes.indexOf(this.account.businessType) !== -1);
+    if (contents.length > 0) {
+      body = contents[0].body;
+    }
+    return body;
   }
 
   ngOnDestroy(): void {
@@ -329,7 +340,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     let valid = true;
     this.validationMessages = [];
 
-    if (this.mode !== CHANGE_OF_LOCATION_MODE) {
+    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange) {
       if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
         valid = false;
         this.validationMessages.push('Associate form is required.');
@@ -350,7 +361,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
-    if (this.mode !== CHANGE_OF_LOCATION_MODE && this.submittedApplications >= 8) {
+    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }
