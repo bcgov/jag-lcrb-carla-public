@@ -160,22 +160,22 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// </summary>
         /// <returns></returns>
 
-        public async Task<ApplicationScreeningRequest> GenerateApplicationScreeningRequest(string ApplicationId)
+        public async Task<Interfaces.Spice.Models.ApplicationScreeningRequest> GenerateApplicationScreeningRequest(string ApplicationId)
         {
             // Query Dynamics for application data
             MicrosoftDynamicsCRMadoxioApplication application = await _dynamicsClient.GetApplicationByIdWithChildren(ApplicationId);
 
             /* Create application */
-            ApplicationScreeningRequest request = new ApplicationScreeningRequest()
+            Interfaces.Spice.Models.ApplicationScreeningRequest request = new Interfaces.Spice.Models.ApplicationScreeningRequest()
             {
                 Name = application.AdoxioName,
                 JobNumber = application.AdoxioJobnumber,
                 UrgentPriority = false,
-                ApplicantType = ApplicationScreeningRequest.Spice_ApplicantType.Cannabis,
+                //ApplicantType = Interfaces.Spice.Models.ApplicationScreeningRequest.Spice_ApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
                 BCeIDNumber = application.AdoxioBusinessnumber,
                 ApplicantName = application.AdoxioNameofapplicant,
-                Address = new Address()
+                Address = new Interfaces.Spice.Models.Address()
                 {
                     AddressStreet1 = application.AdoxioAddressstreet,
                     City = application.AdoxioAddresscity,
@@ -183,7 +183,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     Postal = application.AdoxioAddresspostalcode,
                     Country = application.AdoxioAddresscountry
                 },
-                ContactPerson = new Contact()
+                ContactPerson = new Interfaces.Spice.Models.Contact()
                 {
                     FirstName = application.AdoxioContactpersonfirstname,
                     LastName = application.AdoxioContactpersonlastname,
@@ -191,7 +191,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     ContactEmail = application.AdoxioEmail,
                     ContactPhone = application.AdoxioContactpersonphone
                 },
-                ApplyingPerson = new Contact()
+                ApplyingPerson = new Interfaces.Spice.Models.Contact()
                 {
                     FirstName = application.AdoxioApplyingPerson.Firstname,
                     MiddleName = application.AdoxioApplyingPerson.Middlename,
@@ -203,7 +203,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* Add applicant details */
             if (application.AdoxioApplicant != null)
             {
-                request.Account = new Account()
+                request.Account = new Interfaces.Spice.Models.Account()
                 {
                     Name = application.AdoxioApplicant.Name
                 };
@@ -212,13 +212,13 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* Add establishment */
             if (application.AdoxioEstablishment != null)
             {
-                request.Establishment = new Establishment()
+                request.Establishment = new Interfaces.Spice.Models.Establishment()
                 {
                     Name = application.AdoxioEstablishmentpropsedname,
                     PrimaryPhone = application.AdoxioEstablishmentphone,
                     PrimaryEmail = application.AdoxioEstablishmentemail,
                     ParcelId = application.AdoxioEstablishmentparcelid,
-                    Address = new Address()
+                    Address = new Interfaces.Spice.Models.Address()
                     {
                         AddressStreet1 = application.AdoxioEstablishmentaddressstreet,
                         City = application.AdoxioEstablishmentaddresscity,
@@ -237,17 +237,17 @@ namespace Gov.Lclb.Cllb.SpdSync
                 IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
                 foreach (var legalEntity in legalEntities)
                 {
-                    LegalEntity associate = new LegalEntity()
+                    Interfaces.Spice.Models.LegalEntity associate = new Interfaces.Spice.Models.LegalEntity()
                     {
                         Name = legalEntity.AdoxioName,
-                        Contact = new Contact()
+                        Contact = new Interfaces.Spice.Models.Contact()
                         {
                             FirstName = legalEntity.AdoxioFirstname,
                             LastName = legalEntity.AdoxioLastname,
                             MiddleName = legalEntity.AdoxioMiddlename,
                             ContactEmail = legalEntity.AdoxioEmail,
                             ContactPhone = legalEntity.AdoxioPhonenumber,
-                            Address = new Address()
+                            Address = new Interfaces.Spice.Models.Address()
                             {
                                 AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
                                 AddressStreet2 = legalEntity.AdoxioContact.Address1Line2,
@@ -258,7 +258,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                                 Country = legalEntity.AdoxioContact.Address1Country
                             }
                         },
-                        InterestPercentage = Convert.ToDecimal(legalEntity.AdoxioInterestpercentage),
+                        //InterestPercentage = Convert.ToDecimal(legalEntity.AdoxioInterestpercentage),
                         CommonVotingShares = legalEntity.AdoxioCommonvotingshares,
                         DateSharesIssued = legalEntity.AdoxioDateofsharesissued,
                         DateAppointed = legalEntity.AdoxioDateofappointment
@@ -283,7 +283,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     /* Add previous addresses */
                     foreach (var address in legalEntity.AdoxioLegalentityAdoxioPreviousaddressLegalEntityId)
                     {
-                        var newAddress = new Address()
+                        var newAddress = new Interfaces.Spice.Models.Address()
                         {
                             AddressStreet1 = address.AdoxioStreetaddress,
                             City = address.AdoxioCity,
@@ -300,7 +300,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     var aliases = legalEntity.AdoxioLegalentityAliases;
                     foreach (var alias in aliases)
                     {
-                        associate.Aliases.Add(new Alias()
+                        associate.Aliases.Add(new Interfaces.Spice.Models.Alias()
                         {
                             GivenName = alias.AdoxioFirstname,
                             Surname = alias.AdoxioLastname,
