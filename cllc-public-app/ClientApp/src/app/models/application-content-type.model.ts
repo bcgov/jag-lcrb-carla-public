@@ -2,7 +2,7 @@
 
 export class ApplicationContentType {
   id: string;
-  cartegory: string;
+  category: string;
   body: string;
   businessTypes: string[];
 }
