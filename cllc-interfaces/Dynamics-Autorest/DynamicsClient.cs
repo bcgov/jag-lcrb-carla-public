@@ -92,6 +92,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationtypecontents.
+        /// </summary>
+        public virtual IApplicationtypecontents Applicationtypecontents { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationtypes.
         /// </summary>
         public virtual IApplicationtypes Applicationtypes { get; private set; }
@@ -637,6 +642,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationmodules = new Applicationmodules(this);
             Applications = new Applications(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
+            Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypes = new Applicationtypes(this);
             Areas = new Areas(this);
             Businessaccounts = new Businessaccounts(this);
