@@ -12,7 +12,7 @@ export class ApplicationType {
   // preamble: string;
   // beforeStarting: string;
   // nextSteps: string;
-  typeContents: ApplicationContentType[];
+  contentTypes: ApplicationContentType[];
 
   showPropertyDetails: boolean;
   showCurrentProperty: boolean;
