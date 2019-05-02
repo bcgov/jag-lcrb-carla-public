@@ -22,7 +22,7 @@ import {
 } from '@appapplications-and-licences/applications-and-licences.component';
 import { DynamicsAccount } from '@appmodels/dynamics-account.model';
 import { ApplicationContentType } from '@appmodels/application-content-type.model';
-import { ApplicationTypeName as ApplicationTypeNames } from '@appmodels/application-type.model';
+import { ApplicationTypeNames } from '@appmodels/application-type.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -133,6 +133,68 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
+    this.applicationDataService.getSubmittedApplicationCount()
+      .subscribe(value => this.submittedApplications = value);
+
+    this.userDataService.getCurrentUser()
+      .subscribe((user) => {
+        if (user.accountid != null) {
+          // fetch the account to get the primary contact.
+          this.dynamicsDataService.getRecord('accounts', user.accountid)
+            .subscribe((result) => {
+              this.account = result;
+            });
+        }
+
+      });
+
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      (data: Application) => {
+        if (data.establishmentParcelId) {
+          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+        }
+        this.application = data;
+        this.hideFormControlByType();
+
+        if (this.application.applicationType) {
+          this.htmlContent = {
+            title: this.application.applicationType.title,
+            preamble: this.getApplicationContent('Preamble'),
+            beforeStarting: this.getApplicationContent('BeforeStarting'),
+            nextSteps: this.getApplicationContent('NextSteps'),
+          };
+        }
+
+        const noNulls = Object.keys(data)
+          .filter(e => data[e] !== null)
+          .reduce((o, e) => {
+            o[e] = data[e];
+            return o;
+          }, {});
+
+        this.form.patchValue(noNulls);
+        if (data.isPaid) {
+          this.form.disable();
+        }
+        this.savedFormData = this.form.value;
+      },
+      err => {
+        console.log('Error occured');
+      }
+    );
+
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
+      filter(state => !!state))
+      .subscribe(currentApplication => {
+        this.form.patchValue(currentApplication);
+        if (currentApplication.isPaid) {
+          this.form.disable();
+        }
+        this.savedFormData = this.form.value;
+      });
+    this.subscriptions.push(sub);
+  }
+  private hideFormControlByType() {
     if (this.application.applicationType.name === ApplicationTypeNames.CRSTransferofOwnership) {
       this.form.get('establishmentAddressStreet').disable();
       this.form.get('establishmentAddressCity').disable();
@@ -176,73 +238,13 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       this.form.get('serviceHoursSaturdayClose').disable();
 
     }
-
-    this.applicationDataService.getSubmittedApplicationCount()
-      .subscribe(value => this.submittedApplications = value);
-
-    this.userDataService.getCurrentUser()
-      .subscribe((user) => {
-        if (user.accountid != null) {
-          // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('accounts', user.accountid)
-            .subscribe((result) => {
-              this.account = result;
-            });
-        }
-
-      });
-
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
-        this.application = data;
-
-        if (this.application.applicationType) {
-          this.htmlContent = {
-            title: this.application.applicationType.title,
-            preamble: this.getApplicationContent('preamble'),
-            beforeStarting: this.getApplicationContent('beforeStarting'),
-            nextSteps: this.getApplicationContent('nextSteps'),
-          };
-        }
-
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
-
-        this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
-        this.savedFormData = this.form.value;
-      },
-      err => {
-        console.log('Error occured');
-      }
-    );
-
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
-      filter(state => !!state))
-      .subscribe(currentApplication => {
-        this.form.patchValue(currentApplication);
-        if (currentApplication.isPaid) {
-          this.form.disable();
-        }
-        this.savedFormData = this.form.value;
-      });
-    this.subscriptions.push(sub);
   }
 
   private getApplicationContent(contentCartegory: string) {
     let body = '';
     const contents =
-      this.application.applicationType.typeContents
-        .filter(t => t.cartegory === contentCartegory && t.businessTypes.indexOf(this.account.businessType) !== -1);
+      this.application.applicationType.contentTypes
+        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.account.businessType) !== -1);
     if (contents.length > 0) {
       body = contents[0].body;
     }
