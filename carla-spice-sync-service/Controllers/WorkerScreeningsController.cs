@@ -18,12 +18,14 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         private readonly IConfiguration Configuration;
         private readonly ILogger _logger;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly SpiceUtils _spiceUtils;
 
         public WorkerScreeningsController (IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger(typeof(WorkerScreeningsController));
+            _spiceUtils = new SpiceUtils(Configuration, _loggerFactory);
         }
 
         /// <summary>
@@ -48,28 +50,20 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         public async Task<ActionResult> SendWorkerScreeningRequest(string workerId )
         {
             // Generate the Worker Request.
-
-            SpiceUtils spiceUtils = new SpiceUtils(Configuration, _loggerFactory);
-
-            var workerRequest = await spiceUtils.GenerateWorkerScreeningRequest(workerId);
+            var workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
 
             _logger.LogError("Data to send:");
-
             string jsonString = JsonConvert.SerializeObject(workerRequest);
-
             _logger.LogError(jsonString);
 
             // send the data
-
             List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>();
-
             payload.Add(workerRequest);
 
-            var result = await spiceUtils.SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+            var result = await _spiceUtils.SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
             
             _logger.LogError("Response code was");
-
-            _logger.LogError("" + result.Response.StatusCode);
+            _logger.LogError(result.Response.StatusCode.ToString());
             _logger.LogError("Response text was");
             _logger.LogError(await result.Response.Content.ReadAsStringAsync());
 
