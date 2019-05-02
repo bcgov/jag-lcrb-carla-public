@@ -89,6 +89,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
 
         /// <summary>
+        /// Gets the IApplicationtypecontents.
+        /// </summary>
+        IApplicationtypecontents Applicationtypecontents { get; }
+
+        /// <summary>
         /// Gets the IApplicationtypes.
         /// </summary>
         IApplicationtypes Applicationtypes { get; }
