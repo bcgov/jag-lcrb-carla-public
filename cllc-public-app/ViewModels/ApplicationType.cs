@@ -10,12 +10,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Id;
         public string ActionText;
         public string Name;
-        public LicenseType LicenseType;
-
         public string Title;
-        public string Preamble;
-        public string BeforeStarting;
-        public string NextSteps;
 
         public bool? ShowPropertyDetails;
         public bool? ShowCurrentProperty;
@@ -24,5 +19,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? ShowFinancialIntegrityFormUpload;
         public bool? ShowSupportingDocuments;
         public bool? ShowDeclarations;
+
+        public LicenseType LicenseType;
+
+        public List<ApplicationTypeContent> contentTypes;
     }
 }

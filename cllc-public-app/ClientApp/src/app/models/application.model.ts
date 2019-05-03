@@ -1,6 +1,7 @@
 import { DynamicsAccount } from './dynamics-account.model';
 import { License } from './license.model';
 import { Invoice } from './invoice.model';
+import { ApplicationType } from './application-type.model';
 
 export class Application {
   id: string;
@@ -8,9 +9,10 @@ export class Application {
   additionalPropertyInformation: string;
   applicantType: string;
   applicationStatus: string;
+  applicationType: ApplicationType;
   applyingPerson: string;
   assignedLicence: License;
-  authorizedToSubmit: boolean; 
+  authorizedToSubmit: boolean;
   contactPersonEmail: string;
   contactPersonFirstName: string;
   contactPersonLastName: string;
@@ -23,7 +25,7 @@ export class Application {
   establishmentAddressPostalCode: string;
   establishmentAddressStreet: string;
   establishmentParcelId: string;
-  establishmentPhone: string
+  establishmentPhone: string;
   isLocationChangeInProgress: boolean;
   isPaid: boolean;
   isSubmitted: boolean;
