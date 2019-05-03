@@ -3,7 +3,7 @@
 # Jenkinsfile: ./Jenkinsfile
 # JSON Template File: https://raw.githubusercontent.com/BCDevOps/openshift-tools/master/provisioning/pipeline/resources/pipeline-build.json
 #=========================================================
-NAME=DEV-portal
+NAME=development
 # GITHUB_WEBHOOK_SECRET=[a-zA-Z0-9]{40}
 SOURCE_REPOSITORY_URL=https://github.com/bcgov/jag-lcrb-carla-public.git
 SOURCE_REPOSITORY_REF=master
