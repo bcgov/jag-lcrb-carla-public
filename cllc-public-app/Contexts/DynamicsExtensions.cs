@@ -263,6 +263,64 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await system.Applications.GetByKeyAsync(id.ToString());
+
+                if (result._adoxioLicencetypeValue != null)
+                {
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
+                }
+
+                if (result._adoxioApplicantValue != null)
+                {
+                    result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                }
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
+        public static async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(this IDynamicsClient system, Guid id)
+        {
+            MicrosoftDynamicsCRMadoxioApplication result;
+            try
+            {
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
+
+                // fetch from Dynamics.
+                result = await system.Applications.GetByKeyAsync(id.ToString(), expand: expand);
+
+                if (result._adoxioLicencetypeValue != null)
+                {
+                    string filter = $" eq {result._adoxioLicencetypeValue}";
+                    result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
+                }
+
+                if (result._adoxioApplicantValue != null)
+                {
+                    result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                }
+
+                if (result.AdoxioAssignedLicence != null && result.AdoxioAssignedLicence._adoxioEstablishmentValue != null)
+                {
+                    result.AdoxioAssignedLicence.AdoxioEstablishment = system.GetEstablishmentById(Guid.Parse(result.AdoxioAssignedLicence._adoxioEstablishmentValue));
+                }
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationListByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
             var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
@@ -324,6 +382,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.Licencetypes.Get(filter: typeFilter).Value;
 
             result = licenceTypes.FirstOrDefault();
+
+            return result;
+        }
+
+        public static MicrosoftDynamicsCRMadoxioApplicationtype GetApplicationTypeByName(this IDynamicsClient _dynamicsClient, string name)
+        {
+            MicrosoftDynamicsCRMadoxioApplicationtype result = null;
+            string typeFilter = "adoxio_name eq '" + name + "'";
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplicationtype> applicationTypes = _dynamicsClient.Applicationtypes.Get(filter: typeFilter).Value;
+
+            result = applicationTypes.FirstOrDefault();
 
             return result;
         }
