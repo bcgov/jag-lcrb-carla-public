@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence" };
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
 
                 // fetch from Dynamics.
                 result = await Applications.GetByKeyAsync(id, expand: expand);
@@ -98,6 +98,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (result._adoxioLicencetypeValue != null)
                 {
                     result.AdoxioLicenceType = GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
+                }
+
+                if(result.AdoxioApplicationTypeId != null)
+                {
+                    var filter = $"_adoxio_applicationtype_value eq { result.AdoxioApplicationTypeId.AdoxioApplicationtypeid}";
+                    var typeContents = this.Applicationtypecontents.Get(filter: filter).Value;
+                    result.AdoxioApplicationTypeId.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
                 }
 
                 if (result._adoxioApplicantValue != null)
@@ -110,7 +117,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioAssignedLicence.AdoxioEstablishment = GetEstablishmentById(Guid.Parse(result.AdoxioAssignedLicence._adoxioEstablishmentValue));
                 }
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
             {
                 result = null;
             }
