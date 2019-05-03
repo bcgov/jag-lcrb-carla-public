@@ -1,7 +1,8 @@
 import { ValidatorFn, AbstractControl, FormControl, FormGroup } from '@angular/forms';
 
 
-export const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$)';
+export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$';
+export const USPostalRegex = '^\\d{5}([\-]\\d{4})?$';
 
 export class FormBase {
     form: FormGroup;
@@ -28,7 +29,7 @@ export class FormBase {
         };
     }
 
-    public customZipCodeValidator(pattern: RegExp, countryField: string): ValidatorFn {
+    public customZipCodeValidator(countryField: string): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } | null => {
             if (!control.parent) {
                 return null;
@@ -36,6 +37,10 @@ export class FormBase {
             const country = control.parent.get(countryField).value;
             if (country !== 'Canada' && country !== 'United States of America') {
                 return null;
+            }
+            let pattern = new RegExp(CanadaPostalRegex);
+            if (country !== 'United States of America') {
+                pattern = new RegExp(USPostalRegex);
             }
             const valueMatchesPattern = pattern.test(control.value);
             return valueMatchesPattern ? null : { 'regex-missmatch': { value: control.value } };

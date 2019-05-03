@@ -12,7 +12,7 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
-import { FormBase, postalRegex } from '@shared/form-base';
+import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
 import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -111,7 +111,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       contactPersonPhone: ['', Validators.required],
       establishmentAddressStreet: ['', Validators.required],
       establishmentAddressCity: ['', Validators.required],
-      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
       establishmentPhone: [''],
 
