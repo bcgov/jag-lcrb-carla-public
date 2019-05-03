@@ -5457,6 +5457,423 @@
         }
       }
     },
+    "/adoxio_applicationtypecontents": {
+      "get": {
+        "tags": [
+          "applicationtypecontents"
+        ],
+        "summary": "Get entities from adoxio_applicationtypecontents",
+        "operationId": "Applicationtypecontents_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_isunlimitedliabilitycorporation",
+                "adoxio_isunlimitedliabilitycorporation desc",
+                "adoxio_body",
+                "adoxio_body desc",
+                "adoxio_applicationtypecontentid",
+                "adoxio_applicationtypecontentid desc",
+                "adoxio_issociety",
+                "adoxio_issociety desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "adoxio_iscoop",
+                "adoxio_iscoop desc",
+                "adoxio_islimitedliabilitypartnership",
+                "adoxio_islimitedliabilitypartnership desc",
+                "_adoxio_applicationtype_value",
+                "_adoxio_applicationtype_value desc",
+                "statecode",
+                "statecode desc",
+                "adoxio_ispartnership",
+                "adoxio_ispartnership desc",
+                "adoxio_ispubliccorporation",
+                "adoxio_ispubliccorporation desc",
+                "statuscode",
+                "statuscode desc",
+                "adoxio_isestate",
+                "adoxio_isestate desc",
+                "adoxio_islimitedpartnership",
+                "adoxio_islimitedpartnership desc",
+                "adoxio_islimitedliabilitycorporation",
+                "adoxio_islimitedliabilitycorporation desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "modifiedon",
+                "modifiedon desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "adoxio_isindigenousnation",
+                "adoxio_isindigenousnation desc",
+                "adoxio_isuniversity",
+                "adoxio_isuniversity desc",
+                "versionnumber",
+                "versionnumber desc",
+                "adoxio_category",
+                "adoxio_category desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_issoleproprietorship",
+                "adoxio_issoleproprietorship desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "adoxio_islocalgovernment",
+                "adoxio_islocalgovernment desc",
+                "createdon",
+                "createdon desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_isgeneralpartnership",
+                "adoxio_isgeneralpartnership desc",
+                "adoxio_istrust",
+                "adoxio_istrust desc",
+                "adoxio_isprivatecorporation",
+                "adoxio_isprivatecorporation desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_name",
+                "adoxio_name desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_isunlimitedliabilitycorporation",
+                "adoxio_body",
+                "adoxio_applicationtypecontentid",
+                "adoxio_issociety",
+                "importsequencenumber",
+                "adoxio_iscoop",
+                "adoxio_islimitedliabilitypartnership",
+                "_adoxio_applicationtype_value",
+                "statecode",
+                "adoxio_ispartnership",
+                "adoxio_ispubliccorporation",
+                "statuscode",
+                "adoxio_isestate",
+                "adoxio_islimitedpartnership",
+                "adoxio_islimitedliabilitycorporation",
+                "utcconversiontimezonecode",
+                "modifiedon",
+                "_owningteam_value",
+                "_modifiedby_value",
+                "adoxio_isindigenousnation",
+                "adoxio_isuniversity",
+                "versionnumber",
+                "adoxio_category",
+                "_createdonbehalfby_value",
+                "_createdby_value",
+                "adoxio_issoleproprietorship",
+                "_ownerid_value",
+                "_owninguser_value",
+                "adoxio_islocalgovernment",
+                "createdon",
+                "_owningbusinessunit_value",
+                "_modifiedonbehalfby_value",
+                "timezoneruleversionnumber",
+                "adoxio_isgeneralpartnership",
+                "adoxio_istrust",
+                "adoxio_isprivatecorporation",
+                "overriddencreatedon",
+                "adoxio_name"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_applicationtypecontent_SyncErrors",
+                "adoxio_applicationtypecontent_DuplicateMatchingRecord",
+                "adoxio_applicationtypecontent_DuplicateBaseRecord",
+                "adoxio_applicationtypecontent_AsyncOperations",
+                "adoxio_applicationtypecontent_BulkDeleteFailures",
+                "adoxio_ApplicationType"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Applicationtypecontents_GetResponseModel"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "applicationtypecontents"
+        ],
+        "summary": "Add new entity to adoxio_applicationtypecontents",
+        "operationId": "Applicationtypecontents_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_applicationtypecontents({adoxio_applicationtypecontentid})": {
+      "get": {
+        "tags": [
+          "applicationtypecontents"
+        ],
+        "summary": "Get entity from adoxio_applicationtypecontents by key",
+        "operationId": "Applicationtypecontents_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_applicationtypecontentid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_applicationtypecontentid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_isunlimitedliabilitycorporation",
+                "adoxio_body",
+                "adoxio_applicationtypecontentid",
+                "adoxio_issociety",
+                "importsequencenumber",
+                "adoxio_iscoop",
+                "adoxio_islimitedliabilitypartnership",
+                "_adoxio_applicationtype_value",
+                "statecode",
+                "adoxio_ispartnership",
+                "adoxio_ispubliccorporation",
+                "statuscode",
+                "adoxio_isestate",
+                "adoxio_islimitedpartnership",
+                "adoxio_islimitedliabilitycorporation",
+                "utcconversiontimezonecode",
+                "modifiedon",
+                "_owningteam_value",
+                "_modifiedby_value",
+                "adoxio_isindigenousnation",
+                "adoxio_isuniversity",
+                "versionnumber",
+                "adoxio_category",
+                "_createdonbehalfby_value",
+                "_createdby_value",
+                "adoxio_issoleproprietorship",
+                "_ownerid_value",
+                "_owninguser_value",
+                "adoxio_islocalgovernment",
+                "createdon",
+                "_owningbusinessunit_value",
+                "_modifiedonbehalfby_value",
+                "timezoneruleversionnumber",
+                "adoxio_isgeneralpartnership",
+                "adoxio_istrust",
+                "adoxio_isprivatecorporation",
+                "overriddencreatedon",
+                "adoxio_name"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_applicationtypecontent_SyncErrors",
+                "adoxio_applicationtypecontent_DuplicateMatchingRecord",
+                "adoxio_applicationtypecontent_DuplicateBaseRecord",
+                "adoxio_applicationtypecontent_AsyncOperations",
+                "adoxio_applicationtypecontent_BulkDeleteFailures",
+                "adoxio_ApplicationType"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "applicationtypecontents"
+        ],
+        "summary": "Delete entity from adoxio_applicationtypecontents",
+        "operationId": "Applicationtypecontents_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_applicationtypecontentid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_applicationtypecontentid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "applicationtypecontents"
+        ],
+        "summary": "Update entity in adoxio_applicationtypecontents",
+        "operationId": "Applicationtypecontents_Update",
+        "parameters": [
+          {
+            "name": "adoxio_applicationtypecontentid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_applicationtypecontentid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
     "/adoxio_applicationtypes": {
       "get": {
         "tags": [
@@ -5637,7 +6054,8 @@
                 "adoxio_applicationtype_AsyncOperations",
                 "adoxio_applicationtype_BulkDeleteFailures",
                 "adoxio_applicationtype_applications",
-                "adoxio_licencetypes_applicationtypes"
+                "adoxio_licencetypes_applicationtypes",
+                "adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType"
               ]
             }
           }
@@ -5776,7 +6194,8 @@
                 "adoxio_applicationtype_AsyncOperations",
                 "adoxio_applicationtype_BulkDeleteFailures",
                 "adoxio_applicationtype_applications",
-                "adoxio_licencetypes_applicationtypes"
+                "adoxio_licencetypes_applicationtypes",
+                "adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType"
               ]
             }
           }
@@ -15122,10 +15541,12 @@
                 "adoxio_isdirector desc",
                 "adoxio_birthplace",
                 "adoxio_birthplace desc",
-                "overriddencreatedon",
-                "overriddencreatedon desc",
                 "adoxio_legalentitytype",
                 "adoxio_legalentitytype desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_iskeypersonnel",
+                "adoxio_iskeypersonnel desc",
                 "createdon",
                 "createdon desc",
                 "_owninguser_value",
@@ -15168,6 +15589,8 @@
                 "_adoxio_relatedlicence_value desc",
                 "_owningbusinessunit_value",
                 "_owningbusinessunit_value desc",
+                "adoxio_jobtitle",
+                "adoxio_jobtitle desc",
                 "adoxio_isindividual",
                 "adoxio_isindividual desc",
                 "adoxio_gendercode",
@@ -15260,8 +15683,9 @@
                 "adoxio_bcidcardnumber",
                 "adoxio_isdirector",
                 "adoxio_birthplace",
-                "overriddencreatedon",
                 "adoxio_legalentitytype",
+                "overriddencreatedon",
+                "adoxio_iskeypersonnel",
                 "createdon",
                 "_owninguser_value",
                 "adoxio_selfdeclaredtiedhousedate",
@@ -15283,6 +15707,7 @@
                 "adoxio_phonenumber",
                 "_adoxio_relatedlicence_value",
                 "_owningbusinessunit_value",
+                "adoxio_jobtitle",
                 "adoxio_isindividual",
                 "adoxio_gendercode",
                 "adoxio_preferrednonvotingshares",
@@ -15446,8 +15871,9 @@
                 "adoxio_bcidcardnumber",
                 "adoxio_isdirector",
                 "adoxio_birthplace",
-                "overriddencreatedon",
                 "adoxio_legalentitytype",
+                "overriddencreatedon",
+                "adoxio_iskeypersonnel",
                 "createdon",
                 "_owninguser_value",
                 "adoxio_selfdeclaredtiedhousedate",
@@ -15469,6 +15895,7 @@
                 "adoxio_phonenumber",
                 "_adoxio_relatedlicence_value",
                 "_owningbusinessunit_value",
+                "adoxio_jobtitle",
                 "adoxio_isindividual",
                 "adoxio_gendercode",
                 "adoxio_preferrednonvotingshares",
@@ -35257,6 +35684,222 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_applicationtypecontent": {
+      "title": "adoxio_applicationtypecontent",
+      "type": "object",
+      "properties": {
+        "adoxio_isunlimitedliabilitycorporation": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_body": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_applicationtypecontentid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_issociety": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_iscoop": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_islimitedliabilitypartnership": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_adoxio_applicationtype_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_ispartnership": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_ispubliccorporation": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_isestate": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_islimitedpartnership": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_islimitedliabilitycorporation": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_isindigenousnation": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_isuniversity": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "adoxio_category": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_issoleproprietorship": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_islocalgovernment": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_isgeneralpartnership": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_istrust": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_isprivatecorporation": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_applicationtypecontent_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_applicationtypecontent_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_applicationtypecontent_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_applicationtypecontent_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_applicationtypecontent_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_ApplicationType": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_applicationtype": {
       "title": "adoxio_applicationtype",
       "type": "object",
@@ -35462,6 +36105,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
+          }
+        },
+        "adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
           }
         }
       }
@@ -40274,12 +40923,16 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_legalentitytype": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "overriddencreatedon": {
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_legalentitytype": {
-          "type": "integer",
+        "adoxio_iskeypersonnel": {
+          "type": "boolean",
           "x-nullable": true
         },
         "createdon": {
@@ -40364,6 +41017,10 @@
           "x-nullable": true
         },
         "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_jobtitle": {
           "type": "string",
           "x-nullable": true
         },
@@ -47236,6 +47893,9 @@
         },
         "regardingobjectid_adoxio_applicationtype": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+        },
+        "regardingobjectid_adoxio_applicationtypecontent": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
         }
       }
     },
@@ -49418,6 +50078,9 @@
         },
         "regardingobjectid_adoxio_applicationtype": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+        },
+        "regardingobjectid_adoxio_applicationtypecontent": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
         }
       }
     },
@@ -51091,6 +51754,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+          }
+        },
+        "business_unit_adoxio_applicationtypecontent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
           }
         }
       }
@@ -58003,6 +58672,12 @@
         },
         "baserecordid_adoxio_applicationtype": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+        },
+        "duplicaterecordid_adoxio_applicationtypecontent": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+        },
+        "baserecordid_adoxio_applicationtypecontent": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
         }
       }
     },
@@ -74452,6 +75127,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
           }
+        },
+        "owner_adoxio_applicationtypecontent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+          }
         }
       }
     },
@@ -87600,6 +88281,9 @@
         },
         "regardingobjectid_adoxio_applicationtype": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+        },
+        "regardingobjectid_adoxio_applicationtypecontent": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
         }
       }
     },
@@ -95135,6 +95819,36 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
           }
+        },
+        "lk_adoxio_applicationtypecontent_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+          }
+        },
+        "lk_adoxio_applicationtypecontent_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+          }
+        },
+        "lk_adoxio_applicationtypecontent_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+          }
+        },
+        "lk_adoxio_applicationtypecontent_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+          }
+        },
+        "user_adoxio_applicationtypecontent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+          }
         }
       }
     },
@@ -96410,6 +97124,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+          }
+        },
+        "team_adoxio_applicationtypecontent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
           }
         }
       }
@@ -105093,6 +105813,18 @@
         }
       }
     },
+    "Applicationtypecontents_GetResponseModel": {
+      "title": "Collection of adoxio_applicationtypecontents",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
+          }
+        }
+      }
+    },
     "Applicationtypes_GetResponseModel": {
       "title": "Collection of adoxio_applicationtypes",
       "type": "object",
@@ -108720,6 +109452,9 @@
     },
     {
       "name": "adoxio_applicationtermsconditionslimitations"
+    },
+    {
+      "name": "adoxio_applicationtypecontents"
     },
     {
       "name": "adoxio_applicationtypes"
