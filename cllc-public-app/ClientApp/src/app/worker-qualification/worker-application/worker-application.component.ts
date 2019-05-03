@@ -15,6 +15,7 @@ import { Alias } from '../../models/alias.model';
 import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { COUNTRIES } from './country-list';
+import { FormBase } from '@shared/form-base';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -38,7 +39,6 @@ export const MY_FORMATS = {
 };
 
 
-const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-Za-z][0-9]$)';
 
 @Component({
   selector: 'app-worker-application',
@@ -53,7 +53,7 @@ const postalRegex = '(^\\d{5}([\-]\\d{4})?$)|(^[A-Za-z][0-9][A-Za-z]\\s?[0-9][A-
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
-export class WorkerApplicationComponent implements OnInit {
+export class WorkerApplicationComponent extends FormBase implements OnInit {
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;
@@ -90,6 +90,7 @@ export class WorkerApplicationComponent implements OnInit {
     private route: ActivatedRoute,
 
   ) {
+    super();
     // minDate is a 100 year ago
     this.minDate = new Date();
     this.minDate.setFullYear(this.minDate.getFullYear() - 100);
@@ -117,7 +118,7 @@ export class WorkerApplicationComponent implements OnInit {
         address2_city: ['', Validators.required],
         address2_stateorprovince: ['', Validators.required],
         address2_country: ['', Validators.required],
-        address2_postalcode: ['', [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'address2_country')]]
+        address2_postalcode: ['', [Validators.required, this.customZipCodeValidator('address2_country')]]
       }),
       worker: this.fb.group({
         id: [],
@@ -219,7 +220,7 @@ export class WorkerApplicationComponent implements OnInit {
       city: [address.city, Validators.required],
       provstate: [address.provstate, Validators.required],
       country: [address.country, Validators.required],
-      postalcode: [address.postalcode, [Validators.required, this.customZipCodeValidator(new RegExp(postalRegex), 'country')]],
+      postalcode: [address.postalcode, [Validators.required, this.customZipCodeValidator('country')]],
       fromdate: [address.fromdate, Validators.required],
       todate: [address.todate, Validators.required]
     });
@@ -477,20 +478,6 @@ export class WorkerApplicationComponent implements OnInit {
     if (acceptedKeys.indexOf(event.key) === -1) {
       event.preventDefault();
     }
-  }
-
-  customZipCodeValidator(pattern: RegExp, countryField: string): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      if (!control.parent) {
-        return null;
-      }
-      const country = control.parent.get(countryField).value;
-      if (country !== 'Canada' && country !== 'United States of America') {
-        return null;
-      }
-      const valueMatchesPattern = pattern.test(control.value);
-      return valueMatchesPattern ? null : { 'regex-missmatch': { value: control.value } };
-    };
   }
 
   trimValue(control: FormControl) {

@@ -1,6 +1,6 @@
 
 import { filter } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -12,15 +12,17 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
-import { FormBase, postalRegex } from '@shared/form-base';
+import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { UserDataService } from '@appservices/user-data.service';
 import { DynamicsDataService } from '@appservices/dynamics-data.service';
+import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
-  CHANGE_OF_LOCATION_MODE,
-  TRANSFER_LICENCE_MODE,
-  UPLOAD_FILES_MODE  
+  UPLOAD_FILES_MODE
 } from '@appapplications-and-licences/applications-and-licences.component';
+import { DynamicsAccount } from '@appmodels/dynamics-account.model';
+import { ApplicationContentType } from '@appmodels/application-content-type.model';
+import { ApplicationTypeNames } from '@appmodels/application-type.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -34,6 +36,13 @@ const ServiceHours = [
   '22:45', '23:00'
   // , '23:15', '23:30', '23:45'
 ];
+
+class ApplicationHTMLContent {
+  title: string;
+  preamble: string;
+  beforeStarting: string;
+  nextSteps: string;
+}
 
 
 @Component({
@@ -58,11 +67,14 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   submittedApplications = 8;
   ServiceHours = ServiceHours;
 
+  htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
+
+
+
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
-  readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
-  readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
+  ApplicationTypeNames = ApplicationTypeNames;
   mode: string;
-  account: any;
+  account: DynamicsAccount;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -71,6 +83,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     private applicationDataService: ApplicationDataService,
     private userDataService: UserDataService,
     private dynamicsDataService: DynamicsDataService,
+    private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog) {
@@ -83,11 +96,11 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.form = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
-          id: [''],
-          establishmentAddressStreet: [''],
-          establishmentAddressCity: [''],
-          establishmentAddressPostalCode: [''],
-          establishmentParcelId: ['']
+        id: [''],
+        establishmentAddressStreet: [''],
+        establishmentAddressCity: [''],
+        establishmentAddressPostalCode: [''],
+        establishmentParcelId: ['']
       }),
       establishmentName: [''],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
@@ -98,7 +111,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       contactPersonPhone: ['', Validators.required],
       establishmentAddressStreet: ['', Validators.required],
       establishmentAddressCity: ['', Validators.required],
-      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(postalRegex)]],
+      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
       establishmentPhone: [''],
 
@@ -119,50 +132,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
-
-    if (this.mode === TRANSFER_LICENCE_MODE) {
-      this.form.get('establishmentAddressStreet').disable();
-      this.form.get('establishmentAddressCity').disable();
-      this.form.get('establishmentAddressPostalCode').disable();
-      this.form.get('establishmentName').disable();
-      this.form.get('establishmentParcelId').disable();
-
-      this.form.get('serviceHoursSundayOpen').disable();
-      this.form.get('serviceHoursMondayOpen').disable();
-      this.form.get('serviceHoursTuesdayOpen').disable();
-      this.form.get('serviceHoursWednesdayOpen').disable();
-      this.form.get('serviceHoursThursdayOpen').disable();
-      this.form.get('serviceHoursFridayOpen').disable();
-      this.form.get('serviceHoursSaturdayOpen').disable();
-      this.form.get('serviceHoursSundayClose').disable();
-      this.form.get('serviceHoursMondayClose').disable();
-      this.form.get('serviceHoursTuesdayClose').disable();
-      this.form.get('serviceHoursWednesdayClose').disable();
-      this.form.get('serviceHoursThursdayClose').disable();
-      this.form.get('serviceHoursFridayClose').disable();
-      this.form.get('serviceHoursSaturdayClose').disable();
-    }
-
-    if (this.mode === CHANGE_OF_LOCATION_MODE) {
-
-      this.form.get('establishmentName').disable();
-      
-      this.form.get('serviceHoursSundayOpen').disable();
-      this.form.get('serviceHoursMondayOpen').disable();
-      this.form.get('serviceHoursTuesdayOpen').disable();
-      this.form.get('serviceHoursWednesdayOpen').disable();
-      this.form.get('serviceHoursThursdayOpen').disable();
-      this.form.get('serviceHoursFridayOpen').disable();
-      this.form.get('serviceHoursSaturdayOpen').disable();
-      this.form.get('serviceHoursSundayClose').disable();
-      this.form.get('serviceHoursMondayClose').disable();
-      this.form.get('serviceHoursTuesdayClose').disable();
-      this.form.get('serviceHoursWednesdayClose').disable();
-      this.form.get('serviceHoursThursdayClose').disable();
-      this.form.get('serviceHoursFridayClose').disable();
-      this.form.get('serviceHoursSaturdayClose').disable();
-
-    }
 
     this.applicationDataService.getSubmittedApplicationCount()
       .subscribe(value => this.submittedApplications = value);
@@ -185,11 +154,21 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
         this.application = data;
+        this.hideFormControlByType();
 
-        var noNulls = Object.keys(data)
+        if (this.application.applicationType) {
+          this.htmlContent = {
+            title: this.application.applicationType.title,
+            preamble: this.getApplicationContent('Preamble'),
+            beforeStarting: this.getApplicationContent('BeforeStarting'),
+            nextSteps: this.getApplicationContent('NextSteps'),
+          };
+        }
+
+        const noNulls = Object.keys(data)
           .filter(e => data[e] !== null)
           .reduce((o, e) => {
-            o[e] = data[e]
+            o[e] = data[e];
             return o;
           }, {});
 
@@ -214,6 +193,62 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         this.savedFormData = this.form.value;
       });
     this.subscriptions.push(sub);
+  }
+  private hideFormControlByType() {
+    if (this.application.applicationType.name === ApplicationTypeNames.CRSTransferofOwnership) {
+      this.form.get('establishmentAddressStreet').disable();
+      this.form.get('establishmentAddressCity').disable();
+      this.form.get('establishmentAddressPostalCode').disable();
+      this.form.get('establishmentName').disable();
+      this.form.get('establishmentParcelId').disable();
+
+      this.form.get('serviceHoursSundayOpen').disable();
+      this.form.get('serviceHoursMondayOpen').disable();
+      this.form.get('serviceHoursTuesdayOpen').disable();
+      this.form.get('serviceHoursWednesdayOpen').disable();
+      this.form.get('serviceHoursThursdayOpen').disable();
+      this.form.get('serviceHoursFridayOpen').disable();
+      this.form.get('serviceHoursSaturdayOpen').disable();
+      this.form.get('serviceHoursSundayClose').disable();
+      this.form.get('serviceHoursMondayClose').disable();
+      this.form.get('serviceHoursTuesdayClose').disable();
+      this.form.get('serviceHoursWednesdayClose').disable();
+      this.form.get('serviceHoursThursdayClose').disable();
+      this.form.get('serviceHoursFridayClose').disable();
+      this.form.get('serviceHoursSaturdayClose').disable();
+    }
+
+    if (this.application.applicationType.name === ApplicationTypeNames.CRSLocationChange) {
+
+      this.form.get('establishmentName').disable();
+
+      this.form.get('serviceHoursSundayOpen').disable();
+      this.form.get('serviceHoursMondayOpen').disable();
+      this.form.get('serviceHoursTuesdayOpen').disable();
+      this.form.get('serviceHoursWednesdayOpen').disable();
+      this.form.get('serviceHoursThursdayOpen').disable();
+      this.form.get('serviceHoursFridayOpen').disable();
+      this.form.get('serviceHoursSaturdayOpen').disable();
+      this.form.get('serviceHoursSundayClose').disable();
+      this.form.get('serviceHoursMondayClose').disable();
+      this.form.get('serviceHoursTuesdayClose').disable();
+      this.form.get('serviceHoursWednesdayClose').disable();
+      this.form.get('serviceHoursThursdayClose').disable();
+      this.form.get('serviceHoursFridayClose').disable();
+      this.form.get('serviceHoursSaturdayClose').disable();
+
+    }
+  }
+
+  private getApplicationContent(contentCartegory: string) {
+    let body = '';
+    const contents =
+      this.application.applicationType.contentTypes
+        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.account.businessType) !== -1);
+    if (contents.length > 0) {
+      body = contents[0].body;
+    }
+    return body;
   }
 
   ngOnDestroy(): void {
@@ -307,18 +342,19 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     let valid = true;
     this.validationMessages = [];
 
-    if (this.mode !== CHANGE_OF_LOCATION_MODE)
-    {
+    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange) {
       if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
         valid = false;
         this.validationMessages.push('Associate form is required.');
       }
-      if (!this.financialIntegrityDocuments || !this.financialIntegrityDocuments.files || this.financialIntegrityDocuments.files.length < 1) {
+      if (!this.financialIntegrityDocuments
+        || !this.financialIntegrityDocuments.files
+        || this.financialIntegrityDocuments.files.length < 1) {
         valid = false;
         this.validationMessages.push('Financial Integrity form is required.');
       }
     }
-    
+
     if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
@@ -327,7 +363,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
-    if (this.mode !== CHANGE_OF_LOCATION_MODE && this.submittedApplications >= 8) {
+    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }

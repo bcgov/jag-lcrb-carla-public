@@ -26,7 +26,7 @@ export class LicenseDataService extends DataService {
   }
 
   createChangeOfLocationApplication(licenseId: string): Observable<Application> {
-    return this.http.post<Application>(this.apiPath + licenseId + "/create-change-of-location", null , { headers: this.headers });
+    return this.http.post<Application>(this.apiPath + licenseId + '/create-change-of-location', null , { headers: this.headers });
   }
 
 }
