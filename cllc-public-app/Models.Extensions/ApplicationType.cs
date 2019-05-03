@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -9,30 +10,35 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class ApplicationTypeExtensions
     {        
 
-        public static ApplicationType ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtype dynamicsApplicationType)
+        public static ApplicationType ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtype applicationType)
         {
             ApplicationType result = null;
-            if (dynamicsApplicationType != null)
+            if (applicationType != null)
             {
                 result = new ApplicationType()
                 {
-                    Id = dynamicsApplicationType.AdoxioApplicationtypeid,
+                    Id = applicationType.AdoxioApplicationtypeid,
                     
-                    ActionText = dynamicsApplicationType.AdoxioActiontext,
-                    Name = dynamicsApplicationType.AdoxioName,
-                    Title = dynamicsApplicationType.AdoxioTitletext,
-                    Preamble = dynamicsApplicationType.AdoxioPreamble,
-                    BeforeStarting = dynamicsApplicationType.AdoxioBeforestarting,
-                    NextSteps = dynamicsApplicationType.AdoxioNextsteps,
-                    ShowAssociatesFormUpload = dynamicsApplicationType.AdoxioIsshowassociatesformupload,
-                    ShowCurrentProperty = dynamicsApplicationType.AdoxioIsshowcurrentproperty,
-                    ShowDeclarations = dynamicsApplicationType.AdoxioIsshowdeclarations,
-                    ShowFinancialIntegrityFormUpload = dynamicsApplicationType.AdoxioIsshowfinancialintegrityformupload,
-                    ShowHoursOfSale = dynamicsApplicationType.AdoxioIsshowhoursofsale,
-                    ShowPropertyDetails = dynamicsApplicationType.AdoxioIsshowpropertydetails,
-                    ShowSupportingDocuments = dynamicsApplicationType.AdoxioIsshowsupportingdocuments
+                    ActionText = applicationType.AdoxioActiontext,
+                    Name = applicationType.AdoxioName,
+                    Title = applicationType.AdoxioTitletext,
+                    ShowAssociatesFormUpload = applicationType.AdoxioIsshowassociatesformupload,
+                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,
+                    ShowDeclarations = applicationType.AdoxioIsshowdeclarations,
+                    ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
+                    ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
+                    ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
+                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments
                 };
 
+                if(applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
+                {
+                    result.contentTypes = new List<ApplicationTypeContent>();
+                    foreach(var content in applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType)
+                    {
+                        result.contentTypes.Add(content.ToViewModel());
+                    }
+                }
                 /*
                 if (dynamicsApplicationType.AdoxioLicenceTypeId != null)
                 {
