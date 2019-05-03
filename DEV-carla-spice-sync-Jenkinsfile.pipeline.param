@@ -3,9 +3,9 @@
 # Jenkinsfile: ./Jenkinsfile
 # JSON Template File: https://raw.githubusercontent.com/BCDevOps/openshift-tools/master/provisioning/pipeline/resources/pipeline-build.json
 #=========================================================
-NAME=dev-spice-carla-sync
+NAME=dev-carla-spice-sync
 # GITHUB_WEBHOOK_SECRET=[a-zA-Z0-9]{40}
-SOURCE_REPOSITORY_URL=https://github.com/bcgov/jag-spd-spice.git
+SOURCE_REPOSITORY_URL=https://github.com/bcgov/jag-lcrb-carla-public.git
 SOURCE_REPOSITORY_REF=develop
 CONTEXT_DIR=
-JENKINSFILE_PATH=DEV-spice-carla-sync-Jenkinsfile
+JENKINSFILE_PATH=DEV-carla-spice-sync-Jenkinsfile
