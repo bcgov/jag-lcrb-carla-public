@@ -25,7 +25,7 @@
                 <p>
                   You can save the application and return later to complete and submit it with payment.
                 </p>
-                <a routerLink="/worker-qualification/application/{{currentApplication.id}}">
+                <a routerLink="/worker-qualification/application/{{currentApplication?.id}}">
                   {{currentApplication?.firstname}}
                   {{currentApplication?.middlename}}
                   {{currentApplication?.lastname}}
@@ -39,7 +39,7 @@
                 <p>
                   You can save the application and return later to complete and submit it with payment.
                 </p>
-                <a routerLink="/worker-qualification/application/{{currentApplication.id}}">
+                <a routerLink="/worker-qualification/application/{{currentApplication?.id}}">
                   {{currentApplication?.firstname}}
                   {{currentApplication?.middlename}}
                   {{currentApplication?.lastname}}
@@ -74,6 +74,14 @@
                 <p>
                   You have been issued a letter outlining the results of your application. For more information, please
                   refer to the letter.
+                </p>
+              </div>
+              <div *ngIf="currentApplication?.clientSideStatus === 'Approved'">
+                <p>
+                  Your worker security verification application has been approved.
+                </p>
+                <p>
+                  You have been sent a letter by email with more information. Please refer to the letter for details.
                 </p>
               </div>
 

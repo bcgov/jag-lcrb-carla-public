@@ -7,16 +7,16 @@
   </div>
   <div [formGroup]="form" class="application-wrapper">
     <section [innerHTML]="htmlContent?.preamble"></section>
-    <h3 *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore" class="blue-header">BEFORE STARTING
+    <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
       THE APPLICATION</h3>
-    <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore" class="padded-section">
+    <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
       <div [innerHTML]="htmlContent.beforeStarting"></div>
     </section>
     <h3 class="blue-header" *ngIf="application?.applicationType?.showPropertyDetails">PROPERTY DETAILS</h3>
     <section class="padded-section" *ngIf="application?.applicationType?.showPropertyDetails">
       <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
         <div [ngBusy]="busy"></div>
-        <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
+        <section *ngIf="htmlContent?.beforeStarting">
           <label for="">Establishment Name</label>
           <br>
 
