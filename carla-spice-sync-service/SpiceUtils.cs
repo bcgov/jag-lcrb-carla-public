@@ -162,11 +162,9 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         public async Task<Interfaces.Spice.Models.ApplicationScreeningRequest> GenerateApplicationScreeningRequest(string ApplicationId)
         {
-            // Query Dynamics for application data
             MicrosoftDynamicsCRMadoxioApplication application = await _dynamicsClient.GetApplicationByIdWithChildren(ApplicationId);
 
-            /* Create application */
-            Interfaces.Spice.Models.ApplicationScreeningRequest request = new Interfaces.Spice.Models.ApplicationScreeningRequest()
+            var request = new Interfaces.Spice.Models.ApplicationScreeningRequest()
             {
                 Name = application.AdoxioName,
                 JobNumber = application.AdoxioJobnumber,
@@ -190,16 +188,18 @@ namespace Gov.Lclb.Cllb.SpdSync
                     MiddleName = application.AdoxioContactmiddlename,
                     ContactEmail = application.AdoxioEmail,
                     ContactPhone = application.AdoxioContactpersonphone
-                },
-                ApplyingPerson = new Interfaces.Spice.Models.Contact()
+                }
+            };
+            if (application.AdoxioApplyingPerson != null)
+            {
+                request.ApplyingPerson = new Interfaces.Spice.Models.Contact()
                 {
                     FirstName = application.AdoxioApplyingPerson.Firstname,
                     MiddleName = application.AdoxioApplyingPerson.Middlename,
                     LastName = application.AdoxioApplyingPerson.Lastname,
                     ContactEmail = application.AdoxioApplyingPerson.Emailaddress1
-                }
-            };
-
+                };
+            }
             /* Add applicant details */
             if (application.AdoxioApplicant != null)
             {
@@ -229,12 +229,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                 };
             }
 
-            // get associates from dynamics
-            string applicationfilter = "_adoxio_application_value eq " + ApplicationId;
-            string[] expand = {"adoxio_Contact", "adoxio_legalentity_adoxio_previousaddress_LegalEntityId"};
-            try
+            string applicationfilter = "_adoxio_relatedapplication_value eq " + ApplicationId;
+            string[] expand = { "adoxio_Contact", "adoxio_legalentity_adoxio_previousaddress_LegalEntityId", "adoxio_RelatedApplication" };
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
+            if (legalEntities != null)
             {
-                IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
                 foreach (var legalEntity in legalEntities)
                 {
                     Interfaces.Spice.Models.LegalEntity associate = new Interfaces.Spice.Models.LegalEntity()
@@ -312,11 +312,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                     request.Associates.Add(associate);
                 }
             }
-            catch (OdataerrorException)
-            {
-                _logger.LogError("Error retrieving legal entities");
-            }
-
             return request;
         }
 
@@ -334,7 +329,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 SelfDisclosure =  worker.AdoxioSelfdisclosure, // (Interfaces.Spice.Models.WorkerScreeningRequest.General_YesNo)
                 Gender = worker.AdoxioGendercode, // (Interfaces.Spice.Models.WorkerScreeningRequest.Adoxio_GenderCode)
                 Birthplace = worker.AdoxioBirthplace,
-                //BCIdCardNumber = worker.AdoxioBcidcardnumber,
+                BcIdCardNumber = worker.AdoxioBcidcardnumber,
                 DriversLicence = worker.AdoxioDriverslicencenumber
             };
 
@@ -359,7 +354,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                         Country = worker.AdoxioContactId.Address1Country
                     }
                 };
-
             }
 
             // TODO - add aliases, previous addresses.
