@@ -72,7 +72,13 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                 applicationRequest
             };
 
-            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+            // use jsonconvert to convert to a string and back.
+
+            string jsonData = JsonConvert.SerializeObject(payload);
+
+            IList < Interfaces.Spice.Models.ApplicationScreeningRequest > newObj = JsonConvert.DeserializeObject<IList<Interfaces.Spice.Models.ApplicationScreeningRequest>>(jsonData);
+
+            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(newObj);
 
             _logger.LogError("Response code was");
 
