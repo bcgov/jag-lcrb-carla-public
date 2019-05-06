@@ -57,8 +57,10 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             _logger.LogError(jsonString);
 
             // send the data
-            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>();
-            payload.Add(workerRequest);
+            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
+            {
+                workerRequest
+            };
 
             var result = await _spiceUtils.SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
             

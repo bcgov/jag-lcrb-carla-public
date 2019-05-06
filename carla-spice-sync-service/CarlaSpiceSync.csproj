@@ -54,4 +54,7 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="models\Application.cs" />
+  </ItemGroup>
 </Project>
