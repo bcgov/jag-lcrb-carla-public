@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
             _logger.LogError("Starting SPICE Import Job for Application Screening..");
 
-             ImportApplicationResponses(hangfireContext, responses);
+            ImportApplicationResponses(hangfireContext, responses);
 
             hangfireContext.WriteLine("Done.");
             _logger.LogError("Done.");
@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             _logger.LogError("Done.");
         }
 
-        
+
 
         /// <summary>
         /// Import responses to Dynamics.
@@ -130,7 +130,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     // update the record.
                     MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
                     {
-                       
+
                     };
 
                     try
@@ -159,160 +159,30 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Generate an application screening request
         /// </summary>
         /// <returns></returns>
-
-        public async Task<Interfaces.Spice.Models.ApplicationScreeningRequest> GenerateApplicationScreeningRequest(string ApplicationId)
+        public async Task<ApplicationScreeningRequest> GenerateApplicationScreeningRequest(string applicationId)
         {
-            MicrosoftDynamicsCRMadoxioApplication application = await _dynamicsClient.GetApplicationByIdWithChildren(ApplicationId);
+            MicrosoftDynamicsCRMadoxioApplication application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
 
-            var request = new Interfaces.Spice.Models.ApplicationScreeningRequest()
+            var screeningRequest = CreateApplicationScreeningRequest(application);
+            List<LegalEntity> foundAssociates = new List<LegalEntity>();
+            var associates = CreateApplicationAssociatesScreeningRequest(applicationId, foundAssociates);
+            foreach (var associate in associates)
             {
-                Name = application.AdoxioName,
-                JobNumber = application.AdoxioJobnumber,
-                UrgentPriority = false,
-                //ApplicantType = Interfaces.Spice.Models.ApplicationScreeningRequest.Spice_ApplicantType.Cannabis,
-                DateSent = DateTimeOffset.Now,
-                BCeIDNumber = application.AdoxioBusinessnumber,
-                ApplicantName = application.AdoxioNameofapplicant,
-                Address = new Interfaces.Spice.Models.Address()
-                {
-                    AddressStreet1 = application.AdoxioAddressstreet,
-                    City = application.AdoxioAddresscity,
-                    StateProvince = application.AdoxioAddressprovince,
-                    Postal = application.AdoxioAddresspostalcode,
-                    Country = application.AdoxioAddresscountry
-                },
-                ContactPerson = new Interfaces.Spice.Models.Contact()
-                {
-                    FirstName = application.AdoxioContactpersonfirstname,
-                    LastName = application.AdoxioContactpersonlastname,
-                    MiddleName = application.AdoxioContactmiddlename,
-                    ContactEmail = application.AdoxioEmail,
-                    ContactPhone = application.AdoxioContactpersonphone
-                }
-            };
-            if (application.AdoxioApplyingPerson != null)
-            {
-                request.ApplyingPerson = new Interfaces.Spice.Models.Contact()
-                {
-                    FirstName = application.AdoxioApplyingPerson.Firstname,
-                    MiddleName = application.AdoxioApplyingPerson.Middlename,
-                    LastName = application.AdoxioApplyingPerson.Lastname,
-                    ContactEmail = application.AdoxioApplyingPerson.Emailaddress1
-                };
+                _logger.LogInformation(associate.Name);
+                _logger.LogInformation(associate.Aliases.ToString());
+                _logger.LogInformation(associate.Contact.ToString());
             }
-            /* Add applicant details */
-            if (application.AdoxioApplicant != null)
+            try
             {
-                request.Account = new Interfaces.Spice.Models.Account()
-                {
-                    Name = application.AdoxioApplicant.Name
-                };
+                screeningRequest.Associates.AddRange(associates);
+            }
+            catch (System.NullReferenceException ex)
+            {
+                _logger.LogError(ex.ToString());
             }
 
-            /* Add establishment */
-            if (application.AdoxioEstablishment != null)
-            {
-                request.Establishment = new Interfaces.Spice.Models.Establishment()
-                {
-                    Name = application.AdoxioEstablishmentpropsedname,
-                    PrimaryPhone = application.AdoxioEstablishmentphone,
-                    PrimaryEmail = application.AdoxioEstablishmentemail,
-                    ParcelId = application.AdoxioEstablishmentparcelid,
-                    Address = new Interfaces.Spice.Models.Address()
-                    {
-                        AddressStreet1 = application.AdoxioEstablishmentaddressstreet,
-                        City = application.AdoxioEstablishmentaddresscity,
-                        StateProvince = "BC",
-                        Postal = application.AdoxioEstablishmentaddresspostalcode,
-                        Country = "Canada"
-                    }
-                };
-            }
 
-            string applicationfilter = "_adoxio_relatedapplication_value eq " + ApplicationId;
-            string[] expand = { "adoxio_Contact", "adoxio_legalentity_adoxio_previousaddress_LegalEntityId", "adoxio_RelatedApplication" };
-
-            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
-            if (legalEntities != null)
-            {
-                foreach (var legalEntity in legalEntities)
-                {
-                    Interfaces.Spice.Models.LegalEntity associate = new Interfaces.Spice.Models.LegalEntity()
-                    {
-                        Name = legalEntity.AdoxioName,
-                        Contact = new Interfaces.Spice.Models.Contact()
-                        {
-                            FirstName = legalEntity.AdoxioFirstname,
-                            LastName = legalEntity.AdoxioLastname,
-                            MiddleName = legalEntity.AdoxioMiddlename,
-                            ContactEmail = legalEntity.AdoxioEmail,
-                            ContactPhone = legalEntity.AdoxioPhonenumber,
-                            Address = new Interfaces.Spice.Models.Address()
-                            {
-                                AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
-                                AddressStreet2 = legalEntity.AdoxioContact.Address1Line2,
-                                AddressStreet3 = legalEntity.AdoxioContact.Address1Line3,
-                                City = legalEntity.AdoxioContact.Address1City,
-                                StateProvince = legalEntity.AdoxioContact.Address1Stateorprovince,
-                                Postal = legalEntity.AdoxioContact.Address1Postalcode,
-                                Country = legalEntity.AdoxioContact.Address1Country
-                            }
-                        },
-                        //InterestPercentage = Convert.ToDecimal(legalEntity.AdoxioInterestpercentage),
-                        CommonVotingShares = legalEntity.AdoxioCommonvotingshares,
-                        DateSharesIssued = legalEntity.AdoxioDateofsharesissued,
-                        DateAppointed = legalEntity.AdoxioDateofappointment
-
-
-                        // Might be needed here but its not in the table? might only be needed for worker screening
-                        //RecordIdentifier = legalEntity.AdoxioLegalentityid, // TODO Should probably replace with non-Guid field
-                        //Name = legalEntity.AdoxioName,
-                        //GivenName = legalEntity.AdoxioFirstname,
-                        //Surname = legalEntity.AdoxioLastname,
-                        //SecondName = legalEntity.AdoxioMiddlename,
-                        //BirthDate = legalEntity.AdoxioDateofbirth,
-                        //Birthplace = legalEntity.AdoxioBirthplace,
-                        //BCIdCardNumber = legalEntity.AdoxioBcidcardnumber,
-                        //DriversLicence = legalEntity.AdoxioDriverslicencenumber,
-                        //SelfDisclosure = (General_YesNo)legalEntity.AdoxioSelfdisclosure,
-                        //Gender = (Adoxio_GenderCode)legalEntity.AdoxioGendercode,
-                        //ContactPhone = legalEntity.AdoxioPhonenumber,
-                        //ContactEmail = legalEntity.AdoxioEmail,
-                    };
-
-                    /* Add previous addresses */
-                    foreach (var address in legalEntity.AdoxioLegalentityAdoxioPreviousaddressLegalEntityId)
-                    {
-                        var newAddress = new Interfaces.Spice.Models.Address()
-                        {
-                            AddressStreet1 = address.AdoxioStreetaddress,
-                            City = address.AdoxioCity,
-                            StateProvince = address.AdoxioProvstate,
-                            Postal = address.AdoxioPostalcode,
-                            Country = address.AdoxioCountry,
-                            ToDate = address.AdoxioTodate,
-                            FromDate = address.AdoxioFromdate
-                        };
-                        associate.PreviousAddresses.Add(newAddress);
-                    }
-
-                    /* Add aliases */
-                    var aliases = legalEntity.AdoxioLegalentityAliases;
-                    foreach (var alias in aliases)
-                    {
-                        associate.Aliases.Add(new Interfaces.Spice.Models.Alias()
-                        {
-                            GivenName = alias.AdoxioFirstname,
-                            Surname = alias.AdoxioLastname,
-                            SecondName = alias.AdoxioMiddlename
-                        });
-                    }
-
-                    /* Add associate to application */
-                    request.Associates.Add(associate);
-                }
-            }
-            return request;
+            return screeningRequest;
         }
 
         public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId)
@@ -326,7 +196,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 RecordIdentifier = worker.AdoxioWorkerid,
                 Name = worker.AdoxioName,
                 BirthDate = worker.AdoxioDateofbirth,
-                SelfDisclosure =  worker.AdoxioSelfdisclosure, // (Interfaces.Spice.Models.WorkerScreeningRequest.General_YesNo)
+                SelfDisclosure = worker.AdoxioSelfdisclosure, // (Interfaces.Spice.Models.WorkerScreeningRequest.General_YesNo)
                 Gender = worker.AdoxioGendercode, // (Interfaces.Spice.Models.WorkerScreeningRequest.Adoxio_GenderCode)
                 Birthplace = worker.AdoxioBirthplace,
                 BcIdCardNumber = worker.AdoxioBcidcardnumber,
@@ -359,6 +229,183 @@ namespace Gov.Lclb.Cllb.SpdSync
             // TODO - add aliases, previous addresses.
 
             return request;
+        }
+
+        private ApplicationScreeningRequest CreateApplicationScreeningRequest(MicrosoftDynamicsCRMadoxioApplication application)
+        {
+            var screeningRequest = new ApplicationScreeningRequest()
+            {
+                Name = application.AdoxioName,
+                RecordIdentifier = application.AdoxioJobnumber,
+                UrgentPriority = false,
+                ApplicantType = ApplicationScreeningRequest.Spice_ApplicantType.Cannabis,
+                DateSent = DateTimeOffset.Now,
+                BCeIDNumber = application.AdoxioBusinessnumber,
+                ApplicantName = application.AdoxioNameofapplicant,
+                BusinessAddress = new Address()
+                {
+                    AddressStreet1 = application.AdoxioAddressstreet,
+                    City = application.AdoxioAddresscity,
+                    StateProvince = application.AdoxioAddressprovince,
+                    Postal = application.AdoxioAddresspostalcode,
+                    Country = application.AdoxioAddresscountry
+                },
+                ContactPerson = new Contact()
+                {
+                    FirstName = application.AdoxioContactpersonfirstname,
+                    LastName = application.AdoxioContactpersonlastname,
+                    MiddleName = application.AdoxioContactmiddlename,
+                    Email = application.AdoxioEmail,
+                    PhoneNumber = application.AdoxioContactpersonphone
+                }
+            };
+            if (application.AdoxioApplyingPerson != null)
+            {
+                screeningRequest.ApplyingPerson = new Contact()
+                {
+                    FirstName = application.AdoxioApplyingPerson.Firstname,
+                    MiddleName = application.AdoxioApplyingPerson.Middlename,
+                    LastName = application.AdoxioApplyingPerson.Lastname,
+                    Email = application.AdoxioApplyingPerson.Emailaddress1
+                };
+            }
+            /* Add applicant details */
+            if (application.AdoxioApplicant != null)
+            {
+                screeningRequest.ApplicantAccount = new Account()
+                {
+                    Name = application.AdoxioApplicant.Name
+                };
+            }
+
+            /* Add establishment */
+            if (application.AdoxioEstablishment != null)
+            {
+                screeningRequest.Establishment = new Establishment()
+                {
+                    Name = application.AdoxioEstablishmentpropsedname,
+                    PrimaryPhone = application.AdoxioEstablishmentphone,
+                    PrimaryEmail = application.AdoxioEstablishmentemail,
+                    ParcelId = application.AdoxioEstablishmentparcelid,
+                    Address = new Address()
+                    {
+                        AddressStreet1 = application.AdoxioEstablishmentaddressstreet,
+                        City = application.AdoxioEstablishmentaddresscity,
+                        StateProvince = "BC",
+                        Postal = application.AdoxioEstablishmentaddresspostalcode,
+                        Country = "Canada"
+                    }
+                };
+            }
+            screeningRequest.Associates = new List<LegalEntity>();
+            return screeningRequest;
+        }
+
+        private List<LegalEntity> CreateApplicationAssociatesScreeningRequest(string applicationId, List<LegalEntity> foundAssociates)
+        {
+            string applicationfilter = "_adoxio_relatedapplication_value eq " + applicationId;
+            string[] expand = { "adoxio_Contact" };
+
+            var legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
+            if (legalEntities != null)
+            {
+                foreach (var legalEntity in legalEntities)
+                {
+                    LegalEntity associate = new LegalEntity()
+                    {
+                        Name = legalEntity.AdoxioName,
+                        PreviousAddresses = new List<Address>(),
+                        Aliases = new List<Alias>(),
+                        InterestPercentage = Convert.ToDecimal(legalEntity.AdoxioInterestpercentage),
+                        CommonVotingShares = legalEntity.AdoxioCommonvotingshares,
+                        DateSharesIssued = legalEntity.AdoxioDateofsharesissued,
+                        DateAppointed = legalEntity.AdoxioDateofappointment
+
+
+                        // Might be needed here but its not in the table? might only be needed for worker screening
+                        //RecordIdentifier = legalEntity.AdoxioLegalentityid, // TODO Should probably replace with non-Guid field
+                        //Name = legalEntity.AdoxioName,
+                        //GivenName = legalEntity.AdoxioFirstname,
+                        //Surname = legalEntity.AdoxioLastname,
+                        //SecondName = legalEntity.AdoxioMiddlename,
+                        //BirthDate = legalEntity.AdoxioDateofbirth,
+                        //Birthplace = legalEntity.AdoxioBirthplace,
+                        //BCIdCardNumber = legalEntity.AdoxioBcidcardnumber,
+                        //DriversLicence = legalEntity.AdoxioDriverslicencenumber,
+                        //SelfDisclosure = (General_YesNo)legalEntity.AdoxioSelfdisclosure,
+                        //Gender = (Adoxio_GenderCode)legalEntity.AdoxioGendercode,
+                        //ContactPhone = legalEntity.AdoxioPhonenumber,
+                        //ContactEmail = legalEntity.AdoxioEmail,
+                    };
+                    if (legalEntity.AdoxioIsindividual != null && legalEntity.AdoxioIsindividual == 1)
+                    {
+                        associate.Contact = new Contact()
+                        {
+                            FirstName = legalEntity.AdoxioContact.Firstname,
+                            LastName = legalEntity.AdoxioContact.Lastname,
+                            MiddleName = legalEntity.AdoxioContact.Middlename,
+                            Email = legalEntity.AdoxioEmail,
+                            PhoneNumber = legalEntity.AdoxioPhonenumber,
+                            Address = new Address()
+                            {
+                                AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
+                                AddressStreet2 = legalEntity.AdoxioContact.Address1Line2,
+                                AddressStreet3 = legalEntity.AdoxioContact.Address1Line3,
+                                City = legalEntity.AdoxioContact.Address1City,
+                                StateProvince = legalEntity.AdoxioContact.Address1Stateorprovince,
+                                Postal = legalEntity.AdoxioContact.Address1Postalcode,
+                                Country = legalEntity.AdoxioContact.Address1Country
+                            }
+                        };
+                        /* Add previous addresses */
+                        var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
+                        foreach (var address in previousAddresses)
+                        {
+                            var newAddress = new Address()
+                            {
+                                AddressStreet1 = address.AdoxioStreetaddress,
+                                City = address.AdoxioCity,
+                                StateProvince = address.AdoxioProvstate,
+                                Postal = address.AdoxioPostalcode,
+                                Country = address.AdoxioCountry,
+                                ToDate = address.AdoxioTodate,
+                                FromDate = address.AdoxioFromdate
+                            };
+                            associate.PreviousAddresses.Add(newAddress);
+                        }
+
+                        /* Add aliases */
+                        var aliases = _dynamicsClient.Aliases.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
+                        foreach (var alias in aliases)
+                        {
+                            associate.Aliases.Add(new Alias()
+                            {
+                                GivenName = alias.AdoxioFirstname,
+                                Surname = alias.AdoxioLastname,
+                                SecondName = alias.AdoxioMiddlename
+                            });
+                        }
+                    }
+                    else
+                    {
+                        //var entities = _dynamicsClient.Legalentities.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
+                        //foreach (var alias in aliases)
+                        //{
+                        //    associate.Aliases.Add(new Alias()
+                        //    {
+                        //        GivenName = alias.AdoxioFirstname,
+                        //        Surname = alias.AdoxioLastname,
+                        //        SecondName = alias.AdoxioMiddlename
+                        //    });
+                        //}
+                        // Do the non individuals here
+                    }
+
+                    /* Add associate to application */
+                    foundAssociates.Add(associate);
+                }
+            }
+            return foundAssociates;
         }
     }
 }

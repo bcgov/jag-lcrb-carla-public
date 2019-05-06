@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using SpdSync.models;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -18,12 +19,14 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         private readonly IConfiguration Configuration;
         private readonly ILogger _logger;
         private readonly ILoggerFactory _loggerFactory;
+        private readonly SpiceUtils _spiceUtils;
 
         public ApplicationScreeningsController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
             _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationScreeningsController));
+            _spiceUtils = new SpiceUtils(Configuration, _loggerFactory);
         }
 
         /// <summary>
@@ -48,26 +51,37 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpPost("send/{applicationId}")]
         public async Task<ActionResult> SendApplicationScreeningResponse(string applicationId)
         {
-            // Generate the application request
-            SpiceUtils spiceUtils = new SpiceUtils(Configuration, _loggerFactory);
-            var applicationRequest = await spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+            var applicationRequest = new ApplicationScreeningRequest();
+            try
+            {
+                // Generate the application request
+                applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest();
+            };
+
 
             _logger.LogError("Data to send:");
             _logger.LogError(JsonConvert.SerializeObject(applicationRequest));
 
-            List<Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Interfaces.Spice.Models.ApplicationScreeningRequest>();
-            payload.Add(applicationRequest);
+            List<ApplicationScreeningRequest> payload = new List<ApplicationScreeningRequest>
+            {
+                applicationRequest
+            };
 
-            var result = await spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
 
             _logger.LogError("Response code was");
 
-            _logger.LogError("" + result.Response.StatusCode);
+            _logger.LogError(result.Response.StatusCode.ToString());
             _logger.LogError("Response text was");
             _logger.LogError(await result.Response.Content.ReadAsStringAsync());
 
             _logger.LogInformation("Done Send Application Screening");
-            return Ok();
+            return Ok(applicationRequest);
         }
 
 
