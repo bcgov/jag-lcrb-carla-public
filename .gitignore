@@ -1,3 +1,4 @@
+.env
 .DS_Store
 
 /cllc-interfaces-test/SharePoint/Properties/launchSettings.json
