@@ -25,8 +25,9 @@ export class LicenseDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
-  createChangeOfLocationApplication(licenseId: string): Observable<Application> {
-    return this.http.post<Application>(this.apiPath + licenseId + '/create-change-of-location', null , { headers: this.headers });
+  createApplicationForActionType(licenseId: string, applicationType: string): Observable<Application> {
+    const url = `${this.apiPath}${licenseId}/create-action-application/${applicationType}`;
+    return this.http.post<Application>(url, null, { headers: this.headers });
   }
 
 }

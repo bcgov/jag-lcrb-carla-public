@@ -115,7 +115,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
   doAction(licenceId: string, actionName: string) {
     // newLicenceApplicationData. = this.account.businessType;
-    this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
+    this.busy = this.licenceDataService.createApplicationForActionType(licenceId, actionName).subscribe(
       data => {
         this.router.navigateByUrl('/account-profile/' + data.id);
       },
@@ -126,26 +126,6 @@ export class ApplicationsAndLicencesComponent implements OnInit {
       }
     );
   }
-
-  changeLicenceLocation(application: Application) {
-    // create an application for relocation, linked to the given licence.
-
-    const licenceId = application.assignedLicence.id;
-
-    // newLicenceApplicationData. = this.account.businessType;
-    this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
-      data => {
-        this.router.navigateByUrl('/account-profile/' + data.id);
-      },
-      () => {
-        this.snackBar.open('Error starting a Change Licence Location Application', 'Fail',
-          { duration: 3500, panelClass: ['red-snackbar'] });
-        console.log('Error starting a Change Licence Location Application');
-      }
-    );
-
-  }
-
 
   downloadLicence() {
 
