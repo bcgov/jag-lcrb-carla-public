@@ -264,6 +264,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 applicationVM.AssignedLicence = dynamicsApplication.AdoxioAssignedLicence.ToViewModel(dynamicsClient);
             }
 
+            if (dynamicsApplication.AdoxioApplicationTypeId != null)
+            {
+                applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
+            }
+
             applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
 
             return applicationVM;
