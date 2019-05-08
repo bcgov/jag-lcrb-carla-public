@@ -49,6 +49,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="openshift\templates\carla-spice-sync-service\carla-spice-sync-service.build.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
