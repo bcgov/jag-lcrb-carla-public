@@ -49,13 +49,13 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("send/{applicationId}")]
-        public async Task<ActionResult> SendApplicationScreeningResponse(string applicationId)
+        public ActionResult SendApplicationScreeningResponse(string applicationId)
         {
             var applicationRequest = new ApplicationScreeningRequest();
             try
             {
                 // Generate the application request
-                applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+                applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
             }
             catch (Exception ex)
             {
@@ -64,23 +64,23 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             };
 
 
-            _logger.LogError("Data to send:");
-            _logger.LogError(JsonConvert.SerializeObject(applicationRequest));
+            //_logger.LogError("Data to send:");
+            //_logger.LogError(JsonConvert.SerializeObject(applicationRequest));
 
-            List<ApplicationScreeningRequest> payload = new List<ApplicationScreeningRequest>
-            {
-                applicationRequest
-            };
+            //List<ApplicationScreeningRequest> payload = new List<ApplicationScreeningRequest>
+            //{
+            //    applicationRequest
+            //};
 
-            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+            //var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
 
-            _logger.LogError("Response code was");
+            //_logger.LogError("Response code was");
 
-            _logger.LogError(result.Response.StatusCode.ToString());
-            _logger.LogError("Response text was");
-            _logger.LogError(await result.Response.Content.ReadAsStringAsync());
+            //_logger.LogError(result.Response.StatusCode.ToString());
+            //_logger.LogError("Response text was");
+            //_logger.LogError(await result.Response.Content.ReadAsStringAsync());
 
-            _logger.LogInformation("Done Send Application Screening");
+            //_logger.LogInformation("Done Send Application Screening");
             return Ok(applicationRequest);
         }
 

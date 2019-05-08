@@ -159,28 +159,15 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Generate an application screening request
         /// </summary>
         /// <returns></returns>
-        public async Task<ApplicationScreeningRequest> GenerateApplicationScreeningRequest(string applicationId)
+        public ApplicationScreeningRequest GenerateApplicationScreeningRequest(string applicationId)
         {
-            MicrosoftDynamicsCRMadoxioApplication application = await _dynamicsClient.GetApplicationByIdWithChildren(applicationId);
+            string appFilter = "adoxio_applicationid eq " + applicationId;
+            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant" };
+            var application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
 
             var screeningRequest = CreateApplicationScreeningRequest(application);
-            List<LegalEntity> foundAssociates = new List<LegalEntity>();
-            var associates = CreateApplicationAssociatesScreeningRequest(applicationId, foundAssociates);
-            foreach (var associate in associates)
-            {
-                _logger.LogInformation(associate.Name);
-                _logger.LogInformation(associate.Aliases.ToString());
-                _logger.LogInformation(associate.Contact.ToString());
-            }
-            try
-            {
-                screeningRequest.Associates.AddRange(associates);
-            }
-            catch (System.NullReferenceException ex)
-            {
-                _logger.LogError(ex.ToString());
-            }
-
+            var associates = CreateApplicationAssociatesScreeningRequest(application._adoxioApplicantValue, screeningRequest.Associates);
+            screeningRequest.Associates.AddRange(associates);
 
             return screeningRequest;
         }
@@ -196,8 +183,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 RecordIdentifier = worker.AdoxioWorkerid,
                 Name = worker.AdoxioName,
                 BirthDate = worker.AdoxioDateofbirth,
-                SelfDisclosure = worker.AdoxioSelfdisclosure, // (Interfaces.Spice.Models.WorkerScreeningRequest.General_YesNo)
-                Gender = worker.AdoxioGendercode, // (Interfaces.Spice.Models.WorkerScreeningRequest.Adoxio_GenderCode)
+                SelfDisclosure = worker.AdoxioSelfdisclosure,
+                Gender = worker.AdoxioGendercode,
                 Birthplace = worker.AdoxioBirthplace,
                 BcIdCardNumber = worker.AdoxioBcidcardnumber,
                 DriversLicence = worker.AdoxioDriverslicencenumber
@@ -274,6 +261,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 screeningRequest.ApplicantAccount = new Account()
                 {
+                    AccountId = application.AdoxioApplicant.Accountid,
                     Name = application.AdoxioApplicant.Name
                 };
             }
@@ -297,55 +285,29 @@ namespace Gov.Lclb.Cllb.SpdSync
                     }
                 };
             }
+
+            /* Add key personnel */
             screeningRequest.Associates = new List<LegalEntity>();
-            return screeningRequest;
-        }
-
-        private List<LegalEntity> CreateApplicationAssociatesScreeningRequest(string applicationId, List<LegalEntity> foundAssociates)
-        {
-            string applicationfilter = "_adoxio_relatedapplication_value eq " + applicationId;
+            string keypersonnelfilter = "_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1";
             string[] expand = { "adoxio_Contact" };
-
-            var legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
-            if (legalEntities != null)
+            var keyPersonnel = _dynamicsClient.Legalentities.Get(filter: keypersonnelfilter, expand: expand).Value;
+            if (keyPersonnel != null)
             {
-                foreach (var legalEntity in legalEntities)
+                foreach (var legalEntity in keyPersonnel)
                 {
-                    LegalEntity associate = new LegalEntity()
+                    LegalEntity person = new LegalEntity()
                     {
+                        EntityId = legalEntity.AdoxioLegalentityid,
                         Name = legalEntity.AdoxioName,
                         PreviousAddresses = new List<Address>(),
                         Aliases = new List<Alias>(),
-                        InterestPercentage = Convert.ToDecimal(legalEntity.AdoxioInterestpercentage),
-                        CommonVotingShares = legalEntity.AdoxioCommonvotingshares,
-                        DateSharesIssued = legalEntity.AdoxioDateofsharesissued,
-                        DateAppointed = legalEntity.AdoxioDateofappointment
-
-
-                        // Might be needed here but its not in the table? might only be needed for worker screening
-                        //RecordIdentifier = legalEntity.AdoxioLegalentityid, // TODO Should probably replace with non-Guid field
-                        //Name = legalEntity.AdoxioName,
-                        //GivenName = legalEntity.AdoxioFirstname,
-                        //Surname = legalEntity.AdoxioLastname,
-                        //SecondName = legalEntity.AdoxioMiddlename,
-                        //BirthDate = legalEntity.AdoxioDateofbirth,
-                        //Birthplace = legalEntity.AdoxioBirthplace,
-                        //BCIdCardNumber = legalEntity.AdoxioBcidcardnumber,
-                        //DriversLicence = legalEntity.AdoxioDriverslicencenumber,
-                        //SelfDisclosure = (General_YesNo)legalEntity.AdoxioSelfdisclosure,
-                        //Gender = (Adoxio_GenderCode)legalEntity.AdoxioGendercode,
-                        //ContactPhone = legalEntity.AdoxioPhonenumber,
-                        //ContactEmail = legalEntity.AdoxioEmail,
-                    };
-                    if (legalEntity.AdoxioIsindividual != null && legalEntity.AdoxioIsindividual == 1)
-                    {
-                        associate.Contact = new Contact()
+                        Contact = new Contact()
                         {
                             FirstName = legalEntity.AdoxioContact.Firstname,
                             LastName = legalEntity.AdoxioContact.Lastname,
                             MiddleName = legalEntity.AdoxioContact.Middlename,
-                            Email = legalEntity.AdoxioEmail,
-                            PhoneNumber = legalEntity.AdoxioPhonenumber,
+                            Email = legalEntity.AdoxioContact.Emailaddress1,
+                            PhoneNumber = legalEntity.AdoxioContact.Telephone1,
                             Address = new Address()
                             {
                                 AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
@@ -356,56 +318,133 @@ namespace Gov.Lclb.Cllb.SpdSync
                                 Postal = legalEntity.AdoxioContact.Address1Postalcode,
                                 Country = legalEntity.AdoxioContact.Address1Country
                             }
-                        };
-                        /* Add previous addresses */
-                        var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
-                        foreach (var address in previousAddresses)
-                        {
-                            var newAddress = new Address()
-                            {
-                                AddressStreet1 = address.AdoxioStreetaddress,
-                                City = address.AdoxioCity,
-                                StateProvince = address.AdoxioProvstate,
-                                Postal = address.AdoxioPostalcode,
-                                Country = address.AdoxioCountry,
-                                ToDate = address.AdoxioTodate,
-                                FromDate = address.AdoxioFromdate
-                            };
-                            associate.PreviousAddresses.Add(newAddress);
-                        }
-
-                        /* Add aliases */
-                        var aliases = _dynamicsClient.Aliases.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
-                        foreach (var alias in aliases)
-                        {
-                            associate.Aliases.Add(new Alias()
-                            {
-                                GivenName = alias.AdoxioFirstname,
-                                Surname = alias.AdoxioLastname,
-                                SecondName = alias.AdoxioMiddlename
-                            });
-                        }
-                    }
-                    else
-                    {
-                        //var entities = _dynamicsClient.Legalentities.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
-                        //foreach (var alias in aliases)
-                        //{
-                        //    associate.Aliases.Add(new Alias()
-                        //    {
-                        //        GivenName = alias.AdoxioFirstname,
-                        //        Surname = alias.AdoxioLastname,
-                        //        SecondName = alias.AdoxioMiddlename
-                        //    });
-                        //}
-                        // Do the non individuals here
-                    }
-
-                    /* Add associate to application */
-                    foundAssociates.Add(associate);
+                        },
+                        IsIndividual = true
+                    };
+                    screeningRequest.Associates.Add(person);
                 }
             }
-            return foundAssociates;
+            return screeningRequest;
+        }
+
+        private List<LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, List<LegalEntity> foundAssociates)
+        {
+            List<LegalEntity> newAssociates = new List<LegalEntity>();
+            string applicationfilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
+            foreach (var assoc in foundAssociates)
+            {
+                if (accountId != assoc.EntityId)
+                {
+                    applicationfilter += " and adoxio_legalentityid ne " + assoc.EntityId;
+                }
+            }
+            string[] expand = { "adoxio_Contact", "adoxio_Account" };
+
+            var legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
+            if (legalEntities != null)
+            {
+                foreach (var legalEntity in legalEntities)
+                {
+                    LegalEntity associate = CreateAssociate(legalEntity);
+                    newAssociates.Add(associate);
+                }
+            }
+            var newFoundAssociates = new List<LegalEntity>(foundAssociates);
+            newFoundAssociates.AddRange(newAssociates);
+            foreach (var assoc in newAssociates.ToList())
+            {
+                if (!assoc.IsIndividual)
+                {
+                    var moreAssociates = CreateApplicationAssociatesScreeningRequest(assoc.Account.AccountId, newFoundAssociates);
+                    assoc.Account.Associates = moreAssociates;
+                }
+            }
+            return newAssociates;
+        }
+
+        private LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
+        {
+            LegalEntity associate = new LegalEntity()
+            {
+                EntityId = legalEntity.AdoxioLegalentityid,
+                Name = legalEntity.AdoxioName,
+                PreviousAddresses = new List<Address>(),
+                Aliases = new List<Alias>()
+            };
+            if (legalEntity.AdoxioIsindividual != null && legalEntity.AdoxioIsindividual == 1 && legalEntity.AdoxioContact != null)
+            {
+                associate.IsIndividual = true;
+                associate.Contact = new Contact()
+                {
+                    FirstName = legalEntity.AdoxioContact.Firstname,
+                    LastName = legalEntity.AdoxioContact.Lastname,
+                    MiddleName = legalEntity.AdoxioContact.Middlename,
+                    Email = legalEntity.AdoxioContact.Emailaddress1,
+                    PhoneNumber = legalEntity.AdoxioContact.Telephone1,
+                    Address = new Address()
+                    {
+                        AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
+                        AddressStreet2 = legalEntity.AdoxioContact.Address1Line2,
+                        AddressStreet3 = legalEntity.AdoxioContact.Address1Line3,
+                        City = legalEntity.AdoxioContact.Address1City,
+                        StateProvince = legalEntity.AdoxioContact.Address1Stateorprovince,
+                        Postal = legalEntity.AdoxioContact.Address1Postalcode,
+                        Country = legalEntity.AdoxioContact.Address1Country
+                    }
+                };
+                /* Add previous addresses */
+                var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
+                foreach (var address in previousAddresses)
+                {
+                    var newAddress = new Address()
+                    {
+                        AddressStreet1 = address.AdoxioStreetaddress,
+                        City = address.AdoxioCity,
+                        StateProvince = address.AdoxioProvstate,
+                        Postal = address.AdoxioPostalcode,
+                        Country = address.AdoxioCountry,
+                        ToDate = address.AdoxioTodate,
+                        FromDate = address.AdoxioFromdate
+                    };
+                    associate.PreviousAddresses.Add(newAddress);
+                }
+
+                /* Add aliases */
+                var aliases = _dynamicsClient.Aliases.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
+                foreach (var alias in aliases)
+                {
+                    associate.Aliases.Add(new Alias()
+                    {
+                        GivenName = alias.AdoxioFirstname,
+                        Surname = alias.AdoxioLastname,
+                        SecondName = alias.AdoxioMiddlename
+                    });
+                }
+            }
+            else
+            {
+                if (legalEntity._adoxioShareholderaccountidValue != null)
+                {
+                    var account = _dynamicsClient.Accounts.Get(filter: "accountid eq " + legalEntity._adoxioShareholderaccountidValue).Value;
+                    associate.Account = new Account()
+                    {
+                        AccountId = account[0].Accountid,
+                        Name = account[0].Name,
+                        Associates = new List<LegalEntity>()
+                    };
+                }
+                else
+                {
+                    associate.Account = new Account()
+                    {
+                        AccountId = legalEntity.AdoxioAccount.Accountid,
+                        Name = legalEntity.AdoxioAccount.Name,
+                        Associates = new List<LegalEntity>()
+                    };
+                }
+                associate.IsIndividual = false;
+            }
+            return associate;
         }
     }
 }
