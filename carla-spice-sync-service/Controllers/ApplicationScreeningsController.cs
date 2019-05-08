@@ -52,11 +52,11 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpPost("send/{applicationId}")]
         public async Task<ActionResult> SendApplicationScreeningResponse(string applicationId)
         {
-            var applicationRequest = new ApplicationScreeningRequest();
+            var applicationRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest();
             try
             {
                 // Generate the application request
-                applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+                applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
             }
             catch (Exception ex)
             {
@@ -64,22 +64,12 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                 return BadRequest();
             };
 
-
-            _logger.LogError("Data to send:");
-            _logger.LogError(JsonConvert.SerializeObject(applicationRequest));
-
-            List<ApplicationScreeningRequest> payload = new List<ApplicationScreeningRequest>
+            List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest>
             {
                 applicationRequest
             };
 
-            // use jsonconvert to convert to a string and back.
-
-            string jsonData = JsonConvert.SerializeObject(payload);
-
-            IList < Interfaces.Spice.Models.ApplicationScreeningRequest > newObj = JsonConvert.DeserializeObject<IList<Interfaces.Spice.Models.ApplicationScreeningRequest>>(jsonData);
-
-            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(newObj);
+            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
 
             _logger.LogError("Response code was");
 
@@ -90,7 +80,5 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             _logger.LogInformation("Done Send Application Screening");
             return Ok(applicationRequest);
         }
-
-
     }
 }
