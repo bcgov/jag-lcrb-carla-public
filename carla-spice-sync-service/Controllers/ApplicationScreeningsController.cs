@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpPost("send/{applicationId}")]
         public async Task<ActionResult> SendApplicationScreeningResponse(string applicationId)
         {
-            var applicationRequest = new ApplicationScreeningRequest();
+            var applicationRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest();
             try
             {
                 // Generate the application request
@@ -63,35 +63,21 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                 return BadRequest();
             };
 
+            List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest>
+            {
+                applicationRequest
+            };
 
-            //_logger.LogError("Data to send:");
-            //_logger.LogError(JsonConvert.SerializeObject(applicationRequest));
+            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
 
-            //List<ApplicationScreeningRequest> payload = new List<ApplicationScreeningRequest>
-            //{
-            //    applicationRequest
-            //};
+            _logger.LogError("Response code was");
 
+            _logger.LogError(result.Response.StatusCode.ToString());
+            _logger.LogError("Response text was");
+            _logger.LogError(await result.Response.Content.ReadAsStringAsync());
 
-            //var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
-            // use jsonconvert to convert to a string and back.
-
-            string jsonData = JsonConvert.SerializeObject(applicationRequest);
-
-            IList < Interfaces.Spice.Models.ApplicationScreeningRequest > newObj = JsonConvert.DeserializeObject<IList<Interfaces.Spice.Models.ApplicationScreeningRequest>>(jsonData);
-
-            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(newObj);
-
-            //_logger.LogError("Response code was");
-
-            //_logger.LogError(result.Response.StatusCode.ToString());
-            //_logger.LogError("Response text was");
-            //_logger.LogError(await result.Response.Content.ReadAsStringAsync());
-
-            //_logger.LogInformation("Done Send Application Screening");
+            _logger.LogInformation("Done Send Application Screening");
             return Ok(applicationRequest);
         }
-
-
     }
 }
