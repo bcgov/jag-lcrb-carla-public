@@ -38,8 +38,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// Create a change of location application
-        [HttpPost("{licenceId}/create-change-of-location")]
-        public async Task<JsonResult> CreateChangeOfLocation(string licenceId)
+        [HttpPost("{licenceId}/create-action-application/{applicationTypeName}")]
+        public async Task<JsonResult> CreateApplicationForAction(string licenceId, string applicationTypeName)
         {
             // for association with current user
             string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName("CRS Location Change");
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(applicationTypeName);
 
                 MicrosoftDynamicsCRMadoxioApplication application = new MicrosoftDynamicsCRMadoxioApplication()
                 {
@@ -71,6 +71,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // get the previous application for the licence.
 
                 application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
+
+                 // set applicaiton type relationship 
+                var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
+                application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
                 // set license type relationship 
                 application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);

@@ -314,11 +314,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioApplication.AdoxioApplicanttype = (int?)item.ApplicantType;
             try
             {
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
-
                 // set license type relationship 
+                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
                 adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+
+                // set account relationship
                 adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+                
+                // set applicaiton type relationship 
+                var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
+                adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
+
+                // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
             }
             catch (OdataerrorException odee)
