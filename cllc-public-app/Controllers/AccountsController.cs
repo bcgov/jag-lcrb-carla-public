@@ -94,6 +94,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // query the BCeID API to get the business record.
             var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+            
+            _logger.LogDebug(LoggingEvents.Get, $"busine Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(business)}");
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(business?.businessNumber);
             if (cleanNumber != null)
@@ -348,6 +350,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+            _logger.LogDebug(LoggingEvents.Get, $"busine Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(bceidBusiness)}");
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
             if (cleanNumber != null)
             {
