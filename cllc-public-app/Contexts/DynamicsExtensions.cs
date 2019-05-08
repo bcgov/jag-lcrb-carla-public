@@ -195,41 +195,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         /// <summary>
-        /// Get a Account by their Guid
-        /// </summary>
-        /// <param name="system"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public static async Task<MicrosoftDynamicsCRMaccount> GetAccountById(this IDynamicsClient system, Guid id)
-        {
-            MicrosoftDynamicsCRMaccount result;
-            try
-            {
-                // fetch from Dynamics.
-                result = await system.Accounts.GetByKeyAsync(id.ToString());
-            }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
-            {
-                result = null;
-            }
-
-            // get the primary contact.
-            if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
-            {
-                try
-                {
-                    result.Primarycontactid = await system.GetContactById(Guid.Parse(result._primarycontactidValue));
-                }
-                catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
-                {
-                    result.Primarycontactid = null;
-                }
-            }
-            return result;
-        }
-
-
-        /// <summary>
         /// Get an Invoice by the Id
         /// </summary>
         /// <param name="system">Re</param>
@@ -282,35 +247,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
-        public static async Task<MicrosoftDynamicsCRMcontact> GetContactById(this IDynamicsClient system, Guid id)
-        {
-            MicrosoftDynamicsCRMcontact result;
-            try
-            {
-                // fetch from Dynamics.
-                result = await system.Contacts.GetByKeyAsync(id.ToString());
-            }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
-            {
-                result = null;
-            }
-            return result;
-        }
-
-        public static async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(this IDynamicsClient system, Guid id)
-        {
-            MicrosoftDynamicsCRMadoxioWorker result;
-            try
-            {
-                // fetch from Dynamics.
-                result = await system.Workers.GetByKeyAsync(id.ToString());
-            }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
-            {
-                result = null;
-            }
-            return result;
-        }
 
         public static async Task<MicrosoftDynamicsCRMadoxioAlias> GetAliasById(this IDynamicsClient system, Guid id)
         {
@@ -357,13 +293,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence" };
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
 
                 // fetch from Dynamics.
                 result = await system.Applications.GetByKeyAsync(id.ToString(), expand: expand);
 
                 if (result._adoxioLicencetypeValue != null)
                 {
+                    string filter = $" eq {result._adoxioLicencetypeValue}";
                     result.AdoxioLicenceType = system.GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
                 }
 
@@ -437,66 +374,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-
-        public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, Guid id)
-        {
-            return _dynamicsClient.GetAdoxioLicencetypeById(id.ToString());
-        }
-
-
-        public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(this IDynamicsClient _dynamicsClient, string id)
-        {
-            MicrosoftDynamicsCRMadoxioLicencetype result = null;
-
-            try
-            {
-                // EXPAND the list of application types for this licence type
-                string[] expand = { "adoxio_licencetypes_applicationtypes" };
-                result = _dynamicsClient.Licencetypes.GetByKey(adoxioLicencetypeid: id, expand: expand);
-                
-            }
-            catch (OdataerrorException)
-            {
-                result = null;
-            }
-
-            // additional pass to populate the applicationtypes licencetype.
-           /*
-           if (result.AdoxioLicencetypesApplicationtypes != null)
-           {
-               foreach (var item in result.AdoxioLicencetypesApplicationtypes)
-               {
-
-                   if (item._adoxioLicencetypeidValue != null)
-                   {
-                       item.AdoxioLicenceTypeId = _dynamicsClient.GetAdoxioLicencetypeById(item._adoxioLicencetypeidValue);
-                   }
-               }
-            }
-           */
-
-
-            return result;
-        }
-
-
-        public static MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(this IDynamicsClient _dynamicsClient, Guid id)
-        {
-            MicrosoftDynamicsCRMadoxioEstablishment result = null;
-
-            try
-            {
-                result = _dynamicsClient.Establishments.GetByKey(id.ToString());
-            }
-            catch (OdataerrorException)
-            {
-                result = null;
-            }
-
-            return result;
-        }
-
-
         public static MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeByName(this IDynamicsClient _dynamicsClient, string name)
         {
             MicrosoftDynamicsCRMadoxioLicencetype result = null;
@@ -505,6 +382,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             IEnumerable<MicrosoftDynamicsCRMadoxioLicencetype> licenceTypes = _dynamicsClient.Licencetypes.Get(filter: typeFilter).Value;
 
             result = licenceTypes.FirstOrDefault();
+
+            return result;
+        }
+
+        public static MicrosoftDynamicsCRMadoxioApplicationtype GetApplicationTypeByName(this IDynamicsClient _dynamicsClient, string name)
+        {
+            MicrosoftDynamicsCRMadoxioApplicationtype result = null;
+            string typeFilter = "adoxio_name eq '" + name + "'";
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplicationtype> applicationTypes = _dynamicsClient.Applicationtypes.Get(filter: typeFilter).Value;
+
+            result = applicationTypes.FirstOrDefault();
 
             return result;
         }

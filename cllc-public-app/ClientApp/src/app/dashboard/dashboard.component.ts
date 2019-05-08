@@ -8,6 +8,7 @@ import { ApplicationDataService } from '../services/application-data.service';
 import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { PaymentDataService } from '../services/payment-data.service';
+import { ApplicationType, ApplicationTypeNames } from '@app/models/application-type.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -89,6 +90,7 @@ export class DashboardComponent implements OnInit {
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Cannabis Retail Store',
       applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.CannabisRetailStore },
       account: this.account,
       servicehHoursStandardHours: false,
       serviceHoursSundayOpen: '09:00',

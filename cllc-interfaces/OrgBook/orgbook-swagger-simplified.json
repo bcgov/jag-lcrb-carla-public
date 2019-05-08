@@ -1,0 +1,1198 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OrgBook BC API",
+    "description": "OrgBook BC is a public, searchable directory of digital records for registered businesses in the Province of British Columbia. Over time, other government organizations and businesses will also begin to issue digital records through OrgBook BC. For example, permits and licenses issued by various government services.",
+    "termsOfService": "https://www2.gov.bc.ca/gov/content/data/open-data",
+    "contact": {
+      "email": "bcdevexchange@gov.bc.ca"
+    },
+    "license": {
+      "name": "Open Government License - British Columbia",
+      "url": "https://www2.gov.bc.ca/gov/content/data/open-data/api-terms-of-use-for-ogl-information"
+    },
+    "version": "v2"
+  },
+  "host": "orgbook.gov.bc.ca:443",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/search/autocomplete": {
+      "get": {
+        "description": "",
+        "operationId": "Search_Autocomplete",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "A query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "required": [
+                "count",
+                "results"
+              ],
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Address"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }    
+    }
+    
+	,"/search/credential/topic/facets": {
+	"get": {
+        "tags": [
+          "v2"
+        ],
+        "description": "We want facet_counts from the less-restricted queryset",
+        "operationId": "Search_CredentialTopicFacets",
+        "parameters": [
+          {
+            "name": "ordering",
+            "in": "query",
+            "description": "Which field to use when ordering the results.",
+            "type": "string"
+          },
+		  {
+            "name": "inactive",
+            "in": "query",
+            "description": "True to include inactive companies",
+            "type": "boolean"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "A page number within the paginated result set.",
+            "type": "integer"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "description": "Number of results to return per page.",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "required": [
+                "count",
+                "results"
+              ],
+              "properties": {
+                "count": {
+                  "type": "integer"
+                },
+                "next": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "previous": {
+                  "type": "string",
+                  "format": "uri",
+                  "x-nullable": true
+                },
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/CredentialTopicSearch"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "type": "object",
+      "required": [
+        "credential"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "addressee": {
+          "title": "Addressee",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "civic_address": {
+          "title": "Civic address",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "city": {
+          "title": "City",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "province": {
+          "title": "Province",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "postal_code": {
+          "title": "Postal code",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "country": {
+          "title": "Country",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "credential": {
+          "title": "Credential",
+          "type": "integer"
+        }
+      }
+    },
+    "Attribute": {
+      "type": "object",
+      "required": [
+        "credential"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "default": "text",
+          "minLength": 1
+        },
+        "format": {
+          "title": "Format",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "value": {
+          "title": "Value",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "credential": {
+          "title": "Credential",
+          "type": "integer"
+        }
+      }
+    },
+    "Credential": {
+      "type": "object",
+      "required": [
+        "wallet_id",
+        "topic",
+        "credential_type"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "wallet_id": {
+          "title": "Wallet id",
+          "type": "string",
+          "minLength": 1
+        },
+        "credential_def_id": {
+          "title": "Credential def id",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "cardinality_hash": {
+          "title": "Cardinality hash",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "effective_date": {
+          "title": "Effective date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "inactive": {
+          "title": "Inactive",
+          "type": "boolean"
+        },
+        "latest": {
+          "title": "Latest",
+          "type": "boolean"
+        },
+        "revoked": {
+          "title": "Revoked",
+          "type": "boolean"
+        },
+        "revoked_date": {
+          "title": "Revoked date",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "topic": {
+          "title": "Topic",
+          "type": "integer"
+        },
+        "credential_set": {
+          "title": "Credential set",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "credential_type": {
+          "title": "Credential type",
+          "type": "integer"
+        },
+        "revoked_by": {
+          "title": "Revoked by",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "related_topics": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Issuer": {
+      "title": "Issuer",
+      "type": "object",
+      "required": [
+        "did",
+        "name",
+        "abbreviation",
+        "email",
+        "url"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "has_logo": {
+          "title": "Has logo",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "did": {
+          "title": "Did",
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "minLength": 1
+        },
+        "abbreviation": {
+          "title": "Abbreviation",
+          "type": "string",
+          "minLength": 1
+        },
+        "email": {
+          "title": "Email",
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "title": "Url",
+          "type": "string",
+          "minLength": 1
+        },
+        "endpoint": {
+          "title": "Endpoint",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        }
+      }
+    },
+    "CredentialType": {
+      "type": "object",
+      "required": [
+        "issuer"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "issuer": {
+          "$ref": "#/definitions/Issuer"
+        },
+        "has_logo": {
+          "title": "Has logo",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "description": {
+          "title": "Description",
+          "type": "string",
+          "x-nullable": true
+        },
+        "credential_def_id": {
+          "title": "Credential def id",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "last_issue_date": {
+          "title": "Last issue date",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "url": {
+          "title": "Url",
+          "type": "string",
+          "x-nullable": true
+        },
+        "schema": {
+          "type": "object",
+          "required": [
+            "name",
+            "version",
+            "origin_did"
+          ],
+          "properties": {
+            "id": {
+              "title": "ID",
+              "type": "integer",
+              "readOnly": true
+            },
+            "create_timestamp": {
+              "title": "Create timestamp",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "update_timestamp": {
+              "title": "Update timestamp",
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true
+            },
+            "name": {
+              "title": "Name",
+              "type": "string",
+              "minLength": 1
+            },
+            "version": {
+              "title": "Version",
+              "type": "string",
+              "minLength": 1
+            },
+            "origin_did": {
+              "title": "Origin did",
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Name": {
+      "type": "object",
+      "required": [
+        "credential"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "text": {
+          "title": "Text",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "language": {
+          "title": "Language",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "credential": {
+          "title": "Credential",
+          "type": "integer"
+        }
+      }
+    },
+    "Schema": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "origin_did"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "name": {
+          "title": "Name",
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "title": "Version",
+          "type": "string",
+          "minLength": 1
+        },
+        "origin_did": {
+          "title": "Origin did",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "CredentialName": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "text": {
+          "title": "Text",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "language": {
+          "title": "Language",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "credential_id": {
+          "title": "Credential id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CredentialAutocomplete": {
+      "type": "object",
+      "required": [
+        "names"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialName"
+          }
+        },
+        "inactive": {
+          "title": "Inactive",
+          "type": "boolean"
+        }
+      }
+    },
+    "CredentialSet": {
+      "title": "Credential set",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "latest_credential_id": {
+          "title": "Latest credential id",
+          "type": "string",
+          "readOnly": true
+        },
+        "topic_id": {
+          "title": "Topic id",
+          "type": "string",
+          "readOnly": true
+        },
+        "first_effective_date": {
+          "title": "First effective date",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "last_effective_date": {
+          "title": "Last effective date",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        }
+      }
+    },
+    "CredentialAddress": {
+      "type": "object",
+      "properties": {
+        "province": {
+          "title": "Province",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "addressee": {
+          "title": "Addressee",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "country": {
+          "title": "Country",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "postal_code": {
+          "title": "Postal code",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "city": {
+          "title": "City",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "credential_id": {
+          "title": "Credential id",
+          "type": "string",
+          "readOnly": true
+        },
+        "civic_address": {
+          "title": "Civic address",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "CredentialAttribute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "minLength": 1
+        },
+        "format": {
+          "title": "Format",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "value": {
+          "title": "Value",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "credential_id": {
+          "title": "Credential id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CredentialTopic": {
+      "title": "Topic",
+      "type": "object",
+      "required": [
+        "source_id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "source_id": {
+          "title": "Source id",
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "CredentialNamedTopic": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "type",
+        "names"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "source_id": {
+          "title": "Source id",
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "minLength": 1
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialName"
+          }
+        }
+      }
+    },
+    "CredentialSearch": {
+      "type": "object",
+      "required": [
+        "wallet_id",
+        "credential_set",
+        "credential_type",
+        "addresses",
+        "attributes",
+        "names",
+        "topic",
+        "related_topics"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "effective_date": {
+          "title": "Effective date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "inactive": {
+          "title": "Inactive",
+          "type": "boolean"
+        },
+        "latest": {
+          "title": "Latest",
+          "type": "boolean"
+        },
+        "revoked": {
+          "title": "Revoked",
+          "type": "boolean"
+        },
+        "revoked_date": {
+          "title": "Revoked date",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "wallet_id": {
+          "title": "Wallet id",
+          "type": "string",
+          "minLength": 1
+        },
+        "credential_set": {
+          "$ref": "#/definitions/CredentialSet"
+        },
+        "credential_type": {
+          "$ref": "#/definitions/CredentialType"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialAddress"
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialAttribute"
+          }
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialName"
+          }
+        },
+        "topic": {
+          "$ref": "#/definitions/CredentialTopic"
+        },
+        "related_topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialNamedTopic"
+          }
+        }
+      }
+    },
+    "TopicAttribute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "minLength": 1
+        },
+        "format": {
+          "title": "Format",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "value": {
+          "title": "Value",
+          "type": "string",
+          "minLength": 1,
+          "x-nullable": true
+        },
+        "credential_id": {
+          "title": "Credential id",
+          "type": "string",
+          "readOnly": true
+        },
+        "credential_type_id": {
+          "title": "Credential type id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CredentialTopicExt": {
+      "title": "Topic",
+      "type": "object",
+      "required": [
+        "source_id",
+        "type",
+        "names",
+        "addresses",
+        "attributes"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "source_id": {
+          "title": "Source id",
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "minLength": 1
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialName"
+          }
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialAddress"
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopicAttribute"
+          }
+        }
+      }
+    },
+    "CredentialTopicSearch": {
+      "type": "object",
+      "required": [
+        "wallet_id",
+        "credential_set",
+        "credential_type",
+        "names",
+        "topic",
+        "related_topics"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "effective_date": {
+          "title": "Effective date",
+          "type": "string",
+          "format": "date-time"
+        },
+        "inactive": {
+          "title": "Inactive",
+          "type": "boolean"
+        },
+        "latest": {
+          "title": "Latest",
+          "type": "boolean"
+        },
+        "revoked": {
+          "title": "Revoked",
+          "type": "boolean"
+        },
+        "revoked_date": {
+          "title": "Revoked date",
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "wallet_id": {
+          "title": "Wallet id",
+          "type": "string",
+          "minLength": 1
+        },
+        "credential_set": {
+          "$ref": "#/definitions/CredentialSet"
+        },
+        "credential_type": {
+          "$ref": "#/definitions/CredentialType"
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialName"
+          }
+        },
+        "topic": {
+          "$ref": "#/definitions/CredentialTopicExt"
+        },
+        "related_topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CredentialNamedTopic"
+          }
+        }
+      }
+    },
+    "Topic": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "title": "ID",
+          "type": "integer",
+          "readOnly": true
+        },
+        "create_timestamp": {
+          "title": "Create timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "update_timestamp": {
+          "title": "Update timestamp",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "source_id": {
+          "title": "Source id",
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "title": "Type",
+          "type": "string",
+          "minLength": 1
+        },
+        "related_to": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          },
+          "readOnly": true
+        },
+        "related_from": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic"
+    }
+  },
+  "security": [
+    {
+      "basic": []
+    }
+  ]
+}
