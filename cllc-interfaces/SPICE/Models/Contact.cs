@@ -22,13 +22,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the Contact class.
         /// </summary>
-        public Contact(string firstName = default(string), string lastName = default(string), string middleName = default(string), string contactPhone = default(string), string contactEmail = default(string), Address address = default(Address))
+        public Contact(string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), Address address = default(Address))
         {
             FirstName = firstName;
             LastName = lastName;
             MiddleName = middleName;
-            ContactPhone = contactPhone;
-            ContactEmail = contactEmail;
+            CompanyName = companyName;
+            PhoneNumber = phoneNumber;
+            Email = email;
             Address = address;
             CustomInit();
         }
@@ -55,13 +56,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactPhone")]
-        public string ContactPhone { get; set; }
+        [JsonProperty(PropertyName = "companyName")]
+        public string CompanyName { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contactEmail")]
-        public string ContactEmail { get; set; }
+        [JsonProperty(PropertyName = "phoneNumber")]
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "email")]
+        public string Email { get; set; }
 
         /// <summary>
         /// </summary>

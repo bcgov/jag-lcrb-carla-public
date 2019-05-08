@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class Account
@@ -22,9 +24,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the Account class.
         /// </summary>
-        public Account(string name = default(string))
+        public Account(string accountId = default(string), string name = default(string), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
+            AccountId = accountId;
             Name = name;
+            Associates = associates;
             CustomInit();
         }
 
@@ -35,8 +39,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "accountId")]
+        public string AccountId { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "associates")]
+        public IList<LegalEntity> Associates { get; set; }
 
     }
 }
