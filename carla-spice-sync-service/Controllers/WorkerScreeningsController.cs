@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class WorkerScreeningsController : Controller
@@ -46,7 +47,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// Send a worker record to SPICE for test purposes.  Normally this would occur from a polling process.
         /// </summary>
         /// <returns></returns>
-        [HttpPost("send/{workerId}")]
+        [HttpPost("send/{workerId}")]        
         public async Task<ActionResult> SendWorkerScreeningRequest(string workerId )
         {
             // Generate the Worker Request.
@@ -73,6 +74,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             return Ok();
         }
 
+        
 
     }
 }
