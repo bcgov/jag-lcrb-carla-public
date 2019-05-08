@@ -21,7 +21,7 @@ import * as _moment from 'moment';
 import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '../services/account-data.service';
 import { DynamicsAccount } from '../models/dynamics-account.model';
-import { FormBase, postalRegex } from '../shared/form-base';
+import { FormBase } from '../shared/form-base';
 import { LegalEntityDataService } from '../services/legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 const moment = _rollupMoment || _moment;
