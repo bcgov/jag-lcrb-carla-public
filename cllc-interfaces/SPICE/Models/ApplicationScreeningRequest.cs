@@ -26,20 +26,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// Initializes a new instance of the ApplicationScreeningRequest
         /// class.
         /// </summary>
-        public ApplicationScreeningRequest(string name = default(string), string jobNumber = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Address address = default(Address), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), int? applicantType = default(int?), bool? urgentPriority = default(bool?), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), Account account = default(Account), Establishment establishment = default(Establishment), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        public ApplicationScreeningRequest(int? applicantType = default(int?), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
-            Name = name;
-            JobNumber = jobNumber;
-            ApplicantName = applicantName;
-            BCeIDNumber = bCeIDNumber;
-            Address = address;
-            ContactPerson = contactPerson;
-            ApplyingPerson = applyingPerson;
             ApplicantType = applicantType;
             UrgentPriority = urgentPriority;
-            DateSent = dateSent;
-            Account = account;
+            Name = name;
+            RecordIdentifier = recordIdentifier;
+            ApplicantName = applicantName;
+            BCeIDNumber = bCeIDNumber;
+            ApplicantAccount = applicantAccount;
+            BusinessAddress = businessAddress;
             Establishment = establishment;
+            ContactPerson = contactPerson;
+            ApplyingPerson = applyingPerson;
+            DateSent = dateSent;
             Associates = associates;
             CustomInit();
         }
@@ -48,41 +48,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "jobNumber")]
-        public string JobNumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "applicantName")]
-        public string ApplicantName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bCeIDNumber")]
-        public string BCeIDNumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address")]
-        public Address Address { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "contactPerson")]
-        public Contact ContactPerson { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "applyingPerson")]
-        public Contact ApplyingPerson { get; set; }
 
         /// <summary>
         /// </summary>
@@ -96,13 +61,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateSent")]
-        public System.DateTimeOffset? DateSent { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "account")]
-        public Account Account { get; set; }
+        [JsonProperty(PropertyName = "recordIdentifier")]
+        public string RecordIdentifier { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "applicantName")]
+        public string ApplicantName { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bCeIDNumber")]
+        public string BCeIDNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "applicantAccount")]
+        public Account ApplicantAccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "businessAddress")]
+        public Address BusinessAddress { get; set; }
 
         /// <summary>
         /// </summary>
@@ -111,8 +96,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "contactPerson")]
+        public Contact ContactPerson { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "applyingPerson")]
+        public Contact ApplyingPerson { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "dateSent")]
+        public System.DateTimeOffset? DateSent { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "associates")]
         public IList<LegalEntity> Associates { get; set; }
-
+        public static object Spice_ApplicantType { get; set; }
     }
 }
