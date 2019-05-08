@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <ProjectGuid>{98165f91-d16a-465c-bd81-c66af90dbfd5}</ProjectGuid>
+  </PropertyGroup>
+   <ItemGroup>
+    <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.20" />
+  </ItemGroup>
+
+</Project>

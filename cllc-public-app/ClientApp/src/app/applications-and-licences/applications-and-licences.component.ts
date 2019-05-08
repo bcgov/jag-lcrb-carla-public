@@ -14,8 +14,8 @@ import { DynamicsAccount } from './../models/dynamics-account.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
-export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
-export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
+// export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
+// export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
 
 
 const ACTIVE = 'Active';
@@ -34,8 +34,8 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
-  readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
-  readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
+  // readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
+  // readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
@@ -62,16 +62,16 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     this.licensedApplications = [];
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
-        ).subscribe(([applications, licenses]) => {
-      applications.forEach((application: ApplicationSummary | any) => {
+      ).subscribe(([applications, licenses]) => {
+        applications.forEach((application: ApplicationSummary | any) => {
           this.inProgressApplications.push(application);
-      });
+        });
 
-      licenses.forEach((licence: License | any) => {        
-        this.licensedApplications.push(licence);
-      });
+        licenses.forEach((licence: License | any) => {
+          this.licensedApplications.push(licence);
+        });
 
-    });
+      });
   }
 
   uploadMoreFiles(application: Application) {
@@ -114,49 +114,18 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   }
 
   doAction(licenceId: string, actionName: string) {
-      
-    
-    var mode = 'ChangeOfLocationMode';
-    if (actionName === 'CRS Transfer of Ownership') {
-      mode = "ChangeOfOwnershipMode";
-    }
-    if (actionName === 'CRS Location Change') {
-      mode = "ChangeOfLocationMode";
-    }
-    if (actionName === 'CRS Structural Change') {
-      mode = "StructuralChangeMode";
-    }
-
-      // newLicenceApplicationData. = this.account.businessType;
-      this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
-        data => {
-          this.router.navigateByUrl('/account-profile/' + data.id + ';mode=' + mode);
-        },
-        () => {
-          this.snackBar.open('Error starting a Change Licence Location Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          console.log('Error starting a Change Licence Location Application');
-        }
-      );
-  }
-
-  changeLicenceLocation(application: Application) {
-     // create an application for relocation, linked to the given licence.
-    
-    var licenceId = application.assignedLicence.id;
-
     // newLicenceApplicationData. = this.account.businessType;
-    this.busy = this.licenceDataService.createChangeOfLocationApplication(licenceId).subscribe(
-        data => {
-          this.router.navigateByUrl('/account-profile/' + data.id + ';mode=ChangeOfLocationMode');
-        },
-        () => {
-          this.snackBar.open('Error starting a Change Licence Location Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          console.log('Error starting a Change Licence Location Application');
-        }
-      );
-    
+    this.busy = this.licenceDataService.createApplicationForActionType(licenceId, actionName).subscribe(
+      data => {
+        this.router.navigateByUrl('/account-profile/' + data.id);
+      },
+      () => {
+        this.snackBar.open('Error starting a Change Licence Location Application', 'Fail',
+          { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a Change Licence Location Application');
+      }
+    );
   }
-
 
   downloadLicence() {
 
