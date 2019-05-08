@@ -7,6 +7,7 @@ namespace SpdSync.models
 {
     public class Account
     {
+        public string AccountId { get; set; }
         public string Name { get; set; }
         public List<LegalEntity> Associates { get; set; }
     }
