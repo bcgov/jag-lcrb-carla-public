@@ -113,6 +113,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "associates")]
         public IList<LegalEntity> Associates { get; set; }
-
+        public static object Spice_ApplicantType { get; set; }
     }
 }
