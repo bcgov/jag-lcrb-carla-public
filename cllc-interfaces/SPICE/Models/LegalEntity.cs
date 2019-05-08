@@ -24,14 +24,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the LegalEntity class.
         /// </summary>
-        public LegalEntity(Contact contact = default(Contact), string name = default(string), double? interestPercentage = default(double?), int? commonVotingShares = default(int?), System.DateTimeOffset? dateSharesIssued = default(System.DateTimeOffset?), System.DateTimeOffset? dateAppointed = default(System.DateTimeOffset?), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
+        public LegalEntity(string entityId = default(string), string name = default(string), bool? isIndividual = default(bool?), Contact contact = default(Contact), Account account = default(Account), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
         {
-            Contact = contact;
+            EntityId = entityId;
             Name = name;
-            InterestPercentage = interestPercentage;
-            CommonVotingShares = commonVotingShares;
-            DateSharesIssued = dateSharesIssued;
-            DateAppointed = dateAppointed;
+            IsIndividual = isIndividual;
+            Contact = contact;
+            Account = account;
             Aliases = aliases;
             PreviousAddresses = previousAddresses;
             CustomInit();
@@ -44,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "contact")]
-        public Contact Contact { get; set; }
+        [JsonProperty(PropertyName = "entityId")]
+        public string EntityId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -54,23 +53,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "interestPercentage")]
-        public double? InterestPercentage { get; set; }
+        [JsonProperty(PropertyName = "isIndividual")]
+        public bool? IsIndividual { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "commonVotingShares")]
-        public int? CommonVotingShares { get; set; }
+        [JsonProperty(PropertyName = "contact")]
+        public Contact Contact { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateSharesIssued")]
-        public System.DateTimeOffset? DateSharesIssued { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "dateAppointed")]
-        public System.DateTimeOffset? DateAppointed { get; set; }
+        [JsonProperty(PropertyName = "account")]
+        public Account Account { get; set; }
 
         /// <summary>
         /// </summary>
