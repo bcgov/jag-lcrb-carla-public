@@ -39,7 +39,7 @@ export class FormBase {
                 return null;
             }
             let pattern = new RegExp(CanadaPostalRegex);
-            if (country !== 'United States of America') {
+            if (country === 'United States of America') {
                 pattern = new RegExp(USPostalRegex);
             }
             const valueMatchesPattern = pattern.test(control.value);
