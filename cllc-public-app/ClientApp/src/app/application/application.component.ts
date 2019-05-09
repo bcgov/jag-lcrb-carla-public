@@ -338,6 +338,12 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   }
 
   isValid(): boolean {
+    // mark controls as touched
+    for (const c in this.form.controls) {
+      if (typeof (this.form.get(c).markAsTouched) === 'function') {
+        this.form.get(c).markAsTouched();
+      }
+    }
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = [];
@@ -367,7 +373,10 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }
-    return valid;
+    if (!this.form.valid) {
+      this.validationMessages.push('Some required fields have not been completed');
+    }
+    return valid && this.form.valid;
   }
 
   /**
