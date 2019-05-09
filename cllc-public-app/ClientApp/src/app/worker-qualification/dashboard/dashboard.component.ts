@@ -65,17 +65,7 @@ export class WorkerDashboardComponent implements OnInit {
       });
   }
   setClientSideStatus(worker: Worker) {
-    /*
-    [EnumMember(Value = "Application Incomplete")]
-        NotSubmitted = 845280002,
-        [EnumMember(Value = "Pending Review")]
-        PendingReview  = 845280003,
-        Active  = 1,
-        Withdrawn  = 845280004,
-        Rejected = 845280005,
-        Revoked = 845280000,
-        Expired  = 845280001,
-    */
+    worker.clientSideStatus = worker.status;
     if (!worker.paymentReceived) {
       worker.clientSideStatus = 'Not Completed';
     } else if (worker.paymentReceived
