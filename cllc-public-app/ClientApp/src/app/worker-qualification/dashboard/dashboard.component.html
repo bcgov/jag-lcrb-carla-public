@@ -56,11 +56,10 @@
               </div>
               <div *ngIf="currentApplication?.clientSideStatus === 'Active'">
                 <p>
-                  We've received your Worker Security Verification and Consent for Cannabis Security Screening
-                  application. You'll be contacted if you have submitted any incorrect or unclear information.
+                  Your worker security verification application has been approved.
                 </p>
                 <p>
-                  We'll let you know the result of your application as soon as it is available.
+                  You have been sent a letter by email with more information. Please refer to the letter for details.
                 </p>
                 <a class="btn btn-primary" [href]="'api/worker/' + currentApplication?.id + '/pdf'">
                   <i class="fas fa-download"></i>
@@ -74,14 +73,6 @@
                 <p>
                   You have been issued a letter outlining the results of your application. For more information, please
                   refer to the letter.
-                </p>
-              </div>
-              <div *ngIf="currentApplication?.clientSideStatus === 'Approved'">
-                <p>
-                  Your worker security verification application has been approved.
-                </p>
-                <p>
-                  You have been sent a letter by email with more information. Please refer to the letter for details.
                 </p>
               </div>
 
