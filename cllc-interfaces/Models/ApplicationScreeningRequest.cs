@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         /// <param name="applicantType">Possible values include: 'Cannabis',
         /// 'ESS'</param>
-        public ApplicationScreeningRequest(string applicantType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        public ApplicationScreeningRequest(SpiceApplicantType? applicantType = default(SpiceApplicantType?), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
             ApplicantType = applicantType;
             UrgentPriority = urgentPriority;
@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// Gets or sets possible values include: 'Cannabis', 'ESS'
         /// </summary>
         [JsonProperty(PropertyName = "applicantType")]
-        public string ApplicantType { get; set; }
+        public SpiceApplicantType? ApplicantType { get; set; }
 
         /// <summary>
         /// </summary>
