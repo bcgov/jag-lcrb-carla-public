@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿using CarlaSpiceSync.models;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
 using Hangfire.Console;
@@ -162,7 +163,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         public Interfaces.Spice.Models.ApplicationScreeningRequest GenerateApplicationScreeningRequest(string applicationId)
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
-            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant" };
+            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
             var application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
 
             var screeningRequest = CreateApplicationScreeningRequest(application);
@@ -183,8 +184,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 RecordIdentifier = worker.AdoxioWorkerid,
                 Name = worker.AdoxioName,
                 BirthDate = worker.AdoxioDateofbirth,
-                SelfDisclosure = worker.AdoxioSelfdisclosure,
-                Gender = worker.AdoxioGendercode,
+                SelfDisclosure = ((GeneralYesNo)worker.AdoxioSelfdisclosure).ToString(),
+                Gender = ((AdoxioGenderCode)worker.AdoxioGendercode).ToString(),
                 Birthplace = worker.AdoxioBirthplace,
                 BcIdCardNumber = worker.AdoxioBcidcardnumber,
                 DriversLicence = worker.AdoxioDriverslicencenumber
@@ -225,7 +226,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 Name = application.AdoxioName,
                 RecordIdentifier = application.AdoxioJobnumber,
                 UrgentPriority = false,
-                //ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest.Spice_ApplicantType.Cannabis,
+                ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
                 BCeIDNumber = application.AdoxioBusinessnumber,
                 ApplicantName = application.AdoxioNameofapplicant,
@@ -248,9 +249,16 @@ namespace Gov.Lclb.Cllb.SpdSync
             };
             if (application.AdoxioApplyingPerson != null)
             {
+                string companyName = null;
+                if (application.AdoxioApplyingPerson._parentcustomeridValue != null) {
+                    MicrosoftDynamicsCRMaccount company = _dynamicsClient.Accounts.Get(filter: "accountid eq " + application.AdoxioApplyingPerson._parentcustomeridValue).Value[0];
+                    companyName = company.Name;
+                }
                 screeningRequest.ApplyingPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
+                    ContactId = application.AdoxioApplyingPerson.Contactid,
                     FirstName = application.AdoxioApplyingPerson.Firstname,
+                    CompanyName = companyName,
                     MiddleName = application.AdoxioApplyingPerson.Middlename,
                     LastName = application.AdoxioApplyingPerson.Lastname,
                     Email = application.AdoxioApplyingPerson.Emailaddress1
@@ -295,32 +303,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 foreach (var legalEntity in keyPersonnel)
                 {
-                    Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity person = new Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity()
-                    {
-                        EntityId = legalEntity.AdoxioLegalentityid,
-                        Name = legalEntity.AdoxioName,
-                        PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
-                        Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>(),
-                        Contact = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
-                        {
-                            FirstName = legalEntity.AdoxioContact.Firstname,
-                            LastName = legalEntity.AdoxioContact.Lastname,
-                            MiddleName = legalEntity.AdoxioContact.Middlename,
-                            Email = legalEntity.AdoxioContact.Emailaddress1,
-                            PhoneNumber = legalEntity.AdoxioContact.Telephone1,
-                            Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
-                            {
-                                AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
-                                AddressStreet2 = legalEntity.AdoxioContact.Address1Line2,
-                                AddressStreet3 = legalEntity.AdoxioContact.Address1Line3,
-                                City = legalEntity.AdoxioContact.Address1City,
-                                StateProvince = legalEntity.AdoxioContact.Address1Stateorprovince,
-                                Postal = legalEntity.AdoxioContact.Address1Postalcode,
-                                Country = legalEntity.AdoxioContact.Address1Country
-                            }
-                        },
-                        IsIndividual = true
-                    };
+                    Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity person = CreateAssociate(legalEntity);
                     screeningRequest.Associates.Add(person);
                 }
             }
@@ -338,7 +321,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     applicationfilter += " and adoxio_legalentityid ne " + assoc.EntityId;
                 }
             }
-            string[] expand = { "adoxio_Contact", "adoxio_Account" };
+            string[] expand = { "adoxio_Contact", "adoxio_Account"};
 
             var legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
             if (legalEntities != null)
@@ -376,11 +359,18 @@ namespace Gov.Lclb.Cllb.SpdSync
                 associate.IsIndividual = true;
                 associate.Contact = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
+                    ContactId = legalEntity.AdoxioContact.Contactid,
                     FirstName = legalEntity.AdoxioContact.Firstname,
                     LastName = legalEntity.AdoxioContact.Lastname,
                     MiddleName = legalEntity.AdoxioContact.Middlename,
                     Email = legalEntity.AdoxioContact.Emailaddress1,
                     PhoneNumber = legalEntity.AdoxioContact.Telephone1,
+                    SelfDisclosure = (legalEntity.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioSelfdisclosure).ToString(),
+                    Gender = (legalEntity.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioGendercode).ToString(),
+                    Birthplace = legalEntity.AdoxioBirthplace,
+                    BirthDate = legalEntity.AdoxioDateofbirth,
+                    BcIdCardNumber = legalEntity.AdoxioBcidcardnumber,
+                    DriversLicenceNumber = legalEntity.AdoxioDriverslicencenumber,
                     Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,

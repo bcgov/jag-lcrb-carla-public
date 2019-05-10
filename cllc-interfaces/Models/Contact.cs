@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// 'No'</param>
         /// <param name="gender">Possible values include: 'Male', 'Female',
         /// 'Other'</param>
-        public Contact(string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address))
+        public Contact(string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), GeneralYesNo? selfDisclosure = default(GeneralYesNo?), AdoxioGenderCode? gender = default(AdoxioGenderCode?), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), Address address = default(Address))
         {
             ContactId = contactId;
             FirstName = firstName;
@@ -35,12 +35,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
             CompanyName = companyName;
             PhoneNumber = phoneNumber;
             Email = email;
-            DriversLicenceNumber = driversLicenceNumber;
-            BcIdCardNumber = bcIdCardNumber;
-            BirthDate = birthDate;
-            Birthplace = birthplace;
             SelfDisclosure = selfDisclosure;
             Gender = gender;
+            DriversLicenceNumber = driversLicenceNumber;
+            BcIdCardNumber = bcIdCardNumber;
             Address = address;
             CustomInit();
         }
@@ -86,6 +84,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         public string Email { get; set; }
 
         /// <summary>
+        /// Gets or sets possible values include: 'Yes', 'No'
+        /// </summary>
+        [JsonProperty(PropertyName = "selfDisclosure")]
+        public GeneralYesNo? SelfDisclosure { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'Male', 'Female', 'Other'
+        /// </summary>
+        [JsonProperty(PropertyName = "gender")]
+        public AdoxioGenderCode? Gender { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "driversLicenceNumber")]
         public string DriversLicenceNumber { get; set; }
@@ -94,28 +104,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "bcIdCardNumber")]
         public string BcIdCardNumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "birthDate")]
-        public System.DateTimeOffset? BirthDate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "birthplace")]
-        public string Birthplace { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'Yes', 'No'
-        /// </summary>
-        [JsonProperty(PropertyName = "selfDisclosure")]
-        public string SelfDisclosure { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'Male', 'Female', 'Other'
-        /// </summary>
-        [JsonProperty(PropertyName = "gender")]
-        public string Gender { get; set; }
 
         /// <summary>
         /// </summary>
