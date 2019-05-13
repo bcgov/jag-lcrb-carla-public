@@ -490,7 +490,8 @@
             <input type="checkbox" formControlName="signatureAgreement">
             <span class="error-states">*</span>
             <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
-              application is true and complete</div>
+              application is true and complete
+            </div>
           </section>
         </app-field>
       </div>
@@ -505,11 +506,15 @@
       </section>
 
       <div class="light-blue-bg">
-        <p>
-          The Province does not know how many application for a cannabis retail store license will be received.
-          Therefore,
-          it is difficult to predict how long applications will take to process. To minimize delays in processing,
-          applicants must make sure the application is complete before submitting it.
+        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+          The Province does not know how many application for a cannabis retail store licence will be received.
+          Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
+          processing, applicants must make sure the application is complete before submitting it.
+        </p>
+        <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+          The Province does not know how many applications for a cannabis marketing licence will be
+          received. Therefore, it is difficult to predict how long applications will take to process. To minimize
+          delays in processing, applicants must make sure the application is complete before submitting it.
         </p>
         <br>
         <p>
