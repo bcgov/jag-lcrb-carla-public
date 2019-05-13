@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost("send/{applicationId}")]
-        public async Task<ActionResult> SendApplicationScreeningResponse(string applicationId)
+        public async Task<ActionResult> SendApplicationScreeningRequest(string applicationId)
         {
             var applicationRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest();
             try
@@ -64,21 +64,14 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                 return BadRequest();
             };
 
-            List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest>
+           
+            var result = await _spiceUtils.SendApplicationScreeningRequest(applicationRequest);
+
+            if (result)
             {
-                applicationRequest
-            };
-
-            var result = await _spiceUtils.SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
-
-            _logger.LogError("Response code was");
-
-            _logger.LogError(result.Response.StatusCode.ToString());
-            _logger.LogError("Response text was");
-            _logger.LogError(await result.Response.Content.ReadAsStringAsync());
-
-            _logger.LogInformation("Done Send Application Screening");
-            return Ok(applicationRequest);
+                return Ok(applicationRequest);
+            }
+            return BadRequest();
         }
     }
 }
