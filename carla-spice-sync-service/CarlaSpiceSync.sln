@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{119DD60D-7160-4500-8BA1-E79FCEB40FFC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpiceClient", "..\cllc-interfaces\SPICE\SpiceClient.csproj", "{8766C58F-8616-4D94-A9A8-CDF8E2187AD4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiceClient", "..\cllc-interfaces\SPICE\SpiceClient.csproj", "{8766C58F-8616-4D94-A9A8-CDF8E2187AD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
