@@ -52,7 +52,6 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
 
-
             string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
             List<MicrosoftDynamicsCRMadoxioSpddatarow> result = null;
 
@@ -101,10 +100,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 _logger.LogError("Response code was");
                 _logger.LogError(spiceResult.Response.StatusCode.ToString());
-
-
-            }
-            
+           }
 
             hangfireContext.WriteLine("End of SPD Export Job.");
             _logger.LogError("End of SPD Export Job.");
@@ -137,8 +133,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             hangfireContext.WriteLine("Done.");
             _logger.LogError("Done.");
         }
-
-
 
         /// <summary>
         /// Import responses to Dynamics.
@@ -239,6 +233,52 @@ namespace Gov.Lclb.Cllb.SpdSync
             return screeningRequest;
         }
 
+        /// <summary>
+        /// Sends the application screening request to spice.
+        /// </summary>
+        /// <returns>The application screening request success boolean.</returns>
+        /// <param name="applicationRequest">Application request.</param>
+        public async Task<bool> SendApplicationScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
+        {
+            List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest>
+            {
+                applicationRequest
+            };
+
+            _logger.LogInformation($"Sending Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+            _logger.LogInformation($"Application has {applicationRequest.Associates.Count} associates");
+
+            var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+
+            _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+            _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+
+            return result.Response.StatusCode.ToString() == "OK";
+        }
+
+        /// <summary>
+        /// Sends the worker screening request to spice.
+        /// </summary>
+        /// <returns>The worker screening request success boolean.</returns>
+        /// <param name="workerScreeningRequest">Worker screening request.</param>
+        public async Task<bool> SendWorkerScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest workerScreeningRequest)
+        {
+            // send the data
+            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
+            {
+                workerScreeningRequest
+            };
+
+            _logger.LogInformation($"Sending Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+
+            var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+
+            _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+            _logger.LogInformation($"Done Send Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+
+            return result.Response.StatusCode.ToString() == "OK";
+        }
+
         public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId)
         {
             // Query Dynamics for application data
@@ -262,6 +302,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 request.Contact = new Interfaces.Spice.Models.Contact()
                 {
+                    ContactId = worker.AdoxioContactId.Contactid,
                     FirstName = worker.AdoxioContactId.Firstname,
                     LastName = worker.AdoxioContactId.Lastname,
                     MiddleName = worker.AdoxioContactId.Middlename,
