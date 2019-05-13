@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit {
   window = window;
   busy: Subscription;
+  isMarketerLicence = true;
 
   constructor(private titleService: Title) { }
 
