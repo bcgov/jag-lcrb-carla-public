@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -124,18 +125,39 @@ namespace Gov.Lclb.Cllb.Public.Models
             
         }
 
-        public static void PopulateLicenceType(this MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient)
+        private static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceType(string id, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
+        {
+            string cacheKey = CacheKeys.LicenceTypePrefix + id;
+            if (! memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+            {                
+                // Key not in cache, so get data.
+                result = dynamicsClient.GetAdoxioLicencetypeById(id);
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromDays(365));
+                // Save data in cache.
+                memoryCache.Set(cacheKey, result, cacheEntryOptions);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Get the licence type
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="dynamicsClient"></param>
+        /// <param name="memoryCache"></param>
+        public static void PopulateLicenceType(this MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
         {
             if (application._adoxioLicencetypeValue != null)
             {
-                application.AdoxioLicenceType = dynamicsClient.GetAdoxioLicencetypeById(application._adoxioLicencetypeValue);
+                application.AdoxioLicenceType = GetCachedLicenceType(application._adoxioLicencetypeValue, dynamicsClient, memoryCache);
             }
             
             if (application.AdoxioAssignedLicence != null && application.AdoxioAssignedLicence._adoxioLicencetypeValue != null)
             {
-                application.AdoxioAssignedLicence.AdoxioLicenceType = dynamicsClient.GetAdoxioLicencetypeById(application.AdoxioAssignedLicence._adoxioLicencetypeValue);
+                application.AdoxioAssignedLicence.AdoxioLicenceType = GetCachedLicenceType(application.AdoxioAssignedLicence._adoxioLicencetypeValue, dynamicsClient, memoryCache);
             }
-
         }
 
         public async static Task<Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient)
