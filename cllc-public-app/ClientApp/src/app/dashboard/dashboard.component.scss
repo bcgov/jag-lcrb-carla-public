@@ -82,4 +82,20 @@ li {
     .large-screen-only {
         display: none;
     }
-}  
+} 
+
+.start-application {
+    border-spacing: 1px 3px;
+    border-collapse: separate;
+    width: 100%;
+    margin-bottom: 20px;
+    td,
+    th {
+        background-color: #F1F4FA;
+        color: #000;
+        padding: 10px;
+    }
+    th {
+        text-align: center;
+    }
+}

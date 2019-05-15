@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { 
+import {
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -151,6 +151,8 @@ import {
   ApplicationsAndLicencesComponent,
   ApplicationCancellationDialogComponent
 } from './applications-and-licences/applications-and-licences.component';
+import { AppRemoveIfFeatureOnDirective } from './directives/remove-if-feature-on.directive';
+import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-off.directive';
 
 @NgModule({
   declarations: [
@@ -228,7 +230,9 @@ import {
     SolePropResultsComponent,
     IndividualAssociatesResultsComponent,
     OrganizationResultsComponent,
-    BusinessProfileComponent
+    BusinessProfileComponent,
+    AppRemoveIfFeatureOnDirective,
+    AppRemoveIfFeatureOffDirective
   ],
   imports: [
     ChartsModule,
@@ -321,7 +325,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     NgbModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AccountDataService,

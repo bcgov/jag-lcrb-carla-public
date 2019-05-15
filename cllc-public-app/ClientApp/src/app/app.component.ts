@@ -12,6 +12,7 @@ import { AppState } from './app-state/models/app-state';
 import { Observable } from '../../node_modules/rxjs';
 import * as CurrentUserActions from './app-state/actions/current-user.action';
 import { filter } from 'rxjs/operators';
+import { FeatureFlagService } from '@services/feature-flag.service';
 
 @Component({
   selector: 'app-root',
@@ -33,9 +34,13 @@ export class AppComponent implements OnInit {
     private router: Router,
     private userDataService: UserDataService,
     private store: Store<AppState>,
-    private adoxioLegalEntityDataService: LegalEntityDataService
+    private adoxioLegalEntityDataService: LegalEntityDataService,
+    public featureFlagService: FeatureFlagService
   ) {
     this.isDevMode = isDevMode();
+    if (!featureFlagService.initialized) {
+      featureFlagService.initialize();
+    }
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const prevSlug = this.previousUrl;

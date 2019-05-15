@@ -119,4 +119,23 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
+  startNewMarketerApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Marketer',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.Marketer },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
+      },
+      () => {
+        this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a New Marketer Application');
+      }
+    );
+  }
 }
