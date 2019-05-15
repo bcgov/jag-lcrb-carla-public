@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { ApplicationDataService } from '@app/services/application-data.service';
@@ -6,7 +6,7 @@ import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
 import { Application } from '@app/models/application.model';
 import { ApplicationSummary } from '@app/models/application-summary.model';
-import { ApplicationType } from '@app/models/application-type.model';
+import { ApplicationType, ApplicationTypeNames } from '@app/models/application-type.model';
 import { License } from '@app/models/license.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
@@ -40,6 +40,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   busy: Subscription;
   @Input() applicationInProgress: boolean;
   @Input() account: DynamicsAccount;
+  @Output() marketerApplicationExists: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataLoaded = false;
 
   constructor(
@@ -70,6 +71,12 @@ export class ApplicationsAndLicencesComponent implements OnInit {
         licenses.forEach((licence: License | any) => {
           this.licensedApplications.push(licence);
         });
+
+        // let marketerApplicationExists = !!applications.find((a: any) => a.applicationType.name === ApplicationTypeNames.Marketer);
+        // marketerApplicationExists = marketerApplicationExists
+        //   || !!licenses.find((a: any) => a.licenseType === ApplicationTypeNames.Marketer);
+        //   debugger;
+        // this.marketerApplicationExists.emit(marketerApplicationExists);
 
       });
   }
