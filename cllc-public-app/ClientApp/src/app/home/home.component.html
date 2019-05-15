@@ -4,7 +4,7 @@
     <div class="home-margins">
       <div class="row">
         <div class="col-md-8 col-sm-12">
-          <div *ngIf="!isMarketerLicence" class="jumbotron">
+          <div appRemoveIfFeatureOn="Marketer" class="jumbotron">
             <h2>
               Apply for a cannabis retail store licence
             </h2>
@@ -27,7 +27,7 @@
               </button>
             </div>
           </div>
-          <div *ngIf="isMarketerLicence" class="jumbotron">
+          <div appRemoveIfFeatureOff="Marketer" class="jumbotron">
             <h2>
               Apply for a cannabis licence
             </h2>
@@ -57,8 +57,8 @@
               <button mat-fab class="fab-button mat-elevation-z0">
                 <mat-icon class="icon" aria-label="help icon">help</mat-icon>
               </button>
-              <h2  *ngIf="!isMarketerLicence">What does an applicant need to apply for a cannabis licence?</h2>
-              <h2  *ngIf="isMarketerLicence">What does an applicant need to apply for a cannabis retail store licence?</h2>
+              <h2  appRemoveIfFeatureOn="Marketer">What does an applicant need to apply for a cannabis licence?</h2>
+              <h2  appRemoveIfFeatureOff="Marketer">What does an applicant need to apply for a cannabis retail store licence?</h2>
             </section>
             <p>Answer questions about the proposed business to receive a customized to-do list to prepare an
               application.</p>
@@ -98,10 +98,10 @@
               </table>
             </section>
             <p style="padding-top: 30px;">
-              <span *ngIf="!isMarketerLicence">
+              <span appRemoveIfFeatureOn="Marketer">
                 The number of applications received and where they are in the process. Updated weekly.
               </span>
-              <span *ngIf="isMarketerLicence">
+              <span appRemoveIfFeatureOff="Marketer">
                 The number of cannabis retail store licence applications received and where they are in the process. Updated weekly.
               </span>
             </p>
