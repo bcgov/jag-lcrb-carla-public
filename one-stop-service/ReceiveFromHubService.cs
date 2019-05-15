@@ -124,7 +124,8 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             // check to see if it is simply a problem with an old account number.
 
-            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.
+            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409") // Old account number.
+                || errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists 
             {
                 _logger.LogInformation("Error is old account number is already associated with another account.");
                 // retry the request with a higher increment.
