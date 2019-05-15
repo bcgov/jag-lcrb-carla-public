@@ -469,21 +469,23 @@ namespace Gov.Lclb.Cllb.OneStopService
         public static int GetSuffixFromPartnerNote(string partnerNote, ILogger logger)
         {
             int result = 0;
-            string[] parts = partnerNote.Split("-");
-            if (parts.Length > 1)
+            int strPos = partnerNote.LastIndexOf("-");
+            if (strPos > -1)
             {
-                string suffix = parts[1];
+                string suffix = partnerNote.Substring(strPos + 1);
+
                 suffix = suffix.TrimStart('0');
-                if (! int.TryParse(suffix, out result))
+                if (!int.TryParse(suffix, out result))
                 {
                     logger.LogError($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
                 }
             }
+            
             return result;
         }
 
         /// <summary>
-        /// Extract a  from a partnerNote.
+        /// Extract a Licence Number from a partnerNote.
         /// </summary>
         /// <param name="partnerNote"></param>
         /// <returns></returns>
