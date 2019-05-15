@@ -372,6 +372,17 @@ namespace Gov.Lclb.Cllb.OneStopService
                 result = null;
             }
 
+            if (result!= null && result.AdoxioLicencee != null)
+            {
+                if (! string.IsNullOrEmpty(result.AdoxioLicencee._primarycontactidValue))
+                {
+                    // get the contact.
+                    var runner = _dynamics.GetContactById(Guid.Parse(result.AdoxioLicencee._primarycontactidValue));
+                    runner.Wait();                    
+                    result.AdoxioLicencee.Primarycontactid = runner.Result;
+                }
+            }
+
             return result;
         }
 
