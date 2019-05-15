@@ -195,33 +195,19 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.subscriptions.push(sub);
   }
   private hideFormControlByType() {
-    if (this.application.applicationType.name === ApplicationTypeNames.CRSTransferofOwnership) {
+    if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
       this.form.get('establishmentAddressCity').disable();
       this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentName').disable();
       this.form.get('establishmentParcelId').disable();
-
-      this.form.get('serviceHoursSundayOpen').disable();
-      this.form.get('serviceHoursMondayOpen').disable();
-      this.form.get('serviceHoursTuesdayOpen').disable();
-      this.form.get('serviceHoursWednesdayOpen').disable();
-      this.form.get('serviceHoursThursdayOpen').disable();
-      this.form.get('serviceHoursFridayOpen').disable();
-      this.form.get('serviceHoursSaturdayOpen').disable();
-      this.form.get('serviceHoursSundayClose').disable();
-      this.form.get('serviceHoursMondayClose').disable();
-      this.form.get('serviceHoursTuesdayClose').disable();
-      this.form.get('serviceHoursWednesdayClose').disable();
-      this.form.get('serviceHoursThursdayClose').disable();
-      this.form.get('serviceHoursFridayClose').disable();
-      this.form.get('serviceHoursSaturdayClose').disable();
     }
 
-    if (this.application.applicationType.name === ApplicationTypeNames.CRSLocationChange) {
-
+    if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentName').disable();
+    }
 
+    if (!this.application.applicationType.showHoursOfSale) {
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
       this.form.get('serviceHoursTuesdayOpen').disable();
@@ -236,7 +222,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       this.form.get('serviceHoursThursdayClose').disable();
       this.form.get('serviceHoursFridayClose').disable();
       this.form.get('serviceHoursSaturdayClose').disable();
-
     }
   }
 
@@ -348,28 +333,31 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     let valid = true;
     this.validationMessages = [];
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange) {
-      if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
-        valid = false;
-        this.validationMessages.push('Associate form is required.');
-      }
-      if (!this.financialIntegrityDocuments
-        || !this.financialIntegrityDocuments.files
-        || this.financialIntegrityDocuments.files.length < 1) {
-        valid = false;
-        this.validationMessages.push('Financial Integrity form is required.');
-      }
+    if (this.application.applicationType.showAssociatesFormUpload &&
+      (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1)) {
+      valid = false;
+      this.validationMessages.push('Associate form is required.');
     }
 
-    if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
+    if (this.application.applicationType.showFinancialIntegrityFormUpload &&
+      (!this.financialIntegrityDocuments
+        || !this.financialIntegrityDocuments.files
+        || this.financialIntegrityDocuments.files.length < 1)) {
+      valid = false;
+      this.validationMessages.push('Financial Integrity form is required.');
+    }
+
+    if (this.application.applicationType.showSupportingDocuments &&
+      (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
     }
-    if (!this.form.get('establishmentName').value) {
+
+    if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
-    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange && this.submittedApplications >= 8) {
+    if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }

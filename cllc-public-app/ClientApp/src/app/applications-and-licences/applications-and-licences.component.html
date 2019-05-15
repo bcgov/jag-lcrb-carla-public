@@ -3,12 +3,9 @@
   <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS AND LICENCES</h3>
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
     <section>
-      <div class="space-between" style="padding: 10px;">
-        <p>Submit an Cannabis Retail Store Application and track the status below.</p>
-        <section style="padding-left: 20px;">
-          <ng-content></ng-content>
-        </section>
-      </div>
+
+      <ng-content></ng-content>
+
       <mat-tab-group
         [selectedIndex]="(inProgressApplications?.length > 0 || licensedApplications?.length == 0) ? 0 : 1">
         <mat-tab label="In Progress Applications">
@@ -99,21 +96,21 @@
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
-                     (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Cancel Application</span>
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Relocation Initiated'" style="margin-top: 5px;"
-                     (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Cancel Relocation</span>
                   </a>
                 </div>
                 <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
-                     (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
                   <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Cancel Transfer</span>
@@ -126,7 +123,8 @@
         Application
       </a>
     </div> -->
-                <div *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
+                <div
+                  *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
                   <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
                     <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Add Supporting Documents</span>
@@ -134,7 +132,7 @@
                 </div>
             </tr>
           </table>
-          <p></p>          
+          <p></p>
         </mat-tab>
         <mat-tab label="Licensed Stores">
           <p *ngIf="licensedApplications?.length > 0">Here are your current approved Cannabis Retail Store Licences.
@@ -164,30 +162,28 @@
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <a *ngIf="item.applicationStatus == PAYMENT_REQUIRED" href="javascript:void(0);"
-                   (click)="payLicenceFee(item)">
+                  (click)="payLicenceFee(item)">
                   <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
                 </a>
                 <a *ngIf="item.applicationStatus == RENEWAL_DUE" href="javascript:void(0);"
-                   (click)="renewLicence(item)">
+                  (click)="renewLicence(item)">
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>Renew Licence</span>
                 </a>
                 <a *ngIf="item.applicationStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
-                   [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'"
-                   download>
+                  [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                 </a>
                 <div *ngIf="item.applicationStatus != PAYMENT_REQUIRED">
                   <p *ngFor="let action of item.allowedActions">
-                    <a href="javascript:void(0);"
-                       (click)="doAction(item.licenseId,action.name)">
+                    <a href="javascript:void(0);" (click)="doAction(item.licenseId,action.name)">
                       <span><i class="fas fa-sync" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
 
                     </a>
                   </p>
                 </div>
 
-               
-                
+
+
               </td>
             </tr>
           </table>
