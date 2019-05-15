@@ -22,5 +22,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string JobNumber { get; set; } //adoxio_jobnumber
 
+        public string ApplicationTypeName { get; set; }
+
     }
 }
