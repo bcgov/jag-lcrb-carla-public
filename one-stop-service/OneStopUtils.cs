@@ -473,9 +473,10 @@ namespace Gov.Lclb.Cllb.OneStopService
             if (parts.Length > 1)
             {
                 string suffix = parts[1];
+                suffix = suffix.TrimStart('0');
                 if (! int.TryParse(suffix, out result))
                 {
-                    logger.LogError($"ERROR - unable to parse partner note of {partnerNote}");
+                    logger.LogError($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
                 }
             }
             return result;
