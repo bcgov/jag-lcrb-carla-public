@@ -21,6 +21,8 @@ namespace one_stop_service.Controllers
         {
             Configuration = configuration;
             this.logger = logger;
+            
+            
         }
 
         [HttpGet("SendLicenceCreationMessage/{licenceGuid}")]
