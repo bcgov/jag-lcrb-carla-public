@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
@@ -107,6 +108,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop using REST.
         /// </summary>
+        [AutomaticRetry(Attempts = 0)]
         public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
         {
             if (hangfireContext != null)
@@ -287,6 +289,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to check for and send recent licences
         /// </summary>
+        [AutomaticRetry(Attempts = 0)]
         public async Task CheckForNewLicences(PerformContext hangfireContext)
         {
             if (hangfireContext != null)
@@ -463,14 +466,17 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         /// <param name="partnerNote"></param>
         /// <returns></returns>
-        public static int GetSuffixFromPartnerNote(string partnerNote)
+        public static int GetSuffixFromPartnerNote(string partnerNote, ILogger logger)
         {
             int result = 0;
             string[] parts = partnerNote.Split("-");
             if (parts.Length > 1)
             {
                 string suffix = parts[1];
-                int.TryParse(suffix, out result);
+                if (! int.TryParse(suffix, out result))
+                {
+                    logger.LogError($"ERROR - unable to parse partner note of {partnerNote}");
+                }
             }
             return result;
         }

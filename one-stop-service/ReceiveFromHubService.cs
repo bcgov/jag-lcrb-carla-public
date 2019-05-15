@@ -131,14 +131,14 @@ namespace Gov.Lclb.Cllb.OneStopService
                 // retry the request with a higher increment.
 
                 string licenceGuid = OneStopUtils.GetGuidFromPartnerNote(errorNotification.header.partnerNote);
-                int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote);
+                int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote, _logger);
 
                 // sanity check
                 if (currentSuffix < 10)
                 {
                     currentSuffix++;
-                    _logger.LogInformation($"Starting resend of licence creation message, attempt {currentSuffix}");
-                    BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString()));
+                    _logger.LogInformation($"Starting resend of licence creation message, with new value of {currentSuffix}");
+                    BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))); // zero pad 3 digit.
                 }                
                 else
                 {
