@@ -48,11 +48,51 @@
           href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
       <p></p>
 
-      <app-applications-and-licences [account]="account">
-        <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary"
-          [disabled]="submittedApplications >= 8" (click)="startNewLicenceApplication()">Submit an Application</button>
-        <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary"
-          [disabled]="submittedApplications >= 8" (click)="startNewMarketerApplication()">Submit Marketer Application</button>
+      <app-applications-and-licences appRemoveIfFeatureOn="Marketer" [account]="account">
+        <div appRemoveIfFeatureOn="Marketer" class="space-between" style="padding: 10px;">
+          <p>Submit an Cannabis Retail Store Application and track the status below.</p>
+          <section style="padding-left: 20px;">
+            <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary"
+              [disabled]="submittedApplications >= 8" (click)="startNewLicenceApplication()">Submit
+              an Application</button>
+          </section>
+        </div>
+      </app-applications-and-licences>
+
+      <app-applications-and-licences appRemoveIfFeatureOff="Marketer" [account]="account">
+        <p>Submit an Application and track the status below.</p>
+        <section>
+          <table class="start-application">
+            <tr>
+              <th colspan=2>LICENCE</th>
+              <th>ACTIONS</th>
+            </tr>
+            <tr>
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+              <td>
+                <h3>Cannabis Retail Store Licence</h3>
+                <p>To sell non-medical cannabis and accessories</p>
+                <a href="">Learn more about this licence</a>
+              </td>
+              <td>
+                <button class="btn btn-primary" [disabled]="submittedApplications >= 8"
+                  (click)="startNewLicenceApplication()">START APPLICATION</button>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+              <td>
+                <h3>Cannabis Marketing Licence</h3>
+                <p>To promote non-medical cannabis to licensed cannabis retail stores and the public</p>
+                <a href="">Learn more about this licence</a>
+              </td>
+              <td>
+                <button class="btn btn-primary" [disabled]="submittedApplications >= 1"
+                  (click)="startNewMarketerApplication()">START APPLICATION</button>
+              </td>
+            </tr>
+          </table>
+        </section>
       </app-applications-and-licences>
 
     </div>
@@ -80,12 +120,15 @@
       </section>
       <p></p>
       <section *ngIf="account?.businessType">
-        <h3 *ngIf="account?.businessType !== 'SoleProprietor'"  class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
-        <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">SECURITY SCREENING</h3>
+        <h3 *ngIf="account?.businessType !== 'SoleProprietor'" class="blue-header"
+          style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+        <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header"
+          style="margin-top: 0; margin-bottom: 0">SECURITY SCREENING</h3>
 
         <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
           <section>
-            <section *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation' ,'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1">
+            <section
+              *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation' ,'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1">
               <p>An applicant that is a <i>Private Corporation</i> may have associates that are required to consent to
                 security
                 screening and financial integrity assessments as part of the application for a non-medical cannabis
