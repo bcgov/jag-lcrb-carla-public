@@ -1,388 +1,613 @@
-<div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
-  <div [formGroup]="form" style="padding-left: 45px; position: relative">
-    <div [ngBusy]="busy"></div>
+<div style="position: relative">
+  <div [ngBusy]="busy"></div>
 
-    <h1>{{ htmlContent?.title }}</h1>
+  <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <h1>{{ htmlContent?.title }}</h1>
+    </div>
+    <div [formGroup]="form" class="application-wrapper">
+      <section [innerHTML]="htmlContent?.preamble"></section>
+      <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
+        THE APPLICATION</h3>
+      <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+        <div [innerHTML]="htmlContent.beforeStarting"></div>
+      </section>
+      <h3 class="blue-header" *ngIf="application?.applicationType?.showPropertyDetails">PROPERTY DETAILS</h3>
+      <section class="padded-section" *ngIf="application?.applicationType?.showPropertyDetails">
+        <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
+          <div [ngBusy]="busy"></div>
+          <section *ngIf="htmlContent?.beforeStarting">
+            <label for="">Establishment Name</label>
+            <br>
 
-  </div>
-  <div [formGroup]="form" class="application-wrapper">
-    <section [innerHTML]="htmlContent?.preamble"></section>
-    <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
-      THE APPLICATION</h3>
-    <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
-      <div [innerHTML]="htmlContent.beforeStarting"></div>
-    </section>
-    <h3 class="blue-header" *ngIf="application?.applicationType?.showPropertyDetails">PROPERTY DETAILS</h3>
-    <section class="padded-section" *ngIf="application?.applicationType?.showPropertyDetails">
-      <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
-        <div [ngBusy]="busy"></div>
-        <section *ngIf="htmlContent?.beforeStarting">
-          <label for="">Establishment Name</label>
-          <br>
+            <p>
+              A name cannot mislead the public about what kind of business it operates. The name cannot imply a
+              licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
+              words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
+              or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
+              Scheduling Act. Store names cannot also use language that encourages intoxication.
+            </p>
 
-          <p>
-            A name cannot mislead the public about what kind of business it operates. The name cannot imply a
-            licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
-            words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
-            or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
-            Scheduling Act. Store names cannot also use language that encourages intoxication.
-          </p>
+            <p>
+              Additionally, a name cannot imply an association with another business. This applies to signs,
+              trademarks and any type of branding.
+            </p>
 
-          <p>
-            Additionally, a name cannot imply an association with another business. This applies to signs,
-            trademarks and any type of branding.
-          </p>
-
-          <p>
-            Establishment names will be reviewed for approval during the application process. For more information,
-            please see the <a routerLink="/policy-document/store-name">
-              Non-Medical Cannabis Retail Store Name Approval
-              Process
-            </a>.
-          </p>
-        </section>
-
-        <app-field
-          [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) ? 'Establishment Name' : 'Name of the Proposed Establishment'"
-          [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
-          errorMessage="Please enter the name of the proposed establishment">
-          <input class="form-control" style="width: 500px;" type="text"
-            ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)"
-            formControlName="establishmentName">
-        </app-field>
-
-      </div>
-      <div formGroupName="assignedLicence" *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
-        <h3 class="blue-header">CURRENT ADDRESS</h3>
-        <address class="row">
-          <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
-            <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
-          </app-field>
-          <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
-            <input class="form-control" type="text" readonly formControlName="establishmentAddressCity">
-          </app-field>
-          <section class="col-md-4 col-xs-12">
-            <app-field label="Province" [isFullWidth]="true">
-              <input class="form-control" readonly type="text" value="British Columbia">
-            </app-field>
+            <p>
+              Establishment names will be reviewed for approval during the application process. For more information,
+              please see the <a routerLink="/policy-document/store-name">
+                Non-Medical Cannabis Retail Store Name Approval
+                Process
+              </a>.
+            </p>
           </section>
-          <section class="col-md-4 col-xs-12">
-            <app-field label="Postal Code">
-              <input class="form-control" type="text" readonly formControlName="establishmentAddressPostalCode">
-            </app-field>
-          </section>
-          <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-            <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+
+          <app-field
+            [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) ? 'Establishment Name' : 'Name of the Proposed Establishment'"
+            [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+            errorMessage="Please enter the name of the proposed establishment">
+            <input class="form-control" style="width: 500px;" type="text"
+              ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)"
+              formControlName="establishmentName">
           </app-field>
-        </address>
-        <div class="light-blue-bg" style="display: flex;">
-          <div style="flex: 0 0 210px;">
-            <app-field label="Parcel Identifier (PID)">
-              <input type="text" readonly class="form-control" style="width: 200px;"
-                formControlName="establishmentParcelId">
+
+        </div>
+        <div formGroupName="assignedLicence"
+          *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
+          <h3 class="blue-header">CURRENT ADDRESS</h3>
+          <address class="row">
+            <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
+              <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
             </app-field>
+            <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
+              <input class="form-control" type="text" readonly formControlName="establishmentAddressCity">
+            </app-field>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Province" [isFullWidth]="true">
+                <input class="form-control" readonly type="text" value="British Columbia">
+              </app-field>
+            </section>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Postal Code">
+                <input class="form-control" type="text" readonly formControlName="establishmentAddressPostalCode">
+              </app-field>
+            </section>
+            <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+              <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+            </app-field>
+          </address>
+          <div class="light-blue-bg" style="display: flex;">
+            <div style="flex: 0 0 210px;">
+              <app-field label="Parcel Identifier (PID)">
+                <input type="text" readonly class="form-control" style="width: 200px;"
+                  formControlName="establishmentParcelId">
+              </app-field>
+            </div>
           </div>
         </div>
-      </div>
-      <div *ngIf="application?.applicationType?.showCurrentProperty">
-          <h3 class="blue-header" *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">PROPOSED ADDRESS</h3>
-        &nbsp;
-        <address class="row">
-          <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
-            [valid]="form.get('establishmentAddressStreet').valid || !form.get('establishmentAddressStreet').touched"
-            errorMessage="Please enter the street address">
-            <input class="form-control" type="text" autocomplete="address-line1"
-              formControlName="establishmentAddressStreet">
-          </app-field>
-          <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
-            [valid]="form.get('establishmentAddressCity').valid || !form.get('establishmentAddressCity').touched"
-            errorMessage="Please enter the city">
-            <input class="form-control" type="text" autocomplete="address-level2"
-              formControlName="establishmentAddressCity">
-          </app-field>
-          <section class="col-md-4 col-xs-12">
-            <app-field label="Province" [isFullWidth]="true">
-              <input class="form-control" autocomplete="address-level1" readonly type="text" value="British Columbia">
+        <div *ngIf="application?.applicationType?.showCurrentProperty">
+          <h3 class="blue-header" *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
+            PROPOSED ADDRESS</h3>
+          &nbsp;
+          <address class="row">
+            <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
+              [valid]="form.get('establishmentAddressStreet').valid || !form.get('establishmentAddressStreet').touched"
+              errorMessage="Please enter the street address">
+              <input class="form-control" type="text" autocomplete="address-line1"
+                formControlName="establishmentAddressStreet">
             </app-field>
-          </section>
-          <section class="col-md-4 col-xs-12">
-            <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
-              [valid]="form.get('establishmentAddressPostalCode').valid || !form.get('establishmentAddressPostalCode').touched"
-              errorMessage="Please enter the postal code">
-              <input class="form-control" type="text" autocomplete="postal-code"
-                formControlName="establishmentAddressPostalCode">
+            <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+              [valid]="form.get('establishmentAddressCity').valid || !form.get('establishmentAddressCity').touched"
+              errorMessage="Please enter the city">
+              <input class="form-control" type="text" autocomplete="address-level2"
+                formControlName="establishmentAddressCity">
             </app-field>
-          </section>
-          <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-            <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
-          </app-field>
-        </address>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Province" [isFullWidth]="true">
+                <input class="form-control" autocomplete="address-level1" readonly type="text" value="British Columbia">
+              </app-field>
+            </section>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
+                [valid]="form.get('establishmentAddressPostalCode').valid || !form.get('establishmentAddressPostalCode').touched"
+                errorMessage="Please enter the postal code">
+                <input class="form-control" type="text" autocomplete="postal-code"
+                  formControlName="establishmentAddressPostalCode">
+              </app-field>
+            </section>
+            <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+              <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+            </app-field>
+          </address>
 
-        <div class="light-blue-bg" style="display: flex;">
-          <div style="flex: 0 0 210px;">
-            <app-field label="Parcel Identifier (PID)"
-              [valid]="!form.get('establishmentParcelId').touched || form.get('establishmentParcelId').valid"
-              errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
-              <input type="text" class="form-control" style="width: 200px;" maxlength=9
-                formControlName="establishmentParcelId">
-            </app-field>
-          </div>
-          <div style="flex: 1; font-size: 11px;">
-            <span>
-
+          <div class="light-blue-bg" style="display: flex;">
+            <div style="flex: 0 0 210px;">
+              <app-field label="Parcel Identifier (PID)"
+                [valid]="!form.get('establishmentParcelId').touched || form.get('establishmentParcelId').valid"
+                errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+                <input type="text" class="form-control" style="width: 200px;" maxlength=9
+                  formControlName="establishmentParcelId">
+              </app-field>
+            </div>
+            <div style="flex: 1; font-size: 11px;">
               <span>
-                <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be found
-                on
-              </span> <br>
-              <ul style="display: inline-block">
-                <li>The title to the property</li>
-                <li>Through the B.C. Land Title and Survey Authority</li>
-                <li>The tax assessment notice from BC Assessment</li>
-              </ul>
-            </span>
 
-            <ul style="display: inline-block">
-              <li>BC Assessment’s e-valueBC website </li>
-              <li>The municipal tax notice</li>
-              <li>The property lease</li>
-            </ul>
+                <span>
+                  <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be found
+                  on
+                </span> <br>
+                <ul style="display: inline-block">
+                  <li>The title to the property</li>
+                  <li>Through the B.C. Land Title and Survey Authority</li>
+                  <li>The tax assessment notice from BC Assessment</li>
+                </ul>
+              </span>
+
+              <ul style="display: inline-block">
+                <li>BC Assessment’s e-valueBC website </li>
+                <li>The municipal tax notice</li>
+                <li>The property lease</li>
+              </ul>
+            </div>
           </div>
+
+
+        </div>
+
+        <p>&nbsp;</p>
+
+        <div style="flex: 0 0 210px;">
+          <app-field label="Store Email" [required]="false"
+            [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
+            errorMessage="Please enter an email address">
+            <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
+              formControlName="establishmentEmail">
+          </app-field>
+        </div>
+        <div style="flex: 0 0 210px;">
+          <app-field label="Store Phone" [required]="false"
+            [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
+            errorMessage="Please enter a phone number ">
+            <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
+              (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
+          </app-field>
         </div>
 
 
-      </div>
-
+      </section>
       <p>&nbsp;</p>
 
-      <div style="flex: 0 0 210px;">
-        <app-field label="Store Email" [required]="false"
-          [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
-          errorMessage="Please enter an email address">
-          <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
-            formControlName="establishmentEmail">
-        </app-field>
+
+      <h3 class="blue-header" *ngIf="application?.applicationType?.showHoursOfSale">HOURS OF SALE</h3>
+      <div class="padded-section" *ngIf="application?.applicationType?.showHoursOfSale">
+        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">Indicate the
+          store's proposed hours for cannabis sales below. Proposed
+          hours must fall between 9 a.m. and 11
+          p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed
+          at
+          times they are licensed to be open.
+        </p>
+        <table class="store-hours">
+          <tr>
+            <th class="lead"></th>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+          </tr>
+          <tr>
+            <th>Open</th>
+            <td>
+              <select class="form-control" formControlName="serviceHoursSundayOpen">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursMondayOpen">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursTuesdayOpen">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursWednesdayOpen">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursThursdayOpen">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursFridayOpen">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursSaturdayOpen">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>Close</th>
+            <td>
+              <select class="form-control" formControlName="serviceHoursSundayClose">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursMondayClose">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursTuesdayClose">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursWednesdayClose">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursThursdayClose">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursFridayClose">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+            <td>
+              <select class="form-control" formControlName="serviceHoursSaturdayClose">
+                <option value=""> -- </option>
+                <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
+              </select>
+            </td>
+          </tr>
+        </table>
       </div>
-      <div style="flex: 0 0 210px;">
-        <app-field label="Store Phone" [required]="false"
-          [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
-          errorMessage="Please enter a phone number ">
-          <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
-            (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
+
+      <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+      <i>The contact the LCRB should communicate with regarding the application</i>
+      <address class="padded-section">
+
+        <app-field label="First Name" [required]="true"
+          [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+          errorMessage="Please enter the business contact's first name">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+            formControlName="contactPersonFirstName">
         </app-field>
+
+        <app-field label="Last Name" [required]="true"
+          [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+          errorMessage="Please enter the business contact's last name">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+            formControlName="contactPersonLastName">
+        </app-field>
+
+        <app-field label="Title/ Position" [required]="false" [valid]="true">
+          <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+        </app-field>
+
+        <app-field label="Phone Number (main)" [required]="true"
+          [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+          errorMessage="Please enter the business contact's 10-digit phone number">
+          <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+            (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+        </app-field>
+
+        <app-field label="Email" [required]="true"
+          [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+          errorMessage="Please enter the business contact's email address">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+            formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+        </app-field>
+      </address>
+
+      <hr>
+      <p>&nbsp;</p>
+
+      <div *ngIf="application?.applicationType?.showAssociatesFormUpload">
+
+        <label for="">Associates Form</label>
+        <br>
+        <i>
+          Please download
+          <a *ngIf="account?.businessType === 'SoleProprietor'"
+            href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
+            and complete
+          </a>
+          <a *ngIf="account?.businessType === 'Society'"
+            href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
+            and complete
+          </a>
+          <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+            href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
+            and complete
+          </a>
+          <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+            href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
+            and complete
+          </a>
+          &nbsp;the Associate Form..
+        </i>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+        <br>
+      </div>
+      <div *ngIf="application?.applicationType?.showFinancialIntegrityFormUpload">
+
+        <label for="">Financial Integrity Form</label>
+        <br>
+        <i>
+          Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+            target="_blank">and complete</a> the financial integrity form.
+        </i>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+            #financialIntegrityDocuments></app-file-uploader>
+        </section>
+        <br>
+        <hr>
+
       </div>
 
+      <section *ngIf="application?.applicationType?.showSupportingDocuments">
+        <label for="">Supporting Documents</label>
+        <br>
+        <p>Please download the
+          <a *ngIf="account?.businessType === 'SoleProprietor'"
+            href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
+            Document Checklist
+          </a>
+          <a *ngIf="account?.businessType === 'Society'"
+            href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
+            Document Checklist
+          </a>
+          <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+            href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
+            Document Checklist
+          </a>
+          <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+            href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
+            Document Checklist
+          </a>
+          <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">and assemble all
+            required documents.</span>
+          <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">and assemble all
+            required documents listed in the 'Documents
+            Related to the Proposed Store' section.</span>
+        </p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
+            fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+            [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments></app-file-uploader>
+        </section>
+        <br>
+        <hr>
+      </section>
 
-    </section>
-    <p>&nbsp;</p>
+      <p>Proceed to pay online using a credit card through the secure web portal.</p>
 
-
-    <h3 class="blue-header" *ngIf="application?.applicationType?.showHoursOfSale">HOURS OF SALE</h3>
-    <div class="padded-section" *ngIf="application?.applicationType?.showHoursOfSale">
-      <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">Indicate the store's proposed hours for cannabis sales below. Proposed
-        hours must fall between 9 a.m. and 11
-        p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed at
-        times they are licensed to be open.
+      <p>
+        <i>
+          <b>Please note:</b> Applications which are submitted without all required information or documents will not be
+          processed.
+          Applicants will be contacted and provided the opportunity to submit missing information. Once applicants
+          provide
+          all
+          required documents to the LCRB, the application will be submitted for processing.
+        </i>
       </p>
-      <table class="store-hours">
-        <tr>
-          <th class="lead"></th>
-          <th>Sunday</th>
-          <th>Monday</th>
-          <th>Tuesday</th>
-          <th>Wednesday</th>
-          <th>Thursday</th>
-          <th>Friday</th>
-          <th>Saturday</th>
-        </tr>
-        <tr>
-          <th>Open</th>
-          <td>
-            <select class="form-control" formControlName="serviceHoursSundayOpen">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursMondayOpen">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursTuesdayOpen">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursWednesdayOpen">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursThursdayOpen">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursFridayOpen">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursSaturdayOpen">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <th>Close</th>
-          <td>
-            <select class="form-control" formControlName="serviceHoursSundayClose">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursMondayClose">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursTuesdayClose">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursWednesdayClose">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursThursdayClose">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursFridayClose">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-          <td>
-            <select class="form-control" formControlName="serviceHoursSaturdayClose">
-              <option value=""> -- </option>
-              <option *ngFor="let item of ServiceHours" [value]="item">{{item}}</option>
-            </select>
-          </td>
-        </tr>
-      </table>
-    </div>
 
-    <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-    <i>The contact the LCRB should communicate with regarding the application</i>
-    <address class="padded-section">
-
-      <app-field label="First Name" [required]="true"
-        [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
-        errorMessage="Please enter the business contact's first name">
-        <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-          formControlName="contactPersonFirstName">
-      </app-field>
-
-      <app-field label="Last Name" [required]="true"
-        [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
-        errorMessage="Please enter the business contact's last name">
-        <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-          formControlName="contactPersonLastName">
-      </app-field>
-
-      <app-field label="Title/ Position" [required]="false" [valid]="true">
-        <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
-      </app-field>
-
-      <app-field label="Phone Number (main)" [required]="true"
-        [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
-        errorMessage="Please enter the business contact's 10-digit phone number">
-        <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-          (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
-      </app-field>
-
-      <app-field label="Email" [required]="true"
-        [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
-        errorMessage="Please enter the business contact's email address">
-        <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-          formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
-      </app-field>
-    </address>
-
-    <hr>
-    <p>&nbsp;</p>
-
-    <div *ngIf="application?.applicationType?.showAssociatesFormUpload">
-
-      <label for="">Associates Form</label>
       <br>
-      <i>
-        Please download
-        <a *ngIf="account?.businessType === 'SoleProprietor'"
-          href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
-          and complete
-        </a>
-        <a *ngIf="account?.businessType === 'Society'"
-          href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
-          and complete
-        </a>
-        <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
-          href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
-          and complete
-        </a>
-        <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
-          href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
-          and complete
-        </a>
-        &nbsp;the Associate Form..
-      </i>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
-        </app-file-uploader>
+
+      <h3 class="blue-header" *ngIf="application?.applicationType?.showDeclarations">DECLARATIONS</h3>
+      <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
+        <p>This application should be submitted by an individual with the authority to bind the applicant. The branch
+          relies on the applicant to ensure that the individual who submits this application is authorized to do so.
+          <span *ngIf="account?.businessType === 'SoleProprietor'">
+            Typically, an appropriate individual for a sole proprietorship will be
+            the sole proprietor.
+          </span>
+          <span *ngIf="account?.businessType === 'Society'"
+            href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
+            Typically, an appropriate individual for a society will be a director or a
+            senior manager (as defined in the Societies Act).
+          </span>
+          <span
+            *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">
+            Typically, an appropriate individual will be as follows:
+            <ul>
+              <li>If the applicant is a general partnership, one of the partners</li>
+              <li>If the applicant is a limited partnership, the general partner of the partnership</li>
+            </ul>
+          </span>
+          <span *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1">
+            Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
+            be
+            an
+            officer or, in some cases, a director.
+          </span>
+
+        </p>
+        <p>Note: An agent, lawyer, licensee representative or third party operator may NOT submit this application on
+          behalf of the applicant.</p>
+        <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+          errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="authorizedToSubmit">
+            <span class="error-states">*</span>
+            <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
+            </div>
+          </section>
+        </app-field>
+        <p>
+          Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+          manager
+          an application, or
+          information or a record included as part of the application, that contains false or misleading information, or
+          fails to disclose a material fact”.
+        </p>
+        <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+          errorMessage="Please affirm that all of the information provided for this application is true and complete."
+          [showChevrons]="false">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="signatureAgreement">
+            <span class="error-states">*</span>
+            <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+              application is true and complete
+            </div>
+          </section>
+        </app-field>
+      </div>
+
+      <section class="error" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
       </section>
-      <br>
-      <hr>
-      <br>
-    </div>
-    <div *ngIf="application?.applicationType?.showFinancialIntegrityFormUpload">
 
-      <label for="">Financial Integrity Form</label>
-      <br>
-      <i>
-        Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-          target="_blank">and complete</a> the financial integrity form.
-      </i>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
-          #financialIntegrityDocuments></app-file-uploader>
+      <div class="light-blue-bg">
+        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+          The Province does not know how many application for a cannabis retail store licence will be received.
+          Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
+          processing, applicants must make sure the application is complete before submitting it.
+        </p>
+        <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+          The Province does not know how many applications for a cannabis marketing licence will be
+          received. Therefore, it is difficult to predict how long applications will take to process. To minimize
+          delays in processing, applicants must make sure the application is complete before submitting it.
+        </p>
+        <br>
+        <p>
+          The ‘save for later’ feature allows applicants to re-access an application in progress. For questions on the
+          LCRB application process please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+        </p>
+      </div>
+
+      <section style="position: relative; margin-top: 20px;">
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+          <span>
+            <i class="fa fa-save" style="color: #fff;"></i>
+            SAVE FOR LATER
+          </span>
+        </button>
+        <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+          <span (click)="cancelApplication()">
+            <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+            <a href="javascript: void(0)">
+              Cancel Application
+            </a>
+          </span>
+        </span>
+
+        <div [ngBusy]="busy"></div>
       </section>
-      <br>
-      <hr>
-
     </div>
+  </div>
 
-    <section *ngIf="application?.applicationType?.showSupportingDocuments">
+  <div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <div [ngBusy]="busy"></div>
+      <h1>Add More files to Cannabis Retail Store Licence Application</h1>
+    </div>
+    <div class="application-wrapper">
+      <label for="">Establishment Name</label>:
+      <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
+      <br>
+
+      <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">
+
+        <label for="">Associates Form</label>
+        <br>
+        <i>
+          Please download
+          <a *ngIf="account?.businessType === 'SoleProprietor'"
+            href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
+            and complete
+          </a>
+          <a *ngIf="account?.businessType === 'Society'"
+            href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
+            and complete
+          </a>
+          <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+            href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
+            and complete
+          </a>
+          <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+            href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
+            and complete
+          </a>
+          &nbsp;the Associate Form..
+        </i>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            [enableFileDeletion]="false" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+        <br>
+
+        <label for="">Financial Integrity Form</label>
+        <br>
+        <i>
+          Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+            target="_blank">and complete</a> the financial integrity form.
+        </i>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            [enableFileDeletion]="false" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+      </div>
       <label for="">Supporting Documents</label>
       <br>
       <p>Please download the
@@ -402,225 +627,16 @@
           href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
           Document Checklist
         </a>
-        <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">and assemble all required documents.</span>
-        <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">and assemble all required documents listed in the 'Documents
-          Related to the Proposed Store' section.</span>
+        and assemble all required documents.
       </p>
       <section>
         <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
           fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
-          [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments></app-file-uploader>
-      </section>
-      <br>
-      <hr>
-    </section>
-
-    <p>Proceed to pay online using a credit card through the secure web portal.</p>
-
-    <p>
-      <i>
-        <b>Please note:</b> Applications which are submitted without all required information or documents will not be
-        processed.
-        Applicants will be contacted and provided the opportunity to submit missing information. Once applicants
-        provide
-        all
-        required documents to the LCRB, the application will be submitted for processing.
-      </i>
-    </p>
-
-    <br>
-
-    <h3 class="blue-header" *ngIf="application?.applicationType?.showDeclarations">DECLARATIONS</h3>
-    <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
-      <p>This application should be submitted by an individual with the authority to bind the applicant. The branch
-        relies on the applicant to ensure that the individual who submits this application is authorized to do so.
-        <span *ngIf="account?.businessType === 'SoleProprietor'">
-          Typically, an appropriate individual for a sole proprietorship will be
-          the sole proprietor.
-        </span>
-        <span *ngIf="account?.businessType === 'Society'"
-          href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
-          Typically, an appropriate individual for a society will be a director or a
-          senior manager (as defined in the Societies Act).
-        </span>
-        <span
-          *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">
-          Typically, an appropriate individual will be as follows:
-          <ul>
-            <li>If the applicant is a general partnership, one of the partners</li>
-            <li>If the applicant is a limited partnership, the general partner of the partnership</li>
-          </ul>
-        </span>
-        <span *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1">
-          Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be
-          an
-          officer or, in some cases, a director.
-        </span>
-
-      </p>
-      <p>Note: An agent, lawyer, licensee representative or third party operator may NOT submit this application on
-        behalf of the applicant.</p>
-      <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-        errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-        <section style="display: flex">
-          <input type="checkbox" formControlName="authorizedToSubmit">
-          <span class="error-states">*</span>
-          <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application</div>
-        </section>
-      </app-field>
-      <p>
-        Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general manager
-        an application, or
-        information or a record included as part of the application, that contains false or misleading information, or
-        fails to disclose a material fact”.
-      </p>
-      <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-        errorMessage="Please affirm that all of the information provided for this application is true and complete."
-        [showChevrons]="false">
-        <section style="display: flex">
-          <input type="checkbox" formControlName="signatureAgreement">
-          <span class="error-states">*</span>
-          <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
-            application is true and complete</div>
-        </section>
-      </app-field>
-    </div>
-
-    <section class="error" *ngIf="showValidationMessages">
-      <p *ngFor="let message of validationMessages">
-        <span class="app-cancel">
-          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-          {{message}}
-        </span>
-      </p>
-    </section>
-
-    <div class="light-blue-bg">
-      <p>
-        The Province does not know how many application for a cannabis retail store license will be received. Therefore,
-        it is difficult to predict how long applications will take to process. To minimize delays in processing,
-        applicants must make sure the application is complete before submitting it.
-      </p>
-      <br>
-      <p>
-        The ‘save for later’ feature allows applicants to re-access an application in progress. For questions on the
-        LCRB application process please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
-      </p>
-    </div>
-
-    <section style="position: relative; margin-top: 20px;">
-      <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
-        <span>
-          <i class="fa fa-save" style="color: #fff;"></i>
-          SAVE FOR LATER
-        </span>
-      </button>
-      <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
-      <span style="float: right; color: #1a5a96; padding-top: 10px;">
-        <span (click)="cancelApplication()">
-          <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-          <a href="javascript: void(0)">
-            Cancel Application
-          </a>
-        </span>
-      </span>
-
-      <div [ngBusy]="busy"></div>
-    </section>
-  </div>
-</div>
-
-<div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
-  <div [formGroup]="form" style="padding-left: 45px; position: relative">
-    <div [ngBusy]="busy"></div>
-    <h1>Add More files to Cannabis Retail Store Licence Application</h1>
-  </div>
-  <div class="application-wrapper">
-    <label for="">Establishment Name</label>:
-    <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
-    <br>
-
-    <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">
-
-      <label for="">Associates Form</label>
-      <br>
-      <i>
-        Please download
-        <a *ngIf="account?.businessType === 'SoleProprietor'"
-          href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank">
-          and complete
-        </a>
-        <a *ngIf="account?.businessType === 'Society'"
-          href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
-          and complete
-        </a>
-        <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
-          href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
-          and complete
-        </a>
-        <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
-          href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
-          and complete
-        </a>
-        &nbsp;the Associate Form..
-      </i>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          [enableFileDeletion]="false" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
-        </app-file-uploader>
-      </section>
-      <br>
-      <hr>
-      <br>
-
-      <label for="">Financial Integrity Form</label>
-      <br>
-      <i>
-        Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-          target="_blank">and complete</a> the financial integrity form.
-      </i>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          [enableFileDeletion]="false" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
         </app-file-uploader>
       </section>
       <br>
       <hr>
     </div>
-    <label for="">Supporting Documents</label>
-    <br>
-    <p>Please download the
-      <a *ngIf="account?.businessType === 'SoleProprietor'"
-        href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
-        Document Checklist
-      </a>
-      <a *ngIf="account?.businessType === 'Society'"
-        href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
-        Document Checklist
-      </a>
-      <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
-        href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
-        Document Checklist
-      </a>
-      <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
-        href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
-        Document Checklist
-      </a>
-      and assemble all required documents.
-    </p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-        fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
-        [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
-      </app-file-uploader>
-    </section>
-    <br>
-    <hr>
   </div>
 </div>
