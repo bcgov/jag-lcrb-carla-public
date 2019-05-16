@@ -22,14 +22,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the Contact class.
         /// </summary>
-        public Contact(string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), Address address = default(Address))
+        /// <param name="selfDisclosure">Possible values include: 'Yes',
+        /// 'No'</param>
+        /// <param name="gender">Possible values include: 'Male', 'Female',
+        /// 'Other'</param>
+        public Contact(string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address))
         {
+            ContactId = contactId;
             FirstName = firstName;
             LastName = lastName;
             MiddleName = middleName;
             CompanyName = companyName;
             PhoneNumber = phoneNumber;
             Email = email;
+            DriversLicenceNumber = driversLicenceNumber;
+            BcIdCardNumber = bcIdCardNumber;
+            BirthDate = birthDate;
+            Birthplace = birthplace;
+            SelfDisclosure = selfDisclosure;
+            Gender = gender;
             Address = address;
             CustomInit();
         }
@@ -38,6 +49,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "contactId")]
+        public string ContactId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -68,6 +84,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "email")]
         public string Email { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "driversLicenceNumber")]
+        public string DriversLicenceNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bcIdCardNumber")]
+        public string BcIdCardNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "birthDate")]
+        public System.DateTimeOffset? BirthDate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "birthplace")]
+        public string Birthplace { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'Yes', 'No'
+        /// </summary>
+        [JsonProperty(PropertyName = "selfDisclosure")]
+        public string SelfDisclosure { get; set; }
+
+        /// <summary>
+        /// Gets or sets possible values include: 'Male', 'Female', 'Other'
+        /// </summary>
+        [JsonProperty(PropertyName = "gender")]
+        public string Gender { get; set; }
 
         /// <summary>
         /// </summary>
