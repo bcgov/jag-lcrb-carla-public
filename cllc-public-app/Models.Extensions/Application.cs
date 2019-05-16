@@ -318,6 +318,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus (dynamicsApplication);
             }
 
+            if(dynamicsApplication.AdoxioLicenceType != null)
+            {
+                applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioLicenceType.AdoxioName;
+            }
+
             return applicationSummary;
         }
 
