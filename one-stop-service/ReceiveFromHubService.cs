@@ -123,11 +123,16 @@ namespace Gov.Lclb.Cllb.OneStopService
             _logger.LogError(inputXML);
 
             // check to see if it is simply a problem with an old account number.
-
-            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409") // Old account number.
-                || errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists 
+            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
             {
-                _logger.LogInformation("Error is old account number is already associated with another account.");
+                _logger.LogError("****************************************************");
+                _logger.LogError("CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number.");
+                _logger.LogError("****************************************************");                
+
+            }
+            else if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.               
+            {
+                _logger.LogInformation("Error is old account number is already associated with another account.  Retrying.");
                 // retry the request with a higher increment.
 
                 string licenceGuid = OneStopUtils.GetGuidFromPartnerNote(errorNotification.header.partnerNote);
@@ -139,7 +144,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     currentSuffix++;
                     _logger.LogInformation($"Starting resend of licence creation message, with new value of {currentSuffix}");
                     BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
-                    , TimeSpan.FromMinutes(31)); // Try again after 31 minutes.
+                    , TimeSpan.FromMinutes(1)); // Try again after 1 minutes.
                 }                
                 else
                 {

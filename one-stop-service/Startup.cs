@@ -248,7 +248,7 @@ private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFac
                 {
                     log.LogInformation("Creating Hangfire job for License issuance check ...");
                     ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.HourInterval(6));
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.HourInterval(1));
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
