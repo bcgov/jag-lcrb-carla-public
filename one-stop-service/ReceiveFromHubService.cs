@@ -138,7 +138,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     currentSuffix++;
                     _logger.LogInformation($"Starting resend of licence creation message, with new value of {currentSuffix}");
-                    BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))); // zero pad 3 digit.
+                    BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
+                    , TimeSpan.FromMinutes(31)); // Try again after 31 minutes.
                 }                
                 else
                 {
