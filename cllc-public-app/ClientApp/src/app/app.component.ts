@@ -6,13 +6,13 @@ import { UserDataService } from './services/user-data.service';
 import { User } from './models/user.model';
 import { isDevMode } from '@angular/core';
 import { LegalEntityDataService } from './services/legal-entity-data.service';
-import { LegalEntity } from './models/legal-entity.model';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
 import { Observable } from '../../node_modules/rxjs';
 import * as CurrentUserActions from './app-state/actions/current-user.action';
 import { filter } from 'rxjs/operators';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { LegalEntity } from '@models/legal-entities.model';
 
 @Component({
   selector: 'app-root',

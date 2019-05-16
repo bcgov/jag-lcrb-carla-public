@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { LegalEntity } from '../../../models/legal-entity.model';
 import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { LegalEntity } from '@models/legal-entities.model';
 
 @Component({
   selector: 'app-security-assessments',

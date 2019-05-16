@@ -5,13 +5,13 @@ import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { LegalEntity } from '../../../models/legal-entity.model';
 import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as LegalEntitiesActions from '../../../app-state/actions/legal-entities.action';
+import { LegalEntity } from '@models/legal-entities.model';
 
 @Component({
   selector: 'app-edit-shareholders',

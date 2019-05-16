@@ -1,6 +1,6 @@
 import { DynamicsAccount } from './dynamics-account.model';
 
-export class AdoxioLegalEntity {
+export class LegalEntity {
   id: string; // guid
   name: string;
   isindividual: boolean;
@@ -25,7 +25,7 @@ export class AdoxioLegalEntity {
   commonnonvotingshares: number;
   preferrednonvotingshares: number;
   account: DynamicsAccount;
-  relatedentities: AdoxioLegalEntity[];
+  relatedentities: LegalEntity[];
   email: string;
   dateofappointment: Date;
   securityAssessmentEmailSentOn: Date;

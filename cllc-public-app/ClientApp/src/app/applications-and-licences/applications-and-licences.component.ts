@@ -11,6 +11,7 @@ import { License } from '@app/models/license.model';
 import { FileSystemItem } from '@app/models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { DynamicsAccount } from './../models/dynamics-account.model';
+import { FeatureFlagService } from '@services/feature-flag.service';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -42,6 +43,8 @@ export class ApplicationsAndLicencesComponent implements OnInit {
   @Input() account: DynamicsAccount;
   @Output() marketerApplicationExists: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataLoaded = false;
+  licencePresentLabel: string;
+  licenceAbsentLabel: string;
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -49,7 +52,16 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     private router: Router,
     private paymentService: PaymentDataService,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog) { }
+    private featureFlagService: FeatureFlagService,
+    public dialog: MatDialog) {
+    if (featureFlagService.featureOn('Marketer')) {
+      this.licencePresentLabel = '';
+      this.licenceAbsentLabel = '';
+    } else {
+      this.licencePresentLabel = '';
+      this.licenceAbsentLabel = '';
+    }
+  }
 
   ngOnInit() {
     this.displayApplications();
