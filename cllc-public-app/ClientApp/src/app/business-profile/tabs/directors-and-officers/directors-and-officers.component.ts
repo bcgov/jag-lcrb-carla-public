@@ -4,13 +4,13 @@ import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, 
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { LegalEntity } from '../../../models/legal-entity.model';
 import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
+import { LegalEntity } from '@appmodels/legal-entity.model';
 
 @Component({
   selector: 'app-directors-and-officers',
