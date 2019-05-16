@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { debounce, catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
-import { LegalEntity } from '@appmodels/legal-entities.model';
+import { LegalEntity } from '@appmodels/legal-entity.model';
 
 @Injectable()
 export class LegalEntityDataService extends DataService {
