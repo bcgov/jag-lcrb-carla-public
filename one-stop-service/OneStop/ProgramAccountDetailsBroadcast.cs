@@ -80,15 +80,7 @@ namespace WebApplicationSoap.OneStop
             //establishment (physical location of store)
             userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
             //last name of sole proprietor (if not sole prop then null)
-            if (licence.AdoxioLicencee != null && licence.AdoxioLicencee.Primarycontactid != null && !string.IsNullOrEmpty(licence.AdoxioLicencee.Primarycontactid.Lastname))
-            {
-                userCredentials.lastName = licence.AdoxioLicencee.Primarycontactid.Lastname;
-            }
-            else
-            {
-                userCredentials.lastName = "N/A";
-            }
-            
+            userCredentials.lastName = "N/A";
 
             return userCredentials;
         }
@@ -124,10 +116,10 @@ namespace WebApplicationSoap.OneStop
             
             // licence number
             programAccountDetailsBroadcastBody.partnerInfo1 = licence.AdoxioLicencenumber;
-
+            
             // licence subtype code – not applicable to cannabis
             //programAccountDetailsBroadcastBody.partnerInfo2 = "ToGetFromDynamics";
-
+            
             // licence expiry date
             if (licence.AdoxioExpirydate != null)
             {

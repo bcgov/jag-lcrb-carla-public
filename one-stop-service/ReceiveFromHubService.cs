@@ -123,28 +123,21 @@ namespace Gov.Lclb.Cllb.OneStopService
             _logger.LogError(inputXML);
 
             // check to see if it is simply a problem with an old account number.
-            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11845")) // Transaction not allowed - Duplicate Client event exists )
-            {
-                _logger.LogError("****************************************************");
-                _logger.LogError("CRA has rejected the message due to an incorrect business number.  The business in question may have had multiple business numbers in the past and the number in the record is no longer valid.  Please correct the business number.");
-                _logger.LogError("****************************************************");                
 
-            }
-            else if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.               
+            if (errorNotification.body.validationErrors[0].errorMessageNumber.Equals("11409")) // Old account number.
             {
-                _logger.LogInformation("Error is old account number is already associated with another account.  Retrying.");
+                _logger.LogInformation("Error is old account number is already associated with another account.");
                 // retry the request with a higher increment.
 
                 string licenceGuid = OneStopUtils.GetGuidFromPartnerNote(errorNotification.header.partnerNote);
-                int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote, _logger);
+                int currentSuffix = OneStopUtils.GetSuffixFromPartnerNote(errorNotification.header.partnerNote);
 
                 // sanity check
                 if (currentSuffix < 10)
                 {
                     currentSuffix++;
-                    _logger.LogInformation($"Starting resend of licence creation message, with new value of {currentSuffix}");
-                    BackgroundJob.Schedule(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString("D3"))// zero pad 3 digit.
-                    , TimeSpan.FromMinutes(1)); // Try again after 1 minutes.
+                    _logger.LogInformation($"Starting resend of licence creation message, attempt {currentSuffix}");
+                    BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _logger).SendLicenceCreationMessageREST(null, licenceGuid, currentSuffix.ToString()));
                 }                
                 else
                 {
