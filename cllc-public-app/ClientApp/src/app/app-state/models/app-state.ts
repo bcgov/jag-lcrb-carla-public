@@ -1,7 +1,7 @@
-import { LegalEntity } from '../../models/legal-entity.model';
 import { DynamicsAccount } from '../../models/dynamics-account.model';
 import { Application } from '../../models/application.model';
 import { User } from '../../models/user.model';
+import { LegalEntity } from '@models/legal-entities.model';
 
 export interface AppState {
     legalEntitiesState: LegalEntitiesState;

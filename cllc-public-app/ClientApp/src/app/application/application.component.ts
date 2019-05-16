@@ -1,6 +1,6 @@
 
 import { filter } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -48,7 +48,8 @@ class ApplicationHTMLContent {
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss']
+  styleUrls: ['./application.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApplicationComponent extends FormBase implements OnInit, OnDestroy {
   application: Application;
