@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { LegalEntity } from '../models/legal-entity.model';
 import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { debounce, catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
+import { LegalEntity } from '@appmodels/legal-entities.model';
 
 @Injectable()
 export class LegalEntityDataService extends DataService {
