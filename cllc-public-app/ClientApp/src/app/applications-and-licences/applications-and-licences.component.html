@@ -135,11 +135,15 @@
           <p></p>
         </mat-tab>
         <mat-tab label="Licensed Stores">
-          <p *ngIf="licensedApplications?.length > 0">Here are your current approved Cannabis Retail Store Licences.
+          <p *ngIf="licensedApplications?.length > 0">
+            <span appRemoveIfFeatureOn="Marketer">Here are your current approved Cannabis Retail Store Licences.</span>
+            <span appRemoveIfFeatureOff="Marketer">Here are your current approved  Licences.</span>
           </p>
           <p *ngIf="licensedApplications?.length == 0">
-            You do not have any Licenced Stores.
+            <span appRemoveIfFeatureOn="Marketer">You do not have any Licenced Stores.</span>
+            <span appRemoveIfFeatureOn="Marketer">You do not have any Licences.</span>
           </p>
+          
           <table *ngIf="licensedApplications?.length > 0" class="eq-table">
             <tr>
               <th colspan=2>Licence</th>
