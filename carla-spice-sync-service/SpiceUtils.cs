@@ -1,5 +1,4 @@
-﻿using CarlaSpiceSync.models;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
 using Hangfire.Console;
@@ -52,6 +51,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
 
+
             string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
             List<MicrosoftDynamicsCRMadoxioSpddatarow> result = null;
 
@@ -100,7 +100,10 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 _logger.LogError("Response code was");
                 _logger.LogError(spiceResult.Response.StatusCode.ToString());
-           }
+
+
+            }
+            
 
             hangfireContext.WriteLine("End of SPD Export Job.");
             _logger.LogError("End of SPD Export Job.");
@@ -133,6 +136,8 @@ namespace Gov.Lclb.Cllb.SpdSync
             hangfireContext.WriteLine("Done.");
             _logger.LogError("Done.");
         }
+
+
 
         /// <summary>
         /// Import responses to Dynamics.
@@ -223,7 +228,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         public Interfaces.Spice.Models.ApplicationScreeningRequest GenerateApplicationScreeningRequest(string applicationId)
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
-            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
+            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant" };
             var application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
 
             var screeningRequest = CreateApplicationScreeningRequest(application);
@@ -231,52 +236,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             screeningRequest.Associates = screeningRequest.Associates.Concat(associates).ToList();
 
             return screeningRequest;
-        }
-
-        /// <summary>
-        /// Sends the application screening request to spice.
-        /// </summary>
-        /// <returns>The application screening request success boolean.</returns>
-        /// <param name="applicationRequest">Application request.</param>
-        public async Task<bool> SendApplicationScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
-        {
-            List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest>
-            {
-                applicationRequest
-            };
-
-            _logger.LogInformation($"Sending Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-            _logger.LogInformation($"Application has {applicationRequest.Associates.Count} associates");
-
-            var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
-
-            _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-            _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-
-            return result.Response.StatusCode.ToString() == "OK";
-        }
-
-        /// <summary>
-        /// Sends the worker screening request to spice.
-        /// </summary>
-        /// <returns>The worker screening request success boolean.</returns>
-        /// <param name="workerScreeningRequest">Worker screening request.</param>
-        public async Task<bool> SendWorkerScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest workerScreeningRequest)
-        {
-            // send the data
-            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
-            {
-                workerScreeningRequest
-            };
-
-            _logger.LogInformation($"Sending Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-
-            var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
-
-            _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-            _logger.LogInformation($"Done Send Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-
-            return result.Response.StatusCode.ToString() == "OK";
         }
 
         public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId)
@@ -290,8 +249,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 RecordIdentifier = worker.AdoxioWorkerid,
                 Name = worker.AdoxioName,
                 BirthDate = worker.AdoxioDateofbirth,
-                SelfDisclosure = ((GeneralYesNo)worker.AdoxioSelfdisclosure).ToString(),
-                Gender = ((AdoxioGenderCode)worker.AdoxioGendercode).ToString(),
+                SelfDisclosure = worker.AdoxioSelfdisclosure,
+                Gender = worker.AdoxioGendercode,
                 Birthplace = worker.AdoxioBirthplace,
                 BcIdCardNumber = worker.AdoxioBcidcardnumber,
                 DriversLicence = worker.AdoxioDriverslicencenumber
@@ -302,7 +261,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 request.Contact = new Interfaces.Spice.Models.Contact()
                 {
-                    ContactId = worker.AdoxioContactId.Contactid,
                     FirstName = worker.AdoxioContactId.Firstname,
                     LastName = worker.AdoxioContactId.Lastname,
                     MiddleName = worker.AdoxioContactId.Middlename,
@@ -333,7 +291,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 Name = application.AdoxioName,
                 RecordIdentifier = application.AdoxioJobnumber,
                 UrgentPriority = false,
-                ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
+                //ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest.Spice_ApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
                 BCeIDNumber = application.AdoxioBusinessnumber,
                 ApplicantName = application.AdoxioNameofapplicant,
@@ -356,16 +314,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             };
             if (application.AdoxioApplyingPerson != null)
             {
-                string companyName = null;
-                if (application.AdoxioApplyingPerson._parentcustomeridValue != null) {
-                    MicrosoftDynamicsCRMaccount company = _dynamicsClient.Accounts.Get(filter: "accountid eq " + application.AdoxioApplyingPerson._parentcustomeridValue).Value[0];
-                    companyName = company.Name;
-                }
                 screeningRequest.ApplyingPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
-                    ContactId = application.AdoxioApplyingPerson.Contactid,
                     FirstName = application.AdoxioApplyingPerson.Firstname,
-                    CompanyName = companyName,
                     MiddleName = application.AdoxioApplyingPerson.Middlename,
                     LastName = application.AdoxioApplyingPerson.Lastname,
                     Email = application.AdoxioApplyingPerson.Emailaddress1
@@ -410,7 +361,32 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 foreach (var legalEntity in keyPersonnel)
                 {
-                    Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity person = CreateAssociate(legalEntity);
+                    Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity person = new Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity()
+                    {
+                        EntityId = legalEntity.AdoxioLegalentityid,
+                        Name = legalEntity.AdoxioName,
+                        PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
+                        Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>(),
+                        Contact = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
+                        {
+                            FirstName = legalEntity.AdoxioContact.Firstname,
+                            LastName = legalEntity.AdoxioContact.Lastname,
+                            MiddleName = legalEntity.AdoxioContact.Middlename,
+                            Email = legalEntity.AdoxioContact.Emailaddress1,
+                            PhoneNumber = legalEntity.AdoxioContact.Telephone1,
+                            Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
+                            {
+                                AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
+                                AddressStreet2 = legalEntity.AdoxioContact.Address1Line2,
+                                AddressStreet3 = legalEntity.AdoxioContact.Address1Line3,
+                                City = legalEntity.AdoxioContact.Address1City,
+                                StateProvince = legalEntity.AdoxioContact.Address1Stateorprovince,
+                                Postal = legalEntity.AdoxioContact.Address1Postalcode,
+                                Country = legalEntity.AdoxioContact.Address1Country
+                            }
+                        },
+                        IsIndividual = true
+                    };
                     screeningRequest.Associates.Add(person);
                 }
             }
@@ -428,7 +404,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     applicationfilter += " and adoxio_legalentityid ne " + assoc.EntityId;
                 }
             }
-            string[] expand = { "adoxio_Contact", "adoxio_Account"};
+            string[] expand = { "adoxio_Contact", "adoxio_Account" };
 
             var legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
             if (legalEntities != null)
@@ -466,18 +442,11 @@ namespace Gov.Lclb.Cllb.SpdSync
                 associate.IsIndividual = true;
                 associate.Contact = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
-                    ContactId = legalEntity.AdoxioContact.Contactid,
                     FirstName = legalEntity.AdoxioContact.Firstname,
                     LastName = legalEntity.AdoxioContact.Lastname,
                     MiddleName = legalEntity.AdoxioContact.Middlename,
                     Email = legalEntity.AdoxioContact.Emailaddress1,
                     PhoneNumber = legalEntity.AdoxioContact.Telephone1,
-                    SelfDisclosure = (legalEntity.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioSelfdisclosure).ToString(),
-                    Gender = (legalEntity.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioGendercode).ToString(),
-                    Birthplace = legalEntity.AdoxioBirthplace,
-                    BirthDate = legalEntity.AdoxioDateofbirth,
-                    BcIdCardNumber = legalEntity.AdoxioBcidcardnumber,
-                    DriversLicenceNumber = legalEntity.AdoxioDriverslicencenumber,
                     Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
