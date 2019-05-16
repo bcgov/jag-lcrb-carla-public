@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         AddressStreet3 = worker.AdoxioContactId.Address1Line3,
                         City = worker.AdoxioContactId.Address1City,
                         StateProvince = worker.AdoxioContactId.Address1Stateorprovince,
-                        Postal = worker.AdoxioContactId.Address1Postalcode,
+                        Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(worker.AdoxioContactId.Address1Postalcode)) ? worker.AdoxioContactId.Address1Postalcode : null,
                         Country = worker.AdoxioContactId.Address1Country
                     }
                 };
@@ -342,7 +342,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     AddressStreet1 = application.AdoxioAddressstreet,
                     City = application.AdoxioAddresscity,
                     StateProvince = application.AdoxioAddressprovince,
-                    Postal = application.AdoxioAddresspostalcode,
+                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(application.AdoxioAddresspostalcode)) ? application.AdoxioAddresspostalcode : null,
                     Country = application.AdoxioAddresscountry
                 },
                 ContactPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         AddressStreet1 = application.AdoxioEstablishmentaddressstreet,
                         City = application.AdoxioEstablishmentaddresscity,
                         StateProvince = "BC",
-                        Postal = application.AdoxioEstablishmentaddresspostalcode,
+                        Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(application.AdoxioEstablishmentaddresspostalcode)) ? application.AdoxioEstablishmentaddresspostalcode : null,
                         Country = "Canada"
                     }
                 };
@@ -485,10 +485,11 @@ namespace Gov.Lclb.Cllb.SpdSync
                         AddressStreet3 = legalEntity.AdoxioContact.Address1Line3,
                         City = legalEntity.AdoxioContact.Address1City,
                         StateProvince = legalEntity.AdoxioContact.Address1Stateorprovince,
-                        Postal = legalEntity.AdoxioContact.Address1Postalcode,
+                        Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(legalEntity.AdoxioContact.Address1Postalcode)) ? legalEntity.AdoxioContact.Address1Postalcode : null,
                         Country = legalEntity.AdoxioContact.Address1Country
                     }
                 };
+
                 /* Add previous addresses */
                 var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
                 foreach (var address in previousAddresses)
@@ -498,7 +499,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         AddressStreet1 = address.AdoxioStreetaddress,
                         City = address.AdoxioCity,
                         StateProvince = address.AdoxioProvstate,
-                        Postal = address.AdoxioPostalcode,
+                        Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(address.AdoxioPostalcode)) ? address.AdoxioPostalcode : null,
                         Country = address.AdoxioCountry,
                         ToDate = address.AdoxioTodate,
                         FromDate = address.AdoxioFromdate
