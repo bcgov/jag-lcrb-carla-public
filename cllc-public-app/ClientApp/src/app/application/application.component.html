@@ -79,7 +79,7 @@
           <div class="light-blue-bg" style="display: flex;">
             <div style="flex: 0 0 210px;">
               <app-field label="Parcel Identifier (PID)">
-                <input type="text" readonly class="form-control" style="width: 200px;"
+                <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)" style="width: 200px;"
                   formControlName="establishmentParcelId">
               </app-field>
             </div>
@@ -125,7 +125,7 @@
               <app-field label="Parcel Identifier (PID)"
                 [valid]="!form.get('establishmentParcelId').touched || form.get('establishmentParcelId').valid"
                 errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
-                <input type="text" class="form-control" style="width: 200px;" maxlength=9
+                <input type="text" class="form-control" style="width: 200px;" (keydown)="rejectIfNotDigitOrBackSpace($event)"  maxlength=9
                   formControlName="establishmentParcelId">
               </app-field>
             </div>
