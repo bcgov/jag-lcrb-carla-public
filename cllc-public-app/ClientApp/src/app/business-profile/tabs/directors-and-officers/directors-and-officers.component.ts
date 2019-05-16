@@ -10,7 +10,7 @@ import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
-import { LegalEntity } from '@models/legal-entities.model';
+import { LegalEntity } from '@appmodels/legal-entity.model';
 
 @Component({
   selector: 'app-directors-and-officers',

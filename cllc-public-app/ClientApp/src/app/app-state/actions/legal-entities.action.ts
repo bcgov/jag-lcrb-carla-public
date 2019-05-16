@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { DynamicsAccount } from '../../models/dynamics-account.model';
-import { LegalEntity } from '@models/legal-entities.model';
+import { LegalEntity } from '@appmodels/legal-entity.model';
 
 export const LEGAL_ENTITIES = 'LEGAL_ENTITIES';
 export const SET_LEGAL_ENTITIES = 'SET_LEGAL_ENTITIES';

@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { LegalEntity } from '../../models/legal-entities.model';
+import { LegalEntity } from '../../models/legal-entity.model';
 
 
 export const  CURRENT_LEGAL_ENTITY = 'CURRENT_LEGAL_ENTITY';
