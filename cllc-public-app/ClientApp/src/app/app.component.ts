@@ -12,7 +12,7 @@ import { Observable } from '../../node_modules/rxjs';
 import * as CurrentUserActions from './app-state/actions/current-user.action';
 import { filter } from 'rxjs/operators';
 import { FeatureFlagService } from '@services/feature-flag.service';
-import { LegalEntity } from '@appmodels/legal-entity.model';
+import { LegalEntity } from '@models/legal-entity.model';
 
 @Component({
   selector: 'app-root',

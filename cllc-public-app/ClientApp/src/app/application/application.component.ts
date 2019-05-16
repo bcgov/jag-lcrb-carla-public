@@ -13,16 +13,16 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { UserDataService } from '@appservices/user-data.service';
-import { DynamicsDataService } from '@appservices/dynamics-data.service';
+import { UserDataService } from '@services/user-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
   UPLOAD_FILES_MODE
-} from '@appapplications-and-licences/applications-and-licences.component';
-import { DynamicsAccount } from '@appmodels/dynamics-account.model';
-import { ApplicationContentType } from '@appmodels/application-content-type.model';
-import { ApplicationTypeNames } from '@appmodels/application-type.model';
+} from '@app/applications-and-licences/applications-and-licences.component';
+import { DynamicsAccount } from '@models/dynamics-account.model';
+import { ApplicationContentType } from '@models/application-content-type.model';
+import { ApplicationTypeNames } from '@models/application-type.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',

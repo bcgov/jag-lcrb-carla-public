@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { LegalEntity } from '@appmodels/legal-entity.model';
+import { LegalEntity } from '@models/legal-entity.model';
 
 @Component({
   selector: 'app-security-assessments',
