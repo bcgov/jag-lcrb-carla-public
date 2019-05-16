@@ -26,9 +26,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// Initializes a new instance of the ApplicationScreeningRequest
         /// class.
         /// </summary>
-        /// <param name="applicantType">Possible values include: 'Cannabis',
-        /// 'ESS'</param>
-        public ApplicationScreeningRequest(string applicantType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        public ApplicationScreeningRequest(int? applicantType = default(int?), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
             ApplicantType = applicantType;
             UrgentPriority = urgentPriority;
@@ -52,10 +50,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets possible values include: 'Cannabis', 'ESS'
         /// </summary>
         [JsonProperty(PropertyName = "applicantType")]
-        public string ApplicantType { get; set; }
+        public int? ApplicantType { get; set; }
 
         /// <summary>
         /// </summary>
@@ -116,6 +113,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "associates")]
         public IList<LegalEntity> Associates { get; set; }
-
+        public static object Spice_ApplicantType { get; set; }
     }
 }
