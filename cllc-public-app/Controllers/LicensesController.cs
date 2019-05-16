@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -24,22 +23,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LicensesController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly IMemoryCache _cache;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly PdfClient _pdfClient;
         private readonly ILogger _logger;
 
-        public LicensesController(IDynamicsClient dynamicsClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
-            PdfClient pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
+        public LicensesController(IDynamicsClient dynamicsClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, PdfClient pdfClient, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
-            _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(LicensesController));
-
         }
 
         /// Create a change of location application
@@ -167,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var dynamicsApplication in dynamicsApplicationList)
                 {
                     // populate the licence type.
-                    dynamicsApplication.PopulateLicenceType(_dynamicsClient, _cache  );
+                    dynamicsApplication.PopulateLicenceType(_dynamicsClient);
 
                     licenseSummaryList.Add(dynamicsApplication.ToLicenseSummaryViewModel(applicationsInProgress));
                 }

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using SpdSync.models;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using System;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -51,25 +50,31 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpPost("send/{workerId}")]        
         public async Task<ActionResult> SendWorkerScreeningRequest(string workerId )
         {
-            var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
-            try
+            // Generate the Worker Request.
+            var workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
+
+            _logger.LogError("Data to send:");
+            string jsonString = JsonConvert.SerializeObject(workerRequest);
+            _logger.LogError(jsonString);
+
+            // send the data
+            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
             {
-                // Generate the application request
-                workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.ToString());
-                return BadRequest();
+                workerRequest
             };
 
-            var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
+            var result = await _spiceUtils.SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+            
+            _logger.LogError("Response code was");
+            _logger.LogError(result.Response.StatusCode.ToString());
+            _logger.LogError("Response text was");
+            _logger.LogError(await result.Response.Content.ReadAsStringAsync());
 
-            if (result)
-            {
-                return Ok(workerRequest);
-            }
-            return BadRequest();
+            _logger.LogInformation("Done Send Worker Screening");
+            return Ok();
         }
+
+        
+
     }
 }
