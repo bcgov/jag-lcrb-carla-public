@@ -1,4 +1,5 @@
 import { DynamicsContact } from './dynamics-contact.model';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
 
 export interface DynamicsAccount {
   id: string;
@@ -30,4 +31,6 @@ export interface DynamicsAccount {
   primarycontact: DynamicsContact;
 
   businessType: string;
+
+  tiedHouse: TiedHouseConnection;
 }

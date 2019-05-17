@@ -37,11 +37,13 @@ const routes: Routes = [
   {
     path: 'account-profile',
     component: BusinessProfileComponent,
+    // canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
   {
     path: 'account-profile/:applicationId',
     component: BusinessProfileComponent,
+    // canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
   {
