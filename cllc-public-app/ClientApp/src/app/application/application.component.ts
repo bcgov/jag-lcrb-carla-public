@@ -13,7 +13,6 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { UserDataService } from '@services/user-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
@@ -23,6 +22,8 @@ import {
 import { DynamicsAccount } from '@models/dynamics-account.model';
 import { ApplicationContentType } from '@models/application-content-type.model';
 import { ApplicationTypeNames } from '@models/application-type.model';
+import { CurrentAccountAction } from './../app-state/actions/current-account.action';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -67,6 +68,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   showValidationMessages: boolean;
   submittedApplications = 8;
   ServiceHours = ServiceHours;
+  tiedHouseFormData: TiedHouseConnection;
 
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
 
@@ -82,7 +84,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     public snackBar: MatSnackBar,
     public router: Router,
     private applicationDataService: ApplicationDataService,
-    private userDataService: UserDataService,
     private dynamicsDataService: DynamicsDataService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
@@ -137,17 +138,12 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.applicationDataService.getSubmittedApplicationCount()
       .subscribe(value => this.submittedApplications = value);
 
-    this.userDataService.getCurrentUser()
-      .subscribe((user) => {
-        if (user.accountid != null) {
-          // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('accounts', user.accountid)
-            .subscribe((result) => {
-              this.account = result;
-            });
-        }
-
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(filter(account => !!account))
+      .subscribe((account) => {
+        this.account = account;
       });
+
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       (data: Application) => {
