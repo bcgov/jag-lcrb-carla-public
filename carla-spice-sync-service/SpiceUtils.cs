@@ -269,12 +269,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                 workerScreeningRequest
             };
 
-            logger.LogInformation($"Sending Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+            logger.LogInformation($"Sending Worker Screening Request");
 
             var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
 
             logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-            logger.LogInformation($"Done Send Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+            logger.LogInformation($"Done Send Worker Screening Request");
 
             return result.Response.StatusCode.ToString() == "OK";
         }
