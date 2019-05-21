@@ -268,8 +268,8 @@
             TO FEDERAL PRODUCERS OF CANNABIS</h3>
           <div class="padded-section"
             *ngIf="saveFormData?.businessProfile?.id">
-            <app-connection-to-producers [accountId]="saveFormData?.businessProfile?.id"
-              [businessType]="saveFormData?.businessProfile?.businessType"></app-connection-to-producers>
+            <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
+              [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
           </div>
 
 

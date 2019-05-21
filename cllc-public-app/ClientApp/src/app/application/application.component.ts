@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStr
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable } from 'rxjs';
+import { Subscription, Subject, Observable, forkJoin } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,16 +13,19 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { UserDataService } from '@appservices/user-data.service';
-import { DynamicsDataService } from '@appservices/dynamics-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
   UPLOAD_FILES_MODE
-} from '@appapplications-and-licences/applications-and-licences.component';
-import { DynamicsAccount } from '@appmodels/dynamics-account.model';
-import { ApplicationContentType } from '@appmodels/application-content-type.model';
-import { ApplicationTypeNames } from '@appmodels/application-type.model';
+} from '@app/applications-and-licences/applications-and-licences.component';
+import { Account } from '@models/account.model';
+import { ApplicationContentType } from '@models/application-content-type.model';
+import { ApplicationTypeNames } from '@models/application-type.model';
+import { CurrentAccountAction } from './../app-state/actions/current-account.action';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { ConnectionToProducersComponent } from '@app/business-profile/tabs/connection-to-producers/connection-to-producers.component';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -56,6 +59,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
+  @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
   form: FormGroup;
   savedFormData: any;
   subscriptions: Subscription[] = [];
@@ -67,6 +71,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   showValidationMessages: boolean;
   submittedApplications = 8;
   ServiceHours = ServiceHours;
+  tiedHouseFormData: TiedHouseConnection;
 
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
 
@@ -75,18 +80,18 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   mode: string;
-  account: DynamicsAccount;
+  account: Account;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
     private applicationDataService: ApplicationDataService,
-    private userDataService: UserDataService,
     private dynamicsDataService: DynamicsDataService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog) {
     super();
     this.applicationId = this.route.snapshot.params.applicationId;
@@ -137,17 +142,12 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     this.applicationDataService.getSubmittedApplicationCount()
       .subscribe(value => this.submittedApplications = value);
 
-    this.userDataService.getCurrentUser()
-      .subscribe((user) => {
-        if (user.accountid != null) {
-          // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('accounts', user.accountid)
-            .subscribe((result) => {
-              this.account = result;
-            });
-        }
-
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(filter(account => !!account))
+      .subscribe((account) => {
+        this.account = account;
       });
+
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
       (data: Application) => {
@@ -184,16 +184,16 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       }
     );
 
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
-      filter(state => !!state))
-      .subscribe(currentApplication => {
-        this.form.patchValue(currentApplication);
-        if (currentApplication.isPaid) {
-          this.form.disable();
-        }
-        this.savedFormData = this.form.value;
-      });
-    this.subscriptions.push(sub);
+    // const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
+    //   filter(state => !!state))
+    //   .subscribe(currentApplication => {
+    //     this.form.patchValue(currentApplication);
+    //     if (currentApplication.isPaid) {
+    //       this.form.disable();
+    //     }
+    //     this.savedFormData = this.form.value;
+    //   });
+    // this.subscriptions.push(sub);
   }
   private hideFormControlByType() {
     if (!this.application.applicationType.showPropertyDetails) {
@@ -239,7 +239,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
+    if (!this.connectionsToProducers.formHasChanged() && JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
       return this.save(true);
@@ -253,7 +253,9 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   save(showProgress: boolean = false): Subject<boolean> {
     const saveResult = new Subject<boolean>();
     const saveData = this.form.value;
-    const subscription = this.applicationDataService.updateApplication(this.form.value).subscribe(
+    const subscription = forkJoin(
+      this.applicationDataService.updateApplication(this.form.value),
+      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)).subscribe(
       res => {
         saveResult.next(true);
         this.savedFormData = saveData;
@@ -273,6 +275,12 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     }
 
     return saveResult;
+  }
+
+  prepareTiedHouseSaveRequest(_tiedHouseData) {
+    let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
+    data = { ...data };
+    return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
 
   updateApplicationInStore() {

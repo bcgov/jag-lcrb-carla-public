@@ -10,9 +10,14 @@ import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
 import { Observable } from '../../node_modules/rxjs';
 import * as CurrentUserActions from './app-state/actions/current-user.action';
+import * as CurrentAccountActions from './app-state/actions/current-account.action';
 import { filter } from 'rxjs/operators';
 import { FeatureFlagService } from '@services/feature-flag.service';
-import { LegalEntity } from '@appmodels/legal-entity.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { CurrentAccountAction } from './app-state/actions/current-account.action';
+import { AccountDataService } from '@services/account-data.service';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { BCeidAuthGuard } from '@services/bceid-auth-guard.service';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +40,10 @@ export class AppComponent implements OnInit {
     private userDataService: UserDataService,
     private store: Store<AppState>,
     private adoxioLegalEntityDataService: LegalEntityDataService,
-    public featureFlagService: FeatureFlagService
+    private bCeidAuthGuard: BCeidAuthGuard,
+    private accountDataService: AccountDataService,
+    public featureFlagService: FeatureFlagService,
+    private tiedHouseService: TiedHouseConnectionsDataService
   ) {
     this.isDevMode = isDevMode();
     if (!featureFlagService.initialized) {
@@ -69,19 +77,15 @@ export class AppComponent implements OnInit {
   }
 
   reloadUser() {
-    this.userDataService.getCurrentUser()
+    this.store.select(state => state.currentUserState.currentUser)
+      .pipe(filter(u => !!u))
       .subscribe((data: User) => {
         this.currentUser = data;
         this.isNewUser = this.currentUser.isNewUser;
-
-        this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
-        // this.isAssociate = (this.currentUser.businessname == null);
-        // if (!this.isAssociate) {
-        //   this.adoxioLegalEntityDataService.getBusinessProfileSummary().subscribe(
-        //     res => {
-        //       this.businessProfiles = res;
-        //     });
-        // }
+        if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
+          this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
+          .subscribe(() => {});
+        }
       });
   }
 

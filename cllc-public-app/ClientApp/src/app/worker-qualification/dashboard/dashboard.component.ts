@@ -5,6 +5,8 @@ import { User } from '../../models/user.model';
 import { Worker } from '../../models/worker.model';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app-state/models/app-state';
 
 
 @Component({
@@ -29,7 +31,8 @@ export class WorkerDashboardComponent implements OnInit {
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private userDataService: UserDataService,
-    private workerDataService: WorkerDataService
+    private workerDataService: WorkerDataService,
+    private store: Store<AppState>
   ) {
   }
 
@@ -38,9 +41,9 @@ export class WorkerDashboardComponent implements OnInit {
   }
 
   reloadUser() {
-    this.busy = this.userDataService.getCurrentUser()
-      .subscribe((data: User) => {
-        this.currentUser = data;
+    this.store.select(state => state.currentUserState.currentUser)
+      .subscribe(user => {
+        this.currentUser = user;
         this.isNewUser = this.currentUser.isNewUser;
         this.dataLoaded = true;
         if (this.currentUser && this.currentUser.contactid) {
@@ -49,8 +52,7 @@ export class WorkerDashboardComponent implements OnInit {
             this.dataSource = res;
             this.currentApplication = res[0];
             this.setClientSideStatus(this.currentApplication);
-            // this.numberOfApplications = res.length;
-            // if(this.numberOfApplications < 2) {}
+
             this.applicationStatus = this.getStatus(res);
 
             const passedApplications = res.filter(i => (<any>i).status === 'Active');
@@ -58,8 +60,6 @@ export class WorkerDashboardComponent implements OnInit {
             if (passedApplications.length > 0) {
               this.displayedColumns.push('actions');
             }
-
-
           });
         }
       });

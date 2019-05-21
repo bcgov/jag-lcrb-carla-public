@@ -4,13 +4,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/
 import { ApplicationDataService } from '@app/services/application-data.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
-import { Application } from '@app/models/application.model';
-import { ApplicationSummary } from '@app/models/application-summary.model';
-import { ApplicationType, ApplicationTypeNames } from '@app/models/application-type.model';
-import { License } from '@app/models/license.model';
-import { FileSystemItem } from '@app/models/file-system-item.model';
+import { Application } from '@models/application.model';
+import { ApplicationSummary } from '@models/application-summary.model';
+import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { License } from '@models/license.model';
+import { FileSystemItem } from '@models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
-import { DynamicsAccount } from './../models/dynamics-account.model';
+import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 
 
@@ -40,7 +40,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
-  @Input() account: DynamicsAccount;
+  @Input() account: Account;
   @Output() marketerApplicationExists: EventEmitter<boolean> = new EventEmitter<boolean>();
   dataLoaded = false;
   licencePresentLabel: string;

@@ -1,14 +1,14 @@
 
-import { filter, zip } from 'rxjs/operators';
+import { filter, zip, map, catchError } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { ContactDataService } from '../services/contact-data.service';
-import { DynamicsContact } from '../models/dynamics-contact.model';
+import { Contact } from '../models/contact.model';
 import { AppState } from '../app-state/models/app-state';
 import * as CurrentUserActions from '../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
-import { Subscription, Observable, Subject, forkJoin } from 'rxjs';
+import { Subscription, Observable, Subject, forkJoin, of } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
 import { PreviousAddressDataService } from '../services/previous-address-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,10 +20,12 @@ import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '../services/account-data.service';
-import { DynamicsAccount } from '../models/dynamics-account.model';
+import { Account } from '../models/account.model';
 import { FormBase } from '../shared/form-base';
 import { LegalEntityDataService } from '../services/legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
@@ -63,7 +65,8 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
   applicationId: string;
   applicationMode: string;
-
+  account: Account;
+  tiedHouseFormData: Observable<TiedHouseConnection>;
 
   public get contacts(): FormArray {
     return this.form.get('otherContacts') as FormArray;
@@ -77,7 +80,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-
+    private tiedHouseService: TiedHouseConnectionsDataService
   ) {
     super();
     this.applicationId = this.route.snapshot.params.applicationId;
@@ -131,7 +134,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
       //   emailaddress1: [''],
       // })
     });
-    this.reloadUser();
+    this.subscribeForData();
 
     this.form.get('businessProfile._mailingSameAsPhysicalAddress').valueChanges.pipe(
       filter(value => value === true))
@@ -209,52 +212,34 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     return name;
   }
 
-  reloadUser() {
-    this.busy = this.userDataService.getCurrentUser()
-      .toPromise()
-      .then((data: User) => {
-        this.currentUser = data;
+  subscribeForData() {
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(filter(s => !!s))
+      .subscribe(account => {
+        this.account = account;
+        account.physicalAddressProvince = 'British Columbia';
+        account.physicalAddressCountry = 'Canada';
 
-        this.store.dispatch(new CurrentUserActions.SetCurrentUserAction(data));
-        this.dataLoaded = true;
-        if (this.currentUser && this.currentUser.accountid) {
-          this.busy2 = forkJoin(
-            this.accountDataService.getAccount(this.currentUser.accountid),
-            this.legalEntityDataService.getBusinessProfileSummary()
-          ).toPromise().then(res => {
-            const account: any = res[0];
+        this.form.patchValue({
+          businessProfile: account,
+          primarycontact: account.primarycontact || {}
+        });
 
-            account.physicalAddressProvince = 'British Columbia';
-            account.physicalAddressCountry = 'Canada';
-
-            const legalEntities = res[1].filter(e => e.isApplicant === true);
-            if (legalEntities.length) {
-              this.legalEntityId = legalEntities[0].id;
-            }
-
-
-            this.form.patchValue({
-              businessProfile: account,
-              primarycontact: account.primarycontact || {}
-            });
-
-            this.saveFormData = this.form.value;
-          });
-        }
+        this.saveFormData = this.form.value;
       });
   }
 
   confirmContact(confirm: boolean) {
     if (confirm) {
       // create contact here
-      const contact = new DynamicsContact();
+      const contact = new Contact();
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
       this.busy = this.contactDataService.createWorkerContact(contact)
         .toPromise()
         .then(res => {
-          this.reloadUser();
+          this.subscribeForData();
         }, error => alert('Failed to create contact'));
     } else {
       window.location.href = 'logout';
@@ -262,7 +247,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (// this.workerStatus !== 'Application Incomplete' ||
+    if (!this.connectionsToProducers.formHasChanged() &&
       JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
@@ -270,10 +255,10 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     }
   }
 
-  save(): Subject<boolean> {
-    const subResult = new Subject<boolean>();
+  save(): Observable<boolean> {
+    const _tiedHouse = this.tiedHouseFormData || {};
     this.form.get('businessProfile').patchValue({ physicalAddressCountry: 'Canada' });
-    const value = <DynamicsAccount>{
+    const value = <Account>{
       ...this.form.get('businessProfile').value
     };
     const saves = [
@@ -282,18 +267,17 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
     ];
 
     if (this.connectionsToProducers) {
-      saves.push(this.connectionsToProducers.prepareSaveData());
+      saves.push(
+        this.prepareTiedHouseSaveRequest(Object.assign(this.account.tiedHouse, _tiedHouse))
+      );
     }
 
-    this.busy = forkJoin(...saves)
-      .toPromise()
-      .then(res => {
-        subResult.next(true);
-        this.reloadUser();
-      }, err => subResult.next(false));
-    this.busy3 = Promise.resolve(this.busy);
-
-    return subResult;
+    return forkJoin(...saves)
+      .pipe(catchError(e => of(false)),
+        map(v => {
+          this.accountDataService.loadCurrentAccountToStore(this.account.id).subscribe(() => { });
+          return true;
+        }));
   }
 
   gotoReview() {
@@ -311,6 +295,16 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
       });
     } else {
       this.markAsTouched();
+    }
+  }
+
+  prepareTiedHouseSaveRequest(_tiedHouseData) {
+    let data = (<any>Object).assign(this.account.tiedHouse, _tiedHouseData);
+    data = { ...data };
+    if (data.id) {
+      return this.tiedHouseService.updateTiedHouse(data, data.id);
+    } else {
+      return this.accountDataService.createTiedHouseConnection(data, this.accountId);
     }
   }
 

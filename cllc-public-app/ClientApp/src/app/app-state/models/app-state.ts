@@ -1,7 +1,7 @@
-import { DynamicsAccount } from '../../models/dynamics-account.model';
-import { Application } from '../../models/application.model';
-import { User } from '../../models/user.model';
-import { LegalEntity } from '@appmodels/legal-entity.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
+import { User } from '@models/user.model';
 
 export interface AppState {
     legalEntitiesState: LegalEntitiesState;
@@ -21,7 +21,7 @@ export interface ApplicationsState {
 }
 
 export interface CurrentAccountState {
-    currentAccount: DynamicsAccount;
+    currentAccount: Account;
 }
 
 export interface CurrentUserState {

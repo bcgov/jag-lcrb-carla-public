@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../app-state/models/app-state';
 import { User } from '../models/user.model';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ServiceCardAuthGuard implements CanActivate {
@@ -15,19 +16,17 @@ export class ServiceCardAuthGuard implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        const result = new Subject<boolean>();
-        this.userService.getCurrentUser()
-            .subscribe(user => {
+
+        return this.store.select(s => s.currentUserState.currentUser)
+            .pipe(map(user => {
                 console.log('ServiceCardAuthGuard#canActivate called');
                 const allowAccess = (user && user.userType === 'VerifiedIndividual');
+                console.log(allowAccess);
+
                 if (!allowAccess) {
                     this.router.navigate(['/']);
                 }
-                result.next(allowAccess);
-            }, error => {
-                this.router.navigate(['/']);
-                result.next(false);
-            });
-        return result;
+                return allowAccess;
+            }));
     }
 }

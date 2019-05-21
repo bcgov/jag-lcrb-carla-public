@@ -5,13 +5,13 @@ import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
-import { DynamicsAccount } from '../../../models/dynamics-account.model';
-import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { Account } from '@models/account.model';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../app-state/models/app-state';
-import * as LegalEntitiesActions from '../../../app-state/actions/legal-entities.action';
-import { LegalEntity } from '@appmodels/legal-entity.model';
+import { AppState } from '@app/app-state/models/app-state';
+import * as LegalEntitiesActions from '@app/app-state/actions/legal-entities.action';
+import { LegalEntity } from '@models/legal-entity.model';
 
 @Component({
   selector: 'app-edit-shareholders',
@@ -164,7 +164,7 @@ export class EditShareholdersComponent implements OnInit {
     // adoxioLegalEntity.relatedentities = [];
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = <DynamicsAccount>{};
+      adoxioLegalEntity.account = <Account>{};
       adoxioLegalEntity.account.id = this.accountId;
     }
     return adoxioLegalEntity;

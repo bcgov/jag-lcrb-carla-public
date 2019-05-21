@@ -79,8 +79,8 @@
           <div class="light-blue-bg" style="display: flex;">
             <div style="flex: 0 0 210px;">
               <app-field label="Parcel Identifier (PID)">
-                <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)" style="width: 200px;"
-                  formControlName="establishmentParcelId">
+                <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                  style="width: 200px;" formControlName="establishmentParcelId">
               </app-field>
             </div>
           </div>
@@ -125,8 +125,8 @@
               <app-field label="Parcel Identifier (PID)"
                 [valid]="!form.get('establishmentParcelId').touched || form.get('establishmentParcelId').valid"
                 errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
-                <input type="text" class="form-control" style="width: 200px;" (keydown)="rejectIfNotDigitOrBackSpace($event)"  maxlength=9
-                  formControlName="establishmentParcelId">
+                <input type="text" class="form-control" style="width: 200px;"
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength=9 formControlName="establishmentParcelId">
               </app-field>
             </div>
             <div style="flex: 1; font-size: 11px;">
@@ -328,6 +328,15 @@
         </app-field>
       </address>
 
+      <section>
+        <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
+        <div class="padded-section" *ngIf="application?.id">
+          <app-connection-to-producers *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse" 
+          licensedProducerText="bc non-medical cannabis retail store licensee or applicant"
+          [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
+        </div>
+      </section>
+
       <hr>
       <p>&nbsp;</p>
 
@@ -512,9 +521,9 @@
           processing, applicants must make sure the application is complete before submitting it.
         </p>
         <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-          The Province does not know how many applications for a cannabis marketing licence will be
-          received. Therefore, it is difficult to predict how long applications will take to process. To minimize
-          delays in processing, applicants must make sure the application is complete before submitting it.
+          The Province does not know how many applications for a cannabis marketing licence will be received. Therefore,
+          it is difficult to predict how long applications will take to process. To minimize delays in processing,
+          applicants must make sure the application is complete before submitting it.
         </p>
         <br>
         <p>
@@ -610,7 +619,15 @@
       </div>
       <label for="">Supporting Documents</label>
       <br>
-      <p>Please download the
+      <section *ngIf="ApplicationTypeNames.Marketer === application?.applicationType?.name">
+        <p>Please upload the corporation's:</p>
+        <ul>
+          <li>Notice of Artices</li>
+          <li>Central Securities Register</li>
+        </ul>
+        <br>
+      </section>
+      <p *ngIf="ApplicationTypeNames.Marketer !== application?.applicationType?.name">Please download the
         <a *ngIf="account?.businessType === 'SoleProprietor'"
           href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
           Document Checklist

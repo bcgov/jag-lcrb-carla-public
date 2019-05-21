@@ -31,6 +31,7 @@
     "@angular/router": "~7.2.0",
     "@ng-bootstrap/ng-bootstrap": "^3.3.1",
     "@ngrx/store": "^6.1.0",
+    "@ngrx/store-devtools": "^7.4.0",
     "@nguniversal/module-map-ngfactory-loader": "^6.1.0",
     "angular-url-encode": "^1.0.0",
     "aspnet-prerendering": "^3.0.1",
