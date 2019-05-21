@@ -1,16 +1,15 @@
 <div [ngBusy]="busy"></div>
 <div style="max-width: 800px;" [formGroup]="form">
-  <!-- <h1 style="margin-top: 0;">Connections to Producers</h1> -->
+  <!-- <h1 style="margin-top: 0;">Connections to Producers</h1> --> 
   <span>A "
-    <strong>federal producer</strong>" is a federally licensed producer of cannabis
+    <strong>federal producer</strong>" is a {{licensedProducerText}} of cannabis
   </span>
   <br>
   <p></p>
   <div
     *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the corporation have any association, connection or financial interest in a federally licensed
-        producer of cannabis? </label>
+      <label for="">Does the corporation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
@@ -39,7 +38,7 @@
     <p></p>
 
     <section>
-      <label for="">Does a federally licensed producer of cannabis have any association, connection or financial
+      <label for="">Does a {{licensedProducerText}} of cannabis have any association, connection or financial
         interest in the corporation?</label>
       <br>
       <span>This includes, but is not limited to:</span>
@@ -69,8 +68,7 @@
   </div>
   <div *ngIf="['PublicCorporation'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the corporation have any association, connection or financial interest in a federally licensed
-        producer of cannabis? </label>
+      <label for="">Does the corporation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
@@ -110,7 +108,7 @@
 
     <section>
       <label for="">Does any shareholder with 20% or more voting shares have any association, connection or financial
-        interest in a federally licensed producer of
+        interest in a {{licensedProducerText}} of
         cannabis?
       </label>
       <br>
@@ -139,8 +137,7 @@
     <p></p>
 
     <section>
-      <label for="">Does any shareholder with 20% or more of voting shares have any immediate family members with any connection to a federally licensed
-          producer of cannabis?
+      <label for="">Does any shareholder with 20% or more of voting shares have any immediate family members with any connection to a {{licensedProducerText}} of cannabis?
       </label>
       <br>
       <span>This includes, but is not limited to:</span>
@@ -172,8 +169,8 @@
   </div>
   <div *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the sole proprietor have any association, connection or financial interest in a federally
-        licensed producer of cannabis?</label>
+      <label for="">Does the sole proprietor have any association, connection or financial interest in a
+        {{licensedProducerText}} of cannabis?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
@@ -235,8 +232,7 @@
   <div
     *ngIf="[ 'Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the partnership have any association, connection or financial interest in a federally licensed
-        producer of cannabis?</label>
+      <label for="">Does the partnership have any association, connection or financial interest in a {{licensedProducerText}} of cannabis?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
@@ -264,7 +260,7 @@
     <p></p>
 
     <section>
-      <label for="">Does a federally licensed producer of cannabis have any association, connection or financial
+      <label for="">Does a {{licensedProducerText}} of cannabis have any association, connection or financial
         interest in the partnership?</label>
       <br>
       <span>This includes, but is not limited to:</span>
@@ -294,8 +290,7 @@
   </div>
   <div *ngIf="['Society'].indexOf(businessType) !== -1">
     <section>
-      <label for="">Does the society have any association, connection or financial interest in a federally licensed
-        producer of cannabis?</label>
+      <label for="">Does the society have any association, connection or financial interest in a {{licensedProducerText}} of cannabis?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <br>
