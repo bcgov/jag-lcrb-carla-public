@@ -2,6 +2,7 @@ import { Account } from './account.model';
 import { License } from './license.model';
 import { Invoice } from './invoice.model';
 import { ApplicationType } from './application-type.model';
+import { TiedHouseConnection } from './tied-house-connection.model';
 
 export class Application {
   id: string;
@@ -54,4 +55,5 @@ export class Application {
   serviceHoursWednesdayOpen: string;
   servicehHoursStandardHours: boolean;
   signatureAgreement: boolean;
+  tiedHouse: TiedHouseConnection;
 }

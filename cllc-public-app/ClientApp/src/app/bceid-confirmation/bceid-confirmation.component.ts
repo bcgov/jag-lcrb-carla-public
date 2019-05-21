@@ -6,6 +6,9 @@ import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
 import { AccountDataService } from '../services/account-data.service';
 import { Observable, Subscription } from '../../../node_modules/rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '@appapp-state/models/app-state';
+import { filter, mergeMap } from 'rxjs/operators';
 
 
 @Component({
@@ -31,17 +34,19 @@ export class BceidConfirmationComponent {
 
   constructor(private dynamicsDataService: DynamicsDataService,
     private userDataService: UserDataService,
+    private store: Store<AppState>,
     private accountDataService: AccountDataService) {
     // if this passes, this means the user's account exists but it's contact information has not been created.
     // user will skip the BCeid confirmation.
-    this.busySubscription = this.accountDataService.getCurrentAccount().subscribe((data) => {
-      const account = data;
-      this.createContact(account);
-    },
-      error => {
-        // continue as normal
-        this.accountExists = false;
-      });
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .subscribe((data) => {
+        if (!data) {
+          this.accountExists = false;
+        }
+      },
+        error => {
+          this.accountExists = false;
+        });
 
   }
 
@@ -84,6 +89,7 @@ export class BceidConfirmationComponent {
     this.busy = this.dynamicsDataService.createRecord('accounts', payload)
       .toPromise()
       .then((data) => {
+        this.userDataService.loadUserToStore().then(res => { });
         this.reloadUser.emit();
       });
   }

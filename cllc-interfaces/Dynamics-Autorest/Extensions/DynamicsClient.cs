@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_application_adoxio_tiedhouseconnection_Application", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
 
                 // fetch from Dynamics.
                 result = await Applications.GetByKeyAsync(id, expand: expand);
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if(result.AdoxioApplicationTypeId != null)
                 {
-                    var filter = $"_adoxio_applicationtype_value eq { result.AdoxioApplicationTypeId.AdoxioApplicationtypeid}";
+                    var filter = $"_adoxio_applicationtype_value eq { result.AdoxioApplicationTypeId.AdoxioApplicationtypeid}"; 
                     var typeContents = this.Applicationtypecontents.Get(filter: filter).Value;
                     result.AdoxioApplicationTypeId.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType = typeContents;
                 }
