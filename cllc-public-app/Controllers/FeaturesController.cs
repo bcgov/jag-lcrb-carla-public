@@ -40,10 +40,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet()]
         public IActionResult GetFeatureList()
         {
-            var features = Configuration.GetSection("FEATURES").AsEnumerable()
-                .Select(e => e.Value)
-                .Where(v => v != null)
-                .ToList();
+            var features = new List<string>();
+            if (!String.IsNullOrEmpty(Configuration["FEATURE_MARKETER"]))
+            {
+                features.Add("Marketer");
+            }
 
             return Json(features);
         }
