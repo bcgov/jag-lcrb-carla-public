@@ -22,8 +22,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the Contact class.
         /// </summary>
-        /// <param name="selfDisclosure">Possible values include: 'Yes',
-        /// 'No'</param>
+        /// <param name="selfDisclosure">Possible values include: 'No',
+        /// 'Yes'</param>
         /// <param name="gender">Possible values include: 'Male', 'Female',
         /// 'Other'</param>
         public Contact(string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address))
@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         public string Birthplace { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Yes', 'No'
+        /// Gets or sets possible values include: 'No', 'Yes'
         /// </summary>
         [JsonProperty(PropertyName = "selfDisclosure")]
         public string SelfDisclosure { get; set; }
