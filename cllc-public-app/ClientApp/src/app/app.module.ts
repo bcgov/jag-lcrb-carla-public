@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
@@ -118,7 +118,7 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
 import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
@@ -153,6 +153,11 @@ import {
 } from './applications-and-licences/applications-and-licences.component';
 import { AppRemoveIfFeatureOnDirective } from './directives/remove-if-feature-on.directive';
 import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-off.directive';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppState } from '@app/app-state/models/app-state';
+import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
+import { map } from 'rxjs/operators';
+
 
 @NgModule({
   declarations: [
@@ -235,53 +240,57 @@ import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-o
     AppRemoveIfFeatureOffDirective
   ],
   imports: [
-    ChartsModule,
-    AdminModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    CdkTableModule,
-    FileDropModule,
-    FormsModule,
-    HttpClientModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatStepperModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NgBusyModule,
-    NgbModule.forRoot(),
-    ReactiveFormsModule,
-    BsDatepickerModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    AlertModule.forRoot()
+  ChartsModule,
+  AdminModule,
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  BrowserModule,
+  CdkTableModule,
+  FileDropModule,
+  FormsModule,
+  HttpClientModule,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  NgBusyModule,
+  NgbModule.forRoot(),
+  ReactiveFormsModule,
+  BsDatepickerModule.forRoot(),
+  StoreModule.forRoot(reducers, { metaReducers }),
+  StoreDevtoolsModule.instrument
+    ({
+      maxAge: 5
+    }),
+  AlertModule.forRoot()
   ],
   exports: [
     AdminModule,
@@ -352,6 +361,14 @@ import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-o
     UserDataService,
     VoteDataService,
     WorkerDataService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (us: UserDataService) => function () {
+        return us.loadUserToStore();
+      },
+      deps: [ UserDataService],
+      multi: true
+    }
   ],
   entryComponents: [
     ApplicationCancellationDialogComponent,

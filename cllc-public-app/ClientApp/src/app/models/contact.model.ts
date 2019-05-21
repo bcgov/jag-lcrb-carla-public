@@ -1,4 +1,4 @@
-export class DynamicsContact {
+export class Contact {
   id: string;
   fullname: string;
   firstname: string;

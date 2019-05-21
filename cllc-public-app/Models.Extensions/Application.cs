@@ -5,6 +5,7 @@ using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -38,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
 
 
-            
+
 
             // standard service hours are 9 to 11, 7 days a week.
             if (
@@ -56,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 from.ServiceHoursFridayClose != ServiceHours.sh2300 ||
                 from.ServiceHoursSaturdayOpen != ServiceHours.sh0900 ||
                 from.ServiceHoursSaturdayClose != ServiceHours.sh2300
-                
+
                 )
             {
                 to.AdoxioServicehoursstandardhours = false;
@@ -111,7 +112,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
 
-            
+
             /*
             to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
             to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
@@ -122,14 +123,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 to.AdoxioEstablishmentparcelid = from.AdoxioEstablishment.AdoxioParcelid;
             }
             */
-            
+
         }
 
         private static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceType(string id, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
         {
             string cacheKey = CacheKeys.LicenceTypePrefix + id;
-            if (! memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
-            {                
+            if (!memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+            {
                 // Key not in cache, so get data.
                 result = dynamicsClient.GetAdoxioLicencetypeById(id);
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
@@ -153,7 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 application.AdoxioLicenceType = GetCachedLicenceType(application._adoxioLicencetypeValue, dynamicsClient, memoryCache);
             }
-            
+
             if (application.AdoxioAssignedLicence != null && application.AdoxioAssignedLicence._adoxioLicencetypeValue != null)
             {
                 application.AdoxioAssignedLicence.AdoxioLicenceType = GetCachedLicenceType(application.AdoxioAssignedLicence._adoxioLicencetypeValue, dynamicsClient, memoryCache);
@@ -207,9 +208,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 //get additional property info
                 AdditionalPropertyInformation = dynamicsApplication.AdoxioAdditionalpropertyinformation,
                 AdoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue,
-            
+
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
-            
+
                 //get contact details
                 ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
                 ContactPersonLastName = dynamicsApplication.AdoxioContactpersonlastname,
@@ -290,6 +291,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
             }
+            if (dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication != null)
+            {
+                var tiedHouse = dynamicsApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication.FirstOrDefault();
+                if (tiedHouse != null)
+                {
+                    applicationVM.TiedHouse = tiedHouse.ToViewModel();
+                }
+            }
 
             applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
 
@@ -300,7 +309,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static ApplicationSummary ToSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication)
         {
             ApplicationSummary applicationSummary = new ViewModels.ApplicationSummary()
-            {                
+            {
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
                 //get establishment name and address
@@ -312,13 +321,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationSummary.Id = dynamicsApplication.AdoxioApplicationid.ToString();
             }
-                
+
             if (dynamicsApplication.Statuscode != null)
             {
-                applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus (dynamicsApplication);
+                applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus(dynamicsApplication);
             }
 
-            if(dynamicsApplication.AdoxioLicenceType != null)
+            if (dynamicsApplication.AdoxioLicenceType != null)
             {
                 applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioLicenceType.AdoxioName;
             }
@@ -326,7 +335,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             return applicationSummary;
         }
 
-        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IEnumerable<MicrosoftDynamicsCRMadoxioApplication>  applicationsInProgress )
+        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress)
         {
             ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
             {
@@ -375,18 +384,18 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (addActions)
                 {
                     foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
-                    { 
+                    {
                         // check to see if there is an existing action on this licence.
                         licenseSummary.AllowedActions.Add(item.ToViewModel());
                     }
-                    
+
                 }
             }
 
             return licenseSummary;
         }
 
-        
+
 
     }
 }
