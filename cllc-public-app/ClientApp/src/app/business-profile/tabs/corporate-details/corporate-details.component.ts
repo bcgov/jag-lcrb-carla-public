@@ -1,19 +1,19 @@
 
 import {filter,  auditTime } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { UserDataService } from '../../../services/user-data.service';
-import { AccountDataService } from '../../../services/account-data.service';
-import { User } from '../../../models/user.model';
-import { DynamicsAccount } from '../../../models/dynamics-account.model';
+import { UserDataService } from '@services/user-data.service';
+import { AccountDataService } from '@services/account-data.service';
+import { User } from '@models/user.model';
+import { Account } from '@models/account.model';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription, Subject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
-import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../app-state/models/app-state';
-import * as currentAccountActions from '../../../app-state/actions/current-account.action';
+import { AppState } from '@app/app-state/models/app-state';
+import * as currentAccountActions from '@app/app-state/actions/current-account.action';
 
 @Component({
   selector: 'app-corporate-details',
@@ -24,7 +24,7 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
   @Input() accountId: string;
   @Input() businessType: string;
   corporateDetailsForm: FormGroup;
-  accountModel: DynamicsAccount;
+  accountModel: Account;
   busy: Subscription;
   subscriptions: Subscription[] = [];
   savedFormData: any;

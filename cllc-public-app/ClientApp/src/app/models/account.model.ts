@@ -1,6 +1,7 @@
-import { DynamicsContact } from './dynamics-contact.model';
+import { Contact } from './contact.model';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
 
-export interface DynamicsAccount {
+export interface Account {
   id: string;
   name: string;
   description: string;
@@ -27,7 +28,9 @@ export interface DynamicsAccount {
   physicalAddressCountry: string;
   physicalAddressPostalCode: string;
 
-  primarycontact: DynamicsContact;
+  primarycontact: Contact;
 
   businessType: string;
+
+  tiedHouse: TiedHouseConnection;
 }

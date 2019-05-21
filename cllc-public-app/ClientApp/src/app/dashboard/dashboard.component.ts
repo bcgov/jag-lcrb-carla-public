@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { PaymentDataService } from '../services/payment-data.service';
 import { ApplicationType, ApplicationTypeNames } from '@app/models/application-type.model';
+import { AppState } from '@app/app-state/models/app-state';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,28 +27,22 @@ export class DashboardComponent implements OnInit {
   busy: Subscription;
   isPaid: Boolean;
   orgType = '';
+  console = console;
 
   constructor(private paymentDataService: PaymentDataService,
     private userDataService: UserDataService, private router: Router,
     private dynamicsDataService: DynamicsDataService,
     private applicationDataService: ApplicationDataService,
+    private store: Store<AppState>,
     public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.userDataService.getCurrentUser()
-      .subscribe((data) => {
-        this.currentUser = data;
-        if (this.currentUser.accountid != null) {
-          // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('accounts', this.currentUser.accountid)
-            .subscribe((result) => {
-              this.account = result;
-              if (result.primarycontact) {
-                this.contactId = result.primarycontact.id;
-              }
-            });
+    this.store.select((state) => state.currentAccountState.currentAccount)
+      .subscribe((account) => {
+        this.account = account;
+        if (account && account.primarycontact) {
+          this.contactId = account.primarycontact.id;
         }
-
       });
 
     this.applicationDataService.getSubmittedApplicationCount()
