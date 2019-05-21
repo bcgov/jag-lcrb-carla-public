@@ -183,17 +183,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         console.log('Error occured');
       }
     );
-
-    // const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
-    //   filter(state => !!state))
-    //   .subscribe(currentApplication => {
-    //     this.form.patchValue(currentApplication);
-    //     if (currentApplication.isPaid) {
-    //       this.form.disable();
-    //     }
-    //     this.savedFormData = this.form.value;
-    //   });
-    // this.subscriptions.push(sub);
   }
   private hideFormControlByType() {
     if (!this.application.applicationType.showPropertyDetails) {
