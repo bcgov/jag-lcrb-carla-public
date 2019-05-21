@@ -4,12 +4,12 @@ import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, 
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
-import { DynamicsAccount } from '../../../models/dynamics-account.model';
-import { DynamicsDataService } from '../../../services/dynamics-data.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { Account } from '@models/account.model';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../app-state/models/app-state';
+import { AppState } from '@app/app-state/models/app-state';
 import { LegalEntity } from '@models/legal-entity.model';
 
 @Component({
@@ -104,7 +104,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     }
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = <DynamicsAccount>{};
+      adoxioLegalEntity.account = <Account>{};
       adoxioLegalEntity.account.id = this.accountId;
     }
     // adoxioLegalEntity.relatedentities = [];

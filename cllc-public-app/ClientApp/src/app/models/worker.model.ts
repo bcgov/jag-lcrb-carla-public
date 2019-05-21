@@ -1,4 +1,4 @@
-import { DynamicsContact } from './dynamics-contact.model';
+import { Contact } from './contact.model';
 
 export interface Worker {
     id: string;
@@ -20,7 +20,7 @@ export interface Worker {
     paymentReceived: boolean;
     paymentReceivedDate: Date;
     workerId: string;
-    contact: DynamicsContact;
+    contact: Contact;
     modifiedOn: Date;
     status: string;
     clientSideStatus: string;

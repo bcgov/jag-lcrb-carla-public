@@ -19,7 +19,7 @@ import {
   ApplicationCancellationDialogComponent,
   UPLOAD_FILES_MODE
 } from '@app/applications-and-licences/applications-and-licences.component';
-import { DynamicsAccount } from '@models/dynamics-account.model';
+import { Account } from '@appmodels/account.model';
 import { ApplicationContentType } from '@models/application-content-type.model';
 import { ApplicationTypeNames } from '@models/application-type.model';
 import { CurrentAccountAction } from './../app-state/actions/current-account.action';
@@ -77,7 +77,7 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   mode: string;
-  account: DynamicsAccount;
+  account: Account;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
