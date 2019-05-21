@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { DynamicsAccount } from '../../models/dynamics-account.model';
+import { Account } from '@models/account.model';
 import { LegalEntity } from '@models/legal-entity.model';
 
 export const LEGAL_ENTITIES = 'LEGAL_ENTITIES';
