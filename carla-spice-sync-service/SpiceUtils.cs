@@ -83,7 +83,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 foreach (var row in result)
                 {
-                    var runner = GenerateWorkerScreeningRequest(row.AdoxioLcrbworkerjobid);
+                    var runner = GenerateWorkerScreeningRequest(row.AdoxioLcrbworkerjobid, _logger);
                     runner.Wait();
                     var workerRequest = runner.Result;
                     payload.Add(workerRequest);
@@ -261,7 +261,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// </summary>
         /// <returns>The worker screening request success boolean.</returns>
         /// <param name="workerScreeningRequest">Worker screening request.</param>
-        public async Task<bool> SendWorkerScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest workerScreeningRequest)
+        public async Task<bool> SendWorkerScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest workerScreeningRequest, ILogger logger)
         {
             // send the data
             List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
@@ -269,17 +269,17 @@ namespace Gov.Lclb.Cllb.SpdSync
                 workerScreeningRequest
             };
 
-            _logger.LogInformation($"Sending Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+            logger.LogInformation($"Sending Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
 
             var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
 
-            _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-            _logger.LogInformation($"Done Send Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+            logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+            logger.LogInformation($"Done Send Worker {workerScreeningRequest.Contact.ContactId} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
 
             return result.Response.StatusCode.ToString() == "OK";
         }
 
-        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId)
+        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId, ILogger logger)
         {
             // Query Dynamics for application data
             var worker = await _dynamicsClient.GetWorkerById(WorkerId);
@@ -322,7 +322,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             }
 
             // TODO - add aliases, previous addresses.
-
+            logger.LogInformation("Finished building Model");
             return request;
         }
 
