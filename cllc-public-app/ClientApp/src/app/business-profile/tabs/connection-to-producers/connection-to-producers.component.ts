@@ -23,7 +23,7 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
     this._tiedHouseData = value;
   }
   get tiedHouse(): TiedHouseConnection {
-    return this._tiedHouseData;
+    return {...this._tiedHouseData};
   }
   busy: Subscription;
   subscriptions: Subscription[] = [];
@@ -67,8 +67,8 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
 
   formHasChanged(): boolean {
     let hasChanged = false;
-    const data = (<any>Object).assign({ ...this._tiedHouseData }, this.form.value);
-    if (JSON.stringify(data) !== JSON.stringify(this._tiedHouseData)) {
+    const data = (<any>Object).assign(this.tiedHouse, this.form.value);
+    if (JSON.stringify(data) !== JSON.stringify(this.tiedHouse)) {
       hasChanged = true;
     }
     return hasChanged;
