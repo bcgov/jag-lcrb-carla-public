@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             try
             {
                 // Generate the application request
-                workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
+                workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
             }
             catch (Exception ex)
             {
@@ -69,7 +69,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             }
             else
             {
-                var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
+                var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
 
                 if (result)
                 {
