@@ -7,7 +7,7 @@ import { UserDataService } from '../services/user-data.service';
 import { AccountDataService } from '../services/account-data.service';
 import { Observable, Subscription } from '../../../node_modules/rxjs';
 import { Store } from '@ngrx/store';
-import { AppState } from '@appapp-state/models/app-state';
+import { AppState } from '@app/app-state/models/app-state';
 import { filter, mergeMap } from 'rxjs/operators';
 
 
