@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
     /// </summary>
     public static class GeneralYesNo
     {
-        public const string Yes = "Yes";
         public const string No = "No";
+        public const string Yes = "Yes";
     }
 }
