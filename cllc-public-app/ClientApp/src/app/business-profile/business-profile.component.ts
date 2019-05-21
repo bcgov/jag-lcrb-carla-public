@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
 import { ContactDataService } from '../services/contact-data.service';
-import { DynamicsContact } from '../models/dynamics-contact.model';
+import { Contact } from '../models/contact.model';
 import { AppState } from '../app-state/models/app-state';
 import * as CurrentUserActions from '../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
@@ -20,7 +20,7 @@ import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '../services/account-data.service';
-import { DynamicsAccount } from '../models/dynamics-account.model';
+import { Account } from '../models/account.model';
 import { FormBase } from '../shared/form-base';
 import { LegalEntityDataService } from '../services/legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
@@ -65,7 +65,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
   applicationId: string;
   applicationMode: string;
-  account: DynamicsAccount;
+  account: Account;
   tiedHouseFormData: Observable<TiedHouseConnection>;
 
   public get contacts(): FormArray {
@@ -232,7 +232,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   confirmContact(confirm: boolean) {
     if (confirm) {
       // create contact here
-      const contact = new DynamicsContact();
+      const contact = new Contact();
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
@@ -258,7 +258,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
   save(): Observable<boolean> {
     const _tiedHouse = this.tiedHouseFormData || {};
     this.form.get('businessProfile').patchValue({ physicalAddressCountry: 'Canada' });
-    const value = <DynamicsAccount>{
+    const value = <Account>{
       ...this.form.get('businessProfile').value
     };
     const saves = [

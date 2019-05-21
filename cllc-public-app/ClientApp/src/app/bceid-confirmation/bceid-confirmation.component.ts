@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { DynamicsDataService } from '../services/dynamics-data.service';
-import { DynamicsAccount } from '../models/dynamics-account.model';
-import { DynamicsContact } from '../models/dynamics-contact.model';
+import { Account } from '../models/account.model';
+import { Contact } from '../models/contact.model';
 import { User } from '../models/user.model';
 import { UserDataService } from '../services/user-data.service';
 import { AccountDataService } from '../services/account-data.service';
@@ -66,14 +66,14 @@ export class BceidConfirmationComponent {
   }
 
   confirmContactYes() {
-    const account = <DynamicsAccount>{};
+    const account = <Account>{};
     account.name = this.currentUser.businessname;
     account.id = this.currentUser.accountid;
     this.createContact(account);
   }
 
   createContact(account) {
-    const contact = new DynamicsContact();
+    const contact = new Contact();
     contact.fullname = this.currentUser.name;
     contact.id = this.currentUser.contactid;
     account.primarycontact = contact;

@@ -1,11 +1,11 @@
-import { DynamicsAccount } from './dynamics-account.model';
+import { Account } from './account.model';
 import { License } from './license.model';
 import { Invoice } from './invoice.model';
 import { ApplicationType } from './application-type.model';
 
 export class Application {
   id: string;
-  account: DynamicsAccount;
+  account: Account;
   additionalPropertyInformation: string;
   applicantType: string;
   applicationStatus: string;

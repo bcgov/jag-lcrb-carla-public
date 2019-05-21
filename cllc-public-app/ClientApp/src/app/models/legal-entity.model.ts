@@ -1,4 +1,4 @@
-import { DynamicsAccount } from './dynamics-account.model';
+import { Account } from './account.model';
 
 export class LegalEntity {
   id: string; // guid
@@ -24,7 +24,7 @@ export class LegalEntity {
   preferredvotingshares: number;
   commonnonvotingshares: number;
   preferrednonvotingshares: number;
-  account: DynamicsAccount;
+  account: Account;
   relatedentities: LegalEntity[];
   email: string;
   dateofappointment: Date;

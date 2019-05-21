@@ -1,4 +1,4 @@
-import { DynamicsAccount } from './dynamics-account.model';
+import { Account } from './account.model';
 
 export class Invoice {
   id: string; // guid
@@ -6,5 +6,5 @@ export class Invoice {
   invoicenumber: string;
   totaltax: number;
   totalamount: number;
-  customer: DynamicsAccount;
+  customer: Account;
 }

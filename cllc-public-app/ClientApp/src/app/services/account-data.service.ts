@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { DynamicsAccount } from '../models/dynamics-account.model';
+import { Account } from '../models/account.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ProfileValidation } from '../models/profile-validation.model';
 import { Observable, forkJoin } from 'rxjs';
@@ -23,13 +23,13 @@ export class AccountDataService extends DataService {
     super();
   }
 
-  public getAccount(accountId: string): Observable<DynamicsAccount> {
-    return this.http.get<DynamicsAccount>(this.apiPath + accountId, { headers: this.headers })
+  public getAccount(accountId: string): Observable<Account> {
+    return this.http.get<Account>(this.apiPath + accountId, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   public getCurrentAccount() {
-    return this.http.get<DynamicsAccount>(this.apiPath + 'current', { headers: this.headers })
+    return this.http.get<Account>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -53,7 +53,7 @@ export class AccountDataService extends DataService {
     .pipe(catchError(this.handleError));
 }
 
-  public updateAccount(accountModel: DynamicsAccount) {
+  public updateAccount(accountModel: Account) {
   return this.http.put(this.apiPath + accountModel.id, accountModel, { headers: this.headers })
     .pipe(catchError(this.handleError));
 }
@@ -63,7 +63,7 @@ export class AccountDataService extends DataService {
     .pipe(catchError(this.handleError));
 }
 
-  public deleteAccount(accountModel: DynamicsAccount) {
+  public deleteAccount(accountModel: Account) {
   return this.http.post(this.apiPath + accountModel.id + '/delete', accountModel, { headers: this.headers })
     .pipe(catchError(this.handleError));
 }

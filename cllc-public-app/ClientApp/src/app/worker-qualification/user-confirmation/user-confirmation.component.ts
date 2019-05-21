@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { User } from '../../models/user.model';
-import { DynamicsContact } from '../../models/dynamics-contact.model';
+import { Contact } from '../../models/contact.model';
 import { UserDataService } from '../../services/user-data.service';
 import { AppState } from '../../app-state/models/app-state';
 import { Store } from '@ngrx/store';
@@ -39,7 +39,7 @@ export class UserConfirmationComponent implements OnInit {
   confirmContact(confirm: boolean) {
     if (confirm) {
       // create contact here
-      const contact = new DynamicsContact();
+      const contact = new Contact();
       contact.fullname = this.currentUser.name;
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;

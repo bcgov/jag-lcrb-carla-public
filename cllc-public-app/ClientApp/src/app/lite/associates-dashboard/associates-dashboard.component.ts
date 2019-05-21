@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../../services/user-data.service';
 import { User } from '../../models/user.model';
 import { ContactDataService } from '../../services/contact-data.service';
-import { DynamicsContact } from '../../models/dynamics-contact.model';
+import { Contact } from '../../models/contact.model';
 import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
@@ -17,7 +17,7 @@ export class AssociatesDashboardComponent implements OnInit {
   currentUser: User;
   isNewUser: boolean;
   dataLoaded = false;
-  contact: DynamicsContact;
+  contact: Contact;
   busy:  Subscription;
 
   constructor(private userDataService: UserDataService,
@@ -47,8 +47,8 @@ export class AssociatesDashboardComponent implements OnInit {
 
   confirmContact(confirm: boolean) {
     if (confirm) {
-      //create contact here
-      let contact = new DynamicsContact();
+      // create contact here
+      const contact = new Contact();
       contact.fullname = this.currentUser.name;
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
