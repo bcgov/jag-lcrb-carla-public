@@ -22,7 +22,10 @@ namespace Gov.Lclb.Cllb.SpdSync
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
-                    logging.AddConsole(options => options.IncludeScopes = true);
+                    logging.AddConsole(x => {
+                        x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
+                        x.IncludeScopes = true;
+                        });                    
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddDebug();
                     logging.AddEventSourceLogger();
