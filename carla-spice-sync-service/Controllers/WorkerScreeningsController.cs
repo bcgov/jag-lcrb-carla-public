@@ -63,13 +63,26 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                 return BadRequest();
             };
 
-            var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
-
-            if (result)
+            if (workerRequest == null)
             {
-                return Ok(workerRequest);
+                return NotFound($"Worker {workerId} is not found.");
             }
-            return BadRequest();
+            else
+            {
+                var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
+
+                if (result)
+                {
+                    return Ok(workerRequest);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+                
+            }
+
+            
         }
     }
 }

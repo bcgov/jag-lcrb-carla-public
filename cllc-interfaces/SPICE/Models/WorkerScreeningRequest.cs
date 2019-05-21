@@ -24,8 +24,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the WorkerScreeningRequest class.
         /// </summary>
-        /// <param name="selfDisclosure">Possible values include: 'Yes',
-        /// 'No'</param>
+        /// <param name="selfDisclosure">Possible values include: 'No',
+        /// 'Yes'</param>
         /// <param name="gender">Possible values include: 'Male', 'Female',
         /// 'Other'</param>
         public WorkerScreeningRequest(string recordIdentifier = default(string), string name = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string selfDisclosure = default(string), string gender = default(string), string birthplace = default(string), string bcIdCardNumber = default(string), string driversLicence = default(string), Contact contact = default(Contact), Address address = default(Address), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         public System.DateTimeOffset? BirthDate { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Yes', 'No'
+        /// Gets or sets possible values include: 'No', 'Yes'
         /// </summary>
         [JsonProperty(PropertyName = "selfDisclosure")]
         public string SelfDisclosure { get; set; }
