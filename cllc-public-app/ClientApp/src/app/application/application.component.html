@@ -331,8 +331,8 @@
       <section>
         <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
         <div class="padded-section" *ngIf="application?.id">
-          <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse" 
-          licensedProducerText="non-medical cannabis retail store licensee or applicant"
+          <app-connection-to-producers *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse" 
+          licensedProducerText="bc non-medical cannabis retail store licensee or applicant"
           [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
         </div>
       </section>
