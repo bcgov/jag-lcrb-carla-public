@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
     /// </summary>
     public static class SpiceApplicantType
     {
-        public const string Cannabis = "Cannabis";
         public const string ESS = "ESS";
+        public const string Cannabis = "Cannabis";
     }
 }
