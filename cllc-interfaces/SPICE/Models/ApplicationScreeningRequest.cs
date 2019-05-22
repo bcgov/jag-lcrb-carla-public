@@ -26,16 +26,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// Initializes a new instance of the ApplicationScreeningRequest
         /// class.
         /// </summary>
-        /// <param name="applicantType">Possible values include: 'ESS',
-        /// 'Cannabis'</param>
-        public ApplicationScreeningRequest(string applicantType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        /// <param name="applicantType">Possible values include: 'Cannabis',
+        /// 'ESS'</param>
+        public ApplicationScreeningRequest(string applicantType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string businessNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
             ApplicantType = applicantType;
             UrgentPriority = urgentPriority;
             Name = name;
             RecordIdentifier = recordIdentifier;
             ApplicantName = applicantName;
-            BCeIDNumber = bCeIDNumber;
+            BusinessNumber = businessNumber;
             ApplicantAccount = applicantAccount;
             BusinessAddress = businessAddress;
             Establishment = establishment;
@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets possible values include: 'ESS', 'Cannabis'
+        /// Gets or sets possible values include: 'Cannabis', 'ESS'
         /// </summary>
         [JsonProperty(PropertyName = "applicantType")]
         public string ApplicantType { get; set; }
@@ -79,8 +79,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "bCeIDNumber")]
-        public string BCeIDNumber { get; set; }
+        [JsonProperty(PropertyName = "businessNumber")]
+        public string BusinessNumber { get; set; }
 
         /// <summary>
         /// </summary>
