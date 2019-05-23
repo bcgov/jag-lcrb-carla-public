@@ -12,6 +12,8 @@ import { FileSystemItem } from '@models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
+import { FormBase } from '@shared/form-base';
+import { takeWhile } from 'rxjs/operators';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -28,7 +30,7 @@ const RENEWAL_DUE = 'Renewal Due';
   templateUrl: './applications-and-licences.component.html',
   styleUrls: ['./applications-and-licences.component.scss']
 })
-export class ApplicationsAndLicencesComponent implements OnInit {
+export class ApplicationsAndLicencesComponent extends FormBase implements OnInit {
   inProgressApplications: any[] = [];
   licensedApplications: any[] = [];
 
@@ -54,6 +56,7 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     private snackBar: MatSnackBar,
     private featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
+    super();
     if (featureFlagService.featureOn('Marketer')) {
       this.licencePresentLabel = '';
       this.licenceAbsentLabel = '';
@@ -75,22 +78,23 @@ export class ApplicationsAndLicencesComponent implements OnInit {
     this.licensedApplications = [];
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
-      ).subscribe(([applications, licenses]) => {
-        applications.forEach((application: ApplicationSummary | any) => {
-          this.inProgressApplications.push(application);
+      ).pipe(takeWhile(() => this.componentActive))
+        .subscribe(([applications, licenses]) => {
+          applications.forEach((application: ApplicationSummary | any) => {
+            this.inProgressApplications.push(application);
+          });
+
+          licenses.forEach((licence: License | any) => {
+            this.licensedApplications.push(licence);
+          });
+
+          // let marketerApplicationExists = !!applications.find((a: any) => a.applicationType.name === ApplicationTypeNames.Marketer);
+          // marketerApplicationExists = marketerApplicationExists
+          //   || !!licenses.find((a: any) => a.licenseType === ApplicationTypeNames.Marketer);
+          //   debugger;
+          // this.marketerApplicationExists.emit(marketerApplicationExists);
+
         });
-
-        licenses.forEach((licence: License | any) => {
-          this.licensedApplications.push(licence);
-        });
-
-        // let marketerApplicationExists = !!applications.find((a: any) => a.applicationType.name === ApplicationTypeNames.Marketer);
-        // marketerApplicationExists = marketerApplicationExists
-        //   || !!licenses.find((a: any) => a.licenseType === ApplicationTypeNames.Marketer);
-        //   debugger;
-        // this.marketerApplicationExists.emit(marketerApplicationExists);
-
-      });
   }
 
   uploadMoreFiles(application: Application) {
@@ -118,32 +122,35 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      cancelApplication => {
+    dialogRef.afterClosed()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(applicationId).subscribe(
-            () => {
+          this.busy = this.applicationDataService.cancelApplication(applicationId)
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe(() => {
               this.displayApplications();
             });
         }
       }
-    );
+      );
 
   }
 
   doAction(licenceId: string, actionName: string) {
     // newLicenceApplicationData. = this.account.businessType;
-    this.busy = this.licenceDataService.createApplicationForActionType(licenceId, actionName).subscribe(
-      data => {
+    this.busy = this.licenceDataService.createApplicationForActionType(licenceId, actionName)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(data => {
         this.router.navigateByUrl('/account-profile/' + data.id);
       },
-      () => {
-        this.snackBar.open('Error starting a Change Licence Location Application', 'Fail',
-          { duration: 3500, panelClass: ['red-snackbar'] });
-        console.log('Error starting a Change Licence Location Application');
-      }
-    );
+        () => {
+          this.snackBar.open('Error starting a Change Licence Location Application', 'Fail',
+            { duration: 3500, panelClass: ['red-snackbar'] });
+          console.log('Error starting a Change Licence Location Application');
+        }
+      );
   }
 
   downloadLicence() {
@@ -152,14 +159,16 @@ export class ApplicationsAndLicencesComponent implements OnInit {
 
 
   payLicenceFee(application) {
-    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id).subscribe(res => {
-      const data = <any>res;
-      window.location.href = data.url;
-    }, err => {
-      if (err._body === 'Payment already made') {
-        this.snackBar.open('Application Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-      }
-    });
+    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(res => {
+        const data = <any>res;
+        window.location.href = data.url;
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Application Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
   }
 
   renewLicence() {
