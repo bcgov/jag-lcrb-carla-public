@@ -282,8 +282,9 @@ namespace Gov.Lclb.Cllb.SpdSync
         public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId, ILogger logger)
         {
             // Query Dynamics for application data
-            var worker = await _dynamicsClient.GetWorkerById(WorkerId);
+            var worker = await _dynamicsClient.GetWorkerByIdWithChildren(WorkerId);
 
+                       
             /* Create application */
             Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest()
             {
@@ -319,9 +320,53 @@ namespace Gov.Lclb.Cllb.SpdSync
                         Country = worker.AdoxioContactId.Address1Country
                     }
                 };
+
+                request.Address = new Interfaces.Spice.Models.Address()
+                {
+                    AddressStreet1 = worker.AdoxioContactId.Address1Line1,
+                    AddressStreet2 = worker.AdoxioContactId.Address1Line2,
+                    AddressStreet3 = worker.AdoxioContactId.Address1Line3,
+                    City = worker.AdoxioContactId.Address1City,
+                    StateProvince = worker.AdoxioContactId.Address1Stateorprovince,
+                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(worker.AdoxioContactId.Address1Postalcode)) ? worker.AdoxioContactId.Address1Postalcode : null,
+                    Country = worker.AdoxioContactId.Address1Country
+                };
             }
 
-            // TODO - add aliases, previous addresses.
+            if (worker.AdoxioWorkerAliases != null)
+            {
+                request.Aliases = new List<Interfaces.Spice.Models.Alias>();
+                foreach (var alias in worker.AdoxioWorkerAliases)
+                {
+                    Interfaces.Spice.Models.Alias newAlias = new Interfaces.Spice.Models.Alias()
+                    {
+                        GivenName = alias.AdoxioLastname,
+                        Surname = alias.AdoxioFirstname,
+                        SecondName = alias.AdoxioMiddlename,  
+                    };
+                    request.Aliases.Add(newAlias);
+                }
+            }
+
+            if (worker.AdoxioWorkerPreviousaddresses != null)
+            {
+                request.PreviousAddresses = new List<Interfaces.Spice.Models.Address>();
+                foreach (var address in worker.AdoxioWorkerPreviousaddresses)
+                {
+                    Interfaces.Spice.Models.Address newAddress = new Interfaces.Spice.Models.Address()
+                    {
+                        AddressStreet1 = address.AdoxioStreetaddress,
+                        City = address.AdoxioCity,
+                        StateProvince = address.AdoxioProvstate,
+                        Postal = address.AdoxioPostalcode,
+                        Country = address.AdoxioCountry,
+                        ToDate = address.AdoxioTodate,
+                        FromDate = address.AdoxioFromdate
+                    };
+                    request.PreviousAddresses.Add(newAddress);
+                }
+            }
+
             logger.LogInformation("Finished building Model");
             return request;
         }
