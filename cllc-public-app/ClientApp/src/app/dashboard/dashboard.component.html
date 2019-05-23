@@ -60,52 +60,7 @@
           href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
       <p></p>
 
-      <app-applications-and-licences appRemoveIfFeatureOn="Marketer" [account]="account">
-        <div appRemoveIfFeatureOn="Marketer" class="space-between" style="padding: 10px;">
-          <p>Submit an Cannabis Retail Store Application and track the status below.</p>
-          <section style="padding-left: 20px;">
-            <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary"
-              [disabled]="submittedApplications >= 8" (click)="startNewLicenceApplication()">Submit
-              an Application</button>
-          </section>
-        </div>
-      </app-applications-and-licences>
-
-      <app-applications-and-licences appRemoveIfFeatureOff="Marketer" [account]="account">
-        <p>Submit an Application and track the status below.</p>
-        <section>
-          <table class="start-application">
-            <tr>
-              <th colspan=2>LICENCE</th>
-              <th>ACTIONS</th>
-            </tr>
-            <tr>
-              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
-              <td>
-                <h3>Cannabis Retail Store Licence</h3>
-                <p>To sell non-medical cannabis and accessories</p>
-                <P>(A separate application must be submitted for each proposed store)</P>
-                <a href="">Learn more about this licence</a>
-              </td>
-              <td>
-                <button class="btn btn-primary" [disabled]="submittedApplications >= 8"
-                  (click)="startNewLicenceApplication()">START APPLICATION</button>
-              </td>
-            </tr>
-            <tr>
-              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
-              <td>
-                <h3>Cannabis Marketing Licence</h3>
-                <p>To promote non-medical cannabis to licensed cannabis retail stores and the public</p>
-                <a href="">Learn more about this licence</a>
-              </td>
-              <td>
-                <button class="btn btn-primary" [disabled]="submittedApplications >= 1"
-                  (click)="startNewMarketerApplication()">START APPLICATION</button>
-              </td>
-            </tr>
-          </table>
-        </section>
+      <app-applications-and-licences [account]="account">
       </app-applications-and-licences>
 
     </div>
