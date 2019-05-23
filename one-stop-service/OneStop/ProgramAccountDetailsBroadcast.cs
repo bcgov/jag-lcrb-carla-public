@@ -93,6 +93,28 @@ namespace WebApplicationSoap.OneStop
             return userCredentials;
         }
 
+        string GetPrimaryContact(MicrosoftDynamicsCRMadoxioLicences licence)
+        {
+            // first create an XML object.
+            var primaryContactDetails = new PrimaryContactDetails();
+
+            if (licence.AdoxioLicencee != null)
+            {
+                primaryContactDetails.name = licence.AdoxioLicencee.Name;
+                primaryContactDetails.email = licence.AdoxioLicencee.Emailaddress1;
+                primaryContactDetails.phone = licence.AdoxioLicencee.Telephone1;
+            }
+
+            // convert the XML to a string.
+            using (var stringwriter = new System.IO.StringWriter())
+            {
+               
+                XmlSerializer serializer = new XmlSerializer(primaryContactDetails.GetType());
+                serializer.Serialize(stringwriter, primaryContactDetails);
+                return stringwriter.ToString();                
+            };            
+        }
+
         private SBNProgramAccountDetailsBroadcastBody GetProgramAccountDetailsBroadcastBody(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             var programAccountDetailsBroadcastBody = new SBNProgramAccountDetailsBroadcastBody();
@@ -116,14 +138,16 @@ namespace WebApplicationSoap.OneStop
             // the legal name of the establishment
             programAccountDetailsBroadcastBody.legalName = licence.AdoxioLicencee.Name;
 
-            programAccountDetailsBroadcastBody.operatingName = getOperatingName(licence);
+            programAccountDetailsBroadcastBody.operatingName = GetOperatingName(licence);
 
-            programAccountDetailsBroadcastBody.businessAddress = getBusinessAddress(licence);
+            programAccountDetailsBroadcastBody.businessAddress = GetBusinessAddress(licence);
 
-            programAccountDetailsBroadcastBody.mailingAddress = getMailingAddress(licence);
+            programAccountDetailsBroadcastBody.mailingAddress = GetMailingAddress(licence);
             
             // licence number
             programAccountDetailsBroadcastBody.partnerInfo1 = licence.AdoxioLicencenumber;
+
+            programAccountDetailsBroadcastBody.partnerInfo3 = GetPrimaryContact(licence);
 
             // licence subtype code – not applicable to cannabis
             //programAccountDetailsBroadcastBody.partnerInfo2 = "ToGetFromDynamics";
@@ -160,7 +184,7 @@ namespace WebApplicationSoap.OneStop
             return programAccountStatus;
         }
 
-        private SBNProgramAccountDetailsBroadcastBodyOperatingName getOperatingName(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyOperatingName GetOperatingName(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             var operatingName = new SBNProgramAccountDetailsBroadcastBodyOperatingName();
 
@@ -175,7 +199,7 @@ namespace WebApplicationSoap.OneStop
         /**
          * Business Address (physical location of the store)
          */
-        private SBNProgramAccountDetailsBroadcastBodyBusinessAddress getBusinessAddress(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyBusinessAddress GetBusinessAddress(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             //physical location of the store
             var businessAddress = new SBNProgramAccountDetailsBroadcastBodyBusinessAddress();
@@ -202,7 +226,7 @@ namespace WebApplicationSoap.OneStop
         /**
          * Mailing Address (for the licence)
          */
-        private SBNProgramAccountDetailsBroadcastBodyMailingAddress getMailingAddress(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyMailingAddress GetMailingAddress(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             //mailing address for the licence
             var mailingAddress = new SBNProgramAccountDetailsBroadcastBodyMailingAddress();
