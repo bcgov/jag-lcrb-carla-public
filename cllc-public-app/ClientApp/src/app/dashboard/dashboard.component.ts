@@ -11,13 +11,15 @@ import { PaymentDataService } from '../services/payment-data.service';
 import { ApplicationType, ApplicationTypeNames } from '@app/models/application-type.model';
 import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
+import { takeWhile } from 'rxjs/operators';
+import { FormBase } from '@shared/form-base';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends FormBase implements OnInit {
   public currentUser: User;
   applicationId: string;
   submittedApplications = 8;
@@ -34,10 +36,13 @@ export class DashboardComponent implements OnInit {
     private dynamicsDataService: DynamicsDataService,
     private applicationDataService: ApplicationDataService,
     private store: Store<AppState>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar) {
+      super();
+     }
 
   ngOnInit(): void {
     this.store.select((state) => state.currentAccountState.currentAccount)
+    .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
         if (account && account.primarycontact) {

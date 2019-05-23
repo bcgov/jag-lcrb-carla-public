@@ -121,7 +121,7 @@ import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule, Store } from '@ngrx/store';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
-import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
@@ -220,7 +220,7 @@ import { map } from 'rxjs/operators';
     SurveyPrimaryComponent,
     SurveySidebarComponent,
     SurveyTestComponent,
-    TermsAndConditionsComponent,
+    TermsOfUseComponent,
     UserConfirmationComponent,
     VoteComponent,
     WorkerApplicationComponent,
