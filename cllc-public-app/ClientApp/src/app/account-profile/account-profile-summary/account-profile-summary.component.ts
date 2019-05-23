@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
-import { LegalEntityDataService } from '../services/legal-entity-data.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { AccountDataService } from '../services/account-data.service';
+import { AccountDataService } from '@services/account-data.service';
 
 export class ProfileSummary {
   legalEntityId: string;
@@ -17,11 +17,11 @@ export class ProfileSummary {
 }
 
 @Component({
-  selector: 'app-business-profile-summary',
-  templateUrl: './business-profile-summary.component.html',
-  styleUrls: ['./business-profile-summary.component.scss']
+  selector: 'app-account-profile-summary',
+  templateUrl: './account-profile-summary.component.html',
+  styleUrls: ['./account-profile-summary.component.scss']
 })
-export class BusinessProfileSummaryComponent implements OnInit {
+export class AccountProfileSummaryComponent implements OnInit {
 
   displayedColumns = ['organization', 'businessRelationship', 'profileComplete'];
   dataSource = new MatTableDataSource<ProfileSummary>();
