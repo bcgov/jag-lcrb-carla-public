@@ -1,5 +1,5 @@
 
-import {filter,  auditTime } from 'rxjs/operators';
+import {filter,  auditTime, takeWhile } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
 import { AccountDataService } from '@services/account-data.service';
@@ -14,13 +14,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import * as currentAccountActions from '@app/app-state/actions/current-account.action';
+import { FormBase } from '@shared/form-base';
 
 @Component({
   selector: 'app-corporate-details',
   templateUrl: './corporate-details.component.html',
   styleUrls: ['./corporate-details.component.scss']
 })
-export class CorporateDetailsComponent implements OnInit, OnDestroy {
+export class CorporateDetailsComponent extends FormBase implements OnInit, OnDestroy {
   @Input() accountId: string;
   @Input() businessType: string;
   corporateDetailsForm: FormGroup;
@@ -35,23 +36,19 @@ export class CorporateDetailsComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
+      super();
   }
 
   ngOnInit() {
     this.createForm();
 
-    const sub = this.store.select(state => state.currentAccountState).pipe(
-      filter(state => !!state))
+    const sub = this.store.select(state => state.currentAccountState)
+    .pipe(takeWhile(() => this.componentActive))
+    .pipe(filter(state => !!state))
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;
         this.setFormData(state.currentAccount);
-        // this.corporateDetailsForm.valueChanges
-        //   .pipe(auditTime(10000)).subscribe(formData => {
-        //     if (JSON.stringify(formData) !== JSON.stringify(this.savedFormData)) {
-        //       this.save();
-        //     }
-        //   });
       });
     this.subscriptions.push(sub);
   }

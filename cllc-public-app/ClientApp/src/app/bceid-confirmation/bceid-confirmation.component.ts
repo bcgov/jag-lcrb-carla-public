@@ -8,7 +8,8 @@ import { AccountDataService } from '../services/account-data.service';
 import { Observable, Subscription } from '../../../node_modules/rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { filter, mergeMap } from 'rxjs/operators';
+import { filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { FormBase } from '@shared/form-base';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { filter, mergeMap } from 'rxjs/operators';
   styleUrls: ['./bceid-confirmation.component.scss']
 })
 /** bceid-confirmation component*/
-export class BceidConfirmationComponent {
+export class BceidConfirmationComponent extends FormBase {
   @Input() currentUser: User;
   @Output() reloadUser = new EventEmitter();
   public bceidConfirmAccount = true;
@@ -36,9 +37,11 @@ export class BceidConfirmationComponent {
     private userDataService: UserDataService,
     private store: Store<AppState>,
     private accountDataService: AccountDataService) {
+      super();
     // if this passes, this means the user's account exists but it's contact information has not been created.
     // user will skip the BCeid confirmation.
     this.store.select(state => state.currentAccountState.currentAccount)
+    .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
         if (!data) {
           this.accountExists = false;

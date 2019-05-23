@@ -1,5 +1,5 @@
 
-import { filter, zip, map, catchError } from 'rxjs/operators';
+import { filter, zip, map, catchError, takeWhile } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserDataService } from '../services/user-data.service';
 import { User } from '../models/user.model';
@@ -214,6 +214,7 @@ export class BusinessProfileComponent extends FormBase implements OnInit {
 
   subscribeForData() {
     this.store.select(state => state.currentAccountState.currentAccount)
+    .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(s => !!s))
       .subscribe(account => {
         this.account = account;
