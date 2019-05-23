@@ -25,7 +25,7 @@ import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-cons
 import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-home.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
-import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 
 
@@ -36,13 +36,13 @@ const routes: Routes = [
   },
   {
     path: 'account-profile',
-    component: BusinessProfileComponent,
+    component: AccountProfileComponent,
     // canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
   {
     path: 'account-profile/:applicationId',
-    component: BusinessProfileComponent,
+    component: AccountProfileComponent,
     // canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
@@ -111,7 +111,7 @@ const routes: Routes = [
   // },
   // {
   //   path: 'business-profile/:accountId/:legalEntityId',
-  //   component: BusinessProfileComponent,
+  //   component: AccountProfileComponent,
   //   children: [
   //     {
   //       path: 'before-you-start',

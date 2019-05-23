@@ -61,7 +61,7 @@ import {
   EditShareholdersComponent,
   ShareholderPersonDialogComponent,
   ShareholderOrganizationDialogComponent
-} from './business-profile/tabs/edit-shareholders/edit-shareholders.component';
+} from './account-profile/tabs/edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -87,20 +87,20 @@ import { UserDataService } from './services/user-data.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
-import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
+import { CorporateDetailsComponent } from './account-profile/tabs/corporate-details/corporate-details.component';
 import {
   DirectorsAndOfficersComponent,
   DirectorAndOfficerPersonDialogComponent
-} from './business-profile/tabs/directors-and-officers/directors-and-officers.component';
-import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
-import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
-import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
-import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
-import { BusinessProfileSummaryComponent } from './business-profile-summary/business-profile-summary.component';
+} from './account-profile/tabs/directors-and-officers/directors-and-officers.component';
+import { SecurityAssessmentsComponent } from './account-profile/tabs/security-assessments/security-assessments.component';
+import { OrganizationStructureComponent } from './account-profile/tabs/organization-structure/organization-structure.component';
+import { BeforeYouStartComponent } from './account-profile/tabs/before-you-start/before-you-start.component';
+import { FinancialInformationComponent } from './account-profile/tabs/financial-information/financial-information.component';
+import { AccountProfileSummaryComponent } from './account-profile/account-profile-summary/account-profile-summary.component';
 
 import { NgBusyModule } from 'ng-busy';
-import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key-personnel.component';
-import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { KeyPersonnelComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
+import { ConnectionToProducersComponent } from './account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
@@ -144,7 +144,7 @@ import {
   IndividualAssociatesResultsComponent
 } from './associate-wizard/individual-associates-results/individual-associates-results.component';
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
-import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FieldComponent } from './shared/field/field.component';
 import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import {
@@ -171,8 +171,8 @@ import { map } from 'rxjs/operators';
     BceidConfirmationComponent,
     BeforeYouStartComponent,
     BreadcrumbComponent,
-    BusinessProfileComponent,
-    BusinessProfileSummaryComponent,
+    AccountProfileComponent,
+    AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
     ContactDetailsComponent,
     CorporateDetailsComponent,
@@ -235,7 +235,7 @@ import { map } from 'rxjs/operators';
     SolePropResultsComponent,
     IndividualAssociatesResultsComponent,
     OrganizationResultsComponent,
-    BusinessProfileComponent,
+    AccountProfileComponent,
     AppRemoveIfFeatureOnDirective,
     AppRemoveIfFeatureOffDirective
   ],

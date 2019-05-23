@@ -1,16 +1,16 @@
 
 import { filter, zip, map, catchError, takeWhile } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserDataService } from '../services/user-data.service';
+import { UserDataService } from '@services/user-data.service';
 import { User } from '../models/user.model';
-import { ContactDataService } from '../services/contact-data.service';
+import { ContactDataService } from '@services/contact-data.service';
 import { Contact } from '../models/contact.model';
 import { AppState } from '../app-state/models/app-state';
 import * as CurrentUserActions from '../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
 import { Subscription, Observable, Subject, forkJoin, of } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
-import { PreviousAddressDataService } from '../services/previous-address-data.service';
+import { PreviousAddressDataService } from '@services/previous-address-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { COUNTRIES } from './country-list';
 
@@ -19,13 +19,14 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { defaultFormat as _rollupMoment } from 'moment';
-import { AccountDataService } from '../services/account-data.service';
+import { AccountDataService } from '@services/account-data.service';
 import { Account } from '../models/account.model';
 import { FormBase } from '../shared/form-base';
-import { LegalEntityDataService } from '../services/legal-entity-data.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+
 const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
@@ -43,11 +44,11 @@ export const MY_FORMATS = {
 };
 
 @Component({
-  selector: 'app-business-profile',
-  templateUrl: './business-profile.component.html',
-  styleUrls: ['./business-profile.component.scss']
+  selector: 'app-account-profile',
+  templateUrl: './account-profile.component.html',
+  styleUrls: ['./account-profile.component.scss']
 })
-export class BusinessProfileComponent extends FormBase implements OnInit {
+export class AccountProfileComponent extends FormBase implements OnInit {
   currentUser: User;
   dataLoaded = false;
   busy: Promise<any>;
