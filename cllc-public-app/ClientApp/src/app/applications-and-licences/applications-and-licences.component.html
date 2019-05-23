@@ -3,8 +3,50 @@
   <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS AND LICENCES</h3>
   <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
     <section>
-
-      <ng-content></ng-content>
+      <div appRemoveIfFeatureOn="Marketer" class="space-between" style="padding: 10px;">
+        <p>Submit an Cannabis Retail Store Application and track the status below.</p>
+        <section style="padding-left: 20px;">
+          <button style="background-color: #003366; border-color: #003366;" class="btn btn-primary"
+            [disabled]="submittedApplications >= 8" (click)="startNewLicenceApplication()">Submit
+            an Application</button>
+        </section>
+        </div>
+        <div appRemoveIfFeatureOff="Marketer">
+          <p>Submit an Application and track the status below.</p>
+          <section>
+            <table class="start-application">
+              <tr>
+                <th colspan=2>LICENCE</th>
+                <th>ACTIONS</th>
+              </tr>
+              <tr>
+                <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+                <td>
+                  <h3>Cannabis Retail Store Licence</h3>
+                  <p>To sell non-medical cannabis and accessories</p>
+                  <P>(A separate application must be submitted for each proposed store)</P>
+                  <a href="">Learn more about this licence</a>
+                </td>
+                <td>
+                  <button class="btn btn-primary" [disabled]="submittedApplications >= 8"
+                    (click)="startNewLicenceApplication()">START APPLICATION</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+                <td>
+                  <h3>Cannabis Marketing Licence</h3>
+                  <p>To promote non-medical cannabis to licensed cannabis retail stores and the public</p>
+                  <a href="">Learn more about this licence</a>
+                </td>
+                <td>
+                  <button class="btn btn-primary" [disabled]="submittedApplications >= 1"
+                    (click)="startNewMarketerApplication()">START APPLICATION</button>
+                </td>
+              </tr>
+            </table>
+          </section>
+        </div>
 
       <mat-tab-group
         [selectedIndex]="(inProgressApplications?.length > 0 || licensedApplications?.length == 0) ? 0 : 1">
