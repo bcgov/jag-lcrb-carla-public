@@ -40,34 +40,31 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
-    this.reloadUser();
-  }
-
-  reloadUser() {
     this.store.select(state => state.currentUserState.currentUser)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(user => {
-        this.currentUser = user;
-        this.isNewUser = this.currentUser.isNewUser;
-        this.dataLoaded = true;
-        if (this.currentUser && this.currentUser.contactid) {
+      .subscribe(user => this.loadUser(user));
+  }
 
-          this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
-            this.dataSource = res;
-            this.currentApplication = res[0];
-            this.setClientSideStatus(this.currentApplication);
+  loadUser(user: User) {
+    this.currentUser = user;
+    this.isNewUser = this.currentUser.isNewUser;
+    this.dataLoaded = true;
+    if (this.currentUser && this.currentUser.contactid) {
+      this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
+        this.dataSource = res;
+        this.currentApplication = res[0];
+        this.setClientSideStatus(this.currentApplication);
 
-            this.applicationStatus = this.getStatus(res);
+        this.applicationStatus = this.getStatus(res);
+        const passedApplications = res.filter(i => (<any>i).status === 'Active');
 
-            const passedApplications = res.filter(i => (<any>i).status === 'Active');
-
-            if (passedApplications.length > 0) {
-              this.displayedColumns.push('actions');
-            }
-          });
+        if (passedApplications.length > 0) {
+          this.displayedColumns.push('actions');
         }
       });
+    }
   }
+
   setClientSideStatus(worker: Worker) {
     worker.clientSideStatus = worker.status;
     if (!worker.paymentReceived) {

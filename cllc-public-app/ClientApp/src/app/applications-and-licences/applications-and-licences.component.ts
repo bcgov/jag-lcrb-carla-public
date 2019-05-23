@@ -47,6 +47,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   dataLoaded = false;
   licencePresentLabel: string;
   licenceAbsentLabel: string;
+  submittedApplications = 8;
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -68,6 +69,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   ngOnInit() {
     this.displayApplications();
+
+    this.applicationDataService.getSubmittedApplicationCount()
+      .subscribe(value => this.submittedApplications = value);
   }
 
   /**
@@ -171,8 +175,59 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       });
   }
 
-  renewLicence() {
+  renewLicence() {}
 
+  startNewLicenceApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Cannabis Retail Store',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.CannabisRetailStore },
+      account: this.account,
+      servicehHoursStandardHours: false,
+      serviceHoursSundayOpen: '09:00',
+      serviceHoursMondayOpen: '09:00',
+      serviceHoursTuesdayOpen: '09:00',
+      serviceHoursWednesdayOpen: '09:00',
+      serviceHoursThursdayOpen: '09:00',
+      serviceHoursFridayOpen: '09:00',
+      serviceHoursSaturdayOpen: '09:00',
+      serviceHoursSundayClose: '23:00',
+      serviceHoursMondayClose: '23:00',
+      serviceHoursTuesdayClose: '23:00',
+      serviceHoursWednesdayClose: '23:00',
+      serviceHoursThursdayClose: '23:00',
+      serviceHoursFridayClose: '23:00',
+      serviceHoursSaturdayClose: '23:00',
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
+      },
+      () => {
+        this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a New Licence Application');
+      }
+    );
+  }
+
+  startNewMarketerApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      licenseType: 'Marketer',
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.Marketer },
+      account: this.account,
+    };
+    // newLicenceApplicationData. = this.account.businessType;
+    this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigateByUrl(`/account-profile/${data.id}`);
+      },
+      () => {
+        this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a New Marketer Application');
+      }
+    );
   }
 
 }
