@@ -380,7 +380,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 UrgentPriority = false,
                 ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
-                BCeIDNumber = application.AdoxioBusinessnumber,
+                BusinessNumber = application.AdoxioBusinessnumber,
                 ApplicantName = application.AdoxioNameofapplicant,
                 BusinessAddress = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                 {
@@ -422,7 +422,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 screeningRequest.ApplicantAccount = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
                 {
                     AccountId = application.AdoxioApplicant.Accountid,
-                    Name = application.AdoxioApplicant.Name
+                    Name = application.AdoxioApplicant.Name,
+                    BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber
                 };
             }
 
@@ -503,12 +504,19 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 EntityId = legalEntity.AdoxioLegalentityid,
                 Name = legalEntity.AdoxioName,
+                InterestPercentage = (double?)legalEntity.AdoxioInterestpercentage,
+                AppointmentDate = legalEntity.AdoxioDateofappointment,
+                NumberVotingShares = legalEntity.AdoxioCommonvotingshares,
+                Title = legalEntity.AdoxioJobtitle,
+                Positions = GetLegalEntityPositions(legalEntity),
                 PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
                 Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>()
             };
+            
             if (legalEntity.AdoxioIsindividual != null && legalEntity.AdoxioIsindividual == 1 && legalEntity.AdoxioContact != null)
             {
                 associate.IsIndividual = true;
+                associate.TiedHouse = legalEntity.AdoxioContact.AdoxioSelfdeclaredtiedhouse == 1;
                 associate.Contact = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
                     ContactId = legalEntity.AdoxioContact.Contactid,
@@ -573,6 +581,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                     {
                         AccountId = account[0].Accountid,
                         Name = account[0].Name,
+                        BcIncorporationNumber = account[0].AdoxioBcincorporationnumber,
+                        BusinessNumber = account[0].Accountnumber,
                         Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
                     };
                 }
@@ -582,12 +592,55 @@ namespace Gov.Lclb.Cllb.SpdSync
                     {
                         AccountId = legalEntity.AdoxioAccount.Accountid,
                         Name = legalEntity.AdoxioAccount.Name,
+                        BcIncorporationNumber = legalEntity.AdoxioAccount.AdoxioBcincorporationnumber,
+                        BusinessNumber = legalEntity.AdoxioAccount.Accountnumber,
                         Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
                     };
                 }
                 associate.IsIndividual = false;
             }
             return associate;
+        }
+        public List<string> GetLegalEntityPositions(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
+        {
+            List<string> positions = new List<string>();
+            if (legalEntity.AdoxioIsdirector != null && (bool)legalEntity.AdoxioIsdirector)
+            {
+                positions.Add("director");
+            }
+            if (legalEntity.AdoxioIsofficer != null && (bool)legalEntity.AdoxioIsofficer)
+            {
+                positions.Add("officer");
+            }
+            if (legalEntity.AdoxioIsseniormanagement != null && (bool)legalEntity.AdoxioIsseniormanagement)
+            {
+                positions.Add("senior manager");
+            }
+            if (legalEntity.AdoxioIskeypersonnel != null && (bool)legalEntity.AdoxioIskeypersonnel)
+            {
+                positions.Add("key personnel");
+            }
+            if (legalEntity.AdoxioIsshareholder != null && (bool)legalEntity.AdoxioIsshareholder)
+            {
+                positions.Add("shareholder");
+            }
+            if (legalEntity.AdoxioIsowner != null && (bool)legalEntity.AdoxioIsowner)
+            {
+                positions.Add("owner");
+            }
+            if (legalEntity.AdoxioIstrustee != null && (bool)legalEntity.AdoxioIstrustee)
+            {
+                positions.Add("trustee");
+            }
+            if (legalEntity.AdoxioIsdeemedassociate !=null && (bool)legalEntity.AdoxioIsdeemedassociate)
+            {
+                positions.Add("deemed associate");
+            }
+            if (legalEntity.AdoxioIspartner != null && (bool)legalEntity.AdoxioIspartner)
+            {
+                positions.Add("partner");
+            }
+            return positions;
         }
     }
 }
