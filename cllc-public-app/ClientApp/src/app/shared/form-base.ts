@@ -1,11 +1,13 @@
 import { ValidatorFn, AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { OnDestroy } from '@angular/core';
 
 
 export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$';
 export const USPostalRegex = '^\\d{5}([\-]\\d{4})?$';
 
-export class FormBase {
+export class FormBase implements OnDestroy {
     form: FormGroup;
+    componentActive = true;
 
     isValidOrNotTouched(field: string) {
         return this.form.get(field).valid || !this.form.get(field).touched;
@@ -93,5 +95,9 @@ export class FormBase {
         const value = control.value;
         control.setValue('');
         control.setValue(value.trim());
+    }
+
+    ngOnDestroy(): void {
+        this.componentActive = false;
     }
 }

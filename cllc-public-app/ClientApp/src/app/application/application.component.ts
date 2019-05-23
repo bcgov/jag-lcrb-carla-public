@@ -1,5 +1,5 @@
 
-import { filter } from 'rxjs/operators';
+import { filter, takeWhile } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -54,7 +54,7 @@ class ApplicationHTMLContent {
   styleUrls: ['./application.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ApplicationComponent extends FormBase implements OnInit, OnDestroy {
+export class ApplicationComponent extends FormBase implements OnInit {
   application: Application;
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
@@ -62,7 +62,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
   form: FormGroup;
   savedFormData: any;
-  subscriptions: Subscription[] = [];
   applicationId: string;
   busy: Subscription;
   accountId: string;
@@ -140,17 +139,20 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
 
     this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
       });
 
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: Application) => {
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: Application) => {
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
@@ -179,10 +181,10 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         }
         this.savedFormData = this.form.value;
       },
-      err => {
-        console.log('Error occured');
-      }
-    );
+        err => {
+          console.log('Error occured');
+        }
+      );
   }
   private hideFormControlByType() {
     if (!this.application.applicationType.showPropertyDetails) {
@@ -223,10 +225,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     return body;
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
   canDeactivate(): Observable<boolean> | boolean {
     if (!this.connectionsToProducers.formHasChanged() && JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       return true;
@@ -244,8 +242,9 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     const saveData = this.form.value;
     const subscription = forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
-      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)).subscribe(
-      res => {
+      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData))
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(res => {
         saveResult.next(true);
         this.savedFormData = saveData;
         this.updateApplicationInStore();
@@ -253,11 +252,11 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
       },
-      err => {
-        saveResult.next(false);
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        console.log('Error occured');
-      });
+        err => {
+          saveResult.next(false);
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          console.log('Error occured');
+        });
 
     if (showProgress === true) {
       this.busy = subscription;
@@ -273,11 +272,12 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   }
 
   updateApplicationInStore() {
-    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: Application) => {
+    this.applicationDataService.getApplicationById(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
-    );
+      );
   }
 
   isFieldError(field: string) {
@@ -294,11 +294,13 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
     } else {
-      this.save(true).subscribe((result: boolean) => {
-        if (result) {
-          this.submitPayment();
-        }
-      });
+      this.save(true)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe((result: boolean) => {
+          if (result) {
+            this.submitPayment();
+          }
+        });
     }
   }
 
@@ -306,15 +308,17 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(res => {
-      const jsonUrl = res;
-      window.location.href = jsonUrl['url'];
-      return jsonUrl['url'];
-    }, err => {
-      if (err._body === 'Payment already made') {
-        this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-      }
-    });
+    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(res => {
+        const jsonUrl = res;
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
   }
 
   isValid(): boolean {
@@ -380,19 +384,21 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      cancelApplication => {
+    dialogRef.afterClosed()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(this.applicationId).subscribe(
-            res => {
+          this.busy = this.applicationDataService.cancelApplication(this.applicationId)
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe(res => {
               this.savedFormData = this.form.value;
               this.router.navigate(['/dashboard']);
             },
-            err => {
-              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-              console.error('Error cancelling the application');
-            });
+              err => {
+                this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                console.error('Error cancelling the application');
+              });
         }
       });
   }
