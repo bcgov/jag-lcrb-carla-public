@@ -7,6 +7,8 @@ import { WorkerDataService } from '../../services/worker-data.service.';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
+import { takeWhile } from 'rxjs/operators';
+import { FormBase } from '@shared/form-base';
 
 
 @Component({
@@ -14,7 +16,7 @@ import { AppState } from '@app/app-state/models/app-state';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class WorkerDashboardComponent implements OnInit {
+export class WorkerDashboardComponent extends FormBase implements OnInit {
   currentUser: User;
   displayedColumns = ['lastUpdated', 'worker', 'status'];
   dataSource: Worker[] = [];
@@ -34,6 +36,7 @@ export class WorkerDashboardComponent implements OnInit {
     private workerDataService: WorkerDataService,
     private store: Store<AppState>
   ) {
+    super();
   }
 
   ngOnInit() {
@@ -42,6 +45,7 @@ export class WorkerDashboardComponent implements OnInit {
 
   reloadUser() {
     this.store.select(state => state.currentUserState.currentUser)
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe(user => {
         this.currentUser = user;
         this.isNewUser = this.currentUser.isNewUser;
