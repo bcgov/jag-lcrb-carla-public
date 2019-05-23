@@ -61,7 +61,7 @@ export class BreadcrumbComponent implements OnInit {
       .subscribe( event => {
         this.breadcrumbs = resolveBreadcrumbs(this.route.root, '', '');
         this.visible = this.breadcrumbs.length > 0;
-    })
+    });
   }
 
 }
