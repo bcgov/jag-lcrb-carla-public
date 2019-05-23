@@ -25,7 +25,7 @@ import { ApplicationTypeNames } from '@models/application-type.model';
 import { CurrentAccountAction } from './../app-state/actions/current-account.action';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { ConnectionToProducersComponent } from '@app/business-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { ConnectionToProducersComponent } from '@app/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
