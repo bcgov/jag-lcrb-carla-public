@@ -157,6 +157,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppState } from '@app/app-state/models/app-state';
 import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
 import { map } from 'rxjs/operators';
+import { EstablishmentWatchWordsService } from './services/establishment-watch-words.service';
 
 
 @NgModule({
@@ -357,6 +358,7 @@ import { map } from 'rxjs/operators';
     ServiceCardAuthGuard,
     SurveyDataService,
     TiedHouseConnectionsDataService,
+    EstablishmentWatchWordsService,
     Title,
     UserDataService,
     VoteDataService,
