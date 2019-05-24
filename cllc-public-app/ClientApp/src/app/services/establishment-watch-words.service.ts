@@ -11,6 +11,8 @@ import { AbstractControl, ValidatorFn } from '@angular/forms';
 })
 export class EstablishmentWatchWordsService extends DataService {
     private _forbiddenWords: Array<string> = [];
+    private _problematicWords: Array<string> = [];
+
     apiPath = 'api/establishmentwatchwords';
     constructor(private http: HttpClient) {
         super();
@@ -25,6 +27,7 @@ export class EstablishmentWatchWordsService extends DataService {
       this.getEstablishmentWatchWords()
       .subscribe(watchWords => {
         this._forbiddenWords = watchWords['forbidden'];
+        this._problematicWords = watchWords['problematic'];
       });
     }
 
@@ -37,5 +40,11 @@ export class EstablishmentWatchWordsService extends DataService {
         }
         return null;
       };
+    }
+
+    public potentiallyProblematicValidator(name: string) {
+      const nameWordList = name.toLowerCase().split(' ');
+      const wordsUnioned = this._problematicWords.filter(x => nameWordList.includes(x));
+      return wordsUnioned.length > 0;
     }
 }

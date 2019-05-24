@@ -48,8 +48,12 @@
             errorMessage="Please enter a valid name for the proposed establishment">
             <input class="form-control" style="width: 500px;" type="text"
               ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)"
+              (change)="checkPossibleProblematicWords()"
               formControlName="establishmentName">
           </app-field>
+          <div *ngIf="possibleProblematicNameWarning" class="warning-state">
+            The establishment name contains a word that may be problematic
+          </div>
 
         </div>
         <div formGroupName="assignedLicence"
