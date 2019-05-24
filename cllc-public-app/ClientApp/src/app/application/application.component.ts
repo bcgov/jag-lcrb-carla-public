@@ -74,6 +74,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   submittedApplications = 8;
   ServiceHours = ServiceHours;
   tiedHouseFormData: TiedHouseConnection;
+  possibleProblematicNameWarning = false;
 
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
 
@@ -112,6 +113,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         establishmentParcelId: ['']
       }),
       establishmentName: ['', [
+        Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
@@ -239,6 +241,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
+  checkPossibleProblematicWords() {
+    this.possibleProblematicNameWarning = this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
+  }
+
   /**
    * Save form data
    * @param showProgress
@@ -295,7 +301,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Submit the application for payment
    * */
   submit_application() {
-    console.log(this.isValid());
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
