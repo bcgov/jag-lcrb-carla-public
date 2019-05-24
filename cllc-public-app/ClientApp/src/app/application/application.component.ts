@@ -26,6 +26,8 @@ import { CurrentAccountAction } from './../app-state/actions/current-account.act
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { ConnectionToProducersComponent } from '@app/account-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
+import { KeyValue } from '@angular/common';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -55,6 +57,7 @@ class ApplicationHTMLContent {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApplicationComponent extends FormBase implements OnInit {
+  establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
@@ -91,7 +94,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private tiedHouseService: TiedHouseConnectionsDataService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.applicationId = this.route.snapshot.params.applicationId;
     this.mode = this.route.snapshot.params.mode;
@@ -107,7 +111,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
         establishmentAddressPostalCode: [''],
         establishmentParcelId: ['']
       }),
-      establishmentName: [''],
+      establishmentName: ['', [
+        this.establishmentWatchWordsService.forbiddenNameValidator()
+      ]],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
@@ -119,7 +125,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
       establishmentPhone: [''],
-
       serviceHoursSundayOpen: ['', Validators.required],
       serviceHoursMondayOpen: ['', Validators.required],
       serviceHoursTuesdayOpen: ['', Validators.required],
@@ -140,7 +145,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.applicationDataService.getSubmittedApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
+        .subscribe(value => this.submittedApplications = value);
+
+    this.establishmentWatchWordsService.initialize();
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
@@ -193,7 +200,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentName').disable();
       this.form.get('establishmentParcelId').disable();
-      this.form.get('establishmentName').disable();
     }
 
     if (!this.application.applicationType.showHoursOfSale) {
@@ -289,6 +295,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Submit the application for payment
    * */
   submit_application() {
+    console.log(this.isValid());
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
