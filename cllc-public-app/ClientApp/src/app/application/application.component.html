@@ -45,11 +45,15 @@
           <app-field
             [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) ? 'Establishment Name' : 'Name of the Proposed Establishment'"
             [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
-            errorMessage="Please enter the name of the proposed establishment">
+            errorMessage="Please enter a valid name for the proposed establishment">
             <input class="form-control" style="width: 500px;" type="text"
               ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)"
+              (change)="checkPossibleProblematicWords()"
               formControlName="establishmentName">
           </app-field>
+          <div *ngIf="possibleProblematicNameWarning" class="warning-state">
+            The establishment name contains a word that may be problematic
+          </div>
 
         </div>
         <div formGroupName="assignedLicence"
@@ -331,7 +335,7 @@
       <section>
         <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
         <div class="padded-section" *ngIf="application?.id">
-          <app-connection-to-producers *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse" 
+          <app-connection-to-producers *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
           licensedProducerText="bc non-medical cannabis retail store licensee or applicant"
           [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
         </div>
