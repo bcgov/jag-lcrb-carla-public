@@ -48,6 +48,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   licencePresentLabel: string;
   licenceAbsentLabel: string;
   submittedApplications = 8;
+  marketerExists: boolean;
+  nonMarketerExists: boolean;
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -92,11 +94,13 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             this.licensedApplications.push(licence);
           });
 
-          // let marketerApplicationExists = !!applications.find((a: any) => a.applicationType.name === ApplicationTypeNames.Marketer);
-          // marketerApplicationExists = marketerApplicationExists
-          //   || !!licenses.find((a: any) => a.licenseType === ApplicationTypeNames.Marketer);
-          //   debugger;
-          // this.marketerApplicationExists.emit(marketerApplicationExists);
+          this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
+          .map(item => <any>item)
+          .concat(licenses.filter(item => item.licenseType === ApplicationTypeNames.Marketer)).length > 0;
+
+          this.nonMarketerExists = applications.filter(item => item.applicationTypeName !== ApplicationTypeNames.Marketer)
+          .map(item => <any>item)
+          .concat(licenses.filter(item => item.licenseType !== ApplicationTypeNames.Marketer)).length > 0;
 
         });
   }
