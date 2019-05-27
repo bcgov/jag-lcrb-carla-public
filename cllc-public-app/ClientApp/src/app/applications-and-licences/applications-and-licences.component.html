@@ -28,7 +28,7 @@
                   <a href="">Learn more about this licence</a>
                 </td>
                 <td>
-                  <button class="btn btn-primary" [disabled]="submittedApplications >= 8"
+                  <button class="btn btn-primary" [disabled]="submittedApplications >= 8 || marketerExists"
                     (click)="startNewLicenceApplication()">START APPLICATION</button>
                 </td>
               </tr>
@@ -40,7 +40,7 @@
                   <a href="">Learn more about this licence</a>
                 </td>
                 <td>
-                  <button class="btn btn-primary" [disabled]="submittedApplications >= 1"
+                  <button class="btn btn-primary" [disabled]="nonMarketerExists || marketerExists"
                     (click)="startNewMarketerApplication()">START APPLICATION</button>
                 </td>
               </tr>
