@@ -226,7 +226,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (!this.connectionsToProducers.formHasChanged() && JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
+    const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
+    const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
+    if (connectionsDidntChang && formDidntChange) {
       return true;
     } else {
       return this.save(true);
