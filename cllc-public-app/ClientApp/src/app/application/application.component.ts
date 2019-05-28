@@ -147,7 +147,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.applicationDataService.getSubmittedApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
-        .subscribe(value => this.submittedApplications = value);
+      .subscribe(value => this.submittedApplications = value);
 
     this.establishmentWatchWordsService.initialize();
 
@@ -245,7 +245,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   checkPossibleProblematicWords() {
     console.log(this.form.get('establishmentName').errors);
-    this.possibleProblematicNameWarning = this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
+    this.possibleProblematicNameWarning =
+      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
   }
 
   /**
