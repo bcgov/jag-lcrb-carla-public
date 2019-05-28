@@ -244,6 +244,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   checkPossibleProblematicWords() {
+    console.log(this.form.get('establishmentName').errors);
     this.possibleProblematicNameWarning = this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
   }
 
