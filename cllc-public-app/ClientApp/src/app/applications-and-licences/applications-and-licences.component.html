@@ -200,11 +200,20 @@
                 <span>Reference #: {{item.name}} </span> <span></span>
               </td>
               <td style="padding: 10px;">
-                {{item?.establishmentAddressStreet}} <br>
-                {{item?.establishmentAddressCity}} <br>
-                British Columbia <br>
-                {{item?.establishmentAddressPostalCode}} <br>
-                Canada <br>
+                <div *ngIf="item?.licenceTypeName !== 'Marketer'">
+                  {{item?.establishmentAddressStreet}} <br>
+                  {{item?.establishmentAddressCity}} <br>
+                  British Columbia <br>
+                  {{item?.establishmentAddressPostalCode}} <br>
+                  Canada <br>
+                </div>
+                <div *ngIf="item?.licenceTypeName === 'Marketer'">
+                  {{account?.physicalAddressStreet}} <br>
+                  {{account?.physicalAddressCity}} <br>
+                  {{account?.physicalAddressProvince}} <br>
+                  {{account?.physicalAddressPostalCode}} <br>
+                  {{account?.physicalAddressCountry}} <br>
+                </div>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <a *ngIf="item.applicationStatus == PAYMENT_REQUIRED" href="javascript:void(0);"
@@ -227,9 +236,6 @@
                     </a>
                   </p>
                 </div>
-
-
-
               </td>
             </tr>
           </table>
