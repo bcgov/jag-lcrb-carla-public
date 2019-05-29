@@ -3293,8 +3293,6 @@
                 "adoxio_checklistresolutionassessment desc",
                 "traversedpath",
                 "traversedpath desc",
-                "adoxio_addresspostalcode",
-                "adoxio_addresspostalcode desc",
                 "adoxio_appchecklistlebuilt",
                 "adoxio_appchecklistlebuilt desc",
                 "adoxio_checklistfinaldecisionlettersent",
@@ -3629,10 +3627,12 @@
                 "adoxio_addresscountry desc",
                 "adoxio_licenceexpiry",
                 "adoxio_licenceexpiry desc",
-                "adoxio_appchecklistlginapproval",
-                "adoxio_appchecklistlginapproval desc",
+                "adoxio_checklistsecurityclearancestatus",
+                "adoxio_checklistsecurityclearancestatus desc",
                 "adoxio_initialcapassessmenttrigger",
                 "adoxio_initialcapassessmenttrigger desc",
+                "adoxio_appchecklistlginapproval",
+                "adoxio_appchecklistlginapproval desc",
                 "adoxio_appchecklistfinaldecision",
                 "adoxio_appchecklistfinaldecision desc",
                 "adoxio_checklistlicencefeepaid",
@@ -3702,7 +3702,9 @@
                 "adoxio_uploadedsitemap",
                 "adoxio_uploadedsitemap desc",
                 "adoxio_checklistfloorplanlined",
-                "adoxio_checklistfloorplanlined desc"
+                "adoxio_checklistfloorplanlined desc",
+                "adoxio_addresspostalcode",
+                "adoxio_addresspostalcode desc"
               ]
             }
           },
@@ -3739,7 +3741,6 @@
                 "adoxio_triggertogeneratesecurityclearance",
                 "adoxio_checklistresolutionassessment",
                 "traversedpath",
-                "adoxio_addresspostalcode",
                 "adoxio_appchecklistlebuilt",
                 "adoxio_checklistfinaldecisionlettersent",
                 "adoxio_establishment",
@@ -3907,8 +3908,9 @@
                 "adoxio_appchecklistverifyapplication",
                 "adoxio_addresscountry",
                 "adoxio_licenceexpiry",
-                "adoxio_appchecklistlginapproval",
+                "adoxio_checklistsecurityclearancestatus",
                 "adoxio_initialcapassessmenttrigger",
+                "adoxio_appchecklistlginapproval",
                 "adoxio_appchecklistfinaldecision",
                 "adoxio_checklistlicencefeepaid",
                 "adoxio_authorizedtosubmit",
@@ -3943,7 +3945,8 @@
                 "onholdtime",
                 "adoxio_contactpersonname",
                 "adoxio_uploadedsitemap",
-                "adoxio_checklistfloorplanlined"
+                "adoxio_checklistfloorplanlined",
+                "adoxio_addresspostalcode"
               ]
             }
           },
@@ -4126,7 +4129,6 @@
                 "adoxio_triggertogeneratesecurityclearance",
                 "adoxio_checklistresolutionassessment",
                 "traversedpath",
-                "adoxio_addresspostalcode",
                 "adoxio_appchecklistlebuilt",
                 "adoxio_checklistfinaldecisionlettersent",
                 "adoxio_establishment",
@@ -4294,8 +4296,9 @@
                 "adoxio_appchecklistverifyapplication",
                 "adoxio_addresscountry",
                 "adoxio_licenceexpiry",
-                "adoxio_appchecklistlginapproval",
+                "adoxio_checklistsecurityclearancestatus",
                 "adoxio_initialcapassessmenttrigger",
+                "adoxio_appchecklistlginapproval",
                 "adoxio_appchecklistfinaldecision",
                 "adoxio_checklistlicencefeepaid",
                 "adoxio_authorizedtosubmit",
@@ -4330,7 +4333,8 @@
                 "onholdtime",
                 "adoxio_contactpersonname",
                 "adoxio_uploadedsitemap",
-                "adoxio_checklistfloorplanlined"
+                "adoxio_checklistfloorplanlined",
+                "adoxio_addresspostalcode"
               ]
             }
           },
@@ -5356,6 +5360,8 @@
                 "adoxio_actiontext desc",
                 "adoxio_name",
                 "adoxio_name desc",
+                "_adoxio_applicationfeeproduct_value",
+                "_adoxio_applicationfeeproduct_value desc",
                 "timezoneruleversionnumber",
                 "timezoneruleversionnumber desc",
                 "adoxio_applicationtypeid",
@@ -5410,6 +5416,7 @@
                 "adoxio_isshowsupportingdocuments",
                 "adoxio_actiontext",
                 "adoxio_name",
+                "_adoxio_applicationfeeproduct_value",
                 "timezoneruleversionnumber",
                 "adoxio_applicationtypeid",
                 "utcconversiontimezonecode",
@@ -5449,7 +5456,8 @@
                 "adoxio_applicationtype_BulkDeleteFailures",
                 "adoxio_applicationtype_applications",
                 "adoxio_licencetypes_applicationtypes",
-                "adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType"
+                "adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType",
+                "adoxio_ApplicationFeeProduct"
               ]
             }
           }
@@ -5547,6 +5555,7 @@
                 "adoxio_isshowsupportingdocuments",
                 "adoxio_actiontext",
                 "adoxio_name",
+                "_adoxio_applicationfeeproduct_value",
                 "timezoneruleversionnumber",
                 "adoxio_applicationtypeid",
                 "utcconversiontimezonecode",
@@ -5586,7 +5595,8 @@
                 "adoxio_applicationtype_BulkDeleteFailures",
                 "adoxio_applicationtype_applications",
                 "adoxio_licencetypes_applicationtypes",
-                "adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType"
+                "adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType",
+                "adoxio_ApplicationFeeProduct"
               ]
             }
           }
@@ -24785,6 +24795,8 @@
                 "adoxio_additionaldetails desc",
                 "overriddencreatedon",
                 "overriddencreatedon desc",
+                "adoxio_federalproducername",
+                "adoxio_federalproducername desc",
                 "_adoxio_application_value",
                 "_adoxio_application_value desc",
                 "_adoxio_tiedhouse_value",
@@ -24845,6 +24857,7 @@
                 "utcconversiontimezonecode",
                 "adoxio_additionaldetails",
                 "overriddencreatedon",
+                "adoxio_federalproducername",
                 "_adoxio_application_value",
                 "_adoxio_tiedhouse_value"
               ]
@@ -24999,6 +25012,7 @@
                 "utcconversiontimezonecode",
                 "adoxio_additionaldetails",
                 "overriddencreatedon",
+                "adoxio_federalproducername",
                 "_adoxio_application_value",
                 "_adoxio_tiedhouse_value"
               ]
@@ -25587,6 +25601,8 @@
                 "modifiedon desc",
                 "adoxio_bcidcardnumber",
                 "adoxio_bcidcardnumber desc",
+                "adoxio_exporteddate",
+                "adoxio_exporteddate desc",
                 "adoxio_effectivedatelongdatestring",
                 "adoxio_effectivedatelongdatestring desc",
                 "timezoneruleversionnumber",
@@ -25651,6 +25667,7 @@
                 "adoxio_driverslicencenumber",
                 "modifiedon",
                 "adoxio_bcidcardnumber",
+                "adoxio_exporteddate",
                 "adoxio_effectivedatelongdatestring",
                 "timezoneruleversionnumber",
                 "adoxio_isldbworker",
@@ -25823,6 +25840,7 @@
                 "adoxio_driverslicencenumber",
                 "modifiedon",
                 "adoxio_bcidcardnumber",
+                "adoxio_exporteddate",
                 "adoxio_effectivedatelongdatestring",
                 "timezoneruleversionnumber",
                 "adoxio_isldbworker",
@@ -26004,8 +26022,8 @@
                 "adoxio_isassociate desc",
                 "adoxio_cansignpermanentchangeapplications",
                 "adoxio_cansignpermanentchangeapplications desc",
-                "leadsourcecode",
-                "leadsourcecode desc",
+                "adoxio_consentvalidatedexpirydate",
+                "adoxio_consentvalidatedexpirydate desc",
                 "firstname",
                 "firstname desc",
                 "address2_line2",
@@ -26058,8 +26076,8 @@
                 "versionnumber desc",
                 "governmentid",
                 "governmentid desc",
-                "emailaddress3",
-                "emailaddress3 desc",
+                "leadsourcecode",
+                "leadsourcecode desc",
                 "address2_telephone1",
                 "address2_telephone1 desc",
                 "adoxio_invited",
@@ -26204,6 +26222,8 @@
                 "adoxio_externalid desc",
                 "numberofchildren",
                 "numberofchildren desc",
+                "adoxio_consentvalidated",
+                "adoxio_consentvalidated desc",
                 "gendercode",
                 "gendercode desc",
                 "_modifiedbyexternalparty_value",
@@ -26378,6 +26398,8 @@
                 "adoxio_canattendcompliancemeetings desc",
                 "_createdby_value",
                 "_createdby_value desc",
+                "emailaddress3",
+                "emailaddress3 desc",
                 "customertypecode",
                 "customertypecode desc",
                 "address3_addresstypecode",
@@ -26474,7 +26496,7 @@
                 "address3_city",
                 "adoxio_isassociate",
                 "adoxio_cansignpermanentchangeapplications",
-                "leadsourcecode",
+                "adoxio_consentvalidatedexpirydate",
                 "firstname",
                 "address2_line2",
                 "assistantphone",
@@ -26501,7 +26523,7 @@
                 "anniversary",
                 "versionnumber",
                 "governmentid",
-                "emailaddress3",
+                "leadsourcecode",
                 "address2_telephone1",
                 "adoxio_invited",
                 "address1_upszone",
@@ -26574,6 +26596,7 @@
                 "creditonhold",
                 "adoxio_externalid",
                 "numberofchildren",
+                "adoxio_consentvalidated",
                 "gendercode",
                 "_modifiedbyexternalparty_value",
                 "address2_line3",
@@ -26661,6 +26684,7 @@
                 "_owningbusinessunit_value",
                 "adoxio_canattendcompliancemeetings",
                 "_createdby_value",
+                "emailaddress3",
                 "customertypecode",
                 "address3_addresstypecode",
                 "_modifiedonbehalfby_value",
@@ -26808,7 +26832,8 @@
                 "adoxio_contact_personalhistorysummary",
                 "adoxio_contact_tiedhouseconnections",
                 "adoxio_contact_workerregistration",
-                "adoxio_individual_documents"
+                "adoxio_individual_documents",
+                "contact_SharePointDocumentLocations"
               ]
             }
           }
@@ -26890,7 +26915,7 @@
                 "address3_city",
                 "adoxio_isassociate",
                 "adoxio_cansignpermanentchangeapplications",
-                "leadsourcecode",
+                "adoxio_consentvalidatedexpirydate",
                 "firstname",
                 "address2_line2",
                 "assistantphone",
@@ -26917,7 +26942,7 @@
                 "anniversary",
                 "versionnumber",
                 "governmentid",
-                "emailaddress3",
+                "leadsourcecode",
                 "address2_telephone1",
                 "adoxio_invited",
                 "address1_upszone",
@@ -26990,6 +27015,7 @@
                 "creditonhold",
                 "adoxio_externalid",
                 "numberofchildren",
+                "adoxio_consentvalidated",
                 "gendercode",
                 "_modifiedbyexternalparty_value",
                 "address2_line3",
@@ -27077,6 +27103,7 @@
                 "_owningbusinessunit_value",
                 "adoxio_canattendcompliancemeetings",
                 "_createdby_value",
+                "emailaddress3",
                 "customertypecode",
                 "address3_addresstypecode",
                 "_modifiedonbehalfby_value",
@@ -27224,7 +27251,8 @@
                 "adoxio_contact_personalhistorysummary",
                 "adoxio_contact_tiedhouseconnections",
                 "adoxio_contact_workerregistration",
-                "adoxio_individual_documents"
+                "adoxio_individual_documents",
+                "contact_SharePointDocumentLocations"
               ]
             }
           }
@@ -29596,7 +29624,8 @@
                 "regardingobjectid_adoxio_spdexports",
                 "regardingobjectid_adoxio_worker",
                 "regardingobjectid_incident",
-                "regardingobjectid_adoxio_document"
+                "regardingobjectid_adoxio_document",
+                "regardingobjectid_contact"
               ]
             }
           }
@@ -29749,7 +29778,8 @@
                 "regardingobjectid_adoxio_spdexports",
                 "regardingobjectid_adoxio_worker",
                 "regardingobjectid_incident",
-                "regardingobjectid_adoxio_document"
+                "regardingobjectid_adoxio_document",
+                "regardingobjectid_contact"
               ]
             }
           }
@@ -34029,10 +34059,6 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_addresspostalcode": {
-          "type": "string",
-          "x-nullable": true
-        },
         "adoxio_appchecklistlebuilt": {
           "type": "integer",
           "x-nullable": true
@@ -34702,11 +34728,15 @@
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_appchecklistlginapproval": {
+        "adoxio_checklistsecurityclearancestatus": {
           "type": "integer",
           "x-nullable": true
         },
         "adoxio_initialcapassessmenttrigger": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_appchecklistlginapproval": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34848,6 +34878,10 @@
         },
         "adoxio_checklistfloorplanlined": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_addresspostalcode": {
+          "type": "string",
           "x-nullable": true
         },
         "createdbyname": {
@@ -35630,6 +35664,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "_adoxio_applicationfeeproduct_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "timezoneruleversionnumber": {
           "type": "integer",
           "x-nullable": true
@@ -35749,6 +35787,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtypecontent"
           }
+        },
+        "adoxio_ApplicationFeeProduct": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.product"
         }
       }
     },
@@ -45695,6 +45736,10 @@
           "type": "string",
           "format": "date-time"
         },
+        "adoxio_federalproducername": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_adoxio_application_value": {
           "type": "string",
           "x-nullable": true
@@ -46086,6 +46131,10 @@
         "adoxio_bcidcardnumber": {
           "type": "string",
           "x-nullable": true
+        },
+        "adoxio_exporteddate": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_effectivedatelongdatestring": {
           "type": "string",
@@ -54764,9 +54813,9 @@
           "type": "boolean",
           "x-nullable": true
         },
-        "leadsourcecode": {
-          "type": "integer",
-          "x-nullable": true
+        "adoxio_consentvalidatedexpirydate": {
+          "type": "string",
+          "format": "date-time"
         },
         "firstname": {
           "type": "string",
@@ -54873,8 +54922,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "emailaddress3": {
-          "type": "string",
+        "leadsourcecode": {
+          "type": "integer",
           "x-nullable": true
         },
         "address2_telephone1": {
@@ -55158,6 +55207,10 @@
           "x-nullable": true
         },
         "numberofchildren": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_consentvalidated": {
           "type": "integer",
           "x-nullable": true
         },
@@ -55501,6 +55554,10 @@
           "x-nullable": true
         },
         "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "emailaddress3": {
           "type": "string",
           "x-nullable": true
         },
@@ -56165,6 +56222,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_document"
+          }
+        },
+        "contact_SharePointDocumentLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.sharepointdocumentlocation"
           }
         }
       }
@@ -77985,6 +78048,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
           }
+        },
+        "adoxio_product_adoxio_applicationtype_ApplicationFeeProduct": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+          }
         }
       }
     },
@@ -85169,6 +85238,9 @@
         },
         "regardingobjectid_adoxio_document": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_document"
+        },
+        "regardingobjectid_contact": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
         }
       }
     },
