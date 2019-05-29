@@ -1,10 +1,10 @@
 
-import { filter, takeWhile } from 'rxjs/operators';
+import { filter, takeWhile, map, catchError, mergeMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable, forkJoin } from 'rxjs';
+import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -239,7 +239,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (connectionsDidntChang && formDidntChange) {
       return true;
     } else {
-      return this.save(true);
+      const subj = new Subject<boolean>();
+      this.busy = this.save(true).subscribe(res => {
+        subj.next(res);
+      });
+      return subj;
     }
   }
 
@@ -253,35 +257,31 @@ export class ApplicationComponent extends FormBase implements OnInit {
    * Save form data
    * @param showProgress
    */
-  save(showProgress: boolean = false): Subject<boolean> {
-    const saveResult = new Subject<boolean>();
+  save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    const subscription = forkJoin(
+    return forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
-      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData))
+      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+    )
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        saveResult.next(true);
+      .pipe(catchError(e => {
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        return of(false);
+      }))
+      .pipe(mergeMap(() => {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
-      },
-        err => {
-          saveResult.next(false);
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          console.log('Error occured');
-        });
-
-    if (showProgress === true) {
-      this.busy = subscription;
-    }
-
-    return saveResult;
+        return of(true);
+      }));
   }
 
   prepareTiedHouseSaveRequest(_tiedHouseData) {
+    if (!this.application.tiedHouse) {
+      return of(null);
+    }
     let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
     data = { ...data };
     return this.tiedHouseService.updateTiedHouse(data, data.id);
@@ -310,7 +310,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
     } else {
-      this.save(true)
+      this.busy = this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {

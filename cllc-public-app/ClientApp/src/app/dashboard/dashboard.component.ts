@@ -5,6 +5,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
+import { Account } from '@models/account.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ import { FormBase } from '@shared/form-base';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent extends FormBase implements OnInit {
-  account: any;
+  account: Account;
 
   constructor(private store: Store<AppState>) {
     super();
