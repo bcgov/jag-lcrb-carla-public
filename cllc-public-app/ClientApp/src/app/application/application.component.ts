@@ -4,7 +4,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStr
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable, forkJoin } from 'rxjs';
+import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -282,6 +282,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   prepareTiedHouseSaveRequest(_tiedHouseData) {
+    if (!this.application.tiedHouse) {
+      return of(null);
+    }
     let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
     data = { ...data };
     return this.tiedHouseService.updateTiedHouse(data, data.id);
