@@ -9,7 +9,5 @@ namespace SpdSync.models
     {
         public string RecordIdentifier { get; set; }
         public string Result { get; set; }
-        public DateTimeOffset DateProcessed { get; set; }
-        public DateTimeOffset ExpiryDate { get; set; }
     }
 }
