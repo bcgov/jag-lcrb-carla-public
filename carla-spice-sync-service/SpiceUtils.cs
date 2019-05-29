@@ -29,16 +29,18 @@ namespace Gov.Lclb.Cllb.SpdSync
             this.Configuration = Configuration;
             _logger = loggerFactory.CreateLogger(typeof(SpiceUtils));
             _dynamicsClient = DynamicsUtil.SetupDynamics(Configuration);
+            SpiceClient = CreateSpiceClient(Configuration);
+        }
 
-            // TODO - move this into a seperate routine.
-
+        public SpiceClient CreateSpiceClient(IConfiguration Configuration)
+        {
             string spiceURI = Configuration["SPICE_URI"];
             string token = Configuration["SPICE_JWT_TOKEN"];
 
             // create JWT credentials
             TokenCredentials credentials = new TokenCredentials(token);
 
-            SpiceClient = new SpiceClient(new Uri(spiceURI), credentials);
+            return new SpiceClient(new Uri(spiceURI), credentials);
         }
 
 
@@ -147,6 +149,8 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 if (record != null)
                 {
+                    UpdateContactConsent(record._adoxioContactidValue);
+
                     // update the record.
                     MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchRecord = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary()
                     {
@@ -180,23 +184,30 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Import application responses to Dynamics.
         /// </summary>
         /// <returns></returns>
-        private async void ImportApplicationResponses(PerformContext hangfireContext, List<ApplicationScreeningResponse> responses)
+        private void ImportApplicationResponses(PerformContext hangfireContext, List<ApplicationScreeningResponse> responses)
         {
             foreach (ApplicationScreeningResponse applicationResponse in responses)
             {
-                MicrosoftDynamicsCRMadoxioApplication applicationRecord = await _dynamicsClient.GetApplicationByIdWithChildren(applicationResponse.RecordIdentifier);
+                string appFilter = $"adoxio_jobnumber eq '{applicationResponse.RecordIdentifier}'";
+                string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
+                MicrosoftDynamicsCRMadoxioApplication applicationRecord = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
 
                 if (applicationRecord != null)
                 {
-                    // update the record.
+                    var screeningRequest = CreateApplicationScreeningRequest(applicationRecord);
+                    var associatesValidated = UpdateConsentExpiry(screeningRequest.Associates);
+                    _logger.LogInformation($"Total associates consent expiry updated: {associatesValidated}");
+
+                    // update the date of security status received and the status
                     MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
                     {
-
+                        AdoxioDatereceivedspd = DateTimeOffset.Now,
+                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityResultTranslate.GetTranslatedSecurityStatus(applicationResponse.Result)
                     };
 
                     try
                     {
-                        _dynamicsClient.Applications.Update(applicationRecord.AdoxioJobnumber, patchRecord);
+                        _dynamicsClient.Applications.Update(applicationRecord.AdoxioApplicationid, patchRecord);
                     }
                     catch (OdataerrorException odee)
                     {
@@ -227,8 +238,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             var application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
 
             var screeningRequest = CreateApplicationScreeningRequest(application);
-            var associates = CreateApplicationAssociatesScreeningRequest(application._adoxioApplicantValue, screeningRequest.Associates);
-            screeningRequest.Associates = screeningRequest.Associates.Concat(associates).ToList();
 
             return screeningRequest;
         }
@@ -460,6 +469,11 @@ namespace Gov.Lclb.Cllb.SpdSync
                     screeningRequest.Associates.Add(person);
                 }
             }
+
+            /* Add associates from account */
+            var moreAssociates = CreateApplicationAssociatesScreeningRequest(application._adoxioApplicantValue, screeningRequest.Associates);
+            screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
+
             return screeningRequest;
         }
 
@@ -641,6 +655,36 @@ namespace Gov.Lclb.Cllb.SpdSync
                 positions.Add("partner");
             }
             return positions;
+        }
+
+        public int UpdateConsentExpiry(IList<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> associates)
+        {
+            var i = 0;
+            foreach(var associate in associates)
+            {
+                _logger.LogError(associate.Name);
+                if((bool) associate.IsIndividual)
+                {
+                    UpdateContactConsent(associate.Contact.ContactId);
+                    i += 1;
+                }
+                else
+                {
+                    i += UpdateConsentExpiry(associate.Account.Associates);
+                }
+            }
+            return i;
+        }
+
+        public void UpdateContactConsent(string ContactId)
+        {
+            // update consent validated to yes
+            MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact()
+            {
+                AdoxioConsentvalidated = 845280000,
+                AdoxioConsentvalidatedexpirydate = DateTimeOffset.Now.AddMonths(3)
+            };
+            _dynamicsClient.Contacts.Update(ContactId, contact);
         }
     }
 }
