@@ -51,7 +51,7 @@ export const MY_FORMATS = {
 export class AccountProfileComponent extends FormBase implements OnInit {
   currentUser: User;
   dataLoaded = false;
-  busy: Promise<any>;
+  busy: Subscription;
   busy2: Promise<any>;
   busy3: Promise<any>;
   form: FormGroup;
@@ -239,8 +239,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
       this.busy = this.contactDataService.createWorkerContact(contact)
-        .toPromise()
-        .then(res => {
+        .subscribe(res => {
           this.subscribeForData();
         }, error => alert('Failed to create contact'));
     } else {
@@ -284,7 +283,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   gotoReview() {
     if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
-      this.save().subscribe(data => {
+      this.busy = this.save().subscribe(data => {
         if (this.applicationId) {
           const route: any[] = [`/application/${this.applicationId}`];
           if (this.applicationMode) {
