@@ -4,7 +4,7 @@ import { ApplicationType } from './application-type.model';
 export class ApplicationLicenseSummary {
   id: string;
 
-  establishmentName: string;  
+  establishmentName: string;
   establishmentAddressStreet: string;
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
