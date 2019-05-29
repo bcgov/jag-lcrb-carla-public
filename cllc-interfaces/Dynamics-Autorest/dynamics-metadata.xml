@@ -3046,9 +3046,6 @@
         <Property Name="traversedpath" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="A comma separated list of string values representing the unique identifiers of stages in a Business Process Flow Instance in the order that they occur." />
         </Property>
-        <Property Name="adoxio_addresspostalcode" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_appchecklistlebuilt" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3652,10 +3649,13 @@
         <Property Name="adoxio_licenceexpiry" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_appchecklistlginapproval" Type="Edm.Int32">
+        <Property Name="adoxio_checklistsecurityclearancestatus" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_initialcapassessmenttrigger" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_appchecklistlginapproval" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_appchecklistfinaldecision" Type="Edm.Int32">
@@ -3780,6 +3780,9 @@
         </Property>
         <Property Name="adoxio_checklistfloorplanlined" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
+        </Property>
+        <Property Name="adoxio_addresspostalcode" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <NavigationProperty Name="createdbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_application_createdby">
           <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
@@ -4350,6 +4353,13 @@
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
         </Property>
+        <Property Name="_adoxio_applicationfeeproduct_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
         </Property>
@@ -4441,6 +4451,9 @@
         <NavigationProperty Name="adoxio_applicationtype_applications" Type="Collection(mscrm.adoxio_application)" Partner="adoxio_ApplicationTypeId" />
         <NavigationProperty Name="adoxio_licencetypes_applicationtypes" Type="Collection(mscrm.adoxio_licencetype)" Partner="adoxio_licencetypes_applicationtypes" />
         <NavigationProperty Name="adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType" Type="Collection(mscrm.adoxio_applicationtypecontent)" Partner="adoxio_ApplicationType" />
+        <NavigationProperty Name="adoxio_ApplicationFeeProduct" Type="mscrm.product" Nullable="false" Partner="adoxio_product_adoxio_applicationtype_ApplicationFeeProduct">
+          <ReferentialConstraint Property="_adoxio_applicationfeeproduct_value" ReferencedProperty="productid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_area" BaseType="mscrm.crmbaseentity">
@@ -13359,6 +13372,9 @@
         <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
         </Property>
+        <Property Name="adoxio_federalproducername" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="_adoxio_application_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -13735,6 +13751,9 @@
           </Annotation>
         </Property>
         <Property Name="adoxio_bcidcardnumber" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_exporteddate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_effectivedatelongdatestring" Type="Edm.String" Unicode="false">
@@ -20643,8 +20662,8 @@
         <Property Name="adoxio_cansignpermanentchangeapplications" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="leadsourcecode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Select the primary marketing source that directed the contact to your organization." />
+        <Property Name="adoxio_consentvalidatedexpirydate" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="firstname" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the contact's first name to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns." />
@@ -20742,8 +20761,8 @@
         <Property Name="governmentid" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the passport number or other government ID for the contact for use in documents or reports." />
         </Property>
-        <Property Name="emailaddress3" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Type an alternate email address for the contact." />
+        <Property Name="leadsourcecode" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Select the primary marketing source that directed the contact to your organization." />
         </Property>
         <Property Name="address2_telephone1" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the main phone number associated with the secondary address." />
@@ -21007,6 +21026,9 @@
         </Property>
         <Property Name="numberofchildren" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the number of children the contact has for reference in follow-up phone calls and other communications." />
+        </Property>
+        <Property Name="adoxio_consentvalidated" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="gendercode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Select the contact's gender to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns." />
@@ -21341,6 +21363,9 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="emailaddress3" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Type an alternate email address for the contact." />
+        </Property>
         <Property Name="customertypecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Select the category that best describes the relationship between the contact and your organization." />
         </Property>
@@ -21632,6 +21657,7 @@
         <NavigationProperty Name="adoxio_contact_tiedhouseconnections" Type="Collection(mscrm.adoxio_tiedhouseconnection)" Partner="adoxio_ContactId" />
         <NavigationProperty Name="adoxio_contact_workerregistration" Type="Collection(mscrm.adoxio_worker)" Partner="adoxio_ContactId" />
         <NavigationProperty Name="adoxio_individual_documents" Type="Collection(mscrm.adoxio_document)" Partner="adoxio_IndividualId" />
+        <NavigationProperty Name="contact_SharePointDocumentLocations" Type="Collection(mscrm.sharepointdocumentlocation)" Partner="regardingobjectid_contact" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Person with whom a business unit has a relationship, such as customer, supplier, and colleague." />
       </EntityType>
       <EntityType Name="contractdetail" BaseType="mscrm.crmbaseentity">
@@ -40876,6 +40902,7 @@
         </NavigationProperty>
         <NavigationProperty Name="adoxio_product_adoxio_licencetype_ApplicationFeeProduct" Type="Collection(mscrm.adoxio_licencetype)" Partner="adoxio_ApplicationFeeProduct" />
         <NavigationProperty Name="adoxio_product_adoxio_licencetype_LicenceFeeProduct" Type="Collection(mscrm.adoxio_licencetype)" Partner="adoxio_LicenceFeeProduct" />
+        <NavigationProperty Name="adoxio_product_adoxio_applicationtype_ApplicationFeeProduct" Type="Collection(mscrm.adoxio_applicationtype)" Partner="adoxio_ApplicationFeeProduct" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Information about products and their pricing information." />
       </EntityType>
       <EntityType Name="productsalesliterature" BaseType="mscrm.crmbaseentity">
@@ -47575,6 +47602,9 @@
         </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_document" Type="mscrm.adoxio_document" Nullable="false" Partner="adoxio_document_SharePointDocumentLocations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_documentid" />
+        </NavigationProperty>
+        <NavigationProperty Name="regardingobjectid_contact" Type="mscrm.contact" Nullable="false" Partner="contact_SharePointDocumentLocations">
+          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="contactid" />
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Document libraries or folders on a SharePoint server from where documents can be managed in Microsoft Dynamics 365." />
       </EntityType>
@@ -60569,6 +60599,7 @@
           <NavigationPropertyBinding Path="adoxio_applicationtype_applications" Target="adoxio_applications" />
           <NavigationPropertyBinding Path="adoxio_licencetypes_applicationtypes" Target="adoxio_licencetypes" />
           <NavigationPropertyBinding Path="adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType" Target="adoxio_applicationtypecontents" />
+          <NavigationPropertyBinding Path="adoxio_ApplicationFeeProduct" Target="products" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -65173,6 +65204,7 @@
           <NavigationPropertyBinding Path="adoxio_contact_tiedhouseconnections" Target="adoxio_tiedhouseconnections" />
           <NavigationPropertyBinding Path="adoxio_contact_workerregistration" Target="adoxio_workers" />
           <NavigationPropertyBinding Path="adoxio_individual_documents" Target="adoxio_documents" />
+          <NavigationPropertyBinding Path="contact_SharePointDocumentLocations" Target="sharepointdocumentlocations" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -69850,6 +69882,7 @@
           <NavigationPropertyBinding Path="modifiedonbehalfby" Target="systemusers" />
           <NavigationPropertyBinding Path="adoxio_product_adoxio_licencetype_ApplicationFeeProduct" Target="adoxio_licencetypes" />
           <NavigationPropertyBinding Path="adoxio_product_adoxio_licencetype_LicenceFeeProduct" Target="adoxio_licencetypes" />
+          <NavigationPropertyBinding Path="adoxio_product_adoxio_applicationtype_ApplicationFeeProduct" Target="adoxio_applicationtypes" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -71503,6 +71536,7 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_worker" Target="adoxio_workers" />
           <NavigationPropertyBinding Path="regardingobjectid_incident" Target="incidents" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_document" Target="adoxio_documents" />
+          <NavigationPropertyBinding Path="regardingobjectid_contact" Target="contacts" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
