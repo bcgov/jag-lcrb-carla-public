@@ -2,13 +2,15 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Utils
 {
-	public static class StatusUtility
-	{
+    public static class StatusUtility
+    {
         const string STATUS_ACTIVE = "Active";
         const string STATUS_PAYMENT_REQUIRED = "Payment Required";
         const string STATUS_RENEWAL_DUE = "Renewal Due";
@@ -77,8 +79,30 @@ namespace Gov.Lclb.Cllb.Public.Utils
             return shownStatus;
         }
 
+        public static string GetLicenceStatus(MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications)
+        {
+            var application = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
+            if (application == null)
+            {
+                return null;
+            }
+            AdoxioApplicationStatusCodes status = (AdoxioApplicationStatusCodes)application.Statuscode;
 
-        
+            string shownStatus = Enum.GetName(status.GetType(), status);
 
+            if (licence != null && shownStatus == "Approved")
+            {
+                shownStatus = STATUS_ACTIVE;
+                if (application.AdoxioLicencefeeinvoicepaid != true && licence.AdoxioLicenceType != null && licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                {
+                    shownStatus = STATUS_PAYMENT_REQUIRED;
+                }
+                if (DateTimeOffset.Now > licence.AdoxioExpirydate)
+                {
+                    shownStatus = STATUS_RENEWAL_DUE;
+                }
+            }
+            return shownStatus;
+        }
     }
 }
