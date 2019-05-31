@@ -31,5 +31,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LicenseNumber { get; set; }
         public List<ApplicationType> AllowedActions { get; set; }
 
+        public string LicenceTypeName { get; set; }
+
     }
 }

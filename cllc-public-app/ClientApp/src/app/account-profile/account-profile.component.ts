@@ -51,7 +51,7 @@ export const MY_FORMATS = {
 export class AccountProfileComponent extends FormBase implements OnInit {
   currentUser: User;
   dataLoaded = false;
-  busy: Promise<any>;
+  busy: Subscription;
   busy2: Promise<any>;
   busy3: Promise<any>;
   form: FormGroup;
@@ -101,8 +101,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         businessType: ['', Validators.required],
         contactPhone: ['', [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
         contactEmail: ['', [Validators.required, Validators.email]],
-        // consentForEmailCommunication: [false, this.customRequiredCheckboxValidator()],
-        // websiteAddress: [''],
+
         physicalAddressStreet: ['', Validators.required],
         physicalAddressStreet2: [''],
         physicalAddressCity: ['', Validators.required],
@@ -122,18 +121,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         lastname: ['', Validators.required],
         jobTitle: [''],
         telephone1: ['', [Validators.required, /*Validators.minLength(10), Validators.maxLength(10)*/]],
-        // phoneNumberAlt: [''],
         emailaddress1: ['', [Validators.required, Validators.email]],
       }),
-      // additionalContact: this.fb.group({
-      //   id: [],
-      //   firstName: [''],
-      //   lastName: [''],
-      //   title: [''],
-      //   telephone1: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
-      //   // phoneNumberAlt: [''],
-      //   emailaddress1: [''],
-      // })
     });
     this.subscribeForData();
 
@@ -215,7 +204,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   subscribeForData() {
     this.store.select(state => state.currentAccountState.currentAccount)
-    .pipe(takeWhile(() => this.componentActive))
+      .pipe(takeWhile(() => this.componentActive))
       .pipe(filter(s => !!s))
       .subscribe(account => {
         this.account = account;
@@ -239,8 +228,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
       this.busy = this.contactDataService.createWorkerContact(contact)
-        .toPromise()
-        .then(res => {
+        .subscribe(res => {
           this.subscribeForData();
         }, error => alert('Failed to create contact'));
     } else {
@@ -270,7 +258,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
     if (this.connectionsToProducers) {
       saves.push(
-        this.prepareTiedHouseSaveRequest(Object.assign(this.account.tiedHouse, _tiedHouse))
+        this.prepareTiedHouseSaveRequest({ ...this.account.tiedHouse, ..._tiedHouse })
       );
     }
 
@@ -284,7 +272,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
   gotoReview() {
     if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
-      this.save().subscribe(data => {
+      this.busy = this.save().subscribe(data => {
         if (this.applicationId) {
           const route: any[] = [`/application/${this.applicationId}`];
           if (this.applicationMode) {
@@ -301,8 +289,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   }
 
   prepareTiedHouseSaveRequest(_tiedHouseData) {
-    let data = (<any>Object).assign(this.account.tiedHouse, _tiedHouseData);
-    data = { ...data };
+    const data = { ...this.account.tiedHouse, ..._tiedHouseData };
+
     if (data.id) {
       return this.tiedHouseService.updateTiedHouse(data, data.id);
     } else {
