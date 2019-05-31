@@ -366,6 +366,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseSummary.LicenseNumber = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencenumber;
             }
 
+            if (dynamicsApplication.AdoxioLicenceType != null)
+            {
+                licenseSummary.LicenceTypeName = dynamicsApplication.AdoxioLicenceType.AdoxioName;
+            }
+
             if (dynamicsApplication.AdoxioAssignedLicence != null &&
                 dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType != null &&
                 dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
