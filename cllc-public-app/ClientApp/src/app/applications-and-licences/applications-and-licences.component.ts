@@ -96,11 +96,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
           this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
           .map(item => <any>item)
-          .concat(licenses.filter(item => item.licenseType === ApplicationTypeNames.Marketer)).length > 0;
+          .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
 
           this.nonMarketerExists = applications.filter(item => item.applicationTypeName !== ApplicationTypeNames.Marketer)
           .map(item => <any>item)
-          .concat(licenses.filter(item => item.licenseType !== ApplicationTypeNames.Marketer)).length > 0;
+          .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
         });
   }
@@ -174,7 +174,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         window.location.href = data.url;
       }, err => {
         if (err._body === 'Payment already made') {
-          this.snackBar.open('Application Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
       });
   }

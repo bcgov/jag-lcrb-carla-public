@@ -9,6 +9,7 @@ import { FeatureFlagService } from '@services/feature-flag.service';
 import { LegalEntity } from '@models/legal-entity.model';
 import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
+import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
 
 @Component({
   selector: 'app-root',
@@ -68,13 +69,14 @@ export class AppComponent extends FormBase implements OnInit {
   reloadUser() {
     this.store.select(state => state.currentUserState.currentUser)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(u => !!u))
       .subscribe((data: User) => {
         this.currentUser = data;
-        this.isNewUser = this.currentUser.isNewUser;
+        this.isNewUser =  this.currentUser && this.currentUser.isNewUser;
         if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
           this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
             .subscribe(() => { });
+        } else {
+          this.store.dispatch(new SetCurrentAccountAction(null));
         }
       });
   }

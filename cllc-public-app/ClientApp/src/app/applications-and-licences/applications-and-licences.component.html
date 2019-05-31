@@ -195,9 +195,15 @@
             <tr *ngFor="let item of licensedApplications; let i = index;" style="border: 1px solid #ccc; ">
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
               <td style="padding: 10px;">
-                <span style="color: #1a5a96;">{{item.establishmentName}}</span> <br>
-                <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
-                <span>Reference #: {{item.name}} </span> <span></span>
+                <div appRemoveIfFeatureOn="Marketer">
+                  <span style="color: #1a5a96;">{{item.establishmentName}}</span>
+                </div>
+                <div appRemoveIfFeatureOff="Marketer">
+                  <span *ngIf="item?.licenceTypeName !== 'Marketer'" style="color: #1a5a96;">{{item.establishmentName}}</span>
+                  <span *ngIf="item?.licenceTypeName === 'Marketer'" style="color: #1a5a96;">Marketing Licence</span>
+                </div>
+                <span>Licence Number: </span> <i>{{item.licenseNumber}}</i> <br>
+                <span>Status #: {{item.status}} </span> <span></span>
               </td>
               <td style="padding: 10px;">
                 <div *ngIf="item?.licenceTypeName !== 'Marketer'">
@@ -216,23 +222,22 @@
                 </div>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <a *ngIf="item.applicationStatus == PAYMENT_REQUIRED" href="javascript:void(0);"
+                <a *ngIf="item.status == PAYMENT_REQUIRED" href="javascript:void(0);"
                   (click)="payLicenceFee(item)">
                   <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
                 </a>
-                <a *ngIf="item.applicationStatus == RENEWAL_DUE" href="javascript:void(0);"
+                <a *ngIf="item.status == RENEWAL_DUE" href="javascript:void(0);"
                   (click)="renewLicence(item)">
                   <span><i class="fas fa-sync" style="margin-right: 10px;"></i>Renew Licence</span>
                 </a>
-                <a *ngIf="item.applicationStatus !== PAYMENT_REQUIRED" style="min-width: 10px;"
+                <a *ngIf="item.status !== PAYMENT_REQUIRED" style="min-width: 10px;"
                   [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                 </a>
-                <div *ngIf="item.applicationStatus != PAYMENT_REQUIRED">
+                <div *ngIf="item.status != PAYMENT_REQUIRED">
                   <p *ngFor="let action of item.allowedActions">
                     <a href="javascript:void(0);" (click)="doAction(item.licenseId,action.name)">
                       <span><i class="fas fa-sync" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
-
                     </a>
                   </p>
                 </div>
