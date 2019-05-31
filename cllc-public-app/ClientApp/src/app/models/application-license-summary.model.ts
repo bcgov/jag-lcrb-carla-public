@@ -9,9 +9,9 @@ export class ApplicationLicenseSummary {
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
 
-  applicationStatus: string;
+  status: string;
   licenseId: string;
-  licenseType: string;
+  licenceTypeName: string;
   licenseNumber: string;
   name: string;
   jobNumber: string;

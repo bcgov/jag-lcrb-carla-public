@@ -32,7 +32,7 @@ export class UserDataService extends DataService {
     // handle the error before converting to a promise
       .pipe(catchError(e => of(<User>null)))
       .toPromise().then(user => {
-        this.store.dispatch(new SetCurrentUserAction({ ...user }));
+        this.store.dispatch(new SetCurrentUserAction(user));
       }).catch(e => { });
   }
 

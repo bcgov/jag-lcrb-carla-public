@@ -3,6 +3,8 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -11,8 +13,6 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class LicenseExtensions
     {
-        
-
         public static License ToViewModel(this MicrosoftDynamicsCRMadoxioLicences dynamicsLicense, IDynamicsClient dynamicsClient)
         {
             License adoxioLicenseVM = new License();
@@ -70,6 +70,52 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             return adoxioLicenseVM;
+        }
+
+        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications)
+        {
+            ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
+            {
+                LicenseId = licence.AdoxioLicencesid,
+                LicenseNumber = licence.AdoxioLicencenumber,
+                EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
+                EstablishmentAddressCity = licence.AdoxioEstablishmentaddresscity,
+                EstablishmentAddressPostalCode = licence.AdoxioEstablishmentaddresspostalcode,
+                ExpiryDate = licence.AdoxioExpirydate,
+                Status = StatusUtility.GetLicenceStatus(licence, applications),
+                AllowedActions = new List<ApplicationType>()
+            };
+
+
+            if (licence.AdoxioEstablishment != null)
+            {
+                licenseSummary.EstablishmentName = licence.AdoxioEstablishment.AdoxioName;
+            }
+
+
+            if (licence.AdoxioLicenceType != null)
+            {
+                licenseSummary.LicenceTypeName = licence.AdoxioLicenceType.AdoxioName;
+            }
+
+            if (licence != null &&
+                licence.AdoxioLicenceType != null &&
+                licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
+            {
+                bool addActions = (applications.Any(app => app.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved));
+                
+                if (addActions)
+                {
+                    foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
+                    {
+                        // check to see if there is an existing action on this licence.
+                        licenseSummary.AllowedActions.Add(item.ToViewModel());
+                    }
+
+                }
+            }
+
+            return licenseSummary;
         }
     }
 }

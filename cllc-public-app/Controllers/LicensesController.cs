@@ -139,37 +139,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task<List<ApplicationLicenseSummary>> GetLicensesByLicencee(string licenceeId)
         {
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
+            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
+            IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
             if (string.IsNullOrEmpty(licenceeId))
             {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get(expand: expand).Value;
+                licences = _dynamicsClient.Licenceses.Get(expand: expand).Value;
             }
             else
             {
-                var filter = $"_adoxio_applicant_value eq {licenceeId} and statuscode eq {(int)AdoxioApplicationStatusCodes.Approved}";
-                
+                var filter = $"_adoxio_licencee_value eq {licenceeId}";
+
                 try
                 {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                    licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
+                    licences = licences
+                    .Select(licence =>
+                    {
+                        licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+                        return licence;
+                    });
                 }
-                catch (OdataerrorException)
+                catch (OdataerrorException ex)
                 {
-                    dynamicsApplicationList = null;
+                    licences = null;
                 }
+                
             }
 
-            if (dynamicsApplicationList != null)
+            if (licences != null)
             {
-                IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationListByApplicant(licenceeId);
-
-                foreach (var dynamicsApplication in dynamicsApplicationList)
+                IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licenceeId);
+                foreach (var licence in licences)
                 {
-                    // populate the licence type.
-                    dynamicsApplication.PopulateLicenceType(_dynamicsClient, _cache  );
-
-                    licenseSummaryList.Add(dynamicsApplication.ToLicenseSummaryViewModel(applicationsInProgress));
+                    var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+                    licenseSummaryList.Add(licence.ToLicenseSummaryViewModel(applications));
                 }
             }
 
