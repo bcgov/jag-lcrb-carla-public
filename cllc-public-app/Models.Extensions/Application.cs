@@ -126,7 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         }
 
-        private static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceType(string id, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
+        public static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceType(string id, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
         {
             string cacheKey = CacheKeys.LicenceTypePrefix + id;
             if (!memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
@@ -334,73 +334,5 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             return applicationSummary;
         }
-
-        public static ApplicationLicenseSummary ToLicenseSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress)
-        {
-            ApplicationLicenseSummary licenseSummary = new ViewModels.ApplicationLicenseSummary()
-            {
-                Name = dynamicsApplication.AdoxioName,
-                JobNumber = dynamicsApplication.AdoxioJobnumber,
-                //get establishment name and address
-                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
-                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
-                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
-                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                AllowedActions = new List<ApplicationType>()
-            };
-
-            // id
-            if (dynamicsApplication.AdoxioApplicationid != null)
-            {
-                licenseSummary.Id = dynamicsApplication.AdoxioApplicationid.ToString();
-            }
-
-            if (dynamicsApplication.Statuscode != null)
-            {
-                licenseSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus(dynamicsApplication);
-            }
-
-            if (dynamicsApplication.AdoxioAssignedLicence != null)
-            {
-                licenseSummary.LicenseId = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid;
-                licenseSummary.LicenseNumber = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencenumber;
-            }
-
-            if (dynamicsApplication.AdoxioLicenceType != null)
-            {
-                licenseSummary.LicenceTypeName = dynamicsApplication.AdoxioLicenceType.AdoxioName;
-            }
-
-            if (dynamicsApplication.AdoxioAssignedLicence != null &&
-                dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType != null &&
-                dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
-            {
-                bool addActions = true;
-                foreach (var inProgressApplication in applicationsInProgress)
-                {
-                    // do not add actions if there is already an action in progress.
-                    if (inProgressApplication.AdoxioAssignedLicence != null &&
-                        inProgressApplication.AdoxioAssignedLicence.AdoxioLicencesid == dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid)
-                    {
-                        addActions = false;
-                        break;
-                    }
-                }
-                if (addActions)
-                {
-                    foreach (var item in dynamicsApplication.AdoxioAssignedLicence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
-                    {
-                        // check to see if there is an existing action on this licence.
-                        licenseSummary.AllowedActions.Add(item.ToViewModel());
-                    }
-
-                }
-            }
-
-            return licenseSummary;
-        }
-
-
-
     }
 }
