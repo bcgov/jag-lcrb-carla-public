@@ -22,5 +22,6 @@ export class ApplicationLicenseSummary {
   applicationFormFileUrl: string;
   fileName: string;
   assignedLicense: License;
+  expiryDate: Date;
   allowedActions: ApplicationType[];
 }
