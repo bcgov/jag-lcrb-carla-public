@@ -2,7 +2,6 @@ import { License } from './license.model';
 import { ApplicationType } from './application-type.model';
 
 export class ApplicationLicenseSummary {
-  id: string;
 
   establishmentName: string;
   establishmentAddressStreet: string;
@@ -11,6 +10,7 @@ export class ApplicationLicenseSummary {
 
   status: string;
   licenseId: string;
+  applicationId: string;
   licenceTypeName: string;
   licenseNumber: string;
   name: string;
