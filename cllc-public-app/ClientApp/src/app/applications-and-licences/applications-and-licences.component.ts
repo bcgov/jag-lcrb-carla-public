@@ -8,12 +8,12 @@ import { Application } from '@models/application.model';
 import { ApplicationSummary } from '@models/application-summary.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
 import { License } from '@models/license.model';
-import { FileSystemItem } from '@models/file-system-item.model';
 import { PaymentDataService } from '@services/payment-data.service';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
 import { takeWhile } from 'rxjs/operators';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -166,8 +166,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
 
-  payLicenceFee(application) {
-    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.id)
+  payLicenceFee(licence: ApplicationLicenseSummary) {
+    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(licence.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(res => {
         const data = <any>res;
