@@ -54,7 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (adoxio_licencetype != null)
                 {
                     adoxioLicenseVM.licenseType = adoxio_licencetype.AdoxioName;
-                }                
+                }
             }
 
             // fetch license number
@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             adoxioLicenseVM.establishmentAddressCity = dynamicsLicense.AdoxioEstablishmentaddresscity;
             adoxioLicenseVM.establishmentAddressPostalCode = dynamicsLicense.AdoxioEstablishmentaddresspostalcode;
             adoxioLicenseVM.establishmentAddressStreet = dynamicsLicense.AdoxioEstablishmentaddressstreet;
-            
+
             if (dynamicsLicense.AdoxioEstablishment != null)
             {
                 adoxioLicenseVM.establishmentParcelId = dynamicsLicense.AdoxioEstablishment.AdoxioParcelid;
@@ -92,6 +92,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseSummary.EstablishmentName = licence.AdoxioEstablishment.AdoxioName;
             }
 
+            var mainApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
+            if (mainApplication != null)
+            {
+                licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;
+            }
+
 
             if (licence.AdoxioLicenceType != null)
             {
@@ -103,7 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
                 bool addActions = (applications.Any(app => app.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved));
-                
+
                 if (addActions)
                 {
                     foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
