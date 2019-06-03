@@ -93,7 +93,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
             if (licence != null && shownStatus == "Approved")
             {
                 shownStatus = STATUS_ACTIVE;
-                if (application.AdoxioLicencefeeinvoicepaid != true && licence.AdoxioLicenceType != null && licence.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                if (application.AdoxioLicencefeeinvoicepaid != true && licence.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     shownStatus = STATUS_PAYMENT_REQUIRED;
                 }

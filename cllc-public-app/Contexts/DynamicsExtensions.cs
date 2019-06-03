@@ -352,6 +352,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationsForLicenceByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
@@ -366,7 +367,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 try
                 {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand,orderby: new List<string> { "modifiedon desc" }).Value;
                 }
                 catch (OdataerrorException)
                 {
