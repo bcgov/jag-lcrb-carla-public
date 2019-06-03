@@ -108,7 +108,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licence.AdoxioLicenceType != null &&
                 licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
-                bool addActions = (applications.Any(app => app.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved));
+                bool addActions = !(applications.Any(app => app.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved));
 
                 if (addActions)
                 {
