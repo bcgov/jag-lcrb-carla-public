@@ -1,8 +1,8 @@
 <div [ngBusy]="busy"></div>
 <div style="max-width: 800px;" [formGroup]="form">
   <!-- <h1 style="margin-top: 0;">Connections to Producers</h1> --> 
-  <span>A "
-    <strong>federal producer</strong>" is a {{licensedProducerText}} of cannabis
+  <span *ngIf="federalProducerText === 'federal producer'">A "
+    <strong>{{federalProducerText}}</strong>" is a {{licensedProducerText}} of cannabis
   </span>
   <br>
   <p></p>
@@ -14,10 +14,10 @@
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
-        <li>Directly holding voting shares in a federal producer.</li>
-        <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting
-          shares in a company that holds voting shares in a federal producer.</li>
-        <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li> A contractual business arrangement of any sort</li>
       </ul>
       <input type="radio" group="corpConnectionFederalProducer" [value]='1'
@@ -29,7 +29,7 @@
     <p></p>
 
     <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="corpConnectionFederalProducerDetails"
@@ -58,7 +58,7 @@
     <p></p>
 
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="federalProducerConnectionToCorpDetails"
@@ -73,10 +73,10 @@
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
-        <li>Directly holding voting shares in a federal producer.</li>
-        <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting
-          shares in a company that holds voting shares in a federal producer.</li>
-        <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li> A contractual business arrangement of any sort</li>
       </ul>
       <input type="radio" group="corpConnectionFederalProducer" [value]='1'
@@ -88,7 +88,7 @@
     <p></p>
 
     <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="corpConnectionFederalProducerDetails"
@@ -97,7 +97,7 @@
     <p></p>
 
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
-      <span>Provide the name of the federal producer, the type of shares, percentage of ownership, and any other details
+      <span>Provide the name of the {{federalProducerText}}, the type of shares, percentage of ownership, and any other details
         about
         the holding of voting shares</span>
       <br>
@@ -114,10 +114,10 @@
       <br>
       <span>This includes, but is not limited to:</span>
       <ul>
-        <li>Directly holding voting shares in a federal producer.</li>
-        <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting
-          shares in a company that holds voting shares in a federal producer.</li>
-        <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
       <input type="radio" group="share20PlusConnectionProducer" [value]='1'
@@ -129,7 +129,7 @@
     <p></p>
 
     <section *ngIf="form.get('share20PlusConnectionProducer').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares held).</span>
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="share20PlusConnectionProducerDetails"
         rows="5"></textarea>
@@ -142,9 +142,9 @@
       <br>
       <span>This includes, but is not limited to:</span>
       <ul>
-          <li>Directly holding voting shares in a federal producer.</li>
-          <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting shares in a company that holds voting shares in a federal producer.</li>
-          <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+          <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+          <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+          <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
           <li>A contractual business arrangement of any sort.</li>
         </ul>
         <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</i><br>
@@ -158,7 +158,7 @@
     <p></p>
 
     <section *ngIf="form.get('share20PlusFamilyConnectionProducer').value == '1'">
-      <span>Provide the relationship of the family member, the name of the federal producer, the type of shares,
+      <span>Provide the relationship of the family member, the name of the {{federalProducerText}}, the type of shares,
         percentage of
         ownership, and any other details about the holding of voting shares</span>
       <br>
@@ -175,10 +175,10 @@
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
-        <li>Directly holding voting shares in a federal producer.</li>
-        <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting
-          shares in a company that holds voting shares in a federal producer.</li>
-        <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
       <input type="radio" group="corpConnectionFederalProducer" [value]='1'
@@ -190,7 +190,7 @@
     <p></p>
 
     <section *ngIf="form.get('corpConnectionFederalProducer').value == '1'">
-      <span> Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span> Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="corpConnectionFederalProducerDetails"
@@ -199,15 +199,14 @@
     <p></p>
 
     <section>
-      <label for="">Does the sole proprietor have an immediate family member that has any interest in a federal
-        producer?</label>
+      <label for="">Does the sole proprietor have an immediate family member that has any interest in a {{federalProducerText}}?</label>
       <br>
       <span>This includes, but is not limited to:</span>
       <ul>
-        <li>Directly holding voting shares in a federal producer.</li>
-        <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting
-          shares in a company that holds voting shares in a federal producer.</li>
-        <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
       <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law.</i>
@@ -221,7 +220,7 @@
     <p></p>
 
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).s</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="federalProducerConnectionToCorpDetails"
@@ -237,11 +236,11 @@
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
-        <li>Directly holding voting shares in a federal producer.</li>
-        <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
           shares in a company that holds voting shares in a federal
           producer.</li>
-        <li>Having a beneficial interest in a federal producer. For example, through a trust.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort</li>
       </ul>
       <input type="radio" group="moreThanAYear" [value]='1' formControlName="partnersConnectionFederalProducer"> Yes
@@ -251,7 +250,7 @@
     <p></p>
 
     <section *ngIf="form.get('partnersConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="partnersConnectionFederalProducerDetails"
@@ -280,7 +279,7 @@
     <p></p>
 
     <section *ngIf="form.get('federalProducerConnectionToCorp').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held)</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="federalProducerConnectionToCorpDetails"
@@ -295,10 +294,10 @@
       <span>This includes, but is not limited to:</span>
       <br>
       <ul>
-        <li>Directly holding voting shares in a federal producer.</li>
-        <li>Indirectly holding voting shares in a federal producer. For example, through a subsidiary or holding voting
-          shares in a company that holds voting shares in a federal producer.</li>
-        <li>Having a benefi cial interest in a federal producer. For example, through a trust.</li>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a benefi cial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
       <input type="radio" group="moreThanAYear" [value]='1' formControlName="societyConnectionFederalProducer"> Yes
@@ -308,7 +307,7 @@
     <p></p>
 
     <section *ngIf="form.get('societyConnectionFederalProducer').value == '1'">
-      <span>Provide the name of the federal producer and details of the connection (e.g. percentage and type of shares
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held)</span>
       <br>
       <textarea name="" id="" class="form-control" formControlName="societyConnectionFederalProducerDetails"
