@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 application.AdoxioApplicanttype = adoxioLicense.AdoxioLicencee.AdoxioBusinesstype;
 
-                 // set applicaiton type relationship 
+                // set applicaiton type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(applicationTypeName);
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
@@ -154,17 +154,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
                     licences = licences
-                    .Select(licence =>
-                    {
-                        licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
-                        return licence;
-                    });
+                        .Where(licence =>
+                        {
+                            return licence.Statuscode != (int)LicenceStatusCodes.Cancelled
+                             && licence.Statuscode != (int)LicenceStatusCodes.Suspended;
+
+                        })
+                        .Select(licence =>
+                        {
+                            licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+                            return licence;
+                        });
                 }
                 catch (OdataerrorException ex)
                 {
                     licences = null;
                 }
-                
+
             }
 
             if (licences != null)
@@ -180,7 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return licenseSummaryList;
         }
 
-        
+
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
@@ -191,7 +197,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            List<ApplicationLicenseSummary> adoxioLicenses = await GetLicensesByLicencee(userSettings.AccountId);            
+            List<ApplicationLicenseSummary> adoxioLicenses = await GetLicensesByLicencee(userSettings.AccountId);
 
             return Json(adoxioLicenses);
         }
@@ -614,7 +620,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");                    
+                    byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch (Exception e)
