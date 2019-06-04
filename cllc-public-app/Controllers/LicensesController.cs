@@ -157,7 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Where(licence =>
                         {
                             return licence.Statuscode != (int)LicenceStatusCodes.Cancelled
-                             && licence.Statuscode != (int)LicenceStatusCodes.Suspended;
+                             && licence.Statuscode != (int)LicenceStatusCodes.Inactive;
 
                         })
                         .Select(licence =>
