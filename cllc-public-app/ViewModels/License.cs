@@ -10,6 +10,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public enum LicenceStatusCodes
     {
         Active = 1,
+        Inactive = 2,
         Expired = 845280000,
         Cancelled = 845280001,
         Suspended = 845280002,
