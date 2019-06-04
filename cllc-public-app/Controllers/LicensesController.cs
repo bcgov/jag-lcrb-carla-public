@@ -525,6 +525,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 "adoxio_Licencee",
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
                 "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
+                "adoxio_LicenceType",
                 "adoxio_establishment"
             };
 
@@ -578,7 +579,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>11:00 pm</td>
                     <td>11:00 pm</td>
                 </tr>";
-                if (application.AdoxioServicehoursstandardhours != true)
+                if (application.AdoxioServicehoursstandardhours != true && adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
                 {
                     storeHours = $@"
                 <tr>
@@ -602,25 +603,48 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     <td>{ConvertOpenHoursToString(application?.AdoxioServicehourssundayclose)}</td>
                 </tr>";
                 }
-
-                var parameters = new Dictionary<string, string>
-            {
-                { "title", "Canabis_License" },
-                { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
-                { "establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName },
-                { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
-                { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
-                { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
-                { "licencee", adoxioLicense.AdoxioLicencee.Name },
-                { "effectiveDate", effectiveDateParam },
-                { "expiryDate", expiraryDateParam },
-                { "restrictionsText", termsAndConditions },
-                { "storeHours", storeHours }
-            };
-
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
+                if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                {
+                    parameters = new Dictionary<string, string>
+                    {
+                        { "title", "Canabis_License" },
+                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
+                        { "establishmentName", adoxioLicense.AdoxioEstablishment.AdoxioName },
+                        { "establishmentStreet", adoxioLicense.AdoxioEstablishment.AdoxioAddressstreet },
+                        { "establishmentCity", adoxioLicense.AdoxioEstablishment.AdoxioAddresscity + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioEstablishment.AdoxioAddresspostalcode },
+                        { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                        { "effectiveDate", effectiveDateParam },
+                        { "expiryDate", expiraryDateParam },
+                        { "restrictionsText", termsAndConditions },
+                        { "storeHours", storeHours }
+                    };
+                } else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketer")
+                {
+                    parameters = new Dictionary<string, string>
+                    {
+                        { "title", "Canabis_License" },
+                        { "licenceNumber", adoxioLicense.AdoxioLicencenumber },
+                        { "establishmentName", adoxioLicense.AdoxioLicencee.Name  },
+                        { "establishmentStreet", adoxioLicense.AdoxioLicencee.Address1Line1 },
+                        { "establishmentCity", adoxioLicense.AdoxioLicencee.Address1City + ", B.C." },
+                        { "establishmentPostalCode", adoxioLicense.AdoxioLicencee.Address1Postalcode },
+                        { "licencee", adoxioLicense.AdoxioLicencee.Name },
+                        { "effectiveDate", effectiveDateParam },
+                        { "expiryDate", expiraryDateParam },
+                        { "restrictionsText", termsAndConditions },
+                        { "storeHours", storeHours }
+                    };
+                }
                 try
                 {
-                    byte[] data = await _pdfClient.GetPdf(parameters, "cannabis_licence");
+                    var templateName = "cannabis_licence";
+                    if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketer")
+                    {
+                        templateName = "cannabis_marketer_licence";
+                    }
+                    byte[] data = await _pdfClient.GetPdf(parameters, templateName);
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
                 catch (Exception e)
