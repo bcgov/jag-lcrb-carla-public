@@ -86,7 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
             {
                 return null;
             }
-            AdoxioApplicationStatusCodes status = (AdoxioApplicationStatusCodes)application.Statuscode;
+            LicenceStatusCodes status = (LicenceStatusCodes)licence.Statuscode;
 
             string shownStatus = Enum.GetName(status.GetType(), status);
 
