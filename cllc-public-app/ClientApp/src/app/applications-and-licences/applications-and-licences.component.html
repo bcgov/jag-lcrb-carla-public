@@ -11,7 +11,7 @@
             an Application</button>
         </section>
         </div>
-        <div appRemoveIfFeatureOff="Marketer">
+        <div appRemoveIfFeatureOff="Marketer" *ngIf="submittedApplications < 8  && !marketerExists">
           <p>Submit an Application and track the status below.</p>
           <section>
             <table class="start-application">
