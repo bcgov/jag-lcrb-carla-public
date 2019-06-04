@@ -285,7 +285,7 @@
         </div>
       </section>
       <section appRemoveIfFeatureOff="Marketer" *ngIf="account?.businessType">
-          <h3 *ngIf="account?.businessType !== 'SoleProprietor'" class="blue-header"
+        <h3 *ngIf="account?.businessType !== 'SoleProprietor'" class="blue-header"
           style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
         <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header"
           style="margin-top: 0; margin-bottom: 0">SECURITY SCREENING</h3>
@@ -293,7 +293,12 @@
         <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
           <section *ngIf="account?.businessType !== 'SoleProprietor'">
             <p>
-              An applicant that is a Private Corporation may have associates that are required to submit additional
+              An applicant that is a
+              <span
+                *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">Partnership</span>
+              <span *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation' ,'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1">Private Corporation</span>
+              <span  *ngIf="account?.businessType === 'PublicCorporation'">Public Corporation</span>
+              may have associates that are required to submit additional
               documentation as part of the application process.
             </p>
             <span>Associates of Private Corporation include:</span>
@@ -320,22 +325,23 @@
             </ul>
           </section>
           <section *ngIf="account?.businessType === 'SoleProprietor'">
-              <p>An applicant that is a <i>Sole Proprietorship</i> must consent to a security screening as part of the
-                application
-                for a non-medical cannabis retail store licence.
-              </p>
-              <p>Please visit the
-                <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
-                  target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
-                for submitting documentation for the security screening directly to the LCRB.</p>
-            </section>
+            <p>An applicant that is a <i>Sole Proprietorship</i> must consent to a security screening as part of the
+              application
+              for a non-medical cannabis retail store licence.
+            </p>
+            <p>Please visit the
+              <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+              for submitting documentation for the security screening directly to the LCRB.</p>
+          </section>
         </div>
       </section>
       <p></p>
     </div>
   </div>
   <section style="margin-top: 20px;">
-    <p apappRRemoveIfFeatureOn="Marketer">All cannabis retail store licence holders must follow the terms and conditions of
+    <p apappRRemoveIfFeatureOn="Marketer">All cannabis retail store licence holders must follow the terms and conditions
+      of
       their licence as set out in
       the
       <a href="https://www2.gov.bc.ca/assets/download/B459B70AC1F246E4A4D58C103A94C6C8">Retail Store Licence Terms and
