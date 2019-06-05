@@ -22,12 +22,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the Contact class.
         /// </summary>
-        /// <param name="selfDisclosure">Possible values include: 'No',
-        /// 'Yes'</param>
+        /// <param name="selfDisclosure">Possible values include: 'Yes',
+        /// 'No'</param>
         /// <param name="gender">Possible values include: 'Male', 'Female',
         /// 'Other'</param>
-        public Contact(string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address))
+        public Contact(string spdJobId = default(string), string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address))
         {
+            SpdJobId = spdJobId;
             ContactId = contactId;
             FirstName = firstName;
             LastName = lastName;
@@ -49,6 +50,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// An initialization method that performs custom operations like setting defaults
         /// </summary>
         partial void CustomInit();
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "spdJobId")]
+        public string SpdJobId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -106,7 +112,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         public string Birthplace { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'No', 'Yes'
+        /// Gets or sets possible values include: 'Yes', 'No'
         /// </summary>
         [JsonProperty(PropertyName = "selfDisclosure")]
         public string SelfDisclosure { get; set; }

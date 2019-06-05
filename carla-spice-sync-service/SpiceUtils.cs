@@ -207,7 +207,15 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                     try
                     {
-                        _dynamicsClient.Applications.Update(applicationRecord.AdoxioApplicationid, patchRecord);
+                        if(patchRecord.AdoxioChecklistsecurityclearancestatus != null)
+                        {
+                            _dynamicsClient.Applications.Update(applicationRecord.AdoxioApplicationid, patchRecord);
+                        }
+                        else
+                        {
+                            hangfireContext.WriteLine($"Error updating application - received an invalid status of {applicationResponse.Result}");
+                            _logger.LogError($"Error updating application - received an invalid status of {applicationResponse.Result}");
+                        }
                     }
                     catch (OdataerrorException odee)
                     {
@@ -312,6 +320,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 request.Contact = new Interfaces.Spice.Models.Contact()
                 {
+                    SpdJobId = worker.AdoxioContactId.AdoxioSpdjobid.ToString(),
                     ContactId = worker.AdoxioContactId.Contactid,
                     FirstName = worker.AdoxioContactId.Firstname,
                     LastName = worker.AdoxioContactId.Lastname,
@@ -417,6 +426,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 }
                 screeningRequest.ApplyingPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
+                    SpdJobId = application.AdoxioApplyingPerson.AdoxioSpdjobid.ToString(),
                     ContactId = application.AdoxioApplyingPerson.Contactid,
                     FirstName = application.AdoxioApplyingPerson.Firstname,
                     CompanyName = companyName,
@@ -533,6 +543,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 associate.TiedHouse = legalEntity.AdoxioContact.AdoxioSelfdeclaredtiedhouse == 1;
                 associate.Contact = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
+                    SpdJobId = legalEntity.AdoxioContact.AdoxioSpdjobid.ToString(),
                     ContactId = legalEntity.AdoxioContact.Contactid,
                     FirstName = legalEntity.AdoxioContact.Firstname,
                     LastName = legalEntity.AdoxioContact.Lastname,
