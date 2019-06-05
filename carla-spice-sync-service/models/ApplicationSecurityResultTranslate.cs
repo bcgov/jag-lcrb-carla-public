@@ -20,10 +20,10 @@ namespace CarlaSpiceSync.models
             {
                 switch (result.ToUpper())
                 {
-                    case "PASSED":
+                    case "PASS":
                         status = SECURITY_STATUS_PASSED;
                         break;
-                    case "FAILED":
+                    case "FAIL":
                         status = SECURITY_STATUS_FAILED;
                         break;
                     case "WITHDRAWN":
