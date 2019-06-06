@@ -265,6 +265,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCansigngrocerystoreproofofsalesrevenue = from.adoxio_cansigngrocerystoreproofofsalesrevenue;
             to.AdoxioCansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
             to.AdoxioCansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
+            to.Birthdate = from.Birthdate;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
