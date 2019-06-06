@@ -11,5 +11,5 @@ export class Contact {
   address1_country: string;
   address1_postalcode: string;
   jobTitle: string;
-  dateOfBirth: Date;
+  birthDate: Date;
 }
