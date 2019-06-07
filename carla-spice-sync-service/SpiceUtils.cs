@@ -145,7 +145,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             foreach (WorkerScreeningResponse workerResponse in responses)
             {
                 // search for the Personal History Record.
-                MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamicsClient.Personalhistorysummaries.GetByWorkerJobNumber(workerResponse.RecordIdentifier);
+                MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
+                string historyFilter = $"_adoxio_contactid_value eq {contact.Contactid}";
+                MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamicsClient.Personalhistorysummaries.Get(filter: historyFilter).Value[0];
 
                 if (record != null)
                 {
@@ -154,8 +156,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                     // update the record.
                     MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchRecord = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary()
                     {
-                        AdoxioSecuritystatus = SPDResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
-                        AdoxioCompletedon = workerResponse.DateProcessed
+                        AdoxioSecuritystatus = WorkerSecurityScreeningResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
+                        AdoxioCompletedon = DateTimeOffset.Now
                     };
 
                     try
@@ -202,7 +204,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
                     {
                         AdoxioDatereceivedspd = DateTimeOffset.Now,
-                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityResultTranslate.GetTranslatedSecurityStatus(applicationResponse.Result)
+                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus(applicationResponse.Result)
                     };
 
                     try
@@ -301,11 +303,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             // Query Dynamics for application data
             var worker = await _dynamicsClient.GetWorkerByIdWithChildren(WorkerId);
 
-                       
             /* Create application */
             Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest()
             {
-                RecordIdentifier = worker.AdoxioWorkerid,
                 Name = worker.AdoxioName,
                 BirthDate = worker.AdoxioDateofbirth,
                 SelfDisclosure = ((GeneralYesNo)worker.AdoxioSelfdisclosure).ToString(),
@@ -318,6 +318,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* Add applicant details */
             if (worker.AdoxioContactId != null)
             {
+                request.RecordIdentifier = worker.AdoxioContactId.AdoxioSpdjobid.ToString();
                 request.Contact = new Interfaces.Spice.Models.Contact()
                 {
                     SpdJobId = worker.AdoxioContactId.AdoxioSpdjobid.ToString(),

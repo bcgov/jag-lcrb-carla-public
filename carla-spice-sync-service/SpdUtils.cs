@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿using CarlaSpiceSync.models;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire.Console;
 using Hangfire.Server;
@@ -263,7 +264,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                                 // update the record.
                                 MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchRecord = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary()
                                 {
-                                    AdoxioSecuritystatus = SPDResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
+                                    AdoxioSecuritystatus = WorkerSecurityScreeningResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
                                     AdoxioCompletedon = workerResponse.DateProcessed
                                 };
 
