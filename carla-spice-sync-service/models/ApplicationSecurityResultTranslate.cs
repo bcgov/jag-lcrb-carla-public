@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 
 namespace CarlaSpiceSync.models
 {
-    public static class ApplicationSecurityResultTranslate
+    public static class ApplicationSecurityScreeningResultTranslate
     {
         const int SECURITY_STATUS_NOT_SENT = 845280000;
         const int SECURITY_STATUS_SENT = 845280001;
