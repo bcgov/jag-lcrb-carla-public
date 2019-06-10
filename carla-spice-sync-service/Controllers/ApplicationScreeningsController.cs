@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             };
 
            
-            var result = await _spiceUtils.SendApplicationScreeningRequest(applicationRequest);
+            var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
 
             if (result)
             {
