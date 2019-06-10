@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private async Task<List<ViewModels.ApplicationSummary>> GetApplicationSummariesByApplicant(string applicantId)
+        private List<ViewModels.ApplicationSummary> GetApplicationSummariesByApplicant(string applicantId)
         {
             List<ViewModels.ApplicationSummary> result = new List<ViewModels.ApplicationSummary>();
 
@@ -171,14 +171,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all applications in Dynamics for the current user
         [HttpGet("current")]
-        public async Task<JsonResult> GetCurrentUserApplications()
+        public JsonResult GetCurrentUserApplications()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            List<ViewModels.ApplicationSummary> adoxioApplications = await GetApplicationSummariesByApplicant(userSettings.AccountId);
+            List<ViewModels.ApplicationSummary> adoxioApplications = GetApplicationSummariesByApplicant(userSettings.AccountId);
             return Json(adoxioApplications);
         }
 
