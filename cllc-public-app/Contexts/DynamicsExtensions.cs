@@ -350,6 +350,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
 
+        public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationsForLicenceByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
+        {
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
+            if (string.IsNullOrEmpty(applicantId))
+            {
+                dynamicsApplicationList = _dynamicsClient.Applications.Get().Value;
+            }
+            else
+            {
+                var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
+                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+                try
+                {
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand,orderby: new List<string> { "modifiedon desc" }).Value;
+                }
+                catch (OdataerrorException)
+                {
+                    dynamicsApplicationList = null;
+                }
+            }
+            return dynamicsApplicationList;
+        }
+
+
         /// <summary>
         /// Get a contact by their Siteminder ID
         /// </summary>

@@ -1,10 +1,10 @@
 
-import { filter } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { filter, takeWhile, map, catchError, mergeMap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable } from 'rxjs';
+import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,16 +13,21 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { UserDataService } from '@appservices/user-data.service';
-import { DynamicsDataService } from '@appservices/dynamics-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
   UPLOAD_FILES_MODE
-} from '@appapplications-and-licences/applications-and-licences.component';
-import { DynamicsAccount } from '@appmodels/dynamics-account.model';
-import { ApplicationContentType } from '@appmodels/application-content-type.model';
-import { ApplicationTypeNames } from '@appmodels/application-type.model';
+} from '@app/applications-and-licences/applications-and-licences.component';
+import { Account } from '@models/account.model';
+import { ApplicationContentType } from '@models/application-content-type.model';
+import { ApplicationTypeNames } from '@models/application-type.model';
+import { CurrentAccountAction } from './../app-state/actions/current-account.action';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { ConnectionToProducersComponent } from '@app/account-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
+import { KeyValue } from '@angular/common';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -48,16 +53,18 @@ class ApplicationHTMLContent {
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss']
+  styleUrls: ['./application.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ApplicationComponent extends FormBase implements OnInit, OnDestroy {
+export class ApplicationComponent extends FormBase implements OnInit {
+  establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
+  @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
   form: FormGroup;
   savedFormData: any;
-  subscriptions: Subscription[] = [];
   applicationId: string;
   busy: Subscription;
   accountId: string;
@@ -66,6 +73,8 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   showValidationMessages: boolean;
   submittedApplications = 8;
   ServiceHours = ServiceHours;
+  tiedHouseFormData: TiedHouseConnection;
+  possibleProblematicNameWarning = false;
 
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
 
@@ -74,19 +83,20 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   mode: string;
-  account: DynamicsAccount;
+  account: Account;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
     private applicationDataService: ApplicationDataService,
-    private userDataService: UserDataService,
     private dynamicsDataService: DynamicsDataService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    public dialog: MatDialog) {
+    private tiedHouseService: TiedHouseConnectionsDataService,
+    public dialog: MatDialog,
+    public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.applicationId = this.route.snapshot.params.applicationId;
     this.mode = this.route.snapshot.params.mode;
@@ -102,7 +112,10 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         establishmentAddressPostalCode: [''],
         establishmentParcelId: ['']
       }),
-      establishmentName: [''],
+      establishmentName: ['', [
+        Validators.required,
+        this.establishmentWatchWordsService.forbiddenNameValidator()
+      ]],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
@@ -114,7 +127,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
       establishmentPhone: [''],
-
       serviceHoursSundayOpen: ['', Validators.required],
       serviceHoursMondayOpen: ['', Validators.required],
       serviceHoursTuesdayOpen: ['', Validators.required],
@@ -134,22 +146,22 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
 
-    this.userDataService.getCurrentUser()
-      .subscribe((user) => {
-        if (user.accountid != null) {
-          // fetch the account to get the primary contact.
-          this.dynamicsDataService.getRecord('accounts', user.accountid)
-            .subscribe((result) => {
-              this.account = result;
-            });
-        }
+    this.establishmentWatchWordsService.initialize();
 
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(account => !!account))
+      .subscribe((account) => {
+        this.account = account;
       });
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: Application) => {
+
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: Application) => {
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
@@ -178,50 +190,21 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
         }
         this.savedFormData = this.form.value;
       },
-      err => {
-        console.log('Error occured');
-      }
-    );
-
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
-      filter(state => !!state))
-      .subscribe(currentApplication => {
-        this.form.patchValue(currentApplication);
-        if (currentApplication.isPaid) {
-          this.form.disable();
+        err => {
+          console.log('Error occured');
         }
-        this.savedFormData = this.form.value;
-      });
-    this.subscriptions.push(sub);
+      );
   }
   private hideFormControlByType() {
-    if (this.application.applicationType.name === ApplicationTypeNames.CRSTransferofOwnership) {
+    if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
       this.form.get('establishmentAddressCity').disable();
       this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentName').disable();
       this.form.get('establishmentParcelId').disable();
-
-      this.form.get('serviceHoursSundayOpen').disable();
-      this.form.get('serviceHoursMondayOpen').disable();
-      this.form.get('serviceHoursTuesdayOpen').disable();
-      this.form.get('serviceHoursWednesdayOpen').disable();
-      this.form.get('serviceHoursThursdayOpen').disable();
-      this.form.get('serviceHoursFridayOpen').disable();
-      this.form.get('serviceHoursSaturdayOpen').disable();
-      this.form.get('serviceHoursSundayClose').disable();
-      this.form.get('serviceHoursMondayClose').disable();
-      this.form.get('serviceHoursTuesdayClose').disable();
-      this.form.get('serviceHoursWednesdayClose').disable();
-      this.form.get('serviceHoursThursdayClose').disable();
-      this.form.get('serviceHoursFridayClose').disable();
-      this.form.get('serviceHoursSaturdayClose').disable();
     }
 
-    if (this.application.applicationType.name === ApplicationTypeNames.CRSLocationChange) {
-
-      this.form.get('establishmentName').disable();
-
+    if (!this.application.applicationType.showHoursOfSale) {
       this.form.get('serviceHoursSundayOpen').disable();
       this.form.get('serviceHoursMondayOpen').disable();
       this.form.get('serviceHoursTuesdayOpen').disable();
@@ -236,7 +219,6 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
       this.form.get('serviceHoursThursdayClose').disable();
       this.form.get('serviceHoursFridayClose').disable();
       this.form.get('serviceHoursSaturdayClose').disable();
-
     }
   }
 
@@ -251,53 +233,67 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     return body;
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
   canDeactivate(): Observable<boolean> | boolean {
-    if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
+    const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
+    const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
+    if (connectionsDidntChang && formDidntChange) {
       return true;
     } else {
-      return this.save(true);
+      const subj = new Subject<boolean>();
+      this.busy = this.save(true).subscribe(res => {
+        subj.next(res);
+      });
+      return subj;
     }
+  }
+
+  checkPossibleProblematicWords() {
+    console.log(this.form.get('establishmentName').errors);
+    this.possibleProblematicNameWarning =
+      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
   }
 
   /**
    * Save form data
    * @param showProgress
    */
-  save(showProgress: boolean = false): Subject<boolean> {
-    const saveResult = new Subject<boolean>();
+  save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    const subscription = this.applicationDataService.updateApplication(this.form.value).subscribe(
-      res => {
-        saveResult.next(true);
+    return forkJoin(
+      this.applicationDataService.updateApplication(this.form.value),
+      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+    )
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(catchError(e => {
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        return of(false);
+      }))
+      .pipe(mergeMap(() => {
         this.savedFormData = saveData;
         this.updateApplicationInStore();
         if (showProgress === true) {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
-      },
-      err => {
-        saveResult.next(false);
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        console.log('Error occured');
-      });
+        return of(true);
+      }));
+  }
 
-    if (showProgress === true) {
-      this.busy = subscription;
+  prepareTiedHouseSaveRequest(_tiedHouseData) {
+    if (!this.application.tiedHouse) {
+      return of(null);
     }
-
-    return saveResult;
+    let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
+    data = { ...data };
+    return this.tiedHouseService.updateTiedHouse(data, data.id);
   }
 
   updateApplicationInStore() {
-    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: Application) => {
+    this.applicationDataService.getApplicationById(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
-    );
+      );
   }
 
   isFieldError(field: string) {
@@ -314,11 +310,13 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
       this.submitPayment();
     } else {
-      this.save(true).subscribe((result: boolean) => {
-        if (result) {
-          this.submitPayment();
-        }
-      });
+      this.busy = this.save(true)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe((result: boolean) => {
+          if (result) {
+            this.submitPayment();
+          }
+        });
     }
   }
 
@@ -326,15 +324,17 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId).subscribe(res => {
-      const jsonUrl = res;
-      window.location.href = jsonUrl['url'];
-      return jsonUrl['url'];
-    }, err => {
-      if (err._body === 'Payment already made') {
-        this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-      }
-    });
+    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(res => {
+        const jsonUrl = res;
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
   }
 
   isValid(): boolean {
@@ -348,28 +348,31 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
     let valid = true;
     this.validationMessages = [];
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange) {
-      if (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1) {
-        valid = false;
-        this.validationMessages.push('Associate form is required.');
-      }
-      if (!this.financialIntegrityDocuments
-        || !this.financialIntegrityDocuments.files
-        || this.financialIntegrityDocuments.files.length < 1) {
-        valid = false;
-        this.validationMessages.push('Financial Integrity form is required.');
-      }
+    if (this.application.applicationType.showAssociatesFormUpload &&
+      (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1)) {
+      valid = false;
+      this.validationMessages.push('Associate form is required.');
     }
 
-    if (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1) {
+    if (this.application.applicationType.showFinancialIntegrityFormUpload &&
+      (!this.financialIntegrityDocuments
+        || !this.financialIntegrityDocuments.files
+        || this.financialIntegrityDocuments.files.length < 1)) {
+      valid = false;
+      this.validationMessages.push('Financial Integrity form is required.');
+    }
+
+    if (this.application.applicationType.showSupportingDocuments &&
+      (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
     }
-    if (!this.form.get('establishmentName').value) {
+
+    if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {
       valid = false;
       this.validationMessages.push('Establishment name is required.');
     }
-    if (this.application.applicationType.name !== ApplicationTypeNames.CRSLocationChange && this.submittedApplications >= 8) {
+    if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
     }
@@ -397,19 +400,21 @@ export class ApplicationComponent extends FormBase implements OnInit, OnDestroy 
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      cancelApplication => {
+    dialogRef.afterClosed()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(cancelApplication => {
         if (cancelApplication) {
           // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(this.applicationId).subscribe(
-            res => {
+          this.busy = this.applicationDataService.cancelApplication(this.applicationId)
+            .pipe(takeWhile(() => this.componentActive))
+            .subscribe(res => {
               this.savedFormData = this.form.value;
               this.router.navigate(['/dashboard']);
             },
-            err => {
-              this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-              console.error('Error cancelling the application');
-            });
+              err => {
+                this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+                console.error('Error cancelling the application');
+              });
         }
       });
   }

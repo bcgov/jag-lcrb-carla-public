@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
-import { LegalEntityDataService } from '../services/legal-entity-data.service';
-import { Subscription } from 'rxjs';
+import { AdoxioLegalEntityDataService } from '../services/adoxio-legal-entity-data.service';
+import { LicenseApplicationSummary } from '../models/license-application-summary.model';
+import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
+import { AdoxioLegalEntity } from '../models/adoxio-legalentities.model';
 import { AccountDataService } from '../services/account-data.service';
 
 export class ProfileSummary {
@@ -37,7 +39,7 @@ export class BusinessProfileSummaryComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(private adoxioLegalEntityDataService: LegalEntityDataService,
+  constructor(private adoxioLegalEntityDataService: AdoxioLegalEntityDataService,
     private accountDataService: AccountDataService,
     private router: Router) { }
 

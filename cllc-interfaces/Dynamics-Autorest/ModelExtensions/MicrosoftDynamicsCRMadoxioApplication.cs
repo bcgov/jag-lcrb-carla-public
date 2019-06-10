@@ -1,6 +1,7 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
@@ -43,6 +44,5 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_LicenceEstablishment@odata.bind")]
         public string AdoxioLicenceEstablishmentODataBind { get; set; }
-        
     }
 }

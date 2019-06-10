@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material';
 /** newsletter-signup component*/
 export class NewsletterSignupComponent implements OnInit {
   public newsletterSignupForm: any;
-  @Input('slug') slug: string;
+  @Input() slug: string;
   public description: string;
   public title: string;
   public email: string;

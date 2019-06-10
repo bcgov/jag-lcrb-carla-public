@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using System;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -12,11 +15,18 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)                
-                    .ConfigureAppConfiguration((hostingContext, config) =>
-                            {
-                        config.AddEnvironmentVariables();
-                    })
+            WebHost.CreateDefaultBuilder(args)
+            .ConfigureLogging((Action<WebHostBuilderContext, ILoggingBuilder>)((hostingContext, logging) =>
+            {
+                logging.AddConfiguration((IConfiguration)hostingContext.Configuration.GetSection("Logging"));
+                logging.AddConsole(x => x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ");
+                logging.AddDebug();
+                logging.AddEventSourceLogger();
+            }))                   
+            .ConfigureAppConfiguration((hostingContext, config) =>
+                    {
+                config.AddEnvironmentVariables();
+            })
             .UseStartup<Startup>();
     }
 }

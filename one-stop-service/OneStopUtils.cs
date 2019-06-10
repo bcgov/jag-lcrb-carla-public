@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
@@ -107,6 +108,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop using REST.
         /// </summary>
+        [AutomaticRetry(Attempts = 0)]
         public async Task SendLicenceCreationMessageREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
         {
             if (hangfireContext != null)
@@ -287,6 +289,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <summary>
         /// Hangfire job to check for and send recent licences
         /// </summary>
+        [AutomaticRetry(Attempts = 0)]
         public async Task CheckForNewLicences(PerformContext hangfireContext)
         {
             if (hangfireContext != null)
@@ -367,6 +370,17 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
                 // return null if we can't get results.
                 result = null;
+            }
+
+            if (result!= null && result.AdoxioLicencee != null)
+            {
+                if (! string.IsNullOrEmpty(result.AdoxioLicencee._primarycontactidValue))
+                {
+                    // get the contact.
+                    var runner = _dynamics.GetContactById(Guid.Parse(result.AdoxioLicencee._primarycontactidValue));
+                    runner.Wait();                    
+                    result.AdoxioLicencee.Primarycontactid = runner.Result;
+                }
             }
 
             return result;
@@ -463,20 +477,26 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// </summary>
         /// <param name="partnerNote"></param>
         /// <returns></returns>
-        public static int GetSuffixFromPartnerNote(string partnerNote)
+        public static int GetSuffixFromPartnerNote(string partnerNote, ILogger logger)
         {
             int result = 0;
-            string[] parts = partnerNote.Split("-");
-            if (parts.Length > 1)
+            int strPos = partnerNote.LastIndexOf("-");
+            if (strPos > -1)
             {
-                string suffix = parts[1];
-                int.TryParse(suffix, out result);
+                string suffix = partnerNote.Substring(strPos + 1);
+
+                suffix = suffix.TrimStart('0');
+                if (!int.TryParse(suffix, out result))
+                {
+                    logger.LogError($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
+                }
             }
+            
             return result;
         }
 
         /// <summary>
-        /// Extract a  from a partnerNote.
+        /// Extract a Licence Number from a partnerNote.
         /// </summary>
         /// <param name="partnerNote"></param>
         /// <returns></returns>
