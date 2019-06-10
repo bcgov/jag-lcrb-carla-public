@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { User } from '../../models/user.model';
-import { DynamicsContact } from '../../models/dynamics-contact.model';
-import { UserDataService } from '../../services/user-data.service';
+import { Contact } from '../../models/contact.model';
 import { AppState } from '../../app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { AliasDataService } from '../../services/alias-data.service';
@@ -10,6 +9,7 @@ import { ContactDataService } from '../../services/contact-data.service';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserDataService } from '@services/user-data.service';
 
 @Component({
   selector: 'app-user-confirmation',
@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
 })
 export class UserConfirmationComponent implements OnInit {
   @Input() currentUser: User;
-  @Output() reloadUser: EventEmitter<any> = new EventEmitter<any>();
   busy: any;
   termsAccepted = false;
 
@@ -28,6 +27,7 @@ export class UserConfirmationComponent implements OnInit {
     private previousAddressDataService: PreviousAddressDataService,
     private contactDataService: ContactDataService,
     private workerDataService: WorkerDataService,
+    private userService: UserDataService,
     private fb: FormBuilder,
     private router: Router
   ) { }
@@ -39,13 +39,13 @@ export class UserConfirmationComponent implements OnInit {
   confirmContact(confirm: boolean) {
     if (confirm) {
       // create contact here
-      const contact = new DynamicsContact();
+      const contact = new Contact();
       contact.fullname = this.currentUser.name;
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
       this.busy = this.contactDataService.createWorkerContact(contact).subscribe(res => {
-        this.reloadUser.emit(true);
+        this.userDataService.loadUserToStore();
       }, error => alert('Failed to create contact'));
     } else {
       window.location.href = 'logout';

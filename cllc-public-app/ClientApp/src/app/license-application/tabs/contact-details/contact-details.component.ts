@@ -1,22 +1,23 @@
 
-import {filter,  auditTime } from 'rxjs/operators';
+import { filter, auditTime, takeWhile } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ApplicationDataService } from '../../../services/application-data.service';
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Subscription ,  Observable ,  Subject } from 'rxjs';
+import { Subscription, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import * as currentApplicationActions from '../../../app-state/actions/current-application.action';
 import { Application } from '../../../models/application.model';
+import { FormBase } from '@shared/form-base';
 
 @Component({
   selector: 'app-contact-details',
   templateUrl: './contact-details.component.html',
   styleUrls: ['./contact-details.component.scss']
 })
-export class ContactDetailsComponent implements OnInit, OnDestroy {
+export class ContactDetailsComponent extends FormBase implements OnInit, OnDestroy {
   @Input() applicationId: string;
   contactDetailsForm: FormGroup;
   busy: Subscription;
@@ -27,6 +28,7 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private fb: FormBuilder, public snackBar: MatSnackBar) {
+    super();
     this.applicationId = this.route.parent.snapshot.params.applicationId;
   }
 
@@ -34,8 +36,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
     // create entry form and set retrieved values
     this.createForm();
 
-    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication).pipe(
-      filter(state => !!state))
+    const sub = this.store.select(state => state.currentApplicaitonState.currentApplication)
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(state => !!state))
       .subscribe(currentApplication => {
         this.contactDetailsForm.patchValue(currentApplication);
         if (currentApplication.isPaid) {

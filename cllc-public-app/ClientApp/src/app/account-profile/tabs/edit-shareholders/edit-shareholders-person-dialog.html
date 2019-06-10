@@ -1,0 +1,94 @@
+<h2 *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) == -1"
+  mat-dialog-title>Add Shareholder - Person</h2>
+<h2 *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) !== -1"
+  mat-dialog-title>Add Partner</h2>
+<mat-dialog-content>
+  <form [formGroup]='form' class="form-horizontal">
+    <!--(ngSubmit)="addShareholderPerson(form)"-->
+
+    <div class="form-group row">
+      <div *ngIf="['LimitedPartnership'].indexOf(data?.businessType) !== -1" class="form-group col-md-12">
+        <input type="radio" group="partnerType" formControlName="partnerType" value="General">
+        <span>General Partner</span> &nbsp;
+        <input type="radio" group="partnerType" formControlName="partnerType" value="Limited">
+        <span>Limited Partner</span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-12" [ngClass]="{'has-error': this.isFieldError('firstname')}">
+        <label for="firstname">First Name</label>
+        <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First Name">
+        <div *ngIf="this.isFieldError('firstname')" class="error-msg">
+          <div *ngIf="form.controls['firstname'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-12" [ngClass]="{'has-error': this.isFieldError('lastname')}">
+        <label for="lastname">Last Name</label>
+        <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last Name">
+        <div *ngIf="this.isFieldError('lastname')">
+          <div *ngIf="form.controls['lastname'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-md-12" [ngClass]="{'has-error': this.isFieldError('email')}">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
+        <div *ngIf="this.isFieldError('email')">
+          <div *ngIf="form.controls['email'].hasError('required') ">
+            This is required
+          </div>
+          <div *ngIf="form.controls['email'].hasError('email') ">
+            Email is invalid
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(data?.businessType) == -1"
+      class="form-group row">
+      <div class="col-md-12" [ngClass]="{'has-error': this.isFieldError('commonvotingshares')}">
+        <label for="commonvotingshares">Number of Voting Shares</label>
+        <input type="number" style="width: 150px;" class="form-control" formControlName="commonvotingshares" id="commonvotingshares">
+        <div *ngIf="this.isFieldError('commonvotingshares')">
+          <div *ngIf="form.controls['commonvotingshares'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-md-4" [ngClass]="{'has-error': this.isFieldError('commonnonvotingshares')}">
+        <label for="commonnonvotingshares">Number of<br />Non Voting Shares</label>
+        <input type="number" class="form-control" formControlName="commonnonvotingshares" id="commonnonvotingshares">
+        <div *ngIf="this.isFieldError('commonnonvotingshares')">
+          <div *ngIf="form.controls['commonnonvotingshares'].hasError('required') ">
+            This is required
+          </div>
+        </div>
+      </div> -->
+      <div *ngIf="['UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(data?.businessType) !== -1" class="col-md-12"
+        [ngClass]="{'has-error': this.isFieldError('dateIssued')}">
+        <label for="dateIssued">Date of Shares Issued</label>
+        <input type="text" formControlName='dateIssued' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+        <div *ngIf="this.isFieldError('dateIssued')">
+          <div *ngIf="form.controls['dateIssued'].hasError('dateLessThanToday') ">
+            Date Issued must be before today
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="btn btn-secondary" (click)="close()">Cancel</button>
+  &nbsp;
+  <button class="btn btn-primary" (click)="save()">Save</button>
+</mat-dialog-actions>

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatSnackBar } from '@angular/material';
-import { Subscription } from 'rxjs';
-import { LegalEntity } from '../../../models/legal-entity.model';
-import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
+import { Subscription } from 'rxjs/Subscription';
+import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
+import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,15 +17,15 @@ export class SecurityAssessmentsComponent implements OnInit {
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
 
-  adoxioLegalEntityList: LegalEntity[] = [];
-  dataSource = new MatTableDataSource<LegalEntity>();
+  adoxioLegalEntityList: AdoxioLegalEntity[] = [];
+  dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   displayedColumns = ['sendConsentRequest', 'firstname', 'lastname', 'email', 'position', 'emailsent'];
   busy: Promise<any>;
   busyObsv: Subscription;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private legalEntityDataservice: LegalEntityDataService,
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
     private route: ActivatedRoute,
     private dynamicsDataService: DynamicsDataService,
     public snackBar: MatSnackBar,
@@ -36,8 +36,8 @@ export class SecurityAssessmentsComponent implements OnInit {
     this.route.parent.params.subscribe(p => {
       this.parentLegalEntityId = p.legalEntityId;
       this.accountId = p.accountId;
-      this.dynamicsDataService.getRecord('accounts', this.accountId)
-        .subscribe((data) => {
+      this.dynamicsDataService.getRecord('account', this.accountId)
+        .then((data) => {
           this.businessType = data.businessType;
         });
       this.getDirectorsAndOfficersAndShareholders();
@@ -59,7 +59,7 @@ export class SecurityAssessmentsComponent implements OnInit {
       });
   }
 
-  getRoles(legalEntity: LegalEntity): string {
+  getRoles(legalEntity: AdoxioLegalEntity): string {
     const roles = [];
     if (legalEntity.isDirector === true) {
       roles.push('Director');
@@ -110,6 +110,18 @@ export class SecurityAssessmentsComponent implements OnInit {
         );
     }
 
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
   }
 
 }

@@ -4,8 +4,8 @@ import { MatPaginator, MatTableDataSource, MatSort, MatDialog, MatDialogConfig, 
 import { FormBuilder, FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { LegalEntity } from '../../../models/legal-entity.model';
-import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
+import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
+import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
@@ -23,14 +23,14 @@ export class DirectorsAndOfficersComponent implements OnInit {
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
 
-  adoxioLegalEntityList: LegalEntity[] = [];
-  dataSource = new MatTableDataSource<LegalEntity>();
+  adoxioLegalEntityList: AdoxioLegalEntity[] = [];
+  dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   displayedColumns = ['name', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
   subscriptions: Subscription[] = [];
 
-  constructor(private legalEntityDataservice: LegalEntityDataService,
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
     public dialog: MatDialog,
     private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService,
@@ -38,26 +38,21 @@ export class DirectorsAndOfficersComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-
-    if (this.businessType === 'SoleProprietor') {
-      this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
-    }
-    this.getDirectorsAndOfficers();
-    // const sub = this.store.select(state => state.currentAccountState)
-    //   .filter(state => !!state)
-    //   .subscribe(state => {
-    //     this.accountId = state.currentAccount.id;
-    //     this.businessType = state.currentAccount.businessType;
-    //     if (this.businessType === 'SoleProprietor') {
-    //       this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
-    //     }
-    //     const sub2 = this.route.parent.params.subscribe(p => {
-    //       this.parentLegalEntityId = p.legalEntityId;
-    //       this.getDirectorsAndOfficers();
-    //     });
-    //     this.subscriptions.push(sub2);
-    //   });
-    // this.subscriptions.push(sub);
+    const sub = this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.accountId = state.currentAccount.id;
+        this.businessType = state.currentAccount.businessType;
+        if (this.businessType === 'SoleProprietor') {
+          this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
+        }
+        const sub2 = this.route.parent.params.subscribe(p => {
+          this.parentLegalEntityId = p.legalEntityId;
+          this.getDirectorsAndOfficers();
+        });
+        this.subscriptions.push(sub2);
+      });
+    this.subscriptions.push(sub);
   }
 
   getDirectorsAndOfficers() {
@@ -83,8 +78,8 @@ export class DirectorsAndOfficersComponent implements OnInit {
       });
   }
 
-  formDataToModelData(formData: any): LegalEntity {
-    const adoxioLegalEntity: LegalEntity = new LegalEntity();
+  formDataToModelData(formData: any): AdoxioLegalEntity {
+    const adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
     adoxioLegalEntity.isShareholder = false;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     adoxioLegalEntity.id = formData.id;
@@ -104,7 +99,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     }
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = <DynamicsAccount>{};
+      adoxioLegalEntity.account = new DynamicsAccount();
       adoxioLegalEntity.account.id = this.accountId;
     }
     // adoxioLegalEntity.relatedentities = [];
@@ -112,7 +107,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   }
 
   // Open Person shareholder dialog
-  openPersonDialog(person: LegalEntity) {
+  openPersonDialog(person: AdoxioLegalEntity) {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
@@ -150,7 +145,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   }
 
-  deleteIndividual(person: LegalEntity) {
+  deleteIndividual(person: AdoxioLegalEntity) {
     if (confirm('Delete person?')) {
       this.legalEntityDataservice.deleteLegalEntity(person.id).subscribe(data => {
         this.getDirectorsAndOfficers();
@@ -161,7 +156,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error || '';
+      const body = error.json() || '';
       const err = body || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {

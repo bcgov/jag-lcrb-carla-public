@@ -2,16 +2,16 @@ import { License } from './license.model';
 import { ApplicationType } from './application-type.model';
 
 export class ApplicationLicenseSummary {
-  id: string;
 
-  establishmentName: string;  
+  establishmentName: string;
   establishmentAddressStreet: string;
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
 
-  applicationStatus: string;
+  status: string;
   licenseId: string;
-  licenseType: string;
+  applicationId: string;
+  licenceTypeName: string;
   licenseNumber: string;
   name: string;
   jobNumber: string;
@@ -22,5 +22,6 @@ export class ApplicationLicenseSummary {
   applicationFormFileUrl: string;
   fileName: string;
   assignedLicense: License;
+  expiryDate: Date;
   allowedActions: ApplicationType[];
 }

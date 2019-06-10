@@ -36,14 +36,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
         }
 
-        
+
 
         /// <summary>
         /// Get a license application by applicant id
         /// </summary>
         /// <param name="applicantId"></param>
         /// <returns></returns>
-        private async Task<List<ViewModels.ApplicationSummary>> GetApplicationSummariesByApplicant(string applicantId)
+        private List<ViewModels.ApplicationSummary> GetApplicationSummariesByApplicant(string applicantId)
         {
             List<ViewModels.ApplicationSummary> result = new List<ViewModels.ApplicationSummary>();
 
@@ -99,7 +99,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         )
                     {
                         // determine if there is a transfer in progress.
-                        item.IsLocationChangeInProgress = FindRelatedApplication(result, item, "CRS Location Change");                        
+                        item.IsLocationChangeInProgress = FindRelatedApplication(result, item, "CRS Location Change");
                         // item.isTransferInProgress = FindRelatedApplication(result, item, "CRS Transfer of Ownership");
                     }
                 }
@@ -108,7 +108,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        bool FindRelatedApplication (List<ViewModels.Application> applicationList, ViewModels.Application application, string licenseType)
+        bool FindRelatedApplication(List<ViewModels.Application> applicationList, ViewModels.Application application, string licenseType)
         {
             bool result = false;
             foreach (var item in applicationList)
@@ -171,14 +171,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all applications in Dynamics for the current user
         [HttpGet("current")]
-        public async Task<JsonResult> GetCurrentUserApplications()
+        public JsonResult GetCurrentUserApplications()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
-            List<ViewModels.ApplicationSummary> adoxioApplications = await GetApplicationSummariesByApplicant(userSettings.AccountId);
+            List<ViewModels.ApplicationSummary> adoxioApplications = GetApplicationSummariesByApplicant(userSettings.AccountId);
             return Json(adoxioApplications);
         }
 
@@ -225,7 +225,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result = await dynamicsApplication.ToViewModel(_dynamicsClient);
             }
 
-            
+
 
 
             if (dynamicsApplication.AdoxioApplicationSharePointDocumentLocations.Count == 0)
@@ -320,10 +320,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // set account relationship
                 adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
-                
+
                 // set applicaiton type relationship 
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
                 adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
+
+                if (item.ApplicationType.Name == "Marketer")
+                {
+                    // create tiedhouse relationship
+                     adoxioApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication = new List<MicrosoftDynamicsCRMadoxioTiedhouseconnection>{
+                            new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
+                        };
+                }
 
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
