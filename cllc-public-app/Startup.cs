@@ -38,6 +38,8 @@ namespace Gov.Lclb.Cllb.Public
             Configuration = configuration;
         }
 
+        readonly string MyAllowSpecificOrigins = "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -166,7 +168,21 @@ namespace Gov.Lclb.Cllb.Public
                 authenticationResult = task.Result;
             }
 
-            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins("https://localhost",
+                                        "http://cannabis-licensing-dev.pathfinder.bcgov",
+                                        "http://cannabis-licensing-test.pathfinder.bcgov",
+                                        "http://cannabis-licensing-prod.pathfinder.bcgov",
+                                        "https://dev.justice.gov.bc.ca",
+                                        "https://test.justice.gov.bc.ca",
+                                        "https://justice.gov.bc.ca");
+                });
+            });
+
 
             services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
             {
@@ -304,7 +320,6 @@ namespace Gov.Lclb.Cllb.Public
                 log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
             }
 
-
             string pathBase = Configuration["BASE_PATH"];
 
             if (!string.IsNullOrEmpty(pathBase))
@@ -318,15 +333,10 @@ namespace Gov.Lclb.Cllb.Public
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-            }
+                app.UseHsts(); // Strict-Transport-Security
+                app.UseCors(MyAllowSpecificOrigins);
+            }            
 
-            app.Use(async (ctx, next) =>
-            {
-                ctx.Response.Headers.Add("Content-Security-Policy",
-                                         "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com");
-                ctx.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
-                await next();
-            });
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());
 
