@@ -1,11 +1,12 @@
-import { DynamicsAccount } from './dynamics-account.model';
+import { Account } from './account.model';
 import { License } from './license.model';
 import { Invoice } from './invoice.model';
 import { ApplicationType } from './application-type.model';
+import { TiedHouseConnection } from './tied-house-connection.model';
 
 export class Application {
   id: string;
-  account: DynamicsAccount;
+  account: Account;
   additionalPropertyInformation: string;
   applicantType: string;
   applicationStatus: string;
@@ -54,4 +55,5 @@ export class Application {
   serviceHoursWednesdayOpen: string;
   servicehHoursStandardHours: boolean;
   signatureAgreement: boolean;
+  tiedHouse: TiedHouseConnection;
 }

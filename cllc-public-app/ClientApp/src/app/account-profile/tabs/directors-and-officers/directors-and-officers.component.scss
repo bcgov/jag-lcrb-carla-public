@@ -1,0 +1,26 @@
+.form-control {
+  margin-bottom: 10px;
+}
+
+
+.label {
+  font-size: 16px;
+  font-weight: normal;
+  color: #000;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-left: -8px;
+}
+
+.red-snackbar {
+  background: #F44336;
+}
+
+.green-snackbar {
+  background: #00ff21;
+}
+
+.mat-column-edit,
+.mat-column-delete{
+  flex: 0 0 100px;
+}

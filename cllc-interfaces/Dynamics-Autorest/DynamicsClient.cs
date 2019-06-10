@@ -52,11 +52,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencetypeinvestigationset Licencetypeinvestigationset { get; private set; }
 
         /// <summary>
-        /// Gets the IAgencycommunications.
-        /// </summary>
-        public virtual IAgencycommunications Agencycommunications { get; private set; }
-
-        /// <summary>
         /// Gets the IAliases.
         /// </summary>
         public virtual IAliases Aliases { get; private set; }
@@ -182,6 +177,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishments Establishments { get; private set; }
 
         /// <summary>
+        /// Gets the IEstablishmentwatchwords.
+        /// </summary>
+        public virtual IEstablishmentwatchwords Establishmentwatchwords { get; private set; }
+
+        /// <summary>
         /// Gets the IFiainvestigationlogs.
         /// </summary>
         public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
@@ -200,6 +200,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInspectioninspectorsset.
         /// </summary>
         public virtual IInspectioninspectorsset Inspectioninspectorsset { get; private set; }
+
+        /// <summary>
+        /// Gets the IInspectionreactivationhistories.
+        /// </summary>
+        public virtual IInspectionreactivationhistories Inspectionreactivationhistories { get; private set; }
 
         /// <summary>
         /// Gets the IInterests.
@@ -634,7 +639,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             Accounts = new Accounts(this);
             Licencetypeinvestigationset = new Licencetypeinvestigationset(this);
-            Agencycommunications = new Agencycommunications(this);
             Aliases = new Aliases(this);
             Applicantsteps = new Applicantsteps(this);
             Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
@@ -660,10 +664,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             Documentadmins = new Documentadmins(this);
             Documents = new Documents(this);
             Establishments = new Establishments(this);
+            Establishmentwatchwords = new Establishmentwatchwords(this);
             Fiainvestigationlogs = new Fiainvestigationlogs(this);
             Fundingsources = new Fundingsources(this);
             Incidentlicencetypeset = new Incidentlicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
+            Inspectionreactivationhistories = new Inspectionreactivationhistories(this);
             Interests = new Interests(this);
             Investigationactivities = new Investigationactivities(this);
             Investigations = new Investigations(this);
