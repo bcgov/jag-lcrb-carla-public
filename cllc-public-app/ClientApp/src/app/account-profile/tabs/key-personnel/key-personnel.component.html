@@ -1,0 +1,38 @@
+<div class="">
+  <!-- <h1 style="margin-top: 0">Key Personnel &amp; Senior Employees</h1> -->
+  <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
+      Key personnel are those people having authority and responsibility for planning, directing, and controlling the activities of the corporation, either directly or indirectly.
+      This designation typically includes the following positions:
+  </p>
+
+  <ul *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
+    <li>Chief executive officer, chief operating officer, and chief financial officer</li>
+    <li>Vice presidents </li>
+    <li>Senior managers</li>
+  </ul>
+
+  <ul *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">
+    <li>Chief executive officer, chief operating officer, and chief financial officer</li>
+    <li>Vice presidents</li>
+    <li>Senior managers</li>
+  </ul>
+  <p *ngIf="['SoleProprietor', 'Society'].indexOf(businessType) !== -1">
+    Key personnel are those people having authority and responsibility for planning, directing, and controlling the activities
+    of the business either directly or indirectly.
+  </p>
+  <section>
+    <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1" for="">
+      Upload an organization chart of the corporation's key personnel and senior employees, including name and position:
+    </label>
+    <label *ngIf="['SoleProprietor'].indexOf(businessType) !== -1" for="">
+      Upload an organization chart of the business's key personnel and senior employees, including name and position:
+    </label>
+    <label *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" for="">
+      Upload an organization chart of the corporation's key personnel and senior employees, including name and position:
+    </label>
+  </section>
+  <p></p>
+  <section *ngIf="accountId">
+    <app-file-uploader documentType="Key Personnel" entityName="account" [entityId]="accountId"></app-file-uploader>
+  </section>
+</div>

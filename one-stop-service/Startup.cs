@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -116,12 +117,15 @@ namespace Gov.Lclb.Cllb.OneStopService
                 checks.AddValueTaskCheck("HTTP Endpoint", () => new
                     ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            // app.UseRequestLoggerMiddleware();
+            
+            
 
             // OneStop does not seem to set the SoapAction properly
 
@@ -244,7 +248,7 @@ private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFac
                 {
                     log.LogInformation("Creating Hangfire job for License issuance check ...");
                     ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.MinuteInterval(15));
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.HourInterval(1));
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }

@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { 
+import {
   MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
@@ -61,7 +61,7 @@ import {
   EditShareholdersComponent,
   ShareholderPersonDialogComponent,
   ShareholderOrganizationDialogComponent
-} from './business-profile/tabs/edit-shareholders/edit-shareholders.component';
+} from './account-profile/tabs/edit-shareholders/edit-shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -87,20 +87,20 @@ import { UserDataService } from './services/user-data.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
-import { CorporateDetailsComponent } from './business-profile/tabs/corporate-details/corporate-details.component';
+import { CorporateDetailsComponent } from './account-profile/tabs/corporate-details/corporate-details.component';
 import {
   DirectorsAndOfficersComponent,
   DirectorAndOfficerPersonDialogComponent
-} from './business-profile/tabs/directors-and-officers/directors-and-officers.component';
-import { SecurityAssessmentsComponent } from './business-profile/tabs/security-assessments/security-assessments.component';
-import { OrganizationStructureComponent } from './business-profile/tabs/organization-structure/organization-structure.component';
-import { BeforeYouStartComponent } from './business-profile/tabs/before-you-start/before-you-start.component';
-import { FinancialInformationComponent } from './business-profile/tabs/financial-information/financial-information.component';
-import { BusinessProfileSummaryComponent } from './business-profile-summary/business-profile-summary.component';
+} from './account-profile/tabs/directors-and-officers/directors-and-officers.component';
+import { SecurityAssessmentsComponent } from './account-profile/tabs/security-assessments/security-assessments.component';
+import { OrganizationStructureComponent } from './account-profile/tabs/organization-structure/organization-structure.component';
+import { BeforeYouStartComponent } from './account-profile/tabs/before-you-start/before-you-start.component';
+import { FinancialInformationComponent } from './account-profile/tabs/financial-information/financial-information.component';
+import { AccountProfileSummaryComponent } from './account-profile/account-profile-summary/account-profile-summary.component';
 
 import { NgBusyModule } from 'ng-busy';
-import { KeyPersonnelComponent } from './business-profile/tabs/key-personnel/key-personnel.component';
-import { ConnectionToProducersComponent } from './business-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { KeyPersonnelComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
+import { ConnectionToProducersComponent } from './account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
@@ -118,10 +118,10 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
-import { TermsAndConditionsComponent } from './lite/terms-and-conditions/terms-and-conditions.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
@@ -144,13 +144,21 @@ import {
   IndividualAssociatesResultsComponent
 } from './associate-wizard/individual-associates-results/individual-associates-results.component';
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
-import { BusinessProfileComponent } from './business-profile/business-profile.component';
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FieldComponent } from './shared/field/field.component';
 import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import {
   ApplicationsAndLicencesComponent,
   ApplicationCancellationDialogComponent
 } from './applications-and-licences/applications-and-licences.component';
+import { AppRemoveIfFeatureOnDirective } from './directives/remove-if-feature-on.directive';
+import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-off.directive';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppState } from '@app/app-state/models/app-state';
+import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
+import { map } from 'rxjs/operators';
+import { EstablishmentWatchWordsService } from './services/establishment-watch-words.service';
+
 
 @NgModule({
   declarations: [
@@ -164,8 +172,8 @@ import {
     BceidConfirmationComponent,
     BeforeYouStartComponent,
     BreadcrumbComponent,
-    BusinessProfileComponent,
-    BusinessProfileSummaryComponent,
+    AccountProfileComponent,
+    AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
     ContactDetailsComponent,
     CorporateDetailsComponent,
@@ -213,7 +221,7 @@ import {
     SurveyPrimaryComponent,
     SurveySidebarComponent,
     SurveyTestComponent,
-    TermsAndConditionsComponent,
+    TermsOfUseComponent,
     UserConfirmationComponent,
     VoteComponent,
     WorkerApplicationComponent,
@@ -228,56 +236,62 @@ import {
     SolePropResultsComponent,
     IndividualAssociatesResultsComponent,
     OrganizationResultsComponent,
-    BusinessProfileComponent
+    AccountProfileComponent,
+    AppRemoveIfFeatureOnDirective,
+    AppRemoveIfFeatureOffDirective
   ],
   imports: [
-    ChartsModule,
-    AdminModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    CdkTableModule,
-    FileDropModule,
-    FormsModule,
-    HttpClientModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatStepperModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    NgBusyModule,
-    NgbModule.forRoot(),
-    ReactiveFormsModule,
-    BsDatepickerModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    AlertModule.forRoot()
+  ChartsModule,
+  AdminModule,
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  BrowserModule,
+  CdkTableModule,
+  FileDropModule,
+  FormsModule,
+  HttpClientModule,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  NgBusyModule,
+  NgbModule.forRoot(),
+  ReactiveFormsModule,
+  BsDatepickerModule.forRoot(),
+  StoreModule.forRoot(reducers, { metaReducers }),
+  StoreDevtoolsModule.instrument
+    ({
+      maxAge: 5
+    }),
+  AlertModule.forRoot()
   ],
   exports: [
     AdminModule,
@@ -321,7 +335,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     NgbModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AccountDataService,
@@ -344,10 +358,19 @@ import {
     ServiceCardAuthGuard,
     SurveyDataService,
     TiedHouseConnectionsDataService,
+    EstablishmentWatchWordsService,
     Title,
     UserDataService,
     VoteDataService,
     WorkerDataService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (us: UserDataService) => function () {
+        return us.loadUserToStore();
+      },
+      deps: [ UserDataService],
+      multi: true
+    }
   ],
   entryComponents: [
     ApplicationCancellationDialogComponent,

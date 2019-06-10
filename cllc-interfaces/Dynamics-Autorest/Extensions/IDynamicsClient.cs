@@ -29,10 +29,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         Task<MicrosoftDynamicsCRMaccount> GetAccountById(Guid id);
         Task<MicrosoftDynamicsCRMcontact> GetContactById(Guid id);
-        
+        Task<MicrosoftDynamicsCRMcontact> GetContactById(string id);
+
         MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(Guid id);
 
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(string id);
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(Guid id);
+
+        Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerByIdWithChildren(string id);
+        
     }
 }

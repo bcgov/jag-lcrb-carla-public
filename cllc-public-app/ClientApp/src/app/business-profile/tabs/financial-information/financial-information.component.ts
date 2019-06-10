@@ -1,5 +1,3 @@
-
-import {filter} from 'rxjs/operators';
 import { Component, OnInit, Input } from '@angular/core';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { ActivatedRoute } from '@angular/router';
@@ -21,8 +19,8 @@ export class FinancialInformationComponent implements OnInit {
     private dynamicsDataService: DynamicsDataService) { }
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState).pipe(
-    filter(state => !!state))
+    this.store.select(state => state.currentAccountState)
+    .filter(state => !!state)
     .subscribe(state => {
       this.accountId = state.currentAccount.id;
       this.businessType = state.currentAccount.businessType;
