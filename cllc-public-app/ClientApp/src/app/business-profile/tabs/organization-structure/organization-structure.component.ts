@@ -1,5 +1,3 @@
-
-import {filter} from 'rxjs/operators';
 import { Component, OnInit, Input } from '@angular/core';
 import { UserDataService } from '../../../services/user-data.service';
 import { User } from '../../../models/user.model';
@@ -22,8 +20,8 @@ export class OrganizationStructureComponent implements OnInit {
     private dynamicsDataService: DynamicsDataService) { }
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState).pipe(
-      filter(state => !!state))
+    this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
       .subscribe(state => {
         this.accountId = state.currentAccount.id;
         this.businessType = state.currentAccount.businessType;

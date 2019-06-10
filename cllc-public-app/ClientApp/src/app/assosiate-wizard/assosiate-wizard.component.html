@@ -1,0 +1,33 @@
+<section *ngIf="currentQuestion === 'q1'">
+  <p>Are you a sole proprietor who’s applying for a cannabis retail store licence?</p>
+  <input type="radio" name="q1" value="Yes" (click)="answerCollection.q1 ='Yes'"> <span>Yes</span> <br>
+  <input type="radio" name="q1" value="No" (click)="answerCollection.q1 ='No'"> <span>No</span>
+  <br>
+  <button class="btn btn-primary" (click)="answerCollection.q1 === 'Yes' ? currentQuestion = 'q10' : currentQuestion = 'q2a'">Next</button>
+</section>
+
+<section *ngIf="currentQuestion === 'q2a'">
+  <p>What’s the name of the company that asked you to fill out this questionnaire?</p>
+  <input type="text" (change)="answerCollection.q2a = cname.value" #cname>
+  <br>
+  <button class="btn btn-primary" (click)="currentQuestion = 'q2b'">Next</button>
+</section>
+
+<section *ngIf="currentQuestion === 'q2b'">
+  <p>Are you a director, officer or senior manager at {{ answerCollection.q2a }}?</p>
+  <input type="radio" name="q2b" value="Yes" (click)="answerCollection.q2b ='Yes'"> <span>Yes</span> <br>
+  <input type="radio" name="q2b" value="No" (click)="answerCollection.q2b ='No'"> <span>No</span>
+  <br>
+  <button class="btn btn-primary" (click)="answerCollection.q2b === 'Yes' ? currentQuestion = 'q10' : currentQuestion = 'q2'">Next</button>
+</section>
+
+<section *ngIf="currentQuestion === 'q10'">
+  <p>Ar 10 10 10 10 10e?</p>
+  <input type="radio" name="q10" value="Yes" (click)="answerCollection.q10 ='Yes'"> <span>Yes</span> <br>
+  <input type="radio" name="q10" value="No" (click)="answerCollection.q10 ='No'"> <span>No</span>
+  <br>
+  <button class="btn btn-primary" (click)="answerCollection.q1 === 'Yes' ? currentQuestion = 'q1' : currentQuestion = 'q2'">Next</button>
+</section>
+
+
+{{ answerCollection | json }}

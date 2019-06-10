@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 int guidStart = temp.LastIndexOf("(");
                 int guidEnd = temp.LastIndexOf(")");
                 result = temp.Substring(guidStart + 1, guidEnd - (guidStart + 1));
-                
+
             }
             else
             {
@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     Console.WriteLine(odee.Message);
                     Console.WriteLine(odee.Request.Content);
                     Console.WriteLine(odee.Response.Content);
-                }                
+                }
             }
             return result;
         }
@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
+                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_application_adoxio_tiedhouseconnection_Application", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
 
                 // fetch from Dynamics.
                 result = await Applications.GetByKeyAsync(id, expand: expand);
@@ -100,7 +100,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioLicenceType = GetAdoxioLicencetypeById(Guid.Parse(result._adoxioLicencetypeValue));
                 }
 
-                if(result.AdoxioApplicationTypeId != null)
+                if (result.AdoxioApplicationTypeId != null)
                 {
                     var filter = $"_adoxio_applicationtype_value eq { result.AdoxioApplicationTypeId.AdoxioApplicationtypeid}";
                     var typeContents = this.Applicationtypecontents.Get(filter: filter).Value;
@@ -143,7 +143,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // EXPAND the list of application types for this licence type
                 string[] expand = { "adoxio_licencetypes_applicationtypes" };
                 result = this.Licencetypes.GetByKey(adoxioLicencetypeid: id, expand: expand);
-                
+
             }
             catch (OdataerrorException)
             {
@@ -151,19 +151,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             // additional pass to populate the applicationtypes licencetype.
-           /*
-           if (result.AdoxioLicencetypesApplicationtypes != null)
-           {
-               foreach (var item in result.AdoxioLicencetypesApplicationtypes)
-               {
+            /*
+            if (result.AdoxioLicencetypesApplicationtypes != null)
+            {
+                foreach (var item in result.AdoxioLicencetypesApplicationtypes)
+                {
 
-                   if (item._adoxioLicencetypeidValue != null)
-                   {
-                       item.AdoxioLicenceTypeId = _dynamicsClient.GetAdoxioLicencetypeById(item._adoxioLicencetypeidValue);
-                   }
-               }
-            }
-           */
+                    if (item._adoxioLicencetypeidValue != null)
+                    {
+                        item.AdoxioLicenceTypeId = _dynamicsClient.GetAdoxioLicencetypeById(item._adoxioLicencetypeidValue);
+                    }
+                }
+             }
+            */
 
 
             return result;
@@ -203,19 +203,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public async Task<MicrosoftDynamicsCRMcontact> GetContactById(Guid id)
+        public async Task<MicrosoftDynamicsCRMcontact> GetContactById(string id)
         {
             MicrosoftDynamicsCRMcontact result;
             try
             {
                 // fetch from Dynamics.
-                result = await Contacts.GetByKeyAsync(id.ToString());
+                result = await Contacts.GetByKeyAsync(id);
             }
             catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
             {
                 result = null;
             }
             return result;
+        }
+
+        public async Task<MicrosoftDynamicsCRMcontact> GetContactById(Guid id)
+        {
+            return await GetContactById(id.ToString());
         }
 
         public MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(Guid id)
@@ -255,5 +260,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             return await GetWorkerById(id.ToString());
         }
 
+        public async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerByIdWithChildren(string id)
+        {
+
+            MicrosoftDynamicsCRMadoxioWorker result;
+            try
+            {
+                // fetch from Dynamics.
+                string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
+                result = this.Workers.GetByKey(adoxioWorkerid: id, expand: expand);
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
         }
+
     }
+}

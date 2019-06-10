@@ -49,11 +49,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicencetypeinvestigationset Licencetypeinvestigationset { get; }
 
         /// <summary>
-        /// Gets the IAgencycommunications.
-        /// </summary>
-        IAgencycommunications Agencycommunications { get; }
-
-        /// <summary>
         /// Gets the IAliases.
         /// </summary>
         IAliases Aliases { get; }
@@ -179,6 +174,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishments Establishments { get; }
 
         /// <summary>
+        /// Gets the IEstablishmentwatchwords.
+        /// </summary>
+        IEstablishmentwatchwords Establishmentwatchwords { get; }
+
+        /// <summary>
         /// Gets the IFiainvestigationlogs.
         /// </summary>
         IFiainvestigationlogs Fiainvestigationlogs { get; }
@@ -197,6 +197,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInspectioninspectorsset.
         /// </summary>
         IInspectioninspectorsset Inspectioninspectorsset { get; }
+
+        /// <summary>
+        /// Gets the IInspectionreactivationhistories.
+        /// </summary>
+        IInspectionreactivationhistories Inspectionreactivationhistories { get; }
 
         /// <summary>
         /// Gets the IInterests.
