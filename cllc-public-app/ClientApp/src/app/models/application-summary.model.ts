@@ -5,4 +5,5 @@ export class ApplicationSummary {
   establishmentName: string;
   name: string;
   jobNumber: string;
+  applicationTypeName: string;
 }

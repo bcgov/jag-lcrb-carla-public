@@ -173,7 +173,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpGet("business-profile/{accountId}")]
-        public async Task<IActionResult> GetBusinessProfile(string accountId)
+        public IActionResult GetBusinessProfile(string accountId)
         {
             _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "accountId: {accountId}");

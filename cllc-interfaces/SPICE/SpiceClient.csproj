@@ -2,10 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <ProjectGuid>{8766C58F-8616-4D94-A9A8-CDF8E2187AD4}</ProjectGuid>
   </PropertyGroup>
    <ItemGroup>
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.15" />
   </ItemGroup>
 
+   <ItemGroup>
+     <Folder Include="Models\" />
+   </ItemGroup>
 </Project>

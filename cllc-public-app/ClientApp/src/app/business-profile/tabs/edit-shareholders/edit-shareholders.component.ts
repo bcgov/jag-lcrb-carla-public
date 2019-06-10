@@ -5,8 +5,8 @@ import { MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { LegalEntity } from '../../../models/legal-entity.model';
-import { LegalEntityDataService } from '../../../services/legal-entity-data.service';
+import { AdoxioLegalEntity } from '../../../models/adoxio-legalentities.model';
+import { AdoxioLegalEntityDataService } from '../../../services/adoxio-legal-entity-data.service';
 import { DynamicsAccount } from '../../../models/dynamics-account.model';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { Store } from '@ngrx/store';
@@ -25,14 +25,14 @@ export class EditShareholdersComponent implements OnInit {
   @Input() businessType: string;
 
   shareholderForm: FormGroup;
-  shareholderList: LegalEntity[] = [];
-  dataSource = new MatTableDataSource<LegalEntity>();
+  shareholderList: AdoxioLegalEntity[] = [];
+  dataSource = new MatTableDataSource<AdoxioLegalEntity>();
   displayedColumns = ['position', 'name', 'email', 'commonvotingshares', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
 
 
-  constructor(private legalEntityDataservice: LegalEntityDataService,
+  constructor(private legalEntityDataservice: AdoxioLegalEntityDataService,
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService,
@@ -41,20 +41,17 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getShareholders();
-    this.updateDisplayedColumns();
-
-    // this.store.select(state => state.currentAccountState)
-    //   .filter(state => !!state)
-    //   .subscribe(state => {
-    //     this.accountId = state.currentAccount.id;
-    //     this.businessType = state.currentAccount.businessType;
-    //     this.route.parent.params.subscribe(p => {
-    //       this.parentLegalEntityId = p.legalEntityId;
-    //       this.getShareholders();
-    //       this.updateDisplayedColumns();
-    //     });
-    //   });
+    this.store.select(state => state.currentAccountState)
+      .filter(state => !!state)
+      .subscribe(state => {
+        this.accountId = state.currentAccount.id;
+        this.businessType = state.currentAccount.businessType;
+        this.route.parent.params.subscribe(p => {
+          this.parentLegalEntityId = p.legalEntityId;
+          this.getShareholders();
+          this.updateDisplayedColumns();
+        });
+      });
   }
 
   updateDisplayedColumns() {
@@ -71,7 +68,7 @@ export class EditShareholdersComponent implements OnInit {
       position = 'partners';
     }
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, position)
-      .subscribe((data: LegalEntity[]) => {
+      .subscribe((data: AdoxioLegalEntity[]) => {
         data.forEach(d => {
           d.position = this.getPosition(d);
         });
@@ -80,7 +77,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
 
-  getPosition(shareholder: LegalEntity): string {
+  getPosition(shareholder: AdoxioLegalEntity): string {
     let position = '';
     if (shareholder.isindividual) {
       position = 'Individual';
@@ -129,8 +126,8 @@ export class EditShareholdersComponent implements OnInit {
     return position;
   }
 
-  formDataToModelData(formData: any, shareholderType: string): LegalEntity {
-    const adoxioLegalEntity: LegalEntity = new LegalEntity();
+  formDataToModelData(formData: any, shareholderType: string): AdoxioLegalEntity {
+    const adoxioLegalEntity: AdoxioLegalEntity = new AdoxioLegalEntity();
     adoxioLegalEntity.id = formData.id;
     if (['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(this.businessType) !== -1) {
       adoxioLegalEntity.isPartner = true;
@@ -164,13 +161,13 @@ export class EditShareholdersComponent implements OnInit {
     // adoxioLegalEntity.relatedentities = [];
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = <DynamicsAccount>{};
+      adoxioLegalEntity.account = new DynamicsAccount();
       adoxioLegalEntity.account.id = this.accountId;
     }
     return adoxioLegalEntity;
   }
 
-  editShareholder(shareholder: LegalEntity) {
+  editShareholder(shareholder: AdoxioLegalEntity) {
     if (shareholder.isindividual === true) {
       this.openPersonDialog(shareholder);
     } else {
@@ -178,7 +175,7 @@ export class EditShareholdersComponent implements OnInit {
     }
   }
 
-  deleteShareholder(shareholder: LegalEntity) {
+  deleteShareholder(shareholder: AdoxioLegalEntity) {
     if (confirm('Delete shareholder?')) {
       this.legalEntityDataservice.deleteLegalEntity(shareholder.id).subscribe(data => {
         this.getShareholders();
@@ -187,7 +184,7 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   // Open Person shareholder dialog
-  openPersonDialog(shareholder: LegalEntity) {
+  openPersonDialog(shareholder: AdoxioLegalEntity) {
     // set dialogConfig settings
     const dialogConfig: any = {
       disableClose: true,
@@ -273,7 +270,7 @@ export class EditShareholdersComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error || '';
+      const body = error.json() || '';
       const err = body || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {

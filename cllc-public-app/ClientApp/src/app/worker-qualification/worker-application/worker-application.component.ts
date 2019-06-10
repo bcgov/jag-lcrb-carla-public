@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../../services/user-data.service';
 import { User } from '../../models/user.model';
 import { ContactDataService } from '../../services/contact-data.service';
-import { DynamicsContact } from '../../models/dynamics-contact.model';
+import { Contact } from '../../models/contact.model';
 import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
@@ -16,6 +16,8 @@ import { PreviousAddress } from '../../models/previous-address.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { COUNTRIES } from './country-list';
 import { FormBase } from '@shared/form-base';
+import { Worker } from '../../models/worker.model';
+
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -70,6 +72,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   currentDate: Date = new Date();
   minDate: Date;
   bsConfig: any = { locale: 'en', dateInputFormat: 'YYYY-MM-DD', containerClass: 'theme-dark-blue' };
+  worker: Worker;
 
   public get addresses(): FormArray {
     return this.form.get('addresses') as FormArray;
@@ -178,6 +181,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
             });
 
             this.saveFormData = this.form.value;
+            this.worker = <any>worker;
             this.workerStatus = worker.status;
             if (worker.status !== 'Application Incomplete') {
               this.form.disable();
@@ -190,7 +194,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   confirmContact(confirm: boolean) {
     if (confirm) {
       // create contact here
-      const contact = new DynamicsContact();
+      const contact = new Contact();
       contact.fullname = this.currentUser.name;
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
@@ -303,6 +307,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     // Make sure the contact email and phone number are in sync with worker
     value.contact.emailaddress1 = value.worker.email;
     value.contact.telephone1 = value.worker.phonenumber;
+    value.contact.birthDate = this.worker.dateofbirth;
 
     const saves: Observable<any>[] = [
       this.contactDataService.updateContact(value.contact),
