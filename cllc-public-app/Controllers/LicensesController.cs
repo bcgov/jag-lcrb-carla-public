@@ -137,7 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private async Task<List<ApplicationLicenseSummary>> GetLicensesByLicencee(string licenceeId)
+        private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
         {
             var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
@@ -166,7 +166,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             return licence;
                         });
                 }
-                catch (OdataerrorException ex)
+                catch (OdataerrorException)
                 {
                     licences = null;
                 }
@@ -190,14 +190,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
-        public async Task<JsonResult> GetCurrentUserLicences()
+        public JsonResult GetCurrentUserLicences()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            List<ApplicationLicenseSummary> adoxioLicenses = await GetLicensesByLicencee(userSettings.AccountId);
+            List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(userSettings.AccountId);
 
             return Json(adoxioLicenses);
         }
@@ -206,10 +206,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all licenses in Dynamics filtered by the GUID of the licencee
         [HttpGet("licencee/{licenceeId}")]
-        public async Task<JsonResult> GetDynamicsLicenses(string licenceeId)
+        public JsonResult GetDynamicsLicenses(string licenceeId)
         {
             // get all licenses in Dynamics by Licencee Id
-            List<ApplicationLicenseSummary> adoxioLicenses = await GetLicensesByLicencee(licenceeId);
+            List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(licenceeId);
 
             return Json(adoxioLicenses);
         }
