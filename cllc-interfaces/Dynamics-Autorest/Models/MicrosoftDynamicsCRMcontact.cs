@@ -591,11 +591,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "birthdate")]
-        public System.DateTimeOffset? Birthdate { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "familystatuscode")]
         public int? Familystatuscode { get; set; }
 
