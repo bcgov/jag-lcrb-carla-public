@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SpdSync
+namespace CarlaSpiceSync.models
 {
-    public static class SPDResultTranslate
+    public static class WorkerSecurityScreeningResultTranslate
     {
         const int SPD_RESULT_PASS = 845280000;
         const int SPD_RESULT_FAIL = 845280001;

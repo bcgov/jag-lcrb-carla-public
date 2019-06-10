@@ -52,13 +52,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
 
         /// <param name='applicationId'>
         /// </param>
+        /// <param name='result'>
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> SendApplicationScreeningResponseWithHttpMessagesAsync(string applicationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> SendApplicationScreeningResponseWithHttpMessagesAsync(string applicationId, ApplicationScreeningResponse result = default(ApplicationScreeningResponse), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <param name='secret'>
         /// </param>
@@ -82,13 +84,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
 
         /// <param name='workerId'>
         /// </param>
+        /// <param name='result'>
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> SendWorkerScreeningResultsWithHttpMessagesAsync(string workerId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> SendWorkerScreeningResultsWithHttpMessagesAsync(string workerId, WorkerScreeningResponse result = default(WorkerScreeningResponse), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }
