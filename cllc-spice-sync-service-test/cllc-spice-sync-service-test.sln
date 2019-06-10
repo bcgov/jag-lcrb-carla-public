@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CARLA - SPICE Integration Test", "cllc-spice-sync-service-test.csproj", "{B2353214-C60B-4EE1-8EF9-2E24606894B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B2353214-C60B-4EE1-8EF9-2E24606894B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2353214-C60B-4EE1-8EF9-2E24606894B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2353214-C60B-4EE1-8EF9-2E24606894B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2353214-C60B-4EE1-8EF9-2E24606894B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00CD8946-354D-4856-8A87-F6FFC7CF90F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00CD8946-354D-4856-8A87-F6FFC7CF90F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00CD8946-354D-4856-8A87-F6FFC7CF90F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00CD8946-354D-4856-8A87-F6FFC7CF90F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B91C5399-07F0-4115-B9E1-10C2B16A6AD3}
+	EndGlobalSection
+EndGlobal

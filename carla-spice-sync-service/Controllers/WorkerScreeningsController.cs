@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using SpdSync.models;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -50,31 +51,38 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpPost("send/{workerId}")]        
         public async Task<ActionResult> SendWorkerScreeningRequest(string workerId )
         {
-            // Generate the Worker Request.
-            var workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
-
-            _logger.LogError("Data to send:");
-            string jsonString = JsonConvert.SerializeObject(workerRequest);
-            _logger.LogError(jsonString);
-
-            // send the data
-            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
+            var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
+            try
             {
-                workerRequest
+                // Generate the application request
+                workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return BadRequest();
             };
 
-            var result = await _spiceUtils.SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+            if (workerRequest == null)
+            {
+                return NotFound($"Worker {workerId} is not found.");
+            }
+            else
+            {
+                var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
+
+                if (result)
+                {
+                    return Ok(workerRequest);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+                
+            }
+
             
-            _logger.LogError("Response code was");
-            _logger.LogError(result.Response.StatusCode.ToString());
-            _logger.LogError("Response text was");
-            _logger.LogError(await result.Response.Content.ReadAsStringAsync());
-
-            _logger.LogInformation("Done Send Worker Screening");
-            return Ok();
         }
-
-        
-
     }
 }

@@ -5,6 +5,10 @@ import { User } from '../../models/user.model';
 import { Worker } from '../../models/worker.model';
 import { WorkerDataService } from '../../services/worker-data.service.';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app-state/models/app-state';
+import { takeWhile } from 'rxjs/operators';
+import { FormBase } from '@shared/form-base';
 
 
 @Component({
@@ -12,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class WorkerDashboardComponent implements OnInit {
+export class WorkerDashboardComponent extends FormBase implements OnInit {
   currentUser: User;
   displayedColumns = ['lastUpdated', 'worker', 'status'];
   dataSource: Worker[] = [];
@@ -29,41 +33,38 @@ export class WorkerDashboardComponent implements OnInit {
   // @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     private userDataService: UserDataService,
-    private workerDataService: WorkerDataService
+    private workerDataService: WorkerDataService,
+    private store: Store<AppState>
   ) {
+    super();
   }
 
   ngOnInit() {
-    this.reloadUser();
+    this.store.select(state => state.currentUserState.currentUser)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(user => this.loadUser(user));
   }
 
-  reloadUser() {
-    this.busy = this.userDataService.getCurrentUser()
-      .subscribe((data: User) => {
-        this.currentUser = data;
-        this.isNewUser = this.currentUser.isNewUser;
-        this.dataLoaded = true;
-        if (this.currentUser && this.currentUser.contactid) {
+  loadUser(user: User) {
+    this.currentUser = user;
+    this.isNewUser = this.currentUser.isNewUser;
+    this.dataLoaded = true;
+    if (this.currentUser && this.currentUser.contactid) {
+      this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
+        this.dataSource = res;
+        this.currentApplication = res[0];
+        this.setClientSideStatus(this.currentApplication);
 
-          this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
-            this.dataSource = res;
-            this.currentApplication = res[0];
-            this.setClientSideStatus(this.currentApplication);
-            // this.numberOfApplications = res.length;
-            // if(this.numberOfApplications < 2) {}
-            this.applicationStatus = this.getStatus(res);
+        this.applicationStatus = this.getStatus(res);
+        const passedApplications = res.filter(i => (<any>i).status === 'Active');
 
-            const passedApplications = res.filter(i => (<any>i).status === 'Active');
-
-            if (passedApplications.length > 0) {
-              this.displayedColumns.push('actions');
-            }
-
-
-          });
+        if (passedApplications.length > 0) {
+          this.displayedColumns.push('actions');
         }
       });
+    }
   }
+
   setClientSideStatus(worker: Worker) {
     worker.clientSideStatus = worker.status;
     if (!worker.paymentReceived) {

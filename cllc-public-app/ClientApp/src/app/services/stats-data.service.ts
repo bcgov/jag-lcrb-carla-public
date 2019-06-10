@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DynamicsAccount } from '../models/dynamics-account.model';
+import { Account } from '../models/account.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';

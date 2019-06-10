@@ -24,13 +24,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the LegalEntity class.
         /// </summary>
-        public LegalEntity(string entityId = default(string), string name = default(string), bool? isIndividual = default(bool?), Contact contact = default(Contact), Account account = default(Account), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
+        public LegalEntity(string entityId = default(string), string name = default(string), bool? isIndividual = default(bool?), Contact contact = default(Contact), Account account = default(Account), string title = default(string), IList<string> positions = default(IList<string>), bool? tiedHouse = default(bool?), double? interestPercentage = default(double?), System.DateTimeOffset? appointmentDate = default(System.DateTimeOffset?), double? numberVotingShares = default(double?), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
         {
             EntityId = entityId;
             Name = name;
             IsIndividual = isIndividual;
             Contact = contact;
             Account = account;
+            Title = title;
+            Positions = positions;
+            TiedHouse = tiedHouse;
+            InterestPercentage = interestPercentage;
+            AppointmentDate = appointmentDate;
+            NumberVotingShares = numberVotingShares;
             Aliases = aliases;
             PreviousAddresses = previousAddresses;
             CustomInit();
@@ -65,6 +71,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "account")]
         public Account Account { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "title")]
+        public string Title { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "positions")]
+        public IList<string> Positions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "tiedHouse")]
+        public bool? TiedHouse { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "interestPercentage")]
+        public double? InterestPercentage { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "appointmentDate")]
+        public System.DateTimeOffset? AppointmentDate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "numberVotingShares")]
+        public double? NumberVotingShares { get; set; }
 
         /// <summary>
         /// </summary>

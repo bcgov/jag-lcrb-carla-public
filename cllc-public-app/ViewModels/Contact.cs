@@ -56,6 +56,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public Boolean? adoxio_cansigngrocerystoreproofofsalesrevenue { get; set; }
 
+        public DateTimeOffset? Birthdate { get; set; }
 
     }
 }

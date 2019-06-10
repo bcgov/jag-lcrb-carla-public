@@ -1,142 +1,162 @@
-<section class="container not-supported-browser" *ngIf="isIE10orLower()">
-  <p>Internet Explorer versions 10 and lower are not supported</p>
-  <p>Please use Google Chrome, Firefox, Edge or IE 11</p>
-</section>
+<div *ngIf="featureFlagService.initialized">
+  <section class="container not-supported-browser" *ngIf="isIE10orLower()">
+    <p>Internet Explorer versions 10 and lower are not supported</p>
+    <p>Please use Google Chrome, Firefox, Edge or IE 11</p>
+  </section>
 
-<div class="app-outer" *ngIf="!isIE10orLower()">
-  <header class="app-header">
-    <div class="top-menu row" style="padding-left: 30px; padding-right: 30px; margin:0;">
-      <section class="col-md-8 col-xs-12">
-        <a href="http://www2.gov.bc.ca/" tabindex="1">
-          <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
-        </a>
-        <span class="title" role="banner">
-          Cannabis Licensing&nbsp;
-          <span class="label label-beta">Beta</span>
-        </span>
-      </section>
-      <section class="col-md-4 col-xs-12 sign-container">
-        <span class="sign" *ngIf="currentUser">
-          <span>{{currentUser.name}}</span>
-          &nbsp;
-          <span class="text-right signin">
-            <a href="logout">Sign Out</a>
+  <div class="app-outer" *ngIf="!isIE10orLower()">
+    <header class="app-header">
+      <div class="top-menu row" style="padding-left: 30px; padding-right: 30px; margin:0;">
+        <section class="col-md-8 col-xs-12">
+          <a href="http://www2.gov.bc.ca/" tabindex="1">
+            <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
+          </a>
+          <span class="title" role="banner">
+            Cannabis Licensing&nbsp;
+            <span class="label label-beta">Beta</span>
           </span>
-        </span>
-        <span class="sign" *ngIf="!currentUser">
-          <span class="text-right signin">
-            <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
-            or
-            <a href="login" tabindex="1">Log In</a>
+        </section>
+        <section class="col-md-4 col-xs-12 sign-container">
+          <span class="sign" *ngIf="currentUser">
+            <span>{{currentUser.name}}</span>
+            &nbsp;
+            <span class="text-right signin">
+              <a href="logout">Sign Out</a>
+            </span>
           </span>
-        </span>
-      </section>
-    </div>
-  </header>
-
-  <div *ngIf="currentUser && currentUser.businessname && currentUser.isNewUser == true">
-    <main class="app-content">
-      <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
-    </main>
-  </div>
-
-  <div *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname)">
-    <!-- /NAVBAR -->
-    <div class="navigationRibbon" *ngIf="!currentUser">
-      <div class="level2Navigation">
-        <div class="">
-          <nav class="navbar navbar-expand-md navbar-light justify-content-end" style="margin-bottom: 0; width: 100%;">
-            <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" #toggleButton>
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a (click)="toggleButton.click()" tabindex="2" routerLink="/" title="Home">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/cannabis-retail-licence">Licence
-                    Types
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/application-timelines">Application Requirements</a>
-                </li>
-                <li class="nav-item">
-                  <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/worker-qualification-training">Worker Information</a>
-                </li>
-                <li class="nav-item">
-                  <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/ordering-cannabis">Ordering
-                    Cannabis
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/reporting-sales">Reporting</a>
-                </li>
-                <li class="nav-item">
-                  <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/application-stats">Application Statistics</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
+          <span class="sign" *ngIf="!currentUser">
+            <span class="text-right signin">
+              <a href="https://www.bceid.ca/register/" tabindex="1">Register</a>
+              or
+              <a href="login" tabindex="1">Log In</a>
+            </span>
+          </span>
+        </section>
       </div>
+    </header>
 
+    <div *ngIf="currentUser && currentUser.businessname && currentUser.isNewUser == true">
+      <main class="app-content">
+        <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" (reloadUser)="reloadUser()"
+          [currentUser]="currentUser"></app-bceid-confirmation>
+      </main>
     </div>
 
-    <section *ngIf="currentUser && !isAssociate" class="navigationRibbon">
-      <div class="level2Navigation ">
-        <div class="">
-          <nav class="navbar navbar-expand-md navbar-light justify-content-end" style="margin-bottom: 0;  width: 100%;">
-            <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right" data-target="#loggedInMenu"
-              aria-controls="loggedInMenu" aria-expanded="false" aria-label="Toggle navigation" #toggleButtonLoggedIn>
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="loggedInMenu">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/dashboard">Dashboard</a>
-                  <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
+    <div
+      *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname)">
+      <!-- /NAVBAR -->
+      <div class="navigationRibbon" *ngIf="!currentUser">
+        <div class="level2Navigation">
+          <div class="">
+            <nav class="navbar navbar-expand-md navbar-light justify-content-end"
+              style="margin-bottom: 0; width: 100%;">
+              <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation" #toggleButton>
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/" title="Home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2"
+                      routerLink="/policy-document/cannabis-retail-licence">Licence
+                      Types
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2"
+                      routerLink="/policy-document/application-timelines">Application Requirements</a>
+                  </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2"
+                      routerLink="/policy-document/worker-qualification-training">Worker Information</a>
+                  </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2"
+                      routerLink="/policy-document/ordering-cannabis">Ordering
+                      Cannabis
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2"
+                      routerLink="/policy-document/reporting-sales">Reporting</a>
+                  </li>
+                  <li class="nav-item">
+                    <a (click)="toggleButton.click()" tabindex="2"
+                      routerLink="/policy-document/application-stats">Application Statistics</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
         </div>
-      </div>
-    </section>
-    <!-- /NAVBAR END -->
 
-    <main class="app-content">
-      <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
-
-      <div class="app-main">
-        <breadcrumb></breadcrumb>
-        <router-outlet></router-outlet>
       </div>
 
-      <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
-    </main>
+      <section *ngIf="currentUser && !isAssociate" class="navigationRibbon">
+        <div class="level2Navigation ">
+          <div class="">
+            <nav class="navbar navbar-expand-md navbar-light justify-content-end"
+              style="margin-bottom: 0;  width: 100%;">
+              <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
+                data-target="#loggedInMenu" aria-controls="loggedInMenu" aria-expanded="false"
+                aria-label="Toggle navigation" #toggleButtonLoggedIn>
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="loggedInMenu">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item active">
+                    <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/dashboard">Dashboard</a>
+                    <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </section>
+      <!-- /NAVBAR END -->
+
+      <main class="app-content">
+        <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
+
+        <div class="app-main">
+          <breadcrumb></breadcrumb>
+          <router-outlet></router-outlet>
+        </div>
+
+        <app-insert id="sidebar-right" class="sidebar-right"></app-insert>
+      </main>
+    </div>
+
+    <footer class="app-footer">
+      <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
+        <div class="container c1">
+          <ul class="navbar-nav">
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank"
+                title="Goes to BC Gov Disclaimer Page">Disclaimer</a>
+            </li>
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank"
+                title="Goes to BC Gov Privacy Page">Privacy</a>
+            </li>
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank"
+                title="Goes to BC Gov Accessibility Page">Accessibility</a>
+            </li>
+            <li class="c2">
+              <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank"
+                title="Goes to BC Gov Copyright Page">Copyright</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </footer>
   </div>
-
-  <footer class="app-footer">
-    <nav class="navbar navbar-default navbar-expand navbar-footer navbar-static-bottom">
-      <div class="container c1">
-        <ul class="navbar-nav">
-          <li class="c2">
-            <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" title="Goes to BC Gov Disclaimer Page">Disclaimer</a>
-          </li>
-          <li class="c2">
-            <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" title="Goes to BC Gov Privacy Page">Privacy</a>
-          </li>
-          <li class="c2">
-            <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" title="Goes to BC Gov Accessibility Page">Accessibility</a>
-          </li>
-          <li class="c2">
-            <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" title="Goes to BC Gov Copyright Page">Copyright</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </footer>
-</div>
+</div> 

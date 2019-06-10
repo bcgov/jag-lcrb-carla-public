@@ -421,5 +421,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ServiceHours? ServiceHoursSaturdayClose { get; set; }
 
         public ViewModels.ApplicationType ApplicationType { get; set; }
+
+        public TiedHouseConnection TiedHouse { get; set; }
     }
 }
