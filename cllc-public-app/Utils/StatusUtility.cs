@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
 
             string shownStatus = Enum.GetName(status.GetType(), status);
 
-            if (licence != null && shownStatus == "Approved")
+            if (licence != null && status == LicenceStatusCodes.Active)
             {
                 shownStatus = STATUS_ACTIVE;
                 if (application.AdoxioLicencefeeinvoicepaid != true && licence.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
