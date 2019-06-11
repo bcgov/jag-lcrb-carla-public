@@ -356,7 +356,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
-                dynamicsApplicationList = _dynamicsClient.Applications.Get().Value;
+                dynamicsApplicationList = _dynamicsClient.Applications.Get(expand: expand).Value;
             }
             else
             {
