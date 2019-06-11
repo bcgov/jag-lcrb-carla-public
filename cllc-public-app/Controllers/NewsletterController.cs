@@ -34,7 +34,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public ActionResult GetNewsletter(string slug)
         {
-            Newsletter newsletter = db.GetNewsletterBySlug(slug);
+            
+            Newsletter newsletter = null;
+            if (!string.IsNullOrEmpty(Configuration["DB_USER"]))
+            {
+                newsletter = db.GetNewsletterBySlug(slug);
+            }
+                
             if (newsletter == null)
             {
                 return new NotFoundResult();
