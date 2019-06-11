@@ -97,6 +97,10 @@
                     "value": "${DYNAMICS_CLIENT_ID}"
                   },
 				  {
+                    "name": "DYNAMICS_NATIVE_ODATA_URI",
+                    "value": "${DYNAMICS_NATIVE_ODATA_URI}"
+                  },
+				  {
                     "name": "JWT_VALID_ISSUER",
                     "value": "${JWT_VALID_ISSUER}"
                   },
@@ -115,7 +119,15 @@
 				  {
                     "name": "SHAREPOINT_ODATA_URI",
                     "value": ""
-                  }			                    
+                  },
+				  {
+                    "name": "SPICE_URI",
+                    "value": ""
+                  },
+				  {
+                    "name": "SPICE_JWT_TOKEN",
+                    "value": ""
+                  }
                 ],
                 "resources": {
                   "limits": {
@@ -336,5 +348,13 @@
 		"required": true,
 		"value": "CHANGEME"
     },
+	{
+		"description": "Dynamics native URI",
+		"displayName": "DYNAMICS_NATIVE_ODATA_URI",
+		"name": "DYNAMICS_NATIVE_ODATA_URI",
+		"required": true,
+		"value": "CHANGEME"
+    }
+	
   ]
 }
