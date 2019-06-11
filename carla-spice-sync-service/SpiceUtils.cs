@@ -267,9 +267,14 @@ namespace Gov.Lclb.Cllb.SpdSync
                 {
                     var id = entity.Contact.ContactId;
                     var contact = _dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
+                    if (contact.AdoxioConsentvalidated == null)
+                    {
+                        consentValidated = false;
+                        continue;
+                    }
                     ConsentValidated consent = (ConsentValidated)contact.AdoxioConsentvalidated;
 
-                    if (consent != ConsentValidated.YES && contact.AdoxioConsentvalidatedexpirydate.Value >= DateTimeOffset.Now)
+                    if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES && contact.AdoxioConsentvalidatedexpirydate.Value >= DateTimeOffset.Now)
                     {
                         consentValidated = false;
                     }
@@ -754,6 +759,35 @@ namespace Gov.Lclb.Cllb.SpdSync
                 AdoxioConsentvalidatedexpirydate = DateTimeOffset.Now.AddMonths(3)
             };
             _dynamicsClient.Contacts.Update(ContactId, contact);
+        }
+
+        public async Task SendFoundWorkers(PerformContext hangfireContext)
+        {
+
+        }
+
+        public async Task SendFoundApplications(PerformContext hangfireContext)
+        {
+            string sendFilter = "adoxio_appchecklistsentspd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
+            var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value;
+            _logger.LogError($"Found {applications.Count} applications to send to SPD.");
+            hangfireContext.WriteLine($"Found {applications.Count} applications to send to SPD.");
+
+            foreach (var application in applications)
+            {
+                var screeningRequest = GenerateApplicationScreeningRequest(application.AdoxioApplicationid);
+                var response = await SendApplicationScreeningRequest(application.AdoxioApplicationid, screeningRequest);
+                if (response)
+                {
+                    hangfireContext.WriteLine($"Successfully sent application {application.AdoxioApplicationid} to SPD");
+                    _logger.LogError($"Successfully sent application {application.AdoxioApplicationid} to SPD");
+                }
+                else
+                {
+                    hangfireContext.WriteLine($"Failed to send application {application.AdoxioApplicationid} to SPD");
+                    _logger.LogError($"Failed to send application {application.AdoxioApplicationid} to SPD");
+                }
+            }
         }
     }
 }
