@@ -11,7 +11,7 @@ export GIT_REF="master"
 
 # The project components
 # - defaults to the support the Simple Project Structure
-export components=${components:-"cllc-public-app"}
+export components=${components:-"cllc-public-app carla-spice-sync-service"}
 
 # The builds to be triggered after buildconfigs created (not auto-triggered)
 export builds=${builds:-""}
