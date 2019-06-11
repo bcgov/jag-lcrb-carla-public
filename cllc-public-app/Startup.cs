@@ -287,39 +287,43 @@ namespace Gov.Lclb.Cllb.Public
             var log = loggerFactory.CreateLogger("Startup");
 
             string connectionString = "unknown.";
-            try
+            if (! string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
             {
-                using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            
+                try
                 {
-                    log.LogInformation("Fetching the application's database context ...");
-                    AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                    IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
+                    using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                    {
+                        log.LogInformation("Fetching the application's database context ...");
+                        AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+                        IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
                     
-                    connectionString = context.Database.GetDbConnection().ConnectionString;
+                        connectionString = context.Database.GetDbConnection().ConnectionString;
 
-                    log.LogInformation("Migrating the database ...");
-                    context.Database.Migrate();
-                    log.LogInformation("The database migration complete.");
+                        log.LogInformation("Migrating the database ...");
+                        context.Database.Migrate();
+                        log.LogInformation("The database migration complete.");
 
-                    // run the database seeders
-                    log.LogInformation("Adding/Updating seed data ...");
+                        // run the database seeders
+                        log.LogInformation("Adding/Updating seed data ...");
 
-                    Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, dynamicsClient);
-                    seederFactory.Seed((AppDbContext)context);
-                    log.LogInformation("Seeding operations are complete.");
+                        Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, dynamicsClient);
+                        seederFactory.Seed((AppDbContext)context);
+                        log.LogInformation("Seeding operations are complete.");
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                StringBuilder msg = new StringBuilder();
-                msg.AppendLine("The database migration failed!");
-                msg.AppendLine("The database may not be available and the application will not function as expected.");
-                msg.AppendLine("Please ensure a database is available and the connection string is correct.");
-                msg.AppendLine("If you are running in a development environment, ensure your test database and server configuration match the project's default connection string.");
-                msg.AppendLine("Which is: " + connectionString);
-                log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
-            }
+                catch (Exception e)
+                {
+                    StringBuilder msg = new StringBuilder();
+                    msg.AppendLine("The database migration failed!");
+                    msg.AppendLine("The database may not be available and the application will not function as expected.");
+                    msg.AppendLine("Please ensure a database is available and the connection string is correct.");
+                    msg.AppendLine("If you are running in a development environment, ensure your test database and server configuration match the project's default connection string.");
+                    msg.AppendLine("Which is: " + connectionString);
+                    log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
+                }
 
+            }
             string pathBase = Configuration["BASE_PATH"];
 
             if (!string.IsNullOrEmpty(pathBase))
