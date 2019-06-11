@@ -139,7 +139,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
         {
-            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
+             var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
             if (string.IsNullOrEmpty(licenceeId))
