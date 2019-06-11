@@ -250,7 +250,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Worker Export ...");
-                    RecurringJob.AddOrUpdate(() =>  new SpiceUtils(Configuration, loggerFactory).SendWorkerExportJob(null), Cron.Daily);
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(Configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
+                    //RecurringJob.AddOrUpdate(() => new SpiceUtils(Configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(1));
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
