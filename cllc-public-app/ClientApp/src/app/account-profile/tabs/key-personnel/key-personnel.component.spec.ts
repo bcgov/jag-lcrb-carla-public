@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { KeyPersonnelComponent } from './key-personnel.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('KeyPersonelComponent', () => {
   let component: KeyPersonnelComponent;
@@ -8,7 +9,8 @@ describe('KeyPersonelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KeyPersonnelComponent ]
+      declarations: [ KeyPersonnelComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

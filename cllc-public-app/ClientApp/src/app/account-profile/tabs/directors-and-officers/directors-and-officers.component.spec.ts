@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DirectorsAndOfficersComponent } from './directors-and-officers.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('DirectorsAndOfficersComponent', () => {
   let component: DirectorsAndOfficersComponent;
@@ -8,7 +9,8 @@ describe('DirectorsAndOfficersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DirectorsAndOfficersComponent ]
+      declarations: [ DirectorsAndOfficersComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

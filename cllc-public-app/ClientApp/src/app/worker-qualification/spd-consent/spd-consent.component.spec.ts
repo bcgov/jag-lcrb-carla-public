@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SpdConsentComponent } from './spd-consent.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SpdConsentComponent', () => {
   let component: SpdConsentComponent;
@@ -8,7 +9,8 @@ describe('SpdConsentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpdConsentComponent ]
+      declarations: [ SpdConsentComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

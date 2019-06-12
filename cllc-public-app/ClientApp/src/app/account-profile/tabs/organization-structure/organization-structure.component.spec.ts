@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrganizationStructureComponent } from './organization-structure.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('OrganizationStructureComponent', () => {
   let component: OrganizationStructureComponent;
@@ -8,7 +9,8 @@ describe('OrganizationStructureComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrganizationStructureComponent ]
+      declarations: [ OrganizationStructureComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));
