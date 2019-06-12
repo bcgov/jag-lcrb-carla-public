@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplicationsAndLicencesComponent } from './applications-and-licences.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ApplicationsAndLicencesComponent', () => {
   let component: ApplicationsAndLicencesComponent;
@@ -8,7 +9,8 @@ describe('ApplicationsAndLicencesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApplicationsAndLicencesComponent ]
+      declarations: [ ApplicationsAndLicencesComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

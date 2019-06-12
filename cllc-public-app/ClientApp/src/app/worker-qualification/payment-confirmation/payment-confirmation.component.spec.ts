@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkerPaymentConfirmationComponent } from './payment-confirmation.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('WorkerPaymentConfirmationComponent', () => {
   let component: WorkerPaymentConfirmationComponent;
@@ -8,9 +9,10 @@ describe('WorkerPaymentConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkerPaymentConfirmationComponent ]
+      declarations: [WorkerPaymentConfirmationComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

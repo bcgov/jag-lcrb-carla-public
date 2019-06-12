@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccountProfileComponent } from './account-profile.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AccountProfileComponent', () => {
   let component: AccountProfileComponent;
@@ -8,7 +9,8 @@ describe('AccountProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountProfileComponent ]
+      declarations: [ AccountProfileComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

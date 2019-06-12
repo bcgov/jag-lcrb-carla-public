@@ -2,6 +2,7 @@
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { EditShareholdersComponent } from './edit-shareholders.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 let component: EditShareholdersComponent;
 let fixture: ComponentFixture<EditShareholdersComponent>;
@@ -13,7 +14,8 @@ describe('EditShareholders component', () => {
             imports: [ BrowserModule ],
             providers: [
                 { provide: ComponentFixtureAutoDetect, useValue: true }
-            ]
+            ],
+            schemas: [ NO_ERRORS_SCHEMA ]
         });
         fixture = TestBed.createComponent(EditShareholdersComponent);
         component = fixture.componentInstance;

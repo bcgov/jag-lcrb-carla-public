@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PrePaymentComponent } from './pre-payment.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PrePaymentComponent', () => {
   let component: PrePaymentComponent;
@@ -8,9 +9,10 @@ describe('PrePaymentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrePaymentComponent ]
+      declarations: [PrePaymentComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

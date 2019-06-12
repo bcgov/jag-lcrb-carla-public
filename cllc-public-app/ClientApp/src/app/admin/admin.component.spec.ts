@@ -4,6 +4,7 @@ import {
 } from '@angular/router/testing';
 
 import { AdminComponent } from './admin.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AdminComponent', () => {
   let component: AdminComponent;
@@ -12,7 +13,8 @@ describe('AdminComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AdminComponent ],
-      imports: [ RouterTestingModule ]
+      imports: [ RouterTestingModule ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

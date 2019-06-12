@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserConfirmationComponent } from './user-confirmation.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('UserConfirmationComponent', () => {
   let component: UserConfirmationComponent;
@@ -8,7 +9,8 @@ describe('UserConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserConfirmationComponent ]
+      declarations: [ UserConfirmationComponent ],
+      schemas: [ NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

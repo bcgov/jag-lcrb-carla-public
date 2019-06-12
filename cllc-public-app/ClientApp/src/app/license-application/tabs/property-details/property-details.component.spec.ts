@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PropertyDetailsComponent } from './property-details.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PropertyDetailsComponent', () => {
   let component: PropertyDetailsComponent;
@@ -8,7 +9,8 @@ describe('PropertyDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PropertyDetailsComponent ]
+      declarations: [ PropertyDetailsComponent ],
+      schemas: [ NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
