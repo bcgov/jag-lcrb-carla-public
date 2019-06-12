@@ -32,10 +32,9 @@ export class PolicyDocumentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      filter(data => !!data && !!data.slug))
-      .subscribe((data: any) => {
-        this.setSlug(data.slug);
+    this.route.paramMap
+      .subscribe((data) => {
+        this.setSlug(data.get('slug'));
       });
   }
 
