@@ -48,9 +48,10 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// Send a worker record to SPICE for test purposes.  Normally this would occur from a polling process.
         /// </summary>
         /// <returns></returns>
-        [HttpPost("send/{workerId}")]        
-        public async Task<ActionResult> SendWorkerScreeningRequest(string workerId )
+        [HttpPost("send/{workerIdString}")]        
+        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString)
         {
+            Guid.TryParse(workerIdString, out Guid workerId);
             var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
             try
             {

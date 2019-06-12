@@ -49,9 +49,10 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// Send an application record to SPICE for test purposes.  Normally this would occur from a polling process.
         /// </summary>
         /// <returns></returns>
-        [HttpPost("send/{applicationId}")]
-        public async Task<ActionResult> SendApplicationScreeningRequest(string applicationId)
+        [HttpPost("send/{applicationIdString}")]
+        public async Task<ActionResult> SendApplicationScreeningRequest(string applicationIdString)
         {
+            Guid.TryParse(applicationIdString, out Guid applicationId);
             var applicationRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest();
             try
             {

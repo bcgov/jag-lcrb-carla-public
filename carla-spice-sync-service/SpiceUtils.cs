@@ -85,7 +85,8 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 foreach (var row in result)
                 {
-                    var runner = GenerateWorkerScreeningRequest(row.AdoxioLcrbworkerjobid, _logger);
+                    Guid.TryParse(row.AdoxioLcrbworkerjobid, out Guid workerJobId);
+                    var runner = GenerateWorkerScreeningRequest(workerJobId, _logger);
                     runner.Wait();
                     var workerRequest = runner.Result;
                     payload.Add(workerRequest);
@@ -241,7 +242,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Generate an application screening request
         /// </summary>
         /// <returns></returns>
-        public Interfaces.Spice.Models.ApplicationScreeningRequest GenerateApplicationScreeningRequest(string applicationId)
+        public Interfaces.Spice.Models.ApplicationScreeningRequest GenerateApplicationScreeningRequest(Guid applicationId)
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
@@ -296,7 +297,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// </summary>
         /// <returns>The application screening request success boolean.</returns>
         /// <param name="applicationRequest">Application request.</param>
-        public async Task<bool> SendApplicationScreeningRequest(string applicationId, Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
+        public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
         {
             var consentValidated = ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
 
@@ -322,14 +323,14 @@ namespace Gov.Lclb.Cllb.SpdSync
                         AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
                         AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
                     };
-                    _dynamicsClient.Applications.Update(applicationId, update);
+                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
                     return true;
                 }
                 return false;
             }
 
             _logger.LogError("Consent not valid for all associates.");
-            _dynamicsClient.Applications.Update(applicationId, new MicrosoftDynamicsCRMadoxioApplication()
+            _dynamicsClient.Applications.Update(applicationId.ToString(), new MicrosoftDynamicsCRMadoxioApplication()
             {
                 AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
                 AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("CONSENT NOT VALIDATED")
@@ -360,10 +361,10 @@ namespace Gov.Lclb.Cllb.SpdSync
             return result.Response.StatusCode.ToString() == "OK";
         }
 
-        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId, ILogger logger)
+        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(Guid WorkerId, ILogger logger)
         {
             // Query Dynamics for application data
-            var worker = await _dynamicsClient.GetWorkerByIdWithChildren(WorkerId);
+            var worker = await _dynamicsClient.GetWorkerByIdWithChildren(WorkerId.ToString());
 
             /* Create application */
             Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest()
@@ -776,8 +777,9 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             foreach (var application in applications)
             {
-                var screeningRequest = GenerateApplicationScreeningRequest(application.AdoxioApplicationid);
-                var response = await SendApplicationScreeningRequest(application.AdoxioApplicationid, screeningRequest);
+                Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
+                var screeningRequest = GenerateApplicationScreeningRequest(applicationId);
+                var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
                     hangfireContext.WriteLine($"Successfully sent application {application.AdoxioApplicationid} to SPD");
