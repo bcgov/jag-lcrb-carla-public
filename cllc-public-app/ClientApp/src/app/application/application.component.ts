@@ -89,7 +89,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
-    private applicationDataService: ApplicationDataService,
+    public applicationDataService: ApplicationDataService,
     private dynamicsDataService: DynamicsDataService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
@@ -98,8 +98,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
-    this.applicationId = this.route.snapshot.params.applicationId;
-    this.mode = this.route.snapshot.params.mode;
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
+    this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
   }
 
   ngOnInit() {
@@ -262,8 +262,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-    )
-      .pipe(takeWhile(() => this.componentActive))
+    ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(e => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         return of(false);
@@ -294,11 +293,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
       );
-  }
-
-  isFieldError(field: string) {
-    const isError = !this.form.get(field).valid && this.form.get(field).touched;
-    return isError;
   }
 
   /**
