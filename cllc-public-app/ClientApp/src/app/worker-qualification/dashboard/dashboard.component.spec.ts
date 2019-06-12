@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkerDashboardComponent } from './dashboard.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { UserDataService } from '@services/user-data.service';
+import { provideMockStore } from '@ngrx/store/testing';
+import { WorkerDataService } from '@services/worker-data.service.';
+
+const userDataServiceStub: Partial<UserDataService> = {};
+const workerDataServiceStub: Partial<WorkerDataService> = {};
 
 describe('WorkerDashboardComponent', () => {
   let component: WorkerDashboardComponent;
@@ -8,9 +15,15 @@ describe('WorkerDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkerDashboardComponent ]
+      declarations: [WorkerDashboardComponent],
+      providers: [
+        provideMockStore({}),
+        { provide: UserDataService, useValue: userDataServiceStub },
+        { provide: WorkerDataService, useValue: workerDataServiceStub },
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
