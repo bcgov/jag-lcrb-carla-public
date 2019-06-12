@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkerTermsAndConditionsComponent } from './worker-terms-and-conditions.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('WorkerTermsAndConditionsComponent', () => {
   let component: WorkerTermsAndConditionsComponent;
@@ -8,7 +9,8 @@ describe('WorkerTermsAndConditionsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkerTermsAndConditionsComponent ]
+      declarations: [ WorkerTermsAndConditionsComponent ],
+      schemas:  [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
