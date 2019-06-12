@@ -245,7 +245,8 @@ namespace Gov.Lclb.Cllb.SpdSync
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
-            var application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
+            var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
+            var application = applications.Value[0];
 
             var screeningRequest = CreateApplicationScreeningRequest(application);
 
@@ -528,17 +529,17 @@ namespace Gov.Lclb.Cllb.SpdSync
                 };
             }
 
-            /* Add key personnel */
+            /* Add key personnel and deemed associates */
             screeningRequest.Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>();
-            string keypersonnelfilter = "_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1";
+            string keypersonnelfilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1)";
+            string deemedassociatefilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_isdeemedassociate eq true and adoxio_isindividual eq 1)";
             string[] expand = { "adoxio_Contact" };
-            var keyPersonnel = _dynamicsClient.Legalentities.Get(filter: keypersonnelfilter, expand: expand).Value;
-            if (keyPersonnel != null)
+            var associates = _dynamicsClient.Legalentities.Get(filter: keypersonnelfilter + " or " + deemedassociatefilter, expand: expand).Value;
+            if (associates != null)
             {
-                foreach (var legalEntity in keyPersonnel)
+                foreach (var legalEntity in associates)
                 {
                     Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity person = CreateAssociate(legalEntity);
-                    //legalEntity.AdoxioContact.AdoxioConsentvalidated;
                     screeningRequest.Associates.Add(person);
                 }
             }
