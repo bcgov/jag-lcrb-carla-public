@@ -196,6 +196,22 @@ namespace Gov.Lclb.Cllb.SpdSync
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
 
+
+            app.Use((context, next) =>
+            {
+                var logger = loggerFactory.CreateLogger("Headers");
+                logger.LogError("HEADERS:");
+                foreach (var header in context.Request.Headers)
+                {
+                    logger.LogError($"{header.Key} : {header.Value}");
+                }
+
+                // Call the next delegate/middleware in the pipeline
+                return next();
+            });
+
+            
+
             // enable Splunk logger
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
             {
