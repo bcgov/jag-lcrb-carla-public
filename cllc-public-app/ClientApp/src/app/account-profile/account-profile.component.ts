@@ -26,6 +26,7 @@ import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 
 const moment = _rollupMoment || _moment;
 
@@ -68,6 +69,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   applicationMode: string;
   account: Account;
   tiedHouseFormData: Observable<TiedHouseConnection>;
+  indigenousNations: {id: string, name: string}[] = [];
 
   public get contacts(): FormArray {
     return this.form.get('otherContacts') as FormArray;
@@ -77,7 +79,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
     private contactDataService: ContactDataService,
-    private legalEntityDataService: LegalEntityDataService,
+    private dynamicsDataService: DynamicsDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -218,6 +220,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
         this.saveFormData = this.form.value;
       });
+
+      this.dynamicsDataService.getRecord('indigenousnations', '')
+      .subscribe(data => this.indigenousNations = data);
   }
 
   confirmContact(confirm: boolean) {
