@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardComponent } from './dashboard.component';
 import { Component, Input } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from '@appapp-state/reducers/reducers';
+import { reducers, metaReducers } from '@app/app-state/reducers/reducers';
 import { by, element } from 'protractor';
 
 
