@@ -14,7 +14,7 @@ describe('FileUploaderComponent', () => {
   let fixture: ComponentFixture<FileUploaderComponent>;
 
   beforeEach(async(() => {
-    httpClientSpy.get.and.returnValue(of({}));
+    httpClientSpy.get.and.returnValue(of([]));
     TestBed.configureTestingModule({
       declarations: [ FileUploaderComponent ],
       providers: [

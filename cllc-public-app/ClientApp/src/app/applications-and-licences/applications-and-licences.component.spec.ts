@@ -2,12 +2,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplicationsAndLicencesComponent } from './applications-and-licences.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ApplicationDataService } from '@appservices/application-data.service';
-import { LicenseDataService } from '@appservices/license-data.service';
-import { PaymentDataService } from '@appservices/payment-data.service';
+import { ApplicationDataService } from '@services/application-data.service';
+import { LicenseDataService } from '@services/license-data.service';
+import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { FeatureFlagService } from '@appservices/feature-flag.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
 import { of } from 'rxjs';
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {
