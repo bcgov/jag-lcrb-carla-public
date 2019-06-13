@@ -188,15 +188,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 SetupHangfireJobs(app, loggerFactory);
             }
 
-            app.UseAuthentication();
-            app.UseMvc();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
-            });
-
-
             app.Use((context, next) =>
             {
                 var logger = loggerFactory.CreateLogger("Headers");
@@ -209,6 +200,17 @@ namespace Gov.Lclb.Cllb.SpdSync
                 // Call the next delegate/middleware in the pipeline
                 return next();
             });
+
+            app.UseAuthentication();
+            app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
+            });
+
+
+            
 
             
 
