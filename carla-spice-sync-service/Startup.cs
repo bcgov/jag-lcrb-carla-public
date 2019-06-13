@@ -186,20 +186,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, loggerFactory);
-            }
-
-            app.Use((context, next) =>
-            {
-                var logger = loggerFactory.CreateLogger("Headers");
-                logger.LogError("HEADERS:");
-                foreach (var header in context.Request.Headers)
-                {
-                    logger.LogError($"{header.Key} : {header.Value}");
-                }
-
-                // Call the next delegate/middleware in the pipeline
-                return next();
-            });
+            }            
 
             app.UseAuthentication();
             app.UseMvc();
