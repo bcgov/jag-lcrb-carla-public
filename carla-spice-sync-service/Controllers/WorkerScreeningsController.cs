@@ -51,39 +51,40 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         [HttpPost("send/{workerIdString}")]        
         public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString)
         {
-            Guid.TryParse(workerIdString, out Guid workerId);
-            var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
-            try
+            if(Guid.TryParse(workerIdString, out Guid workerId))
             {
-                // Generate the application request
-                workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.ToString());
-                return BadRequest();
-            };
-
-            if (workerRequest == null)
-            {
-                return NotFound($"Worker {workerId} is not found.");
-            }
-            else
-            {
-                var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
-
-                if (result)
+                var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
+                try
                 {
-                    return Ok(workerRequest);
+                    // Generate the application request
+                    workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex.ToString());
+                    return BadRequest();
+                };
+
+                if (workerRequest == null)
+                {
+                    return NotFound($"Worker {workerId} is not found.");
                 }
                 else
                 {
-                    return BadRequest();
-                }
-                
-            }
+                    var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
 
-            
+                    if (result)
+                    {
+                        return Ok(workerRequest);
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+
+                }
+            }
+            return BadRequest();
         }
     }
 }
