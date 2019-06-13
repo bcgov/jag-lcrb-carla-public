@@ -47,7 +47,7 @@
                 formControlName="businessNumber" (keydown)="rejectIfNotDigitOrBackSpace($event)">
             </app-field>
 
-            <app-field appRemoveIfFeatureOn="IndigenousNation" label="Business Type" [required]="true"
+            <app-field label="Business Type" [required]="true"
               [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
               errorMessage="Please select a business type from the dropdown list">
               <select class="form-control" disabled readonly style="width: 250px;" formControlName="businessType">
@@ -65,8 +65,7 @@
               </select>
             </app-field>
 
-            <section appRemoveIfFeatureOn="IndigenousNation"
-              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
+            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">B.C. Incorporation
                   Number</label>
@@ -83,64 +82,6 @@
               </div>
             </section>
 
-            <div class="row" appRemoveIfFeatureOff="IndigenousNation">
-              <section class="col-md-6">
-                <app-field label="Business Type" [required]="true"
-                  [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
-                  errorMessage="Please select a business type from the dropdown list">
-                  <select class="form-control" disabled readonly style="width: 250px;" formControlName="businessType">
-                    <option value="">Choose the organization type</option>
-                    <option value="PrivateCorporation">Private Corporation</option>
-                    <option value="PublicCorporation">Public Corporation</option>
-                    <option value="UnlimitedLiabilityCorporation">Unlimited Liability Corporation</option>
-                    <option value="LimitedLiabilityCorporation">Limited Liability Corporation</option>
-                    <option value="GeneralPartnership">General Partnership</option>
-                    <option value="Partnership">Partnership</option>
-                    <option value="LimitedPartnership">Limited Partnership</option>
-                    <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
-                    <option value="SoleProprietor">Sole Proprietor</option>
-                    <option value="Society">Society</option>
-                  </select>
-                </app-field>
-
-                <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
-                  <div [ngClass]="{'has-error': false}">
-                    <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">B.C. Incorporation
-                      Number</label>
-                    <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
-                      Incorporation Number</label>
-                    <br />
-                    <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
-                      formControlName="bcIncorporationNumber">
-                    <div *ngIf="false" class="alert alert-danger" style="width: 250px;">
-                      <div *ngIf="form.controls['bcIncorporationNumber'].hasError('required') ">
-                        This is required
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </section>
-              <section class="col-md-6">
-                <app-field label="Apply as an Indigenous Nation?" 
-                  [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
-                  errorMessage="Please select a business type from the dropdown list">
-                  <select class="form-control" style="width: 250px;">
-                    <option value=""></option>
-                    <option [value]="true">Yes</option>
-                    <option [value]="false">No</option>
-                  </select>
-                </app-field>
-
-                <app-field label="Select which Indigenous Nation you wish to apply for" 
-                  [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
-                  errorMessage="Please select a business type from the dropdown list">
-                  <select class="form-control" style="width: 250px;">
-                    <option value=""></option>
-                    <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
-                  </select>
-                </app-field>
-              </section>
-            </div>
             <p></p>
 
             <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
