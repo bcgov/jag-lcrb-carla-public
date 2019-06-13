@@ -233,6 +233,25 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return body;
   }
 
+  private isHoursOfSaleValid(): boolean {
+    return !this.application.applicationType.showHoursOfSale ||
+      (this.form.get('serviceHoursSundayOpen').valid
+        && this.form.get('serviceHoursMondayOpen').valid
+        && this.form.get('serviceHoursTuesdayOpen').valid
+        && this.form.get('serviceHoursWednesdayOpen').valid
+        && this.form.get('serviceHoursThursdayOpen').valid
+        && this.form.get('serviceHoursFridayOpen').valid
+        && this.form.get('serviceHoursSaturdayOpen').valid
+        && this.form.get('serviceHoursSundayClose').valid
+        && this.form.get('serviceHoursMondayClose').valid
+        && this.form.get('serviceHoursTuesdayClose').valid
+        && this.form.get('serviceHoursWednesdayClose').valid
+        && this.form.get('serviceHoursThursdayClose').valid
+        && this.form.get('serviceHoursFridayClose').valid
+        && this.form.get('serviceHoursSaturdayClose').valid
+      );
+  }
+
   canDeactivate(): Observable<boolean> | boolean {
     const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
@@ -375,6 +394,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
+    }
+    if (!this.isHoursOfSaleValid()) {
+      this.validationMessages.push('Hours of sale are required');
     }
     if (!this.form.valid) {
       this.validationMessages.push('Some required fields have not been completed');
