@@ -189,7 +189,7 @@
           hours must fall between 9 a.m. and 11
           p.m. Cannabis stores must not be open outside of their licensed hours. However, they may choose to be closed
           at
-          times they are licensed to be open.
+          times they are licensed to be open. <strong class="error-states">*</strong>
         </p>
         <table class="store-hours">
           <tr>
@@ -293,6 +293,7 @@
             </td>
           </tr>
         </table>
+        <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()" >Hours of Sale are required</p>
       </div>
 
       <div appRemoveIfFeatureOff="Marketer" *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
