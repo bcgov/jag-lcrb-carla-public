@@ -21,8 +21,8 @@ export class PrePaymentComponent implements OnInit {
     private workerDataService: WorkerDataService,
     private userDataService: UserDataService,
     private route: ActivatedRoute) {
-      this.route.params.subscribe(params => {
-        this.workerId = params.id;
+      this.route.paramMap.subscribe(params => {
+        this.workerId = params.get('id');
       });
   }
 
