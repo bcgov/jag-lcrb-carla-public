@@ -5,9 +5,15 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
 import { provideMockStore } from '@ngrx/store/testing';
 import { WorkerDataService } from '@services/worker-data.service.';
+import { MatTableModule } from '@angular/material';
+import { AppState } from '@appapp-state/models/app-state';
 
 const userDataServiceStub: Partial<UserDataService> = {};
 const workerDataServiceStub: Partial<WorkerDataService> = {};
+const initialState = {
+  currentAccountState: { currentAccount: {} },
+  currentUserState: { currentUser: {} }
+} as AppState;
 
 describe('WorkerDashboardComponent', () => {
   let component: WorkerDashboardComponent;
@@ -16,8 +22,9 @@ describe('WorkerDashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [WorkerDashboardComponent],
+      imports: [MatTableModule],
       providers: [
-        provideMockStore({}),
+        provideMockStore({initialState}),
         { provide: UserDataService, useValue: userDataServiceStub },
         { provide: WorkerDataService, useValue: workerDataServiceStub },
       ],
