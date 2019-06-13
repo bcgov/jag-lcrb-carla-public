@@ -39,13 +39,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet()]
         public async Task<IActionResult> Index()
         {
-            var nations = await _dynamicsClient.Localgovindigenousnations.GetAsync(filter: "adoxio_isindigenousnation eq true");
-            var result = new List<IndigenousNation>();
-            foreach(var item in nations.Value)
+            try
             {
-                result.Add(item.ToViewModel());
+                var nations = await _dynamicsClient.Localgovindigenousnations.GetAsync(filter: "adoxio_isindigenousnation eq true");
+                var result = new List<IndigenousNation>();
+                foreach (var item in nations.Value)
+                {
+                    result.Add(item.ToViewModel());
+                }
+                return new JsonResult(result);
             }
-            return new JsonResult(result);
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error updating application");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
         }
 
     }
