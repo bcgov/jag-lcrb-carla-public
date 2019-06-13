@@ -69,7 +69,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   applicationMode: string;
   account: Account;
   tiedHouseFormData: Observable<TiedHouseConnection>;
-  indigenousNations: {id: string, name: string}[] = [];
 
   public get contacts(): FormArray {
     return this.form.get('otherContacts') as FormArray;
@@ -220,9 +219,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
         this.saveFormData = this.form.value;
       });
-
-      this.dynamicsDataService.getRecord('indigenousnations', '')
-      .subscribe(data => this.indigenousNations = data);
   }
 
   confirmContact(confirm: boolean) {

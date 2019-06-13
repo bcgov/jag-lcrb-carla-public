@@ -28,6 +28,7 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { ConnectionToProducersComponent } from '@app/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
 import { KeyValue } from '@angular/common';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -75,11 +76,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   ServiceHours = ServiceHours;
   tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
-
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
-
-
-
+  indigenousNations: { id: string, name: string }[] = [];
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   mode: string;
@@ -143,6 +141,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       serviceHoursSaturdayClose: ['', Validators.required],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      applyAsIndigenousNation: [false],
+      indigenousNationId: [{ value: null, disabled: true }, Validators.required]
+    });
+
+    this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: string) => {
+      if (value === 'true') {
+        this.form.get('indigenousNationId').enable();
+      } else {
+        this.form.get('indigenousNationId').reset();
+        this.form.get('indigenousNationId').disable();
+      }
+
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
@@ -158,12 +168,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.account = account;
       });
 
+    this.dynamicsDataService.getRecord('indigenousnations', '')
+      .subscribe(data => this.indigenousNations = data);
+
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+        }
+        if (data.applicantType === 'IndigenousNation') {
+          (<any>data).applyAsIndigenousNation = 'true';
         }
         this.application = data;
         this.hideFormControlByType();
@@ -278,6 +294,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
+    if (this.form.get('applyAsIndigenousNation').value === 'true') {
+      saveData.applicantType = 'IndigenousNation';
+    } else {
+      saveData.applicantType = this.account.businessType;
+    }
     return forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)

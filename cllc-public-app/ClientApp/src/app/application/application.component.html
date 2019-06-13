@@ -11,7 +11,26 @@
         THE APPLICATION</h3>
       <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
         <div [innerHTML]="htmlContent.beforeStarting"></div>
+
+        <div appRemoveIfFeatureOff="IndigenousNation">
+          <app-field label="Apply as an Indigenous Nation?" [valid]="true"
+            errorMessage="Please select a business type from the dropdown list">
+            <select class="form-control" formControlName="applyAsIndigenousNation" style="width: 250px;">
+              <option [value]="true">Yes</option>
+              <option [value]="false">No</option>
+            </select>
+          </app-field>
+
+          <app-field label="Select which Indigenous Nation you wish to apply for" [valid]="true"
+            errorMessage="Please select a business type from the dropdown list">
+            <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
+              <option value=""></option>
+              <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
+            </select>
+          </app-field>
+        </div>
       </section>
+
       <h3 class="blue-header" *ngIf="application?.applicationType?.showPropertyDetails">PROPERTY DETAILS</h3>
       <section class="padded-section" *ngIf="application?.applicationType?.showPropertyDetails">
         <div [ngClass]="{'has-error': this.isFieldError('establishmentName')}" style="position: relative">
@@ -293,10 +312,11 @@
             </td>
           </tr>
         </table>
-        <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()" >Hours of Sale are required</p>
+        <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()">Hours of Sale are required</p>
       </div>
 
-      <div appRemoveIfFeatureOff="Marketer" *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+      <div appRemoveIfFeatureOff="Marketer"
+        *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
         <h3 class="blue-header">INFORMATION ABOUT THE LICENSED PRODUCER</h3>
         <section class="padded-section">
           <p>
@@ -351,8 +371,8 @@
         <div class="padded-section" *ngIf="application?.id">
           <app-connection-to-producers *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
             licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"
-            federalProducerText="licensee or applicant"
-            [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
+            federalProducerText="licensee or applicant" [businessType]="account?.businessType"
+            (value)="tiedHouseFormData = $event"></app-connection-to-producers>
         </div>
       </section>
 
