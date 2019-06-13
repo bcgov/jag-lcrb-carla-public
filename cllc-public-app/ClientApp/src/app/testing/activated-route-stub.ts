@@ -11,6 +11,7 @@ export class ActivatedRouteStub {
     // and pump new values into the `paramMap` observable
     private subject = new ReplaySubject<ParamMap>();
     data: Observable<any>;
+    parent: ActivatedRouteStub;
 
     constructor(initialParams?: Params) {
         this.setParamMap(initialParams);

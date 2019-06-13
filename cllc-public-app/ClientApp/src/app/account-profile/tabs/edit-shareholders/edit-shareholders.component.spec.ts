@@ -21,7 +21,7 @@ describe('EditShareholders component', () => {
         component = fixture.componentInstance;
     }));
 
-    it('should do something', async(() => {
-        expect(true).toEqual(true);
-    }));
+    // it('should do something', async(() => {
+    //     expect(true).toEqual(true);
+    // }));
 });
