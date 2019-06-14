@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatsDataService } from '@app/services/stats-data.service';
 import { Subscription } from 'rxjs';
 import { Stat } from '../models/stat.model';
-import { BaseChartDirective, Color  } from 'ng2-charts';
+import { BaseChartDirective, Color } from 'ng2-charts';
 import { ChartOptions, ChartType, ChartDataSets } from 'assets/external-deps/Chart.min.js';
 
 
@@ -12,7 +12,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'assets/external-deps/Cha
   styleUrls: ['./stats-viewer.component.scss']
 })
 export class StatsViewerComponent implements OnInit {
-  
+
   dataLoaded: boolean;
   loadCount: number;
   public chartColors: object = {
@@ -48,19 +48,19 @@ export class StatsViewerComponent implements OnInit {
 
 
 
-  public chartType: ChartType  = 'bubble';
+  public chartType: ChartType = 'bubble';
   public summaryData: object = {};
   public summaryKeys: string[];
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
-  public totalLabels: string[] = ["Region",
-    "Applications Where Fee Has Been Paid",
-    "Paid, But Incomplete Applications",
-    "Applications Referred to Local Government or Indigenous Nation",
-    "Applications Approved with Conditions",
-    "Licences Issued"];
+  public totalLabels: string[] = ['Region',
+    'Applications Where Fee Has Been Paid',
+    'Paid, But Incomplete Applications',
+    'Applications Referred to Local Government or Indigenous Nation',
+    'Applications Approved with Conditions',
+    'Licences Issued'];
   public totalData: number[] = [0, 0, 0, 0, 0];
- 
+
   public bubbleChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: true,
@@ -86,7 +86,7 @@ export class StatsViewerComponent implements OnInit {
   public bubbleChartData: ChartDataSets[] = [
     {
       data: [
-        { x: 10, y: 10, r: 10 },       
+        { x: 10, y: 10, r: 10 },
       ],
       label: 'Applications Where Fee Has Been Paid',
       backgroundColor: 'green',
@@ -141,7 +141,7 @@ export class StatsViewerComponent implements OnInit {
   constructor(
     private statsDataService: StatsDataService
   ) {
-    
+
   }
 
   private rand(max: number) {
@@ -155,9 +155,8 @@ export class StatsViewerComponent implements OnInit {
     return { x, y, r };
   }
 
-  private calculateRadius(height: number, maxSize: number, theValue: number)
-  {
-    return ((theValue / 2) / maxSize ) * height;
+  private calculateRadius(height: number, maxSize: number, theValue: number) {
+    return ((theValue / 2) / maxSize) * height;
   }
 
   /*
@@ -171,15 +170,15 @@ export class StatsViewerComponent implements OnInit {
 
   ngOnInit() {
     this.loadCount = 0;
-    this.busy = this.statsDataService.getStats("zLicences Issued (Reporting)").subscribe((stats: Stat[]) => {
+    this.busy = this.statsDataService.getStats('zLicences Issued (Reporting)').subscribe((stats: Stat[]) => {
       stats.forEach((stat: Stat | any) => {
-        
 
-        var current = this.summaryData[stat.commregion];
+
+        let current = this.summaryData[stat.commregion];
         if (!current) {
           current = {};
         }
-        var currentValue = current.licencesIssued;
+        let currentValue = current.licencesIssued;
 
         if (!currentValue) {
           currentValue = 0;
@@ -191,15 +190,15 @@ export class StatsViewerComponent implements OnInit {
       });
       this.loadCount++;
 
-      this.statsDataService.getStats("zApplications Approved with Conditions (Reporting)").subscribe((stats: Stat[]) => {
+      this.statsDataService.getStats('zApplications Approved with Conditions (Reporting)').subscribe((stats: Stat[]) => {
         stats.forEach((stat: Stat | any) => {
-          
 
-          var current = this.summaryData[stat.commregion];
+
+          let current = this.summaryData[stat.commregion];
           if (!current) {
             current = {};
           }
-          var currentValue = current.approvedWithConditions;
+          let currentValue = current.approvedWithConditions;
 
           if (!currentValue) {
             currentValue = 0;
@@ -212,15 +211,16 @@ export class StatsViewerComponent implements OnInit {
         });
         this.loadCount++;
 
-        this.statsDataService.getStats("zApplications Referred to Local Government or Indigenous Nation (Reporting)").subscribe((stats: Stat[]) => {
-          stats.forEach((stat: Stat | any) => {
-            
+        this.statsDataService.getStats('zApplications Referred to Local Government or Indigenous Nation (Reporting)')
+        .subscribe((statList: Stat[]) => {
+          statList.forEach((stat: Stat | any) => {
 
-            var current = this.summaryData[stat.commregion];
+
+            let current = this.summaryData[stat.commregion];
             if (!current) {
               current = {};
             }
-            var currentValue = current.referred;
+            let currentValue = current.referred;
 
             if (!currentValue) {
               currentValue = 0;
@@ -232,15 +232,15 @@ export class StatsViewerComponent implements OnInit {
           });
 
 
-          this.statsDataService.getStats("zPaid, But Incomplete Applications (Reporting)").subscribe((stats: Stat[]) => {
-            stats.forEach((stat: Stat | any) => {
-             
+          this.statsDataService.getStats('zPaid, But Incomplete Applications (Reporting)').subscribe((statList: Stat[]) => {
+            statList.forEach((stat: Stat | any) => {
 
-              var current = this.summaryData[stat.commregion];
+
+              let current = this.summaryData[stat.commregion];
               if (!current) {
                 current = {};
               }
-              var currentValue = current.incomplete;
+              let currentValue = current.incomplete;
 
               if (!currentValue) {
                 currentValue = 0;
@@ -249,16 +249,16 @@ export class StatsViewerComponent implements OnInit {
               current.incomplete = currentValue;
               this.summaryData[stat.commregion] = current;
               this.totalData[1]++;
-            });            
+            });
 
-            this.statsDataService.getStats("zApplications Where Fee Has Been Paid (Reporting)").subscribe((stats: Stat[]) => {
-              stats.forEach((stat: Stat | any) => {                
+            this.statsDataService.getStats('zApplications Where Fee Has Been Paid (Reporting)').subscribe((stats: Stat[]) => {
+              stats.forEach((stat: Stat | any) => {
 
-                var current = this.summaryData[stat.commregion];
+                let current = this.summaryData[stat.commregion];
                 if (!current) {
                   current = {};
                 }
-                var currentValue = current.paid;
+                let currentValue = current.paid;
 
                 if (!currentValue) {
                   currentValue = 0;
@@ -268,18 +268,18 @@ export class StatsViewerComponent implements OnInit {
                 this.summaryData[stat.commregion] = current;
                 this.totalData[0]++;
               });
-              
 
-            this.summaryKeys = Object.keys(this.summaryData).sort((n1, n2) => {
-              if (n1 > n2) {
-                return 1;
-              }
 
-              if (n1 < n2) {
-                return -1;
-              }
+              this.summaryKeys = Object.keys(this.summaryData).sort((n1, n2) => {
+                if (n1 > n2) {
+                  return 1;
+                }
 
-              return 0;
+                if (n1 < n2) {
+                  return -1;
+                }
+
+                return 0;
               });
 
               /*
@@ -287,30 +287,30 @@ export class StatsViewerComponent implements OnInit {
                 backgroundColor: this.chartColors[Object.keys(this.chartColors)[Math.floor(Math.random() * Object.keys(this.chartColors).length)]]
               }));
               */
-              var maxSize = this.totalData[0] + this.totalData[3] + 10 + this.totalData[4];
-              var maxScale = 10 + maxSize + 10;
+              let maxSize = this.totalData[0] + this.totalData[3] + 10 + this.totalData[4];
+              let maxScale = 10 + maxSize + 10;
 
               this.bubbleChartOptions.scales.xAxes[0].ticks.max = maxScale;
               this.bubbleChartOptions.scales.yAxes[0].ticks.max = maxScale;
 
-              var height = 450;
+              let height = 450;
 
-              var series1Data = [];
-              var series1Factor 
+              let series1Data = [];
+              let series1Factor
               series1Data.push(this.newPoint(this.totalData[0] / 2 + 10, 10 + this.totalData[0] / 2, this.calculateRadius(height, maxSize, this.totalData[0])));
 
-              var series2Data = [];
+              let series2Data = [];
               series2Data.push(this.newPoint(10 + this.calculateRadius(height, maxSize, this.totalData[0]), 10 + this.totalData[1] / 2, this.calculateRadius(height, maxSize, this.totalData[1])));
 
 
-              var series3Data = [];
+              let series3Data = [];
               series3Data.push(this.newPoint(10 + (this.totalData[2] / 2), 10 + (this.totalData[2] / 2), this.calculateRadius(height, maxSize, this.totalData[2])));
 
 
-              var series4Data = [];
+              let series4Data = [];
               series4Data.push(this.newPoint(this.totalData[0] + 10 + (this.totalData[3]), 10 + (this.totalData[3] / 2), this.calculateRadius(height, maxSize, this.totalData[3])));
 
-              var series5Data = [];
+              let series5Data = [];
               series5Data.push(this.newPoint(this.totalData[0] + 10 + (this.totalData[3]) + (this.totalData[4] / 2), (this.totalData[4]), this.calculateRadius(height, maxSize, this.totalData[4])));
 
               this.bubbleChartData[0].data = series1Data;
@@ -319,7 +319,7 @@ export class StatsViewerComponent implements OnInit {
               this.bubbleChartData[3].data = series4Data;
               this.bubbleChartData[4].data = series5Data;
 
-            this.dataLoaded = true;
+              this.dataLoaded = true;
             });
           });
 
@@ -327,10 +327,10 @@ export class StatsViewerComponent implements OnInit {
 
       });
 
-        
-    }); 
 
-  
+    });
+
+
   }
 }
 
