@@ -1,4 +1,5 @@
-﻿using CarlaSpiceSync.models;
+﻿
+using CarlaSpiceSync.models;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
@@ -552,7 +553,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             return screeningRequest;
         }
 
-        private List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> foundAssociates)
+        private List<Interfaces.Spice.Models.LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> foundAssociates)
         {
             List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> newAssociates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>();
             string applicationfilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
@@ -664,6 +665,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             }
             else
             {
+                // Attach the account
                 if (legalEntity._adoxioShareholderaccountidValue != null)
                 {
                     var account = _dynamicsClient.Accounts.Get(filter: "accountid eq " + legalEntity._adoxioShareholderaccountidValue).Value;
@@ -676,7 +678,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
                     };
                 }
-                else
+                else if (legalEntity.AdoxioAccount != null)
                 {
                     associate.Account = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
                     {
@@ -686,6 +688,11 @@ namespace Gov.Lclb.Cllb.SpdSync
                         BusinessNumber = legalEntity.AdoxioAccount.Accountnumber,
                         Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
                     };
+                }
+                else
+                {
+                    _logger.LogError("Failed to find a shareholder account found");
+                    associate.Account = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account();
                 }
                 associate.IsIndividual = false;
             }
