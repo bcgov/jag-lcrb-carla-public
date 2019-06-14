@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StatsViewerComponent } from './stats-viewer.component';
+import { StatsDataService } from '@services/stats-data.service';
+import { of } from 'rxjs';
+
+const statsDataServiceStub: Partial<StatsDataService> = {
+  getStats: () => of([])
+};
 
 describe('StatsViewerComponent', () => {
   let component: StatsViewerComponent;
@@ -8,7 +14,10 @@ describe('StatsViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatsViewerComponent ]
+      declarations: [ StatsViewerComponent ],
+      providers: [
+        {provide: StatsDataService, useValue: statsDataServiceStub}
+      ]
     })
     .compileComponents();
   }));

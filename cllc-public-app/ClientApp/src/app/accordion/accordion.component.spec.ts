@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccordionComponent } from './accordion.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
@@ -8,7 +9,8 @@ describe('AccordionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccordionComponent ]
+      declarations: [ AccordionComponent ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));
@@ -23,3 +25,4 @@ describe('AccordionComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

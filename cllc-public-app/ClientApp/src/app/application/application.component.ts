@@ -28,6 +28,7 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { ConnectionToProducersComponent } from '@app/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
 import { KeyValue } from '@angular/common';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -75,11 +76,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   ServiceHours = ServiceHours;
   tiedHouseFormData: TiedHouseConnection;
   possibleProblematicNameWarning = false;
-
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
-
-
-
+  indigenousNations: { id: string, name: string }[] = [];
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   mode: string;
@@ -89,7 +87,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
-    private applicationDataService: ApplicationDataService,
+    public applicationDataService: ApplicationDataService,
     private dynamicsDataService: DynamicsDataService,
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
@@ -98,8 +96,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
-    this.applicationId = this.route.snapshot.params.applicationId;
-    this.mode = this.route.snapshot.params.mode;
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
+    this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
   }
 
   ngOnInit() {
@@ -143,6 +141,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
       serviceHoursSaturdayClose: ['', Validators.required],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      applyAsIndigenousNation: [false],
+      indigenousNationId: [{ value: null, disabled: true }, Validators.required]
+    });
+
+    this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: string) => {
+      if (value === 'true') {
+        this.form.get('indigenousNationId').enable();
+      } else {
+        this.form.get('indigenousNationId').reset();
+        this.form.get('indigenousNationId').disable();
+      }
+
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
@@ -158,12 +168,18 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.account = account;
       });
 
+    this.dynamicsDataService.getRecord('indigenousnations', '')
+      .subscribe(data => this.indigenousNations = data);
+
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+        }
+        if (data.applicantType === 'IndigenousNation') {
+          (<any>data).applyAsIndigenousNation = 'true';
         }
         this.application = data;
         this.hideFormControlByType();
@@ -233,6 +249,25 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return body;
   }
 
+  private isHoursOfSaleValid(): boolean {
+    return !this.application.applicationType.showHoursOfSale ||
+      (this.form.get('serviceHoursSundayOpen').valid
+        && this.form.get('serviceHoursMondayOpen').valid
+        && this.form.get('serviceHoursTuesdayOpen').valid
+        && this.form.get('serviceHoursWednesdayOpen').valid
+        && this.form.get('serviceHoursThursdayOpen').valid
+        && this.form.get('serviceHoursFridayOpen').valid
+        && this.form.get('serviceHoursSaturdayOpen').valid
+        && this.form.get('serviceHoursSundayClose').valid
+        && this.form.get('serviceHoursMondayClose').valid
+        && this.form.get('serviceHoursTuesdayClose').valid
+        && this.form.get('serviceHoursWednesdayClose').valid
+        && this.form.get('serviceHoursThursdayClose').valid
+        && this.form.get('serviceHoursFridayClose').valid
+        && this.form.get('serviceHoursSaturdayClose').valid
+      );
+  }
+
   canDeactivate(): Observable<boolean> | boolean {
     const connectionsDidntChang = !(this.connectionsToProducers && this.connectionsToProducers.formHasChanged());
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
@@ -259,11 +294,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
+    if (this.form.get('applyAsIndigenousNation').value === 'true') {
+      saveData.applicantType = 'IndigenousNation';
+    } else {
+      saveData.applicantType = this.account.businessType;
+    }
     return forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
-    )
-      .pipe(takeWhile(() => this.componentActive))
+    ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(e => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         return of(false);
@@ -294,11 +333,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
       }
       );
-  }
-
-  isFieldError(field: string) {
-    const isError = !this.form.get(field).valid && this.form.get(field).touched;
-    return isError;
   }
 
   /**
@@ -375,6 +409,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.name === ApplicationTypeNames.CannabisRetailStore && this.submittedApplications >= 8) {
       valid = false;
       this.validationMessages.push('Only 8 applications can be submitted');
+    }
+    if (!this.isHoursOfSaleValid()) {
+      this.validationMessages.push('Hours of sale are required');
     }
     if (!this.form.valid) {
       this.validationMessages.push('Some required fields have not been completed');

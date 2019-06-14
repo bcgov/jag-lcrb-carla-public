@@ -22,10 +22,10 @@ import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '@services/account-data.service';
 import { Account } from '../models/account.model';
 import { FormBase } from '../shared/form-base';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { ConnectionToProducersComponent } from './tabs/connection-to-producers/connection-to-producers.component';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
 
 const moment = _rollupMoment || _moment;
 
@@ -77,15 +77,15 @@ export class AccountProfileComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
     private contactDataService: ContactDataService,
-    private legalEntityDataService: LegalEntityDataService,
+    private dynamicsDataService: DynamicsDataService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private tiedHouseService: TiedHouseConnectionsDataService
   ) {
     super();
-    this.applicationId = this.route.snapshot.params.applicationId;
-    this.applicationMode = this.route.snapshot.params.mode;
+    this.route.paramMap.subscribe(params => this.applicationId = params.get('applicationId'));
+    this.route.paramMap.subscribe(params => this.applicationMode = params.get('mode'));
   }
 
   ngOnInit() {

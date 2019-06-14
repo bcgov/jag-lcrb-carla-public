@@ -423,5 +423,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ViewModels.ApplicationType ApplicationType { get; set; }
 
         public TiedHouseConnection TiedHouse { get; set; }
+
+        public string IndigenousNationId { get; set; }
     }
 }

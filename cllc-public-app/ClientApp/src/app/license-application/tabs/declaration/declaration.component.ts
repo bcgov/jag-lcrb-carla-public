@@ -1,8 +1,8 @@
 
-import {filter} from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { Component, OnInit, Input } from '@angular/core';
 import { ApplicationDataService } from '../../../services/application-data.service';
-import { Subscription ,  Observable ,  Subject } from 'rxjs';
+import { Subscription, Observable, Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -29,7 +29,7 @@ export class DeclarationComponent implements OnInit {
     private store: Store<AppState>,
     private route: ActivatedRoute,
     public snackBar: MatSnackBar) {
-    this.applicationId = this.route.parent.snapshot.params.applicationId;
+    this.route.parent.paramMap.subscribe(params => this.applicationId = params.get('applicationId'));
   }
 
   ngOnInit() {
