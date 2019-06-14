@@ -31,9 +31,9 @@
         </div>
       </section>
 
-      <section  class="ngtest-property-details">
-      <h3 class="blue-header" *ngIf="application?.applicationType?.showPropertyDetails">PROPERTY DETAILS</h3>
-      <section class="padded-section" *ngIf="application?.applicationType?.showPropertyDetails">
+      <section  class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
+      <h3 class="blue-header">PROPERTY DETAILS</h3>
+      <section class="padded-section">
         <div style="position: relative">
           <div [ngBusy]="busy"></div>
           <section *ngIf="htmlContent?.beforeStarting">
