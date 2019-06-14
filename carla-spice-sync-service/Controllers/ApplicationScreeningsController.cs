@@ -46,36 +46,47 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
 
 
         /// <summary>
-        /// Send an application record to SPICE for test purposes.  Normally this would occur from a polling process.
+        /// Send an application record to SPICE for event driven processing
         /// </summary>
         /// <returns></returns>
+
         [HttpPost("send/{applicationIdString}")]
-        public async Task<ActionResult> SendApplicationScreeningRequest(string applicationIdString)
+        [AllowAnonymous]
+        public async Task<ActionResult> SendApplicationScreeningRequest(string applicationIdString, string bearer)
         {
-            if(Guid.TryParse(applicationIdString, out Guid applicationId))
+            if (JwtChecker.Check(bearer, Configuration))
             {
-                var applicationRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest();
-                try
+                if (Guid.TryParse(applicationIdString, out Guid applicationId))
                 {
-                    // Generate the application request
-                    applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex.ToString());
+                    var applicationRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest();
+                    try
+                    {
+                        // Generate the application request
+                        applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex.ToString());
+                        return BadRequest();
+                    };
+
+
+                    var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
+
+                    if (result)
+                    {
+                        return Ok(applicationRequest);
+                    }
                     return BadRequest();
-                };
-
-
-                var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
-
-                if (result)
-                {
-                    return Ok(applicationRequest);
                 }
                 return BadRequest();
             }
-            return BadRequest();
+            else
+            {
+                return Unauthorized();
+            }
+
+            
         }
     }
 }
