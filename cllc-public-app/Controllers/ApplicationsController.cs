@@ -525,6 +525,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (!string.IsNullOrEmpty(item.IndigenousNationId))
                 {
                     adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
+                } else
+                {
+                    //remove reference
+                    await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_localgovindigenousnationid");
                 }
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
