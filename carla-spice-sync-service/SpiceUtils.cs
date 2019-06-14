@@ -277,7 +277,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     }
                     ConsentValidated consent = (ConsentValidated)contact.AdoxioConsentvalidated;
 
-                    if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES && contact.AdoxioConsentvalidatedexpirydate.Value >= DateTimeOffset.Now)
+                    if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
                     {
                         consentValidated = false;
                     }
