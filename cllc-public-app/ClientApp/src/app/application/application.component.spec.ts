@@ -21,6 +21,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { FileSystemItem } from '@models/file-system-item.model';
 import { ActivatedRouteStub } from './../testing/activated-route-stub';
+import { FieldComponent } from '@shared/field/field.component';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let applicationDataServiceStub: Partial<ApplicationDataService>;
@@ -54,7 +55,7 @@ describe('ApplicationComponent', () => {
       }),
 
     };
-    dynamicsDataServiceStub = { getRecord: () => of([])};
+    dynamicsDataServiceStub = { getRecord: () => of([]) };
     tiedHouseConnectionsDataServiceStub = {
       updateTiedHouse: () => of(null)
     };
@@ -62,9 +63,9 @@ describe('ApplicationComponent', () => {
     matSnackBarStub = {};
     activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
     TestBed.configureTestingModule({
-      declarations: [ApplicationComponent, FileUploaderComponent],
+      declarations: [ApplicationComponent, FileUploaderComponent, FieldComponent],
       imports: [
-  RouterTestingModule,
+        RouterTestingModule,
         HttpClientTestingModule,
         StoreModule.forRoot(reducers, { metaReducers }),
       ],
@@ -307,7 +308,7 @@ describe('ApplicationComponent', () => {
     expect(component.validationMessages).toContain('At least one supporting document is required.');
   });
 
-  it('should be valid if no supporting documents are uploaded', () => {
+  it('should be valid if supporting documents are uploaded', () => {
     applicationService.getApplicationById = () => of(<Application>{
       id: '1',
       applicationType: <any>{
