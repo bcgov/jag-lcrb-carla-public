@@ -10,38 +10,70 @@
       <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
         THE APPLICATION</h3>
       <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
-        <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+        <div  class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+
+        <div appRemoveIfFeatureOff="IndigenousNation">
+          <app-field label="Apply as an Indigenous Nation?" [valid]="true"
+            errorMessage="Please select a business type from the dropdown list">
+            <select class="form-control" formControlName="applyAsIndigenousNation" style="width: 250px;">
+              <option [value]="true">Yes</option>
+              <option [value]="false">No</option>
+            </select>
+          </app-field>
+
+          <app-field label="Select which Indigenous Nation you wish to apply for" [valid]="true"
+            errorMessage="Please select a business type from the dropdown list">
+            <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
+              <option value=""></option>
+              <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
+            </select>
+          </app-field>
+        </div>
       </section>
-      <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
-        <h3 class="blue-header">PROPERTY DETAILS</h3>
-        <section class="padded-section">
-          <div style="position: relative">
-            <div [ngBusy]="busy"></div>
-            <section *ngIf="htmlContent?.beforeStarting">
-              <label for="">Establishment Name</label>
-              <br>
 
-              <p>
-                A name cannot mislead the public about what kind of business it operates. The name cannot imply a
-                licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
-                words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
-                or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
-                Scheduling Act. Store names cannot also use language that encourages intoxication.
-              </p>
+      <section  class="ngtest-property-details">
+      <h3 class="blue-header" *ngIf="application?.applicationType?.showPropertyDetails">PROPERTY DETAILS</h3>
+      <section class="padded-section" *ngIf="application?.applicationType?.showPropertyDetails">
+        <div style="position: relative">
+          <div [ngBusy]="busy"></div>
+          <section *ngIf="htmlContent?.beforeStarting">
+            <label for="">Establishment Name</label>
+            <br>
 
-              <p>
-                Additionally, a name cannot imply an association with another business. This applies to signs,
-                trademarks and any type of branding.
-              </p>
+            <p>
+              A name cannot mislead the public about what kind of business it operates. The name cannot imply a
+              licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
+              words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
+              or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
+              Scheduling Act. Store names cannot also use language that encourages intoxication.
+            </p>
 
-              <p>
-                Establishment names will be reviewed for approval during the application process. For more information,
-                please see the <a routerLink="/policy-document/store-name">
-                  Non-Medical Cannabis Retail Store Name Approval
-                  Process
-                </a>.
-              </p>
-            </section>
+            <p>
+              Additionally, a name cannot imply an association with another business. This applies to signs,
+              trademarks and any type of branding.
+            </p>
+
+            <p>
+              Establishment names will be reviewed for approval during the application process. For more information,
+              please see the <a routerLink="/policy-document/store-name">
+                Non-Medical Cannabis Retail Store Name Approval
+                Process
+              </a>.
+            </p>
+          </section>
+
+          <app-field
+            [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) ? 'Establishment Name' : 'Name of the Proposed Establishment'"
+            [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+            errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+            <input class="form-control" style="width: 500px;" type="text"
+              ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)"
+              (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+          </app-field>
+          <div *ngIf="possibleProblematicNameWarning" class="warning-state">
+            Caution: The store name might contain at least one word that doesn’t comply with the naming requirements.
+            Double check the store name before submitting the application.
+          </div>
 
             <app-field
               [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) ? 'Establishment Name' : 'Name of the Proposed Establishment'"
@@ -297,6 +329,7 @@
               </td>
             </tr>
           </table>
+          <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()">Hours of Sale are required</p>
         </div>
       </section>
 
