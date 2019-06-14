@@ -45,46 +45,54 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         }       
 
         /// <summary>
-        /// Send a worker record to SPICE for test purposes.  Normally this would occur from a polling process.
+        /// Send a worker record to SPICE for event driven processing.
         /// </summary>
         /// <returns></returns>
-        [HttpPost("send/{workerIdString}")]        
-        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString)
+        [HttpPost("send/{workerIdString}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString, string bearer)
         {
-            if(Guid.TryParse(workerIdString, out Guid workerId))
+            if (JwtChecker.Check(bearer, Configuration))
             {
-                var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
-                try
+                if (Guid.TryParse(workerIdString, out Guid workerId))
                 {
-                    // Generate the application request
-                    workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex.ToString());
-                    return BadRequest();
-                };
-
-                if (workerRequest == null)
-                {
-                    return NotFound($"Worker {workerId} is not found.");
-                }
-                else
-                {
-                    var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
-
-                    if (result)
+                    var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
+                    try
                     {
-                        return Ok(workerRequest);
+                        // Generate the application request
+                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex.ToString());
+                        return BadRequest();
+                    };
+
+                    if (workerRequest == null)
+                    {
+                        return NotFound($"Worker {workerId} is not found.");
                     }
                     else
                     {
-                        return BadRequest();
-                    }
+                        var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
 
+                        if (result)
+                        {
+                            return Ok(workerRequest);
+                        }
+                        else
+                        {
+                            return BadRequest();
+                        }
+
+                    }
                 }
+                return BadRequest();
             }
-            return BadRequest();
+            else
+            {
+                return Unauthorized();
+            }
         }
     }
 }

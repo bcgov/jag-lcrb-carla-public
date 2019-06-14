@@ -186,7 +186,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, loggerFactory);
-            }
+            }            
 
             app.UseAuthentication();
             app.UseMvc();
@@ -195,6 +195,11 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
+
+
+            
+
+            
 
             // enable Splunk logger
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
