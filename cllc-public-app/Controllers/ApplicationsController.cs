@@ -328,7 +328,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.ApplicationType.Name == "Marketer")
                 {
                     // create tiedhouse relationship
-                     adoxioApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication = new List<MicrosoftDynamicsCRMadoxioTiedhouseconnection>{
+                    adoxioApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication = new List<MicrosoftDynamicsCRMadoxioTiedhouseconnection>{
                             new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
                         };
                 }
@@ -521,6 +521,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
+                // Indigenous nation association
+                if (!string.IsNullOrEmpty(item.IndigenousNationId))
+                {
+                    adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
+                }
+
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
             catch (OdataerrorException odee)

@@ -46,6 +46,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("Marketer");
             }
 
+            if (!String.IsNullOrEmpty(Configuration["FEATURE_INDIGENOUS_NATION"]))
+            {
+                features.Add("IndigenousNation");
+            }
+
             return Json(features);
         }
 

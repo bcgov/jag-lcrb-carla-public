@@ -27,9 +27,8 @@
           <h3 *ngIf="getBusinessTypeName() === 'Sole Proprietor'" class="blue-header">DETAILS OF
             THE SOLE PROPRIETORSHIP</h3>
           <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
-          <h3
-            *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"
-            class="blue-header"> CORPORATION DETAILS</h3>
+          <h3 *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" class="blue-header"> CORPORATION DETAILS
+          </h3>
           <div formGroupName="businessProfile" class="padded-section">
             <app-field label="{{getBusinessTypeName()}} - Legal Name">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
@@ -66,12 +65,10 @@
               </select>
             </app-field>
 
-            <section
-              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
+            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
-                <label
-                  *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"
-                  for="">B.C. Incorporation Number</label>
+                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">B.C. Incorporation
+                  Number</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
                 <br />
@@ -84,13 +81,12 @@
                 </div>
               </div>
             </section>
+
             <p></p>
 
-            <section
-              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
+            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
-                <label
-                  *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
+                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'">Date of Incorporation in
                   B.C.</label>
@@ -266,8 +262,7 @@
 
           <h3 class="blue-header">CONNECTIONS
             TO FEDERAL PRODUCERS OF CANNABIS</h3>
-          <div class="padded-section"
-            *ngIf="saveFormData?.businessProfile?.id">
+          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
             <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
               [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
           </div>
