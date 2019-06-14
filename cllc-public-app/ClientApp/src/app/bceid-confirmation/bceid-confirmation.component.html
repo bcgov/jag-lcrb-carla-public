@@ -1,4 +1,4 @@
-<div class="container" *ngIf="!currentUser.isBceidConfirmed">
+<div class="container" *ngIf="!currentUser?.isBceidConfirmed">
   <img style="margin-left: -18px;" *ngIf="termsAccepted" src="assets/bceid_default_logo.jpg" alt="BCeID Logo">
   <div [ngBusy]="busySubscription"></div>
   <app-terms-of-use (termsAccepted)="termsAccepted=$event" *ngIf="bceidConfirmAccount && !accountExists && !termsAccepted"></app-terms-of-use>
