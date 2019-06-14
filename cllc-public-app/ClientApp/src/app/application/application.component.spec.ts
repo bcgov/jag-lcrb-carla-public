@@ -54,7 +54,7 @@ describe('ApplicationComponent', () => {
       }),
 
     };
-    dynamicsDataServiceStub = {};
+    dynamicsDataServiceStub = { getRecord: () => of([])};
     tiedHouseConnectionsDataServiceStub = {
       updateTiedHouse: () => of(null)
     };
