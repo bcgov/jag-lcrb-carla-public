@@ -262,35 +262,43 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <param name="associates">Associates.</param>
         private bool ValidateAssociateConsent(List<Interfaces.Spice.Models.LegalEntity> associates)
         {
-            /* Validate consent for all associates */
-            bool consentValidated = true;
-            foreach (var entity in associates)
+            try
             {
-                if ((bool)entity.IsIndividual)
+                /* Validate consent for all associates */
+                bool consentValidated = true;
+                foreach (var entity in associates)
                 {
-                    var id = entity.Contact.ContactId;
-                    var contact = _dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
-                    if (contact.AdoxioConsentvalidated == null)
+                    if ((bool)entity.IsIndividual)
                     {
-                        consentValidated = false;
-                        continue;
-                    }
-                    ConsentValidated consent = (ConsentValidated)contact.AdoxioConsentvalidated;
+                        var id = entity.Contact.ContactId;
+                        var contact = _dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
+                        if (contact.AdoxioConsentvalidated == null)
+                        {
+                            consentValidated = false;
+                            continue;
+                        }
+                        ConsentValidated consent = (ConsentValidated)contact.AdoxioConsentvalidated;
 
-                    if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
+                        if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
+                        {
+                            consentValidated = false;
+                        }
+                    }
+                    else
                     {
-                        consentValidated = false;
+                        if (!ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
+                        {
+                            consentValidated = false;
+                        }
                     }
                 }
-                else
-                {
-                    if (!ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
-                    {
-                        consentValidated = false;
-                    }
-                }
+                return consentValidated;
             }
-            return consentValidated;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return false;
+            }
         }
 
         /// <summary>

@@ -59,7 +59,7 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
 }
 
 node('nodejs') {
-    stage('Smoke test on Dev') {
+    stage('Angular Unit Tests') {
         //the checkout is mandatory, otherwise functional test would fail
         echo "checking out source"
         echo "Build: ${BUILD_ID}"
@@ -69,19 +69,18 @@ node('nodejs') {
                 // sh 'Xvfb :1 -screen 0 1024x768x24 &'
                 // sh 'export DISPLAY=:1'
                 sh 'npm install -g @angular/cli'
-                sh 'npm install'				
-                sh 'BASE_URL=http://cannabis-licensing-dev.pathfinder.bcgov'
-				sh 'e2e --project=lclb-public-app-e2e'
+                sh 'npm install'				                
+				sh 'npm run test-headless'
             } finally {
-                archiveArtifacts allowEmptyArchive: true, artifacts: 'e2e-reports/**/*'
+                archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
                 junit 'junitresults.xml'
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
                     keepAll: true,
-                    reportDir: 'e2e-reports',
-                    reportFiles: 'chrome-test-report.html',
-                    reportName: "E2E Report"
+                    reportDir: '.',
+                    reportFiles: 'unit-tests.html',
+                    reportName: "Unit Test Report"
                 ])
             }
         }
