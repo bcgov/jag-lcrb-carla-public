@@ -11,6 +11,7 @@
     "watch": "ng build --watch --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
+    "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -72,8 +73,10 @@
     "karma": "^4.0.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "^2.0.5",
+    "karma-htmlfile-reporter": "^0.3.8",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-junit-reporter": "^1.2.0",
     "node-sass": "^4.11.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
