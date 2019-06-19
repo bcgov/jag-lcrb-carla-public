@@ -5,20 +5,25 @@ using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using SpdSync;
 using Splunk;
 using Splunk.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Linq;
+using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +37,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            
+
         }
 
         public IConfiguration Configuration { get; }
@@ -40,15 +45,15 @@ namespace Gov.Lclb.Cllb.SpdSync
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddMvc(config =>
-            {                
+            {
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
                 {
-                     var policy = new AuthorizationPolicyBuilder()
-                                  .RequireAuthenticatedUser()
-                                  .Build();
-                     config.Filters.Add(new AuthorizeFilter(policy));
+                    var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
                 }
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -98,11 +103,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks()
+                .AddCheck("SPD sync", () => HealthCheckResult.Healthy())
+                .AddCheck<SharepointHealthCheck>("Sharepoint");
         }
 
         private void SetupSharePoint(IServiceCollection services)
@@ -125,7 +128,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {            
+        {
 
             if (env.IsDevelopment())
             {
@@ -163,6 +166,28 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 SetupHangfireJobs(app, loggerFactory);
             }
+            var healthCheckOptions = new HealthCheckOptions
+            {
+                ResponseWriter = async (c, r) =>
+                {
+                    c.Response.ContentType = MediaTypeNames.Application.Json;
+                    var result = JsonConvert.SerializeObject(
+                       new
+                       {
+                           checks = r.Entries.Select(e =>
+                      new
+                      {
+                          description = e.Key,
+                          status = e.Value.Status.ToString(),
+                          responseTime = e.Value.Duration.TotalMilliseconds
+                      }),
+                           totalResponseTime = r.TotalDuration.TotalMilliseconds
+                       });
+                    await c.Response.WriteAsync(result);
+                }
+            };
+            app.UseHealthChecks("/hc", healthCheckOptions);
+
 
             app.UseAuthentication();
             app.UseMvc();
@@ -224,9 +249,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             try
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {                    
+                {
                     log.LogInformation("Creating Hangfire job for SPD Daily Export ...");
-                    RecurringJob.AddOrUpdate(() =>  new SpdUtils(Configuration, loggerFactory).SendExportJob(null), Cron.Daily);
+                    RecurringJob.AddOrUpdate(() => new SpdUtils(Configuration, loggerFactory).SendExportJob(null), Cron.Daily);
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
