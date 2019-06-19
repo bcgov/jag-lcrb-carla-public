@@ -14,7 +14,6 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseHealthChecks("/hc")
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     var env = hostingContext.HostingEnvironment;
@@ -28,7 +27,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                     logging.AddEventSourceLogger();
                 })
                 .UseStartup<Startup>()
-                .UseHealthChecks("/hc")
                 .Build();
     }
 }
