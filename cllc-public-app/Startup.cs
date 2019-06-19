@@ -27,7 +27,6 @@ using Splunk.Configurations;
 using System;
 using System.IO;
 using System.Text;
-using Gov.Lclb.Cllb.Public.HealthCheck.Extension;
 using System.Net.Mime;
 using Newtonsoft.Json;
 using System.Linq;
