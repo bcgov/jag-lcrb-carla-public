@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Gov.Lclb.Cllb.Public.HealthCheck.Extension
+namespace Gov.Lclb.Cllb.Interfaces
 {
     public class DynamicsHealthCheck : IHealthCheck
     {
