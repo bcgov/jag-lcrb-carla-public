@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
@@ -27,7 +27,10 @@ using Splunk.Configurations;
 using System;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mime;
+using Newtonsoft.Json;
+using System.Linq;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -111,7 +114,7 @@ namespace Gov.Lclb.Cllb.Public
 
             // setup authorization
             services.AddAuthorization(options =>
-            {    
+            {
                 options.AddPolicy("Business-User", policy =>
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
@@ -131,14 +134,14 @@ namespace Gov.Lclb.Cllb.Public
             {
                 options.MultipartBodyLengthLimit = 1073741824; // 1 GB
             });
-            
+
             // health checks
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-                
-                checks.AddSqlCheck(DatabaseTools.GetDatabaseName(Configuration), DatabaseTools.GetConnectionString(Configuration));
-            });
+            services.AddHealthChecks()
+                .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+                .AddCheck<SharepointHealthCheck>("Sharepoint")
+                .AddCheck<DynamicsHealthCheck>("Dynamics");
+
 
             services.AddSession();
 
@@ -287,9 +290,9 @@ namespace Gov.Lclb.Cllb.Public
             var log = loggerFactory.CreateLogger("Startup");
 
             string connectionString = "unknown.";
-            if (! string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
+            if (!string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
             {
-            
+
                 try
                 {
                     using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -297,7 +300,7 @@ namespace Gov.Lclb.Cllb.Public
                         log.LogInformation("Fetching the application's database context ...");
                         AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                         IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
-                    
+
                         connectionString = context.Database.GetDbConnection().ConnectionString;
 
                         log.LogInformation("Migrating the database ...");
@@ -339,7 +342,28 @@ namespace Gov.Lclb.Cllb.Public
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts(); // Strict-Transport-Security
                 app.UseCors(MyAllowSpecificOrigins);
-            }            
+            }
+
+            var healthCheckOptions = new HealthCheckOptions
+            {
+                ResponseWriter = async (c, r) =>
+                {
+                    c.Response.ContentType = MediaTypeNames.Application.Json;
+                    var result = JsonConvert.SerializeObject(
+                       new
+                       {
+                           checks = r.Entries.Select(e =>
+                      new {
+                                 description = e.Key,
+                                 status = e.Value.Status.ToString(),
+                                 responseTime = e.Value.Duration.TotalMilliseconds
+                             }),
+                           totalResponseTime = r.TotalDuration.TotalMilliseconds
+                       });
+                    await c.Response.WriteAsync(result);
+                }
+            };
+            app.UseHealthChecks("/hc", healthCheckOptions);
 
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());
@@ -368,6 +392,7 @@ namespace Gov.Lclb.Cllb.Public
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+
 
             app.UseSpa(spa =>
             {
