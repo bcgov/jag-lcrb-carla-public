@@ -30,6 +30,7 @@ using System.Text;
 using System.Net.Mime;
 using Newtonsoft.Json;
 using System.Linq;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -136,9 +137,10 @@ namespace Gov.Lclb.Cllb.Public
 
             // health checks
             services.AddHealthChecks()
-             .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: DatabaseTools.GetDatabaseName(Configuration))
-            .AddCheck<SharepointHealthCheck>("sharepoint_health_check")
-            .AddCheck<DynamicsHealthCheck>("synamics_health_check");
+                .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
+                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+                .AddCheck<SharepointHealthCheck>("Sharepoint")
+                .AddCheck<DynamicsHealthCheck>("Dynamics");
 
 
             services.AddSession();
