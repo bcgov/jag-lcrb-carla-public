@@ -9,21 +9,19 @@ module.exports = function (config) {
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-htmlfile-reporter'),
-	  require('karma-junit-reporter'),
+      require('karma-junit-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    client:{
+    client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
-    },	
+    },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, 'coverage'), reports: [ 'html', 'lcovonly' ],
+      dir: require('path').join(__dirname, 'coverage'), reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true
     },
-<<<<<<< Updated upstream
-    
-    reporters: ['progress', 'html','junit'],
-	htmlReporter: {
+    reporters: ['progress', 'html', 'junit'],
+    htmlReporter: {
       outputFile: 'unit-tests.html',
       pageTitle: 'Unit Tests',
       subPageTitle: 'Portal tests',
@@ -31,12 +29,7 @@ module.exports = function (config) {
       useCompactStyle: true,
       useLegacyStyle: true
     },
-=======
-    kjhtmlReporter = {
-      outputFile: 'test-results.html'
-    },
-    reporters: ['progress', 'kjhtml'],
->>>>>>> Stashed changes
+
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
