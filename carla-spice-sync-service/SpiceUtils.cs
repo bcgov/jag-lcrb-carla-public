@@ -624,12 +624,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                     MiddleName = legalEntity.AdoxioContact.Middlename,
                     Email = legalEntity.AdoxioContact.Emailaddress1,
                     PhoneNumber = legalEntity.AdoxioContact.Telephone1,
-                    SelfDisclosure = (legalEntity.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioSelfdisclosure).ToString(),
-                    Gender = (legalEntity.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioGendercode).ToString(),
-                    Birthplace = legalEntity.AdoxioBirthplace,
-                    BirthDate = legalEntity.AdoxioDateofbirth,
-                    BcIdCardNumber = legalEntity.AdoxioBcidcardnumber,
-                    DriversLicenceNumber = legalEntity.AdoxioDriverslicencenumber,
+                    SelfDisclosure = (legalEntity.AdoxioContact.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioContact.AdoxioSelfdisclosure).ToString(),
+                    Gender = (legalEntity.AdoxioContact.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioContact.AdoxioGendercode).ToString(),
+                    Birthplace = legalEntity.AdoxioContact.AdoxioBirthplace,
+                    BirthDate = legalEntity.AdoxioContact.Birthdate,
+                    BcIdCardNumber = legalEntity.AdoxioContact.AdoxioBcidcardnumber,
+                    DriversLicenceNumber = legalEntity.AdoxioContact.AdoxioDriverslicencenumber,
                     Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
