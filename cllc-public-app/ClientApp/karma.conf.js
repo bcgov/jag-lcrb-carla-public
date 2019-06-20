@@ -20,6 +20,7 @@ module.exports = function (config) {
       dir: require('path').join(__dirname, 'coverage'), reports: [ 'html', 'lcovonly' ],
       fixWebpackSourcePaths: true
     },
+<<<<<<< Updated upstream
     
     reporters: ['progress', 'html','junit'],
 	htmlReporter: {
@@ -30,6 +31,12 @@ module.exports = function (config) {
       useCompactStyle: true,
       useLegacyStyle: true
     },
+=======
+    kjhtmlReporter = {
+      outputFile: 'test-results.html'
+    },
+    reporters: ['progress', 'kjhtml'],
+>>>>>>> Stashed changes
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
