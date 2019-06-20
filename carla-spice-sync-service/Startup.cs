@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Rest;
@@ -108,11 +107,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks();
         }
 
         private void SetupSharePoint(IServiceCollection services)
@@ -186,7 +181,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, loggerFactory);
-            }            
+            }
+
+            app.UseHealthChecks("/hc");
 
             app.UseAuthentication();
             app.UseMvc();
