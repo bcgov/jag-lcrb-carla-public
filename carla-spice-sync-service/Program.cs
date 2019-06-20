@@ -14,7 +14,6 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseHealthChecks("/hc")
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     var env = hostingContext.HostingEnvironment;
@@ -22,16 +21,15 @@ namespace Gov.Lclb.Cllb.SpdSync
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
-                    logging.AddConsole(x => {
-                        x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
-                        x.IncludeScopes = true;
-                        });                    
+                    var config = new CllcConsoleLoggerConfiguration();
+
+                    logging.ClearProviders();
+                    logging.AddProvider(new CllcConsoleLoggerProvider(config, hostingContext.HostingEnvironment));
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddDebug();
                     logging.AddEventSourceLogger();
                 })
                 .UseStartup<Startup>()
-                .UseHealthChecks("/hc")
                 .Build();
     }
 }
