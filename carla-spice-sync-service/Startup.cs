@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Rest;
@@ -107,7 +108,10 @@ namespace Gov.Lclb.Cllb.SpdSync
             });
 
             // health checks. 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                .AddCheck("carla-spice-sync", () => HealthCheckResult.Healthy())
+                .AddCheck<SharepointHealthCheck>("Sharepoint")
+                .AddCheck<DynamicsHealthCheck>("Dynamics");
         }
 
         private void SetupSharePoint(IServiceCollection services)
