@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Public
 
     public class CllcConsoleLoggerConfiguration
     {
-        public LogLevel LogLevel { get; set; } = LogLevel.Warning;
+        public LogLevel LogLevel { get; set; } = LogLevel.Debug;
         public int EventId { get; set; } = 0;
     }
     public class CllcConsoleLoggerProvider : ILoggerProvider
