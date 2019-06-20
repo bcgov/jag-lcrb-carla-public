@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public
         }
         public bool IsEnabled(LogLevel logLevel)
         {
-            return logLevel == _config.LogLevel;
+            return logLevel != LogLevel.None;
         }
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public
             {
                 if ((_config.EventId == 0 || _config.EventId == eventId.Id) && !state.ToString().Contains("cannabislicensing/hc"))
                 {
-                    Console.WriteLine($"{_name}:{logLevel.ToString()}:- {formatter(state, exception)}");
+                    Console.WriteLine($"{_name}:{logLevel.ToString()}: {formatter(state, exception)}");
                 }
             }
         }
