@@ -26,13 +26,10 @@ namespace Gov.Lclb.Cllb.Public
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
-                    var config = new CllcConsoleLoggerConfiguration
-                    {
-                        LogLevel = LogLevel.Information
-                    };
+                    var config = new CllcConsoleLoggerConfiguration();
 
                     logging.ClearProviders();
-                    logging.AddProvider(new CllcConsoleLoggerProvider(config));
+                    logging.AddProvider(new CllcConsoleLoggerProvider(config, hostingContext.HostingEnvironment));
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddDebug();
                     logging.AddEventSourceLogger();
