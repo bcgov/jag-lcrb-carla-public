@@ -2,6 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -25,10 +26,13 @@ namespace Gov.Lclb.Cllb.Public
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
-                    logging.AddConsole(x => {
-                        x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
-                        x.IncludeScopes = true;
-                    });
+                    var config = new CllcConsoleLoggerConfiguration
+                    {
+                        LogLevel = LogLevel.Information
+                    };
+
+                    logging.ClearProviders();
+                    logging.AddProvider(new CllcConsoleLoggerProvider(config));
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddDebug();
                     logging.AddEventSourceLogger();
