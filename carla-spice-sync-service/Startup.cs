@@ -110,7 +110,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             // health checks. 
             services.AddHealthChecks()
                 .AddCheck("carla-spice-sync", () => HealthCheckResult.Healthy())
-                .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics");
         }
 
