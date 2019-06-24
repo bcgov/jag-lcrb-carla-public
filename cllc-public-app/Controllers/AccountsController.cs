@@ -25,15 +25,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly BCeIDBusinessQuery _bceid;
         private readonly IConfiguration Configuration;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly IOrgBookClient _orgBookclient;
         private readonly SharePointFileManager _sharePointFileManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public AccountsController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public AccountsController(IConfiguration configuration,
+            SharePointFileManager sharePointFileManager,
+            IHttpContextAccessor httpContextAccessor,
+            IOrgBookClient orgBookClient,
+            BCeIDBusinessQuery bceid,
+            ILoggerFactory loggerFactory,
+            IDynamicsClient dynamicsClient)
         {
             Configuration = configuration;
             _bceid = bceid;
             _dynamicsClient = dynamicsClient;
+            _orgBookclient = orgBookClient;
             _httpContextAccessor = httpContextAccessor;
             _sharePointFileManager = sharePointFileManager;
             _logger = loggerFactory.CreateLogger(typeof(AccountsController));
@@ -94,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // query the BCeID API to get the business record.
             var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-            
+
             _logger.LogDebug(LoggingEvents.Get, $"busine Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(business)}");
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(business?.businessNumber);
@@ -351,6 +359,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
             _logger.LogDebug(LoggingEvents.Get, $"busine Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(bceidBusiness)}");
+            Response12 results = await _orgBookclient.V2SearchCredentialTopicGetAsync(null, null, null, "BC1165060", Inactive3.False, Latest3.True, Revoked3.False, "registration", null, null, null);
+            CredentialTopicSearch credentialTopic = results.Results.FirstOrDefault();
+            // Get business name
+            var businessName = credentialTopic.Topic.Names.FirstOrDefault()?.Text;
+            // Get business type
+            var businessType = credentialTopic.Topic.Attributes.Where(a => a.Type == "entity_type").FirstOrDefault()?.Value;
+            // Get incorporation date
+            var incorporationDate = credentialTopic.Topic.Attributes.Where(a => a.Type == "entity_status_effective").FirstOrDefault()?.Value;
+
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
             if (cleanNumber != null)
             {
@@ -370,7 +387,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     createContact = false;
                 }
-                
+
             }
             catch (OdataerrorException odee)
             {
@@ -469,7 +486,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     legalEntity = await _dynamicsClient.Legalentities.CreateAsync(legalEntity);
                 }
                 catch (OdataerrorException odee)
-                {                    
+                {
                     string legalEntityId = _dynamicsClient.GetCreatedRecord(odee, null);
                     if (!string.IsNullOrEmpty(legalEntityId) && Guid.TryParse(legalEntityId, out Guid legalEntityGuid))
                     {
@@ -507,7 +524,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection() { };
                 tiedHouse.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
 
-                
+
                 try
                 {
                     tiedHouse = await _dynamicsClient.Tiedhouseconnections.CreateAsync(tiedHouse);
@@ -516,14 +533,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     string tiedHouseId = _dynamicsClient.GetCreatedRecord(odee, null);
                     if (string.IsNullOrEmpty(tiedHouseId))
-                    {                   
+                    {
                         _logger.LogError(LoggingEvents.Error, "Error creating Tied house connection.");
                         _logger.LogError("Request:");
                         _logger.LogError(odee.Request.Content);
                         _logger.LogError("Response:");
                         _logger.LogError(odee.Response.Content);
                         throw new OdataerrorException("Error creating Tied house connection.");
-                    }                    
+                    }
                 }
                 catch (Exception e)
                 {
@@ -812,7 +829,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-            
+
             var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection();
 
             // copy values over from the data provided
