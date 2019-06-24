@@ -31,6 +31,7 @@ using System.Net.Mime;
 using Newtonsoft.Json;
 using System.Linq;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Net.Http;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -134,6 +135,10 @@ namespace Gov.Lclb.Cllb.Public
             {
                 options.MultipartBodyLengthLimit = 1073741824; // 1 GB
             });
+
+            var orgBook = new OrgBookClient(new HttpClient());
+            orgBook.ReadResponseAsString = true;
+            services.AddTransient<IOrgBookClient>(_ => (IOrgBookClient)orgBook); 
 
             // health checks
             services.AddHealthChecks()
