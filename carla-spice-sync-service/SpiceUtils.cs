@@ -471,15 +471,15 @@ namespace Gov.Lclb.Cllb.SpdSync
                 UrgentPriority = false,
                 ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
-                BusinessNumber = application.AdoxioBusinessnumber,
+                BusinessNumber = application.AdoxioApplicant.Accountnumber,
                 ApplicantName = application.AdoxioNameofapplicant,
                 BusinessAddress = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                 {
-                    AddressStreet1 = application.AdoxioAddressstreet,
-                    City = application.AdoxioAddresscity,
-                    StateProvince = application.AdoxioAddressprovince,
-                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(application.AdoxioAddresspostalcode)) ? application.AdoxioAddresspostalcode : null,
-                    Country = application.AdoxioAddresscountry
+                    AddressStreet1 = application.AdoxioApplicant.Address1Line1,
+                    City = application.AdoxioApplicant.Address1City,
+                    StateProvince = application.AdoxioApplicant.Address1Stateorprovince,
+                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(application.AdoxioApplicant.Address1Postalcode)) ? application.AdoxioApplicant.Address1Postalcode : null,
+                    Country = application.AdoxioApplicant.Address1Country
                 },
                 ContactPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
