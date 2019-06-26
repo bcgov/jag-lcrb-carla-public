@@ -4,9 +4,9 @@
 # Template File: templates/von-x-agent.yaml
 #=========================================================
 NAME=von-x-agent
-GIT_REPO_URL=https://github.com/brianorwhatever/von-agent-template.git
+GIT_REPO_URL=https://github.com/bcgov/jag-lcrb-carla-public.git
 GIT_REF=master
-SOURCE_CONTEXT_DIR=von-x-agent
+SOURCE_CONTEXT_DIR=lcrb-von-agent/lcrb-von-agent
 TOB_API_URL=https://dev-api.orgbook.gov.bc.ca/api/v2
 TOB_APP_URL=https://dev.orgbook.gov.bc.ca
 AUTO_REGISTER_DID=1

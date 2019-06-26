@@ -40,9 +40,6 @@ issuers:
         effective_date:
           input: effective_date
           from: claim
-        expiry_date:
-          input: expiry_date
-          from: claim
 
       # topic identifies the id of the subject of the credential from the foundational credential
       # in BC Gov deployment type is always "registration" as it is from BC Registries
