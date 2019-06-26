@@ -1,0 +1,87 @@
+[
+{
+    "attributes": {
+        "registration_id": "0b211bf4-3b90-4e9b-9fd1-2aff97374910",
+        "registration_date": "2018-11-01T08:00:00+00:00",
+        "entity_type": "BC",
+        "entity_status": "ACT",
+        "entity_status_effective": "2018-11-01T08:00:00+00:00",
+        "entity_name_effective": "2018-11-01T08:00:00+00:00",
+        "address_line_1": "123 Any Street",
+        "address_line_2": "",
+        "addressee": "Bob's Burgers Inc.",
+        "city": "Vancouver",
+        "country": "CAN",
+        "legal_name": "Bob's Burgers Inc.",
+        "postal_code": "V1V1V1",
+        "province": "BC",
+        "effective_date": "2018-11-05T08:00:00+00:00"
+    },
+    "schema": "myorg-registration.my-organization.ca",
+    "version": "1.0.0"
+},
+{
+    "attributes": {
+        "tax_number": "0b211bf4-3b90-4e9b-9fd1-2aff97374911",
+        "registration_id": "0b211bf4-3b90-4e9b-9fd1-2aff97374910",
+        "effective_date": "2018-11-05T08:00:00+00:00"
+    },
+    "schema": "myorg-tax.my-organization.ca",
+    "version": "1.0.0"
+},
+{
+    "attributes": {
+        "license_number": "0b211bf4-3b90-4e9b-9fd1-2aff97374912",
+        "registration_id": "0b211bf4-3b90-4e9b-9fd1-2aff97374910",
+        "dancing_permitted": "True",
+        "patio": "True",
+        "effective_date": "2018-11-07T08:00:00+00:00"
+    },
+    "schema": "myorg-liquor.my-organization.ca",
+    "version": "1.0.0"
+},
+{
+    "attributes": {
+        "license_number": "0b211bf4-3b90-4e9b-9fd1-2aff97374912",
+        "tax_number": "0b211bf4-3b90-4e9b-9fd1-2aff97374911",
+        "registration_id": "0b211bf4-3b90-4e9b-9fd1-2aff97374910",
+        "credential_status": "ACT",
+        "credential_status_effective": "2018-11-07T08:00:00+00:00",
+        "effective_date": "2018-11-07T08:00:00+00:00"
+    },
+    "schema": "myorg-credential.my-organization.ca",
+    "version": "1.0.0"
+},
+{
+    "attributes": {
+        "registration_id": "0b211bf4-3b90-4e9b-9fd1-2aff97374910",
+        "registration_date": "2018-11-01T08:00:00+00:00",
+        "entity_type": "BC",
+        "entity_status": "ACT",
+        "entity_status_effective": "2018-11-01T08:00:00+00:00",
+        "entity_name_effective": "2018-11-21T08:00:00+00:00",
+        "address_line_1": "123 Fake Street",
+        "address_line_2": "",
+        "addressee": "Bob's Burgers Incorporated",
+        "city": "Vancouver",
+        "country": "CAN",
+        "legal_name": "Bob's Burgers Incorporated",
+        "postal_code": "V2V2V2",
+        "province": "BC",
+        "effective_date": "2018-11-21T08:00:00+00:00"
+    },
+    "schema": "myorg-registration.my-organization.ca",
+    "version": "1.0.0"
+},
+{
+    "attributes": {
+        "license_number": "0b211bf4-3b90-4e9b-9fd1-2aff97374666",
+        "registration_id": "0b211bf4-3b90-4e9b-9fd1-2aff97374910",
+        "dancing_permitted": "False",
+        "patio": "False",
+        "effective_date": "2018-11-21T08:00:00+00:00"
+    },
+    "schema": "myorg-liquor.my-organization.ca",
+    "version": "1.0.0"
+}
+]
