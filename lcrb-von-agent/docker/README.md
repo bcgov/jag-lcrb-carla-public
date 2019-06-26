@@ -6,7 +6,7 @@ If you are planning on submitting Pull Requests to this project, fork the repo a
 
 ```
 git clone https://github.com/bcgov/von-agent-template.git
-cd von-lcrb-agent/docker
+cd lcrb-von-agent/docker
 ```
 
 The database configuration is defined using environment variables defined in the docker/docker-compose.yml file.  You can accept defaults, edit the yml file (be careful about what you check in) or set environment variables to override the values in the yml file.
