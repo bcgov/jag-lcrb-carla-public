@@ -211,13 +211,13 @@ parameters:
     displayName: Application Url
     description: The application URL.
     required: true
-    value: https://lcrb-von-agent-dev.pathfinder.gov.bc.ca
+    value: https://lcrb-von-agent.pathfinder.gov.bc.ca
   - name: ENDPOINT_URL
     displayName: Endpoint URL
     description: The public domain endpoint for the agent, which is registered on the
       ledger.
     required: true
-    value: https://lcrb-von-agent-dev.pathfinder.gov.bc.ca
+    value: https://lcrb-von-agent.pathfinder.gov.bc.ca
   - name: TCP_SOCKET_FAMILY
     displayName: TCP Socket Family
     description: The TCP socket version to be used by the agent DNS resolver.
