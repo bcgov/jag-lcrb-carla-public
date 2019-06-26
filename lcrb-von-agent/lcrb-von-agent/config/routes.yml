@@ -1,0 +1,75 @@
+# Documentation: https://github.com/bcgov/von-agent-template/tree/master/von-lcrb-agent/config
+
+forms:
+  cannabis-retail-store-licence:
+    # URL for the Web form - becomes <server>/<path> e.g. http://localhost:5000/lcrb/CannabisRetailStoreLicense
+    path: /cannabis-retail-store-licence
+    type: issue-credential
+    schema_name: cannabis-retail-store-licence.lcrb
+    page_title: Liquor & Cannabis Regulation Branch
+    title: Cannabis Retail Store Licence
+
+    template: bcgov.index.html
+  
+    description: >
+      Cannabis Retail Store Licence.
+  
+    explanation: Use the form below to apply for a Cannabis Retail Store Licence.
+
+    proof_request:
+      id: registration
+      connection_id: bctob
+
+    #js_includes:
+    #  - src: js/bc_registries.js
+
+    # "fields" are displayed on the UI for the user to enter values
+    fields:
+
+      - name: registration_id
+        label: Registration ID
+        type: text
+        required: true
+
+      - name: licence_number
+        label: Licence Number
+        type: text
+        required: true
+
+      - name: issue_date
+        label: Issue Date
+        type: date
+        required: true
+      
+      - name: effective_date
+        label: Effective Date
+        type: date
+        required: true
+      
+      - name: expiry_date
+        label: Expiry Date
+        type: date
+        required: true
+      
+      - name: establishment_name
+        label: Establishment Name
+        type: text
+        required: true
+
+    # "mapping" identifies attributes that are auto-populated
+    # mapping:
+    #   attributes:
+    #     - name: permit_id
+    #       from: helper
+    #       source: uuid
+
+    #     - name: permit_issued_date
+    #       from: helper
+    #       source: now_iso
+
+    #     - name: permit_status
+    #       from: literal
+    #       source: ACT
+
+
+### eof ###

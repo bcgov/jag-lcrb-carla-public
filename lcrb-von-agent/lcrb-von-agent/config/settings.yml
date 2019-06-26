@@ -1,0 +1,15 @@
+default:
+  # APPLICATION_URL_VONX: $APPLICATION_URL/lcrb/CannabisRetailStoreLicense
+  TEMPLATE_PATH: ../templates
+
+  TOB_API_URL: http://tob-api:8080/api/v2
+  TOB_APP_URL: http://localhost:8080
+
+  WALLET_SEED_VONX: lcrb_000000000000000000000000000
+  WALLET_CREDENTIAL_STORE_NAME: lcrb-bc-wallet-credentials
+  INDY_GENESIS_URL: #GENESISURL#
+
+  LEDGER_PROTOCOL_VERSION: "1.6"
+  AUTO_REGISTER_DID: true
+
+### eof ###
