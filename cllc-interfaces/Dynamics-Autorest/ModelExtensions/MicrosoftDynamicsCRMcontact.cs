@@ -13,11 +13,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string ParentCustomerIdAccountODataBind { get; set; }
 
 
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "birthdate")]
-        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
-        public System.DateTimeOffset? Birthdate { get; set; }
 
     }
 
