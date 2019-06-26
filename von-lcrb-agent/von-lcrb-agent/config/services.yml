@@ -1,0 +1,114 @@
+# Documentation: https://github.com/bcgov/von-agent-template/tree/master/von-lcrb-agent/config
+
+issuers:
+  lcrb:
+    name: Liquor and Cannabis Regulation Branch
+    abbreviation: LCRB
+    url: https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing
+    email: lclb.lclb@gov.bc.ca
+    logo_path: ../assets/img/lcrb-logo.png
+    endpoint: $ENDPOINT_URL
+
+    connection:
+      type: TheOrgBook
+      api_url: $TOB_API_URL
+      sign_target: false
+
+    wallet:
+      name: ${POSTGRESQL_WALLET_NAME:-myorg_issuer}
+      seed: $WALLET_SEED_VONX
+      type: $WALLET_TYPE
+      params:
+        storage_config:
+          url: "$POSTGRESQL_WALLET_HOST:$POSTGRESQL_WALLET_PORT"
+      access_creds:
+        key: $WALLET_ENCRYPTION_KEY
+        storage_credentials:
+          account: $POSTGRESQL_WALLET_USER
+          password: $POSTGRESQL_WALLET_PASSWORD
+          admin_account: ${POSTGRESQL_WALLET_ADMIN_USER:-postgres}
+          admin_password: $POSTGRESQL_WALLET_ADMIN_PASSWORD
+        key_derivation_method: ARGON2I_MOD
+
+    credential_types:
+    - description: Cannabis Retail Store Licence
+      schema: cannabis-retail-store-licence.lcrb
+      issuer_url: $APPLICATION_URL/cannabis-retail-store-licence
+      depends_on:
+        - bcreg_registration
+      credential:
+        effective_date:
+          input: effective_date
+          from: claim
+        expiry_date:
+          input: expiry_date
+          from: claim
+
+      # topic identifies the id of the subject of the credential from the foundational credential
+      # in BC Gov deployment type is always "registration" as it is from BC Registries
+      topic:
+        source_id:
+          input: registration_id
+          from: claim
+        type:
+          input: registration
+          from: value
+
+      mapping:
+        # "attribute" defines a generic field in the TOB model
+        # "value" identifies where to derive the data value (typically it comes from the claim)
+        # "type" - if "value" - is the name of the attribute
+        # "format" is an optional data format (default text)
+        - model: attribute
+          fields:
+            type:
+              input: issue_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: issue_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: licence_number
+              from: value
+            value:
+              input: licence_number
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: expiry_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: expiry_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: effective_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: effective_date
+              from: claim
+
+verifiers:
+  bctob:
+    name: BC OrgBook
+    connection:
+      type: TheOrgBook
+      api_url: $TOB_API_URL
+    wallet:
+      seed: "tob-verifier-wallet-000000000001"
+
+
+### eof ###
