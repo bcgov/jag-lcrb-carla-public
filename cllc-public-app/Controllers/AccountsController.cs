@@ -359,14 +359,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
             _logger.LogDebug(LoggingEvents.Get, $"busine Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(bceidBusiness)}");
-            Response12 results = await _orgBookclient.V2SearchCredentialTopicGetAsync(null, null, null, "BC1165060", Inactive3.False, Latest3.True, Revoked3.False, "registration", null, null, null);
-            CredentialTopicSearch credentialTopic = results.Results.FirstOrDefault();
-            // Get business name
-            var businessName = credentialTopic.Topic.Names.FirstOrDefault()?.Text;
-            // Get business type
-            var businessType = credentialTopic.Topic.Attributes.Where(a => a.Type == "entity_type").FirstOrDefault()?.Value;
-            // Get incorporation date
-            var incorporationDate = credentialTopic.Topic.Attributes.Where(a => a.Type == "entity_status_effective").FirstOrDefault()?.Value;
+            
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
             if (cleanNumber != null)
@@ -635,6 +628,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpPost, "result: " +
                 JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return Json(result);
+        }
+
+        private async Task<string>  GetAccountDataFromOrgBook(){
+            Response12 results = await _orgBookclient.V2SearchCredentialTopicGetAsync(null, null, null, "BC1165060", Inactive3.False, Latest3.True, Revoked3.False, "registration", null, null, null);
+            CredentialTopicSearch credentialTopic = results.Results.FirstOrDefault();
+            // Get business name
+            var businessName = credentialTopic.Topic.Names.FirstOrDefault()?.Text;
+            // Get business type
+            var businessType = credentialTopic.Topic.Attributes.Where(a => a.Type == "entity_type").FirstOrDefault()?.Value;
+            // Get incorporation date
+            var incorporationDate = credentialTopic.Topic.Attributes.Where(a => a.Type == "entity_status_effective").FirstOrDefault()?.Value;
+            return businessType;
         }
 
         /// <summary>
