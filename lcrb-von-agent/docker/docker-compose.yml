@@ -3,7 +3,7 @@ services:
 
   caddyx:
     build:
-      context: ../von-lcrb-agent
+      context: ../lcrb-von-agent
       dockerfile: Dockerfile.caddy
     environment:
       TOB_API_URL: ${TOB_API_URL:-}
@@ -25,7 +25,7 @@ services:
 
   myorg-agent:
     build:
-      context: ../von-lcrb-agent
+      context: ../lcrb-von-agent
       dockerfile: Dockerfile
     environment:
       APPLICATION_URL: ${APPLICATION_URL:-http://localhost:5001}
