@@ -224,11 +224,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILegalentities Legalentities { get; }
 
         /// <summary>
-        /// Gets the ILicencechangeapplications.
-        /// </summary>
-        ILicencechangeapplications Licencechangeapplications { get; }
-
-        /// <summary>
         /// Gets the ILicenceses.
         /// </summary>
         ILicenceses Licenceses { get; }
