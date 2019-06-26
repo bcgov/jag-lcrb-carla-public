@@ -1,0 +1,177 @@
+#!/bin/bash
+#
+# Copyright 2017-2018 Government of Canada - Public Services and Procurement Canada - buyandsell.gc.ca
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+export DOCKERHOST=${APPLICATION_URL-$(docker run --rm --net=host codenvy/che-ip)}
+export MSYS_NO_PATHCONV=1
+set -e
+
+SCRIPT_HOME="$( cd "$( dirname "$0" )" && pwd )"
+
+# =================================================================================================================
+# Usage:
+# -----------------------------------------------------------------------------------------------------------------
+
+usage() {
+  cat <<-EOF
+
+  Usage: $0 [command] [options]
+
+  Commands:
+
+  build - Build the docker images for the project.
+          You need to do this first, since the builds require
+          a combination of Docker images.
+
+  up  - Creates the application container from the built images
+        and starts the services based on the docker-compose.yml file.
+  start - Same as up
+
+  logs - Display the logs from the docker compose run (ctrl-c to exit).
+
+  stop - Stops the services.  This is a non-destructive process.  The volumes and containers
+         are not deleted so they will be reused the next time you run start.
+
+  down - Brings down the services and removes the volumes (storage) and containers.
+  rm - Same as down
+
+EOF
+exit 1
+}
+
+# -----------------------------------------------------------------------------------------------------------------
+# Default Settings:
+# -----------------------------------------------------------------------------------------------------------------
+
+DEFAULT_CONTAINERS=""
+
+# -----------------------------------------------------------------------------------------------------------------
+# Functions:
+# -----------------------------------------------------------------------------------------------------------------
+
+configureEnvironment () {
+
+  if [ -f .env ]; then
+    while read line; do
+      if [[ ! "$line" =~ ^\# ]] && [[ "$line" =~ .*= ]]; then
+        export $line
+      fi
+    done < .env
+  fi
+
+  for arg in $@; do
+    case "$arg" in
+      *=*)
+        export ${arg}
+        ;;
+    esac
+  done
+
+  export WEB_HTTP_PORT=5005
+  export WEB_HOST_PORT=8081
+  export COMPOSE_PROJECT_NAME=myorg
+  export COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME:-"myorg"}
+  export LEDGER_URL=${LEDGER_URL-http://$DOCKERHOST:9000}
+  export APPLICATION_URL=${APPLICATION_URL-http://localhost:${WEB_HTTP_PORT:-5001}}
+  export ENDPOINT_URL=http://${ENDPOINT_HOST-$DOCKERHOST:${WEB_HTTP_PORT:-5001}}
+
+  # wallet-db
+  export POSTGRESQL_DATABASE="THE_ORG_BOOK"
+  export POSTGRESQL_USER="DB_USER"
+  export POSTGRESQL_PASSWORD="DB_PASSWORD"
+  export WALLET_TYPE="postgres_storage"
+  export WALLET_ENCRYPTION_KEY="key"
+  export POSTGRESQL_WALLET_HOST="myorg-wallet-db"
+  export POSTGRESQL_WALLET_PORT="5432"
+  export POSTGRESQL_ADMIN_USER="postgres"
+  export POSTGRESQL_ADMIN_PASSWORD="mysecretpassword"
+}
+
+getStartupParams() {
+  CONTAINERS=""
+  ARGS=""
+  if [ "$COMMAND" == "start" ]; then
+    ARGS+="--force-recreate"
+  fi
+
+  for arg in $@; do
+    case "$arg" in
+      *=*)
+        # Skip it
+        ;;
+     -*)
+        ARGS+=" $arg";;
+      *)
+        CONTAINERS+=" $arg";;
+    esac
+  done
+
+  if [ -z "$CONTAINERS" ]; then
+    CONTAINERS="$DEFAULT_CONTAINERS"
+  fi
+
+  echo ${ARGS} ${CONTAINERS}
+}
+
+build() {
+  # Build all containers in the docker-compose file
+  echo -e "\nBuilding containers ..."
+  echo docker-compose build $@
+  docker-compose build $@
+}
+
+deleteVolumes() {
+  _projectName=${COMPOSE_PROJECT_NAME:-docker}
+
+  echo "Stopping and removing any running containers ..."
+  docker-compose down -v
+}
+
+# =================================================================================================================
+
+pushd ${SCRIPT_HOME} >/dev/null
+COMMAND=$1
+shift || true
+
+case "$COMMAND" in
+  start|up)
+    _startupParams=$(getStartupParams $@)
+    configureEnvironment $@
+    docker-compose up -d ${_startupParams}
+    docker-compose logs -f
+    ;;
+  logs)
+    configureEnvironment $@
+    docker-compose logs -f
+    ;;
+  stop)
+    configureEnvironment $@
+    docker-compose stop
+    ;;
+  rm|down)
+    configureEnvironment $@
+    deleteVolumes
+    ;;
+  build)
+    _startupParams=$(getStartupParams $@)
+    configureEnvironment $@
+    build ${_startupParams}
+    ;;
+  *)
+    usage
+esac
+
+popd >/dev/null

@@ -1,0 +1,29 @@
+- name: cannabis-retail-store-licence.lcrb
+  version: '1.0.0'
+  description: Cannabis Retail Store Licence Issued by Liquor and Cannabis Regulation Branch
+  path: /cannabis-retail-store-licence
+  attributes:
+    registration_id:
+      description: Registration ID
+      data_type: text
+      required: Y
+    licence_number:
+      description: Licence Number
+      data_type: text
+      required: Y
+    issue_date:
+      description: Issue Date
+      data_type: date
+      required: Y
+    effective_date:
+      description: Effective Date
+      data_type: date
+      required: Y
+    expiry_date:
+      description: Expiry Date
+      data_type: date
+      required: Y
+    establishment_name:
+      description: Establishment Name
+      data_type: text
+      required: Y
