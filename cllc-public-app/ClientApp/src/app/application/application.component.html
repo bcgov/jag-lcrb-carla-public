@@ -10,7 +10,7 @@
       <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
         THE APPLICATION</h3>
       <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
-        <div  class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+        <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
 
         <div appRemoveIfFeatureOff="IndigenousNation">
           <app-field label="Apply as an Indigenous Nation?" [valid]="true"
@@ -31,43 +31,43 @@
         </div>
       </section>
 
-      <section  class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
-      <h3 class="blue-header">PROPERTY DETAILS</h3>
-      <section class="padded-section">
-        <div style="position: relative">
-          <div [ngBusy]="busy"></div>
-          <section *ngIf="htmlContent?.beforeStarting">
-            <label for="">Establishment Name</label>
-            <br>
+      <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
+        <h3 class="blue-header">PROPERTY DETAILS</h3>
+        <section class="padded-section">
+          <div style="position: relative">
+            <div [ngBusy]="busy"></div>
+            <section *ngIf="htmlContent?.beforeStarting">
+              <label for="">Establishment Name</label>
+              <br>
 
-            <p>
-              A name cannot mislead the public about what kind of business it operates. The name cannot imply a
-              licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
-              words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
-              or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
-              Scheduling Act. Store names cannot also use language that encourages intoxication.
-            </p>
+              <p>
+                A name cannot mislead the public about what kind of business it operates. The name cannot imply a
+                licensee is selling medical cannabis, and cannot include words in any form or combination or manner the
+                words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
+                or any other words of similar meaning that imply licensing under the Pharmacy Operations and Drug
+                Scheduling Act. Store names cannot also use language that encourages intoxication.
+              </p>
 
-            <p>
-              Additionally, a name cannot imply an association with another business. This applies to signs,
-              trademarks and any type of branding.
-            </p>
+              <p>
+                Additionally, a name cannot imply an association with another business. This applies to signs,
+                trademarks and any type of branding.
+              </p>
 
-            <p>
-              Establishment names will be reviewed for approval during the application process. For more information,
-              please see the <a routerLink="/policy-document/store-name">
-                Non-Medical Cannabis Retail Store Name Approval
-                Process
-              </a>.
-            </p>
-          </section>
+              <p>
+                Establishment names will be reviewed for approval during the application process. For more information,
+                please see the <a routerLink="/policy-document/store-name">
+                  Non-Medical Cannabis Retail Store Name Approval
+                  Process
+                </a>.
+              </p>
+            </section>
 
             <app-field
-              [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) ? 'Establishment Name' : 'Name of the Proposed Establishment'"
+              [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
               [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
               errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
               <input class="form-control" style="width: 500px;" type="text"
-                ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE)"
+                ng-readonly="(mode === TRANSFER_LICENCE_MODE || mode === CHANGE_OF_LOCATION_MODE || ApplicationTypeNames.CRSLocationChange === application?.applicationType?.name)"
                 (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
             </app-field>
             <div *ngIf="possibleProblematicNameWarning" class="warning-state">
@@ -325,7 +325,7 @@
         <h3 class="blue-header">INFORMATION ABOUT THE LICENSED PRODUCER</h3>
         <section class="padded-section">
           <p>
-            Which federally licensed producer will the applicant represent in B.C.?
+            Which federally licensed producer(s) will the applicant represent in B.C.?
           </p>
           <app-field label="Name of Federal Producer " [required]="true" [valid]="true"
             errorMessage="Please enter the name of federal producer">
@@ -335,7 +335,8 @@
       </div>
 
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-      <i>The contact the LCRB should communicate with regarding the application</i>
+      <i>The contact LCRB should communicate with regarding the application. The contact must be authorized to represent
+        the applicant and have the authority to bind the applicant. </i>
       <address class="padded-section">
 
         <app-field label="First Name" [required]="true"
@@ -443,7 +444,7 @@
       <section class="ngtest-supporting-documents" *ngIf="application?.applicationType?.showSupportingDocuments">
         <label for="">Supporting Documents</label>
         <br>
-        <p>Please download the
+        <p appRemoveIfFeatureOn="Marketer">Please download the
           <a *ngIf="account?.businessType === 'SoleProprietor'"
             href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
             Document Checklist
@@ -466,6 +467,11 @@
             required documents listed in the 'Documents
             Related to the Proposed Store' section.</span>
         </p>
+        <p appRemoveIfFeatureOff="Marketer">Please upload the corporation’s </p>
+        <ul appRemoveIfFeatureOff="Marketer">
+          <li>Notice of Articles</li>
+          <li>Central Securities Register</li>
+        </ul>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
             fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
@@ -480,11 +486,8 @@
       <p>
         <i>
           <b>Please note:</b> Applications which are submitted without all required information or documents will not be
-          processed.
-          Applicants will be contacted and provided the opportunity to submit missing information. Once applicants
-          provide
-          all
-          required documents to the LCRB, the application will be submitted for processing.
+          processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+          applicants provide all required documents to the LCRB, the application will be processed.
         </i>
       </p>
 
@@ -493,35 +496,13 @@
       <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">DECLARATIONS
       </h3>
       <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
-        <p>This application should be submitted by an individual with the authority to bind the applicant. The branch
+        <p>
+          The application must only be submitted by an individual with the authority to bind the applicant. The branch
           relies on the applicant to ensure that the individual who submits this application is authorized to do so.
-          <span *ngIf="account?.businessType === 'SoleProprietor'">
-            Typically, an appropriate individual for a sole proprietorship will be
-            the sole proprietor.
-          </span>
-          <span *ngIf="account?.businessType === 'Society'"
-            href="https://www2.gov.bc.ca/assets/download/60B1982F06474FE0808759261CE9A1D2" download target="_blank">
-            Typically, an appropriate individual for a society will be a director or a
-            senior manager (as defined in the Societies Act).
-          </span>
-          <span
-            *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1">
-            Typically, an appropriate individual will be as follows:
-            <ul>
-              <li>If the applicant is a general partnership, one of the partners</li>
-              <li>If the applicant is a limited partnership, the general partner of the partnership</li>
-            </ul>
-          </span>
-          <span *ngIf="['PrivateCorporation', 'PublicCorporation'].indexOf(account?.businessType) !== -1">
-            Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
-            be
-            an
-            officer or, in some cases, a director.
-          </span>
-
+          Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be
+          an officer or, in some cases, a director
         </p>
-        <p>Note: An agent, lawyer, licensee representative or third party operator may NOT submit this application on
-          behalf of the applicant.</p>
+        <p>Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.</p>
         <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
           errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
           <section style="display: flex">
@@ -573,8 +554,9 @@
         </p>
         <br>
         <p>
-          The ‘save for later’ feature allows applicants to re-access an application in progress. For questions on the
-          LCRB application process please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+          The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised that
+          once an application is submitted, you will be unable to upload additional documentation. For questions on the
+          LCRB application process, please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
         </p>
       </div>
 
