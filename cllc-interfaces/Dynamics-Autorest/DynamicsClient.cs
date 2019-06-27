@@ -227,11 +227,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILegalentities Legalentities { get; private set; }
 
         /// <summary>
-        /// Gets the ILicencechangeapplications.
-        /// </summary>
-        public virtual ILicencechangeapplications Licencechangeapplications { get; private set; }
-
-        /// <summary>
         /// Gets the ILicenceses.
         /// </summary>
         public virtual ILicenceses Licenceses { get; private set; }
@@ -674,7 +669,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Investigationactivities = new Investigationactivities(this);
             Investigations = new Investigations(this);
             Legalentities = new Legalentities(this);
-            Licencechangeapplications = new Licencechangeapplications(this);
             Licenceses = new Licenceses(this);
             Licencetypeprerequisites = new Licencetypeprerequisites(this);
             Licencetypes = new Licencetypes(this);
