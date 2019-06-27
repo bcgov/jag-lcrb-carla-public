@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ page_title|default(title) }}{% endblock %}</title>
+    {% block includes %}
+    <script type="text/javascript"
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
+    <!-- script src="{{ static("js/main.js") }}"></script -->
+    {% for include in js_includes %}
+        <script src="{{ static(include.src) }}"></script>
+    {% endfor %}
+    <link rel="shortcut icon" href="{{ static("img/bc-logo.ico") }}">
+    <link rel="stylesheet" href="{{ static("css/mygovbc-bootstrap-theme.min.css") }}">
+    <link rel="stylesheet" href="{{ static("css/bcgov.css") }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+       THE_ORG_BOOK_APP_URL = '{{ THE_ORG_BOOK_APP_URL }}'
+    </script>
+    <script type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.10.4/jquery.typeahead.js"></script>
+    <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.10.4/jquery.typeahead.css" -->
+    {% for include in css_includes %}
+        <link rel="stylesheet" href="{{ static(include.src) }}">
+    {% endfor %}
+    {% endblock %}
+    {% block extrahead %}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+    {% block header %}
+    <header>
+      <div class="container">
+        <a href="http://www2.gov.bc.ca/" tabindex="-1">
+          <img class="header-logo"
+               tabindex="-1" alt="B.C. Government Logo"
+               src="{{ static("img/bc-logo.svg") }}">
+        </a>
+        <span class="title" role="banner">{{ page_title|default(title) }}</span>
+      </div>
+    </header>
+    {% endblock %}
+
+    {% block content %}
+    <main class="container page-content">
+    <div class="row">
+        <div class="col-sm-10 col-sm-push-1">
+            <h2>Selected {{ corp_num }} {{ credential_type }}</h2>
+            <p>You have identified Registratio Id {{ corp_num }} and selected to create a Credential of Type {{ credential_type }}</p>
+            <p>Please select the credentials to offer for the supporting Proof Request(s).</p>
+
+            <form action="/chooser3" method="post"
+                  accept-charset="utf-8" enctype="multipart/form-data" name="chooser"
+                  class="form well">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-8 col-md-push-2">
+                            <div class="form-group">
+                                <label class="control-label required" for="line1-input">
+                                    <span class="field-name">Available Credentials for Type</span>
+                                    <span class="required">(required)</span></label>
+
+                                    <div class="radio">
+                                    <ul>
+                                        <li><input
+                                            name="credential_id"
+                                            type="radio"
+                                            id="credential_id-001-input"
+                                            value="566c32a4-40db-469c-b213-df9483e94e24"
+                                            checked><label for="credential_id-001-input">Credential Option 1 (the real one)</label>
+                                        <li><input
+                                            name="credential_id"
+                                            type="radio"
+                                            id="credential_id-002-input"
+                                            value="002"
+                                            checked><label for="credential_id-002-input">Credential Option 2</label>
+                                        <li><input
+                                            name="credential_id"
+                                            type="radio"
+                                            id="credential_id-003-input"
+                                            value="003"
+                                            checked><label for="credential_id-003-input">Credential Option 3</label>
+                                        </ul>
+                                    </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-check"></span> Submit </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <form action="/chooser" method="get"
+                  accept-charset="utf-8" enctype="multipart/form-data" name="chooser"
+                  class="form well">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-8 col-md-push-2">
+                            <button type="submit" class="btn btn-primary"><span class="fa fa-check"></span> Start Over </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    </main>
+    {% endblock %}
+
+    {% block footer %}
+    <footer>
+      <nav class="navbar navbar-default navbar-footer navbar-static-bottom">
+        <div class="container">
+          <ul class="nav navbar-nav">
+            <li><a href="http://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank">Disclaimer</a></li>
+            <li><a href="http://www2.gov.bc.ca/gov/content/home/privacy" target="_blank">Privacy</a></li>
+            <li><a href="http://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank">Accessibility</a></li>
+            <li><a href="http://www2.gov.bc.ca/gov/content/home/copyright" target="_blank">Copyright</a></li>
+            <li><a href="http://www2.gov.bc.ca/gov/content/home/contact-us"
+                   target="_blank">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+    </footer>
+    {% endblock %}
+</body>
+</html>
+
