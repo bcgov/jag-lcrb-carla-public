@@ -394,7 +394,7 @@
         </app-field>
       </address>
 
-      <section appRemoveIfFeatureOff="Marketer">
+      <section appRemoveIfFeatureOff="Marketer" *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
         <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
         <div class="padded-section" *ngIf="application?.id">
           <app-connection-to-producers *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
