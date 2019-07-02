@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             _dynamics = dynamics;
         }
 
-        public Task<HealthCheckResult> CheckHealthAsync(
+        public async Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -33,12 +33,10 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (healthCheckResultHealthy)
             {
-                return Task.FromResult(
-                    HealthCheckResult.Healthy("Dynamics is healthy."));
+                return HealthCheckResult.Healthy("Dynamics is healthy.");
             }
 
-            return Task.FromResult(
-                HealthCheckResult.Unhealthy("Dynamics is unhealthy."));
+            return HealthCheckResult.Unhealthy("Dynamics is unhealthy.");
         }
     }
 }

@@ -34,12 +34,10 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (healthCheckResultHealthy)
             {
-                return await Task.FromResult(
-                    HealthCheckResult.Healthy("Sharepoint is healthy."));
+                return HealthCheckResult.Healthy("Sharepoint is healthy.");
             }
 
-            return await Task.FromResult(
-                HealthCheckResult.Unhealthy("Sharepoint is unhealthy."));
+            return HealthCheckResult.Unhealthy("Sharepoint is unhealthy.");
         }
     }
 }
