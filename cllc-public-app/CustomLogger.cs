@@ -39,11 +39,23 @@ namespace Gov.Lclb.Cllb.Public
         private readonly string _name;
         private readonly CllcConsoleLoggerConfiguration _config;
         private readonly IHostingEnvironment _env;
+        private readonly bool _production;
+
         public CllcConsoleLogger(string name, CllcConsoleLoggerConfiguration config, IHostingEnvironment env)
         {
             _name = name;
             _config = config;
             _env = env;
+
+            if (_env != null && _env.IsProduction())
+            {
+                _production = true;
+            }
+            else
+            {
+                _production = false;
+            }
+
         }
         public IDisposable BeginScope<TState>(TState state)
         {
@@ -62,9 +74,9 @@ namespace Gov.Lclb.Cllb.Public
             lock (_lock)
             {
                 //filter log messages here (created to filter health check logs)
-                if ((_config.EventId == 0 || _config.EventId == eventId.Id) 
-                    && !state.ToString().Contains("/hc") 
-                    && (!state.ToString().Contains("200 application/json") || !_env.IsProduction()))
+                if ((_config.EventId == 0 || _config.EventId == eventId.Id)
+                    && (state != null && !state.ToString().Contains("/hc"))
+                    && ((state != null && !state.ToString().Contains("200 application/json") || !_production)))
                 {
                     Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} {logLevel.ToString()}:  {_name}:\n\t {formatter(state, exception)}");
                 }
