@@ -335,8 +335,30 @@
       </div>
 
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-      <i>The contact LCRB should communicate with regarding the application. The contact must be authorized to represent
-        the applicant and have the authority to bind the applicant. </i>
+      <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+        The contact LCRB should communicate with regarding the application. The contact must be authorized to represent
+        the applicant and have the authority to bind the applicant.
+      </i>
+      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+        <i *ngIf="account?.businessType === 'SoleProprietor'">
+          The contact LCRB should communicate with regarding the application
+        </i>
+        <i *ngIf="account?.businessType === 'Society'">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="businessTypeIsPartnership()">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="account?.businessType !== 'PublicCorporation'">
+          The contact must be authorized to represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="businessTypeIsPrivateCorporation()">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+      </div>
       <address class="padded-section">
 
         <app-field label="First Name" [required]="true"
@@ -399,15 +421,15 @@
             href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
             and complete
           </a>
-          <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+          <a *ngIf="businessTypeIsPartnership()"
             href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
             and complete
           </a>
-          <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+          <a *ngIf=" businessTypeIsPrivateCorporation()"
             href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
             and complete
           </a>
-          &nbsp;the Associate Form..
+          &nbsp;the Associate Form.
         </i>
         <p>Upload the completed form below.</p>
         <section>
@@ -441,10 +463,11 @@
 
       </div>
 
-      <section class="ngtest-supporting-documents" *ngIf="application?.applicationType?.showSupportingDocuments">
+      <section class="ngtest-supporting-documents"
+        *ngIf="application?.applicationType?.showSupportingDocuments &&  (application?.applicationType?.name !== ApplicationTypeNames.Marketer || account?.businessType !== 'SoleProprietor')">
         <label for="">Supporting Documents</label>
         <br>
-        <p appRemoveIfFeatureOn="Marketer">Please download the
+        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Please download the
           <a *ngIf="account?.businessType === 'SoleProprietor'"
             href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
             Document Checklist
@@ -453,11 +476,11 @@
             href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
             Document Checklist
           </a>
-          <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+          <a *ngIf="businessTypeIsPartnership()"
             href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
             Document Checklist
           </a>
-          <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+          <a *ngIf=" businessTypeIsPrivateCorporation()"
             href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
             Document Checklist
           </a>
@@ -467,11 +490,26 @@
             required documents listed in the 'Documents
             Related to the Proposed Store' section.</span>
         </p>
-        <p appRemoveIfFeatureOff="Marketer">Please upload the corporation’s </p>
-        <ul appRemoveIfFeatureOff="Marketer">
-          <li>Notice of Articles</li>
-          <li>Central Securities Register</li>
-        </ul>
+        <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+          <p *ngIf="account?.businessType === 'Society'">
+            Please upload the society’s Statement of Directors and Registered Office.
+          </p>
+          <p *ngIf="account?.businessType === 'PublicCorporation'">
+            Please upload the society’s Statement of Directors and Registered Office.
+          </p>
+          <p *ngIf="businessTypeIsPartnership()">
+            Please upload the Partnership Agreement.
+          </p>
+          <div *ngIf="businessTypeIsPrivateCorporation()">
+            <p>Please upload the corporation’s </p>
+            <ul>
+              <li>Notice of Articles</li>
+              <li>Central Securities Register</li>
+            </ul>
+          </div>
+
+        </section>
+
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
             fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
@@ -496,13 +534,69 @@
       <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">DECLARATIONS
       </h3>
       <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
-        <p>
+        <p appRemoveIfFeatureOn="Marketer">
           The application must only be submitted by an individual with the authority to bind the applicant. The branch
           relies on the applicant to ensure that the individual who submits this application is authorized to do so.
           Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually be
           an officer or, in some cases, a director
         </p>
-        <p>Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.</p>
+        <section appRemoveIfFeatureOff="Marketer">
+          <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+            The application must only be submitted by an individual with the authority to bind the applicant. The branch
+            relies on the applicant to ensure that the individual who submits this application is authorized to do so.
+            Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
+            be
+            an officer or, in some cases, a director
+          </div>
+          <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+            <p *ngIf="account?.businessType === 'SoleProprietor'">
+              This application should be submitted the sole proprietor.
+            </p>
+            <p *ngIf="account?.businessType === 'Society'">
+              This application must only be submitted by an individual with the authority to bind the applicant. The
+              branch relies on the applicant to ensure that the individual who submits this application is authorized to
+              do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
+              defined in the Societies Act).
+            </p>
+            <p *ngIf="account?.businessType === 'PublicCorporation'">
+              This application must only be submitted by an individual with the authority to bind the applicant. The
+              branch relies on the applicant to ensure that the individual who submits this application is authorized to
+              do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
+              usually be an officer or, in some cases, a director.
+            </p>
+            <div *ngIf="businessTypeIsPartnership()">
+              <p>
+                This application must only be submitted by an individual with the authority to bind the applicant. The
+                branch relies on the applicant to ensure that the individual who submits this application is authorized
+                to do so. Typically, an appropriate individual will be as follows:
+              </p>
+              <ul>
+                <li>If the applicant is a general partnership, one of the general partners</li>
+                <li>If the applicant is a limited partnership, the general partner of the partnership</li>
+              </ul>
+            </div>
+            <p *ngIf="businessTypeIsPrivateCorporation()">
+              The application must only be submitted by an individual with the authority to bind the applicant. The
+              branch relies on the applicant to ensure that the individual who submits this application is authorized to
+              do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
+              usually be an officer or, in some cases, a director.
+            </p>
+
+          </div>
+
+        </section>
+        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Note: A lawyer or consultant,
+          may NOT submit this application on behalf of
+          the applicant.</p>
+        <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+          <p *ngIf="businessTypeIsPrivateCorporation()">
+            Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
+          </p>
+          <p *ngIf="!businessTypeIsPrivateCorporation()">
+            Note: A lawyer, licensee representative or third party operator may NOT submit this application on behalf of
+            the applicant.
+          </p>
+        </section>
         <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
           errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
           <section style="display: flex">
@@ -606,11 +700,11 @@
             href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank">
             and complete
           </a>
-          <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+          <a *ngIf="businessTypeIsPartnership()"
             href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank">
             and complete
           </a>
-          <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+          <a *ngIf=" businessTypeIsPrivateCorporation()"
             href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank">
             and complete
           </a>
@@ -647,14 +741,6 @@
       </div>
       <label for="">Supporting Documents</label>
       <br>
-      <section *ngIf="ApplicationTypeNames.Marketer === application?.applicationType?.name">
-        <p>Please upload the corporation's:</p>
-        <ul>
-          <li>Notice of Artices</li>
-          <li>Central Securities Register</li>
-        </ul>
-        <br>
-      </section>
       <p *ngIf="ApplicationTypeNames.Marketer !== application?.applicationType?.name">Please download the
         <a *ngIf="account?.businessType === 'SoleProprietor'"
           href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
@@ -664,16 +750,35 @@
           href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
           Document Checklist
         </a>
-        <a *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(account?.businessType) !== -1"
+        <a *ngIf="businessTypeIsPartnership()"
           href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
           Document Checklist
         </a>
-        <a *ngIf="['PrivateCorporation', 'PublicCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(account?.businessType) !== -1"
+        <a *ngIf=" businessTypeIsPrivateCorporation()"
           href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
           Document Checklist
         </a>
         and assemble all required documents.
       </p>
+      <section *ngIf="ApplicationTypeNames.Marketer === application?.applicationType?.name">
+        <p *ngIf="account?.businessType === 'Society'">
+          Please upload the society’s Statement of Directors and Registered Office.
+        </p>
+        <p *ngIf="account?.businessType === 'PublicCorporation'">
+          Please upload the society’s Statement of Directors and Registered Office.
+        </p>
+        <p *ngIf="businessTypeIsPartnership()">
+          Please upload the Partnership Agreement.
+        </p>
+        <div *ngIf="businessTypeIsPrivateCorporation()">
+          <p>Please upload the corporation’s </p>
+          <ul>
+            <li>Notice of Articles</li>
+            <li>Central Securities Register</li>
+          </ul>
+        </div>
+
+      </section>
       <section>
         <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
           fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
