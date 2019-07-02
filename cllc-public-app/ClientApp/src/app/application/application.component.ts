@@ -1,6 +1,6 @@
 
-import { filter, takeWhile, map, catchError, mergeMap } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { filter, takeWhile, catchError, mergeMap } from 'rxjs/operators';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -14,21 +14,19 @@ import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.compo
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
-import { Title, DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
   UPLOAD_FILES_MODE
 } from '@app/applications-and-licences/applications-and-licences.component';
 import { Account } from '@models/account.model';
-import { ApplicationContentType } from '@models/application-content-type.model';
 import { ApplicationTypeNames } from '@models/application-type.model';
-import { CurrentAccountAction } from './../app-state/actions/current-account.action';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { ConnectionToProducersComponent } from '@app/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
 import { KeyValue } from '@angular/common';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+import { FeatureFlagService } from './../services/feature-flag.service';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -89,7 +87,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     public router: Router,
     public applicationDataService: ApplicationDataService,
     private dynamicsDataService: DynamicsDataService,
-    private sanitizer: DomSanitizer,
+    public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private tiedHouseService: TiedHouseConnectionsDataService,
@@ -206,7 +204,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }
         this.savedFormData = this.form.value;
       },
-        err => {
+        () => {
           console.log('Error occured');
         }
       );
@@ -303,7 +301,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.applicationDataService.updateApplication(this.form.value),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
-      .pipe(catchError(e => {
+      .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         return of(false);
       }))
@@ -444,16 +442,30 @@ export class ApplicationComponent extends FormBase implements OnInit {
           // delete the application.
           this.busy = this.applicationDataService.cancelApplication(this.applicationId)
             .pipe(takeWhile(() => this.componentActive))
-            .subscribe(res => {
+            .subscribe(() => {
               this.savedFormData = this.form.value;
               this.router.navigate(['/dashboard']);
             },
-              err => {
+              () => {
                 this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
                 console.error('Error cancelling the application');
               });
         }
       });
+  }
+
+  businessTypeIsPartnership(): boolean {
+    return ['GeneralPartnership',
+      'LimitedPartnership',
+      'LimitedLiabilityPartnership',
+      'Partnership'].indexOf(this.account.businessType) !== -1;
+  }
+
+  businessTypeIsPrivateCorporation(): boolean {
+    return ['PrivateCorporation',
+      'PublicCorporation',
+      'UnlimitedLiabilityCorporation',
+      'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
   }
 
 }
