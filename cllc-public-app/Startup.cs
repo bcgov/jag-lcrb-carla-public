@@ -368,7 +368,13 @@ namespace Gov.Lclb.Cllb.Public
                     await c.Response.WriteAsync(result);
                 }
             };
-            app.UseHealthChecks("/hc", healthCheckOptions);
+            app.UseHealthChecks("/hc/ready", healthCheckOptions);
+
+            app.UseHealthChecks("/hc/live", new HealthCheckOptions
+            {
+                // Exclude all checks and return a 200-Ok.
+                Predicate = (_) => false
+            });
 
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());
