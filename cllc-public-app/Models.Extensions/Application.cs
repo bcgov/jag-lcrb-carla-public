@@ -37,6 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
+            to.AdoxioFederalproducernames = from.FederalProducerNames;
 
 
 
@@ -178,6 +179,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                                                     + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
                 EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
                 EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
+                FederalProducerNames = dynamicsApplication.AdoxioFederalproducernames,
 
                 ServicehHoursStandardHours = dynamicsApplication.AdoxioServicehoursstandardhours,
                 ServiceHoursSundayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayopen,

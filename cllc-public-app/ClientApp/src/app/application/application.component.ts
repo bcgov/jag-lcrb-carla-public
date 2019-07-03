@@ -140,7 +140,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
       applyAsIndigenousNation: [false],
-      indigenousNationId: [{ value: null, disabled: true }, Validators.required]
+      indigenousNationId: [{ value: null, disabled: true }, Validators.required],
+      federalProducerNames: ['', Validators.required]
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: string) => {
@@ -233,6 +234,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('serviceHoursThursdayClose').disable();
       this.form.get('serviceHoursFridayClose').disable();
       this.form.get('serviceHoursSaturdayClose').disable();
+    }
+
+    if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
+      this.form.get('federalProducerNames').disable();
     }
   }
 

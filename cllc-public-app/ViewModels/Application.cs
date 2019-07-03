@@ -425,5 +425,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public TiedHouseConnection TiedHouse { get; set; }
 
         public string IndigenousNationId { get; set; }
+        public string FederalProducerNames { get; set; }
     }
 }
