@@ -11,11 +11,11 @@ export class FeatureFlagService {
 
   constructor(private featureFlagDataService: FeatureFlagDataService) { }
 
-  featureOff(featureName: string) {
+  featureOff(featureName: string): boolean {
     return !this.featureOn(featureName);
   }
 
-  featureOn(featureName: string) {
+  featureOn(featureName: string): boolean {
     if (!featureName) {
       return true;
     }

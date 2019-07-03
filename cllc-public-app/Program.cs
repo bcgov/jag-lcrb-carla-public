@@ -25,11 +25,12 @@ namespace Gov.Lclb.Cllb.Public
                     config.AddEnvironmentVariables();
                 })
                 .ConfigureLogging((hostingContext, logging) =>
-                {
-                    var config = new CllcConsoleLoggerConfiguration();
-
+                {                    
                     logging.ClearProviders();
-                    logging.AddProvider(new CllcConsoleLoggerProvider(config, hostingContext.HostingEnvironment));
+                    logging.AddConsole(x => {
+                        x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
+                        x.IncludeScopes = true;
+                    });
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddDebug();
                     logging.AddEventSourceLogger();
