@@ -19,6 +19,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? ShowFinancialIntegrityFormUpload;
         public bool? ShowSupportingDocuments;
         public bool? ShowDeclarations;
+        public bool? EstablishmetNameIsReadOnly;
 
         public LicenseType LicenseType;
 

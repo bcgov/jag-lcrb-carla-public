@@ -57,4 +57,5 @@ export class Application {
   signatureAgreement: boolean;
   tiedHouse: TiedHouseConnection;
   indigenousNationId: string;
+  federalProducerNames: string;
 }

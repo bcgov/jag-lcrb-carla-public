@@ -28,7 +28,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
-                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments
+                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
+                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname
                 };
 
                 if(applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
