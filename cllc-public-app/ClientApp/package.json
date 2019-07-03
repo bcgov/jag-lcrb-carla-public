@@ -12,7 +12,9 @@
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "private": true,
   "dependencies": {
@@ -55,7 +57,8 @@
     "survey-angular": "^1.0.66",
     "tar": "^4.4.8",
     "web-animations-js": "^2.3.1",
-    "zone.js": "~0.8.29"
+    "zone.js": "~0.8.29",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.9",
@@ -80,5 +83,6 @@
     "typescript": "~3.2.2",
     "webpack": "^4.29.1",
     "xmlhttprequest": "^1.8.0"
-  }
+  },
+  "snyk": true
 }
