@@ -133,7 +133,7 @@
                 <app-field label="Postal Code" [required]="true"
                   (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
                   [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                  errorMessage="Please enter the postal code" [isFullWidth]="true">
+                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)" [isFullWidth]="true">
                   <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
                 </app-field>
               </section>
@@ -173,7 +173,8 @@
                   </app-field>
                 </section>
                 <section class="col-md-3 col-xs-12">
-                  <app-field label="Postal /Zip Code" errorMessage="Please enter the postal code"
+                  <app-field label="Postal /Zip Code" errorMessage="This is required. The postal / zip code should be in one of the following formats: X1X1X1,
+                    12345, 12345-1234"
                     (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
                     [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
                     [required]="true" [isFullWidth]="true">
