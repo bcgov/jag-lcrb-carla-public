@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Interfaces
 {
     public class DynamicsHealthCheck : IHealthCheck
+    // follows pattern on https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-2.2
     {
         private readonly IDynamicsClient _dynamics;
         public DynamicsHealthCheck(IDynamicsClient dynamics)
@@ -14,7 +15,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             _dynamics = dynamics;
         }
 
-        public async Task<HealthCheckResult> CheckHealthAsync(
+        public Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -33,10 +34,10 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (healthCheckResultHealthy)
             {
-                return HealthCheckResult.Healthy("Dynamics is healthy.");
+                return Task.FromResult(HealthCheckResult.Healthy("Dynamics is healthy."));
             }
 
-            return HealthCheckResult.Unhealthy("Dynamics is unhealthy.");
+            return Task.FromResult(HealthCheckResult.Unhealthy("Dynamics is unhealthy."));
         }
     }
 }
