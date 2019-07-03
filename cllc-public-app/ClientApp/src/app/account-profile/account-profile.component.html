@@ -196,6 +196,7 @@
               <input class="form-control" style="width: 250px;" maxlength="10"
                 (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPhone">
             </app-field>
+
             <app-field label="Business Email" [required]="true"
               [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
               errorMessage="Please enter a valid email address"
@@ -207,7 +208,8 @@
 
           <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
           <div formGroupName="primarycontact" class="padded-section">
-            <i>The name and contact information of the person LCRB should contact for ongoing communication.</i><br>
+            <i>The name and contact information of the person LCRB should contact for ongoing communication. The contact
+              must be authorized to represent the applicant and have the authority to bind the applicant. </i><br>
 
             <app-field label="First Name" [required]="true"
               [valid]="form.get('primarycontact.firstname').valid || !form.get('primarycontact.firstname').touched"
