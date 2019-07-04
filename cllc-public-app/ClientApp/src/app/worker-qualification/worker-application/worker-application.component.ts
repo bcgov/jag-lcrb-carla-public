@@ -98,8 +98,8 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     this.minDate = new Date();
     this.minDate.setFullYear(this.minDate.getFullYear() - 100);
 
-    this.route.params.subscribe(params => {
-      this.workerId = params.id;
+    this.route.paramMap.subscribe(params => {
+      this.workerId = params.get('id');
     });
   }
 

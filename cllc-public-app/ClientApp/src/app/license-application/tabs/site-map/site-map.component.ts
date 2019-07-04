@@ -11,7 +11,7 @@ export class SiteMapComponent implements OnInit {
   applicationId: string;
 
   constructor(private userDataService: UserDataService, private route: ActivatedRoute) {
-    this.applicationId = route.parent.snapshot.params.applicationId;
+    route.parent.paramMap.subscribe(params => this.applicationId = params.get('applicationId'));
   }
 
   ngOnInit() {

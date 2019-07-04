@@ -70,7 +70,7 @@ export class FileUploaderComponent implements OnInit {
     input.value = '';
   }
 
-  private uploadFile(file) {
+  public uploadFile(file) {
     const validExt = this.extensions.filter(ex => file.name.toLowerCase().endsWith(ex)).length > 0;
     if (!validExt) {
       alert('File type not supported.');

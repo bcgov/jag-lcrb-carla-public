@@ -1,4 +1,5 @@
-﻿using CarlaSpiceSync.models;
+﻿
+using CarlaSpiceSync.models;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
@@ -85,7 +86,8 @@ namespace Gov.Lclb.Cllb.SpdSync
 
                 foreach (var row in result)
                 {
-                    var runner = GenerateWorkerScreeningRequest(row.AdoxioLcrbworkerjobid, _logger);
+                    Guid.TryParse(row.AdoxioLcrbworkerjobid, out Guid workerJobId);
+                    var runner = GenerateWorkerScreeningRequest(workerJobId, _logger);
                     runner.Wait();
                     var workerRequest = runner.Result;
                     payload.Add(workerRequest);
@@ -241,11 +243,12 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// Generate an application screening request
         /// </summary>
         /// <returns></returns>
-        public Interfaces.Spice.Models.ApplicationScreeningRequest GenerateApplicationScreeningRequest(string applicationId)
+        public Interfaces.Spice.Models.ApplicationScreeningRequest GenerateApplicationScreeningRequest(Guid applicationId)
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
-            var application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
+            var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
+            var application = applications.Value[0];
 
             var screeningRequest = CreateApplicationScreeningRequest(application);
 
@@ -259,35 +262,43 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <param name="associates">Associates.</param>
         private bool ValidateAssociateConsent(List<Interfaces.Spice.Models.LegalEntity> associates)
         {
-            /* Validate consent for all associates */
-            bool consentValidated = true;
-            foreach (var entity in associates)
+            try
             {
-                if ((bool)entity.IsIndividual)
+                /* Validate consent for all associates */
+                bool consentValidated = true;
+                foreach (var entity in associates)
                 {
-                    var id = entity.Contact.ContactId;
-                    var contact = _dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
-                    if (contact.AdoxioConsentvalidated == null)
+                    if ((bool)entity.IsIndividual)
                     {
-                        consentValidated = false;
-                        continue;
-                    }
-                    ConsentValidated consent = (ConsentValidated)contact.AdoxioConsentvalidated;
+                        var id = entity.Contact.ContactId;
+                        var contact = _dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
+                        if (contact.AdoxioConsentvalidated == null)
+                        {
+                            consentValidated = false;
+                            continue;
+                        }
+                        ConsentValidated consent = (ConsentValidated)contact.AdoxioConsentvalidated;
 
-                    if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES && contact.AdoxioConsentvalidatedexpirydate.Value >= DateTimeOffset.Now)
+                        if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
+                        {
+                            consentValidated = false;
+                        }
+                    }
+                    else
                     {
-                        consentValidated = false;
+                        if (!ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
+                        {
+                            consentValidated = false;
+                        }
                     }
                 }
-                else
-                {
-                    if (!ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
-                    {
-                        consentValidated = false;
-                    }
-                }
+                return consentValidated;
             }
-            return consentValidated;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                return false;
+            }
         }
 
         /// <summary>
@@ -295,7 +306,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// </summary>
         /// <returns>The application screening request success boolean.</returns>
         /// <param name="applicationRequest">Application request.</param>
-        public async Task<bool> SendApplicationScreeningRequest(string applicationId, Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
+        public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
         {
             var consentValidated = ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
 
@@ -321,14 +332,14 @@ namespace Gov.Lclb.Cllb.SpdSync
                         AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
                         AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
                     };
-                    _dynamicsClient.Applications.Update(applicationId, update);
+                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
                     return true;
                 }
                 return false;
             }
 
             _logger.LogError("Consent not valid for all associates.");
-            _dynamicsClient.Applications.Update(applicationId, new MicrosoftDynamicsCRMadoxioApplication()
+            _dynamicsClient.Applications.Update(applicationId.ToString(), new MicrosoftDynamicsCRMadoxioApplication()
             {
                 AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
                 AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("CONSENT NOT VALIDATED")
@@ -359,10 +370,10 @@ namespace Gov.Lclb.Cllb.SpdSync
             return result.Response.StatusCode.ToString() == "OK";
         }
 
-        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(string WorkerId, ILogger logger)
+        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(Guid WorkerId, ILogger logger)
         {
             // Query Dynamics for application data
-            var worker = await _dynamicsClient.GetWorkerByIdWithChildren(WorkerId);
+            var worker = await _dynamicsClient.GetWorkerByIdWithChildren(WorkerId.ToString());
 
             /* Create application */
             Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest()
@@ -460,15 +471,15 @@ namespace Gov.Lclb.Cllb.SpdSync
                 UrgentPriority = false,
                 ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
-                BusinessNumber = application.AdoxioBusinessnumber,
+                BusinessNumber = application.AdoxioApplicant.Accountnumber,
                 ApplicantName = application.AdoxioNameofapplicant,
                 BusinessAddress = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                 {
-                    AddressStreet1 = application.AdoxioAddressstreet,
-                    City = application.AdoxioAddresscity,
-                    StateProvince = application.AdoxioAddressprovince,
-                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(application.AdoxioAddresspostalcode)) ? application.AdoxioAddresspostalcode : null,
-                    Country = application.AdoxioAddresscountry
+                    AddressStreet1 = application.AdoxioApplicant.Address1Line1,
+                    City = application.AdoxioApplicant.Address1City,
+                    StateProvince = application.AdoxioApplicant.Address1Stateorprovince,
+                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(application.AdoxioApplicant.Address1Postalcode)) ? application.AdoxioApplicant.Address1Postalcode : null,
+                    Country = application.AdoxioApplicant.Address1Country
                 },
                 ContactPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
@@ -528,17 +539,17 @@ namespace Gov.Lclb.Cllb.SpdSync
                 };
             }
 
-            /* Add key personnel */
+            /* Add key personnel and deemed associates */
             screeningRequest.Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>();
-            string keypersonnelfilter = "_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1";
+            string keypersonnelfilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1)";
+            string deemedassociatefilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_isdeemedassociate eq true and adoxio_isindividual eq 1)";
             string[] expand = { "adoxio_Contact" };
-            var keyPersonnel = _dynamicsClient.Legalentities.Get(filter: keypersonnelfilter, expand: expand).Value;
-            if (keyPersonnel != null)
+            var associates = _dynamicsClient.Legalentities.Get(filter: keypersonnelfilter + " or " + deemedassociatefilter, expand: expand).Value;
+            if (associates != null)
             {
-                foreach (var legalEntity in keyPersonnel)
+                foreach (var legalEntity in associates)
                 {
                     Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity person = CreateAssociate(legalEntity);
-                    //legalEntity.AdoxioContact.AdoxioConsentvalidated;
                     screeningRequest.Associates.Add(person);
                 }
             }
@@ -550,7 +561,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             return screeningRequest;
         }
 
-        private List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> foundAssociates)
+        private List<Interfaces.Spice.Models.LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> foundAssociates)
         {
             List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> newAssociates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>();
             string applicationfilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
@@ -613,12 +624,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                     MiddleName = legalEntity.AdoxioContact.Middlename,
                     Email = legalEntity.AdoxioContact.Emailaddress1,
                     PhoneNumber = legalEntity.AdoxioContact.Telephone1,
-                    SelfDisclosure = (legalEntity.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioSelfdisclosure).ToString(),
-                    Gender = (legalEntity.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioGendercode).ToString(),
-                    Birthplace = legalEntity.AdoxioBirthplace,
-                    BirthDate = legalEntity.AdoxioDateofbirth,
-                    BcIdCardNumber = legalEntity.AdoxioBcidcardnumber,
-                    DriversLicenceNumber = legalEntity.AdoxioDriverslicencenumber,
+                    SelfDisclosure = (legalEntity.AdoxioContact.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioContact.AdoxioSelfdisclosure).ToString(),
+                    Gender = (legalEntity.AdoxioContact.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioContact.AdoxioGendercode).ToString(),
+                    Birthplace = legalEntity.AdoxioContact.AdoxioBirthplace,
+                    BirthDate = legalEntity.AdoxioContact.Birthdate,
+                    BcIdCardNumber = legalEntity.AdoxioContact.AdoxioBcidcardnumber,
+                    DriversLicenceNumber = legalEntity.AdoxioContact.AdoxioDriverslicencenumber,
                     Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
@@ -662,6 +673,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             }
             else
             {
+                // Attach the account
                 if (legalEntity._adoxioShareholderaccountidValue != null)
                 {
                     var account = _dynamicsClient.Accounts.Get(filter: "accountid eq " + legalEntity._adoxioShareholderaccountidValue).Value;
@@ -674,7 +686,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                         Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
                     };
                 }
-                else
+                else if (legalEntity.AdoxioAccount != null)
                 {
                     associate.Account = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
                     {
@@ -684,6 +696,11 @@ namespace Gov.Lclb.Cllb.SpdSync
                         BusinessNumber = legalEntity.AdoxioAccount.Accountnumber,
                         Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
                     };
+                }
+                else
+                {
+                    _logger.LogError("Failed to find a shareholder account found");
+                    associate.Account = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account();
                 }
                 associate.IsIndividual = false;
             }
@@ -775,8 +792,9 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             foreach (var application in applications)
             {
-                var screeningRequest = GenerateApplicationScreeningRequest(application.AdoxioApplicationid);
-                var response = await SendApplicationScreeningRequest(application.AdoxioApplicationid, screeningRequest);
+                Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
+                var screeningRequest = GenerateApplicationScreeningRequest(applicationId);
+                var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
                     hangfireContext.WriteLine($"Successfully sent application {application.AdoxioApplicationid} to SPD");
