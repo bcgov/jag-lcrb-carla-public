@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cllc-public-app", "cllc-public-app.csproj", "{8FE0A3D0-B466-41E3-91A9-3AB6207C15E5}"
 EndProject
@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCEP", "..\cllc-interfaces\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PDF", "..\cllc-interfaces\PDF\PDF.csproj", "{7C4D7FD8-E491-427C-83EA-BE9AD181D727}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneStopRestClient", "..\cllc-interfaces\OneStopRestClient\OneStopRestClient.csproj", "{5874D71B-943E-40AC-A965-063F843FE34F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneStopRestClient", "..\cllc-interfaces\OneStopRestClient\OneStopRestClient.csproj", "{5874D71B-943E-40AC-A965-063F843FE34F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrgBookClient", "..\cllc-interfaces\OrgBookClient\OrgBookClient.csproj", "{6253E255-252F-4E2E-A7BF-9D4B48DCA0CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{5874D71B-943E-40AC-A965-063F843FE34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5874D71B-943E-40AC-A965-063F843FE34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5874D71B-943E-40AC-A965-063F843FE34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6253E255-252F-4E2E-A7BF-9D4B48DCA0CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6253E255-252F-4E2E-A7BF-9D4B48DCA0CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6253E255-252F-4E2E-A7BF-9D4B48DCA0CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6253E255-252F-4E2E-A7BF-9D4B48DCA0CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{05301D75-ACF9-45D8-B572-AC052EAD4B54} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 		{7C4D7FD8-E491-427C-83EA-BE9AD181D727} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 		{5874D71B-943E-40AC-A965-063F843FE34F} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
+		{6253E255-252F-4E2E-A7BF-9D4B48DCA0CD} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF5C395A-DA58-4406-95D8-AAEBD4437D0A}
