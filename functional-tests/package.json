@@ -14,11 +14,15 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "gradle chromeTest --debug"
+    "test": "gradle chromeTest --debug",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "gradle": "^1.0.7",
     "opn": "^5.1.0",
-    "process": "^0.11.9"
-  }
+    "process": "^0.11.9",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
