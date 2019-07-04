@@ -1,33 +1,36 @@
 
-import {filter} from 'rxjs/operators';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { filter } from 'rxjs/operators';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { PolicyDocumentComponent } from '../../policy-document/policy-document.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-worker-home',
   templateUrl: './worker-home.component.html',
-  styleUrls: ['./worker-home.component.scss']
+  styleUrls: ['./worker-home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkerHomeComponent implements OnInit, AfterViewInit {
 
   policySlug = 'worker-qualification-training';
   currentSlug = this.policySlug;
   @ViewChild('policyDocs') policyDocs: PolicyDocumentComponent;
-  constructor(public dialog: MatDialog, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, private ref: ChangeDetectorRef) {
+    this.route.data.pipe(
+      filter(data => !!data && !!data.slug))
+      .subscribe((data: any) => {
+        this.policySlug = data.slug;
+      });
+  }
 
   ngOnInit() {
-    this.route.data.pipe(
-    filter(data => !!data && !!data.slug))
-    .subscribe((data: any) => {
-      this.policySlug = data.slug;
-    });
-
+    this.policyDocs.setSlug(this.policySlug);
   }
 
   ngAfterViewInit(): void {
-    this.policyDocs.setSlug(this.policySlug);
+    this.ref.detectChanges();
   }
 
 

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Rest;
@@ -108,11 +108,8 @@ namespace Gov.Lclb.Cllb.SpdSync
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks()
+                .AddCheck("carla-spice-sync", () => HealthCheckResult.Healthy());
         }
 
         private void SetupSharePoint(IServiceCollection services)
@@ -188,6 +185,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 SetupHangfireJobs(app, loggerFactory);
             }
 
+            app.UseHealthChecks("/hc");
+
             app.UseAuthentication();
             app.UseMvc();
             app.UseSwagger();
@@ -195,6 +194,11 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
+
+
+            
+
+            
 
             // enable Splunk logger
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))

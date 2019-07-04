@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../models/user.model';
 import { Contact } from '../../models/contact.model';
 import { AppState } from '../../app-state/models/app-state';
@@ -22,15 +22,7 @@ export class UserConfirmationComponent implements OnInit {
   termsAccepted = false;
 
   constructor(private userDataService: UserDataService,
-    private store: Store<AppState>,
-    private aliasDataService: AliasDataService,
-    private previousAddressDataService: PreviousAddressDataService,
-    private contactDataService: ContactDataService,
-    private workerDataService: WorkerDataService,
-    private userService: UserDataService,
-    private fb: FormBuilder,
-    private router: Router
-  ) { }
+    private contactDataService: ContactDataService  ) { }
 
   ngOnInit() {
   }
@@ -44,9 +36,9 @@ export class UserConfirmationComponent implements OnInit {
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
-      this.busy = this.contactDataService.createWorkerContact(contact).subscribe(res => {
+      this.busy = this.contactDataService.createWorkerContact(contact).subscribe(() => {
         this.userDataService.loadUserToStore();
-      }, error => alert('Failed to create contact'));
+      }, () => alert('Failed to create contact'));
     } else {
       window.location.href = 'logout';
     }

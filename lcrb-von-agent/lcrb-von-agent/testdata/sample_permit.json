@@ -1,0 +1,16 @@
+[
+{
+    "attributes": {
+        "registration_id": "___REGISTRATION_ID___",
+        "licence_number": "100",
+        "establishment_name": "Test Company Establishment",
+        "issue_date": "2017-01-01T08:00:00+00:00",
+        "effective_date": "2018-03-25T08:00:00+00:00",
+        "expiry_date": "2019-07-01T08:00:00+00:00"
+    },
+    "schema": "cannabis-retail-store-licence.lcrb",
+    "version": "1.0.1"
+}
+]
+
+

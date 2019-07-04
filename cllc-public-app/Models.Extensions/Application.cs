@@ -37,6 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
+            to.AdoxioFederalproducernames = from.FederalProducerNames;
 
 
 
@@ -85,6 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
 
+            to.AdoxioApplicanttype = (int?)from.ApplicantType;
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
@@ -177,6 +179,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                                                     + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
                 EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
                 EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
+                FederalProducerNames = dynamicsApplication.AdoxioFederalproducernames,
 
                 ServicehHoursStandardHours = dynamicsApplication.AdoxioServicehoursstandardhours,
                 ServiceHoursSundayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayopen,
@@ -201,6 +204,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 // set a couple of read-only flags to indicate status
                 IsPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved),
+
+                IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
 
                 //get parcel id
                 EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,

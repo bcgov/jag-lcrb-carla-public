@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkerQualificationComponent } from './worker-qualification.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('WorkerQualificationComponent', () => {
   let component: WorkerQualificationComponent;
@@ -8,7 +9,8 @@ describe('WorkerQualificationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkerQualificationComponent ]
+      declarations: [ WorkerQualificationComponent ],
+      schemas: [ NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

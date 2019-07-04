@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AssosiateWizardComponent } from './associate-wizard.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AssosiateWizardComponent', () => {
   let component: AssosiateWizardComponent;
@@ -8,7 +9,8 @@ describe('AssosiateWizardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AssosiateWizardComponent ]
+      declarations: [ AssosiateWizardComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

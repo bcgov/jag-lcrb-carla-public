@@ -27,9 +27,8 @@
           <h3 *ngIf="getBusinessTypeName() === 'Sole Proprietor'" class="blue-header">DETAILS OF
             THE SOLE PROPRIETORSHIP</h3>
           <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
-          <h3
-            *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"
-            class="blue-header"> CORPORATION DETAILS</h3>
+          <h3 *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" class="blue-header"> CORPORATION DETAILS
+          </h3>
           <div formGroupName="businessProfile" class="padded-section">
             <app-field label="{{getBusinessTypeName()}} - Legal Name">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
@@ -66,12 +65,10 @@
               </select>
             </app-field>
 
-            <section
-              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
+            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
-                <label
-                  *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1"
-                  for="">B.C. Incorporation Number</label>
+                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">B.C. Incorporation
+                  Number</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
                 <br />
@@ -84,13 +81,12 @@
                 </div>
               </div>
             </section>
+
             <p></p>
 
-            <section
-              *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
+            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
               <div [ngClass]="{'has-error': false}">
-                <label
-                  *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
+                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'">Date of Incorporation in
                   B.C.</label>
@@ -137,7 +133,7 @@
                 <app-field label="Postal Code" [required]="true"
                   (blur)="trimValue(form.get('businessProfile.physicalAddressPostalCode'))"
                   [valid]="form.get('businessProfile.physicalAddressPostalCode').valid || !form.get('businessProfile.physicalAddressPostalCode').touched"
-                  errorMessage="Please enter the postal code" [isFullWidth]="true">
+                  errorMessage="This is required. The postal code should be in one of the following formats: X1X1X1 (no spaces)" [isFullWidth]="true">
                   <input class="form-control" type="text" formControlName="physicalAddressPostalCode">
                 </app-field>
               </section>
@@ -177,7 +173,8 @@
                   </app-field>
                 </section>
                 <section class="col-md-3 col-xs-12">
-                  <app-field label="Postal /Zip Code" errorMessage="Please enter the postal code"
+                  <app-field label="Postal /Zip Code" errorMessage="This is required. The postal / zip code should be in one of the following formats: X1X1X1,
+                    12345, 12345-1234"
                     (blur)="trimValue(form.get('businessProfile.mailingAddressPostalCode'))"
                     [valid]="form.get('businessProfile.mailingAddressPostalCode').valid || !form.get('businessProfile.mailingAddressPostalCode').touched"
                     [required]="true" [isFullWidth]="true">
@@ -200,6 +197,7 @@
               <input class="form-control" style="width: 250px;" maxlength="10"
                 (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPhone">
             </app-field>
+
             <app-field label="Business Email" [required]="true"
               [valid]="form.get('businessProfile.contactEmail').valid || !form.get('businessProfile.contactEmail').touched"
               errorMessage="Please enter a valid email address"
@@ -211,7 +209,8 @@
 
           <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
           <div formGroupName="primarycontact" class="padded-section">
-            <i>The name and contact information of the person LCRB should contact for ongoing communication.</i><br>
+            <i>The name and contact information of the person LCRB should contact for ongoing communication. The contact
+              must be authorized to represent the applicant and have the authority to bind the applicant. </i><br>
 
             <app-field label="First Name" [required]="true"
               [valid]="form.get('primarycontact.firstname').valid || !form.get('primarycontact.firstname').touched"
@@ -266,8 +265,7 @@
 
           <h3 class="blue-header">CONNECTIONS
             TO FEDERAL PRODUCERS OF CANNABIS</h3>
-          <div class="padded-section"
-            *ngIf="saveFormData?.businessProfile?.id">
+          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
             <app-connection-to-producers *ngIf="account?.tiedHouse" [tiedHouse]="account?.tiedHouse"
               [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
           </div>

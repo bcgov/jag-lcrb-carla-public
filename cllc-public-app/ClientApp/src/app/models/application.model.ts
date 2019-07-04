@@ -56,4 +56,6 @@ export class Application {
   servicehHoursStandardHours: boolean;
   signatureAgreement: boolean;
   tiedHouse: TiedHouseConnection;
+  indigenousNationId: string;
+  federalProducerNames: string;
 }

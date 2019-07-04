@@ -35,20 +35,19 @@ export class SpdConsentComponent implements OnInit {
     private userDataService: UserDataService,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
-    private router: Router,
     private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
-      this.workerId = params.id;
+    this.route.paramMap.subscribe(params => {
+      this.workerId = params.get('id');
     });
   }
 
   ngOnInit() {
-    this.reloadUser();
-
     this.form = this.fb.group({
       id: [],
       selfdisclosure: [''],
     });
+    this.reloadUser();
+
   }
 
 

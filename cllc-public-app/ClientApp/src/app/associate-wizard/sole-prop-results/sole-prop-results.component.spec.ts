@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SolePropResultsComponent } from './sole-prop-results.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('SolePropResultsComponent', () => {
   let component: SolePropResultsComponent;
@@ -8,7 +9,8 @@ describe('SolePropResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SolePropResultsComponent ]
+      declarations: [ SolePropResultsComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
