@@ -21,6 +21,7 @@ export class ApplicationType {
   showFinancialIntegrityFormUpload: boolean;
   showSupportingDocuments: boolean;
   showDeclarations: boolean;
+  establishmetNameIsReadOnly: boolean;
 }
 
 export enum ApplicationTypeNames {
