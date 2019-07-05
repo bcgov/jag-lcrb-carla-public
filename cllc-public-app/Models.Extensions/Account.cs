@@ -56,7 +56,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Telephone1 = fromVM.contactPhone;
             }
-            
+            if (copyIfNull || (!copyIfNull && fromVM.TermsOfUseAccepted != null))
+            {
+                toDynamics.AdoxioTermsofuseaccepted = fromVM.TermsOfUseAccepted;
+            }
+            if (copyIfNull || (!copyIfNull && fromVM.TermsOfUseAcceptedDate != null))
+            {
+                toDynamics.AdoxioTermsofuseaccepteddate = fromVM.TermsOfUseAcceptedDate;
+            }
+
             if (copyIfNull || (!copyIfNull && fromVM.mailingAddressName != null))
             {
                 toDynamics.Address1Name = fromVM.mailingAddressName;
@@ -173,6 +181,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.physicalAddressCountry = account.Address2Country;
                 accountVM.physicalAddressProvince = account.Address2Stateorprovince;
                 accountVM.physicalAddressPostalCode = account.Address2Postalcode;
+
+                accountVM.TermsOfUseAccepted = account.AdoxioTermsofuseaccepted;
+                accountVM.TermsOfUseAcceptedDate = account.AdoxioTermsofuseaccepteddate;
+
+
 
                 if (account.Primarycontactid != null)
                 {
