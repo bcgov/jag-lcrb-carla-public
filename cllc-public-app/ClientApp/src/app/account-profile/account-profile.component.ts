@@ -93,8 +93,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       businessProfile: this.fb.group({
         id: [''],
         _mailingSameAsPhysicalAddress: [],
-        name: [{ value: '', disabled: true }],
-        businessDBAName: [{ value: '', disabled: true }],
+        // name: [''],
+        // businessDBAName: [''],
         bcIncorporationNumber: [''], // Validators.required
         dateOfIncorporationInBC: [''],
         businessNumber: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
