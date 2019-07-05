@@ -125,7 +125,7 @@ The `init.sh` script does a number of things:
 - Prompts for some names to use for your basic agent.
 - Prompts for whether you are running with Play With Docker or locally and sets some variables accordingly.
 - Registers a DID for you on the ledger that you are using.
-- Shows you the lines that were changed in the agent configuration files (in [von-x-agent/config](von-x-agent/config)).
+- Shows you the lines that were changed in the agent configuration files (in [lcrb-von-agent/config](lcrb-von-agent/config)).
 
 The initial agent you  created issues one credential, using the name you gave it, with a handful of claims: permit ID, permit type, etc. That credential depends on the applying organization already having the BC Registries "Registration" credential. Without already having that credential, an applying organization won't be able to get your agent's credential.
 
@@ -153,13 +153,13 @@ All good?  Whoohoo!
 
 ## Step 3: Reviewing the Configuration Files
 
-Your agent is configured using the YAML files in the `von-x-agent/config` folder in the repo. In the following, we'll take a look at the files in that folder. As you browse these files, you should see the organization and permit names you entered during initialization.
+Your agent is configured using the YAML files in the `lcrb-von-agent/config` folder in the repo. In the following, we'll take a look at the files in that folder. As you browse these files, you should see the organization and permit names you entered during initialization.
 
-We'll be working with the files as we go through the tutorial. No need to learn all the details about the YAML file right now. When the time comes, documentation for the files can be found in the [VON Agent Configuration Guide](von-x-agent/config/README.md).
+We'll be working with the files as we go through the tutorial. No need to learn all the details about the YAML file right now. When the time comes, documentation for the files can be found in the [VON Agent Configuration Guide](lcrb-von-agent/config/README.md).
 
 ### In Browser
 
-Use the built-in Docker editor to view the files in the `von-agent-template/von-x-agent/config` folder.
+Use the built-in Docker editor to view the files in the `von-agent-template/lcrb-von-agent/config` folder.
 
 ### Local Machine
 
@@ -167,7 +167,7 @@ Press `CTRL+C` (which stops the agent's rolling message log and gets you back to
 
 ```bash
 # Assuming you are currently in the von-agent-template/docker directory
-cd ../von-x-agent/config
+cd ../lcrb-von-agent/config
 ls # list files
 more schemas.yml # view files - repeat for other .yml files
 ```
@@ -196,7 +196,7 @@ Now that you have seen how a user can trigger the issuance of a verifiable crede
 
 Remember that your credential is set up to depend on the BC Registries `Registration` credential. To populate the JSON structure, we need to get some information from an existing registration credential. Use the second one that you created in the previous tutorial step (you remembered the name, right?). Find the name in OrgBook and on its organization screen, find the "Registration ID" and "Legal Name". When we used GreenLight, those fields came from the proof request. In this case, we're not going to do the proof request, so we need to (correctly!) populate them in the JSON for the API call.
 
-The JSON file we're going to submit is in the `von-agent-template/von-x-agent/testdata` folder, called `sample_permit.json`. Edit that file and make the following changes:
+The JSON file we're going to submit is in the `von-agent-template/lcrb-von-agent/testdata` folder, called `sample_permit.json`. Edit that file and make the following changes:
 
 - set the value of "corp_num" to the "registration ID" from OrgBook
 - set the value of "legal_name" to the "legal name" from OrgBook
@@ -206,7 +206,7 @@ The JSON file we're going to submit is in the `von-agent-template/von-x-agent/te
 Save your file and then, from the `von-agent-template` folder, execute this command **REPLACING** "my-organization" with the name of your organization:
 
 ```
-curl -vX POST http://$ENDPOINT_HOST/my-organization/issue-credential -d @von-x-agent/testdata/sample_permit.json --header "Content-Type: application/json"
+curl -vX POST http://$ENDPOINT_HOST/my-organization/issue-credential -d @lcrb-von-agent/testdata/sample_permit.json --header "Content-Type: application/json"
 ```
 
 You should see the results from the `curl` command with an HTTP response of `200` (success) and JSON structure with the status, something like this:
@@ -217,7 +217,7 @@ You should see the results from the `curl` command with an HTTP response of `200
 
 If the `curl` command failed:
   - Check for typos in your JSON structure 
-  - Check for typos in the command you submitted (to review run the command `cat von-x-agent/testdata/sample_permit.json`)
+  - Check for typos in the command you submitted (to review run the command `cat lcrb-von-agent/testdata/sample_permit.json`)
   - Check that you are in the `von-agent-template` folder.
   - Did you remember to change "my-organization" to the name of your organization?
 
@@ -242,7 +242,7 @@ If you want, you can make other changes, within limits.  You can't change the "c
 
 Things to remember as you make the changes:
 
-- The files to be edited are in the `von-x-agent/config` folder - `schema.yml`, `routes.yml` and `services.yml`. No need to change `settings.yml`
+- The files to be edited are in the `lcrb-von-agent/config` folder - `schema.yml`, `routes.yml` and `services.yml`. No need to change `settings.yml`
 - If you rename a credential attribute, check in all three files for the name and change it in all three.
 - If you add an attribute, you need only add it in `schema.yml` and `routes.yml`. Recall that in `routes.yml` you are defining how to populate the attribute when submitting the credential data via a form. Best choice for this exercise is to add it as a visible form field (for example just below `permit_type`).
 - See  `Stopping and Restarting Your Agent`  below to see if you need to change the `version` of your schema. **HINT**: In this exercise, because you are changing the credential schema, you **do** have to bump the version.
@@ -293,7 +293,7 @@ In this step we'll add an entire new credential that is dependent on the credent
 
 > Your credential issuer service offers a "multi-location" permit that extends the authority of an existing permit to other business locations.  If an organization can prove it has been issued the first credential from the service, it can get subsequent permits for other named locations by supplying a name and address.
 
-The following are the tasks to be done and notes about the changes to be made to the files in `von-x-agent/config`:
+The following are the tasks to be done and notes about the changes to be made to the files in `lcrb-von-agent/config`:
 
 ### Updating `schemas.yml`
 
@@ -349,7 +349,7 @@ As we did in the previous files, we'll copy and paste the existing credential to
         - location_name
 ```
 
-> `Cardinality` lets OrgBook know that an organization can hold multiple active instances of a credential at the same time. By default, an organization has only a single active instance of a credential, and receipt of a new credential means the previous one is revoked. With `cardinality` set (in this case, to `location_name`), if a credential is issued for an organization with a specific `location_name` that has not been seen before by OrgBook, the credential is assumed to be a new one.  However, if `location_name` is the same as another credential for that organization, OrgBook assumes it's a reissuance and revokes the old credential. See the [VON issuer/verifier agent documentation](von-x-agent/config/README.md) for more details.
+> `Cardinality` lets OrgBook know that an organization can hold multiple active instances of a credential at the same time. By default, an organization has only a single active instance of a credential, and receipt of a new credential means the previous one is revoked. With `cardinality` set (in this case, to `location_name`), if a credential is issued for an organization with a specific `location_name` that has not been seen before by OrgBook, the credential is assumed to be a new one.  However, if `location_name` is the same as another credential for that organization, OrgBook assumes it's a reissuance and revokes the old credential. See the [VON issuer/verifier agent documentation](lcrb-von-agent/config/README.md) for more details.
 
 1. In the `mapping` section, remove all of the entries for attributes removed from `schemas.yml`.
 2. Insert an `address` section (below) immediately above the `- model: attribute` line.
@@ -397,14 +397,14 @@ That's it, you should be good to go.  Time to test.
 1. Use the process presented early in this tutorial to stop the agent (without deleting its wallet), build it and start it again.
 2. Use GreenLight to test that you can issue the new credential via a form. Did you get the correct GreenLight graph?
 
-> **NOTE:** GreenLight doesn't yet support issuing multiple of the same credential for a single organization, so we'll have to use `curl` to test that. We've added a JSON file ([von-x-agent/testdata/sample-location.json](https://github.com/bcgov/von-agent-template/blob/master/von-x-agent/testdata/sample_location.json)) that you can edit and use to issue multiple credentials to the same organization. 
+> **NOTE:** GreenLight doesn't yet support issuing multiple of the same credential for a single organization, so we'll have to use `curl` to test that. We've added a JSON file ([lcrb-von-agent/testdata/sample-location.json](https://github.com/bcgov/von-agent-template/blob/master/lcrb-von-agent/testdata/sample_location.json)) that you can edit and use to issue multiple credentials to the same organization. 
 
 3. Update the fields to the correct values (especially corp_num and permit_id) before running the curl command.  Try issuing multiple credentials with different dates but the same `location_name` value to see how OrgBook handles that situation. 
 4. Check in OrgBook to see the results.
 
 ## Conclusion
 
-With that, you should have a pretty good idea of how VON issuer/verifier agents are configured and deployed. See the [agent configuration documentation](von-x-agent/config/README.md) for more details about all of the elements of the YAML files.
+With that, you should have a pretty good idea of how VON issuer/verifier agents are configured and deployed. See the [agent configuration documentation](lcrb-von-agent/config/README.md) for more details about all of the elements of the YAML files.
 
 If you discover any problems in completing this tutorial, please let us know either by submitting an issue to the source GitHub repo, or by updating the files or documentation and submitting a Pull Request.
 
