@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Interfaces
 {
     public class SharepointHealthCheck : IHealthCheck
+    // reference https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-2.2
     {
         private readonly SharePointFileManager _sharepoint;
         public SharepointHealthCheck(SharePointFileManager sharepoint)
@@ -14,16 +15,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             _sharepoint = sharepoint;
         }
 
-        public async Task<HealthCheckResult> CheckHealthAsync(
+        public Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Execute health check logic here. This example sets a dummy
-            // variable to true.
+            // Try and get the Account document library
             bool healthCheckResultHealthy;
             try
             {
-                var result = await _sharepoint.GetDocumentLibrary("Account");
+                var result = _sharepoint.GetDocumentLibrary("Account").GetAwaiter().GetResult();
 
                 healthCheckResultHealthy = (result != null);
             }
@@ -34,12 +34,10 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (healthCheckResultHealthy)
             {
-                return await Task.FromResult(
-                    HealthCheckResult.Healthy("Sharepoint is healthy."));
+                return Task.FromResult(HealthCheckResult.Healthy("Sharepoint is healthy."));
             }
 
-            return await Task.FromResult(
-                HealthCheckResult.Unhealthy("Sharepoint is unhealthy."));
+            return Task.FromResult(HealthCheckResult.Unhealthy("Sharepoint is unhealthy."));
         }
     }
 }
