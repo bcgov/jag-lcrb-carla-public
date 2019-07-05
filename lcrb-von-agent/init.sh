@@ -53,9 +53,9 @@ select example in "1" "2" "3"; do
 
             # Adjustments to files for local execution
             sed -i.bak "s/#local//g" docker/docker-compose.yml
-            sed -i.bak "s/ INDY_GENESIS_URL/ #INDY_GENESIS_URL/" von-x-agent/config/settings.yml
-            # sed -i.bak "s/ AUTO_REGISTER_DID/ #AUTO_REGISTER_DID/" von-x-agent/config/settings.yml
-            find docker von-x-agent -name "*.bak" -type f|xargs rm -f
+            sed -i.bak "s/ INDY_GENESIS_URL/ #INDY_GENESIS_URL/" lcrb-von-agent/config/settings.yml
+            # sed -i.bak "s/ AUTO_REGISTER_DID/ #AUTO_REGISTER_DID/" lcrb-von-agent/config/settings.yml
+            find docker lcrb-von-agent -name "*.bak" -type f|xargs rm -f
 
             break;;
         3 ) 
@@ -67,7 +67,7 @@ select example in "1" "2" "3"; do
             export GENESIS_URL=${LEDGER}/genesis
             __TOBAPIURL=Update-With-OrgBook-API-URL
             __TOBAPPURL=Update-With-OrgBook-Application-URL
-            echo NOTE: TheOrgBook API and Application URLs must be updated in von-x-agent/config/settings.yml
+            echo NOTE: TheOrgBook API and Application URLs must be updated in lcrb-von-agent/config/settings.yml
 
             break;;
     esac
@@ -75,14 +75,14 @@ done
 echo ""
 
 # OK - time to make all the substitutions...
-sed -i.bak "s/my-organization_0000000000000000/${MY_SEED}/g" von-x-agent/config/settings.yml
-sed -i.bak "s#TOBAPIURL#${__TOBAPIURL}#g" von-x-agent/config/settings.yml
-sed -i.bak "s#TOBAPPURL#${__TOBAPPURL}#g" von-x-agent/config/settings.yml
-sed -i.bak "s#GENESISURL#${GENESIS_URL}#g" von-x-agent/config/settings.yml
-find von-x-agent/config -name "*.yml" -exec sed -i.bak "s/my-org-full-name/${ORG_TITLE}/g" {} +
-find von-x-agent/config -name "*.yml" -exec sed -i.bak s/my-organization/${MY_ORG}/g {} +
-find von-x-agent/config -name "*.yml" -exec sed -i.bak s/my-permit/${MY_PERMIT}/g {} +
-find von-x-agent -name "*.bak" -type f|xargs rm -f
+sed -i.bak "s/my-organization_0000000000000000/${MY_SEED}/g" lcrb-von-agent/config/settings.yml
+sed -i.bak "s#TOBAPIURL#${__TOBAPIURL}#g" lcrb-von-agent/config/settings.yml
+sed -i.bak "s#TOBAPPURL#${__TOBAPPURL}#g" lcrb-von-agent/config/settings.yml
+sed -i.bak "s#GENESISURL#${GENESIS_URL}#g" lcrb-von-agent/config/settings.yml
+find lcrb-von-agent/config -name "*.yml" -exec sed -i.bak "s/my-org-full-name/${ORG_TITLE}/g" {} +
+find lcrb-von-agent/config -name "*.yml" -exec sed -i.bak s/my-organization/${MY_ORG}/g {} +
+find lcrb-von-agent/config -name "*.yml" -exec sed -i.bak s/my-permit/${MY_PERMIT}/g {} +
+find lcrb-von-agent -name "*.bak" -type f|xargs rm -f
 
 # Register DID
 # https://gist.github.com/subfuzion/08c5d85437d5d4f00e58
@@ -96,22 +96,22 @@ find von-x-agent -name "*.bak" -type f|xargs rm -f
 # echo ""
 
 # Update the MY-DID entries in the yml files
-# find von-x-agent/config -name "*.yml" -exec sed -i.bak s/X3tCbZSE9uUb223KYDWd6o/$MY_DID/g {} +
-# find von-x-agent -name "*.bak" -type f|xargs rm -f
+# find lcrb-von-agent/config -name "*.yml" -exec sed -i.bak s/X3tCbZSE9uUb223KYDWd6o/$MY_DID/g {} +
+# find lcrb-von-agent -name "*.bak" -type f|xargs rm -f
 
 echo -------------------------
 echo The following updates were made to the configuration files:
 echo ""
 
-grep -E "${ORG_TITLE}|${MY_ORG}|${MY_PERMIT}|${MY_SEED}|${__TOBAPIURL}|${__TOBAPPURL}|${GENESIS_URL}" von-x-agent/config/*.yml
-# grep ${ORG_TITLE} von-x-agent/config/*.yml
-# grep ${MY_ORG} von-x-agent/config/*.yml
-# grep ${MY_PERMIT} von-x-agent/config/*.yml
-# grep ${MY_DID} von-x-agent/config/*.yml
-# grep ${MY_SEED} von-x-agent/config/*.yml
-# grep ${__TOBAPIURL} von-x-agent/config/*.yml
-# grep ${__TOBAPPURL} von-x-agent/config/*.yml
-# grep ${GENESIS_URL} von-x-agent/config/*.yml
+grep -E "${ORG_TITLE}|${MY_ORG}|${MY_PERMIT}|${MY_SEED}|${__TOBAPIURL}|${__TOBAPPURL}|${GENESIS_URL}" lcrb-von-agent/config/*.yml
+# grep ${ORG_TITLE} lcrb-von-agent/config/*.yml
+# grep ${MY_ORG} lcrb-von-agent/config/*.yml
+# grep ${MY_PERMIT} lcrb-von-agent/config/*.yml
+# grep ${MY_DID} lcrb-von-agent/config/*.yml
+# grep ${MY_SEED} lcrb-von-agent/config/*.yml
+# grep ${__TOBAPIURL} lcrb-von-agent/config/*.yml
+# grep ${__TOBAPPURL} lcrb-von-agent/config/*.yml
+# grep ${GENESIS_URL} lcrb-von-agent/config/*.yml
 
 # Clean up
 unset ORG_TITLE MY_ORG MY_PERMIT MY_DID MY_SEED __TOBAPIURL __TOBAPPURL
