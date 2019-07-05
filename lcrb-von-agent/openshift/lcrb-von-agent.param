@@ -1,9 +1,9 @@
 #=========================================================
 # OpenShift template parameters for:
 # Component: .
-# Template File: templates/von-x-agent.yaml
+# Template File: templates/lcrb-von-agent.yaml
 #=========================================================
-NAME=von-x-agent
+NAME=lcrb-von-agent
 GIT_REPO_URL=https://github.com/bcgov/jag-lcrb-carla-public.git
 GIT_REF=master
 SOURCE_CONTEXT_DIR=lcrb-von-agent/lcrb-von-agent
