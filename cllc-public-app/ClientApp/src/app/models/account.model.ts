@@ -13,6 +13,7 @@ export interface Account {
   contactPhone: string;
   termsOfUseAcceptedDate: Date;
   termsOfUseAccepted: boolean;
+  businessDBAName: string;
 
   mailingAddressName: string;
   mailingAddressStreet: string;
