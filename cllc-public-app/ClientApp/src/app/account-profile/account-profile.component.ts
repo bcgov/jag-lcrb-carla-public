@@ -93,8 +93,8 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       businessProfile: this.fb.group({
         id: [''],
         _mailingSameAsPhysicalAddress: [],
-        name: [{ value: '', disabled: true }],
-        businessDBAName: [{ value: '', disabled: true }],
+        // name: [''],
+        // businessDBAName: [''],
         bcIncorporationNumber: [''], // Validators.required
         dateOfIncorporationInBC: [''],
         businessNumber: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
@@ -217,6 +217,14 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         });
 
         this.saveFormData = this.form.value;
+
+        // normalize postal codes
+        this.form.get('businessProfile.mailingAddressPostalCode').setValue(
+          (this.form.get('businessProfile.mailingAddressPostalCode').value || '').replace(/\s+/g, '')
+        );
+        this.form.get('businessProfile.physicalAddressPostalCode').setValue(
+          (this.form.get('businessProfile.physicalAddressPostalCode').value || '').replace(/\s+/g, '')
+        );
       });
   }
 

@@ -30,26 +30,25 @@ export class BceidConfirmationComponent extends FormBase {
   finalBusinessType = '';
   busy: Promise<any>;
   busySubscription: Subscription;
-  accountExists = true;
   termsAccepted = false;
+  account: Account;
 
   constructor(private dynamicsDataService: DynamicsDataService,
     private userDataService: UserDataService,
     private store: Store<AppState>,
     private accountDataService: AccountDataService) {
-      super();
+    super();
     // if this passes, this means the user's account exists but it's contact information has not been created.
     // user will skip the BCeid confirmation.
     this.store.select(state => state.currentAccountState.currentAccount)
-    .pipe(takeWhile(() => this.componentActive))
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe((data) => {
-        if (!data) {
-          this.accountExists = false;
+        this.account = data;
+        if (this.account) {
+          this.termsAccepted = this.account.termsOfUseAccepted;
         }
       },
-        error => {
-          this.accountExists = false;
-        });
+        error => { });
 
   }
 
@@ -74,9 +73,12 @@ export class BceidConfirmationComponent extends FormBase {
   }
 
   confirmContactYes() {
-    const account = <Account>{};
-    account.name = this.currentUser.businessname;
-    account.id = this.currentUser.accountid;
+    const account = <Account>{
+      name: this.currentUser.businessname,
+      id: this.currentUser.accountid,
+      termsOfUseAccepted: true,
+      termsOfUseAcceptedDate: new Date()
+    };
     this.createContact(account);
   }
 
@@ -100,6 +102,18 @@ export class BceidConfirmationComponent extends FormBase {
   confirmContactNo() {
     // confirm Contact
     this.showBceidUserContinue = false;
+  }
+
+  onTermsAccepted(accepted: boolean) {
+    this.termsAccepted = accepted;
+    if (this.account) {
+      const data = { ...this.account, termsOfUseAccepted: true, termsOfUseAcceptedDate: new Date() };
+      this.dynamicsDataService.updateRecord('accounts', this.account.id, data)
+        .subscribe(res => {
+          this.accountDataService.loadCurrentAccountToStore(this.account.id)
+            .subscribe(() => { });
+        });
+    }
   }
 
 }
