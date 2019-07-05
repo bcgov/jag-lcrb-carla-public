@@ -10,6 +10,7 @@ import { LegalEntity } from '@models/legal-entity.model';
 import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
 import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
+import { Account } from './models/account.model';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent extends FormBase implements OnInit {
   public isNewUser: boolean;
   public isDevMode: boolean;
   isAssociate = false;
+  account: Account;
 
   constructor(
     private renderer: Renderer2,
@@ -71,7 +73,7 @@ export class AppComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: User) => {
         this.currentUser = data;
-        this.isNewUser =  this.currentUser && this.currentUser.isNewUser;
+        this.isNewUser = this.currentUser && this.currentUser.isNewUser;
         if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
           this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
             .subscribe(() => { });
@@ -79,6 +81,20 @@ export class AppComponent extends FormBase implements OnInit {
           this.store.dispatch(new SetCurrentAccountAction(null));
         }
       });
+
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(account => {
+        this.account = account;
+      });
+  }
+
+  showBceidTermsOfUse(): boolean {
+    const result =  (this.currentUser
+      && this.currentUser.businessname
+      && this.currentUser.isNewUser === true)
+      || (this.account && !this.account.termsOfUseAccepted);
+      return result;
   }
 
   isIE10orLower() {
