@@ -31,13 +31,13 @@
           </h3>
           <div formGroupName="businessProfile" class="padded-section">
             <app-field label="{{getBusinessTypeName()}} - Legal Name">
-              <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
-                formControlName="name">
+              <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
+                [value]="account?.name || ''">
             </app-field>
 
             <app-field label="Doing Business As (DBA) Name">
-              <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text"
-                formControlName="businessDBAName">
+              <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
+                [value]="account?.businessDBAName || ''">
             </app-field>
 
             <app-field label="Business Number (9 digit number from the Canada Revenue Agency)" [required]="true"
@@ -50,7 +50,7 @@
             <app-field label="Business Type" [required]="true"
               [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
               errorMessage="Please select a business type from the dropdown list">
-              <select class="form-control" disabled readonly style="width: 250px;" formControlName="businessType">
+              <select class="form-control" disabled readonly style="width: 250px;" [value]="account?.businessType">
                 <option value="">Choose the organization type</option>
                 <option value="PrivateCorporation">Private Corporation</option>
                 <option value="PublicCorporation">Public Corporation</option>
@@ -92,8 +92,8 @@
                   B.C.</label>
                 <br>
                 <input type="text" formControlName='dateOfIncorporationInBC'
-                  style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
-                  [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" class="form-control"
+                [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
                 <mat-datepicker #picker></mat-datepicker>
                 <!-- <div *ngIf="this.isFieldError('businessProfile.dateOfIncorporationInBC')" class="alert alert-danger" style="width: 250px;">
                   <div *ngIf="form.controls['businessProfile.dateOfIncorporationInBC'].hasError('required') ">

@@ -35,15 +35,15 @@
       </div>
     </header>
 
-    <div *ngIf="currentUser && currentUser.businessname && currentUser.isNewUser == true">
+    <div *ngIf="showBceidTermsOfUse()">
       <main class="app-content">
-        <app-bceid-confirmation *ngIf="currentUser && currentUser.isNewUser == true" (reloadUser)="reloadUser()"
+        <app-bceid-confirmation (reloadUser)="reloadUser()"
           [currentUser]="currentUser"></app-bceid-confirmation>
       </main>
     </div>
 
     <div
-      *ngIf="!currentUser || (currentUser && !currentUser.isNewUser == true) || (currentUser && !currentUser.businessname)">
+      *ngIf="!showBceidTermsOfUse()">
       <!-- /NAVBAR -->
       <div class="navigationRibbon" *ngIf="!currentUser">
         <div class="level2Navigation">
