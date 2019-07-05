@@ -68,6 +68,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string physicalAddressProvince { get; set; } //dynamics = address2_stateorprovince
         public string physicalAddressPostalCode { get; set; } //dynamics = address2_postalcode
 
+        public bool? TermsOfUseAccepted { get; set; }
+        public DateTimeOffset? TermsOfUseAcceptedDate { get; set; }
+
         public ViewModels.Contact primarycontact { get; set; }
 
         public string businessType { get; set; }
