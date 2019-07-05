@@ -217,6 +217,14 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         });
 
         this.saveFormData = this.form.value;
+
+        // normalize postal codes
+        this.form.get('businessProfile.mailingAddressPostalCode').setValue(
+          (this.form.get('businessProfile.mailingAddressPostalCode').value || '').replace(/\s+/g, '')
+        );
+        this.form.get('businessProfile.physicalAddressPostalCode').setValue(
+          (this.form.get('businessProfile.physicalAddressPostalCode').value || '').replace(/\s+/g, '')
+        );
       });
   }
 
