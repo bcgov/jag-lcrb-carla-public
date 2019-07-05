@@ -11,6 +11,9 @@ export interface Account {
   pstNumber: string;
   contactEmail: string;
   contactPhone: string;
+  termsOfUseAcceptedDate: Date;
+  termsOfUseAccepted: boolean;
+  businessDBAName: string;
 
   mailingAddressName: string;
   mailingAddressStreet: string;
@@ -29,8 +32,6 @@ export interface Account {
   physicalAddressPostalCode: string;
 
   primarycontact: Contact;
-
   businessType: string;
-
   tiedHouse: TiedHouseConnection;
 }

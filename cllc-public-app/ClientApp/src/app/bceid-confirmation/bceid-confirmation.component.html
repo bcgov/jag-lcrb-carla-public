@@ -1,8 +1,10 @@
 <div class="container" *ngIf="!currentUser?.isBceidConfirmed">
-  <img style="margin-left: -18px;" *ngIf="termsAccepted" src="assets/bceid_default_logo.jpg" alt="BCeID Logo">
+  <!-- <img style="margin-left: -18px;" *ngIf="termsAccepted" src="assets/bceid_default_logo.jpg" alt="BCeID Logo"> -->
   <div [ngBusy]="busySubscription"></div>
-  <app-terms-of-use (termsAccepted)="termsAccepted=$event" *ngIf="bceidConfirmAccount && !accountExists && !termsAccepted"></app-terms-of-use>
-  <div *ngIf="bceidConfirmAccount && !accountExists && termsAccepted">
+
+  <app-terms-of-use (termsAccepted)="onTermsAccepted($event)" *ngIf="bceidConfirmAccount && !termsAccepted"></app-terms-of-use>
+
+  <div *ngIf="bceidConfirmAccount && !account && termsAccepted">
     <h2>Please confirm the business or organization name associated to the Business BCeID.</h2>
     <div *ngIf="!showBceidCorrection">
       <p>
@@ -22,7 +24,7 @@
     </div>
   </div>
 
-  <div *ngIf="bceidConfirmBusinessType">
+  <div *ngIf="bceidConfirmBusinessType && !account">
     <h2>Please confirm the organization type associated with the Business BCeID:</h2>
 
     <section class="radio-buttons">
@@ -66,7 +68,7 @@
     </section>
   </div>
 
-  <div *ngIf="bceidConfirmContact">
+  <div *ngIf="bceidConfirmContact && !account">
     <h2>Please confirm the name associated with the Business BCeID login provided.</h2>
     <div *ngIf="showBceidUserContinue">
       <p>
@@ -89,6 +91,7 @@
       </div>
     </div>
   </div>
+
   <div *ngIf="!showBceidUserContinue || showBceidCorrection">
     <p>Before continuing, please update your information with
       <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx">Business BCeID</a> or
