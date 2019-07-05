@@ -14,7 +14,7 @@ In the future, instances of VON Issuer/Verifier Agent will also be able to commu
 Use this [VON Issuer/Verifier Getting Started Tutorial](GettingStartedTutorial.md) to go through the basics of configuring a VON Issuer/Verifier Agent created from this template.
 
 # Configuration Guide
-Much of the work in configuring a VON Issuer/Verifier Agent is in setting up the YAML files in the [von-x-agent/config](von-x-agent/config) folder. A [Configuration Guide](von-x-agent/config/README.md) documents those files.
+Much of the work in configuring a VON Issuer/Verifier Agent is in setting up the YAML files in the [lcrb-von-agent/config](lcrb-von-agent/config) folder. A [Configuration Guide](lcrb-von-agent/config/README.md) documents those files.
 
 # Managing Your Agent Repo
 If you are creating an agent for a service organization that will become a VON Issuer/Verifier Agent, most of the changes you will make in this repo will be for your own organization's use and will not be pushed back into the base repo. As such, we suggest you use one of following methods for managing this repo. We recommend the first method, but would welcome suggestions of other approaches that might have more upside and less downside. Please add an issue to tell us about a better way.

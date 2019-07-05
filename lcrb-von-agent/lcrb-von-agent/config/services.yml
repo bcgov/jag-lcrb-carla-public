@@ -6,7 +6,7 @@ issuers:
     abbreviation: LCRB
     url: https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing
     email: lclb.lclb@gov.bc.ca
-    logo_path: ../assets/img/lcrb-logo.png
+    logo_path: ../assets/img/bc-logo.jpg
     endpoint: $ENDPOINT_URL
 
     connection:
@@ -89,6 +89,17 @@ issuers:
         - model: attribute
           fields:
             type:
+              input: establishment_name
+              from: value
+            format:
+              input: string
+              from: value
+            value:
+              input: establishment_name
+              from: claim
+        - model: attribute
+          fields:
+            type:
               input: effective_date
               from: value
             format:
@@ -97,6 +108,62 @@ issuers:
             value:
               input: effective_date
               from: claim
+        - model: attribute
+          fields:
+            type:
+              input: civic_address
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: civic_address
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: city
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: city
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: province
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: province
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: postal_code
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: postal_code
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: country
+              from: value
+            format:
+              input: text
+              from: value
+            value:
+              input: country
+              from: claim
+        
 
 verifiers:
   bctob:
