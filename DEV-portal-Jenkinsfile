@@ -73,7 +73,7 @@ node('nodejs') {
 				sh 'npm run test-headless'
             } finally {
                 archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
-                junit 'HeadlessChrome_75_0_3770_(Windows_10_0_0).xml'
+                junit 'HeadlessChrome_*.xml'
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
