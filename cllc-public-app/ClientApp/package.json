@@ -11,7 +11,7 @@
     "watch": "ng build --watch --base-href /cannabislicensing/ --deploy-url /cannabislicensing/",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
-    "test-headless": "ng test --watch=false --browsers=ChromeHeadless",
+    "test-headless": "ng test --watch=false --browsers=ChromeHeadlessNoSandbox ",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
