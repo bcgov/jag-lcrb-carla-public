@@ -73,7 +73,15 @@ node('nodejs') {
 				sh 'npm run test-headless'
             } finally {
                 archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
-                junit 'junit.xml'                
+                junit 'junit.xml'
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: '.',
+                    reportFiles: 'unit-tests.html',
+                    reportName: "Unit Test Report"
+                ])
             }
         }
     }
