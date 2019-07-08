@@ -16,7 +16,7 @@ import { COUNTRIES } from './country-list';
 
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import * as _moment from 'moment';
+import * as moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import { defaultFormat as _rollupMoment } from 'moment';
 import { AccountDataService } from '@services/account-data.service';
@@ -26,8 +26,6 @@ import { ConnectionToProducersComponent } from './tabs/connection-to-producers/c
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
-
-const moment = _rollupMoment || _moment;
 
 // See the Moment.js docs for the meaning of these formats:
 // https://momentjs.com/docs/#/displaying/format/
@@ -56,7 +54,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   busy3: Promise<any>;
   form: FormGroup;
   countryList = COUNTRIES;
-  maxDate = new Date();
+  maxDate = moment().endOf('day').toDate();
 
   accountId: string;
   saveFormData: any;
