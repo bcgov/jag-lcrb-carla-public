@@ -29,6 +29,11 @@ module.exports = function (config) {
       useCompactStyle: true,
       useLegacyStyle: true
     },
+	junitReporter: {
+       outPutDir: __dirname,
+	   outputFile: 'junit.xml',
+       useBrowserName: false
+     },
 
     port: 9876,
     colors: true,

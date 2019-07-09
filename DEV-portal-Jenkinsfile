@@ -73,7 +73,7 @@ node('nodejs') {
 				sh 'npm run test-headless'
             } finally {
                 archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
-                junit '**/cllc-public-app/ClientApp/*.xml'
+                junit 'junit.xml'
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
