@@ -144,8 +144,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       federalProducerNames: ['', Validators.required]
     });
 
-    this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: string) => {
-      if (value === 'true') {
+    this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
+      if (value === true) {
         this.form.get('indigenousNationId').enable();
       } else {
         this.form.get('indigenousNationId').reset();

@@ -1,4 +1,4 @@
-<div style="position: relative">
+<ng-template #applicationContent>
   <div [ngBusy]="busy"></div>
 
   <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
@@ -11,24 +11,6 @@
         THE APPLICATION</h3>
       <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
         <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
-
-        <div appRemoveIfFeatureOff="IndigenousNation">
-          <app-field label="Apply as an Indigenous Nation?" [valid]="true"
-            errorMessage="Please select a business type from the dropdown list">
-            <select class="form-control" formControlName="applyAsIndigenousNation" style="width: 250px;">
-              <option [value]="true">Yes</option>
-              <option [value]="false">No</option>
-            </select>
-          </app-field>
-
-          <app-field label="Select which Indigenous Nation you wish to apply for" [valid]="true"
-            errorMessage="Please select a business type from the dropdown list">
-            <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
-              <option value=""></option>
-              <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
-            </select>
-          </app-field>
-        </div>
       </section>
 
       <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
@@ -820,4 +802,93 @@
       <hr>
     </div>
   </div>
+</ng-template>
+
+<ng-template #indigenousContent>
+  <section class="large-screen-only">
+    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">INDIGENOUS NATION</h3>
+
+    <div [formGroup]="form" class="submitted-content"
+      style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+      <app-field label="Apply as an Indigenous Nation?" [valid]="true"
+        errorMessage="Please select a business type from the dropdown list">
+        <mat-button-toggle-group formControlName="applyAsIndigenousNation" aria-label="Font Style">
+          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          <mat-button-toggle [value]="false">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </app-field>
+
+      <app-field label="Select which Indigenous Nation you wish to apply for" [valid]="true"
+        errorMessage="Please select a business type from the dropdown list">
+        <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
+          <option value=""></option>
+          <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
+        </select>
+      </app-field>
+    </div>
+  </section>
+  <section class="large-screen-only">
+    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+
+    <div [formGroup]="form" class="submitted-content"
+      style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+      <p>An applicant that is a <i>Indigenous Nation</i> may have associates that are required to consent to security
+        screening
+        and financial integrity assessments as part of the application for a non-medical cannabis retail store
+        licence.
+        Applicants are required to provide associates with the Parcel Identifier (PID) or proposed retail store
+        location
+        address.
+      </p>
+      <span style="font-style: italic;" class="li-header"><i>Parcel Identifier (PID):</i></span>
+      <br>
+      <ul>
+        <li>The PID is a nine-digit number permanently assigned to a parcel of land.</li>
+        <li>The legal description and PID may be found on a Land Title Certificate, in BC Property Assessment
+          documents,
+          on the lease, or obtained from the landlord.</li>
+      </ul>
+      <p>Applicants should direct associates to the
+        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+          target="_blank">LCRB non-medical cannabis webpage</a> to download required forms and instructions
+        for submitting documentation.</p>
+
+      <p>Associates will submit documentation for security screening and financial integrity assessments
+        directly
+        to
+        the LCRB. Applicants should not delay submitting a completed application form and business financial
+        integrity
+        form. It is the applicant's responsibility to direct all associates to the
+        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+          target="_blank">link provided</a>.</p>
+      <span class="li-header">Associates of <i>Indigenous Nation</i> include:</span>
+      <br>
+      <ul>
+        <li>Directors and officers</li>
+        <li>Senior management</li>
+      </ul>
+      <br>
+      <p>Please note: While they are not normally required as part of the licence application process, the
+        Liquor
+        and
+        Cannabis Regulation Branch reserves the right to ask for a Indigenous Nation’s membership lists.
+      </p>
+    </div>
+  </section>
+</ng-template>
+
+<div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
+  <div class="row">
+    <div class="col-lg-7 col-sm-12">
+      <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
+    </div>
+    <div class="col-lg-4 col-sm-12">
+      <h1>&nbsp;</h1>
+      <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
+    </div>
+  </div>
+</div>
+
+<div appRemoveIfFeatureOn="IndigenousNation">
+  <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
 </div>
