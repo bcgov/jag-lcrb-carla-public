@@ -33,6 +33,7 @@ issuers:
     credential_types:
     - description: Cannabis Retail Store Licence
       schema: cannabis-retail-store-licence.lcrb
+      label_en: Cannabis Retail Store Licence
       issuer_url: $APPLICATION_URL/cannabis-retail-store-licence
       depends_on:
         - bcreg_registration
@@ -44,6 +45,7 @@ issuers:
       # topic identifies the id of the subject of the credential from the foundational credential
       # in BC Gov deployment type is always "registration" as it is from BC Registries
       topic:
+        label_en: Registration
         source_id:
           input: registration_id
           from: claim
@@ -86,13 +88,10 @@ issuers:
             value:
               input: expiry_date
               from: claim
-        - model: attribute
+        - model: name
           fields:
             type:
               input: establishment_name
-              from: value
-            format:
-              input: string
               from: value
             value:
               input: establishment_name
