@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
 import { PolicyDocumentDataService } from '../services/policy-document-data.service';
 import { PolicyDocumentSummary } from '../models/policy-document-summary.model';
 @Component({
@@ -20,6 +20,7 @@ export class PolicyDocumentSidebarComponent implements OnInit {
         .toPromise()
         .then((data) => {
           this.policyDocumentSummaries = data;
+          this.cd.detectChanges();
         });
     }
   }
@@ -27,7 +28,8 @@ export class PolicyDocumentSidebarComponent implements OnInit {
   @Output() slugChange = new EventEmitter<string>();
   public policyDocumentSummaries: PolicyDocumentSummary[];
   /** PolicyDocumentSidebar ctor */
-  constructor(private policyDocumentDataService: PolicyDocumentDataService) {
+  constructor(private policyDocumentDataService: PolicyDocumentDataService,
+    private cd: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
