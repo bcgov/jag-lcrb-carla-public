@@ -1,53 +1,59 @@
 - name: cannabis-retail-store-licence.lcrb
-  version: '1.0.6'
+  version: '1.0.14'
   description: Cannabis Retail Store Licence Issued by Liquor and Cannabis Regulation Branch
   path: /cannabis-retail-store-licence
   attributes:
     registration_id:
-      description: Registration ID
-      data_type: text
-      required: true
-    entity_name:
-      description: Entity Name
+      description_en: Registration ID
       data_type: text
       required: true
     licence_number:
-      description: Licence Number
+      label_en: Licence Number
+      description_en: Licence Number
       data_type: text
       required: true
     issue_date:
-      description: Issue Date
+      label_en: Issue Date
+      description_en: Issue Date
       data_type: date
       required: true
     effective_date:
-      description: Effective Date
+      label_en: Effective Date
+      description_en: Effective Date
       data_type: date
       required: true
     expiry_date:
-      description: Expiry Date
+      label_en: Expiry Date
+      description_en: Expiry Date
       data_type: date
       required: true
     establishment_name:
-      description: Establishment Name
+      label_en: Establishment Name
+      description_en: Establishment Name
       data_type: text
       required: true
     civic_address:
-      description: Civic Address
+      label_en: Civic Address
+      description_en: Civic Address
       data_type: text
       required: false
     city:
-      description: City
+      label_en: City
+      description_en: City
       data_type: text
       required: false
     province:
-      description: Province
+      label_en: Province
+      description_en: Province
       data_type: text
       required: false
     postal_code:
-      description: Postal Code
+      label_en: Postal Code
+      description_en: Postal Code
       data_type: text
       required: false
     country:
-      description: Country
+      label_en: Country
+      description_en: Country
       data_type: text
       required: false
