@@ -1,6 +1,6 @@
 
 import { filter } from 'rxjs/operators';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, DoCheck, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PolicyDocument } from '../models/policy-document.model';
 import { PolicyDocumentDataService } from '../services/policy-document-data.service';
@@ -26,7 +26,8 @@ export class PolicyDocumentComponent implements OnInit {
   constructor(private policyDocumentDataService: PolicyDocumentDataService,
     private titleService: Title,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private cd: ChangeDetectorRef
   ) {
 
   }
@@ -34,7 +35,10 @@ export class PolicyDocumentComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap
       .subscribe((data) => {
-        this.setSlug(data.get('slug'));
+        const slug = data.get('slug');
+        if (slug) {
+          this.setSlug(slug);
+        }
       });
   }
 
@@ -49,6 +53,7 @@ export class PolicyDocumentComponent implements OnInit {
         this.body = this.sanitizer.bypassSecurityTrustHtml(this.policyDocument.body);
         this.category = this.policyDocument.category;
         this.titleService.setTitle(`${this.title} - Liquor and Cannabis Regulation Branch`);
+        this.cd.detectChanges();
       }).catch(error => this.dataLoaded = true);
   }
 
