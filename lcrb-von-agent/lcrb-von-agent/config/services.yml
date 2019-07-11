@@ -88,7 +88,7 @@ issuers:
             value:
               input: expiry_date
               from: claim
-        - model: name
+        - model: attribute
           fields:
             type:
               input: establishment_name
