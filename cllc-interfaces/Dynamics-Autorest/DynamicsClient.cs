@@ -57,11 +57,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAliases Aliases { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicantsteps.
-        /// </summary>
-        public virtual IApplicantsteps Applicantsteps { get; private set; }
-
-        /// <summary>
         /// Gets the IApplicationbpfmvpv2s.
         /// </summary>
         public virtual IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; private set; }
@@ -70,11 +65,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationinvoicehistories.
         /// </summary>
         public virtual IApplicationinvoicehistories Applicationinvoicehistories { get; private set; }
-
-        /// <summary>
-        /// Gets the IApplicationmodules.
-        /// </summary>
-        public virtual IApplicationmodules Applicationmodules { get; private set; }
 
         /// <summary>
         /// Gets the IApplications.
@@ -232,11 +222,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicenceses Licenceses { get; private set; }
 
         /// <summary>
-        /// Gets the ILicencetypeprerequisites.
-        /// </summary>
-        public virtual ILicencetypeprerequisites Licencetypeprerequisites { get; private set; }
-
-        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         public virtual ILicencetypes Licencetypes { get; private set; }
@@ -245,16 +230,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypesapplicationtypesset.
         /// </summary>
         public virtual ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencetypestepprerequisites.
-        /// </summary>
-        public virtual ILicencetypestepprerequisites Licencetypestepprerequisites { get; private set; }
-
-        /// <summary>
-        /// Gets the ILicencetypesteps.
-        /// </summary>
-        public virtual ILicencetypesteps Licencetypesteps { get; private set; }
 
         /// <summary>
         /// Gets the ILoans.
@@ -297,6 +272,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegions Regions { get; private set; }
 
         /// <summary>
+        /// Gets the IRelatedparties.
+        /// </summary>
+        public virtual IRelatedparties Relatedparties { get; private set; }
+
+        /// <summary>
         /// Gets the ISettings.
         /// </summary>
         public virtual ISettings Settings { get; private set; }
@@ -335,6 +315,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITiedhouseconnections.
         /// </summary>
         public virtual ITiedhouseconnections Tiedhouseconnections { get; private set; }
+
+        /// <summary>
+        /// Gets the IWitnesses.
+        /// </summary>
+        public virtual IWitnesses Witnesses { get; private set; }
 
         /// <summary>
         /// Gets the IWorkerinvoicehistories.
@@ -635,10 +620,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accounts = new Accounts(this);
             Licencetypeinvestigationset = new Licencetypeinvestigationset(this);
             Aliases = new Aliases(this);
-            Applicantsteps = new Applicantsteps(this);
             Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
-            Applicationmodules = new Applicationmodules(this);
             Applications = new Applications(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
             Applicationtypecontents = new Applicationtypecontents(this);
@@ -670,11 +653,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Investigations = new Investigations(this);
             Legalentities = new Legalentities(this);
             Licenceses = new Licenceses(this);
-            Licencetypeprerequisites = new Licencetypeprerequisites(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
-            Licencetypestepprerequisites = new Licencetypestepprerequisites(this);
-            Licencetypesteps = new Licencetypesteps(this);
             Loans = new Loans(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
@@ -683,6 +663,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Postalcodes = new Postalcodes(this);
             Previousaddresses = new Previousaddresses(this);
             Regions = new Regions(this);
+            Relatedparties = new Relatedparties(this);
             Settings = new Settings(this);
             Spddatarows = new Spddatarows(this);
             Spdexportses = new Spdexportses(this);
@@ -691,6 +672,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Territories = new Territories(this);
             Tiedhouseassociations = new Tiedhouseassociations(this);
             Tiedhouseconnections = new Tiedhouseconnections(this);
+            Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
             Contacts = new Contacts(this);
