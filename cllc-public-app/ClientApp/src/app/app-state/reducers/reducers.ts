@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import * as legalEnityReducer from './legal-entities-reducer';
 import * as currentAccountReducer from './current-account-reducer';
 import * as currentLegalEnityReducer from './current-legal-entity-reducer';
-import * as applicationsStateReducer from './applications-reducer';
+import * as applicationsStateReducer from './indigenous-nation-reducer';
 import * as currentApplicationStateReducer from './current-application-reducer';
 import * as currentUserStateReducer from './current-user-reducer';
 
@@ -16,7 +16,7 @@ export const reducers: ActionReducerMap<AppState> = {
     legalEntitiesState: legalEnityReducer.reducer,
     currentLegalEntityState: currentLegalEnityReducer.reducer,
     currentAccountState: currentAccountReducer.reducer,
-    applicationsState:  applicationsStateReducer.reducer,
+    indigenousNationState:  applicationsStateReducer.reducer,
     currentApplicaitonState: currentApplicationStateReducer.reducer,
     currentUserState: currentUserStateReducer.reducer
 };

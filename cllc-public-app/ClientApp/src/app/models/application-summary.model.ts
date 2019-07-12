@@ -6,4 +6,5 @@ export class ApplicationSummary {
   name: string;
   jobNumber: string;
   applicationTypeName: string;
+  isIndigenousNation: boolean;
 }
