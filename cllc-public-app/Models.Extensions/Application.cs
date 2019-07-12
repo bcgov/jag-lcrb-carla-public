@@ -337,6 +337,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioLicenceType.AdoxioName;
             }
 
+            applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);
+
             return applicationSummary;
         }
     }
