@@ -13,16 +13,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class ApplicationSummary
     {
         public string Id { get; set; } 
-                
         public string ApplicationStatus { get; set; } 
-
         public string EstablishmentName { get; set; } //adoxio_establishmentpropsedname
-
         public string Name { get; set; } //adoxio_name
-
         public string JobNumber { get; set; } //adoxio_jobnumber
-
         public string ApplicationTypeName { get; set; }
-
+        public bool IsIndigenousNation { get; set; }
     }
 }

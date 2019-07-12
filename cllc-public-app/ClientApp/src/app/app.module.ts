@@ -158,6 +158,7 @@ import { AppState } from '@app/app-state/models/app-state';
 import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
 import { map } from 'rxjs/operators';
 import { EstablishmentWatchWordsService } from './services/establishment-watch-words.service';
+import { AssociateContentComponent } from './associate-content/associate-content.component';
 
 
 @NgModule({
@@ -238,7 +239,8 @@ import { EstablishmentWatchWordsService } from './services/establishment-watch-w
     OrganizationResultsComponent,
     AccountProfileComponent,
     AppRemoveIfFeatureOnDirective,
-    AppRemoveIfFeatureOffDirective
+    AppRemoveIfFeatureOffDirective,
+    AssociateContentComponent
   ],
   imports: [
   ChartsModule,
