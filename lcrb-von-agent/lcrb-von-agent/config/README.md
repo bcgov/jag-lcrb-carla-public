@@ -177,7 +177,7 @@ The following lists a number of features of OrgBook that require information fro
 The following is an example of a basic `services.yml` file, broken into sections. Notes about the content follows the section of the example:
 
 ``` YAML
-# Documentation: https://github.com/bcgov/von-agent-template/tree/master/von-x-agent/config
+# Documentation: https://github.com/bcgov/von-agent-template/tree/master/lcrb-von-agent/config
 
 issuers:
   my-organization:
