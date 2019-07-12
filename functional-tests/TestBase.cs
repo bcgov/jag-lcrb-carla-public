@@ -1,26 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
-using System.Security;
-
-using Microsoft.Dynamics365.UIAutomation.Api;
+﻿using Microsoft.Dynamics365.UIAutomation.Api;
 using Microsoft.Dynamics365.UIAutomation.Browser;
-using OpenQA.Selenium.Support.Events;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
-
-
-
-using OpenQA.Selenium;
-using Xunit;
-using Microsoft.Extensions.Configuration;
+using System;
 using System.Diagnostics;
+using System.Linq;
 
-namespace CllcSpiceSyncServiceTest
+namespace FunctionalTest
 {
 
 
@@ -60,7 +46,9 @@ namespace CllcSpiceSyncServiceTest
                 BrowserType = BrowserType.Chrome,
                 Headless = false,
                 PrivateMode = true,
-                EnableRecording = true
+                EnableRecording = true,
+                Height = 1080,
+                Width = 1920
             });
 
             XrmTestBrowser.LoginPage.Login(xrmUri, username, password);
@@ -75,7 +63,37 @@ namespace CllcSpiceSyncServiceTest
             XrmTestBrowser.GuidedHelp.CloseGuidedHelp();
         }
 
-        
+        protected void SetOptionSet(string id, string value)
+        {
+            OptionSet optionset = new OptionSet() { Name = id, Value = value };
+
+            try
+            {
+                
+                XrmTestBrowser.Entity.SetValue(optionset);
+            }
+            catch (ElementClickInterceptedException)
+            {
+                // temporary fix for Dynamics form layout problems.                  
+                XrmTestBrowser.Driver.ExecuteScript($"var selectObj = document.getElementById('{id}_i');"
+                    + "for (var i=0; i<selectObj.options.length; i++){"
+                    + $"if (selectObj.options[i].text == '{value}')"
+                    + "{ selectObj.options[i].selected = true; }} selectObj.click(); "                    
+                    );
+
+                //XrmTestBrowser.Entity.SetValue(optionset);
+                
+            }
+            
+        }
+
+        // Avoid Selenium nags about control intercepts
+        protected void JavaScriptClick (string id)
+        {            
+            XrmTestBrowser.Driver.ExecuteScript($"document.getElementById(\"{id}\").click();");
+        }
+
+
         /// <summary>
         /// Cleanup
         /// </summary>
