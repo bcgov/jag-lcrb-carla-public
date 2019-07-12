@@ -14,6 +14,7 @@ import { Account } from '@models/account.model';
 })
 export class DashboardComponent extends FormBase implements OnInit {
   account: Account;
+  indigenousNationModeActive: boolean;
 
   constructor(private store: Store<AppState>) {
     super();
@@ -24,6 +25,12 @@ export class DashboardComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
+      });
+
+    this.store.select((state) => state.indigenousNationState.indigenousNationModeActive)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((active) => {
+        this.indigenousNationModeActive = active;
       });
   }
 }
