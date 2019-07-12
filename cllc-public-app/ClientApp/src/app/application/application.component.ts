@@ -178,7 +178,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
         }
         if (data.applicantType === 'IndigenousNation') {
-          (<any>data).applyAsIndigenousNation = 'true';
+          (<any>data).applyAsIndigenousNation = true;
         }
         this.application = data;
         this.hideFormControlByType();
@@ -297,7 +297,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    if (this.form.get('applyAsIndigenousNation').value === 'true') {
+    if (this.form.get('applyAsIndigenousNation').value) {
       saveData.applicantType = 'IndigenousNation';
     } else {
       saveData.applicantType = this.account.businessType;
@@ -460,17 +460,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   businessTypeIsPartnership(): boolean {
-    return ['GeneralPartnership',
-      'LimitedPartnership',
-      'LimitedLiabilityPartnership',
-      'Partnership'].indexOf(this.account.businessType) !== -1;
+    return this.account &&
+      ['GeneralPartnership',
+        'LimitedPartnership',
+        'LimitedLiabilityPartnership',
+        'Partnership'].indexOf(this.account.businessType) !== -1;
   }
 
   businessTypeIsPrivateCorporation(): boolean {
-    return ['PrivateCorporation',
-      'PublicCorporation',
-      'UnlimitedLiabilityCorporation',
-      'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+    return this.account &&
+      ['PrivateCorporation',
+        'PublicCorporation',
+        'UnlimitedLiabilityCorporation',
+        'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
   }
 
 }
