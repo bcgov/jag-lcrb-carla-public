@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<testsuite name="HeadlessChrome 75.0.3770 (Windows 10.0.0)" package="" timestamp="2019-07-08T20:41:11" id="0" hostname="DESKTOP-3DK2543" tests="65" errors="0" failures="0" time="13.475">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/75.0.3770.100 Safari/537.36"/>
+  </properties>
+  <testcase name="AccordionComponent should create" time="0.194" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).AccordionComponent"/>
+  <testcase name="AccountProfileComponent should create" time="0.193" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).AccountProfileComponent"/>
+  <testcase name="ConnectionToProducersComponent should create" time="0.134" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ConnectionToProducersComponent"/>
+  <testcase name="AdminComponent should create" time="0.02" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).AdminComponent"/>
+  <testcase name="AppComponent should create the app" time="0.147" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).AppComponent"/>
+  <testcase name="AppComponent should render title in a span tag" time="0.146" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).AppComponent"/>
+  <testcase name="ApplicationComponent should create" time="0.698" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should have the title specified in the application type" time="0.566" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show preamble content if enabled" time="0.524" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide preamble content if disabled" time="0.614" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show before starting content if enabled" time="0.504" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide before starting content if disabled" time="0.474" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show declarations content if enabled" time="0.448" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide declarations content if disabled" time="0.473" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show supporting documents if enabled" time="0.499" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide supporting documents if disabled" time="0.468" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show financial integrity upload if enabled" time="0.562" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide financial integrity upload if disabled" time="0.445" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show associate form upload if enabled" time="0.428" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide associate form upload if disabled" time="0.425" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show property details if enabled" time="0.443" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide property details if disabled" time="0.432" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show current property if enabled" time="0.49" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide current property if disabled" time="0.436" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should show hours of sale if enabled" time="0.449" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should hide hours of sale if disabled" time="0.413" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should be invalid if no supporting documents are uploaded" time="0.418" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationComponent should be valid if supporting documents are uploaded" time="0.436" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationComponent"/>
+  <testcase name="ApplicationsAndLicencesComponent should create" time="0.092" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ApplicationsAndLicencesComponent"/>
+  <testcase name="AssosiateWizardComponent should create" time="0.151" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).AssosiateWizardComponent"/>
+  <testcase name="IndividualAssociatesResultsComponent should create" time="0.096" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).IndividualAssociatesResultsComponent"/>
+  <testcase name="OrganizationResultsComponent should create" time="0.065" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).OrganizationResultsComponent"/>
+  <testcase name="SolePropResultsComponent should create" time="0.079" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).SolePropResultsComponent"/>
+  <testcase name="bceid-confirmation component should do something" time="0.044" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).bceid-confirmation component"/>
+  <testcase name="BreadcrumbComponent should be created" time="0.014" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).BreadcrumbComponent"/>
+  <testcase name="DashboardComponent should create" time="0.109" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).DashboardComponent"/>
+  <testcase name="DashboardComponent should have &quot;Cannabis&quot; in the title" time="0.119" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).DashboardComponent"/>
+  <testcase name="dynamics-form component should do something" time="0.067" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).dynamics-form component"/>
+  <testcase name="form-viewer component should do something" time="0.015" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).form-viewer component"/>
+  <testcase name="GeneralDataService should ..." time="0.004" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).GeneralDataService"/>
+  <testcase name="HomeComponent should create" time="0.031" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).HomeComponent"/>
+  <testcase name="InsertComponent should create" time="0.019" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).InsertComponent"/>
+  <testcase name="newsletter-confirmation component should do something" time="0.015" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).newsletter-confirmation component"/>
+  <testcase name="newsletter-signup component should do something" time="0.022" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).newsletter-signup component"/>
+  <testcase name="NotFound component should do something" time="0.012" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).NotFound component"/>
+  <testcase name="PolicyDocumentSidebar component should do something" time="0.018" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).PolicyDocumentSidebar component"/>
+  <testcase name="PolicyDocument component should do something" time="0.023" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).PolicyDocument component"/>
+  <testcase name="ResultComponent should create" time="0.146" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).ResultComponent"/>
+  <testcase name="SearchBoxDirective should create an instance" time="0" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).SearchBoxDirective"/>
+  <testcase name="FieldComponent should create" time="0.019" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).FieldComponent"/>
+  <testcase name="FileUploaderComponent should create" time="0.022" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).FileUploaderComponent"/>
+  <testcase name="StatsViewerComponent should create" time="0.027" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).StatsViewerComponent"/>
+  <testcase name="statusbadge component should do something" time="0.01" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).statusbadge component"/>
+  <testcase name="TermsOfUseComponent should create" time="0.048" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).TermsOfUseComponent"/>
+  <testcase name="vote component should do something" time="0.029" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).vote component"/>
+  <testcase name="WorkerDashboardComponent should create" time="0.094" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).WorkerDashboardComponent"/>
+  <testcase name="WorkerPaymentConfirmationComponent should create" time="0.043" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).WorkerPaymentConfirmationComponent"/>
+  <testcase name="PrePaymentComponent should create" time="0.017" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).PrePaymentComponent"/>
+  <testcase name="SpdConsentComponent should create" time="0.092" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).SpdConsentComponent"/>
+  <testcase name="UserConfirmationComponent should create" time="0.016" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).UserConfirmationComponent"/>
+  <testcase name="WorkerApplicationComponent should create" time="0.275" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).WorkerApplicationComponent"/>
+  <testcase name="WorkerHomeComponent should create" time="0.037" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).WorkerHomeComponent"/>
+  <testcase name="WorkerInformationComponent should create" time="0.028" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).WorkerInformationComponent"/>
+  <testcase name="WorkerQualificationComponent should create" time="0.027" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).WorkerQualificationComponent"/>
+  <testcase name="WorkerTermsAndConditionsComponent should create" time="0.071" classname="HeadlessChrome_75_0_3770_(Windows_10_0_0).WorkerTermsAndConditionsComponent"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
