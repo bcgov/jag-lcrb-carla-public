@@ -159,6 +159,9 @@ import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action
 import { map } from 'rxjs/operators';
 import { EstablishmentWatchWordsService } from './services/establishment-watch-words.service';
 import { AssociateContentComponent } from './associate-content/associate-content.component';
+import {
+  ConnectionToNonMedicalStoresComponent
+} from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 
 
 @NgModule({
@@ -240,60 +243,61 @@ import { AssociateContentComponent } from './associate-content/associate-content
     AccountProfileComponent,
     AppRemoveIfFeatureOnDirective,
     AppRemoveIfFeatureOffDirective,
-    AssociateContentComponent
+    AssociateContentComponent,
+    ConnectionToNonMedicalStoresComponent
   ],
   imports: [
-  ChartsModule,
-  AdminModule,
-  AppRoutingModule,
-  BrowserAnimationsModule,
-  BrowserModule,
-  CdkTableModule,
-  FileDropModule,
-  FormsModule,
-  HttpClientModule,
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSlideToggleModule,
-  MatSliderModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  NgBusyModule,
-  NgbModule.forRoot(),
-  ReactiveFormsModule,
-  BsDatepickerModule.forRoot(),
-  StoreModule.forRoot(reducers, { metaReducers }),
-  StoreDevtoolsModule.instrument
-    ({
-      maxAge: 5
-    }),
-  AlertModule.forRoot()
+    ChartsModule,
+    AdminModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    CdkTableModule,
+    FileDropModule,
+    FormsModule,
+    HttpClientModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    NgBusyModule,
+    NgbModule.forRoot(),
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument
+      ({
+        maxAge: 5
+      }),
+    AlertModule.forRoot()
   ],
   exports: [
     AdminModule,
@@ -370,7 +374,7 @@ import { AssociateContentComponent } from './associate-content/associate-content
       useFactory: (us: UserDataService) => function () {
         return us.loadUserToStore();
       },
-      deps: [ UserDataService],
+      deps: [UserDataService],
       multi: true
     }
   ],
