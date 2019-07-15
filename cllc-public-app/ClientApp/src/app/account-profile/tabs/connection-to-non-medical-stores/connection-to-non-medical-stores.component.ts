@@ -4,17 +4,16 @@ import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '../../../services/tied-house-connections-data.service';
 import { TiedHouseConnection } from '../../../models/tied-house-connection.model';
 import { Subject, Subscription } from 'rxjs';
-import { AccountDataService } from './../../../services/account-data.service';
+import { AccountDataService } from '../../../services/account-data.service';
 
 @Component({
-  selector: 'app-connection-to-producers',
-  templateUrl: './connection-to-producers.component.html',
-  styleUrls: ['./connection-to-producers.component.css']
+  selector: 'app-connection-to-non-medical-stores',
+  templateUrl: './connection-to-non-medical-stores.component.html',
+  styleUrls: ['./connection-to-non-medical-stores.component.css']
 })
-export class ConnectionToProducersComponent implements OnInit, OnDestroy {
+export class ConnectionToNonMedicalStoresComponent implements OnInit, OnDestroy {
   @Input() accountId: string;
   @Input() businessType: string;
-  @Input() isMarketer: boolean;
   @Input() licensedProducerText = 'federally licensed producer';
   @Input() federalProducerText = 'federal producer';
   @Input('tiedHouse')
@@ -43,18 +42,10 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.form = this.fb.group({
-      corpConnectionFederalProducer: [''],
-      corpConnectionFederalProducerDetails: [''],
-      federalProducerConnectionToCorp: [''],
-      federalProducerConnectionToCorpDetails: [''],
-      share20PlusConnectionProducer: [''],
-      share20PlusConnectionProducerDetails: [''],
-      share20PlusFamilyConnectionProducer: [''],
-      share20PlusFamilyConnectionProducerDetail: [''],
-      partnersConnectionFederalProducer: [''],
-      partnersConnectionFederalProducerDetails: [''],
-      societyConnectionFederalProducer: [''],
-      societyConnectionFederalProducerDetails: ['']
+      crsConnectionToMarketer: [''],
+      crsConnectionToMarketerDetails: [''],
+      marketerConnectionToCrs: [''],
+      marketerConnectionToCrsDetails: [''],
     });
 
     if (this.tiedHouse) {
