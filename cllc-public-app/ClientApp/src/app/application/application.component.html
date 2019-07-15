@@ -387,10 +387,10 @@
         *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
         <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
         <div class="padded-section" *ngIf="application?.id">
-          <app-connection-to-producers *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
+          <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
             licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"
             federalProducerText="licensee or applicant" [businessType]="account?.businessType"
-            (value)="tiedHouseFormData = $event"></app-connection-to-producers>
+            (value)="tiedHouseFormData = $event"></app-connection-to-non-medical-stores>
         </div>
       </section>
 
@@ -810,7 +810,7 @@
 
     <div [formGroup]="form" class="submitted-content"
       style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-      <app-field label="Apply as an Indigenous Nation?" [valid]="true"
+      <app-field label="Is this application on behalf of an Indigenous Nation?" [valid]="true"
         errorMessage="Please select a business type from the dropdown list">
         <mat-button-toggle-group formControlName="applyAsIndigenousNation" aria-label="Font Style">
           <mat-button-toggle [value]="true">Yes</mat-button-toggle>
@@ -818,7 +818,7 @@
         </mat-button-toggle-group>
       </app-field>
 
-      <app-field label="Select which Indigenous Nation you wish to apply for" [valid]="true"
+      <app-field label="Select the Indigenous Nation" [valid]="true" *ngIf="form.get('applyAsIndigenousNation').value"
         errorMessage="Please select a business type from the dropdown list">
         <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
           <option value=""></option>
