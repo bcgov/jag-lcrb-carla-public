@@ -23,10 +23,12 @@ import { Account } from '@models/account.model';
 import { ApplicationTypeNames } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { ConnectionToProducersComponent } from '@app/account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
 import { KeyValue } from '@angular/common';
 import { FeatureFlagService } from './../services/feature-flag.service';
+import {
+  ConnectionToNonMedicalStoresComponent
+} from '@app/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
@@ -61,7 +63,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild('mainForm') mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
-  @ViewChild(ConnectionToProducersComponent) connectionsToProducers: ConnectionToProducersComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
