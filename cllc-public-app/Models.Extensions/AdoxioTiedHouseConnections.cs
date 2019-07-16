@@ -41,8 +41,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCrsconnectiontomarketerdetails = from.CrsConnectionToMarketerDetails;
             to.AdoxioMarketerconnectiontocrs = (int?)from.MarketerConnectionToCrs;
             to.AdoxioMarketerconnectiontocrsdetails = from.MarketerConnectionToCrsDetails;
-            //to.AdoxioINConnectiontoFederalProducer = (int?)from.INConnectionToFederalProducer;
-            //to.AdoxioINConnectiontoFederalProducerdetails = from.INConnectionToFederalProducerDetails;
+            to.AdoxioInconnectiontofederalproducer = (int?)from.INConnectionToFederalProducer;
+            to.AdoxioInconnectiontofederalproducerdetails = from.INConnectionToFederalProducerDetails;
 
         }
 
@@ -84,8 +84,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.CrsConnectionToMarketerDetails = tiedHouse.AdoxioCrsconnectiontomarketerdetails;
                 result.MarketerConnectionToCrs = (MarketerYesNo?)tiedHouse.AdoxioMarketerconnectiontocrs;
                 result.MarketerConnectionToCrsDetails = tiedHouse.AdoxioMarketerconnectiontocrsdetails;
-                //result.INConnectionToFederalProducer = (MarketerYesNo?)tiedHouse.AdoxioINConnectionToFederalProducer;
-                //result.INConnectionToFederalProducerDetails = tiedHouse.AdoxioINConnectionToFederalProducerdetails;
+                result.INConnectionToFederalProducer = (MarketerYesNo?)tiedHouse.AdoxioInconnectiontofederalproducer;
+                result.INConnectionToFederalProducerDetails = tiedHouse.AdoxioInconnectiontofederalproducerdetails;
 
             }
             return result;
