@@ -7319,7 +7319,18 @@
                 "adoxio_investigation_relatedparties",
                 "adoxio_complianceinvestigation_SharePointDocumentLocations",
                 "adoxio_investigationwitnesses",
-                "adoxio_RegionalManagerId"
+                "adoxio_RegionalManagerId",
+                "adoxio_complianceinvestigation_ActivityPointers",
+                "adoxio_complianceinvestigation_Appointments",
+                "adoxio_complianceinvestigation_Emails",
+                "adoxio_complianceinvestigation_Faxes",
+                "adoxio_complianceinvestigation_Letters",
+                "adoxio_complianceinvestigation_PhoneCalls",
+                "adoxio_complianceinvestigation_ServiceAppointments",
+                "adoxio_complianceinvestigation_Tasks",
+                "adoxio_complianceinvestigation_RecurringAppointmentMasters",
+                "adoxio_complianceinvestigation_SocialActivities",
+                "adoxio_complianceinvestigation_abs_scheduledprocessexecutions"
               ]
             }
           }
@@ -7476,7 +7487,18 @@
                 "adoxio_investigation_relatedparties",
                 "adoxio_complianceinvestigation_SharePointDocumentLocations",
                 "adoxio_investigationwitnesses",
-                "adoxio_RegionalManagerId"
+                "adoxio_RegionalManagerId",
+                "adoxio_complianceinvestigation_ActivityPointers",
+                "adoxio_complianceinvestigation_Appointments",
+                "adoxio_complianceinvestigation_Emails",
+                "adoxio_complianceinvestigation_Faxes",
+                "adoxio_complianceinvestigation_Letters",
+                "adoxio_complianceinvestigation_PhoneCalls",
+                "adoxio_complianceinvestigation_ServiceAppointments",
+                "adoxio_complianceinvestigation_Tasks",
+                "adoxio_complianceinvestigation_RecurringAppointmentMasters",
+                "adoxio_complianceinvestigation_SocialActivities",
+                "adoxio_complianceinvestigation_abs_scheduledprocessexecutions"
               ]
             }
           }
@@ -23022,12 +23044,12 @@
                 "adoxio_solepropconnectiontofederalproducer desc",
                 "timezoneruleversionnumber",
                 "timezoneruleversionnumber desc",
-                "_owningteam_value",
-                "_owningteam_value desc",
+                "adoxio_federalproducername",
+                "adoxio_federalproducername desc",
                 "adoxio_corpconnectionfederalproducer",
                 "adoxio_corpconnectionfederalproducer desc",
-                "statuscode",
-                "statuscode desc",
+                "adoxio_marketerconnectiontocrsdetails",
+                "adoxio_marketerconnectiontocrsdetails desc",
                 "adoxio_associateconnectionfederalproducer",
                 "adoxio_associateconnectionfederalproducer desc",
                 "modifiedon",
@@ -23046,12 +23068,14 @@
                 "adoxio_societyconnectionfederalproducer desc",
                 "adoxio_familymemberfederalproducerdetails",
                 "adoxio_familymemberfederalproducerdetails desc",
-                "adoxio_marketerconnectiontocrsdetails",
-                "adoxio_marketerconnectiontocrsdetails desc",
+                "adoxio_inconnectiontofederalproducer",
+                "adoxio_inconnectiontofederalproducer desc",
                 "_ownerid_value",
                 "_ownerid_value desc",
                 "adoxio_crsconnectiontomarketerdetails",
                 "adoxio_crsconnectiontomarketerdetails desc",
+                "statuscode",
+                "statuscode desc",
                 "adoxio_partnersconnectionfederalproducer",
                 "adoxio_partnersconnectionfederalproducer desc",
                 "adoxio_familymemberfederalproducer",
@@ -23066,8 +23090,6 @@
                 "_owningbusinessunit_value desc",
                 "adoxio_connectiontype",
                 "adoxio_connectiontype desc",
-                "adoxio_crsconnectiontomarketer",
-                "adoxio_crsconnectiontomarketer desc",
                 "adoxio_marketerconnectiontocrs",
                 "adoxio_marketerconnectiontocrs desc",
                 "createdon",
@@ -23080,6 +23102,8 @@
                 "_createdonbehalfby_value desc",
                 "importsequencenumber",
                 "importsequencenumber desc",
+                "adoxio_crsconnectiontomarketer",
+                "adoxio_crsconnectiontomarketer desc",
                 "adoxio_federalproducerconnectiontocorpdetails",
                 "adoxio_federalproducerconnectiontocorpdetails desc",
                 "_createdby_value",
@@ -23102,14 +23126,16 @@
                 "_modifiedby_value desc",
                 "utcconversiontimezonecode",
                 "utcconversiontimezonecode desc",
+                "adoxio_inconnectiontofederalproducerdetails",
+                "adoxio_inconnectiontofederalproducerdetails desc",
                 "adoxio_share20plusconnectionproducer",
                 "adoxio_share20plusconnectionproducer desc",
                 "adoxio_additionaldetails",
                 "adoxio_additionaldetails desc",
                 "overriddencreatedon",
                 "overriddencreatedon desc",
-                "adoxio_federalproducername",
-                "adoxio_federalproducername desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
                 "_adoxio_application_value",
                 "_adoxio_application_value desc",
                 "_adoxio_tiedhouse_value",
@@ -23131,9 +23157,9 @@
                 "_adoxio_accountid_value",
                 "adoxio_solepropconnectiontofederalproducer",
                 "timezoneruleversionnumber",
-                "_owningteam_value",
+                "adoxio_federalproducername",
                 "adoxio_corpconnectionfederalproducer",
-                "statuscode",
+                "adoxio_marketerconnectiontocrsdetails",
                 "adoxio_associateconnectionfederalproducer",
                 "modifiedon",
                 "adoxio_associateconnectionfederalproducerdetails",
@@ -23143,9 +23169,10 @@
                 "adoxio_share20plusfamilyconnectionproducerdetail",
                 "adoxio_societyconnectionfederalproducer",
                 "adoxio_familymemberfederalproducerdetails",
-                "adoxio_marketerconnectiontocrsdetails",
+                "adoxio_inconnectiontofederalproducer",
                 "_ownerid_value",
                 "adoxio_crsconnectiontomarketerdetails",
+                "statuscode",
                 "adoxio_partnersconnectionfederalproducer",
                 "adoxio_familymemberfederalproducer",
                 "adoxio_isconnection",
@@ -23153,13 +23180,13 @@
                 "adoxio_tiedhouseconnectionid",
                 "_owningbusinessunit_value",
                 "adoxio_connectiontype",
-                "adoxio_crsconnectiontomarketer",
                 "adoxio_marketerconnectiontocrs",
                 "createdon",
                 "versionnumber",
                 "adoxio_societyconnectionfederalproducerdetails",
                 "_createdonbehalfby_value",
                 "importsequencenumber",
+                "adoxio_crsconnectiontomarketer",
                 "adoxio_federalproducerconnectiontocorpdetails",
                 "_createdby_value",
                 "adoxio_share20plusconnectionproducerdetails",
@@ -23171,10 +23198,11 @@
                 "adoxio_name",
                 "_modifiedby_value",
                 "utcconversiontimezonecode",
+                "adoxio_inconnectiontofederalproducerdetails",
                 "adoxio_share20plusconnectionproducer",
                 "adoxio_additionaldetails",
                 "overriddencreatedon",
-                "adoxio_federalproducername",
+                "_owningteam_value",
                 "_adoxio_application_value",
                 "_adoxio_tiedhouse_value"
               ]
@@ -23290,9 +23318,9 @@
                 "_adoxio_accountid_value",
                 "adoxio_solepropconnectiontofederalproducer",
                 "timezoneruleversionnumber",
-                "_owningteam_value",
+                "adoxio_federalproducername",
                 "adoxio_corpconnectionfederalproducer",
-                "statuscode",
+                "adoxio_marketerconnectiontocrsdetails",
                 "adoxio_associateconnectionfederalproducer",
                 "modifiedon",
                 "adoxio_associateconnectionfederalproducerdetails",
@@ -23302,9 +23330,10 @@
                 "adoxio_share20plusfamilyconnectionproducerdetail",
                 "adoxio_societyconnectionfederalproducer",
                 "adoxio_familymemberfederalproducerdetails",
-                "adoxio_marketerconnectiontocrsdetails",
+                "adoxio_inconnectiontofederalproducer",
                 "_ownerid_value",
                 "adoxio_crsconnectiontomarketerdetails",
+                "statuscode",
                 "adoxio_partnersconnectionfederalproducer",
                 "adoxio_familymemberfederalproducer",
                 "adoxio_isconnection",
@@ -23312,13 +23341,13 @@
                 "adoxio_tiedhouseconnectionid",
                 "_owningbusinessunit_value",
                 "adoxio_connectiontype",
-                "adoxio_crsconnectiontomarketer",
                 "adoxio_marketerconnectiontocrs",
                 "createdon",
                 "versionnumber",
                 "adoxio_societyconnectionfederalproducerdetails",
                 "_createdonbehalfby_value",
                 "importsequencenumber",
+                "adoxio_crsconnectiontomarketer",
                 "adoxio_federalproducerconnectiontocorpdetails",
                 "_createdby_value",
                 "adoxio_share20plusconnectionproducerdetails",
@@ -23330,10 +23359,11 @@
                 "adoxio_name",
                 "_modifiedby_value",
                 "utcconversiontimezonecode",
+                "adoxio_inconnectiontofederalproducerdetails",
                 "adoxio_share20plusconnectionproducer",
                 "adoxio_additionaldetails",
                 "overriddencreatedon",
-                "adoxio_federalproducername",
+                "_owningteam_value",
                 "_adoxio_application_value",
                 "_adoxio_tiedhouse_value"
               ]
@@ -29506,6 +29536,9 @@
         },
         "regardingobjectid_adoxio_worker_abs_scheduledprocessexecution": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_abs_scheduledprocessexecution": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -31861,6 +31894,9 @@
         },
         "regardingobjectid_adoxio_worker": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -35727,6 +35763,72 @@
         },
         "adoxio_RegionalManagerId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "adoxio_complianceinvestigation_ActivityPointers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.activitypointer"
+          }
+        },
+        "adoxio_complianceinvestigation_Appointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.appointment"
+          }
+        },
+        "adoxio_complianceinvestigation_Emails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.email"
+          }
+        },
+        "adoxio_complianceinvestigation_Faxes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.fax"
+          }
+        },
+        "adoxio_complianceinvestigation_Letters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.letter"
+          }
+        },
+        "adoxio_complianceinvestigation_PhoneCalls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.phonecall"
+          }
+        },
+        "adoxio_complianceinvestigation_ServiceAppointments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.serviceappointment"
+          }
+        },
+        "adoxio_complianceinvestigation_Tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
+        },
+        "adoxio_complianceinvestigation_RecurringAppointmentMasters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.recurringappointmentmaster"
+          }
+        },
+        "adoxio_complianceinvestigation_SocialActivities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.socialactivity"
+          }
+        },
+        "adoxio_complianceinvestigation_abs_scheduledprocessexecutions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
         }
       }
     },
@@ -43589,7 +43691,7 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_owningteam_value": {
+        "adoxio_federalproducername": {
           "type": "string",
           "x-nullable": true
         },
@@ -43597,8 +43699,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "statuscode": {
-          "type": "integer",
+        "adoxio_marketerconnectiontocrsdetails": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_associateconnectionfederalproducer": {
@@ -43637,8 +43739,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_marketerconnectiontocrsdetails": {
-          "type": "string",
+        "adoxio_inconnectiontofederalproducer": {
+          "type": "integer",
           "x-nullable": true
         },
         "_ownerid_value": {
@@ -43647,6 +43749,10 @@
         },
         "adoxio_crsconnectiontomarketerdetails": {
           "type": "string",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
           "x-nullable": true
         },
         "adoxio_partnersconnectionfederalproducer": {
@@ -43677,10 +43783,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_crsconnectiontomarketer": {
-          "type": "integer",
-          "x-nullable": true
-        },
         "adoxio_marketerconnectiontocrs": {
           "type": "integer",
           "x-nullable": true
@@ -43703,6 +43805,10 @@
           "x-nullable": true
         },
         "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_crsconnectiontomarketer": {
           "type": "integer",
           "x-nullable": true
         },
@@ -43750,6 +43856,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_inconnectiontofederalproducerdetails": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_share20plusconnectionproducer": {
           "type": "integer",
           "x-nullable": true
@@ -43762,7 +43872,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_federalproducername": {
+        "_owningteam_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -45249,6 +45359,9 @@
         },
         "regardingobjectid_adoxio_worker_appointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_appointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -58064,6 +58177,9 @@
         },
         "regardingobjectid_adoxio_worker_email": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_email": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -60017,6 +60133,9 @@
         },
         "regardingobjectid_adoxio_worker_fax": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_fax": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -67521,6 +67640,9 @@
         },
         "regardingobjectid_adoxio_worker_letter": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_letter": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -73680,6 +73802,9 @@
         },
         "regardingobjectid_adoxio_worker_phonecall": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_phonecall": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -79259,6 +79384,9 @@
         },
         "regardingobjectid_adoxio_worker_recurringappointmentmaster": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_recurringappointmentmaster": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -82718,6 +82846,9 @@
         },
         "regardingobjectid_adoxio_worker_serviceappointment": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_serviceappointment": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -85103,6 +85234,9 @@
         },
         "regardingobjectid_adoxio_worker_socialactivity": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_socialactivity": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -94224,6 +94358,9 @@
         },
         "regardingobjectid_adoxio_worker_task": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "regardingobjectid_adoxio_complianceinvestigation_task": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
