@@ -5,7 +5,7 @@ import { User } from '@models/user.model';
 
 export interface AppState {
     legalEntitiesState: LegalEntitiesState;
-    applicationsState: ApplicationsState;
+    indigenousNationState: IndigenousNationState;
     currentAccountState: CurrentAccountState;
     currentApplicaitonState: CurrentApplicationState;
     currentLegalEntityState: CurrentLegalEntityState;
@@ -16,8 +16,8 @@ export interface LegalEntitiesState {
     legalEntities: LegalEntity[];
 }
 
-export interface ApplicationsState {
-    applications: Application[];
+export interface IndigenousNationState {
+    indigenousNationModeActive: boolean;
 }
 
 export interface CurrentAccountState {

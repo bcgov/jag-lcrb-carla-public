@@ -14,6 +14,9 @@ import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
 import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app-state/models/app-state';
+import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -56,6 +59,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     private licenceDataService: LicenseDataService,
     private router: Router,
     private paymentService: PaymentDataService,
+    private store: Store<AppState>,
     private snackBar: MatSnackBar,
     private featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
@@ -86,6 +90,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
       ).pipe(takeWhile(() => this.componentActive))
         .subscribe(([applications, licenses]) => {
+          this.checkIndigenousNationState(applications);
           applications.forEach((application: ApplicationSummary | any) => {
             this.inProgressApplications.push(application);
           });
@@ -95,18 +100,24 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           });
 
           this.marketerExists = applications.filter(item => item.applicationTypeName === ApplicationTypeNames.Marketer)
-          .map(item => <any>item)
-          .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
+            .map(item => <any>item)
+            .concat(licenses.filter(item => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
 
           this.nonMarketerExists = applications.filter(item => item.applicationTypeName !== ApplicationTypeNames.Marketer)
-          .map(item => <any>item)
-          .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
+            .map(item => <any>item)
+            .concat(licenses.filter(item => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
 
         });
   }
 
   uploadMoreFiles(application: Application) {
     this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
+  }
+
+  checkIndigenousNationState(applications: ApplicationSummary[]) {
+    if (applications.find((a) => a.isIndigenousNation)) {
+      this.store.dispatch(new SetIndigenousNationModeAction(true));
+    }
   }
 
   /**
@@ -179,7 +190,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       });
   }
 
-  renewLicence() {}
+  renewLicence() { }
 
   startNewLicenceApplication() {
     const newLicenceApplicationData: Application = <Application>{
