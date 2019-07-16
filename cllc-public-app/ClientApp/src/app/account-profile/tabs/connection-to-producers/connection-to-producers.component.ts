@@ -14,6 +14,7 @@ import { AccountDataService } from './../../../services/account-data.service';
 export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   @Input() accountId: string;
   @Input() businessType: string;
+  @Input() isMarketer: boolean;
   @Input() licensedProducerText = 'federally licensed producer';
   @Input() federalProducerText = 'federal producer';
   @Input('tiedHouse')

@@ -21,4 +21,9 @@ export class TiedHouseConnection {
     societyConnectionFederalProducerDetailsString: string;
     tiedHouseString: string;
     tiedHouseNameString: string;
+
+    crsConnectionToMarketer: string;
+    crsConnectionToMarketerDetails: string;
+    marketerConnectionToCrs: string;
+    marketerConnectionToCrsDetails: string;
 }

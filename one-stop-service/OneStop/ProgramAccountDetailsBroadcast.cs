@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -102,7 +103,18 @@ namespace WebApplicationSoap.OneStop
             {
                 primaryContactDetails.name = licence.AdoxioLicencee.Name;
                 primaryContactDetails.email = licence.AdoxioLicencee.Emailaddress1;
-                primaryContactDetails.phone = licence.AdoxioLicencee.Telephone1;
+
+                // 2019-07-11 - LDB has requested that the phone number only contain digits.
+
+                string phoneDigitsOnly = "";
+
+                if (licence.AdoxioLicencee.Telephone1 != null)
+                {
+                    phoneDigitsOnly = Regex.Replace(licence.AdoxioLicencee.Telephone1, "[^0-9]", "");
+                }
+
+
+                primaryContactDetails.phone = phoneDigitsOnly;
             }
 
             // convert the XML to a string.
