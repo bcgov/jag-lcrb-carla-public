@@ -19,8 +19,8 @@ namespace FunctionalTest
             string currentWindow = XrmTestBrowser.Driver.CurrentWindowHandle;
             
 
-            XrmTestBrowser.ThinkTime(1000);
-            // 3. Go to Sales/Accounts using the Sitemap
+            XrmTestBrowser.ThinkTime(500);
+            // 3. Go to Applications using the Sitemap
             XrmTestBrowser.Navigation.OpenSubArea("Licensing", "Applications");
 
             XrmTestBrowser.ThinkTime(500);
@@ -97,32 +97,22 @@ namespace FunctionalTest
 
             XrmTestBrowser.Driver.SwitchTo().Frame("contentIFrame0");
 
+            // CST Review
             JavaScriptClick("stage_0");
 
             XrmTestBrowser.Driver.SwitchTo().ParentFrame();
 
-            SetOptionSet("header_process_adoxio_appchecklistpaymentreceived", "Yes");
-            
-            SetOptionSet("header_process_adoxio_checklistverifybusinessprofile", "Yes");
-            
-            SetOptionSet("header_process_adoxio_checklistverifyapplication", "Yes");
-            
-            SetOptionSet("header_process_adoxio_checklistverifypostalcode", "Yes");
-            
-            SetOptionSet("header_process_adoxio_checklistsitemapreceived", "Yes");
-             
+            SetOptionSet("header_process_adoxio_appchecklistpaymentreceived", "Yes");            
+            SetOptionSet("header_process_adoxio_checklistverifybusinessprofile", "Yes");            
+            SetOptionSet("header_process_adoxio_checklistverifyapplication", "Yes");            
+            SetOptionSet("header_process_adoxio_checklistverifypostalcode", "Yes");            
+            SetOptionSet("header_process_adoxio_checklistsitemapreceived", "Yes");             
             SetOptionSet("header_process_adoxio_checklistfloorplanreceived", "Yes");            
-
             SetOptionSet("header_process_adoxio_checklistphotosreceived", "Yes");
-
-            SetOptionSet("header_process_adoxio_checklistassociateformreceived", "Yes");
-            
+            SetOptionSet("header_process_adoxio_checklistassociateformreceived", "Yes");            
             SetOptionSet("header_process_adoxio_checklistvalidinterestreceived", "Yes");
-
             SetOptionSet("header_process_adoxio_checklistlebuilt", "Yes");
-
             SetOptionSet("header_process_adoxio_checklistspdconsentreceived", "Yes");
-
             SetOptionSet("header_process_adoxio_checklistfinintegrityreceived", "Yes");
 
             var nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
@@ -130,24 +120,19 @@ namespace FunctionalTest
             {
                 nextButton.Click();
             }
-            //XrmTestBrowser.Driver.SwitchTo().Frame("contentIFrame0");
 
+            // SLA Review
             JavaScriptClick("stage_1");
-
-            //XrmTestBrowser.Driver.SwitchTo().ParentFrame();
             
             SetOptionSet("header_process_adoxio_checklistsenttolgin", "Sent");
             SetOptionSet("header_process_adoxio_checklistmarketcapacity", "Yes");
             SetOptionSet("header_process_adoxio_checklistsentforfisla", "Yes");
-
             SetOptionSet("header_process_adoxio_checklistsenttospd", "Yes");
             SetOptionSet("header_process_adoxio_checklisttiedhouseassessed", "T&C Added");
             SetOptionSet("header_process_adoxio_checklistbrandingassessed", "Meets Requirements");
-
             SetOptionSet("header_process_adoxio_checklistphotosassessed", "Meets Requirements");
             SetOptionSet("header_process_adoxio_checklistsitemapassessed", "Meets Requirements");
             SetOptionSet("header_process_adoxio_checklistfloorplanassessed", "Meets Requirements");
-
             SetOptionSet("header_process_adoxio_checklistvalidinterestassessed", "Owned");
             SetOptionSet("header_process_adoxio_checklistlicencehistorycheck", "Yes");
 
@@ -158,9 +143,61 @@ namespace FunctionalTest
             {
                 nextButton.Click();
             }
-            //XrmTestBrowser.Driver.SwitchTo().Frame("contentIFrame0");
 
+            // External Approvals
             JavaScriptClick("stage_2");
+            SetOptionSet("header_process_adoxio_checklistsecurityclearancestatus", "Passed");
+            SetOptionSet("header_process_adoxio_investigationstatus", "Investigation Concluded");
+            SetOptionSet("header_process_adoxio_checklistfinancialcheckpassed", "Yes");
+            SetOptionSet("header_process_adoxio_checklistlginapproval", "Yes");
+
+            nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
+            if (nextButton.Displayed && nextButton.Enabled)
+            {
+                nextButton.Click();
+            }
+
+            // Approval In Principal
+            JavaScriptClick("stage_3");
+            
+            SetOptionSet("header_process_adoxio_checklisttermsconditionsadded", "Yes");
+            SetOptionSet("header_process_adoxio_checklistfloorplanlined", "AIP");
+            SetOptionSet("header_process_adoxio_checklistzoningaip", "Yes");
+            SetOptionSet("header_process_adoxio_checklistlicencecapassessedfinal", "Yes");
+            SetOptionSet("header_process_adoxio_checklistresolutionassessment", "Meets Requirements");
+            SetOptionSet("header_process_adoxio_checklistaipdecision", "Approved");
+            SetOptionSet("header_process_adoxio_checklistdecisionlettersentaip", "Yes");
+
+            nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
+            if (nextButton.Displayed && nextButton.Enabled)
+            {
+                nextButton.Click();
+            }
+
+            // Inspection
+            JavaScriptClick("stage_4");
+
+            SetOptionSet("header_process_adoxio_checkinspectionstatus", "Completed");
+            SetOptionSet("header_process_adoxio_appchecklistinspectionreviewcomplete", "Yes");
+            SetOptionSet("header_process_adoxio_appchecklistinspectionresults", "Pass");
+
+            nextButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"stageNavigateActionContainer\"]"));
+            if (nextButton.Displayed && nextButton.Enabled)
+            {
+                nextButton.Click();
+            }
+
+            // Licence Approval
+            JavaScriptClick("stage_5");
+
+            
+            SetOptionSet("header_process_adoxio_checklistinspectionresultsassessed", "Meets Requirements");
+            SetOptionSet("header_process_adoxio_checklistfloorplanapproved", "Meets Requirements");
+            SetOptionSet("header_process_adoxio_appchecklistvalidinterestreceivedfinal", "Owned");            
+            SetOptionSet("header_process_adoxio_checklistfinalreviewcomplete", "Yes");
+            SetOptionSet("header_process_adoxio_appchecklistfinaldecision", "Approved");
+            SetOptionSet("header_process_adoxio_checklistfinaldecisionlettersent", "Yes");
+
 
 
             IWebElement saveButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"footer_statuscontrol\"]/div[2]/a"));

@@ -84,7 +84,9 @@ namespace FunctionalTest
                 //XrmTestBrowser.Entity.SetValue(optionset);
                 
             }
-            
+
+            XrmTestBrowser.ThinkTime(500);
+
         }
 
         // Avoid Selenium nags about control intercepts
