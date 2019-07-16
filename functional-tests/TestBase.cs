@@ -1,31 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
-using System.Security;
-
-using Microsoft.Dynamics365.UIAutomation.Api;
+﻿using Microsoft.Dynamics365.UIAutomation.Api;
 using Microsoft.Dynamics365.UIAutomation.Browser;
-using OpenQA.Selenium.Support.Events;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium;
+using System;
+using System.Diagnostics;
+using System.Linq;
 
-
-
-using OpenQA.Selenium;
-using Xunit;
-using Microsoft.Extensions.Configuration;
-
-namespace CllcSpiceSyncServiceTest
+namespace FunctionalTest
 {
 
 
     public abstract class TestBase
     {
-        protected IConfigurationRoot attrs;
+        protected IConfigurationRoot configuration;
 
         protected Browser XrmTestBrowser;
 
@@ -33,14 +20,22 @@ namespace CllcSpiceSyncServiceTest
 
         protected TestBase()
         {
-            attrs = new ConfigurationBuilder()
+            // clean up any previous test runs that might be stalled.
+
+            var chromeProcesses = Process.GetProcessesByName("chromedriver");
+            foreach (var process in chromeProcesses)
+            {
+                process.Kill();
+            }
+
+            configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
                 .AddUserSecrets("dc6f3b78-5234-4b46-96e3-75849fde4479")
                 .Build();
 
-            string xrmUriStr = attrs["D365_URL"] ?? "http://acme.crm.dynamics.com";
-            string usernameStr = attrs["D365_USER"] ?? "admin@acme.onmicrosoft.com";
-            string passwordStr = attrs["D365_PWD"] ?? "Password@12345";
+            string xrmUriStr = configuration["D365_URL"] ?? "http://acme.crm.dynamics.com";
+            string usernameStr = configuration["D365_USER"] ?? "admin@acme.onmicrosoft.com";
+            string passwordStr = configuration["D365_PWD"] ?? "Password@12345";
 
             Uri xrmUri = new Uri(xrmUriStr);
             var username = usernameStr.ToSecureString();
@@ -51,7 +46,9 @@ namespace CllcSpiceSyncServiceTest
                 BrowserType = BrowserType.Chrome,
                 Headless = false,
                 PrivateMode = true,
-                EnableRecording = true
+                EnableRecording = true,
+                Height = 1080,
+                Width = 1920
             });
 
             XrmTestBrowser.LoginPage.Login(xrmUri, username, password);
@@ -66,16 +63,45 @@ namespace CllcSpiceSyncServiceTest
             XrmTestBrowser.GuidedHelp.CloseGuidedHelp();
         }
 
-        
+        protected void SetOptionSet(string id, string value)
+        {
+            OptionSet optionset = new OptionSet() { Name = id, Value = value };
+
+            try
+            {
+                
+                XrmTestBrowser.Entity.SetValue(optionset);
+            }
+            catch (ElementClickInterceptedException)
+            {
+                // temporary fix for Dynamics form layout problems.                  
+                XrmTestBrowser.Driver.ExecuteScript($"var selectObj = document.getElementById('{id}_i');"
+                    + "for (var i=0; i<selectObj.options.length; i++){"
+                    + $"if (selectObj.options[i].text == '{value}')"
+                    + "{ selectObj.options[i].selected = true; }} selectObj.click(); "                    
+                    );
+
+                //XrmTestBrowser.Entity.SetValue(optionset);
+                
+            }
+            
+        }
+
+        // Avoid Selenium nags about control intercepts
+        protected void JavaScriptClick (string id)
+        {            
+            XrmTestBrowser.Driver.ExecuteScript($"document.getElementById(\"{id}\").click();");
+        }
+
+
         /// <summary>
         /// Cleanup
         /// </summary>
         public void Dispose()
         {
+            XrmTestBrowser.Driver.Dispose();
             XrmTestBrowser.Dispose();
         }
-        
-       
 
         public void OpenEntity(string area, string subArea, string view = null)
         {

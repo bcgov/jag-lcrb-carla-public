@@ -541,14 +541,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (adoxioLicense.AdoxioEffectivedate.HasValue)
                 {
                     DateTime effectiveDate = adoxioLicense.AdoxioEffectivedate.Value.DateTime;
-                    effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
+                    effectiveDateParam = effectiveDate.ToString("MMMM dd, yyyy");
                 }
 
                 var expiraryDateParam = "";
                 if (adoxioLicense.AdoxioExpirydate.HasValue)
                 {
                     DateTime expiryDate = adoxioLicense.AdoxioExpirydate.Value.DateTime;
-                    expiraryDateParam = expiryDate.ToString("dd/MM/yyyy");
+                    expiraryDateParam = expiryDate.ToString("MMMM dd, yyyy");
                 }
 
                 var termsAndConditions = "";
