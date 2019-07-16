@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace CllcSpiceSyncServiceTest
+namespace FunctionalTest
 {
     public class ContactTests : TestBase
     {
