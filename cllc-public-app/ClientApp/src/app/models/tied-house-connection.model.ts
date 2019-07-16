@@ -26,4 +26,6 @@ export class TiedHouseConnection {
     crsConnectionToMarketerDetails: string;
     marketerConnectionToCrs: string;
     marketerConnectionToCrsDetails: string;
+    iNConnectionToFederalProducer: string;
+    iNConnectionToFederalProducerDetails: string;
 }
