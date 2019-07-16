@@ -48,24 +48,24 @@
       <span> Society</span>
       <br>
       <br>
-      <input type="radio" name="InitialBusinessType" value="Indigenous nation" [(ngModel)]="businessType">
+      <input type="radio" name="InitialBusinessType" value="IndigenousNation" [(ngModel)]="businessType">
       <span> Indigenous nation</span>
     </section>
 
     <section *ngIf="bceidConfirmBusinessType">
-      <button class="btn btn-primary" (click)="confirmCorpType()" [disabled]="!businessType || businessType == 'Indigenous nation'">
+      <button class="btn btn-primary" (click)="confirmCorpType()" [disabled]="!businessType">
         <strong>Next</strong>
       </button>
     </section>
 
-    <section *ngIf="bceidConfirmBusinessType && businessType == 'Indigenous nation'">
+    <!-- <section *ngIf="bceidConfirmBusinessType && businessType == 'Indigenous nation'">
       <p>For Indigenous nations please contact the LCRB directly at
         <a href="mailto:Cannabis.Licensing@gov.bc.ca">Cannabis.Licensing@gov.bc.ca</a>
         to obtain the application form.
       </p>
       <a href="logout">&lt;&lt; Return to Information Portal Homepage</a>
       <br>
-    </section>
+    </section> -->
   </div>
 
   <div *ngIf="bceidConfirmContact && !account">

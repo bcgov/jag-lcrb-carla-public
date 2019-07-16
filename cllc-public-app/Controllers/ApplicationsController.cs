@@ -330,6 +330,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // create tiedhouse relationship
                     adoxioApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication = new List<MicrosoftDynamicsCRMadoxioTiedhouseconnection>{
                             new MicrosoftDynamicsCRMadoxioTiedhouseconnection()
+                            {
+                                AdoxioConnectiontype = (int?)TiedHouseConnectionType.Marketer
+                            }
                         };
                 }
 

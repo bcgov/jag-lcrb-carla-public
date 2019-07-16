@@ -8,6 +8,17 @@ using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+    public enum MarketerYesNo
+    {
+        Yes = 845280000,
+        No = 845280001
+    }
+
+    public enum TiedHouseConnectionType
+    {
+        Marketer = 845280006
+    }
+
     public class TiedHouseConnection
     {
         public string id { get; set; } //adoxio_tiedhouseconnectionId (primary key)
@@ -32,6 +43,19 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string SocietyConnectionFederalProducerDetails { get; set; } //adoxio_societyconnectionfederalproducerdetails (MemoType)
         public string TiedHouse { get; set; } //adoxio_TiedHouse (LookupType)
         public string TiedHouseName { get; set; } //adoxio_TiedHouseName (StringType)
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public TiedHouseConnectionType? ConnectionType { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MarketerYesNo? CrsConnectionToMarketer { get; set; }
+
+        public string CrsConnectionToMarketerDetails {  get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MarketerYesNo? MarketerConnectionToCrs {  get; set; }
+
+        public string MarketerConnectionToCrsDetails {  get; set; }
 
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {
