@@ -54,7 +54,9 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
       partnersConnectionFederalProducer: [''],
       partnersConnectionFederalProducerDetails: [''],
       societyConnectionFederalProducer: [''],
-      societyConnectionFederalProducerDetails: ['']
+      societyConnectionFederalProducerDetails: [''],
+      iNConnectionToFederalProducer: [''],
+      iNConnectionToFederalProducerDetails: [''],
     });
 
     if (this.tiedHouse) {

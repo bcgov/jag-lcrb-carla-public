@@ -57,6 +57,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string MarketerConnectionToCrsDetails {  get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public MarketerYesNo? INConnectionToFederalProducer {  get; set; }
+
+        public string INConnectionToFederalProducerDetails {  get; set; }
+
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {
             var isComplete = false;

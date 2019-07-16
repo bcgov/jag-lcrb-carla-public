@@ -162,6 +162,7 @@ import { AssociateContentComponent } from './associate-content/associate-content
 import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
+import { AssociatePageComponent } from './associate-page/associate-page.component';
 
 
 @NgModule({
@@ -244,7 +245,8 @@ import {
     AppRemoveIfFeatureOnDirective,
     AppRemoveIfFeatureOffDirective,
     AssociateContentComponent,
-    ConnectionToNonMedicalStoresComponent
+    ConnectionToNonMedicalStoresComponent,
+    AssociatePageComponent
   ],
   imports: [
     ChartsModule,
