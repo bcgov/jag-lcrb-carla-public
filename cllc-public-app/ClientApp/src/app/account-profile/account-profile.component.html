@@ -27,15 +27,16 @@
           <h3 *ngIf="getBusinessTypeName() === 'Sole Proprietor'" class="blue-header">DETAILS OF
             THE SOLE PROPRIETORSHIP</h3>
           <h3 *ngIf="saveFormData?.businessProfile?.businessType === 'Society'" class="blue-header">SOCIETY DETAILS</h3>
+          <h3 *ngIf="getBusinessTypeName() === 'Indigenous Nation'" class="blue-header">INDIGENOUS NATION DETAILS</h3>
           <h3 *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" class="blue-header"> CORPORATION DETAILS
           </h3>
           <div formGroupName="businessProfile" class="padded-section">
-            <app-field label="{{getBusinessTypeName()}} - Legal Name">
+            <app-field [label]="legalNameLabel()">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
                 [value]="account?.name || ''">
             </app-field>
 
-            <app-field label="Doing Business As (DBA) Name">
+            <app-field label="Doing Business As (DBA) Name" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">
               <input class="form-control" style="max-width: 450px; min-width: 250px;" type="text" disabled
                 [value]="account?.businessDBAName || ''">
             </app-field>
@@ -47,7 +48,7 @@
                 formControlName="businessNumber" (keydown)="rejectIfNotDigitOrBackSpace($event)">
             </app-field>
 
-            <app-field label="Business Type" [required]="true"
+            <app-field label="Business Type" [required]="true" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'"
               [valid]="form.get('businessProfile.businessType').valid || !form.get('businessProfile.businessType').touched"
               errorMessage="Please select a business type from the dropdown list">
               <select class="form-control" disabled readonly style="width: 250px;" [value]="account?.businessType">
@@ -62,10 +63,11 @@
                 <option value="LimitedLiabilityPartnership">Limited Liability Partnership</option>
                 <option value="SoleProprietor">Sole Proprietor</option>
                 <option value="Society">Society</option>
+                <option value="IndigenousNation">Indigenous Nation</option>
               </select>
             </app-field>
 
-            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
+            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">B.C. Incorporation
                   Number</label>
@@ -84,7 +86,7 @@
 
             <p></p>
 
-            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1">
+            <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
                 <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1">Date
                   of Incorporation in B.C.</label>
@@ -106,7 +108,8 @@
 
 
 
-          <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES</h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">{{getBusinessTypeName().toLocaleUpperCase()}} ADDRESSES</h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">CONTACT ADDRESSES</h3>
           <div formGroupName="businessProfile" class="padded-section">
             <p></p>
             <h3>Physical Address</h3>
@@ -207,7 +210,8 @@
             </app-field>
           </div>
 
-          <h3 class="blue-header">{{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() !== 'Indigenous Nation'">{{getBusinessTypeName().toLocaleUpperCase()}} CONTACT</h3>
+          <h3 class="blue-header" *ngIf="getBusinessTypeName() === 'Indigenous Nation'">AUTHORIZED PERSON</h3>
           <div formGroupName="primarycontact" class="padded-section">
             <i>The name and contact information of the person LCRB should contact for ongoing communication. The contact
               must be authorized to represent the applicant and have the authority to bind the applicant. </i><br>

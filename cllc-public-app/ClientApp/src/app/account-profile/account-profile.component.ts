@@ -187,6 +187,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
       case 'SoleProprietor':
         name = 'Sole Proprietor';
         break;
+      case 'IndigenousNation':
+        name = 'Indigenous Nation';
+        break;
       case 'PublicCorporation':
       case 'PrivateCorporation':
       case 'UnlimitedLiabilityCorporation':
@@ -198,6 +201,15 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         break;
     }
     return name;
+  }
+
+  legalNameLabel() {
+    const businessType = this.getBusinessTypeName();
+    let label = `${businessType} - Legal Name`;
+    if (businessType === 'IndigenousNation') {
+      label = 'Full name of Indigenous Nation';
+    }
+    return label;
   }
 
   subscribeForData() {
