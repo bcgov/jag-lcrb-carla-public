@@ -54,11 +54,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAliases Aliases { get; }
 
         /// <summary>
-        /// Gets the IApplicantsteps.
-        /// </summary>
-        IApplicantsteps Applicantsteps { get; }
-
-        /// <summary>
         /// Gets the IApplicationbpfmvpv2s.
         /// </summary>
         IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; }
@@ -67,11 +62,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationinvoicehistories.
         /// </summary>
         IApplicationinvoicehistories Applicationinvoicehistories { get; }
-
-        /// <summary>
-        /// Gets the IApplicationmodules.
-        /// </summary>
-        IApplicationmodules Applicationmodules { get; }
 
         /// <summary>
         /// Gets the IApplications.
@@ -229,11 +219,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenceses Licenceses { get; }
 
         /// <summary>
-        /// Gets the ILicencetypeprerequisites.
-        /// </summary>
-        ILicencetypeprerequisites Licencetypeprerequisites { get; }
-
-        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         ILicencetypes Licencetypes { get; }
@@ -242,16 +227,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypesapplicationtypesset.
         /// </summary>
         ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypestepprerequisites.
-        /// </summary>
-        ILicencetypestepprerequisites Licencetypestepprerequisites { get; }
-
-        /// <summary>
-        /// Gets the ILicencetypesteps.
-        /// </summary>
-        ILicencetypesteps Licencetypesteps { get; }
 
         /// <summary>
         /// Gets the ILoans.
@@ -294,6 +269,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegions Regions { get; }
 
         /// <summary>
+        /// Gets the IRelatedparties.
+        /// </summary>
+        IRelatedparties Relatedparties { get; }
+
+        /// <summary>
         /// Gets the ISettings.
         /// </summary>
         ISettings Settings { get; }
@@ -332,6 +312,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ITiedhouseconnections.
         /// </summary>
         ITiedhouseconnections Tiedhouseconnections { get; }
+
+        /// <summary>
+        /// Gets the IWitnesses.
+        /// </summary>
+        IWitnesses Witnesses { get; }
 
         /// <summary>
         /// Gets the IWorkerinvoicehistories.

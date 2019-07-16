@@ -1,0 +1,309 @@
+<div [ngBusy]="busy"></div>
+<div style="max-width: 800px;" [formGroup]="form">
+  <!-- <h1 style="margin-top: 0;">Connections to Producers</h1> --> 
+  <span *ngIf="federalProducerText === 'federal producer'">A "
+    <strong>{{federalProducerText}}</strong>" is a {{licensedProducerText}} of cannabis
+  </span>
+  <br>
+  <p></p>
+  <div
+    *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(businessType) !== -1">
+    <section>
+      <label for="">Does the corporation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <br>
+      <ul>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li> A contractual business arrangement of any sort</li>
+      </ul>
+      <input type="radio" group="crsConnectionToMarketer" value='Yes' *ngIf="!isMarketer"
+        formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='No' *ngIf="!isMarketer"
+        formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+        held).</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+
+    <section>
+      <label for="">Does a {{licensedProducerText}} of cannabis have any association, connection or financial
+        interest in the corporation?</label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <ul>
+        <li>Directly holding voting shares in the corporation.</li>
+        <li>Indirectly holding voting shares in the corporation. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in the corporation.</li>
+        <li>Having a beneficial interest in the corporation. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort.</li>
+      </ul>
+      <input type="radio" group="crsConnectionToMarketer" value='Yes'
+        formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='No'
+        formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+        held).</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+  </div>
+  <div *ngIf="['PublicCorporation'].indexOf(businessType) !== -1">
+    <section>
+      <label for="">Does the corporation have any association, connection or financial interest in a {{licensedProducerText}} of cannabis? </label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <br>
+      <ul>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li> A contractual business arrangement of any sort</li>
+      </ul>
+      <input type="radio" group="crsConnectionToMarketer" value='Yes'
+        formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='No'
+        formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}}, the type of shares, percentage of ownership, and any other details
+        about
+        the holding of voting shares</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+
+    <section>
+      <label for="">Does any shareholder with 20% or more voting shares have any association, connection or financial
+        interest in a {{licensedProducerText}} of
+        cannabis?
+      </label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <ul>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort.</li>
+      </ul>
+      <input type="radio" group="marketerConnectionToCrs" value='Yes'
+        formControlName="marketerConnectionToCrs"> Yes
+      <br>
+      <input type="radio" group="marketerConnectionToCrs" value='No'
+        formControlName="marketerConnectionToCrs"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares held).</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+
+    <!-- <section>
+      <label for="">Does any shareholder with 20% or more of voting shares have any immediate family members with any connection to a {{licensedProducerText}} of cannabis?
+      </label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <ul>
+          <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+          <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+          <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+          <li>A contractual business arrangement of any sort.</li>
+        </ul>
+        <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</i><br>
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='Yes'
+        formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='No'
+        formControlName="crsConnectionToMarketer"> No
+    </section> -->
+    <!-- <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the relationship of the family member, the name of the {{federalProducerText}}, the type of shares,
+        percentage of
+        ownership, and any other details about the holding of voting shares</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p> -->
+  </div>
+  <div *ngIf="['SoleProprietor'].indexOf(businessType) !== -1">
+    <section>
+      <label for="">Does the sole proprietor have any association, connection or financial interest in a
+        {{licensedProducerText}} of cannabis?</label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <br>
+      <ul>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort.</li>
+      </ul>
+      <input type="radio" group="crsConnectionToMarketer" value='Yes'
+        formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='No'
+        formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span> Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+        held).</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+
+    <section>
+      <label for="">Does the sole proprietor have an immediate family member that has any interest in a {{federalProducerText}}?</label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <ul>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort.</li>
+      </ul>
+      <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law.</i>
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='Yes'
+        formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='No'
+        formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+        held).s</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+  </div>
+  <div
+    *ngIf="[ 'Partnership', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
+    <section>
+      <label for="">Does the partnership have any association, connection or financial interest in a {{licensedProducerText}} of cannabis?</label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <br>
+      <ul>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a federal
+          producer.</li>
+        <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort</li>
+      </ul>
+      <input type="radio" group="moreThanAYear" value='Yes' formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="moreThanAYear" value='No' formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+        held).</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+
+    <section>
+      <label for="">Does a {{licensedProducerText}} of cannabis have any association, connection or financial
+        interest in the partnership?</label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <ul>
+        <li>Directly holding voting shares in the partnership.</li>
+        <li>Indirectly holding voting shares in the partnership. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in the partnership.</li>
+        <li>Having a beneficial interest in the partnership. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort.</li>
+      </ul>
+      <input type="radio" group="crsConnectionToMarketer" value='Yes'
+        formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="crsConnectionToMarketer" value='No'
+        formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+        held)</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+  </div>
+  <div *ngIf="['Society'].indexOf(businessType) !== -1">
+    <section>
+      <label for="">Does the society have any association, connection or financial interest in a {{licensedProducerText}} of cannabis?</label>
+      <br>
+      <span>This includes, but is not limited to:</span>
+      <br>
+      <ul>
+        <li>Directly holding voting shares in a {{federalProducerText}}.</li>
+        <li>Indirectly holding voting shares in a {{federalProducerText}}. For example, through a subsidiary or holding voting
+          shares in a company that holds voting shares in a {{federalProducerText}}.</li>
+        <li>Having a benefi cial interest in a {{federalProducerText}}. For example, through a trust.</li>
+        <li>A contractual business arrangement of any sort.</li>
+      </ul>
+      <input type="radio" group="moreThanAYear" value='Yes' formControlName="crsConnectionToMarketer"> Yes
+      <br>
+      <input type="radio" group="moreThanAYear" value='No' formControlName="crsConnectionToMarketer"> No
+    </section>
+    <p></p>
+
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+      <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
+        held)</span>
+      <br>
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+        rows="5"></textarea>
+    </section>
+    <p></p>
+  </div>
+</div>

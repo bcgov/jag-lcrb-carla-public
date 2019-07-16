@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -35,6 +36,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSocietyconnectionfederalproducer = from.SocietyConnectionFederalProducer;
             to.AdoxioSocietyconnectionfederalproducerdetails = from.SocietyConnectionFederalProducerDetails;
 
+            to.AdoxioConnectiontype = (int?)from.ConnectionType;
+            to.AdoxioCrsconnectiontomarketer = (int?)from.CrsConnectionToMarketer;
+            to.AdoxioCrsconnectiontomarketerdetails = from.CrsConnectionToMarketerDetails;
+            to.AdoxioMarketerconnectiontocrs = (int?)from.MarketerConnectionToCrs;
+            to.AdoxioMarketerconnectiontocrsdetails = from.MarketerConnectionToCrsDetails;
+
         }
 
 
@@ -69,6 +76,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.ShareType = tiedHouse.AdoxioSharetype;
                 result.SocietyConnectionFederalProducer = tiedHouse.AdoxioSocietyconnectionfederalproducer;
                 result.SocietyConnectionFederalProducerDetails = tiedHouse.AdoxioSocietyconnectionfederalproducerdetails;
+
+                result.ConnectionType = (TiedHouseConnectionType?)tiedHouse.AdoxioConnectiontype;
+                result.CrsConnectionToMarketer = (MarketerYesNo?)tiedHouse.AdoxioCrsconnectiontomarketer;
+                result.CrsConnectionToMarketerDetails = tiedHouse.AdoxioCrsconnectiontomarketerdetails;
+                result.MarketerConnectionToCrs = (MarketerYesNo?)tiedHouse.AdoxioMarketerconnectiontocrs;
+                result.MarketerConnectionToCrsDetails = tiedHouse.AdoxioMarketerconnectiontocrsdetails;
 
             }
             return result;
