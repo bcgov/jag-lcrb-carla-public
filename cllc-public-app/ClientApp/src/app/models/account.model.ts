@@ -1,5 +1,6 @@
 import { Contact } from './contact.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { LegalEntity } from '@models/legal-entity.model';
 
 export interface Account {
   id: string;
@@ -34,4 +35,5 @@ export interface Account {
   primarycontact: Contact;
   businessType: string;
   tiedHouse: TiedHouseConnection;
+  legalEntity: LegalEntity;
 }
