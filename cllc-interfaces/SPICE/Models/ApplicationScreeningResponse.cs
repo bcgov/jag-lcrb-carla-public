@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class ApplicationScreeningResponse
@@ -24,12 +26,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// Initializes a new instance of the ApplicationScreeningResponse
         /// class.
         /// </summary>
-        public ApplicationScreeningResponse(string recordIdentifier = default(string), string result = default(string), System.DateTimeOffset? dateProcessed = default(System.DateTimeOffset?), System.DateTimeOffset? expiryDate = default(System.DateTimeOffset?))
+        public ApplicationScreeningResponse(string recordIdentifier = default(string), string result = default(string), IList<Associate> associates = default(IList<Associate>))
         {
             RecordIdentifier = recordIdentifier;
             Result = result;
-            DateProcessed = dateProcessed;
-            ExpiryDate = expiryDate;
+            Associates = associates;
             CustomInit();
         }
 
@@ -50,13 +51,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "dateProcessed")]
-        public System.DateTimeOffset? DateProcessed { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "expiryDate")]
-        public System.DateTimeOffset? ExpiryDate { get; set; }
+        [JsonProperty(PropertyName = "associates")]
+        public IList<Associate> Associates { get; set; }
 
     }
 }
