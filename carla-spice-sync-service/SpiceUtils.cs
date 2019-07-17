@@ -464,9 +464,11 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest CreateApplicationScreeningRequest(MicrosoftDynamicsCRMadoxioApplication application)
         {
+            MicrosoftDynamicsCRMadoxioLicencetype licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
             var screeningRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest()
             {
                 Name = application.AdoxioName,
+                ApplicationType = licenceType.AdoxioName,
                 RecordIdentifier = application.AdoxioJobnumber,
                 UrgentPriority = false,
                 ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
