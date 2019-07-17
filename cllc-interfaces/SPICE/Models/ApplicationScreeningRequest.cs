@@ -28,9 +28,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         /// <param name="applicantType">Possible values include: 'Cannabis',
         /// 'ESS'</param>
-        public ApplicationScreeningRequest(string applicantType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string businessNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        public ApplicationScreeningRequest(string applicantType = default(string), string applicationType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string businessNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
             ApplicantType = applicantType;
+            ApplicationType = applicationType;
             UrgentPriority = urgentPriority;
             Name = name;
             RecordIdentifier = recordIdentifier;
@@ -56,6 +57,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "applicantType")]
         public string ApplicantType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "applicationType")]
+        public string ApplicationType { get; set; }
 
         /// <summary>
         /// </summary>
