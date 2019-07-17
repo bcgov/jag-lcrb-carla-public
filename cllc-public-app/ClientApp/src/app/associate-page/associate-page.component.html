@@ -1,0 +1,21 @@
+<h3 class="blue-header">KEY PERSONNEL & SENIOR EMPLOYEES</h3>
+<div class="padded-section">
+  <app-key-personnel [accountId]="account?.id"
+    [businessType]="account?.businessType"></app-key-personnel>
+</div>
+
+<h3 class="blue-header">DIRECTORS AND OFFICERS</h3>
+<div class="padded-section"
+  *ngIf="account?.id && account?.businessType && legalEntityId">
+  <app-directors-and-officers [accountId]="account?.id"
+    [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
+  </app-directors-and-officers>
+</div>
+
+<h3 class="blue-header">SHAREHOLDERS</h3>
+<div class="padded-section"
+  *ngIf="account?.id && account?.businessType && legalEntityId">
+  <app-edit-shareholders [accountId]="account?.id"
+    [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
+  </app-edit-shareholders>
+</div>

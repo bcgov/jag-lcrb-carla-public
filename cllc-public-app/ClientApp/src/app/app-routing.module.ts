@@ -27,6 +27,7 @@ import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-co
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
+import { AssociatePageComponent } from '@app/associate-page/associate-page.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
     component: AccountProfileComponent,
     // canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'associates',
+    component: AssociatePageComponent
   },
   {
     path: 'account-profile/:applicationId',
