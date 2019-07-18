@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConnectionToNonMedicalStoresComponent } from './connection-to-non-medical-stores.component.component';
+import { ConnectionToNonMedicalStoresComponent } from './connection-to-non-medical-stores.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
