@@ -148,12 +148,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
       if (value === true) {
+        this.application.applicantType = 'IndigenousNation';
         this.form.get('indigenousNationId').enable();
       } else {
+        this.application.applicantType = this.account.businessType;
         this.form.get('indigenousNationId').reset();
         this.form.get('indigenousNationId').disable();
       }
-
+      this.addDynamicContent();
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
@@ -185,14 +187,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.application = data;
         this.hideFormControlByType();
 
-        if (this.application.applicationType) {
-          this.htmlContent = {
-            title: this.application.applicationType.title,
-            preamble: this.getApplicationContent('Preamble'),
-            beforeStarting: this.getApplicationContent('BeforeStarting'),
-            nextSteps: this.getApplicationContent('NextSteps'),
-          };
-        }
+        this.addDynamicContent();
 
         const noNulls = Object.keys(data)
           .filter(e => data[e] !== null)
@@ -211,6 +206,17 @@ export class ApplicationComponent extends FormBase implements OnInit {
           console.log('Error occured');
         }
       );
+  }
+
+  private addDynamicContent() {
+    if (this.application.applicationType) {
+      this.htmlContent = {
+        title: this.application.applicationType.title,
+        preamble: this.getApplicationContent('Preamble'),
+        beforeStarting: this.getApplicationContent('BeforeStarting'),
+        nextSteps: this.getApplicationContent('NextSteps'),
+      };
+    }
   }
   private hideFormControlByType() {
     if (!this.application.applicationType.showPropertyDetails) {
@@ -247,7 +253,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     let body = '';
     const contents =
       this.application.applicationType.contentTypes
-        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.account.businessType) !== -1);
+        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
     if (contents.length > 0) {
       body = contents[0].body;
     }
@@ -299,11 +305,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    if (this.form.get('applyAsIndigenousNation').value) {
-      saveData.applicantType = 'IndigenousNation';
-    } else {
-      saveData.applicantType = this.account.businessType;
-    }
+    
     return forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
