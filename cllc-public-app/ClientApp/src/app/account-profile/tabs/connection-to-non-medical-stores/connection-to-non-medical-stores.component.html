@@ -20,19 +20,19 @@
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li> A contractual business arrangement of any sort</li>
       </ul>
-      <input type="radio" group="crsConnectionToMarketer" value='Yes' *ngIf="!isMarketer"
-        formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="marketerConnectionToCrs" value='Yes' *ngIf="!isMarketer"
+        formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='No' *ngIf="!isMarketer"
-        formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="marketerConnectionToCrs" value='No' *ngIf="!isMarketer"
+        formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -49,19 +49,19 @@
         <li>Having a beneficial interest in the corporation. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
-      <input type="radio" group="crsConnectionToMarketer" value='Yes'
-        formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="marketerConnectionToCrs" value='Yes'
+        formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='No'
-        formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="marketerConnectionToCrs" value='No'
+        formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -79,20 +79,20 @@
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li> A contractual business arrangement of any sort</li>
       </ul>
-      <input type="radio" group="crsConnectionToMarketer" value='Yes'
-        formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="marketerConnectionToCrs" value='Yes'
+        formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='No'
-        formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="marketerConnectionToCrs" value='No'
+        formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}}, the type of shares, percentage of ownership, and any other details
         about
         the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -111,18 +111,18 @@
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
-      <input type="radio" group="marketerConnectionToCrs" value='Yes'
-        formControlName="marketerConnectionToCrs"> Yes
+      <input type="radio" group="crsConnectionToMarketer" value='Yes'
+        formControlName="crsConnectionToMarketer"> Yes
       <br>
-      <input type="radio" group="marketerConnectionToCrs" value='No'
-        formControlName="marketerConnectionToCrs"> No
+      <input type="radio" group="crsConnectionToMarketer" value='No'
+        formControlName="crsConnectionToMarketer"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
+    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares held).</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
+      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -140,20 +140,20 @@
         </ul>
         <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law</i><br>
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='Yes'
-        formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="marketerConnectionToCrs" value='Yes'
+        formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='No'
-        formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="marketerConnectionToCrs" value='No'
+        formControlName="marketerConnectionToCrs"> No
     </section> -->
     <!-- <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the relationship of the family member, the name of the {{federalProducerText}}, the type of shares,
         percentage of
         ownership, and any other details about the holding of voting shares</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p> -->
@@ -172,19 +172,19 @@
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
-      <input type="radio" group="crsConnectionToMarketer" value='Yes'
-        formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="marketerConnectionToCrs" value='Yes'
+        formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='No'
-        formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="marketerConnectionToCrs" value='No'
+        formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span> Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -202,19 +202,19 @@
       </ul>
       <i>Immediate family members include spouses, parents, siblings, children, sons-in-law and daughters-in-law.</i>
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='Yes'
-        formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="marketerConnectionToCrs" value='Yes'
+        formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='No'
-        formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="marketerConnectionToCrs" value='No'
+        formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).s</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -234,17 +234,17 @@
         <li>Having a beneficial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='Yes' formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="moreThanAYear" value='Yes' formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='No' formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="moreThanAYear" value='No' formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held).</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -261,19 +261,19 @@
         <li>Having a beneficial interest in the partnership. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
-      <input type="radio" group="crsConnectionToMarketer" value='Yes'
-        formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="marketerConnectionToCrs" value='Yes'
+        formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="crsConnectionToMarketer" value='No'
-        formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="marketerConnectionToCrs" value='No'
+        formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held)</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
@@ -291,17 +291,17 @@
         <li>Having a benefi cial interest in a {{federalProducerText}}. For example, through a trust.</li>
         <li>A contractual business arrangement of any sort.</li>
       </ul>
-      <input type="radio" group="moreThanAYear" value='Yes' formControlName="crsConnectionToMarketer"> Yes
+      <input type="radio" group="moreThanAYear" value='Yes' formControlName="marketerConnectionToCrs"> Yes
       <br>
-      <input type="radio" group="moreThanAYear" value='No' formControlName="crsConnectionToMarketer"> No
+      <input type="radio" group="moreThanAYear" value='No' formControlName="marketerConnectionToCrs"> No
     </section>
     <p></p>
 
-    <section *ngIf="form.get('crsConnectionToMarketer').value == 'Yes'">
+    <section *ngIf="form.get('marketerConnectionToCrs').value == 'Yes'">
       <span>Provide the name of the {{federalProducerText}} and details of the connection (e.g. percentage and type of shares
         held)</span>
       <br>
-      <textarea name="" id="" class="form-control" formControlName="crsConnectionToMarketerDetails"
+      <textarea name="" id="" class="form-control" formControlName="marketerConnectionToCrsDetails"
         rows="5"></textarea>
     </section>
     <p></p>
