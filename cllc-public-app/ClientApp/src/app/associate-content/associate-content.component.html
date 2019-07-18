@@ -1,4 +1,4 @@
-<section appRemoveIfFeatureOn="Marketer" *ngIf="account?.businessType && (showBothContents || !isIndigenousNation) &&  account.businessType !== 'IndigenousNation'">
+<section appRemoveIfFeatureOn="Marketer" *ngIf="account?.businessType && (showBothContents || !isIndigenousNation) &&  account?.businessType !== 'IndigenousNation'">
   <h3 *ngIf="account?.businessType !== 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
     ASSOCIATES</h3>
   <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
@@ -196,7 +196,7 @@
   </div>
 </section>
 
-<section appRemoveIfFeatureOff="Marketer" *ngIf="account?.businessType && (showBothContents || !isIndigenousNation) &&  account.businessType !== 'IndigenousNation'">
+<section appRemoveIfFeatureOff="Marketer" *ngIf="account?.businessType && (showBothContents || !isIndigenousNation) &&  account?.businessType !== 'IndigenousNation'">
   <h3 *ngIf="account?.businessType !== 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
     ASSOCIATES</h3>
   <h3 *ngIf="account?.businessType === 'SoleProprietor'" class="blue-header" style="margin-top: 0; margin-bottom: 0">
@@ -361,7 +361,7 @@
   </div>
 </section>
 
-<section class="large-screen-only" *ngIf="isIndigenousNation || account.businessType === 'IndigenousNation'">
+<section class="large-screen-only" *ngIf="isIndigenousNation || account?.businessType === 'IndigenousNation'">
   <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES FOR INDIGENOUS NATIONS</h3>
 
   <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
