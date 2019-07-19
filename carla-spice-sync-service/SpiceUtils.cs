@@ -383,8 +383,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 SelfDisclosure = ((GeneralYesNo)worker.AdoxioSelfdisclosure).ToString(),
                 Gender = ((AdoxioGenderCode)worker.AdoxioGendercode).ToString(),
                 Birthplace = worker.AdoxioBirthplace,
-                BcIdCardNumber = worker.AdoxioBcidcardnumber,
-                DriversLicence = worker.AdoxioDriverslicencenumber
+
             };
 
             /* Add applicant details */
@@ -393,6 +392,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                 request.RecordIdentifier = worker.AdoxioContactId.AdoxioSpdjobid.ToString();
                 request.Contact = new Interfaces.Spice.Models.Contact()
                 {
+                    BcIdCardNumber = worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? worker.AdoxioContactId.AdoxioPrimaryidnumber : null,
+                    DriversLicenceNumber = worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? worker.AdoxioContactId.AdoxioPrimaryidnumber : null,
                     SpdJobId = worker.AdoxioContactId.AdoxioSpdjobid.ToString(),
                     ContactId = worker.AdoxioContactId.Contactid,
                     FirstName = worker.AdoxioContactId.Firstname,
@@ -464,9 +465,11 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest CreateApplicationScreeningRequest(MicrosoftDynamicsCRMadoxioApplication application)
         {
+            MicrosoftDynamicsCRMadoxioLicencetype licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
             var screeningRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest()
             {
                 Name = application.AdoxioName,
+                ApplicationType = licenceType.AdoxioName,
                 RecordIdentifier = application.AdoxioJobnumber,
                 UrgentPriority = false,
                 ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
@@ -628,8 +631,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                     Gender = (legalEntity.AdoxioContact.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioContact.AdoxioGendercode).ToString(),
                     Birthplace = legalEntity.AdoxioContact.AdoxioBirthplace,
                     BirthDate = legalEntity.AdoxioContact.Birthdate,
-                    BcIdCardNumber = legalEntity.AdoxioContact.AdoxioBcidcardnumber,
-                    DriversLicenceNumber = legalEntity.AdoxioContact.AdoxioDriverslicencenumber,
+                    BcIdCardNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
+                    DriversLicenceNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
                     Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
