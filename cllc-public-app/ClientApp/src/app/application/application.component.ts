@@ -143,7 +143,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
-      federalProducerNames: ['', Validators.required]
+      federalProducerNames: ['', Validators.required],
+      applicantType: ['', Validators.required]
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
