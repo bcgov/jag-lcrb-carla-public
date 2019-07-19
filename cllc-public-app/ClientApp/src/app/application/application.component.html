@@ -383,10 +383,10 @@
         </app-field>
       </address>
 
-      <section appRemoveIfFeatureOff="Marketer"
+      <section appRemoveIfFeatureOff="Marketer" 
         *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
         <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
-        <div class="padded-section" *ngIf="application?.id">
+        <div class="padded-section" *ngIf="application?.tiedHouse && account?.businessType">
           <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
             licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"
             federalProducerText="licensee or applicant" [businessType]="account?.businessType"
@@ -826,8 +826,10 @@
         </mat-button-toggle-group>
       </app-field>
 
-      <app-field label="Select the Indigenous Nation" [valid]="true" *ngIf="form.get('applyAsIndigenousNation').value"
-        errorMessage="Please select a business type from the dropdown list">
+      <app-field label="Select the Indigenous nation"
+        [valid]="form.get('indigenousNationId').valid || !form.get('indigenousNationId').touched"
+        *ngIf="form.get('applyAsIndigenousNation').value"
+        errorMessage="Please select the Indigenous nation">
         <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
           <option value=""></option>
           <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
@@ -835,7 +837,8 @@
       </app-field>
     </div>
   </section>
-  <app-associate-content [account]="account" [showBothContents]="false" [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
+  <app-associate-content [account]="account" [showBothContents]="false"
+    [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
 </ng-template>
 
 <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
