@@ -80,11 +80,6 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                         {
                             return Ok(workerRequest);
                         }
-                        else
-                        {
-                            return BadRequest();
-                        }
-
                     }
                 }
                 return BadRequest();
