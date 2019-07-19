@@ -1,4 +1,4 @@
-<div class="">
+<div>
   <h1 style="margin-top: 0">Organization Structure</h1>
   <section>
     <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1" for="">
@@ -22,13 +22,13 @@
       <li>Percentage of ownership</li>
     </ul>
   </section>
-  <div>
+  <div class="container">
     <label for="">Example</label>
     <br>
-    <img src="assets/org_structure_example.png" width="500" alt="Organization Structure">
+    <img src="assets/org_structure_example.png" width="500" alt="Organization Structure" style="margin: auto">
   </div>
   <p></p>
   <section>
-    <app-file-uploader documentType="Organization Structure" entityName="account" [entityId]="accountId"></app-file-uploader>
+    <app-file-uploader *ngIf="accountId" documentType="Organization Structure" entityName="account" [entityId]="accountId"></app-file-uploader>
   </section>
 </div>

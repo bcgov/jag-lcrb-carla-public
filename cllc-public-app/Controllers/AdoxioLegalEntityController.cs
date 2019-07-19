@@ -157,13 +157,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 case "partners":
                     filter += " and adoxio_ispartner eq true";
                     break;
+                case "key-personnel":
+                    filter += " and adoxio_iskeypersonnel eq true";
+                    break;
                 case "directors-officers-management":
-                    filter += " and adoxio_isshareholder ne true and adoxio_ispartner ne true";
+                    filter += " and adoxio_isshareholder ne true and adoxio_ispartner ne true and adoxio_iskeypersonnel ne true";
                     break;
                 case "director-officer-shareholder":
                     filter += " and adoxio_isindividual eq 1";
                     break;
                 default:
+                    filter += " and adoxio_isindividual eq 2"; //return nothing
                     break;
             }
 
@@ -383,7 +387,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Partner;
                 }
-                account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
+                if (item.legalentitytype != null)
+                {
+                    account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.AdoxioApplicantTypeCodes), item.legalentitytype);
+                }
                 account = await _dynamicsClient.Accounts.CreateAsync(account);
 
                 //create tied house under account
