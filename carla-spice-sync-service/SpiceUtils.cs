@@ -320,22 +320,33 @@ namespace Gov.Lclb.Cllb.SpdSync
                 _logger.LogInformation($"Sending Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
                 _logger.LogInformation($"Application has {applicationRequest.Associates.Count} associates");
 
-                var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
-
-                _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-                _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-
-                if(result.Response.StatusCode.ToString() == "OK")
+                try
                 {
-                    MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                    var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+
+                    _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+                    _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+
+                    if (result.Response.StatusCode.ToString() == "OK")
                     {
-                        AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
-                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
-                    };
-                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
-                    return true;
+                        MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                        {
+                            AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
+                            AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
+                        };
+                        _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                        return true;
+                    }
+                    var msg = await result.Response.Content.ReadAsStringAsync();
+                    throw new SystemException(msg);
                 }
-                return false;
+                catch (Exception e)
+                {
+                    _logger.LogError(e.Message);
+                    return false;
+                }
+
+
             }
 
             _logger.LogError("Consent not valid for all associates.");
