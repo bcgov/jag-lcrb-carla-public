@@ -45,11 +45,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetPolicyDocuments(string category)
         {
             string cacheKey = CacheKeys.PolicyDocumentCategoryPrefix + category;
+            string cacheAgeKey = CacheKeys.PolicyDocumentCategoryPrefix + category + "_dto";
             List<ViewModels.PolicyDocumentSummary> PolicyDocuments = null;
-
+            bool fetchDocument = false;
             if (!_cache.TryGetValue(cacheKey, out PolicyDocuments))
+            // item is not in cache at all, fetch.
             {
-                // Key not in cache, so get data.
+                fetchDocument = true;
+            }
+            else
+            {
+                DateTimeOffset dto = DateTimeOffset.Now;
+                // fetch the age of the cache item from the cache
+                if (!_cache.TryGetValue(cacheAgeKey, out dto))
+                // unable to get cache age, fetch.
+                {
+                    fetchDocument = true;
+                }
+                else
+                {
+                    TimeSpan age = DateTimeOffset.Now - dto;
+                    if (age.TotalMinutes > 5)
+                    // More than 5 minutes old, fetch.
+                    {
+                        fetchDocument = true;
+                    }
+                }
+
+            }
+
+            if (fetchDocument)
+            {
+                // Key not in cache or cache expired, get data.
                 try
                 {
                     if (string.IsNullOrEmpty(category))
@@ -68,9 +95,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Select(x => x.ToSummaryViewModel())
                         .ToList();
                     }
+
+                    // Set cache options.
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        // Set the cache to expire far in the future.                    
+                        .SetAbsoluteExpiration(TimeSpan.FromDays(365 * 5));
+
+                    // Save data in cache.
+                    _cache.Set(cacheKey, PolicyDocuments, cacheEntryOptions);
+                    _cache.Set(cacheAgeKey, DateTimeOffset.Now, cacheEntryOptions);
+
                 }
                 catch (OdataerrorException odee)
                 {
+                    // this will gracefully handle situations where Dynamics is not available however we have a cache version.
                     _logger.LogError("Error getting policy documents by category");
                     _logger.LogError("Request:");
                     _logger.LogError(odee.Request.Content);
@@ -78,13 +116,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                 }
 
-                // Set cache options.
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    // Keep in cache for this time
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
-
-                // Save data in cache.
-                _cache.Set(cacheKey, PolicyDocuments, cacheEntryOptions);
+               
             }
             
 
