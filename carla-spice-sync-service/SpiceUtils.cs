@@ -256,11 +256,11 @@ namespace Gov.Lclb.Cllb.SpdSync
         }
 
         /// <summary>
-        /// Validates the associate consent.
+        /// Validates the consent of a legal entity list (including all of its children)
         /// </summary>
         /// <returns><c>true</c>, if associate consent was validated, <c>false</c> otherwise.</returns>
         /// <param name="associates">Associates.</param>
-        private bool ValidateAssociateConsent(List<Interfaces.Spice.Models.LegalEntity> associates)
+        private bool ValidateConsent(List<Interfaces.Spice.Models.LegalEntity> associates)
         {
             try
             {
@@ -286,7 +286,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     }
                     else
                     {
-                        if (!ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
+                        if (!ValidateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
                         {
                             consentValidated = false;
                         }
@@ -308,7 +308,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <param name="applicationRequest">Application request.</param>
         public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
         {
-            var consentValidated = ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
+            var consentValidated = ValidateConsent((List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
 
             if (consentValidated)
             {
@@ -320,22 +320,31 @@ namespace Gov.Lclb.Cllb.SpdSync
                 _logger.LogInformation($"Sending Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
                 _logger.LogInformation($"Application has {applicationRequest.Associates.Count} associates");
 
-                var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
-
-                _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-                _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
-
-                if(result.Response.StatusCode.ToString() == "OK")
+                try
                 {
-                    MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                    var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+
+                    _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+                    _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
+
+                    if (result.Response.StatusCode.ToString() == "OK")
                     {
-                        AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
-                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
-                    };
-                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
-                    return true;
+                        MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                        {
+                            AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
+                            AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
+                        };
+                        _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+                        return true;
+                    }
+                    var msg = await result.Response.Content.ReadAsStringAsync();
+                    throw new SystemException(msg);
                 }
-                return false;
+                catch (Exception e)
+                {
+                    _logger.LogError(e.Message);
+                    return false;
+                }
             }
 
             _logger.LogError("Consent not valid for all associates.");
@@ -354,20 +363,31 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <param name="workerScreeningRequest">Worker screening request.</param>
         public async Task<bool> SendWorkerScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest workerScreeningRequest, ILogger logger)
         {
-            // send the data
-            List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
+            Interfaces.Spice.Models.LegalEntity legalEntity = new Interfaces.Spice.Models.LegalEntity()
             {
-                workerScreeningRequest
+                IsIndividual = true,
+                Contact = workerScreeningRequest.Contact
             };
 
-            logger.LogInformation($"Sending Worker Screening Request");
+            var consentValidated = ValidateConsent(new List<Interfaces.Spice.Models.LegalEntity> { legalEntity });
+            if(consentValidated)
+            {
+                List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
+                {
+                    workerScreeningRequest
+                };
 
-            var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+                logger.LogInformation($"Sending Worker Screening Request");
 
-            logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-            logger.LogInformation($"Done Send Worker Screening Request");
+                var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
 
-            return result.Response.StatusCode.ToString() == "OK";
+                logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+                logger.LogInformation($"Done Send Worker Screening Request");
+
+                return result.Response.StatusCode.ToString() == "OK";
+            }
+            _logger.LogError($"Consent not valid for worker SPD Job ID: {workerScreeningRequest.Contact.SpdJobId}");
+            return false;
         }
 
         public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(Guid WorkerId, ILogger logger)
@@ -380,8 +400,8 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 Name = worker.AdoxioName,
                 BirthDate = worker.AdoxioDateofbirth,
-                SelfDisclosure = ((GeneralYesNo)worker.AdoxioSelfdisclosure).ToString(),
-                Gender = ((AdoxioGenderCode)worker.AdoxioGendercode).ToString(),
+                SelfDisclosure = worker.AdoxioSelfdisclosure != null ? ((GeneralYesNo)worker.AdoxioSelfdisclosure).ToString() : null,
+                Gender = worker.AdoxioGendercode != null ? ((AdoxioGenderCode)worker.AdoxioGendercode).ToString() : null,
                 Birthplace = worker.AdoxioBirthplace,
 
             };
