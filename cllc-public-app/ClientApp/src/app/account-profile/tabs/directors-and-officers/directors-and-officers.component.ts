@@ -25,7 +25,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   adoxioLegalEntityList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
-  displayedColumns = ['name', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
+  displayedColumns = ['firstName', 'lastName', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
   subscriptions: Subscription[] = [];
@@ -39,25 +39,8 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.businessType === 'SoleProprietor') {
-      this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
-    }
+
     this.getDirectorsAndOfficers();
-    // const sub = this.store.select(state => state.currentAccountState)
-    //   .filter(state => !!state)
-    //   .subscribe(state => {
-    //     this.accountId = state.currentAccount.id;
-    //     this.businessType = state.currentAccount.businessType;
-    //     if (this.businessType === 'SoleProprietor') {
-    //       this.displayedColumns = ['name', 'email', 'position', 'edit', 'delete'];
-    //     }
-    //     const sub2 = this.route.parent.params.subscribe(p => {
-    //       this.parentLegalEntityId = p.legalEntityId;
-    //       this.getDirectorsAndOfficers();
-    //     });
-    //     this.subscriptions.push(sub2);
-    //   });
-    // this.subscriptions.push(sub);
   }
 
   getDirectorsAndOfficers() {
@@ -137,7 +120,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
           this.busyObsv = save.subscribe(
             res => {
               this.snackBar.open('Director / Officer Details have been saved', 'Success',
-                { duration: 2500, panelClass: ['red-snackbar'] });
+                { duration: 2500, panelClass: ['green-snackbar'] });
               this.getDirectorsAndOfficers();
             },
             err => {

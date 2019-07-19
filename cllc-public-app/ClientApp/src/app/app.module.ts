@@ -59,9 +59,7 @@ import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
 import {
   EditShareholdersComponent,
-  ShareholderPersonDialogComponent,
-  ShareholderOrganizationDialogComponent
-} from './account-profile/tabs/edit-shareholders/edit-shareholders.component';
+} from './account-profile/tabs/shareholders/shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
 import { InsertService } from './insert/insert.service';
@@ -163,6 +161,7 @@ import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
+import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-entity.component';
 
 
 @NgModule({
@@ -212,8 +211,6 @@ import { AssociatePageComponent } from './associate-page/associate-page.componen
     ResultComponent,
     SearchBoxDirective,
     SecurityAssessmentsComponent,
-    ShareholderOrganizationDialogComponent,
-    ShareholderPersonDialogComponent,
     SiteMapComponent,
     SolePropResultsComponent,
     SpdConsentComponent,
@@ -246,7 +243,8 @@ import { AssociatePageComponent } from './associate-page/associate-page.componen
     AppRemoveIfFeatureOffDirective,
     AssociateContentComponent,
     ConnectionToNonMedicalStoresComponent,
-    AssociatePageComponent
+    AssociatePageComponent,
+    LegalEntityComponent
   ],
   imports: [
     ChartsModule,
@@ -383,8 +381,6 @@ import { AssociatePageComponent } from './associate-page/associate-page.componen
   entryComponents: [
     ApplicationCancellationDialogComponent,
     DirectorAndOfficerPersonDialogComponent,
-    ShareholderOrganizationDialogComponent,
-    ShareholderPersonDialogComponent,
     WorkerHomeDialogComponent,
   ],
   bootstrap: [AppComponent]
