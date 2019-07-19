@@ -474,7 +474,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   businessTypeIsPrivateCorporation(): boolean {
     return this.account &&
       ['PrivateCorporation',
-        'PublicCorporation',
+        // 'PublicCorporation',
         'UnlimitedLiabilityCorporation',
         'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
   }
