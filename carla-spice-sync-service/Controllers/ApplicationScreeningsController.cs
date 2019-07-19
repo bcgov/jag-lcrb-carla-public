@@ -49,7 +49,6 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// Send an application record to SPICE for event driven processing
         /// </summary>
         /// <returns></returns>
-
         [HttpPost("send/{applicationIdString}")]
         [AllowAnonymous]
         public async Task<ActionResult> SendApplicationScreeningRequest(string applicationIdString, string bearer)
@@ -70,14 +69,19 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                         return BadRequest();
                     };
 
-
-                    var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
-
-                    if (result)
+                    if (applicationRequest == null)
                     {
-                        return Ok(applicationRequest);
+                        return NotFound($"Application {applicationId} is not found.");
                     }
-                    return BadRequest();
+                    else
+                    {
+                        var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
+
+                        if (result)
+                        {
+                            return Ok(applicationRequest);
+                        }
+                    }
                 }
                 return BadRequest();
             }
