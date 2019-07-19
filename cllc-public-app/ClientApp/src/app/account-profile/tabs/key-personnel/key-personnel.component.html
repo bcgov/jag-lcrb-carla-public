@@ -1,38 +1,70 @@
-<div class="">
-  <!-- <h1 style="margin-top: 0">Key Personnel &amp; Senior Employees</h1> -->
-  <p *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation', 'GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
-      Key personnel are those people having authority and responsibility for planning, directing, and controlling the activities of the corporation, either directly or indirectly.
-      This designation typically includes the following positions:
-  </p>
+<div>
+    <p>
+        The following individuals have been identified as key personnel:
+    </p>
+  
+    <div class="example-container mat-elevation-z0">
+  
+      <div>
+        <mat-table #table [dataSource]="dataSource">
+  
+          <!-- Column -->
+          <ng-container matColumnDef="firstName">
+              <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.firstname}} </mat-cell>
+            </ng-container>
+  
+            <!-- Column -->
+            <ng-container matColumnDef="lastName">
+              <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.lastname}} </mat-cell>
+            </ng-container>
+  
+          <!-- Column -->
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+          </ng-container>
+  
+          <!-- Column -->
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> Position </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
+  
+          <!-- Column -->
+          <ng-container matColumnDef="dateofappointment">
+            <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.dateofappointment | date:'yyyy-MM-dd' }} </mat-cell>
+          </ng-container>
+  
+          <!-- Column -->
+          <ng-container matColumnDef="edit">
+            <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a href="javascript: void(0)" (click)="openPersonDialog(element)">Edit</a>
+            </mat-cell>
+          </ng-container>
+  
+          <!-- Column -->
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <a href="javascript: void(0)" (click)="deleteIndividual(element)">Delete</a>
+            </mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+  
+      </div>
+    </div>
+  
+    <p></p>
+    <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog(null)">
+      <strong>Add Key Personnel</strong>
+      <br>
+    </a>
+  </div>
 
-  <ul *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1">
-    <li>Chief executive officer, chief operating officer, and chief financial officer</li>
-    <li>Vice presidents </li>
-    <li>Senior managers</li>
-  </ul>
-
-  <ul *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">
-    <li>Chief executive officer, chief operating officer, and chief financial officer</li>
-    <li>Vice presidents</li>
-    <li>Senior managers</li>
-  </ul>
-  <p *ngIf="['SoleProprietor', 'Society'].indexOf(businessType) !== -1">
-    Key personnel are those people having authority and responsibility for planning, directing, and controlling the activities
-    of the business either directly or indirectly.
-  </p>
-  <section>
-    <label *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1" for="">
-      Upload an organization chart of the corporation's key personnel and senior employees, including name and position:
-    </label>
-    <label *ngIf="['SoleProprietor'].indexOf(businessType) !== -1" for="">
-      Upload an organization chart of the business's key personnel and senior employees, including name and position:
-    </label>
-    <label *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" for="">
-      Upload an organization chart of the corporation's key personnel and senior employees, including name and position:
-    </label>
-  </section>
-  <p></p>
-  <section *ngIf="accountId">
-    <app-file-uploader documentType="Key Personnel" entityName="account" [entityId]="accountId"></app-file-uploader>
-  </section>
-</div>
