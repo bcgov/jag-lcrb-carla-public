@@ -113,6 +113,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? isShareholder { get; set; }
         public bool? isPartner { get; set; }
         public bool? isOwner { get; set; }
+        public bool? isKeyPersonnel { get; set; }
 
         public DateTimeOffset? dateofbirth { get; set; } //adoxio_dateofbirth (date time)
         public decimal? interestpercentage { get; set; } //adoxio_interestpercentage (decimal number)
