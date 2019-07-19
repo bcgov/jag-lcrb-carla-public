@@ -18,6 +18,7 @@ export class LegalEntity {
   isPartner: boolean;
   partnerType: string;
   isOwner: boolean;
+  isKeyPersonnel: boolean;
   dateofbirth: Date;
   interestpercentage: number;
   commonvotingshares: number;
@@ -36,4 +37,5 @@ export class LegalEntity {
   sendConsentRequest: boolean;
   parentLegalEntityId: string;
   position: string;
+  percentageVotingShares: number;
 }
