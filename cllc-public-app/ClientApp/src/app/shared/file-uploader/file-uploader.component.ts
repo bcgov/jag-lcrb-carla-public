@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FileSystemItem } from '@models/file-system-item.model';
 import { Subscription } from 'rxjs';
@@ -26,6 +26,7 @@ export class FileUploaderComponent implements OnInit {
   @Input() extensions: string[] = ['pdf'];
   @Input() uploadHeader = 'TO UPLOAD DOCUMENTS, DRAG FILES HERE OR';
   @Input() enableFileDeletion = true;
+  @Output() numberOfUploadedFiles: EventEmitter<number> = new EventEmitter<number>();
   busy: Subscription;
   attachmentURL: string;
   Math = Math;
@@ -107,6 +108,7 @@ export class FileUploaderComponent implements OnInit {
           entry.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}&documentType=${this.documentType}`;
         });
         this.files = data;
+        this.numberOfUploadedFiles.emit(this.files.length);
       },
         err => alert('Failed to get files'));
   }
@@ -144,4 +146,3 @@ export class FileUploaderComponent implements OnInit {
     }
   }
 }
-
