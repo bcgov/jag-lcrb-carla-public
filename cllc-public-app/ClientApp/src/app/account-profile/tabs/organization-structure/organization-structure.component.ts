@@ -22,11 +22,11 @@ export class OrganizationStructureComponent implements OnInit {
     private dynamicsDataService: DynamicsDataService) { }
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState).pipe(
-      filter(state => !!state))
-      .subscribe(state => {
-        this.accountId = state.currentAccount.id;
-        this.businessType = state.currentAccount.businessType;
+    this.store.select(state => state.currentAccountState.currentAccount).pipe(
+      filter(account => !!account))
+      .subscribe(account => {
+        this.accountId = account.id;
+        this.businessType = account.businessType;
       });
   }
 

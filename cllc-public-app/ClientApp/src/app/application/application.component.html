@@ -383,10 +383,10 @@
         </app-field>
       </address>
 
-      <section appRemoveIfFeatureOff="Marketer"
+      <section appRemoveIfFeatureOff="Marketer" 
         *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
         <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
-        <div class="padded-section" *ngIf="application?.id">
+        <div class="padded-section" *ngIf="application?.tiedHouse && account?.businessType">
           <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
             licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"
             federalProducerText="licensee or applicant" [businessType]="account?.businessType"
@@ -429,6 +429,7 @@
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedAssociateDocuments = $event"
             [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
           </app-file-uploader>
         </section>
@@ -449,6 +450,7 @@
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
             [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
             #financialIntegrityDocuments></app-file-uploader>
         </section>
@@ -494,14 +496,14 @@
           <p *ngIf="account?.businessType === 'Society'">
             Please upload the society’s Statement of Directors and Registered Office.
           </p>
-          <p *ngIf="account?.businessType === 'PublicCorporation'">
+          <!-- <p *ngIf="account?.businessType === 'PublicCorporation'">
             Please upload the society’s Statement of Directors and Registered Office.
-          </p>
+          </p> -->
           <p *ngIf="businessTypeIsPartnership()">
             Please upload the Partnership Agreement.
           </p>
           <div *ngIf="businessTypeIsPrivateCorporation()">
-            <p>Please upload the corporation’s </p>
+            <p>Please upload: </p>
             <ul>
               <li>Notice of Articles</li>
               <li>Central Securities Register</li>
@@ -512,6 +514,7 @@
 
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
+          (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
             fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
           </app-file-uploader>
@@ -735,6 +738,7 @@
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedAssociateDocuments = $event"
             [enableFileDeletion]="false" [entityId]="applicationId"
             [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
           </app-file-uploader>
@@ -753,6 +757,7 @@
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
             [enableFileDeletion]="false" [entityId]="applicationId"
             [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
           </app-file-uploader>
@@ -785,14 +790,14 @@
         <p *ngIf="account?.businessType === 'Society'">
           Please upload the society’s Statement of Directors and Registered Office.
         </p>
-        <p *ngIf="account?.businessType === 'PublicCorporation'">
+        <!-- <p *ngIf="account?.businessType === 'PublicCorporation'">
           Please upload the society’s Statement of Directors and Registered Office.
-        </p>
+        </p> -->
         <p *ngIf="businessTypeIsPartnership()">
           Please upload the Partnership Agreement.
         </p>
         <div *ngIf="businessTypeIsPrivateCorporation()">
-          <p>Please upload the corporation’s </p>
+          <p>Please upload: </p>
           <ul>
             <li>Notice of Articles</li>
             <li>Central Securities Register</li>
@@ -803,6 +808,7 @@
       <section>
         <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
           fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+          (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
           [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
         </app-file-uploader>
       </section>
@@ -826,8 +832,10 @@
         </mat-button-toggle-group>
       </app-field>
 
-      <app-field label="Select the Indigenous Nation" [valid]="true" *ngIf="form.get('applyAsIndigenousNation').value"
-        errorMessage="Please select a business type from the dropdown list">
+      <app-field label="Select the Indigenous nation"
+        [valid]="form.get('indigenousNationId').valid || !form.get('indigenousNationId').touched"
+        *ngIf="form.get('applyAsIndigenousNation').value"
+        errorMessage="Please select the Indigenous nation">
         <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
           <option value=""></option>
           <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
@@ -835,7 +843,8 @@
       </app-field>
     </div>
   </section>
-  <app-associate-content [account]="account" [showBothContents]="false" [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
+  <app-associate-content [account]="account" [showBothContents]="false"
+    [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
 </ng-template>
 
 <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
