@@ -42,6 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsofficer = from.isOfficer;
             to.AdoxioIsseniormanagement = from.isSeniorManagement;
             to.AdoxioIsowner = from.isOwner;
+            to.AdoxioIskeypersonnel = from.isKeyPersonnel;
             to.AdoxioPreferrednonvotingshares = from.preferrednonvotingshares;
             to.AdoxioPreferredvotingshares = from.preferredvotingshares;
             to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
@@ -118,6 +119,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.isOfficer = (adoxio_legalentity.AdoxioIsofficer == true);
                 result.isSeniorManagement = (adoxio_legalentity.AdoxioIsseniormanagement == true);
                 result.isOwner = (adoxio_legalentity.AdoxioIsowner == true);
+                result.isKeyPersonnel = (adoxio_legalentity.AdoxioIskeypersonnel == true);
 
                 result.preferrednonvotingshares = adoxio_legalentity.AdoxioPreferrednonvotingshares;
                 result.preferredvotingshares = adoxio_legalentity.AdoxioPreferredvotingshares;
