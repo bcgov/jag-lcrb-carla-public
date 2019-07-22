@@ -48,6 +48,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSameasapplyingperson = (from.sameasapplyingperson != null && (bool)from.sameasapplyingperson) ? 1 : 0;
             to.AdoxioEmail = from.email;
             to.AdoxioDateofappointment = from.dateofappointment;
+            to.AdoxioDateofsharesissued = from.dateIssued;
+            to.AdoxioJobtitle = from.jobTitle;
             // Assigning the account this way throws exception:
             // System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
             //if (from.account.id != null)
@@ -126,7 +128,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // convert from int to bool.
                 result.sameasapplyingperson = (adoxio_legalentity.AdoxioSameasapplyingperson != null && adoxio_legalentity.AdoxioSameasapplyingperson != 0);
                 result.dateofappointment = adoxio_legalentity.AdoxioDateofappointment;
+                result.dateIssued = adoxio_legalentity.AdoxioDateofsharesissued;
                 result.securityAssessmentEmailSentOn = adoxio_legalentity.AdoxioDateemailsent;
+                result.jobTitle = adoxio_legalentity.AdoxioJobtitle;
 
                 // populate the account.
                 if (adoxio_legalentity.AdoxioAccount != null)
