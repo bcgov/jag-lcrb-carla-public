@@ -29,6 +29,7 @@ export class LegalEntity {
   relatedentities: LegalEntity[];
   email: string;
   dateofappointment: Date;
+  dateIssued: Date;
   securityAssessmentEmailSentOn: Date;
   accountId: string;
   shareholderAccountId: string;
@@ -37,5 +38,6 @@ export class LegalEntity {
   sendConsentRequest: boolean;
   parentLegalEntityId: string;
   position: string;
+  jobTitle: string;
   percentageVotingShares: number;
 }
