@@ -83,6 +83,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
   mode: string;
   account: Account;
 
+  uploadedSupportingDocuments = 0;
+  uploadedFinancialIntegrityDocuments: 0;
+  uploadedAssociateDocuments: 0;
+
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
@@ -306,7 +310,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    
+
     return forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
@@ -391,21 +395,19 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.validationMessages = [];
 
     if (this.application.applicationType.showAssociatesFormUpload &&
-      (!this.mainForm || !this.mainForm.files || this.mainForm.files.length < 1)) {
+      (this.uploadedAssociateDocuments < 1)) {
       valid = false;
       this.validationMessages.push('Associate form is required.');
     }
 
     if (this.application.applicationType.showFinancialIntegrityFormUpload &&
-      (!this.financialIntegrityDocuments
-        || !this.financialIntegrityDocuments.files
-        || this.financialIntegrityDocuments.files.length < 1)) {
+      (this.uploadedFinancialIntegrityDocuments < 1)) {
       valid = false;
       this.validationMessages.push('Financial Integrity form is required.');
     }
 
     if (this.application.applicationType.showSupportingDocuments &&
-      (!this.supportingDocuments || !this.supportingDocuments.files || this.supportingDocuments.files.length < 1)) {
+      (this.uploadedSupportingDocuments < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
     }
