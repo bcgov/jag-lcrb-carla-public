@@ -44,72 +44,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             return new SpiceClient(new Uri(spiceURI), credentials);
         }
 
-
-        /// <summary>
-        /// Hangfire job to send an export to SPD.
-        /// </summary>
-        public void SendWorkerExportJob(PerformContext hangfireContext)
-        {
-            hangfireContext.WriteLine("Starting SPD Export Job.");
-            _logger.LogError("Starting SPD Export Job.");
-
-            Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
-
-            string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
-            List<MicrosoftDynamicsCRMadoxioSpddatarow> result = null;
-
-            try
-            {
-                result = _dynamicsClient.Spddatarows.Get(filter: filter).Value.ToList();
-            }
-            catch (OdataerrorException odee)
-            {
-                hangfireContext.WriteLine("Error getting SPD data rows");
-                hangfireContext.WriteLine("Request:");
-                hangfireContext.WriteLine(odee.Request.Content);
-                hangfireContext.WriteLine("Response:");
-                hangfireContext.WriteLine(odee.Response.Content);
-
-                _logger.LogError("Error getting SPD data rows");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                // fail if we can't get results.
-                throw (odee);
-            }
-            
-
-            if (result != null && result.Count > 0)
-            {
-                List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>();
-
-                foreach (var row in result)
-                {
-                    Guid.TryParse(row.AdoxioLcrbworkerjobid, out Guid workerJobId);
-                    var runner = GenerateWorkerScreeningRequest(workerJobId, _logger);
-                    runner.Wait();
-                    var workerRequest = runner.Result;
-                    payload.Add(workerRequest);
-                }
-
-                // send to spice.
-
-                var spiceRunner = SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
-                spiceRunner.Wait();
-                var spiceResult = spiceRunner.Result;
-
-                hangfireContext.WriteLine("Response code was");
-                hangfireContext.WriteLine(spiceResult.Response.StatusCode.ToString());
-
-                _logger.LogError("Response code was");
-                _logger.LogError(spiceResult.Response.StatusCode.ToString());
-           }
-
-            hangfireContext.WriteLine("End of SPD Export Job.");
-            _logger.LogError("End of SPD Export Job.");
-        }
-
         /// <summary>
         /// Hangfire job to receive an application screening import from SPICE.
         /// </summary>
@@ -823,13 +757,13 @@ namespace Gov.Lclb.Cllb.SpdSync
                 var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
-                    hangfireContext.WriteLine($"Successfully sent application {application.AdoxioApplicationid} to SPD");
-                    _logger.LogError($"Successfully sent application {application.AdoxioApplicationid} to SPD");
+                    hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                    _logger.LogError($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
                 }
                 else
                 {
-                    hangfireContext.WriteLine($"Failed to send application {application.AdoxioApplicationid} to SPD");
-                    _logger.LogError($"Failed to send application {application.AdoxioApplicationid} to SPD");
+                    hangfireContext.WriteLine($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                    _logger.LogError($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
                 }
             }
             
