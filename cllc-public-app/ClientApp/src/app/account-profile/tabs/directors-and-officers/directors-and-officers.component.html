@@ -1,13 +1,16 @@
 <div>
-  <p>
+  <p *ngIf="dataSource?.data?.length">
     Enter all directors, officers, and senior managers including those that won’t be involved in non-medical cannabis
     retail stores.
+  </p>
+  <p *ngIf="!dataSource?.data?.length">
+      There is currently no organization leadership on file.
   </p>
 
   <div [ngBusy]="busy"></div>
   <div [ngBusy]="busyObsv"></div>
 
-  <div class="example-container mat-elevation-z0">
+  <div *ngIf="dataSource?.data?.length" class="example-container mat-elevation-z0">
 
     <div>
       <mat-table #table [dataSource]="dataSource">
@@ -67,7 +70,7 @@
 
   <p></p>
   <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog(null)">
-    <strong>Add Person</strong>
+    <strong>Add Leadership Associate</strong>
     <br>
   </a>
 </div>

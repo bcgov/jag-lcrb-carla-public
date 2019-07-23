@@ -58,7 +58,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
 import {
-  EditShareholdersComponent,
+  EditShareholdersComponent, ShareholderDialogComponent,
 } from './account-profile/tabs/shareholders/shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
@@ -97,7 +97,7 @@ import { FinancialInformationComponent } from './account-profile/tabs/financial-
 import { AccountProfileSummaryComponent } from './account-profile/account-profile-summary/account-profile-summary.component';
 
 import { NgBusyModule } from 'ng-busy';
-import { KeyPersonnelComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
+import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
 import { ConnectionToProducersComponent } from './account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
@@ -161,7 +161,6 @@ import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
-import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-entity.component';
 
 
 @NgModule({
@@ -243,8 +242,9 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     AppRemoveIfFeatureOffDirective,
     AssociateContentComponent,
     ConnectionToNonMedicalStoresComponent,
+    KeyPersonnelDialogComponent,
     AssociatePageComponent,
-    LegalEntityComponent
+    ShareholderDialogComponent
   ],
   imports: [
     ChartsModule,
@@ -381,7 +381,9 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
   entryComponents: [
     ApplicationCancellationDialogComponent,
     DirectorAndOfficerPersonDialogComponent,
+    KeyPersonnelDialogComponent,
     WorkerHomeDialogComponent,
+    ShareholderDialogComponent,
   ],
   bootstrap: [AppComponent]
 })
