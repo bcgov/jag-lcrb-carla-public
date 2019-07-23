@@ -1,0 +1,35 @@
+<div>
+  <h1></h1>
+  <mat-horizontal-stepper [linear]="true" (selectionChange)="selectionChange($event)" #stepper>
+    <ng-template matStepperIcon="edit">
+      <i class="fas fa-check"></i>
+    </ng-template>
+    <!-- <ng-template matStepperIcon="number">
+    </ng-template> -->
+
+    <mat-step label="Review Account Profile">
+      <div class="row">
+        <app-account-profile [useInStepperMode]="true" (saveComplete)="stepper.selectedIndex = 1"></app-account-profile>
+      </div>
+    </mat-step>
+    <mat-step label="Review Organization Information">
+      <div class="row">
+        <app-associate-page></app-associate-page>
+      </div>
+      <div style="padding-right: 30px;">
+        <button class="btn btn-primary" style="float: right;" mat-button matStepperNext>
+          CONTINUE TO APPLICATION&nbsp;
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <div style="clear: both;"></div>
+      </div>
+    </mat-step>
+    <mat-step label="Complete Application">
+      <div class="row">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+
+
+</div>
