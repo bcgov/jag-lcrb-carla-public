@@ -23,11 +23,12 @@ export class EditShareholdersComponent implements OnInit {
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
+  @Input() lockAssociates = false;
 
   shareholderForm: FormGroup;
   shareholderList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
-  displayedColumns = ['additional', 'name', 'email', 'percentageVotingShares', 'commonvotingshares', 'edit', 'delete'];
+  displayedColumns = ['name', 'additional', 'commonvotingshares', 'percentageVotingShares', 'email', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
   form: FormGroup;
@@ -50,10 +51,8 @@ export class EditShareholdersComponent implements OnInit {
   }
 
   updateDisplayedColumns() {
-    if (['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(this.businessType) !== -1) {
-      this.displayedColumns = ['partnerType', 'name', 'email', 'edit', 'delete'];
-    } else {
-      this.displayedColumns = ['name', 'additional', 'commonvotingshares', 'percentageVotingShares', 'email', 'edit', 'delete'];
+    if (this.lockAssociates) {
+      this.displayedColumns = ['name', 'additional', 'commonvotingshares', 'percentageVotingShares', 'email'];
     }
   }
 

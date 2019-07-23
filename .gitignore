@@ -15,3 +15,5 @@ one-stop-service/obj/
 pdf-service/.vscode/*
 one-stop-service/.vs/one-stop-service/
 cllc-public-app/.vscode/*
+cllc-public-app/ClientApp/junit.xml
+cllc-public-app/ClientApp/unit-tests.html
