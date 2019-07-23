@@ -69,7 +69,7 @@
   </div>
 
   <p></p>
-  <a tabindex="1" (click)="openPersonDialog(null)">
+  <a *ngIf="!lockAssociates" tabindex="1" (click)="openPersonDialog(null)">
     <strong><i class="fa fa-plus"></i> Add Leadership Associate</strong>
     <br>
   </a>

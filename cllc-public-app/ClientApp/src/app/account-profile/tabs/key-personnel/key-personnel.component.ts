@@ -19,6 +19,7 @@ export class KeyPersonnelComponent implements OnInit {
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
+  @Input() lockAssociates = false;
 
   adoxioLegalEntityList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
@@ -36,6 +37,9 @@ export class KeyPersonnelComponent implements OnInit {
 
   ngOnInit() {
     this.getDirectorsAndOfficers();
+    if (this.lockAssociates) {
+      this.displayedColumns = ['firstName', 'lastName', 'email', 'position', 'dateofappointment'];
+    }
   }
 
   getDirectorsAndOfficers() {

@@ -1,0 +1,16 @@
+::ng-deep {
+    .mat-horizontal-stepper-header {
+        pointer-events: none !important;
+    }
+
+    .mat-step-header .mat-step-icon-selected {
+        border: 3px solid #2196f3 !important;
+        background-color: #2196f3 !important;
+        color: #fff !important;
+    }
+
+    .mat-step-header .mat-step-icon-state-done {
+        color: #2196f3 !important;
+    }
+
+}
