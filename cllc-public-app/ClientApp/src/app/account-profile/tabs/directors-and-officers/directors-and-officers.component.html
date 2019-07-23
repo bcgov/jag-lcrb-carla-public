@@ -42,7 +42,7 @@
         <!-- Column -->
         <ng-container matColumnDef="dateofappointment">
           <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.dateofappointment | date:'yyyy-MM-dd' }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateofappointment |  date : 'dd MMM yyyy' }} </mat-cell>
         </ng-container>
 
         <!-- Column -->
@@ -69,8 +69,8 @@
   </div>
 
   <p></p>
-  <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog(null)">
-    <strong>Add Leadership Associate</strong>
+  <a tabindex="1" (click)="openPersonDialog(null)">
+    <strong><i class="fa fa-plus"></i> Add Leadership Associate</strong>
     <br>
   </a>
 </div>
