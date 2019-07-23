@@ -87,14 +87,6 @@ issuers:
         - model: attribute
           fields:
             type:
-              input: establishment_name
-              from: value
-            value:
-              input: establishment_name
-              from: claim
-        - model: attribute
-          fields:
-            type:
               input: effective_date
               from: value
             format:
