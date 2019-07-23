@@ -170,6 +170,7 @@ export class DirectorAndOfficerPersonDialogComponent {
     private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.directorOfficerForm = fb.group({
+      id: [''],
       isDirector: [false],
       isOfficer: [false],
       isSeniorManagement: [false],
