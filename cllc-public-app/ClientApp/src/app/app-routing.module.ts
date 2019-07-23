@@ -28,6 +28,7 @@ import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.co
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import { AssociatePageComponent } from '@app/associate-page/associate-page.component';
+import { LicenceRenewalStepsComponent } from '@applicence-renewal-steps/licence-renewal-steps.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,18 @@ const routes: Routes = [
   {
     path: 'associates',
     component: AssociatePageComponent
+  },
+  {
+    path: 'renew-crs-licence',
+    component: LicenceRenewalStepsComponent,
+    children: [
+      {
+        path: 'application/:applicationId',
+        component: ApplicationComponent,
+        canDeactivate: [CanDeactivateGuard],
+        canActivate: [BCeidAuthGuard]
+      }
+    ]
   },
   {
     path: 'account-profile/:applicationId',
@@ -165,12 +178,12 @@ const routes: Routes = [
   {
     path: 'policy-document/worker-qualification-training',
     component: WorkerHomeComponent,
-    data: {slug: 'worker-qualification-training'}
+    data: { slug: 'worker-qualification-training' }
   },
   {
     path: 'policy-document/worker-qualification-home',
     component: WorkerHomeComponent,
-    data: {slug: 'worker-qualification-home'}
+    data: { slug: 'worker-qualification-home' }
   },
   {
     path: 'policy-document/:slug',
@@ -273,7 +286,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule],
   providers: [SurveyResolver]
 })
