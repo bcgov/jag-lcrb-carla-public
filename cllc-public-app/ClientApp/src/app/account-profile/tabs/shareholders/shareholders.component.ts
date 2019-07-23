@@ -122,7 +122,11 @@ export class EditShareholdersComponent implements OnInit {
         case 'Trust':
           position = 'Trust';
           break;
+        case 'IndigenousNation':
+          position = 'Indigenous nation';
+          break;
         default:
+          position = shareholder.legalentitytype;
           break;
       }
     }
@@ -132,41 +136,29 @@ export class EditShareholdersComponent implements OnInit {
   formDataToModelData(formData: any, shareholderType: string): LegalEntity {
     const adoxioLegalEntity: LegalEntity = new LegalEntity();
     adoxioLegalEntity.id = formData.id;
-    if (['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(this.businessType) !== -1) {
-      adoxioLegalEntity.isPartner = true;
-      adoxioLegalEntity.isShareholder = false;
-      if (this.businessType === 'GeneralPartnership') {
-        adoxioLegalEntity.partnerType = 'General';
-      } else if (this.businessType === 'LimitedLiabilityPartnership') {
-        adoxioLegalEntity.partnerType = 'Limited';
-      } else {
-        adoxioLegalEntity.partnerType = formData.partnerType;
-      }
-    } else {
-      adoxioLegalEntity.isShareholder = true;
-      adoxioLegalEntity.isPartner = false;
-    }
+
+    adoxioLegalEntity.isShareholder = true;
+    adoxioLegalEntity.isPartner = false;
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
-    if (shareholderType === 'Person') {
-      adoxioLegalEntity.isindividual = true;
+    adoxioLegalEntity.isindividual = formData.isindividual;
+
+    if (formData.isindividual) {
       adoxioLegalEntity.firstname = formData.firstname;
       adoxioLegalEntity.lastname = formData.lastname;
       adoxioLegalEntity.name = formData.firstname + ' ' + formData.lastname;
       adoxioLegalEntity.email = formData.email;
     } else {
-      adoxioLegalEntity.isindividual = false;
       adoxioLegalEntity.name = formData.name;
-      adoxioLegalEntity.legalentitytype = formData.legalentitytype;
     }
+    adoxioLegalEntity.legalentitytype = formData.legalentitytype;
     adoxioLegalEntity.commonnonvotingshares = formData.commonnonvotingshares;
     adoxioLegalEntity.commonvotingshares = formData.commonvotingshares;
     adoxioLegalEntity.dateIssued = formData.dateIssued;
     adoxioLegalEntity.dateofbirth = formData.dateofbirth;
-    // adoxioLegalEntity.relatedentities = [];
+
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = <Account>{};
-      adoxioLegalEntity.account.id = this.accountId;
+      adoxioLegalEntity.account = <Account>{ id: this.accountId };
     }
     return adoxioLegalEntity;
   }
@@ -216,45 +208,6 @@ export class EditShareholdersComponent implements OnInit {
       );
     }
   }
-
-  // Open Person shareholder dialog
-  // openPersonDialog(shareholder: LegalEntity) {
-  //   // set dialogConfig settings
-  //   const dialogConfig: any = {
-  //     disableClose: true,
-  //     autoFocus: true,
-  //     maxWidth: '400px',
-  //     data: {
-  //       businessType: this.businessType,
-  //       shareholder: shareholder
-  //     }
-  //   };
-
-  //   // open dialog, get reference and process returned data from dialog
-  //   const dialogRef = this.dialog.open(ShareholderPersonDialogComponent, dialogConfig);
-  //   dialogRef.afterClosed().subscribe(
-  //     formData => {
-  //       if (formData) {
-  //         const shareholderType = 'Person';
-  //         const adoxioLegalEntity = this.formDataToModelData(formData, shareholderType);
-  //         let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
-  //         if (formData.id) {
-  //           save = this.legalEntityDataservice.updateLegalEntity(adoxioLegalEntity, formData.id);
-  //         }
-  //         this.busyObsv = save.subscribe(
-  //           res => {
-  //             this.snackBar.open('Shareholder Details have been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-  //             this.getShareholders();
-  //           },
-  //           err => {
-  //             this.snackBar.open('Error saving Shareholder Details', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-  //             this.handleError(err);
-  //           }
-  //         );
-  //       }
-  //     }
-  //   );
-  // }
 
   // Open shareholder dialog
   openShareholderDialog(shareholder) {
@@ -343,8 +296,8 @@ export class ShareholderDialogComponent implements OnInit {
       email: ['', Validators.email],
       commonvotingshares: ['', Validators.required],
       partnerType: ['', Validators.required],
-      shareholderType: [''],
-      organizationType: [''],
+      isindividual: [true],
+      legalentitytype: [''],
       dateIssued: [''],
     });
 

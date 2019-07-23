@@ -22,7 +22,8 @@
         <ng-container matColumnDef="additional">
           <mat-header-cell *matHeaderCellDef> Additional</mat-header-cell>
           <mat-cell *matCellDef="let element">
-            {{element.isindividual ? element.dateofbirth : element.legalentitytype}}
+            <span *ngIf="element.isindividual "> {{element.dateofbirth | date : 'dd MMM yyyy'}}</span>
+            <span *ngIf="!element.isindividual "> {{getPosition(element)}}</span>
           </mat-cell>
         </ng-container>
 
@@ -73,8 +74,8 @@
     Total Voting Shares: {{totalShares}}
   </p>
   <div style="margin-bottom: 30px">
-    <a class="btn btn-primary" tabindex="1" (click)="openShareholderDialog()">
-      <strong>Add Shareholder</strong>
+    <a tabindex="1" (click)="openShareholderDialog()">
+      <strong><i class="fa fa-plus"></i> Add Shareholder</strong>
       <br>
     </a>
   </div>
