@@ -161,7 +161,6 @@ import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
-import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-entity.component';
 
 
 @NgModule({
@@ -245,7 +244,6 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     ConnectionToNonMedicalStoresComponent,
     KeyPersonnelDialogComponent,
     AssociatePageComponent,
-    LegalEntityComponent,
     ShareholderDialogComponent
   ],
   imports: [
