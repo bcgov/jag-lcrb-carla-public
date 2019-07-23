@@ -161,6 +161,7 @@ import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
+import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-renewal-steps.component';
 
 
 @NgModule({
@@ -244,7 +245,8 @@ import { AssociatePageComponent } from './associate-page/associate-page.componen
     ConnectionToNonMedicalStoresComponent,
     KeyPersonnelDialogComponent,
     AssociatePageComponent,
-    ShareholderDialogComponent
+    ShareholderDialogComponent,
+    LicenceRenewalStepsComponent
   ],
   imports: [
     ChartsModule,
@@ -287,6 +289,7 @@ import { AssociatePageComponent } from './associate-page/associate-page.componen
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatStepperModule,
     MatTooltipModule,
     NgBusyModule,
     NgbModule.forRoot(),
@@ -340,6 +343,7 @@ import { AssociatePageComponent } from './associate-page/associate-page.componen
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatStepperModule,
     NgbModule,
     ReactiveFormsModule
   ],
