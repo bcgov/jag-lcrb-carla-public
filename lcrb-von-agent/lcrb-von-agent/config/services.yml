@@ -31,6 +31,71 @@ issuers:
         key_derivation_method: ARGON2I_MOD
 
     credential_types:
+    - description: Cannabis Marketing Licence
+      schema: cannabis-marketing-licence.lcrb
+      label_en: Cannabis Marketing Licence
+      issuer_url: $APPLICATION_URL/cannabis-marketing-licence
+      depends_on:
+        - bcreg_registration
+      credential:
+        effective_date:
+          input: effective_date
+          from: claim
+      topic:
+        label_en: Registration
+        source_id:
+          input: registration_id
+          from: claim
+        type:
+          input: registration
+          from: value
+      mapping:
+        # "attribute" defines a generic field in the TOB model
+        # "value" identifies where to derive the data value (typically it comes from the claim)
+        # "type" - if "value" - is the name of the attribute
+        # "format" is an optional data format (default text)
+        - model: attribute
+          fields:
+            type:
+              input: issue_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: issue_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: licence_number
+              from: value
+            value:
+              input: licence_number
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: expiry_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: expiry_date
+              from: claim
+        - model: attribute
+          fields:
+            type:
+              input: effective_date
+              from: value
+            format:
+              input: datetime
+              from: value
+            value:
+              input: effective_date
+              from: claim
+
     - description: Cannabis Retail Store Licence
       schema: cannabis-retail-store-licence.lcrb
       label_en: Cannabis Retail Store Licence
@@ -162,7 +227,7 @@ issuers:
             value:
               input: country
               from: claim
-        
+
 
 verifiers:
   bctob:
