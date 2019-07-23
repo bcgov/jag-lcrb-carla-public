@@ -152,16 +152,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             switch (positionType)
             {
                 case "shareholders":
-                    filter += " and adoxio_isshareholder eq true";
-                    break;
                 case "partners":
-                    filter += " and adoxio_ispartner eq true";
+                    filter += " and (adoxio_ispartner eq true or adoxio_isshareholder eq true)";
                     break;
                 case "key-personnel":
                     filter += " and adoxio_iskeypersonnel eq true";
                     break;
                 case "directors-officers-management":
-                    filter += " and adoxio_isshareholder ne true and adoxio_ispartner ne true and adoxio_iskeypersonnel ne true";
+                    filter += " and (adoxio_isdirector eq true or adoxio_isseniormanagement eq true or adoxio_isofficer eq true)";
                     break;
                 case "director-officer-shareholder":
                     filter += " and adoxio_isindividual eq 1";
