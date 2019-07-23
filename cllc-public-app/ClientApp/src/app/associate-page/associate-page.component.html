@@ -7,20 +7,20 @@
 
   <h3 class="blue-header">KEY PERSONNEL</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-key-personnel [accountId]="account?.id" [businessType]="account?.businessType"
+    <app-key-personnel [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
       [parentLegalEntityId]="legalEntityId"></app-key-personnel>
   </div>
 
   <h3 class="blue-header">ORGANIZATION LEADERSHIP</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-directors-and-officers [accountId]="account?.id" [businessType]="account?.businessType"
+    <app-directors-and-officers [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
       [parentLegalEntityId]="legalEntityId">
     </app-directors-and-officers>
   </div>
 
   <h3 class="blue-header">SHAREHOLDERS</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-shareholders [accountId]="account?.id" [businessType]="account?.businessType"
+    <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
       [parentLegalEntityId]="legalEntityId">
     </app-shareholders>
   </div>
