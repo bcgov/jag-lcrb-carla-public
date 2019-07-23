@@ -1,14 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '../../../services/dynamics-data.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../app-state/models/app-state';
 import { LegalEntity } from '@models/legal-entity.model';
 import { Account } from '@models/account.model';
-import { MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { DirectorAndOfficerPersonDialogComponent } from '../directors-and-officers/directors-and-officers.component';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-key-personnel',
@@ -72,7 +72,8 @@ export class KeyPersonnelComponent implements OnInit {
     adoxioLegalEntity.lastname = formData.lastname;
     adoxioLegalEntity.name = formData.firstname + ' ' + formData.lastname;
     adoxioLegalEntity.email = formData.email;
-    //adoxioLegalEntity.dateofappointment = formData.dateofappointment; // adoxio_dateofappointment
+    adoxioLegalEntity.dateofappointment = formData.dateofappointment;
+    adoxioLegalEntity.jobTitle = formData.jobTitle;
     adoxioLegalEntity.legalentitytype = this.businessType;
 
     if (this.accountId) {
@@ -96,7 +97,7 @@ export class KeyPersonnelComponent implements OnInit {
     };
 
     // open dialog, get reference and process returned data from dialog
-    const dialogRef = this.dialog.open(DirectorAndOfficerPersonDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(KeyPersonnelDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       formData => {
         if (formData) {
@@ -142,3 +143,76 @@ export class KeyPersonnelComponent implements OnInit {
   }
 
 }
+
+
+/***************************************
+ * Director and Officer Person Dialog
+ ***************************************/
+@Component({
+  selector: 'app-key-personnel-dialog',
+  templateUrl: './key-personnel-dialog.component.html',
+})
+export class KeyPersonnelDialogComponent {
+  form: FormGroup;
+  businessType: string;
+
+  constructor(private fb: FormBuilder,
+    private dialogRef: MatDialogRef<KeyPersonnelDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.form = fb.group({
+      id: [''],
+      isDirector: [false],
+      isOfficer: [false],
+      isSeniorManagement: [false],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      jobTitle: ['', Validators.required],
+      email: ['', Validators.email],
+      dateofappointment: ['', Validators.required]
+    }, { validator: this.dateLessThanToday('dateofappointment') }
+    );
+
+    if (data && data.person) {
+      this.form.patchValue(data.person);
+    }
+    this.businessType = data.businessType;
+  }
+
+  dateLessThanToday(field1) {
+    return form => {
+      const d1 = form.controls[field1].value;
+      if (!d1) {
+        return {};
+      }
+      const d1Date = new Date(d1.year, d1.month, d1.day);
+      if (d1Date < new Date()) {
+        return { dateLessThanToday: true };
+      }
+      return {};
+    };
+  }
+
+  save() {
+    let formData = this.data.person || {};
+    formData = (<any>Object).assign(formData, this.form.value);
+    this.dialogRef.close(formData);
+
+    if (!this.form.valid) {
+      Object.keys(this.form.controls).forEach(field => {
+        const control = this.form.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
+  }
+
+  close() {
+    this.dialogRef.close();
+  }
+
+  isFieldError(field: string) {
+    const isError = !this.form.get(field).valid && this.form.get(field).touched;
+    return isError;
+  }
+
+}
+
