@@ -40,6 +40,12 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      noOrgStructureChange: [''],
+      noShareholderChange: [''],
+      noKeyPersonnelChange: [''],
+      noLeadershipChange: ['']
+    });
     this.subscribeForData();
   }
 
