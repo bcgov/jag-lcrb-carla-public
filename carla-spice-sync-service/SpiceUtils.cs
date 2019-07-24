@@ -511,6 +511,16 @@ namespace Gov.Lclb.Cllb.SpdSync
                 }
             }
 
+            /* If sole prop add contact person as associate */
+            if (application.AdoxioApplicanttype == (int)BusinessType.SoleProprietorship)
+            {
+                screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity
+                {
+                    IsIndividual = true,
+                    Contact = screeningRequest.ContactPerson
+                });
+            }
+
             /* Add associates from account */
             var moreAssociates = CreateApplicationAssociatesScreeningRequest(application._adoxioApplicantValue, screeningRequest.Associates);
             screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
@@ -526,7 +536,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 if (accountId != assoc.EntityId)
                 {
-                    applicationfilter += " and adoxio_legalentityid ne " + assoc.EntityId;
+                    applicationfilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
                 }
             }
             string[] expand = { "adoxio_Contact", "adoxio_Account"};
