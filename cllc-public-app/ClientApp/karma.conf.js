@@ -31,7 +31,7 @@ module.exports = function (config) {
     },
 	junitReporter: {
        outPutDir: __dirname,
-	   outputFile: 'junit.xml',
+       outputFile: 'junit.xml',
        useBrowserName: false
      },
 
@@ -42,7 +42,7 @@ module.exports = function (config) {
     browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
         ChromeHeadlessNoSandbox: {
-            base: 'ChromeHeadless',
+        base: 'ChromeHeadless',
             flags: [
                 '--no-sandbox', // required to run without privileges in docker
                 '--user-data-dir=/tmp/chrome-test-profile',
