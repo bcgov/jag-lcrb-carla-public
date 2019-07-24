@@ -745,7 +745,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             _logger.LogError("Starting SendFoundApplications Job");
             hangfireContext.WriteLine("Starting SendFoundApplications Job");
 
-            string sendFilter = "adoxio_appchecklistsentspd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
+            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value;
             _logger.LogError($"Found {applications.Count} applications to send to SPD.");
             hangfireContext.WriteLine($"Found {applications.Count} applications to send to SPD.");
