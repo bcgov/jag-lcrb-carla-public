@@ -65,8 +65,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
                     TimeSpan age = DateTimeOffset.Now - dto;
-                    if (age.TotalMinutes > 5)
-                    // More than 5 minutes old, fetch.
+                    if (age.TotalMinutes > 10)
+                    // More than 10 minutes old, fetch.
                     {
                         fetchDocument = true;
                     }
@@ -115,8 +115,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
                 }
+                catch (Exception e)
+                {
+                    // this will gracefully handle situations where Dynamics is not available however we have a cache version.
+                    _logger.LogError("Unknown error occured");
+                    _logger.LogError(e.Message);
+                }
 
-               
+
             }
             
 
