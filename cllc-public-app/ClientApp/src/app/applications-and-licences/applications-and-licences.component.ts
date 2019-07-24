@@ -165,7 +165,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         this.router.navigateByUrl('/account-profile/' + data.id);
       },
         () => {
-          this.snackBar.open('Error starting a Change Licence Location Application', 'Fail',
+          this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
             { duration: 3500, panelClass: ['red-snackbar'] });
           console.log('Error starting a Change Licence Location Application');
         }

@@ -824,8 +824,7 @@
 
     <div [formGroup]="form" class="submitted-content"
       style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-      <app-field label="Is this application on behalf of an Indigenous Nation?" [valid]="true"
-        errorMessage="Please select a business type from the dropdown list">
+      <app-field label="Is this application on behalf of an Indigenous Nation?" [valid]="true">
         <mat-button-toggle-group formControlName="applyAsIndigenousNation" aria-label="Font Style">
           <mat-button-toggle [value]="true">Yes</mat-button-toggle>
           <mat-button-toggle [value]="false">No</mat-button-toggle>
