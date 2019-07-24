@@ -42,7 +42,7 @@ module.exports = function (config) {
     browsers: ['ChromeHeadlessNoSandbox'],
     customLaunchers: {
         ChromeHeadlessNoSandbox: {
-            base: 'ChromeHeadless',
+        base: 'Chrome', // Headless
             flags: [
                 '--no-sandbox', // required to run without privileges in docker
                 '--user-data-dir=/tmp/chrome-test-profile',
