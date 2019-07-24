@@ -1,13 +1,16 @@
 <div>
-  <p>
+  <p *ngIf="dataSource?.data?.length">
     Enter all directors, officers, and senior managers including those that won’t be involved in non-medical cannabis
     retail stores.
+  </p>
+  <p *ngIf="!dataSource?.data?.length">
+      There is currently no organization leadership on file.
   </p>
 
   <div [ngBusy]="busy"></div>
   <div [ngBusy]="busyObsv"></div>
 
-  <div class="example-container mat-elevation-z0">
+  <div *ngIf="dataSource?.data?.length" class="example-container mat-elevation-z0">
 
     <div>
       <mat-table #table [dataSource]="dataSource">
@@ -39,7 +42,7 @@
         <!-- Column -->
         <ng-container matColumnDef="dateofappointment">
           <mat-header-cell *matHeaderCellDef> Date of Appointment </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.dateofappointment | date:'yyyy-MM-dd' }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.dateofappointment |  date : 'dd MMM yyyy' }} </mat-cell>
         </ng-container>
 
         <!-- Column -->
@@ -66,8 +69,8 @@
   </div>
 
   <p></p>
-  <a class="globalButton btn btn-primary" tabindex="1" (click)="openPersonDialog(null)">
-    <strong>Add Person</strong>
+  <a *ngIf="!lockAssociates" tabindex="1" (click)="openPersonDialog(null)">
+    <strong><i class="fa fa-plus"></i> Add Leadership Associate</strong>
     <br>
   </a>
 </div>
