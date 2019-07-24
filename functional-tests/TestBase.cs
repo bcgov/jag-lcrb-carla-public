@@ -47,6 +47,7 @@ namespace FunctionalTest
                 Headless = false,
                 PrivateMode = true,
                 EnableRecording = true,
+                UserAgentValue = "Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko",
                 Height = 1080,
                 Width = 1920
             });
@@ -68,21 +69,27 @@ namespace FunctionalTest
             OptionSet optionset = new OptionSet() { Name = id, Value = value };
 
             try
-            {
-                
+            {                
                 XrmTestBrowser.Entity.SetValue(optionset);
             }
             catch (ElementClickInterceptedException)
             {
-                // temporary fix for Dynamics form layout problems.                  
+                // temporary fix for Dynamics form layout problems. 
+                //JavaScriptClick($"{id}_i");
+                //XrmTestBrowser.ThinkTime(100);
+
+                
                 XrmTestBrowser.Driver.ExecuteScript($"var selectObj = document.getElementById('{id}_i');"
                     + "for (var i=0; i<selectObj.options.length; i++){"
                     + $"if (selectObj.options[i].text == '{value}')"
                     + "{ selectObj.options[i].selected = true; }} selectObj.click(); "                    
                     );
-
-                //XrmTestBrowser.Entity.SetValue(optionset);
-                
+                try
+                {
+                    XrmTestBrowser.Entity.SetValue(optionset);
+                }
+                catch (ElementClickInterceptedException)
+                { }               
             }
 
             XrmTestBrowser.ThinkTime(500);
