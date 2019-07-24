@@ -22,6 +22,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
+  @Input() lockAssociates = false;
 
   adoxioLegalEntityList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
@@ -38,9 +39,10 @@ export class DirectorsAndOfficersComponent implements OnInit {
     public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-
-
     this.getDirectorsAndOfficers();
+    if (this.lockAssociates) {
+      this.displayedColumns = ['firstName', 'lastName', 'email', 'position', 'dateofappointment'];
+    }
   }
 
   getDirectorsAndOfficers() {
@@ -170,6 +172,7 @@ export class DirectorAndOfficerPersonDialogComponent {
     private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.directorOfficerForm = fb.group({
+      id: [''],
       isDirector: [false],
       isOfficer: [false],
       isSeniorManagement: [false],

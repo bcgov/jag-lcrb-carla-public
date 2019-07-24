@@ -21,6 +21,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
 
   account: Account;
   legalEntityId: string;
+  lockAssociates = true;
 
 
   constructor(private userDataService: UserDataService,
