@@ -10,18 +10,18 @@
     <h2>Portal tests</h2>
     <table cellspacing="0" cellpadding="0" border="0">
       <tr class="overview">
-        <td colspan="3" title="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/75.0.3770.100 Safari/537.36">Browser: HeadlessChrome 75.0.3770 (Windows 10.0.0)</td>
+        <td colspan="3" title="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36">Browser: Chrome 75.0.3770 (Windows 10.0.0)</td>
       </tr>
       <tr class="overview">
-        <td colspan="3">Timestamp: 7/8/2019, 1:45:41 PM</td>
+        <td colspan="3">Timestamp: 7/22/2019, 4:18:03 PM</td>
       </tr>
       <tr>
         <td colspan="3">
-          65 tests / 
-          0 errors / 
-          0 failures / 
-          0 skipped / 
-          runtime: 13.408s
+          69 tests / 
+          1 errors / 
+          1 failures / 
+          68 skipped / 
+          runtime: 0.051s
         </td>
       </tr>
       <tr class="header">
@@ -29,330 +29,410 @@
         <td>Spec</td>
         <td>Suite / Results</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.185s</td>
+      <tr class="fail">
+        <td>Failed</td>
+        <td>should create</td>
+        <td>
+          LegalEntityComponent
+          <br />Property binding matHeaderRowDef not used by any directive on an embedded template. Make sure that the property name is spelled correctly and all directives are listed in the "@NgModule.declarations". ("
+        &lt;/ng-container&gt;
+
+        [ERROR -&gt;]&lt;mat-header-row *matHeaderRowDef="displayedColumns"&gt;&lt;/mat-header-row&gt;
+        &lt;mat-row *matRowDef="l"): ng:///DynamicTestModule/LegalEntityComponent.html@53:8
+Property binding matRowDefColumns not used by any directive on an embedded template. Make sure that the property name is spelled correctly and all directives are listed in the "@NgModule.declarations". ("
+
+        &lt;mat-header-row *matHeaderRowDef="displayedColumns"&gt;&lt;/mat-header-row&gt;
+        [ERROR -&gt;]&lt;mat-row *matRowDef="let row; columns: displayedColumns;"&gt;&lt;/mat-row&gt;
+      &lt;/mat-table&gt;
+
+"): ng:///DynamicTestModule/LegalEntityComponent.html@54:8
+Error: Template parse errors:
+    at syntaxError (node_modules/@angular/compiler/fesm5/compiler.js:2426:1)
+    at TemplateParser.parse (node_modules/@angular/compiler/fesm5/compiler.js:20600:1)
+    at JitCompiler._parseTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26146:1)
+    at JitCompiler._compileTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26133:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:26076:48
+    at Set.forEach (&lt;anonymous&gt;)
+    at JitCompiler._compileComponents (node_modules/@angular/compiler/fesm5/compiler.js:26076:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:25994:1
+    at Object.then (node_modules/@angular/compiler/fesm5/compiler.js:2417:33)
+    at JitCompiler._compileModuleAndAllComponents (node_modules/@angular/compiler/fesm5/compiler.js:25992:1)
+
+          <br />Error: Template parse errors:
+Property binding matHeaderRowDef not used by any directive on an embedded template. Make sure that the property name is spelled correctly and all directives are listed in the "@NgModule.declarations". ("
+        &lt;/ng-container&gt;
+
+        [ERROR -&gt;]&lt;mat-header-row *matHeaderRowDef="displayedColumns"&gt;&lt;/mat-header-row&gt;
+        &lt;mat-row *matRowDef="l"): ng:///DynamicTestModule/LegalEntityComponent.html@53:8
+Property binding matRowDefColumns not used by any directive on an embedded template. Make sure that the property name is spelled correctly and all directives are listed in the "@NgModule.declarations". ("
+
+        &lt;mat-header-row *matHeaderRowDef="displayedColumns"&gt;&lt;/mat-header-row&gt;
+        [ERROR -&gt;]&lt;mat-row *matRowDef="let row; columns: displayedColumns;"&gt;&lt;/mat-row&gt;
+      &lt;/mat-table&gt;
+
+"): ng:///DynamicTestModule/LegalEntityComponent.html@54:8
+    at syntaxError (node_modules/@angular/compiler/fesm5/compiler.js:2426:1)
+    at TemplateParser.parse (node_modules/@angular/compiler/fesm5/compiler.js:20600:1)
+    at JitCompiler._parseTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26146:1)
+    at JitCompiler._compileTemplate (node_modules/@angular/compiler/fesm5/compiler.js:26133:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:26076:48
+    at Set.forEach (&lt;anonymous&gt;)
+    at JitCompiler._compileComponents (node_modules/@angular/compiler/fesm5/compiler.js:26076:1)
+    at node_modules/@angular/compiler/fesm5/compiler.js:25994:1
+    at Object.then (node_modules/@angular/compiler/fesm5/compiler.js:2417:33)
+    at JitCompiler._compileModuleAndAllComponents (node_modules/@angular/compiler/fesm5/compiler.js:25992:1)
+
+          <br />Expected undefined to be truthy.
+    at UserContext.&lt;anonymous&gt; (src/app/account-profile/tabs/legal-entity/legal-entity.component.spec.ts:67:23)
+    at ZoneDelegate../node_modules/zone.js/dist/zone.js.ZoneDelegate.invoke (node_modules/zone.js/dist/zone.js:391:1)
+    at ProxyZoneSpec.onInvoke (node_modules/zone.js/dist/proxy.js:129:1)
+    at ZoneDelegate../node_modules/zone.js/dist/zone.js.ZoneDelegate.invoke (node_modules/zone.js/dist/zone.js:390:1)
+
+        </td>
+      </tr>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>AccordionComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.19s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>AccountProfileComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.128s</td>
+      <tr class="skip">
+        <td>Skipped</td>
+        <td>should create</td>
+        <td>ConnectionToNonMedicalStoresComponent</td>
+      </tr>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>ConnectionToProducersComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.022s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>AdminComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.148s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create the app</td>
         <td>AppComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.146s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should render title in a span tag</td>
         <td>AppComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.599s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.551s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should have the title specified in the application type</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.507s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show preamble content if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.513s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide preamble content if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.551s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show before starting content if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.529s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide before starting content if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.464s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show declarations content if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.469s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide declarations content if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.51s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show supporting documents if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.451s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide supporting documents if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.522s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show financial integrity upload if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.448s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide financial integrity upload if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.432s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show associate form upload if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.432s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide associate form upload if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.444s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show property details if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.431s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide property details if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.44s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show current property if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.504s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide current property if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.463s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should show hours of sale if enabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.433s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should hide hours of sale if disabled</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.417s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should be invalid if no supporting documents are uploaded</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.417s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should be valid if supporting documents are uploaded</td>
         <td>ApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.085s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>ApplicationsAndLicencesComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.153s</td>
+      <tr class="skip">
+        <td>Skipped</td>
+        <td>should create</td>
+        <td>AssociateContentComponent</td>
+      </tr>
+      <tr class="skip">
+        <td>Skipped</td>
+        <td>should create</td>
+        <td>AssociatePageComponent</td>
+      </tr>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>AssosiateWizardComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.095s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>IndividualAssociatesResultsComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.061s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>OrganizationResultsComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.081s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>SolePropResultsComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.045s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>bceid-confirmation component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.016s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should be created</td>
         <td>BreadcrumbComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.105s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>DashboardComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.117s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should have "Cannabis" in the title</td>
         <td>DashboardComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.037s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>dynamics-form component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.012s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>form-viewer component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.006s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should ...</td>
         <td>GeneralDataService</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.034s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>HomeComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.029s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>InsertComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.018s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>newsletter-confirmation component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.016s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>newsletter-signup component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.014s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>NotFound component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.014s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>PolicyDocumentSidebar component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.025s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>PolicyDocument component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.138s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>ResultComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.001s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create an instance</td>
         <td>SearchBoxDirective</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.021s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>FieldComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.028s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>FileUploaderComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.02s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>StatsViewerComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.01s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>statusbadge component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.052s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>TermsOfUseComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.028s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should do something</td>
         <td>vote component</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.084s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>WorkerDashboardComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.036s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>WorkerPaymentConfirmationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.014s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>PrePaymentComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.1s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>SpdConsentComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.016s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>UserConfirmationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.351s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>WorkerApplicationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.041s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>WorkerHomeComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.058s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>WorkerInformationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.023s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>WorkerQualificationComponent</td>
       </tr>
-      <tr class="pass">
-        <td>Passed in 0.078s</td>
+      <tr class="skip">
+        <td>Skipped</td>
         <td>should create</td>
         <td>WorkerTermsAndConditionsComponent</td>
+      </tr>
+      <tr class="system-out">
+        <td colspan="3"><strong>System output:</strong><br />Chrome 75.0.3770 (Windows 10.0.0) ERROR: 'DEPRECATION: fit and fdescribe will cause your suite to report an 'incomplete' status in Jasmine 3.0'
+</td>
       </tr>
     </table>
     <hr/>
