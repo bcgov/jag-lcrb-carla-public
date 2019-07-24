@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>Add Person</h2>
+<h2 mat-dialog-title>
+  <span *ngIf="!directorOfficerForm.get('id').value">Add Leadership Associate</span>
+  <span *ngIf="directorOfficerForm.get('id').value">Edit Leadership Associate</span>
+</h2>
 <mat-dialog-content>
   <form [formGroup]='directorOfficerForm' class="form-horizontal">
 
@@ -7,66 +10,39 @@
         <fieldset *ngIf="businessType !== 'SoleProprietor'">
           <label>Position</label>
           <br>
-          <section> 
-            <input type="checkbox" formControlName="isDirector"> <label style="padding-right: 10px;" for="">Director</label>
-            <input type="checkbox" formControlName="isOfficer"> <label style="padding-right: 10px;" for="">Officer</label>
-            <span *ngIf="businessType == 'Society'">
-              <input type="checkbox" formControlName="isSeniorManagement"> <label style="padding-right: 10px;" for="">Senior Manager</label>
-            </span>
+          <section>
+            <input type="checkbox" formControlName="isDirector"> <label style="padding-right: 10px;"
+              for="">Director</label>
+            <input type="checkbox" formControlName="isOfficer"> <label style="padding-right: 10px;"
+              for="">Officer</label>
+            <input type="checkbox" formControlName="isSeniorManagement"> <label style="padding-right: 10px;"
+              for="">Senior Manager</label>
           </section>
-
-          <!-- <div *ngIf="this.isFieldError('position')" class="error-msg">
-            <div *ngIf="directorOfficerForm.controls['position'].hasError('required') ">
-              This is required
-            </div>
-          </div> -->
         </fieldset>
       </div>
     </div>
 
-    <div class="form-group row">
-      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('firstname')}">
-        <label for="firstname">First Name</label>
+    <div class="row">
+      <app-field class="col-md-6" label="First Name" [valid]="true" errorMessage="This is required">
         <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First Name">
-        <div *ngIf="this.isFieldError('firstname')" class="error-msg">
-          <div *ngIf="directorOfficerForm.controls['firstname'].hasError('required') ">
-            This is required
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('lastname')}">
-        <label for="lastname">Last Name</label>
+      </app-field>
+
+      <app-field class="col-md-6" label="Last Name" [valid]="true" errorMessage="This is required">
         <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last Name">
-        <div *ngIf="this.isFieldError('lastname')">
-          <div *ngIf="directorOfficerForm.controls['lastname'].hasError('required') ">
-            This is required
-          </div>
-        </div>
-      </div>
+      </app-field>
     </div>
 
-    <div class="form-group row">
-      <div class="col-md-6" [ngClass]="{'has-error': this.isFieldError('email')}">
-        <label for="email">Email</label>
-        <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
-        <div *ngIf="this.isFieldError('email')">
-          <div *ngIf="directorOfficerForm.controls['email'].hasError('required') ">
-            This is required
-          </div>
-          <div *ngIf="directorOfficerForm.controls['email'].hasError('email') ">
-            Email is invalid
-          </div>
-        </div>
-      </div>
-      <div *ngIf="businessType !== 'SoleProprietor'" class="col-md-6" [ngClass]="{'has-error': this.isFieldError('dateofappointment')}">
-        <label for="dateIssued">Date of Appointment</label>
-        <input type="text" formControlName='dateofappointment' style="width: 110px;"  placeholder="yyyy-mm-dd" class="form-control" bsDatepicker [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
-        <div *ngIf="this.isFieldError('dateofappointment')">
-          <div *ngIf="directorOfficerForm.controls['dateofappointment'].hasError('dateLessThanToday') ">
-            Date must be before today
-          </div>
-        </div>
-      </div>
+    <div class="row">
+      <app-field class="col-md-6" label="Email" [valid]="true" errorMessage="Email is invalid">
+        <input type="text" class="form-control" id="email" formControlName="email">
+      </app-field>
+
+      <app-field class="col-md-6" label="Date of Appointment" [valid]="true" errorMessage="This is required">
+        <input type="text" formControlName='dateofappointment' style="width: 200px; background-color: #fff;"
+          autocomplete="false" placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
+          (focus)="picker.open()" (click)="picker.open()">
+        <mat-datepicker #picker></mat-datepicker>
+      </app-field>
     </div>
   </form>
 </mat-dialog-content>
@@ -75,3 +51,19 @@
   &nbsp;
   <button class="btn btn-primary" (click)="save()">Save</button>
 </mat-dialog-actions>
+
+<style>
+  ::ng-deep .mat-calendar-body-selected {
+    background-color: #337AB7;
+    color: #000 !important;
+  }
+
+  ::ng-deep .mat-calendar-body-cell-content {
+    color: #54708b;
+  }
+
+  ::ng-deep .mat-calendar-header {
+    background-color: #337AB7;
+    color: #fff;
+  }
+</style>
