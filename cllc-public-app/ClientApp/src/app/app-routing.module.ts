@@ -26,7 +26,6 @@ import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-h
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
-import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import { AssociatePageComponent } from '@app/associate-page/associate-page.component';
 import { LicenceRenewalStepsComponent } from '@applicence-renewal-steps/licence-renewal-steps.component';
 
@@ -274,14 +273,7 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Survey Test'
     }
-  },
-  {
-    path: 'stats-viewer',
-    component: StatsViewerComponent,
-    data: {
-      breadcrumb: 'Survey Test'
-    }
-  },
+  },  
   { path: '**', component: NotFoundComponent }
 ];
 
