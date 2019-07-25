@@ -11,7 +11,7 @@ namespace DataTool
 {
     class Cleaner
     {
-        public void Clean(DynamicsClient _dynamicsClient)
+        public void Clean(IDynamicsClient _dynamicsClient)
         {
             // remove all incidents (waiver applications etc)
             var licences = _dynamicsClient.Licenceses.Get().Value;
