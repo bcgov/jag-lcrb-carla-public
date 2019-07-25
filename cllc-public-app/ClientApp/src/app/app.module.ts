@@ -51,7 +51,6 @@ import { LicenseDataService } from './services/license-data.service';
 import { PaymentDataService } from './services/payment-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from './bceid-confirmation/bceid-confirmation.component';
-import { SearchBoxDirective } from './search-box/search-box.directive';
 import { GeneralDataService } from './general-data.service';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
@@ -194,7 +193,6 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
     ResultComponent,
-    SearchBoxDirective,
     SecurityAssessmentsComponent,
     SolePropResultsComponent,
     SpdConsentComponent,

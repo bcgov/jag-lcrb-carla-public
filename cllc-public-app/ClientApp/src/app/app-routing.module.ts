@@ -15,7 +15,6 @@ import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
-import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
@@ -69,18 +68,13 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'associate-wizard',
-    component: AssosiateWizardComponent,
-  },
-  {
     path: 'dashboard-lite',
     component: DashboardComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'associates-lite',
-    component: AssociatesDashboardComponent,
-    canActivate: [ServiceCardAuthGuard]
+    path: 'associate-wizard',
+    component: AssosiateWizardComponent,
   },
   {
     path: 'application/:applicationId',
