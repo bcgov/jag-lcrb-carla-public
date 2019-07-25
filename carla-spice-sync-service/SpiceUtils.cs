@@ -440,6 +440,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 },
                 ContactPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
+                    ContactId = application.AdoxioApplicant._primarycontactidValue,
                     FirstName = application.AdoxioContactpersonfirstname,
                     LastName = application.AdoxioContactpersonlastname,
                     MiddleName = application.AdoxioContactmiddlename,
@@ -570,9 +571,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 EntityId = legalEntity.AdoxioLegalentityid,
                 Name = legalEntity.AdoxioName,
-                InterestPercentage = (double?)legalEntity.AdoxioInterestpercentage,
-                AppointmentDate = legalEntity.AdoxioDateofappointment,
-                NumberVotingShares = legalEntity.AdoxioCommonvotingshares,
                 Title = legalEntity.AdoxioJobtitle,
                 Positions = GetLegalEntityPositions(legalEntity),
                 PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
