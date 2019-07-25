@@ -144,7 +144,6 @@ import {
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FieldComponent } from './shared/field/field.component';
-import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import {
   ApplicationsAndLicencesComponent,
   ApplicationCancellationDialogComponent
@@ -215,7 +214,6 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
-    StatsViewerComponent,
     StatusBadgeComponent,
     StoreInformationComponent,
     SubmitPayComponent,
