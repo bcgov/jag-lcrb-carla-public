@@ -515,11 +515,14 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* If sole prop add contact person as associate */
             if (application.AdoxioApplicanttype == (int)BusinessType.SoleProprietorship)
             {
-                screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity
+                screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity()
                 {
                     EntityId = screeningRequest.ContactPerson.ContactId,
                     IsIndividual = true,
-                    Contact = screeningRequest.ContactPerson
+                    Positions = new List<string> { "owner" },
+                    Contact = screeningRequest.ContactPerson,
+                    PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
+                    Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>()
                 });
             }
 
@@ -567,7 +570,7 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
         {
-            Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = new Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity()
+            Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = new Interfaces.Spice.Models.LegalEntity()
             {
                 EntityId = legalEntity.AdoxioLegalentityid,
                 Name = legalEntity.AdoxioName,
