@@ -516,6 +516,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity
                 {
+                    EntityId = screeningRequest.ContactPerson.ContactId,
                     IsIndividual = true,
                     Contact = screeningRequest.ContactPerson
                 });
