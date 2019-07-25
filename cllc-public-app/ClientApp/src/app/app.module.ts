@@ -51,9 +51,7 @@ import { LicenseDataService } from './services/license-data.service';
 import { PaymentDataService } from './services/payment-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from './bceid-confirmation/bceid-confirmation.component';
-import { SearchBoxDirective } from './search-box/search-box.directive';
 import { GeneralDataService } from './general-data.service';
-import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
@@ -99,16 +97,8 @@ import { AccountProfileSummaryComponent } from './account-profile/account-profil
 import { NgBusyModule } from 'ng-busy';
 import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
 import { ConnectionToProducersComponent } from './account-profile/tabs/connection-to-producers/connection-to-producers.component';
-import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
-import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
-import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
-import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
-import { FloorPlanComponent } from './license-application/tabs/floor-plan/floor-plan.component';
-import { SiteMapComponent } from './license-application/tabs/site-map/site-map.component';
-import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
-import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
 import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
@@ -120,7 +110,6 @@ import { StoreModule, Store } from '@ngrx/store';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
-import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { AliasDataService } from './services/alias-data.service';
@@ -170,7 +159,6 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     ApplicationCancellationDialogComponent,
     ApplicationComponent,
     ApplicationsAndLicencesComponent,
-    AssociatesDashboardComponent,
     AssosiateWizardComponent,
     BceidConfirmationComponent,
     BeforeYouStartComponent,
@@ -178,10 +166,8 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     AccountProfileComponent,
     AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
-    ContactDetailsComponent,
     CorporateDetailsComponent,
     DashboardComponent,
-    DeclarationComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
     DynamicsFormComponent,
@@ -189,14 +175,12 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     FieldComponent,
     FileUploaderComponent,
     FinancialInformationComponent,
-    FloorPlanComponent,
     FormViewerComponent,
     HomeComponent,
     IndividualAssociatesResultsComponent,
     InsertComponent,
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
-    LicenseApplicationComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
@@ -206,17 +190,12 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
-    PropertyDetailsComponent,
     ResultComponent,
-    SearchBoxDirective,
     SecurityAssessmentsComponent,
-    SiteMapComponent,
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
     StatusBadgeComponent,
-    StoreInformationComponent,
-    SubmitPayComponent,
     SurveyComponent,
     SurveyPrimaryComponent,
     SurveySidebarComponent,
@@ -248,7 +227,6 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
   ],
   imports: [
     ChartsModule,
-    AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -301,7 +279,6 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     AlertModule.forRoot()
   ],
   exports: [
-    AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
