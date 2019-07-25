@@ -273,7 +273,7 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Survey Test'
     }
-  },  
+  },
   { path: '**', component: NotFoundComponent }
 ];
 
