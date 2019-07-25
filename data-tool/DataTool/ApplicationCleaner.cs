@@ -11,7 +11,7 @@ namespace DataTool
 {
     class ApplicationCleaner
     {
-        public void Clean(DynamicsClient _dynamicsClient)
+        public void Clean(IDynamicsClient _dynamicsClient)
         {
 
             try
