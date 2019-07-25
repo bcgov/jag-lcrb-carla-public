@@ -110,7 +110,6 @@ import { StoreModule, Store } from '@ngrx/store';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
-import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { AliasDataService } from './services/alias-data.service';
@@ -160,7 +159,6 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     ApplicationCancellationDialogComponent,
     ApplicationComponent,
     ApplicationsAndLicencesComponent,
-    AssociatesDashboardComponent,
     AssosiateWizardComponent,
     BceidConfirmationComponent,
     BeforeYouStartComponent,
