@@ -477,9 +477,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
   businessTypeIsPrivateCorporation(): boolean {
     return this.account &&
       ['PrivateCorporation',
-        // 'PublicCorporation',
         'UnlimitedLiabilityCorporation',
         'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
+  }
+
+  isCRSRenewalApplication(): boolean {
+    return [
+      ApplicationTypeNames.CRSRenewal.toString(),
+      ApplicationTypeNames.CRSRenewalLate30.toString(),
+      ApplicationTypeNames.CRSRenewalLate6Months.toString(),
+    ].indexOf(this.application.applicationType.name) !== -1;
   }
 
 }
