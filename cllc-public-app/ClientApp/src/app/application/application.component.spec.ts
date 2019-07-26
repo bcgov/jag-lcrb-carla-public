@@ -112,11 +112,11 @@ describe('ApplicationComponent', () => {
   });
 
   it('should show preamble content if enabled', () => {
-    
+
 
     applicationService.getApplicationById = () => of(<Application>{
       applicantType: 'PublicCorporation',
-      applicationType: <any>{       
+      applicationType: <any>{
         contentTypes: [
           {
             'body': 'body1',
@@ -129,7 +129,7 @@ describe('ApplicationComponent', () => {
     fixture = TestBed.createComponent(ApplicationComponent);
     component = fixture.debugElement.componentInstance;
     // ensure the indigenous nation box is not clicked
-    //component.application.indigenousNationId = null; //("applyAsIndigenousNation").setValue(false);
+    // component.application.indigenousNationId = null; //("applyAsIndigenousNation").setValue(false);
 
     fixture.detectChanges();
     expect(component.htmlContent.preamble).toBe('body1');
@@ -142,7 +142,7 @@ describe('ApplicationComponent', () => {
   it('should show before starting content if enabled', () => {
     applicationService.getApplicationById = () => of(<Application>{
       applicantType: 'PublicCorporation',
-      applicationType: <any>{        
+      applicationType: <any>{
         contentTypes: [
           {
             'id': '2',
@@ -333,7 +333,7 @@ describe('ApplicationComponent', () => {
 
     component.uploadedSupportingDocuments = 1;
 
-    component.isValid();    
+    component.isValid();
     expect(component.validationMessages).not.toContain('At least one supporting document is required.');
   });
 });
