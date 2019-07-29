@@ -182,10 +182,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             string appFilter = "adoxio_applicationid eq " + applicationId;
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
             var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
+       
             var application = applications.Value[0];
-
             var screeningRequest = CreateApplicationScreeningRequest(application);
-
             return screeningRequest;
         }
 
@@ -469,11 +468,13 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* Add applicant details */
             if (application.AdoxioApplicant != null)
             {
+                BusinessType businessType = (BusinessType)application.AdoxioApplicant.AdoxioBusinesstype;
                 screeningRequest.ApplicantAccount = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
                 {
                     AccountId = application.AdoxioApplicant.Accountid,
                     Name = application.AdoxioApplicant.Name,
-                    BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber
+                    BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber,
+                    BusinessType = businessType.ToString()
                 };
             }
 
@@ -765,6 +766,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             foreach (var application in applications)
             {
                 Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
+
                 var screeningRequest = GenerateApplicationScreeningRequest(applicationId);
                 var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
