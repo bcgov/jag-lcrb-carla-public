@@ -18,7 +18,7 @@
         <section class="padded-section">
           <div style="position: relative">
             <div [ngBusy]="busy"></div>
-            <section *ngIf="htmlContent?.beforeStarting">
+            <section *ngIf="!application?.applicationType?.establishmetNameIsReadOnly">
               <label for="">Establishment Name</label>
               <br>
 
