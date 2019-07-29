@@ -24,12 +24,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the Account class.
         /// </summary>
-        public Account(string accountId = default(string), string name = default(string), string bcIncorporationNumber = default(string), string businessNumber = default(string), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        public Account(string accountId = default(string), string name = default(string), string bcIncorporationNumber = default(string), string businessNumber = default(string), string businessType = default(string), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
             AccountId = accountId;
             Name = name;
             BcIncorporationNumber = bcIncorporationNumber;
             BusinessNumber = businessNumber;
+            BusinessType = businessType;
             Associates = associates;
             CustomInit();
         }
@@ -58,6 +59,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "businessNumber")]
         public string BusinessNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "businessType")]
+        public string BusinessType { get; set; }
 
         /// <summary>
         /// </summary>
