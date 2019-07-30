@@ -499,6 +499,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                             // fail if we can't create.
                             throw (odee);
                         }
+
+                        // The account will be patched when we fetch data from bceid.
+
+
                     }
                 }
                 else
