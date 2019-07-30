@@ -182,10 +182,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             string appFilter = "adoxio_applicationid eq " + applicationId;
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
             var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
+       
             var application = applications.Value[0];
-
             var screeningRequest = CreateApplicationScreeningRequest(application);
-
             return screeningRequest;
         }
 
@@ -440,6 +439,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 },
                 ContactPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
+                    ContactId = application.AdoxioApplicant._primarycontactidValue,
                     FirstName = application.AdoxioContactpersonfirstname,
                     LastName = application.AdoxioContactpersonlastname,
                     MiddleName = application.AdoxioContactmiddlename,
@@ -468,11 +468,13 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* Add applicant details */
             if (application.AdoxioApplicant != null)
             {
+                BusinessType businessType = (BusinessType)application.AdoxioApplicant.AdoxioBusinesstype;
                 screeningRequest.ApplicantAccount = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
                 {
                     AccountId = application.AdoxioApplicant.Accountid,
                     Name = application.AdoxioApplicant.Name,
-                    BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber
+                    BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber,
+                    BusinessType = businessType.ToString()
                 };
             }
 
@@ -514,10 +516,14 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* If sole prop add contact person as associate */
             if (application.AdoxioApplicanttype == (int)BusinessType.SoleProprietorship)
             {
-                screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity
+                screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity()
                 {
+                    EntityId = screeningRequest.ContactPerson.ContactId,
                     IsIndividual = true,
-                    Contact = screeningRequest.ContactPerson
+                    Positions = new List<string> { "owner" },
+                    Contact = screeningRequest.ContactPerson,
+                    PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
+                    Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>()
                 });
             }
 
@@ -565,13 +571,10 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
         {
-            Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = new Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity()
+            Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = new Interfaces.Spice.Models.LegalEntity()
             {
                 EntityId = legalEntity.AdoxioLegalentityid,
                 Name = legalEntity.AdoxioName,
-                InterestPercentage = (double?)legalEntity.AdoxioInterestpercentage,
-                AppointmentDate = legalEntity.AdoxioDateofappointment,
-                NumberVotingShares = legalEntity.AdoxioCommonvotingshares,
                 Title = legalEntity.AdoxioJobtitle,
                 Positions = GetLegalEntityPositions(legalEntity),
                 PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
@@ -763,6 +766,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             foreach (var application in applications)
             {
                 Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
+
                 var screeningRequest = GenerateApplicationScreeningRequest(applicationId);
                 var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
