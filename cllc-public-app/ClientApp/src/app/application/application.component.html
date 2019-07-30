@@ -2,23 +2,30 @@
   <div [ngBusy]="busy"></div>
 
   <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
+
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <!-- Title -->
       <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
     </div>
+
     <div [formGroup]="form" class="application-wrapper">
+      <!-- Preamble -->
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
+
+      <!-- Before Starting -->
       <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
         THE APPLICATION</h3>
       <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
         <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
       </section>
 
+      <!-- Property Details -->
       <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
         <h3 class="blue-header">PROPERTY DETAILS</h3>
         <section class="padded-section">
           <div style="position: relative">
             <div [ngBusy]="busy"></div>
-            <section *ngIf="!application?.applicationType?.establishmetNameIsReadOnly">
+            <section *ngIf="showFormControl(application?.applicationType?.establishmentName)">
               <label for="">Establishment Name</label>
               <br>
 
@@ -46,12 +53,12 @@
               </p>
             </section>
 
-            <app-field
+            <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
               [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
               [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
               errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
               <input class="form-control" style="width: 500px;" type="text"
-                [readonly]="application?.applicationType?.establishmetNameIsReadOnly"
+                [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
                 (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
             </app-field>
             <div *ngIf="possibleProblematicNameWarning" class="warning-state">
@@ -62,7 +69,7 @@
 
           </div>
           <div formGroupName="assignedLicence"
-            *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
+            *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
             <h3 class="blue-header">CURRENT ADDRESS</h3>
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
@@ -94,7 +101,7 @@
               </div>
             </div>
           </div>
-          <div class="ngtest-current-property" *ngIf="application?.applicationType?.showCurrentProperty">
+          <div class="ngtest-new-address" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
             <h3 class="blue-header"
               *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
               PROPOSED ADDRESS</h3>
@@ -167,29 +174,33 @@
           </div>
 
           <p>&nbsp;</p>
-
-          <div style="flex: 0 0 210px;">
-            <app-field label="Store Email" [required]="false"
-              [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
-              errorMessage="Please enter an email address">
-              <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
-                formControlName="establishmentEmail">
-            </app-field>
-          </div>
-          <div style="flex: 0 0 210px;">
-            <app-field label="Store Phone" [required]="false"
-              [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
-              errorMessage="Please enter a phone number ">
-              <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
-                (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
-            </app-field>
-          </div>
-
+          <!-- Store Contact Info -->
+          <section  *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
+            <div style="flex: 0 0 210px;">
+              <app-field label="Store Email" [required]="false"
+                [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
+                errorMessage="Please enter an email address">
+                <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
+                [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                  formControlName="establishmentEmail">
+              </app-field>
+            </div>
+            <div style="flex: 0 0 210px;">
+              <app-field label="Store Phone" [required]="false"
+                [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
+                errorMessage="Please enter a phone number ">
+                <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
+                [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
+              </app-field>
+            </div>
+          </section>
 
         </section>
       </section>
       <p>&nbsp;</p>
 
+      <!-- Hours of Sale -->
       <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
         <h3 class="blue-header">HOURS OF SALE</h3>
         <div class="padded-section">
@@ -308,8 +319,8 @@
         </div>
       </section>
 
-      <div appRemoveIfFeatureOff="Marketer"
-        *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+      <!-- Licensed Producer -->
+      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
         <h3 class="blue-header">INFORMATION ABOUT THE LICENSED PRODUCER</h3>
         <section class="padded-section">
           <p>
@@ -322,6 +333,7 @@
         </section>
       </div>
 
+      <!-- Contact Details -->
       <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
       <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
         The contact LCRB should communicate with regarding the application. The contact must be authorized to
@@ -383,8 +395,8 @@
         </app-field>
       </address>
 
-      <section appRemoveIfFeatureOff="Marketer"
-        *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+      <!-- Connections to non-medical -->
+      <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
         <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
         <div class="padded-section" *ngIf="application?.tiedHouse && account?.businessType">
           <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
@@ -437,6 +449,7 @@
         <hr>
         <br>
       </div>
+
       <div class="ngtest-financial-integrity-upload"
         *ngIf="application?.applicationType?.showFinancialIntegrityFormUpload">
 
@@ -859,7 +872,7 @@
 
           </div>
 
-          <div class="ngtest-current-property" *ngIf="application?.applicationType?.showCurrentProperty">
+          <div class="ngtest-new-address" *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
 
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
