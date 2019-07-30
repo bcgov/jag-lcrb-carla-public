@@ -33,41 +33,10 @@ namespace DemoTool
         static Dictionary<string, string> LegalEntityMap = new Dictionary<string, string>();
         static Dictionary<string, string> LocalgovindigenousnationMap = new Dictionary<string, string>();
 
-        static DynamicsClient GetDynamicsConnection(IConfiguration Configuration)
+        static IDynamicsClient GetDynamicsConnection(IConfiguration Configuration)
         {
-            string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
-            string ssgUsername = Configuration["SSG_USERNAME"];
-            string ssgPassword = Configuration["SSG_PASSWORD"];
-            string dynamicsNativeOdataUri = Configuration["DYNAMICS_NATIVE_ODATA_URI"];
 
-            string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];
-            string serverAppIdUri = Configuration["DYNAMICS_SERVER_APP_ID_URI"];
-            string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
-            string clientId = Configuration["DYNAMICS_CLIENT_ID"];
-
-            ServiceClientCredentials serviceClientCredentials = null;
-
-            if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
-            {
-                var authenticationContext = new AuthenticationContext(
-                "https://login.windows.net/" + aadTenantId);
-                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-                task.Wait();
-                var authenticationResult = task.Result;
-                string token = authenticationResult.CreateAuthorizationHeader().Substring("Bearer ".Length);
-                serviceClientCredentials = new TokenCredentials(token);
-            }
-            else
-            {
-                serviceClientCredentials = new BasicAuthenticationCredentials()
-                {
-                    UserName = ssgUsername,
-                    Password = ssgPassword
-                };
-            }
-
-            var _dynamicsClient = new DynamicsClient(new Uri(dynamicsOdataUri), serviceClientCredentials);
+            var _dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
             return _dynamicsClient;
         }
 
@@ -81,10 +50,15 @@ namespace DemoTool
             bool isClean = false;
             bool isApplicationClean = false;
 
-            bool isImport = true;
+            bool isImport = false;
 
             bool isMove = false;
-            
+
+            bool isDetectBadAccountData = false;
+
+            bool isFixBadAccountData = false;
+
+
 
             // start by getting secrets.
             var builder = new ConfigurationBuilder()
@@ -115,8 +89,18 @@ namespace DemoTool
                     }
                     else if (arg.ToLower().Equals("import"))
                     {
-                        isObfuscate = true;
+                        isImport = true;
                         Console.Out.WriteLine("Data import enabled");
+                    }
+                    else if (arg.ToLower().Equals("detect-bad-account-data"))
+                    {
+                        isDetectBadAccountData = true;
+                        Console.Out.WriteLine("detect-bad-account-data enabled");
+                    }
+                    else if (arg.ToLower().Equals("fix-bad-account-data"))
+                    {
+                        isFixBadAccountData = true;
+                        Console.Out.WriteLine("fix-bad-account-data enabled");
                     }
                     else
                     {
@@ -350,7 +334,30 @@ namespace DemoTool
                 Mover mover = new Mover();
                 mover.Move(conn);
             }
-   
+
+            if (isDetectBadAccountData)
+            {
+                var conn = GetDynamicsConnection(Configuration);
+                DetectBadAccountData detector = new DetectBadAccountData();
+                detector.Execute(conn);
+            }
+
+            if (isFixBadAccountData)
+            {
+                string bceidUrl = Configuration["BCEID_SERVICE_URL"];
+                string bceidSvcId = Configuration["BCEID_SERVICE_SVCID"];
+                string bceidUserid = Configuration["BCEID_SERVICE_USER"];
+                string bceidPasswd = Configuration["BCEID_SERVICE_PASSWD"];
+
+                var bCeIDBusinessQuery = new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl);
+
+
+                var conn = GetDynamicsConnection(Configuration);
+                FixBadAccountData fixer = new FixBadAccountData();
+                fixer.Execute(conn, bCeIDBusinessQuery);
+            }
+
+
 
         }
     }
