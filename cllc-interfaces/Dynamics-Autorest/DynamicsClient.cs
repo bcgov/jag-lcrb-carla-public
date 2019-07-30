@@ -62,6 +62,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationbpfv3s.
+        /// </summary>
+        public virtual IApplicationbpfv3s Applicationbpfv3s { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationinvoicehistories.
         /// </summary>
         public virtual IApplicationinvoicehistories Applicationinvoicehistories { get; private set; }
@@ -621,6 +626,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Licencetypeinvestigationset = new Licencetypeinvestigationset(this);
             Aliases = new Aliases(this);
             Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
+            Applicationbpfv3s = new Applicationbpfv3s(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
             Applications = new Applications(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
