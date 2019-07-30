@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { WorkerPaymentConfirmationComponent } from './payment-confirmation.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ActivatedRoute,  Router } from '@angular/router';
-import { PaymentDataService } from '@appservices/payment-data.service';
+import { PaymentDataService } from '@services/payment-data.service';
 import { of } from 'rxjs';
 
 const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
