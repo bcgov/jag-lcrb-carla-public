@@ -30,11 +30,11 @@ You can use this tool to convert from Openapi V3 to V2.  Autorest currently requ
 ```
 
 @IF EXIST "%~dp0\node.exe" (
-  "%~dp0\node.exe" "--max-old-space-size=4096" "%~dp0\node_modules\autorest\dist\app.js" %*
+  "%~dp0\node.exe" "--max-old-space-size=5192" "%~dp0\node_modules\autorest\dist\app.js" %*
 ) ELSE (
   @SETLOCAL
   @SET PATHEXT=%PATHEXT:;.JS;=;%
-  node --max-old-space-size=4096 "%~dp0\node_modules\autorest\dist\app.js" %*
+  node --max-old-space-size=5192 "%~dp0\node_modules\autorest\dist\app.js" %*
 )
 ```
 
