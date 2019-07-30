@@ -8,18 +8,7 @@
 
 #### Odata-Openapi
 
-Download and install odata-openapi from https://github.com/oasis-tcs/odata-openapi.git
-
-#### Odata.OpenAPi
-
-
-
-Note that there are many dependencies.  View the file transform.cmd for a list of them all.
-
-#### API-Spec-Converter ####
-You can use this tool to convert from Openapi V3 to V2.  Autorest currently requires V2.
-
-1. `npm install -g api-spec-converter`
+A custom version of Odata-OpenAPI is included with the source code.
 
 #### Autorest ####
 1. npm install -g autorest
@@ -30,11 +19,11 @@ You can use this tool to convert from Openapi V3 to V2.  Autorest currently requ
 ```
 
 @IF EXIST "%~dp0\node.exe" (
-  "%~dp0\node.exe" "--max-old-space-size=4096" "%~dp0\node_modules\autorest\dist\app.js" %*
+  "%~dp0\node.exe" "--max-old-space-size=5192" "%~dp0\node_modules\autorest\dist\app.js" %*
 ) ELSE (
   @SETLOCAL
   @SET PATHEXT=%PATHEXT:;.JS;=;%
-  node --max-old-space-size=4096 "%~dp0\node_modules\autorest\dist\app.js" %*
+  node --max-old-space-size=5192 "%~dp0\node_modules\autorest\dist\app.js" %*
 )
 ```
 
@@ -44,23 +33,10 @@ If you need to patch the Autorest modeler, for example if the modeler is not abl
 
 ### Process ###
 
-1. You will need lots of RAM for this operation.  Close all open programs including Visual Studio, Chrome and Docker.  Greater than 9 GB free is required.
+1. You will need lots of RAM for this operation.  Close all open programs including Visual Studio, Chrome and Docker.  Greater than 9 GB free is required; 32 GB of RAM is recommended.
 
-2. Transfer the Dynamics meta data to your PC
+2. Run the go.bat file in this directory
 
+It will fetch the latest meta data (assuming your PC has correct secrets for the DEV environment, the same secrets required to run the portal application) and then run Autorest with the correct parameters.
 
-3. Use the odata-openapi transform command to transform the metadata file into openapi.  It will emit a few errors however the file will be valid.
-
-3.1 ALTERNATE:
-use Odata.OpenAPI to convert the file
-(from the OoasUtil folder)
-`dotnet run --file \tmp\meta-data\metadata.xml -j -o dynamics.json`
-
-4. Convert the openapi v3 file into openapi v2 using api-spec-converter   
-`api-spec-converter dynamics.json --from=openapi_3 --to=swagger_2 > dynamics-2.json`
-5. Use this file as an input to autorest.
-
-```
-autorest --verbose --input-file=dynamics-2.1.json --output-folder=Dynamics-Autorest  --csharp --use-datetimeoffset --generate-empty-classes --override-client-name=DynamicsClient  --namespace=Gov.Lclb.Cllb.Interfaces --preview  --add-credentials --debug
-```
 

@@ -59,6 +59,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; }
 
         /// <summary>
+        /// Gets the IApplicationbpfv3s.
+        /// </summary>
+        IApplicationbpfv3s Applicationbpfv3s { get; }
+
+        /// <summary>
         /// Gets the IApplicationinvoicehistories.
         /// </summary>
         IApplicationinvoicehistories Applicationinvoicehistories { get; }

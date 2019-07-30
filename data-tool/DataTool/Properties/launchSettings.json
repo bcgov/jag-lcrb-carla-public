@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DataTool": {
+      "commandName": "Project",
+      "commandLineArgs": "detect-bad-account-data"
+    }
+  }
+}

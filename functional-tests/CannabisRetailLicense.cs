@@ -147,7 +147,7 @@ namespace FunctionalTest
             // External Approvals
             JavaScriptClick("stage_2");
             SetOptionSet("header_process_adoxio_checklistsecurityclearancestatus", "Passed");
-            SetOptionSet("header_process_adoxio_investigationstatus", "Investigation Concluded");
+            SetOptionSet("header_process_adoxio_investigationstatus", "Investigation Concluded");            
             SetOptionSet("header_process_adoxio_checklistfinancialcheckpassed", "Yes");
             SetOptionSet("header_process_adoxio_checklistlginapproval", "Yes");
 
