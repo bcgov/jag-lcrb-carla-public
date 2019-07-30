@@ -44,72 +44,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             return new SpiceClient(new Uri(spiceURI), credentials);
         }
 
-
-        /// <summary>
-        /// Hangfire job to send an export to SPD.
-        /// </summary>
-        public void SendWorkerExportJob(PerformContext hangfireContext)
-        {
-            hangfireContext.WriteLine("Starting SPD Export Job.");
-            _logger.LogError("Starting SPD Export Job.");
-
-            Type type = typeof(MicrosoftDynamicsCRMadoxioSpddatarow);
-
-            string filter = $"adoxio_isexport eq true and adoxio_exporteddate eq null";
-            List<MicrosoftDynamicsCRMadoxioSpddatarow> result = null;
-
-            try
-            {
-                result = _dynamicsClient.Spddatarows.Get(filter: filter).Value.ToList();
-            }
-            catch (OdataerrorException odee)
-            {
-                hangfireContext.WriteLine("Error getting SPD data rows");
-                hangfireContext.WriteLine("Request:");
-                hangfireContext.WriteLine(odee.Request.Content);
-                hangfireContext.WriteLine("Response:");
-                hangfireContext.WriteLine(odee.Response.Content);
-
-                _logger.LogError("Error getting SPD data rows");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                // fail if we can't get results.
-                throw (odee);
-            }
-            
-
-            if (result != null && result.Count > 0)
-            {
-                List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>();
-
-                foreach (var row in result)
-                {
-                    Guid.TryParse(row.AdoxioLcrbworkerjobid, out Guid workerJobId);
-                    var runner = GenerateWorkerScreeningRequest(workerJobId, _logger);
-                    runner.Wait();
-                    var workerRequest = runner.Result;
-                    payload.Add(workerRequest);
-                }
-
-                // send to spice.
-
-                var spiceRunner = SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
-                spiceRunner.Wait();
-                var spiceResult = spiceRunner.Result;
-
-                hangfireContext.WriteLine("Response code was");
-                hangfireContext.WriteLine(spiceResult.Response.StatusCode.ToString());
-
-                _logger.LogError("Response code was");
-                _logger.LogError(spiceResult.Response.StatusCode.ToString());
-           }
-
-            hangfireContext.WriteLine("End of SPD Export Job.");
-            _logger.LogError("End of SPD Export Job.");
-        }
-
         /// <summary>
         /// Hangfire job to receive an application screening import from SPICE.
         /// </summary>
@@ -248,10 +182,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             string appFilter = "adoxio_applicationid eq " + applicationId;
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
             var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
+       
             var application = applications.Value[0];
-
             var screeningRequest = CreateApplicationScreeningRequest(application);
-
             return screeningRequest;
         }
 
@@ -506,6 +439,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 },
                 ContactPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
                 {
+                    ContactId = application.AdoxioApplicant._primarycontactidValue,
                     FirstName = application.AdoxioContactpersonfirstname,
                     LastName = application.AdoxioContactpersonlastname,
                     MiddleName = application.AdoxioContactmiddlename,
@@ -534,11 +468,13 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* Add applicant details */
             if (application.AdoxioApplicant != null)
             {
+                BusinessType businessType = (BusinessType)application.AdoxioApplicant.AdoxioBusinesstype;
                 screeningRequest.ApplicantAccount = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
                 {
                     AccountId = application.AdoxioApplicant.Accountid,
                     Name = application.AdoxioApplicant.Name,
-                    BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber
+                    BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber,
+                    BusinessType = businessType.ToString()
                 };
             }
 
@@ -577,6 +513,20 @@ namespace Gov.Lclb.Cllb.SpdSync
                 }
             }
 
+            /* If sole prop add contact person as associate */
+            if (application.AdoxioApplicanttype == (int)BusinessType.SoleProprietorship)
+            {
+                screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity()
+                {
+                    EntityId = screeningRequest.ContactPerson.ContactId,
+                    IsIndividual = true,
+                    Positions = new List<string> { "owner" },
+                    Contact = screeningRequest.ContactPerson,
+                    PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
+                    Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>()
+                });
+            }
+
             /* Add associates from account */
             var moreAssociates = CreateApplicationAssociatesScreeningRequest(application._adoxioApplicantValue, screeningRequest.Associates);
             screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
@@ -592,7 +542,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 if (accountId != assoc.EntityId)
                 {
-                    applicationfilter += " and adoxio_legalentityid ne " + assoc.EntityId;
+                    applicationfilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
                 }
             }
             string[] expand = { "adoxio_Contact", "adoxio_Account"};
@@ -621,13 +571,10 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
         {
-            Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = new Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity()
+            Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = new Interfaces.Spice.Models.LegalEntity()
             {
                 EntityId = legalEntity.AdoxioLegalentityid,
                 Name = legalEntity.AdoxioName,
-                InterestPercentage = (double?)legalEntity.AdoxioInterestpercentage,
-                AppointmentDate = legalEntity.AdoxioDateofappointment,
-                NumberVotingShares = legalEntity.AdoxioCommonvotingshares,
                 Title = legalEntity.AdoxioJobtitle,
                 Positions = GetLegalEntityPositions(legalEntity),
                 PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
@@ -811,7 +758,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             _logger.LogError("Starting SendFoundApplications Job");
             hangfireContext.WriteLine("Starting SendFoundApplications Job");
 
-            string sendFilter = "adoxio_appchecklistsentspd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
+            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value;
             _logger.LogError($"Found {applications.Count} applications to send to SPD.");
             hangfireContext.WriteLine($"Found {applications.Count} applications to send to SPD.");
@@ -819,17 +766,18 @@ namespace Gov.Lclb.Cllb.SpdSync
             foreach (var application in applications)
             {
                 Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
+
                 var screeningRequest = GenerateApplicationScreeningRequest(applicationId);
                 var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
-                    hangfireContext.WriteLine($"Successfully sent application {application.AdoxioApplicationid} to SPD");
-                    _logger.LogError($"Successfully sent application {application.AdoxioApplicationid} to SPD");
+                    hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
+                    _logger.LogError($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
                 }
                 else
                 {
-                    hangfireContext.WriteLine($"Failed to send application {application.AdoxioApplicationid} to SPD");
-                    _logger.LogError($"Failed to send application {application.AdoxioApplicationid} to SPD");
+                    hangfireContext.WriteLine($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
+                    _logger.LogError($"Failed to send application {screeningRequest.RecordIdentifier} to SPD");
                 }
             }
             

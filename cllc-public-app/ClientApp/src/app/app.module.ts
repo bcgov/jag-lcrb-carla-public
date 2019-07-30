@@ -51,14 +51,12 @@ import { LicenseDataService } from './services/license-data.service';
 import { PaymentDataService } from './services/payment-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from './bceid-confirmation/bceid-confirmation.component';
-import { SearchBoxDirective } from './search-box/search-box.directive';
 import { GeneralDataService } from './general-data.service';
-import { AdminModule } from './admin/admin.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from './services/dynamics-data.service';
 import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
 import {
-  EditShareholdersComponent,
+  EditShareholdersComponent, ShareholderDialogComponent,
 } from './account-profile/tabs/shareholders/shareholders.component';
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
 import { InsertComponent } from './insert/insert.component';
@@ -97,18 +95,10 @@ import { FinancialInformationComponent } from './account-profile/tabs/financial-
 import { AccountProfileSummaryComponent } from './account-profile/account-profile-summary/account-profile-summary.component';
 
 import { NgBusyModule } from 'ng-busy';
-import { KeyPersonnelComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
+import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
 import { ConnectionToProducersComponent } from './account-profile/tabs/connection-to-producers/connection-to-producers.component';
-import { LicenseApplicationComponent } from './license-application/license-application.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
-import { ContactDetailsComponent } from './license-application/tabs/contact-details/contact-details.component';
-import { PropertyDetailsComponent } from './license-application/tabs/property-details/property-details.component';
-import { StoreInformationComponent } from './license-application/tabs/store-information/store-information.component';
-import { FloorPlanComponent } from './license-application/tabs/floor-plan/floor-plan.component';
-import { SiteMapComponent } from './license-application/tabs/site-map/site-map.component';
-import { DeclarationComponent } from './license-application/tabs/declaration/declaration.component';
-import { SubmitPayComponent } from './license-application/tabs/submit-pay/submit-pay.component';
 
 import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
@@ -120,7 +110,6 @@ import { StoreModule, Store } from '@ngrx/store';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
-import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { AliasDataService } from './services/alias-data.service';
@@ -144,7 +133,6 @@ import {
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FieldComponent } from './shared/field/field.component';
-import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import {
   ApplicationsAndLicencesComponent,
   ApplicationCancellationDialogComponent
@@ -161,7 +149,7 @@ import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
-import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-entity.component';
+import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-renewal-steps.component';
 
 
 @NgModule({
@@ -171,7 +159,6 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     ApplicationCancellationDialogComponent,
     ApplicationComponent,
     ApplicationsAndLicencesComponent,
-    AssociatesDashboardComponent,
     AssosiateWizardComponent,
     BceidConfirmationComponent,
     BeforeYouStartComponent,
@@ -179,10 +166,8 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     AccountProfileComponent,
     AccountProfileSummaryComponent,
     ConnectionToProducersComponent,
-    ContactDetailsComponent,
     CorporateDetailsComponent,
     DashboardComponent,
-    DeclarationComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
     DynamicsFormComponent,
@@ -190,14 +175,12 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     FieldComponent,
     FileUploaderComponent,
     FinancialInformationComponent,
-    FloorPlanComponent,
     FormViewerComponent,
     HomeComponent,
     IndividualAssociatesResultsComponent,
     InsertComponent,
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
-    LicenseApplicationComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
@@ -207,18 +190,12 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     PolicyDocumentComponent,
     PolicyDocumentSidebarComponent,
     PrePaymentComponent,
-    PropertyDetailsComponent,
     ResultComponent,
-    SearchBoxDirective,
     SecurityAssessmentsComponent,
-    SiteMapComponent,
     SolePropResultsComponent,
     SpdConsentComponent,
     StaticComponent,
-    StatsViewerComponent,
     StatusBadgeComponent,
-    StoreInformationComponent,
-    SubmitPayComponent,
     SurveyComponent,
     SurveyPrimaryComponent,
     SurveySidebarComponent,
@@ -243,12 +220,13 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     AppRemoveIfFeatureOffDirective,
     AssociateContentComponent,
     ConnectionToNonMedicalStoresComponent,
+    KeyPersonnelDialogComponent,
     AssociatePageComponent,
-    LegalEntityComponent
+    ShareholderDialogComponent,
+    LicenceRenewalStepsComponent
   ],
   imports: [
     ChartsModule,
-    AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -287,6 +265,7 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatStepperModule,
     MatTooltipModule,
     NgBusyModule,
     NgbModule.forRoot(),
@@ -300,7 +279,6 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     AlertModule.forRoot()
   ],
   exports: [
-    AdminModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -340,6 +318,7 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatStepperModule,
     NgbModule,
     ReactiveFormsModule
   ],
@@ -381,7 +360,9 @@ import { LegalEntityComponent } from './account-profile/tabs/legal-entity/legal-
   entryComponents: [
     ApplicationCancellationDialogComponent,
     DirectorAndOfficerPersonDialogComponent,
+    KeyPersonnelDialogComponent,
     WorkerHomeDialogComponent,
+    ShareholderDialogComponent,
   ],
   bootstrap: [AppComponent]
 })
