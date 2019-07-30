@@ -11,7 +11,7 @@ namespace DataTool
 {
     class Mover
     {
-        public void Move(DynamicsClient _dynamicsClient)
+        public void Move(IDynamicsClient _dynamicsClient)
         {
             // first find Cantest1
             string filter = "name eq 'XYZ Cannabis Sales Test'";
