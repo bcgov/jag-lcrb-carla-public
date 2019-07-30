@@ -260,6 +260,11 @@
               [businessType]="account?.businessType" (value)="tiedHouseFormData = $event"></app-connection-to-producers>
           </div>
 
+          <!-- <h3 class="blue-header">Financial Intergrity</h3>
+          <div class="padded-section" *ngIf="saveFormData?.businessProfile?.id">
+            <app-financial-information></app-financial-information>
+          </div> -->
+
 
           <div *ngIf="!form.valid && form.touched" class="error-summary">
             <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>

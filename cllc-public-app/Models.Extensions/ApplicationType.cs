@@ -8,7 +8,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// ViewModel transforms.
     /// </summary>
     public static class ApplicationTypeExtensions
-    {        
+    {
 
         public static ApplicationType ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtype applicationType)
         {
@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = new ApplicationType()
                 {
                     Id = applicationType.AdoxioApplicationtypeid,
-                    
+
                     ActionText = applicationType.AdoxioActiontext,
                     Name = applicationType.AdoxioName,
                     Title = applicationType.AdoxioTitletext,
@@ -29,13 +29,21 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
-                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname
+                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
+                    StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
+                    EstablishmentName = (FormControlState?) applicationType.AdoxioEstablishmentname,
+                    newEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
+                    CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,
+                    Signage = (FormControlState?)applicationType.AdoxioSignage,
+                    ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
+                    FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
+                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,
                 };
 
-                if(applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
+                if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
                 {
                     result.contentTypes = new List<ApplicationTypeContent>();
-                    foreach(var content in applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType)
+                    foreach (var content in applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType)
                     {
                         result.contentTypes.Add(content.ToViewModel());
                     }
@@ -47,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
                 */
             }
-            
+
 
             return result;
         }

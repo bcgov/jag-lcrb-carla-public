@@ -22,6 +22,22 @@ export class ApplicationType {
   showSupportingDocuments: boolean;
   showDeclarations: boolean;
   establishmetNameIsReadOnly: boolean;
+
+  storeContactInfo: FormControlState;
+  establishmentName: FormControlState;
+  newEstablishmentAddress: FormControlState;
+  currentEstablishmentAddress: FormControlState;
+  signage: FormControlState;
+  validInterest: FormControlState;
+  floorPlan: FormControlState;
+  sitePlan: FormControlState;
+
+}
+
+export enum FormControlState {
+  Show = 'Yes',
+  Hide = 'No',
+  Reaonly = 'Readonly'
 }
 
 export enum ApplicationTypeNames {
@@ -32,5 +48,5 @@ export enum ApplicationTypeNames {
   CRSRenewal = 'CRS Renewal',
   CRSRenewalLate30 = 'CRS Late Renewal - 30 Day',
   CRSRenewalLate6Months = 'CRS Late Renewal - 30 Day to 6 Months',
-  Marketer= 'Marketer'
+  Marketer = 'Marketer'
 }
