@@ -585,6 +585,9 @@
         <Property Name="description" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type additional information to describe the account, such as an excerpt from the company's website." />
         </Property>
+        <Property Name="adoxio_businesstype" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="tickersymbol" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the stock exchange symbol for the account to track financial performance of the company. You can click the code entered in this field to access the latest trading information from MSN Money." />
         </Property>
@@ -826,7 +829,7 @@
         <Property Name="address2_addresstypecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Select the secondary address type." />
         </Property>
-        <Property Name="adoxio_businesstype" Type="Edm.Int32">
+        <Property Name="adoxio_lgininvolved" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="address1_stateorprovince" Type="Edm.String" Unicode="false">

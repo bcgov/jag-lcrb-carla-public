@@ -172,6 +172,8 @@
                 "address1_shippingmethodcode desc",
                 "description",
                 "description desc",
+                "adoxio_businesstype",
+                "adoxio_businesstype desc",
                 "tickersymbol",
                 "tickersymbol desc",
                 "lastonholdtime",
@@ -298,8 +300,8 @@
                 "exchangerate desc",
                 "address2_addresstypecode",
                 "address2_addresstypecode desc",
-                "adoxio_businesstype",
-                "adoxio_businesstype desc",
+                "adoxio_lgininvolved",
+                "adoxio_lgininvolved desc",
                 "address1_stateorprovince",
                 "address1_stateorprovince desc",
                 "address2_line2",
@@ -483,6 +485,7 @@
                 "revenue",
                 "address1_shippingmethodcode",
                 "description",
+                "adoxio_businesstype",
                 "tickersymbol",
                 "lastonholdtime",
                 "statuscode",
@@ -546,7 +549,7 @@
                 "adoxio_capevaluationdate",
                 "exchangerate",
                 "address2_addresstypecode",
-                "adoxio_businesstype",
+                "adoxio_lgininvolved",
                 "address1_stateorprovince",
                 "address2_line2",
                 "entityimage",
@@ -852,6 +855,7 @@
                 "revenue",
                 "address1_shippingmethodcode",
                 "description",
+                "adoxio_businesstype",
                 "tickersymbol",
                 "lastonholdtime",
                 "statuscode",
@@ -915,7 +919,7 @@
                 "adoxio_capevaluationdate",
                 "exchangerate",
                 "address2_addresstypecode",
-                "adoxio_businesstype",
+                "adoxio_lgininvolved",
                 "address1_stateorprovince",
                 "address2_line2",
                 "entityimage",
@@ -30319,6 +30323,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_businesstype": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "tickersymbol": {
           "type": "string",
           "x-nullable": true
@@ -30566,7 +30574,7 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_businesstype": {
+        "adoxio_lgininvolved": {
           "type": "integer",
           "x-nullable": true
         },
