@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the BCeID API to get the business record.
             var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
 
-            _logger.LogDebug(LoggingEvents.Get, $"busine Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(business)}");
+            _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(business)}");
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(business?.businessNumber);
             if (cleanNumber != null)
@@ -456,6 +456,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     account.Address1Line1 = bceidBusiness.addressLine1;
                     account.Address1Line2 = bceidBusiness.addressLine2;
                     account.Address1Postalcode = bceidBusiness.addressPostal;
+
+                    // 7-29-19 - Enable BN9 collection.
+                    account.Accountnumber = bceidBusiness.businessNumber;
+                    // 7-29-19 - We are not currently collecting the incorporation number
+                    account.AdoxioBcincorporationnumber = bceidBusiness.incorporationNumber;
                 }
 
                 // sets Business type with numerical value found in Adoxio_applicanttypecodes

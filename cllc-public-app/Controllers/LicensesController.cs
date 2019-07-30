@@ -52,6 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var expand = new List<string> {
                 "adoxio_Licencee",
+                "adoxio_LicenceType",
                 "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence",
                 "adoxio_adoxio_licences_adoxio_application_AssignedLicence",
                 "adoxio_establishment"
@@ -82,7 +83,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 application.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
                 // set license type relationship 
-                application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+                application.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicense.AdoxioLicenceType.AdoxioLicencetypeid);
                 application.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
 
                 application.AdoxioLicenceEstablishmentODataBind = _dynamicsClient.GetEntityURI("adoxio_establishments", adoxioLicense.AdoxioEstablishment.AdoxioEstablishmentid);
@@ -139,7 +140,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private List<ApplicationLicenseSummary> GetLicensesByLicencee(string licenceeId)
         {
-             var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
+            var expand = new List<string> { "adoxio_adoxio_licences_adoxio_application_AssignedLicence", "adoxio_LicenceType", "adoxio_establishment" };
             List<ApplicationLicenseSummary> licenseSummaryList = new List<ApplicationLicenseSummary>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLicences> licences = null;
             if (string.IsNullOrEmpty(licenceeId))
@@ -620,7 +621,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "restrictionsText", termsAndConditions },
                         { "storeHours", storeHours }
                     };
-                } else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketer")
+                }
+                else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketer")
                 {
                     parameters = new Dictionary<string, string>
                     {

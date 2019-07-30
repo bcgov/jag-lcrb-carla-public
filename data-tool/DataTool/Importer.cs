@@ -76,7 +76,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateContact(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMcontact contact)
+        void CreateContact(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMcontact contact)
         {
             string accountId = null;
 
@@ -149,7 +149,7 @@ namespace DataTool
             }
         }
 
-        static List<MicrosoftDynamicsCRMcontact> GetCurrentContacts(DynamicsClient _dynamicsClient)
+        static List<MicrosoftDynamicsCRMcontact> GetCurrentContacts(IDynamicsClient _dynamicsClient)
         {
             List<string> expand = new List<string>()
             {
@@ -159,7 +159,7 @@ namespace DataTool
             return (List<MicrosoftDynamicsCRMcontact>)data.Value;
         }
 
-        public void ImportContacts(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMcontact> contacts)
+        public void ImportContacts(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMcontact> contacts)
         {
             var currentContacts = GetCurrentContacts(_dynamicsClient);
 
@@ -204,7 +204,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateAccount(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMaccount account)
+        void CreateAccount(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMaccount account)
         {
             MicrosoftDynamicsCRMaccount newItem = new MicrosoftDynamicsCRMaccount()
             {
@@ -248,13 +248,13 @@ namespace DataTool
             }
         }
 
-        List<MicrosoftDynamicsCRMaccount> GetCurrentAccounts(DynamicsClient _dynamicsClient)
+        List<MicrosoftDynamicsCRMaccount> GetCurrentAccounts(IDynamicsClient _dynamicsClient)
         {
             var data = _dynamicsClient.Accounts.Get();
             return (List<MicrosoftDynamicsCRMaccount>)data.Value;
         }
 
-        public void ImportAccounts(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMaccount> accounts)
+        public void ImportAccounts(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMaccount> accounts)
         {
             var currentAccounts = GetCurrentAccounts(_dynamicsClient);
 
@@ -312,7 +312,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateWorker(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioWorker worker)
+        void CreateWorker(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioWorker worker)
         {
             worker.AdoxioWorkerid = null;
             MicrosoftDynamicsCRMadoxioWorker newItem = new MicrosoftDynamicsCRMadoxioWorker()
@@ -347,13 +347,13 @@ namespace DataTool
             }
         }
 
-        List<MicrosoftDynamicsCRMadoxioWorker> GetCurrentWorkers(DynamicsClient _dynamicsClient)
+        List<MicrosoftDynamicsCRMadoxioWorker> GetCurrentWorkers(IDynamicsClient _dynamicsClient)
         {
             var data = _dynamicsClient.Workers.Get();
             return (List<MicrosoftDynamicsCRMadoxioWorker>)data.Value;
         }
 
-        public void ImportWorkers(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioWorker> workers)
+        public void ImportWorkers(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioWorker> workers)
         {
             var currentWorkers = GetCurrentWorkers(_dynamicsClient);
 
@@ -407,7 +407,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateAlias(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioAlias alias)
+        void CreateAlias(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioAlias alias)
         {
             string contactId = null;
             string workerId = null;
@@ -460,7 +460,7 @@ namespace DataTool
         }
 
 
-        List<MicrosoftDynamicsCRMadoxioAlias> GetCurrentAliases(DynamicsClient _dynamicsClient)
+        List<MicrosoftDynamicsCRMadoxioAlias> GetCurrentAliases(IDynamicsClient _dynamicsClient)
         {
             List<string> expand = new List<string>()
             {
@@ -470,7 +470,7 @@ namespace DataTool
             return (List<MicrosoftDynamicsCRMadoxioAlias>)data.Value;
         }
 
-        public void ImportAliases(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioAlias> aliases)
+        public void ImportAliases(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioAlias> aliases)
         {
             var currentAliases = GetCurrentAliases(_dynamicsClient);
 
@@ -530,7 +530,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateLocalGovIndigenousNation(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation localGovIndigenousNation)
+        void CreateLocalGovIndigenousNation(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation localGovIndigenousNation)
         {
             string contactId = null;
             string workerId = null;
@@ -556,7 +556,7 @@ namespace DataTool
         }
 
 
-        List<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> GetCurrentLocalGovIndigenousNations(DynamicsClient _dynamicsClient)
+        List<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> GetCurrentLocalGovIndigenousNations(IDynamicsClient _dynamicsClient)
         {
             List<string> expand = new List<string>()
             {
@@ -566,7 +566,7 @@ namespace DataTool
             return (List<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation>)data.Value;
         }
 
-        public void ImportLocalGovIndigenousNations(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> localGovIndigenousNations)
+        public void ImportLocalGovIndigenousNations(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> localGovIndigenousNations)
         {
             var currentLocalGovIndigenousNations = GetCurrentLocalGovIndigenousNations(_dynamicsClient);
 
@@ -616,7 +616,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateApplication(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioApplication application)
+        void CreateApplication(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioApplication application)
         {
             MicrosoftDynamicsCRMadoxioApplication createdItem = null;
             application.AdoxioApplicationid = null;
@@ -641,83 +641,48 @@ namespace DataTool
                 AdoxioLicencefeeinvoicepaid = application.AdoxioLicencefeeinvoicepaid,
                 Statuscode = application.Statuscode,
 
-                AdoxioAppchecklistapplicantsentemail = application.AdoxioAppchecklistapplicantsentemail,
-                AdoxioAppchecklistlgfnapproved = application.AdoxioAppchecklistlgfnapproved,
-                AdoxioAppchecklistlicenceissued = application.AdoxioAppchecklistlicenceissued,
-                AdoxioAppchecklistlicencehistoryapproval = application.AdoxioAppchecklistlicencehistoryapproval,
                 AdoxioHoldsotherlicencesoptionset = application.AdoxioHoldsotherlicencesoptionset,
-                AdoxioAppchecklistlgfnnotified = application.AdoxioAppchecklistlgfnnotified,
-                AdoxioAppchecklistcasemanageraipdecision = application.AdoxioAppchecklistcasemanageraipdecision,
                 AdoxioAreyouthemaincontactforapplication = application.AdoxioAreyouthemaincontactforapplication,
                 AdoxioAppchecklistlicencefeecollected = application.AdoxioAppchecklistlicencefeecollected,
                 AdoxioIsapplicationcomplete = application.AdoxioIsapplicationcomplete,
                 AdoxioChecklistassociateformreceived = application.AdoxioChecklistassociateformreceived,
-                AdoxioAppchecklistvalidinterestsubmitted = application.AdoxioAppchecklistvalidinterestsubmitted,
-                AdoxioAppchecklisttermsconditionsapplied = application.AdoxioAppchecklisttermsconditionsapplied,
-                AdoxioAppchecklistdocumentssubmitted = application.AdoxioAppchecklistdocumentssubmitted,
-                AdoxioAppchecklistfinalreview = application.AdoxioAppchecklistfinalreview,
                 AdoxioAppchecklistinspectionresults = application.AdoxioAppchecklistinspectionresults,
                 AdoxioDatefirstyearpaymentreceived = application.AdoxioDatefirstyearpaymentreceived,
                 AdoxioPolicedecision = application.AdoxioPolicedecision,
-                AdoxioAppchecklistlicencehistorycheck = application.AdoxioAppchecklistlicencehistorycheck,
-                AdoxioAppchecklistinvestigationsapproved = application.AdoxioAppchecklistinvestigationsapproved,
                 AdoxioEstablishmentotherbusinessname = application.AdoxioEstablishmentotherbusinessname,
-                AdoxioAppchecklistfinaldecisionlettersent = application.AdoxioAppchecklistfinaldecisionlettersent,
                 AdoxioUploadedfloorplans = application.AdoxioUploadedfloorplans,
-                AdoxioChecklistvalidinterest = application.AdoxioChecklistvalidinterest,
-                AdoxioAppchecklistfinancialintegrityapproved = application.AdoxioAppchecklistfinancialintegrityapproved,
                 AdoxioSignaturedate = application.AdoxioSignaturedate,
                 AdoxioChecklisttiedhouseassessed = application.AdoxioChecklisttiedhouseassessed,
                 AdoxioChecklistspdconsentreceived = application.AdoxioChecklistspdconsentreceived,
                 AdoxioAreyouthemaincontactafterlicensing = application.AdoxioAreyouthemaincontactafterlicensing,
-                AdoxioAppchecklistcasesupervisorapproved = application.AdoxioAppchecklistcasesupervisorapproved,
-                AdoxioAppchecklistzoningconfirmed = application.AdoxioAppchecklistzoningconfirmed,
-                AdoxioAppchecklistspdapproved = application.AdoxioAppchecklistspdapproved,
-                AdoxioAppchecklisttermsconditionsdefined = application.AdoxioAppchecklisttermsconditionsdefined,
-                AdoxioAppchecklistinspectionnotesreviewed = application.AdoxioAppchecklistinspectionnotesreviewed,
                 AdoxioAppchecklistvalidinterestreceivedfinal = application.AdoxioAppchecklistvalidinterestreceivedfinal,
-                AdoxioAppchecklistsentforfi = application.AdoxioAppchecklistsentforfi,
                 AdoxioDateaip = application.AdoxioDateaip,
                 AdoxioChecklistverifypostalcode = application.AdoxioChecklistverifypostalcode,
-                AdoxioAppchecklistspdconsentsubmitted = application.AdoxioAppchecklistspdconsentsubmitted,
                 AdoxioChecklistfloorplanapproved = application.AdoxioChecklistfloorplanapproved,
                 AdoxioTerminatereason = application.AdoxioTerminatereason,
                 AdoxioChecklistfloorplanassessed = application.AdoxioChecklistfloorplanassessed,
-                AdoxioAppchecklistapplicationcomplete = application.AdoxioAppchecklistapplicationcomplete,
                 AdoxioDatereceivedinvestigations = application.AdoxioDatereceivedinvestigations,
                 AdoxioEstablishmentlocatedatwinery = application.AdoxioEstablishmentlocatedatwinery,
-                AdoxioAppchecklistsitemapsubmitted = application.AdoxioAppchecklistsitemapsubmitted,
                 AdoxioChecklistsitemapreceived = application.AdoxioChecklistsitemapreceived,
-                AdoxioAppchecklistsitemapapproved = application.AdoxioAppchecklistsitemapapproved,
                 AdoxioDateaipexpired = application.AdoxioDateaipexpired,
                 AdoxioAppchecklistfinalreviewcomplete = application.AdoxioAppchecklistfinalreviewcomplete,
                 AdoxioDatereceivedlgin = application.AdoxioDatereceivedlgin,
                 AdoxioChecklistbrandingassessed = application.AdoxioChecklistbrandingassessed,
-                AdoxioAppchecklistshareholdersverified = application.AdoxioAppchecklistshareholdersverified,
                 AdoxioAppchecklistverifyapplication = application.AdoxioAppchecklistverifyapplication,
                 AdoxioLicenceexpiry = application.AdoxioLicenceexpiry,
-                AdoxioAppchecklistlginapproval = application.AdoxioAppchecklistlginapproval,
-                AdoxioMarketshareevaluation = application.AdoxioMarketshareevaluation,
-                AdoxioAppchecklistverifybusinessprofile = application.AdoxioAppchecklistverifybusinessprofile,
                 AdoxioChecklistlicencefeepaid = application.AdoxioChecklistlicencefeepaid,
                 AdoxioOtherbusinessesatthesamelocation = application.AdoxioOtherbusinessesatthesamelocation,
                 AdoxioDateassignedtosla = application.AdoxioDateassignedtosla,
-                AdoxioAppchecklistfinalfloorplan = application.AdoxioAppchecklistfinalfloorplan,
                 AdoxioEstablishmentlayoutapplyingforpatio = application.AdoxioEstablishmentlayoutapplyingforpatio,
-                AdoxioAppchecklistbusinessproposal = application.AdoxioAppchecklistbusinessproposal,
                 AdoxioEstablishmentlocatedatfirstnationland = application.AdoxioEstablishmentlocatedatfirstnationland,
                 AdoxioChecklisttermsconditionsadded = application.AdoxioChecklisttermsconditionsadded,
                 AdoxioAppchecklistinspectionreviewcomplete = application.AdoxioAppchecklistinspectionreviewcomplete,
-                AdoxioAppchecklistzoningaip = application.AdoxioAppchecklistzoningaip,
-                AdoxioAppchecklistfinancialintegritysubmitted = application.AdoxioAppchecklistfinancialintegritysubmitted,
                 AdoxioEstablishmentdeclarationoption1 = application.AdoxioEstablishmentdeclarationoption1,
-                AdoxioAppchecklistmarketcapacity = application.AdoxioAppchecklistmarketcapacity,
                 AdoxioChecklistsenttolgin = application.AdoxioChecklistsenttolgin,
                 AdoxioHastiedhouseassociations = application.AdoxioHastiedhouseassociations,
                 AdoxioEstablishmentcomplytoallbylaws = application.AdoxioEstablishmentcomplytoallbylaws,
                 AdoxioChecklistvalidinterestassessed = application.AdoxioChecklistvalidinterestassessed,
                 AdoxioCasemanagerassigned = application.AdoxioCasemanagerassigned,
-                AdoxioAppchecklistinspectionchangesneeded = application.AdoxioAppchecklistinspectionchangesneeded,
                 
 
                 AdoxioAppchecklistfinaldecision = application.AdoxioAppchecklistfinaldecision,
@@ -855,13 +820,13 @@ namespace DataTool
 
         }
 
-        List<MicrosoftDynamicsCRMadoxioApplication> GetCurrentApplications(DynamicsClient _dynamicsClient)
+        List<MicrosoftDynamicsCRMadoxioApplication> GetCurrentApplications(IDynamicsClient _dynamicsClient)
         {
             var data = _dynamicsClient.Applications.Get();
             return (List<MicrosoftDynamicsCRMadoxioApplication>)data.Value;
         }
 
-        public void ImportApplications(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioApplication> applications)
+        public void ImportApplications(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioApplication> applications)
         {
             var currentApplications = GetCurrentApplications(_dynamicsClient);
 
@@ -917,7 +882,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateLicence(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLicences licence)
+        void CreateLicence(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLicences licence)
         {
             string accountId = null;
             string establishmentId = null;
@@ -1047,7 +1012,7 @@ namespace DataTool
 
         }
 
-        static List<MicrosoftDynamicsCRMadoxioLicences> GetCurrentLicences(DynamicsClient _dynamicsClient)
+        static List<MicrosoftDynamicsCRMadoxioLicences> GetCurrentLicences(IDynamicsClient _dynamicsClient)
         {
             List<string> expand = new List<string>()
             {
@@ -1057,7 +1022,7 @@ namespace DataTool
             return (List<MicrosoftDynamicsCRMadoxioLicences>)data.Value;
         }
 
-        public void ImportLicences(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioLicences> licences)
+        public void ImportLicences(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioLicences> licences)
         {
             var currentLicences = GetCurrentLicences(_dynamicsClient);
 
@@ -1116,7 +1081,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateLegalEntity(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
+        void CreateLegalEntity(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
         {
             string accountId = null;
 
@@ -1196,7 +1161,7 @@ namespace DataTool
 
         }
 
-        List<MicrosoftDynamicsCRMadoxioLegalentity> GetCurrentLegalEntities(DynamicsClient _dynamicsClient)
+        List<MicrosoftDynamicsCRMadoxioLegalentity> GetCurrentLegalEntities(IDynamicsClient _dynamicsClient)
         {
             List<string> expand = new List<string>()
             {
@@ -1206,7 +1171,7 @@ namespace DataTool
             return (List<MicrosoftDynamicsCRMadoxioLegalentity>)data.Value;
         }
 
-        public void ImportLegalEntities(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities)
+        public void ImportLegalEntities(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities)
         {
             var currentLegalEntities = GetCurrentLegalEntities(_dynamicsClient);
 
@@ -1267,7 +1232,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateEstablishment(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioEstablishment establishment)
+        void CreateEstablishment(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMadoxioEstablishment establishment)
         {
             string accountId = null;
 
@@ -1349,7 +1314,7 @@ namespace DataTool
 
         }
 
-        List<MicrosoftDynamicsCRMadoxioEstablishment> GetCurrentEstablishments(DynamicsClient _dynamicsClient)
+        List<MicrosoftDynamicsCRMadoxioEstablishment> GetCurrentEstablishments(IDynamicsClient _dynamicsClient)
         {
             List<string> expand = new List<string>()
             {
@@ -1359,7 +1324,7 @@ namespace DataTool
             return (List<MicrosoftDynamicsCRMadoxioEstablishment>)data.Value;
         }
 
-        public void ImportEstablishments(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioEstablishment> establishments)
+        public void ImportEstablishments(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMadoxioEstablishment> establishments)
         {
             var currentEstablishments = GetCurrentEstablishments(_dynamicsClient);
 
@@ -1416,7 +1381,7 @@ namespace DataTool
             return notFound;
         }
 
-        void CreateInvoice(DynamicsClient _dynamicsClient, MicrosoftDynamicsCRMinvoice invoice)
+        void CreateInvoice(IDynamicsClient _dynamicsClient, MicrosoftDynamicsCRMinvoice invoice)
         {
             string accountId = null;
             string workerId = null;
@@ -1457,7 +1422,7 @@ namespace DataTool
         }
 
 
-        static List<MicrosoftDynamicsCRMinvoice> GetCurrentInvoices(DynamicsClient _dynamicsClient)
+        static List<MicrosoftDynamicsCRMinvoice> GetCurrentInvoices(IDynamicsClient _dynamicsClient)
         {
             List<string> expand = new List<string>()
             {
@@ -1467,7 +1432,7 @@ namespace DataTool
             return (List<MicrosoftDynamicsCRMinvoice>)data.Value;
         }
 
-        public void ImportInvoices(DynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMinvoice> invoices)
+        public void ImportInvoices(IDynamicsClient _dynamicsClient, List<MicrosoftDynamicsCRMinvoice> invoices)
         {
             var currentInvoices = GetCurrentInvoices(_dynamicsClient);
 

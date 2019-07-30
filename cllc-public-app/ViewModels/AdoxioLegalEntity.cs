@@ -105,6 +105,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string firstname { get; set; } //adoxio_firstname (text)
         public string middlename { get; set; } //adoxio_middlename (text)
         public string lastname { get; set; } //adoxio_lastname (text)
+        public string jobTitle { get; set; }
+
         //[JsonConverter(typeof(StringEnumConverter))]
         //public PositionOptions position; //adoxio_position (option set)
         public bool? isOfficer { get; set; }
@@ -125,6 +127,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
+        public DateTimeOffset? dateIssued { get; set; } 
         public DateTimeOffset? securityAssessmentEmailSentOn { get; set; } //adoxio_dateemailsent (date time)
 
         //adoxio_contact (lookup contact)

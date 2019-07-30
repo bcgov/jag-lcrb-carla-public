@@ -1,26 +1,64 @@
-<div class="form-wrapper">
+<div class="form-wrapper" [formGroup]="form">
+  <h1>Review your Organization Information</h1>
   <h3 class="blue-header">ORGANIZATION STRUCTURE</h3>
   <div class="padded-section">
     <app-organization-structure></app-organization-structure>
+    <app-field label="Is this information still correct?" [valid]="true">
+      <mat-button-toggle-group formControlName="noOrgStructureChange" aria-label="Font Style">
+        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+        <mat-button-toggle [value]="false">No</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-field>
+    <span *ngIf="form.get('noOrgStructureChange').value === false" class="error-states">
+        A LCRB Licensing Staff member will contact you as part of this renewal process
+      </span>
   </div>
 
   <h3 class="blue-header">KEY PERSONNEL</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-key-personnel [accountId]="account?.id" [businessType]="account?.businessType"
-      [parentLegalEntityId]="legalEntityId"></app-key-personnel>
+    <app-key-personnel [lockAssociates]="lockAssociates" [accountId]="account?.id"
+      [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId"></app-key-personnel>
+
+    <app-field label="Is this information still correct?" [valid]="true">
+      <mat-button-toggle-group formControlName="noKeyPersonnelChange" aria-label="Font Style">
+        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+        <mat-button-toggle [value]="false">No</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-field>
+    <span *ngIf="form.get('noKeyPersonnelChange').value === false" class="error-states">
+      A LCRB Licensing Staff member will contact you as part of this renewal process
+    </span>
   </div>
 
   <h3 class="blue-header">ORGANIZATION LEADERSHIP</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-directors-and-officers [accountId]="account?.id" [businessType]="account?.businessType"
-      [parentLegalEntityId]="legalEntityId">
+    <app-directors-and-officers [lockAssociates]="lockAssociates" [accountId]="account?.id"
+      [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
     </app-directors-and-officers>
+    <app-field label="Is this information still correct?" [valid]="true">
+      <mat-button-toggle-group formControlName="noLeadershipChange" aria-label="Font Style">
+        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+        <mat-button-toggle [value]="false">No</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-field>
+    <span *ngIf="form.get('noLeadershipChange').value === false" class="error-states">
+      A LCRB Licensing Staff member will contact you as part of this renewal process
+    </span>
   </div>
 
   <h3 class="blue-header">SHAREHOLDERS</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-shareholders [accountId]="account?.id" [businessType]="account?.businessType"
+    <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
       [parentLegalEntityId]="legalEntityId">
     </app-shareholders>
+    <app-field label="Is this information still correct?" [valid]="true">
+      <mat-button-toggle-group formControlName="noShareholderChange" aria-label="Font Style">
+        <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+        <mat-button-toggle [value]="false">No</mat-button-toggle>
+      </mat-button-toggle-group>
+    </app-field>
+    <span *ngIf="form.get('noShareholderChange').value === false" class="error-states">
+      A LCRB Licensing Staff member will contact you as part of this renewal process
+    </span>
   </div>
 </div>

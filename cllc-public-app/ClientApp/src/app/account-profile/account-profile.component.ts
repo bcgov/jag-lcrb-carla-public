@@ -1,6 +1,6 @@
 
 import { filter, zip, map, catchError, takeWhile } from 'rxjs/operators';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { UserDataService } from '@services/user-data.service';
 import { User } from '../models/user.model';
 import { ContactDataService } from '@services/contact-data.service';
@@ -47,6 +47,8 @@ export const MY_FORMATS = {
   styleUrls: ['./account-profile.component.scss']
 })
 export class AccountProfileComponent extends FormBase implements OnInit {
+  @Input() useInStepperMode = false;
+  @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   currentUser: User;
   dataLoaded = false;
   busy: Subscription;
@@ -291,7 +293,9 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   gotoReview() {
     if (this.form.valid && (!this.connectionsToProducers || this.connectionsToProducers.form.valid)) {
       this.busy = this.save().subscribe(data => {
-        if (this.applicationId) {
+        if (this.useInStepperMode) {
+          this.saveComplete.emit(true);
+        } else if (this.applicationId) {
           const route: any[] = [`/application/${this.applicationId}`];
           if (this.applicationMode) {
             route.push({ mode: this.applicationMode });

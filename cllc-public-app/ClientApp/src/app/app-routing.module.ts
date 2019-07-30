@@ -15,7 +15,6 @@ import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ApplicationComponent } from './application/application.component';
-import { AssociatesDashboardComponent } from './lite/associates-dashboard/associates-dashboard.component';
 import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
@@ -26,8 +25,8 @@ import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-h
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
-import { StatsViewerComponent } from './stats-viewer/stats-viewer.component';
 import { AssociatePageComponent } from '@app/associate-page/associate-page.component';
+import { LicenceRenewalStepsComponent } from '@applicence-renewal-steps/licence-renewal-steps.component';
 
 
 const routes: Routes = [
@@ -46,6 +45,18 @@ const routes: Routes = [
     component: AssociatePageComponent
   },
   {
+    path: 'renew-crs-licence',
+    component: LicenceRenewalStepsComponent,
+    children: [
+      {
+        path: 'application/:applicationId',
+        component: ApplicationComponent,
+        canDeactivate: [CanDeactivateGuard],
+        canActivate: [BCeidAuthGuard]
+      }
+    ]
+  },
+  {
     path: 'account-profile/:applicationId',
     component: AccountProfileComponent,
     // canDeactivate: [CanDeactivateGuard],
@@ -57,18 +68,13 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'associate-wizard',
-    component: AssosiateWizardComponent,
-  },
-  {
     path: 'dashboard-lite',
     component: DashboardComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'associates-lite',
-    component: AssociatesDashboardComponent,
-    canActivate: [ServiceCardAuthGuard]
+    path: 'associate-wizard',
+    component: AssosiateWizardComponent,
   },
   {
     path: 'application/:applicationId',
@@ -165,12 +171,12 @@ const routes: Routes = [
   {
     path: 'policy-document/worker-qualification-training',
     component: WorkerHomeComponent,
-    data: {slug: 'worker-qualification-training'}
+    data: { slug: 'worker-qualification-training' }
   },
   {
     path: 'policy-document/worker-qualification-home',
     component: WorkerHomeComponent,
-    data: {slug: 'worker-qualification-home'}
+    data: { slug: 'worker-qualification-home' }
   },
   {
     path: 'policy-document/:slug',
@@ -262,18 +268,11 @@ const routes: Routes = [
       breadcrumb: 'Survey Test'
     }
   },
-  {
-    path: 'stats-viewer',
-    component: StatsViewerComponent,
-    data: {
-      breadcrumb: 'Survey Test'
-    }
-  },
   { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule],
   providers: [SurveyResolver]
 })

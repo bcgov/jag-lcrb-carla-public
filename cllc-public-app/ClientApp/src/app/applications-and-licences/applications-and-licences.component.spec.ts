@@ -9,6 +9,9 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { of } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { AppState } from '@appapp-state/models/app-state';
+import { Store } from '@ngrx/store';
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {
   getAllCurrentApplications: () => of([]),
@@ -25,6 +28,14 @@ describe('ApplicationsAndLicencesComponent', () => {
   let component: ApplicationsAndLicencesComponent;
   let fixture: ComponentFixture<ApplicationsAndLicencesComponent>;
 
+  let store: MockStore<AppState>;
+
+  const initialState = {
+    currentAccountState: { currentAccount: { businessType: 'PublicCorporation' } },
+    currentUserState: { currentUser: {} },
+    indigenousNationState: { indigenousNationModeActive: false }
+  } as AppState;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ApplicationsAndLicencesComponent ],
@@ -37,9 +48,11 @@ describe('ApplicationsAndLicencesComponent', () => {
         {provide: FeatureFlagService, useValue: featureFlagServiceStub},
         {provide: MatDialog, useValue: dialogStub},
         {provide: Router, useValue: routerStub},
+        provideMockStore({initialState})
       ]
     })
     .compileComponents();
+    store = TestBed.get(Store);
   }));
 
   beforeEach(() => {
