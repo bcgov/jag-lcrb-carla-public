@@ -63,6 +63,10 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                         // Generate the application request
                         applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
                     }
+                    catch (System.ArgumentOutOfRangeException)
+                    {
+                        return NotFound($"Application {applicationId} is not found.");
+                    }
                     catch (Exception ex)
                     {
                         _logger.LogError(ex.ToString());
