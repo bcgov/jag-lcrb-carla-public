@@ -22,6 +22,7 @@ import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.compo
 import { FileSystemItem } from '@models/file-system-item.model';
 import { ActivatedRouteStub } from './../testing/activated-route-stub';
 import { FieldComponent } from '@shared/field/field.component';
+import { FormControlState } from '@models/application-type.model';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let applicationDataServiceStub: Partial<ApplicationDataService>;
@@ -262,7 +263,7 @@ describe('ApplicationComponent', () => {
   it('should show current property if enabled', () => {
     applicationService.getApplicationById = () => of(<Application>{
       applicationType: <any>{
-        'showCurrentProperty': true,
+        newEstablishmentAddress: 'Yes',
         showPropertyDetails: true,
         contentTypes: []
       }
@@ -270,12 +271,12 @@ describe('ApplicationComponent', () => {
     fixture = TestBed.createComponent(ApplicationComponent);
     component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
-    const elem = fixture.debugElement.query(By.css('.ngtest-current-property')).nativeElement;
+    const elem = fixture.debugElement.query(By.css('.ngtest-new-address')).nativeElement;
     expect(elem).not.toBeFalsy();
   });
 
   it('should hide current property if disabled', () => {
-    const elem = fixture.debugElement.query(By.css('.ngtest-current-property'));
+    const elem = fixture.debugElement.query(By.css('.ngtest-new-address'));
     expect(elem).toBeFalsy();
   });
 
