@@ -20,7 +20,7 @@ import {
   UPLOAD_FILES_MODE
 } from '@app/applications-and-licences/applications-and-licences.component';
 import { Account } from '@models/account.model';
-import { ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
@@ -80,6 +80,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   indigenousNations: { id: string, name: string }[] = [];
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
+  FormControlState = FormControlState;
   mode: string;
   account: Account;
 
@@ -223,6 +224,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       };
     }
   }
+
   private hideFormControlByType() {
     if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
@@ -230,6 +232,22 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentAddressPostalCode').disable();
       this.form.get('establishmentName').disable();
       this.form.get('establishmentParcelId').disable();
+    }
+
+    if (this.application.applicationType.newEstablishmentAddress !== FormControlState.Show) {
+      this.form.get('establishmentAddressStreet').disable();
+      this.form.get('establishmentAddressCity').disable();
+      this.form.get('establishmentAddressPostalCode').disable();
+      this.form.get('establishmentParcelId').disable();
+    }
+
+    if (this.application.applicationType.establishmentName !== FormControlState.Show) {
+      this.form.get('establishmentName').disable();
+    }
+
+    if (this.application.applicationType.storeContactInfo !== FormControlState.Show) {
+      this.form.get('establishmentEmail').disable();
+      this.form.get('establishmentPhone').disable();
     }
 
     if (!this.application.applicationType.showHoursOfSale) {
@@ -487,6 +505,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ApplicationTypeNames.CRSRenewalLate30.toString(),
       ApplicationTypeNames.CRSRenewalLate6Months.toString(),
     ].indexOf(this.application.applicationType.name) !== -1;
+  }
+
+  showFormControl(state: string): boolean {
+    return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
+      .indexOf(state) !== -1;
   }
 
 }
