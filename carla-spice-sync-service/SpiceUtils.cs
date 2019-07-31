@@ -189,11 +189,39 @@ namespace Gov.Lclb.Cllb.SpdSync
         }
 
         /// <summary>
+        /// Validates the consent of a worker
+        /// </summary>
+        /// <returns><c>true</c>, if worker consent was validated, <c>false</c> otherwise.</returns>
+        /// <param name="request">Worker Screening Request</param>
+        public bool ValidateWorkerConsent(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest request)
+        {
+            bool consentValidated = true;
+            try
+            {
+                var worker = _dynamicsClient.Workers.Get(filter: "adoxio_workerid eq " + request.RecordIdentifier).Value[0];
+                if(worker.AdoxioConsentvalidated == null)
+                {
+                    consentValidated = false;
+                }
+                if (worker.AdoxioConsentvalidated.HasValue && (ConsentValidated)worker.AdoxioConsentvalidated != ConsentValidated.YES)
+                {
+                    consentValidated = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString());
+                consentValidated = false;
+            }
+            return consentValidated;
+        }
+
+        /// <summary>
         /// Validates the consent of a legal entity list (including all of its children)
         /// </summary>
         /// <returns><c>true</c>, if associate consent was validated, <c>false</c> otherwise.</returns>
         /// <param name="associates">Associates.</param>
-        private bool ValidateConsent(List<Interfaces.Spice.Models.LegalEntity> associates)
+        private bool ValidateAssociateConsent(List<Interfaces.Spice.Models.LegalEntity> associates)
         {
             try
             {
@@ -210,7 +238,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                             consentValidated = false;
                             continue;
                         }
-                        ConsentValidated consent = (ConsentValidated)contact.AdoxioConsentvalidated;
 
                         if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
                         {
@@ -219,7 +246,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     }
                     else
                     {
-                        if (!ValidateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
+                        if (!ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
                         {
                             consentValidated = false;
                         }
@@ -241,7 +268,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <param name="applicationRequest">Application request.</param>
         public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
         {
-            var consentValidated = ValidateConsent((List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
+            var consentValidated = ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
 
             if (consentValidated)
             {
@@ -296,13 +323,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <param name="workerScreeningRequest">Worker screening request.</param>
         public async Task<bool> SendWorkerScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest workerScreeningRequest, ILogger logger)
         {
-            Interfaces.Spice.Models.LegalEntity legalEntity = new Interfaces.Spice.Models.LegalEntity()
-            {
-                IsIndividual = true,
-                Contact = workerScreeningRequest.Contact
-            };
-
-            var consentValidated = ValidateConsent(new List<Interfaces.Spice.Models.LegalEntity> { legalEntity });
+            var consentValidated = ValidateWorkerConsent(workerScreeningRequest);
             if(consentValidated)
             {
                 List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
@@ -326,23 +347,18 @@ namespace Gov.Lclb.Cllb.SpdSync
         public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(Guid WorkerId, ILogger logger)
         {
             // Query Dynamics for application data
-            var worker = await _dynamicsClient.GetWorkerByIdWithChildren(WorkerId.ToString());
+            string filter = "adoxio_workerid eq " + WorkerId.ToString();
+            string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
+            WorkersGetResponseModel resp = _dynamicsClient.Workers.Get(filter: filter, expand: expand);
+            MicrosoftDynamicsCRMadoxioWorker worker = resp.Value[0];
 
             /* Create application */
-            Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest()
-            {
-                Name = worker.AdoxioName,
-                BirthDate = worker.AdoxioDateofbirth,
-                SelfDisclosure = worker.AdoxioSelfdisclosure != null ? ((GeneralYesNo)worker.AdoxioSelfdisclosure).ToString() : null,
-                Gender = worker.AdoxioGendercode != null ? ((AdoxioGenderCode)worker.AdoxioGendercode).ToString() : null,
-                Birthplace = worker.AdoxioBirthplace,
-
-            };
+            Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest();
 
             /* Add applicant details */
             if (worker.AdoxioContactId != null)
             {
-                request.RecordIdentifier = worker.AdoxioContactId.AdoxioSpdjobid.ToString();
+                request.RecordIdentifier = worker.AdoxioWorkerid;
                 request.Contact = new Interfaces.Spice.Models.Contact()
                 {
                     BcIdCardNumber = worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? worker.AdoxioContactId.AdoxioPrimaryidnumber : null,
@@ -354,6 +370,10 @@ namespace Gov.Lclb.Cllb.SpdSync
                     MiddleName = worker.AdoxioContactId.Middlename,
                     Email = worker.AdoxioContactId.Emailaddress1,
                     PhoneNumber = worker.AdoxioContactId.Telephone1,
+                    BirthDate = worker.AdoxioContactId.Birthdate,
+                    SelfDisclosure = worker.AdoxioContactId.AdoxioSelfdisclosure != null ? ((GeneralYesNo)worker.AdoxioContactId.AdoxioSelfdisclosure).ToString() : null,
+                    Gender = worker.AdoxioContactId.AdoxioGendercode != null ? ((AdoxioGenderCode)worker.AdoxioContactId.AdoxioGendercode).ToString() : null,
+                    Birthplace = worker.AdoxioBirthplace,
                     Address = new Interfaces.Spice.Models.Address()
                     {
                         AddressStreet1 = worker.AdoxioContactId.Address1Line1,
@@ -540,7 +560,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             string applicationfilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
             foreach (var assoc in foundAssociates)
             {
-                if (accountId != assoc.EntityId)
+                if (accountId != assoc.EntityId && assoc.Contact != null)
                 {
                     applicationfilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
                 }
