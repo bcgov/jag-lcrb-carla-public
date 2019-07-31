@@ -622,7 +622,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         { "storeHours", storeHours }
                     };
                 }
-                else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketer")
+                else if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
                 {
                     parameters = new Dictionary<string, string>
                     {
@@ -642,7 +642,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
-                    if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketer")
+                    if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
                     {
                         templateName = "cannabis_marketer_licence";
                     }
