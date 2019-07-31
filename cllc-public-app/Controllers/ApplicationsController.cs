@@ -325,7 +325,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var applicationType = _dynamicsClient.GetApplicationTypeByName(item.ApplicationType.Name);
                 adoxioApplication.AdoxioApplicationTypeIdODataBind = _dynamicsClient.GetEntityURI("adoxio_applicationtypes", applicationType.AdoxioApplicationtypeid);
 
-                if (item.ApplicationType.Name == "Marketer")
+                if (item.ApplicationType.Name == "Marketing")
                 {
                     // create tiedhouse relationship
                     adoxioApplication.AdoxioApplicationAdoxioTiedhouseconnectionApplication = new List<MicrosoftDynamicsCRMadoxioTiedhouseconnection>{
