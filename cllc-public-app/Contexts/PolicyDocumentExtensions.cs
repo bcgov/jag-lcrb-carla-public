@@ -47,19 +47,12 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         public static MicrosoftDynamicsCRMadoxioPolicydocument GetPolicyDocumentBySlug(this IDynamicsClient dynamicsClient, string slug)
         {
 
-            MicrosoftDynamicsCRMadoxioPolicydocument result = null;
-            try
-            {
-                slug = slug.Replace("'", "''");
-                string filter = "adoxio_slug eq '" + slug + "'";
-                result = dynamicsClient.Policydocuments.Get(filter: filter).Value
-                .FirstOrDefault();
-
-            }
-            catch (OdataerrorException)
-            {
-                result = null;
-            }
+            MicrosoftDynamicsCRMadoxioPolicydocument result = null;            
+            slug = slug.Replace("'", "''");
+            string filter = "adoxio_slug eq '" + slug + "'";
+            PolicydocumentsGetResponseModel pdgrm = dynamicsClient.Policydocuments.Get(filter: filter);
+            result = pdgrm.Value
+                .FirstOrDefault();            
             return result;
         }
         
