@@ -56,11 +56,15 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             {
                 if (Guid.TryParse(workerIdString, out Guid workerId))
                 {
-                    var workerRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest();
+                    var workerRequest = new Interfaces.Spice.Models.WorkerScreeningRequest();
                     try
                     {
                         // Generate the application request
                         workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        return NotFound($"Worker {workerIdString} is not found.");
                     }
                     catch (Exception ex)
                     {
