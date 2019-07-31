@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpGet()]
         [AllowAnonymous]
-        public JsonResult GetPolicyDocuments(string category)
+        public ActionResult GetPolicyDocuments(string category)
         {
             string cacheKey = CacheKeys.PolicyDocumentCategoryPrefix + category;
             string cacheAgeKey = CacheKeys.PolicyDocumentCategoryPrefix + category + "_dto";
@@ -96,14 +96,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .ToList();
                     }
 
-                    // Set cache options.
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        // Set the cache to expire far in the future.                    
-                        .SetAbsoluteExpiration(TimeSpan.FromDays(365 * 5));
+                    if (PolicyDocuments != null && PolicyDocuments.Count > 0)
+                    {
+                        // Set cache options.
+                        var cacheEntryOptions = new MemoryCacheEntryOptions()
+                            // Set the cache to expire far in the future.                    
+                            .SetAbsoluteExpiration(TimeSpan.FromDays(365 * 5));
 
-                    // Save data in cache.
-                    _cache.Set(cacheKey, PolicyDocuments, cacheEntryOptions);
-                    _cache.Set(cacheAgeKey, DateTimeOffset.Now, cacheEntryOptions);
+                        // Save data in cache.
+                        _cache.Set(cacheKey, PolicyDocuments, cacheEntryOptions);
+                        _cache.Set(cacheAgeKey, DateTimeOffset.Now, cacheEntryOptions);
+                    }                    
 
                 }
                 catch (OdataerrorException odee)
@@ -124,9 +127,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
             }
-            
 
-            return Json(PolicyDocuments);
+            if (PolicyDocuments == null)
+            {
+                return new NotFoundResult();
+            }
+            else
+            {
+                return Json(PolicyDocuments);
+            }
+
+            
         }
 
         /// <summary>
@@ -139,21 +150,70 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public ActionResult GetPolicy(string slug)
         {
             MicrosoftDynamicsCRMadoxioPolicydocument policyDocument = null;
-
+            bool fetchDocument = false;
             string cacheKey = CacheKeys.PolicyDocumentPrefix + slug;
+            string cacheAgeKey = CacheKeys.PolicyDocumentCategoryPrefix + slug + "_dto";
             if (!_cache.TryGetValue(cacheKey, out policyDocument))
+            // item is not in cache at all, fetch.
             {
-                // Key not in cache, so get data.
-                policyDocument = _dynamicsClient.GetPolicyDocumentBySlug(slug);
+                fetchDocument = true;
+            }
+            else
+            {
+                DateTimeOffset dto = DateTimeOffset.Now;
+                // fetch the age of the cache item from the cache
+                if (!_cache.TryGetValue(cacheAgeKey, out dto))
+                // unable to get cache age, fetch.
+                {
+                    fetchDocument = true;
+                }
+                else
+                {
+                    TimeSpan age = DateTimeOffset.Now - dto;
+                    if (age.TotalMinutes > 10)
+                    // More than 10 minutes old, fetch.
+                    {
+                        fetchDocument = true;
+                    }
+                }
+            }
+            if (fetchDocument)
+            {
+                try
+                {
+                    policyDocument = _dynamicsClient.GetPolicyDocumentBySlug(slug);
 
-                // Set cache options.
-                var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    // Keep in cache for this time
-                    .SetAbsoluteExpiration(TimeSpan.FromMinutes(5));
+                    if (policyDocument != null) // handle case where the document is missing.
+                    {
+                        // Set cache options.
+                        var newCacheEntryOptions = new MemoryCacheEntryOptions()
+                            // Set the cache to expire far in the future.                    
+                            .SetAbsoluteExpiration(TimeSpan.FromDays(365 * 5));
 
-                // Save data in cache.
-                _cache.Set(cacheKey, policyDocument, cacheEntryOptions);
-
+                        // Save data in cache.
+                        _cache.Set(cacheKey, policyDocument, newCacheEntryOptions);
+                        _cache.Set(cacheAgeKey, DateTimeOffset.Now, newCacheEntryOptions);
+                    }
+                    else
+                    {
+                        _logger.LogError($"Unable to get Policy Document {slug} - does it exist?");
+                    }
+                }
+                catch (OdataerrorException odee)
+                {
+                    // this will gracefully handle situations where Dynamics is not available however we have a cache version.
+                    _logger.LogError("Error getting policy document");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+                catch (Exception e)
+                {
+                    // unexpected exception
+                    _logger.LogError("Unknown error occured");
+                    _logger.LogError(e.Message);
+                }
             }
 
             if (policyDocument == null)
