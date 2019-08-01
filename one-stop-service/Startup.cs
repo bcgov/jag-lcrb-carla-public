@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDynamicsClient dynamicsClient = OneStopUtils.SetupDynamics(Configuration);
+            IDynamicsClient dynamicsClient = DynamicsUtils.SetupDynamics(Configuration);
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), Configuration));
 
             services.AddSingleton<ILogger>(_loggerFactory.CreateLogger("OneStopController"));
