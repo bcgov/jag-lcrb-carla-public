@@ -39,22 +39,10 @@ namespace Gov.Lclb.Cllb.OneStopService
         public OneStopUtils(IConfiguration Configuration, ILogger logger)
         {
             this.Configuration = Configuration;
-            _dynamics = OneStopUtils.SetupDynamics(Configuration);
+            _dynamics = DynamicsUtils.SetupDynamics(Configuration);
             _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, logger);
             _logger = logger;
         }
-
-        private string FormatGuidForDynamics(string guid)
-        {
-            string result = null;
-            Guid guidValue;
-            if (Guid.TryParse(guid, out guidValue))
-            {
-                result = guidValue.ToString();
-            }
-            return result;
-        }
-        
 
         /// <summary>
         /// Hangfire job to send LicenceCreationMessage to One stop.
@@ -62,7 +50,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
-            string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
 
             OneStopHubService.receiveFromPartnerResponse output;
             var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
@@ -83,7 +71,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML(GetLicenceFromDynamics(hangfireContext, licenceGuid), suffix);
+                    var innerXML = req.CreateXML(DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger), suffix);
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
@@ -117,7 +105,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             
 
-            string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
 
             // prepare soap message
             var req = new ProgramAccountRequest();
@@ -127,7 +115,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine($"Getting Licence {licenceGuid}");
             }
 
-            var licence = GetLicenceFromDynamics(hangfireContext, licenceGuid);
+            var licence = DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger);
 
             if (hangfireContext != null && licence != null)
             {
@@ -172,7 +160,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
             }
             
-            string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
 
             OneStopHubService.receiveFromPartnerResponse output;
             var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
@@ -198,7 +186,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                         hangfireContext.WriteLine($"Getting licence {licenceGuid}");
                     }
                         
-                    MicrosoftDynamicsCRMadoxioLicences licence = GetLicenceFromDynamics(hangfireContext, licenceGuid);
+                    MicrosoftDynamicsCRMadoxioLicences licence = DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger);
 
                     if (hangfireContext != null)
                     {
@@ -247,11 +235,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
             }
             
-            string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
 
             //prepare soap content
             var req = new ProgramAccountDetailsBroadcast();
-            var licence = GetLicenceFromDynamics(hangfireContext, licenceGuid);
+            var licence = DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger);
 
             if (hangfireContext != null && licence != null)
             {
@@ -338,114 +326,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
 
-        private MicrosoftDynamicsCRMadoxioLicences GetLicenceFromDynamics(PerformContext hangfireContext, string licenceGuidRaw)
-        {
-            MicrosoftDynamicsCRMadoxioLicences result;
-            string licenceGuid = FormatGuidForDynamics(licenceGuidRaw);
-            try
-            {
-                string filter = $"adoxio_licencesid eq {licenceGuid}";
-                // adoxio_Licencee,adoxio_establishment
-                // Note that adoxio_Licencee is the Account linked to the licence
-                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
-                result = _dynamics.Licenceses.GetByKey(licenceGuid, expand: expand);
-            }
-            catch (OdataerrorException odee)
-            {
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine("Error getting Licence");
-                    hangfireContext.WriteLine("Request:");
-                    hangfireContext.WriteLine(odee.Request.Content);
-                    hangfireContext.WriteLine("Response:");
-                    hangfireContext.WriteLine(odee.Response.Content);
-                }
-                if (_logger != null)
-                {
-                    _logger.LogError("Error getting Licence");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                }
-                // return null if we can't get results.
-                result = null;
-            }
 
-            if (result!= null && result.AdoxioLicencee != null)
-            {
-                if (! string.IsNullOrEmpty(result.AdoxioLicencee._primarycontactidValue))
-                {
-                    // get the contact.
-                    var runner = _dynamics.GetContactById(Guid.Parse(result.AdoxioLicencee._primarycontactidValue));
-                    runner.Wait();                    
-                    result.AdoxioLicencee.Primarycontactid = runner.Result;
-                }
-            }
-
-            return result;
-        }
-
-        public static IDynamicsClient SetupDynamics(IConfiguration Configuration)
-        {
-
-            string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
-            string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];
-            string serverAppIdUri = Configuration["DYNAMICS_SERVER_APP_ID_URI"];
-            string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
-            string clientId = Configuration["DYNAMICS_CLIENT_ID"];
-
-            string ssgUsername = Configuration["SSG_USERNAME"];
-            string ssgPassword = Configuration["SSG_PASSWORD"];
-
-            AuthenticationResult authenticationResult = null;
-            // authenticate using ADFS.
-            if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
-            {
-                var authenticationContext = new AuthenticationContext(
-                    "https://login.windows.net/" + aadTenantId);
-                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-                task.Wait();
-                authenticationResult = task.Result;
-            }
-
-            ServiceClientCredentials serviceClientCredentials = null;
-
-            if (string.IsNullOrEmpty(ssgUsername) || string.IsNullOrEmpty(ssgPassword))
-            {
-                var authenticationContext = new AuthenticationContext(
-                "https://login.windows.net/" + aadTenantId);
-                ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-                var task = authenticationContext.AcquireTokenAsync(serverAppIdUri, clientCredential);
-                task.Wait();
-                authenticationResult = task.Result;
-                string token = authenticationResult.CreateAuthorizationHeader().Substring("Bearer ".Length);
-                serviceClientCredentials = new TokenCredentials(token);
-            }
-            else
-            {
-                serviceClientCredentials = new BasicAuthenticationCredentials()
-                {
-                    UserName = ssgUsername,
-                    Password = ssgPassword
-                };
-            }
-
-            IDynamicsClient client = new DynamicsClient(new Uri(Configuration["DYNAMICS_ODATA_URI"]), serviceClientCredentials);
-
-            // set the native client URI
-            if (string.IsNullOrEmpty(Configuration["DYNAMICS_NATIVE_ODATA_URI"]))
-            {
-                client.NativeBaseUri = new Uri(Configuration["DYNAMICS_ODATA_URI"]);
-            }
-            else
-            {
-                client.NativeBaseUri = new Uri(Configuration["DYNAMICS_NATIVE_ODATA_URI"]);
-            }
-
-            return client;
-        }
 
         public static IOneStopRestClient SetupOneStopClient(IConfiguration Configuration, ILogger logger)
         {
