@@ -29,7 +29,8 @@ namespace one_stop_service.Controllers
         public async Task<IActionResult> SendLicenceCreationMessage(string licenceGuid)
         {
             logger.LogInformation($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, logger).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
+            //BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, logger).SendLicenceCreationMessageREST(null, licenceGuid, "001"));
+            BackgroundJob.Enqueue(() => new OrgBookUtils(Configuration, logger).CreateLicenceCredential(null, licenceGuid, "001"));
             return Ok();
         }
 
