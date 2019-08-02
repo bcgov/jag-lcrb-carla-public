@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Subscription ,  Observable ,  Subject } from 'rxjs';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { MatSnackBar } from '@angular/material';
+import { ContactDataService } from '@services/contact-data.service';
 
 @Component({
   selector: 'app-spd-consent',
@@ -28,12 +29,14 @@ export class SpdConsentComponent implements OnInit {
   showValidationMessages: boolean;
   validationMessages: string[];
   workerStatus: string;
+  uploadedDocuments = 0;
 
   constructor(
     private fb: FormBuilder,
     private workerDataService: WorkerDataService,
     private userDataService: UserDataService,
     private paymentDataService: PaymentDataService,
+    private contactDataService: ContactDataService,
     public snackBar: MatSnackBar,
     private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
@@ -44,7 +47,10 @@ export class SpdConsentComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       id: [],
-      selfdisclosure: [''],
+      contact: this.fb.group({
+        id: [],
+        selfDisclosure: [''],
+      }),
     });
     this.reloadUser();
 
@@ -81,7 +87,7 @@ export class SpdConsentComponent implements OnInit {
   }
 
   isCriminalBackgroundValid(): boolean {
-    const valid = (this.form.value.selfdisclosure === true || this.form.value.selfdisclosure === false);
+    const valid = (this.form.value.contact.selfDisclosure === 1 || this.form.value.contact.selfDisclosure === 0);
     return valid;
   }
 
@@ -91,17 +97,16 @@ export class SpdConsentComponent implements OnInit {
   }
 
   isFileUploadValid(): boolean {
-    const valid = !!(this.mainForm && this.mainForm.files && this.mainForm.files.length > 0);
-    return valid;
+    return (this.uploadedDocuments === 1);
   }
 
 
   formValid() {
     return this.infoAccurate
-      && (this.mainForm && this.mainForm.files && this.mainForm.files.length > 0)
+      && (this.uploadedDocuments === 1)
       && this.signName
       && this.consentToCollection
-      && (this.form.value.selfdisclosure === true || this.form.value.selfdisclosure === false);
+      && this.isCriminalBackgroundValid();
   }
 
   canDeactivate(): Observable<boolean> | boolean {
@@ -117,7 +122,7 @@ export class SpdConsentComponent implements OnInit {
     const subResult = new Subject<boolean>();
     const worker = this.form.value;
 
-    this.busy = this.workerDataService.updateWorker(worker, worker.id).subscribe(() => {
+    this.busy = this.contactDataService.updateContact(this.form.value.contact).subscribe(() => {
       subResult.next(true);
       this.reloadUser();
     }, () => subResult.next(false)

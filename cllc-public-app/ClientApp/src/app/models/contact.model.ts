@@ -12,4 +12,12 @@ export class Contact {
   address1_postalcode: string;
   jobTitle: string;
   birthDate: Date;
+
+  birthPlace: string;
+  gender: string;
+  mobilePhone: string;
+  primaryIdNumber: string;
+  secondaryIdNumber: string;
+  isWorker: boolean;
+  selfDisclosure: string;
 }
