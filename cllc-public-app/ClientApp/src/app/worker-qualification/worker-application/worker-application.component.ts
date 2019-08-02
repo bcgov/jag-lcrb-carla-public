@@ -6,7 +6,7 @@ import { Contact } from '../../models/contact.model';
 import { AppState } from '../../app-state/models/app-state';
 import * as CurrentUserActions from '../../app-state/actions/current-user.action';
 import { Store } from '@ngrx/store';
-import { Subscription ,  Observable, Subject, zip ,  forkJoin } from 'rxjs';
+import { Subscription, Observable, Subject, zip, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormArray, ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
 import { AliasDataService } from '../../services/alias-data.service';
 import { PreviousAddressDataService } from '../../services/previous-address-data.service';
@@ -121,7 +121,13 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
         address2_city: ['', Validators.required],
         address2_stateorprovince: ['', Validators.required],
         address2_country: ['', Validators.required],
-        address2_postalcode: ['', [Validators.required, this.customZipCodeValidator('address2_country')]]
+        address2_postalcode: ['', [Validators.required, this.customZipCodeValidator('address2_country')]],
+
+        birthPlace: ['', Validators.required],
+        gender: [''],
+        mobilePhone: ['', Validators.required],
+        primaryIdNumber: [''],
+        secondaryIdNumber: ['']
       }),
       worker: this.fb.group({
         id: [],
@@ -130,13 +136,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
         middlename: [{ value: '', disabled: true }],
         lastname: [{ value: '', disabled: true }],
         dateofbirth: [{ value: '', disabled: true }],
-        gender: [{ value: '', disabled: true }],
-        birthplace: ['', Validators.required],
-        driverslicencenumber: [''],
-        bcidcardnumber: [''],
-        phonenumber: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        selfdisclosure: [''],
         fromdate: ['', Validators.required],
         todate: [{ value: new Date(), disabled: true }],
         aliases: this.fb.array([
@@ -303,7 +303,7 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
 
   save(): Subject<boolean> {
     const subResult = new Subject<boolean>();
-    const value = {...this.form.value};
+    const value = { ...this.form.value };
     // Make sure the contact email and phone number are in sync with worker
     value.contact.emailaddress1 = value.worker.email;
     value.contact.telephone1 = value.worker.phonenumber;
@@ -471,9 +471,10 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
   }
 
   isBCIDValid(): boolean {
-    const validDriver = !!(this.form.get('worker.driverslicencenumber').value
-      && (this.form.get('worker.driverslicencenumber').value + '').length === 7);
-    const validBceid = !!(this.form.get('worker.bcidcardnumber').value && (this.form.get('worker.bcidcardnumber').value + '').length === 9);
+    const validDriver = !!(this.form.get('contact.primaryIdNumber').value
+      && (this.form.get('contact.primaryIdNumber').value + '').length === 7);
+    const validBceid = !!(this.form.get('contact.secondaryIdNumber').value
+      && (this.form.get('contact.secondaryIdNumber').value + '').length === 9);
     return validDriver || validBceid;
   }
 
