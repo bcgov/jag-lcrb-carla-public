@@ -58,5 +58,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public DateTimeOffset? Birthdate { get; set; }
 
+
+        public string BirthPlace { get; set; }
+        public Gender? Gender { get; set; }
+        public string MobilePhone { get; set; }
+        public string PrimaryIdNumber { get; set; }
+        public string SecondaryIdNumber { get; set; }
+        public bool? IsWorker { get; set; }
+        public int? SelfDisclosure { get; set; }
+
     }
 }
