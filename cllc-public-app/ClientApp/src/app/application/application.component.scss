@@ -10,17 +10,17 @@
         padding-bottom: 10px;
         color: #fff !important;
     }
-    
+
     .submitted-header h2 {
         color: #fff !important;
     }
-    
+
     .submitted-content {
         background-color: #eee;
         padding: 20px;
         margin-bottom: 20px;
     }
-    
+
     .submit-container {
         background-color: #38598A;
         border-bottom: solid 4px #FFCC00;
@@ -28,6 +28,7 @@
         margin-bottom: 20px;
         padding: 30px;
         padding-top: 20px;
+
         h2 {
             color: #fff;
         }
@@ -51,7 +52,7 @@
     }
 
     .warning-state {
-      color: #ffc107;
+        color: #ffc107;
     }
 
     ul.square {
@@ -118,4 +119,11 @@
         background-color: #E1E8F2;
         padding: 5px;
     }
+}
+
+
+.field-changed {
+    border: 1px solid #9e9e9e;
+    border-radius: 5px;
+    padding: 5px;
 }

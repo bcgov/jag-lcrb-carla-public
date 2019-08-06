@@ -93,7 +93,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 toDynamics.Address1Postalcode = fromVM.mailingAddressPostalCode;
             }
-            
+
             if (copyIfNull || (!copyIfNull && fromVM.physicalAddressName != null))
             {
                 toDynamics.Address2Name = fromVM.physicalAddressName;
@@ -165,7 +165,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 accountVM.pstNumber = account.AdoxioPstnumber;
                 accountVM.contactEmail = account.Emailaddress1;
                 accountVM.contactPhone = account.Telephone1;
-                
+
                 accountVM.mailingAddressName = account.Address1Name;
                 accountVM.mailingAddressStreet = account.Address1Line1;
                 accountVM.mailingAddressStreet2 = account.Address1Line2;
@@ -184,8 +184,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 accountVM.TermsOfUseAccepted = account.AdoxioTermsofuseaccepted;
                 accountVM.TermsOfUseAcceptedDate = account.AdoxioTermsofuseaccepteddate;
-
-
 
                 if (account.Primarycontactid != null)
                 {
