@@ -26,7 +26,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         public LdbExport(IConfiguration Configuration)
         {
             this.Configuration = Configuration;
-            this._dynamics = OneStopUtils.SetupDynamics(Configuration);
+            this._dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
             
         }
 
