@@ -6,7 +6,7 @@ issuers:
     abbreviation: LCRB
     url: https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing
     email: lclb.lclb@gov.bc.ca
-    logo_path: ../assets/img/bc-logo.jpg
+    logo_path: ../assets/img/logo.jpg
     endpoint: $ENDPOINT_URL
 
     connection:
