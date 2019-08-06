@@ -37,6 +37,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(Guid id);
 
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerByIdWithChildren(string id);
-        
+
+        MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(Guid id);
+        MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(string id);
     }
 }
