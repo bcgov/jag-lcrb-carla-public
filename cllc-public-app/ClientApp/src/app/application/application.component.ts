@@ -149,7 +149,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
-      applicantType: ['', Validators.required]
+      applicantType: ['', Validators.required],
+
+      checklistBrandingAssessed: [''],
+      checklistValidInterestAssessed: [''],
+      checklistFloorPlanAssessed: [''],
+      checklistSiteMapAssessed: [''],
+      checklistEstabRenderAssessed: [''],
+      checklistSignageAssessed: [''],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -408,6 +415,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.form.get(c).markAsTouched();
       }
     }
+
+    if (this.isCRSRenewalApplication()) {
+      return this.isRenewalValid();
+    }
     this.showValidationMessages = false;
     let valid = true;
     this.validationMessages = [];
@@ -445,6 +456,36 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.validationMessages.push('Some required fields have not been completed');
     }
     return valid && this.form.valid;
+  }
+
+  isRenewalValid(): boolean {
+    let isValid = true;
+    if (!this.form.get('checklistBrandingAssessed').value) {
+      isValid = false;
+      this.validationMessages.push('Please indicate whether the Establisment name has changed');
+    }
+    if (!this.form.get('checklistValidInterestAssessed').value) {
+      isValid = false;
+      this.validationMessages
+        .push('Please indicated whether the store is still located at a location that you own or have an executed lease or sub-lease');
+    }
+    if (!this.form.get('checklistFloorPlanAssessed').value) {
+      isValid = false;
+      this.validationMessages.push('Please indicated whether the floor plan has changed');
+    }
+    if (!this.form.get('checklistSiteMapAssessed').value) {
+      isValid = false;
+      this.validationMessages.push('Please indicated whether the Site Plan has changed');
+    }
+    if (!this.form.get('checklistEstabRenderAssessed').value) {
+      isValid = false;
+      this.validationMessages.push('Please indicated whether there has been no modifications to the store’s exterior');
+    }
+    if (!this.form.get('checklistSignageAssessed').value) {
+      isValid = false;
+      this.validationMessages.push('Please indicated whether the Signage has changed ');
+    }
+    return isValid;
   }
 
   /**
@@ -500,11 +541,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isCRSRenewalApplication(): boolean {
-    return [
-      ApplicationTypeNames.CRSRenewal.toString(),
-      ApplicationTypeNames.CRSRenewalLate30.toString(),
-      ApplicationTypeNames.CRSRenewalLate6Months.toString(),
-    ].indexOf(this.application.applicationType.name) !== -1;
+    return this.application
+      && this.application.applicationType
+      && [
+        ApplicationTypeNames.CRSRenewal.toString(),
+        ApplicationTypeNames.CRSRenewalLate30.toString(),
+        ApplicationTypeNames.CRSRenewalLate6Months.toString(),
+      ].indexOf(this.application.applicationType.name) !== -1;
   }
 
   showFormControl(state: string): boolean {

@@ -83,6 +83,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioServicehourssundayopen = (int?)from.ServiceHoursSundayOpen;
             to.AdoxioServicehourssundayclose = (int?)from.ServiceHoursSundayClose;
 
+            to.AdoxioChecklistbrandingassessed = (int?)from.ChecklistBrandingAssessed;
+            to.AdoxioChecklistvalidinterestassessed = (int?)from.ChecklistValidInterestAssessed;
+            to.AdoxioChecklistfloorplanassessed = (int?)from.ChecklistFloorPlanAssessed;
+            to.AdoxioChecklistsitemapassessed = (int?)from.ChecklistSiteMapAssessed;
+            to.AdoxioChecklistestabrenderingsassessed = (int?)from.ChecklistEstabRenderAssessed;
+            to.AdoxioChecklistsignageassessed = (int?)from.ChecklistSignageAssessed;
+            to.AdoxioChecklistorgleadershipbuilt = (int?)from.ChecklistOrgLeadershipBuilt;
+            to.AdoxioChecklistkeypersonnelbuilt = (int?)from.ChecklistKeyPersonnelBuilt;
+            to.AdoxioChecklistshareholdersbuilt = (int?)from.ChecklistShareholdersBuilt;
+
+
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
 
@@ -196,6 +207,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ServiceHoursFridayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehoursfridayclose,
                 ServiceHoursSaturdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayopen,
                 ServiceHoursSaturdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayclose,
+
+                ChecklistBrandingAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistbrandingassessed,
+                ChecklistValidInterestAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistvalidinterestassessed,
+                ChecklistFloorPlanAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistfloorplanassessed,
+                ChecklistSiteMapAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistsitemapassessed,
+                ChecklistEstabRenderAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistestabrenderingsassessed,
+                ChecklistSignageAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistsignageassessed,
+                ChecklistOrgLeadershipBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistorgleadershipbuilt,
+                ChecklistKeyPersonnelBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistkeypersonnelbuilt,
+                ChecklistShareholdersBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistshareholdersbuilt,
+
 
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
