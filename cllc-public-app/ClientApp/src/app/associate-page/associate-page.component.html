@@ -15,13 +15,15 @@
       contact you as part of this renewal process
     </div>
   </div> -->
-  
+
   <h3 class="blue-header">ORGANIZATION LEADERSHIP</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
     <app-directors-and-officers [lockAssociates]="lockAssociates" [accountId]="account?.id"
       [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
     </app-directors-and-officers>
-    <app-field label="Is this information still correct?" [valid]="true">
+    <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
+      [required]="true"
+      [valid]="!form.get('checklistOrgLeadershipBuilt')?.touched || form.get('checklistOrgLeadershipBuilt')?.valid">
       <mat-button-toggle-group formControlName="checklistOrgLeadershipBuilt" aria-label="Font Style">
         <mat-button-toggle value="Yes">Yes</mat-button-toggle>
         <mat-button-toggle value="Changed">No</mat-button-toggle>
@@ -38,7 +40,9 @@
     <app-key-personnel [lockAssociates]="lockAssociates" [accountId]="account?.id"
       [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId"></app-key-personnel>
 
-    <app-field label="Is this information still correct?" [valid]="true">
+    <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
+      [required]="true"
+      [valid]="!form.get('checklistKeyPersonnelBuilt')?.touched || form.get('checklistKeyPersonnelBuilt')?.valid">
       <mat-button-toggle-group formControlName="checklistKeyPersonnelBuilt" aria-label="Font Style">
         <mat-button-toggle value="Yes">Yes</mat-button-toggle>
         <mat-button-toggle value="Changed">No</mat-button-toggle>
@@ -55,7 +59,9 @@
     <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
       [parentLegalEntityId]="legalEntityId">
     </app-shareholders>
-    <app-field label="Is this information still correct?" [valid]="true">
+    <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
+      [required]="true"
+      [valid]="!form.get('checklistShareholdersBuilt')?.touched || form.get('checklistShareholdersBuilt')?.valid">
       <mat-button-toggle-group formControlName="checklistShareholdersBuilt" aria-label="Font Style">
         <mat-button-toggle value="Yes">Yes</mat-button-toggle>
         <mat-button-toggle value="Changed">No</mat-button-toggle>
@@ -66,6 +72,15 @@
       contact you as part of this renewal process
     </div>
   </div>
+
+  <section class="error" *ngIf="showValidationMessages">
+      <p *ngFor="let message of validationMessages">
+        <span class="app-cancel">
+          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+          {{message}}
+        </span>
+      </p>
+    </section>
 </div>
 
 <div style="padding-right: 30px;">
