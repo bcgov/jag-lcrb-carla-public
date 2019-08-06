@@ -58,4 +58,14 @@ export class Application {
   tiedHouse: TiedHouseConnection;
   indigenousNationId: string;
   federalProducerNames: string;
+
+  checklistBrandingAssessed: string;
+  checklistEstabRenderAssessed: string;
+  checklistFloorPlanAssessed: string;
+  checklistKeyPersonnelBuilt: string;
+  checklistOrgLeadershipBuilt: string;
+  checklistShareholdersBuilt: string;
+  checklistSignageAssessed: string;
+  checklistSiteMapAssessed: string;
+  checklistValidInterestAssessed: string;
 }

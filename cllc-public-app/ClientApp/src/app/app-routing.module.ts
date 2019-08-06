@@ -45,16 +45,16 @@ const routes: Routes = [
     component: AssociatePageComponent
   },
   {
-    path: 'renew-crs-licence',
+    path: 'renew-crs-licence/application/:applicationId',
     component: LicenceRenewalStepsComponent,
-    children: [
-      {
-        path: 'application/:applicationId',
-        component: ApplicationComponent,
-        canDeactivate: [CanDeactivateGuard],
-        canActivate: [BCeidAuthGuard]
-      }
-    ]
+    // children: [
+    //   {
+    //     path: 'application/:applicationId',
+    //     component: ApplicationComponent,
+    //     canDeactivate: [CanDeactivateGuard],
+    //     canActivate: [BCeidAuthGuard]
+    //   }
+    // ]
   },
   {
     path: 'account-profile/:applicationId',
