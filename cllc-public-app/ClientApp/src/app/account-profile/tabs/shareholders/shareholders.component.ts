@@ -63,9 +63,12 @@ export class EditShareholdersComponent implements OnInit {
     }
     this.busyObsv = this.legalEntityDataservice.getLegalEntitiesbyPosition(this.parentLegalEntityId, position)
       .subscribe((data: LegalEntity[]) => {
-        this.totalShares = (data || [])
-          .map(entity => entity.commonvotingshares || 0)
-          .reduce((a, v) => a + v);
+        this.totalShares = 0;
+        data = data || [];
+        if (data.length > 0) {
+          this.totalShares = data.map(entity => entity.commonvotingshares || 0)
+            .reduce((a, v) => a + v);
+        }
 
         data.forEach(d => {
           d.position = this.getPosition(d);
