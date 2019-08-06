@@ -36,6 +36,7 @@ export class UserConfirmationComponent implements OnInit {
       contact.firstname = this.currentUser.firstname;
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
+      contact.isWorker = true;
       this.busy = this.contactDataService.createWorkerContact(contact).subscribe(() => {
         this.userDataService.loadUserToStore();
       }, () => alert('Failed to create contact'));

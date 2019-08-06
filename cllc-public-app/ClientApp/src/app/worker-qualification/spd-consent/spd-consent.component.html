@@ -14,7 +14,7 @@
         </p>
 
         <h2 class="blue-header">BACKGROUND SCREENING</h2>
-        <section style="padding-left: 10px;">
+        <section formGroupName="contact" style="padding-left: 10px;">
           <label for="">Have you ever been arrested, charged or convicted in respect of an offence under any of the
             following:</label>
           <p>(i) the Criminal Code, the Controlled Drugs and Substances Act (Canada), the Cannabis Act (Canada), or the
@@ -23,8 +23,8 @@
             Control and Licensing Act or the Liquor Distribution Act;</p>
           <p>(iii) a provision of an Act of a province or territory if the provision regulates cannabis.</p>
           <br>
-          <input type="radio" [value]="true" formControlName="selfdisclosure" name="selfdisclosure"> YES &nbsp;
-          <input type="radio" [value]="false" formControlName="selfdisclosure" name="selfdisclosure"> NO
+          <input type="radio" [value]="1" formControlName="selfDisclosure" name="selfDisclosure"> YES &nbsp;
+          <input type="radio" [value]="0" formControlName="selfDisclosure" name="selfDisclosure"> NO
           <br>
           <div *ngIf="showValidationMessages && !isCriminalBackgroundValid()" style="color: #A12622; margin-top: 2px;">
             <div *ngIf="!name.valid && name.touched ">
@@ -47,7 +47,8 @@
             </div>
           </div>
           <section style="display: flex">
-            <input style="flex: 1 0 15px;" type="checkbox" [(ngModel)]="consentToCollection" [ngModelOptions]="{standalone: true}">
+            <input style="flex: 1 0 15px;" type="checkbox" [(ngModel)]="consentToCollection"
+              [ngModelOptions]="{standalone: true}">
             &nbsp;
             <span>
               I, the undersigned, do hereby consent to the collection and disclosure by the Royal Canadian Mounted
@@ -63,7 +64,8 @@
           </section>
           <br>
           <section style="display: flex">
-            <input style="flex: 1 0 15px;" type="checkbox" [(ngModel)]="infoAccurate" [ngModelOptions]="{standalone: true}">
+            <input style="flex: 1 0 15px;" type="checkbox" [(ngModel)]="infoAccurate"
+              [ngModelOptions]="{standalone: true}">
             &nbsp;
             <span>
               I certify that, to the best of my knowledge, the information I have provided on my application and will
@@ -79,7 +81,8 @@
           <input type="text" class="form-control" required [(ngModel)]="signName" [ngModelOptions]="{standalone: true}"
             style="width: 350px" #name="ngModel">
           <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622;"></i>
-          <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622; margin-left: -6px;"></i>
+          <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs"
+            style="color: #A12622; margin-left: -6px;"></i>
           <div *ngIf="!name.valid && name.touched" style="color: #A12622; width: 350px; margin-top: 2px;">
             <div *ngIf="!name.valid && name.touched ">
               Please enter your full legal name.
@@ -113,9 +116,11 @@
 
         <section>
           <app-file-uploader *ngIf="workerId" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT."
-            [multipleFiles]="false" entityName="worker" [entityId]="workerId" #mainForm></app-file-uploader>
+            (numberOfUploadedFiles)="uploadedDocuments = $event" [multipleFiles]="false" entityName="worker"
+            [entityId]="workerId" #mainForm></app-file-uploader>
         </section>
-        <div *ngIf="showValidationMessages &&  (!mainForm || !mainForm.files || mainForm.files.length < 1)" style="color: #A12622; width: 700px; margin: auto; margin-top: 2px;">
+        <div *ngIf="showValidationMessages &&  (uploadedDocuments < 1)"
+          style="color: #A12622; width: 700px; margin: auto; margin-top: 2px;">
           <span>Please upload your completed signature form. Ensure it is less than 25MB.</span>
           <br>
           <span>Your completed signature form didn’t upload. Please ensure your form is less than 25MB.</span>
@@ -148,7 +153,8 @@
           <button class="btn btn-secondary" routerLink="/worker-qualification/dashboard">
             <i class="fa fa-save"></i>
             SAVE FOR LATER</button>
-          <button style="margin-left: 10px;" routerLink="/worker-qualification/application/{{workerId}}" class="btn btn-secondary">RETURN
+          <button style="margin-left: 10px;" routerLink="/worker-qualification/application/{{workerId}}"
+            class="btn btn-secondary">RETURN
             TO STEP 1
           </button>
           <button style="margin-left: 10px;" (click)="goToNextStep()" class="btn btn-primary">SUBMIT & PAY</button>
@@ -171,7 +177,8 @@
             Protection of Privacy Act. Should you have any questions about the collection, use, or disclosure of
             personal
             information, please contact the Liquor and Cannabis Regulation Branch via mail to PO Box 9292 Stn Prov Govt
-            Victoria B.C. V8W 9J8; email to <a href="mailto:CannabisWorker@gov.bc.ca?Subject=Collection Notice">CannabisWorker@gov.bc.ca;</a>.
+            Victoria B.C. V8W 9J8; email to <a
+              href="mailto:CannabisWorker@gov.bc.ca?Subject=Collection Notice">CannabisWorker@gov.bc.ca;</a>.
           </p>
         </div>
       </section>
