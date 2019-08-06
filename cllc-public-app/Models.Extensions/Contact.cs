@@ -49,6 +49,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = contact.Middlename;
                 result.lastname = contact.Lastname;
                 result.telephone1 = contact.Telephone1;
+                result.BirthPlace = contact.AdoxioBirthplace;
+                result.Gender = (ViewModels.Gender?)contact.Gendercode;
+                result.MobilePhone = contact.Mobilephone;
+                result.PrimaryIdNumber = contact.AdoxioPrimaryidnumber;
+                result.SecondaryIdNumber = contact.AdoxioSecondaryidnumber;
+                result.IsWorker = contact.AdoxioIsworker;
+                result.SelfDisclosure = contact.AdoxioSelfdisclosure;
             }
             return result;
         }
@@ -229,21 +236,25 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.emailaddress1 = smgov_useremail;
             }
+            if (!string.IsNullOrEmpty(smgov_sex))
+            {
+                to.Gender = (Gender)GetIntGenderCode(smgov_sex);
+            }
 
         }
 
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
-        {            
-            to.Emailaddress1 = from.emailaddress1;         
+        {
+            to.Emailaddress1 = from.emailaddress1;
             to.Telephone1 = from.telephone1;
             to.CopyValuesNoEmailPhone(from);
         }
 
         public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
         {
-            to.Fullname = from.name;            
+            to.Fullname = from.name;
             to.Firstname = from.firstname;
             to.Middlename = from.middlename;
             to.Lastname = from.lastname;
@@ -266,6 +277,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCansignpermanentchangeapplications = from.adoxio_cansignpermanentchangeapplications;
             to.AdoxioCansigntemporarychangeapplications = from.adoxio_cansigntemporarychangeapplications;
             to.Birthdate = from.Birthdate;
+
+            to.AdoxioBirthplace = from.BirthPlace;
+            to.Gendercode = (int?)from.Gender;
+            to.Mobilephone = from.MobilePhone;
+            to.AdoxioPrimaryidnumber = from.PrimaryIdNumber;
+            to.AdoxioSecondaryidnumber = from.SecondaryIdNumber;
+            to.AdoxioIsworker = from.IsWorker;
+            to.AdoxioSelfdisclosure = from.SelfDisclosure;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
