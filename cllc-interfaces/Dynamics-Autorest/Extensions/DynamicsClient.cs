@@ -277,5 +277,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(Guid id)
+        {
+            return GetLicenceByIdWithChildren(id.ToString());
+        }
+
+        public MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(string id)
+        {
+            MicrosoftDynamicsCRMadoxioLicences result;
+            try
+            {
+                // adoxio_Licencee,adoxio_establishment
+                // Note that adoxio_Licencee is the Account linked to the licence
+                var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment", "adoxio_LicenceType" };
+                result = this.Licenceses.GetByKey(adoxioLicencesid: id, expand: expand);
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                // return null if we can't get results.
+                result = null;
+            }
+
+            if (result != null && result.AdoxioLicencee != null)
+            {
+                if (!string.IsNullOrEmpty(result.AdoxioLicencee._primarycontactidValue))
+                {
+                    // get the contact.
+                    var runner = this.GetContactById(Guid.Parse(result.AdoxioLicencee._primarycontactidValue));
+                    runner.Wait();
+                    result.AdoxioLicencee.Primarycontactid = runner.Result;
+                }
+            }
+
+            return result;
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         public OneStopUtils(IConfiguration Configuration, ILogger logger)
         {
             this.Configuration = Configuration;
-            _dynamics = DynamicsUtils.SetupDynamics(Configuration);
+            _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
             _onestopRestClient = OneStopUtils.SetupOneStopClient(Configuration, logger);
             _logger = logger;
         }
@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         public async Task SendLicenceCreationMessage(PerformContext hangfireContext, string licenceGuidRaw, string suffix)
         {
             hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
-            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
             OneStopHubService.receiveFromPartnerResponse output;
             var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 try
                 {
                     var req = new ProgramAccountRequest();
-                    var innerXML = req.CreateXML(DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger), suffix);
+                    var innerXML = req.CreateXML(_dynamics.GetLicenceByIdWithChildren(licenceGuid), suffix);
                     var request = new OneStopHubService.receiveFromPartnerRequest(innerXML, "out");
                     output = serviceClient.receiveFromPartnerAsync(request).GetAwaiter().GetResult();
                 }
@@ -105,7 +105,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             }
             
 
-            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
             // prepare soap message
             var req = new ProgramAccountRequest();
@@ -115,7 +115,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine($"Getting Licence {licenceGuid}");
             }
 
-            var licence = DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger);
+            var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
 
             if (hangfireContext != null && licence != null)
             {
@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine("Starting OneStop SendLicenceCreationMessage Job.");
             }
             
-            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
             OneStopHubService.receiveFromPartnerResponse output;
             var serviceClient = new OneStopHubService.http___SOAP_BCPartnerPortTypeClient();
@@ -186,7 +186,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                         hangfireContext.WriteLine($"Getting licence {licenceGuid}");
                     }
                         
-                    MicrosoftDynamicsCRMadoxioLicences licence = DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger);
+                    MicrosoftDynamicsCRMadoxioLicences licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
 
                     if (hangfireContext != null)
                     {
@@ -235,11 +235,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                 hangfireContext.WriteLine("Starting OneStop REST SendLicenceCreationMessage Job.");
             }
             
-            string licenceGuid = DynamicsUtils.FormatGuidForDynamics(licenceGuidRaw);
+            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
             //prepare soap content
             var req = new ProgramAccountDetailsBroadcast();
-            var licence = DynamicsUtils.GetLicenceFromDynamics(hangfireContext, _dynamics, licenceGuid, _logger);
+            var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
 
             if (hangfireContext != null && licence != null)
             {
@@ -282,7 +282,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             if (hangfireContext != null)
             {
-                hangfireContext.WriteLine("Starting check for new licences job.");
+                hangfireContext.WriteLine("Starting check for new licences for onestop job.");
             }
             IList<MicrosoftDynamicsCRMadoxioLicences> result = null;
             try
@@ -322,7 +322,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 
             }
 
-            hangfireContext.WriteLine("End of check for new licences job.");
+            hangfireContext.WriteLine("End of check for new licences for onestop job.");
         }
 
 
