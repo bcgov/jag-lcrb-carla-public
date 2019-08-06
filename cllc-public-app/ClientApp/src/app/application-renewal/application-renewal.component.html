@@ -1,0 +1,404 @@
+<div class="dashboard-spacing" style="position: relative">
+  <div [ngBusy]="busy"></div>
+  <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
+    </div>
+    <div [formGroup]="form" class="application-wrapper">
+      <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
+      <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
+        THE APPLICATION</h3>
+      <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+        <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+      </section>
+
+      <section class="ngtest-property-details" *ngIf="application?.applicationType?.showPropertyDetails">
+        <h3 class="blue-header">PROPERTY DETAILS</h3>
+        <section class="padded-section">
+          <div style="position: relative">
+            <div [ngBusy]="busy"></div>
+
+            <app-field
+              [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
+              [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+              errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+              <input class="form-control" style="width: 500px;" type="text"
+                [readonly]="application?.applicationType?.establishmetNameIsReadOnly"
+                (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+            </app-field>
+
+            <app-field
+              label="The store is still located at a location that you own or have an executed lease or sub-lease."
+              errorMessage="Please select a value" [showChevrons]="false" [required]="true"
+              [valid]="!form.get('checklistBrandingAssessed')?.touched || form.get('checklistBrandingAssessed')?.valid">
+              <mat-button-toggle-group aria-label="Font Style" formControlName="checklistBrandingAssessed">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="Changed">No</mat-button-toggle>
+              </mat-button-toggle-group>
+            </app-field>
+            <div *ngIf="form.get('checklistBrandingAssessed')?.value === 'Changed'" class="field-changed">
+              <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+              contact you as part of this renewal process
+            </div>
+
+          </div>
+
+          <div class="ngtest-new-address"
+            *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
+
+            <address class="row">
+              <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
+                [valid]="form.get('establishmentAddressStreet').valid || !form.get('establishmentAddressStreet').touched"
+                errorMessage="Please enter the street address">
+                <input class="form-control" type="text" autocomplete="address-line1"
+                  formControlName="establishmentAddressStreet">
+              </app-field>
+              <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+                [valid]="form.get('establishmentAddressCity').valid || !form.get('establishmentAddressCity').touched"
+                errorMessage="Please enter the city">
+                <input class="form-control" type="text" autocomplete="address-level2"
+                  formControlName="establishmentAddressCity">
+              </app-field>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Province" [isFullWidth]="true">
+                  <input class="form-control" autocomplete="address-level1" readonly type="text"
+                    value="British Columbia">
+                </app-field>
+              </section>
+              <section class="col-md-4 col-xs-12">
+                <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
+                  [valid]="form.get('establishmentAddressPostalCode').valid || !form.get('establishmentAddressPostalCode').touched"
+                  errorMessage="Please enter the postal code">
+                  <input class="form-control" type="text" autocomplete="postal-code"
+                    formControlName="establishmentAddressPostalCode">
+                </app-field>
+              </section>
+              <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+                <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+              </app-field>
+            </address>
+
+            <div class="light-blue-bg" style="display: flex;">
+              <div style="flex: 0 0 210px;">
+                <app-field label="Parcel Identifier (PID)"
+                  [valid]="!form.get('establishmentParcelId').touched || form.get('establishmentParcelId').valid"
+                  errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+                  <input type="text" class="form-control" style="width: 200px;"
+                    (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength=9 formControlName="establishmentParcelId">
+                </app-field>
+              </div>
+              <div style="flex: 1; font-size: 11px;">
+                <span>
+
+                  <span>
+                    <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be
+                    found
+                    on
+                  </span> <br>
+                  <ul style="display: inline-block">
+                    <li>The title to the property</li>
+                    <li>Through the B.C. Land Title and Survey Authority</li>
+                    <li>The tax assessment notice from BC Assessment</li>
+                  </ul>
+                </span>
+
+                <ul style="display: inline-block">
+                  <li>BC Assessment’s e-valueBC website </li>
+                  <li>The municipal tax notice</li>
+                  <li>The property lease</li>
+                </ul>
+              </div>
+            </div>
+
+            <app-field
+              label="The store is still located at a location that you own or have an executed lease or sub-lease."
+              [valid]="true">
+              <mat-button-toggle-group aria-label="Font Style">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="Changed">No</mat-button-toggle>
+              </mat-button-toggle-group>
+            </app-field>
+            <div *ngIf="true" class="field-changed">
+              <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+              contact you as part of this renewal process
+            </div>
+
+
+          </div>
+
+          <p>&nbsp;</p>
+
+          <!-- Store Contact Info -->
+          <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
+            <div style="flex: 0 0 210px;">
+              <app-field label="Store Email" [required]="true"
+                [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
+                errorMessage="Please enter an email address">
+                <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
+                  [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                  formControlName="establishmentEmail">
+              </app-field>
+            </div>
+            <div style="flex: 0 0 210px;">
+              <app-field label="Store Phone" [required]="true"
+                [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
+                errorMessage="Please enter a phone number ">
+                <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
+                  [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
+              </app-field>
+            </div>
+          </section>
+
+
+        </section>
+      </section>
+      <p>&nbsp;</p>
+
+
+
+      <h3 class="blue-header">OWNERSHIP/LEASE</h3>
+      <div class="padded-section">
+        <app-field label="The store is still located at a location that you own or have an executed lease or sub-lease."
+          errorMessage="Please select a value" [showChevrons]="false" [required]="true"
+          [valid]="!form.get('checklistValidInterestAssessed')?.touched || form.get('checklistValidInterestAssessed')?.valid">
+          <mat-button-toggle-group formControlName="checklistValidInterestAssessed" aria-label="Font Style">
+            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="Changed">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </app-field>
+        <div *ngIf="form.get('checklistValidInterestAssessed')?.value === 'Changed'" class="field-changed">
+          <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will contact
+          you as part of this renewal process
+        </div>
+      </div>
+
+      <h3 class="blue-header">FLOOR PLAN</h3>
+      <div class="padded-section">
+        <app-field label="The floor plan has not changed." errorMessage="Please select a value" [showChevrons]="false"
+          [required]="true"
+          [valid]="!form.get('checklistFloorPlanAssessed')?.touched || form.get('checklistFloorPlanAssessed')?.valid">
+          <mat-button-toggle-group formControlName="checklistFloorPlanAssessed" aria-label="Font Style">
+            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="Changed">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </app-field>
+        <div *ngIf="form.get('checklistFloorPlanAssessed')?.value === 'Changed'" class="field-changed">
+          <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will contact
+          you as part of this renewal process
+        </div>
+      </div>
+
+      <h3 class="blue-header">SITE MAP</h3>
+      <div class="padded-section">
+        <app-field label="The Site Plan has not changed.s" errorMessage="Please select a value" [showChevrons]="false"
+          [required]="true"
+          [valid]="!form.get('checklistSiteMapAssessed')?.touched || form.get('checklistSiteMapAssessed')?.valid">
+          <mat-button-toggle-group formControlName="checklistSiteMapAssessed" aria-label="Font Style">
+            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="Changed">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </app-field>
+        <div *ngIf="form.get('checklistSiteMapAssessed')?.value === 'Changed'" class="field-changed">
+          <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will contact
+          you as part of this renewal process
+        </div>
+      </div>
+
+      <h3 class="blue-header">STORE EXTERIOR</h3>
+      <div class="padded-section">
+        <app-field label="There have been no modifications to the store’s exterior." errorMessage="Please select a value"
+          [showChevrons]="false" [required]="true"
+          [valid]="!form.get('checklistEstabRenderAssessed')?.touched || form.get('checklistEstabRenderAssessed')?.valid">
+          <mat-button-toggle-group formControlName="checklistEstabRenderAssessed" aria-label="Font Style">
+            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="Changed">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </app-field>
+        <div *ngIf="form.get('checklistEstabRenderAssessed')?.value === 'Changed'" class="field-changed">
+          <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will contact
+          you as part of this renewal process
+        </div>
+      </div>
+
+      <h3 class="blue-header">SIGNAGE</h3>
+      <div class="padded-section">
+        <app-field
+          label="Signage has not changed and still complies with the federal Cannabis Act and Cannabis Regulations."
+          errorMessage="Please select a value" [showChevrons]="false" [required]="true"
+          [valid]="!form.get('checklistSignageAssessed')?.touched || form.get('checklistSignageAssessed')?.valid">
+          <mat-button-toggle-group formControlName="checklistSignageAssessed" aria-label="Font Style">
+            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="Changed">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </app-field>
+        <div *ngIf="form.get('checklistSignageAssessed')?.value === 'Changed'" class="field-changed">
+          <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will contact
+          you as part of this renewal process
+        </div>
+      </div>
+
+      <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
+        DECLARATIONS
+      </h3>
+      <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
+        <p appRemoveIfFeatureOn="Marketer">
+          The application must only be submitted by an individual with the authority to bind the applicant. The
+          branch
+          relies on the applicant to ensure that the individual who submits this application is authorized to do so.
+          Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
+          be
+          an officer or, in some cases, a director
+        </p>
+        <section appRemoveIfFeatureOff="Marketer">
+          <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+            The application must only be submitted by an individual with the authority to bind the applicant. The
+            branch
+            relies on the applicant to ensure that the individual who submits this application is authorized to do
+            so.
+            Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
+            usually
+            be
+            an officer or, in some cases, a director
+          </div>
+          <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+            <p *ngIf="account?.businessType === 'SoleProprietor'">
+              This application should be submitted the sole proprietor.
+            </p>
+            <p *ngIf="account?.businessType === 'Society'">
+              This application must only be submitted by an individual with the authority to bind the applicant. The
+              branch relies on the applicant to ensure that the individual who submits this application is
+              authorized to
+              do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
+              defined in the Societies Act).
+            </p>
+            <p *ngIf="account?.businessType === 'PublicCorporation'">
+              This application must only be submitted by an individual with the authority to bind the applicant. The
+              branch relies on the applicant to ensure that the individual who submits this application is
+              authorized to
+              do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+              will
+              usually be an officer or, in some cases, a director.
+            </p>
+            <div *ngIf="businessTypeIsPartnership()">
+              <p>
+                This application must only be submitted by an individual with the authority to bind the applicant.
+                The
+                branch relies on the applicant to ensure that the individual who submits this application is
+                authorized
+                to do so. Typically, an appropriate individual will be as follows:
+              </p>
+              <ul>
+                <li>If the applicant is a general partnership, one of the general partners</li>
+                <li>If the applicant is a limited partnership, the general partner of the partnership</li>
+              </ul>
+            </div>
+            <p *ngIf="businessTypeIsPrivateCorporation()">
+              The application must only be submitted by an individual with the authority to bind the applicant. The
+              branch relies on the applicant to ensure that the individual who submits this application is
+              authorized to
+              do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+              will
+              usually be an officer or, in some cases, a director.
+            </p>
+
+          </div>
+
+        </section>
+        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Note: A lawyer or
+          consultant,
+          may NOT submit this application on behalf of
+          the applicant.</p>
+        <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+          <p *ngIf="businessTypeIsPrivateCorporation()">
+            Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
+          </p>
+          <p *ngIf="!businessTypeIsPrivateCorporation()">
+            Note: A lawyer, licensee representative or third party operator may NOT submit this application on
+            behalf of
+            the applicant.
+          </p>
+        </section>
+        <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+          errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="authorizedToSubmit">
+            <span class="error-states">*</span>
+            <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
+            </div>
+          </section>
+        </app-field>
+        <p>
+          Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+          manager
+          an application, or
+          information or a record included as part of the application, that contains false or misleading
+          information, or
+          fails to disclose a material fact”.
+        </p>
+        <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+          errorMessage="Please affirm that all of the information provided for this application is true and complete."
+          [showChevrons]="false">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="signatureAgreement">
+            <span class="error-states">*</span>
+            <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+              application is true and complete
+            </div>
+          </section>
+        </app-field>
+      </div>
+
+      <section class="error" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
+      </section>
+
+      <div class="light-blue-bg">
+        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+          The Province does not know how many application for a cannabis retail store licence will be received.
+          Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
+          processing, applicants must make sure the application is complete before submitting it.
+        </p>
+        <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+          The Province does not know how many applications for a cannabis marketing licence will be received.
+          Therefore,
+          it is difficult to predict how long applications will take to process. To minimize delays in processing,
+          applicants must make sure the application is complete before submitting it.
+        </p>
+        <br>
+        <p>
+          The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised
+          that
+          once an application is submitted, you will be unable to upload additional documentation. For questions on
+          the
+          LCRB application process, please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+        </p>
+      </div>
+
+      <section style="position: relative; margin-top: 20px;">
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+          <span>
+            <i class="fa fa-save" style="color: #fff;"></i>
+            SAVE FOR LATER
+          </span>
+        </button>
+        <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+          <span (click)="cancelApplication()">
+            <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+            <a href="javascript: void(0)">
+              Cancel Application
+            </a>
+          </span>
+        </span>
+
+        <div [ngBusy]="busy"></div>
+      </section>
+    </div>
+  </div>
+</div>
