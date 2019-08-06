@@ -29,6 +29,8 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   applicationId: string;
   application: Application;
   busy: any;
+  showValidationMessages: boolean;
+  validationMessages: any[];
 
 
   constructor(private store: Store<AppState>, private fb: FormBuilder,
@@ -43,9 +45,9 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       id: [''],
       // noOrgStructureChange: [''],
-      checklistOrgLeadershipBuilt: [''],
-      checklistKeyPersonnelBuilt: [''],
-      checklistShareholdersBuilt: ['']
+      checklistOrgLeadershipBuilt: ['', Validators.required],
+      checklistKeyPersonnelBuilt: ['', Validators.required],
+      checklistShareholdersBuilt: ['', Validators.required]
     });
     this.subscribeForData();
   }
@@ -90,7 +92,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication({...this.application, ...this.form.value})
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -104,8 +106,28 @@ export class AssociatePageComponent extends FormBase implements OnInit {
       }));
   }
 
+  isValid(): boolean {
+    // mark controls as touched
+    for (const c in this.form.controls) {
+      if (typeof (this.form.get(c).markAsTouched) === 'function') {
+        this.form.get(c).markAsTouched();
+      }
+    }
+    this.showValidationMessages = false;
+    this.validationMessages = [];
+
+    if (!this.form.valid) {
+      this.validationMessages.push('Some required fields have not been completed');
+    }
+    return this.form.valid;
+  }
+
   goToNextPage() {
-    this.busy = this.save().subscribe(_ => { this.saveComplete.emit(true); });
+    if (!this.isValid()) {
+      this.showValidationMessages = true;
+    } else {
+      this.busy = this.save().subscribe(_ => { this.saveComplete.emit(true); });
+    }
   }
 
 }
