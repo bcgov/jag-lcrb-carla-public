@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDynamicsClient dynamicsClient = OneStopUtils.SetupDynamics(Configuration);
+            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), Configuration));
 
             services.AddSingleton<ILogger>(_loggerFactory.CreateLogger("OneStopController"));
@@ -249,6 +249,8 @@ private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFac
                     log.LogInformation("Creating Hangfire job for License issuance check ...");
                     ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
                     RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.HourInterval(1));
+                    ILogger orbookLog = loggerFactory.CreateLogger(typeof(OrgBookUtils));
+                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForNewLicences(null), Cron.HourInterval(1));
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
