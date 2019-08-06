@@ -10,6 +10,11 @@ $accent: mat-palette($mat-indigo, 500, A200, A400);
 $warn: mat-palette($mat-red, 500);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
+$custom-typography: mat-typography-config(
+  $font-family: 'MyriadWebPro, Calibri, Arial, "sans serif"'
+);
+
+@include angular-material-typography($custom-typography);
 body {
     color: #494949;
     background: #f2f2f2;
