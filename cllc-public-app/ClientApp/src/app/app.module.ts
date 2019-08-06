@@ -150,6 +150,7 @@ import {
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
 import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-renewal-steps.component';
+import { ApplicationRenewalComponent } from './application-renewal/application-renewal.component';
 
 
 @NgModule({
@@ -223,7 +224,8 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
     KeyPersonnelDialogComponent,
     AssociatePageComponent,
     ShareholderDialogComponent,
-    LicenceRenewalStepsComponent
+    LicenceRenewalStepsComponent,
+    ApplicationRenewalComponent
   ],
   imports: [
     ChartsModule,
