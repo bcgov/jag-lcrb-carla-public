@@ -21,17 +21,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class ApplicationsController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly SharePointFileManager _sharePointFileManager;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;        
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
-        public ApplicationsController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
-            Configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
-            _sharePointFileManager = sharePointFileManager;
+            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;            
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
         }
@@ -385,7 +383,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a SharePointDocumentLocation link
             string folderName = GetApplicationFolderName(adoxioApplication);
             string name = adoxioApplication.AdoxioJobnumber + " Files";
-
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
             // Create the folder
             bool folderExists = await _sharePointFileManager.FolderExists(ApplicationDocumentUrlTitle, folderName);
             if (!folderExists)

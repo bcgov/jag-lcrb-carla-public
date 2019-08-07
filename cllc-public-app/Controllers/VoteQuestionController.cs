@@ -1,22 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     public class VoteQuestionController : Controller
-    {
-        private readonly IConfiguration Configuration;
+    {        
         private readonly AppDbContext db;
-        public VoteQuestionController(AppDbContext db, IConfiguration configuration)
+        public VoteQuestionController(AppDbContext db)
         {
-            Configuration = configuration;
             this.db = db;
         }
 

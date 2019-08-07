@@ -19,16 +19,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     public class InvoiceController : Controller
     {
-        private readonly IConfiguration Configuration;        
+        private readonly IConfiguration _configuration;        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
 		private readonly ILogger _logger;        
 
 		public InvoiceController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
-            Configuration = configuration;
-            this._httpContextAccessor = httpContextAccessor;
-            this._dynamicsClient = dynamicsClient;
+            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
+            _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(InvoiceController));                    
         }
 
