@@ -7,4 +7,5 @@ export class ApplicationSummary {
   jobNumber: string;
   applicationTypeName: string;
   isIndigenousNation: boolean;
+  licenceId: string;
 }
