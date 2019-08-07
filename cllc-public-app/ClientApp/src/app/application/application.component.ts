@@ -149,7 +149,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
-      applicantType: ['', Validators.required]
+      applicantType: ['', Validators.required],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -447,6 +447,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return valid && this.form.valid;
   }
 
+
   /**
    * Dialog to confirm the application cancellation (status changed to "Termindated")
    */
@@ -500,11 +501,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   isCRSRenewalApplication(): boolean {
-    return [
-      ApplicationTypeNames.CRSRenewal.toString(),
-      ApplicationTypeNames.CRSRenewalLate30.toString(),
-      ApplicationTypeNames.CRSRenewalLate6Months.toString(),
-    ].indexOf(this.application.applicationType.name) !== -1;
+    return this.application
+      && this.application.applicationType
+      && [
+        ApplicationTypeNames.CRSRenewal.toString(),
+        ApplicationTypeNames.CRSRenewalLate30.toString(),
+        ApplicationTypeNames.CRSRenewalLate6Months.toString(),
+      ].indexOf(this.application.applicationType.name) !== -1;
   }
 
   showFormControl(state: string): boolean {

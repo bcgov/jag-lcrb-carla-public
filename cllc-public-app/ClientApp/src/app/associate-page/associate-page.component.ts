@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { takeWhile, filter } from 'rxjs/operators';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
 import { UserDataService } from '@services/user-data.service';
 import { Store } from '@ngrx/store';
@@ -11,6 +11,10 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { Account } from '@models/account.model';
+import { ApplicationDataService } from '@services/application-data.service';
+import { Application } from '@models/application.model';
+import { Observable, forkJoin, of } from 'rxjs';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-associate-page',
@@ -18,22 +22,32 @@ import { Account } from '@models/account.model';
   styleUrls: ['./associate-page.component.scss']
 })
 export class AssociatePageComponent extends FormBase implements OnInit {
-
+  @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   account: Account;
   legalEntityId: string;
   lockAssociates = true;
+  applicationId: string;
+  application: Application;
+  busy: any;
+  showValidationMessages: boolean;
+  validationMessages: any[];
 
 
-  constructor(private store: Store<AppState>, private fb: FormBuilder) {
+  constructor(private store: Store<AppState>, private fb: FormBuilder,
+    private applicationDataService: ApplicationDataService,
+    public snackBar: MatSnackBar,
+    private route: ActivatedRoute) {
     super();
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      noOrgStructureChange: [''],
-      noShareholderChange: [''],
-      noKeyPersonnelChange: [''],
-      noLeadershipChange: ['']
+      id: [''],
+      // noOrgStructureChange: [''],
+      checklistOrgLeadershipBuilt: ['', Validators.required],
+      checklistKeyPersonnelBuilt: ['', Validators.required],
+      checklistShareholdersBuilt: ['', Validators.required]
     });
     this.subscribeForData();
   }
@@ -47,6 +61,73 @@ export class AssociatePageComponent extends FormBase implements OnInit {
         this.account = account;
         this.legalEntityId = this.account.legalEntity.id;
       });
+
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: Application) => {
+        if (data.establishmentParcelId) {
+          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+        }
+        if (data.applicantType === 'IndigenousNation') {
+          (<any>data).applyAsIndigenousNation = true;
+        }
+        this.application = data;
+
+        const noNulls = Object.keys(data)
+          .filter(e => data[e] !== null)
+          .reduce((o, e) => {
+            o[e] = data[e];
+            return o;
+          }, {});
+
+        this.form.patchValue(noNulls);
+      },
+        () => {
+          console.log('Error occured');
+        }
+      );
+  }
+
+  save(showProgress: boolean = false): Observable<boolean> {
+    const saveData = this.form.value;
+
+    return forkJoin(
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
+    ).pipe(takeWhile(() => this.componentActive))
+      .pipe(catchError(() => {
+        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        return of(false);
+      }))
+      .pipe(mergeMap(() => {
+        if (showProgress === true) {
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+        }
+        return of(true);
+      }));
+  }
+
+  isValid(): boolean {
+    // mark controls as touched
+    for (const c in this.form.controls) {
+      if (typeof (this.form.get(c).markAsTouched) === 'function') {
+        this.form.get(c).markAsTouched();
+      }
+    }
+    this.showValidationMessages = false;
+    this.validationMessages = [];
+
+    if (!this.form.valid) {
+      this.validationMessages.push('Some required fields have not been completed');
+    }
+    return this.form.valid;
+  }
+
+  goToNextPage() {
+    if (!this.isValid()) {
+      this.showValidationMessages = true;
+    } else {
+      this.busy = this.save().subscribe(_ => { this.saveComplete.emit(true); });
+    }
   }
 
 }
