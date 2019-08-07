@@ -19,5 +19,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string JobNumber { get; set; } //adoxio_jobnumber
         public string ApplicationTypeName { get; set; }
         public bool IsIndigenousNation { get; set; }
+
+        public string LicenceId { get; set; }
     }
 }

@@ -220,7 +220,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    const saveData = this.form.value;
+    const saveData = {...this.application, ...this.form.value};
 
     return forkJoin(
       this.applicationDataService.updateApplication(this.form.value),
