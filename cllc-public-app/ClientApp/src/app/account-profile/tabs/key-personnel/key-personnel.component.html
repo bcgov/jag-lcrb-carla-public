@@ -1,6 +1,9 @@
 <div>
-  <p *ngIf="dataSource?.data?.length">
+  <p *ngIf="dataSource?.data?.length && !lockAssociates">
     The following individuals have been identified as key personnel:
+  </p>
+  <p *ngIf="dataSource?.data?.length && lockAssociates">
+      The following individuals have been identified as key personnel:
   </p>
 
   <p *ngIf="!dataSource?.data?.length"> 
