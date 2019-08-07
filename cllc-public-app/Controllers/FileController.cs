@@ -2,8 +2,6 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -22,17 +19,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     //[Authorize(Policy = "Business-User")]
     public class FileController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly SharePointFileManager _sharePointFileManager;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;        
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
-        public FileController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public FileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
-            Configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
-            _sharePointFileManager = sharePointFileManager;
+            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;            
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(FileController));
         }
@@ -143,6 +138,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
             string folderName = await GetFolderName(entityName, entityId, _dynamicsClient);
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
             try
             {
                 await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
@@ -314,7 +310,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
             byte[] fileContents = await _sharePointFileManager.DownloadFile(serverRelativeUrl);
             return new FileContentResult(fileContents, "application/octet-stream")
             {
@@ -367,7 +363,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 string folderName = await GetFolderName(entityName, entityId, _dynamicsClient); ;
                 // Get the file details list in folder
-                List<FileDetailsList> fileDetailsList = null;
+                List<Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = null;
+                SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
                 try
                 {
                     fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(entityName), folderName, documentType);
@@ -384,7 +381,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 if (fileDetailsList != null)
                 {
-                    foreach (FileDetailsList fileDetails in fileDetailsList)
+                    foreach (Interfaces.SharePointFileManager.FileDetailsList fileDetails in fileDetailsList)
                     {
                         ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem()
                         {
@@ -485,7 +482,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // Update modifiedon to current time
             UpdateEntityModifiedOnDate(entityName, entityId);
-
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
             var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
             if (result)
             {
@@ -540,6 +537,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
         {
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
             var exists = await _sharePointFileManager.DocumentLibraryExists(listTitle);
             if (!exists)
             {

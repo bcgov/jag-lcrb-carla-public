@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -25,8 +24,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {"forbidden", new List<string>()},
                 {"problematic", new List<string>()},
             };
-            //List<string> forbiddenWords = new List<string>();
-            //List<string> problematicWords = new List<string>();
 
             var watchWordsList = _dynamicsClient.Establishmentwatchwords.Get().Value;
 

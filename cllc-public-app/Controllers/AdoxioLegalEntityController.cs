@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -23,20 +22,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class AdoxioLegalEntityController : Controller
     {
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly string _encryptionKey;
-        private readonly SharePointFileManager _sharePointFileManager;
+        
 
         public AdoxioLegalEntityController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
-            Configuration = configuration;
+            _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
-            _encryptionKey = Configuration["ENCRYPTION_KEY"];
-            _sharePointFileManager = sharePointFileManager;
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];            
             _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
         }
 
@@ -487,7 +485,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private string GetConsentLink(string email, string individualId, string parentId)
         {
-            string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"];
 
             result += "/bcservice?path=/security-consent/" + parentId + "/" + individualId + "?code=";
 
@@ -570,7 +568,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string lastname = recipientEntity.AdoxioLastname;
 
                 string confirmationEmailLink = GetConsentLink(email, recipientId, id);
-                string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
+                string bclogo = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/assets/bc-logo.svg";
                 /* send the user an email confirmation. */
                 string body =
                         "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
@@ -607,7 +605,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     + "<p>Do not reply to this email address</p>";
 
                 // send the email.
-                SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
+                SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
 
                 // Specify the message content.
                 MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
