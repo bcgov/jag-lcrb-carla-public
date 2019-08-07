@@ -863,7 +863,7 @@
     <div class="col-md-7 col-sm-12">
       <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
     </div>
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-sm-12" *ngIf="application.applicationType.name === ApplicationTypeNames.CannabisRetailStore">
       <h1>&nbsp;</h1>
       <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
     </div>
