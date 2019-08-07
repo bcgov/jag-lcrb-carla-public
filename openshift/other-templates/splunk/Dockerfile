@@ -1,0 +1,1 @@
+copy getpass.py /usr/lib/python2.7
