@@ -1,23 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     public class SurveyController : Controller
-    {
-        private readonly IConfiguration Configuration;
+    {        
         private readonly AppDbContext db;
-        public SurveyController(AppDbContext db, IConfiguration configuration)
-        {
-            Configuration = configuration;
+        public SurveyController(AppDbContext db)
+        {            
             this.db = db;
         }
         [HttpGet("getActive")]
