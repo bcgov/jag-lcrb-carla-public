@@ -448,6 +448,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ValueNotChanged? ChecklistKeyPersonnelBuilt { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ValueNotChanged? ChecklistShareholdersBuilt { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistEstablishmentAddressAssessed { get; set; }
 
         public string IndigenousNationId { get; set; }
         public string FederalProducerNames { get; set; }
