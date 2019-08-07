@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "***** STARTING SPLUNK *****"
-if grep -R "$(id -u)" /etc/passwd then
+if ! grep -R "$(id -u)" /etc/passwd then
   echo "***** Problem with whoami *****"
   if [ -w /etc/passwd ]; then
     echo "***** Updating passwd *****"
