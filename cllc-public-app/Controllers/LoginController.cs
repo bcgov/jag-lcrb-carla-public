@@ -1,5 +1,4 @@
 ﻿using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Contexts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,16 +13,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("login")]
     public class LoginController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly AppDbContext db;
+        private readonly IConfiguration _configuration;        
         private readonly IHostingEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
 
-        public LoginController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env)
+        public LoginController(IConfiguration configuration, IHostingEnvironment env)
         {
-            Configuration = configuration;
-            _env = env;
-            this.db = db;            
+            _configuration = configuration;
+            _env = env;                      
         }
 
         [HttpGet]
@@ -57,7 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "/" : Configuration["BASE_PATH"];
+                string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
                 // we want to redirect to the dashboard.
                 string url = "dashboard";
 
@@ -132,7 +129,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             );
 
-            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+            string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
 
             string url = "dashboard";
 
