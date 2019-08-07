@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System;
 using System.Threading;
@@ -9,18 +10,20 @@ namespace Gov.Lclb.Cllb.Interfaces
     public class SharepointHealthCheck : IHealthCheck
     // reference https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-2.2
     {
-        private readonly SharePointFileManager _sharepoint;
-        public SharepointHealthCheck(SharePointFileManager sharepoint)
+        private readonly IConfiguration _configuration;
+
+        public SharepointHealthCheck(IConfiguration configuration)
         {
-            _sharepoint = sharepoint;
+            _configuration = configuration;
         }
 
         public Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-            // Try and get the Account document library
-            bool healthCheckResultHealthy;
+        SharePointFileManager _sharepoint = new SharePointFileManager(_configuration);
+        // Try and get the Account document library
+        bool healthCheckResultHealthy;
             try
             {
                 var result = _sharepoint.GetDocumentLibrary("Account").GetAwaiter().GetResult();
