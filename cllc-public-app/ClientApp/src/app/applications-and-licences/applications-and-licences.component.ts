@@ -12,11 +12,12 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, filter } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
+import * as moment from 'moment';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -96,6 +97,10 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           });
 
           licenses.forEach((licence: License | any) => {
+            const relatedApplications = applications.map(a => a.licenceId).filter(l => l === licence.licenseId);
+            if (relatedApplications.length > 0) {
+              licence.relatedApplicationId = relatedApplications[0];
+            }
             this.licensedApplications.push(licence);
           });
 
@@ -190,8 +195,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       });
   }
 
-  renewLicence() { }
-
   startNewLicenceApplication() {
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Cannabis Retail Store',
@@ -243,6 +246,32 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         console.log('Error starting a New Marketer Application');
       }
     );
+  }
+
+  startRenewal(licence) {
+    if (licence.relatedApplicationId) {
+      this.router.navigateByUrl('/renew-crs-licence/application/' + licence.relatedApplicationId);
+    } else {
+      const actionName = 'CRS Renewal';
+      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenceId, actionName)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(data => {
+          this.router.navigateByUrl('/renew-crs-licence/application/' + data.id);
+        },
+          () => {
+            this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
+              { duration: 3500, panelClass: ['red-snackbar'] });
+            console.log('Error starting a Change Licence Location Application');
+          }
+        );
+    }
+  }
+
+  isAboutToExpire(expiryDate: string) {
+    const now = moment(new Date()).startOf('day');
+    const expiry = moment(expiryDate).startOf('day');
+    const diff = expiry.diff(now, 'days') + 1;
+    return diff <= 60 || expiry < now;
   }
 
 }
