@@ -68,4 +68,5 @@ export class Application {
   checklistSignageAssessed: string;
   checklistSiteMapAssessed: string;
   checklistValidInterestAssessed: string;
+  checklistEstablishmentAddressAssessed: string;
 }

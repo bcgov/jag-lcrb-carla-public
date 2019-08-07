@@ -92,6 +92,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioChecklistorgleadershipbuilt = (int?)from.ChecklistOrgLeadershipBuilt;
             to.AdoxioChecklistkeypersonnelbuilt = (int?)from.ChecklistKeyPersonnelBuilt;
             to.AdoxioChecklistshareholdersbuilt = (int?)from.ChecklistShareholdersBuilt;
+            to.AdoxioChecklistestablishmentaddressassessed = (int?)from.ChecklistEstablishmentAddressAssessed;
 
 
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
@@ -217,7 +218,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ChecklistOrgLeadershipBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistorgleadershipbuilt,
                 ChecklistKeyPersonnelBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistkeypersonnelbuilt,
                 ChecklistShareholdersBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistshareholdersbuilt,
-
+                ChecklistEstablishmentAddressAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistestablishmentaddressassessed,
+                
 
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
