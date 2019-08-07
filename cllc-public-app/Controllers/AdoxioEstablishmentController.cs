@@ -2,27 +2,23 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
-using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     [Authorize(Policy = "Business-User")]
     public class AdoxioEstablishmentController : Controller
-    {
-        private readonly IConfiguration Configuration;
+    {        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
 
-        public AdoxioEstablishmentController(IConfiguration configuration, IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
-        {
-            Configuration = configuration;
+        public AdoxioEstablishmentController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
+        {            
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(AdoxioEstablishmentController));
         }

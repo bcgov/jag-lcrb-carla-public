@@ -331,11 +331,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [EnumMember(Value = "23:45")]
         sh2345 = 845280095
     }
+    public enum ValueNotChanged
+    {
+        Yes = 845280000,
+        Changed = 845280002
+    }
 
     public class Application
     {
         public string Id { get; set; } //adoxio_applicationid
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioApplicationStatusCodes ApplicationStatus { get; set; } //statuscode
 
@@ -423,6 +428,26 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ViewModels.ApplicationType ApplicationType { get; set; }
 
         public TiedHouseConnection TiedHouse { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistBrandingAssessed { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistValidInterestAssessed { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistFloorPlanAssessed { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistSiteMapAssessed { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistEstabRenderAssessed { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistSignageAssessed { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistOrgLeadershipBuilt { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistKeyPersonnelBuilt { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? ChecklistShareholdersBuilt { get; set; }
 
         public string IndigenousNationId { get; set; }
         public string FederalProducerNames { get; set; }

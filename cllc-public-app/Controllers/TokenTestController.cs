@@ -1,41 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utility;
+﻿using Gov.Lclb.Cllb.Public.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+using System;
+using System.Net;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     public class TokenTestController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly AppDbContext db;
+        private readonly IConfiguration _configuration;        
         private readonly string _encryptionKey;
 
-        public TokenTestController(AppDbContext db, IConfiguration configuration)
+        public TokenTestController(IConfiguration configuration)
         {
-            Configuration = configuration;
-            this.db = db;
-            this._encryptionKey = Configuration["ENCRYPTION_KEY"];
+            _configuration = configuration;            
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];
         }
         [HttpGet()]
         [AllowAnonymous]
         public ActionResult GetToken()
         {
-            string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"];
             result += "/bcservice?code="; 
 
             // generate a payload.

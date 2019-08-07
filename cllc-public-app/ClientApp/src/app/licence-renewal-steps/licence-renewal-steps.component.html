@@ -8,26 +8,14 @@
     </ng-template> -->
 
     <mat-step label="Review Account Profile">
-      <div class="row">
-        <app-account-profile [useInStepperMode]="true" (saveComplete)="stepper.selectedIndex = 1"></app-account-profile>
-      </div>
+      <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" style="width: 100%" (saveComplete)="stepper.selectedIndex = 1">
+      </app-account-profile>
     </mat-step>
     <mat-step label="Review Organization Information">
-      <div class="row">
-        <app-associate-page></app-associate-page>
-      </div>
-      <div style="padding-right: 30px;">
-        <button class="btn btn-primary" style="float: right;" mat-button matStepperNext>
-          CONTINUE TO APPLICATION&nbsp;
-          <i class="fas fa-chevron-right"></i>
-        </button>
-        <div style="clear: both;"></div>
-      </div>
+      <app-associate-page *ngIf="stepper.selectedIndex === 1" style="width: 100%" (saveComplete)="stepper.selectedIndex = 2"></app-associate-page>
     </mat-step>
     <mat-step label="Complete Application">
-      <div class="row">
-        <router-outlet></router-outlet>
-      </div>
+      <app-application-renewal *ngIf="stepper.selectedIndex === 2" style="width: 100%"></app-application-renewal>
     </mat-step>
   </mat-horizontal-stepper>
 

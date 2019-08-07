@@ -1,37 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("bcservice")]
     public class BCServiceController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly AppDbContext db;
+        private readonly IConfiguration _configuration;        
         private readonly IHostingEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
         private readonly string _encryptionKey;
 
-        public BCServiceController(AppDbContext db, IConfiguration configuration, IHostingEnvironment env)
+        public BCServiceController(IConfiguration configuration, IHostingEnvironment env)
         {
-            Configuration = configuration;
-            _env = env;
-            this.db = db;
-            _encryptionKey = Configuration["ENCRYPTION_KEY"];
+            _configuration = configuration;
+            _env = env;            
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];
         }
 
         [HttpGet]
@@ -65,9 +58,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                if (string.IsNullOrEmpty(Configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
+                if (string.IsNullOrEmpty(_configuration["ENABLE_SERVICECARD_TOKEN_TEST"]))
                 {
-                    string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+                    string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
                     basePath += "/worker-qualification/dashboard";
                     return Redirect(basePath);
                 }
@@ -170,7 +163,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             );
 
-            string basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"]) ? "" : Configuration["BASE_PATH"];
+            string basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "" : _configuration["BASE_PATH"];
             basePath += "/worker-qualification/dashboard";
             return Redirect(basePath);
         }
