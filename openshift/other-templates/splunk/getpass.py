@@ -155,7 +155,7 @@ def getuser():
 
     # If this fails, the exception will "explain" why
     import pwd
-	try:
+    try:
         return pwd.getpwuid(os.geteuid())[0]
     except KeyError: # Sometimes fails in containers
         return None    
