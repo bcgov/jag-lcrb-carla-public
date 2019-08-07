@@ -70,18 +70,7 @@
         {
           "type": "Docker",
           "dockerStrategy":
-          {
-			"env": [
-            {
-                "name": "SA_PASSWORD",
-                  "valueFrom": {
-                  "secretKeyRef": {
-                  "key": "database-admin-password",
-                  "name": "${NAME}"
-                  }
-                }
-             }
-			],			             
+          {			            
             "dockerfilePath": "${DOCKER_FILE_PATH}"            
           }
         },
@@ -102,7 +91,7 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "zabbix"
+      "value": "splunk-openshift"
     },
     {
       "name": "GIT_REF",
@@ -116,7 +105,7 @@
       "displayName": "Source Context Directory",
       "description": "The source context directory.",
       "required": false,
-      "value": "/zabbix-appliance/rhel"
+      "value": "/openshift/other-templates/splunk"
     },
     {
       "name": "SOURCE_IMAGE_KIND",
@@ -130,7 +119,7 @@
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "rhel7"
+      "value": "splunk"
     },
 	{
       "name": "SOURCE_IMAGE_NAMESPACE",
