@@ -22,18 +22,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [Authorize(Policy = "Business-User")]
     public class LicensesController : Controller
-    {
-        private readonly IConfiguration Configuration;
+    {        
         private readonly IMemoryCache _cache;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly PdfClient _pdfClient;
         private readonly ILogger _logger;
 
-        public LicensesController(IDynamicsClient dynamicsClient, IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
+        public LicensesController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
             PdfClient pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
-        {
-            Configuration = configuration;
+        {            
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;

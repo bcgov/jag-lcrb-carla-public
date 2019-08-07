@@ -10,11 +10,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     public class ApplicationVersionInfoController : Controller
     {
-        private readonly IConfiguration Configuration;        
+        private readonly IConfiguration _configuration;        
         
         public ApplicationVersionInfoController(IConfiguration configuration)
         {
-            Configuration = configuration;                  
+            _configuration = configuration;                  
         }
 
         /// <summary>
@@ -31,12 +31,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
             ApplicationVersionInfo avi = new ApplicationVersionInfo()
             {
-                BaseUri = Configuration["BASE_URI"],
-                BasePath = Configuration["BASE_PATH"],
-                Environment = Configuration["ASPNETCORE_ENVIRONMENT"],                
-                SourceCommit = Configuration["OPENSHIFT_BUILD_COMMIT"],
-                SourceRepository = Configuration["OPENSHIFT_BUILD_SOURCE"],
-                SourceReference = Configuration["OPENSHIFT_BUILD_REFERENCE"],
+                BaseUri = _configuration["BASE_URI"],
+                BasePath = _configuration["BASE_PATH"],
+                Environment = _configuration["ASPNETCORE_ENVIRONMENT"],                
+                SourceCommit = _configuration["OPENSHIFT_BUILD_COMMIT"],
+                SourceRepository = _configuration["OPENSHIFT_BUILD_SOURCE"],
+                SourceReference = _configuration["OPENSHIFT_BUILD_REFERENCE"],
                 FileCreationTime = creationTime.ToString("O"), // Use the round trip format as it includes the time zone.
                 FileVersion = fileVersion
             };

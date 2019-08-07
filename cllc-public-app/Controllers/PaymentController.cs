@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private readonly BCEPWrapper _bcep;
 
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                  IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory,
                                  IDynamicsClient dynamicsClient, BCEPWrapper bcep)
         {
-            Configuration = configuration;
+            _configuration = configuration;
             _bcep = bcep;
             _dynamicsClient = dynamicsClient;            
             _httpContextAccessor = httpContextAccessor;
@@ -242,7 +242,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
 
-            var redirectPath = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
+            var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), redirectPath);
 
             _logger.LogError(">>>>>" + redirectUrl["url"]);
@@ -745,7 +745,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             Dictionary<string, string> redirectUrl;
             redirectUrl = new Dictionary<string, string>();
-            var redirectPath = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
+            var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), redirectPath);
 
             _logger.LogInformation(">>>>>" + redirectUrl["url"]);
