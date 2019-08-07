@@ -1,7 +1,8 @@
 #!/bin/sh
+echo "***** STARTING SPLUNK *****"
 if ! whoami &> /dev/null; then
   if [ -w /etc/passwd ]; then
-    echo "${USER_NAME:-splunk}:x:$(id -u):0:${USER_NAME:-splunk} user:${HOME}:/sbin/nologin" >> /etc/passwd
+    echo "${USER_NAME:-splunkd}:x:$(id -u):0:${USER_NAME:-splunkd} user:${HOME}:/sbin/nologin" >> /etc/passwd
   fi
 fi
-exec /sbin/entrypoint.sh start 
+exec /sbin/entrypoint.sh start-service
