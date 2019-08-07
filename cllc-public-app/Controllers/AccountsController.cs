@@ -23,27 +23,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class AccountsController : Controller
     {
         private readonly BCeIDBusinessQuery _bceid;
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
-        private readonly IOrgBookClient _orgBookclient;
-        private readonly SharePointFileManager _sharePointFileManager;
+        private readonly IOrgBookClient _orgBookclient;        
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public AccountsController(IConfiguration configuration,
-            SharePointFileManager sharePointFileManager,
+        public AccountsController(IConfiguration configuration,            
             IHttpContextAccessor httpContextAccessor,
             IOrgBookClient orgBookClient,
             BCeIDBusinessQuery bceid,
             ILoggerFactory loggerFactory,
             IDynamicsClient dynamicsClient)
         {
-            Configuration = configuration;
+            _configuration = configuration;
             _bceid = bceid;
             _dynamicsClient = dynamicsClient;
             _orgBookclient = orgBookClient;
             _httpContextAccessor = httpContextAccessor;
-            _sharePointFileManager = sharePointFileManager;
             _logger = loggerFactory.CreateLogger(typeof(AccountsController));
         }
 
@@ -313,6 +310,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var exists = false;
             var accountIdCleaned = accountId.ToUpper().Replace("-", "");
             var folderName = $"{accountName}_{accountIdCleaned}";
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
             var fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             if (fileDetailsList != null)
             {
