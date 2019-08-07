@@ -4,4 +4,4 @@ if ! whoami &> /dev/null; then
     echo "${USER_NAME:-splunk}:x:$(id -u):0:${USER_NAME:-splunk} user:${HOME}:/sbin/nologin" >> /etc/passwd
   fi
 fi
-exec "/sbin/entrypoint.sh $@" 
+exec /sbin/entrypoint.sh start 
