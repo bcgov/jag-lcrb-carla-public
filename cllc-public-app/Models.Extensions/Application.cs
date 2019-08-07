@@ -340,7 +340,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Name = dynamicsApplication.AdoxioName,
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
                 //get establishment name and address
-                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname
+                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
+                LicenceId = dynamicsApplication._adoxioAssignedlicenceValue
             };
 
             // id
@@ -354,9 +355,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatus(dynamicsApplication);
             }
 
-            if (dynamicsApplication.AdoxioLicenceType != null)
+            if (dynamicsApplication.AdoxioApplicationTypeId != null)
             {
-                applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioLicenceType.AdoxioName;
+                applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioApplicationTypeId.AdoxioName;
             }
 
             applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);
