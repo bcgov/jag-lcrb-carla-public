@@ -129,6 +129,14 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       checklistSiteMapAssessed: ['', Validators.required],
       checklistEstabRenderAssessed: ['', Validators.required],
       checklistSignageAssessed: ['', Validators.required],
+      checklistEstablishmentAddressAssessed: ['', Validators.required],
+      assignedLicence: this.fb.group({
+        id: [''],
+        establishmentAddressStreet: [''],
+        establishmentAddressCity: [''],
+        establishmentAddressPostalCode: [''],
+        establishmentParcelId: ['']
+      }),
     });
 
     this.applicationDataService.getSubmittedApplicationCount()
@@ -220,10 +228,10 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    const saveData = {...this.application, ...this.form.value};
+    const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication(this.form.value),
+      this.applicationDataService.updateApplication({...this.application, ...this.form.value}),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
