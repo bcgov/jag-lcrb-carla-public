@@ -97,9 +97,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           });
 
           licenses.forEach((licence: License | any) => {
-            const relatedApplications = applications.map(a => a.licenceId).filter(l => l === licence.licenseId);
+            const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
             if (relatedApplications.length > 0) {
-              licence.relatedApplicationId = relatedApplications[0];
+              licence.relatedApplicationId = relatedApplications[0].id;
             }
             this.licensedApplications.push(licence);
           });
