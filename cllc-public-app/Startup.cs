@@ -234,32 +234,8 @@ namespace Gov.Lclb.Cllb.Public
             }));
 
             // add SharePoint.
-
-            string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
-            string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
-            string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
-            string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
-            string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
-            string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
-            string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
-            string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
-
-            // SharePoint could be using a different username / password.
-
-            string sharePointSsgUsername = ssgUsername;
-            string sharePointSsgPassword = ssgPassword;
-
-            if (!string.IsNullOrEmpty(Configuration["SHAREPOINT_SSG_USERNAME"]))
-            {
-                sharePointSsgUsername = Configuration["SHAREPOINT_SSG_USERNAME"];
-            }
-
-            if (!string.IsNullOrEmpty(Configuration["SHAREPOINT_SSG_PASSWORD"]))
-            {
-                sharePointSsgPassword = Configuration["SHAREPOINT_SSG_PASSWORD"];
-            }
-
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, sharePointSsgUsername, sharePointSsgPassword, sharePointNativeBaseURI));
+            
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(Configuration));
 
             // add BCeID Web Services
 

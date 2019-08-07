@@ -195,6 +195,5 @@ namespace WebApplicationSoap.OneStop
             return foreignLegacyMailing;
         }
 
-        
     }
 }
