@@ -16,19 +16,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [Authorize(Policy = "Business-User")]
     public class TiedHouseConnectionsController : Controller
-    {
-        private readonly IConfiguration Configuration;
-        private readonly IDynamicsClient _dynamicsClient;
-        private readonly string _encryptionKey;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+    {        
+        private readonly IDynamicsClient _dynamicsClient;                
         private readonly ILogger _logger;
 
-        public TiedHouseConnectionsController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
-        {
-            Configuration = configuration;
-            this._encryptionKey = Configuration["ENCRYPTION_KEY"];
-            this._httpContextAccessor = httpContextAccessor;
-            this._dynamicsClient = dynamicsClient;
+        public TiedHouseConnectionsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        {            
+            _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(TiedHouseConnectionsController));
         }
 
@@ -42,10 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             var result = new List<ViewModels.TiedHouseConnection>();
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
-            String accountfilter = null;
-
-            // set account filter
-            accountfilter = "_adoxio_accountid_value eq " + accountId;
+            string accountfilter = "_adoxio_accountid_value eq " + accountId;
             _logger.LogError("Account filter = " + accountfilter);
 
             tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;

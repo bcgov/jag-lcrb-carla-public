@@ -1,36 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Authorization;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : Controller
-    {
-        private readonly IConfiguration Configuration;
-        private readonly AppDbContext db;
+    {           
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 
-        public UserController(AppDbContext db, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+        public UserController(IHttpContextAccessor httpContextAccessor)
         {
-            Configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
-            this.db = db;
+            _httpContextAccessor = httpContextAccessor;            
         }
         
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;

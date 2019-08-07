@@ -1,19 +1,8 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utils;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -21,15 +10,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [AllowAnonymous]
     public class FeaturesController : Controller 
     {
-        private readonly IConfiguration Configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger _logger;
+        private readonly IConfiguration _configuration;                
 
-        public FeaturesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+        public FeaturesController(IConfiguration configuration)
         {
-            Configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
-            _logger = loggerFactory.CreateLogger(typeof(AliasController));
+            _configuration = configuration;            
         }
 
 
@@ -41,12 +26,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetFeatureList()
         {
             var features = new List<string>();
-            if (!String.IsNullOrEmpty(Configuration["FEATURE_MARKETER"]))
+            if (!String.IsNullOrEmpty(_configuration["FEATURE_MARKETER"]))
             {
                 features.Add("Marketer");
             }
 
-            if (!String.IsNullOrEmpty(Configuration["FEATURE_INDIGENOUS_NATION"]))
+            if (!String.IsNullOrEmpty(_configuration["FEATURE_INDIGENOUS_NATION"]))
             {
                 features.Add("IndigenousNation");
             }
