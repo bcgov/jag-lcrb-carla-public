@@ -19,21 +19,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     public class ContactController : Controller
     {
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IHostingEnvironment _env;
-        private readonly SharePointFileManager _sharePointFileManager;
 
-        public ContactController(SharePointFileManager sharePointFileManager, IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IHostingEnvironment env)
+        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
-            Configuration = configuration;
+            _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(ContactController));
-            _env = env;
-            _sharePointFileManager = sharePointFileManager;
+            _env = env;            
         }
 
 
@@ -351,6 +349,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string folderName = await FileController.GetFolderName("worker", worker.AdoxioWorkerid, _dynamicsClient);
             string name = worker.AdoxioWorkerid + " Files";
 
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
 
             // Create the folder
             bool folderExists = await _sharePointFileManager.FolderExists(SharePointFileManager.WorkertDocumentUrlTitle, folderName);

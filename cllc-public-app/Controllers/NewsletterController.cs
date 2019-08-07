@@ -1,34 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using Gov.Lclb.Cllb.Public.Contexts;
+﻿using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System.Net.Mail;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     public class NewsletterController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly AppDbContext db;
+        private readonly IConfiguration _configuration;
+        private readonly AppDbContext _db;
         private readonly string _encryptionKey;
 
         public NewsletterController(AppDbContext db, IConfiguration configuration)
         {
-            Configuration = configuration;
-            this.db = db;
-            this._encryptionKey = Configuration["ENCRYPTION_KEY"];
+            _configuration = configuration;
+            _db = db;
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];
         }
         [HttpGet("{slug}")]
         [AllowAnonymous]
@@ -36,9 +28,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             
             Newsletter newsletter = null;
-            if (!string.IsNullOrEmpty(Configuration["DB_USER"]))
+            if (!string.IsNullOrEmpty(_configuration["DB_USER"]))
             {
-                newsletter = db.GetNewsletterBySlug(slug);
+                newsletter = _db.GetNewsletterBySlug(slug);
             }
                 
             if (newsletter == null)
@@ -57,14 +49,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult Subscribe(string slug, [FromQuery] string email)
         {
             string confirmationEmailLink = GetConfirmationLink(slug, email);
-            string bclogo = Configuration["BASE_URI"] + Configuration["BASE_PATH"] + "/assets/bc-logo.svg";
+            string bclogo = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/assets/bc-logo.svg";
             /* send the user an email confirmation. */
             string body = "<img src='" + bclogo + "'/><br><h2>Confirm your email address</h2><p>Thank you for signing up to receive updates about cannabis stores in B.C. We’ll send you updates as new rules and regulations are released about selling cannabis.</p>"
                 + "<p>To confirm your request and begin receiving updates by email, click here:</p>"
                 + "<a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a>";
 
             // send the email.
-            SmtpClient client = new SmtpClient(Configuration["SMTP_HOST"]);
+            SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
 
             // Specify the message content.
             MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
@@ -78,7 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private string GetConfirmationLink(string slug, string email)
         {
-            string result = Configuration["BASE_URI"] + Configuration["BASE_PATH"];
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"];
             result += "/newsletter-confirm/" + slug + "?code="; 
 
             // create a newsletter confirmation object.
@@ -112,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // check that the slugs match.
                 if (slug.Equals (newsletterConfirmation.slug))
                 {
-                    db.AddNewsletterSubscriber(slug, newsletterConfirmation.email);
+                    _db.AddNewsletterSubscriber(slug, newsletterConfirmation.email);
                     result = "Success";
                 }                                
             }
@@ -123,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public JsonResult UnSubscribe(string slug, [FromQuery] string email)
         {
-            db.RemoveNewsletterSubscriber(slug, email);
+            _db.RemoveNewsletterSubscriber(slug, email);
             return Json("Ok");
         }
 
