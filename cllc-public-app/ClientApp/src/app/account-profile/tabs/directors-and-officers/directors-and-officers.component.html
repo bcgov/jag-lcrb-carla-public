@@ -1,7 +1,10 @@
 <div>
-  <p *ngIf="dataSource?.data?.length">
+  <p *ngIf="dataSource?.data?.length && !lockAssociates">
     Enter all directors, officers, and senior managers including those that won’t be involved in non-medical cannabis
     retail stores.
+  </p>
+  <p *ngIf="dataSource?.data?.length && lockAssociates">
+      The following organization leadership is on file:
   </p>
   <p *ngIf="!dataSource?.data?.length">
       There is currently no organization leadership on file.
