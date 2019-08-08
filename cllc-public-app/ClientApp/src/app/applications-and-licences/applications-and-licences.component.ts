@@ -100,6 +100,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
             const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
             if (relatedApplications.length > 0) {
               licence.relatedApplicationId = relatedApplications[0].id;
+              if (relatedApplications[0].isPaid) {
+                licence.relatedApplicationPaid = true;
+              }
             }
             this.licensedApplications.push(licence);
           });

@@ -343,7 +343,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
                 //get establishment name and address
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
-                LicenceId = dynamicsApplication._adoxioAssignedlicenceValue
+                LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
+                IsPaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid != null && dynamicsApplication.AdoxioLicencefeeinvoicepaid == true)
             };
 
             // id
