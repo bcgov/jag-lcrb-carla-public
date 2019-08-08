@@ -7,7 +7,7 @@
     - splunk_home_ownership_enforcement is defined
     - splunk_home_ownership_enforcement | bool
 
-- include_tasks: update_etc.yml
+# - include_tasks: update_etc.yml
 
 - include_tasks: stop_splunk.yml
   when:
