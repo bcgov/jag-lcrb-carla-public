@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             _HttpClientHandler = new HttpClientHandler() { UseCookies = true, AllowAutoRedirect = false, CookieContainer = _CookieContainer };
             _Client = new HttpClient(_HttpClientHandler);
 
-            _Client.DefaultRequestHeaders.Add("Accept", "application/json");
+            _Client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
 
             // SharePoint configuration settings.
 
@@ -319,11 +319,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             string relativeUrl = $"{listTitle}/{folderName}";
 
-            HttpRequestMessage endpointRequest =
-                new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + $"web/folders/add('{relativeUrl}')");
-
-             relativeUrl = "";
-
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(ApiEndpoint + $"web/folders/add('{relativeUrl}')"),
+                Headers = {
+                    { "Accept", "application/json" }
+                }
+            };
 
             //string jsonString = "{ '__metadata': { 'type': 'SP.Folder' }, 'ServerRelativeUrl': '" + relativeUrl + "'}";
 
@@ -519,9 +522,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
-            HttpRequestMessage endpointRequest =
-    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
-
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')"),
+                Headers = {
+                    { "Accept", "application/json" }
+                }
+            };
 
             // We want to delete this folder.
             endpointRequest.Headers.Add("IF-MATCH", "*");
@@ -612,8 +620,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             string title = Uri.EscapeUriString(listTitle);
             string query = $"web/lists/GetByTitle('{title}')";
 
-            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + query);
-
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + query),
+                Headers = {
+                    { "Accept", "application/json" }
+                }
+            };
 
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
@@ -683,9 +697,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Delete is very similar to a GET.
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
-            HttpRequestMessage endpointRequest =
-    new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/Files/add(url='"
-    + EscapeApostrophe(name) + "',overwrite=true)");
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/Files/add(url='"
+   + EscapeApostrophe(name) + "',overwrite=true)"),
+                Headers = {
+                    { "Accept", "application/json" }
+                }
+            };
+
             // convert the stream into a byte array.
             MemoryStream ms = new MemoryStream();
             fileData.CopyTo(ms);
