@@ -1,0 +1,11 @@
+#!/bin/sh
+echo "***** STARTING SPLUNK *****"
+getent passwd | grep -q "$(id -u)"
+if [ $? -eq 1 ]; then
+  echo "***** Problem with whoami *****"
+  if [ -w /etc/passwd ]; then
+    echo "***** Updating passwd *****"
+    echo "${USER_NAME:-splunkd}:x:$(id -u):0:${USER_NAME:-splunkd} user:${HOME}:/sbin/nologin" >> /etc/passwd
+  fi
+fi
+exec /sbin/entrypoint.sh start-service
