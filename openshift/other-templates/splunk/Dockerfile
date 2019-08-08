@@ -6,11 +6,9 @@ RUN chmod a+w /etc/passwd
 
 copy uid_entrypoint /sbin
 
-RUN chmod a+w /opt/ansible/ansible.cfg && \
-    chmod a+w /opt/ansible/site.yml
+RUN chmod -R a+w /opt/ansible 
 
-copy ansible.cfg /opt/ansible
-copy site.yml /opt/ansible
+copy ansible/* /opt/ansible/
 
 USER ansible
 
