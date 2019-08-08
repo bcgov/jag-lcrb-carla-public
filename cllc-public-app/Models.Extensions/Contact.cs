@@ -54,6 +54,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.MobilePhone = contact.Mobilephone;
                 result.PrimaryIdNumber = contact.AdoxioPrimaryidnumber;
                 result.SecondaryIdNumber = contact.AdoxioSecondaryidnumber;
+                result.PrimaryIdentificationType = (IdentificationType?)contact.AdoxioIdentificationtype;
+                result.SecondaryIdentificationType = (IdentificationType?)contact.AdoxioSecondaryidentificationtype;
                 result.IsWorker = contact.AdoxioIsworker;
                 result.SelfDisclosure = contact.AdoxioSelfdisclosure;
             }
@@ -285,6 +287,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSecondaryidnumber = from.SecondaryIdNumber;
             to.AdoxioIsworker = from.IsWorker;
             to.AdoxioSelfdisclosure = from.SelfDisclosure;
+            to.AdoxioIdentificationtype= (int?)from.PrimaryIdentificationType;
+            to.AdoxioSecondaryidentificationtype= (int?)from.SecondaryIdentificationType;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
