@@ -33,11 +33,11 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
             
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             
             services.AddMvc(config =>
             {                
-                if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+                if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
                 {
                      var policy = new AuthorizationPolicyBuilder()
                                   .RequireAuthenticatedUser()
@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
 
-            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
             {
                 // Configure JWT authentication
                 services.AddAuthentication(o =>
@@ -80,21 +80,21 @@ namespace Gov.Lclb.Cllb.SpdSync
                     o.TokenValidationParameters = new TokenValidationParameters()
                     {
                         RequireExpirationTime = false,
-                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                        ValidIssuer = _configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = _configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_TOKEN_KEY"]))
                     };
                 });
             }
 
             // determine if we wire up SharePoint.
-            if (!string.IsNullOrEmpty(Configuration["SHAREPOINT_ODATA_URI"]))
+            if (!string.IsNullOrEmpty(_configuration["SHAREPOINT_ODATA_URI"]))
             {
                 SetupSharePoint(services);
             }
 
             // determine if we wire up the SPICE service
-            if (!string.IsNullOrEmpty(Configuration["SPICE_URI"]))
+            if (!string.IsNullOrEmpty(_configuration["SPICE_URI"]))
             {
                 SetupSpice(services);
             }
@@ -114,28 +114,20 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         private void SetupSharePoint(IServiceCollection services)
         {
-            string ssgUsername = Configuration["SSG_USERNAME"];
-            string ssgPassword = Configuration["SSG_PASSWORD"];
+            string ssgUsername = _configuration["SSG_USERNAME"];
+            string ssgPassword = _configuration["SSG_PASSWORD"];
 
             // add SharePoint.
-            string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
-            string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
-            string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
-            string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
-            string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
-            string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
-            string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
-            string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
-
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(sharePointServerAppIdUri, sharePointOdataUri, sharePointWebname, sharePointAadTenantId, sharePointClientId, sharePointCertFileName, sharePointCertPassword, ssgUsername, ssgPassword, sharePointNativeBaseURI));
+            
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
         }
 
         private void SetupSpice(IServiceCollection services)
         {
-            string spiceSsgUsername = Configuration["SPICE_SSG_USERNAME"];
-            string spiceSsgPassword = Configuration["SPICE_SSG_PASSWORD"];
-            string spiceURI = Configuration["SPICE_URI"];
-            string token = Configuration["SPICE_JWT_TOKEN"];
+            string spiceSsgUsername = _configuration["SPICE_SSG_USERNAME"];
+            string spiceSsgPassword = _configuration["SPICE_SSG_PASSWORD"];
+            string spiceURI = _configuration["SPICE_URI"];
+            string token = _configuration["SPICE_JWT_TOKEN"];
 
 
             // create JWT credentials
@@ -180,7 +172,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 app.UseHangfireDashboard("/hangfire", dashboardOptions);
             }
 
-            if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
+            if (!string.IsNullOrEmpty(_configuration["ENABLE_HANGFIRE_JOBS"]))
             {
                 SetupHangfireJobs(app, loggerFactory);
             }
@@ -201,7 +193,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             
 
             // enable Splunk logger
-            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]))
             {
                 var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
 
@@ -214,10 +206,10 @@ namespace Gov.Lclb.Cllb.SpdSync
         SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
         {
             SplunkLoggerConfiguration result = null;
-            string splunkCollectorUrl = Configuration["SPLUNK_COLLECTOR_URL"];
+            string splunkCollectorUrl = _configuration["SPLUNK_COLLECTOR_URL"];
             if (!string.IsNullOrEmpty(splunkCollectorUrl))
             {
-                string splunkToken = Configuration["SPLUNK_TOKEN"];
+                string splunkToken = _configuration["SPLUNK_TOKEN"];
                 if (!string.IsNullOrEmpty(splunkToken))
                 {
                     result = new SplunkLoggerConfiguration()
@@ -254,7 +246,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Worker Export ...");
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(Configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
                     //RecurringJob.AddOrUpdate(() => new SpiceUtils(Configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(1));
                     log.LogInformation("Hangfire Send Export job done.");
 
