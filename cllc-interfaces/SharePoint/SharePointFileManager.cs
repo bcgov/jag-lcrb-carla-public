@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             _HttpClientHandler = new HttpClientHandler() { UseCookies = true, AllowAutoRedirect = false, CookieContainer = _CookieContainer };
             _Client = new HttpClient(_HttpClientHandler);
 
-            _Client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
+            _Client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             // SharePoint configuration settings.
 
@@ -97,8 +97,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 WebName = "/" + WebName;
             }
+            
 
-            ApiEndpoint = sharePointOdataUri + "/_api/";
+            ApiEndpoint = sharePointOdataUri;
+            // ensure there is a trailing slash.
+            if (!ApiEndpoint.EndsWith("/"))
+            {
+                ApiEndpoint += "/";
+            }
+            ApiEndpoint += "_api/";
             FedAuthValue = null;
 
             // Scenario #1 - ADFS (2016) using FedAuth
@@ -142,6 +149,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                 Authorization = "Basic " + credentials;
             }
 
+            // Authorization header is used for Cloud or Basic API Gateway access
+            if (!string.IsNullOrEmpty(Authorization))
+            {
+                _Client.DefaultRequestHeaders.Add("Authorization", Authorization);
+            }
+
             // Add a Digest header.  Needed for certain API operations
             Digest = GetDigest(_Client).GetAwaiter().GetResult();
             if (Digest != null)
@@ -153,12 +166,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             _Client.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
             _Client.DefaultRequestHeaders.Add("OData-Version", "4.0");
 
-            // Authorization header is used for Cloud or Basic API Gateway access
-            if (!string.IsNullOrEmpty(Authorization))
-            {
-                _Client.DefaultRequestHeaders.Add("Authorization", Authorization);
-
-            }
         }
 
         public bool IsValid()
@@ -747,7 +754,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             string result = null;
 
-            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "contextinfo");
+            HttpRequestMessage endpointRequest = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(ApiEndpoint + "contextinfo"),
+                Headers = {
+                    { "Accept", "application/json;odata=verbose" }
+                }
+            };
             
             // make the request.
             var response = await client.SendAsync(endpointRequest);
