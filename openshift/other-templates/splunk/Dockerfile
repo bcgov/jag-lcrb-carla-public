@@ -8,6 +8,9 @@ RUN chmod a+w /etc/passwd
 
 copy uid_entrypoint /sbin
 
+RUN chmod a+w /opt/ansible/ansible.cfg
+
+copy ansible.cfg /opt/ansible
 
 USER ansible
 
