@@ -14105,6 +14105,359 @@
         }
       }
     },
+    "/adoxio_inspectorcommentsrollups": {
+      "get": {
+        "tags": [
+          "inspectorcommentsrollups"
+        ],
+        "summary": "Get entities from adoxio_inspectorcommentsrollups",
+        "operationId": "Inspectorcommentsrollups_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "adoxio_commentattributename",
+                "adoxio_commentattributename desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "versionnumber",
+                "versionnumber desc",
+                "adoxio_inspectorcommentsrollupid",
+                "adoxio_inspectorcommentsrollupid desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "adoxio_displayorder",
+                "adoxio_displayorder desc",
+                "adoxio_applicableinspectiontype",
+                "adoxio_applicableinspectiontype desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "modifiedon",
+                "modifiedon desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "createdon",
+                "createdon desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "statuscode",
+                "statuscode desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "statecode",
+                "statecode desc",
+                "_adoxio_licencetype_value",
+                "_adoxio_licencetype_value desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "_ownerid_value",
+                "_owningteam_value",
+                "adoxio_commentattributename",
+                "overriddencreatedon",
+                "timezoneruleversionnumber",
+                "_owningbusinessunit_value",
+                "versionnumber",
+                "adoxio_inspectorcommentsrollupid",
+                "adoxio_name",
+                "adoxio_displayorder",
+                "adoxio_applicableinspectiontype",
+                "_owninguser_value",
+                "_modifiedby_value",
+                "modifiedon",
+                "importsequencenumber",
+                "createdon",
+                "_createdonbehalfby_value",
+                "statuscode",
+                "_createdby_value",
+                "statecode",
+                "_adoxio_licencetype_value",
+                "_modifiedonbehalfby_value",
+                "utcconversiontimezonecode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_inspectorcommentsrollup_SyncErrors",
+                "adoxio_inspectorcommentsrollup_AsyncOperations",
+                "adoxio_inspectorcommentsrollup_BulkDeleteFailures",
+                "adoxio_LicenceType"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Inspectorcommentsrollups_GetResponseModel"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "inspectorcommentsrollups"
+        ],
+        "summary": "Add new entity to adoxio_inspectorcommentsrollups",
+        "operationId": "Inspectorcommentsrollups_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_inspectorcommentsrollups({adoxio_inspectorcommentsrollupid})": {
+      "get": {
+        "tags": [
+          "inspectorcommentsrollups"
+        ],
+        "summary": "Get entity from adoxio_inspectorcommentsrollups by key",
+        "operationId": "Inspectorcommentsrollups_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_inspectorcommentsrollupid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_inspectorcommentsrollupid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "_ownerid_value",
+                "_owningteam_value",
+                "adoxio_commentattributename",
+                "overriddencreatedon",
+                "timezoneruleversionnumber",
+                "_owningbusinessunit_value",
+                "versionnumber",
+                "adoxio_inspectorcommentsrollupid",
+                "adoxio_name",
+                "adoxio_displayorder",
+                "adoxio_applicableinspectiontype",
+                "_owninguser_value",
+                "_modifiedby_value",
+                "modifiedon",
+                "importsequencenumber",
+                "createdon",
+                "_createdonbehalfby_value",
+                "statuscode",
+                "_createdby_value",
+                "statecode",
+                "_adoxio_licencetype_value",
+                "_modifiedonbehalfby_value",
+                "utcconversiontimezonecode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_inspectorcommentsrollup_SyncErrors",
+                "adoxio_inspectorcommentsrollup_AsyncOperations",
+                "adoxio_inspectorcommentsrollup_BulkDeleteFailures",
+                "adoxio_LicenceType"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "inspectorcommentsrollups"
+        ],
+        "summary": "Delete entity from adoxio_inspectorcommentsrollups",
+        "operationId": "Inspectorcommentsrollups_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_inspectorcommentsrollupid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_inspectorcommentsrollupid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "inspectorcommentsrollups"
+        ],
+        "summary": "Update entity in adoxio_inspectorcommentsrollups",
+        "operationId": "Inspectorcommentsrollups_Update",
+        "parameters": [
+          {
+            "name": "adoxio_inspectorcommentsrollupid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_inspectorcommentsrollupid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
     "/adoxio_interests": {
       "get": {
         "tags": [
@@ -16182,6 +16535,8 @@
                 "adoxio_effectiveyeartext desc",
                 "adoxio_expiryyear",
                 "adoxio_expiryyear desc",
+                "adoxio_orgbookcredentialresult",
+                "adoxio_orgbookcredentialresult desc",
                 "adoxio_effectiveyear",
                 "adoxio_effectiveyear desc",
                 "emailaddress",
@@ -16234,6 +16589,8 @@
                 "createdon desc",
                 "_adoxio_territory_value",
                 "_adoxio_territory_value desc",
+                "adoxio_orgbookcredentialid",
+                "adoxio_orgbookcredentialid desc",
                 "adoxio_licencenumber",
                 "adoxio_licencenumber desc",
                 "adoxio_establishmentaddressstreet",
@@ -16276,6 +16633,7 @@
                 "versionnumber",
                 "adoxio_effectiveyeartext",
                 "adoxio_expiryyear",
+                "adoxio_orgbookcredentialresult",
                 "adoxio_effectiveyear",
                 "emailaddress",
                 "adoxio_establishmentnametemp",
@@ -16302,6 +16660,7 @@
                 "adoxio_ownershiptransferinprogress",
                 "createdon",
                 "_adoxio_territory_value",
+                "adoxio_orgbookcredentialid",
                 "adoxio_licencenumber",
                 "adoxio_establishmentaddressstreet",
                 "_adoxio_licencee_value",
@@ -16462,6 +16821,7 @@
                 "versionnumber",
                 "adoxio_effectiveyeartext",
                 "adoxio_expiryyear",
+                "adoxio_orgbookcredentialresult",
                 "adoxio_effectiveyear",
                 "emailaddress",
                 "adoxio_establishmentnametemp",
@@ -16488,6 +16848,7 @@
                 "adoxio_ownershiptransferinprogress",
                 "createdon",
                 "_adoxio_territory_value",
+                "adoxio_orgbookcredentialid",
                 "adoxio_licencenumber",
                 "adoxio_establishmentaddressstreet",
                 "_adoxio_licencee_value",
@@ -16800,7 +17161,8 @@
                 "adoxio_ApplicationFeeProduct",
                 "adoxio_LicenceFeeProduct",
                 "adoxio_licencetypes_applicationtypes",
-                "adoxio_licencetype_adoxio_applicationtype_LicenceType"
+                "adoxio_licencetype_adoxio_applicationtype_LicenceType",
+                "adoxio_licencetype_adoxio_inspectorcommentsrollup_LicenceType"
               ]
             }
           }
@@ -16941,7 +17303,8 @@
                 "adoxio_ApplicationFeeProduct",
                 "adoxio_LicenceFeeProduct",
                 "adoxio_licencetypes_applicationtypes",
-                "adoxio_licencetype_adoxio_applicationtype_LicenceType"
+                "adoxio_licencetype_adoxio_applicationtype_LicenceType",
+                "adoxio_licencetype_adoxio_inspectorcommentsrollup_LicenceType"
               ]
             }
           }
@@ -39464,6 +39827,150 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup": {
+      "title": "adoxio_inspectorcommentsrollup",
+      "type": "object",
+      "properties": {
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_commentattributename": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "adoxio_inspectorcommentsrollupid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_displayorder": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_applicableinspectiontype": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_licencetype_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_inspectorcommentsrollup_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_inspectorcommentsrollup_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_inspectorcommentsrollup_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_LicenceType": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licencetype"
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_interest": {
       "title": "adoxio_interest",
       "type": "object",
@@ -40840,6 +41347,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_orgbookcredentialresult": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_effectiveyear": {
           "type": "integer",
           "x-nullable": true
@@ -40941,6 +41452,10 @@
           "format": "date-time"
         },
         "_adoxio_territory_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_orgbookcredentialid": {
           "type": "string",
           "x-nullable": true
         },
@@ -41425,6 +41940,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationtype"
+          }
+        },
+        "adoxio_licencetype_adoxio_inspectorcommentsrollup_LicenceType": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
           }
         }
       }
@@ -47077,6 +47598,9 @@
         },
         "regardingobjectid_adoxio_applicationbpfv3": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfv3"
+        },
+        "regardingobjectid_adoxio_inspectorcommentsrollup": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
         }
       }
     },
@@ -49256,6 +49780,9 @@
         },
         "regardingobjectid_adoxio_applicationbpfv3": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfv3"
+        },
+        "regardingobjectid_adoxio_inspectorcommentsrollup": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
         }
       }
     },
@@ -50917,6 +51444,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_witness"
+          }
+        },
+        "business_unit_adoxio_inspectorcommentsrollup": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
           }
         }
       }
@@ -74515,6 +75048,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_witness"
           }
+        },
+        "owner_adoxio_inspectorcommentsrollup": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
         }
       }
     },
@@ -87672,6 +88211,9 @@
         },
         "regardingobjectid_adoxio_applicationbpfv3": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfv3"
+        },
+        "regardingobjectid_adoxio_inspectorcommentsrollup": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
         }
       }
     },
@@ -95195,6 +95737,36 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_applicationbpfv3"
           }
+        },
+        "lk_adoxio_inspectorcommentsrollup_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
+        },
+        "lk_adoxio_inspectorcommentsrollup_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
+        },
+        "lk_adoxio_inspectorcommentsrollup_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
+        },
+        "lk_adoxio_inspectorcommentsrollup_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
+        },
+        "user_adoxio_inspectorcommentsrollup": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
         }
       }
     },
@@ -96458,6 +97030,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_witness"
+          }
+        },
+        "team_adoxio_inspectorcommentsrollup": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
           }
         }
       }
@@ -105405,6 +105983,18 @@
         }
       }
     },
+    "Inspectorcommentsrollups_GetResponseModel": {
+      "title": "Collection of adoxio_inspectorcommentsrollups",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
+        }
+      }
+    },
     "Interests_GetResponseModel": {
       "title": "Collection of adoxio_interests",
       "type": "object",
@@ -108822,6 +109412,9 @@
     },
     {
       "name": "adoxio_inspectionreactivationhistories"
+    },
+    {
+      "name": "adoxio_inspectorcommentsrollups"
     },
     {
       "name": "adoxio_interests"
