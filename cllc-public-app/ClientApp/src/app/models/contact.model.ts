@@ -20,4 +20,6 @@ export class Contact {
   secondaryIdNumber: string;
   isWorker: boolean;
   selfDisclosure: string;
+  secondaryIdentificationType: string;
+  primaryIdentificationType: string;
 }
