@@ -10,6 +10,8 @@ RUN chmod -R a+w /opt/ansible
 
 copy ansible/* /opt/ansible/
 
+RUN chmod a-w /opt/ansible 
+
 USER ansible
 
 ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
