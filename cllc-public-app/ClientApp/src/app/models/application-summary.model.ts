@@ -8,4 +8,5 @@ export class ApplicationSummary {
   applicationTypeName: string;
   isIndigenousNation: boolean;
   licenceId: string;
+  isPaid: boolean;
 }
