@@ -37,6 +37,8 @@ export class UserConfirmationComponent implements OnInit {
       contact.lastname = this.currentUser.lastname;
       contact.emailaddress1 = this.currentUser.email;
       contact.isWorker = true;
+      contact.secondaryIdentificationType = 'BCidCard';
+      contact.primaryIdentificationType = 'DriversLicence';
       this.busy = this.contactDataService.createWorkerContact(contact).subscribe(() => {
         this.userDataService.loadUserToStore();
       }, () => alert('Failed to create contact'));

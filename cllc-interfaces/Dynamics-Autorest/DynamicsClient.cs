@@ -202,6 +202,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInspectionreactivationhistories Inspectionreactivationhistories { get; private set; }
 
         /// <summary>
+        /// Gets the IInspectorcommentsrollups.
+        /// </summary>
+        public virtual IInspectorcommentsrollups Inspectorcommentsrollups { get; private set; }
+
+        /// <summary>
         /// Gets the IInterests.
         /// </summary>
         public virtual IInterests Interests { get; private set; }
@@ -654,6 +659,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Incidentlicencetypeset = new Incidentlicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
             Inspectionreactivationhistories = new Inspectionreactivationhistories(this);
+            Inspectorcommentsrollups = new Inspectorcommentsrollups(this);
             Interests = new Interests(this);
             Investigationactivities = new Investigationactivities(this);
             Investigations = new Investigations(this);
