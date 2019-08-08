@@ -21,12 +21,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         HealthCheckContext context,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-        SharePointFileManager _sharepoint = new SharePointFileManager(_configuration);
+        SharePointFileManager sharepoint = new SharePointFileManager(_configuration);
         // Try and get the Account document library
         bool healthCheckResultHealthy;
             try
             {
-                var result = _sharepoint.GetDocumentLibrary("Account").GetAwaiter().GetResult();
+                var result = sharepoint.GetDocumentLibrary("Account").GetAwaiter().GetResult();
 
                 healthCheckResultHealthy = (result != null);
             }

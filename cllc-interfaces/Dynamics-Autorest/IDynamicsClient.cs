@@ -199,6 +199,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInspectionreactivationhistories Inspectionreactivationhistories { get; }
 
         /// <summary>
+        /// Gets the IInspectorcommentsrollups.
+        /// </summary>
+        IInspectorcommentsrollups Inspectorcommentsrollups { get; }
+
+        /// <summary>
         /// Gets the IInterests.
         /// </summary>
         IInterests Interests { get; }

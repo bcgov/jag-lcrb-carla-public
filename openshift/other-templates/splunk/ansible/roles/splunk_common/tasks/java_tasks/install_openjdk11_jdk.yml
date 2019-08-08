@@ -1,0 +1,53 @@
+---
+- name: Create a dependency file
+  file:
+    path: /usr/share/man/man1
+    state: directory
+  when:
+    - ansible_distribution == 'Debian'
+  become: false
+  become_user: "{{ privileged_user }}"
+
+- name: Download the Java distribution
+  unarchive:
+    src: "{{ java_download_url }}"
+    dest: /opt/container_artifact
+    remote_src: yes
+  retries: 5
+  delay: 10
+  when:
+    - ansible_distribution == 'Debian'
+  become: false
+  become_user: "{{ privileged_user }}"
+
+- name: Create splunk-launch.conf
+  become: false
+  become_user: "{{ privileged_user }}"
+  command: cp {{ splunk.home }}/etc/splunk-launch.conf.default {{ splunk.home }}/etc/splunk-launch.conf
+  ignore_errors: true
+  when:
+    - ansible_distribution == 'Debian'
+
+- name: Create symlinks for java/javac
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  with_items:
+    - { "src": "/opt/container_artifact/jdk-{{ java_update_version }}/bin/java", "dest": "/usr/bin/java"}
+    - { "src": "/opt/container_artifact/jdk-{{ java_update_version }}/bin/javac", "dest": "/usr/bin/javac"}
+  become: false
+  become_user: "{{ privileged_user }}"
+  ignore_errors: true
+  when:
+    - ansible_distribution == 'Debian'
+
+- name: Set JAVA_HOME in splunk-launch.conf
+  become: false
+  become_user: "{{ privileged_user }}"
+  lineinfile:
+    path: "{{ splunk.home }}/etc/splunk-launch.conf"
+    regexp: '^JAVA_HOME'
+    line: "JAVA_HOME=/opt/container_artifact/jdk-{{ java_update_version }}"
+  when:
+    - ansible_distribution == 'Debian'
