@@ -1,0 +1,62 @@
+---
+- name: Download Splunk license
+  get_url:
+    url: "{{ splunk.license_uri }}"
+    dest: "{{ splunk.license_download_dest }}"
+    timeout: 20
+  when:
+    - splunk.role == "splunk_license_master" or not splunk.license_master_included
+    - splunk.license_uri and splunk.license_uri is match("^(https?|file)://.*")
+  register: downloaded_license_path
+  ignore_errors: yes
+  until: downloaded_license_path is success
+  retries: 5
+  delay: 3
+
+- name: Apply Splunk license
+  command: "{{ splunk.exec }} add licenses {{ license_file }} -auth {{ splunk.admin_user }}:{{ splunk.password }}"
+  become: false
+  become_user: "{{ splunk.user }}"
+  when:
+    - not (splunk.ignore_license | bool)
+    - splunk.role != "splunk_universal_forwarder"
+    - splunk.role == "splunk_license_master" or not splunk.license_master_included
+    - not (splunk.wildcard_license | bool)
+  ignore_errors: true
+  with_first_found:
+    - files:
+      - "{{ splunk.license_download_dest }}"
+      - "{{ splunk.nfr_license }}"
+      - "{{ splunk.license_uri }}"
+      errors: "ignore"
+  loop_control:
+    loop_var: license_file
+  notify:
+    - Restart the splunkd service
+  no_log: "{{ hide_password }}"
+
+- name: Apply wildcard licenses
+  command: "{{ splunk.exec }} add licenses {{ item }} -auth {{ splunk.admin_user }}:{{ splunk.password }}"
+  with_fileglob:
+    - "{{ splunk.license_uri }}"
+  ignore_errors: true
+  become: false
+  become_user: "{{ splunk.user }}"
+  when:
+    - not (splunk.ignore_license | bool)
+    - splunk.role == "splunk_license_master" or not splunk.license_master_included
+    - splunk.wildcard_license | bool
+  notify:
+    - Restart the splunkd service
+  no_log: "{{ hide_password }}"
+
+- name: Set as license slave
+  include_tasks: set_as_license_slave.yml
+  vars:
+    license_master_host: "{{ groups.splunk_license_master[0] }}"
+  when:
+    - splunk.license_master_included | bool
+    - splunk.role != "splunk_license_master"
+
+- name: Flush handlers
+  meta: flush_handlers
