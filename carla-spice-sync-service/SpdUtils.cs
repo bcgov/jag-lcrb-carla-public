@@ -748,30 +748,8 @@ namespace Gov.Lclb.Cllb.SpdSync
         {
             // add SharePoint.
 
-            string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
-            string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
-            string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
-            string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
-            string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
-            string sharePointCertFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
-            string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
-            string ssgUsername = Configuration["SSG_USERNAME"];
-            string ssgPassword = Configuration["SSG_PASSWORD"];
-            string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
+            var manager = new SharePointFileManager(Configuration);
 
-            var manager = new SharePointFileManager
-            (
-                sharePointServerAppIdUri,
-                sharePointOdataUri,
-                sharePointWebname,
-                sharePointAadTenantId,
-                sharePointClientId,
-                sharePointCertFileName,
-                sharePointCertPassword,
-                ssgUsername,
-                ssgPassword,
-                sharePointNativeBaseURI
-            );
             return manager;
         }
     }
