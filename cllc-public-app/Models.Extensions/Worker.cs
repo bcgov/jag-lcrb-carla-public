@@ -79,8 +79,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEmail = from.email;
             to.CopyValuesNoEmailPhone(from);
         }
-    
-
 
         public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMadoxioWorker to, ViewModels.Worker from)
         {
