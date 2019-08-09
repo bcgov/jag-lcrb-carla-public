@@ -124,7 +124,7 @@ namespace FunctionalTest
             // SLA Review
             JavaScriptClick("stage_1");
             
-            SetOptionSet("header_process_adoxio_checklistsenttolgin", "Sent");
+            SetOptionSet("header_process_adoxio_checklistsenttolgin", "Yes");            
             SetOptionSet("header_process_adoxio_checklistmarketcapacity", "Yes");
             SetOptionSet("header_process_adoxio_checklistsentforfisla", "Yes");
             SetOptionSet("header_process_adoxio_checklistsenttospd", "Yes");

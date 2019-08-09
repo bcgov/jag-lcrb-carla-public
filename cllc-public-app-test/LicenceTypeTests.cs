@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             string jsonString = await response.Content.ReadAsStringAsync();
-            var licenceTypes = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLicenseType>>(jsonString);
+            var licenceTypes = JsonConvert.DeserializeObject<List<ViewModels.LicenseType>>(jsonString);
             
             foreach (var licenceType in licenceTypes)
             {
@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 response.EnsureSuccessStatusCode();
 
                 jsonString = await response.Content.ReadAsStringAsync();
-                var licenceTypeData = JsonConvert.DeserializeObject<ViewModels.AdoxioLicenseType>(jsonString);
+                var licenceTypeData = JsonConvert.DeserializeObject<ViewModels.LicenseType>(jsonString);
 
                 // verify that we got the same data back.
                 Assert.Equal(licenceType.id, licenceTypeData.id);
