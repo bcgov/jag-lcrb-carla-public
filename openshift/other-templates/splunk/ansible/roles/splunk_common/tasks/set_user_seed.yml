@@ -1,6 +1,7 @@
 ---
 - name: "Hash the password"
-  command: "{{ splunk.exec }} hash-passwd {{ splunk.password }}"
+#  command: "{{ splunk.exec }} hash-passwd {{ splunk.password }}"
+  command: "echo {{ splunk.password }} | mkpasswd -m sha-512"
   register: hashed_pwd
   changed_when: hashed_pwd.rc == 0
   become: false
