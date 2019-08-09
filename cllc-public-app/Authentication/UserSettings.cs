@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Gov.Lclb.Cllb.Public.Models;
 using System;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -81,9 +82,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             // write metadata
             string json = JsonConvert.SerializeObject(this, Formatting.Indented,
                 new JsonSerializerSettings
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    }
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
                 );
 
             return json;
@@ -126,6 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
             return !string.IsNullOrEmpty(settingsTemp) ? CreateFromJson(settingsTemp) : userSettings;
         }
+
     }
 }
 
