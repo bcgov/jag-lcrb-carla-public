@@ -256,7 +256,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.router.navigateByUrl('/renew-crs-licence/application/' + licence.relatedApplicationId);
     } else {
       const actionName = 'CRS Renewal';
-      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenceId, actionName)
+      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe(data => {
           this.router.navigateByUrl('/renew-crs-licence/application/' + data.id);
