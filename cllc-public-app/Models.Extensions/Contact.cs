@@ -259,6 +259,23 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.CopyValuesNoEmailPhone(from);
         }
 
+        public static void CopyContactUserSettings(this MicrosoftDynamicsCRMcontact contact, ViewModels.Contact NewContact)
+        {
+            contact.Address1Line1 = NewContact.address1_line1;
+            contact.Address1Postalcode = NewContact.address1_postalcode;
+            contact.Address1City = NewContact.address1_city;
+            contact.Address1Stateorprovince = NewContact.address1_stateorprovince;
+            contact.Address1Country = NewContact.address1_country;
+
+            contact.Firstname = NewContact.firstname;
+            contact.Middlename = NewContact.middlename;
+            contact.Lastname = NewContact.lastname;
+
+            contact.Emailaddress1 = NewContact.emailaddress1;
+            contact.Gendercode = (int?)NewContact.Gender;
+            contact.Birthdate = NewContact.Birthdate;
+        }
+
         public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
         {
             to.Fullname = from.name;
