@@ -385,4 +385,14 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       .indexOf(state) !== -1;
   }
 
+  saveForLater() {
+    this.busy = this.save(true)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe((result: boolean) => {
+          if (result) {
+            this.router.navigate(['/dashboard']);
+          }
+        });
+  }
+
 }
