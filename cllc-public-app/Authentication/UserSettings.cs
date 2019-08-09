@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Gov.Lclb.Cllb.Public.Models;
 using System;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -81,9 +82,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             // write metadata
             string json = JsonConvert.SerializeObject(this, Formatting.Indented,
                 new JsonSerializerSettings
-                    {
-                        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    }
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
                 );
 
             return json;
@@ -125,6 +126,23 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             string settingsTemp = context.Session.GetString("UserSettings");
 
             return !string.IsNullOrEmpty(settingsTemp) ? CreateFromJson(settingsTemp) : userSettings;
+        }
+
+        public void CopyContactSettingsOver(MicrosoftDynamicsCRMcontact contact)
+        {
+            contact.Address1Line1 = NewContact.address1_line1;
+            contact.Address1Postalcode = NewContact.address1_postalcode;
+            contact.Address1City = NewContact.address1_city;
+            contact.Address1Stateorprovince = NewContact.address1_stateorprovince;
+            contact.Address1Country = NewContact.address1_country;
+
+            contact.Firstname = NewContact.firstname;
+            contact.Middlename = NewContact.middlename;
+            contact.Lastname = NewContact.lastname;
+
+            contact.Emailaddress1 = NewContact.emailaddress1;
+            contact.Gendercode = (int?)NewContact.Gender;
+            contact.Birthdate = NewContact.Birthdate;
         }
     }
 }

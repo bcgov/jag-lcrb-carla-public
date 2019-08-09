@@ -192,6 +192,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.dateofbirth = tempDate;
             }
+
             if (!string.IsNullOrEmpty(smgov_sex))
             {
                 to.gender = (Gender)GetIntGenderCode(smgov_sex);
@@ -241,6 +242,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (!string.IsNullOrEmpty(smgov_sex))
             {
                 to.Gender = (Gender)GetIntGenderCode(smgov_sex);
+            }
+            if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse(smgov_birthdate, out DateTimeOffset tempDate))
+            {
+                to.Birthdate = tempDate;
             }
 
         }
