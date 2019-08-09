@@ -344,7 +344,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 //get establishment name and address
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
                 LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
-                IsPaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid != null && dynamicsApplication.AdoxioLicencefeeinvoicepaid == true)
+                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true)
             };
 
             // id
