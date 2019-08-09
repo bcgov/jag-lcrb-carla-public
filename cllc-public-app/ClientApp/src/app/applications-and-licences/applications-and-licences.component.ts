@@ -35,8 +35,8 @@ const RENEWAL_DUE = 'Renewal Due';
   styleUrls: ['./applications-and-licences.component.scss']
 })
 export class ApplicationsAndLicencesComponent extends FormBase implements OnInit {
-  inProgressApplications: any[] = [];
-  licensedApplications: any[] = [];
+  inProgressApplications: ApplicationSummary[] = [];
+  licensedApplications: ApplicationLicenseSummary[] = [];
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
@@ -92,11 +92,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       ).pipe(takeWhile(() => this.componentActive))
         .subscribe(([applications, licenses]) => {
           this.checkIndigenousNationState(applications);
-          applications.forEach((application: ApplicationSummary | any) => {
+          applications.forEach((application: ApplicationSummary) => {
             this.inProgressApplications.push(application);
           });
 
-          licenses.forEach((licence: License | any) => {
+          licenses.forEach((licence: ApplicationLicenseSummary) => {
             const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
             if (relatedApplications.length > 0) {
               licence.relatedApplicationId = relatedApplications[0].id;
@@ -251,7 +251,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     );
   }
 
-  startRenewal(licence) {
+  startRenewal(licence: ApplicationLicenseSummary) {
     if (licence.relatedApplicationId) {
       this.router.navigateByUrl('/renew-crs-licence/application/' + licence.relatedApplicationId);
     } else {
