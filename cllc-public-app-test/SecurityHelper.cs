@@ -262,21 +262,21 @@ namespace Gov.Lclb.Cllb.Public.Test
             return null;
         }
 
-        public static async Task<ViewModels.AdoxioApplication> CreateLicenceApplication(HttpClient _client, ViewModels.Account currentAccount)
+        public static async Task<ViewModels.Application> CreateLicenceApplication(HttpClient _client, ViewModels.Account currentAccount)
 		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/Application");
 
-            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+            ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
-                licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
-                registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
-                applicant = currentAccount, //account
-                establishmentName = "Not a Dispensary",
-                establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
-                establishmentaddressstreet = "123 Any Street",
-                establishmentaddresscity = "Victoria, BC",
-                establishmentaddresspostalcode = "V1X 1X1"
+                LicenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                ApplicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
+                RegisteredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
+                Applicant = currentAccount, //account
+                EstablishmentName = "Not a Dispensary",
+                EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
+                EstablishmentAddressStreet = "123 Any Street",
+                EstablishmentAddressCity = "Victoria, BC",
+                EstablishmentAddressPostalCode = "V1X 1X1"
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -287,25 +287,25 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             // parse as JSON.
-            ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+            ViewModels.Application responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
 
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
-            Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
-            Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
-            Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+            Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
+            Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
+            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
 
 			return responseViewModel;
 		}
 
-		public static async Task<ViewModels.AdoxioApplication> GetLicenceApplication(HttpClient _client, string applicationId, bool expectSuccess)
+		public static async Task<ViewModels.Application> GetLicenceApplication(HttpClient _client, string applicationId, bool expectSuccess)
 		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + applicationId);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + applicationId);
             var response = await _client.SendAsync(request);
 			if (expectSuccess)
             {
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
-				ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+				ViewModels.Application responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
                 return responseViewModel;
             }
             else
@@ -352,7 +352,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public static async Task<string> DeleteLicenceApplication(HttpClient _client, string applicationId)
 		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + applicationId + "/delete");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/application/" + applicationId + "/delete");
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 			return applicationId;
@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/Application/" + id + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
@@ -397,7 +397,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
         public static async Task<List<ViewModels.FileSystemItem>> GetFileListForApplication(HttpClient _client, string id, string docType, bool expectSuccess)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id + "/attachments/" + docType);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id + "/attachments/" + docType);
             var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
             if (expectSuccess)
@@ -416,7 +416,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public static string DownloadFileForApplication(HttpClient _client, string id, string fileId, bool expectSuccess)
         {
             /*
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id + "/attachment/" + fileId);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id + "/attachment/" + fileId);
             var response = await _client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
             if (expectSuccess)
@@ -436,7 +436,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public static string DeleteFileForApplication(HttpClient _client, string id)
         {
             /*
-            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/adoxioapplication/" + id + "/attachments");
+            var request = new HttpRequestMessage(HttpMethod.Delete, "/api/Application/" + id + "/attachments");
             var response = await _client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
             */
