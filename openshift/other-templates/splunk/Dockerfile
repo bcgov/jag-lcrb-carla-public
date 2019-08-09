@@ -8,7 +8,7 @@ copy uid_entrypoint /sbin
 
 RUN chmod -R a+w /opt/ansible 
 
-copy ansible /opt/
+copy ansible /opt/ansible/
 
 RUN chmod a-w /opt/ansible 
 
