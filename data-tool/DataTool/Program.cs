@@ -4,15 +4,10 @@ using DataTool;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.Rest;
 using Newtonsoft.Json;
-using RandomDataGenerator.FieldOptions;
-using RandomDataGenerator.Randomizers;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace DemoTool
 {
