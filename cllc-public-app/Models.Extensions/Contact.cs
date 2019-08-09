@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = contact.Lastname;
                 result.telephone1 = contact.Telephone1;
                 result.BirthPlace = contact.AdoxioBirthplace;
-                result.Gender = (ViewModels.Gender?)contact.Gendercode;
+                result.Gender = (ViewModels.Gender?)contact.AdoxioGendercode;
                 result.MobilePhone = contact.Mobilephone;
                 result.PrimaryIdNumber = contact.AdoxioPrimaryidnumber;
                 result.SecondaryIdNumber = contact.AdoxioSecondaryidnumber;
@@ -272,7 +272,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             contact.Lastname = NewContact.lastname;
 
             contact.Emailaddress1 = NewContact.emailaddress1;
-            contact.Gendercode = (int?)NewContact.Gender;
+            contact.AdoxioGendercode = (int?)NewContact.Gender;
             contact.Birthdate = NewContact.Birthdate;
         }
 
@@ -303,7 +303,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Birthdate = from.Birthdate;
 
             to.AdoxioBirthplace = from.BirthPlace;
-            to.Gendercode = (int?)from.Gender;
+            to.AdoxioGendercode = (int?)from.Gender;
             to.Mobilephone = from.MobilePhone;
             to.AdoxioPrimaryidnumber = from.PrimaryIdNumber;
             to.AdoxioSecondaryidnumber = from.SecondaryIdNumber;
