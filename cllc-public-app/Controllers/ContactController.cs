@@ -272,7 +272,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null && !_env.IsDevelopment())
             {
                 // get additional information from the service card headers.
-                userSettings.CopyContactSettingsOver(contact);
+                contact.CopyContactUserSettings(userSettings.NewContact);
                 worker.CopyValues(userSettings.NewWorker);                
             }
 
