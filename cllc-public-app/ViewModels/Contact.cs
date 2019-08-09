@@ -66,6 +66,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
 
         public string BirthPlace { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public Gender? Gender { get; set; }
         public string MobilePhone { get; set; }
         public string PrimaryIdNumber { get; set; }
