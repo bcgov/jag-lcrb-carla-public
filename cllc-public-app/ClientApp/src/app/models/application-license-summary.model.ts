@@ -24,4 +24,7 @@ export class ApplicationLicenseSummary {
   assignedLicense: License;
   expiryDate: Date;
   allowedActions: ApplicationType[];
+
+  relatedApplicationPaid: boolean;
+  relatedApplicationId: string;
 }
