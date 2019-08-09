@@ -7,7 +7,7 @@ RUN chmod a+w /etc/passwd
 copy uid_entrypoint /sbin
 
 RUN chmod -R a+w /opt/ansible && \
-  chmod -R a+w /opt/splunk/share/
+  chmod -R 777 /opt/splunk/share/
 
 copy ansible /opt/ansible/
 
