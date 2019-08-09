@@ -422,9 +422,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user1.accountid, account1.id);
 
 			// *** create some license applications
-			ViewModels.AdoxioApplication application1 = await SecurityHelper.CreateLicenceApplication(_client, account1);
+			ViewModels.Application application1 = await SecurityHelper.CreateLicenceApplication(_client, account1);
 			Assert.NotNull(application1);
-			var tmp = await SecurityHelper.GetLicenceApplication(_client, application1.id, true);
+			var tmp = await SecurityHelper.GetLicenceApplication(_client, application1.Id, true);
 			Assert.NotNull(tmp);
             // ***
 
@@ -444,7 +444,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user2.accountid, account2.id);
 
             // *** as user 2, try to access license applications of account 1
-			tmp = await SecurityHelper.GetLicenceApplication(_client, application1.id, false);
+			tmp = await SecurityHelper.GetLicenceApplication(_client, application1.Id, false);
             Assert.Null(tmp);
             // ***
 
@@ -460,7 +460,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             account1 = await GetAccountForCurrentUser();
 
 			// *** delete license applications of account 1
-			await SecurityHelper.DeleteLicenceApplication(_client, application1.id);
+			await SecurityHelper.DeleteLicenceApplication(_client, application1.Id);
             // ***
 
             // logout and cleanup (deletes the account and contact created above ^^^)
@@ -490,14 +490,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user1.accountid, account1.id);
 
             // *** create some license applications
-            ViewModels.AdoxioApplication application1 = await SecurityHelper.CreateLicenceApplication(_client, account1);
+            ViewModels.Application application1 = await SecurityHelper.CreateLicenceApplication(_client, account1);
             Assert.NotNull(application1);
-            var tmp = await SecurityHelper.GetLicenceApplication(_client, application1.id, true);
+            var tmp = await SecurityHelper.GetLicenceApplication(_client, application1.Id, true);
             Assert.NotNull(tmp);
 
             // add an attachment to the application
-			string file1 = await SecurityHelper.UploadFileToApplication(_client, application1.id, "TestAppFileSecurity");
-			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForApplication(_client, application1.id, "TestAppFileSecurity", true);
+			string file1 = await SecurityHelper.UploadFileToApplication(_client, application1.Id, "TestAppFileSecurity");
+			List<ViewModels.FileSystemItem> file1s = await SecurityHelper.GetFileListForApplication(_client, application1.Id, "TestAppFileSecurity", true);
             Assert.NotNull(file1s);
             Assert.Single(file1s);
 			//string _data1 = await SecurityHelper.DownloadFileForApplication(_client, application1.id, file1s[0].id, true);
@@ -519,11 +519,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user2.accountid, account2.id);
 
             // *** as user 2, try to access license applications of account 1
-            tmp = await SecurityHelper.GetLicenceApplication(_client, application1.id, false);
+            tmp = await SecurityHelper.GetLicenceApplication(_client, application1.Id, false);
             Assert.Null(tmp);
 
             // test access to the application's attachment
-			List<ViewModels.FileSystemItem> file2s = await SecurityHelper.GetFileListForApplication(_client, application1.id, "TestFileSecurity", false);
+			List<ViewModels.FileSystemItem> file2s = await SecurityHelper.GetFileListForApplication(_client, application1.Id, "TestFileSecurity", false);
             Assert.Null(file2s);
 			//string _data2 = await SecurityHelper.DownloadFileForApplication(_client, application1.id, file1s[0].id, true);
             // ***
@@ -543,7 +543,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // delete the application's attachments
 			//await SecurityHelper.DeleteFileForApplication(_client, application1.id, file1s[0].id);
 
-            await SecurityHelper.DeleteLicenceApplication(_client, application1.id);
+            await SecurityHelper.DeleteLicenceApplication(_client, application1.Id);
             // ***
 
             // logout and cleanup (deletes the account and contact created above ^^^)
@@ -573,13 +573,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user1.accountid, account1.id);
 
             // *** create some license applications and invoices
-			ViewModels.AdoxioApplication application1 = await SecurityHelper.CreateLicenceApplication(_client, account1);
+			ViewModels.Application application1 = await SecurityHelper.CreateLicenceApplication(_client, account1);
             Assert.NotNull(application1);
-            var tmp = await SecurityHelper.GetLicenceApplication(_client, application1.id, true);
+            var tmp = await SecurityHelper.GetLicenceApplication(_client, application1.Id, true);
             Assert.NotNull(tmp);
 
 			// create invoices
-			Dictionary<string, string> values = await SecurityHelper.PayLicenceApplicationFee(_client, application1.id, false, true);
+			Dictionary<string, string> values = await SecurityHelper.PayLicenceApplicationFee(_client, application1.Id, false, true);
 			Assert.NotNull(values);
 			Assert.True(values.ContainsKey("trnApproved"));
             Assert.Equal("0", values["trnApproved"]);
@@ -601,11 +601,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(user2.accountid, account2.id);
 
             // *** as user 2, try to access license application invoices of account 1
-			tmp = await SecurityHelper.GetLicenceApplication(_client, application1.id, false);
+			tmp = await SecurityHelper.GetLicenceApplication(_client, application1.Id, false);
             Assert.Null(tmp);
 
             // access invoices and try to pay
-			values = await SecurityHelper.PayLicenceApplicationFee(_client, application1.id, false, false);
+			values = await SecurityHelper.PayLicenceApplicationFee(_client, application1.Id, false, false);
             Assert.Null(values);
             // ***
 
