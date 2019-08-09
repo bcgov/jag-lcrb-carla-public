@@ -232,12 +232,12 @@ namespace Gov.Lclb.Cllb.OneStopService
         }        
     
 
-/// <summary>
-/// Setup the Hangfire jobs.
-/// </summary>
-/// <param name="app"></param>
-/// <param name="loggerFactory"></param>
-private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        /// <summary>
+        /// Setup the Hangfire jobs.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="loggerFactory"></param>
+        private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             ILogger log = loggerFactory.CreateLogger(typeof(Startup));
             log.LogInformation("Starting setup of Hangfire job ...");
@@ -246,13 +246,16 @@ private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFac
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    log.LogInformation("Creating Hangfire job for License issuance check ...");
-                    ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.HourInterval(1));
-                    ILogger orbookLog = loggerFactory.CreateLogger(typeof(OrgBookUtils));
-                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForNewLicences(null), Cron.HourInterval(1));
-                    log.LogInformation("Hangfire Send Export job done.");
+                    log.LogInformation("Creating Hangfire jobs for License issuance check ...");
 
+                    ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
+                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.Hourly());
+
+                    ILogger orbookLog = loggerFactory.CreateLogger(typeof(OrgBookUtils));
+                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForNewLicences(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForMissingCredentials(null), Cron.Hourly());
+
+                    log.LogInformation("Hangfire License issuance check jobs setup.");
                 }
             }
             catch (Exception e)
