@@ -140,20 +140,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 to.AdoxioLocalgovindigenousnationid = from.AdoxioEstablishment.AdoxioLGIN;
             }
 
-            //copy contact Info
-            //var previousApplication = from?.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence
-            //    ?.OrderByDescending(app => app.AdoxioDatelicenceapproved)
-            //    ?.FirstOrDefault();
-            //if (previousApplication != null)
-            //{
-            //    to.AdoxioContactmiddlename = previousApplication.AdoxioContactmiddlename;
-            //    to.AdoxioContactpersonfirstname = previousApplication.AdoxioContactpersonfirstname;
-            //    to.AdoxioContactpersonlastname = previousApplication.AdoxioContactpersonlastname;
-            //    to.AdoxioContactpersonfullname = previousApplication.AdoxioContactpersonfullname;
-            //    to.AdoxioContactpersonphone = previousApplication.AdoxioContactpersonphone;
-            //    to.AdoxioEmail = previousApplication.AdoxioEmail;
-            //}
-
         }
 
         public static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceType(string id, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
