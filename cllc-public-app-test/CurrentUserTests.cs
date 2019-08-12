@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var prevId1 = account1.id;
 
             // call the REST API to get the account
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/account/" + prevId1);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/" + prevId1);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.NotNull(account2);
 
             // as our second user, view the account of the first user
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/account/" + prevId1);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/" + prevId1);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
 			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
@@ -179,7 +179,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.NotNull(account1);
 
             // call the REST API to get the strId1
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/account/" + strId1);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/" + strId1);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
@@ -212,7 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.NotNull(account2);
 
             // as our second user, view the account of the first user
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/account/" + childAccountId);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/" + childAccountId);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
 			Assert.Equal(HttpStatusCode.OK, response.StatusCode);
