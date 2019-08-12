@@ -1,0 +1,11 @@
+{
+  "name": "front-end-tests",
+  "description": "Front end tests",
+  "version": "0.0.1",
+  "private": false,
+  "author": "LCRB",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bcgov/ag-lclb-cllc-public.git"
+  }
+}
