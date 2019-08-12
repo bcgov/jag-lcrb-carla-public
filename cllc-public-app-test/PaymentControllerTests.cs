@@ -14,11 +14,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 		public PaymentControllerTests(CustomWebApplicationFactory<Startup> factory)
             : base(factory)
 		{ }
+        const string service = "payment";
 
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
-        {
-            string service = "payment";
+        {            
 			string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -43,8 +43,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 return;
             }
-
-			string service = "payment";
             
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
@@ -57,23 +55,24 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Account currentAccount = await GetAccountForCurrentUser();
             
             // create an application to test with (need a valid id)
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications");
 
-            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+            ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
-				licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
-                registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
+				LicenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                ApplicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
+                ApplicationType = await GetDefaultCannabisApplicationType(),
+                RegisteredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
                                                                      //,name = initialName
                                                                      //,applyingPerson = "Applying Person" //contact
-                applicant = currentAccount, //account
+                Applicant = currentAccount, //account
                                            //,jobNumber = "123"
-                establishmentName = "Not a Dispensary",
-                establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
-                establishmentaddressstreet = "123 Any Street",
-                establishmentaddresscity = "Victoria, BC",
-                establishmentaddresspostalcode = "V1X 1X1",
-                applicationStatus = AdoxioApplicationStatusCodes.InProgress
+                EstablishmentName = "Not a Dispensary",
+                EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
+                EstablishmentAddressStreet = "123 Any Street",
+                EstablishmentAddressCity = "Victoria, BC",
+                EstablishmentAddressPostalCode = "V1X 1X1",
+                ApplicationStatus = AdoxioApplicationStatusCodes.InProgress
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -84,14 +83,14 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+            ViewModels.Application responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
 
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
-            Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
-            Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
-            Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+            Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
+            Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
+            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
             
-			string id = responseViewModel.id;
+			string id = responseViewModel.Id;
 
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/submit/" + id);
             response = await _client.SendAsync(request);
@@ -123,14 +122,14 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal("1", values["trnApproved"]);
 
             // fetch updated application
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-			string invoiceId = responseViewModel.adoxioInvoiceId;
-			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.adoxioInvoiceTrigger);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
+			string invoiceId = responseViewModel.AdoxioInvoiceId;
+			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.AdoxioInvoiceTrigger);
 
 			// delete invoice - note we can't delete an invoice created by Dynamics
             //request = new HttpRequestMessage(HttpMethod.Post, "/api/invoice/" + invoiceId + "/delete");
@@ -139,12 +138,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             //response.EnsureSuccessStatusCode();
 
 			// delete application
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/delete");
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             
 			// should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
@@ -155,9 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		[Fact]
 		public async System.Threading.Tasks.Task CantAccessApplicationOfDifferentCompany()
-		{
-			string service = "payment";
-            
+		{            
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
 
@@ -170,23 +167,24 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Account currentAccount1 = await GetAccountForCurrentUser();
             
 			// create an application to test with (need a valid id)
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication");
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications");
 
-            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+            ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
-                name = "Test Application Name",
-				applyingPerson = "Applying Person", //contact
-				applicant = currentAccount1, //account
-				licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
-				jobNumber = "123",
-                registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
-                establishmentName = "Not a Dispensary",
-                establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
-                establishmentaddressstreet = "123 Any Street",
-                establishmentaddresscity = "Victoria, BC",
-                establishmentaddresspostalcode = "V1X 1X1",
-				applicationStatus = AdoxioApplicationStatusCodes.InProgress
+                Name = "Test Application Name",
+				ApplyingPerson = "Applying Person", //contact
+				Applicant = currentAccount1, //account
+                ApplicationType = await GetDefaultCannabisApplicationType(),
+                LicenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                ApplicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
+				JobNumber = "123",
+                RegisteredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
+                EstablishmentName = "Not a Dispensary",
+                EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
+                EstablishmentAddressStreet = "123 Any Street",
+                EstablishmentAddressCity = "Victoria, BC",
+                EstablishmentAddressPostalCode = "V1X 1X1",
+				ApplicationStatus = AdoxioApplicationStatusCodes.InProgress
             };
 
             var jsonString = JsonConvert.SerializeObject(viewmodel_application);
@@ -197,14 +195,14 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+            ViewModels.Application responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
 
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
-            Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
-            Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
-            Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+            Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
+            Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
+            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
             
-            string id = responseViewModel.id;
+            string id = responseViewModel.Id;
             
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/submit/" + id);
             response = await _client.SendAsync(request);
@@ -237,12 +235,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await Login(loginUser1);
             
 			// delete application
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
 			// should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             
@@ -253,7 +251,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 		[Fact]
 		public async System.Threading.Tasks.Task PaymentSubmitDeclinedAndThenResubitApprovedWorks()
 		{
-			string service = "payment";
 
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
@@ -266,22 +263,23 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Account currentAccount = await GetAccountForCurrentUser();
 
             // create an application to test with (need a valid id)
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication");
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications");
 
-            ViewModels.AdoxioApplication viewmodel_application = new ViewModels.AdoxioApplication()
+            ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
-                licenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
-                applicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
-                registeredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
+                LicenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                ApplicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
+                RegisteredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
                                                                       //,name = initialName
                                                                       //,applyingPerson = "Applying Person" //contact
-                applicant = currentAccount, //account
+                Applicant = currentAccount, //account
                                             //,jobNumber = "123"
-                establishmentName = "Not a Dispensary",
-                establishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
-                establishmentaddressstreet = "123 Any Street",
-                establishmentaddresscity = "Victoria, BC",
-                establishmentaddresspostalcode = "V1X 1X1"
+                ApplicationType = await GetDefaultCannabisApplicationType(),
+                EstablishmentName = "Not a Dispensary",
+                EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
+                EstablishmentAddressStreet = "123 Any Street",
+                EstablishmentAddressCity = "Victoria, BC",
+                EstablishmentAddressPostalCode = "V1X 1X1"
                 //,applicationStatus = "0"
             };
 
@@ -293,13 +291,13 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioApplication responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
+            ViewModels.Application responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
 
-            Assert.Equal("Not a Dispensary", responseViewModel.establishmentName);
-            Assert.Equal("Victoria, BC", responseViewModel.establishmentaddresscity);
-            Assert.Equal("V1X 1X1", responseViewModel.establishmentaddresspostalcode);
+            Assert.Equal("Not a Dispensary", responseViewModel.EstablishmentName);
+            Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
+            Assert.Equal("V1X 1X1", responseViewModel.EstablishmentAddressPostalCode);
 
-            string id = responseViewModel.id;
+            string id = responseViewModel.Id;
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/submit/" + id);
             response = await _client.SendAsync(request);
@@ -325,16 +323,16 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("0", values["trnApproved"]);
 
 			// fetch updated application
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-            string invoiceId = responseViewModel.adoxioInvoiceId;
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
+            string invoiceId = responseViewModel.AdoxioInvoiceId;
 
 			// check application status
-			Assert.Equal(ViewModels.GeneralYesNo.No, responseViewModel.adoxioInvoiceTrigger);
+			Assert.Equal(ViewModels.GeneralYesNo.No, responseViewModel.AdoxioInvoiceTrigger);
 
             // submit a second time to get it paid
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/submit/" + id);
@@ -363,15 +361,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("1", values["trnApproved"]);
 
             // fetch updated application
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioApplication>(jsonString);
-            string invoiceId2 = responseViewModel.adoxioInvoiceId;
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
+            string invoiceId2 = responseViewModel.AdoxioInvoiceId;
 			Assert.NotEqual(invoiceId2, invoiceId);
-			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.adoxioInvoiceTrigger);
+			Assert.Equal(ViewModels.GeneralYesNo.Yes, responseViewModel.AdoxioInvoiceTrigger);
 
             // delete invoice - note we can't delete an invoice created by Dynamics
             //request = new HttpRequestMessage(HttpMethod.Post, "/api/invoice/" + invoiceId + "/delete");
@@ -380,12 +378,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             //response.EnsureSuccessStatusCode();
 
             // delete application
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxioapplication/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // should get a 404 if we try a get now.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxioapplication/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
