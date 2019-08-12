@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            string service = "invoice";
+            string service = "invoices";
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string initialName = "InitialName";
             string changedName = "ChangedName";
-			string service = "invoice";
+			string service = "invoices";
 
 			// first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
