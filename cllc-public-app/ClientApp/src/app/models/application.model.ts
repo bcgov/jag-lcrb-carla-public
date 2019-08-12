@@ -59,14 +59,14 @@ export class Application {
   indigenousNationId: string;
   federalProducerNames: string;
 
-  checklistBrandingAssessed: string;
+  checklistBrandingAssess: string;
   checklistEstabRenderAssessed: string;
-  checklistFloorPlanAssessed: string;
+  checklistFloorPlanAssess: string;
   checklistKeyPersonnelBuilt: string;
   checklistOrgLeadershipBuilt: string;
   checklistShareholdersBuilt: string;
   checklistSignageAssessed: string;
-  checklistSiteMapAssessed: string;
-  checklistValidInterestAssessed: string;
+  checklistSiteMapAssess: string;
+  checklistValidInterestAssess: string;
   checklistEstablishmentAddressAssessed: string;
 }

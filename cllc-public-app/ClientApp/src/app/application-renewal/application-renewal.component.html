@@ -33,15 +33,15 @@
               </app-field>
 
               <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true"
-                [valid]="!form.get('checklistBrandingAssessed')?.touched || form.get('checklistBrandingAssessed')?.valid">
+                [valid]="!form.get('checklistBrandingAssess')?.touched || form.get('checklistBrandingAssess')?.valid">
                 <label>The Establishment Name has not changed and is still compliant with the <a
                     routerLink="/policy-document/store-name">LCRB Naming Policy</a>.</label> <br>
-                <mat-button-toggle-group aria-label="Font Style" formControlName="checklistBrandingAssessed">
+                <mat-button-toggle-group aria-label="Font Style" formControlName="checklistBrandingAssess">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="Changed">No</mat-button-toggle>
                 </mat-button-toggle-group>
               </app-field>
-              <div *ngIf="form.get('checklistBrandingAssessed')?.value === 'Changed'" class="field-changed">
+              <div *ngIf="form.get('checklistBrandingAssess')?.value === 'Changed'" class="field-changed">
                 <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
                 contact you as part of this renewal process
               </div>
@@ -174,19 +174,81 @@
           <app-field
             label="The store is still located at a location that you own or have an executed lease or sub-lease."
             errorMessage="Please select a value" [showChevrons]="false" [required]="true"
-            [valid]="!form.get('checklistValidInterestAssessed')?.touched || form.get('checklistValidInterestAssessed')?.valid">
-            <mat-button-toggle-group formControlName="checklistValidInterestAssessed" aria-label="Font Style">
+            [valid]="!form.get('checklistValidInterestAssess')?.touched || form.get('checklistValidInterestAssess')?.valid">
+            <mat-button-toggle-group formControlName="checklistValidInterestAssess" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="Changed">No</mat-button-toggle>
             </mat-button-toggle-group>
           </app-field>
-          <div *ngIf="form.get('checklistValidInterestAssessed')?.value === 'Changed'" class="field-changed">
+          <div *ngIf="form.get('checklistValidInterestAssess')?.value === 'Changed'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
             contact
             you as part of this renewal process
           </div>
         </mat-card>
       </div>
+
+            <!-- Contact Details -->
+            <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+            <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+              The contact LCRB should communicate with regarding the application. The contact must be authorized to
+              represent
+              the applicant and have the authority to bind the applicant.
+            </i>
+            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+              <i *ngIf="account?.businessType === 'SoleProprietor'">
+                The contact LCRB should communicate with regarding the application
+              </i>
+              <i *ngIf="account?.businessType === 'Society'">
+                The contact LCRB should communicate with regarding the application. The contact must be authorized to
+                represent the applicant and have the authority to bind the applicant.
+              </i>
+              <i *ngIf="businessTypeIsPartnership()">
+                The contact LCRB should communicate with regarding the application. The contact must be authorized to
+                represent the applicant and have the authority to bind the applicant.
+              </i>
+              <i *ngIf="account?.businessType !== 'PublicCorporation'">
+                The contact must be authorized to represent the applicant and have the authority to bind the applicant.
+              </i>
+              <i *ngIf="businessTypeIsPrivateCorporation()">
+                The contact LCRB should communicate with regarding the application. The contact must be authorized to
+                represent the applicant and have the authority to bind the applicant.
+              </i>
+            </div>
+            <address class="padded-section">
+      
+              <app-field label="First Name" [required]="true"
+                [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+                errorMessage="Please enter the business contact's first name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+                  formControlName="contactPersonFirstName">
+              </app-field>
+      
+              <app-field label="Last Name" [required]="true"
+                [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+                errorMessage="Please enter the business contact's last name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+                  formControlName="contactPersonLastName">
+              </app-field>
+      
+              <app-field label="Title/ Position" [required]="false" [valid]="true">
+                <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+              </app-field>
+      
+              <app-field label="Phone Number (main)" [required]="true"
+                [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+                errorMessage="Please enter the business contact's 10-digit phone number">
+                <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+              </app-field>
+      
+              <app-field label="Email" [required]="true"
+                [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+                errorMessage="Please enter the business contact's email address">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+                  formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+              </app-field>
+            </address>
 
 
 
@@ -204,13 +266,13 @@
 
           <app-field label="The floor plan has not changed." errorMessage="Please select a value" [showChevrons]="false"
             [required]="true"
-            [valid]="!form.get('checklistFloorPlanAssessed')?.touched || form.get('checklistFloorPlanAssessed')?.valid">
-            <mat-button-toggle-group formControlName="checklistFloorPlanAssessed" aria-label="Font Style">
+            [valid]="!form.get('checklistFloorPlanAssess')?.touched || form.get('checklistFloorPlanAssess')?.valid">
+            <mat-button-toggle-group formControlName="checklistFloorPlanAssess" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="Changed">No</mat-button-toggle>
             </mat-button-toggle-group>
           </app-field>
-          <div *ngIf="form.get('checklistFloorPlanAssessed')?.value === 'Changed'" class="field-changed">
+          <div *ngIf="form.get('checklistFloorPlanAssess')?.value === 'Changed'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
             contact
             you as part of this renewal process
@@ -218,15 +280,15 @@
         </mat-card>
 
         <mat-card style="margin-bottom: 10px;">
-          <app-field label="The Site Plan has not changed.s" errorMessage="Please select a value" [showChevrons]="false"
+          <app-field label="The Site Plan has not changed." errorMessage="Please select a value" [showChevrons]="false"
             [required]="true"
-            [valid]="!form.get('checklistSiteMapAssessed')?.touched || form.get('checklistSiteMapAssessed')?.valid">
-            <mat-button-toggle-group formControlName="checklistSiteMapAssessed" aria-label="Font Style">
+            [valid]="!form.get('checklistSiteMapAssess')?.touched || form.get('checklistSiteMapAssess')?.valid">
+            <mat-button-toggle-group formControlName="checklistSiteMapAssess" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="Changed">No</mat-button-toggle>
             </mat-button-toggle-group>
           </app-field>
-          <div *ngIf="form.get('checklistSiteMapAssessed')?.value === 'Changed'" class="field-changed">
+          <div *ngIf="form.get('checklistSiteMapAssess')?.value === 'Changed'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
             contact
             you as part of this renewal process

@@ -55,7 +55,7 @@
   </div>
 
   <h3 class="blue-header">SHAREHOLDERS</h3>
-  <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
+  <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId" style="margin-bottom: 10px;">
     <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
       [parentLegalEntityId]="legalEntityId">
     </app-shareholders>
