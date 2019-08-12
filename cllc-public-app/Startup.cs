@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Public
                 .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics");
 
-
+            services.Configure<SplunkLoggerConfiguration>(_ => GetSplunkLoggerConfiguration(null));
             services.AddSession();
 
         }
@@ -401,7 +401,7 @@ namespace Gov.Lclb.Cllb.Public
                 var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
 
                 //Append Http Json logger
-                loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
+                loggerFactory.AddHECRawSplunkLogger(splunkLoggerConfiguration);
             }
 
         }

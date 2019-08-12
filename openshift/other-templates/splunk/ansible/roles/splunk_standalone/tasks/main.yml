@@ -18,4 +18,4 @@
     - splunk.apps_location
     - splunk.deployment_server is not defined or not splunk.deployment_server
 
-- include_tasks: ../../splunk_common/tasks/check_for_required_restarts.yml
+# - include_tasks: ../../splunk_common/tasks/check_for_required_restarts.yml
