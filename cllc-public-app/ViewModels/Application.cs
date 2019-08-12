@@ -430,13 +430,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public TiedHouseConnection TiedHouse { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistBrandingAssessed { get; set; }
+        public ValueNotChanged? ChecklistBrandingAssess { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistValidInterestAssessed { get; set; }
+        public ValueNotChanged? ChecklistValidInterestAssess { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistFloorPlanAssessed { get; set; }
+        public ValueNotChanged? ChecklistFloorPlanAssess { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistSiteMapAssessed { get; set; }
+        public ValueNotChanged? ChecklistSiteMapAssess { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public ValueNotChanged? ChecklistEstabRenderAssessed { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
