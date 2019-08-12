@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task GetCurrentUserDyanamicsApplicationsTest()
         {
             string initialName = randomNewUserName("License Test ", 6);
-            string service = "Application";
+            string service = "Applications";
 
             // login as default and get account for current user
             string loginUser1 = randomNewUserName("TestAppUser", 6);

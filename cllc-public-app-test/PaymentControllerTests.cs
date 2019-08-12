@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            string service = "payment";
+            string service = "payments";
 			string id = "SomeRandomId";
 
             // first confirm we are not logged in
