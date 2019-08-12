@@ -113,6 +113,11 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
       establishmentParcelId: [''],
+      contactPersonFirstName: ['', Validators.required],
+      contactPersonLastName: ['', Validators.required],
+      contactPersonRole: [''],
+      contactPersonEmail: ['', Validators.required],
+      contactPersonPhone: ['', Validators.required],
 
       establishmentAddressStreet: [''],
       establishmentAddressCity: [''],
