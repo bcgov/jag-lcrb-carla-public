@@ -13,11 +13,11 @@ namespace Gov.Lclb.Cllb.Public.Test
         public InvoiceTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
         { }
-
+        const string service = "invoice";
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            string service = "invoices";
+            
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -34,8 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task TestCRUD()
         {
             string initialName = "InitialName";
-            string changedName = "ChangedName";
-			string service = "invoices";
+            string changedName = "ChangedName";			
 
 			// first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
