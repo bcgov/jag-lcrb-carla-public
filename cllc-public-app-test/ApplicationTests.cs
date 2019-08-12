@@ -39,7 +39,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string initialName = randomNewUserName("Application Initial Name ", 6);
             string changedName = randomNewUserName("Application Changed Name ", 6);
-            
+
+
 
             // login as default and get account for current user
             string loginUser = randomNewUserName("TestAppUser_", 6);
@@ -47,6 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             User user = await GetCurrentUser();
             Account currentAccount = await GetAccountForCurrentUser();
+            
 
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -57,13 +59,14 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
-                //ApplicationType = TODO
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
                                                                      //,name = initialName
                                                                      //,applyingPerson = "Applying Person" //contact
                 ,
                 Applicant = currentAccount //account
                                            //,jobNumber = "123"
+
                 ,
                 EstablishmentName = "Not a Dispensary"
                 ,
@@ -173,6 +176,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
                                                                      //,name = initialName
                                                                      //,applyingPerson = "Applying Person" //contact
@@ -285,6 +289,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Applicant = currentAccount1,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 JobNumber = "123",
                 LicenseType = "Cannabis Retail Store",
                 EstablishmentName = "Shared Retail Store",
@@ -389,6 +394,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No
                 ,
                 Applicant = currentAccount
@@ -489,6 +495,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No
                 ,
                 Applicant = currentAccount

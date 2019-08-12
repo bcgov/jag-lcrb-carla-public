@@ -203,7 +203,17 @@ namespace Gov.Lclb.Cllb.Public.Test
 			return currentAccount;
 		}
 
-		public async System.Threading.Tasks.Task GetCurrentUserIsUnauthorized()
+        public async System.Threading.Tasks.Task<ViewModels.ApplicationType> GetDefaultCannabisApplicationType()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/ApplicationTypes/GetByName/Cannabis Retail Store");
+            var response = await _client.SendAsync(request);
+            var jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            var applicationType = JsonConvert.DeserializeObject<ViewModels.ApplicationType>(jsonString);
+            return applicationType;
+        }
+
+        public async System.Threading.Tasks.Task GetCurrentUserIsUnauthorized()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
