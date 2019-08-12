@@ -16,10 +16,12 @@ namespace Gov.Lclb.Cllb.Public.Test
           : base(factory)
         { }
 
+        const string service = "applications";
+
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            string service = "Applications";
+            
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -37,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string initialName = randomNewUserName("Application Initial Name ", 6);
             string changedName = randomNewUserName("Application Changed Name ", 6);
-            string service = "Application";
+            
 
             // login as default and get account for current user
             string loginUser = randomNewUserName("TestAppUser_", 6);
@@ -55,6 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
+                //ApplicationType = TODO
                 RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
                                                                      //,name = initialName
                                                                      //,applyingPerson = "Applying Person" //contact
@@ -78,10 +81,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
             var response = await _client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
+
+            response.EnsureSuccessStatusCode();
+
+            
             Application responseViewModel = JsonConvert.DeserializeObject<Application>(jsonString);
 
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
@@ -150,8 +155,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string initialName = randomNewUserName("First InitialName", 6);
             string changedName = randomNewUserName("First ChangedName", 6);
-            string service = "Application";
-
+  
             // Login as default user
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
@@ -259,7 +263,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task TestUserCanAccessApplicationForTheirAccount()
         {
             string initialName = randomNewUserName("Application Shared ", 6);
-            string service = "Application";
+    
 
             // login as default and get account for current user
             string loginUser1 = randomNewUserName("TestAppUser", 6);
@@ -368,7 +372,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Create application
             string initialName = randomNewUserName("Application Initial Name ", 6);
             string changedName = randomNewUserName("Application Changed Name ", 6);
-            string service = "Application";
+ 
 
             // login as default and get account for current user
             string loginUser = randomNewUserName("TestAppUser_", 6);
@@ -468,7 +472,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Create application
             string initialName = randomNewUserName("Application Initial Name ", 6);
             string changedName = randomNewUserName("Application Changed Name ", 6);
-            string service = "Application";
+
 
             // login as default and get account for current user
             string loginUser = randomNewUserName("TestAppUser_", 6);
