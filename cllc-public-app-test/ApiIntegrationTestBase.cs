@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore;
+﻿
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.AspNetCore;
+
 using System.Net.Http;
 using Microsoft.Extensions.Configuration;
 
@@ -22,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 .AddEnvironmentVariables()
                 .Build();
 
-            var builder = WebHost.CreateDefaultBuilder()               
+            var builder = new WebHostBuilder()               
                 .UseEnvironment("Staging")
                 .UseConfiguration(testConfig)
                 .UseStartup<Startup>();

@@ -20,6 +20,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     public class SharePointFileManager
     {
         public const string DefaultDocumentListTitle = "Account";
+        public const string DefaultDocumentUrlTitle = "account";
         public const string ApplicationDocumentListTitle = "Application";
         public const string ApplicationDocumentUrlTitle = "adoxio_application";
         public const string ContactDocumentListTitle = "contact";
@@ -324,7 +325,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return;
             }
 
-            string relativeUrl = $"{listTitle}/{folderName}";
+            string relativeUrl = $"/{listTitle}/{folderName}";
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
@@ -521,17 +522,17 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             bool result = false;
             // Delete is very similar to a GET.
-            string serverRelativeUrl = "";
+            string serverRelativeUrl = "/";
             if (!string.IsNullOrEmpty(WebName))
             {
                 serverRelativeUrl += $"{WebName}/";
             }
 
-            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            serverRelativeUrl += $"{listTitle}/{folderName}";
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
-                Method = HttpMethod.Get,
+                Method = HttpMethod.Delete,
                 RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')"),
                 Headers = {
                     { "Accept", "application/json" }
@@ -545,7 +546,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.StatusCode == HttpStatusCode.NoContent)
             {
                 result = true;
             }
@@ -591,16 +592,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             Object result = null;
-            string serverRelativeUrl = "";
+            string serverRelativeUrl = "/";
             if (!string.IsNullOrEmpty(WebName))
             {
                 serverRelativeUrl += $"{WebName}/";
             }
 
-            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            serverRelativeUrl += $"{listTitle}/{folderName}";
             
 
-            HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')");
+            HttpRequestMessage endpointRequest = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')"),
+                Headers = {
+                    { "Accept", "application/json" }
+                }
+            };
+            
                         
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
@@ -833,7 +842,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 serverRelativeUrl += $"{WebName}/";
             }
 
-            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName) + "/" + Uri.EscapeUriString(fileName);
+            serverRelativeUrl += $"/{listTitle}/{folderName}/{fileName}";
 
             result = await DeleteFile(serverRelativeUrl);
 
@@ -847,7 +856,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
-                Method = HttpMethod.Post,
+                Method = HttpMethod.Delete,
                 RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')"),
                 Headers = {
                     { "Accept", "application/json" }

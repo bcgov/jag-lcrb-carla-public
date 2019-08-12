@@ -426,6 +426,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+        public async static Task<MicrosoftDynamicsCRMadoxioApplicationtype> GetApplicationTypeById(this IDynamicsClient _dynamicsClient, string id)
+        {
+            MicrosoftDynamicsCRMadoxioApplicationtype result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await _dynamicsClient.Applicationtypes.GetByKeyAsync(id);
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            return result;
+        }
+
         /// <summary>
         /// Convert a service card ID string into a format that is useful (and fits into Dynamics)
         /// </summary>
