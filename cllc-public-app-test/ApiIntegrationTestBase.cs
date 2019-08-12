@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 .AddEnvironmentVariables()
                 .Build();
 
-            var builder = WebHost.CreateDefaultBuilder()               
+            var builder = new WebHostBuilder()               
                 .UseEnvironment("Staging")
                 .UseConfiguration(testConfig)
                 .UseStartup<Startup>();
