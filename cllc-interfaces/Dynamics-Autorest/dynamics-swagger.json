@@ -2914,6 +2914,8 @@
                 "adoxio_inspectorsnotes desc",
                 "_adoxio_assignedlicence_value",
                 "_adoxio_assignedlicence_value desc",
+                "adoxio_checklistfloorplanassess",
+                "adoxio_checklistfloorplanassess desc",
                 "adoxio_servicehoursmondayclose",
                 "adoxio_servicehoursmondayclose desc",
                 "adoxio_establishmentotherbusinessnature",
@@ -2986,8 +2988,8 @@
                 "adoxio_appchecklistsecurityclearanceapproved desc",
                 "adoxio_checklistorgstructure",
                 "adoxio_checklistorgstructure desc",
-                "adoxio_brandingnameresult",
-                "adoxio_brandingnameresult desc",
+                "_slainvokedid_value",
+                "_slainvokedid_value desc",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_validinterestfinalstatus desc",
                 "adoxio_addressprovince",
@@ -3084,6 +3086,8 @@
                 "adoxio_datereceivedspd desc",
                 "adoxio_otherbusinessesatthesamelocation",
                 "adoxio_otherbusinessesatthesamelocation desc",
+                "adoxio_uploadedsitemap",
+                "adoxio_uploadedsitemap desc",
                 "adoxio_fitandpropercomplete",
                 "adoxio_fitandpropercomplete desc",
                 "adoxio_phone",
@@ -3110,6 +3114,8 @@
                 "adoxio_paymentrecieved desc",
                 "adoxio_checklistdecisionlettersentaip",
                 "adoxio_checklistdecisionlettersentaip desc",
+                "adoxio_checklisttiedhouseassess",
+                "adoxio_checklisttiedhouseassess desc",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_sharepointanchorforpersonalhistory desc",
                 "adoxio_checklistzoningaip",
@@ -3134,10 +3140,10 @@
                 "adoxio_localgovermentfirstnationdecision desc",
                 "adoxio_establishmentaddressstreet",
                 "adoxio_establishmentaddressstreet desc",
-                "_slainvokedid_value",
-                "_slainvokedid_value desc",
                 "adoxio_servicehourswednesdayopen",
                 "adoxio_servicehourswednesdayopen desc",
+                "adoxio_checklistfloorplanlinedaip",
+                "adoxio_checklistfloorplanlinedaip desc",
                 "_adoxio_licenceestablishment_value",
                 "_adoxio_licenceestablishment_value desc",
                 "adoxio_areyouthemaincontactforapplication",
@@ -3164,6 +3170,8 @@
                 "_slaid_value desc",
                 "adoxio_appchecklistlicencefeecollected",
                 "adoxio_appchecklistlicencefeecollected desc",
+                "adoxio_checklislginresolutionassess",
+                "adoxio_checklislginresolutionassess desc",
                 "adoxio_establishmentemail",
                 "adoxio_establishmentemail desc",
                 "adoxio_areyouthemaincontactafterlicensing",
@@ -3194,16 +3202,20 @@
                 "adoxio_establishmentotherbusinessname desc",
                 "adoxio_sharepointlocationdummyfield",
                 "adoxio_sharepointlocationdummyfield desc",
+                "adoxio_uploadedfloorplans",
+                "adoxio_uploadedfloorplans desc",
                 "adoxio_establishmentopeningdate",
                 "adoxio_establishmentopeningdate desc",
                 "adoxio_establishmentaddresscountry",
                 "adoxio_establishmentaddresscountry desc",
+                "adoxio_checklistvalidinterestassess",
+                "adoxio_checklistvalidinterestassess desc",
                 "adoxio_servicehoursmondayopen",
                 "adoxio_servicehoursmondayopen desc",
                 "adoxio_federalproducernames",
                 "adoxio_federalproducernames desc",
-                "adoxio_uploadedfloorplans",
-                "adoxio_uploadedfloorplans desc",
+                "lastonholdtime",
+                "lastonholdtime desc",
                 "_createdonbehalfby_value",
                 "_createdonbehalfby_value desc",
                 "_adoxio_policejurisdictionid_value",
@@ -3262,8 +3274,8 @@
                 "adoxio_checkinspectionstatus desc",
                 "adoxio_sharepointanchorforestablishmentproposal",
                 "adoxio_sharepointanchorforestablishmentproposal desc",
-                "lastonholdtime",
-                "lastonholdtime desc",
+                "adoxio_checklistvalidinterestfinalassessed",
+                "adoxio_checklistvalidinterestfinalassessed desc",
                 "_adoxio_licencefeeinvoice_value",
                 "_adoxio_licencefeeinvoice_value desc",
                 "_ownerid_value",
@@ -3286,10 +3298,14 @@
                 "adoxio_dateaip desc",
                 "adoxio_checklistverifypostalcode",
                 "adoxio_checklistverifypostalcode desc",
+                "adoxio_checklistsitemapassess",
+                "adoxio_checklistsitemapassess desc",
                 "adoxio_establishmentaddresspostalcode",
                 "adoxio_establishmentaddresspostalcode desc",
                 "adoxio_sitemapresult",
                 "adoxio_sitemapresult desc",
+                "adoxio_checklistbrandingassess",
+                "adoxio_checklistbrandingassess desc",
                 "_adoxio_applicationtypeid_value",
                 "_adoxio_applicationtypeid_value desc",
                 "adoxio_checklistverifypidpin",
@@ -3364,6 +3380,8 @@
                 "adoxio_checklisttermsconditionsadded desc",
                 "adoxio_pin",
                 "adoxio_pin desc",
+                "adoxio_brandingnameresult",
+                "adoxio_brandingnameresult desc",
                 "adoxio_uploadedlegalentitystructure",
                 "adoxio_uploadedlegalentitystructure desc",
                 "adoxio_appchecklistinspectionreviewcomplete",
@@ -3388,6 +3406,8 @@
                 "adoxio_occupationload desc",
                 "adoxio_servicehoursfridayopen",
                 "adoxio_servicehoursfridayopen desc",
+                "adoxio_fitandproperstatus",
+                "adoxio_fitandproperstatus desc",
                 "adoxio_checklistlgindefined",
                 "adoxio_checklistlgindefined desc",
                 "adoxio_hastiedhouseassociations",
@@ -3416,8 +3436,6 @@
                 "onholdtime desc",
                 "adoxio_contactpersonname",
                 "adoxio_contactpersonname desc",
-                "adoxio_uploadedsitemap",
-                "adoxio_uploadedsitemap desc",
                 "adoxio_checklistsentforfisla",
                 "adoxio_checklistsentforfisla desc",
                 "adoxio_checklistfloorplanlined",
@@ -3447,6 +3465,7 @@
                 "adoxio_establishmentphone",
                 "adoxio_inspectorsnotes",
                 "_adoxio_assignedlicence_value",
+                "adoxio_checklistfloorplanassess",
                 "adoxio_servicehoursmondayclose",
                 "adoxio_establishmentotherbusinessnature",
                 "adoxio_establishmentparcelid",
@@ -3483,7 +3502,7 @@
                 "adoxio_occupationcapacity",
                 "adoxio_appchecklistsecurityclearanceapproved",
                 "adoxio_checklistorgstructure",
-                "adoxio_brandingnameresult",
+                "_slainvokedid_value",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_addressprovince",
                 "adoxio_signatureposition",
@@ -3532,6 +3551,7 @@
                 "adoxio_establishmenthasstandalonepatio",
                 "adoxio_datereceivedspd",
                 "adoxio_otherbusinessesatthesamelocation",
+                "adoxio_uploadedsitemap",
                 "adoxio_fitandpropercomplete",
                 "adoxio_phone",
                 "adoxio_checklistphotosreceived",
@@ -3545,6 +3565,7 @@
                 "adoxio_checklistvalidinterestreceived",
                 "adoxio_paymentrecieved",
                 "adoxio_checklistdecisionlettersentaip",
+                "adoxio_checklisttiedhouseassess",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_checklistzoningaip",
                 "adoxio_uploadedimageofestablishment",
@@ -3557,8 +3578,8 @@
                 "adoxio_uploadeddriversabstract",
                 "adoxio_localgovermentfirstnationdecision",
                 "adoxio_establishmentaddressstreet",
-                "_slainvokedid_value",
                 "adoxio_servicehourswednesdayopen",
+                "adoxio_checklistfloorplanlinedaip",
                 "_adoxio_licenceestablishment_value",
                 "adoxio_areyouthemaincontactforapplication",
                 "adoxio_servicehourspatronparticipation",
@@ -3572,6 +3593,7 @@
                 "_adoxio_licencetype_value",
                 "_slaid_value",
                 "adoxio_appchecklistlicencefeecollected",
+                "adoxio_checklislginresolutionassess",
                 "adoxio_establishmentemail",
                 "adoxio_areyouthemaincontactafterlicensing",
                 "adoxio_additionalpropertyinformation",
@@ -3587,11 +3609,13 @@
                 "adoxio_datefirstyearpaymentreceived",
                 "adoxio_establishmentotherbusinessname",
                 "adoxio_sharepointlocationdummyfield",
+                "adoxio_uploadedfloorplans",
                 "adoxio_establishmentopeningdate",
                 "adoxio_establishmentaddresscountry",
+                "adoxio_checklistvalidinterestassess",
                 "adoxio_servicehoursmondayopen",
                 "adoxio_federalproducernames",
-                "adoxio_uploadedfloorplans",
+                "lastonholdtime",
                 "_createdonbehalfby_value",
                 "_adoxio_policejurisdictionid_value",
                 "adoxio_servicehourssundayclose",
@@ -3621,7 +3645,7 @@
                 "adoxio_applicationid",
                 "adoxio_checkinspectionstatus",
                 "adoxio_sharepointanchorforestablishmentproposal",
-                "lastonholdtime",
+                "adoxio_checklistvalidinterestfinalassessed",
                 "_adoxio_licencefeeinvoice_value",
                 "_ownerid_value",
                 "_adoxio_area_value",
@@ -3633,8 +3657,10 @@
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_dateaip",
                 "adoxio_checklistverifypostalcode",
+                "adoxio_checklistsitemapassess",
                 "adoxio_establishmentaddresspostalcode",
                 "adoxio_sitemapresult",
+                "adoxio_checklistbrandingassess",
                 "_adoxio_applicationtypeid_value",
                 "adoxio_checklistverifypidpin",
                 "adoxio_checklistfloorplanapproved",
@@ -3672,6 +3698,7 @@
                 "adoxio_establishmentlocatedatfirstnationland",
                 "adoxio_checklisttermsconditionsadded",
                 "adoxio_pin",
+                "adoxio_brandingnameresult",
                 "adoxio_uploadedlegalentitystructure",
                 "adoxio_appchecklistinspectionreviewcomplete",
                 "_adoxio_invoice_value",
@@ -3684,6 +3711,7 @@
                 "adoxio_checklistsenttospd",
                 "adoxio_occupationload",
                 "adoxio_servicehoursfridayopen",
+                "adoxio_fitandproperstatus",
                 "adoxio_checklistlgindefined",
                 "adoxio_hastiedhouseassociations",
                 "adoxio_checklistvalidmailingaddress",
@@ -3698,7 +3726,6 @@
                 "adoxio_onlinedocumentupload",
                 "onholdtime",
                 "adoxio_contactpersonname",
-                "adoxio_uploadedsitemap",
                 "adoxio_checklistsentforfisla",
                 "adoxio_checklistfloorplanlined",
                 "adoxio_addresspostalcode"
@@ -3867,6 +3894,7 @@
                 "adoxio_establishmentphone",
                 "adoxio_inspectorsnotes",
                 "_adoxio_assignedlicence_value",
+                "adoxio_checklistfloorplanassess",
                 "adoxio_servicehoursmondayclose",
                 "adoxio_establishmentotherbusinessnature",
                 "adoxio_establishmentparcelid",
@@ -3903,7 +3931,7 @@
                 "adoxio_occupationcapacity",
                 "adoxio_appchecklistsecurityclearanceapproved",
                 "adoxio_checklistorgstructure",
-                "adoxio_brandingnameresult",
+                "_slainvokedid_value",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_addressprovince",
                 "adoxio_signatureposition",
@@ -3952,6 +3980,7 @@
                 "adoxio_establishmenthasstandalonepatio",
                 "adoxio_datereceivedspd",
                 "adoxio_otherbusinessesatthesamelocation",
+                "adoxio_uploadedsitemap",
                 "adoxio_fitandpropercomplete",
                 "adoxio_phone",
                 "adoxio_checklistphotosreceived",
@@ -3965,6 +3994,7 @@
                 "adoxio_checklistvalidinterestreceived",
                 "adoxio_paymentrecieved",
                 "adoxio_checklistdecisionlettersentaip",
+                "adoxio_checklisttiedhouseassess",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_checklistzoningaip",
                 "adoxio_uploadedimageofestablishment",
@@ -3977,8 +4007,8 @@
                 "adoxio_uploadeddriversabstract",
                 "adoxio_localgovermentfirstnationdecision",
                 "adoxio_establishmentaddressstreet",
-                "_slainvokedid_value",
                 "adoxio_servicehourswednesdayopen",
+                "adoxio_checklistfloorplanlinedaip",
                 "_adoxio_licenceestablishment_value",
                 "adoxio_areyouthemaincontactforapplication",
                 "adoxio_servicehourspatronparticipation",
@@ -3992,6 +4022,7 @@
                 "_adoxio_licencetype_value",
                 "_slaid_value",
                 "adoxio_appchecklistlicencefeecollected",
+                "adoxio_checklislginresolutionassess",
                 "adoxio_establishmentemail",
                 "adoxio_areyouthemaincontactafterlicensing",
                 "adoxio_additionalpropertyinformation",
@@ -4007,11 +4038,13 @@
                 "adoxio_datefirstyearpaymentreceived",
                 "adoxio_establishmentotherbusinessname",
                 "adoxio_sharepointlocationdummyfield",
+                "adoxio_uploadedfloorplans",
                 "adoxio_establishmentopeningdate",
                 "adoxio_establishmentaddresscountry",
+                "adoxio_checklistvalidinterestassess",
                 "adoxio_servicehoursmondayopen",
                 "adoxio_federalproducernames",
-                "adoxio_uploadedfloorplans",
+                "lastonholdtime",
                 "_createdonbehalfby_value",
                 "_adoxio_policejurisdictionid_value",
                 "adoxio_servicehourssundayclose",
@@ -4041,7 +4074,7 @@
                 "adoxio_applicationid",
                 "adoxio_checkinspectionstatus",
                 "adoxio_sharepointanchorforestablishmentproposal",
-                "lastonholdtime",
+                "adoxio_checklistvalidinterestfinalassessed",
                 "_adoxio_licencefeeinvoice_value",
                 "_ownerid_value",
                 "_adoxio_area_value",
@@ -4053,8 +4086,10 @@
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_dateaip",
                 "adoxio_checklistverifypostalcode",
+                "adoxio_checklistsitemapassess",
                 "adoxio_establishmentaddresspostalcode",
                 "adoxio_sitemapresult",
+                "adoxio_checklistbrandingassess",
                 "_adoxio_applicationtypeid_value",
                 "adoxio_checklistverifypidpin",
                 "adoxio_checklistfloorplanapproved",
@@ -4092,6 +4127,7 @@
                 "adoxio_establishmentlocatedatfirstnationland",
                 "adoxio_checklisttermsconditionsadded",
                 "adoxio_pin",
+                "adoxio_brandingnameresult",
                 "adoxio_uploadedlegalentitystructure",
                 "adoxio_appchecklistinspectionreviewcomplete",
                 "_adoxio_invoice_value",
@@ -4104,6 +4140,7 @@
                 "adoxio_checklistsenttospd",
                 "adoxio_occupationload",
                 "adoxio_servicehoursfridayopen",
+                "adoxio_fitandproperstatus",
                 "adoxio_checklistlgindefined",
                 "adoxio_hastiedhouseassociations",
                 "adoxio_checklistvalidmailingaddress",
@@ -4118,7 +4155,6 @@
                 "adoxio_onlinedocumentupload",
                 "onholdtime",
                 "adoxio_contactpersonname",
-                "adoxio_uploadedsitemap",
                 "adoxio_checklistsentforfisla",
                 "adoxio_checklistfloorplanlined",
                 "adoxio_addresspostalcode"
@@ -33524,6 +33560,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_checklistfloorplanassess": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_servicehoursmondayclose": {
           "type": "integer",
           "x-nullable": true
@@ -33668,8 +33708,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_brandingnameresult": {
-          "type": "integer",
+        "_slainvokedid_value": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_validinterestfinalstatus": {
@@ -33865,6 +33905,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_uploadedsitemap": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_fitandpropercomplete": {
           "type": "boolean",
           "x-nullable": true
@@ -33917,6 +33961,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_checklisttiedhouseassess": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_sharepointanchorforpersonalhistory": {
           "type": "string",
           "x-nullable": true
@@ -33965,11 +34013,11 @@
           "type": "string",
           "x-nullable": true
         },
-        "_slainvokedid_value": {
-          "type": "string",
+        "adoxio_servicehourswednesdayopen": {
+          "type": "integer",
           "x-nullable": true
         },
-        "adoxio_servicehourswednesdayopen": {
+        "adoxio_checklistfloorplanlinedaip": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34022,6 +34070,10 @@
           "x-nullable": true
         },
         "adoxio_appchecklistlicencefeecollected": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_checklislginresolutionassess": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34085,12 +34137,20 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_uploadedfloorplans": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_establishmentopeningdate": {
           "type": "string",
           "format": "date-time"
         },
         "adoxio_establishmentaddresscountry": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_checklistvalidinterestassess": {
+          "type": "integer",
           "x-nullable": true
         },
         "adoxio_servicehoursmondayopen": {
@@ -34101,9 +34161,9 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_uploadedfloorplans": {
-          "type": "integer",
-          "x-nullable": true
+        "lastonholdtime": {
+          "type": "string",
+          "format": "date-time"
         },
         "_createdonbehalfby_value": {
           "type": "string",
@@ -34221,9 +34281,9 @@
           "type": "string",
           "x-nullable": true
         },
-        "lastonholdtime": {
-          "type": "string",
-          "format": "date-time"
+        "adoxio_checklistvalidinterestfinalassessed": {
+          "type": "integer",
+          "x-nullable": true
         },
         "_adoxio_licencefeeinvoice_value": {
           "type": "string",
@@ -34269,11 +34329,19 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_checklistsitemapassess": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_establishmentaddresspostalcode": {
           "type": "string",
           "x-nullable": true
         },
         "adoxio_sitemapresult": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_checklistbrandingassess": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34425,6 +34493,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_brandingnameresult": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_uploadedlegalentitystructure": {
           "type": "integer",
           "x-nullable": true
@@ -34470,6 +34542,10 @@
           "x-nullable": true
         },
         "adoxio_servicehoursfridayopen": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_fitandproperstatus": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34527,10 +34603,6 @@
         },
         "adoxio_contactpersonname": {
           "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_uploadedsitemap": {
-          "type": "integer",
           "x-nullable": true
         },
         "adoxio_checklistsentforfisla": {
