@@ -113,6 +113,11 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
       establishmentParcelId: [''],
+      contactPersonFirstName: ['', Validators.required],
+      contactPersonLastName: ['', Validators.required],
+      contactPersonRole: [''],
+      contactPersonEmail: ['', Validators.required],
+      contactPersonPhone: ['', Validators.required],
 
       establishmentAddressStreet: [''],
       establishmentAddressCity: [''],
@@ -123,10 +128,10 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
 
-      checklistBrandingAssessed: ['', Validators.required],
-      checklistValidInterestAssessed: ['', Validators.required],
-      checklistFloorPlanAssessed: ['', Validators.required],
-      checklistSiteMapAssessed: ['', Validators.required],
+      checklistBrandingAssess: ['', Validators.required],
+      checklistValidInterestAssess: ['', Validators.required],
+      checklistFloorPlanAssess: ['', Validators.required],
+      checklistSiteMapAssess: ['', Validators.required],
       checklistEstabRenderAssessed: ['', Validators.required],
       checklistSignageAssessed: ['', Validators.required],
       checklistEstablishmentAddressAssessed: ['', Validators.required],
