@@ -14,11 +14,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 		public PaymentControllerTests(CustomWebApplicationFactory<Startup> factory)
             : base(factory)
 		{ }
+        const string service = "payment";
 
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
-        {
-            string service = "payments";
+        {            
 			string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -43,8 +43,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 return;
             }
-
-			string service = "payment";
             
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
@@ -57,12 +55,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Account currentAccount = await GetAccountForCurrentUser();
             
             // create an application to test with (need a valid id)
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/Application");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications");
 
             ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
 				LicenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
                 ApplicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
                                                                      //,name = initialName
                                                                      //,applyingPerson = "Applying Person" //contact
@@ -123,7 +122,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			Assert.Equal("1", values["trnApproved"]);
 
             // fetch updated application
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
@@ -139,12 +138,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             //response.EnsureSuccessStatusCode();
 
 			// delete application
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/Application/" + id + "/delete");
+			request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             
 			// should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
@@ -155,9 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		[Fact]
 		public async System.Threading.Tasks.Task CantAccessApplicationOfDifferentCompany()
-		{
-			string service = "payment";
-            
+		{            
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
 
@@ -170,14 +167,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Account currentAccount1 = await GetAccountForCurrentUser();
             
 			// create an application to test with (need a valid id)
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/Application");
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications");
 
             ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
                 Name = "Test Application Name",
 				ApplyingPerson = "Applying Person", //contact
 				Applicant = currentAccount1, //account
-				LicenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
+                ApplicationType = await GetDefaultCannabisApplicationType(),
+                LicenseType = "Cannabis Retail Store", //*Mandatory field **This is an entity** E.g.Cannabis Retail Store
                 ApplicantType = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation, //*Mandatory (label=business type)
 				JobNumber = "123",
                 RegisteredEstablishment = ViewModels.GeneralYesNo.No, //*Mandatory (Yes=1, No=0)
@@ -237,12 +235,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 			await Login(loginUser1);
             
 			// delete application
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/Application/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
 			// should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
             
@@ -253,7 +251,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 		[Fact]
 		public async System.Threading.Tasks.Task PaymentSubmitDeclinedAndThenResubitApprovedWorks()
 		{
-			string service = "payment";
 
             // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
@@ -266,7 +263,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Account currentAccount = await GetAccountForCurrentUser();
 
             // create an application to test with (need a valid id)
-            var request = new HttpRequestMessage(HttpMethod.Post, "/api/Application");
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications");
 
             ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
@@ -277,6 +274,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                                                                       //,applyingPerson = "Applying Person" //contact
                 Applicant = currentAccount, //account
                                             //,jobNumber = "123"
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 EstablishmentName = "Not a Dispensary",
                 EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1",
                 EstablishmentAddressStreet = "123 Any Street",
@@ -325,7 +323,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("0", values["trnApproved"]);
 
 			// fetch updated application
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
@@ -363,7 +361,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("1", values["trnApproved"]);
 
             // fetch updated application
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
@@ -380,12 +378,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             //response.EnsureSuccessStatusCode();
 
             // delete application
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/Application/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/Applications/" + id + "/delete");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             // should get a 404 if we try a get now.
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/Applications/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
