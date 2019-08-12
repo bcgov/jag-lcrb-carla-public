@@ -188,6 +188,68 @@
         </mat-card>
       </div>
 
+            <!-- Contact Details -->
+            <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+            <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+              The contact LCRB should communicate with regarding the application. The contact must be authorized to
+              represent
+              the applicant and have the authority to bind the applicant.
+            </i>
+            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+              <i *ngIf="account?.businessType === 'SoleProprietor'">
+                The contact LCRB should communicate with regarding the application
+              </i>
+              <i *ngIf="account?.businessType === 'Society'">
+                The contact LCRB should communicate with regarding the application. The contact must be authorized to
+                represent the applicant and have the authority to bind the applicant.
+              </i>
+              <i *ngIf="businessTypeIsPartnership()">
+                The contact LCRB should communicate with regarding the application. The contact must be authorized to
+                represent the applicant and have the authority to bind the applicant.
+              </i>
+              <i *ngIf="account?.businessType !== 'PublicCorporation'">
+                The contact must be authorized to represent the applicant and have the authority to bind the applicant.
+              </i>
+              <i *ngIf="businessTypeIsPrivateCorporation()">
+                The contact LCRB should communicate with regarding the application. The contact must be authorized to
+                represent the applicant and have the authority to bind the applicant.
+              </i>
+            </div>
+            <address class="padded-section">
+      
+              <app-field label="First Name" [required]="true"
+                [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+                errorMessage="Please enter the business contact's first name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+                  formControlName="contactPersonFirstName">
+              </app-field>
+      
+              <app-field label="Last Name" [required]="true"
+                [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+                errorMessage="Please enter the business contact's last name">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+                  formControlName="contactPersonLastName">
+              </app-field>
+      
+              <app-field label="Title/ Position" [required]="false" [valid]="true">
+                <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+              </app-field>
+      
+              <app-field label="Phone Number (main)" [required]="true"
+                [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+                errorMessage="Please enter the business contact's 10-digit phone number">
+                <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+              </app-field>
+      
+              <app-field label="Email" [required]="true"
+                [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+                errorMessage="Please enter the business contact's email address">
+                <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+                  formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+              </app-field>
+            </address>
+
 
 
 
