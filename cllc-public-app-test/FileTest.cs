@@ -15,6 +15,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         public FileTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
         { }
+        const string applicationService = "Applications";
+        const string fileService = "file";
 
         [Fact]
         public async System.Threading.Tasks.Task TestLicenseApplicationUpload()
@@ -23,8 +25,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = randomNewUserName("LETest InitialName", 6);
             string changedName = randomNewUserName("LETest ChangedName", 6);
-            const string applicationService = "Application";
-            const string fileService = "file";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
@@ -41,6 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Applicant = currentAccount1,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 JobNumber = "123",
                 LicenseType = "Cannabis Retail Store",
                 EstablishmentName = "Private Retail Store",
@@ -147,8 +148,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = randomNewUserName("LETest InitialName", 6);
             string changedName = randomNewUserName("LETest ChangedName", 6);
-            const string applicationService = "Application";
-            const string fileService = "file";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
@@ -165,6 +164,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Applicant = currentAccount1,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 JobNumber = "123",
                 LicenseType = "Cannabis Retail Store",
                 EstablishmentName = "Private Retail Store",
@@ -240,8 +240,6 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = randomNewUserName("LETest InitialName", 6);
             string changedName = randomNewUserName("LETest ChangedName", 6);
-            const string applicationService = "Application";
-            const string fileService = "file";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
@@ -258,6 +256,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Applicant = currentAccount1,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 JobNumber = "123",
                 LicenseType = "Cannabis Retail Store",
                 EstablishmentName = "Private Retail Store",
@@ -361,8 +360,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Create application
             string initialName = randomNewUserName("Application Initial Name ", 6);
             string changedName = randomNewUserName("Application Changed Name ", 6);
-            const string applicationService = "Application";
-            const string fileService = "file";
 
             // login as default and get account for current user
             string loginUser = randomNewUserName("TestAppUser_", 6);
@@ -383,6 +380,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 Applicant = currentAccount
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 EstablishmentName = "Not a Dispensary"
                 ,
                 EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1"
@@ -471,8 +469,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Create application
             string initialName = randomNewUserName("Application Initial Name ", 6);
             string changedName = randomNewUserName("Application Changed Name ", 6);
-            const string applicationService = "Application";
-            const string fileService = "file";
 
             // login as default and get account for current user
             string loginUser = randomNewUserName("TestAppUser_", 6);
@@ -488,11 +484,12 @@ namespace Gov.Lclb.Cllb.Public.Test
                 LicenseType = "Cannabis Retail Store"
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation
-                ,
+                ,                
                 RegisteredEstablishment = GeneralYesNo.No
                 ,
                 Applicant = currentAccount
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 EstablishmentName = "Not a Dispensary"
                 ,
                 EstablishmentAddress = "123 Any Street, Victoria, BC, V1X 1X1"
@@ -578,7 +575,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // First create a Legal Entity
 
             string initialName = randomNewUserName("LETest InitialName", 6);
-            const string applicationService = "Application";
+            
             const string fileService = "file";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
@@ -596,6 +593,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Applicant = currentAccount1,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation //*Mandatory (label=business type)
                 ,
+                ApplicationType = await GetDefaultCannabisApplicationType(),
                 JobNumber = "123",
                 LicenseType = "Cannabis Retail Store",
                 EstablishmentName = "Private Retail Store",
