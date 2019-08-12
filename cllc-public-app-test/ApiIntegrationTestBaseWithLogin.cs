@@ -74,9 +74,9 @@ namespace Gov.Lclb.Cllb.Public.Test
         // this fellow returns the external id of the new account
         public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser, string businessName, string businessType = "PublicCorporation")
 		{
-			string accountService = "account";
+            string accountService = "accounts";
 
-			await Login(loginUser + "::" + businessName);
+            await Login(loginUser + "::" + businessName);
 
 			ViewModels.User user = await GetCurrentUser();
             Assert.Equal(user.name, loginUser + " TestUser");
@@ -138,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
         public async System.Threading.Tasks.Task LogoutAndCleanupTestUser(string strId)
 		{
-			string accountService = "account";
+			string accountService = "accounts";
 
             // get the account and check if our current user is the primary contact
 			var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
@@ -195,7 +195,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public async System.Threading.Tasks.Task<ViewModels.Account> GetAccountForCurrentUser()
 		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/account/current");
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/current");
 			var response = await _client.SendAsync(request);
 			var jsonString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();

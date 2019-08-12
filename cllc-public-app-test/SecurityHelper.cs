@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 	{
 		public static async Task<ViewModels.Account> GetAccountRecord(HttpClient _client, string id, bool expectSuccess)
 		{
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/account/" + id);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/" + id);
             var response = await _client.SendAsync(request);
 			if (expectSuccess)
 			{
@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public static async Task<ViewModels.Account> UpdateAccountRecord(HttpClient _client, string id, ViewModels.Account account, bool expectSuccess)
         {
-            var request = new HttpRequestMessage(HttpMethod.Put, "/api/account/" + id)
+            var request = new HttpRequestMessage(HttpMethod.Put, "/api/accounts/" + id)
 			{
                 Content = new StringContent(JsonConvert.SerializeObject(account), Encoding.UTF8, "application/json")
             };
@@ -318,7 +318,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public static async Task<Dictionary<string, string>> PayLicenceApplicationFee(HttpClient _client, string applicationId, bool accepted, bool expectSuccess)
 		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/payment/submit/" + applicationId);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/payments/submit/" + applicationId);
             var response = await _client.SendAsync(request);
 			if (expectSuccess)
 			{
@@ -333,7 +333,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			}
 
 			string accept = accepted ? "/ACCEPT" : "/DECLINE";
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/payment/verify/" + applicationId + accept);
+			request = new HttpRequestMessage(HttpMethod.Get, "/api/payments/verify/" + applicationId + accept);
             response = await _client.SendAsync(request);
             if (expectSuccess)
             {
@@ -352,7 +352,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public static async Task<string> DeleteLicenceApplication(HttpClient _client, string applicationId)
 		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/application/" + applicationId + "/delete");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/applications/" + applicationId + "/delete");
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 			return applicationId;
@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/Application/" + id + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/applications/" + id + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
@@ -397,7 +397,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
         public static async Task<List<ViewModels.FileSystemItem>> GetFileListForApplication(HttpClient _client, string id, string docType, bool expectSuccess)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + id + "/attachments/" + docType);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/applications/" + id + "/attachments/" + docType);
             var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
             if (expectSuccess)

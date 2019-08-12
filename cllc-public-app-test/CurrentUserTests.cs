@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/users/current");
             var response = await _client.SendAsync(request);
             string jsonString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();

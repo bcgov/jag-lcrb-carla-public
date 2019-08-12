@@ -14,11 +14,12 @@ namespace Gov.Lclb.Cllb.Public.Test
         public AccountTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
         { }
+        const string service = "account";
 
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            string service = "account";
+    
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -37,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = "InitialName";
             string changedName = "ChangedName";
-            string service = "account";
+         
 
             // register and login as our first user
             var loginUser1 = randomNewUserName("TestAccountUser", 6);
@@ -53,6 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             };
 
             ViewModels.Account viewmodel_account = account.ToViewModel();
+            
             viewmodel_account.businessType = "PublicCorporation";
 
             string jsonString = JsonConvert.SerializeObject(viewmodel_account);
@@ -147,7 +149,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 string initialName = "InitialName";
                 string changedName = "ChangedName";
-                string service = "account";
+                
 
                 // register and login as our first user
                 var loginUser1 = randomNewUserName("TestAccountUser", 6);
@@ -254,7 +256,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = randomNewUserName("Test", 246);
             string changedName = randomNewUserName("Test", 246);
-            string service = "account";
+     
 
             // register and login as our first user
             var loginUser1 = randomNewUserName("TestAccountUser", 6);
