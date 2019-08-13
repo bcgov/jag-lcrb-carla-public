@@ -399,17 +399,10 @@ namespace Gov.Lclb.Cllb.Public
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
             {
                 var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
-                // Allow self signed certificates
-                System.Net.ServicePointManager.ServerCertificateValidationCallback = new System.Net.Security.RemoteCertificateValidationCallback(AcceptAllCertifications);
                 //Append Http Json logger
                 loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
             }
 
-        }
-
-        private static bool AcceptAllCertifications(object sender, System.Security.Cryptography.X509Certificates.X509Certificate certification, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
-        {
-            return true;
         }
 
         SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
