@@ -188,7 +188,7 @@
           </p>
           <p *ngIf="licensedApplications?.length == 0">
             <span appRemoveIfFeatureOn="Marketer">You do not have any Licenced Stores.</span>
-            <span appRemoveIfFeatureOn="Marketer">You do not have any Licences.</span>
+            <span appRemoveIfFeatureOff="Marketer">You do not have any Licences.</span>
           </p>
 
           <table *ngIf="licensedApplications?.length > 0" class="eq-table">
