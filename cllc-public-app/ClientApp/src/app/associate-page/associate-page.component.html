@@ -11,10 +11,13 @@
       </mat-button-toggle-group>
     </app-field>
     <div *ngIf="form.get('noOrgStructureChange').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
       contact you as part of this renewal process
     </div>
   </div> -->
+  <p>
+    As part of your renewal application, please identify any changes to your organization by confirming the following information.
+  </p>
 
   <h3 class="blue-header">ORGANIZATION LEADERSHIP</h3>
   <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
@@ -30,7 +33,7 @@
       </mat-button-toggle-group>
     </app-field>
     <div *ngIf="form.get('checklistOrgLeadershipBuilt').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
       contact you as part of this renewal process
     </div>
   </div>
@@ -49,7 +52,7 @@
       </mat-button-toggle-group>
     </app-field>
     <div *ngIf="form.get('checklistKeyPersonnelBuilt').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
       contact you as part of this renewal process
     </div>
   </div>
@@ -68,7 +71,7 @@
       </mat-button-toggle-group>
     </app-field>
     <div *ngIf="form.get('checklistShareholdersBuilt').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
       contact you as part of this renewal process
     </div>
   </div>

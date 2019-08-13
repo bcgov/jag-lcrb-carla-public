@@ -34,31 +34,33 @@
 
               <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true"
                 [valid]="!form.get('checklistBrandingAssess')?.touched || form.get('checklistBrandingAssess')?.valid">
-                <label>The Establishment Name has not changed and is still compliant with the <a
-                    routerLink="/policy-document/store-name">LCRB Naming Policy</a>.</label> <br>
+                <label>Has the establishment’s name not changed?</label> <br>
                 <mat-button-toggle-group aria-label="Font Style" formControlName="checklistBrandingAssess">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="Changed">No</mat-button-toggle>
                 </mat-button-toggle-group>
               </app-field>
               <div *ngIf="form.get('checklistBrandingAssess')?.value === 'Changed'" class="field-changed">
-                <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+                <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
                 contact you as part of this renewal process
               </div>
             </mat-card>
             <p></p>
             <mat-card>
-              <app-field
-                label="Signage has not changed and still complies with the federal Cannabis Act and Cannabis Regulations."
-                errorMessage="Please select a value" [showChevrons]="false" [required]="true"
+              <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true"
                 [valid]="!form.get('checklistSignageAssessed')?.touched || form.get('checklistSignageAssessed')?.valid">
+                <label>Does the establishment’s signage still comply with the federal
+                  <a href="https://laws-lois.justice.gc.ca/eng/acts/c-24.5/FullText.html" target="blank">Cannabis
+                    Act</a> and
+                  <a href="https://laws-lois.justice.gc.ca/eng/regulations/SOR-2018-144/FullText.html"
+                    target="blank"></a>Cannabis Regulations? </label> <br>
                 <mat-button-toggle-group formControlName="checklistSignageAssessed" aria-label="Font Style">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="Changed">No</mat-button-toggle>
                 </mat-button-toggle-group>
               </app-field>
               <div *ngIf="form.get('checklistSignageAssessed')?.value === 'Changed'" class="field-changed">
-                <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+                <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
                 contact
                 you as part of this renewal process
               </div>
@@ -72,10 +74,13 @@
       <h3 *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)" class="blue-header">
         ESTABLISHMENT LOCATION</h3>
       <div class="padded-section">
-        <p>Your Cannabis Retail Store is Licenced for the following location. Your federally produced cannabis can only
-          be delivered to this address. Please confirm it has not changed. Note, unapproved relocations of Cannabis
-          Stores is in direct violation of the Cannabis Control and Licensing Act. Failure to seek approval prior to a
-          store relocation may incur legal penalties.
+        <p>
+          Your cannabis retail store is licensed for the following location. Wholesale legal cannabis will only be
+          delivered to this address. Please confirm it has not changed.
+        </p>
+        <p>
+          Note: Licensees must apply to the LCRB to relocate their store. Failure to request a location change violates
+          the Cannabis Control and Licensing Act, and licensees may be subject to legal penalties.
         </p>
         <div *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
           <mat-card>
@@ -130,7 +135,7 @@
                 </ul>
               </div>
             </div>
-            <app-field label="The Establishment Location has not changed." errorMessage="Please select a value"
+            <app-field label="Is the establishment still at the above location?" errorMessage="Please select a value"
               [showChevrons]="false" [required]="true"
               [valid]="!form.get('checklistEstablishmentAddressAssessed')?.touched || form.get('checklistEstablishmentAddressAssessed')?.valid">
               <mat-button-toggle-group aria-label="Font Style" formControlName="checklistEstablishmentAddressAssessed">
@@ -139,7 +144,7 @@
               </mat-button-toggle-group>
             </app-field>
             <div *ngIf="form.get('checklistEstablishmentAddressAssessed')?.value === 'Changed'" class="field-changed">
-              <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+              <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
               contact you as part of this renewal process
             </div>
 
@@ -171,8 +176,7 @@
         </section>
 
         <mat-card>
-          <app-field
-            label="The store is still located at a location that you own or have an executed lease or sub-lease."
+          <app-field label="Do you still own or have an executed lease or sub-lease for the above location?"
             errorMessage="Please select a value" [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistValidInterestAssess')?.touched || form.get('checklistValidInterestAssess')?.valid">
             <mat-button-toggle-group formControlName="checklistValidInterestAssess" aria-label="Font Style">
@@ -181,91 +185,95 @@
             </mat-button-toggle-group>
           </app-field>
           <div *ngIf="form.get('checklistValidInterestAssess')?.value === 'Changed'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
             contact
             you as part of this renewal process
           </div>
         </mat-card>
       </div>
 
-            <!-- Contact Details -->
-            <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-            <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-              The contact LCRB should communicate with regarding the application. The contact must be authorized to
-              represent
-              the applicant and have the authority to bind the applicant.
-            </i>
-            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-              <i *ngIf="account?.businessType === 'SoleProprietor'">
-                The contact LCRB should communicate with regarding the application
-              </i>
-              <i *ngIf="account?.businessType === 'Society'">
-                The contact LCRB should communicate with regarding the application. The contact must be authorized to
-                represent the applicant and have the authority to bind the applicant.
-              </i>
-              <i *ngIf="businessTypeIsPartnership()">
-                The contact LCRB should communicate with regarding the application. The contact must be authorized to
-                represent the applicant and have the authority to bind the applicant.
-              </i>
-              <i *ngIf="account?.businessType !== 'PublicCorporation'">
-                The contact must be authorized to represent the applicant and have the authority to bind the applicant.
-              </i>
-              <i *ngIf="businessTypeIsPrivateCorporation()">
-                The contact LCRB should communicate with regarding the application. The contact must be authorized to
-                represent the applicant and have the authority to bind the applicant.
-              </i>
-            </div>
-            <address class="padded-section">
-      
-              <app-field label="First Name" [required]="true"
-                [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
-                errorMessage="Please enter the business contact's first name">
-                <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-                  formControlName="contactPersonFirstName">
-              </app-field>
-      
-              <app-field label="Last Name" [required]="true"
-                [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
-                errorMessage="Please enter the business contact's last name">
-                <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-                  formControlName="contactPersonLastName">
-              </app-field>
-      
-              <app-field label="Title/ Position" [required]="false" [valid]="true">
-                <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
-              </app-field>
-      
-              <app-field label="Phone Number (main)" [required]="true"
-                [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
-                errorMessage="Please enter the business contact's 10-digit phone number">
-                <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-                  (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
-              </app-field>
-      
-              <app-field label="Email" [required]="true"
-                [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
-                errorMessage="Please enter the business contact's email address">
-                <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-                  formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
-              </app-field>
-            </address>
+      <!-- Contact Details -->
+      <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+      <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+        The contact LCRB should communicate with regarding the application. The contact must be authorized to
+        represent
+        the applicant and have the authority to bind the applicant.
+      </i>
+      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+        <i *ngIf="account?.businessType === 'SoleProprietor'">
+          The contact LCRB should communicate with regarding the application
+        </i>
+        <i *ngIf="account?.businessType === 'Society'">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="businessTypeIsPartnership()">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="account?.businessType !== 'PublicCorporation'">
+          The contact must be authorized to represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="businessTypeIsPrivateCorporation()">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+      </div>
+      <address class="padded-section">
+
+        <app-field label="First Name" [required]="true"
+          [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+          errorMessage="Please enter the business contact's first name">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+            formControlName="contactPersonFirstName">
+        </app-field>
+
+        <app-field label="Last Name" [required]="true"
+          [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+          errorMessage="Please enter the business contact's last name">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+            formControlName="contactPersonLastName">
+        </app-field>
+
+        <app-field label="Title/ Position" [required]="false" [valid]="true">
+          <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+        </app-field>
+
+        <app-field label="Phone Number (main)" [required]="true"
+          [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+          errorMessage="Please enter the business contact's 10-digit phone number">
+          <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+            (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+        </app-field>
+
+        <app-field label="Email" [required]="true"
+          [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+          errorMessage="Please enter the business contact's email address">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+            formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+        </app-field>
+      </address>
 
 
 
 
       <h3 class="blue-header">ESTABLISHMENT STRUCTURE</h3>
       <div class="padded-section">
-        <p>Please confirm that there have been no unreported structural changes to your store. A structural change is
-          defined as a material change to the underlying architecture of the store that results in a modification to the
-          floor plan and site map. Modifications to the store’s exterior may also be considered structural changes that
-          must be reviewed.
+        <p>
+          A structural change is a material change to the underlying architecture of the store that results in a
+          modification to the floor plan or site plan. Modifications to the store’s exterior may also be considered
+          structural changes and must be reviewed by the LCRB.
         </p>
-        <p>Simple changes like repainting or moving smell jars to different areas are not considered structural changes.
+        <p>
+          Simple changes like repainting or moving smell jars to different areas are not considered structural changes.
+        </p>
+        <p>
+          Please confirm that there have been no unreported structural changes to your cannabis retail store:
         </p>
         <mat-card style="margin-bottom: 10px;">
 
-          <app-field label="The floor plan has not changed." errorMessage="Please select a value" [showChevrons]="false"
-            [required]="true"
+          <app-field label="There have been no changes to the floor plan." errorMessage="Please select a value"
+            [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistFloorPlanAssess')?.touched || form.get('checklistFloorPlanAssess')?.valid">
             <mat-button-toggle-group formControlName="checklistFloorPlanAssess" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
@@ -273,15 +281,15 @@
             </mat-button-toggle-group>
           </app-field>
           <div *ngIf="form.get('checklistFloorPlanAssess')?.value === 'Changed'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
             contact
             you as part of this renewal process
           </div>
         </mat-card>
 
         <mat-card style="margin-bottom: 10px;">
-          <app-field label="The Site Plan has not changed." errorMessage="Please select a value" [showChevrons]="false"
-            [required]="true"
+          <app-field label="There have been no changes to the site plan." errorMessage="Please select a value"
+            [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistSiteMapAssess')?.touched || form.get('checklistSiteMapAssess')?.valid">
             <mat-button-toggle-group formControlName="checklistSiteMapAssess" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
@@ -289,14 +297,14 @@
             </mat-button-toggle-group>
           </app-field>
           <div *ngIf="form.get('checklistSiteMapAssess')?.value === 'Changed'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
             contact
             you as part of this renewal process
           </div>
         </mat-card>
 
         <mat-card>
-          <app-field label="There have been no modifications to the store’s exterior."
+          <app-field label="There have been no changes to the establishment’s exterior."
             errorMessage="Please select a value" [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistEstabRenderAssessed')?.touched || form.get('checklistEstabRenderAssessed')?.valid">
             <mat-button-toggle-group class="mat-elevation-2" formControlName="checklistEstabRenderAssessed"
@@ -306,7 +314,7 @@
             </mat-button-toggle-group>
           </app-field>
           <div *ngIf="form.get('checklistEstabRenderAssessed')?.value === 'Changed'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member will
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
             contact
             you as part of this renewal process
           </div>
@@ -318,83 +326,16 @@
           DECLARATIONS
         </h3>
         <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
-          <p appRemoveIfFeatureOn="Marketer">
-            The application must only be submitted by an individual with the authority to bind the applicant. The
-            branch
+          <p>
+            This application should be submitted by an individual with the authority to bind the applicant. The branch
             relies on the applicant to ensure that the individual who submits this application is authorized to do so.
             Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
-            be
-            an officer or, in some cases, a director
+            be an officer or, in some cases, a director.
           </p>
-          <section appRemoveIfFeatureOff="Marketer">
-            <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-              The application must only be submitted by an individual with the authority to bind the applicant. The
-              branch
-              relies on the applicant to ensure that the individual who submits this application is authorized to do
-              so.
-              Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
-              usually
-              be
-              an officer or, in some cases, a director
-            </div>
-            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-              <p *ngIf="account?.businessType === 'SoleProprietor'">
-                This application should be submitted the sole proprietor.
-              </p>
-              <p *ngIf="account?.businessType === 'Society'">
-                This application must only be submitted by an individual with the authority to bind the applicant. The
-                branch relies on the applicant to ensure that the individual who submits this application is
-                authorized to
-                do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
-                defined in the Societies Act).
-              </p>
-              <p *ngIf="account?.businessType === 'PublicCorporation'">
-                This application must only be submitted by an individual with the authority to bind the applicant. The
-                branch relies on the applicant to ensure that the individual who submits this application is
-                authorized to
-                do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
-                will
-                usually be an officer or, in some cases, a director.
-              </p>
-              <div *ngIf="businessTypeIsPartnership()">
-                <p>
-                  This application must only be submitted by an individual with the authority to bind the applicant.
-                  The
-                  branch relies on the applicant to ensure that the individual who submits this application is
-                  authorized
-                  to do so. Typically, an appropriate individual will be as follows:
-                </p>
-                <ul>
-                  <li>If the applicant is a general partnership, one of the general partners</li>
-                  <li>If the applicant is a limited partnership, the general partner of the partnership</li>
-                </ul>
-              </div>
-              <p *ngIf="businessTypeIsPrivateCorporation()">
-                The application must only be submitted by an individual with the authority to bind the applicant. The
-                branch relies on the applicant to ensure that the individual who submits this application is
-                authorized to
-                do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
-                will
-                usually be an officer or, in some cases, a director.
-              </p>
-
-            </div>
-
-          </section>
-          <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Note: A lawyer or
-            consultant,
-            may NOT submit this application on behalf of
-            the applicant.</p>
-          <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-            <p *ngIf="businessTypeIsPrivateCorporation()">
-              Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
-            </p>
-            <p *ngIf="!businessTypeIsPrivateCorporation()">
-              Note: A lawyer, licensee representative or third party operator may NOT submit this application on
-              behalf of
-              the applicant.
-            </p>
-          </section>
+          <p>
+            Note: An agent, lawyer, licensee representative or third party operator may NOT submit this application on
+            behalf of the applicant.
+          </p>
           <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
             errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
             <section style="display: flex">
