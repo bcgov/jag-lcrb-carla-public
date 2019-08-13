@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Public
                 .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics");
 
-
+            services.Configure<SplunkLoggerConfiguration>(_ => GetSplunkLoggerConfiguration(null));
             services.AddSession();
 
         }
@@ -399,7 +399,6 @@ namespace Gov.Lclb.Cllb.Public
             if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
             {
                 var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
-
                 //Append Http Json logger
                 loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
             }
@@ -422,7 +421,7 @@ namespace Gov.Lclb.Cllb.Public
                             BatchIntervalInMilliseconds = 5000,
                             BatchSizeCount = 10,
                             ChannelIdType = HECConfiguration.ChannelIdOption.None,
-                            DefaultTimeoutInMilliseconds = 10000,
+                            DefaultTimeoutInMilliseconds = 1000,
 
                             SplunkCollectorUrl = splunkCollectorUrl,
                             Token = splunkToken,
