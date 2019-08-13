@@ -122,13 +122,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             //}
         }
 
-        public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from)
+        public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from, bool copyAddress)
         {
             // copy establishment information
-            to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
-            to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
-            to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
-            to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
+            if (copyAddress)
+            {
+                to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
+                to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
+                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
+                to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
+            }
+
             if (from.AdoxioEstablishment != null)
             {
                 to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;

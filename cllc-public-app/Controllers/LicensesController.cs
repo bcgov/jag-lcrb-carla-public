@@ -70,7 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // START WITH BLANK FIELDS.
                 };
 
-                application.CopyValuesForChangeOfLocation(adoxioLicense);
+                application.CopyValuesForChangeOfLocation(adoxioLicense, applicationTypeName != "CRS Location Change");
 
                 // get the previous application for the licence.
 
