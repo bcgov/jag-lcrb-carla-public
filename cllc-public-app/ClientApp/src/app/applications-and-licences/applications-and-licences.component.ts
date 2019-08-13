@@ -234,7 +234,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   startNewMarketerApplication() {
     const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Marketer',
+      licenseType: 'Marketing',
       applicantType: this.account.businessType,
       applicationType: <ApplicationType>{ name: ApplicationTypeNames.Marketer },
       account: this.account,
