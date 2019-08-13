@@ -15,57 +15,22 @@ using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
-    public class Schema
-    {
-        public string type { get; set; }
-        public string name { get; set; }
-        public string version { get; set; }
-    }
-
-    public class Attributes
-    {
-        public string registration_id { get; set; }
-        public string licence_number { get; set; }
-        public string establishment_name { get; set; }
-        public DateTimeOffset issue_date { get; set; }
-        public DateTimeOffset? effective_date { get; set; }
-        public DateTimeOffset? expiry_date { get; set; }
-        public string civic_address { get; set; }
-        public string city { get; set; }
-        public string province { get; set; }
-        public string postal_code { get; set; }
-        public string country { get; set; }
-    }
-
-    public class Credential
-    {
-        public string schema { get; set; }
-        public string version { get; set; }
-        public Attributes attributes { get; set; }
-    }
-     
-
     public class OrgBookUtils
     {
-        private static readonly HttpClient Client = new HttpClient();
-
         private IConfiguration Configuration { get; }
-
-        private string ORGBOOK_API_BASE_URL;
-        private string ORGBOOK_API_REGISTRATION_ENDPOINT = "/api/v2/topic/ident/registration/";
-        private string ORGBOOK_API_SCHEMA_ENDPOINT = "/api/v2/schema";
-        private string ORGBOOK_API_CREDENTIAL_ENDPOINT = "/api/v2/search/credential/topic";
-
-        private IDynamicsClient _dynamics;
-
         private ILogger _logger;
+        private IDynamicsClient _dynamics;
+        private OrgBookClient _orgbookClient;
 
         public OrgBookUtils(IConfiguration Configuration, ILogger logger)
         {
             this.Configuration = Configuration;
-            _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
+            if (Configuration["DYNAMICS_ODATA_URI"] != null)
+            {
+                _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
+            }
             _logger = logger;
-            ORGBOOK_API_BASE_URL = Configuration["ORGBOOK_URL"];
+            _orgbookClient = new OrgBookClient(new HttpClient(), Configuration["ORGBOOK_URL"]);
         }
 
         /// <summary>
@@ -82,7 +47,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             IList<MicrosoftDynamicsCRMadoxioLicences> result = null;
             try
             {
-                var expand = new List<string> { "adoxio_Licencee"};
+                var expand = new List<string> { "adoxio_Licencee", "adoxio_LicenceType" };
                 string filter = $"adoxio_orgbookcredentialresult eq null";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
             }
@@ -111,11 +76,15 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
                 string licenceId = item.AdoxioLicencesid;
-                int? orgbookTopicId = await GetOrgBookTopicId(registrationId);
+                int? orgbookTopicId = await _orgbookClient.GetTopicId(registrationId);
+                var (schema, schemaVersion) = GetSchemaFromConfig(item.AdoxioLicenceType.AdoxioName);
 
                 if (orgbookTopicId != null)
                 {
-                    var (schema, schemaVersion) = await CreateLicenceCredential(hangfireContext, licenceId, registrationId);
+                    string licenceGuid = Utils.ParseGuid(licenceId);
+                    var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
+                    VonAgentClient _vonAgentClient = new VonAgentClient(new HttpClient(), _logger, schema, schemaVersion, Configuration["AGENT_URL"]);
+                    await _vonAgentClient.CreateLicenceCredential(licence, registrationId);
 
                     _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
                     {
@@ -179,14 +148,14 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
                 string licenceId = item.AdoxioLicencesid;
-                int? orgbookTopicId = await GetOrgBookTopicId(registrationId);
+                int? orgbookTopicId = await _orgbookClient.GetTopicId(registrationId);
 
                 if (orgbookTopicId != null)
                 {
                     var (schemaName, schemaVersion) = GetSchemaFromConfig(item.AdoxioLicenceType.AdoxioName);
                     
-                    var schemaId = await GetSchemaId(schemaName, schemaVersion);
-                    var credentialId = await GetLicenceCredentialId((int)orgbookTopicId, (int)schemaId);
+                    var schemaId = await _orgbookClient.GetSchemaId(schemaName, schemaVersion);
+                    var credentialId = await _orgbookClient.GetLicenceCredentialId((int)orgbookTopicId, (int)schemaId);
 
                     _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
                     {
@@ -204,102 +173,6 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             _logger.LogInformation("End of check for new licences for orgbook job.");
             hangfireContext.WriteLine("End of check for new licences for orgbook job.");
-        }
-
-        /// <summary>
-        /// Hangfire job to create licence credential in OrgBook.
-        /// </summary>
-        [AutomaticRetry(Attempts = 0)]
-        public async Task<(string, string)> CreateLicenceCredential(PerformContext hangfireContext, string licenceGuidRaw, string registrationId)
-        {
-            hangfireContext.WriteLine("Starting OrgBook CreateLicenceCredential Job.");
-            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
-
-            hangfireContext.WriteLine($"Getting Licence {licenceGuid}");
-            var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
-
-            var (schema, schemaVersion) = GetSchemaFromConfig(licence.AdoxioLicenceType.AdoxioName);
-
-            Credential credential = new Credential()
-            {
-                attributes = new Attributes()
-                {
-                    registration_id = registrationId,
-                    licence_number = licence.AdoxioLicencenumber,
-                    establishment_name = licence.AdoxioEstablishment?.AdoxioName,
-                    issue_date = DateTime.UtcNow,
-                    effective_date = licence.AdoxioEffectivedate,
-                    expiry_date = licence.AdoxioExpirydate,
-                    civic_address = licence.AdoxioEstablishmentaddressstreet,
-                    city = licence.AdoxioEstablishmentaddresscity,
-                    province = "BC",
-                    postal_code = licence.AdoxioEstablishmentaddresspostalcode,
-                    country = "Canada",
-                },
-                schema = schema,
-                version = schemaVersion
-            };
-
-            HttpResponseMessage response = await Client.PostAsJsonAsync(
-                Configuration["AGENT_URL"] + "lcrb/issue-credential", new List<Credential>() { credential });
-
-            if (!response.IsSuccessStatusCode)
-            {
-                string _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                _logger.LogError($"Failed to create verifiable credential for licence {licence.AdoxioLicencenumber}");
-                hangfireContext.WriteLine($"Failed to create verifiable credential for licence {licence.AdoxioLicencenumber}");
-            }
-
-            _logger.LogInformation($"Successfully created verifiable credential for licence {licence.AdoxioLicencenumber}");
-            hangfireContext.WriteLine($"Successfully created verifiable credential for licence {licence.AdoxioLicencenumber}");
-
-            return (schema, schemaVersion);
-        }
-
-        public async Task<int?> GetOrgBookTopicId(string registrationId)
-        {
-            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_API_BASE_URL + ORGBOOK_API_REGISTRATION_ENDPOINT + registrationId);
-            if (resp.IsSuccessStatusCode)
-            {
-                string _responseContent = await resp.Content.ReadAsStringAsync();
-                var response = (JObject)JsonConvert.DeserializeObject(_responseContent);
-                return (int)response.GetValue("id");
-            }
-            return null;
-        }
-
-        public async Task<int?> GetSchemaId(string schemaName, string schemaVersion)
-        {
-            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_API_BASE_URL + ORGBOOK_API_SCHEMA_ENDPOINT + "?name=" + schemaName + "&version=" + schemaVersion);
-            if (resp.IsSuccessStatusCode)
-            {
-                string _responseContent = await resp.Content.ReadAsStringAsync();
-                var response = (JObject)JsonConvert.DeserializeObject(_responseContent);
-                int count = (int)response.GetValue("total");
-                JArray results = (JArray)response.GetValue("results");
-                if (count == 1)
-                {
-                    return results.First.Value<int>("id");
-                }
-            }
-            return null;
-        }
-
-        public async Task<int?> GetLicenceCredentialId(int topicId, int schemaId)
-        {
-            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_API_BASE_URL + ORGBOOK_API_CREDENTIAL_ENDPOINT + $"?inactive=false&latest=true&revoked=false&credential_type_id={schemaId}&topic_id={topicId}");
-            if (resp.IsSuccessStatusCode)
-            {
-                string _responseContent = await resp.Content.ReadAsStringAsync();
-                var response = (JObject)JsonConvert.DeserializeObject(_responseContent);
-                int count = (int)response.GetValue("total");
-                JArray results = (JArray)response.GetValue("results");
-                if (count == 1)
-                {
-                    return results.First.Value<int>("id");
-                }
-            }
-            return null;
         }
 
         private static (string, string) GetSchemaFromConfig(string licenceType)

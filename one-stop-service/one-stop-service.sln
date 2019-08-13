@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneStopRestClient", "..\cll
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "one-stop-service-tests", "..\one-stop-service-tests\one-stop-service-tests.csproj", "{1FF1E630-1E52-4595-BE7F-E18E71C428DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{354FA3A0-3407-4DF2-8E5D-CBF72639BE90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF1E630-1E52-4595-BE7F-E18E71C428DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF1E630-1E52-4595-BE7F-E18E71C428DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF1E630-1E52-4595-BE7F-E18E71C428DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF1E630-1E52-4595-BE7F-E18E71C428DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
