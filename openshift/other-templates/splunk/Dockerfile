@@ -5,6 +5,7 @@ USER root
 RUN chmod a+w /etc/passwd
 
 copy uid_entrypoint /sbin
+copy entrypoint.sh /sbin
 
 RUN chmod -R a+w /opt/ansible && \
   chmod -R 777 /opt/splunk
