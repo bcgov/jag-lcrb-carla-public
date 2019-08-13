@@ -22,8 +22,7 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.Rest;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
-using Splunk;
-using Splunk.Configurations;
+using Serilog;
 using System;
 using System.IO;
 using System.Text;
@@ -147,7 +146,6 @@ namespace Gov.Lclb.Cllb.Public
                 .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics");
 
-            services.Configure<SplunkLoggerConfiguration>(_ => GetSplunkLoggerConfiguration(null));
             services.AddSession();
 
         }
@@ -395,42 +393,19 @@ namespace Gov.Lclb.Cllb.Public
                 }
             });
 
-            // enable Splunk logger
-            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
+            // enable Splunk logger using Serilog
+            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
+                )
             {
-                var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
-                //Append Http Json logger
-                loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
+                        Configuration["SPLUNK_TOKEN"])
+                    .CreateLogger();                                
             }
 
         }
-
-        SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
-        {
-            SplunkLoggerConfiguration result = null;
-            string splunkCollectorUrl = Configuration["SPLUNK_COLLECTOR_URL"];
-            if (!string.IsNullOrEmpty(splunkCollectorUrl))
-            {
-                string splunkToken = Configuration["SPLUNK_TOKEN"];
-                if (!string.IsNullOrEmpty(splunkToken))
-                {
-                    result = new SplunkLoggerConfiguration()
-                    {
-                        HecConfiguration = new HECConfiguration()
-                        {
-                            BatchIntervalInMilliseconds = 5000,
-                            BatchSizeCount = 10,
-                            ChannelIdType = HECConfiguration.ChannelIdOption.None,
-                            DefaultTimeoutInMilliseconds = 1000,
-
-                            SplunkCollectorUrl = splunkCollectorUrl,
-                            Token = splunkToken,
-                            UseAuthTokenAsQueryString = false
-                        }
-                    };
-                }
-            }
-            return result;
-        }
+        
     }
 }
