@@ -247,7 +247,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Worker Export ...");
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(Configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(1));
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(1));
                     log.LogInformation("Hangfire Send Export job done.");
 
                 }
