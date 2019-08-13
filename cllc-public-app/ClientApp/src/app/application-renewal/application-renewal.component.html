@@ -34,7 +34,7 @@
 
               <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true"
                 [valid]="!form.get('checklistBrandingAssess')?.touched || form.get('checklistBrandingAssess')?.valid">
-                <label>Has the establishment’s name not changed?</label> <br>
+                <label>Does the establishment still have the same name?</label> <br>
                 <mat-button-toggle-group aria-label="Font Style" formControlName="checklistBrandingAssess">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="Changed">No</mat-button-toggle>
