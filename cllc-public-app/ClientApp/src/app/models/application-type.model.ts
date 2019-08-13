@@ -48,5 +48,5 @@ export enum ApplicationTypeNames {
   CRSRenewal = 'CRS Renewal',
   CRSRenewalLate30 = 'CRS Late Renewal - 30 Day',
   CRSRenewalLate6Months = 'CRS Late Renewal - 30 Day to 6 Months',
-  Marketer = 'Marketer'
+  Marketer = 'Marketing'
 }
