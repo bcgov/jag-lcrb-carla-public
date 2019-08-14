@@ -1,5 +1,4 @@
 <ng-template #applicationContent>
-  <div [ngBusy]="busy"></div>
 
   <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
 
@@ -717,9 +716,9 @@
   <div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <div [ngBusy]="busy"></div>
-      <h1>Add More files to the Application</h1>
+      <h1 *ngIf="application" >Add More files to the Application</h1>
     </div>
-    <div class="application-wrapper">
+    <div *ngIf="application"  class="application-wrapper">
       <label for="">Establishment Name</label>:
       <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
       <br>
@@ -864,11 +863,13 @@
 </ng-template>
 
 <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
+  <div [ngBusy]="busy"></div>
   <div class="row">
     <div class="col-md-7 col-sm-12">
       <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
     </div>
-    <div class="col-md-4 col-sm-12" *ngIf="application.applicationType.name === ApplicationTypeNames.CannabisRetailStore">
+    <div class="col-md-4 col-sm-12"
+      *ngIf="application?.applicationType.name === ApplicationTypeNames.CannabisRetailStore">
       <h1>&nbsp;</h1>
       <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
     </div>
@@ -876,6 +877,7 @@
 </div>
 
 <div appRemoveIfFeatureOn="IndigenousNation">
+  <div [ngBusy]="busy"></div>
   <ng-container *ngTemplateOutlet="applicationContent">
   </ng-container>
 </div>
