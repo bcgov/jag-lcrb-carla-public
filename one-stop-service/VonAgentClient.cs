@@ -14,6 +14,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         readonly string _schema;
         readonly string _schemaVersion;
         readonly string AGENT_URL;
+        readonly string ISSUE_URL = "lcrb/issue-credential";
         public VonAgentClient(HttpClient client, ILogger logger, string schema, string schemaVersion, string agentURL)
         {
             Client = client;
@@ -45,8 +46,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 version = _schemaVersion
             };
 
-            HttpResponseMessage response = await Client.PostAsJsonAsync(
-                AGENT_URL+ "lcrb/issue-credential", new List<Credential>() { credential });
+            HttpResponseMessage response = await Client.PostAsJsonAsync(AGENT_URL + ISSUE_URL, new List<Credential>() { credential });
 
             if (!response.IsSuccessStatusCode)
             {
