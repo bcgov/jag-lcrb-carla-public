@@ -33,6 +33,21 @@ issuers:
     credential_types:
     - description: Cannabis Marketing Licence
       schema: cannabis-marketing-licence.lcrb
+      topic:
+        related_source_id:
+          input: associated_registration_id
+          from: claim
+        related_type:
+          input: registration
+          from: value
+        source_id:
+          input: registration_id
+          from: claim
+        type:
+          input: registration
+          from: value
+      cardinality_fields:
+        - associated_registration_id
       label_en: Cannabis Marketing Licence
       issuer_url: $APPLICATION_URL/cannabis-marketing-licence
       depends_on:
@@ -98,6 +113,21 @@ issuers:
 
     - description: Cannabis Retail Store Licence
       schema: cannabis-retail-store-licence.lcrb
+      topic:
+        related_source_id:
+          input: associated_registration_id
+          from: claim
+        related_type:
+          input: registration
+          from: value
+        source_id:
+          input: registration_id
+          from: claim
+        type:
+          input: registration
+          from: value
+      cardinality_fields:
+        - associated_registration_id
       label_en: Cannabis Retail Store Licence
       issuer_url: $APPLICATION_URL/cannabis-retail-store-licence
       depends_on:
