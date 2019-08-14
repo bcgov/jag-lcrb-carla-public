@@ -154,10 +154,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
       if (value === true) {
-        this.application.applicantType = 'IndigenousNation';
+        this.form.get('applicantType').setValue('IndigenousNation');
         this.form.get('indigenousNationId').enable();
       } else {
-        this.application.applicantType = this.account.businessType;
+        this.form.get('applicantType').setValue(this.account.businessType);
         this.form.get('indigenousNationId').reset();
         this.form.get('indigenousNationId').disable();
       }
