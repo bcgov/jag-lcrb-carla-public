@@ -553,15 +553,7 @@
         DECLARATIONS
       </h3>
       <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
-        <p appRemoveIfFeatureOn="Marketer">
-          The application must only be submitted by an individual with the authority to bind the applicant. The
-          branch
-          relies on the applicant to ensure that the individual who submits this application is authorized to do so.
-          Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
-          be
-          an officer or, in some cases, a director
-        </p>
-        <section appRemoveIfFeatureOff="Marketer">
+        <section>
           <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
             The application must only be submitted by an individual with the authority to bind the applicant. The
             branch
