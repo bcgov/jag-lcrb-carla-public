@@ -1,15 +1,14 @@
-﻿
+﻿using CarlaSpiceSync;
 using CarlaSpiceSync.models;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
+using Gov.Lclb.Cllb.Interfaces.Spice.Models;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using SpdSync;
-using SpdSync.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +29,10 @@ namespace Gov.Lclb.Cllb.SpdSync
             this.Configuration = Configuration;
             _logger = loggerFactory.CreateLogger(typeof(SpiceUtils));
             _dynamicsClient = DynamicsUtil.SetupDynamics(Configuration);
-            SpiceClient = CreateSpiceClient(Configuration);
+            SpiceClient = SetupSpiceClient(Configuration);
         }
 
-        public SpiceClient CreateSpiceClient(IConfiguration Configuration)
+        public SpiceClient SetupSpiceClient(IConfiguration Configuration)
         {
             string spiceURI = Configuration["SPICE_URI"];
             string token = Configuration["SPICE_JWT_TOKEN"];
@@ -44,41 +43,12 @@ namespace Gov.Lclb.Cllb.SpdSync
             return new SpiceClient(new Uri(spiceURI), credentials);
         }
 
-        /// <summary>
-        /// Hangfire job to receive an application screening import from SPICE.
-        /// </summary>
-        public void ReceiveApplicationImportJob(PerformContext hangfireContext, List<ApplicationScreeningResponse> responses)
-        {
-            hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
-            _logger.LogError("Starting SPICE Import Job for Application Screening..");
-
-            ImportApplicationResponses(hangfireContext, responses);
-
-            hangfireContext.WriteLine("Done.");
-            _logger.LogError("Done.");
-        }
-
-        /// <summary>
-        /// Hangfire job to receive an import from SPICE.
-        /// </summary>
-        public void ReceiveWorkerImportJob(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
+        public void ReceiveWorkerImportJob(PerformContext hangfireContext, List<CompletedWorkerScreening> responses)
         {
             hangfireContext.WriteLine("Starting SPICE Import Job for Worker Screening.");
             _logger.LogError("Starting SPICE Import Job for Worker Screening.");
 
-            ImportWorkerResponses(hangfireContext, responses);
-
-            hangfireContext.WriteLine("Done.");
-            _logger.LogError("Done.");
-        }
-
-        /// <summary>
-        /// Import responses to Dynamics.
-        /// </summary>
-        /// <returns></returns>
-        private void ImportWorkerResponses(PerformContext hangfireContext, List<WorkerScreeningResponse> responses)
-        {
-            foreach (WorkerScreeningResponse workerResponse in responses)
+            foreach (var workerResponse in responses)
             {
                 // search for the Personal History Record.
                 MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
@@ -116,15 +86,21 @@ namespace Gov.Lclb.Cllb.SpdSync
                     }
                 }
             }
+
+            hangfireContext.WriteLine("Finished SPICE Import Job for Worker Screening.");
+            _logger.LogError("Finished SPICE Import Job for Worker Screening.");
         }
 
         /// <summary>
         /// Import application responses to Dynamics.
         /// </summary>
         /// <returns></returns>
-        private void ImportApplicationResponses(PerformContext hangfireContext, List<ApplicationScreeningResponse> responses)
+        public void ReceiveApplicationImportJob(PerformContext hangfireContext, List<CompletedApplicationScreening> responses)
         {
-            foreach (ApplicationScreeningResponse applicationResponse in responses)
+            hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
+            _logger.LogError("Starting SPICE Import Job for Application Screening..");
+
+            foreach (var applicationResponse in responses)
             {
                 string appFilter = $"adoxio_jobnumber eq '{applicationResponse.RecordIdentifier}'";
                 string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
@@ -171,13 +147,16 @@ namespace Gov.Lclb.Cllb.SpdSync
                     }
                 }
             }
+
+            hangfireContext.WriteLine("Finished SPICE Import Job for Application Screening.");
+            _logger.LogError("Finished SPICE Import Job for Application Screening..");
         }
 
         /// <summary>
         /// Generate an application screening request
         /// </summary>
         /// <returns></returns>
-        public Interfaces.Spice.Models.ApplicationScreeningRequest GenerateApplicationScreeningRequest(Guid applicationId)
+        public IncompleteApplicationScreening GenerateApplicationScreeningRequest(Guid applicationId)
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
             string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
@@ -188,91 +167,33 @@ namespace Gov.Lclb.Cllb.SpdSync
             return screeningRequest;
         }
 
-        /// <summary>
-        /// Validates the consent of a worker
-        /// </summary>
-        /// <returns><c>true</c>, if worker consent was validated, <c>false</c> otherwise.</returns>
-        /// <param name="request">Worker Screening Request</param>
-        public bool ValidateWorkerConsent(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest request)
-        {
-            bool consentValidated = true;
-            try
-            {
-                var worker = _dynamicsClient.Workers.Get(filter: "adoxio_workerid eq " + request.RecordIdentifier).Value[0];
-                if(worker.AdoxioConsentvalidated == null)
-                {
-                    consentValidated = false;
-                }
-                if (worker.AdoxioConsentvalidated.HasValue && (ConsentValidated)worker.AdoxioConsentvalidated != ConsentValidated.YES)
-                {
-                    consentValidated = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.ToString());
-                consentValidated = false;
-            }
-            return consentValidated;
-        }
-
-        /// <summary>
-        /// Validates the consent of a legal entity list (including all of its children)
-        /// </summary>
-        /// <returns><c>true</c>, if associate consent was validated, <c>false</c> otherwise.</returns>
-        /// <param name="associates">Associates.</param>
-        private bool ValidateAssociateConsent(List<Interfaces.Spice.Models.LegalEntity> associates)
+        public MicrosoftDynamicsCRMadoxioWorker GetWorker(Guid workerId)
         {
             try
             {
-                /* Validate consent for all associates */
-                bool consentValidated = true;
-                foreach (var entity in associates)
-                {
-                    if ((bool)entity.IsIndividual)
-                    {
-                        var id = entity.Contact.ContactId;
-                        var contact = _dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
-                        if (contact.AdoxioConsentvalidated == null)
-                        {
-                            consentValidated = false;
-                            continue;
-                        }
-
-                        if (contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
-                        {
-                            consentValidated = false;
-                        }
-                    }
-                    else
-                    {
-                        if (!ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
-                        {
-                            consentValidated = false;
-                        }
-                    }
-                }
-                return consentValidated;
+                return _dynamicsClient.Workers.Get(filter: $"adoxio_workerid eq {workerId.ToString()}").Value[0];
             }
-            catch (Exception ex)
+            catch
             {
-                _logger.LogError(ex.ToString());
-                return false;
+                _logger.LogError($"Unable to find worker {workerId.ToString()}");
+                return null;
             }
         }
+
+
 
         /// <summary>
         /// Sends the application screening request to spice.
         /// </summary>
         /// <returns>The application screening request success boolean.</returns>
         /// <param name="applicationRequest">Application request.</param>
-        public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, Interfaces.Spice.Models.ApplicationScreeningRequest applicationRequest)
+        public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
         {
-            var consentValidated = ValidateAssociateConsent((List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
+            var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
 
             if (consentValidated)
             {
-                List<Interfaces.Spice.Models.ApplicationScreeningRequest> payload = new List<Interfaces.Spice.Models.ApplicationScreeningRequest>
+                List<IncompleteApplicationScreening> payload = new List<IncompleteApplicationScreening>
                 {
                     applicationRequest
                 };
@@ -321,39 +242,33 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// </summary>
         /// <returns>The worker screening request success boolean.</returns>
         /// <param name="workerScreeningRequest">Worker screening request.</param>
-        public async Task<bool> SendWorkerScreeningRequest(Gov.Lclb.Cllb.Interfaces.Spice.Models.WorkerScreeningRequest workerScreeningRequest, ILogger logger)
+        public async Task<bool> SendWorkerScreeningRequest(IncompleteWorkerScreening workerScreeningRequest)
         {
-            var consentValidated = ValidateWorkerConsent(workerScreeningRequest);
-            if(consentValidated)
+            WorkersGetResponseModel workerResponse = _dynamicsClient.Workers.Get(filter: "adoxio_workerid eq " + workerScreeningRequest.RecordIdentifier);
+            if(workerResponse.Value.Count > 0)
             {
-                List<Interfaces.Spice.Models.WorkerScreeningRequest> payload = new List<Interfaces.Spice.Models.WorkerScreeningRequest>
+                List<IncompleteWorkerScreening> payload = new List<IncompleteWorkerScreening>
                 {
                     workerScreeningRequest
                 };
 
-                logger.LogInformation($"Sending Worker Screening Request");
+                _logger.LogInformation($"Sending Worker Screening Request");
 
                 var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
 
-                logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-                logger.LogInformation($"Done Send Worker Screening Request");
+                _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+                _logger.LogInformation($"Done Send Worker Screening Request");
 
                 return result.Response.StatusCode.ToString() == "OK";
             }
-            _logger.LogError($"Consent not valid for worker SPD Job ID: {workerScreeningRequest.Contact.SpdJobId}");
+            _logger.LogError($"Worker {workerScreeningRequest.RecordIdentifier} not found");
             return false;
         }
 
-        public async Task<Interfaces.Spice.Models.WorkerScreeningRequest> GenerateWorkerScreeningRequest(Guid WorkerId, ILogger logger)
+        public async Task<IncompleteWorkerScreening> GenerateWorkerScreeningRequest(MicrosoftDynamicsCRMadoxioWorker worker)
         {
-            // Query Dynamics for application data
-            string filter = "adoxio_workerid eq " + WorkerId.ToString();
-            string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
-            WorkersGetResponseModel resp = _dynamicsClient.Workers.Get(filter: filter, expand: expand);
-            MicrosoftDynamicsCRMadoxioWorker worker = resp.Value[0];
-
-            /* Create application */
-            Interfaces.Spice.Models.WorkerScreeningRequest request = new Interfaces.Spice.Models.WorkerScreeningRequest();
+            /* Create request */
+            IncompleteWorkerScreening request = new IncompleteWorkerScreening();
 
             /* Add applicant details */
             if (worker.AdoxioContactId != null)
@@ -371,8 +286,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                     Email = worker.AdoxioContactId.Emailaddress1,
                     PhoneNumber = worker.AdoxioContactId.Telephone1,
                     BirthDate = worker.AdoxioContactId.Birthdate,
-                    SelfDisclosure = worker.AdoxioContactId.AdoxioSelfdisclosure != null ? ((GeneralYesNo)worker.AdoxioContactId.AdoxioSelfdisclosure).ToString() : null,
-                    Gender = worker.AdoxioContactId.AdoxioGendercode != null ? ((AdoxioGenderCode)worker.AdoxioContactId.AdoxioGendercode).ToString() : null,
+                    SelfDisclosure = worker.AdoxioContactId.AdoxioSelfdisclosure != null ? ((CarlaSpiceSync.models.GeneralYesNo)worker.AdoxioContactId.AdoxioSelfdisclosure).ToString() : null,
+                    Gender = worker.AdoxioContactId.AdoxioGendercode != null ? ((CarlaSpiceSync.models.AdoxioGenderCode)worker.AdoxioContactId.AdoxioGendercode).ToString() : null,
                     Birthplace = worker.AdoxioBirthplace,
                     Address = new Interfaces.Spice.Models.Address()
                     {
@@ -432,14 +347,14 @@ namespace Gov.Lclb.Cllb.SpdSync
                 }
             }
 
-            logger.LogInformation("Finished building Model");
+            _logger.LogInformation("Finished building Model");
             return request;
         }
 
-        private Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest CreateApplicationScreeningRequest(MicrosoftDynamicsCRMadoxioApplication application)
+        private IncompleteApplicationScreening CreateApplicationScreeningRequest(MicrosoftDynamicsCRMadoxioApplication application)
         {
             MicrosoftDynamicsCRMadoxioLicencetype licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
-            var screeningRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest()
+            var screeningRequest = new IncompleteApplicationScreening()
             {
                 Name = application.AdoxioName,
                 ApplicationType = licenceType.AdoxioName,
@@ -614,8 +529,8 @@ namespace Gov.Lclb.Cllb.SpdSync
                     MiddleName = legalEntity.AdoxioContact.Middlename,
                     Email = legalEntity.AdoxioContact.Emailaddress1,
                     PhoneNumber = legalEntity.AdoxioContact.Telephone1,
-                    SelfDisclosure = (legalEntity.AdoxioContact.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioContact.AdoxioSelfdisclosure).ToString(),
-                    Gender = (legalEntity.AdoxioContact.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioContact.AdoxioGendercode).ToString(),
+                    SelfDisclosure = (legalEntity.AdoxioContact.AdoxioSelfdisclosure == null) ? null : ((CarlaSpiceSync.models.GeneralYesNo)legalEntity.AdoxioContact.AdoxioSelfdisclosure).ToString(),
+                    Gender = (legalEntity.AdoxioContact.AdoxioGendercode == null) ? null : ((CarlaSpiceSync.models.AdoxioGenderCode)legalEntity.AdoxioContact.AdoxioGendercode).ToString(),
                     Birthplace = legalEntity.AdoxioContact.AdoxioBirthplace,
                     BirthDate = legalEntity.AdoxioContact.Birthdate,
                     BcIdCardNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
@@ -770,7 +685,43 @@ namespace Gov.Lclb.Cllb.SpdSync
 
         public async Task SendFoundWorkers(PerformContext hangfireContext)
         {
+            _logger.LogError("Starting SendFoundWorkers Job");
+            hangfireContext.WriteLine("Starting SendFoundWorkers Job");
 
+            // Query Dynamics for worker data
+            string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
+            string sendFilter = $"adoxio_consentvalidated eq {(int)WorkerConsentValidated.Yes} and adoxio_spdexportdate eq null";
+            WorkersGetResponseModel workers = _dynamicsClient.Workers.Get(filter: sendFilter, expand: expand);
+            
+            if (workers.Value.Count < 1)
+            {
+                _logger.LogError("No workers found for processing");
+                hangfireContext.WriteLine("No workers found for processing");
+            }
+            else
+            {
+                _logger.LogError($"Found {workers.Value.Count} workers to send to SPD.");
+                hangfireContext.WriteLine($"Found {workers.Value.Count} workers to send to SPD.");
+
+                foreach (var worker in workers.Value)
+                {
+                    IncompleteWorkerScreening screeningRequest = await GenerateWorkerScreeningRequest(worker);
+                    var response = await SendWorkerScreeningRequest(screeningRequest);
+                    if (response)
+                    {
+                        hangfireContext.WriteLine($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
+                        _logger.LogError($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
+                    }
+                    else
+                    {
+                        hangfireContext.WriteLine($"Failed to send worker {screeningRequest.RecordIdentifier} to SPD");
+                        _logger.LogError($"Failed to send worker {screeningRequest.RecordIdentifier} to SPD");
+                    }
+                }
+            }
+            
+            _logger.LogError("End of SendFoundWorkers Job");
+            hangfireContext.WriteLine("End of SendFoundWorkers Job");
         }
 
         public async Task SendFoundApplications(PerformContext hangfireContext)
@@ -803,7 +754,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             
             _logger.LogError("End of SendFoundApplications Job");
             hangfireContext.WriteLine("End of SendFoundApplications Job");
-
         }
     }
 }

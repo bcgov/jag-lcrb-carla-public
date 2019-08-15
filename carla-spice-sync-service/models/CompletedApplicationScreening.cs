@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CarlaSpiceSync.models;
 
-namespace SpdSync.models
+namespace CarlaSpiceSync.models
 {
-    public class ApplicationScreeningResponse
+    public class CompletedApplicationScreening
     {
         public string RecordIdentifier { get; set; }
         public string Result { get; set; }
