@@ -16,6 +16,7 @@
     <PackageReference Include="Hangfire.AspNetCore" Version="1.7.2" />
     <PackageReference Include="Hangfire.Console" Version="1.4.2" />
     <PackageReference Include="Hangfire.MemoryStorage.Core" Version="1.4.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
@@ -61,5 +62,7 @@
 
   <ItemGroup>
     <Compile Remove="models\Application.cs" />
+    <Compile Remove="WorkerResultParser.cs" />
+    <Compile Remove="WorkerUpdater.cs" />
   </ItemGroup>
 </Project>
