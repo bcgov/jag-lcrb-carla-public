@@ -3,12 +3,16 @@ using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using SpdSync;
 using System.Collections.Generic;
-using SpdSync.models;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System;
+using CarlaSpiceSync.models;
+using Hangfire.Server;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Interfaces.Spice.Models;
+using Gov.Lclb.Cllb.Interfaces;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.SpdSync.Controllers
 {
@@ -18,12 +22,14 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
     public class WorkerScreeningsController : Controller
     {
         private readonly IConfiguration Configuration;
+        private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
         private readonly ILoggerFactory _loggerFactory;
         private readonly SpiceUtils _spiceUtils;
 
-        public WorkerScreeningsController (IConfiguration configuration, ILoggerFactory loggerFactory)
+        public WorkerScreeningsController (IConfiguration configuration, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
+            _dynamicsClient = dynamicsClient;
             Configuration = configuration;
             _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger(typeof(WorkerScreeningsController));
@@ -36,7 +42,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpPost("receive")]
-        public ActionResult ReceiveWorkerScreeningResults([FromBody] List<WorkerScreeningResponse> results)
+        public ActionResult ReceiveWorkerScreeningResults([FromBody] List<CompletedWorkerScreening> results)
         {
             // Process the updates received from the SPICE system.
             BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveWorkerImportJob(null, results));
@@ -50,43 +56,66 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// <returns></returns>
         [HttpPost("send/{workerIdString}")]
         [AllowAnonymous]
-        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString, string bearer)
+        public async Task<ActionResult> SendWorkerScreeningRequest(string workerId, string bearer)
         {
             if (JwtChecker.Check(bearer, Configuration))
             {
-                if (Guid.TryParse(workerIdString, out Guid workerId))
+                if (string.IsNullOrEmpty(workerId))
                 {
-                    var workerRequest = new Interfaces.Spice.Models.WorkerScreeningRequest();
-                    try
-                    {
-                        // Generate the application request
-                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
-                    }
-                    catch (ArgumentOutOfRangeException)
-                    {
-                        return NotFound($"Worker {workerIdString} is not found.");
-                    }
-                    catch (Exception ex)
-                    {
-                        _logger.LogError(ex.ToString());
-                        return BadRequest();
-                    };
-
-                    if (workerRequest == null)
-                    {
-                        return NotFound($"Worker {workerId} is not found.");
-                    }
-                    else
-                    {
-                        var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
-
-                        if (result)
-                        {
-                            return Ok(workerRequest);
-                        }
-                    }
+                    return NotFound();
                 }
-                return BadRequest();
+                
+                // Get the worker from dynamics
+                Guid id = Guid.Parse(workerId);
+                string filter = $"adoxio_workerid eq {id}";
+                var fields = new List<string> { "adoxio_ContactId" };
+                MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
+
+                if (worker != null)
+                {
+                    // Form the request
+                    IncompleteWorkerScreening workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(worker);
+                    // Send the request
+                    var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
+
+                    if (result)
+                    {
+                        return Ok(workerRequest);
+                    }
+                    return BadRequest();
+                }
+                else
+                {
+                    return NotFound();
+                }
+                    
+                    // var workerRequest = new ();
+                    // try
+                    // {
+                    //     // Generate the application request
+                        
+                        
+                    // }
+                    // catch (ArgumentOutOfRangeException)
+                    // {
+                    //     return NotFound($"Worker {workerIdString} is not found.");
+                    // }
+                    // catch (Exception ex)
+                    // {
+                    //     _logger.LogError(ex.ToString());
+                    //     return BadRequest();
+                    // };
+
+                    // if (workerRequest == null)
+                    // {
+                        
+                    // }
+                    // else
+                    // {
+                    //     
+                    // }
+                // }
+                // return BadRequest();
             }
             else
             {
