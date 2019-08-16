@@ -16,7 +16,8 @@
     </div>
   </div> -->
   <p>
-    As part of your renewal application, please identify any changes to your organization by confirming the following information.
+    As part of your renewal application, please identify any changes to your organization by confirming the following
+    information.
   </p>
 
   <h3 class="blue-header">ORGANIZATION LEADERSHIP</h3>
@@ -56,34 +57,37 @@
       contact you as part of this renewal process
     </div>
   </div>
-
-  <h3 class="blue-header">SHAREHOLDERS</h3>
-  <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId" style="margin-bottom: 10px;">
-    <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
-      [parentLegalEntityId]="legalEntityId">
-    </app-shareholders>
-    <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
-      [required]="true"
-      [valid]="!form.get('checklistShareholdersBuilt')?.touched || form.get('checklistShareholdersBuilt')?.valid">
-      <mat-button-toggle-group formControlName="checklistShareholdersBuilt" aria-label="Font Style">
-        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-        <mat-button-toggle value="Changed">No</mat-button-toggle>
-      </mat-button-toggle-group>
-    </app-field>
-    <div *ngIf="form.get('checklistShareholdersBuilt').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-      contact you as part of this renewal process
+  <section *ngIf="account.isPrivateCorporation() || account.isPublicCorporation() || account.isPartnership()">
+    <h3 *ngIf="account.isPrivateCorporation() || account.isPublicCorporation()" class="blue-header">SHAREHOLDERS</h3>
+    <h3 *ngIf="account.isPartnership()" class="blue-header">PARTNERS</h3>
+    <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId"
+      style="margin-bottom: 10px;">
+      <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id"
+        [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
+      </app-shareholders>
+      <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
+        [required]="true"
+        [valid]="!form.get('checklistShareholdersBuilt')?.touched || form.get('checklistShareholdersBuilt')?.valid">
+        <mat-button-toggle-group formControlName="checklistShareholdersBuilt" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </app-field>
+      <div *ngIf="form.get('checklistShareholdersBuilt').value === 'Changed'" class="field-changed">
+        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+        contact you as part of this renewal process
+      </div>
     </div>
-  </div>
+  </section>
 
   <section class="error" *ngIf="showValidationMessages">
-      <p *ngFor="let message of validationMessages">
-        <span class="app-cancel">
-          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-          {{message}}
-        </span>
-      </p>
-    </section>
+    <p *ngFor="let message of validationMessages">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
+      </span>
+    </p>
+  </section>
 </div>
 
 <div style="padding-right: 30px;">
