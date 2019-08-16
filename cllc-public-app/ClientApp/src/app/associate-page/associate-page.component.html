@@ -57,9 +57,9 @@
       contact you as part of this renewal process
     </div>
   </div>
-  <section *ngIf="account.isPrivateCorporation() || account.isPublicCorporation() || account.isPartnership()">
-    <h3 *ngIf="account.isPrivateCorporation() || account.isPublicCorporation()" class="blue-header">SHAREHOLDERS</h3>
-    <h3 *ngIf="account.isPartnership()" class="blue-header">PARTNERS</h3>
+  <section *ngIf="account?.isPrivateCorporation() || account?.isPublicCorporation() || account?.isPartnership()">
+    <h3 *ngIf="account?.isPrivateCorporation() || account?.isPublicCorporation()" class="blue-header">SHAREHOLDERS</h3>
+    <h3 *ngIf="account?.isPartnership()" class="blue-header">PARTNERS</h3>
     <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId"
       style="margin-bottom: 10px;">
       <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id"
