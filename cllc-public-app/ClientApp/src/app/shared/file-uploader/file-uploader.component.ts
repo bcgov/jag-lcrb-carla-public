@@ -26,6 +26,8 @@ export class FileUploaderComponent implements OnInit {
   @Input() extensions: string[] = ['pdf'];
   @Input() uploadHeader = 'TO UPLOAD DOCUMENTS, DRAG FILES HERE OR';
   @Input() enableFileDeletion = true;
+  @Input() maxNumberOfFiles = 10;
+  @Input() useDocumentTypeForName = false;
   @Output() numberOfUploadedFiles: EventEmitter<number> = new EventEmitter<number>();
   busy: Subscription;
   attachmentURL: string;
@@ -44,15 +46,25 @@ export class FileUploaderComponent implements OnInit {
 
   public dropped(event: UploadEvent) {
     const files = event.files;
+    let newFileCount = 0;
+    for (const droppedFile of files) {
+      newFileCount += 1;
+    }
+    let count = this.getCurrentLastFileCounter() + 1;
     if (files.length > 1 && !this.multipleFiles) {
       alert('Only one file can be uploaded here');
+      return;
+    }
+    if (this.maxNumberOfFiles < (this.files.length + newFileCount)) {
+      alert(`Only ${this.maxNumberOfFiles} files can be uploaded here`);
       return;
     }
     for (const droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          this.uploadFile(file);
+          this.uploadFile(file, count);
+          count += 1;
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -62,16 +74,48 @@ export class FileUploaderComponent implements OnInit {
     }
   }
 
+  getCurrentLastFileCounter(): number {
+    let lastCount = 0;
+    if (this.files.length) {
+      const counts = this.files.map(file => {
+        const match = file.name.match(/_(\d+)\.([^\.]+)$/);
+        if (match) {
+          return parseInt(match[1], 10);
+        } else {
+          return 0;
+        }
+
+      }).sort()
+        .reverse();
+      lastCount = counts[0];
+    }
+    return lastCount;
+  }
+
   onBrowserFileSelect(event: any, input: any) {
     const uploadedFiles = event.target.files;
+    let newFileCount = 0;
+    for (const droppedFile of uploadedFiles) {
+      newFileCount += 1;
+    }
+    let count = this.getCurrentLastFileCounter() + 1;
+    if (uploadedFiles.length > 1 && !this.multipleFiles) {
+      alert('Only one file can be uploaded here');
+      return;
+    }
+    if (this.maxNumberOfFiles < (this.files.length + newFileCount)) {
+      alert(`Only ${this.maxNumberOfFiles} files can be uploaded here`);
+      return;
+    }
     for (const file of uploadedFiles) {
-      this.uploadFile(file);
+      this.uploadFile(file, count);
+      count += 1;
     }
 
     input.value = '';
   }
 
-  public uploadFile(file) {
+  public uploadFile(file, count) {
     const validExt = this.extensions.filter(ex => file.name.toLowerCase().endsWith(ex)).length > 0;
     if (!validExt) {
       alert('File type not supported.');
@@ -84,7 +128,12 @@ export class FileUploaderComponent implements OnInit {
     }
 
     const formData = new FormData();
-    formData.append('file', file, file.name);
+    let fileName = file.name;
+    const extension = file.name.match(/\.([^\.])+$/)[0];
+    if (this.useDocumentTypeForName) {
+      fileName = this.documentType.replace(/ /g, '_') + '_' + (count) + extension;
+    }
+    formData.append('file', file, fileName);
     formData.append('documentType', this.documentType);
     const headers: HttpHeaders = new HttpHeaders();
 
@@ -101,6 +150,15 @@ export class FileUploaderComponent implements OnInit {
     const getFileURL = this.attachmentURL + '/' + this.documentType;
     this.busy = this.http.get<FileSystemItem[]>(getFileURL, { headers: headers })
       .subscribe((data) => {
+        // sort by filename
+        data = data.sort((fileA, fileB) => {
+          if (fileA.name > fileB.name) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
+
         // convert bytes to KB
         data.forEach((entry) => {
           entry.size = Math.ceil(entry.size / 1024);
@@ -125,7 +183,8 @@ export class FileUploaderComponent implements OnInit {
   }
 
   disableFileUpload(): boolean {
-    return !this.multipleFiles && (this.files && this.files.length > 0);
+    return (!this.multipleFiles && (this.files && this.files.length > 0))
+    || (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length));
   }
 
   public fileOver(event) {
