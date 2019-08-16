@@ -46,7 +46,7 @@ describe('AssociatePageComponent', () => {
   });
   const initialState = {
     currentAccountState: {
-      currentAccount: account, 
+      currentAccount: account,
     },
     currentUserState: { currentUser: {} }
   } as AppState;
@@ -104,7 +104,7 @@ describe('AssociatePageComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
