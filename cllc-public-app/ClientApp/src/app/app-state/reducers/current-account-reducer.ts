@@ -14,7 +14,7 @@ export function reducer(state: CurrentAccountState = initialState, action: Curre
         case CurrentAccountActions.CURRENT_ACCOUNT:
             return { ...state };
         case CurrentAccountActions.SET_CURRENT_ACCOUNT:
-            return { currentAccount: action.payload };
+            return { currentAccount: Object.assign(new Account(), action.payload) };
         default:
             return state;
     }
