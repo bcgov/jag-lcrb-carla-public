@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user.model';
-import { Subscription } from 'rxjs';
 import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs/operators';
