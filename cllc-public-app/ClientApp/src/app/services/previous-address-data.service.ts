@@ -28,7 +28,7 @@ export class PreviousAddressDataService extends DataService {
    * Create a new address in Dynamics
    * @param data - address data
    */
-  createPreviousAdderess(data: any) {
+  createPreviousAdderess(data: PreviousAddress) {
     return this.http.post<PreviousAddress>('api/previousaddress/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -37,7 +37,7 @@ export class PreviousAddressDataService extends DataService {
    * update a  address in Dynamics
    * @param data - address data
    */
-  updatePreviousAdderess(data: any, id: string) {
+  updatePreviousAdderess(data: PreviousAddress, id: string) {
     return this.http.put<PreviousAddress>(`api/previousaddress/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }

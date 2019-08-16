@@ -180,11 +180,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       );
   }
 
-  downloadLicence() {
-
-  }
-
-
   payLicenceFee(licence: ApplicationLicenseSummary) {
     this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(licence.applicationId)
       .pipe(takeWhile(() => this.componentActive))
