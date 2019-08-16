@@ -46,7 +46,7 @@ describe('AssociatePageComponent', () => {
   });
   const initialState = {
     currentAccountState: {
-      currentAccount: account, 
+      currentAccount: account,
     },
     currentUserState: { currentUser: {} }
   } as AppState;
