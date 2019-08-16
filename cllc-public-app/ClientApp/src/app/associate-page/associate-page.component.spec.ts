@@ -39,16 +39,14 @@ describe('AssociatePageComponent', () => {
   let store: MockStore<AppState>;
   let applicationService: ApplicationDataService;
 
-  const account = new Account();
-  account.businessType = 'PublicCorporation';
-  account.legalEntity = <LegalEntity>{ id: '0' };
 
+  const account = Object.assign(new Account(), {
+    businessType: 'PublicCorporation',
+    legalEntity: { id: '0' }
+  });
   const initialState = {
     currentAccountState: {
-      currentAccount: {
-        businessType: 'PublicCorporation',
-        legalEntity: { id: '0' }
-      },
+      currentAccount: account, 
     },
     currentUserState: { currentUser: {} }
   } as AppState;
@@ -106,7 +104,7 @@ describe('AssociatePageComponent', () => {
     fixture.detectChanges();
   });
 
-  // fit('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  fit('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
