@@ -12,6 +12,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import * as LegalEntitiesActions from '@app/app-state/actions/legal-entities.action';
 import { LegalEntity } from '@models/legal-entity.model';
+import { takeWhile, filter } from 'rxjs/operators';
+import { FormBase } from '@shared/form-base';
 
 @Component({
   selector: 'app-shareholders',
@@ -19,7 +21,7 @@ import { LegalEntity } from '@models/legal-entity.model';
   styleUrls: ['./shareholders.component.scss']
 })
 
-export class EditShareholdersComponent implements OnInit {
+export class EditShareholdersComponent extends FormBase implements OnInit {
   @Input() accountId: string;
   @Input() parentLegalEntityId: string;
   @Input() businessType: string;
@@ -34,6 +36,7 @@ export class EditShareholdersComponent implements OnInit {
   form: FormGroup;
   showAddShareholder = false;
   totalShares: number;
+  account: Account;
 
 
   constructor(private legalEntityDataservice: LegalEntityDataService,
@@ -43,11 +46,19 @@ export class EditShareholdersComponent implements OnInit {
     private dynamicsDataService: DynamicsDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar) {
+    super();
   }
 
   ngOnInit() {
     this.getShareholders();
     this.updateDisplayedColumns();
+
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(s => !!s))
+      .subscribe(account => {
+        this.account = account;
+      });
   }
 
   updateDisplayedColumns() {
@@ -139,8 +150,14 @@ export class EditShareholdersComponent implements OnInit {
     const adoxioLegalEntity: LegalEntity = new LegalEntity();
     adoxioLegalEntity.id = formData.id;
 
-    adoxioLegalEntity.isShareholder = true;
-    adoxioLegalEntity.isPartner = false;
+    if (this.account.isPartnership()) {
+      adoxioLegalEntity.isShareholder = false;
+      adoxioLegalEntity.isPartner = true;
+    } else {
+      adoxioLegalEntity.isShareholder = true;
+      adoxioLegalEntity.isPartner = false;
+    }
+
     adoxioLegalEntity.parentLegalEntityId = this.parentLegalEntityId;
     adoxioLegalEntity.isindividual = formData.isindividual;
 
