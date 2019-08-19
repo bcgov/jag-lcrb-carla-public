@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -24,7 +25,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             AGENT_URL = agentURL;
         }
 
-        public async Task CreateLicenceCredential(MicrosoftDynamicsCRMadoxioLicences licence, string registrationId)
+        public async Task<bool> CreateLicenceCredential(MicrosoftDynamicsCRMadoxioLicences licence, string registrationId)
         {
             Credential credential = new Credential()
             {
@@ -46,15 +47,34 @@ namespace Gov.Lclb.Cllb.OneStopService
                 version = _schemaVersion
             };
 
-            HttpResponseMessage response = await Client.PostAsJsonAsync(AGENT_URL + ISSUE_URL, new List<Credential>() { credential });
+            try
+            {
+                HttpResponseMessage response = await Client.PostAsJsonAsync(AGENT_URL + ISSUE_URL, new List<Credential>() { credential });
 
-            if (!response.IsSuccessStatusCode)
-            {
-                _logger.LogError($"Failed to create verifiable credential for licence {licence.AdoxioLicencenumber}");
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError($"Failed to create verifiable credential for licence {licence.AdoxioLicencenumber}");
+                    _logger.LogError($"Status code from VON Agent: {response.StatusCode}");
+                    _logger.LogError($"Response: {await response.Content.ReadAsStringAsync()}");
+                    return false;
+                }
+                else
+                {
+                    AgentResponse resp = JsonConvert.DeserializeObject<List<AgentResponse>>(await response.Content.ReadAsStringAsync())[0];
+                    if (!resp.Success) {
+                        _logger.LogError($"Failed to create verifiable credential for licence {licence.AdoxioLicencenumber}");
+                        _logger.LogError($"Status code from VON Agent: {response.StatusCode}");
+                        _logger.LogError($"Response: {resp.Result}");
+                        return false;
+                    }
+                    _logger.LogInformation($"Successfully created verifiable credential for licence {licence.AdoxioLicencenumber}");
+                    return true;
+                }
             }
-            else
+            catch (HttpRequestException)
             {
-                _logger.LogInformation($"Successfully created verifiable credential for licence {licence.AdoxioLicencenumber}");
+                _logger.LogError($"Failed to make licence issue request to {AGENT_URL + ISSUE_URL}");
+                return false;
             }
         }
     }
