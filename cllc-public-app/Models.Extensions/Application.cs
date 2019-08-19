@@ -136,8 +136,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (from.AdoxioEstablishment != null)
             {
                 to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
-                to.AdoxioEmail = from.AdoxioEstablishment.AdoxioEmail;
-                to.AdoxioPhone = from.AdoxioEstablishment.AdoxioPhone;
+                to.AdoxioEstablishmentemail = from.AdoxioEstablishment.AdoxioEmail;
+                to.AdoxioEstablishmentphone = from.AdoxioEstablishment.AdoxioPhone;
                 to.AdoxioEstablishmentparcelid = from.AdoxioEstablishment.AdoxioParcelid;
                 to.AdoxioIsoninland = from.AdoxioEstablishment.AdoxioIsoninland;
                 to.AdoxioPoliceJurisdictionId = from.AdoxioEstablishment.AdoxioPDJurisdiction;
