@@ -108,17 +108,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licence.AdoxioLicenceType != null &&
                 licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes != null)
             {
-                bool addActions = !(applications.Any(app => app.Statuscode != (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved));
-
-                if (addActions)
+                foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
                 {
-                    foreach (var item in licence.AdoxioLicenceType.AdoxioLicencetypesApplicationtypes)
-                    {
-                        // check to see if there is an existing action on this licence.
-                        licenseSummary.AllowedActions.Add(item.ToViewModel());
-                    }
-
+                    // check to see if there is an existing action on this licence.
+                    licenseSummary.AllowedActions.Add(item.ToViewModel());
                 }
+
             }
 
             return licenseSummary;
