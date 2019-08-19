@@ -731,7 +731,8 @@
 
         <app-field label="Email" [required]="true"
           [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
-          errorMessage="Please enter the business contact's email address">
+          errorMessage="Please enter the business contact's email address"
+          afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
             formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
         </app-field>
