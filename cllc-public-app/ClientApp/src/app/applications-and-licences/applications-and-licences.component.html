@@ -227,7 +227,7 @@
                 </a>
                 <div *ngIf="item.status != PAYMENT_REQUIRED">
                   <p *ngFor="let action of item.allowedActions">
-                    <a href="javascript:void(0);" (click)="doAction(item.licenseId,action.name)">
+                    <a href="javascript:void(0);" (click)="doAction(item,action.name)">
                       <span><i class="fas fa-sync" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
                     </a>
                   </p>
