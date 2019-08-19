@@ -2,8 +2,10 @@
   <span *ngIf="leadingText">{{leadingText}} <p></p> </span>
   <label *ngIf="label">{{label}} <span *ngIf="required" class="error-states">*</span></label>
 
-  <div *ngIf="afterLabelText">{{afterLabelText}}</div>
-  <br *ngIf="label && !afterLabelText">
+  <i *ngIf="afterLabelText">
+    <br>
+    {{afterLabelText}}
+  </i>
 
   <div style="display: flex; align-items: center;">
     <section [ngClass]="{'fullWidth': isFullWidth}">
