@@ -77,27 +77,46 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
                 string licenceId = item.AdoxioLicencesid;
                 int? orgbookTopicId = await _orgbookClient.GetTopicId(registrationId);
-                var (schema, schemaVersion) = GetSchemaFromConfig(item.AdoxioLicenceType.AdoxioName);
+                string licenceType = item.AdoxioLicenceType?.AdoxioName;
+                var (schema, schemaVersion) = GetSchemaFromConfig(licenceType);
 
-                if (orgbookTopicId != null)
-                {
-                    string licenceGuid = Utils.ParseGuid(licenceId);
-                    var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
-                    VonAgentClient _vonAgentClient = new VonAgentClient(new HttpClient(), _logger, schema, schemaVersion, Configuration["AGENT_URL"]);
-                    await _vonAgentClient.CreateLicenceCredential(licence, registrationId);
-
-                    _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
-                    {
-                        AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Pass
-                    });
-                    _logger.LogInformation($"Successfully issued credential to {registrationId}.");
-                    hangfireContext.WriteLine($"Successfully issued credential to {registrationId}.");
-                }
-                else
+                if (orgbookTopicId == null)
                 {
                     _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences() { AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Fail });
                     _logger.LogError($"Failed to issue credential - Registration ID: {registrationId} does not exist.");
                     hangfireContext.WriteLine($"Failed to issue credential - Registration ID: {registrationId} does not exist.");
+                }
+                else if(schema == null || schemaVersion == null)
+                {
+                    _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences() { AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Fail });
+                    _logger.LogError($"Schema {licenceType} not found.");
+                    hangfireContext.WriteLine($"Schema {licenceType} not found.");
+                }
+                else
+                {
+                    string licenceGuid = Utils.ParseGuid(licenceId);
+                    var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
+                    VonAgentClient _vonAgentClient = new VonAgentClient(new HttpClient(), _logger, schema, schemaVersion, Configuration["AGENT_URL"]);
+                    bool issueSuccess = await _vonAgentClient.CreateLicenceCredential(licence, registrationId);
+
+                    if(issueSuccess)
+                    {
+                        _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
+                        {
+                            AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Pass
+                        });
+                        _logger.LogInformation($"Successfully issued credential to {registrationId}.");
+                        hangfireContext.WriteLine($"Successfully issued credential to {registrationId}.");
+                    }
+                    else
+                    {
+                        _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
+                        {
+                            AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Fail
+                        });
+                        _logger.LogInformation($"Failed to issue licence credential to {registrationId}.");
+                        hangfireContext.WriteLine($"Failed to issue licence credential to {registrationId}.");
+                    }
                 }
             }
 
@@ -182,7 +201,8 @@ namespace Gov.Lclb.Cllb.OneStopService
                 JsonSerializer serializer = new JsonSerializer();
                 List<Schema> schemas = (List<Schema>)serializer.Deserialize(file, typeof(List<Schema>));
                 Schema schema = schemas.Find((obj) => obj.type == licenceType);
-                return (schema.name, schema.version);
+
+                return schema == null ? (null, null) : (schema.name, schema.version);
             }
         }
     }
