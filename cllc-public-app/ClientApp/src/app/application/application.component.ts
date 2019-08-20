@@ -87,6 +87,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedSupportingDocuments = 0;
   uploadedFinancialIntegrityDocuments: 0;
   uploadedAssociateDocuments: 0;
+  uploadedSignageDocuments: 0;
+  uploadedValidInterestDocuments: 0;
+  uploadedSitePlanDocuments: 0;
+  uploadedFloorPlanDocuments: 0;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -428,6 +432,30 @@ export class ApplicationComponent extends FormBase implements OnInit {
       (this.uploadedSupportingDocuments < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
+    }
+
+    if (this.application.applicationType.signage === FormControlState.Show &&
+      (this.uploadedSignageDocuments < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one signage document is required.');
+    }
+
+    if (this.application.applicationType.validInterest  === FormControlState.Show &&
+      (this.uploadedValidInterestDocuments < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one supporting document is required.');
+    }
+
+    if (this.application.applicationType.sitePlan  === FormControlState.Show &&
+      (this.uploadedSitePlanDocuments < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one site plan document is required.');
+    }
+
+    if (this.application.applicationType.floorPlan  === FormControlState.Show &&
+      (this.uploadedFloorPlanDocuments < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one floor plan document is required.');
     }
 
     if (this.application.applicationType.showPropertyDetails && !this.form.get('establishmentName').value) {

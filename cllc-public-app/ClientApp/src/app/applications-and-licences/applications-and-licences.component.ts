@@ -97,13 +97,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
           });
 
           licenses.forEach((licence: ApplicationLicenseSummary) => {
+            licence.actionApplications = [];
             const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
-            if (relatedApplications.length > 0) {
-              licence.relatedApplicationId = relatedApplications[0].id;
-              if (relatedApplications[0].isPaid) {
-                licence.relatedApplicationPaid = true;
-              }
-            }
+            relatedApplications.forEach(app => {
+              licence.actionApplications.push({
+                applicationId: app.id,
+                applicationTypeName: app.applicationTypeName,
+                isPaid: app.isPaid
+              });
+            });
             this.licensedApplications.push(licence);
           });
 
@@ -165,25 +167,27 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
 
   }
 
-  doAction(licenceId: string, actionName: string) {
-    // newLicenceApplicationData. = this.account.businessType;
-    this.busy = this.licenceDataService.createApplicationForActionType(licenceId, actionName)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(data => {
-        this.router.navigateByUrl('/account-profile/' + data.id);
-      },
-        () => {
-          this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
-            { duration: 3500, panelClass: ['red-snackbar'] });
-          console.log('Error starting a Change Licence Location Application');
-        }
-      );
+  doAction(licence: ApplicationLicenseSummary, actionName: string) {
+    const actionApplication = licence.actionApplications.find(app => app.applicationTypeName === actionName);
+    if (actionApplication && !actionApplication.isPaid) {
+      this.router.navigateByUrl('/account-profile/' + actionApplication.applicationId);
+    } else if (actionApplication && actionApplication.isPaid) {
+      this.snackBar.open('Application already submitted', 'Fail',
+        { duration: 3500, panelClass: ['red-snackbar'] });
+    } else {
+      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(data => {
+          this.router.navigateByUrl('/account-profile/' + data.id);
+        },
+          () => {
+            this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
+              { duration: 3500, panelClass: ['red-snackbar'] });
+            console.log('Error starting a Change Licence Location Application');
+          }
+        );
+    }
   }
-
-  downloadLicence() {
-
-  }
-
 
   payLicenceFee(licence: ApplicationLicenseSummary) {
     this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(licence.applicationId)
@@ -252,8 +256,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   startRenewal(licence: ApplicationLicenseSummary) {
-    if (licence.relatedApplicationId) {
-      this.router.navigateByUrl('/renew-crs-licence/application/' + licence.relatedApplicationId);
+    const renewalApplication = licence.actionApplications.find(app => app.applicationTypeName === 'CRS Renewal');
+    if (renewalApplication && !renewalApplication.isPaid) {
+      this.router.navigateByUrl('/renew-crs-licence/application/' + renewalApplication.applicationId);
+    } else if (renewalApplication && renewalApplication.isPaid) {
+      this.snackBar.open('Renewal application already submitted', 'Fail',
+        { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
       const actionName = 'CRS Renewal';
       this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
