@@ -5,7 +5,7 @@ import { WorkerDataService } from '../../services/worker-data.service.';
 import { User } from '../../models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { Subscription ,  Observable ,  Subject } from 'rxjs';
+import { Subscription, Observable, Subject } from 'rxjs';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { MatSnackBar } from '@angular/material';
 import { ContactDataService } from '@services/contact-data.service';
@@ -30,6 +30,7 @@ export class SpdConsentComponent implements OnInit {
   validationMessages: string[];
   workerStatus: string;
   uploadedDocuments = 0;
+  submitting: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -114,19 +115,22 @@ export class SpdConsentComponent implements OnInit {
       JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
       return true;
     } else {
-      return this.save();
+      return this.save(true);
     }
   }
 
-  save(): Subject<boolean> {
+  save(trackResult: boolean = false): Subject<boolean> {
     const subResult = new Subject<boolean>();
     const worker = this.form.value;
 
-    this.busy = this.contactDataService.updateContact(this.form.value.contact).subscribe(() => {
+    const busy = this.contactDataService.updateContact(this.form.value.contact).subscribe(() => {
       subResult.next(true);
       this.reloadUser();
     }, () => subResult.next(false)
     );
+    if (trackResult) {
+      this.busy = busy;
+    }
     return subResult;
   }
 
@@ -143,12 +147,15 @@ export class SpdConsentComponent implements OnInit {
 * Redirect to payment processing page (Express Pay / Bambora service)
 * */
   private submitPayment() {
-    this.save().subscribe(r => {
+    this.submitting = true;
+    this.busy = this.save().subscribe(r => {
       this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
         const jsonUrl = res;
         window.location.href = jsonUrl['url'];
+        this.submitting = false;
         return jsonUrl['url'];
       }, err => {
+        this.submitting = false;
         if (err._body === 'Payment already made') {
           this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
