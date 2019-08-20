@@ -2,6 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 
 namespace Gov.Lclb.Cllb.Public
@@ -25,7 +26,7 @@ namespace Gov.Lclb.Cllb.Public
                     config.AddEnvironmentVariables();
                 })
                 .ConfigureLogging((hostingContext, logging) =>
-                {                    
+                {
                     logging.ClearProviders();
                     logging.AddConsole(x => {
                         x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
@@ -33,8 +34,9 @@ namespace Gov.Lclb.Cllb.Public
                     });
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddDebug();
-                    logging.AddEventSourceLogger();
+                    logging.AddEventSourceLogger();                    
                 })
+                .UseSerilog()
                 .UseStartup<Startup>();
     }
 }
