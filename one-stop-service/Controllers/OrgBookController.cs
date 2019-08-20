@@ -27,7 +27,7 @@ namespace one_stop_service.Controllers
         public async Task<IActionResult> IssueLicenceCredential(string licenceGuid)
         {
             logger.LogInformation($"Reached IssueLicenceCredential. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OrgBookUtils(Configuration, logger).CreateLicenceCredential(null, licenceGuid));
+            //BackgroundJob.Enqueue(() => new OrgBookUtils(Configuration, logger).CreateLicenceCredential(null, licenceGuid, ));
             return Ok();
         }
     }

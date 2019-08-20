@@ -36,7 +36,7 @@ export class WorkerDataService extends DataService {
    * Create a new worker in Dynamics
    * @param data - worker data
    */
-  createWorker(data: any) {
+  createWorker(data: Worker) {
     return this.http.post<Worker>('api/worker/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -45,7 +45,7 @@ export class WorkerDataService extends DataService {
    * update a  worker in Dynamics
    * @param data - worker data
    */
-  updateWorker(data: any, id: string) {
+  updateWorker(data: Worker, id: string) {
     return this.http.put<Worker>(`api/worker/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }

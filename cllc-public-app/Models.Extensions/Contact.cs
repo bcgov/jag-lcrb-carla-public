@@ -50,10 +50,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.lastname = contact.Lastname;
                 result.telephone1 = contact.Telephone1;
                 result.BirthPlace = contact.AdoxioBirthplace;
-                result.Gender = (ViewModels.Gender?)contact.Gendercode;
+                result.Gender = (ViewModels.Gender?)contact.AdoxioGendercode;
                 result.MobilePhone = contact.Mobilephone;
                 result.PrimaryIdNumber = contact.AdoxioPrimaryidnumber;
                 result.SecondaryIdNumber = contact.AdoxioSecondaryidnumber;
+                result.PrimaryIdentificationType = (IdentificationType?)contact.AdoxioIdentificationtype;
+                result.SecondaryIdentificationType = (IdentificationType?)contact.AdoxioSecondaryidentificationtype;
                 result.IsWorker = contact.AdoxioIsworker;
                 result.SelfDisclosure = contact.AdoxioSelfdisclosure;
             }
@@ -190,6 +192,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.dateofbirth = tempDate;
             }
+
             if (!string.IsNullOrEmpty(smgov_sex))
             {
                 to.gender = (Gender)GetIntGenderCode(smgov_sex);
@@ -240,6 +243,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.Gender = (Gender)GetIntGenderCode(smgov_sex);
             }
+            if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse(smgov_birthdate, out DateTimeOffset tempDate))
+            {
+                to.Birthdate = tempDate;
+            }
 
         }
 
@@ -250,6 +257,23 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Emailaddress1 = from.emailaddress1;
             to.Telephone1 = from.telephone1;
             to.CopyValuesNoEmailPhone(from);
+        }
+
+        public static void CopyContactUserSettings(this MicrosoftDynamicsCRMcontact contact, ViewModels.Contact NewContact)
+        {
+            contact.Address1Line1 = NewContact.address1_line1;
+            contact.Address1Postalcode = NewContact.address1_postalcode;
+            contact.Address1City = NewContact.address1_city;
+            contact.Address1Stateorprovince = NewContact.address1_stateorprovince;
+            contact.Address1Country = NewContact.address1_country;
+
+            contact.Firstname = NewContact.firstname;
+            contact.Middlename = NewContact.middlename;
+            contact.Lastname = NewContact.lastname;
+
+            contact.Emailaddress1 = NewContact.emailaddress1;
+            contact.AdoxioGendercode = (int?)NewContact.Gender;
+            contact.Birthdate = NewContact.Birthdate;
         }
 
         public static void CopyValuesNoEmailPhone(this MicrosoftDynamicsCRMcontact to, ViewModels.Contact from)
@@ -279,12 +303,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.Birthdate = from.Birthdate;
 
             to.AdoxioBirthplace = from.BirthPlace;
-            to.Gendercode = (int?)from.Gender;
+            to.AdoxioGendercode = (int?)from.Gender;
             to.Mobilephone = from.MobilePhone;
             to.AdoxioPrimaryidnumber = from.PrimaryIdNumber;
             to.AdoxioSecondaryidnumber = from.SecondaryIdNumber;
             to.AdoxioIsworker = from.IsWorker;
             to.AdoxioSelfdisclosure = from.SelfDisclosure;
+            to.AdoxioIdentificationtype= (int?)from.PrimaryIdentificationType;
+            to.AdoxioSecondaryidentificationtype= (int?)from.SecondaryIdentificationType;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)

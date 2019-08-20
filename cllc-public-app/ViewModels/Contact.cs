@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+    public enum IdentificationType {
+        DriversLicence = 845280000,
+        BCIdCard = 845280005
+    }
     public class Contact
     {
         public string id { get; set; }
@@ -60,12 +66,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
 
         public string BirthPlace { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public Gender? Gender { get; set; }
         public string MobilePhone { get; set; }
         public string PrimaryIdNumber { get; set; }
         public string SecondaryIdNumber { get; set; }
         public bool? IsWorker { get; set; }
         public int? SelfDisclosure { get; set; }
-
+        [JsonConverter(typeof(StringEnumConverter))]
+        public IdentificationType? SecondaryIdentificationType { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public IdentificationType? PrimaryIdentificationType { get; set; }
     }
 }

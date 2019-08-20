@@ -77,7 +77,7 @@ export class ApplicationDataService extends DataService {
    * Update the Dynamics Application
    * @param applicationData
    */
-  updateApplication(applicationData: any) {
+  updateApplication(applicationData: Application) {
     // call API
     // console.log("===== AdoxioApplicationDataService.updateApplication: ", applicationData);
     return this.http.put(this.apiPath + applicationData.id, applicationData, { headers: this.headers })
@@ -88,7 +88,7 @@ export class ApplicationDataService extends DataService {
    * Create a Dynamics Application
    * @param applicationData
    */
-  createApplication(applicationData: any): Observable<Application> {
+  createApplication(applicationData: Application): Observable<Application> {
     // call API
     // console.log("===== AdoxioApplicationDataService.createApplication: ", applicationData);
     return this.http.post<Application>(this.apiPath, applicationData, { headers: this.headers });

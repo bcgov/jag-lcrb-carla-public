@@ -1,5 +1,4 @@
 <ng-template #applicationContent>
-  <div [ngBusy]="busy"></div>
 
   <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
 
@@ -201,6 +200,194 @@
       </section>
       <p>&nbsp;</p>
 
+      <div class="ngtest-phot-star-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
+        <hr>
+        <label for="">Photos or renderings of the store's signage</label>
+        <br>
+        <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
+          <p>
+            The signage submitted must show the name of the store and all words, images and symbols used in the signage.
+          </p>
+          <p>
+            Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
+            green cross).
+          </p>
+          <p>
+            Signage must not imply an association with another business (other than another non-medical cannabis retail
+            store).
+          </p>
+          <p>
+            If submitting renderings, renderings may be either printed or hand-drawn (as long as they are legible)
+          </p>
+        </section>
+
+        <p *ngIf="application?.applicationType?.signage === FormControlState.Reaonly">The below photos or renderings of
+          the store's signage are on file.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Signage"
+            [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show"
+            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="false" entityName="application"
+            [extensions]="['jpg', 'jpeg', 'png', 'pdf']" (numberOfUploadedFiles)="uploadedSignageDocuments = $event"
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+      </div>
+
+      <div class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
+
+        <label for="">Offer or Proof of Ownership, Lease or Sub-Lease</label>
+        <br>
+        <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
+          <p>
+            If the applicant currently owns or leases the proposed store location, submit Option 1.
+          </p>
+          <p>
+            If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
+          </p>
+          <p>
+            Leases or other arrangements must not expire for at least 12 months from the date the licence is issued
+          </p>
+          <p>
+            Option 1: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store location.
+          </p>
+          <p>
+            Option 2: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store location. Note,
+          </p>
+          <p>
+            Option 1 will be required before the licence is issued.
+          </p>
+        </section>
+
+        <p *ngIf="application?.applicationType?.validInterest === FormControlState.Reaonly">
+          The below offer or proof of ownership, lease or sub-lease is on file.
+        </p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Valid Interest" fileTypes="FILE MUST BE IN PDF FORMAT."
+            [enableFileDeletion]="application?.applicationType?.validInterest === FormControlState.Show"
+            [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+      </div>
+
+      <div class="ngtest-floor-plan" *ngIf="showFormControl(application?.applicationType?.floorPlan)">
+
+        <label for="">Floor Plan</label>
+        <br>
+        <section *ngIf="application?.applicationType?.floorPlan === FormControlState.Show">
+          <p>
+            If the applicant currently owns or leases the proposed store location, submit Option 1.
+          </p>
+          <p>
+            If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
+          </p>
+          <p>
+            Leases or other arrangements must not expire for at least 12 months from the date the licence is issued
+          </p>
+          <p>
+            Option 1: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store location.
+          </p>
+          <p>
+            Option 2: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store location. Note,
+          </p>
+          <p>
+            Option 1 will be required before the licence is issued.
+          </p>
+        </section>
+        <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
+          The below offer or proof of ownership, lease or sub-lease is on file.
+        </p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
+            [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show"
+            [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+      </div>
+
+      <div class="ngtest-site-plan" *ngIf="showFormControl(application?.applicationType?.sitePlan)">
+
+        <label for="">Site Plan</label>
+        <br>
+        <div *ngIf="application?.applicationType?.sitePlan === FormControlState.Show">
+          <p>
+            A site plan is a document showing any existing and proposed building footprints, pathways of travel,
+            parking,
+            and landscaping elements,
+            and the surrounding area. The document must measure at least 8.5" x 11" (standard letter size). Either a
+            hand-drawn or computer-generated
+            plan is acceptable, as long as the plan is drawn to scale and is clear and legible. A site plan must not be
+            submitted on graph paper or paper
+            with gridlines.
+          </p>
+          <p>
+            The site plan must include the proposed store footprint and a representation of any interior or exterior
+            spaces surrounding the store, including:
+          </p>
+          <ul>
+            <li>The location of any other buildings/businesses on the same site, each building footprint, type of
+              businesses
+              (e.g. gas station, office building) and building names, and their entrances and exits</li>
+            <li>A description of the type of separation proposed (for any adjoining businesses)</li>
+            <li>Road access and exits, including any relevant street names</li>
+            <li>Parking lots.</li>
+          </ul>
+          <p>
+            If the proposed store is located inside a building with other businesses
+            (e.g. a mall), submit two site plans:
+          </p>
+          <p>
+            1) One site plan showing location of any other buildings/businesses on the same site, including:
+          </p>
+          <ul>
+            <li>Each building footprint, building name and a list of businesses operating inside the building</li>
+            <li>Road access and exits, including any relevant street names, and</li>
+            <li>Parking lots</li>
+          </ul>
+          <p>
+            2) A second site plan showing the location of the proposed store
+            inside the building’s footprint:
+          </p>
+          <ul>
+            <li>All entrances and exits for the building</li>
+            <li>The location, name and type of businesses operating inside the building</li>
+            <li>The store footprint with all entrances and exits for the store, and</li>
+            <li>A description of the type of separation proposed for any business adjoining the proposed store</li>
+          </ul>
+          <p>
+            Full height walls are required for separation and no connecting doors between the cannabis retail store and
+            the neighbouring business are permitted.
+          </p>
+          <p>
+            The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store or
+            grocery
+            store) provided each business has its own controlled entrance within the vestibule. The cannabis retail
+            store
+            cannot share a vestibule with a business that would be contrary to public interest (i.e. business aimed at
+            minors or a liquor consumption business).
+          </p>
+        </div>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
+            [enableFileDeletion]="application?.applicationType?.sitePlan === FormControlState.Show"
+            [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
+            (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+      </div>
+
       <!-- Hours of Sale -->
       <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
         <h3 class="blue-header">HOURS OF SALE</h3>
@@ -333,68 +520,6 @@
           </app-field>
         </section>
       </div>
-
-      <!-- Contact Details -->
-      <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-      <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-        The contact LCRB should communicate with regarding the application. The contact must be authorized to
-        represent
-        the applicant and have the authority to bind the applicant.
-      </i>
-      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-        <i *ngIf="account?.businessType === 'SoleProprietor'">
-          The contact LCRB should communicate with regarding the application
-        </i>
-        <i *ngIf="account?.businessType === 'Society'">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="businessTypeIsPartnership()">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="account?.businessType !== 'PublicCorporation'">
-          The contact must be authorized to represent the applicant and have the authority to bind the applicant.
-        </i>
-        <i *ngIf="businessTypeIsPrivateCorporation()">
-          The contact LCRB should communicate with regarding the application. The contact must be authorized to
-          represent the applicant and have the authority to bind the applicant.
-        </i>
-      </div>
-      <address class="padded-section">
-
-        <app-field label="First Name" [required]="true"
-          [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
-          errorMessage="Please enter the business contact's first name">
-          <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-            formControlName="contactPersonFirstName">
-        </app-field>
-
-        <app-field label="Last Name" [required]="true"
-          [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
-          errorMessage="Please enter the business contact's last name">
-          <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-            formControlName="contactPersonLastName">
-        </app-field>
-
-        <app-field label="Title/ Position" [required]="false" [valid]="true">
-          <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
-        </app-field>
-
-        <app-field label="Phone Number (main)" [required]="true"
-          [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
-          errorMessage="Please enter the business contact's 10-digit phone number">
-          <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-            (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
-        </app-field>
-
-        <app-field label="Email" [required]="true"
-          [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
-          errorMessage="Please enter the business contact's email address">
-          <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-            formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
-        </app-field>
-      </address>
 
       <!-- Connections to non-medical -->
       <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
@@ -550,19 +675,74 @@
 
       <br>
 
+      <!-- Contact Details -->
+      <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+      <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+        The contact LCRB should communicate with regarding the application. The contact must be authorized to
+        represent
+        the applicant and have the authority to bind the applicant.
+      </i>
+      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+        <i *ngIf="account?.businessType === 'SoleProprietor'">
+          The contact LCRB should communicate with regarding the application
+        </i>
+        <i *ngIf="account?.businessType === 'Society'">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="businessTypeIsPartnership()">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="account?.businessType !== 'PublicCorporation'">
+          The contact must be authorized to represent the applicant and have the authority to bind the applicant.
+        </i>
+        <i *ngIf="businessTypeIsPrivateCorporation()">
+          The contact LCRB should communicate with regarding the application. The contact must be authorized to
+          represent the applicant and have the authority to bind the applicant.
+        </i>
+      </div>
+      <address class="padded-section">
+
+        <app-field label="First Name" [required]="true"
+          [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+          errorMessage="Please enter the business contact's first name">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+            formControlName="contactPersonFirstName">
+        </app-field>
+
+        <app-field label="Last Name" [required]="true"
+          [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+          errorMessage="Please enter the business contact's last name">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+            formControlName="contactPersonLastName">
+        </app-field>
+
+        <app-field label="Title/ Position" [required]="false" [valid]="true">
+          <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+        </app-field>
+
+        <app-field label="Phone Number (main)" [required]="true"
+          [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+          errorMessage="Please enter the business contact's 10-digit phone number">
+          <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+            (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+        </app-field>
+
+        <app-field label="Email" [required]="true"
+          [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+          errorMessage="Please enter the business contact's email address"
+          afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
+          <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+            formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+        </app-field>
+      </address>
+
       <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
         DECLARATIONS
       </h3>
       <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
-        <p appRemoveIfFeatureOn="Marketer">
-          The application must only be submitted by an individual with the authority to bind the applicant. The
-          branch
-          relies on the applicant to ensure that the individual who submits this application is authorized to do so.
-          Typically, an appropriate individual in a corporation will be a duly authorized signatory who will usually
-          be
-          an officer or, in some cases, a director
-        </p>
-        <section appRemoveIfFeatureOff="Marketer">
+        <section>
           <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
             The application must only be submitted by an individual with the authority to bind the applicant. The
             branch
@@ -717,9 +897,9 @@
   <div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <div [ngBusy]="busy"></div>
-      <h1>Add More files to the Application</h1>
+      <h1 *ngIf="application">Add More files to the Application</h1>
     </div>
-    <div class="application-wrapper">
+    <div *ngIf="application" class="application-wrapper">
       <label for="">Establishment Name</label>:
       <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
       <br>
@@ -837,12 +1017,17 @@
 
     <div [formGroup]="form" class="submitted-content"
       style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-      <app-field label="Is this application on behalf of an Indigenous Nation?" [valid]="true">
+      <app-field label="Is this application for an Indigenous Nation?" [valid]="true">
         <mat-button-toggle-group formControlName="applyAsIndigenousNation" aria-label="Font Style">
-            <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-            <mat-button-toggle [value]="false">No</mat-button-toggle>
+          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          <mat-button-toggle [value]="false">No</mat-button-toggle>
         </mat-button-toggle-group>
       </app-field>
+
+      <div *ngIf="form.get('applyAsIndigenousNation').value" style="margin-top: 10px; margin-bottom: 10px;">
+        Third party agents or consultants cannot apply on behalf of an Indigenous nation. The application and all
+        supporting documents will be connected to the BCeID used at log-in.
+      </div>
 
       <app-field label="Select the Indigenous nation"
         [valid]="form.get('indigenousNationId').valid || !form.get('indigenousNationId').touched"
@@ -859,11 +1044,13 @@
 </ng-template>
 
 <div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
+  <div [ngBusy]="busy"></div>
   <div class="row">
     <div class="col-md-7 col-sm-12">
       <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
     </div>
-    <div class="col-md-4 col-sm-12">
+    <div class="col-md-4 col-sm-12"
+      *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
       <h1>&nbsp;</h1>
       <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
     </div>
@@ -871,6 +1058,7 @@
 </div>
 
 <div appRemoveIfFeatureOn="IndigenousNation">
+  <div [ngBusy]="busy"></div>
   <ng-container *ngTemplateOutlet="applicationContent">
   </ng-container>
 </div>

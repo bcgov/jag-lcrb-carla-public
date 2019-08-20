@@ -352,7 +352,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationsForLicenceByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType" };
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_AssignedLicence", "adoxio_LicenceType", "adoxio_ApplicationTypeId" };
             IEnumerable<MicrosoftDynamicsCRMadoxioApplication> dynamicsApplicationList = null;
             if (string.IsNullOrEmpty(applicantId))
             {
@@ -423,6 +423,21 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             result = applicationTypes.FirstOrDefault();
 
+            return result;
+        }
+
+        public async static Task<MicrosoftDynamicsCRMadoxioApplicationtype> GetApplicationTypeById(this IDynamicsClient _dynamicsClient, string id)
+        {
+            MicrosoftDynamicsCRMadoxioApplicationtype result;
+            try
+            {
+                // fetch from Dynamics.
+                result = await _dynamicsClient.Applicationtypes.GetByKeyAsync(id);
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
             return result;
         }
 

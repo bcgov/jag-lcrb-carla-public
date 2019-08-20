@@ -268,6 +268,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // set the type to Retail Worker.
             contact.Customertypecode = 845280000;
 
+      
+            if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null && !_env.IsDevelopment())
+            {
+                // get additional information from the service card headers.
+                contact.CopyContactUserSettings(userSettings.NewContact);
+                worker.CopyValues(userSettings.NewWorker);                
+            }
+
             //Default the country to Canada
             if (string.IsNullOrEmpty(contact.Address1Country))
             {
@@ -278,13 +286,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 contact.Address2Country = "Canada";
             }
 
-            if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null && !_env.IsDevelopment())
-            {
-                // get additional information from the service card headers.
-                contact.CopyValues(userSettings.NewContact);
-                worker.CopyValues(userSettings.NewWorker);                
-            }
-            
+
             contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
 
             try

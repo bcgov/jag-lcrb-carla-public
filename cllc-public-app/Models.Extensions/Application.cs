@@ -83,10 +83,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioServicehourssundayopen = (int?)from.ServiceHoursSundayOpen;
             to.AdoxioServicehourssundayclose = (int?)from.ServiceHoursSundayClose;
 
-            to.AdoxioChecklistbrandingassessed = (int?)from.ChecklistBrandingAssessed;
-            to.AdoxioChecklistvalidinterestassessed = (int?)from.ChecklistValidInterestAssessed;
-            to.AdoxioChecklistfloorplanassessed = (int?)from.ChecklistFloorPlanAssessed;
-            to.AdoxioChecklistsitemapassessed = (int?)from.ChecklistSiteMapAssessed;
+            to.AdoxioChecklistbrandingassess = (int?)from.ChecklistBrandingAssess;
+            to.AdoxioChecklistvalidinterestassess = (int?)from.ChecklistValidInterestAssess;
+            to.AdoxioChecklistfloorplanassess = (int?)from.ChecklistFloorPlanAssess;
+            to.AdoxioChecklistsitemapassess = (int?)from.ChecklistSiteMapAssess;
             to.AdoxioChecklistestabrenderingsassessed = (int?)from.ChecklistEstabRenderAssessed;
             to.AdoxioChecklistsignageassessed = (int?)from.ChecklistSignageAssessed;
             to.AdoxioChecklistorgleadershipbuilt = (int?)from.ChecklistOrgLeadershipBuilt;
@@ -122,21 +122,27 @@ namespace Gov.Lclb.Cllb.Public.Models
             //}
         }
 
-        public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from)
+        public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from, bool copyAddress)
         {
-            to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
+            // copy establishment information
+            if (copyAddress)
+            {
+                to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
+                to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
+                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
+                to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
+            }
 
-
-            /*
-            to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
-            to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
-            to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
-            to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
             if (from.AdoxioEstablishment != null)
             {
+                to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
+                to.AdoxioEstablishmentemail = from.AdoxioEstablishment.AdoxioEmail;
+                to.AdoxioEstablishmentphone = from.AdoxioEstablishment.AdoxioPhone;
                 to.AdoxioEstablishmentparcelid = from.AdoxioEstablishment.AdoxioParcelid;
+                to.AdoxioIsoninland = from.AdoxioEstablishment.AdoxioIsoninland;
+                to.AdoxioPoliceJurisdictionId = from.AdoxioEstablishment.AdoxioPDJurisdiction;
+                to.AdoxioLocalgovindigenousnationid = from.AdoxioEstablishment.AdoxioLGIN;
             }
-            */
 
         }
 
@@ -209,17 +215,17 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ServiceHoursSaturdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayopen,
                 ServiceHoursSaturdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayclose,
 
-                ChecklistBrandingAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistbrandingassessed,
-                ChecklistValidInterestAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistvalidinterestassessed,
-                ChecklistFloorPlanAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistfloorplanassessed,
-                ChecklistSiteMapAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistsitemapassessed,
+                ChecklistBrandingAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistbrandingassess,
+                ChecklistValidInterestAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistvalidinterestassess,
+                ChecklistFloorPlanAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistfloorplanassess,
+                ChecklistSiteMapAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistsitemapassess,
                 ChecklistEstabRenderAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistestabrenderingsassessed,
                 ChecklistSignageAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistsignageassessed,
                 ChecklistOrgLeadershipBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistorgleadershipbuilt,
                 ChecklistKeyPersonnelBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistkeypersonnelbuilt,
                 ChecklistShareholdersBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistshareholdersbuilt,
                 ChecklistEstablishmentAddressAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistestablishmentaddressassessed,
-                
+
 
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
@@ -343,7 +349,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 JobNumber = dynamicsApplication.AdoxioJobnumber,
                 //get establishment name and address
                 EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
-                LicenceId = dynamicsApplication._adoxioAssignedlicenceValue
+                LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
+                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true)
             };
 
             // id
