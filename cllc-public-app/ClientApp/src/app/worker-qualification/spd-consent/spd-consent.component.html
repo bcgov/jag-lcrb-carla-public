@@ -1,5 +1,5 @@
 <div class="dashboard-spacing">
-  <div [ngBusy]="busy"></div>
+  <div *ngIf="!submitting" [ngBusy]="busy"></div>
   <div class="row">
     <div class="col-lg-7 col-sm-12">
       <div [formGroup]="form">
@@ -148,8 +148,8 @@
           Please make sure that you have filled out the entire form correctly.
         </section>
         <P>&nbsp;</P>
-
-        <span style="float: right;">
+        <section style="float: right; position: relative;">
+          <div [ngBusy]="busy"></div>
           <button class="btn btn-secondary" routerLink="/worker-qualification/dashboard">
             <i class="fa fa-save"></i>
             SAVE FOR LATER</button>
@@ -158,7 +158,7 @@
             TO STEP 1
           </button>
           <button style="margin-left: 10px;" (click)="goToNextStep()" class="btn btn-primary">SUBMIT & PAY</button>
-        </span>
+        </section>
       </div>
     </div>
     <div class="col-lg-4 col-sm-12" style="position: relative">
