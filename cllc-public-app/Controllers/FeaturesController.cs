@@ -26,9 +26,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetFeatureList()
         {
             var features = new List<string>();
-            if (!String.IsNullOrEmpty(_configuration["FEATURE_MARKETER"]))
+            if (!String.IsNullOrEmpty(_configuration["FEATURE_CRS_RENEWAL"]))
             {
-                features.Add("Marketer");
+                features.Add("CRS-Renewal");
             }
 
             if (!String.IsNullOrEmpty(_configuration["FEATURE_INDIGENOUS_NATION"]))
