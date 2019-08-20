@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Xunit;
-using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
+
 
 namespace SharePoint.Tests
 {
@@ -32,14 +32,8 @@ namespace SharePoint.Tests
                 .Build();
 
             serverAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
-            string odataUri = Configuration["SHAREPOINT_ODATA_URI"];
-            string webname = Configuration["SHAREPOINT_WEBNAME"];
-            string aadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
-            string clientId = Configuration["SHAREPOINT_CLIENT_ID"];
-            string certFileName = Configuration["SHAREPOINT_CERTIFICATE_FILENAME"];
-            string certPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
-            sharePointFileManager = new SharePointFileManager(serverAppIdUri, odataUri, webname, aadTenantId, clientId, certFileName, certPassword, null, null, serverAppIdUri);
+            sharePointFileManager = new SharePointFileManager(Configuration);
 
         }
 
@@ -80,8 +74,12 @@ namespace SharePoint.Tests
             string documentType = "Document Type";
             string fileName = documentType + "__" + "test-file-name" + rnd.Next() + ".txt";
             string folderName = "test-folder-name" + rnd.Next();
-            string path = "/" + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
-            string url = serverAppIdUri + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
+            string path = "/";
+            if (! string.IsNullOrEmpty (sharePointFileManager.WebName) )
+            {
+                path += $"{sharePointFileManager.WebName}/";
+            }
+            path += SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
             string contentType = "text/plain";
             string testData = "This is just a test.";
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
@@ -92,13 +90,15 @@ namespace SharePoint.Tests
 
             // get file details list in SP folder
 
-            List<FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
             // validate that file name uploaded and listed are the same
-            foreach (FileDetailsList fileDetails in fileDetailsList)
+            string serverRelativeUrl = null;
+            foreach (var fileDetails in fileDetailsList)
             {
                 Assert.Equal(fileName, fileDetails.Name);
+                serverRelativeUrl = fileDetails.ServerRelativeUrl;
             }
             
             // verify that we can download the same file.
@@ -109,11 +109,11 @@ namespace SharePoint.Tests
 
             // delete file from SP
 
-            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentListTitle, folderName, fileName);
+            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentUrlTitle, folderName, fileName);
 
             // delete folder from SP
 
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
         }
 
 
@@ -138,11 +138,11 @@ namespace SharePoint.Tests
 
             // get file details list in SP folder
 
-            List<FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
             // validate that file name uploaded and listed are the same
-            foreach (FileDetailsList fileDetails in fileDetailsList)
+            foreach (Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList fileDetails in fileDetailsList)
             {
                 Assert.Equal(fileName, fileDetails.Name);
             }
@@ -189,18 +189,17 @@ namespace SharePoint.Tests
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test-Folder-" + rnd.Next();
 
-            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
 
-            Assert.True(folder != null);
 
-            bool exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            bool exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
 
             Assert.True(exists);
 
 
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
 
-            exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
 
             Assert.False(exists);
         }
@@ -211,8 +210,8 @@ namespace SharePoint.Tests
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
-            Assert.True(folder != null);
+            await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            
             var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             Assert.True(files != null);
             Assert.True(files.Count == 0);
@@ -225,8 +224,8 @@ namespace SharePoint.Tests
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            object folder = await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
-            Assert.True(folder != null);
+            await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+
             string fileName = documentType + "__" + "test-file-name" + rnd.Next() + ".txt";
             string contentType = "text/plain";
 
@@ -239,11 +238,11 @@ namespace SharePoint.Tests
 
             // get file details list in SP folder
 
-            List<FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
             // validate that file name uploaded and listed are the same
-            foreach (FileDetailsList fileDetails in fileDetailsList)
+            foreach (var fileDetails in fileDetailsList)
             {
                 Assert.Equal(fileName, fileDetails.Name);
             }                        
