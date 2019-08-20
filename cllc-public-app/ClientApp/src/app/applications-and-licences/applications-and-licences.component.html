@@ -198,7 +198,7 @@
                 <span>Licence Number: </span> <i>{{item.licenseNumber}}</i> <br>
                 <span>Status #: {{item.status}} </span> <br>
                 <span>Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span> <br>
-                <a href="javascript: void(0);" (click)="startRenewal(item)"
+                <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
                   *ngIf="isAboutToExpire(item.expiryDate) && !item.relatedApplicationPaid">Renew Licence</a>
               </td>
               <td style="padding: 10px;">
