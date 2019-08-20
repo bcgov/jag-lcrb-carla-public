@@ -88,34 +88,6 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
                 {
                     return NotFound();
                 }
-                    
-                    // var workerRequest = new ();
-                    // try
-                    // {
-                    //     // Generate the application request
-                        
-                        
-                    // }
-                    // catch (ArgumentOutOfRangeException)
-                    // {
-                    //     return NotFound($"Worker {workerIdString} is not found.");
-                    // }
-                    // catch (Exception ex)
-                    // {
-                    //     _logger.LogError(ex.ToString());
-                    //     return BadRequest();
-                    // };
-
-                    // if (workerRequest == null)
-                    // {
-                        
-                    // }
-                    // else
-                    // {
-                    //     
-                    // }
-                // }
-                // return BadRequest();
             }
             else
             {
