@@ -11,19 +11,19 @@ export class NewsletterDataService extends DataService {
     super();
   }
 
-  getNewsletter(slug: any) {
+  getNewsletter(slug: string) {
     return this.http.get<Newsletter>('api/newsletter/' + slug, {
       headers: this.headers
     }).pipe(catchError(this.handleError));
   }
 
-  signup(slug: any, email: any) {
+  signup(slug: string, email: string) {
     return this.http.post<Newsletter>('api/newsletter/' + slug + '/subscribe?email=' + email, {
       headers: this.headers
     }).pipe(catchError(this.handleError));
   }
 
-  verifyCode(slug: any, code: any) {
+  verifyCode(slug: string, code: string) {
     return this.http.get('api/newsletter/' + slug + '/verifycode?code=' + code, {
       headers: this.headers
     }).pipe(catchError(this.handleError));
