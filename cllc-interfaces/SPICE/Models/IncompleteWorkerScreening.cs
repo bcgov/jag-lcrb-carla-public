@@ -11,24 +11,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class WorkerScreeningRequest
+    public partial class IncompleteWorkerScreening
     {
         /// <summary>
-        /// Initializes a new instance of the WorkerScreeningRequest class.
+        /// Initializes a new instance of the IncompleteWorkerScreening class.
         /// </summary>
-        public WorkerScreeningRequest()
+        public IncompleteWorkerScreening()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the WorkerScreeningRequest class.
+        /// Initializes a new instance of the IncompleteWorkerScreening class.
         /// </summary>
         /// <param name="selfDisclosure">Possible values include: 'Yes',
         /// 'No'</param>
         /// <param name="gender">Possible values include: 'Male', 'Female',
         /// 'Other'</param>
-        public WorkerScreeningRequest(string recordIdentifier = default(string), string name = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), GeneralYesNo? selfDisclosure = default(GeneralYesNo?), AdoxioGenderCode? gender = default(AdoxioGenderCode?), string birthplace = default(string), string bcIdCardNumber = default(string), string driversLicence = default(string), Contact contact = default(Contact), Address address = default(Address), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
+        public IncompleteWorkerScreening(string recordIdentifier = default(string), string name = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string selfDisclosure = default(string), string gender = default(string), string birthplace = default(string), string bcIdCardNumber = default(string), string driversLicence = default(string), Contact contact = default(Contact), Address address = default(Address), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
         {
             RecordIdentifier = recordIdentifier;
             Name = name;
@@ -69,13 +69,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// Gets or sets possible values include: 'Yes', 'No'
         /// </summary>
         [JsonProperty(PropertyName = "selfDisclosure")]
-        public GeneralYesNo? SelfDisclosure { get; set; }
+        public string SelfDisclosure { get; set; }
 
         /// <summary>
         /// Gets or sets possible values include: 'Male', 'Female', 'Other'
         /// </summary>
         [JsonProperty(PropertyName = "gender")]
-        public AdoxioGenderCode? Gender { get; set; }
+        public string Gender { get; set; }
 
         /// <summary>
         /// </summary>

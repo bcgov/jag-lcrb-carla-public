@@ -16,7 +16,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Rest;
-using SpdSync;
 using Splunk;
 using Splunk.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
@@ -239,7 +238,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {                    
-                    log.LogInformation("Creating Hangfire job for SPD Daily Worker Export ...");
+                    log.LogInformation("Creating Hangfire jobs for SPD Export ...");
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
                     // RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
