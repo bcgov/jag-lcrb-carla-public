@@ -13,7 +13,7 @@ export class PolicyDocumentDataService extends DataService {
     super();
   }
 
-  getPolicyDocument(slug: any) {
+  getPolicyDocument(slug: string) {
 
     return this.http.get<PolicyDocument>('api/policydocument/' + slug, {
       headers: this.headers

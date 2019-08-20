@@ -26,7 +26,7 @@ export class AliasDataService extends DataService {
    * Create a new alias in Dynamics
    * @param data - alias data
    */
-  createAlias(data: any) {
+  createAlias(data: Alias) {
     return this.http.post<Alias>('api/alias/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -35,7 +35,7 @@ export class AliasDataService extends DataService {
    * update a  alias in Dynamics
    * @param data - alias data
    */
-  updateAlias(data: any, id: string) {
+  updateAlias(data: Alias, id: string) {
     return this.http.put<Alias>(`api/alias/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }

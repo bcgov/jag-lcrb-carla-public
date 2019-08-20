@@ -30,7 +30,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   application: Application;
   busy: any;
   showValidationMessages: boolean;
-  validationMessages: any[];
+  validationMessages: string[];
 
 
   constructor(private store: Store<AppState>, private fb: FormBuilder,
@@ -52,6 +52,16 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     this.subscribeForData();
   }
 
+  reconfigureFormFields() {
+    if (this.account.isPrivateCorporation() || this.account.isPublicCorporation()) {
+      this.form.get('checklistShareholdersBuilt').clearValidators();
+      this.form.get('checklistShareholdersBuilt').reset();
+    } else {
+      this.form.get('checklistShareholdersBuilt').setValidators([Validators.required]);
+      this.form.get('checklistShareholdersBuilt').reset();
+    }
+  }
+
 
   subscribeForData() {
     this.store.select(state => state.currentAccountState.currentAccount)
@@ -59,6 +69,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
       .pipe(filter(s => !!s))
       .subscribe(account => {
         this.account = account;
+        this.reconfigureFormFields();
         this.legalEntityId = this.account.legalEntity.id;
       });
 
