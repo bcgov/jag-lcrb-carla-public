@@ -187,11 +187,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
 
-
-            
-
-            
-
             // enable Splunk logger
             if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]))
             {
@@ -200,7 +195,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 //Append Http Json logger
                 loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
             }
-
         }
 
         SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
@@ -247,26 +241,9 @@ namespace Gov.Lclb.Cllb.SpdSync
                 {                    
                     log.LogInformation("Creating Hangfire job for SPD Daily Worker Export ...");
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(1));
+                    // RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
 
-                }
-            }
-            catch (Exception e)
-            {
-                StringBuilder msg = new StringBuilder();
-                msg.AppendLine("Failed to setup Hangfire job.");
-                log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
-            }
-
-            try
-            {
-
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    log.LogInformation("Creating Hangfire job for Checking SharePoint...");
-                    //RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, loggerFactory, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null), Cron.Hourly);
-                    log.LogInformation("Hangfire Send Export job done.");
                 }
             }
             catch (Exception e)
