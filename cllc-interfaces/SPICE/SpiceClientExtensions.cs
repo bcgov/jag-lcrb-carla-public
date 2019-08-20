@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
             /// </param>
             /// <param name='requests'>
             /// </param>
-            public static void ReceiveApplicationScreenings(this ISpiceClient operations, IList<ApplicationScreeningRequest> requests = default(IList<ApplicationScreeningRequest>))
+            public static void ReceiveApplicationScreenings(this ISpiceClient operations, IList<IncompleteApplicationScreening> requests = default(IList<IncompleteApplicationScreening>))
             {
                 operations.ReceiveApplicationScreeningsAsync(requests).GetAwaiter().GetResult();
             }
@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ReceiveApplicationScreeningsAsync(this ISpiceClient operations, IList<ApplicationScreeningRequest> requests = default(IList<ApplicationScreeningRequest>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ReceiveApplicationScreeningsAsync(this ISpiceClient operations, IList<IncompleteApplicationScreening> requests = default(IList<IncompleteApplicationScreening>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.ReceiveApplicationScreeningsWithHttpMessagesAsync(requests, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
@@ -49,51 +49,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse ReceiveApplicationScreeningsWithHttpMessages(this ISpiceClient operations, IList<ApplicationScreeningRequest> requests = default(IList<ApplicationScreeningRequest>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse ReceiveApplicationScreeningsWithHttpMessages(this ISpiceClient operations, IList<IncompleteApplicationScreening> requests = default(IList<IncompleteApplicationScreening>), Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.ReceiveApplicationScreeningsWithHttpMessagesAsync(requests, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='applicationId'>
-            /// </param>
-            /// <param name='result'>
-            /// </param>
-            public static void SendApplicationScreeningResponse(this ISpiceClient operations, string applicationId, ApplicationScreeningResponse result = default(ApplicationScreeningResponse))
-            {
-                operations.SendApplicationScreeningResponseAsync(applicationId, result).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='applicationId'>
-            /// </param>
-            /// <param name='result'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task SendApplicationScreeningResponseAsync(this ISpiceClient operations, string applicationId, ApplicationScreeningResponse result = default(ApplicationScreeningResponse), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.SendApplicationScreeningResponseWithHttpMessagesAsync(applicationId, result, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='applicationId'>
-            /// </param>
-            /// <param name='result'>
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse SendApplicationScreeningResponseWithHttpMessages(this ISpiceClient operations, string applicationId, ApplicationScreeningResponse result = default(ApplicationScreeningResponse), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.SendApplicationScreeningResponseWithHttpMessagesAsync(applicationId, result, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -140,7 +98,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
             /// </param>
             /// <param name='requests'>
             /// </param>
-            public static void ReceiveWorkerScreenings(this ISpiceClient operations, IList<WorkerScreeningRequest> requests = default(IList<WorkerScreeningRequest>))
+            public static void ReceiveWorkerScreenings(this ISpiceClient operations, IList<IncompleteWorkerScreening> requests = default(IList<IncompleteWorkerScreening>))
             {
                 operations.ReceiveWorkerScreeningsAsync(requests).GetAwaiter().GetResult();
             }
@@ -153,7 +111,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ReceiveWorkerScreeningsAsync(this ISpiceClient operations, IList<WorkerScreeningRequest> requests = default(IList<WorkerScreeningRequest>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ReceiveWorkerScreeningsAsync(this ISpiceClient operations, IList<IncompleteWorkerScreening> requests = default(IList<IncompleteWorkerScreening>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.ReceiveWorkerScreeningsWithHttpMessagesAsync(requests, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
@@ -166,51 +124,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse ReceiveWorkerScreeningsWithHttpMessages(this ISpiceClient operations, IList<WorkerScreeningRequest> requests = default(IList<WorkerScreeningRequest>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse ReceiveWorkerScreeningsWithHttpMessages(this ISpiceClient operations, IList<IncompleteWorkerScreening> requests = default(IList<IncompleteWorkerScreening>), Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.ReceiveWorkerScreeningsWithHttpMessagesAsync(requests, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='workerId'>
-            /// </param>
-            /// <param name='result'>
-            /// </param>
-            public static void SendWorkerScreeningResults(this ISpiceClient operations, string workerId, WorkerScreeningResponse result = default(WorkerScreeningResponse))
-            {
-                operations.SendWorkerScreeningResultsAsync(workerId, result).GetAwaiter().GetResult();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='workerId'>
-            /// </param>
-            /// <param name='result'>
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task SendWorkerScreeningResultsAsync(this ISpiceClient operations, string workerId, WorkerScreeningResponse result = default(WorkerScreeningResponse), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.SendWorkerScreeningResultsWithHttpMessagesAsync(workerId, result, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='workerId'>
-            /// </param>
-            /// <param name='result'>
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse SendWorkerScreeningResultsWithHttpMessages(this ISpiceClient operations, string workerId, WorkerScreeningResponse result = default(WorkerScreeningResponse), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.SendWorkerScreeningResultsWithHttpMessagesAsync(workerId, result, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
