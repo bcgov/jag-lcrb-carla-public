@@ -29,7 +29,6 @@ export class ConnectionToProducersComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   savedFormData: any = {};
 
-  operatingForMoreThanOneYear: any;
   form: any;
   _tiedHouseData: TiedHouseConnection;
   @Output() value: EventEmitter<TiedHouseConnection> = new EventEmitter<TiedHouseConnection>();

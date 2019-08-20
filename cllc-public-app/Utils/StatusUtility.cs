@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
             if (application.AdoxioAssignedLicence != null && shownStatus == "Approved")
             {
                 shownStatus = STATUS_ACTIVE;
-                if (application.AdoxioLicencefeeinvoicepaid != true && application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                if (application.AdoxioLicencefeeinvoicepaid != true && application.AdoxioLicenceType != null && application.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store")
                 {
                     shownStatus = STATUS_PAYMENT_REQUIRED;
                 }
@@ -81,7 +81,9 @@ namespace Gov.Lclb.Cllb.Public.Utils
 
         public static string GetLicenceStatus(MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications)
         {
-            var application = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
+            var application = applications
+                .OrderByDescending(app => app.AdoxioDatelicenceapproved)
+                .Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
             if (application == null)
             {
                 return null;
@@ -93,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
             if (licence != null && status == LicenceStatusCodes.Active)
             {
                 shownStatus = STATUS_ACTIVE;
-                if (application.AdoxioLicencefeeinvoicepaid != true && licence.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "Cannabis Retail Store")
+                if (application.AdoxioLicencefeeinvoicepaid != true && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store")
                 {
                     shownStatus = STATUS_PAYMENT_REQUIRED;
                 }
