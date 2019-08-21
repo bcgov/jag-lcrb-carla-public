@@ -6,7 +6,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace Gov.Lclb.Cllb.SpdSync.Controllers
+namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
 {
     [Route("api/authentication")]
     public class AuthenticationController : Controller

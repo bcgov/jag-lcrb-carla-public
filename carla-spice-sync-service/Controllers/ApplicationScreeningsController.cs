@@ -3,14 +3,13 @@ using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using SpdSync;
 using System.Collections.Generic;
-using SpdSync.models;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using System;
+using Gov.Lclb.Cllb.Interfaces.Spice.Models;
+using Gov.Lclb.Cllb.CarlaSpiceSync;
 
-namespace Gov.Lclb.Cllb.SpdSync.Controllers
+namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
@@ -36,7 +35,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpPost("receive")]
-        public ActionResult ReceiveApplicationScreeningResult([FromBody] List<ApplicationScreeningResponse> results)
+        public ActionResult ReceiveApplicationScreeningResult([FromBody] List<CompletedApplicationScreening> results)
         {
             // Process the updates received from the SPICE system.
             BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
@@ -57,7 +56,7 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             {
                 if (Guid.TryParse(applicationIdString, out Guid applicationId))
                 {
-                    var applicationRequest = new Gov.Lclb.Cllb.Interfaces.Spice.Models.ApplicationScreeningRequest();
+                    var applicationRequest = new IncompleteApplicationScreening();
                     try
                     {
                         // Generate the application request
