@@ -8,8 +8,8 @@ rem 2.2 autorest --reset
 
 echo Updating meta data
 
-curl https://raw.githubusercontent.com/bcgov/api-specs/master/geocoder/geocoder-combined.json > geocoder.json
+rem curl https://raw.githubusercontent.com/bcgov/api-specs/master/geocoder/geocoder-combined.json > geocoder.json
 
 echo Updating client
 
-autorest --verbose --input-file=geocoder.json --output-folder=.  --csharp --use-datetimeoffset --sync-methods=all --generate-empty-classes --override-client-name=GeocoderClient  --namespace=Gov.Lclb.Cllb.Interfaces.GeoCoder --add-credentials --debug
+autorest --verbose --debug
