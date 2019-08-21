@@ -11,31 +11,32 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
     using System.Collections.Generic;
     using System.Linq;
 
-    public partial class ApplicationScreeningRequest
+    public partial class IncompleteApplicationScreening
     {
         /// <summary>
-        /// Initializes a new instance of the ApplicationScreeningRequest
+        /// Initializes a new instance of the IncompleteApplicationScreening
         /// class.
         /// </summary>
-        public ApplicationScreeningRequest()
+        public IncompleteApplicationScreening()
         {
             CustomInit();
         }
 
         /// <summary>
-        /// Initializes a new instance of the ApplicationScreeningRequest
+        /// Initializes a new instance of the IncompleteApplicationScreening
         /// class.
         /// </summary>
         /// <param name="applicantType">Possible values include: 'Cannabis',
         /// 'ESS'</param>
-        public ApplicationScreeningRequest(SpiceApplicantType? applicantType = default(SpiceApplicantType?), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string bCeIDNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        public IncompleteApplicationScreening(string applicantType = default(string), string applicationType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string businessNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
         {
             ApplicantType = applicantType;
+            ApplicationType = applicationType;
             UrgentPriority = urgentPriority;
             Name = name;
             RecordIdentifier = recordIdentifier;
             ApplicantName = applicantName;
-            BCeIDNumber = bCeIDNumber;
+            BusinessNumber = businessNumber;
             ApplicantAccount = applicantAccount;
             BusinessAddress = businessAddress;
             Establishment = establishment;
@@ -55,7 +56,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// Gets or sets possible values include: 'Cannabis', 'ESS'
         /// </summary>
         [JsonProperty(PropertyName = "applicantType")]
-        public SpiceApplicantType? ApplicantType { get; set; }
+        public string ApplicantType { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "applicationType")]
+        public string ApplicationType { get; set; }
 
         /// <summary>
         /// </summary>
@@ -79,8 +85,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "bCeIDNumber")]
-        public string BCeIDNumber { get; set; }
+        [JsonProperty(PropertyName = "businessNumber")]
+        public string BusinessNumber { get; set; }
 
         /// <summary>
         /// </summary>
