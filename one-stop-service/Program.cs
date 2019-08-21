@@ -11,7 +11,7 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).UseUrls("http://localhost:5009").Build().Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
