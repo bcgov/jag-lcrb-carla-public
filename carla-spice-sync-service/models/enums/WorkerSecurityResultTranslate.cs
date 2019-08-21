@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CarlaSpiceSync.models
+﻿namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public static class WorkerSecurityScreeningResultTranslate
     {
