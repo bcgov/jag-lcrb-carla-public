@@ -4,17 +4,14 @@ using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System;
-using CarlaSpiceSync.models;
-using Hangfire.Server;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
 using Gov.Lclb.Cllb.Interfaces;
 using System.Linq;
 
-namespace Gov.Lclb.Cllb.SpdSync.Controllers
+namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
