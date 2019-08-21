@@ -58,5 +58,37 @@ export class Account {
     const isPublicCorp = ['PublicCorporation'].indexOf(this.businessType) !== -1;
     return isPublicCorp;
   }
+
+  getBusinessTypeName() {
+    if (!this.businessType) {
+      return '';
+    }
+    let name = '';
+    switch (this.businessType) {
+      case 'GeneralPartnership':
+      case 'LimitedPartnership"':
+      case 'LimitedLiabilityPartnership':
+        name = 'Partnership';
+        break;
+      case 'SoleProprietor':
+        name = 'Sole Proprietor';
+        break;
+      case 'IndigenousNation':
+        name = 'Indigenous Nation';
+        break;
+      case 'PublicCorporation':
+          name = 'Public Corporation';
+          break;
+      case 'PrivateCorporation':
+      case 'UnlimitedLiabilityCorporation':
+      case 'LimitedLiabilityCorporation':
+        name = 'Private Corporation';
+        break;
+      default:
+        name = this.businessType;
+        break;
+    }
+    return name;
+  }
 }
 
