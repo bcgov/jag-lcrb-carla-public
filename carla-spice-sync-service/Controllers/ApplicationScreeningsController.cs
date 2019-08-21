@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         {
             // Process the updates received from the SPICE system.
             BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
-            _logger.LogInformation("Started receive Application Screenings import job");
+            _logger.LogInformation("Started receive completed Application Screening job");
             return Ok();
         }
 
@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                         // Generate the application request
                         applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
                     }
-                    catch (System.ArgumentOutOfRangeException)
+                    catch (ArgumentOutOfRangeException)
                     {
                         return NotFound($"Application {applicationId} is not found.");
                     }
@@ -70,30 +70,23 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     {
                         _logger.LogError(ex.ToString());
                         return BadRequest();
-                    };
+                    }
 
                     if (applicationRequest == null)
                     {
                         return NotFound($"Application {applicationId} is not found.");
                     }
-                    else
-                    {
-                        var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
+                    
+                    var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
 
-                        if (result)
-                        {
-                            return Ok(applicationRequest);
-                        }
+                    if (result)
+                    {
+                        return Ok(applicationRequest);
                     }
                 }
                 return BadRequest();
             }
-            else
-            {
-                return Unauthorized();
-            }
-
-            
+            return Unauthorized();
         }
     }
 }
