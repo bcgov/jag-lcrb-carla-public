@@ -1,0 +1,11 @@
+<div [ngClass]="{ 'less': !showMore, 'more': showMore}">
+  <ng-content select="[less]"></ng-content>
+  <ng-content select="[more]"></ng-content>
+
+  <div *ngIf="!showMore" class="fade">
+  </div>
+</div>
+<div style="text-align: center;">
+  <a *ngIf="showMore" href="javascript: void(0);" (click)="toggleContent()">Show less</a>
+  <a  *ngIf="!showMore" href="javascript: void(0);" (click)="toggleContent()">Show more</a>
+</div>
