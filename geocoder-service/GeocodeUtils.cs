@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.GeoCoder;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire;
 using Hangfire.Console;
@@ -25,6 +26,8 @@ namespace Gov.Lclb.Cllb.Geocoder
         
         private IDynamicsClient _dynamics;
 
+        private IGeocoderClient _geocoder;
+
         private ILogger _logger;
 
         public GeocodeUtils(IConfiguration Configuration, ILogger logger)
@@ -32,7 +35,7 @@ namespace Gov.Lclb.Cllb.Geocoder
             this.Configuration = Configuration;
             _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
             _logger = logger;
-            GEOCODE_API_BASE_URL = Configuration["GEOCODE_API_URL"];
+            _geocoder = GeocoderSetupUtil.SetupGeocoder(Configuration);
         }
 
         /// <summary>
@@ -47,6 +50,15 @@ namespace Gov.Lclb.Cllb.Geocoder
             }
 
             var establishment = _dynamics.GetEstablishmentById(establishmentId);
+
+            if (establishment != null)
+            {
+                
+                string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
+                // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
+                _geocoder.GeoCoderAPI.Sites(outputFormat: "kml", addressString: address);
+
+            }
         }
 
         /// <summary>
