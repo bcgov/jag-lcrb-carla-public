@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace CarlaSpiceSync.models
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class CompletedApplicationScreening
     {

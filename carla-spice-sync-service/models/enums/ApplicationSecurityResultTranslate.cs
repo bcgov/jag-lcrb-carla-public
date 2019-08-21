@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.Serialization;
-
-namespace CarlaSpiceSync.models
+﻿namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public static class ApplicationSecurityScreeningResultTranslate
     {

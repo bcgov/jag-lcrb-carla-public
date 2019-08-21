@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 
-namespace Gov.Lclb.Cllb.SpdSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public static class DynamicsUtil
     {

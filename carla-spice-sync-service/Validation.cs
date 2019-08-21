@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using CarlaSpiceSync.models;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Interfaces.Spice.Models;
 
-namespace CarlaSpiceSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class Validation
     {
@@ -32,7 +30,7 @@ namespace CarlaSpiceSync
         /// </summary>
         /// <returns><c>true</c>, if associate consent was validated, <c>false</c> otherwise.</returns>
         /// <param name="associates">Associates.</param>
-        public static bool ValidateAssociateConsent(IDynamicsClient dynamicsClient, List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> associates)
+        public static bool ValidateAssociateConsent(IDynamicsClient dynamicsClient, List<LegalEntity> associates)
         {
             /* Validate consent for all associates */
             bool consentValidated = true;
@@ -55,7 +53,7 @@ namespace CarlaSpiceSync
                 }
                 else
                 {
-                    if (!ValidateAssociateConsent(dynamicsClient, (List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>)entity.Account.Associates))
+                    if (!ValidateAssociateConsent(dynamicsClient, (List<LegalEntity>)entity.Account.Associates))
                     {
                         consentValidated = false;
                     }
