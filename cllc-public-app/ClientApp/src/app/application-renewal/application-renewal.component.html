@@ -21,7 +21,7 @@
             <p>Please review the two following establishment name related questions and identify whether you have made
               any unreported changes.</p>
 
-            <mat-card>
+            <mat-card class="mat-elevation-z8">
               <app-field
                 [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
                 [required]="true"
@@ -34,7 +34,7 @@
 
               <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true"
                 [valid]="!form.get('checklistBrandingAssess')?.touched || form.get('checklistBrandingAssess')?.valid">
-                <label>Does the establishment still have the same name?</label> <br>
+                <label>Have you made an unreported change to your store’s name in the past 12 months?</label> <br>
                 <mat-button-toggle-group aria-label="Font Style" formControlName="checklistBrandingAssess">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="Changed">No</mat-button-toggle>
@@ -46,14 +46,10 @@
               </div>
             </mat-card>
             <p></p>
-            <mat-card>
+            <mat-card class="mat-elevation-z8">
               <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true"
                 [valid]="!form.get('checklistSignageAssessed')?.touched || form.get('checklistSignageAssessed')?.valid">
-                <label>Does the establishment’s signage still comply with the federal
-                  <a href="https://laws-lois.justice.gc.ca/eng/acts/c-24.5/FullText.html" target="blank">Cannabis
-                    Act</a> and
-                  <a href="https://laws-lois.justice.gc.ca/eng/regulations/SOR-2018-144/FullText.html"
-                    target="blank"></a>Cannabis Regulations? </label> <br>
+                <label>Have you updated the store’s signage or branding in the past 12 months?</label> <br>
                 <mat-button-toggle-group formControlName="checklistSignageAssessed" aria-label="Font Style">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="Changed">No</mat-button-toggle>
@@ -83,7 +79,7 @@
           the Cannabis Control and Licensing Act, and licensees may be subject to legal penalties.
         </p>
         <div *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-          <mat-card>
+          <mat-card class="mat-elevation-z8">
             <address formGroupName="assignedLicence" class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                 <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
@@ -135,8 +131,9 @@
                 </ul>
               </div>
             </div>
-            <app-field label="Is the establishment still at the above location?" errorMessage="Please select a value"
-              [showChevrons]="false" [required]="true"
+            <app-field
+              label="Have you sold the property or transferred the lease associated with this cannabis retail store licence within the last 12 months?"
+              errorMessage="Please select a value" [showChevrons]="false" [required]="true"
               [valid]="!form.get('checklistEstablishmentAddressAssessed')?.touched || form.get('checklistEstablishmentAddressAssessed')?.valid">
               <mat-button-toggle-group aria-label="Font Style" formControlName="checklistEstablishmentAddressAssessed">
                 <mat-button-toggle value="Yes">Yes</mat-button-toggle>
@@ -175,7 +172,7 @@
           </div>
         </section>
 
-        <mat-card>
+        <mat-card class="mat-elevation-z8">
           <app-field label="Do you still own or have an executed lease or sub-lease for the above location?"
             errorMessage="Please select a value" [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistValidInterestAssess')?.touched || form.get('checklistValidInterestAssess')?.valid">
@@ -270,10 +267,10 @@
         <p>
           Please confirm that there have been no unreported structural changes to your cannabis retail store:
         </p>
-        <mat-card style="margin-bottom: 10px;">
+        <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
 
-          <app-field label="There have been no changes to the floor plan." errorMessage="Please select a value"
-            [showChevrons]="false" [required]="true"
+          <app-field label="Have you made any unreported changes to the floor plan within the past 12 months?"
+            errorMessage="Please select a value" [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistFloorPlanAssess')?.touched || form.get('checklistFloorPlanAssess')?.valid">
             <mat-button-toggle-group formControlName="checklistFloorPlanAssess" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
@@ -287,8 +284,8 @@
           </div>
         </mat-card>
 
-        <mat-card style="margin-bottom: 10px;">
-          <app-field label="There have been no changes to the site plan." errorMessage="Please select a value"
+        <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+          <app-field label="Have you made any unreported changes to the site map within the past 12 months?" errorMessage="Please select a value"
             [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistSiteMapAssess')?.touched || form.get('checklistSiteMapAssess')?.valid">
             <mat-button-toggle-group formControlName="checklistSiteMapAssess" aria-label="Font Style">
@@ -303,8 +300,8 @@
           </div>
         </mat-card>
 
-        <mat-card>
-          <app-field label="There have been no changes to the establishment’s exterior."
+        <mat-card class="mat-elevation-z8">
+          <app-field label="Have you made any unreported changes to the establishment’s exterior within the past 12 months?"
             errorMessage="Please select a value" [showChevrons]="false" [required]="true"
             [valid]="!form.get('checklistEstabRenderAssessed')?.touched || form.get('checklistEstabRenderAssessed')?.valid">
             <mat-button-toggle-group class="mat-elevation-2" formControlName="checklistEstabRenderAssessed"
