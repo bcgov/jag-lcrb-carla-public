@@ -9,4 +9,3 @@ TOB_APP_URL=https://test.orgbook.gov.bc.ca
 AUTO_REGISTER_DID=1
 APPLICATION_DOMAIN=lcrb-von-agent-test.pathfinder.gov.bc.ca
 APPLICATION_URL=https://lcrb-von-agent-test.pathfinder.gov.bc.ca/
-APPLICATION_URL=https://lcrb-von-agent-test.pathfinder.gov.bc.ca/
