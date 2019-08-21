@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gov.Lclb.Cllb.SpdSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public static class JwtChecker
     {
