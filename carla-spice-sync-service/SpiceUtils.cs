@@ -261,8 +261,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             return false;
         }
 
-        public async Task<IncompleteWorkerScreening> GenerateWorkerScreeningRequest(MicrosoftDynamicsCRMadoxioWorker worker)
+        public async Task<IncompleteWorkerScreening> GenerateWorkerScreeningRequest(Guid workerId)
         {
+            string filter = $"adoxio_workerid eq {workerId}";
+            var fields = new List<string> { "adoxio_ContactId" };
+            MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value[0];
             /* Create request */
             IncompleteWorkerScreening request = new IncompleteWorkerScreening();
 
@@ -701,7 +704,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 foreach (var worker in workers.Value)
                 {
-                    IncompleteWorkerScreening screeningRequest = await GenerateWorkerScreeningRequest(worker);
+                    IncompleteWorkerScreening screeningRequest = await GenerateWorkerScreeningRequest(Guid.Parse(worker.AdoxioWorkerid));
                     var response = await SendWorkerScreeningRequest(screeningRequest);
                     if (response)
                     {
