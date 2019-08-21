@@ -25,7 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: ApiController]
-namespace Gov.Lclb.Cllb.SpdSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class Startup
     {
