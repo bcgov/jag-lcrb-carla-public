@@ -19,14 +19,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
     public class WorkerScreeningsController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
         private readonly ILoggerFactory _loggerFactory;
         private readonly SpiceUtils _spiceUtils;
 
-        public WorkerScreeningsController (IConfiguration configuration, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public WorkerScreeningsController (IConfiguration configuration, ILoggerFactory loggerFactory)
         {
-            _dynamicsClient = dynamicsClient;
             Configuration = configuration;
             _loggerFactory = loggerFactory;
             _logger = loggerFactory.CreateLogger(typeof(WorkerScreeningsController));
@@ -43,7 +41,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         {
             // Process the updates received from the SPICE system.
             BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveWorkerImportJob(null, results));
-            _logger.LogInformation("Started receive worker screening results job");
+            _logger.LogInformation("Started receive completed worker screening job");
             return Ok();
         }       
 
@@ -53,43 +51,41 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         /// <returns></returns>
         [HttpPost("send/{workerIdString}")]
         [AllowAnonymous]
-        public async Task<ActionResult> SendWorkerScreeningRequest(string workerId, string bearer)
+        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString, string bearer)
         {
             if (JwtChecker.Check(bearer, Configuration))
             {
-                if (string.IsNullOrEmpty(workerId))
+                if (Guid.TryParse(workerIdString, out Guid workerId))
                 {
-                    return NotFound();
-                }
-                
-                // Get the worker from dynamics
-                Guid id = Guid.Parse(workerId);
-                string filter = $"adoxio_workerid eq {id}";
-                var fields = new List<string> { "adoxio_ContactId" };
-                MicrosoftDynamicsCRMadoxioWorker worker = _dynamicsClient.Workers.Get(filter: filter, expand: fields).Value.FirstOrDefault();
+                    var workerRequest = new IncompleteWorkerScreening();
+                    try
+                    {
+                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
+                    }
+                    catch (System.ArgumentOutOfRangeException)
+                    {
+                        return NotFound($"Worker {workerId} is not found.");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex.ToString());
+                        return BadRequest();
+                    }
 
-                if (worker != null)
-                {
-                    // Form the request
-                    IncompleteWorkerScreening workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(worker);
-                    // Send the request
+                    if (workerRequest == null)
+                    {
+                        return NotFound($"Worker {workerId} is not found.");
+                    }
+                   
                     var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
-
                     if (result)
                     {
                         return Ok(workerRequest);
                     }
-                    return BadRequest();
                 }
-                else
-                {
-                    return NotFound();
-                }
+                return BadRequest();
             }
-            else
-            {
-                return Unauthorized();
-            }
+            return Unauthorized();
         }
     }
 }
