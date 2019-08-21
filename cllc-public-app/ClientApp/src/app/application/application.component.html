@@ -205,20 +205,27 @@
         <label for="">Photos or renderings of the store's signage</label>
         <br>
         <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
-          <p>
-            The signage submitted must show the name of the store and all words, images and symbols used in the signage.
-          </p>
-          <p>
-            Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
-            green cross).
-          </p>
-          <p>
-            Signage must not imply an association with another business (other than another non-medical cannabis retail
-            store).
-          </p>
-          <p>
-            If submitting renderings, renderings may be either printed or hand-drawn (as long as they are legible)
-          </p>
+          <app-more-less-content>
+            <span less>
+              The signage submitted must show the name of the store and all words, images and symbols used in the
+              signage.
+            </span>
+            <div more>
+              <br>
+              <p>
+                Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
+                green cross).
+              </p>
+              <p>
+                Signage must not imply an association with another business (other than another non-medical cannabis
+                retail
+                store).
+              </p>
+              <p>
+                If submitting renderings, renderings may be either printed or hand-drawn (as long as they are legible)
+              </p>
+            </div>
+          </app-more-less-content>
         </section>
 
         <p *ngIf="application?.applicationType?.signage === FormControlState.Reaonly">The below photos or renderings of
@@ -240,24 +247,29 @@
         <label for="">Offer or Proof of Ownership, Lease or Sub-Lease</label>
         <br>
         <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
-          <p>
-            If the applicant currently owns or leases the proposed store location, submit Option 1.
-          </p>
-          <p>
-            If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
-          </p>
-          <p>
-            Leases or other arrangements must not expire for at least 12 months from the date the licence is issued
-          </p>
-          <p>
-            Option 1: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store location.
-          </p>
-          <p>
-            Option 2: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store location. Note,
-          </p>
-          <p>
-            Option 1 will be required before the licence is issued.
-          </p>
+          <app-more-less-content>
+            <span less>
+              If the applicant currently owns or leases the proposed store location, submit Option 1.
+            </span>
+            <div more>
+              <br>
+              <p>
+                If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
+              </p>
+              <p>
+                Leases or other arrangements must not expire for at least 12 months from the date the licence is issued
+              </p>
+              <p>
+                Option 1: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store location.
+              </p>
+              <p>
+                Option 2: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store location. Note,
+              </p>
+              <p>
+                Option 1 will be required before the licence is issued.
+              </p>
+            </div>
+          </app-more-less-content>
         </section>
 
         <p *ngIf="application?.applicationType?.validInterest === FormControlState.Reaonly">
@@ -280,24 +292,38 @@
         <label for="">Floor Plan</label>
         <br>
         <section *ngIf="application?.applicationType?.floorPlan === FormControlState.Show">
-          <p>
-            If the applicant currently owns or leases the proposed store location, submit Option 1.
-          </p>
-          <p>
-            If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
-          </p>
-          <p>
-            Leases or other arrangements must not expire for at least 12 months from the date the licence is issued
-          </p>
-          <p>
-            Option 1: Submit a copy of the lease, sub-lease, or proof of ownership of the proposed store location.
-          </p>
-          <p>
-            Option 2: Submit a copy of the offer to purchase, lease, or sub-lease the proposed store location. Note,
-          </p>
-          <p>
-            Option 1 will be required before the licence is issued.
-          </p>
+          <app-more-less-content>
+            <span less>
+              A floor plan is a document, showing a view from above, of the dimensions and relationships between rooms,
+              spaces and other physical features
+            </span>
+            <span more>
+              <span>
+                on each floor of a structure. The document must measure at least 8.5"" x 11"" (standard letter size). A
+                floor plan for each level of the establishment
+                must be submitted if the proposed establishment has more than one level. Either a hand-drawn or
+                computer-generated plan is acceptable, as
+                long as the plan is drawn to scale and is clear and legible. A floor plan must not be submitted on graph
+                paper or paper with gridlines.
+              </span>
+              <br>
+              <p>
+              </p>
+              The floor plan must be submitted at the time of application and it
+              must identify the proposed non-medical cannabis retail area(s) plus
+              the following interior features of the establishment:
+              <ul>
+                <li>Each room or area labeled with its intended use and dimensions;</li>
+                <li>Washrooms, stairs and elevators;</li>
+                <li>Entrances and exits (including those used by staff only);</li>
+                <li>Cannabis storage areas;</li>
+                <li>Sales counter and cash register locations;</li>
+                <li>Furniture and fixture layout (e.g. shelves, display cases); and</li>
+                <li>Identify the security system and other physical security features that secure the store.</li>
+              </ul>
+            </span>
+          </app-more-less-content>
+
         </section>
         <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
           The below offer or proof of ownership, lease or sub-lease is on file.
@@ -319,62 +345,67 @@
         <label for="">Site Plan</label>
         <br>
         <div *ngIf="application?.applicationType?.sitePlan === FormControlState.Show">
-          <p>
-            A site plan is a document showing any existing and proposed building footprints, pathways of travel,
-            parking,
-            and landscaping elements,
-            and the surrounding area. The document must measure at least 8.5" x 11" (standard letter size). Either a
-            hand-drawn or computer-generated
-            plan is acceptable, as long as the plan is drawn to scale and is clear and legible. A site plan must not be
-            submitted on graph paper or paper
-            with gridlines.
-          </p>
-          <p>
-            The site plan must include the proposed store footprint and a representation of any interior or exterior
-            spaces surrounding the store, including:
-          </p>
-          <ul>
-            <li>The location of any other buildings/businesses on the same site, each building footprint, type of
-              businesses
-              (e.g. gas station, office building) and building names, and their entrances and exits</li>
-            <li>A description of the type of separation proposed (for any adjoining businesses)</li>
-            <li>Road access and exits, including any relevant street names</li>
-            <li>Parking lots.</li>
-          </ul>
-          <p>
-            If the proposed store is located inside a building with other businesses
-            (e.g. a mall), submit two site plans:
-          </p>
-          <p>
-            1) One site plan showing location of any other buildings/businesses on the same site, including:
-          </p>
-          <ul>
-            <li>Each building footprint, building name and a list of businesses operating inside the building</li>
-            <li>Road access and exits, including any relevant street names, and</li>
-            <li>Parking lots</li>
-          </ul>
-          <p>
-            2) A second site plan showing the location of the proposed store
-            inside the building’s footprint:
-          </p>
-          <ul>
-            <li>All entrances and exits for the building</li>
-            <li>The location, name and type of businesses operating inside the building</li>
-            <li>The store footprint with all entrances and exits for the store, and</li>
-            <li>A description of the type of separation proposed for any business adjoining the proposed store</li>
-          </ul>
-          <p>
-            Full height walls are required for separation and no connecting doors between the cannabis retail store and
-            the neighbouring business are permitted.
-          </p>
-          <p>
-            The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store or
-            grocery
-            store) provided each business has its own controlled entrance within the vestibule. The cannabis retail
-            store
-            cannot share a vestibule with a business that would be contrary to public interest (i.e. business aimed at
-            minors or a liquor consumption business).
-          </p>
+          <app-more-less-content>
+            <span less> A site plan is a document showing any existing and proposed building footprints, pathways of
+              travel,
+              parking, and landscaping elements, and the surrounding area. The document must measure at least 8.5" x
+              11"</span>
+            <span more>
+              <span>
+                (standard letter size). Either a hand-drawn or computer-generated plan is acceptable, as long as the
+                plan is drawn to scale and is clear and legible. A site plan must not be submitted on graph paper or
+                paper with gridlines.
+              </span>
+              <p>
+                The site plan must include the proposed store footprint and a representation of any interior or exterior
+                spaces surrounding the store, including:
+              </p>
+              <ul>
+                <li>The location of any other buildings/businesses on the same site, each building footprint, type of
+                  businesses
+                  (e.g. gas station, office building) and building names, and their entrances and exits</li>
+                <li>A description of the type of separation proposed (for any adjoining businesses)</li>
+                <li>Road access and exits, including any relevant street names</li>
+                <li>Parking lots.</li>
+              </ul>
+              <p>
+                If the proposed store is located inside a building with other businesses
+                (e.g. a mall), submit two site plans:
+              </p>
+              <p>
+                1) One site plan showing location of any other buildings/businesses on the same site, including:
+              </p>
+              <ul>
+                <li>Each building footprint, building name and a list of businesses operating inside the building</li>
+                <li>Road access and exits, including any relevant street names, and</li>
+                <li>Parking lots</li>
+              </ul>
+              <p>
+                2) A second site plan showing the location of the proposed store
+                inside the building’s footprint:
+              </p>
+              <ul>
+                <li>All entrances and exits for the building</li>
+                <li>The location, name and type of businesses operating inside the building</li>
+                <li>The store footprint with all entrances and exits for the store, and</li>
+                <li>A description of the type of separation proposed for any business adjoining the proposed store</li>
+              </ul>
+              <p>
+                Full height walls are required for separation and no connecting doors between the cannabis retail store
+                and
+                the neighbouring business are permitted.
+              </p>
+              <p>
+                The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store or
+                grocery
+                store) provided each business has its own controlled entrance within the vestibule. The cannabis retail
+                store
+                cannot share a vestibule with a business that would be contrary to public interest (i.e. business aimed
+                at
+                minors or a liquor consumption business).
+              </p>
+            </span>
+          </app-more-less-content>
         </div>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."

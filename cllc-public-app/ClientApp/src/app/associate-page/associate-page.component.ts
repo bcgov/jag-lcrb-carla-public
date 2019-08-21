@@ -47,7 +47,14 @@ export class AssociatePageComponent extends FormBase implements OnInit {
       // noOrgStructureChange: [''],
       checklistOrgLeadershipBuilt: ['', Validators.required],
       checklistKeyPersonnelBuilt: ['', Validators.required],
-      checklistShareholdersBuilt: ['', Validators.required]
+      checklistShareholdersBuilt: ['', Validators.required],
+
+      // these fields are not saving
+      checklistorgstructure: ['', Validators.required],
+      checklisttiedhouseassess: ['', Validators.required],
+      checklistAllowLicenceUse: ['', Validators.required],
+      checklistUnreportedSale: ['', Validators.required],
+      checklistConvicted: ['', Validators.required],
     });
     this.subscribeForData();
   }
