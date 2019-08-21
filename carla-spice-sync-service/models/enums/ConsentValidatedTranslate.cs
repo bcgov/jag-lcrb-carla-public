@@ -1,5 +1,4 @@
-﻿using System;
-namespace CarlaSpiceSync.models
+﻿namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public enum ConsentValidated
     {

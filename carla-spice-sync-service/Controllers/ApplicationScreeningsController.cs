@@ -6,10 +6,10 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
-using CarlaSpiceSync.models;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
+using Gov.Lclb.Cllb.CarlaSpiceSync;
 
-namespace Gov.Lclb.Cllb.SpdSync.Controllers
+namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

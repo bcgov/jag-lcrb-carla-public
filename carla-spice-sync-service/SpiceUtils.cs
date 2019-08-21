@@ -1,6 +1,4 @@
-﻿using CarlaSpiceSync;
-using CarlaSpiceSync.models;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
@@ -14,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Gov.Lclb.Cllb.SpdSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class SpiceUtils
     {
@@ -180,8 +178,6 @@ namespace Gov.Lclb.Cllb.SpdSync
             }
         }
 
-
-
         /// <summary>
         /// Sends the application screening request to spice.
         /// </summary>
@@ -189,7 +185,7 @@ namespace Gov.Lclb.Cllb.SpdSync
         /// <param name="applicationRequest">Application request.</param>
         public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
         {
-            var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<Interfaces.Spice.Models.LegalEntity>)applicationRequest.Associates);
+            var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates);
 
             if (consentValidated)
             {
@@ -274,7 +270,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             if (worker.AdoxioContactId != null)
             {
                 request.RecordIdentifier = worker.AdoxioWorkerid;
-                request.Contact = new Interfaces.Spice.Models.Contact()
+                request.Contact = new Contact()
                 {
                     BcIdCardNumber = worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? worker.AdoxioContactId.AdoxioPrimaryidnumber : null,
                     DriversLicenceNumber = worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? worker.AdoxioContactId.AdoxioPrimaryidnumber : null,
@@ -286,22 +282,22 @@ namespace Gov.Lclb.Cllb.SpdSync
                     Email = worker.AdoxioContactId.Emailaddress1,
                     PhoneNumber = worker.AdoxioContactId.Telephone1 != null ? worker.AdoxioContactId.Telephone1 : worker.AdoxioContactId.Mobilephone,
                     BirthDate = worker.AdoxioContactId.Birthdate,
-                    SelfDisclosure = worker.AdoxioContactId.AdoxioSelfdisclosure != null ? ((CarlaSpiceSync.models.GeneralYesNo)worker.AdoxioContactId.AdoxioSelfdisclosure).ToString() : null,
-                    Gender = worker.AdoxioContactId.AdoxioGendercode != null ? ((CarlaSpiceSync.models.AdoxioGenderCode)worker.AdoxioContactId.AdoxioGendercode).ToString() : null,
+                    SelfDisclosure = worker.AdoxioContactId.AdoxioSelfdisclosure != null ? ((GeneralYesNo)worker.AdoxioContactId.AdoxioSelfdisclosure).ToString() : null,
+                    Gender = worker.AdoxioContactId.AdoxioGendercode != null ? ((AdoxioGenderCode)worker.AdoxioContactId.AdoxioGendercode).ToString() : null,
                     Birthplace = worker.AdoxioBirthplace,
-                    Address = new Interfaces.Spice.Models.Address()
+                    Address = new Address()
                     {
                         AddressStreet1 = worker.AdoxioContactId.Address1Line1,
                         AddressStreet2 = worker.AdoxioContactId.Address1Line2,
                         AddressStreet3 = worker.AdoxioContactId.Address1Line3,
                         City = worker.AdoxioContactId.Address1City,
                         StateProvince = worker.AdoxioContactId.Address1Stateorprovince,
-                        Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(worker.AdoxioContactId.Address1Postalcode)) ? worker.AdoxioContactId.Address1Postalcode : null,
+                        Postal = (Validation.ValidatePostalCode(worker.AdoxioContactId.Address1Postalcode)) ? worker.AdoxioContactId.Address1Postalcode : null,
                         Country = worker.AdoxioContactId.Address1Country
                     }
                 };
 
-                request.Address = new Interfaces.Spice.Models.Address()
+                request.Address = new Address()
                 {
                     AddressStreet1 = worker.AdoxioContactId.Address1Line1,
                     AddressStreet2 = worker.AdoxioContactId.Address1Line2,
@@ -315,10 +311,10 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             if (worker.AdoxioWorkerAliases != null)
             {
-                request.Aliases = new List<Interfaces.Spice.Models.Alias>();
+                request.Aliases = new List<Alias>();
                 foreach (var alias in worker.AdoxioWorkerAliases)
                 {
-                    Interfaces.Spice.Models.Alias newAlias = new Interfaces.Spice.Models.Alias()
+                    Alias newAlias = new Alias()
                     {
                         GivenName = alias.AdoxioLastname,
                         Surname = alias.AdoxioFirstname,
@@ -330,10 +326,10 @@ namespace Gov.Lclb.Cllb.SpdSync
 
             if (worker.AdoxioWorkerPreviousaddresses != null)
             {
-                request.PreviousAddresses = new List<Interfaces.Spice.Models.Address>();
+                request.PreviousAddresses = new List<Address>();
                 foreach (var address in worker.AdoxioWorkerPreviousaddresses)
                 {
-                    Interfaces.Spice.Models.Address newAddress = new Interfaces.Spice.Models.Address()
+                    Address newAddress = new Address()
                     {
                         AddressStreet1 = address.AdoxioStreetaddress,
                         City = address.AdoxioCity,
@@ -360,19 +356,19 @@ namespace Gov.Lclb.Cllb.SpdSync
                 ApplicationType = licenceType.AdoxioName,
                 RecordIdentifier = application.AdoxioJobnumber,
                 UrgentPriority = false,
-                ApplicantType = Gov.Lclb.Cllb.Interfaces.Spice.Models.SpiceApplicantType.Cannabis,
+                ApplicantType = SpiceApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
                 BusinessNumber = application.AdoxioApplicant.Accountnumber,
                 ApplicantName = application.AdoxioNameofapplicant,
-                BusinessAddress = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
+                BusinessAddress = new Address()
                 {
                     AddressStreet1 = application.AdoxioApplicant.Address1Line1,
                     City = application.AdoxioApplicant.Address1City,
                     StateProvince = application.AdoxioApplicant.Address1Stateorprovince,
-                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(application.AdoxioApplicant.Address1Postalcode)) ? application.AdoxioApplicant.Address1Postalcode : null,
+                    Postal = (Validation.ValidatePostalCode(application.AdoxioApplicant.Address1Postalcode)) ? application.AdoxioApplicant.Address1Postalcode : null,
                     Country = application.AdoxioApplicant.Address1Country
                 },
-                ContactPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
+                ContactPerson = new Contact()
                 {
                     ContactId = application.AdoxioApplicant._primarycontactidValue,
                     FirstName = application.AdoxioContactpersonfirstname,
@@ -389,7 +385,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     MicrosoftDynamicsCRMaccount company = _dynamicsClient.Accounts.Get(filter: "accountid eq " + application.AdoxioApplyingPerson._parentcustomeridValue).Value[0];
                     companyName = company.Name;
                 }
-                screeningRequest.ApplyingPerson = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
+                screeningRequest.ApplyingPerson = new Contact()
                 {
                     SpdJobId = application.AdoxioApplyingPerson.AdoxioSpdjobid.ToString(),
                     ContactId = application.AdoxioApplyingPerson.Contactid,
@@ -404,7 +400,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             if (application.AdoxioApplicant != null)
             {
                 BusinessType businessType = (BusinessType)application.AdoxioApplicant.AdoxioBusinesstype;
-                screeningRequest.ApplicantAccount = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
+                screeningRequest.ApplicantAccount = new Account()
                 {
                     AccountId = application.AdoxioApplicant.Accountid,
                     Name = application.AdoxioApplicant.Name,
@@ -416,13 +412,13 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* Add establishment */
             if (application.AdoxioEstablishment != null)
             {
-                screeningRequest.Establishment = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Establishment()
+                screeningRequest.Establishment = new Establishment()
                 {
                     Name = application.AdoxioEstablishmentpropsedname,
                     PrimaryPhone = application.AdoxioEstablishmentphone,
                     PrimaryEmail = application.AdoxioEstablishmentemail,
                     ParcelId = application.AdoxioEstablishmentparcelid,
-                    Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
+                    Address = new Address()
                     {
                         AddressStreet1 = application.AdoxioEstablishmentaddressstreet,
                         City = application.AdoxioEstablishmentaddresscity,
@@ -434,7 +430,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             }
 
             /* Add key personnel and deemed associates */
-            screeningRequest.Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>();
+            screeningRequest.Associates = new List<LegalEntity>();
             string keypersonnelfilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1)";
             string deemedassociatefilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_isdeemedassociate eq true and adoxio_isindividual eq 1)";
             string[] expand = { "adoxio_Contact" };
@@ -443,7 +439,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 foreach (var legalEntity in associates)
                 {
-                    Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity person = CreateAssociate(legalEntity);
+                    LegalEntity person = CreateAssociate(legalEntity);
                     screeningRequest.Associates.Add(person);
                 }
             }
@@ -451,14 +447,14 @@ namespace Gov.Lclb.Cllb.SpdSync
             /* If sole prop add contact person as associate */
             if (application.AdoxioApplicanttype == (int)BusinessType.SoleProprietorship)
             {
-                screeningRequest.Associates.Add(new Interfaces.Spice.Models.LegalEntity()
+                screeningRequest.Associates.Add(new LegalEntity()
                 {
                     EntityId = screeningRequest.ContactPerson.ContactId,
                     IsIndividual = true,
                     Positions = new List<string> { "owner" },
                     Contact = screeningRequest.ContactPerson,
-                    PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
-                    Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>()
+                    PreviousAddresses = new List<Address>(),
+                    Aliases = new List<Alias>()
                 });
             }
 
@@ -469,9 +465,9 @@ namespace Gov.Lclb.Cllb.SpdSync
             return screeningRequest;
         }
 
-        private List<Interfaces.Spice.Models.LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> foundAssociates)
+        private List<LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<LegalEntity> foundAssociates)
         {
-            List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> newAssociates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>();
+            List<LegalEntity> newAssociates = new List<LegalEntity>();
             string applicationfilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
             foreach (var assoc in foundAssociates)
             {
@@ -487,11 +483,11 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 foreach (var legalEntity in legalEntities)
                 {
-                    Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = CreateAssociate(legalEntity);
+                    LegalEntity associate = CreateAssociate(legalEntity);
                     newAssociates.Add(associate);
                 }
             }
-            var newFoundAssociates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>(foundAssociates);
+            var newFoundAssociates = new List<LegalEntity>(foundAssociates);
             newFoundAssociates.AddRange(newAssociates);
             foreach (var assoc in newAssociates.ToList())
             {
@@ -504,23 +500,23 @@ namespace Gov.Lclb.Cllb.SpdSync
             return newAssociates;
         }
 
-        private Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
+        private LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
         {
-            Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity associate = new Interfaces.Spice.Models.LegalEntity()
+            LegalEntity associate = new LegalEntity()
             {
                 EntityId = legalEntity.AdoxioLegalentityid,
                 Name = legalEntity.AdoxioName,
                 Title = legalEntity.AdoxioJobtitle,
                 Positions = GetLegalEntityPositions(legalEntity),
-                PreviousAddresses = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Address>(),
-                Aliases = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias>()
+                PreviousAddresses = new List<Address>(),
+                Aliases = new List<Alias>()
             };
             
             if (legalEntity.AdoxioIsindividual != null && legalEntity.AdoxioIsindividual == 1 && legalEntity.AdoxioContact != null)
             {
                 associate.IsIndividual = true;
                 associate.TiedHouse = legalEntity.AdoxioContact.AdoxioSelfdeclaredtiedhouse == 1;
-                associate.Contact = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Contact()
+                associate.Contact = new Contact()
                 {
                     SpdJobId = legalEntity.AdoxioContact.AdoxioSpdjobid.ToString(),
                     ContactId = legalEntity.AdoxioContact.Contactid,
@@ -535,14 +531,14 @@ namespace Gov.Lclb.Cllb.SpdSync
                     BirthDate = legalEntity.AdoxioContact.Birthdate,
                     BcIdCardNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
                     DriversLicenceNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
-                    Address = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
+                    Address = new Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
                         AddressStreet2 = legalEntity.AdoxioContact.Address1Line2,
                         AddressStreet3 = legalEntity.AdoxioContact.Address1Line3,
                         City = legalEntity.AdoxioContact.Address1City,
                         StateProvince = legalEntity.AdoxioContact.Address1Stateorprovince,
-                        Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(legalEntity.AdoxioContact.Address1Postalcode)) ? legalEntity.AdoxioContact.Address1Postalcode : null,
+                        Postal = (Validation.ValidatePostalCode(legalEntity.AdoxioContact.Address1Postalcode)) ? legalEntity.AdoxioContact.Address1Postalcode : null,
                         Country = legalEntity.AdoxioContact.Address1Country
                     }
                 };
@@ -551,12 +547,12 @@ namespace Gov.Lclb.Cllb.SpdSync
                 var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
                 foreach (var address in previousAddresses)
                 {
-                    var newAddress = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Address()
+                    var newAddress = new Address()
                     {
                         AddressStreet1 = address.AdoxioStreetaddress,
                         City = address.AdoxioCity,
                         StateProvince = address.AdoxioProvstate,
-                        Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(address.AdoxioPostalcode)) ? address.AdoxioPostalcode : null,
+                        Postal = (Validation.ValidatePostalCode(address.AdoxioPostalcode)) ? address.AdoxioPostalcode : null,
                         Country = address.AdoxioCountry,
                         ToDate = address.AdoxioTodate,
                         FromDate = address.AdoxioFromdate
@@ -568,7 +564,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                 var aliases = _dynamicsClient.Aliases.Get(filter: "_adoxio_contactid_value eq " + legalEntity.AdoxioContact.Contactid).Value;
                 foreach (var alias in aliases)
                 {
-                    associate.Aliases.Add(new Gov.Lclb.Cllb.Interfaces.Spice.Models.Alias()
+                    associate.Aliases.Add(new Alias()
                     {
                         GivenName = alias.AdoxioFirstname,
                         Surname = alias.AdoxioLastname,
@@ -582,30 +578,30 @@ namespace Gov.Lclb.Cllb.SpdSync
                 if (legalEntity._adoxioShareholderaccountidValue != null)
                 {
                     var account = _dynamicsClient.Accounts.Get(filter: "accountid eq " + legalEntity._adoxioShareholderaccountidValue).Value;
-                    associate.Account = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
+                    associate.Account = new Account()
                     {
                         AccountId = account[0].Accountid,
                         Name = account[0].Name,
                         BcIncorporationNumber = account[0].AdoxioBcincorporationnumber,
                         BusinessNumber = account[0].Accountnumber,
-                        Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
+                        Associates = new List<LegalEntity>()
                     };
                 }
                 else if (legalEntity.AdoxioAccount != null)
                 {
-                    associate.Account = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account()
+                    associate.Account = new Account()
                     {
                         AccountId = legalEntity.AdoxioAccount.Accountid,
                         Name = legalEntity.AdoxioAccount.Name,
                         BcIncorporationNumber = legalEntity.AdoxioAccount.AdoxioBcincorporationnumber,
                         BusinessNumber = legalEntity.AdoxioAccount.Accountnumber,
-                        Associates = new List<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity>()
+                        Associates = new List<LegalEntity>()
                     };
                 }
                 else
                 {
                     _logger.LogError("Failed to find a shareholder account found");
-                    associate.Account = new Gov.Lclb.Cllb.Interfaces.Spice.Models.Account();
+                    associate.Account = new Account();
                 }
                 associate.IsIndividual = false;
             }
@@ -653,7 +649,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             return positions;
         }
 
-        public int UpdateConsentExpiry(IList<Gov.Lclb.Cllb.Interfaces.Spice.Models.LegalEntity> associates)
+        public int UpdateConsentExpiry(IList<LegalEntity> associates)
         {
             var i = 0;
             foreach(var associate in associates)
