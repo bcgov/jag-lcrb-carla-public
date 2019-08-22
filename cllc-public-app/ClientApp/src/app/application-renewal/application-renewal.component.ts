@@ -187,6 +187,11 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       );
   }
 
+  isTouchedAndInvalid(fieldName: string): boolean {
+    return this.form.get(fieldName).touched
+      && !this.form.get(fieldName).valid;
+  }
+
   private addDynamicContent() {
     if (this.application.applicationType) {
       this.htmlContent = {
