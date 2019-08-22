@@ -326,7 +326,7 @@ namespace odata2openapi
                                 parameter.Schema = null;
                                 parameter.Reference = null;
                                 parameter.Type = JsonObjectType.String;
-                            }
+                            }                            
                         }
                         else
                         {
@@ -414,6 +414,15 @@ namespace odata2openapi
 
                     foreach (var property in definition.Value.Properties)
                     {
+                        // fix for doubles
+                        if (property.Value != null && property.Value.Format != null && property.Value.Format.Equals("double"))
+                        {
+                            property.Value.Format = "decimal";
+                        }
+                        if (property.Key.Equals("adoxio_birthdate"))
+                        {
+                            property.Value.Format = "date";
+                        }
                         if (property.Key.Equals("totalamount"))
                         {
                             property.Value.Type = JsonObjectType.Number;
