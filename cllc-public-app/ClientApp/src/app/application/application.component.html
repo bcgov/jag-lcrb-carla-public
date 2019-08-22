@@ -231,10 +231,10 @@
           the store's signage are on file.</p>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Signage"
-            [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show"
-            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="false" entityName="application"
+            [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show" [useDocumentTypeForName]="true"
+            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
             [extensions]="['jpg', 'jpeg', 'png', 'pdf']" (numberOfUploadedFiles)="uploadedSignageDocuments = $event"
-            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
         <br>
@@ -276,9 +276,9 @@
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Valid Interest" fileTypes="FILE MUST BE IN PDF FORMAT."
             [enableFileDeletion]="application?.applicationType?.validInterest === FormControlState.Show"
-            [multipleFiles]="false" entityName="application"
+            [multipleFiles]="false" entityName="application" [useDocumentTypeForName]="true"
             (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+            [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
         <br>
@@ -329,9 +329,9 @@
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
             [enableFileDeletion]="application?.applicationType?.floorPlan === FormControlState.Show"
-            [multipleFiles]="false" entityName="application"
+            [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
             (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+            [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
         <br>
@@ -410,7 +410,7 @@
             [enableFileDeletion]="application?.applicationType?.sitePlan === FormControlState.Show"
             [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
             (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'">
+            [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
         <br>
