@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMleadaddress
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadaddress(string _parentidValue = default(string), string upszone = default(string), object exchangerate = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string line1 = default(string), string stateorprovince = default(string), string _modifiedbyValue = default(string), string name = default(string), long? versionnumber = default(long?), int? addressnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), string telephone2 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), double? latitude = default(double?), string postofficebox = default(string), string _createdbyValue = default(string), string telephone3 = default(string), string telephone1 = default(string), string fax = default(string), string composite = default(string), string leadaddressid = default(string), string line3 = default(string), int? addresstypecode = default(int?), int? shippingmethodcode = default(int?), string county = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), double? longitude = default(double?), string city = default(string), string postalcode = default(string), int? utcoffset = default(int?), IList<MicrosoftDynamicsCRMsyncerror> leadAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlead parentid = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMleadaddress(string _parentidValue = default(string), string upszone = default(string), object exchangerate = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string line1 = default(string), string stateorprovince = default(string), string _modifiedbyValue = default(string), string name = default(string), long? versionnumber = default(long?), int? addressnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), string telephone2 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), decimal? latitude = default(decimal?), string postofficebox = default(string), string _createdbyValue = default(string), string telephone3 = default(string), string telephone1 = default(string), string fax = default(string), string composite = default(string), string leadaddressid = default(string), string line3 = default(string), int? addresstypecode = default(int?), int? shippingmethodcode = default(int?), string county = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), decimal? longitude = default(decimal?), string city = default(string), string postalcode = default(string), int? utcoffset = default(int?), IList<MicrosoftDynamicsCRMsyncerror> leadAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlead parentid = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             this._parentidValue = _parentidValue;
             Upszone = upszone;
@@ -157,7 +157,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "latitude")]
-        public double? Latitude { get; set; }
+        public decimal? Latitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -227,7 +227,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "longitude")]
-        public double? Longitude { get; set; }
+        public decimal? Longitude { get; set; }
 
         /// <summary>
         /// </summary>
