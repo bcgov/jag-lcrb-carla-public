@@ -32,5 +32,14 @@ namespace Gov.Lclb.Cllb.Geocoder.Controllers
             return Ok();
         }
 
+        // Geocode a given establishment.
+        [HttpGet("GeocodeEstablishments")]
+        public ActionResult GeocodeEstablishments()
+        {
+            _logger.LogInformation($"Geocoding establishments");
+            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _logger).GeocodeEstablishments(null));
+            return Ok();
+        }
+
     }
 }
