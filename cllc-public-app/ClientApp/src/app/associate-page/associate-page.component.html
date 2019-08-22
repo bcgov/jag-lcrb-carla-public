@@ -16,74 +16,205 @@
     </div>
   </div> -->
   <p>
-    As part of your renewal application, please identify any changes to your organization by confirming the following information.
+    As part of your renewal application, please identify any changes to your organization by confirming the following
+    information.
   </p>
 
-  <h3 class="blue-header">ORGANIZATION LEADERSHIP</h3>
-  <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-directors-and-officers [lockAssociates]="lockAssociates" [accountId]="account?.id"
-      [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
-    </app-directors-and-officers>
-    <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
-      [required]="true"
-      [valid]="!form.get('checklistOrgLeadershipBuilt')?.touched || form.get('checklistOrgLeadershipBuilt')?.valid">
-      <mat-button-toggle-group formControlName="checklistOrgLeadershipBuilt" aria-label="Font Style">
-        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-        <mat-button-toggle value="Changed">No</mat-button-toggle>
-      </mat-button-toggle-group>
-    </app-field>
-    <div *ngIf="form.get('checklistOrgLeadershipBuilt').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-      contact you as part of this renewal process
-    </div>
-  </div>
+  <mat-card class="mat-elevation-z8">
+    <app-field errorMessage="Please select a value" [showChevrons]="false" [required]="true" [valid]="true">
 
-  <h3 class="blue-header">KEY PERSONNEL</h3>
-  <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId">
-    <app-key-personnel [lockAssociates]="lockAssociates" [accountId]="account?.id"
-      [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId"></app-key-personnel>
-
-    <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
-      [required]="true"
-      [valid]="!form.get('checklistKeyPersonnelBuilt')?.touched || form.get('checklistKeyPersonnelBuilt')?.valid">
-      <mat-button-toggle-group formControlName="checklistKeyPersonnelBuilt" aria-label="Font Style">
-        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-        <mat-button-toggle value="Changed">No</mat-button-toggle>
-      </mat-button-toggle-group>
     </app-field>
-    <div *ngIf="form.get('checklistKeyPersonnelBuilt').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-      contact you as part of this renewal process
-    </div>
-  </div>
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        1. Have you or any partner, shareholder or director of this establishment been convicted of a criminal offence
+        within the past 12 months that you have not reported to the LCRB?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklistConvicted" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;">
+        <div *ngIf="form.get('checklistConvicted').value === 'Changed'" class="field-changed">
+          <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+          contact you as part of this renewal process
+        </div>
+      </section>
+  </mat-card>
+  <p></p>
 
-  <h3 class="blue-header">SHAREHOLDERS</h3>
-  <div class="padded-section" *ngIf="account?.id && account?.businessType && legalEntityId" style="margin-bottom: 10px;">
-    <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id" [businessType]="account?.businessType"
-      [parentLegalEntityId]="legalEntityId">
-    </app-shareholders>
-    <app-field label="Is this information still correct?" errorMessage="Please select a value" [showChevrons]="false"
-      [required]="true"
-      [valid]="!form.get('checklistShareholdersBuilt')?.touched || form.get('checklistShareholdersBuilt')?.valid">
-      <mat-button-toggle-group formControlName="checklistShareholdersBuilt" aria-label="Font Style">
-        <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-        <mat-button-toggle value="Changed">No</mat-button-toggle>
-      </mat-button-toggle-group>
-    </app-field>
-    <div *ngIf="form.get('checklistShareholdersBuilt').value === 'Changed'" class="field-changed">
-      <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-      contact you as part of this renewal process
-    </div>
-  </div>
+  <mat-card class="mat-elevation-z8">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        2. Have you made an unreported sale of the business associated with the licence within the past 12 months?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklistUnreportedSale" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;">
+        <div *ngIf="form.get('checklistUnreportedSale').value === 'Changed'" class="field-changed">
+          <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+          contact you as part of this renewal process
+        </div>
+      </section>
+  </mat-card>
+  <p></p>
+
+  <mat-card class="mat-elevation-z8">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        3. Have you entered into an unreported agreement allowing another person or business to use your licence within
+        the past 12 months?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklistAllowLicenceUse" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;">
+      <div *ngIf="form.get('checklistAllowLicenceUse').value === 'Changed'" class="field-changed">
+        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+        contact you as part of this renewal process
+      </div>
+    </section>
+  </mat-card>
+  <p></p>
+
+  <mat-card class="mat-elevation-z8">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        4. Our records show that this establishment is licensed as a {{account?.getBusinessTypeName()}}. Has this
+        changed?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklistorgstructure" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;">
+      <div *ngIf="form.get('checklistorgstructure').value === 'Changed'" class="field-changed">
+        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+        contact you as part of this renewal process
+      </div>
+    </section>
+  </mat-card>
+  <p></p>
+
+  <mat-card class="mat-elevation-z8">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        5. Have you acquired a new interest or expanded an existing interest - financial or otherwise - in a federal
+        producer of cannabis within the past 12 months?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklisttiedhouseassess" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;">
+      <div *ngIf="form.get('checklisttiedhouseassess').value === 'Changed'" class="field-changed">
+        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+        contact you as part of this renewal process
+      </div>
+    </section>
+  </mat-card>
+  <p></p>
+
+
+  <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        6. Have you made any unreported changes to your organizational leadership within the past 12 months?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklistOrgLeadershipBuilt" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+      <app-directors-and-officers [lockAssociates]="lockAssociates" [accountId]="account?.id"
+        [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
+      </app-directors-and-officers>
+
+      <div *ngIf="form.get('checklistOrgLeadershipBuilt').value === 'Changed'" class="field-changed">
+        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+        contact you as part of this renewal process
+      </div>
+    </section>
+  </mat-card>
+  <p></p>
+
+  <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        7. Have you made any unreported changes to your key personnel within the past 12 months?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklistKeyPersonnelBuilt" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+      <app-key-personnel [lockAssociates]="lockAssociates" [accountId]="account?.id"
+        [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId"></app-key-personnel>
+
+      <div *ngIf="form.get('checklistKeyPersonnelBuilt').value === 'Changed'" class="field-changed">
+        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+        contact you as part of this renewal process
+      </div>
+    </section>
+  </mat-card>
+
+  <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;"
+    *ngIf="account?.isPrivateCorporation() || account?.isPublicCorporation() || account?.isPartnership()">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+      <div class="question-label">
+        8. Our records show the above share distribution. Has this changed?
+      </div>
+      <div style="flex: 0 0 85px;">
+        <mat-button-toggle-group formControlName="checklistShareholdersBuilt" aria-label="Font Style">
+          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+          <mat-button-toggle value="Changed">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </section>
+    <section style="padding-right: 85px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+      <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id"
+        [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
+      </app-shareholders>
+
+      <div *ngIf="form.get('checklistShareholdersBuilt').value === 'Changed'" class="field-changed">
+        <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
+        contact you as part of this renewal process
+      </div>
+    </section>
+  </mat-card>
+  <p></p>
 
   <section class="error" *ngIf="showValidationMessages">
-      <p *ngFor="let message of validationMessages">
-        <span class="app-cancel">
-          <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-          {{message}}
-        </span>
-      </p>
-    </section>
+    <p *ngFor="let message of validationMessages">
+      <span class="app-cancel">
+        <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+        {{message}}
+      </span>
+    </p>
+  </section>
 </div>
 
 <div style="padding-right: 30px;">

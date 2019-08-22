@@ -25,6 +25,11 @@ export class ApplicationLicenseSummary {
   expiryDate: Date;
   allowedActions: ApplicationType[];
 
-  relatedApplicationPaid: boolean;
-  relatedApplicationId: string;
+  actionApplications: LicenceActionApplication[];
+}
+
+export interface LicenceActionApplication {
+  applicationId: string;
+  applicationTypeName: string;
+  isPaid: boolean;
 }

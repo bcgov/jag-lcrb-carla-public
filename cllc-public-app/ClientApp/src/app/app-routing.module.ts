@@ -25,7 +25,6 @@ import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-h
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
-import { AssociatePageComponent } from '@app/associate-page/associate-page.component';
 import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence-renewal-steps.component';
 
 
@@ -37,24 +36,12 @@ const routes: Routes = [
   {
     path: 'account-profile',
     component: AccountProfileComponent,
-    // canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
-  },
-  {
-    path: 'associates',
-    component: AssociatePageComponent
   },
   {
     path: 'renew-crs-licence/application/:applicationId',
     component: LicenceRenewalStepsComponent,
-    // children: [
-    //   {
-    //     path: 'application/:applicationId',
-    //     component: ApplicationComponent,
-    //     canDeactivate: [CanDeactivateGuard],
-    //     canActivate: [BCeidAuthGuard]
-    //   }
-    // ]
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'account-profile/:applicationId',
@@ -113,57 +100,6 @@ const routes: Routes = [
     canDeactivate: [CanDeactivateGuard],
     canActivate: [ServiceCardAuthGuard]
   },
-  // {
-  //   path: 'worker-qualification',
-  //   component: WorkerqualificationComponent,
-  //   canActivate: [ServiceCardAuthGuard],
-  //   children: [
-  //   ]
-  // },
-  // {
-  //   path: 'business-profile/:accountId/:legalEntityId',
-  //   component: AccountProfileComponent,
-  //   children: [
-  //     {
-  //       path: 'before-you-start',
-  //       component: BeforeYouStartComponent
-  //     },
-  //     {
-  //       path: 'corporate-details',
-  //       component: CorporateDetailsComponent,
-  //       canDeactivate: [CanDeactivateGuard]
-  //     },
-  //     {
-  //       path: 'organization-structure',
-  //       component: OrganizationStructureComponent
-  //     },
-  //     {
-  //       path: 'directors-and-officers',
-  //       component: DirectorsAndOfficersComponent
-  //     },
-  //     {
-  //       path: 'key-personnel',
-  //       component: KeyPersonnelComponent
-  //     },
-  //     {
-  //       path: 'shareholders',
-  //       component: EditShareholdersComponent
-  //     },
-  //     {
-  //       path: 'connections-to-producers',
-  //       component: ConnectionToProducersComponent,
-  //       canDeactivate: [CanDeactivateGuard]
-  //     },
-  //     {
-  //       path: 'finance-integrity',
-  //       component: FinancialInformationComponent
-  //     },
-  //     {
-  //       path: 'security-assessment',
-  //       component: SecurityAssessmentsComponent
-  //     },
-  //   ]
-  // },
   {
     path: 'form-viewer/:id',
     component: FormViewerComponent
@@ -186,44 +122,6 @@ const routes: Routes = [
     path: 'newsletter-confirm/:slug',
     component: NewsletterConfirmationComponent
   },
-  // {
-  //   path: 'license-application/:applicationId',
-  //   component: LicenseApplicationComponent,
-  //   children: [
-  //     {
-  //       path: 'contact-details',
-  //       component: ContactDetailsComponent,
-  //       canDeactivate: [CanDeactivateGuard]
-  //     },
-  //     {
-  //       path: 'declaration',
-  //       component: DeclarationComponent,
-  //       canDeactivate: [CanDeactivateGuard]
-  //     },
-  //     {
-  //       path: 'floor-plan',
-  //       component: FloorPlanComponent
-  //     },
-  //     {
-  //       path: 'property-details',
-  //       component: PropertyDetailsComponent,
-  //       canDeactivate: [CanDeactivateGuard]
-  //     },
-  //     {
-  //       path: 'site-map',
-  //       component: SiteMapComponent
-  //     },
-  //     {
-  //       path: 'store-information',
-  //       component: StoreInformationComponent,
-  //       canDeactivate: [CanDeactivateGuard]
-  //     },
-  //     {
-  //       path: 'submit-pay',
-  //       component: SubmitPayComponent
-  //     },
-  //   ]
-  // },
   {
     path: 'payment-confirmation',
     component: PaymentConfirmationComponent,
