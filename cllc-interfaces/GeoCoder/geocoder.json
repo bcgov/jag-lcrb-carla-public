@@ -1,19 +1,253 @@
 {
-  "openapi": "3.0.0",
-  "servers": [
-    {
-      "url": "https://geocoder.api.gov.bc.ca/",
-      "description": "Production (gated)"
+  "components": {
+    "schemas": {
+      "jsonResponse": {
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "queryAddress": {
+            "type": "string"
+          },
+          "searchTimestamp": {
+            "type": "string"
+          },
+          "executionTime": {
+            "type": "number"
+          },
+          "version": {
+            "type": "string"
+          },
+          "baseDataDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "crs": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "properties": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "integer",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          },
+          "interpolation": {
+            "type": "string"
+          },
+          "echo": {
+            "type": "string"
+          },
+          "locationDescriptor": {
+            "type": "string"
+          },
+          "setBack": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "minScore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxResults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "disclaimer": {
+            "type": "string"
+          },
+          "privacyStatement": {
+            "type": "string"
+          },
+          "copyrightNotice": {
+            "type": "string"
+          },
+          "copyrightLicense": {
+            "type": "string"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "geometry": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "crs": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "properties": {
+                          "type": "object",
+                          "properties": {
+                            "code": {
+                              "type": "integer",
+                              "format": "int32"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "coordinates": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "fullAddress": {
+                      "type": "string"
+                    },
+                    "score": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "matchPrecision": {
+                      "type": "string"
+                    },
+                    "precisionPoints": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "faults": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "element": {
+                            "type": "string"
+                          },
+                          "fault": {
+                            "type": "string"
+                          },
+                          "penalty": {
+                            "type": "integer",
+                            "format": "int32"
+                          }
+                        }
+                      }
+                    },
+                    "siteName": {
+                      "type": "string"
+                    },
+                    "unitDesignator": {
+                      "type": "string"
+                    },
+                    "unitNumber": {
+                      "type": "string"
+                    },
+                    "unitNumberSuffix": {
+                      "type": "string"
+                    },
+                    "civicNumber": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "civicNumberSuffix": {
+                      "type": "string"
+                    },
+                    "streetName": {
+                      "type": "string"
+                    },
+                    "streetType": {
+                      "type": "string"
+                    },
+                    "isStreetTypePrefix": {
+                      "type": "string"
+                    },
+                    "streetDirection": {
+                      "type": "string"
+                    },
+                    "isStreetDirectionPrefix": {
+                      "type": "string"
+                    },
+                    "streetQualifier": {
+                      "type": "string"
+                    },
+                    "localityName": {
+                      "type": "string"
+                    },
+                    "localityType": {
+                      "type": "string"
+                    },
+                    "electoralArea": {
+                      "type": "string"
+                    },
+                    "provinceCode": {
+                      "type": "string"
+                    },
+                    "locationPositionalAccuracy": {
+                      "type": "string"
+                    },
+                    "locationDescriptor": {
+                      "type": "string"
+                    },
+                    "siteID": {
+                      "type": "string"
+                    },
+                    "blockID": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "fullSiteDescriptor": {
+                      "type": "string"
+                    },
+                    "accessNotes": {
+                      "type": "string"
+                    },
+                    "siteStatus": {
+                      "type": "string"
+                    },
+                    "siteRetireDate": {
+                      "type": "string"
+                    },
+                    "changeDate": {
+                      "type": "string"
+                    },
+                    "isOfficial": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
-    {
-      "url": "https://geocodertst.api.gov.bc.ca/",
-      "description": "Test (gated)"
-    },
-    {
-      "url": "https://geocoderdlv.api.gov.bc.ca/",
-      "description": "Delivery (gated)"
-    }
-  ],
+
+     "securitySchemes": {
+        "apikey": {
+          "type": "apiKey",
+          "in": "header",
+          "name": "apikey"
+        }
+      }
+    
+  },
+  "externalDocs": {
+    "description": "BC Address Geocoder",
+    "url": "https://www2.gov.bc.ca/gov/content?id=118DD57CD9674D57BDBD511C2E78DC0D"
+  },
   "info": {
     "title": "Geocoder REST API",
     "description": "This API represents address cleaning, correction, completion, geocoding, reverse geocoding, and proximity resources for intersection addresses, physical addresses and their occupants in British Columbia. Please read our [data collection notice](https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice).  \n\nPlease note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers. \n\n[Developer API keys](https://github.com/bcgov/gwa/wiki/Developer-Guide#developer-api-keys) are unique and provide the ability to make up to 2 requests per second. Production government applications may use organization API keys which are further described in [the Developer guide](https://github.com/bcgov/gwa/wiki/Developer-Guide#developer-api-keys).\n\n **Notification: If you have applications or web pages that link to the public geocoder at one of the following URLs, please note that they are now deprecated [More Details](https://www2.gov.bc.ca/gov/content?id=103ADC5A956842828554238DEF28D6E5).  \n - http://apps.gov.bc.ca/pub/geocoder \n - https://apps.gov.bc.ca/pub/geocoder\n \n \n **To acquire an API key please visit the [API Key Request](https://kq.apps.gov.bc.ca/) application.**\n ",
@@ -29,29 +263,7 @@
       "email": "IDDDBCLS@Victoria1.gov.bc.ca"
     }
   },
-  "externalDocs": {
-    "description": "BC Address Geocoder",
-    "url": "https://www2.gov.bc.ca/gov/content?id=118DD57CD9674D57BDBD511C2E78DC0D"
-  },
-  "tags": [
-    {
-      "name": "sites"
-    },
-    {
-      "name": "intersections"
-    },
-    {
-      "name": "occupants"
-    },
-    {
-      "name": "parcels"
-    }
-  ],
-  "security": [
-    {
-      "apikey": []
-    }
-  ],
+  "openapi": "3.0.0",
   "paths": {
     "/addresses.{outputFormat}": {
       "get": {
@@ -429,7 +641,14 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of matching sites or intersections and their physical locations. See <a href='https://github.com/bcgov/api-specs/blob/master/geocoder/geocoder-developer-guide.md#resource-representations-in-http-responses' target=\"_blank\">addresses response</a>"
+            "description": "A list of matching sites or intersections and their physical locations. See <a href='https://github.com/bcgov/api-specs/blob/master/geocoder/geocoder-developer-guide.md#resource-representations-in-http-responses' target=\"_blank\">addresses response</a>",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/jsonResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -2325,14 +2544,37 @@
       }
     }
   },
-  "components": {
-    "schemas": {},
-    "securitySchemes": {
-      "apikey": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "apikey"
-      }
+  "security": [
+    {
+      "apikey": []
     }
-  }
+  ],
+  "servers": [
+    {
+      "url": "https://geocoder.api.gov.bc.ca/",
+      "description": "Production (gated)"
+    },
+    {
+      "url": "https://geocodertst.api.gov.bc.ca/",
+      "description": "Test (gated)"
+    },
+    {
+      "url": "https://geocoderdlv.api.gov.bc.ca/",
+      "description": "Delivery (gated)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "sites"
+    },
+    {
+      "name": "intersections"
+    },
+    {
+      "name": "occupants"
+    },
+    {
+      "name": "parcels"
+    }
+  ]
 }

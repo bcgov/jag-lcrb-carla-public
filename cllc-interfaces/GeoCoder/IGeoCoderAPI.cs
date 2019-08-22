@@ -7,6 +7,7 @@
 namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
 {
     using Microsoft.Rest;
+    using Models;
     using System.Collections;
     using System.Collections.Generic;
     using System.Threading;
@@ -207,10 +208,13 @@ namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
         /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
+        /// <exception cref="Microsoft.Rest.SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> SitesWithHttpMessagesAsync(string outputFormat, string addressString = default(string), string locationDescriptor = default(string), int? maxResults = 1, string interpolation = default(string), bool? echo = true, bool? brief = false, bool? autoComplete = false, int? setBack = 0, int? outputSRS = 4326, int? minScore = 1, string matchPrecision = default(string), string matchPrecisionNot = default(string), string siteName = default(string), string unitDesignator = default(string), string unitNumber = default(string), string unitNumberSuffix = default(string), string civicNumber = default(string), string civicNumberSuffix = default(string), string streetName = default(string), string streetType = default(string), string streetDirection = default(string), string streetQualifier = default(string), string localityName = default(string), string provinceCode = "BC", string localities = default(string), string notLocalities = default(string), string bbox = default(string), string centre = default(string), double? maxDistance = default(double?), bool? extrapolate = default(bool?), string parcelPoint = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<JsonResponse>> SitesWithHttpMessagesAsync(string outputFormat, string addressString = default(string), string locationDescriptor = default(string), int? maxResults = 1, string interpolation = default(string), bool? echo = true, bool? brief = false, bool? autoComplete = false, int? setBack = 0, int? outputSRS = 4326, int? minScore = 1, string matchPrecision = default(string), string matchPrecisionNot = default(string), string siteName = default(string), string unitDesignator = default(string), string unitNumber = default(string), string unitNumberSuffix = default(string), string civicNumber = default(string), string civicNumberSuffix = default(string), string streetName = default(string), string streetType = default(string), string streetDirection = default(string), string streetQualifier = default(string), string localityName = default(string), string provinceCode = "BC", string localities = default(string), string notLocalities = default(string), string bbox = default(string), string centre = default(string), double? maxDistance = default(double?), bool? extrapolate = default(bool?), string parcelPoint = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Geocode an address and identify site occupants
         /// </summary>
