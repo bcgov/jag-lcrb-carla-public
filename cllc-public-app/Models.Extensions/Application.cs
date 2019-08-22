@@ -83,16 +83,22 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioServicehourssundayopen = (int?)from.ServiceHoursSundayOpen;
             to.AdoxioServicehourssundayclose = (int?)from.ServiceHoursSundayClose;
 
-            to.AdoxioChecklistbrandingassess = (int?)from.ChecklistBrandingAssess;
-            to.AdoxioChecklistvalidinterestassess = (int?)from.ChecklistValidInterestAssess;
-            to.AdoxioChecklistfloorplanassess = (int?)from.ChecklistFloorPlanAssess;
-            to.AdoxioChecklistsitemapassess = (int?)from.ChecklistSiteMapAssess;
-            to.AdoxioChecklistestabrenderingsassessed = (int?)from.ChecklistEstabRenderAssessed;
-            to.AdoxioChecklistsignageassessed = (int?)from.ChecklistSignageAssessed;
-            to.AdoxioChecklistorgleadershipbuilt = (int?)from.ChecklistOrgLeadershipBuilt;
-            to.AdoxioChecklistkeypersonnelbuilt = (int?)from.ChecklistKeyPersonnelBuilt;
-            to.AdoxioChecklistshareholdersbuilt = (int?)from.ChecklistShareholdersBuilt;
-            to.AdoxioChecklistestablishmentaddressassessed = (int?)from.ChecklistEstablishmentAddressAssessed;
+            to.AdoxioRenewalcriminaloffencecheck = (int?)from.RenewalCriminalOffenceCheck;
+            to.AdoxioRenewalunreportedsaleofbusiness = (int?)from.RenewalUnreportedSaleOfBusiness;
+            to.AdoxioRenewalbusinesstype = (int?)from.RenewalBusinessType;
+            to.AdoxioRenewaltiedhouse = (int?)from.RenewalTiedhouse;
+            to.AdoxioRenewalorgleadership = (int?)from.RenewalOrgLeadership;
+            to.AdoxioRenewalkeypersonnel = (int?)from.Renewalkeypersonnel;
+            to.AdoxioRenewalshareholders = (int?)from.RenewalShareholders;
+            to.AdoxioRenewaloutstandingfines = (int?)from.RenewalOutstandingFines;
+            to.AdoxioRenewalbranding = (int?)from.RenewalBranding;
+            to.AdoxioRenewalsignage = (int?)from.RenewalSignage;
+            to.AdoxioRenewalestablishmentaddress = (int?)from.RenewalEstablishmentAddress;
+            to.AdoxioRenewalvalidinterest = (int?)from.RenewalValidInterest;
+            to.AdoxioRenewalzoning = (int?)from.RenewalZoning;
+            to.AdoxioRenewalfloorplan = (int?)from.RenewalFloorPlan;
+            to.AdoxioRenewalsitemap = (int?)from.RenewalSiteMap;
+            to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
 
 
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
@@ -215,16 +221,23 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ServiceHoursSaturdayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayopen,
                 ServiceHoursSaturdayClose = (ServiceHours?)dynamicsApplication.AdoxioServicehourssaturdayclose,
 
-                ChecklistBrandingAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistbrandingassess,
-                ChecklistValidInterestAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistvalidinterestassess,
-                ChecklistFloorPlanAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistfloorplanassess,
-                ChecklistSiteMapAssess = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistsitemapassess,
-                ChecklistEstabRenderAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistestabrenderingsassessed,
-                ChecklistSignageAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistsignageassessed,
-                ChecklistOrgLeadershipBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistorgleadershipbuilt,
-                ChecklistKeyPersonnelBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistkeypersonnelbuilt,
-                ChecklistShareholdersBuilt = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistshareholdersbuilt,
-                ChecklistEstablishmentAddressAssessed = (ValueNotChanged?)dynamicsApplication.AdoxioChecklistestablishmentaddressassessed,
+                RenewalCriminalOffenceCheck = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalcriminaloffencecheck,
+                RenewalUnreportedSaleOfBusiness = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalunreportedsaleofbusiness,
+                RenewalBusinessType = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalbusinesstype,
+                RenewalTiedhouse = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaltiedhouse,
+                RenewalOrgLeadership = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalorgleadership,
+                Renewalkeypersonnel = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalkeypersonnel,
+                RenewalShareholders = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalshareholders,
+                RenewalOutstandingFines = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaloutstandingfines,
+                RenewalBranding = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalbranding,
+                RenewalSignage = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalsignage,
+                RenewalEstablishmentAddress = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalestablishmentaddress,
+                RenewalValidInterest = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalvalidinterest,
+                RenewalZoning = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalzoning,
+                RenewalFloorPlan = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfloorplan,
+                RenewalSiteMap = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalsitemap,
+                TiedhouseFederalInterest = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaltiedhousefederalinterest,
+
 
 
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,

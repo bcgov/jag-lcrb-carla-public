@@ -44,28 +44,26 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
-      // noOrgStructureChange: [''],
-      checklistOrgLeadershipBuilt: ['', Validators.required],
-      checklistKeyPersonnelBuilt: ['', Validators.required],
-      checklistShareholdersBuilt: ['', Validators.required],
-
-      // these fields are not saving
-      checklistorgstructure: ['', Validators.required],
-      checklisttiedhouseassess: ['', Validators.required],
-      checklistAllowLicenceUse: ['', Validators.required],
-      checklistUnreportedSale: ['', Validators.required],
-      checklistConvicted: ['', Validators.required],
+      renewalCriminalOffenceCheck: ['', Validators.required],
+      renewalUnreportedSaleOfBusiness: ['', Validators.required],
+      renewalBusinessType: ['', Validators.required],
+      renewalTiedhouse: ['', Validators.required],
+      tiedhouseFederalInterest: ['', Validators.required],
+      renewalOrgLeadership: ['', Validators.required],
+      renewalkeypersonnel: ['', Validators.required],
+      renewalShareholders: ['', Validators.required],
+      renewalOutstandingFines: ['', Validators.required],
     });
     this.subscribeForData();
   }
 
   reconfigureFormFields() {
     if (this.account.isPrivateCorporation() || this.account.isPublicCorporation()) {
-      this.form.get('checklistShareholdersBuilt').clearValidators();
-      this.form.get('checklistShareholdersBuilt').reset();
+      this.form.get('renewalShareholders').clearValidators();
+      this.form.get('renewalShareholders').reset();
     } else {
-      this.form.get('checklistShareholdersBuilt').setValidators([Validators.required]);
-      this.form.get('checklistShareholdersBuilt').reset();
+      this.form.get('renewalShareholders').setValidators([Validators.required]);
+      this.form.get('renewalShareholders').reset();
     }
   }
 
