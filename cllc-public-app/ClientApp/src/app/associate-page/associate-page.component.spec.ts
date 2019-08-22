@@ -16,11 +16,14 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { ApplicationRenewalComponent } from '@appapplication-renewal/application-renewal.component';
 import { of } from 'rxjs';
 import { Application } from '@models/application.model';
+import { Account } from '@models/account.model';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { FieldComponent } from '@shared/field/field.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { reducers, metaReducers } from '@app/app-state/reducers/reducers';
+import { LegalEntity } from '@models/legal-entity.model';
+
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let applicationDataServiceStub: Partial<ApplicationDataService>;
@@ -36,12 +39,14 @@ describe('AssociatePageComponent', () => {
   let store: MockStore<AppState>;
   let applicationService: ApplicationDataService;
 
+
+  const account = Object.assign(new Account(), {
+    businessType: 'PublicCorporation',
+    legalEntity: { id: '0' }
+  });
   const initialState = {
     currentAccountState: {
-      currentAccount: {
-        businessType: 'PublicCorporation',
-        legalEntity: { id: '0' }
-      },
+      currentAccount: account,
     },
     currentUserState: { currentUser: {} }
   } as AppState;
