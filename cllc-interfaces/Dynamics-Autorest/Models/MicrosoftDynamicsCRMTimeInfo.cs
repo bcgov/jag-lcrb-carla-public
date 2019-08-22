@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 'Vacation', 'Appointment', 'ResourceStartTime',
         /// 'ResourceServiceRestriction', 'ResourceCapacity',
         /// 'ServiceRestriction', 'ServiceCost'</param>
-        public MicrosoftDynamicsCRMTimeInfo(System.DateTimeOffset? start = default(System.DateTimeOffset?), System.DateTimeOffset? end = default(System.DateTimeOffset?), string timeCode = default(string), string subCode = default(string), string sourceId = default(string), string calendarId = default(string), int? sourceTypeCode = default(int?), bool? isActivity = default(bool?), int? activityStatusCode = default(int?), double? effort = default(double?), string displayText = default(string))
+        public MicrosoftDynamicsCRMTimeInfo(System.DateTimeOffset? start = default(System.DateTimeOffset?), System.DateTimeOffset? end = default(System.DateTimeOffset?), string timeCode = default(string), string subCode = default(string), string sourceId = default(string), string calendarId = default(string), int? sourceTypeCode = default(int?), bool? isActivity = default(bool?), int? activityStatusCode = default(int?), decimal? effort = default(decimal?), string displayText = default(string))
         {
             Start = start;
             End = end;
@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Effort")]
-        public double? Effort { get; set; }
+        public decimal? Effort { get; set; }
 
         /// <summary>
         /// </summary>
