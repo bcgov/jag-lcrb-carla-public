@@ -128,14 +128,13 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
 
-      checklistBrandingAssess: ['', Validators.required],
-      checklistValidInterestAssess: ['', Validators.required],
-      checklistFloorPlanAssess: ['', Validators.required],
-      checklistSiteMapAssess: ['', Validators.required],
-      checklistEstabRenderAssessed: ['', Validators.required],
-      checklistSignageAssessed: ['', Validators.required],
-      checklistEstablishmentAddressAssessed: ['', Validators.required],
-      checklistZoningaips: [''],
+      renewalBranding: ['', Validators.required],
+      renewalSignage: ['', Validators.required],
+      renewalEstablishmentAddress: ['', Validators.required],
+      renewalValidInterest: ['', Validators.required],
+      renewalZoning: ['', Validators.required],
+      renewalFloorPlan: ['', Validators.required],
+      renewalSiteMap: [''],
       assignedLicence: this.fb.group({
         id: [''],
         establishmentAddressStreet: [''],
@@ -188,6 +187,11 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       );
   }
 
+  isTouchedAndInvalid(fieldName: string): boolean {
+    return this.form.get(fieldName).touched
+      && !this.form.get(fieldName).valid;
+  }
+
   private addDynamicContent() {
     if (this.application.applicationType) {
       this.htmlContent = {
@@ -237,7 +241,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication({...this.application, ...this.form.value}),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -393,12 +397,12 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
   saveForLater() {
     this.busy = this.save(true)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe((result: boolean) => {
-          if (result) {
-            this.router.navigate(['/dashboard']);
-          }
-        });
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.router.navigate(['/dashboard']);
+        }
+      });
   }
 
 }

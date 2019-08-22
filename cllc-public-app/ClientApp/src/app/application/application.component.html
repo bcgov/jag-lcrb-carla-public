@@ -206,12 +206,11 @@
         <br>
         <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
           <app-more-less-content>
-            <span less>
+            <p less>
               The signage submitted must show the name of the store and all words, images and symbols used in the
               signage.
-            </span>
+            </p>
             <div more>
-              <br>
               <p>
                 Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
                 green cross).
@@ -248,11 +247,10 @@
         <br>
         <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
           <app-more-less-content>
-            <span less>
+            <p less>
               If the applicant currently owns or leases the proposed store location, submit Option 1.
-            </span>
+            </p>
             <div more>
-              <br>
               <p>
                 If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
               </p>
