@@ -359,6 +359,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 ApplicationType = licenceType.AdoxioName,
                 RecordIdentifier = application.AdoxioJobnumber,
                 UrgentPriority = false,
+                Associates = new List<LegalEntity>(),
                 ApplicantType = SpiceApplicantType.Cannabis,
                 DateSent = DateTimeOffset.Now,
                 BusinessNumber = application.AdoxioApplicant.Accountnumber,
@@ -400,7 +401,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 };
             }
             /* Add applicant details */
-            if (application.AdoxioApplicant != null)
+            if (application.AdoxioApplicant != null && application.AdoxioApplicant.AdoxioBusinesstype != null)
             {
                 BusinessType businessType = (BusinessType)application.AdoxioApplicant.AdoxioBusinesstype;
                 screeningRequest.ApplicantAccount = new Account()
@@ -410,6 +411,19 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     BcIncorporationNumber = application.AdoxioApplicant.AdoxioBcincorporationnumber,
                     BusinessType = businessType.ToString()
                 };
+
+                if (businessType == BusinessType.SoleProprietorship)
+                {
+                    screeningRequest.Associates.Add(new LegalEntity()
+                    {
+                        EntityId = screeningRequest.ContactPerson.ContactId,
+                        IsIndividual = true,
+                        Positions = new List<string> { "owner" },
+                        Contact = screeningRequest.ContactPerson,
+                        PreviousAddresses = new List<Address>(),
+                        Aliases = new List<Alias>()
+                    });
+                }
             }
 
             /* Add establishment */
@@ -433,7 +447,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
 
             /* Add key personnel and deemed associates */
-            screeningRequest.Associates = new List<LegalEntity>();
             string keypersonnelfilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1)";
             string deemedassociatefilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_isdeemedassociate eq true and adoxio_isindividual eq 1)";
             string[] expand = { "adoxio_Contact" };
@@ -445,20 +458,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     LegalEntity person = CreateAssociate(legalEntity);
                     screeningRequest.Associates.Add(person);
                 }
-            }
-
-            /* If sole prop add contact person as associate */
-            if (application.AdoxioApplicanttype == (int)BusinessType.SoleProprietorship)
-            {
-                screeningRequest.Associates.Add(new LegalEntity()
-                {
-                    EntityId = screeningRequest.ContactPerson.ContactId,
-                    IsIndividual = true,
-                    Positions = new List<string> { "owner" },
-                    Contact = screeningRequest.ContactPerson,
-                    PreviousAddresses = new List<Address>(),
-                    Aliases = new List<Alias>()
-                });
             }
 
             /* Add associates from account */
