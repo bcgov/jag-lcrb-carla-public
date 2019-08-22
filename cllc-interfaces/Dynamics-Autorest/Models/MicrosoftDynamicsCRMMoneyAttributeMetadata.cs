@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         /// <param name="imeMode">Possible values include: 'Auto', 'Inactive',
         /// 'Active', 'Disabled'</param>
-        public MicrosoftDynamicsCRMMoneyAttributeMetadata(string imeMode = default(string), double? maxValue = default(double?), double? minValue = default(double?), int? precision = default(int?), int? precisionSource = default(int?), string calculationOf = default(string), string formulaDefinition = default(string), int? sourceTypeMask = default(int?), bool? isBaseCurrency = default(bool?))
+        public MicrosoftDynamicsCRMMoneyAttributeMetadata(string imeMode = default(string), decimal? maxValue = default(decimal?), decimal? minValue = default(decimal?), int? precision = default(int?), int? precisionSource = default(int?), string calculationOf = default(string), string formulaDefinition = default(string), int? sourceTypeMask = default(int?), bool? isBaseCurrency = default(bool?))
         {
             ImeMode = imeMode;
             MaxValue = maxValue;
@@ -58,12 +58,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "MaxValue")]
-        public double? MaxValue { get; set; }
+        public decimal? MaxValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "MinValue")]
-        public double? MinValue { get; set; }
+        public decimal? MinValue { get; set; }
 
         /// <summary>
         /// </summary>
