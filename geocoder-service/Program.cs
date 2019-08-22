@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
+using Serilog;
 using System;
 
 namespace Gov.Lclb.Cllb.Geocoder
@@ -23,12 +24,12 @@ namespace Gov.Lclb.Cllb.Geocoder
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
-
-                    logging.ClearProviders();
+                    logging.ClearProviders();                    
                     logging.SetMinimumLevel(LogLevel.Debug);
                     logging.AddDebug();
                     logging.AddEventSourceLogger();
                 })
+                .UseSerilog()
                 .UseStartup<Startup>();                
     }
 }

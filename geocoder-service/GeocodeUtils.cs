@@ -22,7 +22,7 @@ namespace Gov.Lclb.Cllb.Geocoder
 
         private IConfiguration Configuration { get; }
 
-        private string GEOCODE_API_BASE_URL;
+        
         
         private IDynamicsClient _dynamics;
 
@@ -56,7 +56,17 @@ namespace Gov.Lclb.Cllb.Geocoder
                 
                 string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
                 // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
-                _geocoder.GeoCoderAPI.Sites(outputFormat: "kml", addressString: address);
+                var output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
+                // get the lat and long for the pin.
+                double? latData = output.Features[0].Geometry.Coordinates[0];
+                double? longData = output.Features[0].Geometry.Coordinates[1];
+
+                // update the establishment.
+
+                var patchEstablishment = new MicrosoftDynamicsCRMadoxioEstablishment()
+                {
+                    
+                }
 
             }
         }
