@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Reflection;
@@ -18,16 +19,22 @@ namespace Gov.Lclb.Cllb.Geocoder
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly ILoggerFactory _loggerFactory;
+
+        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
+            _loggerFactory = loggerFactory;
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopController"));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             // Other ConfigureServices() code...
             services.AddSwaggerGen(c =>
@@ -102,8 +109,23 @@ namespace Gov.Lclb.Cllb.Geocoder
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB Geocoder Service");
             });
+
+            var logConfig = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .WriteTo.Console();
+
+            // enable Splunk logger using Serilog
+            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
+                )
+            {
+                logConfig.WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
+                        Configuration["SPLUNK_TOKEN"]);
+            }
+
+            Log.Logger = logConfig.CreateLogger();
         }
 
 
@@ -115,7 +137,7 @@ namespace Gov.Lclb.Cllb.Geocoder
         /// <param name="loggerFactory"></param>
         private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            ILogger log = loggerFactory.CreateLogger(typeof(Startup));
+            Microsoft.Extensions.Logging.ILogger log = loggerFactory.CreateLogger(typeof(Startup));
             log.LogInformation("Starting setup of Hangfire job ...");
 
             try
@@ -124,7 +146,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                 {
                     log.LogInformation("Creating Hangfire jobs for License issuance check ...");
 
-                    ILogger geocodeLog = loggerFactory.CreateLogger(typeof(GeocodeUtils));
+                    Microsoft.Extensions.Logging.ILogger geocodeLog = loggerFactory.CreateLogger(typeof(GeocodeUtils));
                     RecurringJob.AddOrUpdate(() => new GeocodeUtils(Configuration, geocodeLog).GeocodeEstablishments(null), Cron.Hourly());
 
 
