@@ -1,6 +1,6 @@
 ﻿using Hangfire.Dashboard;
 
-namespace Gov.Lclb.Cllb.SpdSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class LocalHangfireAuthorizationFilter : IDashboardAuthorizationFilter
     {

@@ -135,6 +135,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       checklistEstabRenderAssessed: ['', Validators.required],
       checklistSignageAssessed: ['', Validators.required],
       checklistEstablishmentAddressAssessed: ['', Validators.required],
+      checklistZoningaips: [''],
       assignedLicence: this.fb.group({
         id: [''],
         establishmentAddressStreet: [''],

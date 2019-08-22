@@ -2,7 +2,7 @@ import { Contact } from './contact.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { LegalEntity } from '@models/legal-entity.model';
 
-export interface Account {
+export class Account {
   id: string;
   name: string;
   description: string;
@@ -36,4 +36,59 @@ export interface Account {
   businessType: string;
   tiedHouse: TiedHouseConnection;
   legalEntity: LegalEntity;
+
+  isPartnership(): boolean {
+    const isPartnership = [
+      'GeneralPartnership',
+      'LimitedPartnership',
+      'LimitedLiabilityPartnership',
+      'Partnership'].indexOf(this.businessType) !== -1;
+    return isPartnership;
+  }
+
+  isPrivateCorporation(): boolean {
+    const isPrivateCorp = [
+      'PrivateCorporation',
+      'UnlimitedLiabilityCorporation',
+      'LimitedLiabilityCorporation'].indexOf(this.businessType) !== -1;
+    return isPrivateCorp;
+  }
+
+  isPublicCorporation(): boolean {
+    const isPublicCorp = ['PublicCorporation'].indexOf(this.businessType) !== -1;
+    return isPublicCorp;
+  }
+
+  getBusinessTypeName() {
+    if (!this.businessType) {
+      return '';
+    }
+    let name = '';
+    switch (this.businessType) {
+      case 'GeneralPartnership':
+      case 'LimitedPartnership"':
+      case 'LimitedLiabilityPartnership':
+        name = 'Partnership';
+        break;
+      case 'SoleProprietor':
+        name = 'Sole Proprietor';
+        break;
+      case 'IndigenousNation':
+        name = 'Indigenous Nation';
+        break;
+      case 'PublicCorporation':
+          name = 'Public Corporation';
+          break;
+      case 'PrivateCorporation':
+      case 'UnlimitedLiabilityCorporation':
+      case 'LimitedLiabilityCorporation':
+        name = 'Private Corporation';
+        break;
+      default:
+        name = this.businessType;
+        break;
+    }
+    return name;
+  }
 }
+

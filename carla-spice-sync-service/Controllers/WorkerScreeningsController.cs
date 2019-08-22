@@ -3,14 +3,15 @@ using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
-using SpdSync;
 using System.Collections.Generic;
-using SpdSync.models;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using Gov.Lclb.Cllb.Interfaces.Spice.Models;
+using Gov.Lclb.Cllb.Interfaces;
+using System.Linq;
 
-namespace Gov.Lclb.Cllb.SpdSync.Controllers
+namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
@@ -36,11 +37,11 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpPost("receive")]
-        public ActionResult ReceiveWorkerScreeningResults([FromBody] List<WorkerScreeningResponse> results)
+        public ActionResult ReceiveWorkerScreeningResults([FromBody] List<CompletedWorkerScreening> results)
         {
             // Process the updates received from the SPICE system.
             BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveWorkerImportJob(null, results));
-            _logger.LogInformation("Started receive worker screening results job");
+            _logger.LogInformation("Started receive completed worker screening job");
             return Ok();
         }       
 
@@ -56,42 +57,35 @@ namespace Gov.Lclb.Cllb.SpdSync.Controllers
             {
                 if (Guid.TryParse(workerIdString, out Guid workerId))
                 {
-                    var workerRequest = new Interfaces.Spice.Models.WorkerScreeningRequest();
+                    var workerRequest = new IncompleteWorkerScreening();
                     try
                     {
-                        // Generate the application request
-                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId, _logger);
+                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
                     }
-                    catch (ArgumentOutOfRangeException)
+                    catch (System.ArgumentOutOfRangeException)
                     {
-                        return NotFound($"Worker {workerIdString} is not found.");
+                        return NotFound($"Worker {workerId} is not found.");
                     }
                     catch (Exception ex)
                     {
                         _logger.LogError(ex.ToString());
                         return BadRequest();
-                    };
+                    }
 
                     if (workerRequest == null)
                     {
                         return NotFound($"Worker {workerId} is not found.");
                     }
-                    else
+                   
+                    var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
+                    if (result)
                     {
-                        var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest, _logger);
-
-                        if (result)
-                        {
-                            return Ok(workerRequest);
-                        }
+                        return Ok(workerRequest);
                     }
                 }
                 return BadRequest();
             }
-            else
-            {
-                return Unauthorized();
-            }
+            return Unauthorized();
         }
     }
 }

@@ -27,6 +27,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     {
                 config.AddEnvironmentVariables();
             })
+            
             .UseStartup<Startup>();
     }
 }

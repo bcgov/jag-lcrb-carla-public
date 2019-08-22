@@ -38,7 +38,7 @@ export class LegalEntityDataService extends DataService {
    * Create a new legal entity in Dynamics
    * @param data - legal entity data
    */
-  createLegalEntity(data: any) {
+  createLegalEntity(data: LegalEntity) {
     return this.http.post<LegalEntity>('api/adoxiolegalentity/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -47,7 +47,7 @@ export class LegalEntityDataService extends DataService {
    * update a  legal entity in Dynamics
    * @param data - legal entity data
    */
-  updateLegalEntity(data: any, id: string) {
+  updateLegalEntity(data: LegalEntity, id: string) {
     return this.http.put<LegalEntity>(`api/adoxiolegalentity/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
@@ -66,7 +66,7 @@ export class LegalEntityDataService extends DataService {
    * Create a new legal entity in Dynamics
    * @param data - legal entity data
    */
-  createChildLegalEntity(data: any) {
+  createChildLegalEntity(data: LegalEntity) {
     return this.http.post<LegalEntity>('api/adoxiolegalentity/child-legal-entity', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
