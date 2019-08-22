@@ -4,6 +4,13 @@
 This is the AutoRest configuration file for the APIs.
 
 ---
+### Useful tools
+
+https://www.json2yaml.com - Converts between json and yaml.
+
+https://apidevtools.org/swagger-parser/online/ - openapi validator
+
+https://roger13.github.io/SwagDefGen/ - convert raw json into OpenAPI 
 
 #### Basic Information 
 These are the global settings for APIs.
@@ -29,11 +36,5 @@ directive:
   
     # set each operationId to 'GeoCoderAPI<Tag>'
     transform: $.operationId = `GeoCoderAPI_${$.tags[0]}`
-
-  - from: swagger-document
-    where: $.paths..responses  
-    # set return type to string.
-    transform: $.schema.type = `string`
-    reason: no return type specified.
   
 ```

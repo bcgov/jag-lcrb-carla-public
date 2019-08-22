@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
 {
     using Microsoft.Rest;
+    using Models;
+    using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
@@ -228,6 +230,9 @@ namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
         /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
+        /// <exception cref="SerializationException">
+        /// Thrown when unable to deserialize the response
+        /// </exception>
         /// <exception cref="ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
@@ -237,7 +242,7 @@ namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> SitesWithHttpMessagesAsync(string outputFormat, string addressString = default(string), string locationDescriptor = default(string), int? maxResults = 1, string interpolation = default(string), bool? echo = true, bool? brief = false, bool? autoComplete = false, int? setBack = 0, int? outputSRS = 4326, int? minScore = 1, string matchPrecision = default(string), string matchPrecisionNot = default(string), string siteName = default(string), string unitDesignator = default(string), string unitNumber = default(string), string unitNumberSuffix = default(string), string civicNumber = default(string), string civicNumberSuffix = default(string), string streetName = default(string), string streetType = default(string), string streetDirection = default(string), string streetQualifier = default(string), string localityName = default(string), string provinceCode = "BC", string localities = default(string), string notLocalities = default(string), string bbox = default(string), string centre = default(string), double? maxDistance = default(double?), bool? extrapolate = default(bool?), string parcelPoint = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<JsonResponse>> SitesWithHttpMessagesAsync(string outputFormat, string addressString = default(string), string locationDescriptor = default(string), int? maxResults = 1, string interpolation = default(string), bool? echo = true, bool? brief = false, bool? autoComplete = false, int? setBack = 0, int? outputSRS = 4326, int? minScore = 1, string matchPrecision = default(string), string matchPrecisionNot = default(string), string siteName = default(string), string unitDesignator = default(string), string unitNumber = default(string), string unitNumberSuffix = default(string), string civicNumber = default(string), string civicNumberSuffix = default(string), string streetName = default(string), string streetType = default(string), string streetDirection = default(string), string streetQualifier = default(string), string localityName = default(string), string provinceCode = "BC", string localities = default(string), string notLocalities = default(string), string bbox = default(string), string centre = default(string), double? maxDistance = default(double?), bool? extrapolate = default(bool?), string parcelPoint = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (outputFormat == null)
             {
@@ -483,9 +488,27 @@ namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse();
+            var _result = new HttpOperationResponse<JsonResponse>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<JsonResponse>(_responseContent, Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    _httpRequest.Dispose();
+                    if (_httpResponse != null)
+                    {
+                        _httpResponse.Dispose();
+                    }
+                    throw new SerializationException("Unable to deserialize the response.", _responseContent, ex);
+                }
+            }
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);

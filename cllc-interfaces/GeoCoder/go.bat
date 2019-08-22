@@ -12,4 +12,6 @@ rem curl https://raw.githubusercontent.com/bcgov/api-specs/master/geocoder/geoco
 
 echo Updating client
 
-autorest --verbose --debug
+autorest --use=Azure/autorest.interactive --verbose --debug
+
+rem --use=Azure/autorest.interactive

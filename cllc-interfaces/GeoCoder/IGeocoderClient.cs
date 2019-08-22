@@ -7,6 +7,7 @@
 namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
 {
     using Microsoft.Rest;
+    using Models;
     using Newtonsoft.Json;
 
     /// <summary>
