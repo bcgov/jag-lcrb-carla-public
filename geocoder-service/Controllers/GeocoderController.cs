@@ -15,20 +15,20 @@ namespace Gov.Lclb.Cllb.Geocoder.Controllers
     public class GeocoderController : ControllerBase
     {
         IConfiguration Configuration;
-        private readonly ILogger logger;
+        private readonly ILogger _logger;
 
-        public GeocoderController(IConfiguration configuration, ILogger logger)
+        public GeocoderController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
-            this.logger = logger;
+            this._logger = loggerFactory.CreateLogger(typeof(GeocoderController));
         }
 
         // Geocode a given establishment.
         [HttpGet("GeocodeEstablishment/{establishmentId}")]
         public ActionResult GeocodeEstablishment( string establishmentId )
         {
-            logger.LogInformation($"Geocoding establishment. EstablishmentId: {establishmentId}");
-            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, logger).GeocodeEstablishment(null, establishmentId));
+            _logger.LogInformation($"Geocoding establishment. EstablishmentId: {establishmentId}");
+            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _logger).GeocodeEstablishment(null, establishmentId));
             return Ok();
         }
 
