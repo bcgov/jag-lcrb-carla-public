@@ -18,3 +18,18 @@
     background-color: #E1E8F2;
     padding: 5px;
 }
+
+.question-label {
+    font-weight: 600;
+}
+
+::ng-deep {
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+        line-height: 36px !important;
+    }
+
+    .mat-button-toggle-checked {
+        background-color: #38598a !important;
+        color: #fff !important;
+    }
+}

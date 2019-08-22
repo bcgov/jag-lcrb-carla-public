@@ -220,7 +220,6 @@ namespace Gov.Lclb.Cllb.OneStopService
                             BatchSizeCount = 10,
                             ChannelIdType = HECConfiguration.ChannelIdOption.None,
                             DefaultTimeoutInMilliseconds = 10000,
-
                             SplunkCollectorUrl = splunkCollectorUrl,
                             Token = splunkToken,
                             UseAuthTokenAsQueryString = false

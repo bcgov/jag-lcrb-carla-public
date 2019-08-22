@@ -40,10 +40,10 @@ export class AccountDataService extends DataService {
       this.tiedHouseService.getTiedHouse(id),
       this.legalEntityDataService.getBusinessProfileSummary())
       .pipe(map(data => {
-        const account = data[0];
+        const account: Account = data[0];
         account.tiedHouse = data[1];
         account.legalEntity = data[2].length ? data[2][0] : null;
-        this.store.dispatch(new SetCurrentAccountAction({ ...account }));
+        this.store.dispatch(new SetCurrentAccountAction(<Account>{ ...account }));
         return account;
       }));
   }

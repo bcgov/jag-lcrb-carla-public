@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Gov.Lclb.Cllb.SpdSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class EnumTypeParameterFilter : IParameterFilter
     {

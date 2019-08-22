@@ -30,7 +30,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   application: Application;
   busy: any;
   showValidationMessages: boolean;
-  validationMessages: any[];
+  validationMessages: string[];
 
 
   constructor(private store: Store<AppState>, private fb: FormBuilder,
@@ -47,9 +47,26 @@ export class AssociatePageComponent extends FormBase implements OnInit {
       // noOrgStructureChange: [''],
       checklistOrgLeadershipBuilt: ['', Validators.required],
       checklistKeyPersonnelBuilt: ['', Validators.required],
-      checklistShareholdersBuilt: ['', Validators.required]
+      checklistShareholdersBuilt: ['', Validators.required],
+
+      // these fields are not saving
+      checklistorgstructure: ['', Validators.required],
+      checklisttiedhouseassess: ['', Validators.required],
+      checklistAllowLicenceUse: ['', Validators.required],
+      checklistUnreportedSale: ['', Validators.required],
+      checklistConvicted: ['', Validators.required],
     });
     this.subscribeForData();
+  }
+
+  reconfigureFormFields() {
+    if (this.account.isPrivateCorporation() || this.account.isPublicCorporation()) {
+      this.form.get('checklistShareholdersBuilt').clearValidators();
+      this.form.get('checklistShareholdersBuilt').reset();
+    } else {
+      this.form.get('checklistShareholdersBuilt').setValidators([Validators.required]);
+      this.form.get('checklistShareholdersBuilt').reset();
+    }
   }
 
 
@@ -59,6 +76,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
       .pipe(filter(s => !!s))
       .subscribe(account => {
         this.account = account;
+        this.reconfigureFormFields();
         this.legalEntityId = this.account.legalEntity.id;
       });
 
