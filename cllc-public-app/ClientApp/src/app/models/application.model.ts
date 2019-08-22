@@ -59,14 +59,21 @@ export class Application {
   indigenousNationId: string;
   federalProducerNames: string;
 
-  checklistBrandingAssess: string;
-  checklistEstabRenderAssessed: string;
-  checklistFloorPlanAssess: string;
-  checklistKeyPersonnelBuilt: string;
-  checklistOrgLeadershipBuilt: string;
-  checklistShareholdersBuilt: string;
-  checklistSignageAssessed: string;
-  checklistSiteMapAssess: string;
-  checklistValidInterestAssess: string;
-  checklistEstablishmentAddressAssessed: string;
+  renewalCriminalOffenceCheck: string;
+  renewalUnreportedSaleOfBusiness: string;
+  renewalBusinessType: string;
+  renewalTiedhouse: string;
+  tiedhouseFederalInterest: string;
+  renewalOrgLeadership: string;
+  renewalkeypersonnel: string;
+  renewalShareholders: string;
+  renewalOutstandingFines: string;
+
+  renewalBranding: string;
+  renewalSignage: string;
+  renewalEstablishmentAddress: string;
+  renewalValidInterest: string;
+  renewalZoning: string;
+  renewalFloorPlan: string;
+  renewalSiteMap: string;
 }
