@@ -57,12 +57,17 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     this.subscribeForData();
   }
 
+  isTouchedAndInvalid(fieldName: string): boolean {
+    return this.form.get(fieldName).touched
+      && !this.form.get(fieldName).valid;
+  }
+
   reconfigureFormFields() {
     if (this.account.isPrivateCorporation() || this.account.isPublicCorporation()) {
-      this.form.get('renewalShareholders').clearValidators();
+      this.form.get('renewalShareholders').setValidators([Validators.required]);
       this.form.get('renewalShareholders').reset();
     } else {
-      this.form.get('renewalShareholders').setValidators([Validators.required]);
+      this.form.get('renewalShareholders').clearValidators();
       this.form.get('renewalShareholders').reset();
     }
   }

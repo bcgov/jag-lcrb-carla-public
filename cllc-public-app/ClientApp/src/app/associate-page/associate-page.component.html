@@ -30,7 +30,8 @@
         or convicted of a criminal offence within the past 12 months that you have not reported to the LCRB?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalCriminalOffenceCheck" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalCriminalOffenceCheck')}"
+          formControlName="renewalCriminalOffenceCheck" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -51,7 +52,8 @@
         2. Has there been an unreported sale of the business associated with the licence within the past 12 months?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalUnreportedSaleOfBusiness" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalUnreportedSaleOfBusiness')}"
+          formControlName="renewalUnreportedSaleOfBusiness" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -73,7 +75,8 @@
         changed?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalBusinessType" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalBusinessType')}"
+          formControlName="renewalBusinessType" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -96,7 +99,8 @@
         a federal producer of cannabis within the past 12 months?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalTiedhouse" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalTiedhouse')}"
+          formControlName="renewalTiedhouse" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -119,7 +123,8 @@
         otherwise - in the licensee {{account?.getBusinessTypeName()}} within the past 12 months?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="tiedhouseFederalInterest" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('tiedhouseFederalInterest')}"
+          formControlName="tiedhouseFederalInterest" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -142,7 +147,8 @@
         6. Have you made any unreported changes to your organizational leadership within the past 12 months?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalOrgLeadership" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalOrgLeadership')}"
+          formControlName="renewalOrgLeadership" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -167,7 +173,8 @@
         7. Have you made any unreported changes to your key personnel within the past 12 months?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalkeypersonnel" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalkeypersonnel')}"
+          formControlName="renewalkeypersonnel" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -191,7 +198,8 @@
         8. Our records show the above share distribution. Has this changed?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalShareholders" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalShareholders')}"
+          formControlName="renewalShareholders" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>
@@ -216,7 +224,8 @@
         the Cannabis Control and Licensing Act that has not yet been paid?
       </div>
       <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="renewalOutstandingFines" aria-label="Font Style">
+        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalOutstandingFines')}"
+          formControlName="renewalOutstandingFines" aria-label="Font Style">
           <mat-button-toggle value="Yes">Yes</mat-button-toggle>
           <mat-button-toggle value="No">No</mat-button-toggle>
         </mat-button-toggle-group>

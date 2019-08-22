@@ -19,7 +19,8 @@
             1. Have you made an unreported change to your store’s name in the past 12 months?
           </div>
           <div style="flex: 0 0 85px;">
-            <mat-button-toggle-group formControlName="renewalBranding" aria-label="Font Style">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalBranding')}"
+              formControlName="renewalBranding" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -49,7 +50,8 @@
             2. Have you updated the store’s signage or branding in the past 12 months?
           </div>
           <div style="flex: 0 0 85px;">
-            <mat-button-toggle-group formControlName="renewalSignage" aria-label="Font Style">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalSignage')}"
+              formControlName="renewalSignage" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -72,7 +74,8 @@
             physical location has not changed).
           </div>
           <div style="flex: 0 0 85px;">
-            <mat-button-toggle-group formControlName="renewalEstablishmentAddress" aria-label="Font Style">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalEstablishmentAddress')}"
+              formControlName="renewalEstablishmentAddress" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -147,7 +150,8 @@
             within the last 12 months?
           </div>
           <div style="flex: 0 0 85px;">
-            <mat-button-toggle-group formControlName="renewalValidInterest" aria-label="Font Style">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalValidInterest')}"
+              formControlName="renewalValidInterest" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -186,10 +190,12 @@
       <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
-            5. Are you aware of any local government or Indigenous nation zoning changes with respect to your establishment location?  ****If so, please describe.*****
+            5. Are you aware of any local government or Indigenous nation zoning changes with respect to your
+            establishment location? ****If so, please describe.*****
           </div>
           <div style="flex: 0 0 85px;">
-            <mat-button-toggle-group formControlName="renewalZoning" aria-label="Font Style">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalZoning')}"
+              formControlName="renewalZoning" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -210,7 +216,8 @@
             6. Have you made any unreported changes to the store’s floor plan within the past 12 months?
           </div>
           <div style="flex: 0 0 85px;">
-            <mat-button-toggle-group formControlName="renewalFloorPlan" aria-label="Font Style">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalFloorPlan')}"
+              formControlName="renewalFloorPlan" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
@@ -231,7 +238,7 @@
             7. Have you made any unreported changes to the site map within the past 12 months?
           </div>
           <div style="flex: 0 0 85px;">
-            <mat-button-toggle-group formControlName="renewalSiteMap" aria-label="Font Style">
+            <mat-button-toggle-group  [ngClass]="{'invalid': isTouchedAndInvalid('renewalShareholders')}" formControlName="renewalSiteMap" aria-label="Font Style">
               <mat-button-toggle value="Yes">Yes</mat-button-toggle>
               <mat-button-toggle value="No">No</mat-button-toggle>
             </mat-button-toggle-group>
