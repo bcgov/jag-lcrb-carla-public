@@ -478,7 +478,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 {
                     applicationfilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
                 }
-                else
+                else if(accountId != assoc.EntityId)
                 {
                     applicationfilter += " and adoxio_legalentityid ne " + assoc.EntityId;
                 }
