@@ -21,9 +21,7 @@ namespace Gov.Lclb.Cllb.Geocoder
         private static readonly HttpClient Client = new HttpClient();
 
         private IConfiguration Configuration { get; }
-
-        
-        
+               
         private IDynamicsClient _dynamics;
 
         private IGeocoderClient _geocoder;
@@ -51,23 +49,52 @@ namespace Gov.Lclb.Cllb.Geocoder
 
             var establishment = _dynamics.GetEstablishmentById(establishmentId);
 
+            await GeocodeEstablishment(hangfireContext, establishment);
+        }
+
+        private async Task GeocodeEstablishment(PerformContext hangfireContext, MicrosoftDynamicsCRMadoxioEstablishment establishment)
+        {
             if (establishment != null)
             {
-                
                 string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
                 // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
                 var output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
                 // get the lat and long for the pin.
-                double? latData = output.Features[0].Geometry.Coordinates[0];
-                double? longData = output.Features[0].Geometry.Coordinates[1];
+                double? longData = output.Features[0].Geometry.Coordinates[0];
+                double? latData = output.Features[0].Geometry.Coordinates[1];
 
                 // update the establishment.
 
                 var patchEstablishment = new MicrosoftDynamicsCRMadoxioEstablishment()
                 {
-                    
+                    AdoxioLongitude = (decimal?)longData,
+                    AdoxioLatitude = (decimal?)latData
+                };
+                try
+                {
+                    _dynamics.Establishments.Update(establishment.AdoxioEstablishmentid, patchEstablishment);
+                    _logger.LogInformation($"Updated establishment with address {address}");
+                    hangfireContext.WriteLine($"Updated establishment with address {address}");
                 }
-
+                catch (OdataerrorException odee)
+                {
+                    if (hangfireContext != null)
+                    {
+                        _logger.LogError("Error updating establishment");
+                        _logger.LogError("Request:");
+                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError("Response:");
+                        _logger.LogError(odee.Response.Content);
+                        hangfireContext.WriteLine("Error updating establishment");
+                        hangfireContext.WriteLine("Request:");
+                        hangfireContext.WriteLine(odee.Request.Content);
+                        hangfireContext.WriteLine("Response:");
+                        hangfireContext.WriteLine(odee.Response.Content);
+                    }
+                    
+                    // fail if we can't update.
+                    throw (odee);
+                }
             }
         }
 
@@ -82,23 +109,23 @@ namespace Gov.Lclb.Cllb.Geocoder
                 _logger.LogInformation("Starting GeocodeEstablishments job.");
                 hangfireContext.WriteLine("Starting GeocodeEstablishments job.");
             }
-            IList<MicrosoftDynamicsCRMadoxioLicences> result = null;
+            IList<MicrosoftDynamicsCRMadoxioEstablishment> result;
+
             try
             {
-                var expand = new List<string> { "adoxio_Licencee" };
-                string filter = $"adoxio_orgbookcredentialresult eq null";
-                result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
+                string filter = $"adoxio_longitude eq null";
+                result = _dynamics.Establishments.Get().Value;
             }
             catch (OdataerrorException odee)
             {
                 if (hangfireContext != null)
                 {
-                    _logger.LogError("Error getting Licences");
+                    _logger.LogError("Error getting Establishments");
                     _logger.LogError("Request:");
                     _logger.LogError(odee.Request.Content);
                     _logger.LogError("Response:");
                     _logger.LogError(odee.Response.Content);
-                    hangfireContext.WriteLine("Error getting Licences");
+                    hangfireContext.WriteLine("Error getting Establishments");
                     hangfireContext.WriteLine("Request:");
                     hangfireContext.WriteLine(odee.Request.Content);
                     hangfireContext.WriteLine("Response:");
@@ -110,10 +137,9 @@ namespace Gov.Lclb.Cllb.Geocoder
             }
 
             // now for each one process it.
-            foreach (var item in result)
-            {
-                string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
-                string licenceId = item.AdoxioLicencesid;
+            foreach (var establishment in result)
+            {                 
+                await GeocodeEstablishment(hangfireContext, establishment);
             }
 
             _logger.LogInformation("End of GeocodeEstablishments job.");
