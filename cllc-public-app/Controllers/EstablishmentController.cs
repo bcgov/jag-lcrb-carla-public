@@ -2,25 +2,27 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     [Authorize(Policy = "Business-User")]
-    public class AdoxioEstablishmentController : Controller
+    public class EstablishmentsController : Controller
     {        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
 
-        public AdoxioEstablishmentController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
+        public EstablishmentsController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
         {            
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioEstablishmentController));
+            _logger = loggerFactory.CreateLogger(typeof(EstablishmentsController));
         }
 
         /// <summary>
@@ -51,13 +53,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
         }
 
+        [HttpGet("map")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetMap()
+        {
+            // get establishments
+
+            var establishments = _dynamicsClient.Establishments.Get().Value;
+
+            List<EstablishmentMapData> establishmentMapData = new List<EstablishmentMapData>();
+
+            foreach (var establishment in establishments)
+            {
+                establishmentMapData.Add(new EstablishmentMapData()
+                {
+                    id = establishment.AdoxioEstablishmentid.ToString(),
+                    Name = establishment.AdoxioName,
+                    Phone = establishment.AdoxioPhone,
+                    AddressCity = establishment.AdoxioAddresscity,
+                    AddressPostal = establishment.AdoxioAddresspostalcode,
+                    AddressStreet = establishment.AdoxioAddressstreet,
+                    Latitude = (decimal) establishment.AdoxioLatitude,
+                    Longitude = (decimal) establishment.AdoxioLongitude,
+                });
+            }
+
+            return Json(establishmentMapData);
+        }
+
         /// <summary>
         /// Create a establishment
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost()]
-        public async Task<IActionResult> CreateEstablishment([FromBody] ViewModels.AdoxioEstablishment item)
+        public async Task<IActionResult> CreateEstablishment([FromBody] ViewModels.Establishment item)
         {
             // create a new legal entity.
             MicrosoftDynamicsCRMadoxioEstablishment adoxio_establishment = new MicrosoftDynamicsCRMadoxioEstablishment();
@@ -78,7 +108,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Unable to create establishment");
             }
 
-            ViewModels.AdoxioEstablishment result = adoxio_establishment.ToViewModel();
+            ViewModels.Establishment result = adoxio_establishment.ToViewModel();
                        
             return Json(result);
         }
@@ -90,7 +120,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEstablishment([FromBody] ViewModels.AdoxioEstablishment item, string id)
+        public async Task<IActionResult> UpdateEstablishment([FromBody] ViewModels.Establishment item, string id)
         {
             if (string.IsNullOrEmpty(id) || id != item.id)
             {
