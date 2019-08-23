@@ -41,6 +41,7 @@ export const MY_FORMATS = {
   },
 };
 
+
 @Component({
   selector: 'app-account-profile',
   templateUrl: './account-profile.component.html',
@@ -95,7 +96,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         _mailingSameAsPhysicalAddress: [],
         // name: [''],
         // businessDBAName: [''],
-        bcIncorporationNumber: [''], // Validators.required
+        bcIncorporationNumber: [''],
         dateOfIncorporationInBC: [''],
         businessNumber: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
         businessType: ['', Validators.required],
@@ -237,6 +238,16 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         this.form.get('businessProfile.physicalAddressPostalCode').setValue(
           (this.form.get('businessProfile.physicalAddressPostalCode').value || '').replace(/\s+/g, '')
         );
+
+        if (this.account.isPrivateCorporation()) {
+          this.form.get('businessProfile.bcIncorporationNumber')
+          .setValidators([Validators.pattern('^BC[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
+        } else if (this.account.businessType === 'Society') {
+          this.form.get('businessProfile.bcIncorporationNumber')
+          .setValidators([Validators.pattern('^S[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
+        } else {
+          this.form.get('businessProfile.bcIncorporationNumber').clearValidators();
+        }
       });
   }
 
