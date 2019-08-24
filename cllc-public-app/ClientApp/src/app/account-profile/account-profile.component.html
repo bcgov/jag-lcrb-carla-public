@@ -76,10 +76,9 @@
                 <br />
                 <input class="form-control" style="width: 250px;" type="text" id="bcIncorporationNumber"
                   formControlName="bcIncorporationNumber">
-                <div *ngIf="false" class="alert alert-danger" style="width: 250px;">
-                  <div *ngIf="form.controls['bcIncorporationNumber'].hasError('required') ">
-                    This is required
-                  </div>
+                <div *ngIf="!form.get('businessProfile.bcIncorporationNumber').valid && form.get('businessProfile.bcIncorporationNumber').touched" class="alert alert-danger" style="width: 250px;">
+                    <span *ngIf="account?.isPrivateCorporation()">Please use this format: 'BC1234567'</span>
+                    <span *ngIf="account?.businessType === 'Society'">Please use this format: 'S1234567'</span>
                 </div>
               </div>
             </section>
