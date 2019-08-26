@@ -342,7 +342,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
             if (accountSiteminderGuid == null || accountSiteminderGuid.Length == 0)
             {
-                _logger.LogError(LoggingEvents.Error, "No account Siteminder Guid exernal id");
+                _logger.LogDebug(LoggingEvents.Error, "No account Siteminder Guid exernal id");
                 throw new Exception("Error. No accountSiteminderGuid exernal id");
             }
 
@@ -350,7 +350,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
-                _logger.LogError(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
+                _logger.LogDebug(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
                 throw new Exception("Error. No ContactSiteminderGuid exernal id");
             }
 
@@ -621,7 +621,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.LogError(LoggingEvents.Error, "Invalid user registration.");
+                _logger.LogDebug(LoggingEvents.Error, "Invalid user registration.");
                 throw new Exception("Invalid user registration.");
             }
 
@@ -813,7 +813,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set account filter
             accountfilter = "_adoxio_accountid_value eq " + accountId;
-            _logger.LogError("Account filter = " + accountfilter);
+            _logger.LogDebug("Account filter = " + accountfilter);
 
             tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
 
