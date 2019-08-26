@@ -37,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = new List<ViewModels.TiedHouseConnection>();
             IEnumerable<MicrosoftDynamicsCRMadoxioTiedhouseconnection> tiedHouseConnections = null;
             string accountfilter = "_adoxio_accountid_value eq " + accountId;
-            _logger.LogError("Account filter = " + accountfilter);
+            _logger.LogDebug("Account filter = " + accountfilter);
 
             tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
 

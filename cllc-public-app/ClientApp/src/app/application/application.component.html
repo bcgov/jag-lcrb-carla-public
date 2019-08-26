@@ -1029,7 +1029,7 @@
       </section>
       <section>
         <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-          fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+          fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId" [maxNumberOfFiles]="200"
           (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
           [enableFileDeletion]="false" #supportingDocuments>
         </app-file-uploader>
