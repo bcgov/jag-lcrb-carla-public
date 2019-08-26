@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
-                _logger.LogError(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
+                _logger.LogDebug(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
                 throw new Exception("Error. No ContactSiteminderGuid exernal id");
             }
 
@@ -205,7 +205,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.LogError(LoggingEvents.Error, "Invalid user registration.");
+                _logger.LogDebug(LoggingEvents.Error, "Invalid user registration.");
                 throw new Exception("Invalid user registration.");
             }
 
@@ -228,7 +228,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
-                _logger.LogError(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
+                _logger.LogDebug(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
                 throw new Exception("Error. No ContactSiteminderGuid exernal id");
             }
 
@@ -337,7 +337,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.LogError(LoggingEvents.Error, "Invalid user registration.");
+                _logger.LogDebug(LoggingEvents.Error, "Invalid user registration.");
                 throw new Exception("Invalid user registration.");
             }
 
