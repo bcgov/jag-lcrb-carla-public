@@ -1,5 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Utility;
+using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -36,21 +37,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // diagnostic feature for development - echo headers back.
                 if ((!_env.IsProduction()) && path.Equals("headers"))
-                {
-                    StringBuilder html = new StringBuilder();
-                    html.AppendLine("<html>");
-                    html.AppendLine("<body>");
-                    html.AppendLine("<b>Request Headers:</b>");
-                    html.AppendLine("<ul style=\"list-style-type:none\">");
-                    foreach (var item in Request.Headers)
-                    {
-                        html.AppendFormat("<li><b>{0}</b> = {1}</li>\r\n", item.Key, ExpandValue(item.Value));
-                    }
-                    html.AppendLine("</ul>");
-                    html.AppendLine("</body>");
-                    html.AppendLine("</html>");
+                {                    
                     ContentResult contentResult = new ContentResult();
-                    contentResult.Content = html.ToString();
+                    contentResult.Content = LoggingEvents.GetHeaders(Request);
                     contentResult.ContentType = "text/html";
                     return contentResult;
                 }
@@ -80,28 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     };
                 }
             }
-        }
-    
-
-        /// <summary>
-        /// Utility function used to expand headers.
-        /// </summary>
-        /// <param name="values"></param>
-        /// <returns></returns>
-        private static string ExpandValue(IEnumerable<string> values)
-        {
-            StringBuilder value = new StringBuilder();
-
-            foreach (string item in values)
-            {
-                if (value.Length > 0)
-                {
-                    value.Append(", ");
-                }
-                value.Append(item);
-            }
-            return value.ToString();
-        }
+        }    
 
 		/// <summary>
         /// Injects an authentication token cookie into the response for use with the 
