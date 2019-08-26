@@ -205,8 +205,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            _logger.LogError("Application id = " + id);
-            _logger.LogError("User id = " + userSettings.AccountId);
+            _logger.LogDebug("Application id = " + id);
+            _logger.LogDebug("User id = " + userSettings.AccountId);
 
             ViewModels.Application result = null;
             var dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
@@ -361,14 +361,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // in case the job number is not there, try getting the record from the server.
             if (adoxioApplication.AdoxioJobnumber == null)
             {
-                _logger.LogError("AdoxioJobnumber is null, fetching record again.");
+                _logger.LogDebug("AdoxioJobnumber is null, fetching record again.");
                 Guid id = Guid.Parse(adoxioApplication.AdoxioApplicationid);
                 adoxioApplication = await _dynamicsClient.GetApplicationById(id);
             }
 
             if (adoxioApplication.AdoxioJobnumber == null)
             {
-                _logger.LogError("Unable to get the Job Number for the Application.");
+                _logger.LogDebug("Unable to get the Job Number for the Application.");
                 throw new Exception("Error creating Licence Application.");
             }
 
