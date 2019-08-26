@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-    public class AdoxioEstablishment
+    public class Establishment
     {
         // string form of the guid.
         public string id { get; set; }
