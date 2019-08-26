@@ -308,7 +308,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 try
                 {
-                    _logger.LogInformation("Checking user session");
+                    _logger.LogDebug("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
                     _logger.LogDebug("UserSettings found: " + userSettings.GetJson());
                 }

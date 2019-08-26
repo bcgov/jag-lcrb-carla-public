@@ -23,12 +23,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<string> receiveFromPartner(string inputXml)
         {
             var url = $"{BaseUri}?inputXML={Uri.EscapeDataString(inputXml)}";
-            logger.LogInformation($"InputXML to send = {inputXml}");
+            logger.LogDebug($"InputXML to send = {inputXml}");
             var response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                logger.LogInformation("OneStop message sequence completed successfully ");
+                logger.LogDebug("OneStop message sequence completed successfully ");
                 return content;
             } else
             {
