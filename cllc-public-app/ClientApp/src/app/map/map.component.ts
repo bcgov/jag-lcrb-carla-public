@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EstablishmentDataService } from '@app/services/establishment-data.service';
+import { Subscription } from 'rxjs';
 
 declare var EstablishmentsMap: any;
 declare var searchMapOptions: any;
@@ -12,7 +13,7 @@ declare var searchMapOptions: any;
 
 
 export class MapComponent implements OnInit {
-
+  busy: Subscription;
   constructor(
     private establishmentDataService: EstablishmentDataService
   ) { }
