@@ -5,7 +5,7 @@ import { WorkerDataService } from '../../services/worker-data.service.';
 import { User } from '../../models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { Subscription, Observable, Subject } from 'rxjs';
+import { Subscription, Observable, Subject, forkJoin } from 'rxjs';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { MatSnackBar } from '@angular/material';
 import { ContactDataService } from '@services/contact-data.service';
@@ -122,8 +122,12 @@ export class SpdConsentComponent implements OnInit {
   save(trackResult: boolean = false): Subject<boolean> {
     const subResult = new Subject<boolean>();
     const worker = this.form.value;
+    worker.selfdisclosure = worker.contact.selfDisclosure;
 
-    const busy = this.contactDataService.updateContact(this.form.value.contact).subscribe(() => {
+    const busy = forkJoin(
+      this.contactDataService.updateContact(this.form.value.contact),
+      this.workerDataService.updateWorker(worker, worker.id)
+    ).subscribe(() => {
       subResult.next(true);
       this.reloadUser();
     }, () => subResult.next(false)
