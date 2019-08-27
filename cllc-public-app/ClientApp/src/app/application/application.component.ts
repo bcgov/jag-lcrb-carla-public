@@ -154,6 +154,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
+      proposedChange: [''],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
