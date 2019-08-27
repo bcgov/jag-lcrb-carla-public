@@ -10,7 +10,8 @@ export class FormBase implements OnDestroy {
     componentActive = true;
 
     isValidOrNotTouched(field: string) {
-        return this.form.get(field).valid || !this.form.get(field).touched;
+        return !this.form.get(field).disabled
+            && (this.form.get(field).valid || !this.form.get(field).touched);
     }
 
     public rejectIfNotDigitOrBackSpace(event) {
