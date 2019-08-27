@@ -69,7 +69,7 @@
           </div>
           <div formGroupName="assignedLicence"
             *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
-            <h3 class="blue-header">CURRENT ADDRESS</h3>
+            <h3 class="blue-header" style="margin-left: -15px;">CURRENT ADDRESS</h3>
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
                 <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
@@ -203,9 +203,11 @@
       <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange">
         <h3 class="blue-header">DESCRIPTION OF CHANGE</h3>
         <div class="padded-section">
-          <app-field label="Please briefly outline the  proposed change" [required]="false" [isFullWidth]="true"
-            [valid]="true" errorMessage="Please enter a description ">
-            <textarea rows="8" style="width: 100%;"></textarea>
+          <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
+            [showChevrons]="false" [valid]="!form.get('description1').touched || form.get('description1').valid"
+            errorMessage="Please enter a description ">
+            <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
+              minlength="10"></textarea>
           </app-field>
         </div>
       </section>
@@ -345,8 +347,9 @@
         </section>
       </div>
       <br>
-      <hr>
-      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+      <hr *ngIf="application.applicationType.showDescription1">
+      <mat-card *ngIf="application.applicationType.showDescription1" class="mat-elevation-z0"
+        style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             Does the proposed change involve a shared vestibule or changes to the entrances, exits or windows?
@@ -361,7 +364,7 @@
         </section>
       </mat-card>
 
-      <div class="ngtest-site-plan" *ngIf="showFormControl(application?.applicationType?.sitePlan)">
+      <div class="ngtest-site-plan" *ngIf="showSitePlan()">
         <hr><br>
         <label for="">Site Plan</label>
         <br>
@@ -781,15 +784,6 @@
             formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
         </app-field>
       </address>
-      <br>
-      <p>
-          <i>
-            <b>Please note:</b> Applications which are submitted without all required information or documents will
-            not be
-            processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
-            applicants provide all required documents to the LCRB, the application will be processed.
-          </i>
-        </p>
 
       <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
         DECLARATIONS
@@ -895,6 +889,15 @@
       </div>
 
       <p>Proceed to pay online using a credit card through the secure web portal.</p>
+
+      <p>
+        <i>
+          <b>Please note:</b> Applications which are submitted without all required information or documents will
+          not be
+          processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+          applicants provide all required documents to the LCRB, the application will be processed.
+        </i>
+      </p>
 
       <section class="error" *ngIf="showValidationMessages">
         <p *ngFor="let message of validationMessages">

@@ -99,6 +99,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewalfloorplan = (int?)from.RenewalFloorPlan;
             to.AdoxioRenewalsitemap = (int?)from.RenewalSiteMap;
             to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
+            to.AdoxioDescription1 = from.Description1;
 
 
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
@@ -258,6 +259,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 AdoxioInvoiceId = dynamicsApplication._adoxioInvoiceValue,
 
                 PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
+                Description1 = dynamicsApplication.AdoxioDescription1,
 
                 //get contact details
                 ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
