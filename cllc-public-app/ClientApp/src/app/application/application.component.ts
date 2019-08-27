@@ -154,7 +154,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
-      proposedChange: [''],
+      description1: ['', [Validators.required]],
+      proposedChange: ['', [Validators.required]],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -275,6 +276,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
     }
+
+    if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange) {
+      this.form.get('proposedChange').disable();
+    }
+
+    if (!this.application.applicationType.showDescription1) {
+      this.form.get('description1').disable();
+    }
   }
 
   private getApplicationContent(contentCartegory: string) {
@@ -325,6 +334,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
     console.log(this.form.get('establishmentName').errors);
     this.possibleProblematicNameWarning =
       this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
+  }
+
+  showSitePlan(): boolean {
+    let show = this.showFormControl(this.application.applicationType.sitePlan);
+    if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
+      show = this.showFormControl(this.application.applicationType.sitePlan)
+        && this.form.get('proposedChange').value === 'Yes';
+    }
+
+    return show;
   }
 
   /**
@@ -418,43 +437,43 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.validationMessages = [];
 
     if (this.application.applicationType.showAssociatesFormUpload &&
-      (this.uploadedAssociateDocuments < 1)) {
+      ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('Associate form is required.');
     }
 
     if (this.application.applicationType.showFinancialIntegrityFormUpload &&
-      (this.uploadedFinancialIntegrityDocuments < 1)) {
+      ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('Financial Integrity form is required.');
     }
 
     if (this.application.applicationType.showSupportingDocuments &&
-      (this.uploadedSupportingDocuments < 1)) {
+      ((this.uploadedSupportingDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
     }
 
     if (this.application.applicationType.signage === FormControlState.Show &&
-      (this.uploadedSignageDocuments < 1)) {
+      ((this.uploadedSignageDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one signage document is required.');
     }
 
-    if (this.application.applicationType.validInterest  === FormControlState.Show &&
-      (this.uploadedValidInterestDocuments < 1)) {
+    if (this.application.applicationType.validInterest === FormControlState.Show &&
+      ((this.uploadedValidInterestDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
     }
 
-    if (this.application.applicationType.sitePlan  === FormControlState.Show &&
-      (this.uploadedSitePlanDocuments < 1)) {
+    if (this.showSitePlan() &&
+      ((this.uploadedSitePlanDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one site plan document is required.');
     }
 
-    if (this.application.applicationType.floorPlan  === FormControlState.Show &&
-      (this.uploadedFloorPlanDocuments < 1)) {
+    if (this.application.applicationType.floorPlan === FormControlState.Show &&
+      ((this.uploadedFloorPlanDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one floor plan document is required.');
     }
