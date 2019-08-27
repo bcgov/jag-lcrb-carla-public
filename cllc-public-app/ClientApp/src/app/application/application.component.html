@@ -54,7 +54,7 @@
 
             <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
               [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
-              [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
+              [required]="true" [valid]="isValidOrNotTouched('establishmentName')"
               errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
               <input class="form-control" style="width: 500px;" type="text"
                 [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
@@ -108,13 +108,13 @@
             &nbsp;
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
-                [valid]="form.get('establishmentAddressStreet').valid || !form.get('establishmentAddressStreet').touched"
+                [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                 errorMessage="Please enter the street address">
                 <input class="form-control" type="text" autocomplete="address-line1"
                   formControlName="establishmentAddressStreet">
               </app-field>
               <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
-                [valid]="form.get('establishmentAddressCity').valid || !form.get('establishmentAddressCity').touched"
+                [valid]="isValidOrNotTouched('establishmentAddressCity')"
                 errorMessage="Please enter the city">
                 <input class="form-control" type="text" autocomplete="address-level2"
                   formControlName="establishmentAddressCity">
@@ -127,7 +127,7 @@
               </section>
               <section class="col-md-4 col-xs-12">
                 <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
-                  [valid]="form.get('establishmentAddressPostalCode').valid || !form.get('establishmentAddressPostalCode').touched"
+                  [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                   errorMessage="Please enter the postal code">
                   <input class="form-control" type="text" autocomplete="postal-code"
                     formControlName="establishmentAddressPostalCode">
@@ -141,7 +141,7 @@
             <div class="light-blue-bg" style="display: flex;">
               <div style="flex: 0 0 210px;">
                 <app-field label="Parcel Identifier (PID)"
-                  [valid]="!form.get('establishmentParcelId').touched || form.get('establishmentParcelId').valid"
+                  [valid]="isValidOrNotTouched('establishmentParcelId')"
                   errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
                   <input type="text" class="form-control" style="width: 200px;"
                     (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength=9 formControlName="establishmentParcelId">
@@ -178,7 +178,7 @@
           <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
             <div style="flex: 0 0 210px;">
               <app-field label="Store Email" [required]="false"
-                [valid]="!form.get('establishmentEmail').touched || form.get('establishmentEmail').valid"
+                [valid]="isValidOrNotTouched('establishmentEmail')"
                 errorMessage="Please enter an email address">
                 <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
@@ -187,7 +187,7 @@
             </div>
             <div style="flex: 0 0 210px;">
               <app-field label="Store Phone" [required]="false"
-                [valid]="!form.get('establishmentPhone').touched || form.get('establishmentPhone').valid"
+                [valid]="isValidOrNotTouched('establishmentPhone')"
                 errorMessage="Please enter a phone number ">
                 <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
@@ -752,14 +752,14 @@
       <address class="padded-section">
 
         <app-field label="First Name" [required]="true"
-          [valid]="form.get('contactPersonFirstName').valid || !form.get('contactPersonFirstName').touched"
+          [valid]="isValidOrNotTouched('contactPersonFirstName')"
           errorMessage="Please enter the business contact's first name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
             formControlName="contactPersonFirstName">
         </app-field>
 
         <app-field label="Last Name" [required]="true"
-          [valid]="form.get('contactPersonLastName').valid || !form.get('contactPersonLastName').touched"
+          [valid]="isValidOrNotTouched('contactPersonLastName')"
           errorMessage="Please enter the business contact's last name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
             formControlName="contactPersonLastName">
@@ -770,14 +770,14 @@
         </app-field>
 
         <app-field label="Phone Number (main)" [required]="true"
-          [valid]="form.get('contactPersonPhone').valid || !form.get('contactPersonPhone').touched"
+          [valid]="isValidOrNotTouched('contactPersonPhone')"
           errorMessage="Please enter the business contact's 10-digit phone number">
           <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
             (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
         </app-field>
 
         <app-field label="Email" [required]="true"
-          [valid]="form.get('contactPersonEmail').valid || !form.get('contactPersonEmail').touched"
+          [valid]="isValidOrNotTouched('contactPersonEmail')"
           errorMessage="Please enter the business contact's email address"
           afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
@@ -1088,7 +1088,7 @@
       </div>
 
       <app-field label="Select the Indigenous nation"
-        [valid]="form.get('indigenousNationId').valid || !form.get('indigenousNationId').touched"
+        [valid]="isValidOrNotTouched('indigenousNationId')"
         *ngIf="form.get('applyAsIndigenousNation').value" errorMessage="Please select the Indigenous nation">
         <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
           <option value=""></option>
