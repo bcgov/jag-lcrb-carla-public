@@ -467,21 +467,22 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         private List<LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<LegalEntity> foundAssociates)
         {
             List<LegalEntity> newAssociates = new List<LegalEntity>();
-            string applicationfilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
+            string entityFilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
+            entityFilter += " and adoxio_isdonotsendtospd ne true";
             foreach (var assoc in foundAssociates)
             {
                 if (accountId != assoc.EntityId && assoc.Contact != null)
                 {
-                    applicationfilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
+                    entityFilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
                 }
                 else if(accountId != assoc.EntityId)
                 {
-                    applicationfilter += " and adoxio_legalentityid ne " + assoc.EntityId;
+                    entityFilter += " and adoxio_legalentityid ne " + assoc.EntityId;
                 }
             }
             string[] expand = { "adoxio_Contact", "adoxio_Account"};
 
-            var legalEntities = _dynamicsClient.Legalentities.Get(filter: applicationfilter, expand: expand).Value;
+            var legalEntities = _dynamicsClient.Legalentities.Get(filter: entityFilter, expand: expand).Value;
             if (legalEntities != null)
             {
                 foreach (var legalEntity in legalEntities)
