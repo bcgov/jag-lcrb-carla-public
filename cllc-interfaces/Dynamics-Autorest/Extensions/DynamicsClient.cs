@@ -215,6 +215,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = null;
             }
+            catch (Exception)
+            {
+                result = null;
+            }
             return result;
         }
 
