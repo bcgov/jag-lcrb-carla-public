@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -139,16 +140,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
             string folderName = await GetFolderName(entityName, entityId, _dynamicsClient);
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
+            string headers = LoggingEvents.GetHeaders(Request);
             try
             {
                 await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
+
+                
+                _logger.LogInformation($"SUCCESS in uploading file {fileName} to folder {folderName} Headers: {headers} ");
             }
             catch (SharePointRestException ex)
             {
-                _logger.LogError("Error uploading file to SharePoint");
-                _logger.LogError(ex.Response.Content);
-                _logger.LogError(ex.Message);
+                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} - SharePointRestException - {ex.Message} {ex.Response.Content}");                
                 return new NotFoundResult();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} Unexpected Exception {e.ToString()} {e.Message} {e.StackTrace.ToString()}");
             }
             return Json(result);
         }
