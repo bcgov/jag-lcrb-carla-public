@@ -24,7 +24,7 @@
         <section class="padded-section">
           <div style="position: relative">
             <div [ngBusy]="busy"></div>
-            <section *ngIf="showFormControl(application?.applicationType?.establishmentName)">
+            <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show">
               <label for="">Establishment Name</label>
               <br>
 
