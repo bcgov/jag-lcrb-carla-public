@@ -7,6 +7,8 @@
 namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 {
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     public partial class Contact
@@ -26,7 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// 'No'</param>
         /// <param name="gender">Possible values include: 'Male', 'Female',
         /// 'Other'</param>
-        public Contact(string spdJobId = default(string), string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address))
+        public Contact(string spdJobId = default(string), string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
         {
             SpdJobId = spdJobId;
             ContactId = contactId;
@@ -43,6 +45,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
             SelfDisclosure = selfDisclosure;
             Gender = gender;
             Address = address;
+            Aliases = aliases;
+            PreviousAddresses = previousAddresses;
             CustomInit();
         }
 
@@ -127,6 +131,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "address")]
         public Address Address { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "aliases")]
+        public IList<Alias> Aliases { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "previousAddresses")]
+        public IList<Address> PreviousAddresses { get; set; }
 
     }
 }
