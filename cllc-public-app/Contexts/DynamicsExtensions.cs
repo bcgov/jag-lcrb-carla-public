@@ -388,8 +388,20 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             string sanitizedSiteminderId = GuidUtility.SanitizeGuidString(siteminderId);
             MicrosoftDynamicsCRMcontact result = null;
-            var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
-            result = contactsResponse.Value.FirstOrDefault();
+            try
+            {
+                var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
+                result = contactsResponse.Value.FirstOrDefault();
+            }
+            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            {
+                result = null;
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
             return result;
         }
 
