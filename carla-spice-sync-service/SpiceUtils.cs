@@ -275,19 +275,17 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 request.RecordIdentifier = worker.AdoxioWorkerid;
                 request.Contact = new Contact()
                 {
-                    BcIdCardNumber = worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? worker.AdoxioContactId.AdoxioPrimaryidnumber : null,
-                    DriversLicenceNumber = worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? worker.AdoxioContactId.AdoxioPrimaryidnumber : null,
                     SpdJobId = worker.AdoxioContactId.AdoxioSpdjobid.ToString(),
                     ContactId = worker.AdoxioContactId.Contactid,
                     FirstName = worker.AdoxioContactId.Firstname,
                     LastName = worker.AdoxioContactId.Lastname,
                     MiddleName = worker.AdoxioContactId.Middlename,
                     Email = worker.AdoxioContactId.Emailaddress1,
-                    PhoneNumber = worker.AdoxioContactId.Telephone1 != null ? worker.AdoxioContactId.Telephone1 : worker.AdoxioContactId.Mobilephone,
+                    PhoneNumber = worker.AdoxioContactId.Telephone1 ?? worker.AdoxioContactId.Mobilephone,
                     BirthDate = worker.AdoxioContactId.Birthdate,
                     SelfDisclosure = worker.AdoxioContactId.AdoxioSelfdisclosure != null ? ((GeneralYesNo)worker.AdoxioContactId.AdoxioSelfdisclosure).ToString() : null,
                     Gender = worker.AdoxioContactId.AdoxioGendercode != null ? ((AdoxioGenderCode)worker.AdoxioContactId.AdoxioGendercode).ToString() : null,
-                    Birthplace = worker.AdoxioBirthplace,
+                    Birthplace = worker.AdoxioContactId.AdoxioBirthplace,
                     Address = new Address()
                     {
                         AddressStreet1 = worker.AdoxioContactId.Address1Line1,
@@ -297,42 +295,42 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         StateProvince = worker.AdoxioContactId.Address1Stateorprovince,
                         Postal = (Validation.ValidatePostalCode(worker.AdoxioContactId.Address1Postalcode)) ? worker.AdoxioContactId.Address1Postalcode : null,
                         Country = worker.AdoxioContactId.Address1Country
-                    }
+                    },
+                    Aliases = new List<Alias>(),
+                    PreviousAddresses = new List<Address>()
                 };
 
-                request.Address = new Address()
+                if (worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard)
                 {
-                    AddressStreet1 = worker.AdoxioContactId.Address1Line1,
-                    AddressStreet2 = worker.AdoxioContactId.Address1Line2,
-                    AddressStreet3 = worker.AdoxioContactId.Address1Line3,
-                    City = worker.AdoxioContactId.Address1City,
-                    StateProvince = worker.AdoxioContactId.Address1Stateorprovince,
-                    Postal = (CarlaSpiceSync.Validation.ValidatePostalCode(worker.AdoxioContactId.Address1Postalcode)) ? worker.AdoxioContactId.Address1Postalcode : null,
-                    Country = worker.AdoxioContactId.Address1Country
-                };
-            }
-
-            if (worker.AdoxioWorkerAliases != null)
-            {
-                request.Aliases = new List<Alias>();
-                foreach (var alias in worker.AdoxioWorkerAliases)
+                    request.Contact.BcIdCardNumber = worker.AdoxioContactId.AdoxioPrimaryidnumber;
+                } else if (worker.AdoxioContactId.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence)
                 {
-                    Alias newAlias = new Alias()
-                    {
-                        GivenName = alias.AdoxioLastname,
-                        Surname = alias.AdoxioFirstname,
-                        SecondName = alias.AdoxioMiddlename,  
-                    };
-                    request.Aliases.Add(newAlias);
+                    request.Contact.DriversLicenceNumber = worker.AdoxioContactId.AdoxioPrimaryidnumber;
                 }
-            }
 
-            if (worker.AdoxioWorkerPreviousaddresses != null)
-            {
-                request.PreviousAddresses = new List<Address>();
-                foreach (var address in worker.AdoxioWorkerPreviousaddresses)
+                if (worker.AdoxioContactId.AdoxioSecondaryidentificationtype == (int)IdentificationType.BCIDCard)
                 {
-                    Address newAddress = new Address()
+                    request.Contact.BcIdCardNumber = worker.AdoxioContactId.AdoxioSecondaryidnumber;
+                } else if(worker.AdoxioContactId.AdoxioSecondaryidentificationtype == (int)IdentificationType.DriversLicence)
+                {
+                    request.Contact.DriversLicenceNumber = worker.AdoxioContactId.AdoxioSecondaryidnumber;
+                }
+
+                var aliases = _dynamicsClient.Aliases.Get(filter: "_adoxio_contactid_value eq " + worker.AdoxioContactId.Contactid).Value;
+                foreach (var alias in aliases)
+                {
+                    request.Contact.Aliases.Add(new Alias()
+                    {
+                        GivenName = alias.AdoxioFirstname,
+                        Surname = alias.AdoxioLastname,
+                        SecondName = alias.AdoxioMiddlename
+                    });
+                }
+
+                var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + worker.AdoxioContactId.Contactid).Value;
+                foreach (var address in previousAddresses)
+                {
+                    request.Contact.PreviousAddresses.Add(new Address()
                     {
                         AddressStreet1 = address.AdoxioStreetaddress,
                         City = address.AdoxioCity,
@@ -341,8 +339,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         Country = address.AdoxioCountry,
                         ToDate = address.AdoxioTodate,
                         FromDate = address.AdoxioFromdate
-                    };
-                    request.PreviousAddresses.Add(newAddress);
+                    });
                 }
             }
 
@@ -530,7 +527,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     LastName = legalEntity.AdoxioContact.Lastname,
                     MiddleName = legalEntity.AdoxioContact.Middlename,
                     Email = legalEntity.AdoxioContact.Emailaddress1,
-                    PhoneNumber = legalEntity.AdoxioContact.Telephone1 != null ? legalEntity.AdoxioContact.Telephone1 : legalEntity.AdoxioContact.Mobilephone,
+                    PhoneNumber = legalEntity.AdoxioContact.Telephone1 ?? legalEntity.AdoxioContact.Mobilephone,
                     SelfDisclosure = (legalEntity.AdoxioContact.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)legalEntity.AdoxioContact.AdoxioSelfdisclosure).ToString(),
                     Gender = (legalEntity.AdoxioContact.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)legalEntity.AdoxioContact.AdoxioGendercode).ToString(),
                     Birthplace = legalEntity.AdoxioContact.AdoxioBirthplace,
@@ -676,7 +673,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
         public void UpdateContactConsent(string ContactId)
         {
-            // update consent validated to yes
+            // update consent validated to yes and expire it in 3 months
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact()
             {
                 AdoxioConsentvalidated = 845280000,
@@ -692,7 +689,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             // Query Dynamics for worker data
             string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
-            string sendFilter = $"adoxio_consentvalidated eq {(int)WorkerConsentValidated.Yes} and adoxio_spdexportdate eq null";
+            string sendFilter = $"adoxio_consentvalidated eq {(int)WorkerConsentValidated.Yes} and adoxio_exporteddate eq null";
             WorkersGetResponseModel workers = _dynamicsClient.Workers.Get(filter: sendFilter, expand: expand);
             
             if (workers.Value.Count < 1)
@@ -708,11 +705,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 foreach (var worker in workers.Value)
                 {
                     IncompleteWorkerScreening screeningRequest = await GenerateWorkerScreeningRequest(Guid.Parse(worker.AdoxioWorkerid));
-                    var response = await SendWorkerScreeningRequest(screeningRequest);
-                    if (response)
+                    var reqSuccess = await SendWorkerScreeningRequest(screeningRequest);
+                    if (reqSuccess)
                     {
                         hangfireContext.WriteLine($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
                         _logger.LogError($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
+                        UpdateWorkerSent(worker.AdoxioWorkerid);
                     }
                     else
                     {
@@ -724,6 +722,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             
             _logger.LogError("End of SendFoundWorkers Job");
             hangfireContext.WriteLine("End of SendFoundWorkers Job");
+        }
+
+        private void UpdateWorkerSent(string workerId)
+        {
+            MicrosoftDynamicsCRMadoxioWorker workerPatch = new MicrosoftDynamicsCRMadoxioWorker()
+            {
+                AdoxioExporteddate = DateTime.UtcNow
+            };
+            _dynamicsClient.Workers.Update(workerId, workerPatch);
         }
 
         public async Task SendFoundApplications(PerformContext hangfireContext)

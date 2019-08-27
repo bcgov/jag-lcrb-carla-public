@@ -7,8 +7,6 @@
 namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 {
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Linq;
 
     public partial class IncompleteWorkerScreening
@@ -24,24 +22,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// <summary>
         /// Initializes a new instance of the IncompleteWorkerScreening class.
         /// </summary>
-        /// <param name="selfDisclosure">Possible values include: 'Yes',
-        /// 'No'</param>
-        /// <param name="gender">Possible values include: 'Male', 'Female',
-        /// 'Other'</param>
-        public IncompleteWorkerScreening(string recordIdentifier = default(string), string name = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string selfDisclosure = default(string), string gender = default(string), string birthplace = default(string), string bcIdCardNumber = default(string), string driversLicence = default(string), Contact contact = default(Contact), Address address = default(Address), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
+        public IncompleteWorkerScreening(string recordIdentifier = default(string), Contact contact = default(Contact))
         {
             RecordIdentifier = recordIdentifier;
-            Name = name;
-            BirthDate = birthDate;
-            SelfDisclosure = selfDisclosure;
-            Gender = gender;
-            Birthplace = birthplace;
-            BcIdCardNumber = bcIdCardNumber;
-            DriversLicence = driversLicence;
             Contact = contact;
-            Address = address;
-            Aliases = aliases;
-            PreviousAddresses = previousAddresses;
             CustomInit();
         }
 
@@ -57,60 +41,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "birthDate")]
-        public System.DateTimeOffset? BirthDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'Yes', 'No'
-        /// </summary>
-        [JsonProperty(PropertyName = "selfDisclosure")]
-        public string SelfDisclosure { get; set; }
-
-        /// <summary>
-        /// Gets or sets possible values include: 'Male', 'Female', 'Other'
-        /// </summary>
-        [JsonProperty(PropertyName = "gender")]
-        public string Gender { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "birthplace")]
-        public string Birthplace { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "bcIdCardNumber")]
-        public string BcIdCardNumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "driversLicence")]
-        public string DriversLicence { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "contact")]
         public Contact Contact { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "address")]
-        public Address Address { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "aliases")]
-        public IList<Alias> Aliases { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "previousAddresses")]
-        public IList<Address> PreviousAddresses { get; set; }
 
     }
 }
