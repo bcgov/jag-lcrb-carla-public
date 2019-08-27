@@ -57,10 +57,6 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     this.subscribeForData();
   }
 
-  isTouchedAndInvalid(fieldName: string): boolean {
-    return this.form.get(fieldName).touched
-      && !this.form.get(fieldName).valid;
-  }
 
   reconfigureFormFields() {
     if (this.account.isPrivateCorporation() || this.account.isPublicCorporation()) {
