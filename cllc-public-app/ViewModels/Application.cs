@@ -466,5 +466,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string IndigenousNationId { get; set; }
         public string FederalProducerNames { get; set; }
+        public string Description1 { get; set; }
     }
 }

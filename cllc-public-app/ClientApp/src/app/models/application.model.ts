@@ -76,4 +76,6 @@ export class Application {
   renewalZoning: string;
   renewalFloorPlan: string;
   renewalSiteMap: string;
+
+  description1: string;
 }

@@ -97,6 +97,11 @@ export class FormBase implements OnDestroy {
         control.setValue(value.trim());
     }
 
+    public isTouchedAndInvalid(fieldName: string): boolean {
+        return this.form.get(fieldName).touched
+            && !this.form.get(fieldName).valid;
+    }
+
     ngOnDestroy(): void {
         this.componentActive = false;
     }

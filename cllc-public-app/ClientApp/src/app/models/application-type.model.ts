@@ -22,6 +22,7 @@ export class ApplicationType {
   showSupportingDocuments: boolean;
   showDeclarations: boolean;
   establishmetNameIsReadOnly: boolean;
+  showDescription1: boolean;
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;
