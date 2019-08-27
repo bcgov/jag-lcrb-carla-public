@@ -200,6 +200,16 @@
       </section>
       <p>&nbsp;</p>
 
+      <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange">
+        <h3 class="blue-header">DESCRIPTION OF CHANGE</h3>
+        <div class="padded-section">
+          <app-field label="Please briefly outline the  proposed change" [required]="false" [isFullWidth]="true"
+            [valid]="true" errorMessage="Please enter a description ">
+            <textarea rows="8" style="width: 100%;"></textarea>
+          </app-field>
+        </div>
+      </section>
+
       <div class="ngtest-phot-star-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
         <hr>
         <label for="">Photos or renderings of the store's signage</label>
@@ -231,10 +241,11 @@
           the store's signage are on file.</p>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Signage"
-            [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show" [useDocumentTypeForName]="true"
-            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-            [extensions]="['jpg', 'jpeg', 'png', 'pdf']" (numberOfUploadedFiles)="uploadedSignageDocuments = $event"
-            [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
+            [enableFileDeletion]="application?.applicationType?.signage === FormControlState.Show"
+            [useDocumentTypeForName]="true" fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true"
+            entityName="application" [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+            (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
         <br>
@@ -242,7 +253,8 @@
       </div>
 
       <div class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
-
+        <hr>
+        <br>
         <label for="">Offer or Proof of Ownership, Lease or Sub-Lease</label>
         <br>
         <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
@@ -281,44 +293,41 @@
             [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
-        <br>
-        <hr>
       </div>
 
       <div class="ngtest-floor-plan" *ngIf="showFormControl(application?.applicationType?.floorPlan)">
-
+        <hr><br>
         <label for="">Floor Plan</label>
         <br>
         <section *ngIf="application?.applicationType?.floorPlan === FormControlState.Show">
           <app-more-less-content>
             <span less>
-              A floor plan is a document, showing a view from above, of the dimensions and relationships between rooms,
-              spaces and other physical features
-            </span>
-            <span more>
               <span>
-                on each floor of a structure. The document must measure at least 8.5"" x 11"" (standard letter size). A
-                floor plan for each level of the establishment
-                must be submitted if the proposed establishment has more than one level. Either a hand-drawn or
-                computer-generated plan is acceptable, as
-                long as the plan is drawn to scale and is clear and legible. A floor plan must not be submitted on graph
-                paper or paper with gridlines.
+                A floor plan is a document, showing a view from above, of the dimensions and relationships between
+                rooms, spaces and other physical features on each floor of a structure. The document must measure at
+                least 8.5"" x 11"" (standard letter size). A floor plan for each level of the establishment must be
+                submitted if the proposed establishment has more than one level. Either a hand-drawn or
+                computer-generated plan is acceptable, as long as the plan is drawn to scale and is clear and legible. A
+                floor plan must not be submitted on graph paper or paper with gridlines.
               </span>
-              <br>
-              <p>
-              </p>
-              The floor plan must be submitted at the time of application and it
-              must identify the proposed non-medical cannabis retail area(s) plus
-              the following interior features of the establishment:
-              <ul>
-                <li>Each room or area labeled with its intended use and dimensions;</li>
-                <li>Washrooms, stairs and elevators;</li>
-                <li>Entrances and exits (including those used by staff only);</li>
-                <li>Cannabis storage areas;</li>
-                <li>Sales counter and cash register locations;</li>
-                <li>Furniture and fixture layout (e.g. shelves, display cases); and</li>
-                <li>Identify the security system and other physical security features that secure the store.</li>
-              </ul>
+              <div style="display: flex; margin-top: 10px;">
+                <section>
+                  The floor plan must be submitted at the time of application and it
+                  must identify the proposed non-medical cannabis retail area(s) plus
+                  the following interior features of the establishment:
+                  <ul>
+                    <li>Each room or area labeled with its intended use and dimensions;</li>
+                    <li>Washrooms, stairs and elevators;</li>
+                    <li>Entrances and exits (including those used by staff only);</li>
+                    <li>Cannabis storage areas;</li>
+                    <li>Sales counter and cash register locations;</li>
+                    <li>Furniture and fixture layout (e.g. shelves, display cases); and</li>
+                    <li>Identify the security system and other physical security features that secure the store.</li>
+                  </ul>
+                </section>
+                <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
+                  style="margin: auto; display: block;">
+              </div>
             </span>
           </app-more-less-content>
 
@@ -334,75 +343,102 @@
             [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
-        <br>
-        <hr>
       </div>
+      <br>
+      <hr>
+      <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+        <section style="display: flex; justify-content: space-between; width: 100%;">
+          <div class="question-label">
+            Does the proposed change involve a shared vestibule or changes to the entrances, exits or windows?
+          </div>
+          <div style="flex: 0 0 85px;">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('proposedChange')}"
+              formControlName="proposedChange" aria-label="Font Style">
+              <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+              <mat-button-toggle value="No">No</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </section>
+      </mat-card>
 
       <div class="ngtest-site-plan" *ngIf="showFormControl(application?.applicationType?.sitePlan)">
-
+        <hr><br>
         <label for="">Site Plan</label>
         <br>
         <div *ngIf="application?.applicationType?.sitePlan === FormControlState.Show">
           <app-more-less-content>
-            <span less> A site plan is a document showing any existing and proposed building footprints, pathways of
-              travel,
-              parking, and landscaping elements, and the surrounding area. The document must measure at least 8.5" x
-              11"</span>
-            <span more>
+            <section less>
               <span>
-                (standard letter size). Either a hand-drawn or computer-generated plan is acceptable, as long as the
-                plan is drawn to scale and is clear and legible. A site plan must not be submitted on graph paper or
-                paper with gridlines.
+                A site plan is a document showing any existing and proposed building footprints, pathways of
+                travel, parking, and landscaping elements, and the surrounding area. The document must measure at least
+                8.5" x 11" (standard letter size). Either a hand-drawn or computer-generated plan is acceptable, as long
+                as the plan is drawn to scale and is clear and legible. A site plan must not be submitted on graph paper
+                or paper with gridlines.
               </span>
-              <p>
-                The site plan must include the proposed store footprint and a representation of any interior or exterior
-                spaces surrounding the store, including:
-              </p>
-              <ul>
-                <li>The location of any other buildings/businesses on the same site, each building footprint, type of
-                  businesses
-                  (e.g. gas station, office building) and building names, and their entrances and exits</li>
-                <li>A description of the type of separation proposed (for any adjoining businesses)</li>
-                <li>Road access and exits, including any relevant street names</li>
-                <li>Parking lots.</li>
-              </ul>
-              <p>
-                If the proposed store is located inside a building with other businesses
-                (e.g. a mall), submit two site plans:
-              </p>
-              <p>
-                1) One site plan showing location of any other buildings/businesses on the same site, including:
-              </p>
-              <ul>
-                <li>Each building footprint, building name and a list of businesses operating inside the building</li>
-                <li>Road access and exits, including any relevant street names, and</li>
-                <li>Parking lots</li>
-              </ul>
-              <p>
-                2) A second site plan showing the location of the proposed store
-                inside the building’s footprint:
-              </p>
-              <ul>
-                <li>All entrances and exits for the building</li>
-                <li>The location, name and type of businesses operating inside the building</li>
-                <li>The store footprint with all entrances and exits for the store, and</li>
-                <li>A description of the type of separation proposed for any business adjoining the proposed store</li>
-              </ul>
-              <p>
-                Full height walls are required for separation and no connecting doors between the cannabis retail store
-                and
-                the neighbouring business are permitted.
-              </p>
-              <p>
-                The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store or
-                grocery
-                store) provided each business has its own controlled entrance within the vestibule. The cannabis retail
-                store
-                cannot share a vestibule with a business that would be contrary to public interest (i.e. business aimed
-                at
-                minors or a liquor consumption business).
-              </p>
-            </span>
+              <div class="row" style="margin-top: 10px;">
+                <div class="col-md-6">
+                  <p>
+                    The site plan must include the proposed store footprint and a representation of any interior or
+                    exterior spaces surrounding the store, including:
+                  </p>
+
+                  <ul>
+                    <li>The location of any other buildings/businesses on the same site, each building footprint, type
+                      of businesses (e.g. gas station, office building) and building names, and their entrances and
+                      exits</li>
+                    <li>A description of the type of separation proposed (for any adjoining businesses)</li>
+                    <li>Road access and exits, including any relevant street names</li>
+                    <li>Parking lots.</li>
+                  </ul>
+                  <img src="assets/site-plan-example.png" width="350" alt="Site plan"
+                    style="margin: auto; display: block;">
+                </div>
+                <div class="col-md-6">
+                  <p>
+                    If the proposed store is located inside a building with other businesses
+                    (e.g. a mall), submit two site plans:
+                  </p>
+                  <p>
+                    1) One site plan showing location of any other buildings/businesses on the same site, including:
+                  </p>
+                  <ul>
+                    <li>Each building footprint, building name and a list of businesses operating inside the building
+                    </li>
+                    <li>Road access and exits, including any relevant street names, and</li>
+                    <li>Parking lots</li>
+                  </ul>
+                  <p>
+                    2) A second site plan showing the location of the proposed store
+                    inside the building’s footprint:
+                  </p>
+                  <ul>
+                    <li>All entrances and exits for the building</li>
+                    <li>The location, name and type of businesses operating inside the building</li>
+                    <li>The store footprint with all entrances and exits for the store, and</li>
+                    <li>A description of the type of separation proposed for any business adjoining the proposed store
+                    </li>
+                  </ul>
+                  <p>
+                    Full height walls are required for separation and no connecting doors between the cannabis retail
+                    store
+                    and
+                    the neighbouring business are permitted.
+                  </p>
+                  <p>
+                    The cannabis retail store may share a vestibule with another type of business (e.g. a liquor store
+                    or
+                    grocery
+                    store) provided each business has its own controlled entrance within the vestibule. The cannabis
+                    retail
+                    store
+                    cannot share a vestibule with a business that would be contrary to public interest (i.e. business
+                    aimed
+                    at
+                    minors or a liquor consumption business).
+                  </p>
+                </div>
+              </div>
+            </section>
           </app-more-less-content>
         </div>
         <section>
@@ -413,8 +449,6 @@
             [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
-        <br>
-        <hr>
       </div>
 
       <!-- Hours of Sale -->
@@ -561,11 +595,9 @@
         </div>
       </section>
 
-      <hr>
-      <p>&nbsp;</p>
-
       <div class="ngtest-associate-upload" *ngIf="application?.applicationType?.showAssociatesFormUpload">
-
+        <br>
+        <hr>
         <label for="">Associates Form</label>
         <br>
         <i>
@@ -601,13 +633,11 @@
           </app-file-uploader>
         </section>
         <br>
-        <hr>
-        <br>
       </div>
 
       <div class="ngtest-financial-integrity-upload"
         *ngIf="application?.applicationType?.showFinancialIntegrityFormUpload">
-
+        <hr><br>
         <label for="">Financial Integrity Form</label>
         <br>
         <i>
@@ -622,13 +652,12 @@
             [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
           </app-file-uploader>
         </section>
-        <br>
-        <hr>
-
       </div>
 
       <section class="ngtest-supporting-documents"
         *ngIf="application?.applicationType?.showSupportingDocuments &&  (application?.applicationType?.name !== ApplicationTypeNames.Marketer || account?.businessType !== 'SoleProprietor')">
+        <hr>
+        <br>
         <label for="">Supporting Documents</label>
         <br>
         <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Please download the
@@ -687,19 +716,7 @@
             [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #supportingDocuments>
           </app-file-uploader>
         </section>
-        <br>
-        <hr>
       </section>
-
-      <p>
-        <i>
-          <b>Please note:</b> Applications which are submitted without all required information or documents will
-          not be
-          processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
-          applicants provide all required documents to the LCRB, the application will be processed.
-        </i>
-      </p>
-
       <br>
 
       <!-- Contact Details -->
@@ -764,6 +781,15 @@
             formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
         </app-field>
       </address>
+      <br>
+      <p>
+          <i>
+            <b>Please note:</b> Applications which are submitted without all required information or documents will
+            not be
+            processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+            applicants provide all required documents to the LCRB, the application will be processed.
+          </i>
+        </p>
 
       <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
         DECLARATIONS
@@ -1029,9 +1055,9 @@
       </section>
       <section>
         <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
-          fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId" [maxNumberOfFiles]="200"
-          (numberOfUploadedFiles)="uploadedSupportingDocuments = $event" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
-          [enableFileDeletion]="false" #supportingDocuments>
+          fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+          [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
+          [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
         </app-file-uploader>
       </section>
       <br>
