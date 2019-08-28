@@ -308,10 +308,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     request.Contact.DriversLicenceNumber = worker.AdoxioContactId.AdoxioPrimaryidnumber;
                 }
 
-                if (worker.AdoxioContactId.AdoxioSecondaryidentificationtype == (int)IdentificationType.BCIDCard)
+                if (worker.AdoxioContactId.AdoxioSecondaryidentificationtype == (int)SecondaryIdentificationType.BCIDCard)
                 {
                     request.Contact.BcIdCardNumber = worker.AdoxioContactId.AdoxioSecondaryidnumber;
-                } else if(worker.AdoxioContactId.AdoxioSecondaryidentificationtype == (int)IdentificationType.DriversLicence)
+                } else if(worker.AdoxioContactId.AdoxioSecondaryidentificationtype == (int)SecondaryIdentificationType.DriversLicence)
                 {
                     request.Contact.DriversLicenceNumber = worker.AdoxioContactId.AdoxioSecondaryidnumber;
                 }
