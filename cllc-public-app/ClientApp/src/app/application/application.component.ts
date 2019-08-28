@@ -333,7 +333,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication(this.form.value),
+      this.applicationDataService.updateApplication({...this.application, ...this.form.value}),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
