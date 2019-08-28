@@ -53,31 +53,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
         }
 
+        /// <summary>
+        /// Get a list of all map data
+        /// </summary>
+        /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("map")]
         [AllowAnonymous]
         public async Task<IActionResult> GetMap()
         {
-            // get establishments
+            // get establishments                      
+            var expand = new List<string> { "adoxio_establishment" }; // get establishment data at the same time.
+            string filter =  "statuscode eq 1";  // only active licenses
 
-            var establishments = _dynamicsClient.Establishments.Get().Value;
+            IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
-            List<EstablishmentMapData> establishmentMapData = new List<EstablishmentMapData>();
-
-            foreach (var establishment in establishments)
+            try
             {
-                establishmentMapData.Add(new EstablishmentMapData()
-                {
-                    id = establishment.AdoxioEstablishmentid.ToString(),
-                    Name = establishment.AdoxioName,
-                    Phone = establishment.AdoxioPhone,
-                    AddressCity = establishment.AdoxioAddresscity,
-                    AddressPostal = establishment.AdoxioAddresspostalcode,
-                    AddressStreet = establishment.AdoxioAddressstreet,
-                    Latitude = (decimal) establishment.AdoxioLatitude,
-                    Longitude = (decimal) establishment.AdoxioLongitude,
-                });
-            }
+                licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value;
 
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error creating establishment");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                throw new Exception("Unable to establishment");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unexpected error getting establishment map data");                
+                _logger.LogError(e.Message);                
+            }
+            List<EstablishmentMapData> establishmentMapData = new List<EstablishmentMapData>();
+            if (licences != null)
+            {                
+                foreach (var license in licences)
+                {
+                    if (license.AdoxioEstablishment != null && license.AdoxioEstablishment.AdoxioLatitude != null && license.AdoxioEstablishment.AdoxioLongitude != null)
+                    {
+                        establishmentMapData.Add(new EstablishmentMapData()
+                        {
+                            id = license.AdoxioEstablishment.AdoxioEstablishmentid.ToString(),
+                            Name = license.AdoxioEstablishment.AdoxioName,
+                            License = license.AdoxioLicencenumber,
+                            Phone = license.AdoxioEstablishment.AdoxioPhone,
+                            AddressCity = license.AdoxioEstablishment.AdoxioAddresscity,
+                            AddressPostal = license.AdoxioEstablishment.AdoxioAddresspostalcode,
+                            AddressStreet = license.AdoxioEstablishment.AdoxioAddressstreet,
+                            Latitude = (decimal)license.AdoxioEstablishment.AdoxioLatitude,
+                            Longitude = (decimal)license.AdoxioEstablishment.AdoxioLongitude,
+                        });
+                    }
+
+                }               
+            }
             return Json(establishmentMapData);
         }
 
