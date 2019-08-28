@@ -87,14 +87,20 @@
                            "claimName":"${PERSISTENT_VOLUME_NAME}"
                         }
                      },
-                     {  
-                        "name":"sonar-temp",
+ {  
+                        "name":"${NAME}-es5",
                         "emptyDir":{  
 
                         }
                      },
                      {  
-                        "name":"sonar-logs",
+                        "name":"${NAME}-temp",
+                        "emptyDir":{  
+
+                        }
+                     },
+                     {  
+                        "name":"${NAME}-logs",
                         "emptyDir":{  
 
                         }
@@ -141,17 +147,21 @@
                         },
                         "volumeMounts":[  
                            {  
-                              "name":"sonar-logs",
+                              "name":"${NAME}-logs",
                               "mountPath":"/opt/sonarqube/logs"
                            },
                            {  
-                              "name":"sonar-temp",
+                              "name":"${NAME}-temp",
                               "mountPath":"/opt/sonarqube/temp"
                            },
                            {  
                               "name":"${NAME}-data",
                               "mountPath":"/opt/sonarqube/data",
                               "subPath":"data"
+                           },
+                           {  
+                              "name":"${NAME}-es5",
+                              "mountPath":"/opt/sonarqube/data/es5"
                            },
                            {  
                               "name":"${NAME}-data",
