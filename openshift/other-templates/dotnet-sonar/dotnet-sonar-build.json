@@ -112,7 +112,7 @@
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "registry.access.redhat.com/dotnet/dotnet-20-rhel7"
+      "value": "registry.access.redhat.com/dotnet/dotnet-22-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
