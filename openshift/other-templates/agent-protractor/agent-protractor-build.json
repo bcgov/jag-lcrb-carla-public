@@ -91,7 +91,7 @@
         "displayName":"Git Repo URL",
         "description":"The URL to your GIT repo.",
         "required":true,
-        "value":"https://github.com/BCDevOps/BDDStack.git"
+        "value":"https://github.com/bcgov/jag-lcrb-carla-public.git"
      },
      {
         "name":"GIT_REF",
@@ -105,7 +105,7 @@
         "displayName":"Source Context Directory",
         "description":"The source context directory.",
         "required":false,
-        "value":"/docker"
+        "value":"/agent-protractor"
      },
      {
         "name":"SOURCE_IMAGE_KIND",
@@ -140,7 +140,7 @@
         "displayName":"Docker File Path",
         "description":"The path to the docker file defining the build.",
         "required":false,
-        "value":"Dockerfile"
+        "value":"Dockerfile.rhel7"
      },
      {
         "name":"OUTPUT_IMAGE_TAG",
