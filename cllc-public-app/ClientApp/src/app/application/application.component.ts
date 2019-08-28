@@ -162,7 +162,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.form.get('indigenousNationId').enable();
       } else {
         this.form.get('applicantType').setValue(this.account.businessType);
-        this.form.get('indigenousNationId').reset();
         this.form.get('indigenousNationId').disable();
       }
       this.addDynamicContent();
