@@ -169,11 +169,9 @@
                 </ul>
               </div>
             </div>
-
-
+            <p>&nbsp;</p>
           </div>
 
-          <p>&nbsp;</p>
           <!-- Store Contact Info -->
           <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
             <div style="flex: 0 0 210px;">
@@ -194,17 +192,17 @@
                   (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
               </app-field>
             </div>
+            <p>&nbsp;</p>
           </section>
 
         </section>
       </section>
-      <p>&nbsp;</p>
 
-      <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange">
+      <section *ngIf="application.applicationType.showDescription1">
         <h3 class="blue-header">DESCRIPTION OF CHANGE</h3>
         <div class="padded-section">
           <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
-            [showChevrons]="false" [valid]="!form.get('description1').touched || form.get('description1').valid"
+            [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
             errorMessage="Please enter a description ">
             <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
               minlength="10"></textarea>
@@ -212,7 +210,7 @@
         </div>
       </section>
 
-      <div class="ngtest-phot-star-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
+      <div class="ngtest-photo-signage" *ngIf="showFormControl(application?.applicationType?.signage)">
         <hr>
         <label for="">Photos or renderings of the store's signage</label>
         <br>
@@ -347,8 +345,8 @@
         </section>
       </div>
       <br>
-      <hr *ngIf="application.applicationType.showDescription1">
-      <mat-card *ngIf="application.applicationType.showDescription1" class="mat-elevation-z0"
+      <hr *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange">
+      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange" class="mat-elevation-z0"
         style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
