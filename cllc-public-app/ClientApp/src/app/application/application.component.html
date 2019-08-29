@@ -114,8 +114,7 @@
                   formControlName="establishmentAddressStreet">
               </app-field>
               <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
-                [valid]="isValidOrNotTouched('establishmentAddressCity')"
-                errorMessage="Please enter the city">
+                [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">
                 <input class="form-control" type="text" autocomplete="address-level2"
                   formControlName="establishmentAddressCity">
               </app-field>
@@ -140,8 +139,7 @@
 
             <div class="light-blue-bg" style="display: flex;">
               <div style="flex: 0 0 210px;">
-                <app-field label="Parcel Identifier (PID)"
-                  [valid]="isValidOrNotTouched('establishmentParcelId')"
+                <app-field label="Parcel Identifier (PID)" [valid]="isValidOrNotTouched('establishmentParcelId')"
                   errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
                   <input type="text" class="form-control" style="width: 200px;"
                     (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength=9 formControlName="establishmentParcelId">
@@ -175,8 +173,7 @@
           <!-- Store Contact Info -->
           <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
             <div style="flex: 0 0 210px;">
-              <app-field label="Store Email" [required]="false"
-                [valid]="isValidOrNotTouched('establishmentEmail')"
+              <app-field label="Store Email" [required]="false" [valid]="isValidOrNotTouched('establishmentEmail')"
                 errorMessage="Please enter an email address">
                 <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
@@ -184,8 +181,7 @@
               </app-field>
             </div>
             <div style="flex: 0 0 210px;">
-              <app-field label="Store Phone" [required]="false"
-                [valid]="isValidOrNotTouched('establishmentPhone')"
+              <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('establishmentPhone')"
                 errorMessage="Please enter a phone number ">
                 <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
@@ -248,9 +244,24 @@
             [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
-        <br>
-        <hr>
       </div>
+
+      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSEstablishmentNameChange"
+        class="mat-elevation-z0" style="margin-bottom: 10px;">
+        <section style="display: flex; justify-content: space-between; width: 100%;">
+          <div class="question-label">
+            Will the store’s exterior change?
+          </div>
+          <div style="flex: 0 0 85px;">
+            <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('proposedChange')}"
+              formControlName="proposedChange" aria-label="Font Style">
+              <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+              <mat-button-toggle value="No">No</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        </section>
+      </mat-card>
+
 
       <div class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
         <hr>
@@ -346,8 +357,8 @@
       </div>
       <br>
       <hr *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange">
-      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange" class="mat-elevation-z0"
-        style="margin-bottom: 10px;">
+      <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange"
+        class="mat-elevation-z0" style="margin-bottom: 10px;">
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             Does the proposed change involve a shared vestibule or changes to the entrances, exits or windows?
@@ -451,6 +462,36 @@
           </app-file-uploader>
         </section>
       </div>
+
+      <div class="ngtest-photos-renderings"
+      *ngIf="showExteriorRenderings()">
+      <hr>
+      <label for="">Photos or renderings of the store's proposed exterior changes </label>
+      <br>
+      <section>
+        <app-more-less-content>
+          <div less>
+            <ul>
+              <li>Must show that cannabis is not visible from outside the store</li>
+              <li>If submitting photos, the photos must be taken specifically for the purpose of the application (not
+                general/stock images) and must be no more than six months old</li>
+              <li>If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
+                legible)</li>
+            </ul>
+          </div>
+        </app-more-less-content>
+      </section>
+
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
+          [enableFileDeletion]="true" [useDocumentTypeForName]="true"
+          fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+          [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+          (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
+        </app-file-uploader>
+      </section>
+    </div>
 
       <!-- Hours of Sale -->
       <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
@@ -749,15 +790,13 @@
       </div>
       <address class="padded-section">
 
-        <app-field label="First Name" [required]="true"
-          [valid]="isValidOrNotTouched('contactPersonFirstName')"
+        <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
           errorMessage="Please enter the business contact's first name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
             formControlName="contactPersonFirstName">
         </app-field>
 
-        <app-field label="Last Name" [required]="true"
-          [valid]="isValidOrNotTouched('contactPersonLastName')"
+        <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
           errorMessage="Please enter the business contact's last name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
             formControlName="contactPersonLastName">
@@ -767,15 +806,13 @@
           <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
         </app-field>
 
-        <app-field label="Phone Number (main)" [required]="true"
-          [valid]="isValidOrNotTouched('contactPersonPhone')"
+        <app-field label="Phone Number (main)" [required]="true" [valid]="isValidOrNotTouched('contactPersonPhone')"
           errorMessage="Please enter the business contact's 10-digit phone number">
           <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
             (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
         </app-field>
 
-        <app-field label="Email" [required]="true"
-          [valid]="isValidOrNotTouched('contactPersonEmail')"
+        <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
           errorMessage="Please enter the business contact's email address"
           afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
@@ -1085,8 +1122,7 @@
         supporting documents will be connected to the BCeID used at log-in.
       </div>
 
-      <app-field label="Select the Indigenous nation"
-        [valid]="isValidOrNotTouched('indigenousNationId')"
+      <app-field label="Select the Indigenous nation" [valid]="isValidOrNotTouched('indigenousNationId')"
         *ngIf="form.get('applyAsIndigenousNation').value" errorMessage="Please select the Indigenous nation">
         <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
           <option value=""></option>
