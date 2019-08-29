@@ -37,12 +37,12 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;">
+    <!-- <section style="padding-right: 85px;">
       <div *ngIf="form.get('renewalCriminalOffenceCheck').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
         contact you as part of this renewal process
       </div>
-    </section>
+    </section> -->
   </mat-card>
   <p></p>
 
@@ -110,7 +110,7 @@
       <div *ngIf="form.get('renewalTiedhouse').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
         You can still renew your licence. Please ensure your connections to federal producer information is up to date
-        on the Account Profile page. A member of LCRB may contact you to determine any additional next steps.
+        on the <a href="/account-profile" target="blank">Account Profile</a> page. A member of LCRB may contact you to determine any additional next steps.
       </div>
     </section>
   </mat-card>
@@ -134,7 +134,7 @@
       <div *ngIf="form.get('tiedhouseFederalInterest').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
         You can still renew your licence. Please ensure your connections to federal producer information is up to date
-        on the Account Profile page. A member of LCRB may contact you to determine any additional next steps.
+        on the <a href="/account-profile" target="blank">Account Profile</a> page. A member of LCRB may contact you to determine any additional next steps.
       </div>
     </section>
   </mat-card>
@@ -220,7 +220,7 @@
   <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
     <section style="display: flex; justify-content: space-between; width: 100%;">
       <div class="question-label">
-        9. Do you have an outstanding payable fine under the Offence Actor outstanding payable monetary penalty under
+        9. Do you have an outstanding payable fine under the Offence Act or outstanding payable monetary penalty under
         the Cannabis Control and Licensing Act that has not yet been paid?
       </div>
       <div style="flex: 0 0 85px;">
