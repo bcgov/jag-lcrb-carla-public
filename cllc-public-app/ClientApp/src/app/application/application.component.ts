@@ -164,7 +164,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.form.get('indigenousNationId').enable();
       } else {
         this.form.get('applicantType').setValue(this.account.businessType);
-        this.form.get('indigenousNationId').reset();
         this.form.get('indigenousNationId').disable();
       }
       this.addDynamicContent();
@@ -354,7 +353,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication(this.form.value),
+      this.applicationDataService.updateApplication({...this.application, ...this.form.value}),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
