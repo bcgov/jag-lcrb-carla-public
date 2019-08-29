@@ -1,5 +1,5 @@
 - name: cannabis-retail-store-licence.lcrb
-  version: '1.0.21'
+  version: '1.0.22'
   description: Cannabis Retail Store Licence Issued by Liquor and Cannabis Regulation Branch
   path: /cannabis-retail-store-licence
   attributes:
@@ -58,7 +58,7 @@
       data_type: text
       required: false
 - name: cannabis-marketing-licence.lcrb
-  version: '1.0.6'
+  version: '1.0.7'
   description: Cannabis Marketing Licence Issued by Liquor and Cannabis Regulation Branch
   path: /cannabis-marketing-licence
   attributes:
