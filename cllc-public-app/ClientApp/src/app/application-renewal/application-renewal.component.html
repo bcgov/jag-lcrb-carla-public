@@ -38,7 +38,10 @@
 
           <div *ngIf="form.get('renewalBranding').value === 'Yes'" class="field-changed">
 
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence. Please submit an <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Establishment Name Change')">Establishment Name Change</a> application to report the change.
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence.
+            Please submit an <a href="javascript:void(0);"
+              (click)="doAction(application?.assignedLicence?.id,'CRS Establishment Name Change')">Establishment Name or
+              Branding Change Application</a> to report the change.
           </div>
         </section>
       </mat-card>
@@ -59,7 +62,10 @@
         </section>
         <section style="padding-right: 85px;">
           <div *ngIf="form.get('renewalSignage').value === 'Yes'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please submit an <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Establishment Name Change')">Establishment Name and Branding Change</a> application.
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please
+            submit an <a href="javascript:void(0);"
+              (click)="doAction(application?.assignedLicence?.id,'CRS Establishment Name Change')">Establishment Name
+              and Branding Change</a> application.
           </div>
         </section>
       </mat-card>
@@ -134,9 +140,13 @@
           </div>
 
           <div *ngIf="form.get('renewalEstablishmentAddress').value === 'Yes'" style=" margin-top: 10px;"
-               class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please submit a <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Location Change')">Relocation Request</a> to indicate where the Establishment has moved too.
-</div>
+            class="field-changed">
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please
+            submit a
+            <a href="javascript:void(0);"
+              (click)="doAction(application?.assignedLicence?.id,'CRS Location Change')">Relocation Request</a> to
+            indicate where the establishment has moved to.
+          </div>
         </section>
       </mat-card>
 
@@ -189,7 +199,7 @@
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             5. Are you aware of any local government or Indigenous nation zoning changes with respect to your
-            establishment location? ****If so, please describe.*****
+            establishment location?
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalZoning')}"
@@ -223,8 +233,11 @@
         </section>
         <section style="padding-right: 85px;">
           <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence. Please submit a <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Structural Change')">Structural Change Request</a> to indicate where the Establishment has moved too.
-</div>
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence.
+            Please submit a <a href="javascript:void(0);"
+              (click)="doAction(application?.assignedLicence?.id,'CRS Structural Change')">Structural Change Request</a>
+            to indicate where the establishment has moved to.
+          </div>
         </section>
       </mat-card>
 

@@ -3,10 +3,10 @@
 
     <div>
       <p *ngIf="dataSource?.data?.length">
-        The following Shareholder information is on file for the account.
+        The following shareholder information is on file for the account.
       </p>
       <p *ngIf="!dataSource?.data?.length">
-        There is no Shareholder information currently on file for this account.
+        There is no shareholder information currently on file for this account.
       </p>
 
       <mat-table *ngIf="dataSource?.data?.length" #table [dataSource]="dataSource">
