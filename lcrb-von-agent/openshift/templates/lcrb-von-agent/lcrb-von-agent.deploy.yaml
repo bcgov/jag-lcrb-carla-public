@@ -8,166 +8,166 @@ metadata:
   name: "${NAME}-deployment-template"
   creationTimestamp: null
 objects:
-  - kind: Service
-    apiVersion: v1
-    metadata:
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+    annotations:
+      description: "Defines how to deploy ${NAME}"
+  spec:
+    strategy:
+      type: Rolling
+    triggers:
+      - type: ConfigChange
+      - type: ImageChange
+        imageChangeParams:
+          automatic: true
+          containerNames:
+            - "${NAME}"
+          from:
+            kind: ImageStreamTag
+            namespace: "${IMAGE_NAMESPACE}"
+            name: "${SOURCE_IMAGE_NAME}:${TAG_NAME}"
+    replicas: 1
+    selector:
       name: "${NAME}"
-      annotations:
-        description: Exposes and load balances the application pods.
-    spec:
-      ports:
-        - name: 8080-tcp
-          protocol: TCP
-          port: 8080
-          targetPort: 8080
-      selector:
+    template:
+      metadata:
         name: "${NAME}"
-      type: ClusterIP
-      sessionAffinity: None
-  - kind: Route
-    apiVersion: v1
-    metadata:
-      name: "${NAME}"
-    spec:
-      host: "${APPLICATION_DOMAIN}"
-      tls:
-        insecureEdgeTerminationPolicy: Redirect
-        termination: edge
-      to:
-        kind: Service
-        name: "${NAME}"
-        weight: 100
-      port:
-        targetPort: 8080-tcp
-  - kind: DeploymentConfig
-    apiVersion: v1
-    metadata:
-      name: "${NAME}"
-      annotations:
-        description: "Defines how to deploy ${NAME}"
-    spec:
-      strategy:
-        type: Rolling
-      triggers:
-        - type: ConfigChange
-        - type: ImageChange
-          imageChangeParams:
-            automatic: true
-            containerNames:
-              - "${NAME}"
-            from:
-              kind: ImageStreamTag
-              namespace: "${IMAGE_NAMESPACE}"
-              name: "${SOURCE_IMAGE_NAME}:${TAG_NAME}"
-      replicas: 1
-      selector:
-        name: "${NAME}"
-      template:
-        metadata:
+        labels:
           name: "${NAME}"
-          labels:
-            name: "${NAME}"
-        spec:
-          containers:
-            - name: "${NAME}"
-              image: ""
-              ports:
-                - containerPort: 8080
-                  protocol: TCP
-              env:
-              - name: APPLICATION_URL
-                value: "${APPLICATION_URL}"
-              - name: CONFIG_ROOT
-                value: "${CONFIG_ROOT}"
-              - name: HOST_PORT
-                value: "${HOST_PORT}"
-              - name: ENVIRONMENT
-                value: "${ENVIRONMENT}"
-              - name: GENESIS_URL
-                value: "${GENESIS_URL}"
-              - name: INDY_LEDGER_URL
-                value: "${INDY_LEDGER_URL}"
-              - name: LEDGER_PROTOCOL_VERSION
-                value: "${LEDGER_PROTOCOL_VERSION}"
-              - name: AUTO_REGISTER_DID
-                value: "${AUTO_REGISTER_DID}"
-              - name: LOG_LEVEL
-                value: "${LOG_LEVEL}"
-              - name: PYTHON_ENV
-                value: "${PYTHON_ENV}"
-              - name: TOB_API_URL
-                value: "${TOB_API_URL}"
-              - name: TOB_APP_URL
-                value: "${TOB_APP_URL}"
-              - name: INDY_WALLET_TYPE
-                value: "${INDY_WALLET_TYPE}"
-              - name: WALLET_TYPE
-                value: "postgres_storage"
-              - name: POSTGRESQL_WALLET_HOST
-                value: "${POSTGRESQL_WALLET_HOST}"
-              - name: POSTGRESQL_WALLET_PORT
-                value: "${POSTGRESQL_WALLET_PORT}"
-              - name: POSTGRESQL_WALLET_NAME
-                value: "${POSTGRESQL_WALLET_NAME}"
-              - name: POSTGRESQL_WALLET_USER
-                valueFrom:
-                  secretKeyRef:
-                    name: "${POSTGRESQL_WALLET_HOST}"
-                    key: database-user
-              - name: POSTGRESQL_WALLET_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: "${POSTGRESQL_WALLET_HOST}"
-                    key: database-password
-              - name: POSTGRESQL_WALLET_ADMIN_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: "${POSTGRESQL_WALLET_HOST}"
-                    key: admin-password
-              - name: WALLET_ENCRYPTION_KEY
-                valueFrom:
-                  secretKeyRef:
-                    name: "${WALLET_CREDENTIAL_STORE_NAME}"
-                    key: key
-              - name: INDY_WALLET_SEED
-                valueFrom:
-                  secretKeyRef:
-                    name: "${WALLET_CREDENTIAL_STORE_NAME}"
-                    key: seed
-              - name: ISSUER_WALLET_DID
-                valueFrom:
-                  secretKeyRef:
-                    name: "${WALLET_CREDENTIAL_STORE_NAME}"
-                    key: did
-              - name: TOB_WALLET_SEED
-                valueFrom:
-                  secretKeyRef:
-                    name: "${WALLET_CREDENTIAL_STORE_NAME}"
-                    key: tob-seed
-              - name: TOB_DID
-                valueFrom:
-                  secretKeyRef:
-                    name: "${WALLET_CREDENTIAL_STORE_NAME}"
-                    key: tob-did
-              - name: ENDPOINT_URL
-                value: "${ENDPOINT_URL}"
-              - name: TCP_SOCKET_FAMILY
-                value: "${TCP_SOCKET_FAMILY}"
-  - kind: Secret
-    apiVersion: v1
-    metadata:
-      name: "${WALLET_CREDENTIAL_STORE_NAME}"
-      labels:
-        app: "${APP_NAME}"
-        name: "${NAME}"
-        app-group: "${APP_GROUP}"
-    data:
-      key: "${WALLET_ENCRYPTION_KEY}"
-      seed: "${INDY_WALLET_SEED}"
-      did: "${INDY_WALLET_DID}"
-      tob-did: "${TOB_DID}"
-      tob-seed: "${TOB_WALLET_SEED}"
-    type: Opaque
+      spec:
+        containers:
+          - name: "${NAME}"
+            image: ""
+            ports:
+              - containerPort: 8080
+                protocol: TCP
+            env:
+            - name: APPLICATION_URL
+              value: "${APPLICATION_URL}"
+            - name: CONFIG_ROOT
+              value: "${CONFIG_ROOT}"
+            - name: HOST_PORT
+              value: "${HOST_PORT}"
+            - name: ENVIRONMENT
+              value: "${ENVIRONMENT}"
+            - name: GENESIS_URL
+              value: "${GENESIS_URL}"
+            - name: INDY_LEDGER_URL
+              value: "${INDY_LEDGER_URL}"
+            - name: LEDGER_PROTOCOL_VERSION
+              value: "${LEDGER_PROTOCOL_VERSION}"
+            - name: AUTO_REGISTER_DID
+              value: "${AUTO_REGISTER_DID}"
+            - name: LOG_LEVEL
+              value: "${LOG_LEVEL}"
+            - name: PYTHON_ENV
+              value: "${PYTHON_ENV}"
+            - name: TOB_API_URL
+              value: "${TOB_API_URL}"
+            - name: TOB_APP_URL
+              value: "${TOB_APP_URL}"
+            - name: INDY_WALLET_TYPE
+              value: "${INDY_WALLET_TYPE}"
+            - name: WALLET_TYPE
+              value: "postgres_storage"
+            - name: POSTGRESQL_WALLET_HOST
+              value: "${POSTGRESQL_WALLET_HOST}"
+            - name: POSTGRESQL_WALLET_PORT
+              value: "${POSTGRESQL_WALLET_PORT}"
+            - name: POSTGRESQL_WALLET_NAME
+              value: "${POSTGRESQL_WALLET_NAME}"
+            - name: POSTGRESQL_WALLET_USER
+              valueFrom:
+                secretKeyRef:
+                  name: "${POSTGRESQL_WALLET_HOST}"
+                  key: database-user
+            - name: POSTGRESQL_WALLET_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "${POSTGRESQL_WALLET_HOST}"
+                  key: database-password
+            - name: POSTGRESQL_WALLET_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "${POSTGRESQL_WALLET_HOST}"
+                  key: admin-password
+            - name: WALLET_ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "${WALLET_CREDENTIAL_STORE_NAME}"
+                  key: key
+            - name: INDY_WALLET_SEED
+              valueFrom:
+                secretKeyRef:
+                  name: "${WALLET_CREDENTIAL_STORE_NAME}"
+                  key: seed
+            - name: ISSUER_WALLET_DID
+              valueFrom:
+                secretKeyRef:
+                  name: "${WALLET_CREDENTIAL_STORE_NAME}"
+                  key: did
+            - name: TOB_WALLET_SEED
+              valueFrom:
+                secretKeyRef:
+                  name: "${WALLET_CREDENTIAL_STORE_NAME}"
+                  key: tob-seed
+            - name: TOB_DID
+              valueFrom:
+                secretKeyRef:
+                  name: "${WALLET_CREDENTIAL_STORE_NAME}"
+                  key: tob-did
+            - name: ENDPOINT_URL
+              value: "${ENDPOINT_URL}"
+            - name: TCP_SOCKET_FAMILY
+              value: "${TCP_SOCKET_FAMILY}"
+- kind: Secret
+  apiVersion: v1
+  metadata:
+    name: "${WALLET_CREDENTIAL_STORE_NAME}"
+    labels:
+      app: "${APP_NAME}"
+      name: "${NAME}"
+      app-group: "${APP_GROUP}"
+  data:
+    key: "${WALLET_ENCRYPTION_KEY}"
+    seed: "${INDY_WALLET_SEED}"
+    did: "${INDY_WALLET_DID}"
+    tob-did: "${TOB_DID}"
+    tob-seed: "${TOB_WALLET_SEED}"
+  type: Opaque
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+    annotations:
+      description: Exposes and load balances the application pods.
+  spec:
+    ports:
+      - name: 8080-tcp
+        protocol: TCP
+        port: 8080
+        targetPort: 8080
+    selector:
+      name: "${NAME}"
+    type: ClusterIP
+    sessionAffinity: None
+- kind: Route
+  apiVersion: v1
+  metadata:
+    name: "${NAME}"
+  spec:
+    host: "${APPLICATION_DOMAIN}"
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge
+    to:
+      kind: Service
+      name: "${NAME}"
+      weight: 100
+    port:
+      targetPort: 8080-tcp
 parameters:
   - name: IMAGE_NAMESPACE
     displayName: Image Namespace

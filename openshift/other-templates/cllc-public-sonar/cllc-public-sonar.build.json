@@ -59,18 +59,14 @@
             }
         },
         "output": {
-            "to": {
-                "kind": "ImageStreamTag",
-                "name": "cllc-public:latest"
-            }
         },
         "resources": {
             "limits": {
-                "cpu": "4",
+                "cpu": "2",
                 "memory": "10Gi"
             },
             "requests": {
-                "cpu": "4",
+                "cpu": "2",
                 "memory": "10Gi"
             }
         },

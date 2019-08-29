@@ -52,18 +52,7 @@
         {
           "type": "Docker",
           "dockerStrategy":
-          {
-			"env": [
-            {
-                "name": "SA_PASSWORD",
-                  "valueFrom": {
-                  "secretKeyRef": {
-                  "key": "database-admin-password",
-                  "name": "${NAME}"
-                  }
-                }
-             }
-			],			             
+          {						           
             "dockerfilePath": "${DOCKER_FILE_PATH}"            
           }
         },

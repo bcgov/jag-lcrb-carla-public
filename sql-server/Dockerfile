@@ -53,7 +53,7 @@ USER 10001
 # Default SQL Server TCP/Port
 EXPOSE $TCP_PORT
 
-ENV PATH $PATH:/opt/mssql-tools/binTH $PATH:/opt/mssql-tools/bin
+ENV PATH $PATH:/opt/mssql-tools/bin
 
 ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
 ENTRYPOINT [ "uid_entrypoint" ]
