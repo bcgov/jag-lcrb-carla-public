@@ -86,13 +86,14 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   uploadedSupportingDocuments = 0;
   uploadedFinancialIntegrityDocuments: 0;
   uploadedAssociateDocuments: 0;
+  window = window;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
     public applicationDataService: ApplicationDataService,
-    public licenceDataService: LicenseDataService,    
+    public licenceDataService: LicenseDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -203,18 +204,18 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   }
 
 
-  doAction(licenseId: string, actionName: string) {    
+  doAction(licenseId: string, actionName: string) {
     this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(data => {
-        this.router.navigateByUrl('/account-profile/' + data.id);
+        this.window.open(`/account-profile/${data.id}`, 'blank');
       },
         () => {
           this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
             { duration: 3500, panelClass: ['red-snackbar'] });
           console.log('Error starting a Change Licence Application');
         }
-      );    
+      );
   }
 
   private getApplicationContent(contentCartegory: string) {
