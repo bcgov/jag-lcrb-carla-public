@@ -18,6 +18,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string AddressPostal { get; set; }
         public string AddressStreet { get; set; }
         public string Name { get; set; }
+        public string License { get; set; }
         public string Phone { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }

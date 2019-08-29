@@ -157,7 +157,7 @@ function EstablishmentsMap(options) {
     // Leaflet style for the _establishmentMarkers
     var _establishment_MARKER_STYLE = {
           radius: 3, // The radius of the circleMarker
-          color: '#0147b7', // The color of the circleMarker
+          color: '#355A20', // The color of the circleMarker; green for Cannabis.
           fillOpacity: 1.0 // How transparent the circleMarker's fill is
     };
 
@@ -428,7 +428,9 @@ function EstablishmentsMap(options) {
         // This dictionary's values will in general consist of a (potentially processed)
         // subset of the JSON returned by the Python establishment search service.
       var contentObj = {
-            'Name': establishment.name || '', 
+        'Type': '<img src=assets/bc-logo.svg height=25 width=25> Non-Medical Cannabis Retail Store ',
+        'Name': establishment.name || '',
+            'License': establishment.license || '',
             'Phone': establishment.phone || '',
             'Street Address': establishment.addressStreet || '',
             'City': establishment.addressCity || '',
@@ -438,7 +440,7 @@ function EstablishmentsMap(options) {
         // We build the contentString from the contentObj dictionary, using paragraphs as property delimiters.
         var contentString = '';
         $.each(contentObj, function (contentKey, contentVal) {
-            contentString += '' + contentKey + ': ' + contentVal + '<br />';
+          contentString += contentVal + '<br />'; // contentKey + ': '
         });
         return contentString;
     };

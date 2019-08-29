@@ -37,8 +37,8 @@
           </app-field>
 
           <div *ngIf="form.get('renewalBranding').value === 'Yes'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-            contact you as part of this renewal process
+
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence. Please submit an <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Establishment Name Change')">Establishment Name Change</a> application to report the change.
           </div>
         </section>
       </mat-card>
@@ -59,8 +59,7 @@
         </section>
         <section style="padding-right: 85px;">
           <div *ngIf="form.get('renewalSignage').value === 'Yes'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-            contact you as part of this renewal process
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please submit an <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Establishment Name Change')">Establishment Name and Branding Change</a> application.
           </div>
         </section>
       </mat-card>
@@ -135,10 +134,9 @@
           </div>
 
           <div *ngIf="form.get('renewalEstablishmentAddress').value === 'Yes'" style=" margin-top: 10px;"
-            class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-            contact you as part of this renewal process
-          </div>
+               class="field-changed">
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please submit a <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Location Change')">Relocation Request</a> to indicate where the Establishment has moved too.
+</div>
         </section>
       </mat-card>
 
@@ -225,9 +223,8 @@
         </section>
         <section style="padding-right: 85px;">
           <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
-            contact you as part of this renewal process
-          </div>
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence. Please submit a <a href="javascript:void(0);" (click)="doAction(application?.assignedLicense?.id,'CRS Structural Change')">Structural Change Request</a> to indicate where the Establishment has moved too.
+</div>
         </section>
       </mat-card>
 
