@@ -2,8 +2,7 @@
 
 echo Updating meta data
 
-# curl http://spice-carla-dev.pathfinder.bcgov/swagger/v1/swagger.json > spice-carla.swagger
-curl http://localhost:10000/swagger/v1/swagger.json > spice-carla.swagger
+curl http://spice-carla-dev.pathfinder.bcgov/swagger/v1/swagger.json > spice-carla.swagger
 
 echo Updating client
 
