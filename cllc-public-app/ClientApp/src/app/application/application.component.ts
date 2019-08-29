@@ -91,6 +91,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedValidInterestDocuments: 0;
   uploadedSitePlanDocuments: 0;
   uploadedFloorPlanDocuments: 0;
+  uploadedPhotosOrRenderingsDocuments: 0;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -276,7 +277,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.form.get('federalProducerNames').disable();
     }
 
-    if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange) {
+    if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
+      && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
       this.form.get('proposedChange').disable();
     }
 
@@ -345,6 +347,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return show;
   }
 
+  showExteriorRenderings() {
+    let show = this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
+      || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange;
+    show = show && this.form.get('proposedChange').value === 'Yes';
+    return show;
+  }
+
   /**
    * Save form data
    * @param showProgress
@@ -353,7 +362,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication({...this.application, ...this.form.value}),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -469,6 +478,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       ((this.uploadedSitePlanDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one site plan document is required.');
+    }
+
+    if (this.showExteriorRenderings() &&
+      ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one store exterior rendering or photo is required.');
     }
 
     if (this.application.applicationType.floorPlan === FormControlState.Show &&
