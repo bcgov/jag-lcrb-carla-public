@@ -15,7 +15,6 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
@@ -31,7 +30,7 @@ import { FeatureFlagService } from './../services/feature-flag.service';
 import {
   ConnectionToNonMedicalStoresComponent
 } from '@app/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
-
+import { LicenseDataService } from '@app/services/license-data.service';
 
 
 
@@ -93,7 +92,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     public snackBar: MatSnackBar,
     public router: Router,
     public applicationDataService: ApplicationDataService,
-    private dynamicsDataService: DynamicsDataService,
+    public licenceDataService: LicenseDataService,    
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -201,6 +200,21 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         nextSteps: this.getApplicationContent('NextSteps'),
       };
     }
+  }
+
+
+  doAction(licenseId: string, actionName: string) {    
+    this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(data => {
+        this.router.navigateByUrl('/account-profile/' + data.id);
+      },
+        () => {
+          this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
+            { duration: 3500, panelClass: ['red-snackbar'] });
+          console.log('Error starting a Change Licence Application');
+        }
+      );    
   }
 
   private getApplicationContent(contentCartegory: string) {
