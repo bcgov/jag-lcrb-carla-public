@@ -32,6 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         Task<MicrosoftDynamicsCRMcontact> GetContactById(string id);
 
         MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(Guid id);
+        MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(string id);
 
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(string id);
         Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(Guid id);

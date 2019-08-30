@@ -1,0 +1,11 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: templates/lcrb-von-agent.yaml
+#=========================================================
+NAME=lcrb-von-agent
+TOB_API_URL=https://orgbook.gov.bc.ca/api/v2
+TOB_APP_URL=https://orgbook.gov.bc.ca
+AUTO_REGISTER_DID=1
+APPLICATION_DOMAIN=lcrb-von-agent.pathfinder.gov.bc.ca
+APPLICATION_URL=https://lcrb-von-agent.pathfinder.gov.bc.ca/

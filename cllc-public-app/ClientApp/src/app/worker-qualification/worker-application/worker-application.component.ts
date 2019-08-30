@@ -306,8 +306,14 @@ export class WorkerApplicationComponent extends FormBase implements OnInit {
     const value = { ...this.form.value };
     // Make sure the contact email and phone number are in sync with worker
     value.contact.emailaddress1 = value.worker.email;
-    value.contact.telephone1 = value.worker.phonenumber;
     value.contact.birthDate = this.worker.dateofbirth;
+
+    // copy fields from contact to worker
+    value.worker.birthplace = value.contact.birthPlace;
+    value.worker.driverslicencenumber = value.contact.primaryIdNumber;
+    value.worker.bcidcardnumber = value.contact.secondaryIdNumber;
+    value.worker.phonenumber = value.contact.mobilePhone;
+
 
     const saves: Observable<any>[] = [
       this.contactDataService.updateContact(value.contact),
