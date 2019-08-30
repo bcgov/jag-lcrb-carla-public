@@ -69,7 +69,7 @@
               <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
               <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
                 <span style="font-weight: 600">{{item.establishmentName}}</span> <br>
-                <span style="font-weight: 600">{{item.portallabel}}</span> <br>
+                <span>{{item.portallabel}}</span> <br>
                 <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
                 <span>Reference #: {{item.name}} </span> <span></span> <br>
               </td>
@@ -222,7 +222,8 @@
                 <a *ngIf="item.status == PAYMENT_REQUIRED" href="javascript:void(0);" (click)="payLicenceFee(item)">
                   <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
                 </a>
-                <a *ngIf="item.status !== PAYMENT_REQUIRED" style="min-width: 10px;"
+                div
+                <a *ngIf="item.status !== PAYMENT_REQUIRED" style="min-width: 10px; margin-bottom: 5px;"
                   [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
                   <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
                 </a>

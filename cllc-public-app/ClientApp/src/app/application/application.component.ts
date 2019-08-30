@@ -338,7 +338,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showSitePlan(): boolean {
-    let show = this.showFormControl(this.application.applicationType.sitePlan);
+    let show = this.application
+      && this.application.applicationType
+      && this.showFormControl(this.application.applicationType.sitePlan);
+
     if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
       show = this.showFormControl(this.application.applicationType.sitePlan)
         && this.form.get('proposedChange').value === 'Yes';
@@ -348,8 +351,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   showExteriorRenderings() {
-    let show = this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
-      || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange;
+    let show = this.application &&
+      (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
+        || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange);
     show = show && this.form.get('proposedChange').value === 'Yes';
     return show;
   }
@@ -361,6 +365,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
 
+    // do not save if the form is in file upload mode
+    if (this.mode === UPLOAD_FILES_MODE) {
+      return of(true);
+    }
     return forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
