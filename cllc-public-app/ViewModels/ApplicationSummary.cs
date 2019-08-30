@@ -21,5 +21,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool IsIndigenousNation { get; set; }
         public bool IsPaid { get; set; }
         public string LicenceId { get; set; }
+        public string Portallabel { get; set; }
     }
 }

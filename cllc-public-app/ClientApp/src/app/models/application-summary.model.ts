@@ -9,4 +9,5 @@ export class ApplicationSummary {
   isIndigenousNation: boolean;
   licenceId: string;
   isPaid: boolean;
+  portallabel: string;
 }
