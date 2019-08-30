@@ -194,7 +194,7 @@
         </section>
       </section>
 
-      <section *ngIf="application.applicationType.showDescription1">
+      <section *ngIf="application?.applicationType?.showDescription1">
         <h3 class="blue-header">DESCRIPTION OF CHANGE</h3>
         <div class="padded-section">
           <app-field label="Please briefly outline the  proposed change" [required]="true" [isFullWidth]="true"
