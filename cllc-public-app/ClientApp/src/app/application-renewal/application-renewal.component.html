@@ -39,9 +39,8 @@
           <div *ngIf="form.get('renewalBranding').value === 'Yes'" class="field-changed">
 
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence.
-            Please submit an <a href="javascript:void(0);"
-              (click)="doAction(application?.assignedLicence?.id,'CRS Establishment Name Change')">Establishment Name or
-              Branding Change Application</a> to report the change.
+            After submitting your renewal, please start a Establishment Name or Branding Change application from the
+            Dashboard.
           </div>
         </section>
       </mat-card>
@@ -62,10 +61,9 @@
         </section>
         <section style="padding-right: 85px;">
           <div *ngIf="form.get('renewalSignage').value === 'Yes'" class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please
-            submit an <a href="javascript:void(0);"
-              (click)="doAction(application?.assignedLicence?.id,'CRS Establishment Name Change')">Establishment Name
-              and Branding Change</a> application.
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence.
+            After submitting your renewal, please start a Establishment Name and Branding Change application from the
+            Dashboard.
           </div>
         </section>
       </mat-card>
@@ -141,11 +139,8 @@
 
           <div *ngIf="form.get('renewalEstablishmentAddress').value === 'Yes'" style=" margin-top: 10px;"
             class="field-changed">
-            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please
-            submit a
-            <a href="javascript:void(0);"
-              (click)="doAction(application?.assignedLicence?.id,'CRS Location Change')">Relocation Request</a> to
-            indicate where the establishment has moved to.
+            <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence.
+            After submitting your renewal, please start a Relocation Request application from the Dashboard.
           </div>
         </section>
       </mat-card>
@@ -234,9 +229,7 @@
         <section style="padding-right: 85px;">
           <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence.
-            Please submit a <a href="javascript:void(0);"
-              (click)="doAction(application?.assignedLicence?.id,'CRS Structural Change')">Structural Change Request</a>
-            to indicate where the establishment has moved to.
+            After submitting your renewal, please start a Structural Change Request application from the Dashboard.
           </div>
         </section>
       </mat-card>
