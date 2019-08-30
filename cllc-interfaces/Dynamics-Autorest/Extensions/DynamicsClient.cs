@@ -215,6 +215,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = null;
             }
+            catch (Exception)
+            {
+                result = null;
+            }
             return result;
         }
 
@@ -225,11 +229,17 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(Guid id)
         {
+            return GetEstablishmentById(id.ToString());            
+        }
+
+
+        public MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(string id)
+        {
             MicrosoftDynamicsCRMadoxioEstablishment result = null;
 
             try
             {
-                result = Establishments.GetByKey(id.ToString());
+                result = Establishments.GetByKey(id);
             }
             catch (OdataerrorException)
             {
@@ -238,7 +248,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return result;
         }
-
 
         public async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(string id)
         {

@@ -22,6 +22,7 @@ export class ApplicationType {
   showSupportingDocuments: boolean;
   showDeclarations: boolean;
   establishmetNameIsReadOnly: boolean;
+  showDescription1: boolean;
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;
@@ -41,12 +42,13 @@ export enum FormControlState {
 }
 
 export enum ApplicationTypeNames {
-  CannabisRetailStore = 'Cannabis Retail Store',
+  CRSEstablishmentNameChange = 'CRS Establishment Name Change',
   CRSLocationChange = 'CRS Location Change',
-  CRSStructuralChange = 'CRS Structural Change',
-  CRSTransferofOwnership = 'CRS Transfer of Ownership',
   CRSRenewal = 'CRS Renewal',
   CRSRenewalLate30 = 'CRS Late Renewal - 30 Day',
   CRSRenewalLate6Months = 'CRS Late Renewal - 30 Day to 6 Months',
-  Marketer = 'Marketing'
+  CRSStructuralChange = 'CRS Structural Change',
+  CRSTransferofOwnership = 'CRS Transfer of Ownership',
+  CannabisRetailStore = 'Cannabis Retail Store',
+  Marketer = 'Marketing',
 }

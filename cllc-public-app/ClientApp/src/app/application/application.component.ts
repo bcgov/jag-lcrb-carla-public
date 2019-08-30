@@ -1,5 +1,5 @@
 
-import { filter, takeWhile, catchError, mergeMap } from 'rxjs/operators';
+import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -91,6 +91,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   uploadedValidInterestDocuments: 0;
   uploadedSitePlanDocuments: 0;
   uploadedFloorPlanDocuments: 0;
+  uploadedPhotosOrRenderingsDocuments: 0;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
@@ -154,6 +155,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
       applicantType: ['', Validators.required],
+      description1: ['', [Validators.required]],
+      proposedChange: ['', [Validators.required]],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -273,6 +276,15 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
     }
+
+    if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
+      && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
+      this.form.get('proposedChange').disable();
+    }
+
+    if (!this.application.applicationType.showDescription1) {
+      this.form.get('description1').disable();
+    }
   }
 
   private getApplicationContent(contentCartegory: string) {
@@ -325,6 +337,27 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
   }
 
+  showSitePlan(): boolean {
+    let show = this.application
+      && this.application.applicationType
+      && this.showFormControl(this.application.applicationType.sitePlan);
+
+    if (this.application && this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange) {
+      show = this.showFormControl(this.application.applicationType.sitePlan)
+        && this.form.get('proposedChange').value === 'Yes';
+    }
+
+    return show;
+  }
+
+  showExteriorRenderings() {
+    let show = this.application &&
+      (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
+        || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange);
+    show = show && this.form.get('proposedChange').value === 'Yes';
+    return show;
+  }
+
   /**
    * Save form data
    * @param showProgress
@@ -332,8 +365,13 @@ export class ApplicationComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
 
+    // do not save if the form is in file upload mode
+    if (this.mode === UPLOAD_FILES_MODE) {
+      // a delay is need by the deactivate guard
+      return of(true).pipe(delay(10));
+    }
     return forkJoin(
-      this.applicationDataService.updateApplication({...this.application, ...this.form.value}),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -416,43 +454,49 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.validationMessages = [];
 
     if (this.application.applicationType.showAssociatesFormUpload &&
-      (this.uploadedAssociateDocuments < 1)) {
+      ((this.uploadedAssociateDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('Associate form is required.');
     }
 
     if (this.application.applicationType.showFinancialIntegrityFormUpload &&
-      (this.uploadedFinancialIntegrityDocuments < 1)) {
+      ((this.uploadedFinancialIntegrityDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('Financial Integrity form is required.');
     }
 
     if (this.application.applicationType.showSupportingDocuments &&
-      (this.uploadedSupportingDocuments < 1)) {
+      ((this.uploadedSupportingDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
     }
 
     if (this.application.applicationType.signage === FormControlState.Show &&
-      (this.uploadedSignageDocuments < 1)) {
+      ((this.uploadedSignageDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one signage document is required.');
     }
 
-    if (this.application.applicationType.validInterest  === FormControlState.Show &&
-      (this.uploadedValidInterestDocuments < 1)) {
+    if (this.application.applicationType.validInterest === FormControlState.Show &&
+      ((this.uploadedValidInterestDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one supporting document is required.');
     }
 
-    if (this.application.applicationType.sitePlan  === FormControlState.Show &&
-      (this.uploadedSitePlanDocuments < 1)) {
+    if (this.showSitePlan() &&
+      ((this.uploadedSitePlanDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one site plan document is required.');
     }
 
-    if (this.application.applicationType.floorPlan  === FormControlState.Show &&
-      (this.uploadedFloorPlanDocuments < 1)) {
+    if (this.showExteriorRenderings() &&
+      ((this.uploadedPhotosOrRenderingsDocuments || 0) < 1)) {
+      valid = false;
+      this.validationMessages.push('At least one store exterior rendering or photo is required.');
+    }
+
+    if (this.application.applicationType.floorPlan === FormControlState.Show &&
+      ((this.uploadedFloorPlanDocuments || 0) < 1)) {
       valid = false;
       this.validationMessages.push('At least one floor plan document is required.');
     }
