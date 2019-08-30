@@ -50,27 +50,27 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 // search for the Personal History Record.
                 MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
-                string historyFilter = $"_adoxio_contactid_value eq {contact.Contactid}";
-                MicrosoftDynamicsCRMadoxioPersonalhistorysummary record = _dynamicsClient.Personalhistorysummaries.Get(filter: historyFilter).Value[0];
+                string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
+                WorkersGetResponseModel resp = _dynamicsClient.Workers.Get(filter: filter);
 
-                if (record != null)
+                if (resp.Value.Count == 1)
                 {
-                    UpdateContactConsent(record._adoxioContactidValue);
+                    // UpdateWorker(record._adoxioContactidValue);
 
                     // update the record.
-                    MicrosoftDynamicsCRMadoxioPersonalhistorysummary patchRecord = new MicrosoftDynamicsCRMadoxioPersonalhistorysummary()
+                    MicrosoftDynamicsCRMadoxioWorker patchRecord = new MicrosoftDynamicsCRMadoxioWorker()
                     {
                         AdoxioSecuritystatus = WorkerSecurityScreeningResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
-                        AdoxioCompletedon = DateTimeOffset.Now
+                        AdoxioSecuritycompletedon = DateTimeOffset.Now
                     };
 
                     try
                     {
-                        _dynamicsClient.Personalhistorysummaries.Update(record.AdoxioPersonalhistorysummaryid, patchRecord);
+                        _dynamicsClient.Workers.Update(resp.Value[0].AdoxioWorkerid, patchRecord);
                     }
                     catch (OdataerrorException odee)
                     {
-                        hangfireContext.WriteLine("Error updating worker personal history");
+                        hangfireContext.WriteLine("Error updating worker security status");
                         hangfireContext.WriteLine("Request:");
                         hangfireContext.WriteLine(odee.Request.Content);
                         hangfireContext.WriteLine("Response:");
@@ -82,6 +82,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         _logger.LogError("Response:");
                         _logger.LogError(odee.Response.Content);
                     }
+                }
+                else if(resp.Value.Count > 1)
+                {
+                    _logger.LogError($"Too many workers found for spd job id: {workerResponse.RecordIdentifier}");
+                    hangfireContext.WriteLine($"Too many workers found for spd job id: {workerResponse.RecordIdentifier}");
+                }
+                else {
+                    _logger.LogError($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
+                    hangfireContext.WriteLine($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
                 }
             }
 
@@ -240,25 +249,19 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// <param name="workerScreeningRequest">Worker screening request.</param>
         public async Task<bool> SendWorkerScreeningRequest(IncompleteWorkerScreening workerScreeningRequest)
         {
-            WorkersGetResponseModel workerResponse = _dynamicsClient.Workers.Get(filter: "adoxio_workerid eq " + workerScreeningRequest.RecordIdentifier);
-            if(workerResponse.Value.Count > 0)
+            List<IncompleteWorkerScreening> payload = new List<IncompleteWorkerScreening>
             {
-                List<IncompleteWorkerScreening> payload = new List<IncompleteWorkerScreening>
-                {
-                    workerScreeningRequest
-                };
+                workerScreeningRequest
+            };
 
-                _logger.LogInformation($"Sending Worker Screening Request");
+            _logger.LogInformation($"Sending Worker Screening Request");
 
-                var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+            var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
 
-                _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
-                _logger.LogInformation($"Done Send Worker Screening Request");
+            _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
+            _logger.LogInformation($"Done Send Worker Screening Request");
 
-                return result.Response.StatusCode.ToString() == "OK";
-            }
-            _logger.LogError($"Worker {workerScreeningRequest.RecordIdentifier} not found");
-            return false;
+            return result.Response.StatusCode.ToString() == "OK";
         }
 
         public async Task<IncompleteWorkerScreening> GenerateWorkerScreeningRequest(Guid workerId)
@@ -736,13 +739,23 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
+            string[] select = {"adoxio_applicationtypeid"};
+            ApplicationtypesGetResponseModel appTypesResponse = _dynamicsClient.Applicationtypes.Get(filter: "createdon ne null", select: select);
+            if (appTypesResponse.Value.Count == 0)
+            {
+                _logger.LogError("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
+                hangfireContext.WriteLine("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
+            }
+
+            List<string> appTypes = appTypesResponse.Value.Select(a => a.AdoxioApplicationtypeid).ToList();
             _logger.LogError("Starting SendFoundApplications Job");
             hangfireContext.WriteLine("Starting SendFoundApplications Job");
 
             string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
-            var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value;
-            _logger.LogError($"Found {applications.Count} applications to send to SPD.");
-            hangfireContext.WriteLine($"Found {applications.Count} applications to send to SPD.");
+
+            var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
+            _logger.LogError($"Found {applications.Count()} applications to send to SPD.");
+            hangfireContext.WriteLine($"Found {applications.Count()} applications to send to SPD.");
 
             foreach (var application in applications)
             {
