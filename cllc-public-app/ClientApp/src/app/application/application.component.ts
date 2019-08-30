@@ -1,5 +1,5 @@
 
-import { filter, takeWhile, catchError, mergeMap } from 'rxjs/operators';
+import { filter, takeWhile, catchError, mergeMap, delay } from 'rxjs/operators';
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -367,7 +367,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
-      return of(true);
+      // a delay is need by the deactivate guard
+      return of(true).pipe(delay(10));
     }
     return forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
