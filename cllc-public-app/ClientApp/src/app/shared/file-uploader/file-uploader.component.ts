@@ -131,7 +131,7 @@ export class FileUploaderComponent implements OnInit {
     let fileName = file.name;
     const extension = file.name.match(/\.([^\.])+$/)[0];
     if (this.useDocumentTypeForName) {
-      fileName = this.documentType.replace(/ /g, '_') + '_' + (count) + extension;
+      fileName = (count) + extension;
     }
     formData.append('file', file, fileName);
     formData.append('documentType', this.documentType);
@@ -150,6 +150,11 @@ export class FileUploaderComponent implements OnInit {
     const getFileURL = this.attachmentURL + '/' + this.documentType;
     this.busy = this.http.get<FileSystemItem[]>(getFileURL, { headers: headers })
       .subscribe((data) => {
+        data.forEach(file => {
+          if (this.useDocumentTypeForName) {
+            file.name = this.documentType + '_' + file.name;
+          }
+        });
         // sort by filename
         data = data.sort((fileA, fileB) => {
           if (fileA.name > fileB.name) {
@@ -184,7 +189,7 @@ export class FileUploaderComponent implements OnInit {
 
   disableFileUpload(): boolean {
     return (!this.multipleFiles && (this.files && this.files.length > 0))
-    || (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length));
+      || (this.multipleFiles && this.maxNumberOfFiles <= (this.files.length));
   }
 
   public fileOver(event) {
