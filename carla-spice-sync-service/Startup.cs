@@ -16,7 +16,6 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Rest;
-using SpdSync;
 using Splunk;
 using Splunk.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
@@ -26,7 +25,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 [assembly: ApiController]
-namespace Gov.Lclb.Cllb.SpdSync
+namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
     public class Startup
     {
@@ -187,11 +186,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
 
-
-            
-
-            
-
             // enable Splunk logger
             if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]))
             {
@@ -200,7 +194,6 @@ namespace Gov.Lclb.Cllb.SpdSync
                 //Append Http Json logger
                 loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
             }
-
         }
 
         SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
@@ -245,28 +238,11 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {                    
-                    log.LogInformation("Creating Hangfire job for SPD Daily Worker Export ...");
+                    log.LogInformation("Creating Hangfire jobs for SPD Export ...");
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplications(null), Cron.MinuteInterval(15));
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(1));
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
 
-                }
-            }
-            catch (Exception e)
-            {
-                StringBuilder msg = new StringBuilder();
-                msg.AppendLine("Failed to setup Hangfire job.");
-                log.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
-            }
-
-            try
-            {
-
-                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                {
-                    log.LogInformation("Creating Hangfire job for Checking SharePoint...");
-                    //RecurringJob.AddOrUpdate(() => new WorkerUpdater(Configuration, loggerFactory, SpdUtils.SetupSharepoint(Configuration)).ReceiveImportJob(null), Cron.Hourly);
-                    log.LogInformation("Hangfire Send Export job done.");
                 }
             }
             catch (Exception e)

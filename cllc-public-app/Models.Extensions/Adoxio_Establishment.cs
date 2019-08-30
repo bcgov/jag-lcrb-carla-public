@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="to"></param>
         /// <param name="from"></param>
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEstablishment to, ViewModels.AdoxioEstablishment from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEstablishment to, ViewModels.Establishment from)
         {            
             if (to.AdoxioAddresscity != from.Addresscity)
             {
@@ -191,12 +191,12 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
-        public static ViewModels.AdoxioEstablishment ToViewModel(this MicrosoftDynamicsCRMadoxioEstablishment adoxio_establishment)
+        public static ViewModels.Establishment ToViewModel(this MicrosoftDynamicsCRMadoxioEstablishment adoxio_establishment)
         {
-            ViewModels.AdoxioEstablishment result = null;
+            ViewModels.Establishment result = null;
             if (adoxio_establishment != null)
             {
-                result = new ViewModels.AdoxioEstablishment();
+                result = new ViewModels.Establishment();
                 if (adoxio_establishment.AdoxioEstablishmentid != null)
                 {
                     result.id = adoxio_establishment.AdoxioEstablishmentid.ToString();
@@ -272,7 +272,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="from"></param>
         /// <returns></returns>
-        public static MicrosoftDynamicsCRMadoxioEstablishment ToModel(this ViewModels.AdoxioEstablishment from)
+        public static MicrosoftDynamicsCRMadoxioEstablishment ToModel(this ViewModels.Establishment from)
         {
             MicrosoftDynamicsCRMadoxioEstablishment result = null;
             if (from != null)

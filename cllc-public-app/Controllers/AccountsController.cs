@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current")]
         public async Task<IActionResult> GetCurrentAccount()
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             ViewModels.Account result = null;
 
             // get the current user.
@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("bceid")]
         public async Task<IActionResult> GetCurrentBCeIDBusiness()
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAccount(string id)
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "id: " + id);
 
             Boolean userAccessToAccount = false;
@@ -180,7 +180,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("business-profile/{accountId}")]
         public IActionResult GetBusinessProfile(string accountId)
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "accountId: {accountId}");
 
             List<LegalEntity> legalEntities;
@@ -253,7 +253,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private List<ViewModels.LegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
         {
-            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.Get, "parentLegalEntityId: {accouparentLegalEntityIdntId}");
 
             List<ViewModels.LegalEntity> children = null;
@@ -304,7 +304,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private async Task<bool> FileUploadExists(string accountId, string accountName, string documentType)
         {
-            _logger.LogInformation(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.Get, "accountId: {accountId}, accountName: {accountName}, documentType: {documentType}");
 
             var exists = false;
@@ -324,7 +324,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateDynamicsAccount([FromBody] ViewModels.Account item)
         {
-            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + JsonConvert.SerializeObject(item));
 
             ViewModels.Account result = null;
@@ -342,7 +342,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string accountSiteminderGuid = userSettings.SiteMinderBusinessGuid;
             if (accountSiteminderGuid == null || accountSiteminderGuid.Length == 0)
             {
-                _logger.LogError(LoggingEvents.Error, "No account Siteminder Guid exernal id");
+                _logger.LogDebug(LoggingEvents.Error, "No account Siteminder Guid exernal id");
                 throw new Exception("Error. No accountSiteminderGuid exernal id");
             }
 
@@ -350,13 +350,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string contactSiteminderGuid = userSettings.SiteMinderGuid;
             if (contactSiteminderGuid == null || contactSiteminderGuid.Length == 0)
             {
-                _logger.LogError(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
+                _logger.LogDebug(LoggingEvents.Error, "No Contact Siteminder Guid exernal id");
                 throw new Exception("Error. No ContactSiteminderGuid exernal id");
             }
 
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-            _logger.LogDebug(LoggingEvents.Get, $"busine Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(bceidBusiness)}");
+            _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {Newtonsoft.Json.JsonConvert.SerializeObject(bceidBusiness)}");
             
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
@@ -621,7 +621,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                _logger.LogError(LoggingEvents.Error, "Invalid user registration.");
+                _logger.LogDebug(LoggingEvents.Error, "Invalid user registration.");
                 throw new Exception("Invalid user registration.");
             }
 
@@ -654,7 +654,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsAccount([FromBody] ViewModels.Account item, string id)
         {
-            _logger.LogInformation(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPut, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpPut, "Account parameter: " + JsonConvert.SerializeObject(item));
             _logger.LogDebug(LoggingEvents.HttpPut, "id parameter: " + id);
 
@@ -715,7 +715,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteDynamicsAccount(string id)
         {
-            _logger.LogInformation(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // verify the currently logged in user has access to this account
             Guid accountId = new Guid(id);
@@ -777,7 +777,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("delete/current")]
         public async Task<IActionResult> DeleteCurrentAccount()
         {
-            _logger.LogInformation(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
+            _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             // get the current user.
             string sessionSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -813,7 +813,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set account filter
             accountfilter = "_adoxio_accountid_value eq " + accountId;
-            _logger.LogError("Account filter = " + accountfilter);
+            _logger.LogDebug("Account filter = " + accountfilter);
 
             tiedHouseConnections = _dynamicsClient.Tiedhouseconnections.Get(filter: accountfilter).Value;
 

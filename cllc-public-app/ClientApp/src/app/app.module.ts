@@ -151,6 +151,8 @@ import {
 import { AssociatePageComponent } from './associate-page/associate-page.component';
 import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-renewal-steps.component';
 import { ApplicationRenewalComponent } from './application-renewal/application-renewal.component';
+import { MoreLessContentComponent } from './shared/more-less-content/more-less-content.component';
+import { MapComponent } from './map/map.component';
 
 
 @NgModule({
@@ -225,7 +227,9 @@ import { ApplicationRenewalComponent } from './application-renewal/application-r
     AssociatePageComponent,
     ShareholderDialogComponent,
     LicenceRenewalStepsComponent,
-    ApplicationRenewalComponent
+    ApplicationRenewalComponent,
+    MoreLessContentComponent,
+    MapComponent
   ],
   imports: [
     ChartsModule,

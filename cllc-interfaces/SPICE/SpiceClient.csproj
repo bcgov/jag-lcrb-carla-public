@@ -8,6 +8,7 @@
   </ItemGroup>
 
    <ItemGroup>
-     <Folder Include="Models\" />
+     <Compile Remove="Models\CompletedApplicationScreening.cs" />
+     <Compile Remove="Models\CompletedWorkerScreening.cs" />
    </ItemGroup>
 </Project>

@@ -13,4 +13,4 @@ genesis
 .vscode
 
 # Local config
-.env
+docker/.env

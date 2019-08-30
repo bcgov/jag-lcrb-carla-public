@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/{id}")]
         public async Task<IActionResult> GetPaymentUrl(string id)
         {
-            _logger.LogInformation("Called GetPaymentUrl(" + id + ")");
+            _logger.LogDebug("Called GetPaymentUrl(" + id + ")");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
@@ -93,12 +93,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.LogError("No invoice found, retry = " + retries);
+                _logger.LogDebug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 patchApplication = await GetDynamicsApplication(id, false);
                 invoiceId = patchApplication._adoxioInvoiceValue;
             }
-            _logger.LogInformation("Created invoice for application = " + invoiceId);
+            _logger.LogDebug("Created invoice for application = " + invoiceId);
 
             /*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -122,7 +122,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             redirectUrl = new Dictionary<string, string>();
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt));
 
-            _logger.LogInformation(">>>>>" + redirectUrl["url"]);
+            _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
             return Json(redirectUrl);
         }
@@ -137,7 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/licence-fee/{id}")]
         public async Task<IActionResult> GetLicencePaymentUrl(string id)
         {
-            _logger.LogInformation("Called GetLicencePaymentUrl(" + id + ")");
+            _logger.LogDebug("Called GetLicencePaymentUrl(" + id + ")");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
@@ -214,12 +214,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.LogError("No invoice found, retry = " + retries);
+                _logger.LogDebug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 adoxioApplication = await GetDynamicsApplication(id, false);
                 invoiceId = adoxioApplication._adoxioInvoiceValue;
             }
-            _logger.LogError("Created invoice for application = " + invoiceId);
+            _logger.LogDebug("Created invoice for application = " + invoiceId);
 
             /*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -245,7 +245,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), redirectPath);
 
-            _logger.LogError(">>>>>" + redirectUrl["url"]);
+            _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
             return Json(redirectUrl);
         }
@@ -271,7 +271,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // load the invoice for this application
             string invoiceId = adoxioApplication._adoxioInvoiceValue;
             Guid invoiceGuid = Guid.Parse(invoiceId);
-            _logger.LogInformation("Found invoice for application = " + invoiceId);
+            _logger.LogDebug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
@@ -281,7 +281,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var key in response.Keys)
             {
-                _logger.LogInformation(">>>>>" + key + ":" + response[key]);
+                _logger.LogDebug(">>>>>" + key + ":" + response[key]);
             }
 
             /* 
@@ -292,13 +292,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
             {
-                _logger.LogInformation("Processing invoice with status New");
+                _logger.LogDebug("Processing invoice with status New");
 
                 // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
-                    _logger.LogError("Transaction approved");
+                    _logger.LogDebug("Transaction approved");
 
                     MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -348,7 +348,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // if payment failed:
                 else
                 {
-                    _logger.LogError("Transaction NOT approved");
+                    _logger.LogDebug("Transaction NOT approved");
 
                     // set invoice status to Cancelled
                     MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 // that can happen if we are re-validating a completed invoice (paid or cancelled)
-                _logger.LogError("Invoice status is not New, skipping updates ...");
+                _logger.LogDebug("Invoice status is not New, skipping updates ...");
             }
 
             return Json(response);
@@ -420,7 +420,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // load the invoice for this application
             string invoiceId = adoxioApplication._adoxioLicencefeeinvoiceValue;
-            _logger.LogError("Found invoice for application = " + invoiceId);
+            _logger.LogDebug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
@@ -430,7 +430,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var key in response.Keys)
             {
-                _logger.LogInformation(">>>>>" + key + ":" + response[key]);
+                _logger.LogDebug(">>>>>" + key + ":" + response[key]);
             }
 
             /* 
@@ -441,14 +441,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
             {
-                _logger.LogInformation("Processing invoice with status New");
+                _logger.LogDebug("Processing invoice with status New");
 
 
                 // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
-                    _logger.LogError("Transaction approved");
+                    _logger.LogDebug("Transaction approved");
 
                     MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -497,7 +497,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // if payment failed:
                 else
                 {
-                    _logger.LogError("Transaction NOT approved");
+                    _logger.LogDebug("Transaction NOT approved");
 
                     MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -545,7 +545,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 // that can happen if we are re-validating a completed invoice (paid or cancelled)
-                _logger.LogError("Invoice status is not New, skipping updates ...");
+                _logger.LogDebug("Invoice status is not New, skipping updates ...");
             }
 
             return Json(response);
@@ -557,8 +557,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            _logger.LogError("Application id = " + id);
-            _logger.LogError("User id = " + userSettings.AccountId);
+            _logger.LogDebug("Application id = " + id);
+            _logger.LogDebug("User id = " + userSettings.AccountId);
             var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice" };
             MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = null;
             if (getInvoice)
@@ -590,8 +590,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            _logger.LogError("Worker id = " + id);
-            _logger.LogError("User Contact id = " + userSettings.ContactId);
+            _logger.LogDebug("Worker id = " + id);
+            _logger.LogDebug("User Contact id = " + userSettings.ContactId);
 
             MicrosoftDynamicsCRMadoxioWorker worker = null;
             if (getInvoice)
@@ -673,7 +673,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("submit/worker/{workerId}")]
         public async Task<IActionResult> GetWorkerPaymentUrl(string workerId)
         {
-            _logger.LogInformation($"Called GetWorkerPaymentUrl({workerId})");
+            _logger.LogDebug($"Called GetWorkerPaymentUrl({workerId})");
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid workerGuid = Guid.Parse(workerId);
@@ -718,12 +718,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // should happen immediately, but ...
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
-                _logger.LogError("No invoice found, retry = " + retries);
+                _logger.LogDebug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 patchWorker = await GetDynamicsWorker(workerId, false);
                 invoiceId = patchWorker._adoxioInvoiceValue;
             }
-            _logger.LogError("Created invoice for worker = " + invoiceId);
+            _logger.LogDebug("Created invoice for worker = " + invoiceId);
 
             /*
              * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
@@ -748,7 +748,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), redirectPath);
 
-            _logger.LogInformation(">>>>>" + redirectUrl["url"]);
+            _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
             return Json(redirectUrl);
         }
@@ -774,7 +774,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // load the invoice for this application
             string invoiceId = worker._adoxioInvoiceValue;
-            _logger.LogError("Found invoice for application = " + invoiceId);
+            _logger.LogDebug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
             var ordernum = invoice.AdoxioTransactionid;
             var orderamt = invoice.Totalamount;
@@ -784,7 +784,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var key in response.Keys)
             {
-                _logger.LogInformation(">>>>>" + key + ":" + response[key]);
+                _logger.LogDebug(">>>>>" + key + ":" + response[key]);
             }
 
             /* 
@@ -795,13 +795,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
             {
-                _logger.LogInformation("Processing invoice with status New");
+                _logger.LogDebug("Processing invoice with status New");
 
                 // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
-                    _logger.LogError("Transaction approved");
+                    _logger.LogDebug("Transaction approved");
 
                     MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice()
                     {
@@ -849,7 +849,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // if payment failed:
                 else
                 {
-                    _logger.LogError("Transaction NOT approved");
+                    _logger.LogDebug("Transaction NOT approved");
 
                     // set invoice status to Cancelled
                     MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice()
@@ -899,7 +899,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 // that can happen if we are re-validating a completed invoice (paid or cancelled)
-                _logger.LogError("Invoice status is not New, skipping updates ...");
+                _logger.LogDebug("Invoice status is not New, skipping updates ...");
             }
 
             return Json(response);

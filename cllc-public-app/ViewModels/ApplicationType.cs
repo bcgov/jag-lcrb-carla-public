@@ -47,6 +47,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? SitePlan { get; set; }
 
+        public bool? ShowDescription1 { get; set; }
+
         public LicenseType LicenseType;
 
         public List<ApplicationTypeContent> contentTypes;

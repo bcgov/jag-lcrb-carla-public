@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMProposalParty
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMProposalParty(string resourceId = default(string), string resourceSpecId = default(string), string displayName = default(string), string entityName = default(string), double? effortRequired = default(double?))
+        public MicrosoftDynamicsCRMProposalParty(string resourceId = default(string), string resourceSpecId = default(string), string displayName = default(string), string entityName = default(string), decimal? effortRequired = default(decimal?))
         {
             ResourceId = resourceId;
             ResourceSpecId = resourceSpecId;
@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "EffortRequired")]
-        public double? EffortRequired { get; set; }
+        public decimal? EffortRequired { get; set; }
 
     }
 }

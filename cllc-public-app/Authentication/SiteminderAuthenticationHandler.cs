@@ -308,7 +308,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 try
                 {
-                    _logger.LogInformation("Checking user session");
+                    _logger.LogDebug("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
                     _logger.LogDebug("UserSettings found: " + userSettings.GetJson());
                 }
@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     if (isDeveloperLogin)
                     {
-                        _logger.LogError("Generating a Development user");
+                        _logger.LogDebug("Generating a Development user");
                         userSettings.BusinessLegalName = devCompanyId + " TestBusiness";
                         userSettings.UserDisplayName = userId + " TestUser";
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("contact", userSettings.UserDisplayName).ToString();
@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     }
                     else if (isBCSCDeveloperLogin)
                     {
-                        _logger.LogError("Generating a Development BC Services user");
+                        _logger.LogDebug("Generating a Development BC Services user");
                         userSettings.BusinessLegalName = null;
                         userSettings.UserDisplayName = userId + " Associate";
                         siteMinderGuid = GuidUtility.CreateIdForDynamics("bcsc", userSettings.UserDisplayName).ToString();
@@ -431,7 +431,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (userSettings.AuthenticatedUser != null && !userSettings.AuthenticatedUser.Active)
                 {
 
-                    _logger.LogError(options.InactivegDbUserIdError + " (" + userId + ")");
+                    _logger.LogDebug(options.InactivegDbUserIdError + " (" + userId + ")");
                     return AuthenticateResult.Fail(options.InactivegDbUserIdError);
                 }
 
@@ -477,7 +477,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (!hostingEnv.IsProduction() && (isDeveloperLogin || isBCSCDeveloperLogin))
                 {
-                    _logger.LogError("DEV MODE Setting identity and creating session for: " + userId);
+                    _logger.LogDebug("DEV MODE Setting identity and creating session for: " + userId);
 
                     if (isDeveloperLogin)
                     {
