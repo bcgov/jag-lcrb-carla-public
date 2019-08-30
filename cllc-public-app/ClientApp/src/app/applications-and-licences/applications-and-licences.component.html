@@ -219,14 +219,18 @@
                 </div>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <a *ngIf="item.status == PAYMENT_REQUIRED" href="javascript:void(0);" (click)="payLicenceFee(item)">
-                  <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
-                </a>
-                div
-                <a *ngIf="item.status !== PAYMENT_REQUIRED" style="min-width: 10px; margin-bottom: 5px;"
-                  [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
-                  <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
-                </a>
+                <div *ngIf="item.status == PAYMENT_REQUIRED" href="javascript:void(0);" (click)="payLicenceFee(item)"
+                  style="min-width: 10px; margin-bottom: 10px;">
+                  <a>
+                    <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
+                  </a>
+                </div>
+                <div *ngIf="item.status !== PAYMENT_REQUIRED" style="min-width: 10px; margin-bottom: 10px;">
+                  <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
+                    <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
+                  </a>
+                </div>
+
                 <div *ngIf="item.status != PAYMENT_REQUIRED">
                   <p *ngFor="let action of item.allowedActions">
                     <a href="javascript:void(0);" (click)="doAction(item,action.name)">
