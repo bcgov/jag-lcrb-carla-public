@@ -38,6 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
                     FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
                     SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,
+                    ShowDescription1 = applicationType.AdoxioShowdescription1,
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)

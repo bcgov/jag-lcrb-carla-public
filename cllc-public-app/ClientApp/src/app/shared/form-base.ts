@@ -10,7 +10,9 @@ export class FormBase implements OnDestroy {
     componentActive = true;
 
     isValidOrNotTouched(field: string) {
-        return this.form.get(field).valid || !this.form.get(field).touched;
+        return this.form.get(field).disabled
+            || this.form.get(field).valid
+            || !this.form.get(field).touched;
     }
 
     public rejectIfNotDigitOrBackSpace(event) {
@@ -95,6 +97,11 @@ export class FormBase implements OnDestroy {
         const value = control.value;
         control.setValue('');
         control.setValue(value.trim());
+    }
+
+    public isTouchedAndInvalid(fieldName: string): boolean {
+        return this.form.get(fieldName).touched
+            && !this.form.get(fieldName).valid;
     }
 
     ngOnDestroy(): void {

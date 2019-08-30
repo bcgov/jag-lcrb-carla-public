@@ -26,6 +26,7 @@ import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-co
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence-renewal-steps.component';
+import { MapComponent } from './map/map.component';
 
 
 const routes: Routes = [
@@ -164,6 +165,13 @@ const routes: Routes = [
     component: SurveyTestComponent,
     data: {
       breadcrumb: 'Survey Test'
+    }
+  },
+  {
+    path: 'map',
+    component: MapComponent,
+    data: {
+      breadcrumb: 'Map'
     }
   },
   { path: '**', component: NotFoundComponent }

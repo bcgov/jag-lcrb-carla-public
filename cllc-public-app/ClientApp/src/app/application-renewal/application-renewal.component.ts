@@ -15,7 +15,6 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
@@ -31,7 +30,7 @@ import { FeatureFlagService } from './../services/feature-flag.service';
 import {
   ConnectionToNonMedicalStoresComponent
 } from '@app/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
-
+import { LicenseDataService } from '@app/services/license-data.service';
 
 
 
@@ -87,13 +86,14 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   uploadedSupportingDocuments = 0;
   uploadedFinancialIntegrityDocuments: 0;
   uploadedAssociateDocuments: 0;
+  window = window;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
     public applicationDataService: ApplicationDataService,
-    private dynamicsDataService: DynamicsDataService,
+    public licenceDataService: LicenseDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -128,13 +128,13 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
 
-      checklistBrandingAssess: ['', Validators.required],
-      checklistValidInterestAssess: ['', Validators.required],
-      checklistFloorPlanAssess: ['', Validators.required],
-      checklistSiteMapAssess: ['', Validators.required],
-      checklistEstabRenderAssessed: ['', Validators.required],
-      checklistSignageAssessed: ['', Validators.required],
-      checklistEstablishmentAddressAssessed: ['', Validators.required],
+      renewalBranding: ['', Validators.required],
+      renewalSignage: ['', Validators.required],
+      renewalEstablishmentAddress: ['', Validators.required],
+      renewalValidInterest: ['', Validators.required],
+      renewalZoning: ['', Validators.required],
+      renewalFloorPlan: ['', Validators.required],
+      renewalSiteMap: [''],
       assignedLicence: this.fb.group({
         id: [''],
         establishmentAddressStreet: [''],
@@ -187,6 +187,11 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       );
   }
 
+  isTouchedAndInvalid(fieldName: string): boolean {
+    return this.form.get(fieldName).touched
+      && !this.form.get(fieldName).valid;
+  }
+
   private addDynamicContent() {
     if (this.application.applicationType) {
       this.htmlContent = {
@@ -196,6 +201,21 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         nextSteps: this.getApplicationContent('NextSteps'),
       };
     }
+  }
+
+
+  doAction(licenseId: string, actionName: string) {
+    this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(data => {
+        this.window.open(`/account-profile/${data.id}`, 'blank');
+      },
+        () => {
+          this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
+            { duration: 3500, panelClass: ['red-snackbar'] });
+          console.log('Error starting a Change Licence Application');
+        }
+      );
   }
 
   private getApplicationContent(contentCartegory: string) {
@@ -236,7 +256,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     const saveData = this.form.value;
 
     return forkJoin(
-      this.applicationDataService.updateApplication({...this.application, ...this.form.value}),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
@@ -392,12 +412,12 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
 
   saveForLater() {
     this.busy = this.save(true)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe((result: boolean) => {
-          if (result) {
-            this.router.navigate(['/dashboard']);
-          }
-        });
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((result: boolean) => {
+        if (result) {
+          this.router.navigate(['/dashboard']);
+        }
+      });
   }
 
 }

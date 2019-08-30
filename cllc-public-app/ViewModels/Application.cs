@@ -334,7 +334,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public enum ValueNotChanged
     {
         Yes = 845280000,
-        Changed = 845280002
+        No = 845280001
     }
 
     public class Application
@@ -429,29 +429,43 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public TiedHouseConnection TiedHouse { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistBrandingAssess { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistValidInterestAssess { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistFloorPlanAssess { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistSiteMapAssess { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistEstabRenderAssessed { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistSignageAssessed { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistOrgLeadershipBuilt { get; set; }
+        public ValueNotChanged? RenewalCriminalOffenceCheck { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistKeyPersonnelBuilt { get; set; }
+        public ValueNotChanged? RenewalUnreportedSaleOfBusiness { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistShareholdersBuilt { get; set; }
+        public ValueNotChanged? RenewalBusinessType { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public ValueNotChanged? ChecklistEstablishmentAddressAssessed { get; set; }
+        public ValueNotChanged? RenewalTiedhouse { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? TiedhouseFederalInterest { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalOrgLeadership { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? Renewalkeypersonnel { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalShareholders { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalOutstandingFines { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalBranding { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalSignage { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalEstablishmentAddress { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalValidInterest { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalZoning { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalFloorPlan { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ValueNotChanged? RenewalSiteMap { get; set; }
 
         public string IndigenousNationId { get; set; }
         public string FederalProducerNames { get; set; }
+        public string Description1 { get; set; }
     }
 }

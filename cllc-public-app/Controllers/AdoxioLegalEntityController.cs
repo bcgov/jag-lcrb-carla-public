@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // set account filter
             accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
-            _logger.LogError("Account filter = " + accountfilter);
+            _logger.LogDebug("Account filter = " + accountfilter);
 
             legalEntities = _dynamicsClient.Legalentities.Get(filter: accountfilter).Value;
 
@@ -169,7 +169,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                _logger.LogError("Account filter = " + filter);
+                _logger.LogDebug("Account filter = " + filter);
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value;
 
             }
@@ -216,7 +216,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // query the Dynamics system to get the legal entity record.
             MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
-            _logger.LogError("Find legal entity for applicant = " + userSettings.AccountId.ToString());
+            _logger.LogDebug("Find legal entity for applicant = " + userSettings.AccountId.ToString());
 
             legalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 

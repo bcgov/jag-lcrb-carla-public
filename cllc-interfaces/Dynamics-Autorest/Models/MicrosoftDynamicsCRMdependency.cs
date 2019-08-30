@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMdependency
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMdependency(string _requiredcomponentnodeidValue = default(string), string requiredcomponentparentid = default(string), double? requiredcomponentintroducedversion = default(double?), string requiredcomponentbasesolutionid = default(string), int? dependencytype = default(int?), int? requiredcomponenttype = default(int?), string dependentcomponentbasesolutionid = default(string), string _dependentcomponentnodeidValue = default(string), int? dependentcomponenttype = default(int?), string dependentcomponentobjectid = default(string), string requiredcomponentobjectid = default(string), string dependencyid = default(string), string dependentcomponentparentid = default(string))
+        public MicrosoftDynamicsCRMdependency(string _requiredcomponentnodeidValue = default(string), string requiredcomponentparentid = default(string), decimal? requiredcomponentintroducedversion = default(decimal?), string requiredcomponentbasesolutionid = default(string), int? dependencytype = default(int?), int? requiredcomponenttype = default(int?), string dependentcomponentbasesolutionid = default(string), string _dependentcomponentnodeidValue = default(string), int? dependentcomponenttype = default(int?), string dependentcomponentobjectid = default(string), string requiredcomponentobjectid = default(string), string dependencyid = default(string), string dependentcomponentparentid = default(string))
         {
             this._requiredcomponentnodeidValue = _requiredcomponentnodeidValue;
             Requiredcomponentparentid = requiredcomponentparentid;
@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "requiredcomponentintroducedversion")]
-        public double? Requiredcomponentintroducedversion { get; set; }
+        public decimal? Requiredcomponentintroducedversion { get; set; }
 
         /// <summary>
         /// </summary>
