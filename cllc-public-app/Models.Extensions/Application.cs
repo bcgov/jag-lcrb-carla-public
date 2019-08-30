@@ -382,6 +382,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (dynamicsApplication.AdoxioApplicationTypeId != null)
             {
                 applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioApplicationTypeId.AdoxioName;
+                applicationSummary.Portallabel = dynamicsApplication.AdoxioApplicationTypeId.AdoxioPortallabel;
             }
 
             applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);
