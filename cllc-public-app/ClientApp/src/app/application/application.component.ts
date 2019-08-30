@@ -367,6 +367,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
     // do not save if the form is in file upload mode
     if (this.mode === UPLOAD_FILES_MODE) {
+      // a delay is need by the deactivate guard
       return of(true).pipe(delay(10));
     }
     return forkJoin(
