@@ -219,9 +219,9 @@
                 </div>
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
-                <div *ngIf="item.status == PAYMENT_REQUIRED" href="javascript:void(0);" (click)="payLicenceFee(item)"
+                <div *ngIf="item.status == PAYMENT_REQUIRED"
                   style="min-width: 10px; margin-bottom: 10px;">
-                  <a>
+                  <a href="javascript:void(0);" (click)="payLicenceFee(item)">
                     <span><i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>Pay Licence Fee</span>
                   </a>
                 </div>
