@@ -4,8 +4,7 @@ import { ConnectionToNonMedicalStoresComponent } from './connection-to-non-medic
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { AccountDataService } from '@services/account-data.service';
+
 
 describe('ConnectionToNonMedicalStoresComponent', () => {
   let component: ConnectionToNonMedicalStoresComponent;
@@ -16,9 +15,7 @@ describe('ConnectionToNonMedicalStoresComponent', () => {
       declarations: [ConnectionToNonMedicalStoresComponent],
       providers: [
         FormBuilder,
-        { provide: MatSnackBar, useValue: {} },
-        { provide: TiedHouseConnectionsDataService, useValue: {} },
-        { provide: AccountDataService, useValue: {} },
+        { provide: MatSnackBar, useValue: {} }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

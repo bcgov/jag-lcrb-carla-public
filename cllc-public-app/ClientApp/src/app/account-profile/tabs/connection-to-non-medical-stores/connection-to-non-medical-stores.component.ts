@@ -35,9 +35,7 @@ export class ConnectionToNonMedicalStoresComponent implements OnInit, OnDestroy 
   @Output() value: EventEmitter<TiedHouseConnection> = new EventEmitter<TiedHouseConnection>();
 
   constructor(private fb: FormBuilder,
-    public snackBar: MatSnackBar,
-    private tiedHouseService: TiedHouseConnectionsDataService,
-    private accountDataService: AccountDataService) { }
+    public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.form = this.fb.group({

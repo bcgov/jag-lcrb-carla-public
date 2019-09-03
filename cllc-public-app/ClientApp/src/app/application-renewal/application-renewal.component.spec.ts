@@ -13,7 +13,7 @@ import { of } from 'rxjs';
 import { Application } from '@models/application.model';
 import { ApplicationComponent } from '@app/application/application.component';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
-import { FieldComponent } from '@appshared/field/field.component';
+import { FieldComponent } from '@shared/field/field.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StoreModule, Store } from '@ngrx/store';
@@ -21,11 +21,14 @@ import { reducers, metaReducers } from '@app/app-state/reducers/reducers';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { LicenseDataService } from '@services/license-data.service';
+import { Account } from '@models/account.model';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let applicationDataServiceStub: Partial<ApplicationDataService>;
 let dynamicsDataServiceStub: Partial<DynamicsDataService>;
 let tiedHouseConnectionsDataServiceStub: Partial<TiedHouseConnectionsDataService>;
+let licenseDataServiceStub: Partial<LicenseDataService>;
 let matDialogStub: Partial<MatDialog>;
 let matSnackBarStub: Partial<MatSnackBar>;
 let activatedRouteStub: ActivatedRouteStub;
@@ -36,8 +39,11 @@ describe('ApplicationRenewalComponent', () => {
   let store: MockStore<AppState>;
   let applicationService: ApplicationDataService;
 
+  const account = new Account();
+  account.businessType = 'PublicCorporation';
+
   const initialState = {
-    currentAccountState: { currentAccount: { businessType: 'PublicCorporation' } },
+    currentAccountState: { currentAccount: account},
     currentUserState: { currentUser: {} }
   } as AppState;
 
@@ -54,6 +60,7 @@ describe('ApplicationRenewalComponent', () => {
       }),
 
     };
+    licenseDataServiceStub = {};
     dynamicsDataServiceStub = { getRecord: () => of([]) };
     tiedHouseConnectionsDataServiceStub = {
       updateTiedHouse: () => of(null)
@@ -75,6 +82,7 @@ describe('ApplicationRenewalComponent', () => {
         { provide: ApplicationDataService, useValue: applicationDataServiceStub },
         { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
         { provide: TiedHouseConnectionsDataService, useValue: tiedHouseConnectionsDataServiceStub },
+        { provide: LicenseDataService, useValue: licenseDataServiceStub },
         { provide: MatDialog, useValue: matDialogStub },
         { provide: ActivatedRoute, useValue: activatedRouteStub },
         { provide: MatSnackBar, useValue: matSnackBarStub },
