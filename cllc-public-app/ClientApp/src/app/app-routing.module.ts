@@ -166,14 +166,7 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Survey Test'
     }
-  },
-  {
-    path: 'map',
-    component: MapComponent,
-    data: {
-      breadcrumb: 'Map'
-    }
-  },
+  }, 
   { path: '**', component: NotFoundComponent }
 ];
 
