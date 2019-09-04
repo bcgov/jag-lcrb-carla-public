@@ -69,6 +69,34 @@
 			  {
                 "name": "PROD_BUILD",
                 "value": "${PROD_BUILD}"
+              },
+			  {
+                "name": "DOTNET_SDK_VERSION",
+                "value": "latest"
+              },			  
+			  {
+                "name": "MSBuildEmitSolution",
+                "value": "1"
+              },			  
+			  {
+                "name": "VERSION_PREFIX",
+                "value": "2.10.0"
+              },
+			  {
+                "name": "DOTNET_CONFIGURATION",
+                "value": "Debug"
+              },
+			  {
+                "name": "MSBuildEmitSolution",
+                "value": "1"
+              },
+			  {
+                "name": "DOTNET_INCREMENTAL",
+                "value": "true"
+              },
+			  {
+                "name": "NPM_MIRROR",
+                "value": "http://nexus/nexus/content/repositories/npm-registry"
               }
             ]
           }
@@ -114,7 +142,7 @@
       "displayName": "Git Reference",
       "description": "The git reference or branch.",
       "required": true,
-      "value": "master"
+      "value": "develop"
     },
     {
       "name": "SOURCE_CONTEXT_DIR",
@@ -135,7 +163,7 @@
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "registry.access.redhat.com/dotnet/dotnet-20-rhel7"
+      "value": "registry.access.redhat.com/dotnet/dotnet-22-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
