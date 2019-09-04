@@ -285,6 +285,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     return diff <= 60 || expiry < now;
   }
 
+  licenceHasExpired(expiryDate: string) {
+    const now = moment(new Date()).startOf('day');
+    const expiry = moment(expiryDate).startOf('day');
+    return expiry < now;
+  }
+
 }
 
 @Component({
