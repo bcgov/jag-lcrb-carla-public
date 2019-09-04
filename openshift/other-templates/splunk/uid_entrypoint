@@ -8,5 +8,6 @@ if [ $? -eq 1 ]; then
     echo "${USER_NAME:-splunkd}:x:$(id -u):0:${USER_NAME:-splunkd} user:${HOME}:/sbin/nologin" >> /etc/passwd
   fi
 fi
-exec /sbin/updateetc.sh
+# ensure config exists.
+/sbin/updateetc.sh
 exec /sbin/entrypoint.sh start-service
