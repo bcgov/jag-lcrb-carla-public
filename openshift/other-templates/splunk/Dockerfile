@@ -11,8 +11,7 @@ copy uid_entrypoint /sbin
 RUN mkdir -p /opt/splunk/etc && \
   mkdir -p /opt/container_artifact && \
   chmod a+w /opt/container_artifact && \
-  chmod a+w /opt/splunk/etc && \
-  /sbin/updateetc.sh
+  chmod a+w /opt/splunk/etc 
 
 # copy ansible /opt/ansible/
 
