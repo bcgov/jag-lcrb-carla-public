@@ -17,11 +17,13 @@ RUN mkdir -p /opt/splunk/etc && \
 
 RUN chmod -R 777 /opt/splunk
 
+RUN chmod -R a+rx /opt/ansible
+
 USER ansible
 
 RUN /sbin/entrypoint.sh start-and-exit
 
-RUN chmod -R a+rx /opt/ansible
+
 
 
 ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
