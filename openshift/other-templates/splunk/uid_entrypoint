@@ -10,4 +10,6 @@ if [ $? -eq 1 ]; then
 fi
 # ensure config exists.
 /sbin/updateetc.sh
-exec /sbin/entrypoint.sh start-service
+
+exec /opt/splunk/bin/splunk start
+#exec /sbin/entrypoint.sh start-service
