@@ -11,5 +11,11 @@ fi
 # ensure config exists.
 /sbin/updateetc.sh
 
-exec /opt/splunk/bin/splunk start
+sed -i -e '/enableSplunkdSSL =/ s/= .*/= false/' /opt/splunk/etc/system/local/server.conf
+
+cp cacert.pem.default cacert.pem
+cp ca.pem.default ca.pem
+
+/opt/splunk/bin/splunk start&
+tail -n 0 -f /opt/splunk/var/log/splunk/splunkd_stderr.log &
 #exec /sbin/entrypoint.sh start-service
