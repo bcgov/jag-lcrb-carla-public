@@ -19,8 +19,12 @@ USER ansible
 
 RUN /sbin/entrypoint.sh start-and-exit
 
+USER root
+
 RUN cp -ar /opt/splunk/etc /opt/splunk/etc-default && \
-  chmod -R a+rx /opt/ansible
+  chmod -R a+rx /opt/splunk/etc-default
+
+USER ansible
 
 ### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
 ENTRYPOINT [ "uid_entrypoint" ]
