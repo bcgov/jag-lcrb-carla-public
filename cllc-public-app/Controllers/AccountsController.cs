@@ -120,6 +120,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
+        /// Get Autocomplete data for a given name using startswith
+        /// </summary>
+        /// <param name="name">The name to filter by using startswith</param>
+        /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
+        [HttpGet("autocomplete")]
+        public IActionResult GetAutocomplete(string name)
+        {
+            IDictionary<string, string> results = new Dictionary<string, string>();
+            try
+            {
+                string filter = null;
+                // escape any apostophes.
+                if (name != null)
+                {
+                    name = name.Replace("'", "''");
+                    filter = $"startswith(name,'{name}')";
+                }
+                
+                var accounts = _dynamicsClient.Accounts.Get(filter: filter).Value;
+                foreach (var account in accounts)
+                {
+                    results.Add(account.Accountid, account.Name);
+                }
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError(LoggingEvents.Error, "Error while getting autocomplete data");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
+
+            return Json(results);
+        }
+
+        /// <summary>
         /// Get a specific legal entity
         /// </summary>
         /// <param name="id"></param>
@@ -158,7 +195,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);                
                 if (account == null)
                 {
                     _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
