@@ -16,6 +16,6 @@ sed -i -e '/enableSplunkdSSL =/ s/= .*/= false/' /opt/splunk/etc/system/local/se
 cp /opt/splunk/etc/auth/cacert.pem.default /opt/splunk/etc/auth/cacert.pem
 cp /opt/splunk/etc/auth/ca.pem.default /opt/splunk/etc/auth/ca.pem
 
-/opt/splunk/bin/splunk start&
+/opt/splunk/bin/splunk start
 tail -n 0 -f /opt/splunk/var/log/splunk/splunkd_stderr.log &
 #exec /sbin/entrypoint.sh start-service
