@@ -9,8 +9,10 @@ if [ $? -eq 1 ]; then
   fi
 fi
 # ensure config exists.
+touch /opt/splunk/etc/splunk.version
 /sbin/updateetc.sh
 
+echo "***** Updating config *****"
 sed -i -e '/enableSplunkdSSL =/ s/= .*/= false/' /opt/splunk/etc/system/local/server.conf
 
 cp /opt/splunk/etc/auth/cacert.pem.default /opt/splunk/etc/auth/cacert.pem

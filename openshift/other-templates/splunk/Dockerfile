@@ -5,7 +5,7 @@ USER root
 RUN chmod a+w /etc/passwd
 
 copy uid_entrypoint /sbin
-#copy entrypoint.sh /sbin
+copy entrypoint.sh /sbin
 
 
 RUN mkdir -p /opt/splunk/etc && \
