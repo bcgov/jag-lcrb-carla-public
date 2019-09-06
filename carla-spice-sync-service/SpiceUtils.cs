@@ -739,6 +739,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Workers.Update(workerId, workerPatch);
         }
 
+        [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = {"adoxio_applicationtypeid"};
