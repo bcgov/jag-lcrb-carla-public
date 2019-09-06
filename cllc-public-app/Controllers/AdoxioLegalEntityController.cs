@@ -19,8 +19,9 @@ using Microsoft.AspNetCore.Authorization;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class AdoxioLegalEntityController : Controller
+    public class AdoxioLegalEntityController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
@@ -67,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.Add(legalEntity.ToViewModel());
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.Add(legalEntity.ToViewModel());
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
         private List<MicrosoftDynamicsCRMadoxioLegalentity> GetAccountLegalEntities(string accountId)
@@ -196,7 +197,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -234,7 +235,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.account = account.ToViewModel();
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -267,7 +268,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result = adoxioLegalEntity.ToViewModel();
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -351,7 +352,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            return Json(adoxioLegalEntity.ToViewModel());
+            return new JsonResult(adoxioLegalEntity.ToViewModel());
         }
 
         /// <summary>
@@ -405,7 +406,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioLegalEntity = await _dynamicsClient.Legalentities.CreateAsync(adoxioLegalEntity);
 
-            return Json(adoxioLegalEntity.ToViewModel());
+            return new JsonResult(adoxioLegalEntity.ToViewModel());
         }
 
         /// <summary>
@@ -441,7 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
 
-            return Json(adoxioLegalEntity.ToViewModel());
+            return new JsonResult(adoxioLegalEntity.ToViewModel());
         }
 
         /// <summary>
@@ -526,7 +527,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result = "Success";
                 }
             }
-            return Json(result);
+            return new JsonResult(result);
         }
 
 

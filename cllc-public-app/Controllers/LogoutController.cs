@@ -9,7 +9,8 @@ using System;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("[controller]")]
-    public class LogoutController : Controller
+    [ApiController]
+    public class LogoutController : ControllerBase
     {
         private readonly IConfiguration Configuration;        
         private readonly IHostingEnvironment _env;

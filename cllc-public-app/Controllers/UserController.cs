@@ -8,7 +8,8 @@ using System.Security.Claims;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class UserController : Controller
+    [ApiController]
+    public class UserController : ControllerBase
     {           
         private readonly IHttpContextAccessor _httpContextAccessor;
 

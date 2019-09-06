@@ -14,7 +14,8 @@ using System.Text;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("bcservice")]
-    public class BCServiceController : Controller
+    [ApiController]
+    public class BCServiceController : ControllerBase
     {
         private readonly IConfiguration _configuration;        
         private readonly IHostingEnvironment _env;
@@ -106,18 +107,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     Expires = DateTime.UtcNow.AddDays(-1)
                 }
             );
-
-
-
-
-
-
-
-
-
-
-
-
 
             // create new "dev" user cookie
             Response.Cookies.Append(
