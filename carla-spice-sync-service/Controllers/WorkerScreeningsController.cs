@@ -60,7 +60,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     var workerRequest = new IncompleteWorkerScreening();
                     try
                     {
-                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
+                        workerRequest = _spiceUtils.GenerateWorkerScreeningRequest(workerId);
                     }
                     catch (System.ArgumentOutOfRangeException)
                     {
@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                         return NotFound($"Worker {workerId} is not found.");
                     }
                    
-                    var result = await _spiceUtils.SendWorkerScreeningRequest(workerRequest);
+                    var result = _spiceUtils.SendWorkerScreeningRequest(workerRequest);
                     if (result)
                     {
                         return Ok(workerRequest);
