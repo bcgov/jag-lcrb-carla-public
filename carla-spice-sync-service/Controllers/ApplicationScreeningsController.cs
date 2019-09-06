@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                         return NotFound($"Application {applicationId} is not found.");
                     }
                     
-                    var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
+                    var result = _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
 
                     if (result)
                     {
