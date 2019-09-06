@@ -35,9 +35,6 @@ export class AppComponent extends FormBase implements OnInit {
     public featureFlagService: FeatureFlagService) {
     super();
     this.isDevMode = isDevMode();
-    if (!featureFlagService.initialized) {
-      featureFlagService.initialize();
-    }
     this.router.events
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((event) => {

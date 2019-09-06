@@ -36,6 +36,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("IndigenousNation");
             }
 
+            if (!String.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
+            {
+                features.Add("Maps");
+            }
+
             return Json(features);
         }
 
