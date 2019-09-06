@@ -21,7 +21,7 @@ const licenceDataServiceStub: Partial<LicenseDataService> = {getAllCurrentLicens
 const routerStub: Partial<Router> = {};
 const paymentServiceStub: Partial<PaymentDataService> = {};
 const snackBarStub: Partial<MatSnackBar> = {};
-const featureFlagServiceStub: Partial<FeatureFlagService> = {featureOn: () => true};
+const featureFlagServiceStub: Partial<FeatureFlagService> = {featureOn: () => of(true)};
 const dialogStub: Partial<MatDialog> = {};
 
 describe('ApplicationsAndLicencesComponent', () => {

@@ -119,12 +119,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       contactPersonEmail: ['', Validators.required],
       contactPersonPhone: ['', Validators.required],
 
-      establishmentAddressStreet: [''],
-      establishmentAddressCity: [''],
-      establishmentAddressPostalCode: [''],
-      establishmentEmail: ['', [Validators.email, Validators.required]],
-      establishmentPhone: ['', Validators.required],
-
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
 

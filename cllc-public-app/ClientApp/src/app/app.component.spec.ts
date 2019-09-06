@@ -29,7 +29,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
 
     accountDataServiceStub = {};
-    featureFlagServiceStub = {initialized: true};
+    featureFlagServiceStub = {};
 
     TestBed.configureTestingModule({
       declarations: [
