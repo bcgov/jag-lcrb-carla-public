@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
@@ -192,7 +193,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// </summary>
         /// <returns>The application screening request success boolean.</returns>
         /// <param name="applicationRequest">Application request.</param>
-        public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
+        public bool SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
         {
             var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates);
 
@@ -208,7 +209,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 try
                 {
-                    var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+                    var result = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
 
                     _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
                     _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
@@ -223,7 +224,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         _dynamicsClient.Applications.Update(applicationId.ToString(), update);
                         return true;
                     }
-                    var msg = await result.Response.Content.ReadAsStringAsync();
+                    var msg = result.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     throw new SystemException(msg);
                 }
                 catch (Exception e)
@@ -247,7 +248,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// </summary>
         /// <returns>The worker screening request success boolean.</returns>
         /// <param name="workerScreeningRequest">Worker screening request.</param>
-        public async Task<bool> SendWorkerScreeningRequest(IncompleteWorkerScreening workerScreeningRequest)
+        public bool SendWorkerScreeningRequest(IncompleteWorkerScreening workerScreeningRequest)
         {
             List<IncompleteWorkerScreening> payload = new List<IncompleteWorkerScreening>
             {
@@ -256,7 +257,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             _logger.LogInformation($"Sending Worker Screening Request");
 
-            var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+            var result = SpiceClient.ReceiveWorkerScreeningsWithHttpMessages(payload);
 
             _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
             _logger.LogInformation($"Done Send Worker Screening Request");
@@ -264,7 +265,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             return result.Response.StatusCode.ToString() == "OK";
         }
 
-        public async Task<IncompleteWorkerScreening> GenerateWorkerScreeningRequest(Guid workerId)
+        public IncompleteWorkerScreening GenerateWorkerScreeningRequest(Guid workerId)
         {
             string filter = $"adoxio_workerid eq {workerId}";
             var fields = new List<string> { "adoxio_ContactId" };
@@ -686,6 +687,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Contacts.Update(ContactId, contact);
         }
 
+        [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
         public async Task SendFoundWorkers(PerformContext hangfireContext)
         {
             _logger.LogError("Starting SendFoundWorkers Job");
@@ -708,8 +710,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 foreach (var worker in workers.Value)
                 {
-                    IncompleteWorkerScreening screeningRequest = await GenerateWorkerScreeningRequest(Guid.Parse(worker.AdoxioWorkerid));
-                    var reqSuccess = await SendWorkerScreeningRequest(screeningRequest);
+                    IncompleteWorkerScreening screeningRequest = GenerateWorkerScreeningRequest(Guid.Parse(worker.AdoxioWorkerid));
+                    var reqSuccess = SendWorkerScreeningRequest(screeningRequest);
                     if (reqSuccess)
                     {
                         hangfireContext.WriteLine($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
@@ -762,7 +764,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
 
                 var screeningRequest = GenerateApplicationScreeningRequest(applicationId);
-                var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
+                var response = SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
                     hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");
