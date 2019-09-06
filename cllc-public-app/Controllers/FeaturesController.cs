@@ -7,8 +7,9 @@ using System.Collections.Generic;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     [AllowAnonymous]
-    public class FeaturesController : Controller 
+    public class FeaturesController : ControllerBase
     {
         private readonly IConfiguration _configuration;                
 
@@ -36,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("IndigenousNation");
             }
 
-            return Json(features);
+            return new  JsonResult(features);
         }
 
     }

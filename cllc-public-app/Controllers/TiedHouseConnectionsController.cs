@@ -14,8 +14,9 @@ using Microsoft.AspNetCore.Authorization;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class TiedHouseConnectionsController : Controller
+    public class TiedHouseConnectionsController : ControllerBase
     {        
         private readonly IDynamicsClient _dynamicsClient;                
         private readonly ILogger _logger;
@@ -46,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.Add(tiedHouse.ToViewModel());
             }
 
-            return Json(result.FirstOrDefault());
+            return new JsonResult(result.FirstOrDefault());
         }
 
 
@@ -94,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             
-            return Json(tiedHouse.ToViewModel());
+            return new JsonResult(tiedHouse.ToViewModel());
         }
     }
 }

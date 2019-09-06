@@ -12,7 +12,8 @@ using System.Text;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("login")]
-    public class LoginController : Controller
+    [ApiController]
+    public class LoginController : ControllerBase
     {
         private readonly IConfiguration _configuration;        
         private readonly IHostingEnvironment _env;

@@ -10,7 +10,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
     // fix for cors issue with certain map servers.
     [Route("api/[controller]")]
-    public class MapServerController : Controller
+    [ApiController]
+    // public API
+    public class MapServerController : ControllerBase
     {        
         private readonly IHostingEnvironment _env;
 

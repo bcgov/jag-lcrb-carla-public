@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -17,8 +18,10 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    //[Authorize(Policy = "Business-User")]
-    public class FileController : Controller
+    [ApiController]
+    [Authorize]
+    // No authorize policy as this can be used by workers to upload files.
+    public class FileController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;        
@@ -157,7 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} Unexpected Exception {e.ToString()} {e.Message} {e.StackTrace.ToString()}");
             }
-            return Json(result);
+            return new JsonResult(result);
         }
 
         private async Task<bool> CanAccessEntity(string entityName, string entityId)
@@ -349,7 +352,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            return Json(fileSystemItemVMList);
+            return new JsonResult(fileSystemItemVMList);
         }
 
         private async Task<List<ViewModels.FileSystemItem>> getFileDetailsListInFolder(string entityId, string entityName, string documentType)

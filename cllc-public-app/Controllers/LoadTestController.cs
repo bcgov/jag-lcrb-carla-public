@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("websurge-allow.txt")]
-    public class LoadTestController : Controller
+    [ApiController]
+    public class LoadTestController : ControllerBase
     {        
         private readonly IHostingEnvironment _env;        
 

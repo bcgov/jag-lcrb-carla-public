@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 // TODO implement this with autorest
 
 namespace Gov.Lclb.Cllb.Public.Controllers
-{
-    [Produces("application/json")]
+{    
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class ApplicationTypesController : Controller
+    public class ApplicationTypesController : ControllerBase
     {                  
         private readonly IDynamicsClient _dynamicsClient;
 
@@ -36,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 applicationTypeVMList.Add(applicationType.ToViewModel());
             }
 
-            return Json(applicationTypeVMList);
+            return new JsonResult(applicationTypeVMList);
         }
 
         /// GET a specific application type
@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Json(applicationType.ToViewModel());
+                return new JsonResult(applicationType.ToViewModel());
             }
 
         }
@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Json(applicationType.ToViewModel());
+                return new JsonResult(applicationType.ToViewModel());
             }
             
         }
