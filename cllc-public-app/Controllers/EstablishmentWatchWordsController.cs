@@ -6,8 +6,9 @@ using System.Collections.Generic;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     [AllowAnonymous]
-    public class EstablishmentWatchWordsController : Controller
+    public class EstablishmentWatchWordsController : ControllerBase
     {
         private readonly IDynamicsClient _dynamicsClient;
 
@@ -39,7 +40,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
             }
-            return Json(returnVal);
+            return new JsonResult(returnVal);
         }
     }
 }

@@ -17,11 +17,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
-{
-    [Produces("application/json")]
+{    
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class LicensesController : Controller
+    public class LicensesController : ControllerBase
     {        
         private readonly IMemoryCache _cache;
         private readonly IDynamicsClient _dynamicsClient;
@@ -131,7 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                 }
 
-                return Json(await application.ToViewModel(_dynamicsClient));
+                return new JsonResult(await application.ToViewModel(_dynamicsClient));
 
             }
         }
@@ -198,7 +198,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
             List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(userSettings.AccountId);
 
-            return Json(adoxioLicenses);
+            return new JsonResult(adoxioLicenses);
         }
 
 
@@ -210,7 +210,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get all licenses in Dynamics by Licencee Id
             List<ApplicationLicenseSummary> adoxioLicenses = GetLicensesByLicencee(licenceeId);
 
-            return Json(adoxioLicenses);
+            return new JsonResult(adoxioLicenses);
         }
 
         /// <summary>
