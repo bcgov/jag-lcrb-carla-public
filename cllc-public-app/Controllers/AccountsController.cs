@@ -17,10 +17,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
-{
+{    
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class AccountsController : Controller
+    public class AccountsController : ControllerBase
     {
         private readonly BCeIDBusinessQuery _bceid;
         private readonly IConfiguration _configuration;
@@ -83,7 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "Current Account Result: " +
                JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// GET account in Dynamics for the current user
@@ -116,7 +117,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "BCeID business record: " +
                 JsonConvert.SerializeObject(business, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(business);
+            return new JsonResult (business);
         }
 
         /// <summary>
@@ -211,7 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "Account result: " +
                 JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(result);
+            return new JsonResult(result);
         }
 
         [HttpGet("business-profile/{accountId}")]
@@ -285,7 +286,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "BusinessProfile.isComplete: " +
                 JsonConvert.SerializeObject(isComplete, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(isComplete);
+            return new JsonResult(isComplete);
         }
 
         private List<ViewModels.LegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
@@ -667,7 +668,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpPost, "result: " +
                 JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(result);
+            return new JsonResult(result);
         }
 
         private async Task<string>  GetAccountDataFromOrgBook(){
@@ -741,7 +742,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpPut, "updatedAccount: " +
                 JsonConvert.SerializeObject(updatedAccount, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
 
-            return Json(updatedAccount);
+            return new JsonResult(updatedAccount);
         }
 
         /// <summary>
@@ -859,7 +860,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.Add(tiedHouse.ToViewModel());
             }
 
-            return Json(result.FirstOrDefault());
+            return new JsonResult(result.FirstOrDefault());
         }
 
         /// <summary>
@@ -898,7 +899,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            return Json(tiedHouse.ToViewModel());
+            return new JsonResult(tiedHouse.ToViewModel());
         }
 
 

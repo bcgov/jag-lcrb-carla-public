@@ -3,7 +3,8 @@
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("404")]
-    public class NotFoundController : Controller
+    [ApiController]
+    public class NotFoundController : ControllerBase
     {
 
         public NotFoundController()

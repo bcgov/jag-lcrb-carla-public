@@ -4,6 +4,7 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -17,7 +18,9 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class InvoiceController : Controller
+    [ApiController]
+    [Authorize]
+    public class InvoiceController : ControllerBase
     {
         private readonly IConfiguration _configuration;        
         private readonly IDynamicsClient _dynamicsClient;
@@ -52,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result.Add(invoice.ToViewModel());
                 }
 
-                return Json(result);
+                return new JsonResult(result);
             }
             return new NotFoundResult();
         }
@@ -97,7 +100,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result = invoice.ToViewModel();                
                 }
 
-                return Json(result);
+                return new JsonResult(result);
 			}
             return new NotFoundResult();
         }
@@ -160,7 +163,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _logger.LogError(odee.Response.Content);
                 }
 
-                return Json(invoice.ToViewModel());
+                return new JsonResult(invoice.ToViewModel());
 			}
             return new NotFoundResult();
         }
@@ -197,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 invoice.CopyValues(item);
 
                 await _dynamicsClient.Invoices.UpdateAsync(adoxio_legalentityid.ToString(), invoice);
-                return Json(invoice.ToViewModel());
+                return new JsonResult(invoice.ToViewModel());
 			}
             return new NotFoundResult();
         }
