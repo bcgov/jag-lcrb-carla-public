@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Response.Content);
             }
 
-            return Json(results);
+            return new JsonResult(results);
         }
 
         /// <summary>
