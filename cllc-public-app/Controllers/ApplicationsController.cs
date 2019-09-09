@@ -18,8 +18,9 @@ using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class ApplicationsController : Controller
+    public class ApplicationsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;        
@@ -164,7 +165,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<JsonResult> GetDynamicsApplications(string applicantId)
         {
             List<ViewModels.Application> adoxioApplications = await GetApplicationsByApplicant(applicantId);
-            return Json(adoxioApplications);
+            return new JsonResult(adoxioApplications);
         }
 
         /// GET all applications in Dynamics for the current user
@@ -177,7 +178,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             List<ViewModels.ApplicationSummary> adoxioApplications = GetApplicationSummariesByApplicant(userSettings.AccountId);
-            return Json(adoxioApplications);
+            return new JsonResult(adoxioApplications);
         }
 
         /// GET submitted applications in Dynamics for the current user
@@ -190,7 +191,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             var count = GetSubmittedCountByApplicant(userSettings.AccountId);
-            return Json(count);
+            return new JsonResult(count);
         }
 
         /// <summary>
@@ -231,7 +232,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 await initializeSharepoint(dynamicsApplication);
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
         private string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
@@ -374,7 +375,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             await initializeSharepoint(adoxioApplication);
 
-            return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient));
 
         }
 
@@ -547,7 +548,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
 
-            return Json(await adoxioApplication.ToViewModel(_dynamicsClient));
+            return new JsonResult(await adoxioApplication.ToViewModel(_dynamicsClient));
         }
 
         /// <summary>

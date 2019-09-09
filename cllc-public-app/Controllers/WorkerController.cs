@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -16,7 +17,9 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class WorkerController : Controller
+    [ApiController]
+    [Authorize]
+    public class WorkerController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
@@ -71,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-            return Json(results);
+            return new JsonResult(results);
         }
 
 
@@ -108,7 +111,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -161,7 +164,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw odee;
             }
             worker = await _dynamicsClient.GetWorkerById(workerId);
-            return Json(worker.ToViewModel());
+            return new JsonResult(worker.ToViewModel());
         }
 
         /// <summary>
@@ -200,7 +203,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
             }
-            return Json(worker);
+            return new JsonResult(worker);
         }
 
 

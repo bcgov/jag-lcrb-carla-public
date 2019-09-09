@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -14,7 +15,9 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class PreviousAddressController : Controller
+    [ApiController]
+    [Authorize]
+    public class PreviousAddressController : ControllerBase
     {        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -68,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
 
@@ -108,7 +111,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             Address = await _dynamicsClient.GetPreviousAddressById(id);
-            return Json(Address.ToViewModel());
+            return new JsonResult(Address.ToViewModel());
         }
 
         // /// <summary>
@@ -167,7 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw (odee);
             }
 
-            return Json(address.ToViewModel());
+            return new JsonResult(address.ToViewModel());
         }
 
         /// <summary>

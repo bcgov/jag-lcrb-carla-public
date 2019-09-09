@@ -13,8 +13,9 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class EstablishmentsController : Controller
+    public class EstablishmentsController : ControllerBase
     {        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
@@ -48,7 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Json(establishment.ToViewModel());
+                return new JsonResult(establishment.ToViewModel());
             }
             
         }
@@ -59,7 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("map")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetMap()
+        public IActionResult GetMap()
         {
             // get establishments                      
             var expand = new List<string> { "adoxio_establishment" }; // get establishment data at the same time.
@@ -109,7 +110,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 }               
             }
-            return Json(establishmentMapData);
+            return new JsonResult(establishmentMapData);
         }
 
         /// <summary>
@@ -141,7 +142,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             ViewModels.Establishment result = adoxio_establishment.ToViewModel();
                        
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// <summary>
@@ -201,7 +202,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Unable to get establishment after update");
             }
 
-            return Json(adoxioEstablishment.ToViewModel());
+            return new JsonResult(adoxioEstablishment.ToViewModel());
         }
 
         /// <summary>

@@ -6,7 +6,8 @@ using Microsoft.Extensions.Configuration;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class JurisdictionController : Controller
+    [ApiController]
+    public class JurisdictionController : ControllerBase
     {        
         private readonly AppDbContext _db;
         public JurisdictionController(AppDbContext db, IConfiguration configuration)
@@ -18,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public JsonResult GetJurisdictions()
         {
-            return Json(_db.GetJurisdictions());
+            return new JsonResult(_db.GetJurisdictions());
         }
         
     }

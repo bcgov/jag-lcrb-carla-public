@@ -68,6 +68,159 @@
                     "name": "ASPNETCORE_ENVIRONMENT",
                     "value": "${ASPNETCORE_ENVIRONMENT}"
                   },
+				  				  {
+                    "name": "ADFS_OAUTH2_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "adfs-oauth2-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+				  {
+                    "name": "DYNAMICS_APP_GROUP_CLIENT_ID",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-app-group-client-id",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_APP_GROUP_RESOURCE",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-app-group-resource",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_APP_GROUP_SECRET",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-app-group-secret",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_NATIVE_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-native-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_NATIVE_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-native-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-password",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_USERNAME",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-username",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SHAREPOINT_NATIVE_BASE_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-native-base-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },                  
+                  {
+                    "name": "SHAREPOINT_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },                  
+                  {
+                    "name": "SHAREPOINT_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-password",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },               
+                  {
+                    "name": "SHAREPOINT_RELYING_PARTY_IDENTIFIER",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-relying-party-identifier",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SHAREPOINT_STS_TOKEN_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-sts-token-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },				  
+                  {
+                    "name": "SHAREPOINT_USERNAME",
+					"valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-username",
+						"name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+				  {
+                    "name": "SPLUNK_COLLECTOR_URL",
+					"valueFrom": {
+                      "secretKeyRef": {
+                        "key": "splunk-collector-url",
+						"name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },	
+					{
+                    "name": "SPLUNK_TOKEN",
+					"valueFrom": {
+                      "secretKeyRef": {
+                        "key": "splunk-token",
+						"name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },						  
                   {
                     "name": "DB_USER",
                     "valueFrom": {
@@ -113,17 +266,9 @@
                       }
                     }
                   },
+                  
                   {
-                    "name": "DYNAMICS_NATIVE_ODATA_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "dynamics-native-odata-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "PathBase",
+                    "name": "BASE_PATH",
                     "valueFrom": {
                       "secretKeyRef": {
                         "key": "base-path",
@@ -176,52 +321,10 @@
                       }
                     }
                   },
-                  {
-                    "name": "SHAREPOINT_SERVER_APPID_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-server-appid-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
+                  
                   {
                     "name": "SHAREPOINT_WEBNAME",
                     "value": "${SHAREPOINT_WEBNAME}"
-                  },
-                  {
-                    "name": "SHAREPOINT_AAD_TENANTID",
-                    "value": "${SHAREPOINT_AAD_TENANTID}"
-                  },
-                  {
-                    "name": "SHAREPOINT_CLIENT_ID",
-                    "value": "${SHAREPOINT_CLIENT_ID}"
-                  },
-                  {
-                    "name": "SHAREPOINT_CERTIFICATE_PASSWORD",
-                    "value": "${SHAREPOINT_CERTIFICATE_PASSWORD}"
-                  },
-                  {
-                    "name": "SHAREPOINT_CERTIFICATE_FILENAME",
-                    "value": "${SHAREPOINT_CERTIFICATE_FILENAME}"
-                  },
-                  {
-                    "name": "REDIS_SERVER",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "redis-server",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DYNAMICS_ODATA_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "dynamics-odata-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
                   },
                   {
                     "name": "BCEID_SERVICE_SVCID",
@@ -303,16 +406,7 @@
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }
-                  },
-                  {
-                    "name": "SHAREPOINT_NATIVE_BASE_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "sharepoint-native-base-uri",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
+                  },                  
                   {
                     "name": "SITEMINDER_LOGOUT_URL",
                     "value": "${SITEMINDER_LOGOUT_URL}"
@@ -328,6 +422,27 @@
                   {
                     "name": "BCEP_CONF_PATH_WORKER",
                     "value": "${BCEP_CONF_PATH_WORKER}"
+                  },
+                  {
+                    "name": "MAPSERVER_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "mapserver-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "FEATURE_CRS_RENEWAL",
+                    "value": "1"
+                  },
+				  {
+                    "name": "FEATURE_INDIGENOUS_NATION",
+                    "value": "1"
+                  },
+				  {
+                    "name": "FEATURE_MARKETER",
+                    "value": "1"
                   }
                 ],
                 "resources": {
@@ -638,7 +753,7 @@
       "displayName": "JWT for PDF service",
       "description": "JWT for PDF service.",
       "required": true,
-      "value": ""
+      "value": "changeme"
     },
     {
       "name": "BCEP_CONF_PATH_WORKER",

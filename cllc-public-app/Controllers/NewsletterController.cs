@@ -10,7 +10,9 @@ using System.Net.Mail;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class NewsletterController : Controller
+    [ApiController]
+    // Public API
+    public class NewsletterController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly AppDbContext _db;
@@ -39,7 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Json(newsletter);
+                return new JsonResult(newsletter);
             }
             
         }
@@ -65,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             message.IsBodyHtml = true;
             client.Send(message);
 
-            return Json("Ok");
+            return new JsonResult("Ok");
         }
 
         private string GetConfirmationLink(string slug, string email)
@@ -108,7 +110,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result = "Success";
                 }                                
             }
-            return Json(result);
+            return new JsonResult(result);
         }
 
         [HttpPost("{slug}/unsubscribe")]
@@ -116,7 +118,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult UnSubscribe(string slug, [FromQuery] string email)
         {
             _db.RemoveNewsletterSubscriber(slug, email);
-            return Json("Ok");
+            return new JsonResult("Ok");
         }
 
     }

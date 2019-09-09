@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class SurveyController : Controller
+    [ApiController]
+    // public controller.
+    public class SurveyController : ControllerBase
     {        
         private readonly AppDbContext db;
         public SurveyController(AppDbContext db)
@@ -17,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetActive()
         {
             
-            return Json(db.GetSurveys());
+            return new JsonResult(db.GetSurveys());
         }
 
         [HttpGet("getSurvey")]
@@ -39,14 +41,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult Create(string name)
         {
             db.StoreSurvey(name, "{}");
-            return Json("Ok");
+            return new JsonResult("Ok");
         }
 
         [HttpGet("changeName")]
         public JsonResult ChangeName(string id, string name)
         {
             db.ChangeName(id, name);
-            return Json("Ok");
+            return new JsonResult("Ok");
         }
 
         [HttpPost("changeJson")]
@@ -60,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult Delete(string id)
         {
             db.DeleteSurvey(id);
-            return Json("Ok");
+            return new JsonResult("Ok");
         }
 
         [HttpPost("post")]
@@ -68,14 +70,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult PostResult([FromBody]ViewModels.PostSurveyResult model)
         {
             db.PostResults(model.postId, model.clientId, model.surveyResult);
-            return Json("Ok");
+            return new JsonResult("Ok");
         }
 
         [HttpGet("results")]
         [AllowAnonymous]
         public JsonResult GetResults(string postId)
         {
-            return Json(db.GetResults(postId));
+            return new JsonResult(db.GetResults(postId));
         }
 
         [HttpGet("getResultByClient/{clientId}")]
@@ -83,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult GetResultByClient(string clientId)
         {
             string result = db.GetSurveyResultByClientId(clientId);
-            return Json(result);
+            return new JsonResult(result);
         }
     }
 }

@@ -8,4 +8,16 @@ if [ $? -eq 1 ]; then
     echo "${USER_NAME:-splunkd}:x:$(id -u):0:${USER_NAME:-splunkd} user:${HOME}:/sbin/nologin" >> /etc/passwd
   fi
 fi
-exec /sbin/entrypoint.sh start-service
+# ensure config exists.
+touch /opt/splunk/etc/splunk.version
+/sbin/updateetc.sh
+
+echo "***** Updating config *****"
+sed -i -e '/enableSplunkdSSL =/ s/= .*/= false/' /opt/splunk/etc/system/local/server.conf
+
+cp /opt/splunk/etc/auth/cacert.pem.default /opt/splunk/etc/auth/cacert.pem
+cp /opt/splunk/etc/auth/ca.pem.default /opt/splunk/etc/auth/ca.pem
+
+/opt/splunk/bin/splunk start
+tail -n 0 -f /opt/splunk/var/log/splunk/splunkd_stderr.log
+#exec /sbin/entrypoint.sh start-service
