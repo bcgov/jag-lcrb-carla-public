@@ -228,7 +228,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             if (!string.IsNullOrEmpty(smgov_givennames))
             {
-                to.middlename = smgov_givennames;
+                to.middlename = smgov_givennames.Replace(smgov_givenname, "").Trim();
             }
 
             if (!string.IsNullOrEmpty(smgov_surname))
