@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class VoteQuestionController : Controller
+    [ApiController]
+    public class VoteQuestionController : ControllerBase
     {        
         private readonly AppDbContext db;
         public VoteQuestionController(AppDbContext db)
@@ -17,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public JsonResult GetVoteQuestions()
         {
-            return Json(db.GetVoteQuestions());
+            return new JsonResult(db.GetVoteQuestions());
         }
 
         [HttpGet("{slug}")]
@@ -32,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Json(result);
+                return new JsonResult(result);
             }
         }
 
@@ -41,7 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult AddVote(string slug, [FromQuery] string option)
         {
             db.AddVote(option);
-            return Json(db.GetViewModelVoteQuestionBySlug(slug));
+            return new JsonResult(db.GetViewModelVoteQuestionBySlug(slug));
         }
 
     }

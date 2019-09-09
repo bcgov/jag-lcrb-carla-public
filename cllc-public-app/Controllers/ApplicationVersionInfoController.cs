@@ -1,4 +1,5 @@
 ﻿using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,7 +9,9 @@ using System.Reflection;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class ApplicationVersionInfoController : Controller
+    [ApiController]
+    // public API
+    public class ApplicationVersionInfoController : ControllerBase
     {
         private readonly IConfiguration _configuration;        
         
@@ -21,7 +24,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Return the version of the running application
         /// </summary>
         /// <returns>The version of the running application</returns>
-        [HttpGet]        
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult GetApplicationVersionInfo()
         {
             Assembly assembly = this.GetType().GetTypeInfo().Assembly;
@@ -41,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 FileVersion = fileVersion
             };
 
-            return Json(avi);
+            return new JsonResult(avi);
         }
     
 	}

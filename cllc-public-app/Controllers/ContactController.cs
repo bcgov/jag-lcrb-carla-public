@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,9 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class ContactController : Controller
+    [ApiController]
+    [Authorize]
+    public class ContactController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
@@ -65,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            return Json(result);
+            return new JsonResult(result);
         }
 
 
@@ -107,7 +110,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             contact = await _dynamicsClient.GetContactById(contactId);
-            return Json(contact.ToViewModel());
+            return new JsonResult(contact.ToViewModel());
         }
 
         /// <summary>
@@ -209,7 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Invalid user registration.");
             }
 
-            return Json(contact.ToViewModel());
+            return new JsonResult(contact.ToViewModel());
         }
 
         /// <summary>
@@ -341,7 +344,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Invalid user registration.");
             }
 
-            return Json(contact.ToViewModel());
+            return new JsonResult(contact.ToViewModel());
         }
 
 

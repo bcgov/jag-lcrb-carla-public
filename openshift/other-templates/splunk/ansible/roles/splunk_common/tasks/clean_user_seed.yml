@@ -1,7 +1,0 @@
----
-- name: Remove user-seed.conf
-  file:
-    dest: "{{ splunk.home }}/etc/system/local/user-seed.conf"
-    state: "absent"
-  notify:
-    - Restart the splunkd service
