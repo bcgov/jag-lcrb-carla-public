@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("Maps");
             }
 
-            return Json(features);
+            return new JsonResult(features);
         }
 
     }
