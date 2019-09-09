@@ -153,6 +153,7 @@ import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-re
 import { ApplicationRenewalComponent } from './application-renewal/application-renewal.component';
 import { MoreLessContentComponent } from './shared/more-less-content/more-less-content.component';
 import { MapComponent } from './map/map.component';
+import { AccountPickerComponent } from './shared/account-picker/account-picker.component';
 
 
 @NgModule({
@@ -229,7 +230,8 @@ import { MapComponent } from './map/map.component';
     LicenceRenewalStepsComponent,
     ApplicationRenewalComponent,
     MoreLessContentComponent,
-    MapComponent
+    MapComponent,
+    AccountPickerComponent
   ],
   imports: [
     ChartsModule,
