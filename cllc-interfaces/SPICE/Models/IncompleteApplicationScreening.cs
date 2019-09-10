@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         /// <param name="applicantType">Possible values include: 'Cannabis',
         /// 'ESS'</param>
-        public IncompleteApplicationScreening(string applicantType = default(string), string applicationType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string businessNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>))
+        public IncompleteApplicationScreening(string applicantType = default(string), string applicationType = default(string), bool? urgentPriority = default(bool?), string name = default(string), string recordIdentifier = default(string), string applicantName = default(string), string businessNumber = default(string), Account applicantAccount = default(Account), Address businessAddress = default(Address), Establishment establishment = default(Establishment), Contact contactPerson = default(Contact), Contact applyingPerson = default(Contact), System.DateTimeOffset? dateSent = default(System.DateTimeOffset?), IList<LegalEntity> associates = default(IList<LegalEntity>), Contact assignedPerson = default(Contact))
         {
             ApplicantType = applicantType;
             ApplicationType = applicationType;
@@ -44,6 +44,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
             ApplyingPerson = applyingPerson;
             DateSent = dateSent;
             Associates = associates;
+            AssignedPerson = assignedPerson;
             CustomInit();
         }
 
@@ -122,6 +123,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "associates")]
         public IList<LegalEntity> Associates { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "assignedPerson")]
+        public Contact AssignedPerson { get; set; }
 
     }
 }
