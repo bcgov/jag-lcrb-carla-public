@@ -39,6 +39,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   account: Account;
+  minDate = new Date();
 
 
   constructor(private store: Store<AppState>,
@@ -58,7 +59,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
-      description1: ['', [Validators.required]],
+      description1: ['', [Validators.required, Validators.minLength(10)]],
       isReadyWorkers: [''],
       isReadyNameBranding: [''],
       isReadyDisplays: [''],
@@ -72,7 +73,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
       isReadyExtranceExit: [''],
       isReadySurveillanceNotice: [''],
       isReadyProductNotVisibleOutside: [''],
-      establishmentopeningdate: [''],
+      establishmentopeningdate: ['', [Validators.required]],
     });
 
 
