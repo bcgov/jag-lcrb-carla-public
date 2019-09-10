@@ -467,5 +467,21 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string IndigenousNationId { get; set; }
         public string FederalProducerNames { get; set; }
         public string Description1 { get; set; }
+
+
+        public System.DateTimeOffset? Establishmentopeningdate { get; set; }
+        public bool? IsReadyWorkers { get; set; }
+        public bool? IsReadyNameBranding { get; set; }
+        public bool? IsReadyDisplays { get; set; }
+        public bool? IsReadyIntruderAlarm { get; set; }
+        public bool? IsReadyFireAlarm { get; set; }
+        public bool? IsReadyLockedCases { get; set; }
+        public bool? IsReadyLockedStorage { get; set; }
+        public bool? IsReadyPerimeter { get; set; }
+        public bool? IsReadyRetailArea { get; set; }
+        public bool? IsReadyStorage { get; set; }
+        public bool? IsReadyExtranceExit { get; set; }
+        public bool? IsReadySurveillanceNotice { get; set; }
+        public bool? IsReadyProductNotVisibleOutside { get; set; }
     }
 }

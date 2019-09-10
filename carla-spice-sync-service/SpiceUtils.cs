@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
@@ -102,7 +103,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// Import application responses to Dynamics.
         /// </summary>
         /// <returns></returns>
-        public void ReceiveApplicationImportJob(PerformContext hangfireContext, List<CompletedApplicationScreening> responses)
+        public async Task ReceiveApplicationImportJob(PerformContext hangfireContext, List<CompletedApplicationScreening> responses)
         {
             hangfireContext.WriteLine("Starting SPICE Import Job for Application Screening.");
             _logger.LogError("Starting SPICE Import Job for Application Screening..");
@@ -111,11 +112,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 string appFilter = $"adoxio_jobnumber eq '{applicationResponse.RecordIdentifier}'";
                 string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
-                MicrosoftDynamicsCRMadoxioApplication applicationRecord = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
+                ApplicationsGetResponseModel resp = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
 
-                if (applicationRecord != null)
+                if (resp.Value.Count != 0)
                 {
-                    var screeningRequest = CreateApplicationScreeningRequest(applicationRecord);
+                    MicrosoftDynamicsCRMadoxioApplication applicationRecord = resp.Value[0];
+                    var screeningRequest = await CreateApplicationScreeningRequest(applicationRecord);
                     var associatesValidated = UpdateConsentExpiry(screeningRequest.Associates);
                     _logger.LogInformation($"Total associates consent expiry updated: {associatesValidated}");
 
@@ -163,15 +165,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// Generate an application screening request
         /// </summary>
         /// <returns></returns>
-        public IncompleteApplicationScreening GenerateApplicationScreeningRequest(Guid applicationId)
+        public async Task<IncompleteApplicationScreening> GenerateApplicationScreeningRequest(Guid applicationId)
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
-            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
+            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser" };
             var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
        
             var application = applications.Value[0];
-            var screeningRequest = CreateApplicationScreeningRequest(application);
-            return screeningRequest;
+            return await CreateApplicationScreeningRequest(application);
         }
 
         public MicrosoftDynamicsCRMadoxioWorker GetWorker(Guid workerId)
@@ -192,7 +193,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// </summary>
         /// <returns>The application screening request success boolean.</returns>
         /// <param name="applicationRequest">Application request.</param>
-        public async Task<bool> SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
+        public bool SendApplicationScreeningRequest(Guid applicationId, IncompleteApplicationScreening applicationRequest)
         {
             var consentValidated = Validation.ValidateAssociateConsent(_dynamicsClient, (List<LegalEntity>)applicationRequest.Associates);
 
@@ -208,22 +209,28 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 try
                 {
-                    var result = await SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload);
+                    MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                    {
+                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENDING")
+                    };
+                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+
+                    var result = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
 
                     _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
                     _logger.LogInformation($"Done Send Application {applicationRequest.RecordIdentifier} Screening Request at {DateTime.Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffffK")}");
 
                     if (result.Response.StatusCode.ToString() == "OK")
                     {
-                        MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                        update = new MicrosoftDynamicsCRMadoxioApplication()
                         {
-                            AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
+                            AdoxioSecurityclearancegenerateddate = DateTimeOffset.UtcNow,
                             AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
                         };
                         _dynamicsClient.Applications.Update(applicationId.ToString(), update);
                         return true;
                     }
-                    var msg = await result.Response.Content.ReadAsStringAsync();
+                    var msg = result.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     throw new SystemException(msg);
                 }
                 catch (Exception e)
@@ -247,7 +254,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// </summary>
         /// <returns>The worker screening request success boolean.</returns>
         /// <param name="workerScreeningRequest">Worker screening request.</param>
-        public async Task<bool> SendWorkerScreeningRequest(IncompleteWorkerScreening workerScreeningRequest)
+        public bool SendWorkerScreeningRequest(IncompleteWorkerScreening workerScreeningRequest)
         {
             List<IncompleteWorkerScreening> payload = new List<IncompleteWorkerScreening>
             {
@@ -256,7 +263,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             _logger.LogInformation($"Sending Worker Screening Request");
 
-            var result = await SpiceClient.ReceiveWorkerScreeningsWithHttpMessagesAsync(payload);
+            var result = SpiceClient.ReceiveWorkerScreeningsWithHttpMessages(payload);
 
             _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
             _logger.LogInformation($"Done Send Worker Screening Request");
@@ -264,7 +271,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             return result.Response.StatusCode.ToString() == "OK";
         }
 
-        public async Task<IncompleteWorkerScreening> GenerateWorkerScreeningRequest(Guid workerId)
+        public IncompleteWorkerScreening GenerateWorkerScreeningRequest(Guid workerId)
         {
             string filter = $"adoxio_workerid eq {workerId}";
             var fields = new List<string> { "adoxio_ContactId" };
@@ -350,7 +357,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             return request;
         }
 
-        private IncompleteApplicationScreening CreateApplicationScreeningRequest(MicrosoftDynamicsCRMadoxioApplication application)
+        private async Task<IncompleteApplicationScreening> CreateApplicationScreeningRequest(MicrosoftDynamicsCRMadoxioApplication application)
         {
             MicrosoftDynamicsCRMadoxioLicencetype licenceType = _dynamicsClient.Licencetypes.Get(filter: $"adoxio_licencetypeid eq {application._adoxioLicencetypeValue}").Value[0];
             var screeningRequest = new IncompleteApplicationScreening()
@@ -380,6 +387,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     MiddleName = application.AdoxioContactmiddlename,
                     Email = application.AdoxioEmail,
                     PhoneNumber = application.AdoxioContactpersonphone
+                },
+                AssignedPerson = new Contact()
+                {
+                    FirstName = application.Owninguser?.Firstname,
+                    LastName = application.Owninguser?.Lastname
                 }
             };
             if (application.AdoxioApplyingPerson != null)
@@ -412,17 +424,72 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     BusinessType = businessType.ToString()
                 };
 
-                if (businessType == BusinessType.SoleProprietorship)
+                if (businessType == BusinessType.SoleProprietorship && application.AdoxioApplicant?._primarycontactidValue != null)
                 {
-                    screeningRequest.Associates.Add(new LegalEntity()
+                    MicrosoftDynamicsCRMcontact owner = await _dynamicsClient.GetContactById(application.AdoxioApplicant._primarycontactidValue);
+                    LegalEntity entity = new LegalEntity()
                     {
-                        EntityId = screeningRequest.ContactPerson.ContactId,
+                        EntityId = owner.Contactid,
                         IsIndividual = true,
                         Positions = new List<string> { "owner" },
-                        Contact = screeningRequest.ContactPerson,
+                        Contact = new Contact()
+                        {
+                            SpdJobId = owner.AdoxioSpdjobid.ToString(),
+                            ContactId = owner.Contactid,
+                            FirstName = owner.Firstname,
+                            LastName = owner.Lastname,
+                            MiddleName = owner.Middlename,
+                            Email = owner.Emailaddress1,
+                            PhoneNumber = owner.Telephone1 ?? owner.Mobilephone,
+                            SelfDisclosure = (owner.AdoxioSelfdisclosure == null) ? null : ((GeneralYesNo)owner.AdoxioSelfdisclosure).ToString(),
+                            Gender = (owner.AdoxioGendercode == null) ? null : ((AdoxioGenderCode)owner.AdoxioGendercode).ToString(),
+                            Birthplace = owner.AdoxioBirthplace,
+                            BirthDate = owner.Birthdate,
+                            BcIdCardNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? owner.AdoxioPrimaryidnumber : null,
+                            DriversLicenceNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? owner.AdoxioPrimaryidnumber : null,
+                            Address = new Address()
+                            {
+                                AddressStreet1 = owner.Address1Line1,
+                                AddressStreet2 = owner.Address1Line2,
+                                AddressStreet3 = owner.Address1Line3,
+                                City = owner.Address1City,
+                                StateProvince = owner.Address1Stateorprovince,
+                                Postal = (Validation.ValidatePostalCode(owner.Address1Postalcode)) ? owner.Address1Postalcode : null,
+                                Country = owner.Address1Country
+                            }
+                        },
                         PreviousAddresses = new List<Address>(),
                         Aliases = new List<Alias>()
-                    });
+                    };
+                    /* Add previous addresses */
+                    var previousAddresses = _dynamicsClient.Previousaddresses.Get(filter: "_adoxio_contactid_value eq " + owner.Contactid).Value;
+                    foreach (var address in previousAddresses)
+                    {
+                        var newAddress = new Address()
+                        {
+                            AddressStreet1 = address.AdoxioStreetaddress,
+                            City = address.AdoxioCity,
+                            StateProvince = address.AdoxioProvstate,
+                            Postal = (Validation.ValidatePostalCode(address.AdoxioPostalcode)) ? address.AdoxioPostalcode : null,
+                            Country = address.AdoxioCountry,
+                            ToDate = address.AdoxioTodate,
+                            FromDate = address.AdoxioFromdate
+                        };
+                        entity.PreviousAddresses.Add(newAddress);
+                    }
+
+                    /* Add aliases */
+                    var aliases = _dynamicsClient.Aliases.Get(filter: "_adoxio_contactid_value eq " + owner.Contactid).Value;
+                    foreach (var alias in aliases)
+                    {
+                        entity.Aliases.Add(new Alias()
+                        {
+                            GivenName = alias.AdoxioFirstname,
+                            Surname = alias.AdoxioLastname,
+                            SecondName = alias.AdoxioMiddlename
+                        });
+                    }
+                    screeningRequest.Associates.Add(entity);
                 }
             }
 
@@ -474,11 +541,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             entityFilter += " and adoxio_isdonotsendtospd ne true";
             foreach (var assoc in foundAssociates)
             {
-                if (accountId != assoc.EntityId && assoc.Contact != null)
+                if (accountId != assoc.EntityId && assoc.Contact?.ContactId != null)
                 {
                     entityFilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
                 }
-                else if(accountId != assoc.EntityId)
+                else if(assoc.EntityId != null && accountId != assoc.EntityId)
                 {
                     entityFilter += " and adoxio_legalentityid ne " + assoc.EntityId;
                 }
@@ -686,6 +753,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Contacts.Update(ContactId, contact);
         }
 
+        [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
         public async Task SendFoundWorkers(PerformContext hangfireContext)
         {
             _logger.LogError("Starting SendFoundWorkers Job");
@@ -708,8 +776,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 foreach (var worker in workers.Value)
                 {
-                    IncompleteWorkerScreening screeningRequest = await GenerateWorkerScreeningRequest(Guid.Parse(worker.AdoxioWorkerid));
-                    var reqSuccess = await SendWorkerScreeningRequest(screeningRequest);
+                    IncompleteWorkerScreening screeningRequest = GenerateWorkerScreeningRequest(Guid.Parse(worker.AdoxioWorkerid));
+                    var reqSuccess = SendWorkerScreeningRequest(screeningRequest);
                     if (reqSuccess)
                     {
                         hangfireContext.WriteLine($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
@@ -737,6 +805,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Workers.Update(workerId, workerPatch);
         }
 
+        [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = {"adoxio_applicationtypeid"};
@@ -761,8 +830,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 Guid.TryParse(application.AdoxioApplicationid, out Guid applicationId);
 
-                var screeningRequest = GenerateApplicationScreeningRequest(applicationId);
-                var response = await SendApplicationScreeningRequest(applicationId, screeningRequest);
+                var screeningRequest = await GenerateApplicationScreeningRequest(applicationId);
+                var response = SendApplicationScreeningRequest(applicationId, screeningRequest);
                 if (response)
                 {
                     hangfireContext.WriteLine($"Successfully sent application {screeningRequest.RecordIdentifier} to SPD");

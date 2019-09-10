@@ -78,4 +78,19 @@ export class Application {
   renewalSiteMap: string;
 
   description1: string;
+
+  isReadyWorkers: boolean;
+  isReadyNameBranding: boolean;
+  isReadyDisplays: boolean;
+  isReadyIntruderAlarm: boolean;
+  isReadyFireAlarm: boolean;
+  isReadyLockedCases: boolean;
+  isReadyLockedStorage: boolean;
+  isReadyPerimeter: boolean;
+  isReadyRetailArea: boolean;
+  isReadyStorage: boolean;
+  isReadyExtranceExit: boolean;
+  isReadySurveillanceNotice: boolean;
+  isReadyProductNotVisibleOutside: boolean;
+  establishmentopeningdate: Date;
 }
