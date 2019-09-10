@@ -27,6 +27,8 @@ import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.co
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence-renewal-steps.component';
 import { MapComponent } from './map/map.component';
+import { FeatureGuard } from './services/feaure-guard.service';
+import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 
 
 const routes: Routes = [
@@ -67,6 +69,12 @@ const routes: Routes = [
   {
     path: 'application/:applicationId',
     component: ApplicationComponent,
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'store-opening/:applicationId',
+    component: ApplicationAndLicenceFeeComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
@@ -166,13 +174,19 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Survey Test'
     }
-  }, 
+  },
+  {
+    path: 'maps',
+    component: MapComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'Maps'}
+  },
   { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
-  exports: [RouterModule],
+exports: [RouterModule],
   providers: [SurveyResolver]
 })
 export class AppRoutingModule { }

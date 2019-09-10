@@ -12,8 +12,11 @@ export class AppRemoveIfFeatureOffDirective implements OnInit {
     }
 
     ngOnInit() {
-        if (this.featureFlagService.featureOff(this.featureName)) {
-            this.el.nativeElement.parentNode.removeChild(this.el.nativeElement);
-        }
+        this.featureFlagService.featureOn(this.featureName)
+            .subscribe((featureOn: boolean) => {
+                if (!featureOn) {
+                    this.el.nativeElement.parentNode.removeChild(this.el.nativeElement);
+                }
+            });
     }
 }

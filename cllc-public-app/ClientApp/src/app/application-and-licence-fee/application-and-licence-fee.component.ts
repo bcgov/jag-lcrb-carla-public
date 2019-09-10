@@ -1,148 +1,86 @@
-
-
-
-import { filter, takeWhile, catchError, mergeMap } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBase } from '@shared/form-base';
+import { Application } from '@models/application.model';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription, Observable, Subject, of, forkJoin } from 'rxjs';
+import {
+  ApplicationCancellationDialogComponent
+} from '@app/applications-and-licences/applications-and-licences.component';
+import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { Subscription, Subject, Observable, forkJoin, of } from 'rxjs';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
-import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
-import { Application } from '@models/application.model';
-import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { DomSanitizer } from '@angular/platform-browser';
-import {
-  ApplicationCancellationDialogComponent,
-  UPLOAD_FILES_MODE
-} from '@app/applications-and-licences/applications-and-licences.component';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ApplicationDataService } from '@services/application-data.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
+import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
+import { ApplicationHTMLContent } from '@app/application/application.component';
 import { Account } from '@models/account.model';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
-import { TiedHouseConnection } from '@models/tied-house-connection.model';
-import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
-import { KeyValue } from '@angular/common';
-import { FeatureFlagService } from './../services/feature-flag.service';
-import {
-  ConnectionToNonMedicalStoresComponent
-} from '@app/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
-import { LicenseDataService } from '@app/services/license-data.service';
-
-
-
-const ServiceHours = [
-  // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
-  // '03:15', '03:30', '03:45', '04:00', '04:15', '04:30', '04:45', '05:00', '05:15', '05:30', '05:45', '06:00', '06:15',
-  // '06:30', '06:45', '07:00', '07:15', '07:30', '07:45', '08:00', '08:15', '08:30', '08:45',
-  '09:00', '09:15', '09:30',
-  '09:45', '10:00', '10:15', '10:30', '10:45', '11:00', '11:15', '11:30', '11:45', '12:00', '12:15', '12:30', '12:45',
-  '13:00', '13:15', '13:30', '13:45', '14:00', '14:15', '14:30', '14:45', '15:00', '15:15', '15:30', '15:45', '16:00',
-  '16:15', '16:30', '16:45', '17:00', '17:15', '17:30', '17:45', '18:00', '18:15', '18:30', '18:45', '19:00', '19:15',
-  '19:30', '19:45', '20:00', '20:15', '20:30', '20:45', '21:00', '21:15', '21:30', '21:45', '22:00', '22:15', '22:30',
-  '22:45', '23:00'
-  // , '23:15', '23:30', '23:45'
-];
-
-class ApplicationHTMLContent {
-  title: string;
-  preamble: string;
-  beforeStarting: string;
-  nextSteps: string;
-}
-
+import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
+import { ApplicationLicenseSummary } from '@appmodels/application-license-summary.model';
 
 @Component({
-  selector: 'app-application-renewal',
-  templateUrl: './application-renewal.component.html',
-  styleUrls: ['./application-renewal.component.scss']
+  selector: 'app-application-and-licence-fee',
+  templateUrl: './application-and-licence-fee.component.html',
+  styleUrls: ['./application-and-licence-fee.component.scss']
 })
-export class ApplicationRenewalComponent extends FormBase implements OnInit {
-  establishmentWatchWords: KeyValue<string, boolean>[];
+export class ApplicationAndLicenceFeeComponent extends FormBase implements OnInit {
   application: Application;
-
   form: FormGroup;
   savedFormData: any;
   applicationId: string;
   busy: Subscription;
-  accountId: string;
-  payMethod: string;
   validationMessages: any[];
   showValidationMessages: boolean;
   submittedApplications = 8;
-  ServiceHours = ServiceHours;
-  tiedHouseFormData: TiedHouseConnection;
-  possibleProblematicNameWarning = false;
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
-  readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
-  mode: string;
   account: Account;
+  minDate = new Date();
 
-  uploadedSupportingDocuments = 0;
-  uploadedFinancialIntegrityDocuments: 0;
-  uploadedAssociateDocuments: 0;
-  window = window;
 
   constructor(private store: Store<AppState>,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
     public applicationDataService: ApplicationDataService,
-    public licenceDataService: LicenseDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
-    this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
-      establishmentName: ['', [
-        Validators.required,
-        this.establishmentWatchWordsService.forbiddenNameValidator()
-      ]],
-      establishmentParcelId: [''],
-      contactPersonFirstName: ['', Validators.required],
-      contactPersonLastName: ['', Validators.required],
-      contactPersonRole: [''],
-      contactPersonEmail: ['', Validators.required],
-      contactPersonPhone: ['', Validators.required],
-
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
-
-      renewalBranding: ['', Validators.required],
-      renewalSignage: ['', Validators.required],
-      renewalEstablishmentAddress: ['', Validators.required],
-      renewalValidInterest: ['', Validators.required],
-      renewalZoning: ['', Validators.required],
-      renewalFloorPlan: ['', Validators.required],
-      renewalSiteMap: [''],
-      assignedLicence: this.fb.group({
-        id: [''],
-        establishmentAddressStreet: [''],
-        establishmentAddressCity: [''],
-        establishmentAddressPostalCode: [''],
-        establishmentParcelId: ['']
-      }),
+      description1: ['', [Validators.required, Validators.minLength(10)]],
+      isReadyWorkers: [''],
+      isReadyNameBranding: [''],
+      isReadyDisplays: [''],
+      isReadyIntruderAlarm: [''],
+      isReadyFireAlarm: [''],
+      isReadyLockedCases: [''],
+      isReadyLockedStorage: [''],
+      isReadyPerimeter: [''],
+      isReadyRetailArea: [''],
+      isReadyStorage: [''],
+      isReadyExtranceExit: [''],
+      isReadySurveillanceNotice: [''],
+      isReadyProductNotVisibleOutside: [''],
+      establishmentopeningdate: ['', [Validators.required]],
     });
+
 
     this.applicationDataService.getSubmittedApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
 
-    this.establishmentWatchWordsService.initialize();
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
@@ -150,6 +88,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       .subscribe((account) => {
         this.account = account;
       });
+
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
@@ -170,20 +109,12 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
           }, {});
 
         this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
         this.savedFormData = this.form.value;
       },
         () => {
           console.log('Error occured');
         }
       );
-  }
-
-  isTouchedAndInvalid(fieldName: string): boolean {
-    return this.form.get(fieldName).touched
-      && !this.form.get(fieldName).valid;
   }
 
   private addDynamicContent() {
@@ -197,19 +128,17 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     }
   }
 
-
-  doAction(licenseId: string, actionName: string) {
-    this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
+  payLicenceFee() {
+    this.busy = this.paymentDataService.getInvoiceFeePaymentSubmissionUrl(this.application.id)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(data => {
-        this.window.open(`/account-profile/${data.id}`, 'blank');
-      },
-        () => {
-          this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail',
-            { duration: 3500, panelClass: ['red-snackbar'] });
-          console.log('Error starting a Change Licence Application');
+      .subscribe(res => {
+        const data = <any>res;
+        window.location.href = data.url;
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
-      );
+      });
   }
 
   private getApplicationContent(contentCartegory: string) {
@@ -222,6 +151,8 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     }
     return body;
   }
+
+
 
   canDeactivate(): Observable<boolean> | boolean {
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
@@ -236,11 +167,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     }
   }
 
-  checkPossibleProblematicWords() {
-    console.log(this.form.get('establishmentName').errors);
-    this.possibleProblematicNameWarning =
-      this.establishmentWatchWordsService.potentiallyProblematicValidator(this.form.get('establishmentName').value);
-  }
+
 
   /**
    * Save form data
@@ -248,10 +175,8 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-      this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -267,14 +192,7 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       }));
   }
 
-  prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
-      return of(null);
-    }
-    let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
-    return this.tiedHouseService.updateTiedHouse(data, data.id);
-  }
+
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId)
@@ -292,33 +210,16 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
-      this.submitPayment();
+      this.payLicenceFee();
     } else {
       this.busy = this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.submitPayment();
+            this.payLicenceFee();
           }
         });
     }
-  }
-
-  /**
-   * Redirect to payment processing page (Express Pay / Bambora service)
-   * */
-  private submitPayment() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        const jsonUrl = res;
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      });
   }
 
   isValid(): boolean {
@@ -329,13 +230,17 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       }
     }
     this.showValidationMessages = false;
+    let valid = true;
     this.validationMessages = [];
 
+
     if (!this.form.valid) {
+      valid = false;
       this.validationMessages.push('Some required fields have not been completed');
     }
-    return this.form.valid;
+    return valid;
   }
+
 
   /**
    * Dialog to confirm the application cancellation (status changed to "Termindated")
@@ -389,29 +294,9 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
         'LimitedLiabilityCorporation'].indexOf(this.account.businessType) !== -1;
   }
 
-  isCRSRenewalApplication(): boolean {
-    return this.application
-      && this.application.applicationType
-      && [
-        ApplicationTypeNames.CRSRenewal.toString(),
-        ApplicationTypeNames.CRSRenewalLate30.toString(),
-        ApplicationTypeNames.CRSRenewalLate6Months.toString(),
-      ].indexOf(this.application.applicationType.name) !== -1;
-  }
-
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
       .indexOf(state) !== -1;
-  }
-
-  saveForLater() {
-    this.busy = this.save(true)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((result: boolean) => {
-        if (result) {
-          this.router.navigate(['/dashboard']);
-        }
-      });
   }
 
 }

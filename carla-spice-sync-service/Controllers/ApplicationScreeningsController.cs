@@ -60,7 +60,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     try
                     {
                         // Generate the application request
-                        applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+                        applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
                     }
                     catch (ArgumentOutOfRangeException)
                     {
@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                         return NotFound($"Application {applicationId} is not found.");
                     }
                     
-                    var result = await _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
+                    var result = _spiceUtils.SendApplicationScreeningRequest(applicationId, applicationRequest);
 
                     if (result)
                     {

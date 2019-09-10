@@ -17,10 +17,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
-{
+{    
     [Route("api/[controller]")]
+    [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class AccountsController : Controller
+    public class AccountsController : ControllerBase
     {
         private readonly BCeIDBusinessQuery _bceid;
         private readonly IConfiguration _configuration;
@@ -83,7 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "Current Account Result: " +
                JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(result);
+            return new JsonResult(result);
         }
 
         /// GET account in Dynamics for the current user
@@ -116,7 +117,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "BCeID business record: " +
                 JsonConvert.SerializeObject(business, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(business);
+            return new JsonResult (business);
+        }
+
+        /// <summary>
+        /// Get Autocomplete data for a given name using startswith
+        /// </summary>
+        /// <param name="name">The name to filter by using startswith</param>
+        /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
+        [HttpGet("autocomplete")]
+        public IActionResult GetAutocomplete(string name)
+        {
+            IDictionary<string, string> results = new Dictionary<string, string>();
+            try
+            {
+                string filter = null;
+                // escape any apostophes.
+                if (name != null)
+                {
+                    name = name.Replace("'", "''");
+                    filter = $"startswith(name,'{name}')";
+                }
+                
+                var accounts = _dynamicsClient.Accounts.Get(filter: filter).Value;
+                foreach (var account in accounts)
+                {
+                    results.Add(account.Accountid, account.Name);
+                }
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError(LoggingEvents.Error, "Error while getting autocomplete data");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+            }
+
+            return new JsonResult(results);
         }
 
         /// <summary>
@@ -158,7 +196,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);                
                 if (account == null)
                 {
                     _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
@@ -174,7 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "Account result: " +
                 JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(result);
+            return new JsonResult(result);
         }
 
         [HttpGet("business-profile/{accountId}")]
@@ -248,7 +286,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpGet, "BusinessProfile.isComplete: " +
                 JsonConvert.SerializeObject(isComplete, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(isComplete);
+            return new JsonResult(isComplete);
         }
 
         private List<ViewModels.LegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
@@ -630,7 +668,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(LoggingEvents.HttpPost, "result: " +
                 JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            return Json(result);
+            return new JsonResult(result);
         }
 
         private async Task<string>  GetAccountDataFromOrgBook(){
@@ -704,7 +742,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpPut, "updatedAccount: " +
                 JsonConvert.SerializeObject(updatedAccount, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
 
-            return Json(updatedAccount);
+            return new JsonResult(updatedAccount);
         }
 
         /// <summary>
@@ -822,7 +860,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 result.Add(tiedHouse.ToViewModel());
             }
 
-            return Json(result.FirstOrDefault());
+            return new JsonResult(result.FirstOrDefault());
         }
 
         /// <summary>
@@ -861,7 +899,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            return Json(tiedHouse.ToViewModel());
+            return new JsonResult(tiedHouse.ToViewModel());
         }
 
 

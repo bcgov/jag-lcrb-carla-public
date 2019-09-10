@@ -14,7 +14,8 @@ using System.Linq;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class PolicyDocumentController : Controller
+    [ApiController]
+    public class PolicyDocumentController : ControllerBase
     {        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
@@ -126,7 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Json(PolicyDocuments);
+                return new JsonResult(PolicyDocuments);
             }
 
             
@@ -214,7 +215,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                return Json(policyDocument.ToViewModel());
+                return new JsonResult(policyDocument.ToViewModel());
             }            
         }
     }

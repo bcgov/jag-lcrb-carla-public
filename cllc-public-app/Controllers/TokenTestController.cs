@@ -8,7 +8,8 @@ using System.Net;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class TokenTestController : Controller
+    [ApiController]
+    public class TokenTestController : ControllerBase
     {
         private readonly IConfiguration _configuration;        
         private readonly string _encryptionKey;

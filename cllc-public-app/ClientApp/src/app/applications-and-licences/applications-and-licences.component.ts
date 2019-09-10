@@ -190,16 +190,17 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   payLicenceFee(licence: ApplicationLicenseSummary) {
-    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(licence.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        const data = <any>res;
-        window.location.href = data.url;
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      });
+    // this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(licence.applicationId)
+    //   .pipe(takeWhile(() => this.componentActive))
+    //   .subscribe(res => {
+    //     const data = <any>res;
+    //     window.location.href = data.url;
+    //   }, err => {
+    //     if (err._body === 'Payment already made') {
+    //       this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+    //     }
+    //   });
+    this.router.navigate([`/store-opening/${licence.applicationId}`]);
   }
 
   startNewLicenceApplication() {
@@ -283,6 +284,12 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     const expiry = moment(expiryDate).startOf('day');
     const diff = expiry.diff(now, 'days') + 1;
     return diff <= 60 || expiry < now;
+  }
+
+  licenceHasExpired(expiryDate: string) {
+    const now = moment(new Date()).startOf('day');
+    const expiry = moment(expiryDate).startOf('day');
+    return expiry < now;
   }
 
 }

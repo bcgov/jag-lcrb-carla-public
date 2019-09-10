@@ -44,5 +44,54 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_LicenceEstablishment@odata.bind")]
         public string AdoxioLicenceEstablishmentODataBind { get; set; }
+
+
+        //format date here
+        [JsonProperty(PropertyName = "adoxio_establishmentopeningdate")]
+        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
+        public System.DateTimeOffset? AdoxioEstablishmentopeningdate { get; set; }
+
+
+
+        [JsonProperty(PropertyName = "adoxio_isreadyworkers")]
+        public bool? IsReadyWorkers { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadynamebranding")]
+        public bool? IsReadyNameBranding { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadydisplays")]
+        public bool? IsReadyDisplays { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadyintruderalarm")]
+        public bool? IsReadyIntruderAlarm { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadyfirealarm")]
+        public bool? IsReadyFireAlarm { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadylockedcases")]
+        public bool? IsReadyLockedCases { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadylockedstorage")]
+        public bool? IsReadyLockedStorage { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadyperimeter")]
+        public bool? IsReadyPerimeter { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadyretailarea")]
+        public bool? IsReadyRetailArea { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadystorage")]
+        public bool? IsReadyStorage { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadyentranceexit")]
+        public bool? IsReadyExtranceExit { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadysurveillancenotice")]
+        public bool? IsReadySurveillanceNotice { get; set; }
+        
+        [JsonProperty(PropertyName = "adoxio_isreadyproductnotvisibleoutside")]
+        public bool? IsReadyProductNotVisibleOutside { get; set; }
+
+
     }
 }
