@@ -58,8 +58,21 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
-      establishmentName: [''],
       description1: ['', [Validators.required]],
+      isReadyWorkers: [''],
+      isReadyNameBranding: [''],
+      isReadyDisplays: [''],
+      isReadyIntruderAlarm: [''],
+      isReadyFireAlarm: [''],
+      isReadyLockedCases: [''],
+      isReadyLockedStorage: [''],
+      isReadyPerimeter: [''],
+      isReadyRetailArea: [''],
+      isReadyStorage: [''],
+      isReadyExtranceExit: [''],
+      isReadySurveillanceNotice: [''],
+      isReadyProductNotVisibleOutside: [''],
+      establishmentopeningdate: [''],
     });
 
 
@@ -84,7 +97,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
         }
 
         this.application = data;
-        this.hideFormControlByType();
 
         this.addDynamicContent();
 
@@ -96,9 +108,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
           }, {});
 
         this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
         this.savedFormData = this.form.value;
       },
         () => {
@@ -116,9 +125,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
         nextSteps: this.getApplicationContent('NextSteps'),
       };
     }
-  }
-
-  private hideFormControlByType() {
   }
 
   payLicenceFee() {
