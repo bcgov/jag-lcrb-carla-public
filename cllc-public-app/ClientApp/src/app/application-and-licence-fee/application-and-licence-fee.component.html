@@ -18,9 +18,11 @@
       <section>
         <h3 class="blue-header">STORE OPENING</h3>
         <div class="padded-section">
-          <app-field label="Estimated Opening Date">
-            <input type="text" style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" readonly formControlName="establishmentopeningdate"
-              class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+          <app-field label="Estimated Opening Date" [required]="true"
+            [valid]="isValidOrNotTouched('establishmentopeningdate')" errorMessage="Please enter date">
+            <input type="text" style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" readonly
+              formControlName="establishmentopeningdate" class="form-control" [min]="minDate" [matDatepicker]="picker"
+              (focus)="picker.open()" (click)="picker.open()">
             <mat-datepicker #picker></mat-datepicker>
           </app-field>
           <!-- <app-field label="Reason for opening on this date">
@@ -30,7 +32,9 @@
               <option value="3">Option 3</option>
             </select>
           </app-field> -->
-          <app-field label="Please describe" [isFullWidth]="true">
+          <app-field label="Please outline the reason for the opening date" [isFullWidth]="true" [required]="true"
+            [valid]="isValidOrNotTouched('description1')" errorMessage="Please enter value (atlease 10 characters)"
+            [showChevrons]="false">
             <textarea style="width: 100%" rows="6" formControlName="description1"></textarea>
           </app-field>
         </div>
@@ -208,7 +212,7 @@
       <section *ngIf="application?.licenceFeeInvoicePaid">
 
         <section style="position: relative; margin-top: 20px;">
-          <button style="float: right;" class="btn btn-primary"  [routerLink]="[ '/dashboard']">
+          <button style="float: right;" class="btn btn-primary" [routerLink]="[ '/dashboard']">
             <i class="fas fa-save" style="margin-right: 10px;"></i>
             SAVE</button>
           <div style="clear: both"></div>
