@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +16,9 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
-    public class PaymentController : Controller
+    [ApiController]
+    [Authorize]
+    public class PaymentController : ControllerBase
     {
         private static Random random = new Random();
 
@@ -124,7 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
-            return Json(redirectUrl);
+            return new JsonResult(redirectUrl);
         }
 
         /// <summary>
@@ -247,7 +250,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
-            return Json(redirectUrl);
+            return new JsonResult(redirectUrl);
         }
 
         /// <summary>
@@ -398,7 +401,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogDebug("Invoice status is not New, skipping updates ...");
             }
 
-            return Json(response);
+            return new JsonResult(response);
         }
         /// <summary>
         /// Update a payment response from Bambora (payment success or failed)
@@ -548,7 +551,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogDebug("Invoice status is not New, skipping updates ...");
             }
 
-            return Json(response);
+            return new JsonResult(response);
         }
 
         private async Task<MicrosoftDynamicsCRMadoxioApplication> GetDynamicsApplication(string id, bool getInvoice)
@@ -750,7 +753,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug(">>>>>" + redirectUrl["url"]);
 
-            return Json(redirectUrl);
+            return new JsonResult(redirectUrl);
         }
 
 
@@ -902,7 +905,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogDebug("Invoice status is not New, skipping updates ...");
             }
 
-            return Json(response);
+            return new JsonResult(response);
         }
 
     }

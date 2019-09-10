@@ -1,43 +1,28 @@
 import { Injectable } from '@angular/core';
 import { FeatureFlagDataService } from './feature-flag-data.service';
+import { map } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeatureFlagService {
 
-  private _featureFlags: Array<string> = []; // A list of all features turned ON
-  private _initialized = false;
+  private _featureFlags: Observable<string[]> = of([]); // A list of all features turned ON
 
-  constructor(private featureFlagDataService: FeatureFlagDataService) { }
+  constructor(private featureFlagDataService: FeatureFlagDataService) {
+    this._featureFlags = this.featureFlagDataService.getFeatureFlags();
+   }
 
-  featureOff(featureName: string): boolean {
-    return !this.featureOn(featureName);
-  }
-
-  featureOn(featureName: string): boolean {
+  featureOn(featureName: string): Observable<boolean> {
     if (!featureName) {
-      return true;
+      return of(true);
     }
     // Find the feature flag that is turned on
-    return this._featureFlags && !!this._featureFlags.find(feature => {
-      return feature === featureName;
-    });
     // if feature not found, default to turned off
+    return this._featureFlags
+      .pipe(map(features => {
+        return !!features.find(feature => feature === featureName);
+      }));
   }
-
-  get initialized() {
-    return this._initialized;
-  }
-
-  // This method is called once and a list of features is stored in memory
-  initialize() {
-    this._featureFlags = [];
-      // Call API to retrieve the list of features and their state
-      this.featureFlagDataService.getFeatureFlags()
-        .subscribe(featureFlags => {
-          this._featureFlags = featureFlags;
-          this._initialized = true;
-        });
-      }
 }
