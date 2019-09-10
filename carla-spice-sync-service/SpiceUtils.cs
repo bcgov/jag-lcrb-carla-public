@@ -112,10 +112,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 string appFilter = $"adoxio_jobnumber eq '{applicationResponse.RecordIdentifier}'";
                 string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
-                MicrosoftDynamicsCRMadoxioApplication applicationRecord = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value[0];
+                ApplicationsGetResponseModel resp = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
 
-                if (applicationRecord != null)
+                if (resp.Value.Count != 0)
                 {
+                    MicrosoftDynamicsCRMadoxioApplication applicationRecord = resp.Value[0];
                     var screeningRequest = CreateApplicationScreeningRequest(applicationRecord);
                     var associatesValidated = UpdateConsentExpiry(screeningRequest.Associates);
                     _logger.LogInformation($"Total associates consent expiry updated: {associatesValidated}");
@@ -167,7 +168,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public IncompleteApplicationScreening GenerateApplicationScreeningRequest(Guid applicationId)
         {
             string appFilter = "adoxio_applicationid eq " + applicationId;
-            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
+            string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact", "owninguser" };
             var applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand);
        
             var application = applications.Value[0];
@@ -209,6 +210,12 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 try
                 {
+                    MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                    {
+                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENDING")
+                    };
+                    _dynamicsClient.Applications.Update(applicationId.ToString(), update);
+
                     var result = SpiceClient.ReceiveApplicationScreeningsWithHttpMessagesAsync(payload).GetAwaiter().GetResult();
 
                     _logger.LogInformation($"Response code was: {result.Response.StatusCode.ToString()}");
@@ -216,9 +223,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                     if (result.Response.StatusCode.ToString() == "OK")
                     {
-                        MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
+                        update = new MicrosoftDynamicsCRMadoxioApplication()
                         {
-                            AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
+                            AdoxioSecurityclearancegenerateddate = DateTimeOffset.UtcNow,
                             AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
                         };
                         _dynamicsClient.Applications.Update(applicationId.ToString(), update);
@@ -381,6 +388,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     MiddleName = application.AdoxioContactmiddlename,
                     Email = application.AdoxioEmail,
                     PhoneNumber = application.AdoxioContactpersonphone
+                },
+                AssignedPerson = new Contact()
+                {
+                    FirstName = application.Owninguser?.Firstname,
+                    LastName = application.Owninguser?.Lastname
                 }
             };
             if (application.AdoxioApplyingPerson != null)
@@ -739,6 +751,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Workers.Update(workerId, workerPatch);
         }
 
+        [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = {"adoxio_applicationtypeid"};
