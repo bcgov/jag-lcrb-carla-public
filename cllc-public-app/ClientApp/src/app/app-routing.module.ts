@@ -28,6 +28,7 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
 import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence-renewal-steps.component';
 import { MapComponent } from './map/map.component';
 import { FeatureGuard } from './services/feaure-guard.service';
+import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 
 
 const routes: Routes = [
@@ -68,6 +69,12 @@ const routes: Routes = [
   {
     path: 'application/:applicationId',
     component: ApplicationComponent,
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'store-opening/:applicationId',
+    component: ApplicationAndLicenceFeeComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },

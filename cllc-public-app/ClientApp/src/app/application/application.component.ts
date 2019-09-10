@@ -43,7 +43,7 @@ const ServiceHours = [
   // , '23:15', '23:30', '23:45'
 ];
 
-class ApplicationHTMLContent {
+export class ApplicationHTMLContent {
   title: string;
   preamble: string;
   beforeStarting: string;
