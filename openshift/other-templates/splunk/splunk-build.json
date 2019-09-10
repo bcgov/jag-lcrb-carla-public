@@ -1,52 +1,41 @@
 {
   "kind": "Template",
   "apiVersion": "v1",
-  "metadata":
-  {
+  "metadata": {
     "name": "${NAME}-build-template",
     "creationTimestamp": null
   },
   "objects": [
-  {
-            "apiVersion": "v1",
-            "kind": "Secret",
-            "metadata": {
-                "annotations": {
-                    "template.openshift.io/expose-admin_password": "{.data['database-admin-password']}",
-                    "template.openshift.io/expose-database_name": "{.data['database-name']}",
-                    "template.openshift.io/expose-password": "{.data['database-password']}",
-                    "template.openshift.io/expose-username": "{.data['database-user']}"
-                },
-                "name": "${NAME}"
-            },
-            "stringData": {
-                "database-admin-password": "${DB_ADMIN_PASSWORD}",
-                "database-name": "${DB_DATABASE}",
-                "database-password": "${DB_PASSWORD}",
-                "database-user": "${DB_USER}"
-            }
+    {
+      "apiVersion": "v1",
+      "kind": "Secret",
+      "metadata": {
+        "annotations": {
+          "template.openshift.io/expose-admin_password": "{.data['admin-password']}"
         },
+        "name": "${NAME}"
+      },
+      "stringData": {
+        "admin-password": "${ADMIN_PASSWORD}"
+      }
+    },
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
-      "metadata":
-      {
+      "metadata": {
         "name": "${NAME}"
       }
     },
     {
       "kind": "BuildConfig",
       "apiVersion": "v1",
-      "metadata":
-      {
+      "metadata": {
         "name": "${NAME}",
-        "labels":
-        {
+        "labels": {
           "app": "${NAME}"
         }
       },
-      "spec":
-      {
+      "spec": {
         "triggers": [
           {
             "type": "ImageChange"
@@ -56,28 +45,49 @@
           }
         ],
         "runPolicy": "Serial",
-        "source":
-        {
+        "source": {
           "type": "Git",
-          "git":
-          {
+          "git": {
             "uri": "${GIT_REPO_URL}",
             "ref": "${GIT_REF}"
           },
           "contextDir": "${SOURCE_CONTEXT_DIR}"
         },
-        "strategy":
-        {
+        "strategy": {
           "type": "Docker",
-          "dockerStrategy":
-          {			            
-            "dockerfilePath": "${DOCKER_FILE_PATH}"            
+          "dockerStrategy": {
+            "dockerfilePath": "${DOCKER_FILE_PATH}",
+            "env": [
+              {
+                "name": "SPLUNK_PASSWORD",
+                "valueFrom": {
+                  "secretKeyRef": {
+                    "key": "admin-password",
+                    "name": "${NAME}"
+                  }
+                }
+              },
+              {
+                "name": "SPLUNK_START_ARGS",
+                "value": "--accept-license"
+              },
+              {
+                "name": "DEFAULT_LOCAL_TMP",
+                "value": "/tmp"
+              },
+              {
+                "name": "SPLUNK_HOME_OWNERSHIP_ENFORCEMENT",
+                "value": "false"
+              },
+              {
+                "name": "SPLUNK_HOME",
+                "value": "/opt/splunk"
+              }
+            ]
           }
         },
-        "output":
-        {
-          "to":
-          {
+        "output": {
+          "to": {
             "kind": "ImageStreamTag",
             "name": "${NAME}:${OUTPUT_IMAGE_TAG}"
           }
@@ -92,13 +102,20 @@
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
       "value": "splunk-openshift"
+    },	
+    {
+      "name": "GIT_REPO_URL",
+      "displayName": "Git repo",
+      "description": "The git repo.",
+      "required": true,
+      "value": "https://github.com/bcgov/jag-lcrb-carla-public.git"
     },
     {
       "name": "GIT_REF",
       "displayName": "Git Reference",
       "description": "The git reference or branch.",
       "required": true,
-      "value": "4.2"
+      "value": "master"
     },
     {
       "name": "SOURCE_CONTEXT_DIR",
@@ -121,7 +138,7 @@
       "required": true,
       "value": "splunk"
     },
-	{
+    {
       "name": "SOURCE_IMAGE_NAMESPACE",
       "displayName": "Source Image Namespace",
       "description": "The namespace of the source image.",
@@ -149,36 +166,13 @@
       "required": true,
       "value": "latest"
     },
-	{
-		"name": "DB_USER",
-		"displayName": "DB Connection Username",
-		"description": "Username for MongoDB user that will be used for accessing the database.",
-		"generate": "expression",
-		"from": "user[A-Z0-9]{3}",
-		"required": true
-	},
-	{
-		"name": "DB_PASSWORD",
-		"displayName": "DB Connection Password",
-		"description": "Password for the MongoDB connection user.",
-		"generate": "expression",
-		"from": "[a-zA-Z0-9]{16}",
-		"required": true
-	},
-	{
-		"name": "DB_DATABASE",
-		"displayName": "Database Name",
-		"description": "Name of the database accessed.",
-		"value": "surveys",
-		"required": true
-	},
-	{
-		"name": "DB_ADMIN_PASSWORD",
-		"displayName": "DB Admin Password",
-		"description": "Password for the database admin user.",
-		"generate": "expression",
-		"from": "[a-zA-Z0-9]{16}",
-		"required": true
-	}
+    {
+      "name": "ADMIN_PASSWORD",
+      "displayName": "Admin Password",
+      "description": "Password for the admin user.",
+      "generate": "expression",
+      "from": "[a-zA-Z0-9]{16}",
+      "required": true
+    }
   ]
 }
