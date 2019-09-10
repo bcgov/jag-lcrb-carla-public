@@ -154,6 +154,7 @@ import { ApplicationRenewalComponent } from './application-renewal/application-r
 import { MoreLessContentComponent } from './shared/more-less-content/more-less-content.component';
 import { MapComponent } from './map/map.component';
 import { AccountPickerComponent } from './shared/account-picker/account-picker.component';
+import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 
 
 @NgModule({
@@ -231,7 +232,8 @@ import { AccountPickerComponent } from './shared/account-picker/account-picker.c
     ApplicationRenewalComponent,
     MoreLessContentComponent,
     MapComponent,
-    AccountPickerComponent
+    AccountPickerComponent,
+    ApplicationAndLicenceFeeComponent
   ],
   imports: [
     ChartsModule,
