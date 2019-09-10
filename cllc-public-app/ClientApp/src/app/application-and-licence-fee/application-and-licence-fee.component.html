@@ -1,0 +1,296 @@
+<ng-template #applicationContent>
+
+  <div *ngIf="account?.businessType">
+
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <!-- Title -->
+      <h1 class="ngtest-page-title">Plan Your Store Opening</h1>
+    </div>
+
+    <div [formGroup]="form" class="application-wrapper">
+      <!-- Preamble -->
+      <section class="ngtest-preamble-content">
+        Your non-medical cannabis retail store application has been approved in principle. After completing the required
+        fields and paying your first-year licence fee, your licence will be approved, and you can begin ordering product
+        from the Liquor Distribution Branch.
+      </section>
+
+      <!-- Before Starting -->
+      <!-- <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
+        THE APPLICATION</h3>
+      <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+        <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+      </section> -->
+
+
+      <section>
+        <h3 class="blue-header">STORE OPENING</h3>
+        <div class="padded-section">
+          <app-field label="Estimated Opening Date">
+            <input type="text" style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" readonly
+              class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+            <mat-datepicker #picker></mat-datepicker>
+          </app-field>
+          <app-field label="Reason for opening on this date">
+            <select name="" id="" class="form-control">
+              <option value="0">Option 1</option>
+              <option value="1">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+          </app-field>
+          <app-field label="Please describe" [isFullWidth]="true">
+            <textarea style="width: 100%" rows="10"></textarea>
+          </app-field>
+        </div>
+
+        <span>Note: If your estimated opening date changes, please update it here.</span>
+      </section>
+
+
+      <section>
+        <h3 class="blue-header">GET READY FOR YOUR INSPECTION</h3>
+        <div class="padded-section">
+          <p>
+            As you get closer to your store opening, please contact your local inspector, [inspector email] to schedule
+            the site inspection.
+          </p>
+          <p>
+            Below you will find the list of requirements that an inspector will be reviewing at the time of your
+            inspection. It is your responsibility to ensure the following requirements are in place. Failure to meet
+            these requirements could result in the temporary suspension of your licence. Please see the <a href="">Terms
+              and
+              Conditions Handbook</a> for more information.
+          </p>
+          <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+            <section style="display: flex; justify-content: space-between; width: 100%;">
+              <div class="question-label">
+                Workers have obtained a security verification from the province. This includes any adult performing
+                work-related activities in a retail store as an employee, independent contractor or volunteer on a
+                full-time or part-time basis. Note, this does not cover trade workers who work under the supervision of
+                a qualified worker.
+              </div>
+              <div style="flex: 0 0 85px;">
+                <mat-button-toggle-group aria-label="Font Style">
+                  <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                  <mat-button-toggle value="No">No</mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
+            </section>
+          </mat-card>
+          <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+            <section style="display: flex; justify-content: space-between; width: 100%;">
+              <div class="question-label">
+                The name of the business and exterior signage complies with provincial requirements as approved by the
+                Branch.
+              </div>
+              <div style="flex: 0 0 85px;">
+                <mat-button-toggle-group aria-label="Font Style">
+                  <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                  <mat-button-toggle value="No">No</mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
+            </section>
+          </mat-card>
+          <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+            <section style="display: flex; justify-content: space-between; width: 100%;">
+              <div class="question-label">
+                Displays do not permit self-service by patrons (including dispensing devices). All cannabis and cannabis
+                accessories must be displayed in a way that products are not accessible to patrons.
+              </div>
+              <div style="flex: 0 0 85px;">
+                <mat-button-toggle-group aria-label="Font Style">
+                  <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                  <mat-button-toggle value="No">No</mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
+            </section>
+          </mat-card>
+          <p></p>
+          <p></p>
+          <mat-card>
+            <p>The physical security requirements are in place:</p>
+            <section class="padded-section">
+              <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                <section style="display: flex; justify-content: space-between; width: 100%;">
+                  <div class="question-label">
+                    An audible intruder alarm system monitored by a third-party
+                  </div>
+                  <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                </section>
+              </mat-card>
+              <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                <section style="display: flex; justify-content: space-between; width: 100%;">
+                  <div class="question-label">
+                    An audible fire alarm system monitored by a third-party
+                  </div>
+                  <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                </section>
+              </mat-card>
+              <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                <section style="display: flex; justify-content: space-between; width: 100%;">
+                  <div class="question-label">
+                    Locked retail product display cases
+                  </div>
+                  <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                </section>
+              </mat-card>
+              <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                <section style="display: flex; justify-content: space-between; width: 100%;">
+                  <div class="question-label">
+                    Locked cannabis storage room
+                  </div>
+                  <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                </section>
+              </mat-card>
+              <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                <section style="display: flex; justify-content: space-between; width: 100%;">
+                  <div class="question-label">
+                    Secure perimeter door locks
+                  </div>
+                  <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                </section>
+              </mat-card>
+              <p></p>
+              <p></p>
+              <mat-card>
+                <p>Security cameras with full unobstructed view of:</p>
+                <section class="padded-section">
+                  <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                    <section style="display: flex; justify-content: space-between; width: 100%;">
+                      <div class="question-label">
+                        the retail sales area
+                      </div>
+                      <div style="flex: 0 0 85px;">
+                        <mat-button-toggle-group aria-label="Font Style">
+                          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                          <mat-button-toggle value="No">No</mat-button-toggle>
+                        </mat-button-toggle-group>
+                      </div>
+                    </section>
+                  </mat-card>
+                  <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                    <section style="display: flex; justify-content: space-between; width: 100%;">
+                      <div class="question-label">
+                        any product storage area
+                      </div>
+                      <div style="flex: 0 0 85px;">
+                        <mat-button-toggle-group aria-label="Font Style">
+                          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                          <mat-button-toggle value="No">No</mat-button-toggle>
+                        </mat-button-toggle-group>
+                      </div>
+                    </section>
+                  </mat-card>
+                  <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                    <section style="display: flex; justify-content: space-between; width: 100%;">
+                      <div class="question-label">
+                        both the interior and exterior of all store entrances/exits.
+                      </div>
+                      <div style="flex: 0 0 85px;">
+                        <mat-button-toggle-group aria-label="Font Style">
+                          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                          <mat-button-toggle value="No">No</mat-button-toggle>
+                        </mat-button-toggle-group>
+                      </div>
+                    </section>
+                  </mat-card>
+                </section>
+              </mat-card>
+              <p></p>
+              <p></p>
+              <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                <section style="display: flex; justify-content: space-between; width: 100%;">
+                  <div class="question-label">
+                    A notice in the retail sales area informing patrons that video surveillance is being used on the
+                    premises is visible at all times.
+                  </div>
+                  <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                </section>
+              </mat-card>
+              <mat-card class="mat-elevation-z8" style="margin-bottom: 10px;">
+                <section style="display: flex; justify-content: space-between; width: 100%;">
+                  <div class="question-label">
+                    Cannabis, cannabis accessories and any transactions involving these products are not visible from
+                    outside the store.
+                  </div>
+                  <div style="flex: 0 0 85px;">
+                    <mat-button-toggle-group aria-label="Font Style">
+                      <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                      <mat-button-toggle value="No">No</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                </section>
+              </mat-card>
+            </section>
+          </mat-card>
+        </div>
+      </section>
+      <p>Proceed to pay online using a credit card through the secure web portal.</p>
+
+      <section class="error" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
+      </section>
+
+      <section style="position: relative; margin-top: 20px;">
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+          <span>
+            <i class="fa fa-save" style="color: #fff;"></i>
+            SAVE FOR LATER
+          </span>
+        </button>
+        <button *ngIf="!application?.licenceFeeInvoicePaid" class="btn btn-primary" (click)="submit_application()">PAY LICENCE FEE</button>
+        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+          <span (click)="cancelApplication()">
+            <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+            <a href="javascript: void(0)">
+              Cancel Application
+            </a>
+          </span>
+        </span>
+
+        <div [ngBusy]="busy"></div>
+      </section>
+    </div>
+  </div>
+</ng-template>
+
+
+<div class="dashboard-spacing" style="position: relative">
+  <div [ngBusy]="busy"></div>
+  <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
+</div>
