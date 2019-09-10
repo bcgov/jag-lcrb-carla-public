@@ -60,7 +60,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     try
                     {
                         // Generate the application request
-                        applicationRequest = _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
+                        applicationRequest = await _spiceUtils.GenerateApplicationScreeningRequest(applicationId);
                     }
                     catch (ArgumentOutOfRangeException)
                     {
