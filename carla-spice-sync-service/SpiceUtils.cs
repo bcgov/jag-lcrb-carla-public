@@ -409,7 +409,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     CompanyName = companyName,
                     MiddleName = application.AdoxioApplyingPerson.Middlename,
                     LastName = application.AdoxioApplyingPerson.Lastname,
-                    Email = application.AdoxioApplyingPerson.Emailaddress1
+                    Email = application.AdoxioApplyingPerson.Emailaddress1,
                 };
             }
             /* Add applicant details */
@@ -447,6 +447,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             BirthDate = owner.Birthdate,
                             BcIdCardNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? owner.AdoxioPrimaryidnumber : null,
                             DriversLicenceNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? owner.AdoxioPrimaryidnumber : null,
+                            DriverLicenceJurisdiction = owner.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? ((IdentificationJurisdiction)owner.AdoxioIdentificationjurisdiction).ToString() : null,
                             Address = new Address()
                             {
                                 AddressStreet1 = owner.Address1Line1,
@@ -605,6 +606,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     BirthDate = legalEntity.AdoxioContact.Birthdate,
                     BcIdCardNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
                     DriversLicenceNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
+                    DriverLicenceJurisdiction = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? ((IdentificationJurisdiction)legalEntity.AdoxioContact.AdoxioIdentificationjurisdiction).ToString() : null,
                     Address = new Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
