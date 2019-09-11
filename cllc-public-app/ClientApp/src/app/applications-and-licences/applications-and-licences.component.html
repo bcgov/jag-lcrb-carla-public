@@ -211,7 +211,7 @@
                   {{account?.physicalAddressCountry}} <br>
                 </div>
               </td>
-              <td *ngIf="!licenceHasExpired(item.expiryDate)" style="background-color: #E1E8F2; padding: 10px;">
+              <td *ngIf="!licenceHasExpired(item.expiryDate) && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore" style="background-color: #E1E8F2; padding: 10px;">
                 <div style="min-width: 10px; margin-bottom: 10px;">
                   <a href="javascript:void(0);" (click)="payLicenceFee(item)">
                     <span *ngIf="item.status == PAYMENT_REQUIRED">
