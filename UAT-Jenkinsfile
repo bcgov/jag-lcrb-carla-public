@@ -132,6 +132,9 @@ def notifyError(title, description) {
 
 node('master') {
 	stage('Build') {        
+    options {
+      timeout(time: 30, unit `MINUTES`)
+    }
 		echo "Building Application image..."
 		buildAndVerify(ARTIFACT_BUILD)
 		
