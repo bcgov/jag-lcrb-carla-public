@@ -19,6 +19,7 @@ export class MapComponent implements OnInit {
   ) { }
   crsJson: string;
   hasData: boolean;
+  rows: any;
   ngOnInit() {
     // get the json from the map service.
     this.establishmentDataService.getEstablishmentsMap()
@@ -32,7 +33,7 @@ export class MapComponent implements OnInit {
         searchMap.drawAndFitBounds(this.crsJson);
 
         this.hasData = true;
-
+        this.rows = JSON.parse(value);
       });
   }
 
