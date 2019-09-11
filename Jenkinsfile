@@ -1,9 +1,6 @@
 node('master') {
 	
     stage('Build Image') {
-        options {
-            timeout(time: 30, unit 'MINUTES')
-        }
         echo "Building..."
         openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
         openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
