@@ -1225,8 +1225,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentopeningdate")]
-        public System.DateTimeOffset? AdoxioEstablishmentopeningdate { get; set; }
+        // [JsonProperty(PropertyName = "adoxio_establishmentopeningdate")]
+        // public System.DateTimeOffset? AdoxioEstablishmentopeningdate { get; set; }
 
         /// <summary>
         /// </summary>
