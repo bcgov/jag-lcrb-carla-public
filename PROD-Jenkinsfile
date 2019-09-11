@@ -56,12 +56,12 @@ def buildAndVerify(buildConfigName) {
   openshiftBuild(
     bldCfg: buildConfigName,
     showBuildLogs: 'true',
-    waitTime: '900000'
+    waitTime: '1800000'
   )
   openshiftVerifyBuild(
     bldCfg: buildConfigName,
     showBuildLogs: 'true',
-    waitTime: '900000'
+    waitTime: '1800000'
   )
 }
 
@@ -72,7 +72,7 @@ def tagImage(srcHash, destination, imageStream) {
     destTag: destination,
     srcStream: imageStream,
     srcTag: srcHash,
-    waitTime: '900000'
+    waitTime: '1800000'
   )
 }
 
@@ -91,7 +91,7 @@ def deployAndVerify(srcHash, environment, imageStream) {
   openshiftVerifyDeployment(
     deploymentConfig: "cllc-public",
     namespace: "${PROJECT_NAMESPACE}-${environment}",
-    waitTime: '900000'
+    waitTime: '1800000'
   )
 }
 
@@ -147,7 +147,7 @@ node('master') {
 		- deploying newly built image
 		- notifying of success or failure
 	*/
-	stage("Deploy to ${environments.prod.name}") {
+	stage("Deploy to ${environments.prod.name}") {            
 	  def environment = environments.prod.tag
 	  def stableTag = environments.prod.previousTag
 	  node {
