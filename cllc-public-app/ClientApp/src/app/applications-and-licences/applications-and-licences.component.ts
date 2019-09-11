@@ -54,6 +54,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   submittedApplications = 8;
   marketerExists: boolean;
   nonMarketerExists: boolean;
+  ApplicationTypeNames = ApplicationTypeNames;
 
   constructor(
     private applicationDataService: ApplicationDataService,
