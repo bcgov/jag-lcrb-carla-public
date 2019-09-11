@@ -811,7 +811,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = {"adoxio_applicationtypeid"};
-            ApplicationtypesGetResponseModel appTypesResponse = _dynamicsClient.Applicationtypes.Get(filter: "createdon ne null", select: select);
+            ApplicationtypesGetResponseModel appTypesResponse = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select);
             if (appTypesResponse.Value.Count == 0)
             {
                 _logger.LogError("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
@@ -819,8 +819,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
 
             List<string> appTypes = appTypesResponse.Value.Select(a => a.AdoxioApplicationtypeid).ToList();
-            _logger.LogError("Starting SendFoundApplications Job");
-            hangfireContext.WriteLine("Starting SendFoundApplications Job");
+            _logger.LogError($"Starting SendFoundApplications Job for {appTypesResponse.Value.Count} application types");
+            hangfireContext.WriteLine($"Starting SendFoundApplications Job for {appTypesResponse.Value.Count} application types");
 
             string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
 
