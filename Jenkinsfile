@@ -2,7 +2,7 @@ node('master') {
 	
     stage('Build Image') {
         options {
-            timeout(time: 30, unit `MINUTES`)
+            timeout(time: 30, unit 'MINUTES')
         }
         echo "Building..."
         openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
