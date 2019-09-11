@@ -56,12 +56,12 @@ def buildAndVerify(buildConfigName) {
   openshiftBuild(
     bldCfg: buildConfigName,
     showBuildLogs: 'true',
-    waitTime: '900000'
+    waitTime: '1800000'
   )
   openshiftVerifyBuild(
     bldCfg: buildConfigName,
     showBuildLogs: 'true',
-    waitTime: '900000'
+    waitTime: '1800000'
   )
 }
 
@@ -72,7 +72,7 @@ def tagImage(srcHash, destination, imageStream) {
     destTag: destination,
     srcStream: imageStream,
     srcTag: srcHash,
-    waitTime: '900000'
+    waitTime: '1800000'
   )
 }
 
@@ -91,7 +91,7 @@ def deployAndVerify(srcHash, environment, imageStream) {
   openshiftVerifyDeployment(
     deploymentConfig: APP_NAME,
     namespace: "${PROJECT_NAMESPACE}-${environment}",
-    waitTime: '900000'
+    waitTime: '1800000'
   )
 }
 
@@ -131,7 +131,7 @@ def notifyError(title, description) {
 }
 
 node('master') {
-	stage('Build') {        
+	stage('Build') {            
 		echo "Building Application image..."
 		buildAndVerify(ARTIFACT_BUILD)
 		
