@@ -5,10 +5,42 @@
       <h1>
         A map of Cannabis Retail Stores.
       </h1>
-      <div style="height: 700px">
-        <div aria-label="A map of Cannabis Retail Stores." id="search-map" style="height: 700px; width: 600px; margin: auto;"></div>
-      </div>
-    </div>
+      <form>
+        <div class="row">          
+            
+              <input id="id_search" class="font-weight-bold">
+                <label>
+                  Search by city or establishment name                 
+                </label>              
+            
+        </div>
+        <div class="row">
+          
+            <button  type="submit">Search</button>
+            <button variant="dark" type="reset" class="mx-2">Reset</button>
+          </div>
+        
+        </form>
+        <div style="height: 700px">
+          <div aria-label="A map of Cannabis Retail Stores." id="search-map" style="height: 700px; width: 600px; margin: auto;"></div>
+        </div>
+
+        <table *ngIf="rows?.length > 0" class="eq-table">
+          <tr>
+            <th>#</th>
+            <th>Establishment Name</th>
+            <th>City</th>
+            <th>License</th>
+          </tr>
+          <tr *ngFor="let item of rows; let i = index;">
+            <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+            <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+              <span style="font-weight: 600">{{item.establishmentName}}</span> 
+            </td>
+
+          </tr>
+        </table>
+</div>
   </div>
 </div>
 

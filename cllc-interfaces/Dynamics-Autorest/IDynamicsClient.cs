@@ -99,6 +99,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBusinessaccounts Businessaccounts { get; }
 
         /// <summary>
+        /// Gets the ICannabisinventoryreports.
+        /// </summary>
+        ICannabisinventoryreports Cannabisinventoryreports { get; }
+
+        /// <summary>
+        /// Gets the ICannabismonthlyreports.
+        /// </summary>
+        ICannabismonthlyreports Cannabismonthlyreports { get; }
+
+        /// <summary>
+        /// Gets the ICannabisproductadmins.
+        /// </summary>
+        ICannabisproductadmins Cannabisproductadmins { get; }
+
+        /// <summary>
         /// Gets the ICitydistricts.
         /// </summary>
         ICitydistricts Citydistricts { get; }
