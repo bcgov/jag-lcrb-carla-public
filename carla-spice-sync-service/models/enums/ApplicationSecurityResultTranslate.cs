@@ -4,6 +4,7 @@
     {
         const int SECURITY_STATUS_NOT_SENT = 845280000;
         const int SECURITY_STATUS_SENT = 845280001;
+        const int SECURITY_STATUS_SENDING = 845280007;
         const int SECURITY_STATUS_CONSENT_NOT_VALIDATED = 845280002;
         const int SECURITY_STATUS_WITHDRAWN = 845280003;
         const int SECURITY_STATUS_PASSED = 845280004;
@@ -27,6 +28,9 @@
                         break;
                     case "REQUEST SENT":
                         status = SECURITY_STATUS_SENT;
+                        break;
+                    case "REQUEST SENDING":
+                        status = SECURITY_STATUS_SENDING;
                         break;
                     case "REQUEST NOT SENT":
                         status = SECURITY_STATUS_NOT_SENT;

@@ -101,6 +101,22 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
             to.AdoxioDescription1 = from.Description1;
 
+            //store opening
+            to.IsReadyWorkers = from.IsReadyWorkers;
+            to.IsReadyNameBranding = from.IsReadyNameBranding;
+            to.IsReadyDisplays = from.IsReadyDisplays;
+            to.IsReadyIntruderAlarm = from.IsReadyIntruderAlarm;
+            to.IsReadyFireAlarm = from.IsReadyFireAlarm;
+            to.IsReadyLockedCases = from.IsReadyLockedCases;
+            to.IsReadyLockedStorage = from.IsReadyLockedStorage;
+            to.IsReadyPerimeter = from.IsReadyPerimeter;
+            to.IsReadyRetailArea = from.IsReadyRetailArea;
+            to.IsReadyStorage = from.IsReadyStorage;
+            to.IsReadyExtranceExit = from.IsReadyExtranceExit;
+            to.IsReadySurveillanceNotice = from.IsReadySurveillanceNotice;
+            to.IsReadyProductNotVisibleOutside = from.IsReadyProductNotVisibleOutside;
+            to.AdoxioEstablishmentopeningdate = from.Establishmentopeningdate;
+
 
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
@@ -270,7 +286,23 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 //get record audit info
                 CreatedOn = dynamicsApplication.Createdon,
-                ModifiedOn = dynamicsApplication.Modifiedon
+                ModifiedOn = dynamicsApplication.Modifiedon,
+
+                //store opening 
+                IsReadyWorkers = dynamicsApplication.IsReadyWorkers,
+                IsReadyNameBranding = dynamicsApplication.IsReadyNameBranding,
+                IsReadyDisplays = dynamicsApplication.IsReadyDisplays,
+                IsReadyIntruderAlarm = dynamicsApplication.IsReadyIntruderAlarm,
+                IsReadyFireAlarm = dynamicsApplication.IsReadyFireAlarm,
+                IsReadyLockedCases = dynamicsApplication.IsReadyLockedCases,
+                IsReadyLockedStorage = dynamicsApplication.IsReadyLockedStorage,
+                IsReadyPerimeter = dynamicsApplication.IsReadyPerimeter,
+                IsReadyRetailArea = dynamicsApplication.IsReadyRetailArea,
+                IsReadyStorage = dynamicsApplication.IsReadyStorage,
+                IsReadyExtranceExit = dynamicsApplication.IsReadyExtranceExit,
+                IsReadySurveillanceNotice = dynamicsApplication.IsReadySurveillanceNotice,
+                IsReadyProductNotVisibleOutside = dynamicsApplication.IsReadyProductNotVisibleOutside,
+                Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate
 
             };
 
