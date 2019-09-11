@@ -92,9 +92,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       ).pipe(takeWhile(() => this.componentActive))
         .subscribe(([applications, licenses]) => {
           this.checkIndigenousNationState(applications);
-          applications.forEach((application: ApplicationSummary) => {
-            this.inProgressApplications.push(application);
-          });
+          // filter out approved applications
+          applications.filter(app => ['Approved', 'Renewal Due', 'Payment Required', 'Active'].indexOf(app.applicationStatus) === -1)
+            .forEach((application: ApplicationSummary) => {
+              this.inProgressApplications.push(application);
+            });
 
           licenses.forEach((licence: ApplicationLicenseSummary) => {
             licence.actionApplications = [];
@@ -190,17 +192,13 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   payLicenceFee(licence: ApplicationLicenseSummary) {
-    // this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(licence.applicationId)
-    //   .pipe(takeWhile(() => this.componentActive))
-    //   .subscribe(res => {
-    //     const data = <any>res;
-    //     window.location.href = data.url;
-    //   }, err => {
-    //     if (err._body === 'Payment already made') {
-    //       this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-    //     }
-    //   });
-    this.router.navigate([`/store-opening/${licence.applicationId}`]);
+    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
+    if (crsApplication) {
+      this.router.navigate([`/store-opening/${crsApplication.applicationId}`]);
+    } else {
+      this.snackBar.open('Unable to find CRS Application', 'Fail',
+        { duration: 3500, panelClass: ['red-snackbar'] });
+    }
   }
 
   startNewLicenceApplication() {
