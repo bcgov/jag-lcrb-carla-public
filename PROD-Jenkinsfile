@@ -148,6 +148,9 @@ node('master') {
 		- notifying of success or failure
 	*/
 	stage("Deploy to ${environments.prod.name}") {
+    options {
+      timeout(time: 30, unit 'MINUTES')
+    }
 	  def environment = environments.prod.tag
 	  def stableTag = environments.prod.previousTag
 	  node {
