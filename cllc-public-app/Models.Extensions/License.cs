@@ -93,11 +93,15 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
 
             var mainApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();
+            var crsApplication = applications.Where(app => app.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store").FirstOrDefault();
             if (mainApplication != null)
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;
             }
-
+            if(crsApplication != null)
+            {
+                licenseSummary.StoreInspected = crsApplication.AdoxioAppchecklistinspectionresults == (int)InspectionStatus.Pass;
+            }
 
             if (licence.AdoxioLicenceType != null)
             {

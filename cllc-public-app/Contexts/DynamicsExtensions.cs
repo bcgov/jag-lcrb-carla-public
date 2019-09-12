@@ -332,7 +332,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 var filter = $"_adoxio_applicant_value eq {applicantId} and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
-                filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved}";
+                // Approved applications need to be passed to the client app
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Denied}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
                 filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
