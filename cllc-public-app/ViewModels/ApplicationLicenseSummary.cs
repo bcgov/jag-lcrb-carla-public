@@ -10,6 +10,17 @@ using System.Threading.Tasks;
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
 
+    public enum InspectionStatus
+    {
+        Pass = 845280000,
+        Fail = 845280001,
+        Deficient = 845280002,
+        ContraventionsIdentified = 845280003,
+        ComplianceDeficiency = 845280004,
+        NoContraventions = 845280005,
+        Attempted = 845280006,
+    }
+
     public class ApplicationLicenseSummary
     {
         public string LicenseId { get; set; }
@@ -24,6 +35,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? ExpiryDate { get; set; }
         
         public string Status { get; set; }
+
+        public bool StoreInspected { get; set; }
 
     }
 }
