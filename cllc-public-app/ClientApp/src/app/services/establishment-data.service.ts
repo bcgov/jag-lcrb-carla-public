@@ -20,6 +20,10 @@ export class EstablishmentDataService extends DataService {
       return this.http.get<string>(this.apiPath + "/map", { headers: this.headers })
       .pipe(catchError(this.handleError));
     }
-    
+
+    public getEstablishmentsMapSearch(search: string): Observable<string> {
+      return this.http.get<string>(this.apiPath + "/map?search=" + encodeURI(search), { headers: this.headers })
+      .pipe(catchError(this.handleError));
+    }
 
 }

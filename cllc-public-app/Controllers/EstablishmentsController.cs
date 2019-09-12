@@ -60,12 +60,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("map")]
         [AllowAnonymous]
-        public IActionResult GetMap()
+        public IActionResult GetMap(string search)
         {
             // get establishments                      
             var expand = new List<string> { "adoxio_establishment" }; // get establishment data at the same time.
             string filter =  "statuscode eq 1";  // only active licenses
+            if (! string.IsNullOrEmpty (search))
+            {
+                search = search.Replace("'", "''");
+                filter += $" and (adoxio_establishment/startswith(adoxio_name,'{search}')";
+                filter += $" or adoxio_establishment/startswith(adoxio_addresscity,'{search}')";
 
+            }
             IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
             try
