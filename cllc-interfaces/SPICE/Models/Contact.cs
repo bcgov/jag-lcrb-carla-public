@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// 'No'</param>
         /// <param name="gender">Possible values include: 'Male', 'Female',
         /// 'Other'</param>
-        public Contact(string spdJobId = default(string), string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
+        public Contact(string spdJobId = default(string), string contactId = default(string), string firstName = default(string), string lastName = default(string), string middleName = default(string), string companyName = default(string), string phoneNumber = default(string), string email = default(string), string driversLicenceNumber = default(string), string driverLicenceJurisdiction = default(string), string bcIdCardNumber = default(string), System.DateTimeOffset? birthDate = default(System.DateTimeOffset?), string birthplace = default(string), string selfDisclosure = default(string), string gender = default(string), Address address = default(Address), IList<Alias> aliases = default(IList<Alias>), IList<Address> previousAddresses = default(IList<Address>))
         {
             SpdJobId = spdJobId;
             ContactId = contactId;
@@ -39,6 +39,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
             PhoneNumber = phoneNumber;
             Email = email;
             DriversLicenceNumber = driversLicenceNumber;
+            DriverLicenceJurisdiction = driverLicenceJurisdiction;
             BcIdCardNumber = bcIdCardNumber;
             BirthDate = birthDate;
             Birthplace = birthplace;
@@ -99,6 +100,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Spice.Models
         /// </summary>
         [JsonProperty(PropertyName = "driversLicenceNumber")]
         public string DriversLicenceNumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "driverLicenceJurisdiction")]
+        public string DriverLicenceJurisdiction { get; set; }
 
         /// <summary>
         /// </summary>
