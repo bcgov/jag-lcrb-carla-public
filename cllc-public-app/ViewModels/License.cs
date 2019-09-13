@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Suspended = 845280002,
         Dormant = 845280003,
         TransferRequested = 845280004,
-
+        PendingFistYearFee = 845280005,
     }
 
     public class License
