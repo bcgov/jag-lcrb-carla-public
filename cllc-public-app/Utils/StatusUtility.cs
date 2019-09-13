@@ -95,14 +95,13 @@ namespace Gov.Lclb.Cllb.Public.Utils
             if (licence != null && status == LicenceStatusCodes.Active)
             {
                 shownStatus = STATUS_ACTIVE;
-
                 if (DateTimeOffset.Now > licence.AdoxioExpirydate)
                 {
                     shownStatus = STATUS_RENEWAL_DUE;
                 }
             }
 
-            // moved  first year payment logic here
+            // moved first year payment logic here
             if (licence != null && status == LicenceStatusCodes.PendingFistYearFee)
             {
                 shownStatus = STATUS_PAYMENT_REQUIRED;
