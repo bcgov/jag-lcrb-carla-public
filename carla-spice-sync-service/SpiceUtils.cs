@@ -49,11 +49,20 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             foreach (var workerResponse in responses)
             {
-                // search for the Personal History Record.
                 try
                 {
-                    MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
-                    string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
+                    string contactId;
+                    if (workerResponse.RecordIdentifier == null)
+                    {
+                        MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
+                        contactId = contact.Contactid;
+                    }
+                    else
+                    {
+                        contactId = workerResponse.RecordIdentifier;
+                    }
+                    
+                    string filter = $"_adoxio_contactid_value eq {contactId}";
                     WorkersGetResponseModel resp = _dynamicsClient.Workers.Get(filter: filter);
 
                     if (resp.Value.Count == 1)

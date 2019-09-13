@@ -70,6 +70,14 @@
 
           <app-field [valid]="true" [showChevrons]="false">
             <section style="display: flex">
+              <input type="checkbox" formControlName="isReadyValidInterest">
+              <div style="padding-left: 10px;">
+                You own or have a fully executed lease for your establishment
+              </div>
+            </section>
+          </app-field>
+          <app-field [valid]="true" [showChevrons]="false">
+            <section style="display: flex">
               <input type="checkbox" formControlName="isReadyWorkers">
               <div style="padding-left: 10px;">
                 Workers have obtained a security verification from the province. This includes any adult (19 years of
