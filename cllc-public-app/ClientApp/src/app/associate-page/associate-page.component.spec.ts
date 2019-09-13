@@ -13,7 +13,6 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { ApplicationRenewalComponent } from '@appapplication-renewal/application-renewal.component';
 import { of } from 'rxjs';
 import { Application } from '@models/application.model';
 import { Account } from '@models/account.model';
@@ -22,7 +21,6 @@ import { FieldComponent } from '@shared/field/field.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { reducers, metaReducers } from '@app/app-state/reducers/reducers';
-import { LegalEntity } from '@models/legal-entity.model';
 
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
@@ -36,8 +34,6 @@ let activatedRouteStub: ActivatedRouteStub;
 describe('AssociatePageComponent', () => {
   let component: AssociatePageComponent;
   let fixture: ComponentFixture<AssociatePageComponent>;
-  let store: MockStore<AppState>;
-  let applicationService: ApplicationDataService;
 
 
   const account = Object.assign(new Account(), {
@@ -93,8 +89,6 @@ describe('AssociatePageComponent', () => {
     })
       .compileComponents();
 
-    store = TestBed.get(Store);
-    applicationService = TestBed.get(ApplicationDataService);
   }));
 
 
