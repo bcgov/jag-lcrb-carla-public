@@ -1,0 +1,84 @@
+<ng-template #applicationContent>
+
+  <div *ngIf="account?.businessType">
+
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <!-- Title -->
+      <h1 class="ngtest-page-title">Transfer Your Cannabis Retail Store Licence</h1>
+    </div>
+
+    <div [formGroup]="form" class="application-wrapper">
+      <!-- Preamble -->
+      <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
+
+      <!-- Before Starting -->
+      <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
+        THE APPLICATION</h3>
+      <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+        <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+      </section>
+
+      <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">ESTABLISHMENT NAME</h3>
+      <section class="padded-section">
+        <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" label="Establishment Name"
+          [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
+          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+          <input class="form-control" style="width: 500px;" type="text"
+            [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
+            (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+        </app-field>
+      </section>
+
+      <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">IDENTIFY THE PROPOSED LICENSEE</h3>
+      <section class="padded-section">
+        <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
+          label="Search for the business name you intend to transfer your cannabis retail store licence to:"
+          [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
+          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+          <app-account-picker></app-account-picker>
+        </app-field>
+      </section>
+
+      <p></p>
+      <section class="error" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
+      </section>
+
+      <section *ngIf="application?.licenceFeeInvoicePaid">
+
+        <section style="position: relative; margin-top: 20px;">
+          <button style="float: right;" class="btn btn-primary" [routerLink]="[ '/dashboard']">
+            <i class="fas fa-save" style="margin-right: 10px;"></i>
+            SAVE</button>
+          <div style="clear: both"></div>
+          <div [ngBusy]="busy"></div>
+        </section>
+      </section>
+
+      <section *ngIf="!application?.licenceFeeInvoicePaid">
+        <p></p>
+        <p>Proceed to pay online using a credit card through the secure web portal.</p>
+        <p></p>
+
+        <section style="position: relative; margin-top: 20px;">
+          <button style="float: right;" class="btn btn-primary" (click)="submit_application()">
+            <i class="fas fa-shopping-cart" style="margin-right: 10px;"></i>
+            PAY LICENCE FEE AND RECEIVE LICENCE</button>
+          <div style="clear: both"></div>
+          <div [ngBusy]="busy"></div>
+        </section>
+      </section>
+    </div>
+  </div>
+</ng-template>
+
+
+<div class="dashboard-spacing" style="position: relative">
+  <div [ngBusy]="busy"></div>
+  <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
+</div>
