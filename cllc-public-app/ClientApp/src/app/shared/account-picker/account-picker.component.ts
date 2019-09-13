@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MatAutocompleteTrigger } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AccountDataService } from '@services/account-data.service';
@@ -11,6 +11,7 @@ import { filter, tap, switchMap, map } from 'rxjs/operators';
 })
 export class AccountPickerComponent implements OnInit {
   @ViewChild('autocomplete', {read: MatAutocompleteTrigger}) inputAutoComplit: MatAutocompleteTrigger;
+  @Output() valueSelected: EventEmitter<string> = new EventEmitter<string>();
   form: FormGroup;
   autocompleteAccounts: any[];
   constructor(private accountDataService: AccountDataService,
@@ -44,6 +45,10 @@ export class AccountPickerComponent implements OnInit {
 
   autocompleteDisplay(item: any) {
     return item.name;
+  }
+
+  onOptionSelect(event) {
+    this.valueSelected.emit(event.value.id);
   }
 
 }

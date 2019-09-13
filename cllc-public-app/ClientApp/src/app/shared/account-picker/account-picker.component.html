@@ -1,9 +1,10 @@
 <div [formGroup]="form">
-  <input type="text" class="form-control" placeholder="" formControlName="autocompleteInput" [matAutocomplete]="auto"
+  <input type="text" class="form-control" style="width: 500px;"  placeholder="" formControlName="autocompleteInput" [matAutocomplete]="auto"
     #autocomplete>
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="autocompleteDisplay">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelect($event)" [displayWith]="autocompleteDisplay">
     <mat-option *ngFor="let item of autocompleteAccounts" [value]="item">
       {{item.name}}
     </mat-option>
   </mat-autocomplete>
+
 </div>
