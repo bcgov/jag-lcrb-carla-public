@@ -53,6 +53,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
 
 
+        [JsonProperty(PropertyName = "adoxio_isreadyvalidinterest")]
+        public bool? IsReadyValidInterest { get; set; }
+
         [JsonProperty(PropertyName = "adoxio_isreadyworkers")]
         public bool? IsReadyWorkers { get; set; }
         
