@@ -6,12 +6,13 @@ import { UserDataService } from '@services/user-data.service';
 import { provideMockStore } from '@ngrx/store/testing';
 import { WorkerDataService } from '@services/worker-data.service.';
 import { MatTableModule } from '@angular/material';
-import { AppState } from '@appapp-state/models/app-state';
+import { AppState } from '@app/app-state/models/app-state';
+import { Account } from '@models/account.model';
 
 const userDataServiceStub: Partial<UserDataService> = {};
 const workerDataServiceStub: Partial<WorkerDataService> = {};
 const initialState = {
-  currentAccountState: { currentAccount: {} },
+  currentAccountState: { currentAccount: new Account() },
   currentUserState: { currentUser: {} }
 } as AppState;
 
