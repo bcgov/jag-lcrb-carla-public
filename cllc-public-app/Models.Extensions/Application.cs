@@ -103,6 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             //store opening
             to.IsReadyWorkers = from.IsReadyWorkers;
+            to.IsReadyValidInterest = from.IsReadyValidInterest;
             to.IsReadyNameBranding = from.IsReadyNameBranding;
             to.IsReadyDisplays = from.IsReadyDisplays;
             to.IsReadyIntruderAlarm = from.IsReadyIntruderAlarm;
@@ -289,6 +290,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ModifiedOn = dynamicsApplication.Modifiedon,
 
                 //store opening 
+                IsReadyValidInterest = dynamicsApplication.IsReadyValidInterest,
                 IsReadyWorkers = dynamicsApplication.IsReadyWorkers,
                 IsReadyNameBranding = dynamicsApplication.IsReadyNameBranding,
                 IsReadyDisplays = dynamicsApplication.IsReadyDisplays,

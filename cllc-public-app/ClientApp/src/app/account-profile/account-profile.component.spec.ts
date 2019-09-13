@@ -13,10 +13,11 @@ import { TiedHouseConnectionsDataService } from '@services/tied-house-connection
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { of } from 'rxjs';
 import { AppState } from '@app/app-state/models/app-state';
+import { Account } from '@models/account.model';
 
 const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 const initialState = {
-  currentAccountState: { currentAccount: {} },
+  currentAccountState: { currentAccount: new Account() },
   currentUserState: { currentUser: {} }
 } as AppState;
 
