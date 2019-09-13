@@ -7,11 +7,12 @@ import { reducers, metaReducers } from '@app/app-state/reducers/reducers';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../app-state/models/app-state';
 import { AssociateContentComponent } from '../associate-content/associate-content.component';
+import { Account } from '@models/account.model';
 
 
 @Component({selector: 'app-applications-and-licences', template: ''})
 class ApplicationsAndLicencesComponent {
-  @Input() account: any
+  @Input() account: any;
 }
 
 describe('DashboardComponent', () => {
@@ -19,8 +20,10 @@ describe('DashboardComponent', () => {
   let fixture: ComponentFixture<DashboardComponent>;
   let store: MockStore<AppState>;
 
+  const account = new Account();
+  account.businessType = 'PublicCorporation';
   const initialState = {
-    currentAccountState: { currentAccount: { businessType: 'PublicCorporation' } },
+    currentAccountState: { currentAccount: account },
     currentUserState: { currentUser: {} },
     indigenousNationState: { indigenousNationModeActive: false }
   } as AppState;
@@ -40,7 +43,7 @@ describe('DashboardComponent', () => {
       .compileComponents();
 
     store = TestBed.get(Store);
-    //applicationService = TestBed.get(ApplicationDataService)
+    // applicationService = TestBed.get(ApplicationDataService)
   }));
 
   beforeEach(() => {

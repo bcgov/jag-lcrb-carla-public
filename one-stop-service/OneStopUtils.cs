@@ -287,7 +287,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             IList<MicrosoftDynamicsCRMadoxioLicences> result = null;
             try
             {
-                string filter = $"adoxio_businessprogramaccountreferencenumber eq null";
+                string filter = $"adoxio_businessprogramaccountreferencenumber eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter).Value;                
             }
             catch (OdataerrorException odee)
