@@ -31,13 +31,126 @@
 
       <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">IDENTIFY THE PROPOSED LICENSEE</h3>
       <section class="padded-section">
-        <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-          label="Search for the business name you intend to transfer your cannabis retail store licence to:"
-          [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
-          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+        <app-field label="Search for the business name you intend to transfer your cannabis retail store licence to:"
+          [required]="false" [valid]="true">
           <app-account-picker></app-account-picker>
         </app-field>
       </section>
+
+      <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">CONSENT TO TRANSFER YOUR LICENCE</h3>
+      <section class="padded-section">
+        <app-field [required]="false" [valid]="true">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="authorizedToSubmit">
+            <!-- <span class="error-states">*</span> -->
+            <div style="padding-left: 10px;"> I consent to transfer my licence to the above account.
+            </div>
+          </section>
+        </app-field>
+      </section>
+
+      <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
+          DECLARATIONS
+        </h3>
+        <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
+          <section>
+            <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+              The application must only be submitted by an individual with the authority to bind the applicant. The
+              branch
+              relies on the applicant to ensure that the individual who submits this application is authorized to do
+              so.
+              Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
+              usually
+              be
+              an officer or, in some cases, a director
+            </div>
+            <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+              <p *ngIf="account?.businessType === 'SoleProprietor'">
+                This application should be submitted the sole proprietor.
+              </p>
+              <p *ngIf="account?.businessType === 'Society'">
+                This application must only be submitted by an individual with the authority to bind the applicant. The
+                branch relies on the applicant to ensure that the individual who submits this application is
+                authorized to
+                do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
+                defined in the Societies Act).
+              </p>
+              <p *ngIf="account?.businessType === 'PublicCorporation'">
+                This application must only be submitted by an individual with the authority to bind the applicant. The
+                branch relies on the applicant to ensure that the individual who submits this application is
+                authorized to
+                do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+                will
+                usually be an officer or, in some cases, a director.
+              </p>
+              <div *ngIf="businessTypeIsPartnership()">
+                <p>
+                  This application must only be submitted by an individual with the authority to bind the applicant.
+                  The
+                  branch relies on the applicant to ensure that the individual who submits this application is
+                  authorized
+                  to do so. Typically, an appropriate individual will be as follows:
+                </p>
+                <ul>
+                  <li>If the applicant is a general partnership, one of the general partners</li>
+                  <li>If the applicant is a limited partnership, the general partner of the partnership</li>
+                </ul>
+              </div>
+              <p *ngIf="businessTypeIsPrivateCorporation()">
+                The application must only be submitted by an individual with the authority to bind the applicant. The
+                branch relies on the applicant to ensure that the individual who submits this application is
+                authorized to
+                do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+                will
+                usually be an officer or, in some cases, a director.
+              </p>
+  
+            </div>
+  
+          </section>
+          <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Note: A lawyer or
+            consultant,
+            may NOT submit this application on behalf of
+            the applicant.</p>
+          <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+            <p *ngIf="businessTypeIsPrivateCorporation()">
+              Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
+            </p>
+            <p *ngIf="!businessTypeIsPrivateCorporation()">
+              Note: A lawyer, licensee representative or third party operator may NOT submit this application on
+              behalf of
+              the applicant.
+            </p>
+          </section>
+          <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+            errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+            <section style="display: flex">
+              <input type="checkbox" formControlName="authorizedToSubmit">
+              <span class="error-states">*</span>
+              <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
+              </div>
+            </section>
+          </app-field>
+          <p>
+            Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+            manager
+            an application, or
+            information or a record included as part of the application, that contains false or misleading
+            information, or
+            fails to disclose a material fact”.
+          </p>
+          <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+            errorMessage="Please affirm that all of the information provided for this application is true and complete."
+            [showChevrons]="false">
+            <section style="display: flex">
+              <input type="checkbox" formControlName="signatureAgreement">
+              <span class="error-states">*</span>
+              <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+                application is true and complete
+              </div>
+            </section>
+          </app-field>
+        </div>
 
       <p></p>
       <section class="error" *ngIf="showValidationMessages">
