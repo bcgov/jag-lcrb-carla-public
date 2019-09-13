@@ -22,11 +22,13 @@ namespace FunctionalTest
         {
             // clean up any previous test runs that might be stalled.
 
-            var chromeProcesses = Process.GetProcessesByName("chromedriver");
+            /*
+             var chromeProcesses = Process.GetProcessesByName("chromedriver");
             foreach (var process in chromeProcesses)
             {
                 process.Kill();
             }
+            */
 
             configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
