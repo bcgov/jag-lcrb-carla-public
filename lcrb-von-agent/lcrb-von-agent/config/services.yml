@@ -49,6 +49,8 @@ issuers:
         type:
           input: registration
           from: value
+      cardinality_fields:
+        - licence_number
       mapping:
         # "attribute" defines a generic field in the TOB model
         # "value" identifies where to derive the data value (typically it comes from the claim)
@@ -117,7 +119,8 @@ issuers:
         type:
           input: registration
           from: value
-
+      cardinality_fields:
+        - licence_number
       mapping:
         - model: attribute
           fields:

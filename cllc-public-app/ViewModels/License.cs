@@ -7,7 +7,7 @@ using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-        public enum LicenceStatusCodes
+    public enum LicenceStatusCodes
     {
         Active = 1,
         Inactive = 2,
@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string id { get; set; }
         public string establishmentName { get; set; }
         public string establishmentAddress { get; set; }
-        
+
         public string establishmentAddressStreet { get; set; }
         public string establishmentAddressCity { get; set; }
         public string establishmentAddressPostalCode { get; set; }
