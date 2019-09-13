@@ -79,6 +79,7 @@ export class Application {
 
   description1: string;
 
+  isReadyValidInterest: boolean;
   isReadyWorkers: boolean;
   isReadyNameBranding: boolean;
   isReadyDisplays: boolean;
