@@ -19,7 +19,6 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationHTMLContent } from '@app/application/application.component';
 import { Account } from '@models/account.model';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
-import { ApplicationLicenseSummary } from '@appmodels/application-license-summary.model';
 
 @Component({
   selector: 'app-application-and-licence-fee',
@@ -60,6 +59,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     this.form = this.fb.group({
       id: [''],
       description1: ['', [Validators.required, Validators.minLength(10)]],
+      isReadyValidInterest: [''],
       isReadyWorkers: [''],
       isReadyNameBranding: [''],
       isReadyDisplays: [''],
