@@ -22,11 +22,11 @@ import * as currentApplicationActions from '@app/app-state/actions/current-appli
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
 @Component({
-  selector: 'app-application-and-licence-fee',
-  templateUrl: './application-and-licence-fee.component.html',
-  styleUrls: ['./application-and-licence-fee.component.scss']
+  selector: 'app-application-ownership-transfer',
+  templateUrl: './application-ownership-transfer.component.html',
+  styleUrls: ['./application-ownership-transfer.component.scss']
 })
-export class ApplicationAndLicenceFeeComponent extends FormBase implements OnInit {
+export class ApplicationOwnershipTransferComponent extends FormBase implements OnInit {
   application: Application;
   form: FormGroup;
   savedFormData: any;
@@ -59,21 +59,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
-      description1: ['', [Validators.required, Validators.minLength(10)]],
-      isReadyWorkers: [''],
-      isReadyNameBranding: [''],
-      isReadyDisplays: [''],
-      isReadyIntruderAlarm: [''],
-      isReadyFireAlarm: [''],
-      isReadyLockedCases: [''],
-      isReadyLockedStorage: [''],
-      isReadyPerimeter: [''],
-      isReadyRetailArea: [''],
-      isReadyStorage: [''],
-      isReadyExtranceExit: [''],
-      isReadySurveillanceNotice: [''],
-      isReadyProductNotVisibleOutside: [''],
-      establishmentopeningdate: ['', [Validators.required]],
+      establishmentName: [''],
     });
 
 
