@@ -19,6 +19,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { ActivatedRouteStub } from './../testing/activated-route-stub';
 import { FieldComponent } from '@shared/field/field.component';
+import { Account } from '@models/account.model';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let applicationDataServiceStub: Partial<ApplicationDataService>;
@@ -32,33 +33,35 @@ describe('ApplicationAndLicenceFeeComponent', () => {
   let component: ApplicationAndLicenceFeeComponent;
   let fixture: ComponentFixture<ApplicationAndLicenceFeeComponent>;
 
+  const account = new Account();
+  account.businessType = 'PublicCorporation';
   const initialState = {
-    currentAccountState: { currentAccount: { businessType: 'PublicCorporation' } },
+    currentAccountState: { currentAccount: account },
     currentUserState: { currentUser: {} }
   } as AppState;
 
-  beforeEach(async(() => { 
+  beforeEach(async(() => {
     paymentDataServiceStub = {};
-  applicationDataServiceStub = {
-    getSubmittedApplicationCount: () => of(0),
-    cancelApplication: () => of(null),
-    updateApplication: () => of(null),
-    getApplicationById: () => of(<Application>{
-      applicationType: <any>{
-        contentTypes: []
-      }
-    }),
+    applicationDataServiceStub = {
+      getSubmittedApplicationCount: () => of(0),
+      cancelApplication: () => of(null),
+      updateApplication: () => of(null),
+      getApplicationById: () => of(<Application>{
+        applicationType: <any>{
+          contentTypes: []
+        }
+      }),
 
-  };
-  dynamicsDataServiceStub = { getRecord: () => of([]) };
-  tiedHouseConnectionsDataServiceStub = {
-    updateTiedHouse: () => of(null)
-  };
-  matDialogStub = {};
-  matSnackBarStub = {};
-  activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
+    };
+    dynamicsDataServiceStub = { getRecord: () => of([]) };
+    tiedHouseConnectionsDataServiceStub = {
+      updateTiedHouse: () => of(null)
+    };
+    matDialogStub = {};
+    matSnackBarStub = {};
+    activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
     TestBed.configureTestingModule({
-      declarations: [ ApplicationAndLicenceFeeComponent , FieldComponent],
+      declarations: [ApplicationAndLicenceFeeComponent, FieldComponent],
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
@@ -77,7 +80,7 @@ describe('ApplicationAndLicenceFeeComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
