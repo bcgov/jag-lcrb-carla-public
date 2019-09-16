@@ -18,90 +18,86 @@ namespace FunctionalTest
 
             string firstName = RandomizerFactory.GetRandomizer(new FieldOptionsFirstName()).Generate();
 
-            string lastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName()).Generate();
+            string lastName = RandomizerFactory.GetRandomizer(new FieldOptionsLastName()).Generate() + "-WS-Test";
 
             
 
             // first create a contact.
 
-            XrmTestBrowser.ThinkTime(1000);
-            // 3. Go to Sales/Accounts using the Sitemap
+            
+            // 1. Go to Sales/Accounts using the Sitemap
             XrmTestBrowser.Navigation.OpenSubArea("Licensing", "Contacts");
 
-            XrmTestBrowser.ThinkTime(500);
-            // 4. Change the active view
-            XrmTestBrowser.Grid.SwitchView("Active Contacts");
 
-            XrmTestBrowser.ThinkTime(500);
-            //5. Click on the "New" button
+            XrmTestBrowser.ThinkTime(100);
+
+            //2. Click on the "New" button
             XrmTestBrowser.CommandBar.ClickCommand("New");
 
-            XrmTestBrowser.ThinkTime(2000);
+            XrmTestBrowser.ThinkTime(500);
 
             var fields = new List<Field>
             {
                 new Field() {Id = "firstname", Value = firstName},
                 new Field() {Id = "lastname", Value = lastName}
             };
-            //6. Set the attribute values in the form
+
+            //3. Set the attribute values in the form
             XrmTestBrowser.Entity.SetValue(new CompositeControl() { Id = "fullname", Fields = fields });
             XrmTestBrowser.Entity.SetValue("emailaddress1", email);
             XrmTestBrowser.Entity.SetValue("mobilephone", "555-555-5555");
             XrmTestBrowser.Entity.SetValue("birthdate", DateTime.Parse("1/1/1970"));
 
 
-            //7. Save the new record
+            //4. Save the new record
             XrmTestBrowser.CommandBar.ClickCommand("Save");
 
-            // now create an email
+            XrmTestBrowser.ThinkTime(100);
 
-            XrmTestBrowser.ThinkTime(1000);
+            // now create a worker verification
+
             // 3. Go to Sales/Accounts using the Sitemap
             XrmTestBrowser.Navigation.OpenSubArea("Compliance & Enforcement", "Worker Verifications");
 
-            XrmTestBrowser.ThinkTime(500);
-            // 4. Change the active view
-            XrmTestBrowser.Grid.SwitchView("Active Worker Verifications");
-
-            XrmTestBrowser.ThinkTime(500);
+            
             //5. Click on the "New" button
             XrmTestBrowser.CommandBar.ClickCommand("New");
 
             XrmTestBrowser.ThinkTime(2000);
 
-            XrmTestBrowser.Entity.SetValue("adoxio_ismanual", true);
-
             XrmTestBrowser.Entity.SetValue("adoxio_email", email);
 
-            // set the contact
+
+            SetOptionSet("adoxio_ismanual", "Yes");
+            SetOptionSet("adoxio_consentvalidated", "Yes");
+
+            // Click on the contact field.
+            XrmTestBrowser.ThinkTime(500);
+            IWebElement contactDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid\"]"));
+            contactDiv.Click();
+
+             // set the contact
+             // Change the text field.
+             IWebElement contactIdText = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_ledit\"]"));
+            contactIdText.SendKeys(firstName + " " + lastName);
 
             XrmTestBrowser.ThinkTime(500);
-            IWebElement userOrTeamDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_lookupValue\"]"));
+            IWebElement userOrTeamDiv = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_i\"]"));
             userOrTeamDiv.Click();
 
-            // Change the text field.
-            IWebElement userOrTeamText = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_ledit\"]"));
-            userOrTeamText.SendKeys(configuration["APPLICATION_ASSIGNEE"]);
+            
 
             // click the search button.
-            IWebElement searchButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_lookupSearch\"]"));
+            //IWebElement searchButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"adoxio_contactid_lookupSearch\"]"));
 
-            searchButton.Click();
+            //searchButton.Click();
 
             // find the first item and click on it.
             IWebElement firstItem = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"item0\"]"));
             firstItem.Click();
 
             XrmTestBrowser.ThinkTime(1000);
-
-            // click the OK button.
-            try
-            {
-                XrmTestBrowser.Driver.FindElement(By.XPath("//button[@id=\"ok_id\"]")).Click();
-            }
-            catch (StaleElementReferenceException)
-            { // ignore the stale element, we have moved on. 
-            }
+           
 
             // switch back to the main frame.
 
