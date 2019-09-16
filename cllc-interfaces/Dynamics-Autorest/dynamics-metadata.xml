@@ -2993,7 +2993,7 @@
         <Property Name="adoxio_checklistlebuilt" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_signatureposition" Type="Edm.String" Unicode="false">
+        <Property Name="adoxio_tiedhouseresult" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="importsequencenumber" Type="Edm.Int32">
@@ -3179,7 +3179,7 @@
         <Property Name="adoxio_servicehourswednesdayclose" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_appchecklistpaymentreceived" Type="Edm.Int32">
+        <Property Name="adoxio_isreadyvalidinterest" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_inspectionchecklistdate" Type="Edm.DateTimeOffset">
@@ -3282,9 +3282,6 @@
         <Property Name="adoxio_renewaltiedhousefederalinterest" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_tiedhouseresult" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_businessinfoemail" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3298,7 +3295,7 @@
         <Property Name="adoxio_initialcapassessment" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_registeredestablishment" Type="Edm.Int32">
+        <Property Name="adoxio_signatureposition" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklistaipdecisionmade" Type="Edm.Int32">
@@ -3347,6 +3344,9 @@
         </Property>
         <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
+        </Property>
+        <Property Name="adoxio_registeredestablishment" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_inspectiondate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3577,6 +3577,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklistspdapproved" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_appchecklistpaymentreceived" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_appchecklistvalidinterestreceivedfinal" Type="Edm.Int32">
