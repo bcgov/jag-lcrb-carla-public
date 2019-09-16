@@ -1,7 +1,6 @@
 <ng-template #applicationContent>
 
   <div *ngIf="account?.businessType">
-
     <div [formGroup]="form" style="padding-left: 45px; position: relative">
       <!-- Title -->
       <h1 class="ngtest-page-title">Transfer Your Cannabis Retail Store Licence</h1>
@@ -33,7 +32,7 @@
       <section class="padded-section">
         <app-field label="Search for the business name you intend to transfer your cannabis retail store licence to:"
           [required]="false" [valid]="true">
-          <app-account-picker></app-account-picker>
+          <app-account-picker (valueSelected)="form.get('accountId').setValue($event)"></app-account-picker>
         </app-field>
       </section>
 
@@ -41,7 +40,7 @@
       <section class="padded-section">
         <app-field [required]="false" [valid]="true">
           <section style="display: flex">
-            <input type="checkbox" formControlName="authorizedToSubmit">
+            <input type="checkbox" formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
             <div style="padding-left: 10px;"> I consent to transfer my licence to the above account.
             </div>

@@ -48,7 +48,7 @@ export class AccountPickerComponent implements OnInit {
   }
 
   onOptionSelect(event) {
-    this.valueSelected.emit(event.value.id);
+    this.valueSelected.emit(event.option.value.id);
   }
 
 }
