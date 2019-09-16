@@ -9,7 +9,7 @@
       <div class="row">
         <div  class="text-left">
         <app-field label="Search by city or establishment name">
-  <input type="text" [(ngModel)]="search" size="80" style="padding-right: 20px">
+  <input type="text" [(ngModel)]="search" size="80" style="padding-right: 20px" (keyup.enter)="searchMap()">
           &nbsp;
           <button style="padding-left: 20px" class="btn btn-primary" (click)="searchMap()">
   <i class="fas fa-search" style="margin-right: 10px;"></i>
