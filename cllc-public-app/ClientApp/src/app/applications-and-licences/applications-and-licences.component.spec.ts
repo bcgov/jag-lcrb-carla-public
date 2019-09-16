@@ -10,8 +10,9 @@ import { Router } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { of } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AppState } from '@appapp-state/models/app-state';
+import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
+import { Account } from '@models/account.model';
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {
   getAllCurrentApplications: () => of([]),
@@ -30,8 +31,10 @@ describe('ApplicationsAndLicencesComponent', () => {
 
   let store: MockStore<AppState>;
 
+  const account = new Account();
+  account.businessType = 'PublicCorporation';
   const initialState = {
-    currentAccountState: { currentAccount: { businessType: 'PublicCorporation' } },
+    currentAccountState: { currentAccount: account },
     currentUserState: { currentUser: {} },
     indigenousNationState: { indigenousNationModeActive: false }
   } as AppState;
