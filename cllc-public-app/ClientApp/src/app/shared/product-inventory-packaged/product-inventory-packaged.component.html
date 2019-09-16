@@ -1,0 +1,110 @@
+<mat-table #table [dataSource]="dataSource">
+
+  <!-- Column -->
+  <ng-container matColumnDef="rowLabel">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.rowLabel}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{totalsLabel}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="seeds">
+    <mat-header-cell *matHeaderCellDef style="padding-left: 5px;">Seeds
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.seeds}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('seeds')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="vegetativeCannabisPlants">
+    <mat-header-cell *matHeaderCellDef>Vegetative cannabis plants
+      <br> (Packaged units / # of plants)</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.vegetativeCannabisPlants}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('vegetativeCannabisPlants')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="freshCannabis">
+    <mat-header-cell *matHeaderCellDef>Fresh cannabis
+      <br> (Packaged units)</mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.freshCannabis}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('freshCannabis')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="driedCannabis">
+    <mat-header-cell *matHeaderCellDef>Dried Cannabis
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.driedCannabis}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('driedCannabis')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="ediblesSolids">
+    <mat-header-cell *matHeaderCellDef>Edibles - Solids
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.ediblesSolids}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('ediblesSolids')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="ediblesNonSolids">
+    <mat-header-cell *matHeaderCellDef>Edibles - Non - Solids
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.ediblesNonSolids}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('ediblesNonSolids')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="inhaledExtracts">
+    <mat-header-cell *matHeaderCellDef>Extracts - Inhaled
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.inhaledExtracts}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('inhaledExtracts')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="ingestedExtracts">
+    <mat-header-cell *matHeaderCellDef>Extracts - Ingested
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.ingestedExtracts}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('ingestedExtracts')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="otherExtracts">
+    <mat-header-cell *matHeaderCellDef>Extracts - Other
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.otherExtracts}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('otherExtracts')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="tropicals">
+    <mat-header-cell *matHeaderCellDef>Tropicals
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.tropicals}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('tropicals')}} </mat-footer-cell>
+  </ng-container>
+
+  <!-- Column -->
+  <ng-container matColumnDef="other">
+    <mat-header-cell *matHeaderCellDef>Other
+      <br> (Packaged units)
+    </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.other}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getTotalCost('other')}} </mat-footer-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+</mat-table>
