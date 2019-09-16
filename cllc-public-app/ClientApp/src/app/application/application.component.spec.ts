@@ -1,10 +1,9 @@
 import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { convertToParamMap, ParamMap, Params, ActivatedRoute } from '@angular/router';
-import { ReplaySubject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { ApplicationComponent } from './application.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { StoreModule, Store } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from '@app/app-state/reducers/reducers';
 import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
@@ -16,13 +15,13 @@ import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { of } from 'rxjs';
 import { Application } from '@models/application.model';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { FileSystemItem } from '@models/file-system-item.model';
 import { ActivatedRouteStub } from './../testing/activated-route-stub';
 import { FieldComponent } from '@shared/field/field.component';
-import { FormControlState } from '@models/application-type.model';
+import { Account } from '@models/account.model';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let applicationDataServiceStub: Partial<ApplicationDataService>;
@@ -35,11 +34,12 @@ let activatedRouteStub: ActivatedRouteStub;
 describe('ApplicationComponent', () => {
   let component: ApplicationComponent;
   let fixture: ComponentFixture<ApplicationComponent>;
-  let store: MockStore<AppState>;
   let applicationService: ApplicationDataService;
 
+  const account = new Account();
+  account.businessType = 'PublicCorporation';
   const initialState = {
-    currentAccountState: { currentAccount: { businessType: 'PublicCorporation' } },
+    currentAccountState: { currentAccount: account },
     currentUserState: { currentUser: {} }
   } as AppState;
 
@@ -85,7 +85,6 @@ describe('ApplicationComponent', () => {
     })
       .compileComponents();
 
-    store = TestBed.get(Store);
     applicationService = TestBed.get(ApplicationDataService);
   }));
 
