@@ -2992,8 +2992,8 @@
                 "adoxio_validinterestfinalstatus desc",
                 "adoxio_checklistlebuilt",
                 "adoxio_checklistlebuilt desc",
-                "adoxio_signatureposition",
-                "adoxio_signatureposition desc",
+                "adoxio_tiedhouseresult",
+                "adoxio_tiedhouseresult desc",
                 "importsequencenumber",
                 "importsequencenumber desc",
                 "adoxio_uploadedsitemap",
@@ -3106,8 +3106,8 @@
                 "adoxio_dateaipdecisionlettersent desc",
                 "adoxio_servicehourswednesdayclose",
                 "adoxio_servicehourswednesdayclose desc",
-                "adoxio_appchecklistpaymentreceived",
-                "adoxio_appchecklistpaymentreceived desc",
+                "adoxio_isreadyvalidinterest",
+                "adoxio_isreadyvalidinterest desc",
                 "adoxio_inspectionchecklistdate",
                 "adoxio_inspectionchecklistdate desc",
                 "adoxio_sharepointanchorforpersonalhistory",
@@ -3164,16 +3164,14 @@
                 "adoxio_servicehourspatronparticipation desc",
                 "adoxio_renewaltiedhousefederalinterest",
                 "adoxio_renewaltiedhousefederalinterest desc",
-                "adoxio_tiedhouseresult",
-                "adoxio_tiedhouseresult desc",
                 "adoxio_businessinfoemail",
                 "adoxio_businessinfoemail desc",
                 "_modifiedby_value",
                 "_modifiedby_value desc",
                 "adoxio_initialcapassessment",
                 "adoxio_initialcapassessment desc",
-                "adoxio_registeredestablishment",
-                "adoxio_registeredestablishment desc",
+                "adoxio_signatureposition",
+                "adoxio_signatureposition desc",
                 "adoxio_checklistaipdecisionmade",
                 "adoxio_checklistaipdecisionmade desc",
                 "adoxio_checklistmarketcapacity",
@@ -3200,6 +3198,8 @@
                 "statuscode desc",
                 "timezoneruleversionnumber",
                 "timezoneruleversionnumber desc",
+                "adoxio_registeredestablishment",
+                "adoxio_registeredestablishment desc",
                 "adoxio_inspectiondate",
                 "adoxio_inspectiondate desc",
                 "adoxio_servicehourstuesdayopen",
@@ -3330,6 +3330,8 @@
                 "adoxio_renewalkeypersonnel desc",
                 "adoxio_checklistspdapproved",
                 "adoxio_checklistspdapproved desc",
+                "adoxio_appchecklistpaymentreceived",
+                "adoxio_appchecklistpaymentreceived desc",
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_appchecklistvalidinterestreceivedfinal desc",
                 "adoxio_dateaip",
@@ -3566,7 +3568,7 @@
                 "adoxio_brandingnameresult",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_checklistlebuilt",
-                "adoxio_signatureposition",
+                "adoxio_tiedhouseresult",
                 "importsequencenumber",
                 "adoxio_uploadedsitemap",
                 "adoxio_renewalconcluded",
@@ -3623,7 +3625,7 @@
                 "adoxio_addresscity",
                 "adoxio_dateaipdecisionlettersent",
                 "adoxio_servicehourswednesdayclose",
-                "adoxio_appchecklistpaymentreceived",
+                "adoxio_isreadyvalidinterest",
                 "adoxio_inspectionchecklistdate",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_initialcapassessmentdate",
@@ -3652,11 +3654,10 @@
                 "adoxio_areyouthemaincontactforapplication",
                 "adoxio_servicehourspatronparticipation",
                 "adoxio_renewaltiedhousefederalinterest",
-                "adoxio_tiedhouseresult",
                 "adoxio_businessinfoemail",
                 "_modifiedby_value",
                 "adoxio_initialcapassessment",
-                "adoxio_registeredestablishment",
+                "adoxio_signatureposition",
                 "adoxio_checklistaipdecisionmade",
                 "adoxio_checklistmarketcapacity",
                 "_adoxio_licencetype_value",
@@ -3670,6 +3671,7 @@
                 "adoxio_checklistassociateformreceived",
                 "statuscode",
                 "timezoneruleversionnumber",
+                "adoxio_registeredestablishment",
                 "adoxio_inspectiondate",
                 "adoxio_servicehourstuesdayopen",
                 "adoxio_appchecklistinspectionresults",
@@ -3735,6 +3737,7 @@
                 "adoxio_email",
                 "adoxio_renewalkeypersonnel",
                 "adoxio_checklistspdapproved",
+                "adoxio_appchecklistpaymentreceived",
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_dateaip",
                 "adoxio_isreadysurveillancenotice",
@@ -4025,7 +4028,7 @@
                 "adoxio_brandingnameresult",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_checklistlebuilt",
-                "adoxio_signatureposition",
+                "adoxio_tiedhouseresult",
                 "importsequencenumber",
                 "adoxio_uploadedsitemap",
                 "adoxio_renewalconcluded",
@@ -4082,7 +4085,7 @@
                 "adoxio_addresscity",
                 "adoxio_dateaipdecisionlettersent",
                 "adoxio_servicehourswednesdayclose",
-                "adoxio_appchecklistpaymentreceived",
+                "adoxio_isreadyvalidinterest",
                 "adoxio_inspectionchecklistdate",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_initialcapassessmentdate",
@@ -4111,11 +4114,10 @@
                 "adoxio_areyouthemaincontactforapplication",
                 "adoxio_servicehourspatronparticipation",
                 "adoxio_renewaltiedhousefederalinterest",
-                "adoxio_tiedhouseresult",
                 "adoxio_businessinfoemail",
                 "_modifiedby_value",
                 "adoxio_initialcapassessment",
-                "adoxio_registeredestablishment",
+                "adoxio_signatureposition",
                 "adoxio_checklistaipdecisionmade",
                 "adoxio_checklistmarketcapacity",
                 "_adoxio_licencetype_value",
@@ -4129,6 +4131,7 @@
                 "adoxio_checklistassociateformreceived",
                 "statuscode",
                 "timezoneruleversionnumber",
+                "adoxio_registeredestablishment",
                 "adoxio_inspectiondate",
                 "adoxio_servicehourstuesdayopen",
                 "adoxio_appchecklistinspectionresults",
@@ -4194,6 +4197,7 @@
                 "adoxio_email",
                 "adoxio_renewalkeypersonnel",
                 "adoxio_checklistspdapproved",
+                "adoxio_appchecklistpaymentreceived",
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_dateaip",
                 "adoxio_isreadysurveillancenotice",
@@ -35111,8 +35115,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_signatureposition": {
-          "type": "string",
+        "adoxio_tiedhouseresult": {
+          "type": "integer",
           "x-nullable": true
         },
         "importsequencenumber": {
@@ -35340,8 +35344,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_appchecklistpaymentreceived": {
-          "type": "integer",
+        "adoxio_isreadyvalidinterest": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_inspectionchecklistdate": {
@@ -35456,10 +35460,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_tiedhouseresult": {
-          "type": "integer",
-          "x-nullable": true
-        },
         "adoxio_businessinfoemail": {
           "type": "string",
           "x-nullable": true
@@ -35472,8 +35472,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_registeredestablishment": {
-          "type": "integer",
+        "adoxio_signatureposition": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_checklistaipdecisionmade": {
@@ -35525,6 +35525,10 @@
           "x-nullable": true
         },
         "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_registeredestablishment": {
           "type": "integer",
           "x-nullable": true
         },
@@ -35785,6 +35789,10 @@
           "x-nullable": true
         },
         "adoxio_checklistspdapproved": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_appchecklistpaymentreceived": {
           "type": "integer",
           "x-nullable": true
         },
