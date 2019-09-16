@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             try
             {
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_LicenceType" };
-                string filter = $"adoxio_orgbookcredentialresult eq null";
+                string filter = $"adoxio_orgbookcredentialresult eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
             }
             catch (OdataerrorException odee)
@@ -139,7 +139,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             try
             {
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_LicenceType" };
-                string filter = $"adoxio_orgbookcredentialresult eq {(int)OrgBookCredentialStatus.Pass} and adoxio_orgbookcredentialid eq null";
+                string filter = $"adoxio_orgbookcredentialresult eq {(int)OrgBookCredentialStatus.Pass} and adoxio_orgbookcredentialid eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
             }
             catch (OdataerrorException odee)

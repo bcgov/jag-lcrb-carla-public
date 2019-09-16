@@ -95,14 +95,16 @@ namespace Gov.Lclb.Cllb.Public.Utils
             if (licence != null && status == LicenceStatusCodes.Active)
             {
                 shownStatus = STATUS_ACTIVE;
-                if (application.AdoxioLicencefeeinvoicepaid != true && application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "Cannabis Retail Store")
-                {
-                    shownStatus = STATUS_PAYMENT_REQUIRED;
-                }
                 if (DateTimeOffset.Now > licence.AdoxioExpirydate)
                 {
                     shownStatus = STATUS_RENEWAL_DUE;
                 }
+            }
+
+            // moved first year payment logic here
+            if (licence != null && status == LicenceStatusCodes.PendingFistYearFee)
+            {
+                shownStatus = STATUS_PAYMENT_REQUIRED;
             }
             return shownStatus;
         }
