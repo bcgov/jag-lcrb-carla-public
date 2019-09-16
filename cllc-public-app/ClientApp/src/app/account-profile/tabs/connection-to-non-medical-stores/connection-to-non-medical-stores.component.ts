@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { FormBuilder } from '@angular/forms';
-import { TiedHouseConnectionsDataService } from '../../../services/tied-house-connections-data.service';
 import { TiedHouseConnection } from '../../../models/tied-house-connection.model';
-import { Subject, Subscription } from 'rxjs';
-import { AccountDataService } from '../../../services/account-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-connection-to-non-medical-stores',

@@ -49,50 +49,58 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             foreach (var workerResponse in responses)
             {
-                // search for the Personal History Record.
-                MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
-                string filter = $"_adoxio_contactid_value eq {contact.Contactid}";
-                WorkersGetResponseModel resp = _dynamicsClient.Workers.Get(filter: filter);
-
-                if (resp.Value.Count == 1)
+                try
                 {
-                    // UpdateWorker(record._adoxioContactidValue);
-
-                    // update the record.
-                    MicrosoftDynamicsCRMadoxioWorker patchRecord = new MicrosoftDynamicsCRMadoxioWorker()
+                    string contactId;
+                    if (workerResponse.RecordIdentifier == null)
                     {
-                        AdoxioSecuritystatus = WorkerSecurityScreeningResultTranslate.GetTranslatedSecurityStatus(workerResponse.Result),
-                        AdoxioSecuritycompletedon = DateTimeOffset.Now
-                    };
-
-                    try
+                        MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
+                        contactId = contact.Contactid;
+                    }
+                    else
                     {
+                        contactId = workerResponse.RecordIdentifier;
+                    }
+                    
+                    string filter = $"_adoxio_contactid_value eq {contactId}";
+                    WorkersGetResponseModel resp = _dynamicsClient.Workers.Get(filter: filter);
+
+                    if (resp.Value.Count == 1)
+                    {
+                        // update the record.
+                        MicrosoftDynamicsCRMadoxioWorker patchRecord = new MicrosoftDynamicsCRMadoxioWorker()
+                        {
+                            AdoxioSecuritystatus = (int?)TranslateStatus.WorkerResultSpiceToLCRB(workerResponse.Result),
+                            AdoxioSecuritycompletedon = DateTimeOffset.Now
+                        };
+
                         _dynamicsClient.Workers.Update(resp.Value[0].AdoxioWorkerid, patchRecord);
                     }
-                    catch (OdataerrorException odee)
+                    else if(resp.Value.Count > 1)
                     {
-                        hangfireContext.WriteLine("Error updating worker security status");
-                        hangfireContext.WriteLine("Request:");
-                        hangfireContext.WriteLine(odee.Request.Content);
-                        hangfireContext.WriteLine("Response:");
-                        hangfireContext.WriteLine(odee.Response.Content);
-
-                        _logger.LogError("Error updating worker personal history");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError($"Too many workers found for spd job id: {workerResponse.RecordIdentifier}");
+                        hangfireContext.WriteLine($"Too many workers found for spd job id: {workerResponse.RecordIdentifier}");
+                    }
+                    else {
+                        _logger.LogError($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
+                        hangfireContext.WriteLine($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
                     }
                 }
-                else if(resp.Value.Count > 1)
+                catch (OdataerrorException odee)
                 {
-                    _logger.LogError($"Too many workers found for spd job id: {workerResponse.RecordIdentifier}");
-                    hangfireContext.WriteLine($"Too many workers found for spd job id: {workerResponse.RecordIdentifier}");
+                    hangfireContext.WriteLine("Error updating worker security status");
+                    hangfireContext.WriteLine("Request:");
+                    hangfireContext.WriteLine(odee.Request.Content);
+                    hangfireContext.WriteLine("Response:");
+                    hangfireContext.WriteLine(odee.Response.Content);
+
+                    _logger.LogError("Error updating worker personal history");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
                 }
-                else {
-                    _logger.LogError($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
-                    hangfireContext.WriteLine($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
-                }
+
             }
 
             hangfireContext.WriteLine("Finished SPICE Import Job for Worker Screening.");
@@ -125,7 +133,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
                     {
                         AdoxioDatereceivedspd = DateTimeOffset.Now,
-                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus(applicationResponse.Result)
+                        AdoxioChecklistsecurityclearancestatus = (int?)TranslateStatus.BusinessResultSpiceToLCRB(applicationResponse.Result)
                     };
 
                     try
@@ -211,7 +219,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 {
                     MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
                     {
-                        AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENDING")
+                        AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.Sending
                     };
                     _dynamicsClient.Applications.Update(applicationId.ToString(), update);
 
@@ -225,7 +233,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         update = new MicrosoftDynamicsCRMadoxioApplication()
                         {
                             AdoxioSecurityclearancegenerateddate = DateTimeOffset.UtcNow,
-                            AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST SENT")
+                            AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.Sent
                         };
                         _dynamicsClient.Applications.Update(applicationId.ToString(), update);
                         return true;
@@ -244,7 +252,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Applications.Update(applicationId.ToString(), new MicrosoftDynamicsCRMadoxioApplication()
             {
                 AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
-                AdoxioChecklistsecurityclearancestatus = ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("CONSENT NOT VALIDATED")
+                AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.ConsentNotValidated
             });
             return false;
         }
@@ -409,7 +417,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     CompanyName = companyName,
                     MiddleName = application.AdoxioApplyingPerson.Middlename,
                     LastName = application.AdoxioApplyingPerson.Lastname,
-                    Email = application.AdoxioApplyingPerson.Emailaddress1
+                    Email = application.AdoxioApplyingPerson.Emailaddress1,
                 };
             }
             /* Add applicant details */
@@ -447,6 +455,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             BirthDate = owner.Birthdate,
                             BcIdCardNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? owner.AdoxioPrimaryidnumber : null,
                             DriversLicenceNumber = owner.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? owner.AdoxioPrimaryidnumber : null,
+                            DriverLicenceJurisdiction = owner.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? ((IdentificationJurisdiction)owner.AdoxioIdentificationjurisdiction).ToString() : null,
                             Address = new Address()
                             {
                                 AddressStreet1 = owner.Address1Line1,
@@ -605,6 +614,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     BirthDate = legalEntity.AdoxioContact.Birthdate,
                     BcIdCardNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.BCIDCard ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
                     DriversLicenceNumber = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? legalEntity.AdoxioContact.AdoxioPrimaryidnumber : null,
+                    DriverLicenceJurisdiction = legalEntity.AdoxioContact.AdoxioIdentificationtype == (int)IdentificationType.DriversLicence ? ((IdentificationJurisdiction)legalEntity.AdoxioContact.AdoxioIdentificationjurisdiction).ToString() : null,
                     Address = new Address()
                     {
                         AddressStreet1 = legalEntity.AdoxioContact.Address1Line1,
@@ -809,7 +819,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = {"adoxio_applicationtypeid"};
-            ApplicationtypesGetResponseModel appTypesResponse = _dynamicsClient.Applicationtypes.Get(filter: "createdon ne null", select: select);
+            ApplicationtypesGetResponseModel appTypesResponse = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select);
             if (appTypesResponse.Value.Count == 0)
             {
                 _logger.LogError("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
@@ -817,10 +827,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
 
             List<string> appTypes = appTypesResponse.Value.Select(a => a.AdoxioApplicationtypeid).ToList();
-            _logger.LogError("Starting SendFoundApplications Job");
-            hangfireContext.WriteLine("Starting SendFoundApplications Job");
+            _logger.LogError($"Starting SendFoundApplications Job for {appTypesResponse.Value.Count} application types");
+            hangfireContext.WriteLine($"Starting SendFoundApplications Job for {appTypesResponse.Value.Count} application types");
 
-            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + ApplicationSecurityScreeningResultTranslate.GetTranslatedSecurityStatus("REQUEST NOT SENT");
+            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + (int?)LCRBApplicationSecurityStatus.NotSent;
 
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
             _logger.LogError($"Found {applications.Count()} applications to send to SPD.");

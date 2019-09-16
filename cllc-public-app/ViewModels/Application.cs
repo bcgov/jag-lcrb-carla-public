@@ -470,6 +470,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
 
         public System.DateTimeOffset? Establishmentopeningdate { get; set; }
+        public bool? IsReadyValidInterest { get; set; }
         public bool? IsReadyWorkers { get; set; }
         public bool? IsReadyNameBranding { get; set; }
         public bool? IsReadyDisplays { get; set; }
