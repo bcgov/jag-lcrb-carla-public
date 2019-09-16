@@ -60,6 +60,10 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     this.form = this.fb.group({
       id: [''],
       establishmentName: [''],
+      accountId: [''],
+      transferConsent: [''],
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
 
@@ -114,18 +118,6 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     }
   }
 
-  payLicenceFee() {
-    this.busy = this.paymentDataService.getInvoiceFeePaymentSubmissionUrl(this.application.id)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        const data = <any>res;
-        window.location.href = data.url;
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      });
-  }
 
   private getApplicationContent(contentCartegory: string) {
     let body = '';
@@ -189,23 +181,40 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
       );
   }
 
-  /**
+   /**
    * Submit the application for payment
    * */
   submit_application() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
-      this.payLicenceFee();
+      this.submitPayment();
     } else {
       this.busy = this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.payLicenceFee();
+            this.submitPayment();
           }
         });
     }
+  }
+
+  /**
+   * Redirect to payment processing page (Express Pay / Bambora service)
+   * */
+  private submitPayment() {
+    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(res => {
+        const jsonUrl = res;
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
   }
 
   isValid(): boolean {
