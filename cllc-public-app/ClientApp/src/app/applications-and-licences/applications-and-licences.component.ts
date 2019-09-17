@@ -7,12 +7,10 @@ import { Router } from '@angular/router';
 import { Application } from '@models/application.model';
 import { ApplicationSummary } from '@models/application-summary.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
-import { License } from '@models/license.model';
-import { PaymentDataService } from '@services/payment-data.service';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
-import { takeWhile, filter } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -60,10 +58,9 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     private applicationDataService: ApplicationDataService,
     private licenceDataService: LicenseDataService,
     private router: Router,
-    private paymentService: PaymentDataService,
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
-    private featureFlagService: FeatureFlagService,
+    featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
     super();
     if (featureFlagService.featureOn('Marketer')) {
@@ -199,6 +196,26 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     } else {
       this.snackBar.open('Unable to find CRS Application', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
+    }
+  }
+
+  transferLicence(licence: ApplicationLicenseSummary) {
+    const transferApplication =
+      licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSTransferofOwnership);
+    if (transferApplication) {
+      this.router.navigate([`/ownership-transfer/${transferApplication.applicationId}`]);
+    } else {
+      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, ApplicationTypeNames.CRSTransferofOwnership)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(data => {
+          this.router.navigateByUrl('/ownership-transfer/' + data.id);
+        },
+          () => {
+            this.snackBar.open(`Error running licence action for ${ApplicationTypeNames.CRSTransferofOwnership}`, 'Fail',
+              { duration: 3500, panelClass: ['red-snackbar'] });
+            console.log('Error starting a Change Licence Location Application');
+          }
+        );
     }
   }
 
