@@ -12,7 +12,7 @@ export class ProductInventoryPackagedComponent implements OnInit {
   {rowLabel: 'Quantity received - returns', seeds: 1},
   {rowLabel: 'Other', seeds: 20},
 ];
-  @Input() showTotals = true;
+  @Input() showTotals = false;
   @Input() totalsLabel = 'Total';
 
   constructor() { }
@@ -20,7 +20,7 @@ export class ProductInventoryPackagedComponent implements OnInit {
   ngOnInit() {
   }
 
-  getTotalCost(colName: string) {
+  getRowTotal(colName: string) {
     return this.dataSource.map(t => (t[colName] || 0)).reduce((acc, value) => acc + value, 0);
   }
 
