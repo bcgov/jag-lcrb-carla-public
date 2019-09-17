@@ -80,16 +80,11 @@ namespace FunctionalTest
             { // ignore the stale element, we have moved on. 
             }
             
-
-            
             //XrmTestBrowser.ThinkTime(2000);
 
             // switch back to the main frame.
 
             XrmTestBrowser.Driver.SwitchTo().ParentFrame();
-
-            
-            
             
             XrmTestBrowser.ThinkTime(500);
 
@@ -197,8 +192,6 @@ namespace FunctionalTest
             SetOptionSet("header_process_adoxio_checklistfinalreviewcomplete", "Yes");
             SetOptionSet("header_process_adoxio_appchecklistfinaldecision", "Approved");
             SetOptionSet("header_process_adoxio_checklistfinaldecisionlettersent", "Yes");
-
-
 
             IWebElement saveButton = XrmTestBrowser.Driver.FindElement(By.XPath("//*[@id=\"footer_statuscontrol\"]/div[2]/a"));
             saveButton.Click();

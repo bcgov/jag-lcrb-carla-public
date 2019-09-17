@@ -183,7 +183,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'maps',
+    path: 'map',
     component: MapComponent,
     canActivate: [FeatureGuard],
     data: { feature: 'Maps' }

@@ -428,7 +428,7 @@ function EstablishmentsMap(options) {
         // This dictionary's values will in general consist of a (potentially processed)
         // subset of the JSON returned by the Python establishment search service.
       var contentObj = {
-        'Type': '<img src=assets/bc-logo.svg height=25 width=25> Non-Medical Cannabis Retail Store ',
+        'Type': '<img src=assets/placeholder_credential.png height=50 width=50><strong>Non-Medical Cannabis Retail Store</strong>',
         'Name': establishment.name || '',
             'License': establishment.license || '',
             'Phone': establishment.phone || '',
@@ -450,8 +450,17 @@ function EstablishmentsMap(options) {
         // First we clear any extant markers
         _clearEstablishments();
 
+      var greenIcon = L.icon({
+        iconUrl: 'assets/placeholder_credential.png',
+
+
+        iconSize: [50, 50], // size of the icon
+        iconAnchor: [25, 25], // point of the icon which will correspond to marker's location        
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+      });
+
         // Markers should only be clickable when there is no establishmentPushpin available.
-        var style = $.extend({}, _establishment_MARKER_STYLE, {interactive: !_establishmentPushpin});
+      var style = $.extend({}, _establishment_MARKER_STYLE, { interactive: !_establishmentPushpin});
         var establishmentPushpinGuid = null;
         // Now we draw the Establishments, checking to prevent a marker from being drawn where a pushpin will be.
         if (_exists(_establishmentPushpin) && _exists(_establishmentPushpin.establishmentDetails) && _exists(_establishmentPushpin.establishmentDetails.guid)) {
@@ -461,7 +470,7 @@ function EstablishmentsMap(options) {
             var latLong = _getLatLngInBC(establishment.latitude, establishment.longitude);
             var establishmentGuid = establishment.id;
             if (_exists(latLong) && _canDrawestablishment(establishmentPushpinGuid, establishmentGuid)) {
-                var establishmentMarker = L.circleMarker(latLong, style);
+              var establishmentMarker = L.marker(latLong, { icon: greenIcon, interactive: !_establishmentPushpin });
                 establishmentMarker.bindPopup(_generateestablishmentMarkerPopupContents(establishment));
                 establishmentMarker.addTo(_leafletMap);
                 _establishmentMarkers.push(establishmentMarker);
@@ -521,7 +530,17 @@ function EstablishmentsMap(options) {
         // If the map or the latLng do not exist, bail out.
         if (!_exists(_leafletMap) || !_exists(latLongArray) || !_isArray(latLongArray) || latLongArray.length !== 2) {
             return;
-        }
+      }
+
+      var greenIcon = L.icon({
+        iconUrl: 'assets/placeholder_credential.png',
+        
+
+        iconSize: [50, 50], // size of the icon
+        iconAnchor: [25, 25], // point of the icon which will correspond to marker's location        
+        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+      });
+
         // We ensure the lat/long is in BC, in case it was passed in without checking.
         var latLong = _getLatLngInBC(latLongArray[0], latLongArray[1]);
         // If the latitude and longitude do not fit within the map's maxBounds, bail out.
@@ -538,8 +557,9 @@ function EstablishmentsMap(options) {
             }
         } else {
             _establishmentPushpin = {};
-            _establishmentPushpin.pushpinMarker = L.marker(latLong, {
-                draggable: _exists(_establishmentPushpinMoveCallback) // The pin should only drag if the map's caller has a hook to handle movement
+          _establishmentPushpin.pushpinMarker = L.marker(latLong, {
+              icon: greenIcon,
+              draggable: _exists(_establishmentPushpinMoveCallback) // The pin should only drag if the map's caller has a hook to handle movement
             }).addTo(_leafletMap);
 
             // The pin should subscribe to move events.

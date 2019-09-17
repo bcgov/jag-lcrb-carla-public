@@ -102,6 +102,21 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBusinessaccounts Businessaccounts { get; private set; }
 
         /// <summary>
+        /// Gets the ICannabisinventoryreports.
+        /// </summary>
+        public virtual ICannabisinventoryreports Cannabisinventoryreports { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabismonthlyreports.
+        /// </summary>
+        public virtual ICannabismonthlyreports Cannabismonthlyreports { get; private set; }
+
+        /// <summary>
+        /// Gets the ICannabisproductadmins.
+        /// </summary>
+        public virtual ICannabisproductadmins Cannabisproductadmins { get; private set; }
+
+        /// <summary>
         /// Gets the ICitydistricts.
         /// </summary>
         public virtual ICitydistricts Citydistricts { get; private set; }
@@ -639,6 +654,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypes = new Applicationtypes(this);
             Areas = new Areas(this);
             Businessaccounts = new Businessaccounts(this);
+            Cannabisinventoryreports = new Cannabisinventoryreports(this);
+            Cannabismonthlyreports = new Cannabismonthlyreports(this);
+            Cannabisproductadmins = new Cannabisproductadmins(this);
             Citydistricts = new Citydistricts(this);
             Complaintpublicbpfs = new Complaintpublicbpfs(this);
             Complaints = new Complaints(this);
