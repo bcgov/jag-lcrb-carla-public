@@ -97,9 +97,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-        private List<MicrosoftDynamicsCRMadoxioLegalentity> GetAccountLegalEntities(string accountId)
+        private List<MicrosoftDynamicsCRMadoxioLegalentity> GetAccountLegalEntities(string accountId, List<string> shareHolders = null)
         {
             List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
+            if (shareHolders == null)
+            {
+                shareHolders = new List<string>();
+            }
             var filter = "_adoxio_account_value eq " + accountId;
             filter += " and adoxio_isindividual eq 0";
 
@@ -109,11 +113,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 legalEntities = response.Value.ToList();
                 var children = new List<MicrosoftDynamicsCRMadoxioLegalentity>();
+
+
+
                 foreach (var legalEntity in legalEntities)
                 {
-                    if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue))
+                    if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue) && !shareHolders.Contains(legalEntity._adoxioShareholderaccountidValue))
                     {
-                        children.AddRange(GetAccountLegalEntities(legalEntity._adoxioShareholderaccountidValue));
+                        shareHolders.Add(legalEntity._adoxioShareholderaccountidValue);
+                        children.AddRange(GetAccountLegalEntities(legalEntity._adoxioShareholderaccountidValue, shareHolders));
                     }
                 }
                 legalEntities.AddRange(children);
