@@ -39,4 +39,18 @@ If you need to patch the Autorest modeler, for example if the modeler is not abl
 
 It will fetch the latest meta data (assuming your PC has correct secrets for the DEV environment, the same secrets required to run the portal application) and then run Autorest with the correct parameters.
 
+``` yaml
+# list all the input OpenAPI files (may be YAML, JSON, or Literate- OpenAPI markdown)
+input-file:
+  - dynamics-swagger.json
 
+csharp:
+  output-folder: .
+  add-credentials: true
+  override-client-name: DynamicsClient
+  use-datetimeoffset: true 
+  sync-methods: all 
+  generate-empty-classes: true
+  namespace: Gov.Lclb.Cllb.Interfaces
+  azure-arm: false
+```
