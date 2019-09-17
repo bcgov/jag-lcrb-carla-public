@@ -60,12 +60,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("map")]
         [AllowAnonymous]
-        public IActionResult GetMap()
+        public IActionResult GetMap(string search)
         {
             // get establishments                      
             var expand = new List<string> { "adoxio_establishment" }; // get establishment data at the same time.
             string filter =  "statuscode eq 1";  // only active licenses
-
+                      
             IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
             try
@@ -94,18 +94,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     if (license.AdoxioEstablishment != null && license.AdoxioEstablishment.AdoxioLatitude != null && license.AdoxioEstablishment.AdoxioLongitude != null)
                     {
-                        establishmentMapData.Add(new EstablishmentMapData()
+                        bool add = true;
+                        if (!string.IsNullOrEmpty(search) && license.AdoxioEstablishment.AdoxioName != null && license.AdoxioEstablishment.AdoxioAddresscity != null)
                         {
-                            id = license.AdoxioEstablishment.AdoxioEstablishmentid.ToString(),
-                            Name = license.AdoxioEstablishment.AdoxioName,
-                            License = license.AdoxioLicencenumber,
-                            Phone = license.AdoxioEstablishment.AdoxioPhone,
-                            AddressCity = license.AdoxioEstablishment.AdoxioAddresscity,
-                            AddressPostal = license.AdoxioEstablishment.AdoxioAddresspostalcode,
-                            AddressStreet = license.AdoxioEstablishment.AdoxioAddressstreet,
-                            Latitude = (decimal)license.AdoxioEstablishment.AdoxioLatitude,
-                            Longitude = (decimal)license.AdoxioEstablishment.AdoxioLongitude,
-                        });
+                            search = search.ToUpper();
+                            if (!license.AdoxioEstablishment.AdoxioName.ToUpper().StartsWith(search) == true
+                                && !license.AdoxioEstablishment.AdoxioAddresscity.ToUpper().StartsWith(search) == true)
+                            {
+                                add = false;
+                            }
+                        }
+                        if (add)
+                        {
+                            establishmentMapData.Add(new EstablishmentMapData()
+                            {
+                                id = license.AdoxioEstablishment.AdoxioEstablishmentid.ToString(),
+                                Name = license.AdoxioEstablishment.AdoxioName,
+                                License = license.AdoxioLicencenumber,
+                                Phone = license.AdoxioEstablishment.AdoxioPhone,
+                                AddressCity = license.AdoxioEstablishment.AdoxioAddresscity,
+                                AddressPostal = license.AdoxioEstablishment.AdoxioAddresspostalcode,
+                                AddressStreet = license.AdoxioEstablishment.AdoxioAddressstreet,
+                                Latitude = (decimal)license.AdoxioEstablishment.AdoxioLatitude,
+                                Longitude = (decimal)license.AdoxioEstablishment.AdoxioLongitude,
+                            });
+                        }
+                        
                     }
 
                 }               

@@ -716,7 +716,9 @@
                 "adoxio_licensee_contraventions",
                 "adoxio_licensee_investigations",
                 "adoxio_account_adoxio_licences_ProposedOwner",
-                "adoxio_licensee_compliancemeetings"
+                "adoxio_licensee_compliancemeetings",
+                "adoxio_licensee_cannabismonthlyreports",
+                "adoxio_licensee_cannabisinventoryreports"
               ]
             }
           }
@@ -1086,7 +1088,9 @@
                 "adoxio_licensee_contraventions",
                 "adoxio_licensee_investigations",
                 "adoxio_account_adoxio_licences_ProposedOwner",
-                "adoxio_licensee_compliancemeetings"
+                "adoxio_licensee_compliancemeetings",
+                "adoxio_licensee_cannabismonthlyreports",
+                "adoxio_licensee_cannabisinventoryreports"
               ]
             }
           }
@@ -2920,8 +2924,8 @@
                 "adoxio_establishmentotherbusinessnature desc",
                 "adoxio_establishmentparcelid",
                 "adoxio_establishmentparcelid desc",
-                "adoxio_datesentlgin",
-                "adoxio_datesentlgin desc",
+                "adoxio_aiptype",
+                "adoxio_aiptype desc",
                 "adoxio_establishmentlayoutsubmitfloorplans",
                 "adoxio_establishmentlayoutsubmitfloorplans desc",
                 "_modifiedonbehalfby_value",
@@ -2982,14 +2986,14 @@
                 "adoxio_occupationcapacity desc",
                 "adoxio_checklistorgstructure",
                 "adoxio_checklistorgstructure desc",
-                "_slainvokedid_value",
-                "_slainvokedid_value desc",
+                "adoxio_brandingnameresult",
+                "adoxio_brandingnameresult desc",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_validinterestfinalstatus desc",
                 "adoxio_checklistlebuilt",
                 "adoxio_checklistlebuilt desc",
-                "adoxio_signatureposition",
-                "adoxio_signatureposition desc",
+                "adoxio_tiedhouseresult",
+                "adoxio_tiedhouseresult desc",
                 "importsequencenumber",
                 "importsequencenumber desc",
                 "adoxio_uploadedsitemap",
@@ -3006,10 +3010,14 @@
                 "adoxio_invoicetrigger desc",
                 "adoxio_establishmentalreadyopen",
                 "adoxio_establishmentalreadyopen desc",
+                "adoxio_isreadyretailarea",
+                "adoxio_isreadyretailarea desc",
                 "adoxio_establishmentaddresscountry",
                 "adoxio_establishmentaddresscountry desc",
                 "adoxio_dateaipexpiredlongdatestring",
                 "adoxio_dateaipexpiredlongdatestring desc",
+                "adoxio_description1",
+                "adoxio_description1 desc",
                 "adoxio_applicanttype",
                 "adoxio_applicanttype desc",
                 "adoxio_renewalvalidinterest",
@@ -3018,6 +3026,8 @@
                 "adoxio_servicehourssaturdayopen desc",
                 "_adoxio_inspector_value",
                 "_adoxio_inspector_value desc",
+                "adoxio_isreadylockedstorage",
+                "adoxio_isreadylockedstorage desc",
                 "adoxio_checklistsignageexamples",
                 "adoxio_checklistsignageexamples desc",
                 "adoxio_checklistverifybusinessprofile",
@@ -3058,16 +3068,12 @@
                 "adoxio_name desc",
                 "adoxio_checklistassociatesconsentreceived",
                 "adoxio_checklistassociatesconsentreceived desc",
-                "adoxio_finalcapassessment",
-                "adoxio_finalcapassessment desc",
                 "adoxio_establishmentpropsedname",
                 "adoxio_establishmentpropsedname desc",
                 "_adoxio_region_value",
                 "_adoxio_region_value desc",
                 "adoxio_checklistshareholdersbuilt",
                 "adoxio_checklistshareholdersbuilt desc",
-                "adoxio_datesentinvestigations",
-                "adoxio_datesentinvestigations desc",
                 "adoxio_establishmentproposalneedsmailsent",
                 "adoxio_establishmentproposalneedsmailsent desc",
                 "adoxio_checklistfinancialdocuments",
@@ -3082,8 +3088,8 @@
                 "adoxio_establishmenthasstandalonepatio desc",
                 "adoxio_datereceivedspd",
                 "adoxio_datereceivedspd desc",
-                "adoxio_otherbusinessesatthesamelocation",
-                "adoxio_otherbusinessesatthesamelocation desc",
+                "adoxio_datesentlgin",
+                "adoxio_datesentlgin desc",
                 "adoxio_renewalbusinesstype",
                 "adoxio_renewalbusinesstype desc",
                 "adoxio_phone",
@@ -3092,26 +3098,26 @@
                 "adoxio_checklistphotosreceived desc",
                 "_adoxio_sla_value",
                 "_adoxio_sla_value desc",
+                "adoxio_datesentinvestigations",
+                "adoxio_datesentinvestigations desc",
                 "adoxio_addresscity",
                 "adoxio_addresscity desc",
-                "adoxio_checklistsitemapassessed",
-                "adoxio_checklistsitemapassessed desc",
                 "adoxio_dateaipdecisionlettersent",
                 "adoxio_dateaipdecisionlettersent desc",
                 "adoxio_servicehourswednesdayclose",
                 "adoxio_servicehourswednesdayclose desc",
-                "adoxio_appchecklistpaymentreceived",
-                "adoxio_appchecklistpaymentreceived desc",
+                "adoxio_isreadyvalidinterest",
+                "adoxio_isreadyvalidinterest desc",
+                "adoxio_inspectionchecklistdate",
+                "adoxio_inspectionchecklistdate desc",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_sharepointanchorforpersonalhistory desc",
                 "adoxio_initialcapassessmentdate",
                 "adoxio_initialcapassessmentdate desc",
-                "adoxio_uploadedlegalentitystructure",
-                "adoxio_uploadedlegalentitystructure desc",
+                "adoxio_checklistvalidinterestreceived",
+                "adoxio_checklistvalidinterestreceived desc",
                 "adoxio_paymentrecieved",
                 "adoxio_paymentrecieved desc",
-                "_adoxio_policejurisdictionid_value",
-                "_adoxio_policejurisdictionid_value desc",
                 "adoxio_checklistdecisionlettersentaip",
                 "adoxio_checklistdecisionlettersentaip desc",
                 "adoxio_checklisttiedhouseassess",
@@ -3130,6 +3136,8 @@
                 "adoxio_fitandpropercomplete desc",
                 "adoxio_jobnumber",
                 "adoxio_jobnumber desc",
+                "adoxio_renewalsitemap",
+                "adoxio_renewalsitemap desc",
                 "adoxio_establishmentotheroption1",
                 "adoxio_establishmentotheroption1 desc",
                 "adoxio_establishmentotheroption2",
@@ -3142,6 +3150,8 @@
                 "adoxio_holdsotherlicencesoptionset desc",
                 "adoxio_establishmentaddressstreet",
                 "adoxio_establishmentaddressstreet desc",
+                "_slainvokedid_value",
+                "_slainvokedid_value desc",
                 "adoxio_servicehourswednesdayopen",
                 "adoxio_servicehourswednesdayopen desc",
                 "adoxio_checklistfloorplanlinedaip",
@@ -3154,22 +3164,22 @@
                 "adoxio_servicehourspatronparticipation desc",
                 "adoxio_renewaltiedhousefederalinterest",
                 "adoxio_renewaltiedhousefederalinterest desc",
-                "adoxio_tiedhouseresult",
-                "adoxio_tiedhouseresult desc",
                 "adoxio_businessinfoemail",
                 "adoxio_businessinfoemail desc",
                 "_modifiedby_value",
                 "_modifiedby_value desc",
                 "adoxio_initialcapassessment",
                 "adoxio_initialcapassessment desc",
-                "adoxio_registeredestablishment",
-                "adoxio_registeredestablishment desc",
+                "adoxio_signatureposition",
+                "adoxio_signatureposition desc",
                 "adoxio_checklistaipdecisionmade",
                 "adoxio_checklistaipdecisionmade desc",
                 "adoxio_checklistmarketcapacity",
                 "adoxio_checklistmarketcapacity desc",
                 "_adoxio_licencetype_value",
                 "_adoxio_licencetype_value desc",
+                "adoxio_dateassignedtosla",
+                "adoxio_dateassignedtosla desc",
                 "_slaid_value",
                 "_slaid_value desc",
                 "adoxio_appchecklistlicencefeecollected",
@@ -3188,16 +3198,22 @@
                 "statuscode desc",
                 "timezoneruleversionnumber",
                 "timezoneruleversionnumber desc",
+                "adoxio_registeredestablishment",
+                "adoxio_registeredestablishment desc",
                 "adoxio_inspectiondate",
                 "adoxio_inspectiondate desc",
                 "adoxio_servicehourstuesdayopen",
                 "adoxio_servicehourstuesdayopen desc",
                 "adoxio_appchecklistinspectionresults",
                 "adoxio_appchecklistinspectionresults desc",
+                "adoxio_isreadystorage",
+                "adoxio_isreadystorage desc",
                 "adoxio_checklistkeypersonnelbuilt",
                 "adoxio_checklistkeypersonnelbuilt desc",
                 "adoxio_datefirstyearpaymentreceived",
                 "adoxio_datefirstyearpaymentreceived desc",
+                "adoxio_isreadylockedcases",
+                "adoxio_isreadylockedcases desc",
                 "adoxio_establishmentotherbusinessname",
                 "adoxio_establishmentotherbusinessname desc",
                 "adoxio_sharepointlocationdummyfield",
@@ -3216,12 +3232,12 @@
                 "lastonholdtime desc",
                 "_adoxio_applyingperson_value",
                 "_adoxio_applyingperson_value desc",
-                "adoxio_checklistvalidinterestreceived",
-                "adoxio_checklistvalidinterestreceived desc",
-                "adoxio_federalproducernames",
-                "adoxio_federalproducernames desc",
                 "_createdonbehalfby_value",
                 "_createdonbehalfby_value desc",
+                "adoxio_federalproducernames",
+                "adoxio_federalproducernames desc",
+                "_adoxio_policejurisdictionid_value",
+                "_adoxio_policejurisdictionid_value desc",
                 "adoxio_servicehourssundayclose",
                 "adoxio_servicehourssundayclose desc",
                 "adoxio_servicehoursthursdayopen",
@@ -3262,6 +3278,14 @@
                 "adoxio_renewalzoning desc",
                 "adoxio_datelicenceapproved",
                 "adoxio_datelicenceapproved desc",
+                "adoxio_isreadydisplays",
+                "adoxio_isreadydisplays desc",
+                "adoxio_isreadyfirealarm",
+                "adoxio_isreadyfirealarm desc",
+                "adoxio_isreadyentranceexit",
+                "adoxio_isreadyentranceexit desc",
+                "adoxio_checklistfinaldecisionmade",
+                "adoxio_checklistfinaldecisionmade desc",
                 "adoxio_validinterestinitialstatus",
                 "adoxio_validinterestinitialstatus desc",
                 "adoxio_checklistsignageassessed",
@@ -3282,6 +3306,8 @@
                 "adoxio_applicationid desc",
                 "adoxio_checkinspectionstatus",
                 "adoxio_checkinspectionstatus desc",
+                "adoxio_isreadynamebranding",
+                "adoxio_isreadynamebranding desc",
                 "adoxio_sharepointanchorforestablishmentproposal",
                 "adoxio_sharepointanchorforestablishmentproposal desc",
                 "adoxio_checklistvalidinterestfinalassessed",
@@ -3304,14 +3330,18 @@
                 "adoxio_renewalkeypersonnel desc",
                 "adoxio_checklistspdapproved",
                 "adoxio_checklistspdapproved desc",
+                "adoxio_appchecklistpaymentreceived",
+                "adoxio_appchecklistpaymentreceived desc",
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_appchecklistvalidinterestreceivedfinal desc",
                 "adoxio_dateaip",
                 "adoxio_dateaip desc",
+                "adoxio_isreadysurveillancenotice",
+                "adoxio_isreadysurveillancenotice desc",
                 "adoxio_checklistverifypostalcode",
                 "adoxio_checklistverifypostalcode desc",
-                "adoxio_checklistsitemapassess",
-                "adoxio_checklistsitemapassess desc",
+                "adoxio_checklistfloorplanlined",
+                "adoxio_checklistfloorplanlined desc",
                 "adoxio_establishmentaddresspostalcode",
                 "adoxio_establishmentaddresspostalcode desc",
                 "adoxio_sitemapresult",
@@ -3340,6 +3370,8 @@
                 "_adoxio_applicant_value desc",
                 "adoxio_paymentreceiveddate",
                 "adoxio_paymentreceiveddate desc",
+                "adoxio_checklistsitemapassess",
+                "adoxio_checklistsitemapassess desc",
                 "adoxio_establishmentlocatedatwinery",
                 "adoxio_establishmentlocatedatwinery desc",
                 "adoxio_renewalbranding",
@@ -3356,6 +3388,8 @@
                 "adoxio_datereceivedlgin desc",
                 "adoxio_contactmiddlename",
                 "adoxio_contactmiddlename desc",
+                "adoxio_otherbusinessesatthesamelocation",
+                "adoxio_otherbusinessesatthesamelocation desc",
                 "adoxio_checklistbrandingassessed",
                 "adoxio_checklistbrandingassessed desc",
                 "adoxio_checklistnoticeofarticles",
@@ -3368,20 +3402,18 @@
                 "adoxio_checklistsecurityclearancestatus desc",
                 "adoxio_checklistestablishmentaddressassessed",
                 "adoxio_checklistestablishmentaddressassessed desc",
-                "adoxio_checklistvalidestablishmentaddress",
-                "adoxio_checklistvalidestablishmentaddress desc",
                 "adoxio_initialcapassessmenttrigger",
                 "adoxio_initialcapassessmenttrigger desc",
+                "adoxio_checklistsitemapassessed",
+                "adoxio_checklistsitemapassessed desc",
                 "adoxio_checklistlicencefeepaid",
                 "adoxio_checklistlicencefeepaid desc",
                 "adoxio_authorizedtosubmit",
                 "adoxio_authorizedtosubmit desc",
                 "_owningteam_value",
                 "_owningteam_value desc",
-                "adoxio_dateassignedtosla",
-                "adoxio_dateassignedtosla desc",
-                "adoxio_renewalsitemap",
-                "adoxio_renewalsitemap desc",
+                "adoxio_isreadyperimeter",
+                "adoxio_isreadyperimeter desc",
                 "adoxio_checklistfinancialcheckpassed",
                 "adoxio_checklistfinancialcheckpassed desc",
                 "adoxio_securityclearancegenerateddate",
@@ -3396,6 +3428,8 @@
                 "adoxio_inspectionscheduleddate desc",
                 "adoxio_establishmentlocatedatfirstnationland",
                 "adoxio_establishmentlocatedatfirstnationland desc",
+                "adoxio_isreadyproductnotvisibleoutside",
+                "adoxio_isreadyproductnotvisibleoutside desc",
                 "adoxio_renewalsignage",
                 "adoxio_renewalsignage desc",
                 "adoxio_pin",
@@ -3404,8 +3438,8 @@
                 "adoxio_renewalfloorplan desc",
                 "adoxio_addressprovince",
                 "adoxio_addressprovince desc",
-                "adoxio_brandingnameresult",
-                "adoxio_brandingnameresult desc",
+                "adoxio_uploadedlegalentitystructure",
+                "adoxio_uploadedlegalentitystructure desc",
                 "adoxio_appchecklistinspectionreviewcomplete",
                 "adoxio_appchecklistinspectionreviewcomplete desc",
                 "_adoxio_invoice_value",
@@ -3416,16 +3450,20 @@
                 "adoxio_businessstructureinstructionfield desc",
                 "adoxio_checklistassociateslist",
                 "adoxio_checklistassociateslist desc",
-                "adoxio_checklistfinaldecisionmade",
-                "adoxio_checklistfinaldecisionmade desc",
+                "adoxio_isreadyworkers",
+                "adoxio_isreadyworkers desc",
                 "adoxio_description2",
                 "adoxio_description2 desc",
                 "adoxio_establishmentdeclarationoption3",
                 "adoxio_establishmentdeclarationoption3 desc",
+                "adoxio_finalcapassessment",
+                "adoxio_finalcapassessment desc",
                 "adoxio_checklisttermsconditionsadded",
                 "adoxio_checklisttermsconditionsadded desc",
                 "adoxio_renewalcriminaloffencecheck",
                 "adoxio_renewalcriminaloffencecheck desc",
+                "adoxio_isreadyintruderalarm",
+                "adoxio_isreadyintruderalarm desc",
                 "adoxio_renewalestablishmentaddress",
                 "adoxio_renewalestablishmentaddress desc",
                 "adoxio_checklistsenttospd",
@@ -3464,12 +3502,10 @@
                 "onholdtime desc",
                 "adoxio_contactpersonname",
                 "adoxio_contactpersonname desc",
-                "adoxio_description1",
-                "adoxio_description1 desc",
                 "adoxio_checklistsentforfisla",
                 "adoxio_checklistsentforfisla desc",
-                "adoxio_checklistfloorplanlined",
-                "adoxio_checklistfloorplanlined desc",
+                "adoxio_checklistvalidestablishmentaddress",
+                "adoxio_checklistvalidestablishmentaddress desc",
                 "adoxio_addresspostalcode",
                 "adoxio_addresspostalcode desc"
               ]
@@ -3498,7 +3534,7 @@
                 "adoxio_servicehoursmondayclose",
                 "adoxio_establishmentotherbusinessnature",
                 "adoxio_establishmentparcelid",
-                "adoxio_datesentlgin",
+                "adoxio_aiptype",
                 "adoxio_establishmentlayoutsubmitfloorplans",
                 "_modifiedonbehalfby_value",
                 "_adoxio_casemanager_value",
@@ -3529,10 +3565,10 @@
                 "_adoxio_casemanagersupervisor_value",
                 "adoxio_occupationcapacity",
                 "adoxio_checklistorgstructure",
-                "_slainvokedid_value",
+                "adoxio_brandingnameresult",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_checklistlebuilt",
-                "adoxio_signatureposition",
+                "adoxio_tiedhouseresult",
                 "importsequencenumber",
                 "adoxio_uploadedsitemap",
                 "adoxio_renewalconcluded",
@@ -3541,12 +3577,15 @@
                 "adoxio_checklistestablishmentrenderings",
                 "adoxio_invoicetrigger",
                 "adoxio_establishmentalreadyopen",
+                "adoxio_isreadyretailarea",
                 "adoxio_establishmentaddresscountry",
                 "adoxio_dateaipexpiredlongdatestring",
+                "adoxio_description1",
                 "adoxio_applicanttype",
                 "adoxio_renewalvalidinterest",
                 "adoxio_servicehourssaturdayopen",
                 "_adoxio_inspector_value",
+                "adoxio_isreadylockedstorage",
                 "adoxio_checklistsignageexamples",
                 "adoxio_checklistverifybusinessprofile",
                 "adoxio_role",
@@ -3567,11 +3606,9 @@
                 "adoxio_finaldecision",
                 "adoxio_name",
                 "adoxio_checklistassociatesconsentreceived",
-                "adoxio_finalcapassessment",
                 "adoxio_establishmentpropsedname",
                 "_adoxio_region_value",
                 "adoxio_checklistshareholdersbuilt",
-                "adoxio_datesentinvestigations",
                 "adoxio_establishmentproposalneedsmailsent",
                 "adoxio_checklistfinancialdocuments",
                 "adoxio_addressstreet",
@@ -3579,21 +3616,21 @@
                 "adoxio_licencefeeinvoicetrigger",
                 "adoxio_establishmenthasstandalonepatio",
                 "adoxio_datereceivedspd",
-                "adoxio_otherbusinessesatthesamelocation",
+                "adoxio_datesentlgin",
                 "adoxio_renewalbusinesstype",
                 "adoxio_phone",
                 "adoxio_checklistphotosreceived",
                 "_adoxio_sla_value",
+                "adoxio_datesentinvestigations",
                 "adoxio_addresscity",
-                "adoxio_checklistsitemapassessed",
                 "adoxio_dateaipdecisionlettersent",
                 "adoxio_servicehourswednesdayclose",
-                "adoxio_appchecklistpaymentreceived",
+                "adoxio_isreadyvalidinterest",
+                "adoxio_inspectionchecklistdate",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_initialcapassessmentdate",
-                "adoxio_uploadedlegalentitystructure",
+                "adoxio_checklistvalidinterestreceived",
                 "adoxio_paymentrecieved",
-                "_adoxio_policejurisdictionid_value",
                 "adoxio_checklistdecisionlettersentaip",
                 "adoxio_checklisttiedhouseassess",
                 "adoxio_contactpersonfullname",
@@ -3603,26 +3640,28 @@
                 "adoxio_establishmentaddress",
                 "adoxio_fitandpropercomplete",
                 "adoxio_jobnumber",
+                "adoxio_renewalsitemap",
                 "adoxio_establishmentotheroption1",
                 "adoxio_establishmentotheroption2",
                 "adoxio_uploadeddriversabstract",
                 "adoxio_localgovermentfirstnationdecision",
                 "adoxio_holdsotherlicencesoptionset",
                 "adoxio_establishmentaddressstreet",
+                "_slainvokedid_value",
                 "adoxio_servicehourswednesdayopen",
                 "adoxio_checklistfloorplanlinedaip",
                 "_adoxio_licenceestablishment_value",
                 "adoxio_areyouthemaincontactforapplication",
                 "adoxio_servicehourspatronparticipation",
                 "adoxio_renewaltiedhousefederalinterest",
-                "adoxio_tiedhouseresult",
                 "adoxio_businessinfoemail",
                 "_modifiedby_value",
                 "adoxio_initialcapassessment",
-                "adoxio_registeredestablishment",
+                "adoxio_signatureposition",
                 "adoxio_checklistaipdecisionmade",
                 "adoxio_checklistmarketcapacity",
                 "_adoxio_licencetype_value",
+                "adoxio_dateassignedtosla",
                 "_slaid_value",
                 "adoxio_appchecklistlicencefeecollected",
                 "adoxio_checklislginresolutionassess",
@@ -3632,11 +3671,14 @@
                 "adoxio_checklistassociateformreceived",
                 "statuscode",
                 "timezoneruleversionnumber",
+                "adoxio_registeredestablishment",
                 "adoxio_inspectiondate",
                 "adoxio_servicehourstuesdayopen",
                 "adoxio_appchecklistinspectionresults",
+                "adoxio_isreadystorage",
                 "adoxio_checklistkeypersonnelbuilt",
                 "adoxio_datefirstyearpaymentreceived",
+                "adoxio_isreadylockedcases",
                 "adoxio_establishmentotherbusinessname",
                 "adoxio_sharepointlocationdummyfield",
                 "adoxio_uploadedfloorplans",
@@ -3646,9 +3688,9 @@
                 "adoxio_servicehoursmondayopen",
                 "lastonholdtime",
                 "_adoxio_applyingperson_value",
-                "adoxio_checklistvalidinterestreceived",
-                "adoxio_federalproducernames",
                 "_createdonbehalfby_value",
+                "adoxio_federalproducernames",
+                "_adoxio_policejurisdictionid_value",
                 "adoxio_servicehourssundayclose",
                 "adoxio_servicehoursthursdayopen",
                 "adoxio_checklistsenttolgin",
@@ -3669,6 +3711,10 @@
                 "adoxio_checklistassociatescontacted",
                 "adoxio_renewalzoning",
                 "adoxio_datelicenceapproved",
+                "adoxio_isreadydisplays",
+                "adoxio_isreadyfirealarm",
+                "adoxio_isreadyentranceexit",
+                "adoxio_checklistfinaldecisionmade",
                 "adoxio_validinterestinitialstatus",
                 "adoxio_checklistsignageassessed",
                 "adoxio_checklistverifyapplication",
@@ -3679,6 +3725,7 @@
                 "adoxio_checklistspdconsentreceived",
                 "adoxio_applicationid",
                 "adoxio_checkinspectionstatus",
+                "adoxio_isreadynamebranding",
                 "adoxio_sharepointanchorforestablishmentproposal",
                 "adoxio_checklistvalidinterestfinalassessed",
                 "_adoxio_licencefeeinvoice_value",
@@ -3690,10 +3737,12 @@
                 "adoxio_email",
                 "adoxio_renewalkeypersonnel",
                 "adoxio_checklistspdapproved",
+                "adoxio_appchecklistpaymentreceived",
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_dateaip",
+                "adoxio_isreadysurveillancenotice",
                 "adoxio_checklistverifypostalcode",
-                "adoxio_checklistsitemapassess",
+                "adoxio_checklistfloorplanlined",
                 "adoxio_establishmentaddresspostalcode",
                 "adoxio_sitemapresult",
                 "adoxio_checklistbrandingassess",
@@ -3708,6 +3757,7 @@
                 "adoxio_datereceivedinvestigations",
                 "_adoxio_applicant_value",
                 "adoxio_paymentreceiveddate",
+                "adoxio_checklistsitemapassess",
                 "adoxio_establishmentlocatedatwinery",
                 "adoxio_renewalbranding",
                 "adoxio_checklistsitemapreceived",
@@ -3716,19 +3766,19 @@
                 "adoxio_renewalorgleadership",
                 "adoxio_datereceivedlgin",
                 "adoxio_contactmiddlename",
+                "adoxio_otherbusinessesatthesamelocation",
                 "adoxio_checklistbrandingassessed",
                 "adoxio_checklistnoticeofarticles",
                 "adoxio_addresscountry",
                 "adoxio_licenceexpiry",
                 "adoxio_checklistsecurityclearancestatus",
                 "adoxio_checklistestablishmentaddressassessed",
-                "adoxio_checklistvalidestablishmentaddress",
                 "adoxio_initialcapassessmenttrigger",
+                "adoxio_checklistsitemapassessed",
                 "adoxio_checklistlicencefeepaid",
                 "adoxio_authorizedtosubmit",
                 "_owningteam_value",
-                "adoxio_dateassignedtosla",
-                "adoxio_renewalsitemap",
+                "adoxio_isreadyperimeter",
                 "adoxio_checklistfinancialcheckpassed",
                 "adoxio_securityclearancegenerateddate",
                 "adoxio_checklistsecuritiesregister",
@@ -3736,21 +3786,24 @@
                 "adoxio_renewaltiedhouse",
                 "adoxio_inspectionscheduleddate",
                 "adoxio_establishmentlocatedatfirstnationland",
+                "adoxio_isreadyproductnotvisibleoutside",
                 "adoxio_renewalsignage",
                 "adoxio_pin",
                 "adoxio_renewalfloorplan",
                 "adoxio_addressprovince",
-                "adoxio_brandingnameresult",
+                "adoxio_uploadedlegalentitystructure",
                 "adoxio_appchecklistinspectionreviewcomplete",
                 "_adoxio_invoice_value",
                 "adoxio_datefileuploadfromportalnotified",
                 "adoxio_businessstructureinstructionfield",
                 "adoxio_checklistassociateslist",
-                "adoxio_checklistfinaldecisionmade",
+                "adoxio_isreadyworkers",
                 "adoxio_description2",
                 "adoxio_establishmentdeclarationoption3",
+                "adoxio_finalcapassessment",
                 "adoxio_checklisttermsconditionsadded",
                 "adoxio_renewalcriminaloffencecheck",
+                "adoxio_isreadyintruderalarm",
                 "adoxio_renewalestablishmentaddress",
                 "adoxio_checklistsenttospd",
                 "adoxio_occupationload",
@@ -3770,9 +3823,8 @@
                 "adoxio_onlinedocumentupload",
                 "onholdtime",
                 "adoxio_contactpersonname",
-                "adoxio_description1",
                 "adoxio_checklistsentforfisla",
-                "adoxio_checklistfloorplanlined",
+                "adoxio_checklistvalidestablishmentaddress",
                 "adoxio_addresspostalcode"
               ]
             }
@@ -3942,7 +3994,7 @@
                 "adoxio_servicehoursmondayclose",
                 "adoxio_establishmentotherbusinessnature",
                 "adoxio_establishmentparcelid",
-                "adoxio_datesentlgin",
+                "adoxio_aiptype",
                 "adoxio_establishmentlayoutsubmitfloorplans",
                 "_modifiedonbehalfby_value",
                 "_adoxio_casemanager_value",
@@ -3973,10 +4025,10 @@
                 "_adoxio_casemanagersupervisor_value",
                 "adoxio_occupationcapacity",
                 "adoxio_checklistorgstructure",
-                "_slainvokedid_value",
+                "adoxio_brandingnameresult",
                 "adoxio_validinterestfinalstatus",
                 "adoxio_checklistlebuilt",
-                "adoxio_signatureposition",
+                "adoxio_tiedhouseresult",
                 "importsequencenumber",
                 "adoxio_uploadedsitemap",
                 "adoxio_renewalconcluded",
@@ -3985,12 +4037,15 @@
                 "adoxio_checklistestablishmentrenderings",
                 "adoxio_invoicetrigger",
                 "adoxio_establishmentalreadyopen",
+                "adoxio_isreadyretailarea",
                 "adoxio_establishmentaddresscountry",
                 "adoxio_dateaipexpiredlongdatestring",
+                "adoxio_description1",
                 "adoxio_applicanttype",
                 "adoxio_renewalvalidinterest",
                 "adoxio_servicehourssaturdayopen",
                 "_adoxio_inspector_value",
+                "adoxio_isreadylockedstorage",
                 "adoxio_checklistsignageexamples",
                 "adoxio_checklistverifybusinessprofile",
                 "adoxio_role",
@@ -4011,11 +4066,9 @@
                 "adoxio_finaldecision",
                 "adoxio_name",
                 "adoxio_checklistassociatesconsentreceived",
-                "adoxio_finalcapassessment",
                 "adoxio_establishmentpropsedname",
                 "_adoxio_region_value",
                 "adoxio_checklistshareholdersbuilt",
-                "adoxio_datesentinvestigations",
                 "adoxio_establishmentproposalneedsmailsent",
                 "adoxio_checklistfinancialdocuments",
                 "adoxio_addressstreet",
@@ -4023,21 +4076,21 @@
                 "adoxio_licencefeeinvoicetrigger",
                 "adoxio_establishmenthasstandalonepatio",
                 "adoxio_datereceivedspd",
-                "adoxio_otherbusinessesatthesamelocation",
+                "adoxio_datesentlgin",
                 "adoxio_renewalbusinesstype",
                 "adoxio_phone",
                 "adoxio_checklistphotosreceived",
                 "_adoxio_sla_value",
+                "adoxio_datesentinvestigations",
                 "adoxio_addresscity",
-                "adoxio_checklistsitemapassessed",
                 "adoxio_dateaipdecisionlettersent",
                 "adoxio_servicehourswednesdayclose",
-                "adoxio_appchecklistpaymentreceived",
+                "adoxio_isreadyvalidinterest",
+                "adoxio_inspectionchecklistdate",
                 "adoxio_sharepointanchorforpersonalhistory",
                 "adoxio_initialcapassessmentdate",
-                "adoxio_uploadedlegalentitystructure",
+                "adoxio_checklistvalidinterestreceived",
                 "adoxio_paymentrecieved",
-                "_adoxio_policejurisdictionid_value",
                 "adoxio_checklistdecisionlettersentaip",
                 "adoxio_checklisttiedhouseassess",
                 "adoxio_contactpersonfullname",
@@ -4047,26 +4100,28 @@
                 "adoxio_establishmentaddress",
                 "adoxio_fitandpropercomplete",
                 "adoxio_jobnumber",
+                "adoxio_renewalsitemap",
                 "adoxio_establishmentotheroption1",
                 "adoxio_establishmentotheroption2",
                 "adoxio_uploadeddriversabstract",
                 "adoxio_localgovermentfirstnationdecision",
                 "adoxio_holdsotherlicencesoptionset",
                 "adoxio_establishmentaddressstreet",
+                "_slainvokedid_value",
                 "adoxio_servicehourswednesdayopen",
                 "adoxio_checklistfloorplanlinedaip",
                 "_adoxio_licenceestablishment_value",
                 "adoxio_areyouthemaincontactforapplication",
                 "adoxio_servicehourspatronparticipation",
                 "adoxio_renewaltiedhousefederalinterest",
-                "adoxio_tiedhouseresult",
                 "adoxio_businessinfoemail",
                 "_modifiedby_value",
                 "adoxio_initialcapassessment",
-                "adoxio_registeredestablishment",
+                "adoxio_signatureposition",
                 "adoxio_checklistaipdecisionmade",
                 "adoxio_checklistmarketcapacity",
                 "_adoxio_licencetype_value",
+                "adoxio_dateassignedtosla",
                 "_slaid_value",
                 "adoxio_appchecklistlicencefeecollected",
                 "adoxio_checklislginresolutionassess",
@@ -4076,11 +4131,14 @@
                 "adoxio_checklistassociateformreceived",
                 "statuscode",
                 "timezoneruleversionnumber",
+                "adoxio_registeredestablishment",
                 "adoxio_inspectiondate",
                 "adoxio_servicehourstuesdayopen",
                 "adoxio_appchecklistinspectionresults",
+                "adoxio_isreadystorage",
                 "adoxio_checklistkeypersonnelbuilt",
                 "adoxio_datefirstyearpaymentreceived",
+                "adoxio_isreadylockedcases",
                 "adoxio_establishmentotherbusinessname",
                 "adoxio_sharepointlocationdummyfield",
                 "adoxio_uploadedfloorplans",
@@ -4090,9 +4148,9 @@
                 "adoxio_servicehoursmondayopen",
                 "lastonholdtime",
                 "_adoxio_applyingperson_value",
-                "adoxio_checklistvalidinterestreceived",
-                "adoxio_federalproducernames",
                 "_createdonbehalfby_value",
+                "adoxio_federalproducernames",
+                "_adoxio_policejurisdictionid_value",
                 "adoxio_servicehourssundayclose",
                 "adoxio_servicehoursthursdayopen",
                 "adoxio_checklistsenttolgin",
@@ -4113,6 +4171,10 @@
                 "adoxio_checklistassociatescontacted",
                 "adoxio_renewalzoning",
                 "adoxio_datelicenceapproved",
+                "adoxio_isreadydisplays",
+                "adoxio_isreadyfirealarm",
+                "adoxio_isreadyentranceexit",
+                "adoxio_checklistfinaldecisionmade",
                 "adoxio_validinterestinitialstatus",
                 "adoxio_checklistsignageassessed",
                 "adoxio_checklistverifyapplication",
@@ -4123,6 +4185,7 @@
                 "adoxio_checklistspdconsentreceived",
                 "adoxio_applicationid",
                 "adoxio_checkinspectionstatus",
+                "adoxio_isreadynamebranding",
                 "adoxio_sharepointanchorforestablishmentproposal",
                 "adoxio_checklistvalidinterestfinalassessed",
                 "_adoxio_licencefeeinvoice_value",
@@ -4134,10 +4197,12 @@
                 "adoxio_email",
                 "adoxio_renewalkeypersonnel",
                 "adoxio_checklistspdapproved",
+                "adoxio_appchecklistpaymentreceived",
                 "adoxio_appchecklistvalidinterestreceivedfinal",
                 "adoxio_dateaip",
+                "adoxio_isreadysurveillancenotice",
                 "adoxio_checklistverifypostalcode",
-                "adoxio_checklistsitemapassess",
+                "adoxio_checklistfloorplanlined",
                 "adoxio_establishmentaddresspostalcode",
                 "adoxio_sitemapresult",
                 "adoxio_checklistbrandingassess",
@@ -4152,6 +4217,7 @@
                 "adoxio_datereceivedinvestigations",
                 "_adoxio_applicant_value",
                 "adoxio_paymentreceiveddate",
+                "adoxio_checklistsitemapassess",
                 "adoxio_establishmentlocatedatwinery",
                 "adoxio_renewalbranding",
                 "adoxio_checklistsitemapreceived",
@@ -4160,19 +4226,19 @@
                 "adoxio_renewalorgleadership",
                 "adoxio_datereceivedlgin",
                 "adoxio_contactmiddlename",
+                "adoxio_otherbusinessesatthesamelocation",
                 "adoxio_checklistbrandingassessed",
                 "adoxio_checklistnoticeofarticles",
                 "adoxio_addresscountry",
                 "adoxio_licenceexpiry",
                 "adoxio_checklistsecurityclearancestatus",
                 "adoxio_checklistestablishmentaddressassessed",
-                "adoxio_checklistvalidestablishmentaddress",
                 "adoxio_initialcapassessmenttrigger",
+                "adoxio_checklistsitemapassessed",
                 "adoxio_checklistlicencefeepaid",
                 "adoxio_authorizedtosubmit",
                 "_owningteam_value",
-                "adoxio_dateassignedtosla",
-                "adoxio_renewalsitemap",
+                "adoxio_isreadyperimeter",
                 "adoxio_checklistfinancialcheckpassed",
                 "adoxio_securityclearancegenerateddate",
                 "adoxio_checklistsecuritiesregister",
@@ -4180,21 +4246,24 @@
                 "adoxio_renewaltiedhouse",
                 "adoxio_inspectionscheduleddate",
                 "adoxio_establishmentlocatedatfirstnationland",
+                "adoxio_isreadyproductnotvisibleoutside",
                 "adoxio_renewalsignage",
                 "adoxio_pin",
                 "adoxio_renewalfloorplan",
                 "adoxio_addressprovince",
-                "adoxio_brandingnameresult",
+                "adoxio_uploadedlegalentitystructure",
                 "adoxio_appchecklistinspectionreviewcomplete",
                 "_adoxio_invoice_value",
                 "adoxio_datefileuploadfromportalnotified",
                 "adoxio_businessstructureinstructionfield",
                 "adoxio_checklistassociateslist",
-                "adoxio_checklistfinaldecisionmade",
+                "adoxio_isreadyworkers",
                 "adoxio_description2",
                 "adoxio_establishmentdeclarationoption3",
+                "adoxio_finalcapassessment",
                 "adoxio_checklisttermsconditionsadded",
                 "adoxio_renewalcriminaloffencecheck",
+                "adoxio_isreadyintruderalarm",
                 "adoxio_renewalestablishmentaddress",
                 "adoxio_checklistsenttospd",
                 "adoxio_occupationload",
@@ -4214,9 +4283,8 @@
                 "adoxio_onlinedocumentupload",
                 "onholdtime",
                 "adoxio_contactpersonname",
-                "adoxio_description1",
                 "adoxio_checklistsentforfisla",
-                "adoxio_checklistfloorplanlined",
+                "adoxio_checklistvalidestablishmentaddress",
                 "adoxio_addresspostalcode"
               ]
             }
@@ -5201,6 +5269,8 @@
             "items": {
               "type": "string",
               "enum": [
+                "adoxio_requiressecurityscreening",
+                "adoxio_requiressecurityscreening desc",
                 "overriddencreatedon",
                 "overriddencreatedon desc",
                 "adoxio_isshowassociatesformupload",
@@ -5257,8 +5327,6 @@
                 "adoxio_floorplan desc",
                 "adoxio_defaultbpfid",
                 "adoxio_defaultbpfid desc",
-                "adoxio_isshowsupportingdocuments",
-                "adoxio_isshowsupportingdocuments desc",
                 "adoxio_code",
                 "adoxio_code desc",
                 "modifiedon",
@@ -5267,6 +5335,8 @@
                 "adoxio_portallabel desc",
                 "adoxio_actiontext",
                 "adoxio_actiontext desc",
+                "adoxio_isshowsupportingdocuments",
+                "adoxio_isshowsupportingdocuments desc",
                 "adoxio_showdescription2",
                 "adoxio_showdescription2 desc",
                 "adoxio_category",
@@ -5312,6 +5382,7 @@
             "items": {
               "type": "string",
               "enum": [
+                "adoxio_requiressecurityscreening",
                 "overriddencreatedon",
                 "adoxio_isshowassociatesformupload",
                 "adoxio_isdefault",
@@ -5340,11 +5411,11 @@
                 "adoxio_isshowfinancialintegrityformupload",
                 "adoxio_floorplan",
                 "adoxio_defaultbpfid",
-                "adoxio_isshowsupportingdocuments",
                 "adoxio_code",
                 "modifiedon",
                 "adoxio_portallabel",
                 "adoxio_actiontext",
+                "adoxio_isshowsupportingdocuments",
                 "adoxio_showdescription2",
                 "adoxio_category",
                 "versionnumber",
@@ -5473,6 +5544,7 @@
             "items": {
               "type": "string",
               "enum": [
+                "adoxio_requiressecurityscreening",
                 "overriddencreatedon",
                 "adoxio_isshowassociatesformupload",
                 "adoxio_isdefault",
@@ -5501,11 +5573,11 @@
                 "adoxio_isshowfinancialintegrityformupload",
                 "adoxio_floorplan",
                 "adoxio_defaultbpfid",
-                "adoxio_isshowsupportingdocuments",
                 "adoxio_code",
                 "modifiedon",
                 "adoxio_portallabel",
                 "adoxio_actiontext",
+                "adoxio_isshowsupportingdocuments",
                 "adoxio_showdescription2",
                 "adoxio_category",
                 "versionnumber",
@@ -6370,6 +6442,1213 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_businessaccount"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_cannabisinventoryreports": {
+      "get": {
+        "tags": [
+          "cannabisinventoryreports"
+        ],
+        "summary": "Get entities from adoxio_cannabisinventoryreports",
+        "operationId": "Cannabisinventoryreports_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_totalreductions",
+                "adoxio_totalreductions desc",
+                "adoxio_qtyreceiveddomestic",
+                "adoxio_qtyreceiveddomestic desc",
+                "createdon",
+                "createdon desc",
+                "statecode",
+                "statecode desc",
+                "adoxio_qtyshippedreturned",
+                "adoxio_qtyshippedreturned desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "adoxio_numberpackagedunits",
+                "adoxio_numberpackagedunits desc",
+                "adoxio_openinginventory",
+                "adoxio_openinginventory desc",
+                "_adoxio_productid_value",
+                "_adoxio_productid_value desc",
+                "adoxio_qtyreceivedother",
+                "adoxio_qtyreceivedother desc",
+                "adoxio_closinginventorycalculated",
+                "adoxio_closinginventorycalculated desc",
+                "adoxio_cannabisinventoryreportid",
+                "adoxio_cannabisinventoryreportid desc",
+                "versionnumber",
+                "versionnumber desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "_transactioncurrencyid_value",
+                "_transactioncurrencyid_value desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "adoxio_qtyreceivedtotal",
+                "adoxio_qtyreceivedtotal desc",
+                "modifiedon",
+                "modifiedon desc",
+                "adoxio_closinginventory",
+                "adoxio_closinginventory desc",
+                "adoxio_qtyloststolen",
+                "adoxio_qtyloststolen desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "adoxio_weightofclosinginventory",
+                "adoxio_weightofclosinginventory desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_valueofclosinginventory_base",
+                "adoxio_valueofclosinginventory_base desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "_adoxio_licenceid_value",
+                "_adoxio_licenceid_value desc",
+                "_adoxio_establishmentid_value",
+                "_adoxio_establishmentid_value desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "adoxio_qtyreceivedreturns",
+                "adoxio_qtyreceivedreturns desc",
+                "exchangerate",
+                "exchangerate desc",
+                "_adoxio_licenseeid_value",
+                "_adoxio_licenseeid_value desc",
+                "statuscode",
+                "statuscode desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_otherreductions",
+                "adoxio_otherreductions desc",
+                "adoxio_totalvalue_base",
+                "adoxio_totalvalue_base desc",
+                "_adoxio_monthlyreportid_value",
+                "_adoxio_monthlyreportid_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "adoxio_qtyreceivedcalculated",
+                "adoxio_qtyreceivedcalculated desc",
+                "adoxio_totalreductionscalculated",
+                "adoxio_totalreductionscalculated desc",
+                "adoxio_totalvalue",
+                "adoxio_totalvalue desc",
+                "adoxio_valueofclosinginventory",
+                "adoxio_valueofclosinginventory desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_qtyshippeddomestic",
+                "adoxio_qtyshippeddomestic desc",
+                "adoxio_qtydestroyed",
+                "adoxio_qtydestroyed desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_totalreductions",
+                "adoxio_qtyreceiveddomestic",
+                "createdon",
+                "statecode",
+                "adoxio_qtyshippedreturned",
+                "_modifiedby_value",
+                "adoxio_numberpackagedunits",
+                "adoxio_openinginventory",
+                "_adoxio_productid_value",
+                "adoxio_qtyreceivedother",
+                "adoxio_closinginventorycalculated",
+                "adoxio_cannabisinventoryreportid",
+                "versionnumber",
+                "_modifiedonbehalfby_value",
+                "importsequencenumber",
+                "_transactioncurrencyid_value",
+                "_createdonbehalfby_value",
+                "adoxio_qtyreceivedtotal",
+                "modifiedon",
+                "adoxio_closinginventory",
+                "adoxio_qtyloststolen",
+                "_owningteam_value",
+                "adoxio_weightofclosinginventory",
+                "overriddencreatedon",
+                "adoxio_valueofclosinginventory_base",
+                "_ownerid_value",
+                "_adoxio_licenceid_value",
+                "_adoxio_establishmentid_value",
+                "utcconversiontimezonecode",
+                "adoxio_qtyreceivedreturns",
+                "exchangerate",
+                "_adoxio_licenseeid_value",
+                "statuscode",
+                "adoxio_name",
+                "_owninguser_value",
+                "_owningbusinessunit_value",
+                "adoxio_otherreductions",
+                "adoxio_totalvalue_base",
+                "_adoxio_monthlyreportid_value",
+                "timezoneruleversionnumber",
+                "adoxio_qtyreceivedcalculated",
+                "adoxio_totalreductionscalculated",
+                "adoxio_totalvalue",
+                "adoxio_valueofclosinginventory",
+                "_createdby_value",
+                "adoxio_qtyshippeddomestic",
+                "adoxio_qtydestroyed"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_cannabisinventoryreport_SyncErrors",
+                "adoxio_cannabisinventoryreport_DuplicateMatchingRecord",
+                "adoxio_cannabisinventoryreport_DuplicateBaseRecord",
+                "adoxio_cannabisinventoryreport_AsyncOperations",
+                "adoxio_cannabisinventoryreport_BulkDeleteFailures",
+                "adoxio_MonthlyReportId",
+                "adoxio_ProductId",
+                "transactioncurrencyid",
+                "adoxio_LicenseeId",
+                "adoxio_EstablishmentId",
+                "adoxio_LicenceId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Cannabisinventoryreports_GetResponseModel"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "cannabisinventoryreports"
+        ],
+        "summary": "Add new entity to adoxio_cannabisinventoryreports",
+        "operationId": "Cannabisinventoryreports_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_cannabisinventoryreports({adoxio_cannabisinventoryreportid})": {
+      "get": {
+        "tags": [
+          "cannabisinventoryreports"
+        ],
+        "summary": "Get entity from adoxio_cannabisinventoryreports by key",
+        "operationId": "Cannabisinventoryreports_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_cannabisinventoryreportid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabisinventoryreportid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_totalreductions",
+                "adoxio_qtyreceiveddomestic",
+                "createdon",
+                "statecode",
+                "adoxio_qtyshippedreturned",
+                "_modifiedby_value",
+                "adoxio_numberpackagedunits",
+                "adoxio_openinginventory",
+                "_adoxio_productid_value",
+                "adoxio_qtyreceivedother",
+                "adoxio_closinginventorycalculated",
+                "adoxio_cannabisinventoryreportid",
+                "versionnumber",
+                "_modifiedonbehalfby_value",
+                "importsequencenumber",
+                "_transactioncurrencyid_value",
+                "_createdonbehalfby_value",
+                "adoxio_qtyreceivedtotal",
+                "modifiedon",
+                "adoxio_closinginventory",
+                "adoxio_qtyloststolen",
+                "_owningteam_value",
+                "adoxio_weightofclosinginventory",
+                "overriddencreatedon",
+                "adoxio_valueofclosinginventory_base",
+                "_ownerid_value",
+                "_adoxio_licenceid_value",
+                "_adoxio_establishmentid_value",
+                "utcconversiontimezonecode",
+                "adoxio_qtyreceivedreturns",
+                "exchangerate",
+                "_adoxio_licenseeid_value",
+                "statuscode",
+                "adoxio_name",
+                "_owninguser_value",
+                "_owningbusinessunit_value",
+                "adoxio_otherreductions",
+                "adoxio_totalvalue_base",
+                "_adoxio_monthlyreportid_value",
+                "timezoneruleversionnumber",
+                "adoxio_qtyreceivedcalculated",
+                "adoxio_totalreductionscalculated",
+                "adoxio_totalvalue",
+                "adoxio_valueofclosinginventory",
+                "_createdby_value",
+                "adoxio_qtyshippeddomestic",
+                "adoxio_qtydestroyed"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_cannabisinventoryreport_SyncErrors",
+                "adoxio_cannabisinventoryreport_DuplicateMatchingRecord",
+                "adoxio_cannabisinventoryreport_DuplicateBaseRecord",
+                "adoxio_cannabisinventoryreport_AsyncOperations",
+                "adoxio_cannabisinventoryreport_BulkDeleteFailures",
+                "adoxio_MonthlyReportId",
+                "adoxio_ProductId",
+                "transactioncurrencyid",
+                "adoxio_LicenseeId",
+                "adoxio_EstablishmentId",
+                "adoxio_LicenceId"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "cannabisinventoryreports"
+        ],
+        "summary": "Delete entity from adoxio_cannabisinventoryreports",
+        "operationId": "Cannabisinventoryreports_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_cannabisinventoryreportid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabisinventoryreportid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "cannabisinventoryreports"
+        ],
+        "summary": "Update entity in adoxio_cannabisinventoryreports",
+        "operationId": "Cannabisinventoryreports_Update",
+        "parameters": [
+          {
+            "name": "adoxio_cannabisinventoryreportid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabisinventoryreportid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_cannabismonthlyreports": {
+      "get": {
+        "tags": [
+          "cannabismonthlyreports"
+        ],
+        "summary": "Get entities from adoxio_cannabismonthlyreports",
+        "operationId": "Cannabismonthlyreports_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_employeesother",
+                "adoxio_employeesother desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "createdon",
+                "createdon desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "_adoxio_licenceid_value",
+                "_adoxio_licenceid_value desc",
+                "adoxio_employeessales",
+                "adoxio_employeessales desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "adoxio_employeesadministrative",
+                "adoxio_employeesadministrative desc",
+                "adoxio_retailerdistributor",
+                "adoxio_retailerdistributor desc",
+                "_adoxio_licenseeid_value",
+                "_adoxio_licenseeid_value desc",
+                "modifiedon",
+                "modifiedon desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "adoxio_cannabismonthlyreportid",
+                "adoxio_cannabismonthlyreportid desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc",
+                "versionnumber",
+                "versionnumber desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "adoxio_employeesproduction",
+                "adoxio_employeesproduction desc",
+                "adoxio_reportingperiodyear",
+                "adoxio_reportingperiodyear desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "statuscode",
+                "statuscode desc",
+                "_adoxio_establishmentid_value",
+                "_adoxio_establishmentid_value desc",
+                "adoxio_city",
+                "adoxio_city desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "adoxio_employeesmanagement",
+                "adoxio_employeesmanagement desc",
+                "adoxio_licencenumber",
+                "adoxio_licencenumber desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "adoxio_postalcode",
+                "adoxio_postalcode desc",
+                "adoxio_reportingperiodmonth",
+                "adoxio_reportingperiodmonth desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "statecode",
+                "statecode desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_employeesother",
+                "adoxio_name",
+                "createdon",
+                "timezoneruleversionnumber",
+                "_adoxio_licenceid_value",
+                "adoxio_employeessales",
+                "utcconversiontimezonecode",
+                "adoxio_employeesadministrative",
+                "adoxio_retailerdistributor",
+                "_adoxio_licenseeid_value",
+                "modifiedon",
+                "_owningbusinessunit_value",
+                "adoxio_cannabismonthlyreportid",
+                "_modifiedonbehalfby_value",
+                "_modifiedby_value",
+                "versionnumber",
+                "overriddencreatedon",
+                "adoxio_employeesproduction",
+                "adoxio_reportingperiodyear",
+                "_createdby_value",
+                "statuscode",
+                "_adoxio_establishmentid_value",
+                "adoxio_city",
+                "_owningteam_value",
+                "_ownerid_value",
+                "adoxio_employeesmanagement",
+                "adoxio_licencenumber",
+                "_owninguser_value",
+                "_createdonbehalfby_value",
+                "adoxio_postalcode",
+                "adoxio_reportingperiodmonth",
+                "importsequencenumber",
+                "statecode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_cannabismonthlyreport_SyncErrors",
+                "adoxio_cannabismonthlyreport_DuplicateMatchingRecord",
+                "adoxio_cannabismonthlyreport_DuplicateBaseRecord",
+                "adoxio_cannabismonthlyreport_AsyncOperations",
+                "adoxio_cannabismonthlyreport_BulkDeleteFailures",
+                "adoxio_LicenceId",
+                "adoxio_EstablishmentId",
+                "adoxio_LicenseeId",
+                "adoxio_cannabismonthlyreport_inventoryreports"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Cannabismonthlyreports_GetResponseModel"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "cannabismonthlyreports"
+        ],
+        "summary": "Add new entity to adoxio_cannabismonthlyreports",
+        "operationId": "Cannabismonthlyreports_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_cannabismonthlyreports({adoxio_cannabismonthlyreportid})": {
+      "get": {
+        "tags": [
+          "cannabismonthlyreports"
+        ],
+        "summary": "Get entity from adoxio_cannabismonthlyreports by key",
+        "operationId": "Cannabismonthlyreports_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_cannabismonthlyreportid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabismonthlyreportid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "adoxio_employeesother",
+                "adoxio_name",
+                "createdon",
+                "timezoneruleversionnumber",
+                "_adoxio_licenceid_value",
+                "adoxio_employeessales",
+                "utcconversiontimezonecode",
+                "adoxio_employeesadministrative",
+                "adoxio_retailerdistributor",
+                "_adoxio_licenseeid_value",
+                "modifiedon",
+                "_owningbusinessunit_value",
+                "adoxio_cannabismonthlyreportid",
+                "_modifiedonbehalfby_value",
+                "_modifiedby_value",
+                "versionnumber",
+                "overriddencreatedon",
+                "adoxio_employeesproduction",
+                "adoxio_reportingperiodyear",
+                "_createdby_value",
+                "statuscode",
+                "_adoxio_establishmentid_value",
+                "adoxio_city",
+                "_owningteam_value",
+                "_ownerid_value",
+                "adoxio_employeesmanagement",
+                "adoxio_licencenumber",
+                "_owninguser_value",
+                "_createdonbehalfby_value",
+                "adoxio_postalcode",
+                "adoxio_reportingperiodmonth",
+                "importsequencenumber",
+                "statecode"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_cannabismonthlyreport_SyncErrors",
+                "adoxio_cannabismonthlyreport_DuplicateMatchingRecord",
+                "adoxio_cannabismonthlyreport_DuplicateBaseRecord",
+                "adoxio_cannabismonthlyreport_AsyncOperations",
+                "adoxio_cannabismonthlyreport_BulkDeleteFailures",
+                "adoxio_LicenceId",
+                "adoxio_EstablishmentId",
+                "adoxio_LicenseeId",
+                "adoxio_cannabismonthlyreport_inventoryreports"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "cannabismonthlyreports"
+        ],
+        "summary": "Delete entity from adoxio_cannabismonthlyreports",
+        "operationId": "Cannabismonthlyreports_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_cannabismonthlyreportid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabismonthlyreportid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "cannabismonthlyreports"
+        ],
+        "summary": "Update entity in adoxio_cannabismonthlyreports",
+        "operationId": "Cannabismonthlyreports_Update",
+        "parameters": [
+          {
+            "name": "adoxio_cannabismonthlyreportid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabismonthlyreportid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+            },
+            "description": "New property values"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_cannabisproductadmins": {
+      "get": {
+        "tags": [
+          "cannabisproductadmins"
+        ],
+        "summary": "Get entities from adoxio_cannabisproductadmins",
+        "operationId": "Cannabisproductadmins_Get",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "$count",
+            "in": "query",
+            "type": "boolean"
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "versionnumber desc",
+                "utcconversiontimezonecode",
+                "utcconversiontimezonecode desc",
+                "_owningbusinessunit_value",
+                "_owningbusinessunit_value desc",
+                "_createdby_value",
+                "_createdby_value desc",
+                "adoxio_cannabisproductadminid",
+                "adoxio_cannabisproductadminid desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
+                "statecode",
+                "statecode desc",
+                "importsequencenumber",
+                "importsequencenumber desc",
+                "_createdonbehalfby_value",
+                "_createdonbehalfby_value desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
+                "_owninguser_value",
+                "_owninguser_value desc",
+                "_ownerid_value",
+                "_ownerid_value desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
+                "statuscode",
+                "statuscode desc",
+                "createdon",
+                "createdon desc",
+                "modifiedon",
+                "modifiedon desc",
+                "adoxio_name",
+                "adoxio_name desc",
+                "_modifiedby_value",
+                "_modifiedby_value desc"
+              ]
+            }
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "utcconversiontimezonecode",
+                "_owningbusinessunit_value",
+                "_createdby_value",
+                "adoxio_cannabisproductadminid",
+                "_modifiedonbehalfby_value",
+                "_owningteam_value",
+                "statecode",
+                "importsequencenumber",
+                "_createdonbehalfby_value",
+                "overriddencreatedon",
+                "_owninguser_value",
+                "_ownerid_value",
+                "timezoneruleversionnumber",
+                "statuscode",
+                "createdon",
+                "modifiedon",
+                "adoxio_name",
+                "_modifiedby_value"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_cannabisproductadmin_SyncErrors",
+                "adoxio_cannabisproductadmin_DuplicateMatchingRecord",
+                "adoxio_cannabisproductadmin_DuplicateBaseRecord",
+                "adoxio_cannabisproductadmin_AsyncOperations",
+                "adoxio_cannabisproductadmin_BulkDeleteFailures",
+                "adoxio_cannabisproductadmin_inventoryreports"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Cannabisproductadmins_GetResponseModel"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "cannabisproductadmins"
+        ],
+        "summary": "Add new entity to adoxio_cannabisproductadmins",
+        "operationId": "Cannabisproductadmins_Create",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+            },
+            "description": "New entity"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      }
+    },
+    "/adoxio_cannabisproductadmins({adoxio_cannabisproductadminid})": {
+      "get": {
+        "tags": [
+          "cannabisproductadmins"
+        ],
+        "summary": "Get entity from adoxio_cannabisproductadmins by key",
+        "operationId": "Cannabisproductadmins_GetByKey",
+        "parameters": [
+          {
+            "name": "adoxio_cannabisproductadminid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabisproductadminid",
+            "type": "string"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "versionnumber",
+                "utcconversiontimezonecode",
+                "_owningbusinessunit_value",
+                "_createdby_value",
+                "adoxio_cannabisproductadminid",
+                "_modifiedonbehalfby_value",
+                "_owningteam_value",
+                "statecode",
+                "importsequencenumber",
+                "_createdonbehalfby_value",
+                "overriddencreatedon",
+                "_owninguser_value",
+                "_ownerid_value",
+                "timezoneruleversionnumber",
+                "statuscode",
+                "createdon",
+                "modifiedon",
+                "adoxio_name",
+                "_modifiedby_value"
+              ]
+            }
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "*",
+                "createdbyname",
+                "createdonbehalfbyname",
+                "modifiedbyname",
+                "modifiedonbehalfbyname",
+                "owninguser",
+                "owningteam",
+                "ownerid",
+                "owningbusinessunit",
+                "adoxio_cannabisproductadmin_SyncErrors",
+                "adoxio_cannabisproductadmin_DuplicateMatchingRecord",
+                "adoxio_cannabisproductadmin_DuplicateBaseRecord",
+                "adoxio_cannabisproductadmin_AsyncOperations",
+                "adoxio_cannabisproductadmin_BulkDeleteFailures",
+                "adoxio_cannabisproductadmin_inventoryreports"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+            }
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "cannabisproductadmins"
+        ],
+        "summary": "Delete entity from adoxio_cannabisproductadmins",
+        "operationId": "Cannabisproductadmins_Delete",
+        "parameters": [
+          {
+            "name": "adoxio_cannabisproductadminid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabisproductadminid",
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "schema": { "$ref": "#/definitions/odata.error" },
+            "description": ""
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "cannabisproductadmins"
+        ],
+        "summary": "Update entity in adoxio_cannabisproductadmins",
+        "operationId": "Cannabisproductadmins_Update",
+        "parameters": [
+          {
+            "name": "adoxio_cannabisproductadminid",
+            "in": "path",
+            "required": true,
+            "description": "key: adoxio_cannabisproductadminid",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
             },
             "description": "New property values"
           }
@@ -12064,7 +13343,9 @@
                 "adoxio_establishment_contraventions",
                 "adoxio_establishment_complaints",
                 "adoxio_establishment_compliancemeetings",
-                "adoxio_establishment_investigations"
+                "adoxio_establishment_investigations",
+                "adoxio_establishment_cannabismonthlyreports",
+                "adoxio_establishment_inventoryreports"
               ]
             }
           }
@@ -12245,7 +13526,9 @@
                 "adoxio_establishment_contraventions",
                 "adoxio_establishment_complaints",
                 "adoxio_establishment_compliancemeetings",
-                "adoxio_establishment_investigations"
+                "adoxio_establishment_investigations",
+                "adoxio_establishment_cannabismonthlyreports",
+                "adoxio_establishment_inventoryreports"
               ]
             }
           }
@@ -16859,7 +18142,9 @@
                 "adoxio_licence_investigations",
                 "adoxio_ProposedOwner",
                 "adoxio_licences_ActivityParties",
-                "adoxio_AreaId"
+                "adoxio_AreaId",
+                "adoxio_licence_cannabismonthlyreports",
+                "adoxio_licence_inventoryreports"
               ]
             }
           }
@@ -17047,7 +18332,9 @@
                 "adoxio_licence_investigations",
                 "adoxio_ProposedOwner",
                 "adoxio_licences_ActivityParties",
-                "adoxio_AreaId"
+                "adoxio_AreaId",
+                "adoxio_licence_cannabismonthlyreports",
+                "adoxio_licence_inventoryreports"
               ]
             }
           }
@@ -31879,6 +33166,18 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_compliancemeeting"
           }
+        },
+        "adoxio_licensee_cannabismonthlyreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "adoxio_licensee_cannabisinventoryreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
         }
       }
     },
@@ -33680,9 +34979,9 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_datesentlgin": {
-          "type": "string",
-          "format": "date-time"
+        "adoxio_aiptype": {
+          "type": "integer",
+          "x-nullable": true
         },
         "adoxio_establishmentlayoutsubmitfloorplans": {
           "type": "boolean",
@@ -33804,8 +35103,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_slainvokedid_value": {
-          "type": "string",
+        "adoxio_brandingnameresult": {
+          "type": "integer",
           "x-nullable": true
         },
         "adoxio_validinterestfinalstatus": {
@@ -33816,8 +35115,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_signatureposition": {
-          "type": "string",
+        "adoxio_tiedhouseresult": {
+          "type": "integer",
           "x-nullable": true
         },
         "importsequencenumber": {
@@ -33852,11 +35151,19 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "adoxio_isreadyretailarea": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "adoxio_establishmentaddresscountry": {
           "type": "string",
           "x-nullable": true
         },
         "adoxio_dateaipexpiredlongdatestring": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_description1": {
           "type": "string",
           "x-nullable": true
         },
@@ -33874,6 +35181,10 @@
         },
         "_adoxio_inspector_value": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_isreadylockedstorage": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_checklistsignageexamples": {
@@ -33957,10 +35268,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_finalcapassessment": {
-          "type": "string",
-          "x-nullable": true
-        },
         "adoxio_establishmentpropsedname": {
           "type": "string",
           "x-nullable": true
@@ -33972,10 +35279,6 @@
         "adoxio_checklistshareholdersbuilt": {
           "type": "integer",
           "x-nullable": true
-        },
-        "adoxio_datesentinvestigations": {
-          "type": "string",
-          "format": "date-time"
         },
         "adoxio_establishmentproposalneedsmailsent": {
           "type": "integer",
@@ -34005,9 +35308,9 @@
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_otherbusinessesatthesamelocation": {
-          "type": "integer",
-          "x-nullable": true
+        "adoxio_datesentlgin": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_renewalbusinesstype": {
           "type": "integer",
@@ -34025,12 +35328,12 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_datesentinvestigations": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_addresscity": {
           "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_checklistsitemapassessed": {
-          "type": "integer",
           "x-nullable": true
         },
         "adoxio_dateaipdecisionlettersent": {
@@ -34041,9 +35344,13 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_appchecklistpaymentreceived": {
-          "type": "integer",
+        "adoxio_isreadyvalidinterest": {
+          "type": "boolean",
           "x-nullable": true
+        },
+        "adoxio_inspectionchecklistdate": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_sharepointanchorforpersonalhistory": {
           "type": "string",
@@ -34053,16 +35360,12 @@
           "type": "string",
           "format": "date-time"
         },
-        "adoxio_uploadedlegalentitystructure": {
+        "adoxio_checklistvalidinterestreceived": {
           "type": "integer",
           "x-nullable": true
         },
         "adoxio_paymentrecieved": {
           "type": "boolean",
-          "x-nullable": true
-        },
-        "_adoxio_policejurisdictionid_value": {
-          "type": "string",
           "x-nullable": true
         },
         "adoxio_checklistdecisionlettersentaip": {
@@ -34101,6 +35404,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_renewalsitemap": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_establishmentotheroption1": {
           "type": "boolean",
           "x-nullable": true
@@ -34122,6 +35429,10 @@
           "x-nullable": true
         },
         "adoxio_establishmentaddressstreet": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_slainvokedid_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -34149,10 +35460,6 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_tiedhouseresult": {
-          "type": "integer",
-          "x-nullable": true
-        },
         "adoxio_businessinfoemail": {
           "type": "string",
           "x-nullable": true
@@ -34165,8 +35472,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_registeredestablishment": {
-          "type": "integer",
+        "adoxio_signatureposition": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_checklistaipdecisionmade": {
@@ -34180,6 +35487,10 @@
         "_adoxio_licencetype_value": {
           "type": "string",
           "x-nullable": true
+        },
+        "adoxio_dateassignedtosla": {
+          "type": "string",
+          "format": "date-time"
         },
         "_slaid_value": {
           "type": "string",
@@ -34217,6 +35528,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_registeredestablishment": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_inspectiondate": {
           "type": "string",
           "format": "date-time"
@@ -34229,6 +35544,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_isreadystorage": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "adoxio_checklistkeypersonnelbuilt": {
           "type": "integer",
           "x-nullable": true
@@ -34236,6 +35555,10 @@
         "adoxio_datefirstyearpaymentreceived": {
           "type": "string",
           "format": "date-time"
+        },
+        "adoxio_isreadylockedcases": {
+          "type": "boolean",
+          "x-nullable": true
         },
         "adoxio_establishmentotherbusinessname": {
           "type": "string",
@@ -34273,15 +35596,15 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_checklistvalidinterestreceived": {
-          "type": "integer",
+        "_createdonbehalfby_value": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_federalproducernames": {
           "type": "string",
           "x-nullable": true
         },
-        "_createdonbehalfby_value": {
+        "_adoxio_policejurisdictionid_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -34365,6 +35688,22 @@
           "type": "string",
           "format": "date-time"
         },
+        "adoxio_isreadydisplays": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_isreadyfirealarm": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_isreadyentranceexit": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_checklistfinaldecisionmade": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_validinterestinitialstatus": {
           "type": "integer",
           "x-nullable": true
@@ -34403,6 +35742,10 @@
         },
         "adoxio_checkinspectionstatus": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_isreadynamebranding": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_sharepointanchorforestablishmentproposal": {
@@ -34449,6 +35792,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_appchecklistpaymentreceived": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_appchecklistvalidinterestreceivedfinal": {
           "type": "integer",
           "x-nullable": true
@@ -34457,11 +35804,15 @@
           "type": "string",
           "format": "date-time"
         },
+        "adoxio_isreadysurveillancenotice": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "adoxio_checklistverifypostalcode": {
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_checklistsitemapassess": {
+        "adoxio_checklistfloorplanlined": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34521,6 +35872,10 @@
           "type": "string",
           "format": "date-time"
         },
+        "adoxio_checklistsitemapassess": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_establishmentlocatedatwinery": {
           "type": "boolean",
           "x-nullable": true
@@ -34553,6 +35908,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_otherbusinessesatthesamelocation": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_checklistbrandingassessed": {
           "type": "integer",
           "x-nullable": true
@@ -34577,11 +35936,11 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_checklistvalidestablishmentaddress": {
+        "adoxio_initialcapassessmenttrigger": {
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_initialcapassessmenttrigger": {
+        "adoxio_checklistsitemapassessed": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34597,12 +35956,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_dateassignedtosla": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "adoxio_renewalsitemap": {
-          "type": "integer",
+        "adoxio_isreadyperimeter": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_checklistfinancialcheckpassed": {
@@ -34633,6 +35988,10 @@
           "type": "boolean",
           "x-nullable": true
         },
+        "adoxio_isreadyproductnotvisibleoutside": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "adoxio_renewalsignage": {
           "type": "integer",
           "x-nullable": true
@@ -34649,7 +36008,7 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_brandingnameresult": {
+        "adoxio_uploadedlegalentitystructure": {
           "type": "integer",
           "x-nullable": true
         },
@@ -34673,8 +36032,8 @@
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_checklistfinaldecisionmade": {
-          "type": "integer",
+        "adoxio_isreadyworkers": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_description2": {
@@ -34685,12 +36044,20 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_finalcapassessment": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_checklisttermsconditionsadded": {
           "type": "integer",
           "x-nullable": true
         },
         "adoxio_renewalcriminaloffencecheck": {
           "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_isreadyintruderalarm": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_renewalestablishmentaddress": {
@@ -34769,15 +36136,11 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_description1": {
-          "type": "string",
-          "x-nullable": true
-        },
         "adoxio_checklistsentforfisla": {
           "type": "integer",
           "x-nullable": true
         },
-        "adoxio_checklistfloorplanlined": {
+        "adoxio_checklistvalidestablishmentaddress": {
           "type": "integer",
           "x-nullable": true
         },
@@ -35473,6 +36836,10 @@
       "title": "adoxio_applicationtype",
       "type": "object",
       "properties": {
+        "adoxio_requiressecurityscreening": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "overriddencreatedon": {
           "type": "string",
           "format": "date-time"
@@ -35585,10 +36952,6 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_isshowsupportingdocuments": {
-          "type": "boolean",
-          "x-nullable": true
-        },
         "adoxio_code": {
           "type": "string",
           "x-nullable": true
@@ -35603,6 +36966,10 @@
         },
         "adoxio_actiontext": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_isshowsupportingdocuments": {
+          "type": "boolean",
           "x-nullable": true
         },
         "adoxio_showdescription2": {
@@ -36147,6 +37514,618 @@
         },
         "adoxio_AccountId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport": {
+      "title": "adoxio_cannabisinventoryreport",
+      "type": "object",
+      "properties": {
+        "adoxio_totalreductions": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_qtyreceiveddomestic": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_qtyshippedreturned": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_numberpackagedunits": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_openinginventory": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_productid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_qtyreceivedother": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_closinginventorycalculated": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_cannabisinventoryreportid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_transactioncurrencyid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_qtyreceivedtotal": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_closinginventory": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_qtyloststolen": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_weightofclosinginventory": {
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_valueofclosinginventory_base": {
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_licenceid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_adoxio_establishmentid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_qtyreceivedreturns": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "exchangerate": {
+          "x-nullable": true
+        },
+        "_adoxio_licenseeid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_otherreductions": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_totalvalue_base": {
+          "x-nullable": true
+        },
+        "_adoxio_monthlyreportid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_qtyreceivedcalculated": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_totalreductionscalculated": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_totalvalue": {
+          "x-nullable": true
+        },
+        "adoxio_valueofclosinginventory": {
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_qtyshippeddomestic": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_qtydestroyed": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_cannabisinventoryreport_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_cannabisinventoryreport_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_cannabisinventoryreport_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_cannabisinventoryreport_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_cannabisinventoryreport_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_MonthlyReportId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+        },
+        "adoxio_ProductId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+        },
+        "transactioncurrencyid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.transactioncurrency"
+        },
+        "adoxio_LicenseeId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+        },
+        "adoxio_EstablishmentId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+        },
+        "adoxio_LicenceId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport": {
+      "title": "adoxio_cannabismonthlyreport",
+      "type": "object",
+      "properties": {
+        "adoxio_employeesother": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_licenceid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_employeessales": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_employeesadministrative": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_retailerdistributor": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_licenseeid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_cannabismonthlyreportid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_employeesproduction": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_reportingperiodyear": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_adoxio_establishmentid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_city": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_employeesmanagement": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_licencenumber": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_postalcode": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_reportingperiodmonth": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_cannabismonthlyreport_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_cannabismonthlyreport_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_cannabismonthlyreport_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_cannabismonthlyreport_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_cannabismonthlyreport_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_LicenceId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
+        },
+        "adoxio_EstablishmentId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
+        },
+        "adoxio_LicenseeId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+        },
+        "adoxio_cannabismonthlyreport_inventoryreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin": {
+      "title": "adoxio_cannabisproductadmin",
+      "type": "object",
+      "properties": {
+        "versionnumber": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true
+        },
+        "utcconversiontimezonecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_createdby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_cannabisproductadminid": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "statecode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "importsequencenumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "_createdonbehalfby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "_owninguser_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_ownerid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "statuscode": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "createdon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedon": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "adoxio_name": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "_modifiedby_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "createdbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "createdonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "modifiedonbehalfbyname": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owninguser": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
+        },
+        "owningteam": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.team"
+        },
+        "ownerid": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.principal"
+        },
+        "owningbusinessunit": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.businessunit"
+        },
+        "adoxio_cannabisproductadmin_SyncErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.syncerror"
+          }
+        },
+        "adoxio_cannabisproductadmin_DuplicateMatchingRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_cannabisproductadmin_DuplicateBaseRecord": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.duplicaterecord"
+          }
+        },
+        "adoxio_cannabisproductadmin_AsyncOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.asyncoperation"
+          }
+        },
+        "adoxio_cannabisproductadmin_BulkDeleteFailures": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.bulkdeletefailure"
+          }
+        },
+        "adoxio_cannabisproductadmin_inventoryreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
         }
       }
     },
@@ -39470,6 +41449,18 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
           }
+        },
+        "adoxio_establishment_cannabismonthlyreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "adoxio_establishment_inventoryreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
         }
       }
     },
@@ -41995,6 +43986,18 @@
         },
         "adoxio_AreaId": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_area"
+        },
+        "adoxio_licence_cannabismonthlyreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "adoxio_licence_inventoryreports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
         }
       }
     },
@@ -47903,6 +49906,15 @@
         },
         "regardingobjectid_adoxio_inspectorcommentsrollup": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+        },
+        "regardingobjectid_adoxio_cannabismonthlyreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+        },
+        "regardingobjectid_adoxio_cannabisproductadmin": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+        },
+        "regardingobjectid_adoxio_cannabisinventoryreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
         }
       }
     },
@@ -50085,6 +52097,15 @@
         },
         "regardingobjectid_adoxio_inspectorcommentsrollup": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+        },
+        "regardingobjectid_adoxio_cannabismonthlyreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+        },
+        "regardingobjectid_adoxio_cannabisproductadmin": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+        },
+        "regardingobjectid_adoxio_cannabisinventoryreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
         }
       }
     },
@@ -51752,6 +53773,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
+        },
+        "business_unit_adoxio_cannabismonthlyreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "business_unit_adoxio_cannabisproductadmin": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "business_unit_adoxio_cannabisinventoryreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
           }
         }
       }
@@ -58742,6 +60781,24 @@
         },
         "baserecordid_adoxio_witness": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_witness"
+        },
+        "duplicaterecordid_adoxio_cannabismonthlyreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+        },
+        "baserecordid_adoxio_cannabismonthlyreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+        },
+        "duplicaterecordid_adoxio_cannabisproductadmin": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+        },
+        "baserecordid_adoxio_cannabisproductadmin": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+        },
+        "duplicaterecordid_adoxio_cannabisinventoryreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+        },
+        "baserecordid_adoxio_cannabisinventoryreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
         }
       }
     },
@@ -75378,6 +77435,24 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
           }
+        },
+        "owner_adoxio_cannabismonthlyreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "owner_adoxio_cannabisproductadmin": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "owner_adoxio_cannabisinventoryreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
         }
       }
     },
@@ -88538,6 +90613,15 @@
         },
         "regardingobjectid_adoxio_inspectorcommentsrollup": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+        },
+        "regardingobjectid_adoxio_cannabismonthlyreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+        },
+        "regardingobjectid_adoxio_cannabisproductadmin": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+        },
+        "regardingobjectid_adoxio_cannabisinventoryreport": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
         }
       }
     },
@@ -96091,6 +98175,96 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
           }
+        },
+        "lk_adoxio_cannabismonthlyreport_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "lk_adoxio_cannabismonthlyreport_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "lk_adoxio_cannabismonthlyreport_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "lk_adoxio_cannabismonthlyreport_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "user_adoxio_cannabismonthlyreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "lk_adoxio_cannabisproductadmin_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "lk_adoxio_cannabisproductadmin_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "lk_adoxio_cannabisproductadmin_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "lk_adoxio_cannabisproductadmin_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "user_adoxio_cannabisproductadmin": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "lk_adoxio_cannabisinventoryreport_createdby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
+        },
+        "lk_adoxio_cannabisinventoryreport_createdonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
+        },
+        "lk_adoxio_cannabisinventoryreport_modifiedby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
+        },
+        "lk_adoxio_cannabisinventoryreport_modifiedonbehalfby": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
+        },
+        "user_adoxio_cannabisinventoryreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
         }
       }
     },
@@ -97360,6 +99534,24 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_inspectorcommentsrollup"
+          }
+        },
+        "team_adoxio_cannabismonthlyreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        },
+        "team_adoxio_cannabisproductadmin": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        },
+        "team_adoxio_cannabisinventoryreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
           }
         }
       }
@@ -99266,6 +101458,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_contraventionadmin"
+          }
+        },
+        "TransactionCurrency_adoxio_cannabisinventoryreport": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
           }
         }
       }
@@ -106067,6 +108265,42 @@
         }
       }
     },
+    "Cannabisinventoryreports_GetResponseModel": {
+      "title": "Collection of adoxio_cannabisinventoryreports",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
+        }
+      }
+    },
+    "Cannabismonthlyreports_GetResponseModel": {
+      "title": "Collection of adoxio_cannabismonthlyreports",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabismonthlyreport"
+          }
+        }
+      }
+    },
+    "Cannabisproductadmins_GetResponseModel": {
+      "title": "Collection of adoxio_cannabisproductadmins",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisproductadmin"
+          }
+        }
+      }
+    },
     "Citydistricts_GetResponseModel": {
       "title": "Collection of adoxio_citydistricts",
       "type": "object",
@@ -109676,6 +111910,15 @@
     },
     {
       "name": "adoxio_businessaccounts"
+    },
+    {
+      "name": "adoxio_cannabisinventoryreports"
+    },
+    {
+      "name": "adoxio_cannabismonthlyreports"
+    },
+    {
+      "name": "adoxio_cannabisproductadmins"
     },
     {
       "name": "adoxio_citydistricts"
