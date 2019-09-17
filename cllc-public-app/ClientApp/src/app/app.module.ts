@@ -155,6 +155,8 @@ import { MoreLessContentComponent } from './shared/more-less-content/more-less-c
 import { MapComponent } from './map/map.component';
 import { AccountPickerComponent } from './shared/account-picker/account-picker.component';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
+import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
+import { ProductInventoryPackagedComponent } from './shared/product-inventory-packaged/product-inventory-packaged.component';
 
 
 @NgModule({
@@ -233,7 +235,9 @@ import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee
     MoreLessContentComponent,
     MapComponent,
     AccountPickerComponent,
-    ApplicationAndLicenceFeeComponent
+    ApplicationAndLicenceFeeComponent,
+    ApplicationOwnershipTransferComponent,
+    ProductInventoryPackagedComponent
   ],
   imports: [
     ChartsModule,
