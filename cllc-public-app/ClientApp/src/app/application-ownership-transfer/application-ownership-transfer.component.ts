@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBase } from '@shared/form-base';
 import { Application } from '@models/application.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription, Observable, Subject, of, forkJoin } from 'rxjs';
 import {
   ApplicationCancellationDialogComponent
@@ -19,7 +19,6 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationHTMLContent } from '@app/application/application.component';
 import { Account } from '@models/account.model';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
-import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 
 @Component({
   selector: 'app-application-ownership-transfer',
