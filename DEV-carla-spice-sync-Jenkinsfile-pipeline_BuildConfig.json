@@ -1,0 +1,51 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "dev-carla-spice-sync-pipeline",
+                    "name": "dev-carla-spice-sync-pipeline",
+                    "template": "dev-carla-spice-sync-pipeline"
+                },
+                "name": "dev-carla-spice-sync-pipeline"
+            },
+            "spec": {
+                "output": {},
+                "postCommit": {},
+                "resources": {},
+                "runPolicy": "Parallel",
+                "source": {
+                    "contextDir": "",
+                    "git": {
+                        "ref": "develop",
+                        "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+                    },
+                    "type": "Git"
+                },
+                "strategy": {
+                    "jenkinsPipelineStrategy": {
+                        "jenkinsfilePath": "DEV-carla-spice-sync-Jenkinsfile"
+                    },
+                    "type": "JenkinsPipeline"
+                },
+                "triggers": [
+                    {
+                        "github": {
+                            "secret": "0KrTye0lQNkVdNh4gQD4AjI1vGTuOVmnPVplh05q"
+                        },
+                        "type": "GitHub"
+                    }
+                ]
+            },
+            "status": {
+                "lastVersion": 0
+            }
+        }
+    ]
+}
