@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Serilog;
@@ -56,11 +56,8 @@ namespace Gov.Lclb.Cllb.Geocoder
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks()
+                 .AddCheck("geocoder-service", () => HealthCheckResult.Healthy("OK"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
