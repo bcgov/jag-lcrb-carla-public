@@ -132,7 +132,7 @@
                 },
                 "readinessProbe": {
                   "httpGet": {
-                    "path": "/hc",
+                    "path": "/hc/ready",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
@@ -144,7 +144,7 @@
                 },
                 "liveinessProbe": {
                   "httpGet": {
-                    "path": "/hc",
+                    "path": "/hc/live",
                     "port": 8080,
                     "scheme": "HTTP"
                   },
