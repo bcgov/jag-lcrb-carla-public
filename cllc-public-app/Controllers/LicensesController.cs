@@ -78,7 +78,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // check access to licence
-            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
+            var expand = new List<string> {  "adoxio_Licencee" };
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(item.LicenceId, expand: expand);
             if (adoxioLicense == null)
             {
                 return NotFound();
