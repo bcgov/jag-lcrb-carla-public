@@ -428,13 +428,14 @@ function EstablishmentsMap(options) {
         // This dictionary's values will in general consist of a (potentially processed)
         // subset of the JSON returned by the Python establishment search service.
       var contentObj = {
-        'Type': '<img src=assets/placeholder_credential.png height=50 width=50><strong>Non-Medical Cannabis Retail Store</strong>',
+        // <img src=assets/placeholder_credential.png height=50 width=50>
+        'Type': '<strong>Non-Medical Cannabis Retail Store</strong>',
         'Name': establishment.name || '',
-            'License': establishment.license || '',
-            'Phone': establishment.phone || '',
-            'Street Address': establishment.addressStreet || '',
-            'City': establishment.addressCity || '',
-            'Postal': establishment.addressPostal || ''
+//            'License': 'License:' + (establishment.license || ''),
+        'Phone': establishment.phone || '',
+        'Street Address': establishment.addressStreet || '',
+        'City': establishment.addressCity || '',
+        'Postal': establishment.addressPostal || ''
         };
 
         // We build the contentString from the contentObj dictionary, using paragraphs as property delimiters.
@@ -469,8 +470,10 @@ function EstablishmentsMap(options) {
         Establishments.forEach(function (establishment) {
             var latLong = _getLatLngInBC(establishment.latitude, establishment.longitude);
             var establishmentGuid = establishment.id;
-            if (_exists(latLong) && _canDrawestablishment(establishmentPushpinGuid, establishmentGuid)) {
-              var establishmentMarker = L.marker(latLong, { icon: greenIcon, interactive: !_establishmentPushpin });
+          if (_exists(latLong) && _canDrawestablishment(establishmentPushpinGuid, establishmentGuid)) {
+              // icon marker
+              // var establishmentMarker = L.marker(latLong, { icon: greenIcon, interactive: !_establishmentPushpin });
+              var establishmentMarker =L.circleMarker(latLong, style);
                 establishmentMarker.bindPopup(_generateestablishmentMarkerPopupContents(establishment));
                 establishmentMarker.addTo(_leafletMap);
                 _establishmentMarkers.push(establishmentMarker);
@@ -524,7 +527,8 @@ function EstablishmentsMap(options) {
     /**
      * Places a establishmentPushpin on the map to help refine the placement of a establishment.
      * When placed by a button click, the map pans and zooms to centre on the marker.
-     * @param latLongArray An array of [lat, long], where lat and long specify where the establishmentPushpin will be placed
+     * @param {any} latLongArray An array of [lat, long], where lat and long specify where the establishmentPushpin will be placed
+     * @param {any} establishmentDetails Details for the establishment.
      */
     var placeestablishmentPushpin = function (latLongArray, establishmentDetails) {
         // If the map or the latLng do not exist, bail out.
