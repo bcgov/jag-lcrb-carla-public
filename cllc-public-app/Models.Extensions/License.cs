@@ -83,7 +83,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentAddressPostalCode = licence.AdoxioEstablishmentaddresspostalcode,
                 ExpiryDate = licence.AdoxioExpirydate,
                 Status = StatusUtility.GetLicenceStatus(licence, applications),
-                AllowedActions = new List<ApplicationType>()
+                AllowedActions = new List<ApplicationType>(),
+                TransferRequested = (TransferRequested?)licence.AdoxioTransferrequested
             };
 
 
