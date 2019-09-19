@@ -27,6 +27,7 @@ export class ApplicationLicenseSummary {
   storeInspected: boolean;
 
   actionApplications: LicenceActionApplication[];
+  transferRequested: string;
 }
 
 export interface LicenceActionApplication {

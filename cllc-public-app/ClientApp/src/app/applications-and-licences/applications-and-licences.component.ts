@@ -53,6 +53,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   marketerExists: boolean;
   nonMarketerExists: boolean;
   ApplicationTypeNames = ApplicationTypeNames;
+  licenceTransferFeatureOn = false;
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -60,7 +61,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     private router: Router,
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
-    featureFlagService: FeatureFlagService,
+    public featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
     super();
     if (featureFlagService.featureOn('Marketer')) {
@@ -70,6 +71,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.licencePresentLabel = '';
       this.licenceAbsentLabel = '';
     }
+    featureFlagService.featureOn('LicenceTransfer')
+    .pipe(takeWhile(() => this.componentActive))
+    .subscribe((featureOn: boolean) => {
+      this.licenceTransferFeatureOn = featureOn;
+    });
   }
 
   ngOnInit() {
@@ -196,26 +202,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     } else {
       this.snackBar.open('Unable to find CRS Application', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
-    }
-  }
-
-  transferLicence(licence: ApplicationLicenseSummary) {
-    const transferApplication =
-      licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSTransferofOwnership);
-    if (transferApplication) {
-      this.router.navigate([`/ownership-transfer/${transferApplication.applicationId}`]);
-    } else {
-      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, ApplicationTypeNames.CRSTransferofOwnership)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(data => {
-          this.router.navigateByUrl('/ownership-transfer/' + data.id);
-        },
-          () => {
-            this.snackBar.open(`Error running licence action for ${ApplicationTypeNames.CRSTransferofOwnership}`, 'Fail',
-              { duration: 3500, panelClass: ['red-snackbar'] });
-            console.log('Error starting a Change Licence Location Application');
-          }
-        );
     }
   }
 
