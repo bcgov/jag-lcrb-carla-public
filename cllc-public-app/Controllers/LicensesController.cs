@@ -17,12 +17,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
-{    
+{
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
     public class LicensesController : ControllerBase
-    {        
+    {
         private readonly IMemoryCache _cache;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -31,13 +31,87 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public LicensesController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor,
             PdfClient pdfClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
-        {            
+        {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _pdfClient = pdfClient;
             _logger = loggerFactory.CreateLogger(typeof(LicensesController));
 
+        }
+
+        /// GET licence by id
+        [HttpGet("{id}")]
+        public JsonResult GetLicence(string id)
+        {
+            MicrosoftDynamicsCRMadoxioLicences licence = null;
+
+            var filter = $"adoxio_licencesid eq {id}";
+
+            try
+            {
+                licence = _dynamicsClient.Licenceses.GetByKey(id);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error getting licence by id");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
+
+
+
+            return new JsonResult(licence.ToViewModel(_dynamicsClient));
+        }
+
+
+        [HttpPost("initiate-transfer")]
+        public ActionResult InitiateTranster(LicenceTranster item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            try
+            {
+                var yes = 845280001;
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    ProposedOwnerODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
+                    AdoxioTransferrequested = yes
+                };
+
+                // create application
+                _dynamicsClient.Licenceses.Update(item.LicenceId, patchLicence);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error initiating licence transfer");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                // fail if we can't create.
+                throw (odee);
+            }
+            return Ok();
         }
 
         /// Create a change of location application
@@ -681,5 +755,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // if current user doesn't have an account they are probably not logged in
             return false;
         }
+    }
+
+    public class LicenceTranster
+    {
+        public string AccountId { get; set; }
+        public string LicenceId { get; set; }
     }
 }
