@@ -1,5 +1,7 @@
 # bash script to be sourced to set environment variables for OpenShift scripts
-export PROJECT_NAMESPACE="yuumcs"
+# export PROJECT_NAMESPACE="yuumcs"
+export PROJECT_NAMESPACE="lclb-cllc"
+
 export PROJECT_OS_DIR=${PROJECT_OS_DIR:-../../openshift}
 
 # The templates that should not have their GIT referances(uri and ref) over-ridden
@@ -11,7 +13,7 @@ export GIT_REF="master"
 
 # The project components
 # - defaults to the support the Simple Project Structure
-export components=${components:-"cllc-public-app carla-spice-sync-service"}
+export components=${components:-"cllc-public-app carla-spice-sync-service geocoder-service"}
 
 # The builds to be triggered after buildconfigs created (not auto-triggered)
 export builds=${builds:-""}
