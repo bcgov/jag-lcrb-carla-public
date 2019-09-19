@@ -199,26 +199,6 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     }
   }
 
-  transferLicence(licence: ApplicationLicenseSummary) {
-    const transferApplication =
-      licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CRSTransferofOwnership);
-    if (transferApplication) {
-      this.router.navigate([`/ownership-transfer/${transferApplication.applicationId}`]);
-    } else {
-      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, ApplicationTypeNames.CRSTransferofOwnership)
-        .pipe(takeWhile(() => this.componentActive))
-        .subscribe(data => {
-          this.router.navigateByUrl('/ownership-transfer/' + data.id);
-        },
-          () => {
-            this.snackBar.open(`Error running licence action for ${ApplicationTypeNames.CRSTransferofOwnership}`, 'Fail',
-              { duration: 3500, panelClass: ['red-snackbar'] });
-            console.log('Error starting a Change Licence Location Application');
-          }
-        );
-    }
-  }
-
   startNewLicenceApplication() {
     const newLicenceApplicationData: Application = <Application>{
       licenseType: 'Cannabis Retail Store',
