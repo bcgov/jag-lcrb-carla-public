@@ -53,6 +53,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   marketerExists: boolean;
   nonMarketerExists: boolean;
   ApplicationTypeNames = ApplicationTypeNames;
+  licenceTransferFeatureOn = false;
 
   constructor(
     private applicationDataService: ApplicationDataService,
@@ -60,7 +61,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     private router: Router,
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
-    featureFlagService: FeatureFlagService,
+    public featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
     super();
     if (featureFlagService.featureOn('Marketer')) {
@@ -70,6 +71,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.licencePresentLabel = '';
       this.licenceAbsentLabel = '';
     }
+    featureFlagService.featureOn('LicenceTransfer')
+    .pipe(takeWhile(() => this.componentActive))
+    .subscribe((featureOn: boolean) => {
+      this.licenceTransferFeatureOn = featureOn;
+    });
   }
 
   ngOnInit() {

@@ -42,6 +42,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("Maps");
             }
 
+            if (!String.IsNullOrEmpty(_configuration["FEATURE_LICENCE_TRANSFER"]))
+            {
+                features.Add("LicenceTransfer");
+            }
+
             return new JsonResult(features);
         }
 
