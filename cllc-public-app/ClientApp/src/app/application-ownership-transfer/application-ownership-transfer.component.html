@@ -1,0 +1,130 @@
+<div class="dashboard-spacing" style="position: relative">
+  <div [ngBusy]="busy"></div>
+
+  <div *ngIf="account?.businessType">
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <!-- Title -->
+      <h1 class="ngtest-page-title">Transfer Your Cannabis Retail Store Licence</h1>
+    </div>
+
+    <div [formGroup]="form" class="application-wrapper">
+      <!-- Preamble -->
+      <section class="ngtest-preamble-content">
+        Preamble content here
+      </section>
+
+      <!-- Before Starting -->
+      <h3 class="blue-header">BEFORE STARTING THE APPLICATION</h3>
+      <section class="padded-section">
+        <div class="ngtest-before-starting-content">
+          Before starting content here
+        </div>
+      </section>
+
+      <h3 class="blue-header">ESTABLISHMENT NAME</h3>
+      <section class="padded-section">
+        <app-field label="Establishment Name" [required]="false" [valid]="isValidOrNotTouched('establishmentName')"
+          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+          <input class="form-control" style="width: 500px;" type="text" [readonly]="true"
+            (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+        </app-field>
+      </section>
+
+      <h3 class="blue-header">IDENTIFY THE PROPOSED LICENSEE</h3>
+      <section class="padded-section">
+        <app-field label="Search for the business name you intend to transfer your cannabis retail store licence to:"
+        errorMessage="Please select a value"
+          [required]="true"  [valid]="isValidOrNotTouched('accountId')">
+          <app-account-picker (valueSelected)="form.get('accountId').setValue($event)"></app-account-picker>
+        </app-field>
+      </section>
+
+      <h3 class="blue-header">CONSENT TO TRANSFER YOUR LICENCE</h3>
+      <section class="padded-section">
+        <app-field [required]="true"  [valid]="isValidOrNotTouched('transferConsent')"
+        errorMessage="Please consent to the transfer" [showChevrons]="false">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="transferConsent">
+            <!-- <span class="error-states">*</span> -->
+            <div style="padding-left: 10px;"> I consent to transfer my licence to the above account.
+            </div>
+          </section>
+        </app-field>
+      </section>
+
+      <h3 class="blue-header ngtest-declarations">
+        DECLARATIONS
+      </h3>
+      <div class="padded-section">
+        <section>
+          <div>
+            The application must only be submitted by an individual with the authority to bind the applicant. The
+            branch
+            relies on the applicant to ensure that the individual who submits this application is authorized to do
+            so.
+            Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
+            usually
+            be
+            an officer or, in some cases, a director
+          </div>
+        </section>
+        <p>Note: A lawyer or
+          consultant,
+          may NOT submit this application on behalf of
+          the applicant.</p>
+
+        <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+          errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="authorizedToSubmit">
+            <span class="error-states">*</span>
+            <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
+            </div>
+          </section>
+        </app-field>
+        <p>
+          Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+          manager
+          an application, or
+          information or a record included as part of the application, that contains false or misleading
+          information, or
+          fails to disclose a material fact”.
+        </p>
+        <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+          errorMessage="Please affirm that all of the information provided for this application is true and complete."
+          [showChevrons]="false">
+          <section style="display: flex">
+            <input type="checkbox" formControlName="signatureAgreement">
+            <span class="error-states">*</span>
+            <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+              application is true and complete
+            </div>
+          </section>
+        </app-field>
+      </div>
+
+      <p></p>
+      <section class="error" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
+      </section>
+
+      <section style="position: relative; margin-top: 20px;">
+        <button class="btn btn-primary" (click)="initiateTransfer()">
+            <i class="fa fa-save" style="color: #fff;"></i>
+          SUBMIT TRANSFER</button>
+        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+            <a routerLink="/dashboard">
+                <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+              Cancel Transfer
+            </a>
+        </span>
+        <div [ngBusy]="busy"></div>
+      </section>
+    </div>
+  </div>
+</div>

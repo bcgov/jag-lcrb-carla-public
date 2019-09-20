@@ -3,12 +3,72 @@
   <div class="form-wrapper">
     <div class="home-margins">
       <h1>
-        A map of Cannabis Retail Stores.
+        Map of Licenced Non-Medical Cannabis Stores in British Columbia
       </h1>
-      <div style="height: 700px">
-        <div aria-label="A map of Cannabis Retail Stores." id="search-map" style="height: 700px; width: 600px; margin: auto;"></div>
+     
+      <div class="row">
+        <div class="text-left col-md-4">
+          <p>This map provides the locations of private non-medical cannabis retail store licences in British Columbia.</p>
+
+          <app-field label="Search by city or establishment name">
+            <input type="text" [(ngModel)]="search" size="40" style="padding-right: 20px" (keyup.enter)="searchMap()">
+            &nbsp;
+            <button style="padding-left: 20px" class="btn btn-primary" (click)="searchMap()">
+              <i class="fas fa-search" style="margin-right: 10px;"></i>
+              Search
+            </button>
+          </app-field>
+
+          <p>Use the General Search to find non-medical cannabis retail stores within the province. When search results are returned you can click on the store name or the icon on the map for more information</p>
+          <p>Below you will find this information available in a table.</p>
+          <p>Please note that not all locations may be open for business.</p>
+
+        </div>
+
+        <div aria-label="A map of Cannabis Retail Stores." class="col-md-4" id="search-map"></div>
       </div>
-    </div>
+
+          
+        <hr />
+          <div class="row">
+            <table *ngIf="mapData?.length > 0" class="eq-table">
+              <tr>
+                <th>#</th>
+                <th>Establishment Name</th>
+                <th>Type</th>
+                <th>License</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Postal</th>
+              </tr>
+              <tr *ngFor="let item of mapData; let i = index;">
+                <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.name}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">Non-Medical Cannabis Retail Store</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.license}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.phone}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.addressStreet}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.addressCity}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.addressPostal}}</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+</div>
   </div>
 </div>
 

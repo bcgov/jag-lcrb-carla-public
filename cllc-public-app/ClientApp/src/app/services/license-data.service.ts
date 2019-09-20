@@ -5,9 +5,10 @@ import { Http, Headers, Response } from '@angular/http';
 import { ApplicationLicenseSummary } from '../models/application-license-summary.model';
 import { Application } from '../models/application.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
+import { License } from '@models/license.model';
 
 @Injectable()
 export class LicenseDataService extends DataService {
@@ -16,6 +17,16 @@ export class LicenseDataService extends DataService {
 
   constructor(private http: HttpClient) {
     super();
+  }
+
+  getLicenceById(licenseId: string): Observable<License> {
+    const url = `${this.apiPath}${licenseId}`;
+    return this.http.get<License>(url, { headers: this.headers });
+  }
+
+  initiateTransfer(licenceId: string, accountId: string) {
+    const url = `${this.apiPath}initiate-transfer`;
+    return this.http.post<Application>(url, {licenceId, accountId}, { headers: this.headers });
   }
 
   getAllCurrentLicenses(): Observable<ApplicationLicenseSummary[]> {

@@ -21,6 +21,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Attempted = 845280006,
     }
 
+
+    public enum TransferRequested
+    {
+        Yes = 845280001,
+        No = 845280000
+    }
+
     public class ApplicationLicenseSummary
     {
         public string LicenseId { get; set; }
@@ -38,5 +45,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool StoreInspected { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
+        public TransferRequested? TransferRequested { get; set; }
     }
 }

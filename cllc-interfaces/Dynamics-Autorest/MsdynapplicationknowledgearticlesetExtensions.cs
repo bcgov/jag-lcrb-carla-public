@@ -6,6 +6,7 @@
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
+    using Microsoft.Rest;
     using Models;
     using System.Collections;
     using System.Collections.Generic;
@@ -84,6 +85,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
+            /// Get entities from msdyn_adoxio_application_knowledgearticleset
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='skip'>
+            /// </param>
+            /// <param name='search'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
+            /// <param name='orderby'>
+            /// Order items by property values
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MsdynapplicationknowledgearticlesetGetResponseModel> GetWithHttpMessages(this IMsdynapplicationknowledgearticleset operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
             /// Add new entity to msdyn_adoxio_application_knowledgearticleset
             /// </summary>
             /// <param name='operations'>
@@ -123,6 +157,27 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     return _result.Body;
                 }
+            }
+
+            /// <summary>
+            /// Add new entity to msdyn_adoxio_application_knowledgearticleset
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='body'>
+            /// New entity
+            /// </param>
+            /// <param name='prefer'>
+            /// Required in order for the service to return a JSON representation of the
+            /// object.
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle> CreateWithHttpMessages(this IMsdynapplicationknowledgearticleset operations, MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.CreateWithHttpMessagesAsync(body, prefer, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -172,6 +227,29 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
+            /// Get entity from msdyn_adoxio_application_knowledgearticleset by key
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='msdynAdoxioApplicationKnowledgearticleid'>
+            /// key: msdyn_adoxio_application_knowledgearticleid
+            /// </param>
+            /// <param name='select'>
+            /// Select properties to be returned
+            /// </param>
+            /// <param name='expand'>
+            /// Expand related entities
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle> GetByKeyWithHttpMessages(this IMsdynapplicationknowledgearticleset operations, string msdynAdoxioApplicationKnowledgearticleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.GetByKeyWithHttpMessagesAsync(msdynAdoxioApplicationKnowledgearticleid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
             /// Delete entity from msdyn_adoxio_application_knowledgearticleset
             /// </summary>
             /// <param name='operations'>
@@ -209,6 +287,26 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
+            /// Delete entity from msdyn_adoxio_application_knowledgearticleset
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='msdynAdoxioApplicationKnowledgearticleid'>
+            /// key: msdyn_adoxio_application_knowledgearticleid
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse DeleteWithHttpMessages(this IMsdynapplicationknowledgearticleset operations, string msdynAdoxioApplicationKnowledgearticleid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.DeleteWithHttpMessagesAsync(msdynAdoxioApplicationKnowledgearticleid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
             /// Update entity in msdyn_adoxio_application_knowledgearticleset
             /// </summary>
             /// <param name='operations'>
@@ -243,6 +341,26 @@ namespace Gov.Lclb.Cllb.Interfaces
             public static async Task UpdateAsync(this IMsdynapplicationknowledgearticleset operations, string msdynAdoxioApplicationKnowledgearticleid, MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle body, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.UpdateWithHttpMessagesAsync(msdynAdoxioApplicationKnowledgearticleid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Update entity in msdyn_adoxio_application_knowledgearticleset
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='msdynAdoxioApplicationKnowledgearticleid'>
+            /// key: msdyn_adoxio_application_knowledgearticleid
+            /// </param>
+            /// <param name='body'>
+            /// New property values
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse UpdateWithHttpMessages(this IMsdynapplicationknowledgearticleset operations, string msdynAdoxioApplicationKnowledgearticleid, MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle body, Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.UpdateWithHttpMessagesAsync(msdynAdoxioApplicationKnowledgearticleid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
