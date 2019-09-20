@@ -29,6 +29,7 @@ import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence
 import { MapComponent } from './map/map.component';
 import { FeatureGuard } from './services/feaure-guard.service';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
+import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 
 
 const routes: Routes = [
@@ -76,6 +77,11 @@ const routes: Routes = [
     path: 'store-opening/:applicationId',
     component: ApplicationAndLicenceFeeComponent,
     canDeactivate: [CanDeactivateGuard],
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'ownership-transfer/:licenceId',
+    component: ApplicationOwnershipTransferComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
@@ -176,17 +182,17 @@ const routes: Routes = [
     }
   },
   {
-    path: 'maps',
+    path: 'map',
     component: MapComponent,
     canActivate: [FeatureGuard],
-    data: { feature: 'Maps'}
+    data: { feature: 'Maps' }
   },
   { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
-exports: [RouterModule],
+  exports: [RouterModule],
   providers: [SurveyResolver]
 })
 export class AppRoutingModule { }
