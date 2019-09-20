@@ -7,12 +7,10 @@ import { Router } from '@angular/router';
 import { Application } from '@models/application.model';
 import { ApplicationSummary } from '@models/application-summary.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
-import { License } from '@models/license.model';
-import { PaymentDataService } from '@services/payment-data.service';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
-import { takeWhile, filter } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -55,15 +53,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   marketerExists: boolean;
   nonMarketerExists: boolean;
   ApplicationTypeNames = ApplicationTypeNames;
+  licenceTransferFeatureOn = false;
 
   constructor(
     private applicationDataService: ApplicationDataService,
     private licenceDataService: LicenseDataService,
     private router: Router,
-    private paymentService: PaymentDataService,
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
-    private featureFlagService: FeatureFlagService,
+    public featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
     super();
     if (featureFlagService.featureOn('Marketer')) {
@@ -73,6 +71,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       this.licencePresentLabel = '';
       this.licenceAbsentLabel = '';
     }
+    featureFlagService.featureOn('LicenceTransfer')
+    .pipe(takeWhile(() => this.componentActive))
+    .subscribe((featureOn: boolean) => {
+      this.licenceTransferFeatureOn = featureOn;
+    });
   }
 
   ngOnInit() {

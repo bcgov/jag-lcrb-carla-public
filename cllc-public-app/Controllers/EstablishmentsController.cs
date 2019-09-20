@@ -60,17 +60,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("map")]
         [AllowAnonymous]
-        public IActionResult GetMap()
+        public IActionResult GetMap(string search)
         {
-            // get establishments                      
-            var expand = new List<string> { "adoxio_establishment" }; // get establishment data at the same time.
+            // get establishments                                  
             string filter =  "statuscode eq 1";  // only active licenses
-
+                      
             IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
             try
             {
-                licences = _dynamicsClient.Licenceses.Get(filter: filter, expand: expand).Value;
+                licences = _dynamicsClient.Licenceses.Get( filter: filter ).Value;
 
             }
             catch (OdataerrorException odee)
@@ -92,22 +91,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {                
                 foreach (var license in licences)
                 {
-                    if (license.AdoxioEstablishment != null && license.AdoxioEstablishment.AdoxioLatitude != null && license.AdoxioEstablishment.AdoxioLongitude != null)
+                    if (license._adoxioEstablishmentValue != null)
                     {
-                        establishmentMapData.Add(new EstablishmentMapData()
+                        var establishment = _dynamicsClient.GetEstablishmentById(license._adoxioEstablishmentValue);
+                        if (establishment != null && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null)
                         {
-                            id = license.AdoxioEstablishment.AdoxioEstablishmentid.ToString(),
-                            Name = license.AdoxioEstablishment.AdoxioName,
-                            License = license.AdoxioLicencenumber,
-                            Phone = license.AdoxioEstablishment.AdoxioPhone,
-                            AddressCity = license.AdoxioEstablishment.AdoxioAddresscity,
-                            AddressPostal = license.AdoxioEstablishment.AdoxioAddresspostalcode,
-                            AddressStreet = license.AdoxioEstablishment.AdoxioAddressstreet,
-                            Latitude = (decimal)license.AdoxioEstablishment.AdoxioLatitude,
-                            Longitude = (decimal)license.AdoxioEstablishment.AdoxioLongitude,
-                        });
+                            bool add = true;
+                            if (!string.IsNullOrEmpty(search) && establishment.AdoxioName != null && establishment.AdoxioAddresscity != null)
+                            {
+                                search = search.ToUpper();
+                                if (!establishment.AdoxioName.ToUpper().StartsWith(search) == true
+                                    && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search) == true)
+                                {
+                                    add = false;
+                                }
+                            }
+                            if (add)
+                            {
+                                establishmentMapData.Add(new EstablishmentMapData()
+                                {
+                                    id = establishment.AdoxioEstablishmentid.ToString(),
+                                    Name = establishment.AdoxioName,
+                                    License = license.AdoxioLicencenumber,
+                                    Phone = establishment.AdoxioPhone,
+                                    AddressCity = establishment.AdoxioAddresscity,
+                                    AddressPostal = establishment.AdoxioAddresspostalcode,
+                                    AddressStreet = establishment.AdoxioAddressstreet,
+                                    Latitude = (decimal) establishment.AdoxioLatitude,
+                                    Longitude = (decimal) establishment.AdoxioLongitude,
+                                });
+                            }
+                        }
                     }
-
                 }               
             }
             return new JsonResult(establishmentMapData);

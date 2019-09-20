@@ -136,7 +136,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (name != null)
                 {
                     name = name.Replace("'", "''");
-                    filter = $"startswith(name,'{name}')";
+                    filter = $"contains(name,'{name}')";
                 }
                 
                 var accounts = _dynamicsClient.Accounts.Get(filter: filter).Value;

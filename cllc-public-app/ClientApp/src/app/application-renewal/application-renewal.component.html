@@ -26,7 +26,7 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 85px;">
+        <section style="padding-right: 95px;">
           <app-field
             [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
             [required]="true" [valid]="form.get('establishmentName').valid || !form.get('establishmentName').touched"
@@ -59,7 +59,7 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 85px;">
+        <section style="padding-right: 95px;">
           <div *ngIf="form.get('renewalSignage').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence.
             After submitting your renewal, please start a Establishment Name and Branding Change application from the
@@ -84,7 +84,7 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 85px;">
+        <section style="padding-right: 95px;">
           <address formGroupName="assignedLicence" class="row">
             <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
               <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
@@ -160,7 +160,7 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 85px;">
+        <section style="padding-right: 95px;">
           <!-- Store Contact Info -->
           <section *ngIf="showFormControl(application?.applicationType?.storeContactInfo)">
             <div style="flex: 0 0 210px;">
@@ -204,7 +204,7 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 85px;">
+        <section style="padding-right: 95px;">
           <div *ngIf="form.get('renewalZoning').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
             contact you as part of this renewal process
@@ -217,6 +217,8 @@
         <section style="display: flex; justify-content: space-between; width: 100%;">
           <div class="question-label">
             6. Have you made any unreported changes to the store’s floor plan within the past 12 months?
+            <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
+              matTooltip="This includes any businesses with which you share  common areas. For example, vestibules, bathrooms, and window coverings."></i>
           </div>
           <div style="flex: 0 0 85px;">
             <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalFloorPlan')}"
@@ -226,7 +228,7 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 85px;">
+        <section style="padding-right: 95px;">
           <div *ngIf="form.get('renewalFloorPlan').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i> You can still renew your licence.
             After submitting your renewal, please start a Structural Change Request application from the Dashboard.
@@ -247,7 +249,7 @@
             </mat-button-toggle-group>
           </div>
         </section>
-        <section style="padding-right: 85px;">
+        <section style="padding-right: 95px;">
           <div *ngIf="form.get('renewalSiteMap').value === 'Yes'" class="field-changed">
             <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
             contact you as part of this renewal process
