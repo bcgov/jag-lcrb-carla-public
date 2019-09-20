@@ -62,31 +62,38 @@
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/cannabis-retail-licence">Licence
+                       routerLink="/policy-document/cannabis-retail-licence">
+                      Licence
                       Types
                     </a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/application-timelines">Application Requirements</a>
+                       routerLink="/policy-document/application-timelines">Application Requirements</a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/worker-qualification-training">Worker Information</a>
+                       routerLink="/policy-document/worker-qualification-training">Worker Information</a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/ordering-cannabis">Ordering
+                       routerLink="/policy-document/ordering-cannabis">
+                      Ordering
                       Cannabis
                     </a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/reporting-sales">Reporting</a>
+                       routerLink="/policy-document/reporting-sales">Reporting</a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                      routerLink="/policy-document/application-stats">Application Statistics</a>
+                       routerLink="/policy-document/application-stats">Application Statistics</a>
+                  </li>
+                  <li class="nav-item" *ngIf="showMap">
+                    <a (click)="toggleButton.click()" tabindex="2"
+                       routerLink="/map">Map of Licensed Stores
+                    </a>
                   </li>
                 </ul>
               </div>
