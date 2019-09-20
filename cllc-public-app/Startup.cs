@@ -228,6 +228,10 @@ namespace Gov.Lclb.Cllb.Public
             string bearer_token = $"Bearer {Configuration["PDF_JWT_TOKEN"]}";
 
             services.AddTransient<PdfClient>(_ => new PdfClient(pdf_service_base_uri, bearer_token));
+
+            // add the GeoCoder Client.
+
+            services.AddTransient<GeocoderClient>(_ => new GeocoderClient(Configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

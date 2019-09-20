@@ -102,20 +102,19 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDescription1 = from.Description1;
 
             //store opening
-            to.IsReadyWorkers = from.IsReadyWorkers;
-            to.IsReadyValidInterest = from.IsReadyValidInterest;
-            to.IsReadyNameBranding = from.IsReadyNameBranding;
-            to.IsReadyDisplays = from.IsReadyDisplays;
-            to.IsReadyIntruderAlarm = from.IsReadyIntruderAlarm;
-            to.IsReadyFireAlarm = from.IsReadyFireAlarm;
-            to.IsReadyLockedCases = from.IsReadyLockedCases;
-            to.IsReadyLockedStorage = from.IsReadyLockedStorage;
-            to.IsReadyPerimeter = from.IsReadyPerimeter;
-            to.IsReadyRetailArea = from.IsReadyRetailArea;
-            to.IsReadyStorage = from.IsReadyStorage;
-            to.IsReadyExtranceExit = from.IsReadyExtranceExit;
-            to.IsReadySurveillanceNotice = from.IsReadySurveillanceNotice;
-            to.IsReadyProductNotVisibleOutside = from.IsReadyProductNotVisibleOutside;
+            to.AdoxioIsreadyworkers = from.IsReadyWorkers;
+            to.AdoxioIsreadynamebranding = from.IsReadyNameBranding;
+            to.AdoxioIsreadydisplays = from.IsReadyDisplays;
+            to.AdoxioIsreadyintruderalarm = from.IsReadyIntruderAlarm;
+            to.AdoxioIsreadyfirealarm = from.IsReadyFireAlarm;
+            to.AdoxioIsreadylockedcases = from.IsReadyLockedCases;
+            to.AdoxioIsreadylockedstorage = from.IsReadyLockedStorage;
+            to.AdoxioIsreadyperimeter = from.IsReadyPerimeter;
+            to.AdoxioIsreadyretailarea = from.IsReadyRetailArea;
+            to.AdoxioIsreadystorage = from.IsReadyStorage;
+            to.AdoxioIsreadyentranceexit = from.IsReadyExtranceExit;
+            to.AdoxioIsreadysurveillancenotice = from.IsReadySurveillanceNotice;
+            to.AdoxioIsreadyproductnotvisibleoutside = from.IsReadyProductNotVisibleOutside;
             to.AdoxioEstablishmentopeningdate = from.Establishmentopeningdate;
 
 
@@ -290,20 +289,19 @@ namespace Gov.Lclb.Cllb.Public.Models
                 ModifiedOn = dynamicsApplication.Modifiedon,
 
                 //store opening 
-                IsReadyValidInterest = dynamicsApplication.IsReadyValidInterest,
-                IsReadyWorkers = dynamicsApplication.IsReadyWorkers,
-                IsReadyNameBranding = dynamicsApplication.IsReadyNameBranding,
-                IsReadyDisplays = dynamicsApplication.IsReadyDisplays,
-                IsReadyIntruderAlarm = dynamicsApplication.IsReadyIntruderAlarm,
-                IsReadyFireAlarm = dynamicsApplication.IsReadyFireAlarm,
-                IsReadyLockedCases = dynamicsApplication.IsReadyLockedCases,
-                IsReadyLockedStorage = dynamicsApplication.IsReadyLockedStorage,
-                IsReadyPerimeter = dynamicsApplication.IsReadyPerimeter,
-                IsReadyRetailArea = dynamicsApplication.IsReadyRetailArea,
-                IsReadyStorage = dynamicsApplication.IsReadyStorage,
-                IsReadyExtranceExit = dynamicsApplication.IsReadyExtranceExit,
-                IsReadySurveillanceNotice = dynamicsApplication.IsReadySurveillanceNotice,
-                IsReadyProductNotVisibleOutside = dynamicsApplication.IsReadyProductNotVisibleOutside,
+                IsReadyWorkers = dynamicsApplication.AdoxioIsreadyworkers,
+                IsReadyNameBranding = dynamicsApplication.AdoxioIsreadynamebranding,
+                IsReadyDisplays = dynamicsApplication.AdoxioIsreadydisplays,
+                IsReadyIntruderAlarm = dynamicsApplication.AdoxioIsreadyintruderalarm,
+                IsReadyFireAlarm = dynamicsApplication.AdoxioIsreadyfirealarm,
+                IsReadyLockedCases = dynamicsApplication.AdoxioIsreadylockedcases,
+                IsReadyLockedStorage = dynamicsApplication.AdoxioIsreadylockedstorage,
+                IsReadyPerimeter = dynamicsApplication.AdoxioIsreadyperimeter,
+                IsReadyRetailArea = dynamicsApplication.AdoxioIsreadyretailarea,
+                IsReadyStorage = dynamicsApplication.AdoxioIsreadystorage,
+                IsReadyExtranceExit = dynamicsApplication.AdoxioIsreadyentranceexit,
+                IsReadySurveillanceNotice = dynamicsApplication.AdoxioIsreadysurveillancenotice,
+                IsReadyProductNotVisibleOutside = dynamicsApplication.AdoxioIsreadyproductnotvisibleoutside,
                 Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate
 
             };
