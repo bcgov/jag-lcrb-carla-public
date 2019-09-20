@@ -27,17 +27,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public IActionResult GetFeatureList()
         {
             var features = new List<string>();
-            if (!String.IsNullOrEmpty(_configuration["FEATURE_CRS_RENEWAL"]))
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_CRS_RENEWAL"]))
             {
                 features.Add("CRS-Renewal");
             }
 
-            if (!String.IsNullOrEmpty(_configuration["FEATURE_INDIGENOUS_NATION"]))
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_INDIGENOUS_NATION"]))
             {
                 features.Add("IndigenousNation");
             }
 
-            if (!String.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
             {
                 features.Add("Maps");
             }
