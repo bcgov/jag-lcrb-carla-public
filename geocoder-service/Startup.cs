@@ -170,7 +170,8 @@ namespace Gov.Lclb.Cllb.Geocoder
                 // Exclude all checks and return a 200-Ok.
                 Predicate = (_) => false
             });
-            
+
+            app.UseAuthentication();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
