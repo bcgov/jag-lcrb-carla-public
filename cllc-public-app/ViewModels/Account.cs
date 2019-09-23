@@ -133,4 +133,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         }
 
     }
+
+    public class TransferAccount
+    {
+        public string AccountId { get; set; }
+        public string AccountName { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AdoxioApplicantTypeCodes? BusinessType { get; set; }
+        public string ContactName { get; set; }
+    }
 }
