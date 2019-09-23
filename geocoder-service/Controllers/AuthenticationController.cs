@@ -18,6 +18,14 @@ namespace Gov.Lclb.Cllb.Geocoder.Controllers
             Configuration = configuration;
         }
 
+        // test point for authorization.  Returns OK if authorized.
+        [HttpGet("test")]
+        [Authorize]
+        public ActionResult Test()
+        {
+            return new OkResult();
+        }
+
         /// <summary>
         /// Returns a security token.
         /// </summary>
