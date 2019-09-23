@@ -144,7 +144,8 @@ namespace Gov.Lclb.Cllb.Public
                 .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
                 .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
                 .AddCheck<SharepointHealthCheck>("Sharepoint")
-                .AddCheck<DynamicsHealthCheck>("Dynamics");
+                .AddCheck<DynamicsHealthCheck>("Dynamics")
+                .AddCheck<GeocoderHealthCheck>("Geocoder");
 
             services.AddSession();
 
