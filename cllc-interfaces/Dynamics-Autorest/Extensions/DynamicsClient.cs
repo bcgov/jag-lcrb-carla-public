@@ -90,7 +90,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
-                string[] expand = { "adoxio_localgovindigenousnationid", "adoxio_application_SharePointDocumentLocations", "adoxio_application_adoxio_tiedhouseconnection_Application", "adoxio_AssignedLicence", "adoxio_ApplicationTypeId" };
+                string[] expand = { "adoxio_localgovindigenousnationid",
+                    "adoxio_application_SharePointDocumentLocations",
+                    "adoxio_application_adoxio_tiedhouseconnection_Application",
+                    "adoxio_AssignedLicence",
+                    "adoxio_ApplicationTypeId",
+                    "adoxio_LicenceFeeInvoice",
+                    "adoxio_Invoice"                    
+                };
 
                 // fetch from Dynamics.
                 result = await Applications.GetByKeyAsync(id, expand: expand);
