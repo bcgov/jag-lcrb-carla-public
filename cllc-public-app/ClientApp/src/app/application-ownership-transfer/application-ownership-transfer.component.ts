@@ -12,7 +12,7 @@ import { FeatureFlagService } from '@services/feature-flag.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationHTMLContent } from '@app/application/application.component';
-import { Account } from '@models/account.model';
+import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
 
@@ -51,7 +51,16 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   ngOnInit() {
     this.form = this.fb.group({
       establishmentName: [''],
-      accountId: ['', [Validators.required]],
+      establishmentAddressStreet: [''],
+      establishmentAddressCity: [''],
+      establishmentAddressPostalCode: [''],
+      establishmentParcelId: [''],
+      proposedOwner: this.fb.group({
+        accountId: ['', [Validators.required]],
+        accountName: [{value: '', disabled: true}],
+        contactName: [{value: '', disabled: true}],
+        businessType: [{value: '', disabled: true}],
+      }),
       transferConsent: ['', [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
@@ -71,7 +80,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
 
 
         this.licence = data;
-        this.form.patchValue({ establishmentName: this.licence.establishmentName });
+        this.form.patchValue(data);
       },
         () => {
           console.log('Error occured');
@@ -156,6 +165,10 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
       .indexOf(state) !== -1;
+  }
+
+  onAccountSelect(proposedAccount: TransferAccount) {
+    this.form.get('proposedOwner').patchValue(proposedAccount);
   }
 
 }
