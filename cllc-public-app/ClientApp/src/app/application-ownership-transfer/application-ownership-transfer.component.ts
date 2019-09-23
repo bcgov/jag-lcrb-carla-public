@@ -19,7 +19,8 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationHTMLContent } from '@app/application/application.component';
 import { Account } from '@models/account.model';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
-import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { LicenseDataService } from '@services/license-data.service';
+import { License } from '@models/license.model';
 
 @Component({
   selector: 'app-application-ownership-transfer',
@@ -27,14 +28,12 @@ import { ApplicationLicenseSummary } from '@models/application-license-summary.m
   styleUrls: ['./application-ownership-transfer.component.scss']
 })
 export class ApplicationOwnershipTransferComponent extends FormBase implements OnInit {
-  application: Application;
+  licence: License;
   form: FormGroup;
-  savedFormData: any;
-  applicationId: string;
+  licenceId: string;
   busy: Subscription;
   validationMessages: any[];
   showValidationMessages: boolean;
-  submittedApplications = 8;
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
@@ -47,30 +46,24 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     public snackBar: MatSnackBar,
     public router: Router,
     public applicationDataService: ApplicationDataService,
+    private licenseDataService: LicenseDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
     public establishmentWatchWordsService: EstablishmentWatchWordsService) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
+    this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get('licenceId'));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [''],
       establishmentName: [''],
-      accountId: [''],
-      transferConsent: [''],
+      accountId: ['', [Validators.required]],
+      transferConsent: ['', [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
-
-
-    this.applicationDataService.getSubmittedApplicationCount()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => this.submittedApplications = value);
-
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
@@ -80,26 +73,13 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
       });
 
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+    this.busy = this.licenseDataService.getLicenceById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
+      .subscribe((data: License) => {
 
-        this.application = data;
 
-        this.addDynamicContent();
-
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
-
-        this.form.patchValue(noNulls);
-        this.savedFormData = this.form.value;
+        this.licence = data;
+        this.form.patchValue({ establishmentName: this.licence.establishmentName });
       },
         () => {
           console.log('Error occured');
@@ -107,43 +87,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
       );
   }
 
-  private addDynamicContent() {
-    if (this.application.applicationType) {
-      this.htmlContent = {
-        title: this.application.applicationType.title,
-        preamble: this.getApplicationContent('Preamble'),
-        beforeStarting: this.getApplicationContent('BeforeStarting'),
-        nextSteps: this.getApplicationContent('NextSteps'),
-      };
-    }
-  }
 
-
-  private getApplicationContent(contentCartegory: string) {
-    let body = '';
-    const contents =
-      this.application.applicationType.contentTypes
-        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
-    if (contents.length > 0) {
-      body = contents[0].body;
-    }
-    return body;
-  }
-
-
-
-  canDeactivate(): Observable<boolean> | boolean {
-    const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
-    if (formDidntChange) {
-      return true;
-    } else {
-      const subj = new Subject<boolean>();
-      this.busy = this.save(true).subscribe(res => {
-        subj.next(res);
-      });
-      return subj;
-    }
-  }
 
 
 
@@ -152,19 +96,15 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    const saveData = this.form.value;
-    return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
-    ).pipe(takeWhile(() => this.componentActive))
+    return this.licenseDataService.initiateTransfer(this.licence.id, this.form.get('accountId').value)
+      .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
-        this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        this.snackBar.open('Error submitting transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         return of(false);
       }))
       .pipe(mergeMap(() => {
-        this.savedFormData = saveData;
-        this.updateApplicationInStore();
         if (showProgress === true) {
-          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.snackBar.open('Transfer has been initiated', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         }
         return of(true);
       }));
@@ -173,7 +113,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
 
 
   updateApplicationInStore() {
-    this.applicationDataService.getApplicationById(this.applicationId)
+    this.applicationDataService.getApplicationById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: Application) => {
         this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
@@ -181,40 +121,21 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
       );
   }
 
-   /**
-   * Submit the application for payment
-   * */
-  submit_application() {
+  /**
+  * Initiate licence transfer
+  * */
+  initiateTransfer() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
-    } else if (JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value)) {
-      this.submitPayment();
     } else {
       this.busy = this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.submitPayment();
+            this.router.navigate(['/dashboard']);
           }
         });
     }
-  }
-
-  /**
-   * Redirect to payment processing page (Express Pay / Bambora service)
-   * */
-  private submitPayment() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(res => {
-        const jsonUrl = res;
-        window.location.href = jsonUrl['url'];
-        return jsonUrl['url'];
-      }, err => {
-        if (err._body === 'Payment already made') {
-          this.snackBar.open('Application payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        }
-      });
   }
 
   isValid(): boolean {
@@ -234,44 +155,6 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
       this.validationMessages.push('Some required fields have not been completed');
     }
     return valid;
-  }
-
-
-  /**
-   * Dialog to confirm the application cancellation (status changed to "Termindated")
-   */
-  cancelApplication() {
-
-    const dialogConfig = {
-      disableClose: true,
-      autoFocus: true,
-      width: '400px',
-      height: '200px',
-      data: {
-        establishmentName: this.application.establishmentName,
-        applicationName: this.application.name
-      }
-    };
-
-    // open dialog, get reference and process returned data from dialog
-    const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
-    dialogRef.afterClosed()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(cancelApplication => {
-        if (cancelApplication) {
-          // delete the application.
-          this.busy = this.applicationDataService.cancelApplication(this.applicationId)
-            .pipe(takeWhile(() => this.componentActive))
-            .subscribe(() => {
-              this.savedFormData = this.form.value;
-              this.router.navigate(['/dashboard']);
-            },
-              () => {
-                this.snackBar.open('Error cancelling the application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-                console.error('Error cancelling the application');
-              });
-        }
-      });
   }
 
   businessTypeIsPartnership(): boolean {

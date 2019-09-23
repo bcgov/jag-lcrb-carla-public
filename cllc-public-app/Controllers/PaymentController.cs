@@ -24,19 +24,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private readonly BCEPWrapper _bcep;
 
+        private readonly GeocoderClient _geocoderClient;
+
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        
 
         public PaymentController(IConfiguration configuration,
                                  IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory,
-                                 IDynamicsClient dynamicsClient, BCEPWrapper bcep)
+                                 IDynamicsClient dynamicsClient, BCEPWrapper bcep, GeocoderClient geocoderClient)
         {
             _configuration = configuration;
             _bcep = bcep;
             _dynamicsClient = dynamicsClient;            
             _httpContextAccessor = httpContextAccessor;
+            _geocoderClient = geocoderClient;
             _logger = loggerFactory.CreateLogger(typeof(PaymentController));
         }
 
@@ -54,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id, false);
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id);
             if (adoxioApplication == null)
             {
                 return NotFound();
@@ -86,10 +90,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fail 
                 throw (odee);
             }
-            patchApplication = await GetDynamicsApplication(id, false);
+            var application = await GetDynamicsApplication(id);
 
             // now load the invoice for this application to get the pricing
-            string invoiceId = patchApplication._adoxioInvoiceValue;
+            string invoiceId = application._adoxioInvoiceValue;
             int retries = 0;
             while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
             {
@@ -98,8 +102,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 retries++;
                 _logger.LogDebug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
-                patchApplication = await GetDynamicsApplication(id, false);
-                invoiceId = patchApplication._adoxioInvoiceValue;
+                application = await GetDynamicsApplication(id);
+                invoiceId = application._adoxioInvoiceValue;
             }
             _logger.LogDebug("Created invoice for application = " + invoiceId);
 
@@ -144,16 +148,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id, true);
+            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
 
-            if (adoxioApplication == null)
+            if (application == null)
             {
                 return NotFound();
             }
 
-            if (adoxioApplication.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+            if (application.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
             {
-                if (adoxioApplication.AdoxioLicencefeeinvoicepaid == false)
+                if (application.AdoxioLicencefeeinvoicepaid == false)
                 {
                     try
                     {
@@ -177,10 +181,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound("Payment already made");
             }
 
-            if (!string.IsNullOrEmpty(adoxioApplication._adoxioLicencefeeinvoiceValue))
+            if (!string.IsNullOrEmpty(application._adoxioLicencefeeinvoiceValue))
             {
 
-                MicrosoftDynamicsCRMinvoice invoice2 = await _dynamicsClient.GetInvoiceById(Guid.Parse(adoxioApplication._adoxioLicencefeeinvoiceValue));
+                MicrosoftDynamicsCRMinvoice invoice2 = await _dynamicsClient.GetInvoiceById(Guid.Parse(application._adoxioLicencefeeinvoiceValue));
                 if (invoice2 != null && invoice2.Statecode == (int)Adoxio_invoicestates.Cancelled)
                 {
                     // set the application invoice trigger to create an invoice                    
@@ -204,10 +208,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // fail 
                         throw (odee);
                     }
-                    adoxioApplication = await GetDynamicsApplication(id, false);
+                    application = await GetDynamicsApplication(id);
                 }
             }
-            string invoiceId = adoxioApplication._adoxioLicencefeeinvoiceValue;
+            string invoiceId = application._adoxioLicencefeeinvoiceValue;
 
 
 
@@ -219,8 +223,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 retries++;
                 _logger.LogDebug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
-                adoxioApplication = await GetDynamicsApplication(id, false);
-                invoiceId = adoxioApplication._adoxioInvoiceValue;
+                application = await GetDynamicsApplication(id);
+                invoiceId = application._adoxioInvoiceValue;
             }
             _logger.LogDebug("Created invoice for application = " + invoiceId);
 
@@ -265,14 +269,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("verify/{id}")]
         public async Task<IActionResult> VerifyPaymentStatus(string id)
         {
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id, false);
-            if (adoxioApplication == null)
+            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            if (application == null)
             {
                 return NotFound();
             }
 
             // load the invoice for this application
-            string invoiceId = adoxioApplication._adoxioInvoiceValue;
+            string invoiceId = application._adoxioInvoiceValue;
             Guid invoiceGuid = Guid.Parse(invoiceId);
             _logger.LogDebug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
@@ -415,7 +419,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("verify/licence-fee/{id}")]
         public async Task<IActionResult> VerifyLicenceFeePaymentStatus(string id)
         {
-            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id, false);
+            MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await GetDynamicsApplication(id);
             if (adoxioApplication == null)
             {
                 return NotFound();
@@ -495,7 +499,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw (odee);
                     }
 
-
+                    // trigger geocoding
+                    if (!string.IsNullOrEmpty (_configuration["FEATURE_MAPS"]))
+                    {
+                        _geocoderClient.GeocodeEstablishment(adoxioApplication._adoxioLicenceestablishmentValue, _logger);
+                    }
+                    
                 }
                 // if payment failed:
                 else
@@ -554,7 +563,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(response);
         }
 
-        private async Task<MicrosoftDynamicsCRMadoxioApplication> GetDynamicsApplication(string id, bool getInvoice)
+        private async Task<MicrosoftDynamicsCRMadoxioApplication> GetDynamicsApplication(string id)
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -562,17 +571,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.LogDebug("Application id = " + id);
             _logger.LogDebug("User id = " + userSettings.AccountId);
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice" };
-            MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = null;
-            if (getInvoice)
-            {
-                dynamicsApplication = await _dynamicsClient.Applications.GetByKeyAsync(Guid.Parse(id).ToString(), expand: expand);
-            }
-            else
-            {
-                dynamicsApplication = await _dynamicsClient.Applications.GetByKeyAsync(Guid.Parse(id).ToString());
-            }
+            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice", "adoxio_Establishment" };
 
+            MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren( Guid.Parse(id) );
+            
             if (dynamicsApplication == null)
             {
                 return null;

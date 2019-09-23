@@ -1,16 +1,26 @@
 ﻿using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Linq;
+using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,14 +43,47 @@ namespace Gov.Lclb.Cllb.Geocoder
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopController"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("Geocoder"));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(config =>
+            {
+                if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                    config.Filters.Add(new AuthorizeFilter(policy));
+                }
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             // Other ConfigureServices() code...
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "JAG LCRB GeoCoder Service", Version = "v1" });
             });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders();
+
+            if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
+            {
+                // Configure JWT authentication
+                services.AddAuthentication(o =>
+                {
+                    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(o =>
+                {
+                    o.SaveToken = true;
+                    o.RequireHttpsMetadata = false;
+                    o.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        //    RequireExpirationTime = false,
+                        ValidIssuer = Configuration["JWT_VALID_ISSUER"],
+                        ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
+                    };
+                });
+            }
 
             services.AddHangfire(config =>
             {
@@ -51,11 +94,8 @@ namespace Gov.Lclb.Cllb.Geocoder
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks()
+                 .AddCheck("geocoder-service", () => HealthCheckResult.Healthy("OK"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,8 +143,35 @@ namespace Gov.Lclb.Cllb.Geocoder
                 SetupHangfireJobs(app, loggerFactory);
             }
 
+            var healthCheckOptions = new HealthCheckOptions
+            {
+                ResponseWriter = async (c, r) =>
+                {
+                    c.Response.ContentType = MediaTypeNames.Application.Json;
+                    var result = JsonConvert.SerializeObject(
+                       new
+                       {
+                           checks = r.Entries.Select(e =>
+                      new {
+                          description = e.Key,
+                          status = e.Value.Status.ToString(),
+                          responseTime = e.Value.Duration.TotalMilliseconds
+                      }),
+                           totalResponseTime = r.TotalDuration.TotalMilliseconds
+                       });
+                    await c.Response.WriteAsync(result);
+                }
+            };
 
-            app.UseHttpsRedirection();
+            app.UseHealthChecks("/hc/ready", healthCheckOptions);
+
+            app.UseHealthChecks("/hc/live", new HealthCheckOptions
+            {
+                // Exclude all checks and return a 200-Ok.
+                Predicate = (_) => false
+            });
+
+            app.UseAuthentication();
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
