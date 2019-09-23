@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ProductInventoryPackagedComponent } from './product-inventory-packaged.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MatTableModule } from '@angular/material';
 
 describe('ProductInventoryPackagedComponent', () => {
   let component: ProductInventoryPackagedComponent;
@@ -8,7 +9,9 @@ describe('ProductInventoryPackagedComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductInventoryPackagedComponent ]
+      declarations: [ ProductInventoryPackagedComponent ],
+      imports: [ MatTableModule ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
