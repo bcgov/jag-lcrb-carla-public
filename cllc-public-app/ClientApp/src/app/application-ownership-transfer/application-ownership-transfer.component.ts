@@ -97,7 +97,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    return this.licenseDataService.initiateTransfer(this.licence.id, this.form.get('accountId').value)
+    return this.licenseDataService.initiateTransfer(this.licence.id, this.form.get('proposedOwner.accountId').value)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error submitting transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -133,6 +133,11 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     for (const c in this.form.controls) {
       if (typeof (this.form.get(c).markAsTouched) === 'function') {
         this.form.get(c).markAsTouched();
+      }
+    }
+    for (const c in (<FormGroup>this.form.get('proposedOwner')).controls) {
+      if (typeof (this.form.get(`proposedOwner.${c}`).markAsTouched) === 'function') {
+        this.form.get(`proposedOwner.${c}`).markAsTouched();
       }
     }
     this.showValidationMessages = false;

@@ -89,6 +89,7 @@
           [valid]="isValidOrNotTouched('proposedOwner.accountId')">
           <app-account-picker (valueSelected)="onAccountSelect($event)"></app-account-picker>
         </app-field>
+        
         <label>Account: </label> <span> {{form.get('proposedOwner.accountName')?.value}}</span> <br>
         <label>Type: </label> <span> {{form.get('proposedOwner.businessType')?.value}}</span><br>
         <label>Contact Person: </label> <span> {{form.get('proposedOwner.contactName')?.value}}</span><br>
