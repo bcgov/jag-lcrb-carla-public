@@ -69,6 +69,8 @@ namespace Gov.Lclb.Cllb.Geocoder
                 // Configure JWT authentication
                 services.AddAuthentication(o =>
                 {
+                    o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    o.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
                     o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 }).AddJwtBearer(o =>
