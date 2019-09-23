@@ -17,14 +17,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize]
     public class FederalTrackingController : ControllerBase
     {
+        private readonly string DOCUMENT_LIBRARY = "Federal Reporting";
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IConfiguration _configuration;
+        private readonly SharePointFileManager _sharepoint;
         private readonly ILogger _logger;
 
-        public FederalTrackingController(IDynamicsClient dynamicsClient, IConfiguration configuration, ILoggerFactory loggerFactory)
+        public FederalTrackingController(IDynamicsClient dynamicsClient, IConfiguration configuration, ILoggerFactory loggerFactory, SharePointFileManager sharepoint)
         {
             _dynamicsClient = dynamicsClient;
             _configuration = configuration;
+            _sharepoint = sharepoint;
             _logger = loggerFactory.CreateLogger(typeof(FederalTrackingController));
         }
 
@@ -55,8 +58,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         ReportingPeriodMonth = monthStr,
                         ReportingPeriodYear = yearStr,
-                        RetailerDistributor = report.AdoxioRetailerdistributor?.ToString(),
+                        RetailerDistributor = report.AdoxioRetailerdistributor?.ToString() ?? "1",
+                        //TBR
                         CompanyName = report.AdoxioLicenseeId?.ToString(),
+                        //TBR
                         SiteID = "BC"+report.AdoxioLicencenumber,
                         City = report.AdoxioCity,
                         PostalCode = report.AdoxioPostalcode,
@@ -76,17 +81,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     monthlyReports.Add(export);
                 }
-                using (var writer = new StreamWriter("/tmp/test.csv"))
+
+                string filePath = "";
+                using (var mem = new MemoryStream())
+                using (var writer = new StreamWriter(mem))
                 using (var csv = new CsvWriter(writer))
                 {
                     csv.Configuration.RegisterClassMap<FederalTrackingMonthlyExportMap>();
                     csv.WriteRecords(monthlyReports);
+                    
+                    writer.Flush();
+                    mem.Position = 0;
+                    string filename = $"{yearStr}-{monthStr}-CannabisTrackingReport.csv";
+                    bool result = _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv").GetAwaiter().GetResult();
+                    string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
+                    filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + url + filename;
                 }
 
-                return new JsonResult(new Dictionary<string, int>{
-                    { "found", resp.Value.Count },
-                    { "month", month },
-                    { "year", year }
+                return new JsonResult(new Dictionary<string, string>{
+                    { "file", filePath },
+                    { "count", resp.Value.Count.ToString() },
+                    { "month", month.ToString() },
+                    { "year", year.ToString() }
                 });
             }
             catch (OdataerrorException odee)
@@ -98,7 +114,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(odee.Response.Content);
                 return new BadRequestResult();
             }
-            return new NotFoundResult();
+            catch (SharePointRestException e)
+            {
+                _logger.LogError("Error saving csv to sharepoint");
+                _logger.LogError("Request:");
+                _logger.LogError(e.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(e.Response.Content);
+                return new BadRequestResult();
+            }
         }
     }
 }
