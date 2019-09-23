@@ -54,11 +54,17 @@ namespace Gov.Lclb.Cllb.Geocoder
 
         private async Task GeocodeEstablishment(PerformContext hangfireContext, MicrosoftDynamicsCRMadoxioEstablishment establishment)
         {
-            if (establishment != null)
+            if (establishment != null && ! string.IsNullOrEmpty(establishment.AdoxioAddresscity) )
             {
                 string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
                 // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
                 var output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
+                // if there are a lot of faults just query the city.
+                if (output.Features[0].Properties.Faults.Count > 1) 
+                {
+                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: establishment.AdoxioAddresscity);
+                }
+
                 // get the lat and long for the pin.
                 double? longData = output.Features[0].Geometry.Coordinates[0];
                 double? latData = output.Features[0].Geometry.Coordinates[1];

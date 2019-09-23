@@ -80,9 +80,8 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'ownership-transfer/:applicationId',
+    path: 'ownership-transfer/:licenceId',
     component: ApplicationOwnershipTransferComponent,
-    canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
   {

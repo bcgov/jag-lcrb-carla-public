@@ -4,7 +4,7 @@ import { User } from './models/user.model';
 import { isDevMode } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
-import { filter, takeWhile } from 'rxjs/operators';
+import { filter, takeWhile, map } from 'rxjs/operators';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LegalEntity } from '@models/legal-entity.model';
 import { AccountDataService } from '@services/account-data.service';
@@ -24,6 +24,7 @@ export class AppComponent extends FormBase implements OnInit {
   public currentUser: User;
   public isNewUser: boolean;
   public isDevMode: boolean;
+  public showMap: boolean;
   isAssociate = false;
   account: Account;
 
@@ -34,6 +35,9 @@ export class AppComponent extends FormBase implements OnInit {
     private accountDataService: AccountDataService,
     public featureFlagService: FeatureFlagService) {
     super();
+    featureFlagService.featureOn('Maps')
+      .subscribe(x => this.showMap = x);
+    
     this.isDevMode = isDevMode();
     this.router.events
       .pipe(takeWhile(() => this.componentActive))
