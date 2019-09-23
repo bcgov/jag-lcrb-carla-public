@@ -502,7 +502,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // trigger geocoding
                     if (!string.IsNullOrEmpty (_configuration["FEATURE_MAPS"]))
                     {
-                        _geocoderClient.GeocodeEstablishment(adoxioApplication._adoxioLicenceestablishmentValue, _logger);
+                        await _geocoderClient.GeocodeEstablishment(adoxioApplication._adoxioLicenceestablishmentValue, _logger);
                     }
                     
                 }
