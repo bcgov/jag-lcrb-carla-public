@@ -11,6 +11,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { Account } from '@models/account.model';
+import { of } from 'rxjs';
 
 let accountDataServiceStub: Partial<AccountDataService>;
 let featureFlagServiceStub: Partial<FeatureFlagService>;
@@ -25,7 +26,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
 
     accountDataServiceStub = {};
-    featureFlagServiceStub = {};
+    featureFlagServiceStub = {featureOn: () => of(true)};
 
     TestBed.configureTestingModule({
       declarations: [

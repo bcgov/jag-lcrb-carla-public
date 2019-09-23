@@ -77,8 +77,8 @@ export class Account {
         name = 'Indigenous Nation';
         break;
       case 'PublicCorporation':
-          name = 'Public Corporation';
-          break;
+        name = 'Public Corporation';
+        break;
       case 'PrivateCorporation':
       case 'UnlimitedLiabilityCorporation':
       case 'LimitedLiabilityCorporation':
@@ -90,5 +90,13 @@ export class Account {
     }
     return name;
   }
+}
+
+
+export class TransferAccount {
+  accountId: string;
+  accountName: string;
+  businessType: string;
+  contactName: string;
 }
 
