@@ -67,5 +67,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             
         }
+
+
+        /// <summary>
+        /// GetPDF
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<bool> TestAuthentication()
+        {
+            bool result = false;
+
+            HttpRequestMessage endpointRequest =
+                new HttpRequestMessage(HttpMethod.Get, BaseUri + "/api/authentication/test");
+
+            // make the request.
+            try
+            {
+                var response = await client.SendAsync(endpointRequest);
+                HttpStatusCode _statusCode = response.StatusCode;
+
+                if (_statusCode == HttpStatusCode.OK)
+                {
+                    result = true;
+                }
+            }
+            catch ( Exception )
+            {
+
+            }
+            
+
+            return result;
+
+        }
     }
 }
