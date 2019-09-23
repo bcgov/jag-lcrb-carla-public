@@ -9,7 +9,6 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ApplicationDataService } from '@services/application-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
@@ -20,9 +19,11 @@ import { AppState } from '@app/app-state/models/app-state';
 import { ActivatedRouteStub } from './../testing/activated-route-stub';
 import { FieldComponent } from '@shared/field/field.component';
 import { Account } from '@models/account.model';
+import { LicenseDataService } from '@services/license-data.service';
+import { License } from '@models/license.model';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
-let applicationDataServiceStub: Partial<ApplicationDataService>;
+let licenceDataServiceStub: Partial<LicenseDataService>;
 let dynamicsDataServiceStub: Partial<DynamicsDataService>;
 let tiedHouseConnectionsDataServiceStub: Partial<TiedHouseConnectionsDataService>;
 let matDialogStub: Partial<MatDialog>;
@@ -32,7 +33,7 @@ let activatedRouteStub: ActivatedRouteStub;
 describe('ApplicationOwnershipTransferComponent', () => {
   let component: ApplicationOwnershipTransferComponent;
   let fixture: ComponentFixture<ApplicationOwnershipTransferComponent>;
-  let applicationService: ApplicationDataService;
+  let licenceService: LicenseDataService;
 
   const account = new Account();
   account.businessType = 'PublicCorporation';
@@ -43,15 +44,8 @@ describe('ApplicationOwnershipTransferComponent', () => {
 
   beforeEach(async(() => {
     paymentDataServiceStub = {};
-    applicationDataServiceStub = {
-      getSubmittedApplicationCount: () => of(0),
-      cancelApplication: () => of(null),
-      updateApplication: () => of(null),
-      getApplicationById: () => of(<Application>{
-        applicationType: <any>{
-          contentTypes: []
-        }
-      }),
+    licenceDataServiceStub = {
+      getLicenceById: () => of(<License>{}),
 
     };
     dynamicsDataServiceStub = { getRecord: () => of([]) };
@@ -72,7 +66,7 @@ describe('ApplicationOwnershipTransferComponent', () => {
         provideMockStore({ initialState }),
         FormBuilder,
         { provide: PaymentDataService, useValue: paymentDataServiceStub },
-        { provide: ApplicationDataService, useValue: applicationDataServiceStub },
+        { provide: LicenseDataService, useValue: licenceDataServiceStub },
         { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
         { provide: TiedHouseConnectionsDataService, useValue: tiedHouseConnectionsDataServiceStub },
         { provide: MatDialog, useValue: matDialogStub },
@@ -83,7 +77,7 @@ describe('ApplicationOwnershipTransferComponent', () => {
     })
       .compileComponents();
 
-    applicationService = TestBed.get(ApplicationDataService);
+    licenceService = TestBed.get(LicenseDataService);
   }));
 
   beforeEach(() => {
