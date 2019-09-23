@@ -1,24 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBase } from '@shared/form-base';
-import { Application } from '@models/application.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription, Observable, Subject, of, forkJoin } from 'rxjs';
-import {
-  ApplicationCancellationDialogComponent
-} from '@app/applications-and-licences/applications-and-licences.component';
+import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationHTMLContent } from '@app/application/application.component';
 import { Account } from '@models/account.model';
-import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
 
@@ -42,10 +36,8 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
 
 
   constructor(private store: Store<AppState>,
-    private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
-    public applicationDataService: ApplicationDataService,
     private licenseDataService: LicenseDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
@@ -108,17 +100,6 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
         }
         return of(true);
       }));
-  }
-
-
-
-  updateApplicationInStore() {
-    this.applicationDataService.getApplicationById(this.licenceId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      }
-      );
   }
 
   /**
