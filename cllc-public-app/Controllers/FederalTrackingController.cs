@@ -72,23 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     foreach (MicrosoftDynamicsCRMadoxioCannabisinventoryreport inventoryReport in invResp.Value)
                     {
                         MicrosoftDynamicsCRMadoxioCannabisproductadmin product = _dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
-                        if(product.AdoxioName == "Dried Cannabis")
-                        {
-                            export.DriedCannabisPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
-                            export.DriedCannabisPackagedAdditionsReceivedDomestic = inventoryReport.AdoxioQtyreceiveddomestic ?? 0;
-                            export.DriedCannabisPackagedAdditionsReceivedReturned = inventoryReport.AdoxioQtyreceivedreturns ?? 0;
-                            export.DriedCannabisPackagedAdditionsOther = inventoryReport.AdoxioQtyreceivedother ?? 0;
-                            export.DriedCannabisPackagedReductionsShippedDomestic = inventoryReport.AdoxioQtyshippeddomestic ?? 0;
-                            export.DriedCannabisPackagedReductionsShippedReturned = inventoryReport.AdoxioQtyshippedreturned ?? 0;
-                            export.DriedCannabisPackagedReductionsDestroyed = inventoryReport.AdoxioQtydestroyed ?? 0;
-                            export.DriedCannabisPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
-                            export.DriedCannabisPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
-                            export.DriedCannabisPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                            export.DriedCannabisPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                            export.DriedCannabisPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                            export.DriedCannabisPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
-                            export.DriedCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                        }
+                        export.PopulateProduct(inventoryReport, product);
                     }
                     monthlyReports.Add(export);
                 }
