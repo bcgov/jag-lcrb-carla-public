@@ -256,6 +256,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
+
+        public MicrosoftDynamicsCRMadoxioLocalgovindigenousnation GetLginById(string id)
+        {
+            MicrosoftDynamicsCRMadoxioLocalgovindigenousnation result = null;
+
+            try
+            {
+                result = this.Localgovindigenousnations.GetByKey(id);
+            }
+            catch (OdataerrorException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+
         public async Task<MicrosoftDynamicsCRMadoxioWorker> GetWorkerById(string id)
         {
             MicrosoftDynamicsCRMadoxioWorker result;
