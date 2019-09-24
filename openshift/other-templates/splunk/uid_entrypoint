@@ -16,8 +16,8 @@ if [ ! -f "/opt/splunk/etc/splunk.version" ]; then
 fi
 
 if [ ! -f "/opt/splunk/var/lib/splunk/audit/db" ]; then        
-  echo Updating /opt/splunk/var/lib/splunk
-  (cd /opt/splunk-var; tar cf - *) | (cd /opt/splunk/var/lib/splunk; tar xf -)        
+  echo Updating /opt/splunk/var
+  (cd /opt/splunk-var; tar cf - *) | (cd /opt/splunk/var; tar xf -)        
 fi
 
 
