@@ -31,7 +31,9 @@ export class MapComponent extends FormBase implements OnInit {
       name: ['']
     });
     // get the json from the map service.
-    this.establishmentDataService.getEstablishmentsMap()
+      this.busy =
+      this.establishmentDataService.getEstablishmentsMap()
+      .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => {
         this.mapData = value;
 
@@ -53,7 +55,18 @@ export class MapComponent extends FormBase implements OnInit {
         this.establishmentMap.drawAndFitBounds(this.mapData);
         this.hasData = true;        
         });
-    }
+  }
+
+  resetMap() {
+    this.busy =
+      this.establishmentDataService.getEstablishmentsMapSearch("")
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(value => {
+          this.mapData = value;
+          this.establishmentMap.drawAndFitBounds(this.mapData);
+          this.hasData = true;
+        });
+  }
   }
 
   
