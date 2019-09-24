@@ -22,7 +22,9 @@ RUN /sbin/entrypoint.sh start-and-exit
 USER root
 
 RUN cp -ar /opt/splunk/etc /opt/splunk/etc-default && \
-  chmod -R a+rx /opt/splunk/etc-default
+  chmod -R a+rx /opt/splunk/etc-default && \
+  cp -ar /opt/splunk/var/lib/splunk /opt/splunk-var && \
+  cp -ar /opt/splunk/etc /opt/splunk-etc-configured
 
 USER ansible
 
