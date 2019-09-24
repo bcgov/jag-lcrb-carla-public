@@ -13,10 +13,12 @@
           <app-field label="Search by city or establishment name">
             <input type="text" [(ngModel)]="search" size="40" style="padding-right: 20px" (keyup.enter)="searchMap()">
             &nbsp;
-            <button style="padding-left: 20px" class="btn btn-primary" (click)="searchMap()">
+            <button style="margin-right:10px; padding-left: 20px" class="btn btn-primary" (click)="searchMap()">
               <i class="fas fa-search" style="margin-right: 10px;"></i>
               Search
-            </button>
+            </button> <button class="btn btn-primary" (click)="resetMap()">  
+  Reset Map
+</button>
           </app-field>
 
           <p>Use the General Search to find non-medical cannabis retail stores within the province. When search results are returned you can click on the store name or the icon on the map for more information</p>
