@@ -595,8 +595,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        //[JsonProperty(PropertyName = "birthdate")]
-        //public System.DateTimeOffset? Birthdate { get; set; }
+        // [JsonProperty(PropertyName = "birthdate")]
+        // public System.DateTimeOffset? Birthdate { get; set; }
 
         /// <summary>
         /// </summary>
