@@ -9,8 +9,11 @@ if [ $? -eq 1 ]; then
   fi
 fi
 # ensure config exists.
-touch /opt/splunk/etc/splunk.version
-/sbin/updateetc.sh
+touch 
+if [[ ! -f "/opt/splunk/etc/splunk.version" ]]; then        
+  echo Updating /opt/splunk/etc
+  (cd /opt/splunk-etc; tar cf - *) | (cd /opt/splunk/etc; tar xf -)        
+fi
 
 echo "***** Updating config *****"
 sed -i -e '/enableSplunkdSSL =/ s/= .*/= false/' /opt/splunk/etc/system/local/server.conf
