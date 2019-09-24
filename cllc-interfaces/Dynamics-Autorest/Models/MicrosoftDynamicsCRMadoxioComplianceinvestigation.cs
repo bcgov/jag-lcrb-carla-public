@@ -29,14 +29,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioComplianceinvestigation class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioComplianceinvestigation(System.DateTimeOffset? adoxioCompleteddate = default(System.DateTimeOffset?), string adoxioInvestigationenforcementaction = default(string), string adoxioInvestigationsummary = default(string), int? utcconversiontimezonecode = default(int?), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioApproveddate = default(System.DateTimeOffset?), string adoxioJobnumber = default(string), string _adoxioLicenseeidValue = default(string), string _adoxioAreaidValue = default(string), string adoxioInvestigationbackground = default(string), string _modifiedbyValue = default(string), string _adoxioLicenceidValue = default(string), string adoxioAssigneddatetext = default(string), string _adoxioRegionidValue = default(string), string _adoxioRegionalmanageridValue = default(string), string adoxioInvestigationexhibits = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string adoxioRmsummary = default(string), int? newRmnotapprovedreason = default(int?), System.DateTimeOffset? adoxioRmreminderemailsentdate = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _adoxioEstablishmentidValue = default(string), int? adoxioRecommendedaction = default(int?), int? newIsrmapproved = default(int?), string adoxioInvestigationoffences = default(string), System.DateTimeOffset? adoxioDateinvestigationassigned = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioInvestigationwitnessstatements = default(string), string adoxioInvestigationdescription = default(string), string _owninguserValue = default(string), System.DateTimeOffset? adoxioDateinvestigationconcluded = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _adoxioComplaintidValue = default(string), string adoxioComplianceinvestigationid = default(string), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioComplianceinvestigationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplianceinvestigationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplianceinvestigationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioComplianceinvestigationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioComplianceinvestigationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaintId = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioInvestigationInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMincident> adoxioInvestigationInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioInvestigationContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMadoxioRelatedparty> adoxioInvestigationRelatedparties = default(IList<MicrosoftDynamicsCRMadoxioRelatedparty>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioComplianceinvestigationSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMadoxioWitness> adoxioInvestigationwitnesses = default(IList<MicrosoftDynamicsCRMadoxioWitness>), MicrosoftDynamicsCRMsystemuser adoxioRegionalManagerId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> adoxioComplianceinvestigationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioComplianceinvestigationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioComplianceinvestigationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioComplianceinvestigationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioComplianceinvestigationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioComplianceinvestigationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioComplianceinvestigationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioComplianceinvestigationTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioComplianceinvestigationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioComplianceinvestigationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioComplianceinvestigationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        public MicrosoftDynamicsCRMadoxioComplianceinvestigation(System.DateTimeOffset? adoxioCompleteddate = default(System.DateTimeOffset?), string adoxioInvestigationenforcementaction = default(string), string adoxioInvestigationsummary = default(string), int? utcconversiontimezonecode = default(int?), long? versionnumber = default(long?), string adoxioComplianceinvestigationid = default(string), System.DateTimeOffset? adoxioApproveddate = default(System.DateTimeOffset?), string adoxioJobnumber = default(string), string _adoxioLicenseeidValue = default(string), string _adoxioAreaidValue = default(string), string adoxioInvestigationbackground = default(string), string _modifiedbyValue = default(string), string _adoxioLicenceidValue = default(string), string adoxioAssigneddatetext = default(string), int? timezoneruleversionnumber = default(int?), string _adoxioRegionidValue = default(string), string _adoxioRegionalmanageridValue = default(string), string adoxioInvestigationexhibits = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string adoxioRmsummary = default(string), int? newRmnotapprovedreason = default(int?), int? adoxioInvestigationoutcome = default(int?), System.DateTimeOffset? adoxioRmreminderemailsentdate = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _owneridValue = default(string), string _owningbusinessunitValue = default(string), string _adoxioEstablishmentidValue = default(string), int? adoxioRecommendedaction = default(int?), int? newIsrmapproved = default(int?), string adoxioInvestigationoffences = default(string), System.DateTimeOffset? adoxioDateinvestigationassigned = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioInvestigationwitnessstatements = default(string), string adoxioInvestigationdescription = default(string), string _owninguserValue = default(string), System.DateTimeOffset? adoxioDateinvestigationconcluded = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _adoxioComplaintidValue = default(string), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioComplianceinvestigationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplianceinvestigationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioComplianceinvestigationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioComplianceinvestigationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioComplianceinvestigationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioComplaint adoxioComplaintId = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> adoxioInvestigationInvestigationactivities = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMincident> adoxioInvestigationInspections = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioInvestigationContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioArea adoxioAreaId = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMadoxioRelatedparty> adoxioInvestigationRelatedparties = default(IList<MicrosoftDynamicsCRMadoxioRelatedparty>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioComplianceinvestigationSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMadoxioWitness> adoxioInvestigationwitnesses = default(IList<MicrosoftDynamicsCRMadoxioWitness>), MicrosoftDynamicsCRMsystemuser adoxioRegionalManagerId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> adoxioComplianceinvestigationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioComplianceinvestigationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioComplianceinvestigationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioComplianceinvestigationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioComplianceinvestigationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioComplianceinvestigationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioComplianceinvestigationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioComplianceinvestigationTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioComplianceinvestigationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioComplianceinvestigationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioComplianceinvestigationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMannotation> adoxioComplianceinvestigationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>))
         {
             AdoxioCompleteddate = adoxioCompleteddate;
             AdoxioInvestigationenforcementaction = adoxioInvestigationenforcementaction;
             AdoxioInvestigationsummary = adoxioInvestigationsummary;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Versionnumber = versionnumber;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioComplianceinvestigationid = adoxioComplianceinvestigationid;
             AdoxioApproveddate = adoxioApproveddate;
             AdoxioJobnumber = adoxioJobnumber;
             this._adoxioLicenseeidValue = _adoxioLicenseeidValue;
@@ -45,6 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._modifiedbyValue = _modifiedbyValue;
             this._adoxioLicenceidValue = _adoxioLicenceidValue;
             AdoxioAssigneddatetext = adoxioAssigneddatetext;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
             this._adoxioRegionidValue = _adoxioRegionidValue;
             this._adoxioRegionalmanageridValue = _adoxioRegionalmanageridValue;
             AdoxioInvestigationexhibits = adoxioInvestigationexhibits;
@@ -54,6 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Statuscode = statuscode;
             AdoxioRmsummary = adoxioRmsummary;
             NewRmnotapprovedreason = newRmnotapprovedreason;
+            AdoxioInvestigationoutcome = adoxioInvestigationoutcome;
             AdoxioRmreminderemailsentdate = adoxioRmreminderemailsentdate;
             this._owningteamValue = _owningteamValue;
             this._owneridValue = _owneridValue;
@@ -71,7 +73,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioDateinvestigationconcluded = adoxioDateinvestigationconcluded;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._adoxioComplaintidValue = _adoxioComplaintidValue;
-            AdoxioComplianceinvestigationid = adoxioComplianceinvestigationid;
             Statecode = statecode;
             Modifiedon = modifiedon;
             Importsequencenumber = importsequencenumber;
@@ -112,6 +113,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioComplianceinvestigationRecurringAppointmentMasters = adoxioComplianceinvestigationRecurringAppointmentMasters;
             AdoxioComplianceinvestigationSocialActivities = adoxioComplianceinvestigationSocialActivities;
             AdoxioComplianceinvestigationAbsScheduledprocessexecutions = adoxioComplianceinvestigationAbsScheduledprocessexecutions;
+            AdoxioComplianceinvestigationAnnotations = adoxioComplianceinvestigationAnnotations;
             CustomInit();
         }
 
@@ -147,8 +149,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complianceinvestigationid")]
+        public string AdoxioComplianceinvestigationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -189,6 +191,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_assigneddatetext")]
         public string AdoxioAssigneddatetext { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -234,6 +241,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "new_rmnotapprovedreason")]
         public int? NewRmnotapprovedreason { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_investigationoutcome")]
+        public int? AdoxioInvestigationoutcome { get; set; }
 
         /// <summary>
         /// </summary>
@@ -319,11 +331,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_complaintid_value")]
         public string _adoxioComplaintidValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complianceinvestigationid")]
-        public string AdoxioComplianceinvestigationid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -524,6 +531,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_complianceinvestigation_abs_scheduledprocessexecutions")]
         public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AdoxioComplianceinvestigationAbsScheduledprocessexecutions { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complianceinvestigation_Annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> AdoxioComplianceinvestigationAnnotations { get; set; }
 
     }
 }

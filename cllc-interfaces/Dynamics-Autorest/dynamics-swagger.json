@@ -6508,10 +6508,10 @@
                 "statecode desc",
                 "adoxio_qtyshippedreturned",
                 "adoxio_qtyshippedreturned desc",
+                "adoxio_packagedunitsnumber",
+                "adoxio_packagedunitsnumber desc",
                 "_modifiedby_value",
                 "_modifiedby_value desc",
-                "adoxio_numberpackagedunits",
-                "adoxio_numberpackagedunits desc",
                 "adoxio_openinginventory",
                 "adoxio_openinginventory desc",
                 "_adoxio_productid_value",
@@ -6608,8 +6608,8 @@
                 "createdon",
                 "statecode",
                 "adoxio_qtyshippedreturned",
+                "adoxio_packagedunitsnumber",
                 "_modifiedby_value",
-                "adoxio_numberpackagedunits",
                 "adoxio_openinginventory",
                 "_adoxio_productid_value",
                 "adoxio_qtyreceivedother",
@@ -6764,8 +6764,8 @@
                 "createdon",
                 "statecode",
                 "adoxio_qtyshippedreturned",
+                "adoxio_packagedunitsnumber",
                 "_modifiedby_value",
-                "adoxio_numberpackagedunits",
                 "adoxio_openinginventory",
                 "_adoxio_productid_value",
                 "adoxio_qtyreceivedother",
@@ -6961,6 +6961,8 @@
             "items": {
               "type": "string",
               "enum": [
+                "_adoxio_licenceid_value",
+                "_adoxio_licenceid_value desc",
                 "adoxio_employeesother",
                 "adoxio_employeesother desc",
                 "adoxio_name",
@@ -6969,8 +6971,8 @@
                 "createdon desc",
                 "timezoneruleversionnumber",
                 "timezoneruleversionnumber desc",
-                "_adoxio_licenceid_value",
-                "_adoxio_licenceid_value desc",
+                "adoxio_csvexportdate",
+                "adoxio_csvexportdate desc",
                 "adoxio_employeessales",
                 "adoxio_employeessales desc",
                 "utcconversiontimezonecode",
@@ -6981,10 +6983,14 @@
                 "adoxio_retailerdistributor desc",
                 "_adoxio_licenseeid_value",
                 "_adoxio_licenseeid_value desc",
+                "adoxio_licenseenametext",
+                "adoxio_licenseenametext desc",
                 "modifiedon",
                 "modifiedon desc",
                 "_owningbusinessunit_value",
                 "_owningbusinessunit_value desc",
+                "adoxio_siteidnumber",
+                "adoxio_siteidnumber desc",
                 "adoxio_cannabismonthlyreportid",
                 "adoxio_cannabismonthlyreportid desc",
                 "_modifiedonbehalfby_value",
@@ -7038,18 +7044,21 @@
             "items": {
               "type": "string",
               "enum": [
+                "_adoxio_licenceid_value",
                 "adoxio_employeesother",
                 "adoxio_name",
                 "createdon",
                 "timezoneruleversionnumber",
-                "_adoxio_licenceid_value",
+                "adoxio_csvexportdate",
                 "adoxio_employeessales",
                 "utcconversiontimezonecode",
                 "adoxio_employeesadministrative",
                 "adoxio_retailerdistributor",
                 "_adoxio_licenseeid_value",
+                "adoxio_licenseenametext",
                 "modifiedon",
                 "_owningbusinessunit_value",
+                "adoxio_siteidnumber",
                 "adoxio_cannabismonthlyreportid",
                 "_modifiedonbehalfby_value",
                 "_modifiedby_value",
@@ -7178,18 +7187,21 @@
             "items": {
               "type": "string",
               "enum": [
+                "_adoxio_licenceid_value",
                 "adoxio_employeesother",
                 "adoxio_name",
                 "createdon",
                 "timezoneruleversionnumber",
-                "_adoxio_licenceid_value",
+                "adoxio_csvexportdate",
                 "adoxio_employeessales",
                 "utcconversiontimezonecode",
                 "adoxio_employeesadministrative",
                 "adoxio_retailerdistributor",
                 "_adoxio_licenseeid_value",
+                "adoxio_licenseenametext",
                 "modifiedon",
                 "_owningbusinessunit_value",
+                "adoxio_siteidnumber",
                 "adoxio_cannabismonthlyreportid",
                 "_modifiedonbehalfby_value",
                 "_modifiedby_value",
@@ -8459,6 +8471,8 @@
                 "adoxio_checklistreviewedbyrm desc",
                 "_owninguser_value",
                 "_owninguser_value desc",
+                "adoxio_investigationstatus",
+                "adoxio_investigationstatus desc",
                 "adoxio_licencenumber",
                 "adoxio_licencenumber desc",
                 "adoxio_storestreet",
@@ -8543,8 +8557,8 @@
                 "adoxio_checklistestablishmentlinked desc",
                 "adoxio_street2",
                 "adoxio_street2 desc",
-                "_modifiedonbehalfby_value",
-                "_modifiedonbehalfby_value desc",
+                "adoxio_investigationoutcome",
+                "adoxio_investigationoutcome desc",
                 "utcconversiontimezonecode",
                 "utcconversiontimezonecode desc",
                 "_modifiedby_value",
@@ -8569,6 +8583,8 @@
                 "adoxio_preferredmethodofcontact desc",
                 "adoxio_checklistinspectionscompleted",
                 "adoxio_checklistinspectionscompleted desc",
+                "_adoxio_establishmentid_value",
+                "_adoxio_establishmentid_value desc",
                 "adoxio_complaintid",
                 "adoxio_complaintid desc",
                 "adoxio_storepostalcode",
@@ -8585,8 +8601,8 @@
                 "adoxio_checklistinvestigationactivitiesdone desc",
                 "adoxio_checklistinspectionscheduled",
                 "adoxio_checklistinspectionscheduled desc",
-                "_adoxio_establishmentid_value",
-                "_adoxio_establishmentid_value desc",
+                "_modifiedonbehalfby_value",
+                "_modifiedonbehalfby_value desc",
                 "timezoneruleversionnumber",
                 "timezoneruleversionnumber desc",
                 "adoxio_hearingdatetime",
@@ -8623,6 +8639,7 @@
                 "adoxio_checklistreviewedbyadmin",
                 "adoxio_checklistreviewedbyrm",
                 "_owninguser_value",
+                "adoxio_investigationstatus",
                 "adoxio_licencenumber",
                 "adoxio_storestreet",
                 "adoxio_delegategmcomments",
@@ -8665,7 +8682,7 @@
                 "adoxio_incidentdate",
                 "adoxio_checklistestablishmentlinked",
                 "adoxio_street2",
-                "_modifiedonbehalfby_value",
+                "adoxio_investigationoutcome",
                 "utcconversiontimezonecode",
                 "_modifiedby_value",
                 "adoxio_city",
@@ -8678,6 +8695,7 @@
                 "adoxio_postalcode",
                 "adoxio_preferredmethodofcontact",
                 "adoxio_checklistinspectionscompleted",
+                "_adoxio_establishmentid_value",
                 "adoxio_complaintid",
                 "adoxio_storepostalcode",
                 "adoxio_overalloutcome",
@@ -8686,7 +8704,7 @@
                 "traversedpath",
                 "adoxio_checklistinvestigationactivitiesdone",
                 "adoxio_checklistinspectionscheduled",
-                "_adoxio_establishmentid_value",
+                "_modifiedonbehalfby_value",
                 "timezoneruleversionnumber",
                 "adoxio_hearingdatetime",
                 "adoxio_isdelegategmapproved",
@@ -8840,6 +8858,7 @@
                 "adoxio_checklistreviewedbyadmin",
                 "adoxio_checklistreviewedbyrm",
                 "_owninguser_value",
+                "adoxio_investigationstatus",
                 "adoxio_licencenumber",
                 "adoxio_storestreet",
                 "adoxio_delegategmcomments",
@@ -8882,7 +8901,7 @@
                 "adoxio_incidentdate",
                 "adoxio_checklistestablishmentlinked",
                 "adoxio_street2",
-                "_modifiedonbehalfby_value",
+                "adoxio_investigationoutcome",
                 "utcconversiontimezonecode",
                 "_modifiedby_value",
                 "adoxio_city",
@@ -8895,6 +8914,7 @@
                 "adoxio_postalcode",
                 "adoxio_preferredmethodofcontact",
                 "adoxio_checklistinspectionscompleted",
+                "_adoxio_establishmentid_value",
                 "adoxio_complaintid",
                 "adoxio_storepostalcode",
                 "adoxio_overalloutcome",
@@ -8903,7 +8923,7 @@
                 "traversedpath",
                 "adoxio_checklistinvestigationactivitiesdone",
                 "adoxio_checklistinspectionscheduled",
-                "_adoxio_establishmentid_value",
+                "_modifiedonbehalfby_value",
                 "timezoneruleversionnumber",
                 "adoxio_hearingdatetime",
                 "adoxio_isdelegategmapproved",
@@ -9100,8 +9120,8 @@
                 "utcconversiontimezonecode desc",
                 "versionnumber",
                 "versionnumber desc",
-                "timezoneruleversionnumber",
-                "timezoneruleversionnumber desc",
+                "adoxio_complianceinvestigationid",
+                "adoxio_complianceinvestigationid desc",
                 "adoxio_approveddate",
                 "adoxio_approveddate desc",
                 "adoxio_jobnumber",
@@ -9118,6 +9138,8 @@
                 "_adoxio_licenceid_value desc",
                 "adoxio_assigneddatetext",
                 "adoxio_assigneddatetext desc",
+                "timezoneruleversionnumber",
+                "timezoneruleversionnumber desc",
                 "_adoxio_regionid_value",
                 "_adoxio_regionid_value desc",
                 "_adoxio_regionalmanagerid_value",
@@ -9136,6 +9158,8 @@
                 "adoxio_rmsummary desc",
                 "new_rmnotapprovedreason",
                 "new_rmnotapprovedreason desc",
+                "adoxio_investigationoutcome",
+                "adoxio_investigationoutcome desc",
                 "adoxio_rmreminderemailsentdate",
                 "adoxio_rmreminderemailsentdate desc",
                 "_owningteam_value",
@@ -9170,8 +9194,6 @@
                 "_createdonbehalfby_value desc",
                 "_adoxio_complaintid_value",
                 "_adoxio_complaintid_value desc",
-                "adoxio_complianceinvestigationid",
-                "adoxio_complianceinvestigationid desc",
                 "statecode",
                 "statecode desc",
                 "modifiedon",
@@ -9194,7 +9216,7 @@
                 "adoxio_investigationsummary",
                 "utcconversiontimezonecode",
                 "versionnumber",
-                "timezoneruleversionnumber",
+                "adoxio_complianceinvestigationid",
                 "adoxio_approveddate",
                 "adoxio_jobnumber",
                 "_adoxio_licenseeid_value",
@@ -9203,6 +9225,7 @@
                 "_modifiedby_value",
                 "_adoxio_licenceid_value",
                 "adoxio_assigneddatetext",
+                "timezoneruleversionnumber",
                 "_adoxio_regionid_value",
                 "_adoxio_regionalmanagerid_value",
                 "adoxio_investigationexhibits",
@@ -9212,6 +9235,7 @@
                 "statuscode",
                 "adoxio_rmsummary",
                 "new_rmnotapprovedreason",
+                "adoxio_investigationoutcome",
                 "adoxio_rmreminderemailsentdate",
                 "_owningteam_value",
                 "_ownerid_value",
@@ -9229,7 +9253,6 @@
                 "adoxio_dateinvestigationconcluded",
                 "_createdonbehalfby_value",
                 "_adoxio_complaintid_value",
-                "adoxio_complianceinvestigationid",
                 "statecode",
                 "modifiedon",
                 "importsequencenumber"
@@ -9281,7 +9304,8 @@
                 "adoxio_complianceinvestigation_Tasks",
                 "adoxio_complianceinvestigation_RecurringAppointmentMasters",
                 "adoxio_complianceinvestigation_SocialActivities",
-                "adoxio_complianceinvestigation_abs_scheduledprocessexecutions"
+                "adoxio_complianceinvestigation_abs_scheduledprocessexecutions",
+                "adoxio_complianceinvestigation_Annotations"
               ]
             }
           }
@@ -9365,7 +9389,7 @@
                 "adoxio_investigationsummary",
                 "utcconversiontimezonecode",
                 "versionnumber",
-                "timezoneruleversionnumber",
+                "adoxio_complianceinvestigationid",
                 "adoxio_approveddate",
                 "adoxio_jobnumber",
                 "_adoxio_licenseeid_value",
@@ -9374,6 +9398,7 @@
                 "_modifiedby_value",
                 "_adoxio_licenceid_value",
                 "adoxio_assigneddatetext",
+                "timezoneruleversionnumber",
                 "_adoxio_regionid_value",
                 "_adoxio_regionalmanagerid_value",
                 "adoxio_investigationexhibits",
@@ -9383,6 +9408,7 @@
                 "statuscode",
                 "adoxio_rmsummary",
                 "new_rmnotapprovedreason",
+                "adoxio_investigationoutcome",
                 "adoxio_rmreminderemailsentdate",
                 "_owningteam_value",
                 "_ownerid_value",
@@ -9400,7 +9426,6 @@
                 "adoxio_dateinvestigationconcluded",
                 "_createdonbehalfby_value",
                 "_adoxio_complaintid_value",
-                "adoxio_complianceinvestigationid",
                 "statecode",
                 "modifiedon",
                 "importsequencenumber"
@@ -9452,7 +9477,8 @@
                 "adoxio_complianceinvestigation_Tasks",
                 "adoxio_complianceinvestigation_RecurringAppointmentMasters",
                 "adoxio_complianceinvestigation_SocialActivities",
-                "adoxio_complianceinvestigation_abs_scheduledprocessexecutions"
+                "adoxio_complianceinvestigation_abs_scheduledprocessexecutions",
+                "adoxio_complianceinvestigation_Annotations"
               ]
             }
           }
@@ -10431,6 +10457,8 @@
                 "adoxio_name desc",
                 "adoxio_incidentdatetime",
                 "adoxio_incidentdatetime desc",
+                "_owningteam_value",
+                "_owningteam_value desc",
                 "_createdby_value",
                 "_createdby_value desc",
                 "adoxio_maxpenalty",
@@ -10529,8 +10557,8 @@
                 "adoxio_interpretation desc",
                 "adoxio_istandc",
                 "adoxio_istandc desc",
-                "_owningteam_value",
-                "_owningteam_value desc",
+                "adoxio_contraventionoutcome",
+                "adoxio_contraventionoutcome desc",
                 "_adoxio_contraventiontitleid_value",
                 "_adoxio_contraventiontitleid_value desc",
                 "_adoxio_establishmentid_value",
@@ -10564,6 +10592,7 @@
                 "adoxio_iswqr",
                 "adoxio_name",
                 "adoxio_incidentdatetime",
+                "_owningteam_value",
                 "_createdby_value",
                 "adoxio_maxpenalty",
                 "adoxio_isact",
@@ -10613,7 +10642,7 @@
                 "adoxio_iswqrwordtemplate",
                 "adoxio_interpretation",
                 "adoxio_istandc",
-                "_owningteam_value",
+                "adoxio_contraventionoutcome",
                 "_adoxio_contraventiontitleid_value",
                 "_adoxio_establishmentid_value",
                 "_ownerid_value",
@@ -10747,6 +10776,7 @@
                 "adoxio_iswqr",
                 "adoxio_name",
                 "adoxio_incidentdatetime",
+                "_owningteam_value",
                 "_createdby_value",
                 "adoxio_maxpenalty",
                 "adoxio_isact",
@@ -10796,7 +10826,7 @@
                 "adoxio_iswqrwordtemplate",
                 "adoxio_interpretation",
                 "adoxio_istandc",
-                "_owningteam_value",
+                "adoxio_contraventionoutcome",
                 "_adoxio_contraventiontitleid_value",
                 "_adoxio_establishmentid_value",
                 "_ownerid_value",
@@ -17920,6 +17950,10 @@
               "enum": [
                 "adoxio_businessprogramaccountreferencenumber",
                 "adoxio_businessprogramaccountreferencenumber desc",
+                "adoxio_effectivemonthname",
+                "adoxio_effectivemonthname desc",
+                "overriddencreatedon",
+                "overriddencreatedon desc",
                 "adoxio_effectivedayofmonth",
                 "adoxio_effectivedayofmonth desc",
                 "timezoneruleversionnumber",
@@ -17932,12 +17966,12 @@
                 "_owninguser_value desc",
                 "adoxio_establishmentaddresspostalcode",
                 "adoxio_establishmentaddresspostalcode desc",
+                "_adoxio_inspectorid_value",
+                "_adoxio_inspectorid_value desc",
                 "_adoxio_areaid_value",
                 "_adoxio_areaid_value desc",
                 "adoxio_expiryyeartext",
                 "adoxio_expiryyeartext desc",
-                "adoxio_effectivemonthname",
-                "adoxio_effectivemonthname desc",
                 "_createdonbehalfby_value",
                 "_createdonbehalfby_value desc",
                 "statuscode",
@@ -17952,8 +17986,6 @@
                 "adoxio_effectiveyeartext desc",
                 "adoxio_expiryyear",
                 "adoxio_expiryyear desc",
-                "adoxio_orgbookcredentialresult",
-                "adoxio_orgbookcredentialresult desc",
                 "adoxio_effectiveyear",
                 "adoxio_effectiveyear desc",
                 "emailaddress",
@@ -17972,10 +18004,8 @@
                 "adoxio_licenceprintname desc",
                 "_adoxio_proposedowner_value",
                 "_adoxio_proposedowner_value desc",
-                "adoxio_effectivedate",
-                "adoxio_effectivedate desc",
-                "overriddencreatedon",
-                "overriddencreatedon desc",
+                "adoxio_orgbookcredentialresult",
+                "adoxio_orgbookcredentialresult desc",
                 "adoxio_name",
                 "adoxio_name desc",
                 "_adoxio_licencetype_value",
@@ -17992,6 +18022,8 @@
                 "_adoxio_establishment_value desc",
                 "adoxio_establishmentphone",
                 "adoxio_establishmentphone desc",
+                "adoxio_effectivedate",
+                "adoxio_effectivedate desc",
                 "_ownerid_value",
                 "_ownerid_value desc",
                 "importsequencenumber",
@@ -18034,15 +18066,17 @@
               "type": "string",
               "enum": [
                 "adoxio_businessprogramaccountreferencenumber",
+                "adoxio_effectivemonthname",
+                "overriddencreatedon",
                 "adoxio_effectivedayofmonth",
                 "timezoneruleversionnumber",
                 "_modifiedonbehalfby_value",
                 "_adoxio_pdjurisdiction_value",
                 "_owninguser_value",
                 "adoxio_establishmentaddresspostalcode",
+                "_adoxio_inspectorid_value",
                 "_adoxio_areaid_value",
                 "adoxio_expiryyeartext",
-                "adoxio_effectivemonthname",
                 "_createdonbehalfby_value",
                 "statuscode",
                 "adoxio_expirydayofmonth",
@@ -18050,7 +18084,6 @@
                 "versionnumber",
                 "adoxio_effectiveyeartext",
                 "adoxio_expiryyear",
-                "adoxio_orgbookcredentialresult",
                 "adoxio_effectiveyear",
                 "emailaddress",
                 "adoxio_establishmentnametemp",
@@ -18060,8 +18093,7 @@
                 "adoxio_transferrequested",
                 "adoxio_licenceprintname",
                 "_adoxio_proposedowner_value",
-                "adoxio_effectivedate",
-                "overriddencreatedon",
+                "adoxio_orgbookcredentialresult",
                 "adoxio_name",
                 "_adoxio_licencetype_value",
                 "_createdby_value",
@@ -18070,6 +18102,7 @@
                 "_owningteam_value",
                 "_adoxio_establishment_value",
                 "adoxio_establishmentphone",
+                "adoxio_effectivedate",
                 "_ownerid_value",
                 "importsequencenumber",
                 "_adoxio_lgin_value",
@@ -18144,7 +18177,8 @@
                 "adoxio_licences_ActivityParties",
                 "adoxio_AreaId",
                 "adoxio_licence_cannabismonthlyreports",
-                "adoxio_licence_inventoryreports"
+                "adoxio_licence_inventoryreports",
+                "adoxio_InspectorId"
               ]
             }
           }
@@ -18224,15 +18258,17 @@
               "type": "string",
               "enum": [
                 "adoxio_businessprogramaccountreferencenumber",
+                "adoxio_effectivemonthname",
+                "overriddencreatedon",
                 "adoxio_effectivedayofmonth",
                 "timezoneruleversionnumber",
                 "_modifiedonbehalfby_value",
                 "_adoxio_pdjurisdiction_value",
                 "_owninguser_value",
                 "adoxio_establishmentaddresspostalcode",
+                "_adoxio_inspectorid_value",
                 "_adoxio_areaid_value",
                 "adoxio_expiryyeartext",
-                "adoxio_effectivemonthname",
                 "_createdonbehalfby_value",
                 "statuscode",
                 "adoxio_expirydayofmonth",
@@ -18240,7 +18276,6 @@
                 "versionnumber",
                 "adoxio_effectiveyeartext",
                 "adoxio_expiryyear",
-                "adoxio_orgbookcredentialresult",
                 "adoxio_effectiveyear",
                 "emailaddress",
                 "adoxio_establishmentnametemp",
@@ -18250,8 +18285,7 @@
                 "adoxio_transferrequested",
                 "adoxio_licenceprintname",
                 "_adoxio_proposedowner_value",
-                "adoxio_effectivedate",
-                "overriddencreatedon",
+                "adoxio_orgbookcredentialresult",
                 "adoxio_name",
                 "_adoxio_licencetype_value",
                 "_createdby_value",
@@ -18260,6 +18294,7 @@
                 "_owningteam_value",
                 "_adoxio_establishment_value",
                 "adoxio_establishmentphone",
+                "adoxio_effectivedate",
                 "_ownerid_value",
                 "importsequencenumber",
                 "_adoxio_lgin_value",
@@ -18334,7 +18369,8 @@
                 "adoxio_licences_ActivityParties",
                 "adoxio_AreaId",
                 "adoxio_licence_cannabismonthlyreports",
-                "adoxio_licence_inventoryreports"
+                "adoxio_licence_inventoryreports",
+                "adoxio_InspectorId"
               ]
             }
           }
@@ -37541,12 +37577,11 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_modifiedby_value": {
-          "type": "string",
+        "adoxio_packagedunitsnumber": {
           "x-nullable": true
         },
-        "adoxio_numberpackagedunits": {
-          "type": "integer",
+        "_modifiedby_value": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_openinginventory": {
@@ -37782,6 +37817,10 @@
       "title": "adoxio_cannabismonthlyreport",
       "type": "object",
       "properties": {
+        "_adoxio_licenceid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_employeesother": {
           "type": "integer",
           "x-nullable": true
@@ -37798,9 +37837,9 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_adoxio_licenceid_value": {
+        "adoxio_csvexportdate": {
           "type": "string",
-          "x-nullable": true
+          "format": "date-time"
         },
         "adoxio_employeessales": {
           "type": "integer",
@@ -37822,11 +37861,19 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_licenseenametext": {
+          "type": "string",
+          "x-nullable": true
+        },
         "modifiedon": {
           "type": "string",
           "format": "date-time"
         },
         "_owningbusinessunit_value": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_siteidnumber": {
           "type": "string",
           "x-nullable": true
         },
@@ -38517,6 +38564,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_investigationstatus": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "adoxio_licencenumber": {
           "type": "string",
           "x-nullable": true
@@ -38686,8 +38737,8 @@
           "type": "string",
           "x-nullable": true
         },
-        "_modifiedonbehalfby_value": {
-          "type": "string",
+        "adoxio_investigationoutcome": {
+          "type": "integer",
           "x-nullable": true
         },
         "utcconversiontimezonecode": {
@@ -38738,6 +38789,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "_adoxio_establishmentid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_complaintid": {
           "type": "string",
           "x-nullable": true
@@ -38770,7 +38825,7 @@
           "type": "integer",
           "x-nullable": true
         },
-        "_adoxio_establishmentid_value": {
+        "_modifiedonbehalfby_value": {
           "type": "string",
           "x-nullable": true
         },
@@ -39029,8 +39084,8 @@
           "format": "int64",
           "x-nullable": true
         },
-        "timezoneruleversionnumber": {
-          "type": "integer",
+        "adoxio_complianceinvestigationid": {
+          "type": "string",
           "x-nullable": true
         },
         "adoxio_approveddate": {
@@ -39063,6 +39118,10 @@
         },
         "adoxio_assigneddatetext": {
           "type": "string",
+          "x-nullable": true
+        },
+        "timezoneruleversionnumber": {
+          "type": "integer",
           "x-nullable": true
         },
         "_adoxio_regionid_value": {
@@ -39098,6 +39157,10 @@
           "x-nullable": true
         },
         "new_rmnotapprovedreason": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "adoxio_investigationoutcome": {
           "type": "integer",
           "x-nullable": true
         },
@@ -39166,10 +39229,6 @@
           "x-nullable": true
         },
         "_adoxio_complaintid_value": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_complianceinvestigationid": {
           "type": "string",
           "x-nullable": true
         },
@@ -39360,6 +39419,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.abs_scheduledprocessexecution"
+          }
+        },
+        "adoxio_complianceinvestigation_Annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.annotation"
           }
         }
       }
@@ -39841,6 +39906,10 @@
           "type": "string",
           "format": "date-time"
         },
+        "_owningteam_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_createdby_value": {
           "type": "string",
           "x-nullable": true
@@ -40032,8 +40101,8 @@
           "type": "boolean",
           "x-nullable": true
         },
-        "_owningteam_value": {
-          "type": "string",
+        "adoxio_contraventionoutcome": {
+          "type": "integer",
           "x-nullable": true
         },
         "_adoxio_contraventiontitleid_value": {
@@ -43560,6 +43629,14 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_effectivemonthname": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "overriddencreatedon": {
+          "type": "string",
+          "format": "date-time"
+        },
         "adoxio_effectivedayofmonth": {
           "type": "integer",
           "x-nullable": true
@@ -43584,15 +43661,15 @@
           "type": "string",
           "x-nullable": true
         },
+        "_adoxio_inspectorid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_adoxio_areaid_value": {
           "type": "string",
           "x-nullable": true
         },
         "adoxio_expiryyeartext": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "adoxio_effectivemonthname": {
           "type": "string",
           "x-nullable": true
         },
@@ -43622,10 +43699,6 @@
           "x-nullable": true
         },
         "adoxio_expiryyear": {
-          "type": "integer",
-          "x-nullable": true
-        },
-        "adoxio_orgbookcredentialresult": {
           "type": "integer",
           "x-nullable": true
         },
@@ -43665,13 +43738,9 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_effectivedate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "overriddencreatedon": {
-          "type": "string",
-          "format": "date-time"
+        "adoxio_orgbookcredentialresult": {
+          "type": "integer",
+          "x-nullable": true
         },
         "adoxio_name": {
           "type": "string",
@@ -43704,6 +43773,10 @@
         "adoxio_establishmentphone": {
           "type": "string",
           "x-nullable": true
+        },
+        "adoxio_effectivedate": {
+          "type": "string",
+          "format": "date-time"
         },
         "_ownerid_value": {
           "type": "string",
@@ -43998,6 +44071,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
           }
+        },
+        "adoxio_InspectorId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         }
       }
     },
@@ -48702,6 +48778,9 @@
         },
         "objectid_adoxio_worker": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_worker"
+        },
+        "objectid_adoxio_complianceinvestigation": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
         }
       }
     },
@@ -98264,6 +98343,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
+          }
+        },
+        "adoxio_inspector_licences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licences"
           }
         }
       }
