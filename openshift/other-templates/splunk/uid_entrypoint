@@ -9,8 +9,8 @@ if [ $? -eq 1 ]; then
   fi
 fi
 # ensure config exists.
-touch 
-if [[ ! -f "/opt/splunk/etc/splunk.version" ]]; then        
+
+if [ ! -f "/opt/splunk/etc/splunk.version" ]; then        
   echo Updating /opt/splunk/etc
   (cd /opt/splunk-etc; tar cf - *) | (cd /opt/splunk/etc; tar xf -)        
 fi
