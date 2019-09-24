@@ -106,6 +106,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     add = false;
                                 }
                             }
+
+                            // check the lgin too.
+                            if (add == false
+                                && !string.IsNullOrEmpty(search)
+                                && establishment._adoxioLginValue != null)
+                            {
+                                establishment.AdoxioLGIN = _dynamicsClient.GetLginById(establishment._adoxioLginValue);
+                                if (establishment.AdoxioLGIN != null
+                                    && establishment.AdoxioLGIN.AdoxioName != null
+                                    && establishment.AdoxioLGIN.AdoxioName.ToUpper().StartsWith(search))
+                                    {
+                                        add = true;
+                                    }                                    
+                            }
+
                             if (add)
                             {
                                 establishmentMapData.Add(new EstablishmentMapData()
