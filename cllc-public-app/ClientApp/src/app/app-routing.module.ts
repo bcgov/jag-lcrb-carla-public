@@ -31,6 +31,7 @@ import { FeatureGuard } from './services/feaure-guard.service';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
+import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
 
 
 const routes: Routes = [
@@ -39,8 +40,13 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'federal-reporting/:licenseId',
+    component: FederalReportingComponent,
+  },
+  {
     path: 'licensee-changes',
-    component: LicenseeTreeComponent
+    component: LicenseeTreeComponent,
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'account-profile',

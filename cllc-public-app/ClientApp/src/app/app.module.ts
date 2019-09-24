@@ -161,6 +161,7 @@ import { ProductInventoryPackagedComponent } from './shared/product-inventory-pa
 import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.component';
 import { VersionInfoDataService } from './services/version-info-data.service';
 import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
+import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
 
 
 @NgModule({
@@ -243,7 +244,8 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     ApplicationOwnershipTransferComponent,
     ProductInventoryPackagedComponent,
     LicenseeTreeComponent,
-    VersionInfoDialogComponent
+    VersionInfoDialogComponent,
+    FederalReportingComponent
   ],
   imports: [
     ChartsModule,
