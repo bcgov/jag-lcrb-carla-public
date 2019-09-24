@@ -29,20 +29,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioCannabismonthlyreport class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioCannabismonthlyreport(int? adoxioEmployeesother = default(int?), string adoxioName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string _adoxioLicenceidValue = default(string), int? adoxioEmployeessales = default(int?), int? utcconversiontimezonecode = default(int?), int? adoxioEmployeesadministrative = default(int?), int? adoxioRetailerdistributor = default(int?), string _adoxioLicenseeidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string adoxioCannabismonthlyreportid = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), long? versionnumber = default(long?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioEmployeesproduction = default(int?), string adoxioReportingperiodyear = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string _adoxioEstablishmentidValue = default(string), string adoxioCity = default(string), string _owningteamValue = default(string), string _owneridValue = default(string), int? adoxioEmployeesmanagement = default(int?), string adoxioLicencenumber = default(string), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), string adoxioPostalcode = default(string), string adoxioReportingperiodmonth = default(string), int? importsequencenumber = default(int?), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioCannabismonthlyreportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabismonthlyreportDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabismonthlyreportDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCannabismonthlyreportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCannabismonthlyreportBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioCannabismonthlyreportInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>))
+        public MicrosoftDynamicsCRMadoxioCannabismonthlyreport(string _adoxioLicenceidValue = default(string), int? adoxioEmployeesother = default(int?), string adoxioName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? adoxioCsvexportdate = default(System.DateTimeOffset?), int? adoxioEmployeessales = default(int?), int? utcconversiontimezonecode = default(int?), int? adoxioEmployeesadministrative = default(int?), int? adoxioRetailerdistributor = default(int?), string _adoxioLicenseeidValue = default(string), string adoxioLicenseenametext = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string adoxioSiteidnumber = default(string), string adoxioCannabismonthlyreportid = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), long? versionnumber = default(long?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioEmployeesproduction = default(int?), string adoxioReportingperiodyear = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string _adoxioEstablishmentidValue = default(string), string adoxioCity = default(string), string _owningteamValue = default(string), string _owneridValue = default(string), int? adoxioEmployeesmanagement = default(int?), string adoxioLicencenumber = default(string), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), string adoxioPostalcode = default(string), string adoxioReportingperiodmonth = default(string), int? importsequencenumber = default(int?), int? statecode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioCannabismonthlyreportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabismonthlyreportDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabismonthlyreportDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCannabismonthlyreportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCannabismonthlyreportBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioCannabismonthlyreportInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>))
         {
+            this._adoxioLicenceidValue = _adoxioLicenceidValue;
             AdoxioEmployeesother = adoxioEmployeesother;
             AdoxioName = adoxioName;
             Createdon = createdon;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._adoxioLicenceidValue = _adoxioLicenceidValue;
+            AdoxioCsvexportdate = adoxioCsvexportdate;
             AdoxioEmployeessales = adoxioEmployeessales;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             AdoxioEmployeesadministrative = adoxioEmployeesadministrative;
             AdoxioRetailerdistributor = adoxioRetailerdistributor;
             this._adoxioLicenseeidValue = _adoxioLicenseeidValue;
+            AdoxioLicenseenametext = adoxioLicenseenametext;
             Modifiedon = modifiedon;
             this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioSiteidnumber = adoxioSiteidnumber;
             AdoxioCannabismonthlyreportid = adoxioCannabismonthlyreportid;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._modifiedbyValue = _modifiedbyValue;
@@ -91,6 +94,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licenceid_value")]
+        public string _adoxioLicenceidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_employeesother")]
         public int? AdoxioEmployeesother { get; set; }
 
@@ -111,8 +119,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licenceid_value")]
-        public string _adoxioLicenceidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_csvexportdate")]
+        public System.DateTimeOffset? AdoxioCsvexportdate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -141,6 +149,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_licenseenametext")]
+        public string AdoxioLicenseenametext { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
@@ -148,6 +161,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_siteidnumber")]
+        public string AdoxioSiteidnumber { get; set; }
 
         /// <summary>
         /// </summary>
