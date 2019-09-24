@@ -15,6 +15,17 @@ if [ ! -f "/opt/splunk/etc/splunk.version" ]; then
   (cd /opt/splunk-etc; tar cf - *) | (cd /opt/splunk/etc; tar xf -)        
 fi
 
+if [ ! -f "/opt/splunk/var/lib/splunk/audit/db" ]; then        
+  echo Updating /opt/splunk/var/lib/splunk
+  (cd /opt/splunk-var; tar cf - *) | (cd /opt/splunk/var/lib/splunk; tar xf -)        
+fi
+
+
+if [ ! -f "/opt/splunk/var/log/splunk" ]; then
+  echo Creating log directory
+  mkdir /opt/splunk/var/log/splunk
+fi  
+
 echo "***** Updating config *****"
 sed -i -e '/enableSplunkdSSL =/ s/= .*/= false/' /opt/splunk/etc/system/local/server.conf
 
