@@ -30,9 +30,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int SeedsPackagedClosingInventoryTotal = 0;
         public double SeedsPackagedClosingInventoryTotalValue = 0;
         public int SeedsPackagedClosingTotalSeeds = 0;
-        public int BCSeedsPackagedUnitsSold = 0;
+        public double BCSeedsPackagedUnitsSold = 0;
         public double BCSeedsTotalValueSold = 0;
-        public int SeedsPackagedUnitsSold = 0;
+        public double SeedsPackagedUnitsSold = 0;
         public double SeedsTotalValueSold = 0;
 
         //Vegetative Cannabis
@@ -47,9 +47,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int VegetativeCannabisPackagedReductionsOther = 0;
         public int VegetativeCannabisPackagedClosingInventoryTotal = 0;
         public double VegetativeCannabisPackagedClosingInventoryTotalValue = 0;
-        public int BCVegetativeCannabisPackagedUnitsSold = 0;
+        public double BCVegetativeCannabisPackagedUnitsSold = 0;
         public double BCVegetativeCannabisTotalValueSold = 0;
-        public int VegetativeCannabisPackagedUnitsSold = 0;
+        public double VegetativeCannabisPackagedUnitsSold = 0;
         public double VegetativeCannabisTotalValueSold = 0;
 
         // Dried Cannabis
@@ -65,9 +65,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int DriedCannabisPackagedClosingInventory = 0;
         public double DriedCannabisPackagedClosingInventoryValue = 0;
         public double DriedCannabisPackagedClosingInventoryWeight = 0;
-        public int BCDriedCannabisPackagedUnitsSold = 0;
+        public double BCDriedCannabisPackagedUnitsSold = 0;
         public double BCDriedCannabisTotalValueSold = 0;
-        public int DriedCannabisPackagedUnitsSold = 0;
+        public double DriedCannabisPackagedUnitsSold = 0;
         public double DriedCannabisTotalValueSold = 0;
 
         // Fresh Cannabis
@@ -83,9 +83,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int FreshCannabisPackagedClosingInventory = 0;
         public double FreshCannabisPackagedClosingInventoryValue = 0;
         public double FreshCannabisPackagedClosingInventoryWeight = 0;
-        public int BCFreshCannabisPackagedUnitsSold = 0;
+        public double BCFreshCannabisPackagedUnitsSold = 0;
         public double BCFreshCannabisTotalValueSold = 0;
-        public int FreshCannabisPackagedUnitsSold = 0;
+        public double FreshCannabisPackagedUnitsSold = 0;
         public double FreshCannabisTotalValueSold = 0;
 
         // Solid Edibles
@@ -101,9 +101,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int SolidEdiblesPackagedClosingInventory = 0;
         public double SolidEdiblesPackagedClosingInventoryValue = 0;
         public double SolidEdiblesPackagedClosingInventoryWeight = 0;
-        public int BCSolidEdiblesPackagedUnitsSold = 0;
+        public double BCSolidEdiblesPackagedUnitsSold = 0;
         public double BCSolidEdiblesTotalValueSold = 0;
-        public int SolidEdiblesPackagedUnitsSold = 0;
+        public double SolidEdiblesPackagedUnitsSold = 0;
         public double SolidEdiblesTotalValueSold = 0;
 
         // Non-Solid Edibles
@@ -119,9 +119,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int NonSolidEdiblesPackagedClosingInventory = 0;
         public double NonSolidEdiblesPackagedClosingInventoryValue = 0;
         public double NonSolidEdiblesPackagedClosingInventoryWeight = 0;
-        public int BCNonSolidEdiblesPackagedUnitsSold = 0;
+        public double BCNonSolidEdiblesPackagedUnitsSold = 0;
         public double BCNonSolidEdiblesTotalValueSold = 0;
-        public int NonSolidEdiblesPackagedUnitsSold = 0;
+        public double NonSolidEdiblesPackagedUnitsSold = 0;
         public double NonSolidEdiblesTotalValueSold = 0;
 
         // Inhaled Extracts
@@ -137,9 +137,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int InhaledExtractsPackagedClosingInventory = 0;
         public double InhaledExtractsPackagedClosingInventoryValue = 0;
         public double InhaledExtractsPackagedClosingInventoryWeight = 0;
-        public int BCInhaledExtractsPackagedUnitsSold = 0;
+        public double BCInhaledExtractsPackagedUnitsSold = 0;
         public double BCInhaledExtractsTotalValueSold = 0;
-        public int InhaledExtractsPackagedUnitsSold = 0;
+        public double InhaledExtractsPackagedUnitsSold = 0;
         public double InhaledExtractsTotalValueSold = 0;
 
         // Ingested Extracts
@@ -155,9 +155,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int IngestedExtractsPackagedClosingInventory = 0;
         public double IngestedExtractsPackagedClosingInventoryValue = 0;
         public double IngestedExtractsPackagedClosingInventoryWeight = 0;
-        public int BCIngestedExtractsPackagedUnitsSold = 0;
+        public double BCIngestedExtractsPackagedUnitsSold = 0;
         public double BCIngestedExtractsTotalValueSold = 0;
-        public int IngestedExtractsPackagedUnitsSold = 0;
+        public double IngestedExtractsPackagedUnitsSold = 0;
         public double IngestedExtractsTotalValueSold = 0;
 
         // OtherExtracts
@@ -173,9 +173,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int OtherExtractsPackagedClosingInventory = 0;
         public double OtherExtractsPackagedClosingInventoryValue = 0;
         public double OtherExtractsPackagedClosingInventoryWeight = 0;
-        public int BCOtherExtractsPackagedUnitsSold = 0;
+        public double BCOtherExtractsPackagedUnitsSold = 0;
         public double BCOtherExtractsTotalValueSold = 0;
-        public int OtherExtractsPackagedUnitsSold = 0;
+        public double OtherExtractsPackagedUnitsSold = 0;
         public double OtherExtractsTotalValueSold = 0;
 
         // Topicals
@@ -191,9 +191,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int TopicalsPackagedClosingInventory = 0;
         public double TopicalsPackagedClosingInventoryValue = 0;
         public double TopicalsPackagedClosingInventoryWeight = 0;
-        public int BCTopicalsPackagedUnitsSold = 0;
+        public double BCTopicalsPackagedUnitsSold = 0;
         public double BCTopicalsTotalValueSold = 0;
-        public int TopicalsPackagedUnitsSold = 0;
+        public double TopicalsPackagedUnitsSold = 0;
         public double TopicalsTotalValueSold = 0;
 
         // Other
@@ -209,9 +209,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int OtherPackagedClosingInventory = 0;
         public double OtherPackagedClosingInventoryValue = 0;
         public double OtherPackagedClosingInventoryWeight = 0;
-        public int BCOtherPackagedUnitsSold = 0;
+        public double BCOtherPackagedUnitsSold = 0;
         public double BCOtherTotalValueSold = 0;
-        public int OtherPackagedUnitsSold = 0;
+        public double OtherPackagedUnitsSold = 0;
         public double OtherTotalValueSold = 0;
 
         public void PopulateProduct(MicrosoftDynamicsCRMadoxioCannabisinventoryreport inventoryReport, MicrosoftDynamicsCRMadoxioCannabisproductadmin product)
@@ -232,9 +232,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     SeedsPackagedClosingInventoryTotalValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     // TODO needs "Total number of seeds (#)" field
                     // SeedsPackagedClosingTotalSeeds = inventoryReport.AdoxioWeightofclosinginventory;
-                    BCSeedsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCSeedsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCSeedsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    SeedsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    SeedsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     SeedsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Vegetative Cannabis":
@@ -249,9 +249,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     VegetativeCannabisPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     VegetativeCannabisPackagedClosingInventoryTotal = inventoryReport.AdoxioClosinginventory ?? 0;
                     VegetativeCannabisPackagedClosingInventoryTotalValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    BCVegetativeCannabisPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCVegetativeCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCVegetativeCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    VegetativeCannabisPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    VegetativeCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     VegetativeCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Fresh Cannabis":
@@ -267,9 +267,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     FreshCannabisPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     FreshCannabisPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     FreshCannabisPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCFreshCannabisPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCFreshCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCFreshCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    FreshCannabisPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    FreshCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     FreshCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Dried Cannabis":
@@ -285,9 +285,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     DriedCannabisPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     DriedCannabisPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     DriedCannabisPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCDriedCannabisPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCDriedCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCDriedCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    DriedCannabisPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    DriedCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     DriedCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Edibles - Solids":
@@ -303,9 +303,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     SolidEdiblesPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     SolidEdiblesPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     SolidEdiblesPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCSolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCSolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCSolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    SolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    SolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     SolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Edibles - Non-Solids":
@@ -321,9 +321,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     NonSolidEdiblesPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     NonSolidEdiblesPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     NonSolidEdiblesPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCNonSolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCNonSolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCNonSolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    NonSolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    NonSolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     NonSolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Extracts - Inhaled":
@@ -339,9 +339,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     InhaledExtractsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     InhaledExtractsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     InhaledExtractsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCInhaledExtractsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCInhaledExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCInhaledExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    InhaledExtractsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    InhaledExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     InhaledExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Extracts - Ingested":
@@ -357,9 +357,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     IngestedExtractsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     IngestedExtractsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     IngestedExtractsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCIngestedExtractsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCIngestedExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCIngestedExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    IngestedExtractsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    IngestedExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     IngestedExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Extracts - Other":
@@ -375,9 +375,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     OtherExtractsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     OtherExtractsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     OtherExtractsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCOtherExtractsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCOtherExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCOtherExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    OtherExtractsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    OtherExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     OtherExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Topicals":
@@ -393,9 +393,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     TopicalsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     TopicalsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     TopicalsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCTopicalsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCTopicalsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCTopicalsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    TopicalsPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    TopicalsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     TopicalsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
                 case "Other":
@@ -411,9 +411,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     OtherPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
                     OtherPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
                     OtherPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCOtherPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    BCOtherPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     BCOtherTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    OtherPackagedUnitsSold = inventoryReport.AdoxioNumberpackagedunits ?? 0;
+                    OtherPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
                     OtherTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
                     break;
             }
