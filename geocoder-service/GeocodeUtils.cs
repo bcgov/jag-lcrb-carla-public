@@ -59,11 +59,21 @@ namespace Gov.Lclb.Cllb.Geocoder
                 string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
                 // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
                 var output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
-                // if there are a lot of faults just query the city.
-                if (output.Features[0].Properties.Faults.Count > 1) 
+                               
+                // if there are any faults try a query based on the LGIN instead of the city.
+                if (output.Features[0].Properties.Faults.Count > 0  && establishment._adoxioLginValue != null) 
                 {
-                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: establishment.AdoxioAddresscity);
+                    var lgin = _dynamics.GetLginById(establishment._adoxioLginValue);
+                    address = $"{establishment.AdoxioAddressstreet}, {lgin.AdoxioName}, BC";
+                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);                    
                 }
+
+                // if the LGIN did not provide a good match just default to the specified city.
+                if (output.Features[0].Properties.Faults.Count > 1)
+                {
+                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: $"{establishment.AdoxioAddresscity}, BC");
+                }
+                    
 
                 // get the lat and long for the pin.
                 double? longData = output.Features[0].Geometry.Coordinates[0];
