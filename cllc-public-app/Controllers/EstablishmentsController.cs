@@ -64,22 +64,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // get establishments                                  
             string filter =  "statuscode eq 1";  // only active licenses
-                      
+            // we need to get applications so we can see if the inspection is complete.
+            string[] expand = { "adoxio_adoxio_licences_adoxio_application_AssignedLicence" };
+
             IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
             try
             {
-                licences = _dynamicsClient.Licenceses.Get( filter: filter ).Value;
-
+                licences = _dynamicsClient.Licenceses.Get( filter: filter, expand: expand ).Value;
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error creating establishment");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new Exception("Unable to establishment");
+                _logger.LogError("Error getting licenses" + odee.Request.Content + "\n" + odee.Response.Content);                
+                throw new Exception("Unable to get licences");
             }
             catch (Exception e)
             {
@@ -91,36 +88,52 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {                
                 foreach (var license in licences)
                 {
-                    if (license._adoxioEstablishmentValue != null)
+                    bool add = false;
+
+                    // only consider the item if the inspection is complete.
+                    if (license.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence != null)
+                    {
+                        foreach (var item in license.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence)
+                        {
+                            if (item.AdoxioInspectioncomplete != null && item.AdoxioInspectioncomplete ==  true)
+                            {
+                                add = true;
+                            }
+                                
+                        }
+                    }
+
+
+                    if (add && license._adoxioEstablishmentValue != null)
                     {
                         var establishment = _dynamicsClient.GetEstablishmentById(license._adoxioEstablishmentValue);
                         if (establishment != null && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null)
                         {
-                            bool add = true;
-                            if (!string.IsNullOrEmpty(search) && establishment.AdoxioName != null && establishment.AdoxioAddresscity != null)
+                            
+                            if (add && !string.IsNullOrEmpty(search) && establishment.AdoxioName != null && establishment.AdoxioAddresscity != null)
                             {
                                 search = search.ToUpper();
                                 if (!establishment.AdoxioName.ToUpper().StartsWith(search) == true
                                     && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search) == true)
                                 {
-                                    add = false;
+                                    // candidate for rejection; check the lgin too.
+                                    if (establishment._adoxioLginValue != null)
+                                    {
+                                        establishment.AdoxioLGIN = _dynamicsClient.GetLginById(establishment._adoxioLginValue);
+                                        if (establishment.AdoxioLGIN == null
+                                            || establishment.AdoxioLGIN.AdoxioName == null
+                                            || !establishment.AdoxioLGIN.AdoxioName.ToUpper().StartsWith(search))
+                                        {
+                                            add = false;
+                                        }                                        
+                                    }
+                                    else
+                                    {
+                                        add = false;
+                                    }
                                 }
                             }
-
-                            // check the lgin too.
-                            if (add == false
-                                && !string.IsNullOrEmpty(search)
-                                && establishment._adoxioLginValue != null)
-                            {
-                                establishment.AdoxioLGIN = _dynamicsClient.GetLginById(establishment._adoxioLginValue);
-                                if (establishment.AdoxioLGIN != null
-                                    && establishment.AdoxioLGIN.AdoxioName != null
-                                    && establishment.AdoxioLGIN.AdoxioName.ToUpper().StartsWith(search))
-                                    {
-                                        add = true;
-                                    }                                    
-                            }
-
+                            
                             if (add)
                             {
                                 establishmentMapData.Add(new EstablishmentMapData()
