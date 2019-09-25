@@ -37,7 +37,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <!-- <section style="padding-right: 85px;">
+    <!-- <section style="padding-right: 95px;">
       <div *ngIf="form.get('renewalCriminalOffenceCheck').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>A LCRB Licensing Staff member may
         contact you as part of this renewal process
@@ -50,6 +50,8 @@
     <section style="display: flex; justify-content: space-between; width: 100%;">
       <div class="question-label">
         2. Has there been an unreported sale of the business associated with the licence within the past 12 months?
+        <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
+          matTooltip="For example, are you the new owner of the licence or does the licence have a new owner?"></i>
       </div>
       <div style="flex: 0 0 85px;">
         <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalUnreportedSaleOfBusiness')}"
@@ -59,7 +61,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;">
+    <section style="padding-right: 95px;">
       <div *ngIf="form.get('renewalUnreportedSaleOfBusiness').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please
         contact us as soon as possible to transfer this licence to its new owner.
@@ -73,6 +75,8 @@
       <div class="question-label">
         3. Our records show that this establishment is licensed as a {{account?.getBusinessTypeName()}}. Has this
         changed?
+        <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
+          matTooltip="For example, has your business type changed to a sole proprietor, private corporation, partnership, etc.?"></i>
       </div>
       <div style="flex: 0 0 85px;">
         <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalBusinessType')}"
@@ -82,7 +86,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;">
+    <section style="padding-right: 95px;">
       <div *ngIf="form.get('renewalBusinessType').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>You can still renew your licence. Please
         contact us to update this information.
@@ -97,6 +101,8 @@
         4. Have you, any partner, shareholder, director, officer, or an immediate family member of any of the
         aforementioned associates acquired a new interest or expanded an existing interest - financial or otherwise - in
         a federal producer of cannabis within the past 12 months?
+        <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
+          matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee."></i>
       </div>
       <div style="flex: 0 0 85px;">
         <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('renewalTiedhouse')}"
@@ -106,7 +112,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;">
+    <section style="padding-right: 95px;">
       <div *ngIf="form.get('renewalTiedhouse').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
         You can still renew your licence. After submitting your renewal, you can update your federal producer
@@ -122,6 +128,8 @@
       <div class="question-label">
         5. Has a federal produce of cannabis acquired a new interest or expanded an existing interest - financial or
         otherwise - in the licensee {{account?.getBusinessTypeName()}} within the past 12 months?
+        <i style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle"
+          matTooltip="Tied house relationships with federal producers must be reported to the LCRB to determine if there is a risk of the producer’s products being favoured by the licensee."></i>
       </div>
       <div style="flex: 0 0 85px;">
         <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('tiedhouseFederalInterest')}"
@@ -131,7 +139,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;">
+    <section style="padding-right: 95px;">
       <div *ngIf="form.get('tiedhouseFederalInterest').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
         You can still renew your licence. After submitting your renewal, you can update your federal producer
@@ -156,7 +164,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+    <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType && legalEntityId">
       <app-directors-and-officers [lockAssociates]="lockAssociates" [accountId]="account?.id"
         [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
       </app-directors-and-officers>
@@ -182,7 +190,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+    <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType && legalEntityId">
       <app-key-personnel [lockAssociates]="lockAssociates" [accountId]="account?.id"
         [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId"></app-key-personnel>
 
@@ -207,7 +215,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;" *ngIf="account?.id && account?.businessType && legalEntityId">
+    <section style="padding-right: 95px;" *ngIf="account?.id && account?.businessType && legalEntityId">
       <app-shareholders [lockAssociates]="lockAssociates" [accountId]="account?.id"
         [businessType]="account?.businessType" [parentLegalEntityId]="legalEntityId">
       </app-shareholders>
@@ -233,7 +241,7 @@
         </mat-button-toggle-group>
       </div>
     </section>
-    <section style="padding-right: 85px;">
+    <section style="padding-right: 95px;">
       <div *ngIf="form.get('renewalOutstandingFines').value === 'Yes'" class="field-changed">
         <i class="fa fa-exclamation-circle" style="margin-right: 10px;"></i>
         You can still renew your licence. Please contact us to to pay your fines.
