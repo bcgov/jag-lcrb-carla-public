@@ -142,13 +142,13 @@ namespace Gov.Lclb.Cllb.Public
             // health checks
             services.AddHealthChecks()
                 .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+                // No longer checking SQL Server in health checks as the SQL components are no longer active.
+                //.AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
                 .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics")
                 .AddCheck<GeocoderHealthCheck>("Geocoder");
 
             services.AddSession();
-
         }
 
         private void SetupDynamics(IServiceCollection services)
