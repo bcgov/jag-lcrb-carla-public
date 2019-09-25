@@ -16,6 +16,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
 import * as moment from 'moment';
+import { PaymentDataService } from '@services/payment-data.service';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -61,6 +62,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     private router: Router,
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
+    private paymentService: PaymentDataService,
     public featureFlagService: FeatureFlagService,
     public dialog: MatDialog) {
     super();
@@ -195,7 +197,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     }
   }
 
-  payLicenceFee(licence: ApplicationLicenseSummary) {
+  planStoreOpening(licence: ApplicationLicenseSummary) {
     const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
     if (crsApplication) {
       this.router.navigate([`/store-opening/${crsApplication.applicationId}`]);
@@ -204,6 +206,22 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
         { duration: 3500, panelClass: ['red-snackbar'] });
     }
   }
+
+  payLicenceFee(licence: ApplicationLicenseSummary) {
+    const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
+    if (crsApplication) {
+    this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(crsApplication.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(res => {
+        const data = <any>res;
+        window.location.href = data.url;
+      }, err => {
+        if (err._body === 'Payment already made') {
+          this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        }
+      });
+    }
+    }
 
   startNewLicenceApplication() {
     const newLicenceApplicationData: Application = <Application>{
