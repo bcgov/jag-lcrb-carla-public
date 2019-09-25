@@ -2,7 +2,7 @@
   "kind": "Template",
   "apiVersion": "v1",
   "metadata": {
-    "name": "${NAME}-build-template",
+    "name": "${NAME}-deploy-template",
     "creationTimestamp": null
   },
   "objects": [
