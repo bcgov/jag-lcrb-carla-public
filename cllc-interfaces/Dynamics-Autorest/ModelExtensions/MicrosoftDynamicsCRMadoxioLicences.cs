@@ -8,7 +8,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
     public partial class MicrosoftDynamicsCRMadoxioLicences
     {
-        
+
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_account_adoxio_legalentity_Account@odata.bind")]
@@ -16,6 +16,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_AccountId@odata.bind")]
         public string AccountODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_ProposedOwner@odata.bind")]
+        public string ProposedOwnerODataBind { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_establishment@odata.bind")]
         public string AdoxioEstablishmentODataBind { get; set; }
@@ -30,7 +33,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         //enable accessing properties using string names
         public object this[string propertyName]
         {
-            get {
+            get
+            {
                 if (propertyName.IndexOf(".") > -1)
                 {
                     string[] tokens = propertyName.Split(".");
@@ -45,14 +49,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
                     {
                         return property.GetType().GetProperty(secondToken).GetValue(property, null);
                     }
-                    
+
                 }
                 else
                 {
                     return this.GetType().GetProperty(propertyName).GetValue(this, null);
                 }
             }
-                
+
             set { this.GetType().GetProperty(propertyName).SetValue(this, value, null); }
         }
     }

@@ -128,7 +128,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("autocomplete")]
         public IActionResult GetAutocomplete(string name)
         {
-            IDictionary<string, string> results = new Dictionary<string, string>();
+           var results = new List<TransferAccount>();
             try
             {
                 string filter = null;
@@ -138,11 +138,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     name = name.Replace("'", "''");
                     filter = $"contains(name,'{name}')";
                 }
-                
-                var accounts = _dynamicsClient.Accounts.Get(filter: filter).Value;
+                var expand = new List<string> { "primarycontactid" };
+                var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand).Value;
                 foreach (var account in accounts)
                 {
-                    results.Add(account.Accountid, account.Name);
+                    var transferAccount = new TransferAccount()
+                    {
+                        AccountId = account.Accountid,
+                        AccountName = account.Name,
+                        BusinessType = (AdoxioApplicantTypeCodes?)account.AdoxioBusinesstype
+
+                    };
+                    if(account.Primarycontactid != null)
+                    {
+
+                        transferAccount.ContactName = $"{account.Primarycontactid.Firstname} {account.Primarycontactid.Lastname}";
+                    }
+                    results.Add(transferAccount);
                 }
             }
             catch (OdataerrorException odee)
