@@ -1,24 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBase } from '@shared/form-base';
-import { Application } from '@models/application.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription, Observable, Subject, of, forkJoin } from 'rxjs';
-import {
-  ApplicationCancellationDialogComponent
-} from '@app/applications-and-licences/applications-and-licences.component';
+import { Subscription, Observable, of } from 'rxjs';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationHTMLContent } from '@app/application/application.component';
-import { Account } from '@models/account.model';
-import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
+import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
 
@@ -42,10 +36,8 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
 
 
   constructor(private store: Store<AppState>,
-    private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar,
     public router: Router,
-    public applicationDataService: ApplicationDataService,
     private licenseDataService: LicenseDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
@@ -59,7 +51,16 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   ngOnInit() {
     this.form = this.fb.group({
       establishmentName: [''],
-      accountId: ['', [Validators.required]],
+      establishmentAddressStreet: [''],
+      establishmentAddressCity: [''],
+      establishmentAddressPostalCode: [''],
+      establishmentParcelId: [''],
+      proposedOwner: this.fb.group({
+        accountId: ['', [Validators.required]],
+        accountName: [{value: '', disabled: true}],
+        contactName: [{value: '', disabled: true}],
+        businessType: [{value: '', disabled: true}],
+      }),
       transferConsent: ['', [this.customRequiredCheckboxValidator()]],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
@@ -79,7 +80,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
 
 
         this.licence = data;
-        this.form.patchValue({ establishmentName: this.licence.establishmentName });
+        this.form.patchValue(data);
       },
         () => {
           console.log('Error occured');
@@ -96,7 +97,7 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    return this.licenseDataService.initiateTransfer(this.licence.id, this.form.get('accountId').value)
+    return this.licenseDataService.initiateTransfer(this.licence.id, this.form.get('proposedOwner.accountId').value)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error submitting transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -108,17 +109,6 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
         }
         return of(true);
       }));
-  }
-
-
-
-  updateApplicationInStore() {
-    this.applicationDataService.getApplicationById(this.licenceId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      }
-      );
   }
 
   /**
@@ -143,6 +133,11 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
     for (const c in this.form.controls) {
       if (typeof (this.form.get(c).markAsTouched) === 'function') {
         this.form.get(c).markAsTouched();
+      }
+    }
+    for (const c in (<FormGroup>this.form.get('proposedOwner')).controls) {
+      if (typeof (this.form.get(`proposedOwner.${c}`).markAsTouched) === 'function') {
+        this.form.get(`proposedOwner.${c}`).markAsTouched();
       }
     }
     this.showValidationMessages = false;
@@ -175,6 +170,10 @@ export class ApplicationOwnershipTransferComponent extends FormBase implements O
   showFormControl(state: string): boolean {
     return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
       .indexOf(state) !== -1;
+  }
+
+  onAccountSelect(proposedAccount: TransferAccount) {
+    this.form.get('proposedOwner').patchValue(proposedAccount);
   }
 
 }

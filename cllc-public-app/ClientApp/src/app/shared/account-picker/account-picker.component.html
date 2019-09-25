@@ -3,7 +3,7 @@
     #autocomplete>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelect($event)" [displayWith]="autocompleteDisplay">
     <mat-option *ngFor="let item of autocompleteAccounts" [value]="item">
-      {{item.name}}
+      {{item.accountName}}
     </mat-option>
   </mat-autocomplete>
 
