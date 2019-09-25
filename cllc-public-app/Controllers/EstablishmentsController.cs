@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -62,16 +63,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public IActionResult GetMap(string search)
         {
+            string applicationsFilter = "_adoxio_assignedlicence_value ne null";
             // get establishments                                  
             string filter =  "statuscode eq 1";  // only active licenses
             // we need to get applications so we can see if the inspection is complete.
-            string[] expand = { "adoxio_adoxio_licences_adoxio_application_AssignedLicence" };
+
+            IList<MicrosoftDynamicsCRMadoxioApplication> applications = null;
+            try
+            {
+                applications = _dynamicsClient.Applications.Get(filter: applicationsFilter).Value;
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error getting applications" + odee.Request.Content + "\n" + odee.Response.Content);
+                throw new Exception("Unable to get applications");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("Unexpected error getting applications");
+                _logger.LogError(e.Message);
+            }
+
+
 
             IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
             try
             {
-                licences = _dynamicsClient.Licenceses.Get( filter: filter, expand: expand ).Value;
+                licences = _dynamicsClient.Licenceses.Get( filter: filter ).Value;
             }
             catch (OdataerrorException odee)
             {
@@ -91,15 +110,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     bool add = false;
 
                     // only consider the item if the inspection is complete.
-                    if (license.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence != null)
+
+                    // note that the Linq query is required because the License does not contain accurate data to show the related applications.
+
+                    var relatedApplications = applications.Where(app => app._adoxioAssignedlicenceValue == license.AdoxioLicencesid).ToList();
+
+
+                    if (relatedApplications != null)
                     {
-                        foreach (var item in license.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence)
+                        foreach (var item in relatedApplications)
                         {
-                            if (item.AdoxioInspectioncomplete != null && item.AdoxioInspectioncomplete ==  true)
+                            // with the new business flow, we check for a pass (845280000) in AdoxioAppchecklistinspectionresults
+                            if (item.AdoxioAppchecklistinspectionresults != null && item.AdoxioAppchecklistinspectionresults == 845280000)
                             {
                                 add = true;
                             }
-                                
                         }
                     }
 
