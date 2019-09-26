@@ -9,15 +9,30 @@ if [ $? -eq 1 ]; then
   fi
 fi
 # ensure config exists.
-touch /opt/splunk/etc/splunk.version
-/sbin/updateetc.sh
+
+if [ ! -f "/opt/splunk/etc/splunk.version" ]; then        
+  echo Updating /opt/splunk/etc
+  (cd /opt/splunk-etc; tar cf - *) | (cd /opt/splunk/etc; tar xf -)        
+fi
+
+if [ ! -f "/opt/splunk/var/log/splunk" ]; then
+  echo Creating log directory
+  mkdir /opt/splunk/var/log/splunk
+fi  
 
 echo "***** Updating config *****"
 sed -i -e '/enableSplunkdSSL =/ s/= .*/= false/' /opt/splunk/etc/system/local/server.conf
+
+string='OPTIMISTIC_ABOUT_FILE_LOCKING = 1'
+sed -i -e "\|$string|h; \${x;s|$string||;{g;t};a\\" -e "$string" -e "}" /opt/splunk/etc/splunk-launch.conf
+
+if [ ! -f "/opt/splunk/etc/myinstall/splunkd.xml" ]; then
+  echo Creating splunkd config
+  cp /opt/splunk/etc/myinstall/splunkd.xml.cfg-default /opt/splunk/etc/myinstall/splunkd.xml
+fi  
 
 cp /opt/splunk/etc/auth/cacert.pem.default /opt/splunk/etc/auth/cacert.pem
 cp /opt/splunk/etc/auth/ca.pem.default /opt/splunk/etc/auth/ca.pem
 
 /opt/splunk/bin/splunk start
 tail -n 0 -f /opt/splunk/var/log/splunk/splunkd_stderr.log
-#exec /sbin/entrypoint.sh start-service
