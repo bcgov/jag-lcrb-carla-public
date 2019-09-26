@@ -31,6 +31,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Net.Http;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -142,13 +143,13 @@ namespace Gov.Lclb.Cllb.Public
             // health checks
             services.AddHealthChecks()
                 .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
-                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+                // No longer checking SQL Server in health checks as the SQL components are no longer active.
+                //.AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
                 .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics")
                 .AddCheck<GeocoderHealthCheck>("Geocoder");
 
             services.AddSession();
-
         }
 
         private void SetupDynamics(IServiceCollection services)
@@ -290,7 +291,25 @@ namespace Gov.Lclb.Cllb.Public
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler(errorApp =>
+                {
+                    errorApp.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.ContentType = "text/html";
+
+                        await context.Response.WriteAsync("An unexpected server error occurred.\r\n");
+                        
+
+                        var exceptionHandlerPathFeature =
+                            context.Features.Get<IExceptionHandlerPathFeature>();
+                        
+                        if (exceptionHandlerPathFeature?.Error != null)
+                        {
+                            Log.Logger.Error(exceptionHandlerPathFeature?.Error, "Unexpected Error");
+                        }                        
+                    });
+                });
                 app.UseHsts(); // Strict-Transport-Security
                 app.UseCors(MyAllowSpecificOrigins);
             }
