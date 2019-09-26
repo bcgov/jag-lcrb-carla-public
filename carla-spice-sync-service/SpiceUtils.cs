@@ -538,8 +538,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 {
                     foreach (var legalEntity in associates)
                     {
-                        LegalEntity person = CreateAssociate(legalEntity);
-                        screeningRequest.Associates.Add(person);
+                        try
+                        {
+                            LegalEntity person = CreateAssociate(legalEntity);
+                            screeningRequest.Associates.Add(person);
+                        }
+                        catch (ArgumentNullException e)
+                        {
+                            _logger.LogError($"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                        }
                     }
                 }
 
@@ -583,8 +590,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 foreach (var legalEntity in legalEntities)
                 {
-                    LegalEntity associate = CreateAssociate(legalEntity);
-                    newAssociates.Add(associate);
+                    try
+                    {
+                        LegalEntity associate = CreateAssociate(legalEntity);
+                        newAssociates.Add(associate);
+                    }
+                    catch (ArgumentNullException e)
+                    {
+                        _logger.LogError($"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                    }
                 }
             }
             var newFoundAssociates = new List<LegalEntity>(foundAssociates);
@@ -602,6 +616,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
         private LegalEntity CreateAssociate(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
         {
+            if(legalEntity == null)
+            {
+                throw new ArgumentNullException();
+            }
             LegalEntity associate = new LegalEntity()
             {
                 EntityId = legalEntity.AdoxioLegalentityid,
