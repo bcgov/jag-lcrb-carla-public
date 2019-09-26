@@ -42,15 +42,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET licence by id
         [HttpGet("{id}")]
-        public JsonResult GetLicence(string id)
+        public ActionResult GetLicence(string id)
         {
             MicrosoftDynamicsCRMadoxioLicences licence = null;
 
-            var filter = $"adoxio_licencesid eq {id}";
 
             try
             {
-                licence = _dynamicsClient.Licenceses.GetByKey(id);
+                // check access to licence
+                licence = _dynamicsClient.GetLicenceByIdWithChildren(id);
+                if (licence == null)
+                {
+                    return NotFound();
+                }
+
+                if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+                {
+                    return Forbid();
+                }
             }
             catch (OdataerrorException odee)
             {
@@ -78,7 +87,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // check access to licence
-            var expand = new List<string> {  "adoxio_Licencee" };
             MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
             if (adoxioLicense == null)
             {
