@@ -11,13 +11,18 @@
       <!-- Preamble -->
       <section class="ngtest-preamble-content">
         <p>
-          Transferring a cannabis licence occurs when the entire legal entity (an individual, corporation, society,
-          etc.) to which the licence is issued changes to a new legal entity.
+          By submitting this application, the current cannabis retail store licence holder acknowledges that they
+          <strong>must continue to hold valid interest</strong> (lease or land title) until the Transfer of Ownership
+          application is approved by the Liquor and Cannabis Regulation Branch.
         </p>
         <p>
-          The licensee listed on the face of the cannabis retail store licence is responsible for the licence until
-          such a time that the Branch approves an administratively complete transfer application and notifies both
-          parties of its completion.
+          The current licensee must continue to operate and be responsible for the retail store in compliance with the
+          Cannabis Act, Regulation and Terms and Conditions of the licence until successful completion of the licence
+          transfer.
+        </p>
+        <p>
+          If the current licensee does not want to operate the store during the transfer process, the store must remain
+          closed until the transfer application has been approved.
         </p>
       </section>
 
@@ -26,17 +31,18 @@
       <section class="padded-section">
         <div class="ngtest-before-starting-content">
           <p>
-            Please ensure that the proposed owner of the store has logged into the Cannabis Licensing Portal (this
-            website) at least once. If you cannot find their business when searching below, this indicates that they
-            have not yet logged in and created an account record.
+            Please ensure that the proposed licensee of the cannabis retail store has logged into the cannabis licensing
+            portal (this website) at least once. If you cannot find their business when searching below, they have not
+            yet logged in and created an account record.
           </p>
           <p>
-            Once you have submitted the transfer application, the identified proposed licensee will be notified to
-            continue their application process. They will need to pay a
+            Once you have submitted the transfer application, the proposed licensee will be notified to continue their
+            application process. They will need to pay a $500 application fee at the time of submission.
           </p>
           <p>
-            This person will act as the contact for this application and will receive information throughout the
-            application process. Once licensed, all future correspondence will be directed to the licensee.
+            The proposed licensee will act as the contact for this application and will receive information throughout
+            the application process. All future correspondence will be directed to the new licensee after the licence
+            has been successfully transferred.
           </p>
         </div>
       </section>
@@ -50,36 +56,36 @@
         </app-field>
 
         <div>
-            <address class="row">
-              <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
-                <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
+          <address class="row">
+            <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
+              <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
+            </app-field>
+            <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
+              <input class="form-control" type="text" readonly formControlName="establishmentAddressCity">
+            </app-field>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Province" [isFullWidth]="true">
+                <input class="form-control" readonly type="text" value="British Columbia">
               </app-field>
-              <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
-                <input class="form-control" type="text" readonly formControlName="establishmentAddressCity">
+            </section>
+            <section class="col-md-4 col-xs-12">
+              <app-field label="Postal Code">
+                <input class="form-control" type="text" readonly formControlName="establishmentAddressPostalCode">
               </app-field>
-              <section class="col-md-4 col-xs-12">
-                <app-field label="Province" [isFullWidth]="true">
-                  <input class="form-control" readonly type="text" value="British Columbia">
-                </app-field>
-              </section>
-              <section class="col-md-4 col-xs-12">
-                <app-field label="Postal Code">
-                  <input class="form-control" type="text" readonly formControlName="establishmentAddressPostalCode">
-                </app-field>
-              </section>
-              <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
-                <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+            </section>
+            <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+              <input class="form-control" autocomplete="country-name" readonly type="text" value="Canada">
+            </app-field>
+          </address>
+          <div class="light-blue-bg" style="display: flex;">
+            <div style="flex: 0 0 210px;">
+              <app-field label="Parcel Identifier (PID)">
+                <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                  style="width: 200px;" formControlName="establishmentParcelId">
               </app-field>
-            </address>
-            <div class="light-blue-bg" style="display: flex;">
-              <div style="flex: 0 0 210px;">
-                <app-field label="Parcel Identifier (PID)">
-                  <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                    style="width: 200px;" formControlName="establishmentParcelId">
-                </app-field>
-              </div>
             </div>
           </div>
+        </div>
       </section>
 
       <h3 class="blue-header">IDENTIFY THE PROPOSED LICENSEE</h3>
@@ -89,7 +95,7 @@
           [valid]="isValidOrNotTouched('proposedOwner.accountId')">
           <app-account-picker (valueSelected)="onAccountSelect($event)"></app-account-picker>
         </app-field>
-        
+
         <label>Account: </label> <span> {{form.get('proposedOwner.accountName')?.value}}</span> <br>
         <label>Type: </label> <span> {{form.get('proposedOwner.businessType')?.value}}</span><br>
         <label>Contact Person: </label> <span> {{form.get('proposedOwner.contactName')?.value}}</span><br>
