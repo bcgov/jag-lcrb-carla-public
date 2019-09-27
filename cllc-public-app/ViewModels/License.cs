@@ -22,7 +22,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class License
     {
         public string id { get; set; }
+        public string establishmentId { get; set; }
         public string establishmentName { get; set; }
+        public string establishmentEmail { get; set; }
+        public string establishmentPhone { get; set; }
         public string establishmentAddress { get; set; }
 
         public string establishmentAddressStreet { get; set; }
