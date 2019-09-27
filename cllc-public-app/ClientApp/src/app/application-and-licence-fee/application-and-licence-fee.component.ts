@@ -20,6 +20,8 @@ import { ApplicationHTMLContent } from '@app/application/application.component';
 import { Account } from '@models/account.model';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { DynamicsDataService } from '@services/dynamics-data.service';
+import { EstablishmentDataService } from '@services/establishment-data.service';
+import { Establishment } from '@models/establishment.model';
 
 @Component({
   selector: 'app-application-and-licence-fee',
@@ -48,6 +50,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     public router: Router,
     public applicationDataService: ApplicationDataService,
     public dynamicsDataService: DynamicsDataService,
+    public establishmentDataService: EstablishmentDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -176,15 +179,15 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
-    const establishment = {
+    const establishment = <Establishment> {
       id: saveData.assignedLicence.establishmentId,
-      Phone: saveData.assignedLicence.establishmentPhone,
+      phone: saveData.assignedLicence.establishmentPhone,
       email: saveData.assignedLicence.establishmentEmail,
     };
 
     return forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-      this.dynamicsDataService.updateRecord('establishments', establishment.id, establishment)
+      this.establishmentDataService.upEstablishment(establishment)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
