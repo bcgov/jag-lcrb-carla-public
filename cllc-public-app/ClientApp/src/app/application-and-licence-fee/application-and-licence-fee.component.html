@@ -26,6 +26,22 @@
       <section>
         <h3 class="blue-header">STORE OPENING</h3>
         <div class="padded-section">
+          <section formGroupName="assignedLicence">
+            <div style="flex: 0 0 210px;">
+              <app-field label="Store Email" [required]="false" [valid]="isValidOrNotTouched('assignedLicence.establishmentEmail')"
+                errorMessage="Please enter an email address">
+                <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
+                  formControlName="establishmentEmail">
+              </app-field>
+            </div>
+            <div style="flex: 0 0 210px;">
+              <app-field label="Store Phone" [required]="false" [valid]="isValidOrNotTouched('assignedLicence.establishmentPhone')"
+                errorMessage="Please enter a phone number ">
+                <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
+              </app-field>
+            </div>
+          </section>
           <app-field label="Estimated Opening Date" [required]="true"
             [valid]="isValidOrNotTouched('establishmentopeningdate')" errorMessage="Please enter date">
             <input type="text" style="width: 200px; background-color: #fff;" placeholder="yyyy-mm-dd" readonly
