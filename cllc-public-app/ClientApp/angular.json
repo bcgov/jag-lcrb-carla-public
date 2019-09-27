@@ -26,7 +26,8 @@
               "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.scss"
             ],
-            "scripts": ["src/assets/establishmentsMap.js"]
+            "scripts": ["src/assets/establishmentsMap.js"],
+            "aot": true
           },
           "configurations": {
             "production": {
