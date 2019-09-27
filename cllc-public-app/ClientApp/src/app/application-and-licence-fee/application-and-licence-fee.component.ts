@@ -19,6 +19,9 @@ import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { ApplicationHTMLContent } from '@app/application/application.component';
 import { Account } from '@models/account.model';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
+import { DynamicsDataService } from '@services/dynamics-data.service';
+import { EstablishmentDataService } from '@services/establishment-data.service';
+import { Establishment } from '@models/establishment.model';
 
 @Component({
   selector: 'app-application-and-licence-fee',
@@ -46,6 +49,8 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     public snackBar: MatSnackBar,
     public router: Router,
     public applicationDataService: ApplicationDataService,
+    public dynamicsDataService: DynamicsDataService,
+    public establishmentDataService: EstablishmentDataService,
     public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -58,6 +63,11 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   ngOnInit() {
     this.form = this.fb.group({
       id: [''],
+      assignedLicence: this.fb.group({
+        establishmentId: [''],
+        establishmentPhone: [''],
+        establishmentEmail: [''],
+      }),
       description1: ['', [Validators.required, Validators.minLength(10)]],
       isReadyValidInterest: [''],
       isReadyWorkers: [''],
@@ -76,11 +86,9 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
       establishmentopeningdate: ['', [Validators.required]],
     });
 
-
     this.applicationDataService.getSubmittedApplicationCount()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.submittedApplications = value);
-
 
     this.store.select(state => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
@@ -89,9 +97,9 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
         this.account = account;
       });
 
-
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
+      // .pipe(mergeMap(application))
       .subscribe((data: Application) => {
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
@@ -152,8 +160,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     return body;
   }
 
-
-
   canDeactivate(): Observable<boolean> | boolean {
     const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
     if (formDidntChange) {
@@ -167,16 +173,21 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
     }
   }
 
-
-
   /**
    * Save form data
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
+    const establishment = <Establishment> {
+      id: saveData.assignedLicence.establishmentId,
+      phone: saveData.assignedLicence.establishmentPhone,
+      email: saveData.assignedLicence.establishmentEmail,
+    };
+
     return forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
+      this.establishmentDataService.upEstablishment(establishment)
     ).pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -191,8 +202,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
         return of(true);
       }));
   }
-
-
 
   updateApplicationInStore() {
     this.applicationDataService.getApplicationById(this.applicationId)
