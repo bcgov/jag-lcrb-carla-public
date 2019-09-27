@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UploadEvent, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { FileSystemItem } from '@models/file-system-item.model';
 import { Subscription } from 'rxjs';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -44,8 +44,8 @@ export class FileUploaderComponent implements OnInit {
     this.getUploadedFileData();
   }
 
-  public dropped(event: UploadEvent) {
-    const files = event.files;
+  public dropped(event: NgxFileDropEntry[]) {
+    const files = event;
     let newFileCount = 0;
     for (const droppedFile of files) {
       newFileCount += 1;

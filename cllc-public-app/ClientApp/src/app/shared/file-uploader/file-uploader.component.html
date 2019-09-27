@@ -1,6 +1,6 @@
 <div class="upload-wrapper">
   <p></p>
-  <file-drop [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)"
+  <ngx-file-drop [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)"
     customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
     <div style="text-align: center">
       <h3></h3>
@@ -16,7 +16,7 @@
       <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" multiple style="visibility: hidden;" #fileBrowserM>
       <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" style="visibility: hidden;" #fileBrowser>
     </div>
-  </file-drop>
+  </ngx-file-drop>
   <div style="margin-top: 5px; color: #2C679E;">
     <div [ngBusy]="busy"></div>
     <section *ngFor="let item of files; let i=index" class="file-list">
