@@ -38,7 +38,7 @@
     }
   },
   "angularCompilerOptions": {
-    "enableIvy": true
+    "enableIvy": false
   },
   "exclude": [
     "test.ts",
