@@ -124,7 +124,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? commonnonvotingshares { get; set; } //adoxio_commonnonvotingshares (whole number)
         public int? preferrednonvotingshares { get; set; } //adoxio_preferrednonvotingshares (whole number)
         public Account account { get; set; } //adoxio_account (lookup account)
-        List<AdoxioLegalEntity> relatedentities { get; set; }
+        public List<AdoxioLegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
         public DateTimeOffset? dateIssued { get; set; } 

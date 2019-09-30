@@ -97,6 +97,60 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
+        [HttpGet("current-hierarchy")]
+        public JsonResult GetCurrentHierarchy()
+        {
+            List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
+
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            // check that the session is setup correctly.
+            userSettings.Validate();
+
+            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = GetAccountLegalEntities(userSettings.AccountId);
+
+            foreach (var legalEntity in legalEntities)
+            {
+                result.Add(legalEntity.ToViewModel());
+            }
+
+            return new JsonResult(result);
+        }
+
+        private List<AdoxioLegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
+        {
+            List<AdoxioLegalEntity> result = null;
+            var filter = "_adoxio_account_value eq " + accountId;
+            if (shareHolders == null)
+            {
+                shareHolders = new List<string>();                
+            }
+            
+            var response = _dynamicsClient.Legalentities.Get(filter: filter);
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntities = response.Value.ToList();                
+
+                foreach (var legalEntity in legalEntities)
+                {
+                    var viewModel = legalEntity.ToViewModel();
+                    viewModel.relatedentities = new List<AdoxioLegalEntity>();
+                    if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue) && !shareHolders.Contains(legalEntity._adoxioShareholderaccountidValue))
+                    {
+                        shareHolders.Add(legalEntity._adoxioShareholderaccountidValue);
+                        viewModel.relatedentities.AddRange ( GetAccountHierarchy(legalEntity._adoxioShareholderaccountidValue, shareHolders));
+                    }                    
+
+                    result.Add(viewModel);
+                }
+                
+            }
+            return result;
+
+        }
+
         private List<MicrosoftDynamicsCRMadoxioLegalentity> GetAccountLegalEntities(string accountId, List<string> shareHolders = null)
         {
             List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
