@@ -5,6 +5,7 @@ using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {        
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
+        private readonly IMemoryCache _cache;
 
-        public EstablishmentsController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
-        {            
+        public EstablishmentsController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
+        {
+            _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(EstablishmentsController));
         }
@@ -63,126 +66,169 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public IActionResult GetMap(string search)
         {
-            string applicationsFilter = "_adoxio_assignedlicence_value ne null ";
-            // get establishments                                  
-            string licenseFilter =  "statuscode eq 1";  // only active licenses
-            string[] licenseExpand = { "adoxio_LicenceType" };
 
-            // we need to get applications so we can see if the inspection is complete.
-
-            IList<MicrosoftDynamicsCRMadoxioApplication> applications = null;
-            try
+            string cacheKey;
+            if (string.IsNullOrEmpty(search))
             {
-                applications = _dynamicsClient.Applications.Get( filter: applicationsFilter ).Value;
+                cacheKey = "MAP_NOSEARCH";
             }
-            catch (OdataerrorException odee)
+            else
             {
-                _logger.LogError("Error getting applications" + odee.Request.Content + "\n" + odee.Response.Content);
-                throw new Exception("Unable to get applications");
+                search = search.ToUpper();
+                search = search.Trim();
+                cacheKey = $"MAP_SEARCH_{search}";
             }
-            catch (Exception e)
+            List<EstablishmentMapData> establishmentMapData; 
+            if (!_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
             {
-                _logger.LogError("Unexpected error getting applications");
-                _logger.LogError(e.Message);
-            }
-
-            
-            // get licenses
-            IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
-
-            try
-            {
-                licences = _dynamicsClient.Licenceses.Get( filter: licenseFilter , expand: licenseExpand).Value;
-            }
-            catch (OdataerrorException odee)
-            {
-                _logger.LogError("Error getting licenses" + odee.Request.Content + "\n" + odee.Response.Content);                
-                throw new Exception("Unable to get licences");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError("Unexpected error getting establishment map data");                
-                _logger.LogError(e.Message);                
-            }
-
-            List<EstablishmentMapData> establishmentMapData = new List<EstablishmentMapData>();
-            if (licences != null)
-            {                
-                foreach (var license in licences)
+                try
                 {
-                    if (license.AdoxioLicenceType != null && license.AdoxioLicenceType.AdoxioName.Equals("Cannabis Retail Store") )
+                    string applicationsFilter = "_adoxio_assignedlicence_value ne null ";
+                    // get establishments                                  
+                    string licenseFilter = "statuscode eq 1";  // only active licenses
+                    string[] licenseExpand = { "adoxio_LicenceType" };
+
+                    // we need to get applications so we can see if the inspection is complete.
+
+                    IList<MicrosoftDynamicsCRMadoxioApplication> applications = null;
+                    try
                     {
-                        bool add = false;
+                        applications = _dynamicsClient.Applications.Get(filter: applicationsFilter).Value;
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error getting applications" + odee.Request.Content + "\n" + odee.Response.Content);
+                        throw new Exception("Unable to get applications");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError("Unexpected error getting applications");
+                        _logger.LogError(e.Message);
+                    }
 
-                        // only consider the item if the inspection is complete.
 
-                        // note that the Linq query is required because the License does not contain accurate data to show the related applications.
+                    // get licenses
+                    IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
-                        var relatedApplications = applications.Where(app => app._adoxioAssignedlicenceValue == license.AdoxioLicencesid).ToList();
+                    try
+                    {
+                        licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand).Value;
+                    }
+                    catch (OdataerrorException odee)
+                    {
+                        _logger.LogError("Error getting licenses" + odee.Request.Content + "\n" + odee.Response.Content);
+                        throw new Exception("Unable to get licences");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError("Unexpected error getting establishment map data");
+                        _logger.LogError(e.Message);
+                    }
 
-
-                        if (relatedApplications != null)
+                    establishmentMapData = new List<EstablishmentMapData>();
+                    if (licences != null)
+                    {
+                        foreach (var license in licences)
                         {
-                            foreach (var item in relatedApplications)
+                            if (license.AdoxioLicenceType != null && license.AdoxioLicenceType.AdoxioName.Equals("Cannabis Retail Store"))
                             {
-                                // with the new business flow, we check for a pass (845280000) in AdoxioAppchecklistinspectionresults
-                                if (item.AdoxioAppchecklistinspectionresults != null && item.AdoxioAppchecklistinspectionresults == 845280000)
+                                bool add = false;
+
+                                // only consider the item if the inspection is complete.
+
+                                // note that the Linq query is required because the License does not contain accurate data to show the related applications.
+
+                                var relatedApplications = applications.Where(app => app._adoxioAssignedlicenceValue == license.AdoxioLicencesid).ToList();
+
+
+                                if (relatedApplications != null)
                                 {
-                                    add = true;
-                                }
-                            }
-                        }
-
-
-                        if (add && license._adoxioEstablishmentValue != null)
-                        {
-                            var establishment = _dynamicsClient.GetEstablishmentById(license._adoxioEstablishmentValue);
-                            if (establishment != null && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null)
-                            {
-
-                                if (add && !string.IsNullOrEmpty(search) && establishment.AdoxioName != null && establishment.AdoxioAddresscity != null)
-                                {
-                                    search = search.ToUpper();
-                                    if (!establishment.AdoxioName.ToUpper().StartsWith(search) == true
-                                        && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search) == true)
+                                    foreach (var item in relatedApplications)
                                     {
-                                        // candidate for rejection; check the lgin too.
-                                        if (establishment._adoxioLginValue != null)
+                                        // with the new business flow, we check for a pass (845280000) in AdoxioAppchecklistinspectionresults
+                                        if (item.AdoxioAppchecklistinspectionresults != null && item.AdoxioAppchecklistinspectionresults == 845280000)
                                         {
-                                            establishment.AdoxioLGIN = _dynamicsClient.GetLginById(establishment._adoxioLginValue);
-                                            if (establishment.AdoxioLGIN == null
-                                                || establishment.AdoxioLGIN.AdoxioName == null
-                                                || !establishment.AdoxioLGIN.AdoxioName.ToUpper().StartsWith(search))
-                                            {
-                                                add = false;
-                                            }
-                                        }
-                                        else
-                                        {
-                                            add = false;
+                                            add = true;
                                         }
                                     }
                                 }
 
-                                if (add)
+
+                                if (add && license._adoxioEstablishmentValue != null)
                                 {
-                                    establishmentMapData.Add(new EstablishmentMapData()
+                                    var establishment = _dynamicsClient.GetEstablishmentById(license._adoxioEstablishmentValue);
+                                    if (establishment != null && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null)
                                     {
-                                        id = establishment.AdoxioEstablishmentid.ToString(),
-                                        Name = establishment.AdoxioName,
-                                        License = license.AdoxioLicencenumber,
-                                        Phone = establishment.AdoxioPhone,
-                                        AddressCity = establishment.AdoxioAddresscity,
-                                        AddressPostal = establishment.AdoxioAddresspostalcode,
-                                        AddressStreet = establishment.AdoxioAddressstreet,
-                                        Latitude = (decimal)establishment.AdoxioLatitude,
-                                        Longitude = (decimal)establishment.AdoxioLongitude,
-                                    });
+
+                                        if (add && !string.IsNullOrEmpty(search) && establishment.AdoxioName != null && establishment.AdoxioAddresscity != null)
+                                        {
+                                            search = search.ToUpper();
+                                            if (!establishment.AdoxioName.ToUpper().StartsWith(search) == true
+                                                && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search) == true)
+                                            {
+                                                // candidate for rejection; check the lgin too.
+                                                if (establishment._adoxioLginValue != null)
+                                                {
+                                                    establishment.AdoxioLGIN = _dynamicsClient.GetLginById(establishment._adoxioLginValue);
+                                                    if (establishment.AdoxioLGIN == null
+                                                        || establishment.AdoxioLGIN.AdoxioName == null
+                                                        || !establishment.AdoxioLGIN.AdoxioName.ToUpper().StartsWith(search))
+                                                    {
+                                                        add = false;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    add = false;
+                                                }
+                                            }
+                                        }
+
+                                        if (add)
+                                        {
+                                            establishmentMapData.Add(new EstablishmentMapData()
+                                            {
+                                                id = establishment.AdoxioEstablishmentid.ToString(),
+                                                Name = establishment.AdoxioName,
+                                                License = license.AdoxioLicencenumber,
+                                                Phone = establishment.AdoxioPhone,
+                                                AddressCity = establishment.AdoxioAddresscity,
+                                                AddressPostal = establishment.AdoxioAddresspostalcode,
+                                                AddressStreet = establishment.AdoxioAddressstreet,
+                                                Latitude = (decimal)establishment.AdoxioLatitude,
+                                                Longitude = (decimal)establishment.AdoxioLongitude,
+                                            });
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }                    
-                }               
+                    }
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                               // Set the cache to expire in an hour.                   
+                               .SetAbsoluteExpiration(TimeSpan.FromHours(1));
+
+                    // Save data in cache.
+                    _cache.Set("S_" + cacheKey, establishmentMapData, cacheEntryOptions);
+                    cacheEntryOptions = new MemoryCacheEntryOptions()
+                               // Set the cache to expire in an hour.                   
+                               .SetAbsoluteExpiration(TimeSpan.FromDays(1));
+                    // long term cache
+                    _cache.Set(cacheKey, establishmentMapData, cacheEntryOptions);
+                }
+                catch (Exception e)
+                {
+                    if (!_cache.TryGetValue(cacheKey, out establishmentMapData))
+                    {
+                        establishmentMapData = new List<EstablishmentMapData>();
+                        _logger.LogError(e, "Error getting map data, and nothing in long term cache.");
+                    }
+                    else
+                    {
+                        _logger.LogError(e, "Error getting map data, showing long term cache data");
+                    }
+                }
+                
             }
             return new JsonResult(establishmentMapData);
         }
