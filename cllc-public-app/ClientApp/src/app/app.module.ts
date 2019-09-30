@@ -2,7 +2,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -342,7 +341,6 @@ import { ProductInventoryPackagedComponent } from './shared/product-inventory-pa
     BCeidAuthGuard,
     CanDeactivateGuard,
     ContactDataService,
-    CookieService,
     DynamicsDataService,
     GeneralDataService,
     InsertService,
