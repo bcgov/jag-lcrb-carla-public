@@ -37,7 +37,8 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatTreeModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
@@ -155,6 +156,7 @@ import { AccountPickerComponent } from './shared/account-picker/account-picker.c
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { ProductInventoryPackagedComponent } from './shared/product-inventory-packaged/product-inventory-packaged.component';
+import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.component';
 
 
 @NgModule({
@@ -235,7 +237,8 @@ import { ProductInventoryPackagedComponent } from './shared/product-inventory-pa
     AccountPickerComponent,
     ApplicationAndLicenceFeeComponent,
     ApplicationOwnershipTransferComponent,
-    ProductInventoryPackagedComponent
+    ProductInventoryPackagedComponent,
+    LicenseeTreeComponent
   ],
   imports: [
     ChartsModule,
@@ -279,6 +282,7 @@ import { ProductInventoryPackagedComponent } from './shared/product-inventory-pa
     MatToolbarModule,
     MatStepperModule,
     MatTooltipModule,
+    MatTreeModule,
     NgBusyModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
@@ -329,6 +333,7 @@ import { ProductInventoryPackagedComponent } from './shared/product-inventory-pa
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatTreeModule,
     MatStepperModule,
     ReactiveFormsModule
   ],
