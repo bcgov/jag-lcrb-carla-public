@@ -69,7 +69,7 @@
 
             <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
-                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">B.C. Incorporation
+                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">Incorporation
                   Number</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
