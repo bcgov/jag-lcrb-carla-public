@@ -53,25 +53,25 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<ViewModels.AdoxioLegalEntity> GetLegalEntityRecordForCurrent(HttpClient _client)
+		public static async Task<ViewModels.LegalEntity> GetLegalEntityRecordForCurrent(HttpClient _client)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             return responseViewModel;
         }
 
-		public static async Task<ViewModels.AdoxioLegalEntity> GetLegalEntityRecord(HttpClient _client, string id, bool expectSuccess)
+		public static async Task<ViewModels.LegalEntity> GetLegalEntityRecord(HttpClient _client, string id, bool expectSuccess)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/" + id);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/" + id);
             var response = await _client.SendAsync(request);
             if (expectSuccess)
             {
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
-				ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+				ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
                 return responseViewModel;
             }
             else
@@ -82,15 +82,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<List<ViewModels.AdoxioLegalEntity>> GetLegalEntitiesByPosition(HttpClient _client, string parentAccountId, string positionType, bool expectSuccess)
+		public static async Task<List<ViewModels.LegalEntity>> GetLegalEntitiesByPosition(HttpClient _client, string parentAccountId, string positionType, bool expectSuccess)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/position/" + parentAccountId + "/" + positionType);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/position/" + parentAccountId + "/" + positionType);
             var response = await _client.SendAsync(request);
 			if (expectSuccess)
             {
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
-				List<ViewModels.AdoxioLegalEntity> responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+				List<ViewModels.LegalEntity> responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
                 return responseViewModel;
             }
             else
@@ -101,15 +101,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<ViewModels.AdoxioLegalEntity> CreateDirectorOrShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId,
+		public static async Task<ViewModels.LegalEntity> CreateDirectorOrShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId,
 		                                                                                  bool isDirectorFlag, bool isOfficerFlag, bool isShareholderFlag) 
 		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/child-legal-entity");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/child-legal-entity");
             var vmAccount = new ViewModels.Account
             {
                 id = user.accountid
             };
-            var vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            var vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 firstname = "Test",
@@ -129,21 +129,21 @@ namespace Gov.Lclb.Cllb.Public.Test
             var response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            ViewModels.AdoxioLegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
 			var responseViewModel = await GetLegalEntityRecord(_client, responseDirector.id, true);
             Assert.Equal(responseDirector.name, responseViewModel.name);
 			return responseViewModel;
 		}
 
-		public static async Task<ViewModels.AdoxioLegalEntity> CreateOrganizationalShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId)
+		public static async Task<ViewModels.LegalEntity> CreateOrganizationalShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId)
         {
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/child-legal-entity");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/child-legal-entity");
             var vmAccount = new ViewModels.Account
             {
                 id = user.accountid
             };
-            var vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            var vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 firstname = "Test",
@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            ViewModels.AdoxioLegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
             var responseViewModel = await GetLegalEntityRecord(_client, responseDirector.id, true);
             Assert.Equal(responseDirector.name, responseViewModel.name);
@@ -170,7 +170,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public static async Task<string> DeleteLegalEntityRecord(HttpClient _client, string id)
 		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/" + id + "/delete");
+			var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/" + id + "/delete");
             var response = await _client.SendAsync(request);
             var _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
@@ -205,7 +205,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/" + legalentityid + "/attachments");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/" + legalentityid + "/attachments");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
@@ -216,7 +216,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 		public static async Task<List<ViewModels.FileSystemItem>> GetFileListForAccount(HttpClient _client, string id, string docType, bool expectSuccess)
 		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/" + id + "/attachments/" + docType);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/" + id + "/attachments/" + docType);
 			var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
 			if (expectSuccess)
@@ -235,7 +235,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public static string DownloadFileForAccount(HttpClient _client, string id, string fileId, bool expectSuccess)
         {
             /*
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/" + id + "/attachment/" + fileId);
+			var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/" + id + "/attachment/" + fileId);
 			var response = await _client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
             if (expectSuccess)
@@ -255,7 +255,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public static string DeleteFileForAccount(HttpClient _client, string id)
         {
             /*
-			var request = new HttpRequestMessage(HttpMethod.Delete, "/api/adoxiolegalentity/" + id + "/attachments");
+			var request = new HttpRequestMessage(HttpMethod.Delete, "/api/legalentities/" + id + "/attachments");
 			var response = await _client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
 			*/
