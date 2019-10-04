@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
 
 			// try to "hack" the query
 			string hackId = legalEntity1.id + " or (adoxio_isshareholder eq true)";
-			List<ViewModels.AdoxioLegalEntity> doss = await SecurityHelper.GetLegalEntitiesByPosition(_client, hackId, "director-officer-shareholder", false);
+			List<ViewModels.LegalEntity> doss = await SecurityHelper.GetLegalEntitiesByPosition(_client, hackId, "director-officer-shareholder", false);
             Assert.Null(doss);
 
             // logout and cleanup (deletes the account and contact created above ^^^)
