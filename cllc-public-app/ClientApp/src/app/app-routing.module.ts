@@ -30,12 +30,17 @@ import { MapComponent } from './map/map.component';
 import { FeatureGuard } from './services/feaure-guard.service';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
+import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'licensee-changes',
+    component: LicenseeTreeComponent
   },
   {
     path: 'account-profile',
