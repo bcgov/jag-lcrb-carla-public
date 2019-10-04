@@ -88,8 +88,45 @@ namespace odata2openapi
         }
 
 
+        static void AddSubItems (SwaggerDocument swaggerDocument, List<string> itemsToKeep, string currentItem)
+        {
+            if (currentItem != null && ! itemsToKeep.Contains (currentItem))
+            {
+                itemsToKeep.Add(currentItem);
+                string key = null;
+                JsonSchema4 item = null;
+
+                // find the current item.
+                foreach (var definition in swaggerDocument.Definitions)
+                {
+                    if (definition.Value.Title != null && definition.Value.Title.Equals (currentItem))
+                    {
+                        item = definition.Value;
+                        break;
+                    }
+                }
+                
+                if (item != null)
+                {                    
+                    foreach (var property in item.Properties)
+                    {                         
+                        if (property.Value.Item != null && property.Value.Item.Reference != null && (property.Value.Type == JsonObjectType.Object || property.Value.Type == JsonObjectType.Array))
+                        {
+                            string title = property.Value.Item.Reference.Title;
+                            if (title != null && ! itemsToKeep.Contains (title))
+                            {                            
+                                // recursive call.
+                                AddSubItems(swaggerDocument, itemsToKeep, title);
+                            }                        
+                        }
+                    }
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
+            List<string> defsToKeep = new List<string>();
             bool getMetadata = true;
 
             // start by getting secrets.
@@ -202,7 +239,8 @@ namespace odata2openapi
                         {
                             ok2Delete = false;
                         }
-                        if (firstTagLower.IndexOf ("adoxio") != -1)
+                       
+                        if (!firstTagLower.StartsWith("msdyn") && firstTagLower.IndexOf ("adoxio") != -1)
                         {
                             ok2Delete = false;
                             firstTagLower = firstTagLower.Replace("adoxio_", "");
@@ -321,12 +359,14 @@ namespace odata2openapi
                                 parameter.Reference = null;
                                 parameter.Type = JsonObjectType.Array;
                             }
-                            if (schema.Type == JsonObjectType.String)
+                            else if (schema.Type == JsonObjectType.String)
                             {
                                 parameter.Schema = null;
                                 parameter.Reference = null;
                                 parameter.Type = JsonObjectType.String;
-                            }                            
+                            }
+
+                            
                         }
                         else
                         {
@@ -366,6 +406,8 @@ namespace odata2openapi
                                     // move the inline schema to defs.
                                     swaggerDocument.Definitions.Add(resultName, val.Schema);
 
+                                    defsToKeep.Add(resultName);
+
                                     val.Schema = new JsonSchema4();
                                     val.Schema.Reference = swaggerDocument.Definitions[resultName];
                                     val.Schema.Type = JsonObjectType.None;
@@ -403,14 +445,119 @@ namespace odata2openapi
 
                 }
 
+                foreach (var path in swaggerDocument.Paths)
+                {
+                    foreach (var value in path.Value.Values)
+                    {
+                        foreach (var response in value.Responses)
+                        {
+                            if (response.Value.Schema != null && response.Value.Schema.Reference != null)
+                            {
+                                var schema = response.Value.Schema.Reference;
+                                if (!string.IsNullOrEmpty(schema.Title) && (schema.Type == JsonObjectType.Array || schema.Type == JsonObjectType.Object))
+                                {
+                                    string title = schema.Title;
+                                    /*
+                                    string search = "Collection of ";
+                                    if (title.StartsWith(search))
+                                    {
+                                        title = title.Substring(search.Length, title.Length - search.Length - 1);                                        
+                                    }
+                                    */
+                                    AddSubItems(swaggerDocument, defsToKeep, title);
+                                }
+                            }
+                        }
+                        foreach (var parameter in value.Parameters)
+                        {
+                            if (parameter.Schema != null && parameter.Schema.Reference != null)
+                            {
+                                var schema = parameter.Schema.Reference;
+                                if (!string.IsNullOrEmpty(schema.Title) && (schema.Type == JsonObjectType.Array || schema.Type == JsonObjectType.Object))
+                                {
+                                    AddSubItems(swaggerDocument, defsToKeep, schema.Title);
+                                }                                
+                            }
+                        }
+
+                    }
+                }
+                
+
+                // reverse the items to keep.
+
+                List<string> defsToRemove = new List<string>();
+                foreach (var definition in swaggerDocument.Definitions)
+                {
+                    if (//!definition.Key.Contains("_GetResponseModel") && 
+                        !definition.Key.Contains("odata.error") &&
+                        !definition.Key.Contains("crmbaseentity") &&
+                        
+
+                        !defsToKeep.Contains(definition.Value.Title))
+                    {
+                        defsToRemove.Add(definition.Key);
+                    }
+                    else
+                    {
+                        Console.Out.WriteLine($"Keep: {definition.Key}");
+                    }
+                }
+
+                foreach (string defToRemove in defsToRemove)
+                {
+                    Console.Out.WriteLine($"Remove: {defToRemove}");
+                    if (!string.IsNullOrEmpty (defToRemove) && swaggerDocument.Definitions.ContainsKey (defToRemove))
+                    {
+                        swaggerDocument.Definitions.Remove(defToRemove);
+                    }
+
+                    if (!string.IsNullOrEmpty(defToRemove) && swaggerDocument.Components.Schemas.ContainsKey(defToRemove))
+                    {
+                        swaggerDocument.Components.Schemas.Remove(defToRemove);
+                    }
+
+                    if (!string.IsNullOrEmpty(defToRemove) && swaggerDocument.Components.Responses.ContainsKey(defToRemove))
+                    {
+                        swaggerDocument.Components.Responses.Remove(defToRemove);
+                    }
+
+                    
+                }
+
+                List<string> responsesToRemove = new List<string>();
+                foreach (var response in swaggerDocument.Components.Responses)
+                {
+                    if ( !defsToKeep.Contains(response.Value.Schema.Title) )
+                    {
+                        responsesToRemove.Add(response.Key);
+                    }
+                    else
+                    {
+                        Console.Out.WriteLine($"Keep Response: {response.Key}");
+                    }
+                }
+
+                foreach (string responseToRemove in responsesToRemove)
+                {
+                    Console.Out.WriteLine($"Remove Response: {responseToRemove}");
+                
+                    if (!string.IsNullOrEmpty(responseToRemove) && swaggerDocument.Components.Responses.ContainsKey(responseToRemove))
+                    {
+                        swaggerDocument.Components.Responses.Remove(responseToRemove);
+                    }
+
+
+                }
+
 
                 /*
                  * Cleanup definitions.                 
                  */
 
                 foreach (var definition in swaggerDocument.Definitions)
-                {                    
-
+                {
+                    Console.Out.WriteLine($"Definition: {definition.Value.Title}");
 
                     foreach (var property in definition.Value.Properties)
                     {
@@ -442,8 +589,8 @@ namespace odata2openapi
                 }
 
                 // cleanup parameters.
-                swaggerDocument.Parameters.Clear();
-
+                swaggerDocument.Parameters.Clear();                
+                
                 swagger = swaggerDocument.ToJson(SchemaType.Swagger2);
 
                 // fix up the swagger file.
