@@ -174,11 +174,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError($"Error creating contact. Request: {odee.Request.Content} Response: {odee.Response.Content}");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Unknown error creating contact. Error: {e.Message} {e.ToString()}");
             }
 
             // if we have not yet authenticated, then this is the new record for the user.
