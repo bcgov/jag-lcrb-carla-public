@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpersonaldocumenttemplate class.
         /// </summary>
-        public MicrosoftDynamicsCRMpersonaldocumenttemplate(string personaldocumenttemplateid = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), bool? status = default(bool?), string clientdata = default(string), int? languagecode = default(int?), string associatedentitytypecode = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string description = default(string), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), int? documenttype = default(int?), long? versionnumber = default(long?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string content = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpersonaldocumenttemplate(string personaldocumenttemplateid = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), bool? status = default(bool?), string clientdata = default(string), int? languagecode = default(int?), string associatedentitytypecode = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string description = default(string), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), int? documenttype = default(int?), long? versionnumber = default(long?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string content = default(string), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Personaldocumenttemplateid = personaldocumenttemplateid;
             this._owningbusinessunitValue = _owningbusinessunitValue;
@@ -166,7 +166,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
+        public object Ownerid { get; set; }
 
         /// <summary>
         /// </summary>
