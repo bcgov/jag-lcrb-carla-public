@@ -241,10 +241,10 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
         if (this.account.isPrivateCorporation()) {
           this.form.get('businessProfile.bcIncorporationNumber')
-          .setValidators([Validators.pattern('^[A-Za-z][A-Za-z][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
+          .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
         } else if (this.account.businessType === 'Society') {
           this.form.get('businessProfile.bcIncorporationNumber')
-          .setValidators([Validators.pattern('^S[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
+          .setValidators([Validators.pattern('^[A-Za-z][A-Za-z]?[0-9][0-9][0-9][0-9][0-9][0-9][0-9]$')]);
         } else {
           this.form.get('businessProfile.bcIncorporationNumber').clearValidators();
         }
