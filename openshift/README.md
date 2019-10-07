@@ -133,11 +133,20 @@ UAT is not currently supported by the process above.  To setup the UAT environme
 `oc process -f templates/cllc-public/cllc-public-deploy.json --param-file=cllc-public-deploy.uat.param`
 
 
-
 Change directory to the directory containing the mssql server template, and execute the following:
 
 `oc process -f sql-server-deploy.json --param-file=sql-server-deploy.uat.param | oc create -f -`
 
-### Mssql deployment on local ###
+### Nexus ###
 
-To build an image for Mssql on a local instance of Openshift, Dockerfile.centos should be used. In jag-lcrb-carla-public/sql-server Dockerfile.centos should be renamed to Dockerfile. 
+A Nexus deployment will improve the speed of builds.
+
+The following commands should be run from the Tools project.
+
+First, import the docker image for nexus:
+
+`oc import-image sonatype/nexus --confirm`
+
+Next, import the nexus deployment configuration:
+
+`oc process -f nexus.deploy.json | oc create -f -`

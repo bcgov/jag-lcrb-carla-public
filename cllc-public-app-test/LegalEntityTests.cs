@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
     public class LegalEntityTests : ApiIntegrationTestBaseWithLogin
     {
-        private const string service = "adoxiolegalentity";
+        private const string service = "legalentities";
         public LegalEntityTests(CustomWebApplicationFactory<Startup> factory)
           : base(factory)
         { }
@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         //[Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            string service = "adoxiolegalentity";
+            string service = "legalentities";
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		//[Fact]
 		public async System.Threading.Tasks.Task TestNewAccountHasNoShareholdersOrDirectors()
 		{
-			string service = "adoxiolegalentity";
+			string service = "legalentities";
 			string shareholders = "/shareholders";
 			string directors = "/director-officer-shareholder";
 
@@ -60,7 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			response = await _client.SendAsync(request);
 			jsonString = await response.Content.ReadAsStringAsync();
 			response.EnsureSuccessStatusCode();
-			var responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+			var responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
 			Assert.Empty(responseViewModel);
 
             // get directors
@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
 			jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-			responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+			responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
 			Assert.Empty(responseViewModel);
 
 			await LogoutAndCleanupTestUser(strId);
@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task TestCRUD()
         {
 			string changedName = randomNewUserName("LETest ChangedName", 6);
-            string service = "adoxiolegalentity";
+            string service = "legalentities";
             string firstName = "LETFirst";
             string middleName = "LETMiddle";
             string lastName = "LETLast";
@@ -112,7 +112,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 id = accountId
             };
 
-            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            ViewModels.LegalEntity vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 //position = ViewModels.PositionOptions.Director,
@@ -145,7 +145,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             
-            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
             // name should match.
             Assert.Equal(firstName + " " + lastName, responseViewModel.name);
@@ -157,7 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
 			jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal(firstName + " " + lastName, responseViewModel.name);
 
             // U - Update            
@@ -180,7 +180,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
 
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal(changedName, responseViewModel.firstname);
 
             // D - Delete
@@ -208,7 +208,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 		//[Fact]
 		public async System.Threading.Tasks.Task TestAddShareholderAndDirector()
 		{
-			string service = "adoxiolegalentity";
+			string service = "legalentities";
 
 			var loginUser = randomNewUserName("TestAddSD", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
@@ -229,7 +229,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
 				id = user.accountid
             };
-            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            ViewModels.LegalEntity vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 //position = ViewModels.PositionOptions.Shareholder,
@@ -255,13 +255,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            ViewModels.AdoxioLegalEntity responseShareholder = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseShareholder = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 			Assert.Equal(responseShareholder.name, responseViewModel.name);
 
 			// create a Director and fetch it to verify
@@ -270,7 +270,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 id = user.accountid
             };
-            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 //position = ViewModels.PositionOptions.Director,
@@ -296,13 +296,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            ViewModels.AdoxioLegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
 			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 			Assert.Equal(responseDirector.name, responseViewModel.name);
 
 			// logout
@@ -353,7 +353,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			string initialName = randomNewUserName("LETest InitialName", 6);
 			string changedName = randomNewUserName("LETest ChangedName", 6);
-            string service = "adoxiolegalentity";
+            string service = "legalentities";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
@@ -362,7 +362,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = new ViewModels.AdoxioLegalEntity()
+            ViewModels.LegalEntity viewmodel_adoxio_legalentity = new ViewModels.LegalEntity()
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 isDirector = true,
@@ -379,7 +379,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
@@ -503,7 +503,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string initialName = randomNewUserName("First InitialName", 6);
             string changedName = randomNewUserName("First ChangedName", 6);
-            string service = "adoxiolegalentity";
+            string service = "legalentities";
 
             // Login as default user
 
@@ -516,7 +516,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
             
-            ViewModels.AdoxioLegalEntity viewmodel_adoxio_legalentity = new ViewModels.AdoxioLegalEntity()
+            ViewModels.LegalEntity viewmodel_adoxio_legalentity = new ViewModels.LegalEntity()
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 isDirector = true,
@@ -529,7 +529,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioLegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
             string id = responseViewModel.id;
@@ -600,13 +600,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             String jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            var responseViewModelList = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+            var responseViewModelList = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
 
             Assert.Equal("LegalEntityByPosTest TestBusiness", responseViewModelList.First().name);
             var levelOneLegalEntityId = responseViewModelList.First().id;
 
             // Creating child
-            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            ViewModels.LegalEntity vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 name = "Cannabis Test Investor",
@@ -634,7 +634,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         //[Fact]
         public async System.Threading.Tasks.Task TestThreeTierShareholders()
         {
-            string service = "adoxiolegalentity";
+            string service = "legalentities";
 
             var loginUser = randomNewUserName("TestThreeTierShareholders", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser, "Cybertron Commercial Goods", "PrivateCorporation");
@@ -646,13 +646,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             String jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            var responseViewModelList = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString);
+            var responseViewModelList = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
 
             Assert.Equal("Cybertron Commercial Goods TestBusiness", responseViewModelList.First().name);
             var levelOneLegalEntityId = responseViewModelList.First().id;
 
             // First tier director
-            ViewModels.AdoxioLegalEntity vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            ViewModels.LegalEntity vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 firstname = "Ms.",
                 middlename = "Test",
@@ -672,11 +672,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal("Ms. Director", responseViewModel.name);
 
             // First tier officer
-            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 firstname = "Andrew",
                 middlename = "Test",
@@ -696,11 +696,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal("Andrew Officer", responseViewModel.name);
 
             // Creating child
-            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 name = "Cannabis Test Investor",
@@ -720,14 +720,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal("Cannabis Test Investor", responseViewModel.name);
             var levelTwoLegalEntityId = responseViewModel.id;
             var levelTwoAccountId = responseViewModel.shareholderAccountId;
             var levelTwoAccount = new ViewModels.Account {id = levelTwoAccountId };
 
             // Creating child 2
-            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
                 name = "Green Group Investments",
@@ -746,14 +746,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal("Green Group Investments", responseViewModel.name);
             var levelThreeLegalEntityId = responseViewModel.id;
             var levelThreeAccountId = responseViewModel.shareholderAccountId;
             var levelThreeAccount = new ViewModels.Account { id = levelThreeAccountId };
 
             // Second tier Officer
-            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 firstname = "Carlos",
                 middlename = "Test",
@@ -773,11 +773,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal("Carlos Officer", responseViewModel.name);
 
             // Third tier shareholder
-            vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 firstname = "Doug",
                 middlename = "Test",
@@ -797,7 +797,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal("Doug Baldwin", responseViewModel.name);
 
             await LogoutAndCleanupTestUser(strId);
