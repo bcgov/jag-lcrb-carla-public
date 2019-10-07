@@ -1,43 +1,41 @@
 import { Account } from './account.model';
+import { Application } from './application.model';
+import { LegalEntity } from './legal-entity.model';
+import { Contact } from './contact.model';
 
-export class LegalEntity {
+export class LicenseeChangeLog {
   id: string; // guid
-  name: string;
-  isindividual: boolean;
-  sameasapplyingperson: boolean;
-  legalentitytype: string;
-  otherlegalentitytype: string;
-  firstname: string;
-  middlename: string;
-  lastname: string;
-  isOfficer: boolean;
-  isApplicant: boolean;
-  isDirector: boolean;
-  isSeniorManagement: boolean;
-  isShareholder: boolean;
-  isPartner: boolean;
-  partnerType: string;
-  isOwner: boolean;
-  isKeyPersonnel: boolean;
-  dateofbirth: Date;
-  interestpercentage: number;
-  commonvotingshares: number;
-  preferredvotingshares: number;
-  commonnonvotingshares: number;
-  preferrednonvotingshares: number;
-  account: Account;
-  relatedentities: LegalEntity[];
-  email: string;
-  dateofappointment: Date;
-  dateIssued: Date;
-  securityAssessmentEmailSentOn: Date;
-  accountId: string;
-  shareholderAccountId: string;
-  // helper fields
-  shareholderType: string;
-  sendConsentRequest: boolean;
-  parentLegalEntityId: string;
-  position: string;
-  jobTitle: string;
-  percentageVotingShares: number;
+
+  isDirectorNew: boolean;
+  isDirectorOld: boolean;
+  isManagerNew: boolean;
+  isManagerOld: boolean;
+  isOfficerNew: boolean;
+  isOfficerOld: boolean;
+  isShareholderNew: boolean;
+  isShareholderOld: boolean;
+  isTrusteeNew: boolean;
+  isTrusteeOld: boolean;
+  BusinessAccountType: string;
+  NumberofSharesNew: string;
+  NumberofSharesOld: string;
+  EmailNew: string;
+  EmailOld: string;
+  FirstNameNew: string;
+  FirstNameOld: string;
+  JobNumber: string;
+  LastNameNew: string;
+  LastNameOld: string;
+  LicenseeChangelogid: string;
+  Name: string;
+  DateofBirthNew: Date;
+  DateofBirthOld: Date;
+
+  BusinessAccount: Account;
+  Contact: Contact;
+  Application: Application;
+  ApplicationType: string;
+  LegalEntity: LegalEntity;
+  ParentLinceseeChangeLogId: LicenseeChangeLog;
+  LicenseechangelogLicenseechangelogs: LicenseeChangeLog[];
 }
