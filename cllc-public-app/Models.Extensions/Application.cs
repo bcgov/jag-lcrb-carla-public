@@ -116,6 +116,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsreadysurveillancenotice = from.IsReadySurveillanceNotice;
             to.AdoxioIsreadyproductnotvisibleoutside = from.IsReadyProductNotVisibleOutside;
             to.AdoxioEstablishmentopeningdate = from.Establishmentopeningdate;
+            to.AdoxioIsreadyvalidinterest = from.IsReadyValidInterest;
+
 
 
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
@@ -302,7 +304,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsReadyExtranceExit = dynamicsApplication.AdoxioIsreadyentranceexit,
                 IsReadySurveillanceNotice = dynamicsApplication.AdoxioIsreadysurveillancenotice,
                 IsReadyProductNotVisibleOutside = dynamicsApplication.AdoxioIsreadyproductnotvisibleoutside,
-                Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate
+                Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate,
+                IsReadyValidInterest = dynamicsApplication.AdoxioIsreadyvalidinterest,
 
             };
 

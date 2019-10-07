@@ -5,6 +5,7 @@ using Protractor;
 using System;
 using Xunit.Gherkin.Quick;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
 
 namespace bdd_tests
 {
@@ -14,18 +15,20 @@ namespace bdd_tests
         // Protractor driver
         protected NgWebDriver ngDriver;
 
-        //protected IConfigurationRoot configuration;
+        protected IConfigurationRoot configuration;
 
-        string baseUri;
+        protected string baseUri;
 
         protected TestBase()
         {
-            driver = new ChromeDriver();
+            string path = Directory.GetCurrentDirectory();
+
+            driver = new ChromeDriver(path);
             driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(5);
 
             ngDriver = new NgWebDriver(driver);
 
-            var configuration = new ConfigurationBuilder()
+            configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
                 .AddUserSecrets("dc6f3b78-5234-4b46-96e3-75849fde4479")
                 .Build();

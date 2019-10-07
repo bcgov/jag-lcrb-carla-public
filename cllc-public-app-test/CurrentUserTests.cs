@@ -163,11 +163,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             var bpFilter = "and (adoxio_isapplicant eq true or adoxio_isindividual eq 0)";
             var filter = accountfilter + " " + bpFilter;
 
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/business-profile-summary");
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/business-profile-summary");
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-			var parentLegalEntity = JsonConvert.DeserializeObject<List<ViewModels.AdoxioLegalEntity>>(jsonString).FirstOrDefault();
+			var parentLegalEntity = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString).FirstOrDefault();
             var parentLegalEntityId = parentLegalEntity.id;
 
             // The Default development user should not be a new user.
@@ -186,7 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 			ViewModels.Account retAccount1 = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 			Assert.Equal(user1.accountid, retAccount1.id);
 
-            var vmAdoxioLegalEntity = new ViewModels.AdoxioLegalEntity
+            var vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
 				name = "Create ShareholderLE",
@@ -199,12 +199,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             };
 
             jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
-            request = new HttpRequestMessage(HttpMethod.Post, "/api/adoxiolegalentity/child-legal-entity");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/child-legal-entity");
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
             
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
-            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            var responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             var childAccountId = responseViewModel.accountId;
             response.EnsureSuccessStatusCode();
 
