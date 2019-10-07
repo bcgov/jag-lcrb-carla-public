@@ -3,32 +3,42 @@ using OpenQA.Selenium.Remote;
 using Protractor;
 using System;
 using Xunit;
+using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
 
 namespace bdd_tests
 {
-    [FeatureFile("./map-view.feature")]
+    [FeatureFile("./MapView.feature")]
     public sealed class MapView : TestBase
     {
 
-        [Given(@"I view the map")]
+        [Given(@"I navigate to the map")]
         public void I_view_the_map()
         {
             // navigate to the map page.
-            
+            ngDriver.Navigate().GoToUrl($"{baseUri}/map");
         }
 
-        [And(@"I zoom in")]
-        public void I_zoom_in()
+        [And(@"I search for (.*)")]
+        public void I_search_for(string search)
         {
-            // zoom in
+            //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
         }
 
-
-        [Then(@"the page shows search results in text form for the given area")]
-        public void The_result_should_be_z_on_the_screen(int expectedResult)
+        [Then(@"the page shows a map")]
+        public void The_page_shows_a_map()
         {
             // verify that the results are in the right area
+            //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
+            //Assert.Equal("build an angular app", elements[1].Text);
+        }
+        
+        [Then(@"the page shows search results including (.*)")]
+        public void The_page_shows_search_results_including(string expectedResult)
+        {
+            // verify that the results are in the right area
+            //var elements = ngDriver.FindElements(NgBy.Repeater("todo in todoList.todos"));
+            //Assert.Equal("build an angular app", elements[1].Text);
         }
     }
 }

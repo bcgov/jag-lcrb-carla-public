@@ -233,7 +233,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "accountId: {accountId}");
 
-            List<LegalEntity> legalEntities;
+            List<BusinessProfileLegalEntity> legalEntities;
 
             var expand = new List<string> { "primarycontactid" };
             var account = (_dynamicsClient.Accounts.Get(filter: "", expand: expand).Value.FirstOrDefault()).ToViewModel();
@@ -248,7 +248,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Select(le =>
                         {
                             var legalEntity = le.ToViewModel();
-                            var entity = new ViewModels.LegalEntity
+                            var entity = new ViewModels.BusinessProfileLegalEntity
                             {
                                 AdoxioLegalEntity = legalEntity,
                                 Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel(),
@@ -301,12 +301,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(isComplete);
         }
 
-        private List<ViewModels.LegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
+        private List<ViewModels.BusinessProfileLegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
         {
             _logger.LogDebug(LoggingEvents.Get, "Begin method " + this.GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.Get, "parentLegalEntityId: {accouparentLegalEntityIdntId}");
 
-            List<ViewModels.LegalEntity> children = null;
+            List<ViewModels.BusinessProfileLegalEntity> children = null;
             var childEntitiesFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntityId}";
             var expandList = new List<string> { "adoxio_ShareholderAccountID", "adoxio_Account" };
 
@@ -317,7 +317,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         .Select(le =>
                         {
                             var legalEntity = le.ToViewModel();
-                            var entity = new ViewModels.LegalEntity
+                            var entity = new ViewModels.BusinessProfileLegalEntity
                             {
                                 AdoxioLegalEntity = legalEntity,
                                 Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
