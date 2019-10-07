@@ -1,0 +1,265 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata":
+  {
+    "annotations":
+    {
+      "description": "Deployment template for a nexus server with persistent storage.",
+      "tags": "Nexus"
+    },
+    "name": "${NAME}-persistent-template"
+  },
+  "objects": [    
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata":
+      {
+        "name": "${NAME}",
+        "generation": 1,
+        "labels":
+        {
+          "app": "${NAME}-persistent",
+          "template": "${NAME}-persistent-template"
+        }
+      },
+      "spec":
+      {
+        "strategy":
+        {
+          "type": "Recreate",
+          "recreateParams":
+          {
+            "timeoutSeconds": 600
+          },
+          "resources": {},
+          "activeDeadlineSeconds": 21600
+        },
+        "triggers": [
+          {
+            "type": "ImageChange",
+            "imageChangeParams":
+            {
+              "automatic": true,
+              "containerNames": [
+                "${NAME}"
+              ],
+              "from":
+              {
+                "kind": "ImageStreamTag",
+                "namespace": "openshift",
+                "name": "nexus:latest"
+              }
+            }
+          },
+          {
+            "type": "ConfigChange"
+          }
+        ],
+        "replicas": 1,
+        "test": false,
+        "selector":
+        {
+          "name": "${NAME}"
+        },
+        "template":
+        {
+          "metadata":
+          {
+            "labels":
+            {
+              "name": "${NAME}"
+            }
+          },
+          "spec":
+          {
+            "volumes": [
+              {
+                "name": "${NAME}-data",
+                "persistentVolumeClaim":
+                {
+                  "claimName": "${PERSISTENT_VOLUME_NAME}"
+                }
+              }
+            ],
+            "containers": [
+              {
+                "name": "${NAME}",
+                "image": "",
+                "ports": [
+                  {
+                    "containerPort": 8081,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  
+                ],
+                "resources":
+                {
+				"limits": {
+                                "cpu": "${CPU_LIMIT}",
+                                "memory": "${MEMORY_LIMIT}"
+                            },
+                            "requests": {
+                                "cpu": "${CPU_REQUEST}",
+                                "memory": "${MEMORY_REQUEST}"
+                            }                  
+                },
+                "volumeMounts": [
+                  {
+                    "name": "${NAME}-data",
+                    "mountPath": "/sonatype-work"
+                  }
+                ],
+                "livenessProbe":
+                {
+                  "tcpSocket":
+                  {
+                    "port": 8081
+                  },
+                  "initialDelaySeconds": 90,
+                  "timeoutSeconds": 10,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                },
+                "readinessProbe":
+                {"tcpSocket":
+                  {
+                    "port": 8081
+                  },
+                  "initialDelaySeconds": 90,
+                  "timeoutSeconds": 10,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "imagePullPolicy": "IfNotPresent",
+                "securityContext":
+                {
+                  "capabilities": {},
+                  "privileged": false
+                }
+              }
+            ],
+            "restartPolicy": "Always",
+            "terminationGracePeriodSeconds": 30,
+            "dnsPolicy": "ClusterFirst",
+            "securityContext": {},
+            "schedulerName": "default-scheduler"
+          }
+        }
+      }
+    },
+    {
+      "kind": "PersistentVolumeClaim",
+      "apiVersion": "v1",
+      "metadata":
+      {
+        "name": "${PERSISTENT_VOLUME_NAME}",
+        "labels":
+        {
+          "app": "${NAME}-persistent",
+          "template": "${NAME}-persistent-template"
+        }
+      },
+      "spec":
+      {
+        "accessModes": [
+          "ReadWriteOnce"
+        ],
+        "resources":
+        {
+          "requests":
+          {
+            "storage": "${PERSISTENT_VOLUME_SIZE}"
+          }
+        }
+      }
+    },    
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata":
+      {
+        "name": "${NAME}",
+        "labels":
+        {
+          "app": "${NAME}-persistent",
+          "template": "${NAME}-persistent-template"
+        }
+      },
+      "spec":
+      {
+        "ports": [
+          {
+            "name": "nexus",
+            "protocol": "TCP",
+            "port": 8081,
+            "targetPort": 8081
+          }
+        ],
+        "selector":
+        {
+          "name": "${NAME}"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "NAME",
+      "displayName": "Name",
+      "description": "The name assigned to all of the OpenShift resources associated to the nexus instance.",
+      "required": true,
+      "value": "nexus"
+    },
+    {
+      "name": "PERSISTENT_VOLUME_NAME",
+      "displayName": "Persistent Volume Name",
+      "description": "The name of the persistent volume associated with the deployment.",
+      "required": true,
+      "value": "nexus"
+    },
+    {
+      "name": "PERSISTENT_VOLUME_SIZE",
+      "displayName": "Persistent Volume Size",
+      "description": "The size of the persistent volume , e.g. 512Mi, 1Gi, 2Gi.",
+      "required": true,
+      "value": "5Gi"
+    },
+    {
+      "name": "MEMORY_REQUEST",
+      "displayName": "Memory Request",
+      "description": "Minimum amount of memory the container can use.",
+      "required": true,
+      "value": "512Mi"
+    },
+	{
+      "name": "MEMORY_LIMIT",
+      "displayName": "Memory Limit",
+      "description": "Maximum amount of memory the container can use.",
+      "required": true,
+      "value": "1G"
+    },
+	{
+      "name": "CPU_REQUEST",
+      "displayName": "CPU Request",
+      "description": "Minimum amount of CPU the container can use.",
+      "required": true,
+      "value": "10m"
+    },
+	{
+      "name": "CPU_LIMIT",
+      "displayName": "CPU Limit",
+      "description": "Maximum amount of CPU the container can use.",
+      "required": true,
+      "value": "500m"
+    }
+  ]
+}
