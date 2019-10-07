@@ -22,13 +22,13 @@ export class LegalEntityDataService extends DataService {
    * @param positionType
    */
   getLegalEntitiesbyPosition(parentLegalEntityId, positionType: string) {
-    const apiPath = `api/adoxiolegalentity/position/${parentLegalEntityId}/${positionType}`;
+    const apiPath = `api/legalentities/position/${parentLegalEntityId}/${positionType}`;
     return this.http.get<LegalEntity[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   getBusinessProfileSummary() {
-    const apiPath = 'api/adoxiolegalentity/business-profile-summary/';
+    const apiPath = 'api/legalentities/business-profile-summary/';
     return this.http.get<LegalEntity[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
 
@@ -39,7 +39,7 @@ export class LegalEntityDataService extends DataService {
    * @param data - legal entity data
    */
   createLegalEntity(data: LegalEntity) {
-    return this.http.post<LegalEntity>('api/adoxiolegalentity/', data, { headers: this.headers })
+    return this.http.post<LegalEntity>('api/legalentities/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -48,7 +48,7 @@ export class LegalEntityDataService extends DataService {
    * @param data - legal entity data
    */
   updateLegalEntity(data: LegalEntity, id: string) {
-    return this.http.put<LegalEntity>(`api/adoxiolegalentity/${id}`, data, { headers: this.headers })
+    return this.http.put<LegalEntity>(`api/legalentities/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -57,7 +57,7 @@ export class LegalEntityDataService extends DataService {
    * @param data - legal entity data
    */
   deleteLegalEntity(id: string) {
-    return this.http.post<LegalEntity>(`api/adoxiolegalentity/${id}/delete`, {}, { headers: this.headers })
+    return this.http.post<LegalEntity>(`api/legalentities/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -67,7 +67,7 @@ export class LegalEntityDataService extends DataService {
    * @param data - legal entity data
    */
   createChildLegalEntity(data: LegalEntity) {
-    return this.http.post<LegalEntity>('api/adoxiolegalentity/child-legal-entity', data, { headers: this.headers })
+    return this.http.post<LegalEntity>('api/legalentities/child-legal-entity', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -77,7 +77,7 @@ export class LegalEntityDataService extends DataService {
    */
   sendConsentRequestEmail(data: string[]) {
     const legalEntityId: string = data[0];
-    const apiPath = 'api/adoxiolegalentity/' + legalEntityId + '/sendconsentrequests';
+    const apiPath = 'api/legalentities/' + legalEntityId + '/sendconsentrequests';
     return this.http.post(apiPath, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
