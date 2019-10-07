@@ -33,6 +33,113 @@ namespace Gov.Lclb.Cllb.Public.Test
         }
 
         [Fact]
+        public async System.Threading.Tasks.Task TestBirthdate()
+        {
+
+            string initialName = "TestFirst";
+            string changedName = "ChangedName";
+            string changedEmail = "newEmail@gov.bc.ca";
+            string service = "worker";
+
+            // January 1, 1970 - 00:00 with Pacific time.
+            // note that this field expects no time.
+
+            DateTimeOffset birthDate = DateTimeOffset.Parse("01/01/1970 00:00 -8:00");
+
+
+            // register and login as our first user
+            var loginUser1 = randomNewUserName("TestServiceCardUser", 6);
+            await ServiceCardLogin(loginUser1, loginUser1);
+
+            // C - Create
+
+
+            var request = new HttpRequestMessage(HttpMethod.Post, $"/api/contact");
+
+            
+
+            ViewModels.Contact contactVM = new ViewModels.Contact()
+            {
+                firstname = initialName,
+                middlename = "TestMiddle",
+                lastname = "TestLst",
+                emailaddress1 = "testEmail@gov.bc.ca",
+                Birthdate = birthDate,
+                Gender = ViewModels.Gender.Other
+            };
+
+            // the contact service expects certain headers to exist for creation.
+            request.Headers.Add("SMGOV_USEREMAIL", contactVM.emailaddress1);
+            request.Headers.Add("SMGOV_GIVENNAME", contactVM.firstname);
+            request.Headers.Add("SMGOV_SURNAME", contactVM.lastname);
+
+
+            string jsonString = JsonConvert.SerializeObject(contactVM);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            contactVM = JsonConvert.DeserializeObject<ViewModels.Contact>(jsonString);
+
+            request = new HttpRequestMessage(HttpMethod.Post, $"/api/{service}");
+
+            ViewModels.Worker workerVM = new ViewModels.Worker()
+            {
+                firstname = contactVM.firstname,
+                middlename = contactVM.lastname,
+                lastname = contactVM.lastname,
+                dateofbirth = contactVM.Birthdate,
+                email = contactVM.emailaddress1,
+                contact = contactVM,
+                gender = ViewModels.Gender.Other
+            };
+
+            jsonString = JsonConvert.SerializeObject(workerVM);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+
+            workerVM = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
+
+            // R -Read
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/{workerVM.id}");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+            jsonString = await response.Content.ReadAsStringAsync();
+            workerVM = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
+            Assert.NotNull(workerVM?.id);
+            
+            Assert.Equal(birthDate, workerVM.contact.Birthdate);
+
+            Assert.Equal(birthDate, workerVM.dateofbirth.Value);
+
+            // D - Delete
+
+            request = new HttpRequestMessage(HttpMethod.Post, $"/api/{service}/" + workerVM.id + "/delete");
+            response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // second delete should return a 404.
+            request = new HttpRequestMessage(HttpMethod.Post, $"/api/{service}/" + workerVM.id + "/delete");
+            response = await _client.SendAsync(request);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+
+            // should get a 404 if we try a get now.
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/" + workerVM.id);
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            var worker3 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
+            Assert.Null(worker3);
+
+            await Logout();
+        }
+
+        [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
 
