@@ -66,6 +66,33 @@ namespace SharePoint.Tests
         }
 
         [Fact]
+        public async void FolderNameTest()
+        {
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            string name = "test-name" + rnd.Next() + ".txt";
+            string testFolder = "O'Test " + rnd.Next();
+            string listTitle = "Shared Documents";
+            string url = serverAppIdUri + "/cannabisdev/Shared Documents/" + testFolder + "/" + name;
+
+            string contentType = "text/plain";
+
+            string testData = "This is just a test.";
+
+            MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
+
+            await sharePointFileManager.CreateFolder(listTitle, testFolder);
+
+            await sharePointFileManager.UploadFile(name, "Shared Documents", testFolder, fileData, contentType);
+
+            // now delete it.
+
+            await sharePointFileManager.DeleteFile("Shared Documents", testFolder, name);
+
+            // cleanup the test folder.
+            await sharePointFileManager.DeleteFolder("Shared Documents", testFolder);
+        }
+
+        [Fact]
         public async void AddRemoveListFilesTest()
         {
             // set file and folder settings
