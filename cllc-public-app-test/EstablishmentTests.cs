@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Test
           : base(factory) 
         { }
 
-        const string service = "adoxioestablishment";
+        const string service = "establishments";
         //[Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            ViewModels.AdoxioEstablishment viewmodel_adoxio_establishment = new ViewModels.AdoxioEstablishment()
+            ViewModels.Establishment viewmodel_adoxio_establishment = new ViewModels.Establishment()
             {
                 Name = initialName
             };
@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // parse as JSON.
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioEstablishment responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioEstablishment>(jsonString);
+            ViewModels.Establishment responseViewModel = JsonConvert.DeserializeObject<ViewModels.Establishment>(jsonString);
 
             // name should match.
             Assert.Equal(initialName, responseViewModel.Name);
@@ -70,11 +70,11 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioEstablishment>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Establishment>(jsonString);
             Assert.Equal(initialName, responseViewModel.Name);
 
             // U - Update            
-            ViewModels.AdoxioEstablishment patchModel = new ViewModels.AdoxioEstablishment()
+            ViewModels.Establishment patchModel = new ViewModels.Establishment()
             {
                 Name = changedName
             };            
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             jsonString = await response.Content.ReadAsStringAsync();
 
-            responseViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioEstablishment>(jsonString);
+            responseViewModel = JsonConvert.DeserializeObject<ViewModels.Establishment>(jsonString);
             Assert.Equal(changedName, responseViewModel.Name);
 
             // D - Delete

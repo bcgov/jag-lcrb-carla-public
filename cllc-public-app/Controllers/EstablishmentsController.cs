@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     string applicationsFilter = "_adoxio_assignedlicence_value ne null ";
                     // get establishments                                  
-                    string licenseFilter = "statuscode eq 1";  // only active licenses
+                    string licenseFilter = "statuscode eq 1"; // only active licenses
                     string[] licenseExpand = { "adoxio_LicenceType" };
 
                     // we need to get applications so we can see if the inspection is complete.
@@ -102,10 +102,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError("Unexpected error getting applications");
-                        _logger.LogError(e.Message);
+                        _logger.LogError($"Unexpected error getting applications {e.Message}");                        
                     }
-
 
                     // get licenses
                     IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
@@ -116,13 +114,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error getting licenses" + odee.Request.Content + "\n" + odee.Response.Content);
+                        _logger.LogError("Error getting licenses {odee.Request.Content} {odee.Response.Content}");
                         throw new Exception("Unable to get licences");
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError("Unexpected error getting establishment map data");
-                        _logger.LogError(e.Message);
+                        _logger.LogError($"Unexpected error getting establishment map data. {e.Message}");                        
                     }
 
                     establishmentMapData = new List<EstablishmentMapData>();
