@@ -232,6 +232,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvestigationactivities Investigationactivities { get; private set; }
 
         /// <summary>
+        /// Gets the IInvestigationreactivationhistories.
+        /// </summary>
+        public virtual IInvestigationreactivationhistories Investigationreactivationhistories { get; private set; }
+
+        /// <summary>
         /// Gets the IInvestigations.
         /// </summary>
         public virtual IInvestigations Investigations { get; private set; }
@@ -255,6 +260,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypesapplicationtypesset.
         /// </summary>
         public virtual ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenseechangelogs.
+        /// </summary>
+        public virtual ILicenseechangelogs Licenseechangelogs { get; private set; }
 
         /// <summary>
         /// Gets the ILoans.
@@ -365,26 +375,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IInvoices.
         /// </summary>
         public virtual IInvoices Invoices { get; private set; }
-
-        /// <summary>
-        /// Gets the IMsdynapplicationknowledgearticleset.
-        /// </summary>
-        public virtual IMsdynapplicationknowledgearticleset Msdynapplicationknowledgearticleset { get; private set; }
-
-        /// <summary>
-        /// Gets the IMsdynapplicationknowledgebaserecset.
-        /// </summary>
-        public virtual IMsdynapplicationknowledgebaserecset Msdynapplicationknowledgebaserecset { get; private set; }
-
-        /// <summary>
-        /// Gets the IMsdynlicencetypeknowledgearticleset.
-        /// </summary>
-        public virtual IMsdynlicencetypeknowledgearticleset Msdynlicencetypeknowledgearticleset { get; private set; }
-
-        /// <summary>
-        /// Gets the IMsdynlicencetypeknowledgebaserecset.
-        /// </summary>
-        public virtual IMsdynlicencetypeknowledgebaserecset Msdynlicencetypeknowledgebaserecset { get; private set; }
 
         /// <summary>
         /// Gets the ISavedqueries.
@@ -680,11 +670,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             Inspectorcommentsrollups = new Inspectorcommentsrollups(this);
             Interests = new Interests(this);
             Investigationactivities = new Investigationactivities(this);
+            Investigationreactivationhistories = new Investigationreactivationhistories(this);
             Investigations = new Investigations(this);
             Legalentities = new Legalentities(this);
             Licenceses = new Licenceses(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
+            Licenseechangelogs = new Licenseechangelogs(this);
             Loans = new Loans(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
@@ -707,10 +699,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Workers = new Workers(this);
             Contacts = new Contacts(this);
             Invoices = new Invoices(this);
-            Msdynapplicationknowledgearticleset = new Msdynapplicationknowledgearticleset(this);
-            Msdynapplicationknowledgebaserecset = new Msdynapplicationknowledgebaserecset(this);
-            Msdynlicencetypeknowledgearticleset = new Msdynlicencetypeknowledgearticleset(this);
-            Msdynlicencetypeknowledgebaserecset = new Msdynlicencetypeknowledgebaserecset(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);

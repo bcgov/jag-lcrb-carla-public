@@ -21,22 +21,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
-    public class AdoxioLegalEntityController : ControllerBase
+    public class LegalEntitiesController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
-        private readonly string _encryptionKey;
-        
+        private readonly string _encryptionKey;        
 
-        public AdoxioLegalEntityController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public LegalEntitiesController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];            
-            _logger = loggerFactory.CreateLogger(typeof(AdoxioLegalEntityController));
+            _logger = loggerFactory.CreateLogger(typeof(LegalEntitiesController));
         }
 
         /// <summary>
@@ -47,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet()]
         public JsonResult GetDynamicsLegalEntities()
         {
-            List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
+            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String accountfilter = null;
 
@@ -79,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("business-profile-summary")]
         public JsonResult GetBusinessProfileSummary()
         {
-            List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
+            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
 
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -100,7 +99,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current-hierarchy")]
         public JsonResult GetCurrentHierarchy()
         {
-            List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
+            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
 
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -118,9 +117,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-        private List<AdoxioLegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
+        private List<LegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
         {
-            List<AdoxioLegalEntity> result = null;
+            List<LegalEntity> result = null;
             var filter = "_adoxio_account_value eq " + accountId;
             if (shareHolders == null)
             {
@@ -136,7 +135,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 foreach (var legalEntity in legalEntities)
                 {
                     var viewModel = legalEntity.ToViewModel();
-                    viewModel.relatedentities = new List<AdoxioLegalEntity>();
+                    viewModel.relatedentities = new List<LegalEntity>();
                     if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue) && !shareHolders.Contains(legalEntity._adoxioShareholderaccountidValue))
                     {
                         shareHolders.Add(legalEntity._adoxioShareholderaccountidValue);
@@ -195,7 +194,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Route("position/{parentLegalEntityId}/{positionType}")]
         public IActionResult GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
         {
-            List<ViewModels.AdoxioLegalEntity> result = new List<AdoxioLegalEntity>();
+            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
             IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
             String filter = null;
 
@@ -269,7 +268,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("applicant")]
         public async Task<IActionResult> GetApplicantDynamicsLegalEntity()
         {
-            ViewModels.AdoxioLegalEntity result = null;
+            ViewModels.LegalEntity result = null;
 
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
@@ -308,7 +307,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDynamicsLegalEntity(string id)
         {
-            ViewModels.AdoxioLegalEntity result = null;
+            ViewModels.LegalEntity result = null;
             // query the Dynamics system to get the legal entity record.
             if (string.IsNullOrEmpty(id))
             {
@@ -339,7 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="item"></param>
         /// <returns></returns>
         [HttpPost()]
-        public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
+        public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] ViewModels.LegalEntity item)
         {
 
             // create a new legal entity.
@@ -424,7 +423,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpPost()]
         [Route("child-legal-entity")]
-        public async Task<IActionResult> CreateDynamicsShareholderLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item)
+        public async Task<IActionResult> CreateDynamicsShareholderLegalEntity([FromBody] ViewModels.LegalEntity item)
         {
             if (item == null)
             {
@@ -478,7 +477,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDynamicsLegalEntity([FromBody] ViewModels.AdoxioLegalEntity item, string id)
+        public async Task<IActionResult> UpdateDynamicsLegalEntity([FromBody] ViewModels.LegalEntity item, string id)
         {
             if (id != item.id)
             {
