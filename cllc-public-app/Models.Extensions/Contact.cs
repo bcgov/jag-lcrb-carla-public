@@ -49,6 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = contact.Middlename;
                 result.lastname = contact.Lastname;
                 result.telephone1 = contact.Telephone1;
+                result.Birthdate = contact.Birthdate;
                 result.BirthPlace = contact.AdoxioBirthplace;
                 result.Gender = (ViewModels.Gender?)contact.AdoxioGendercode;
                 result.MobilePhone = contact.Mobilephone;
