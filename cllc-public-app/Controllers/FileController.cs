@@ -93,11 +93,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error creating document location");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error creating document location");
                 }
             }
 
@@ -245,11 +241,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating application");
                         // fail if we can't create.
                         throw (odee);
                     }
@@ -262,11 +254,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating Contact");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating Contact");
                         // fail if we can't create.
                         throw (odee);
                     }
@@ -279,11 +267,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating Contact");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating Contact");                       
                         // fail if we can't create.
                         throw (odee);
                     }
@@ -381,11 +365,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (SharePointRestException spre)
                 {
-                    _logger.LogError("Error getting SharePoint File List");
-                    _logger.LogError("Request URI:");
-                    _logger.LogError(spre.Request.RequestUri.ToString());
-                    _logger.LogError("Response:");
-                    _logger.LogError(spre.Response.Content);
+                    _logger.LogError(spre,"Error getting SharePoint File List");
                     throw new Exception("Unable to get Sharepoint File List.");
                 }
 
