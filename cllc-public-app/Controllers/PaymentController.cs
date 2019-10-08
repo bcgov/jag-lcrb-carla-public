@@ -82,11 +82,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error updating application");
                 // fail 
                 throw (odee);
             }
@@ -169,11 +165,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating application");
                         // fail 
                         throw (odee);
                     }
@@ -200,11 +192,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating application");                        
                         // fail 
                         throw (odee);
                     }
@@ -321,11 +309,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating invoice");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating invoice");
                         // fail 
                         throw (odee);
                     }
@@ -343,11 +327,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating application");
                         // fail 
                         throw (odee);
                     }
@@ -369,11 +349,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating invoice");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating invoice");                        
                         // fail 
                         throw (odee);
                     }
@@ -388,11 +364,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating application");
                         // fail 
                         throw (odee);
                     }
@@ -470,11 +442,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating invoice");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating invoice");
                         // fail 
                         throw (odee);
                     }
@@ -490,11 +458,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating application");
                         // fail 
                         throw (odee);
                     }
@@ -523,11 +487,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating invoice");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating invoice");
+                       
                         // fail 
                         throw (odee);
                     }
@@ -544,11 +505,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating application");
                         // fail 
                         throw (odee);
                     }
@@ -704,11 +661,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating worker");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error updating worker");
                 // fail 
                 throw (odee);
             }
@@ -821,11 +774,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating invoice");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating invoice");
                         // fail 
                         throw (odee);
                     }
@@ -868,11 +817,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating invoice");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating invoice");
                         // fail 
                         throw (odee);
                     }
@@ -891,11 +836,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (OdataerrorException odee)
                     {
-                        _logger.LogError("Error updating worker");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error updating worker");
                         // fail 
                         throw (odee);
                     }

@@ -63,11 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error getting licence by id");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error getting licence by id");
                 // fail if we can't create.
                 throw (odee);
             }
@@ -112,11 +108,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error initiating licence transfer");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error initiating licence transfer");
                 // fail if we can't create.
                 throw (odee);
             }
@@ -183,11 +175,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     else
                     {
 
-                        _logger.LogError("Error creating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error creating application");                       
                         // fail if we can't create.
                         throw (odee);
                     }
@@ -207,11 +195,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error updating application");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error updating application");
                 }
 
                 return new JsonResult(await application.ToViewModel(_dynamicsClient));

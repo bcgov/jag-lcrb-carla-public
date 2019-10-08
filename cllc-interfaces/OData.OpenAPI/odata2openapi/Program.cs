@@ -315,6 +315,18 @@ namespace odata2openapi
                                 parameter.Schema = null;
                                 parameter.Type = JsonObjectType.String;
                             }
+                            if (name == "$orderby" || name == "$select" || name == "$expand")
+                            {
+                                parameter.Kind = SwaggerParameterKind.Query;
+                                parameter.Reference = null;
+                                parameter.Schema = null;
+                                parameter.Type = JsonObjectType.Array;
+                                parameter.CollectionFormat = SwaggerParameterCollectionFormat.Csv;
+                                parameter.Enumeration.Clear();
+                                parameter.Items.Clear();
+                                parameter.Item = new JsonSchema4() { Type = JsonObjectType.String };
+
+                            }
                             if (name == "$count")
                             {
                                 parameter.Kind = SwaggerParameterKind.Query;
@@ -358,6 +370,7 @@ namespace odata2openapi
                                 parameter.Schema = null;
                                 parameter.Reference = null;
                                 parameter.Type = JsonObjectType.Array;
+                                parameter.CollectionFormat = SwaggerParameterCollectionFormat.Csv;
                             }
                             else if (schema.Type == JsonObjectType.String)
                             {

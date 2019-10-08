@@ -32,6 +32,7 @@ using System.Linq;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Net.Http;
 using Microsoft.AspNetCore.Diagnostics;
+using Serilog.Exceptions;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -390,9 +391,10 @@ namespace Gov.Lclb.Cllb.Public
                 )
             {
                 Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
+                    .Enrich.FromLogContext()  
+                    .Enrich.WithExceptionDetails()
                     .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
-                        Configuration["SPLUNK_TOKEN"])
+                        Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel:Serilog.Events.LogEventLevel.Error)
                     .CreateLogger();                                
             }
 

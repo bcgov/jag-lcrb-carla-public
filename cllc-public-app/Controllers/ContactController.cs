@@ -174,7 +174,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError($"Error creating contact. Request: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError($"Error creating contact. ");
             }
             catch (Exception e)
             {
