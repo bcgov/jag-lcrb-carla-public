@@ -34,6 +34,13 @@ export class LegalEntityDataService extends DataService {
 
   }
 
+  getCurrentHierachy() {
+    const apiPath = 'api/legalentities/current-hierarchy';
+    return this.http.get<LegalEntity>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+
+  }
+
   /**
    * Create a new legal entity in Dynamics
    * @param data - legal entity data
