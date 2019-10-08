@@ -105,11 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 catch (OdataerrorException odee)
                 {
                     // this will gracefully handle situations where Dynamics is not available however we have a cache version.
-                    _logger.LogError("Error getting policy documents by category");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error getting policy documents by category");
                 }
                 catch (Exception e)
                 {
@@ -195,17 +191,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 catch (OdataerrorException odee)
                 {
                     // this will gracefully handle situations where Dynamics is not available however we have a cache version.
-                    _logger.LogError("Error getting policy document");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error getting policy document");
                 }
                 catch (Exception e)
                 {
                     // unexpected exception
-                    _logger.LogError("Unknown error occured");
-                    _logger.LogError(e.Message);
+                    _logger.LogError(e,"Unknown error occured");                    
                 }
             }
 
