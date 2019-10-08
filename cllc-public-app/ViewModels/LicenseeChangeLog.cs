@@ -40,7 +40,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Account ParentBusinessAccount { get; set; }
         public Application Application { get; set; }
         public ApplicationType ApplicationType { get; set; }
-        public Legalentity LegalEntity { get; set; }
+        public LegalEntity LegalEntity { get; set; }
         public LicenseeChangeLog ParentLinceseeChangeLogId { get; set; }
         public IList<LicenseeChangeLog> LicenseechangelogLicenseechangelogs { get; set; }
     }

@@ -27,14 +27,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
-        private readonly string _encryptionKey;        
+        private readonly string _encryptionKey;
 
         public LegalEntitiesController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
-            _encryptionKey = _configuration["ENCRYPTION_KEY"];            
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _logger = loggerFactory.CreateLogger(typeof(LegalEntitiesController));
         }
 
@@ -99,22 +99,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current-hierarchy")]
         public JsonResult GetCurrentHierarchy()
         {
-            List<ViewModels.LegalEntity> result = new List<LegalEntity>();
-
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // check that the session is setup correctly.
             userSettings.Validate();
 
-            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = GetAccountLegalEntities(userSettings.AccountId);
-
-            foreach (var legalEntity in legalEntities)
-            {
-                result.Add(legalEntity.ToViewModel());
-            }
-
-            return new JsonResult(result);
+            LegalEntity legalEntity = GetLegalEntityTree(userSettings.AccountId);
+            return new JsonResult(legalEntity);
         }
 
         private List<LegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
@@ -123,28 +115,80 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var filter = "_adoxio_account_value eq " + accountId;
             if (shareHolders == null)
             {
-                shareHolders = new List<string>();                
+                shareHolders = new List<string>();
             }
-            
+
             var response = _dynamicsClient.Legalentities.Get(filter: filter);
 
             if (response != null && response.Value != null)
             {
-                var legalEntities = response.Value.ToList();                
+                var legalEntities = response.Value.ToList();
 
                 foreach (var legalEntity in legalEntities)
                 {
                     var viewModel = legalEntity.ToViewModel();
-                    viewModel.relatedentities = new List<LegalEntity>();
+                    viewModel.children = new List<LegalEntity>();
                     if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue) && !shareHolders.Contains(legalEntity._adoxioShareholderaccountidValue))
                     {
                         shareHolders.Add(legalEntity._adoxioShareholderaccountidValue);
-                        viewModel.relatedentities.AddRange ( GetAccountHierarchy(legalEntity._adoxioShareholderaccountidValue, shareHolders));
-                    }                    
+                        viewModel.children.AddRange(GetAccountHierarchy(legalEntity._adoxioShareholderaccountidValue, shareHolders));
+                    }
 
                     result.Add(viewModel);
                 }
-                
+
+            }
+            return result;
+
+        }
+
+        private LegalEntity GetLegalEntityTree(string accountId)
+        {
+            LegalEntity result = null;
+            var filter = "_adoxio_account_value eq " + accountId;
+            filter += " and _adoxio_legalentityowned_value eq null";
+
+            var response = _dynamicsClient.Legalentities.Get(filter: filter);
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntity = response.Value.FirstOrDefault();
+                if (legalEntity != null)
+                {
+                    result = legalEntity.ToViewModel();
+                    result.children = this.GetLegalEntityChildren(result.id);
+                }
+            }
+            return result;
+        }
+
+        private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities = null)
+        {
+            List<LegalEntity> result = new List<LegalEntity>();
+            var filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
+            if (processedEntities == null)
+            {
+                processedEntities = new List<string>();
+            }
+
+            var response = _dynamicsClient.Legalentities.Get(filter: filter);
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntities = response.Value.ToList();
+
+                foreach (var legalEntity in legalEntities)
+                {
+                    var viewModel = legalEntity.ToViewModel();
+                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
+                    {
+                        processedEntities.Add(legalEntity.AdoxioLegalentityid);
+                        viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
+                    }
+
+                    result.Add(viewModel);
+                }
+
             }
             return result;
 

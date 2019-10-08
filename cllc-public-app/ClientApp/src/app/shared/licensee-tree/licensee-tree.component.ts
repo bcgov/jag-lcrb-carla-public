@@ -3,8 +3,11 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, filter } from 'rxjs/operators';
 import { Account } from '@models/account.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
 
 
 
@@ -21,32 +24,32 @@ interface FoodNode {
   edited?: boolean;
 }
 
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Parent Company',
-    children: [
-      {
-        name: 'Shareholder Company Alpha',
-        children: [
-          {
-            name: 'Shareholder Company Beta',
-            children: [
-              { name: 'Shareholder George' },
-              { name: 'Shareholder George\'s Wife' },
-            ]
-          },
-          {
-            name: 'Shareholder Company Gamma',
-            children: [
-              { name: 'Shareholder Carlos' },
-              { name: 'Shareholder Carlos¿s Wife' },
-            ]
-          },
-        ]
-      },
-    ]
-  }
-];
+// const TREE_DATA: FoodNode[] = [
+//   {
+//     name: 'Parent Company',
+//     children: [
+//       {
+//         name: 'Shareholder Company Alpha',
+//         children: [
+//           {
+//             name: 'Shareholder Company Beta',
+//             children: [
+//               { name: 'Shareholder George' },
+//               { name: 'Shareholder George\'s Wife' },
+//             ]
+//           },
+//           {
+//             name: 'Shareholder Company Gamma',
+//             children: [
+//               { name: 'Shareholder Carlos' },
+//               { name: 'Shareholder Carlos¿s Wife' },
+//             ]
+//           },
+//         ]
+//       },
+//     ]
+//   }
+// ];
 
 // TREE_DATA[0].children[0].children[0] = TREE_DATA[0];
 
@@ -57,22 +60,23 @@ const TREE_DATA: FoodNode[] = [
 })
 export class LicenseeTreeComponent implements OnInit {
   treeControl = new NestedTreeControl<FoodNode>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<FoodNode>();
+  dataSource = new MatTreeNestedDataSource<any>();
   @ViewChild('tree') tree: MatTree<any>;
   componentActive = true;
   account: Account;
 
-  constructor(private store: Store<AppState>) {
-    this.dataSource.data = TREE_DATA;
+  constructor(private store: Store<AppState>,
+    private legalEntityDataService: LegalEntityDataService) {
+    // this.dataSource.data = TREE_DATA;
   }
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
-    this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe(account => {
-        this.account = account;
+    this.legalEntityDataService.getCurrentHierachy()
+      .subscribe(legalEntity => {
+        this.dataSource.data = this.processLegalEtities([legalEntity]);
+        this.refreshTree();
       });
   }
 
@@ -97,6 +101,10 @@ export class LicenseeTreeComponent implements OnInit {
       this.deleteAssociate(element);
     });
     this.refreshTree();
+  }
+
+  processLegalEtities(entities: LegalEntity[]): LicenseeChangeLog[] {
+    return null;
   }
 
   refreshTree() {

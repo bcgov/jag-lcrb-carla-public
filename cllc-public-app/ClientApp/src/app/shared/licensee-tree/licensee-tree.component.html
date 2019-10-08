@@ -18,7 +18,7 @@
         <span
           [ngClass]="{'added-node': !!node.isNew, 'deleted-node': !!node.deleted, 'edited-node': !!node.edited}">{{node.name}}</span>
         &nbsp; &nbsp;
-        <a href="javascript:void(0)" (click)="!node.deleted && addAssociate(node)">Add</a> &nbsp; &nbsp;
+        <a *ngIf="!node.isindividual"  href="javascript:void(0)" (click)="!node.deleted && addAssociate(node)">Add</a> &nbsp; &nbsp;
         <a href="javascript:void(0)" (click)="!node.deleted && deleteAssociate(node)">Delete</a> &nbsp; &nbsp;
         <a href="javascript:void(0)" (click)="!node.deleted && editAssociate(node)">Edit</a>
       </li>
@@ -36,7 +36,7 @@
           <span
             [ngClass]="{'added-node': !!node.isNew, 'deleted-node': !!node.deleted, 'edited-node': !!node.edited}">{{node.name}}</span>
           &nbsp; &nbsp;
-          <a href="javascript:void(0)" (click)="!node.deleted && addAssociate(node)">Add</a> &nbsp; &nbsp;
+          <a  *ngIf="!node.isindividual" href="javascript:void(0)" (click)="!node.deleted && addAssociate(node)">Add</a> &nbsp; &nbsp;
           <a href="javascript:void(0)" (click)="!node.deleted && deleteAssociate(node)">Delete</a> &nbsp; &nbsp;
           <a href="javascript:void(0)" (click)="!node.deleted && editAssociate(node)">Edit</a>
         </div>
