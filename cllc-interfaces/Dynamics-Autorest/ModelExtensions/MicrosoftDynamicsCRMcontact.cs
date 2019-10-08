@@ -16,6 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "birthdate")]
+        //[JsonConverter(typeof(UTCDateTimeConverter))]
         [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
         public System.DateTimeOffset? Birthdate { get; set; }
 
