@@ -16,11 +16,19 @@
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
         <span
-          [ngClass]="{'added-node': !!node.isNew, 'deleted-node': !!node.deleted, 'edited-node': !!node.edited}">{{node.name}}</span>
+          [ngClass]="{'added-node': node.changeType === 'add', 'deleted-node': node.changeType === 'delete', 'edited-node': node.changeType === 'edit'}">
+          {{node.nameNew}}
+        </span>
         &nbsp; &nbsp;
-        <a *ngIf="!node.isindividual"  href="javascript:void(0)" (click)="!node.deleted && addAssociate(node)">Add</a> &nbsp; &nbsp;
-        <a href="javascript:void(0)" (click)="!node.deleted && deleteAssociate(node)">Delete</a> &nbsp; &nbsp;
-        <a href="javascript:void(0)" (click)="!node.deleted && editAssociate(node)">Edit</a>
+        <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
+          (click)="node.changeType !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
+          Shareholder</a>
+        <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
+          (click)="node.changeType !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add Leadership</a>
+        <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
+          (click)="node.changeType !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i> Edit</a>
+        <a *ngIf="!node.isRoot" href="javascript:void(0)"
+          (click)="node.changeType !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i> Delete</a>
       </li>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
@@ -34,11 +42,21 @@
           </button>
 
           <span
-            [ngClass]="{'added-node': !!node.isNew, 'deleted-node': !!node.deleted, 'edited-node': !!node.edited}">{{node.name}}</span>
+            [ngClass]="{'added-node': node.changeType === 'add', 'deleted-node': node.changeType === 'delete', 'edited-node': node.changeType === 'edit'}">
+            {{node.nameNew}}
+          </span>
           &nbsp; &nbsp;
-          <a  *ngIf="!node.isindividual" href="javascript:void(0)" (click)="!node.deleted && addAssociate(node)">Add</a> &nbsp; &nbsp;
-          <a href="javascript:void(0)" (click)="!node.deleted && deleteAssociate(node)">Delete</a> &nbsp; &nbsp;
-          <a href="javascript:void(0)" (click)="!node.deleted && editAssociate(node)">Edit</a>
+          <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
+            (click)="node.changeType !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
+            Shareholder</a>
+          <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
+            (click)="node.changeType !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add
+            Leadership</a>
+          <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
+            (click)="node.changeType !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i> Edit</a>
+          <a *ngIf="!node.isRoot" href="javascript:void(0)"
+            (click)="node.changeType !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
+            Delete</a>
         </div>
         <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
           <ng-container matTreeNodeOutlet></ng-container>
@@ -46,4 +64,70 @@
       </li>
     </mat-nested-tree-node>
   </mat-tree>
+
+  <h3 class="blue-header">BUSINESS SHAREHOLDER CHANGES</h3>
+  <section class="padded-section">
+    <table class="eq-table">
+      <tr>
+        <th>Change Type</th>
+        <th>Business Account Name</th>
+        <th>Email</th>
+        <th>Number of Shares</th>
+        <th>Contact Name</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </section>
+
+  <h3 class="blue-header">INDIVIDUAL SHAREHOLDER CHANGES</h3>
+  <section class="padded-section">
+    <table class="eq-table">
+      <tr>
+        <th>Change Type</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Number of Shares</th>
+        <th>Contact Name</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </section>
+
+  <h3 class="blue-header">LEADERSHIP CHANGES</h3>
+  <section class="padded-section">
+    <table class="eq-table">
+      <tr>
+        <th>Change Type</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Date of Birth</th>
+        <th>Is Director</th>
+        <th>Is Officer</th>
+        <th>Is Manager</th>
+        <th>Is Trustee</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </section>
 </div>
