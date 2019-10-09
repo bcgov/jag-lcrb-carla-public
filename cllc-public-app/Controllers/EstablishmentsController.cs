@@ -249,11 +249,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error creating establishment");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error creating establishment");
                 throw new Exception("Unable to create establishment");
             }
 
@@ -297,11 +293,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating establishment");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error updating establishment");
                 throw new Exception("Unable to update establishment");
             }
 
@@ -311,11 +303,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error getting establishment");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error getting establishment");
                 throw new Exception("Unable to get establishment after update");
             }
 
@@ -344,11 +332,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error delete establishment");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error delete establishment");
                 throw new Exception("Unable to delete establishment");
             }
 
