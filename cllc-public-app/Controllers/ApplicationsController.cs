@@ -273,11 +273,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error creating document location");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error creating document location");
                 }
             }
 
@@ -348,11 +344,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
 
-                    _logger.LogError("Error creating application");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error creating application");
                     // fail if we can't create.
                     throw (odee);
                 }
@@ -395,20 +387,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (SharePointRestException spre)
                 {
-                    _logger.LogError("Error creating Sharepoint Folder");
-                    _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
-                    _logger.LogError($"FolderName is: {folderName}");
-                    _logger.LogError($"Request is: {spre.Request.Content}");
-                    _logger.LogError($"Response is: {spre.Response.Content}");
-                    _logger.LogError($"Error is: {spre.Message} {spre.StackTrace}");
+                    _logger.LogError(spre, "Error creating Sharepoint Folder");
                     throw spre;
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError("Error creating Sharepoint Folder");
-                    _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
-                    _logger.LogError($"FolderName is: {folderName}");
-                    _logger.LogError($"Error is: {e.Message} {e.StackTrace}");
+                    _logger.LogError(e,"Error creating Sharepoint Folder");
                     throw e;
                 }
 
@@ -436,11 +420,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else
                 {
-                    _logger.LogError("Error creating SharepointDocumentLocation");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error creating SharepointDocumentLocation");
                     mdcsdl = null;
                 }
 
@@ -461,11 +441,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error adding reference SharepointDocumentLocation to application");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error adding reference SharepointDocumentLocation to application");                    
                 }
 
                 string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
@@ -480,11 +456,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error adding reference to SharepointDocumentLocation");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error adding reference to SharepointDocumentLocation");                    
                 }
             }
         }
@@ -537,11 +509,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error updating application");                
                 // fail if we can't create.
                 throw (odee);
             }
@@ -586,11 +554,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error cancelling application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error cancelling application");                
                 // fail if we can't create.
                 throw (odee);
             }

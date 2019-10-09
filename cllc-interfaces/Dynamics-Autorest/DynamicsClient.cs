@@ -97,6 +97,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAreas Areas { get; private set; }
 
         /// <summary>
+        /// Gets the IAuditlogrequests.
+        /// </summary>
+        public virtual IAuditlogrequests Auditlogrequests { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessaccounts.
         /// </summary>
         public virtual IBusinessaccounts Businessaccounts { get; private set; }
@@ -643,6 +648,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypes = new Applicationtypes(this);
             Areas = new Areas(this);
+            Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
             Cannabismonthlyreports = new Cannabismonthlyreports(this);

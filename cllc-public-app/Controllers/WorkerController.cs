@@ -156,11 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error updating contact");
                 throw odee;
             }
             worker = await _dynamicsClient.GetWorkerById(workerId);
@@ -194,11 +190,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError($"Error creating worker. Request: {odee.Request.Content} Response: {odee.Response.Content}");                
+                _logger.LogError(odee,$"Error creating worker. ");                
             }
             catch (Exception e)
             {
-                _logger.LogError($"Error creating worker. Unexpected error: {e.Message}");
+                _logger.LogError(e, $"Error creating worker.");
             }
 
             try
@@ -209,11 +205,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError($"Error updating worker. Request: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError(odee, $"Error updating worker. ");
             }
             catch (Exception e)
             {
-                _logger.LogError($"Error updating worker. Unexpected error: {e.Message}");
+                _logger.LogError(e, $"Error updating worker.");
             }
 
 
@@ -247,7 +243,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError($"Error updating worker. Request: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError(odee, $"Error updating worker. ");
             }
 
 
