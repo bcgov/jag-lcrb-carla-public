@@ -24,7 +24,6 @@ export class LicenseeChangeLog {
   emailOld: string;
   firstNameNew: string;
   firstNameOld: string;
-  JobNumber: string;
   lastNameNew: string;
   lastNameOld: string;
   LicenseeChangelogid: string;
@@ -32,6 +31,9 @@ export class LicenseeChangeLog {
   nameOld: string;
   dateofBirthNew: Date;
   dateofBirthOld: Date;
+  titleNew: string;
+  titleOld: string;
+
 
   BusinessAccount: Account;
   Contact: Contact;
@@ -44,45 +46,91 @@ export class LicenseeChangeLog {
 
   isRoot: boolean; // This is only used on the client side
 
+
   /**
    * Create from LegalEntity
    */
-  constructor(legalEntity: LegalEntity) {
-    this.typeOfChange = 'unchanged';
-    this.isIndividual = legalEntity.isindividual;
-    this.isDirectorNew = legalEntity.isDirector;
-    this.isDirectorOld = legalEntity.isDirector;
-    this.isManagerNew = legalEntity.isSeniorManagement;
-    this.isManagerOld = legalEntity.isSeniorManagement;
-    this.isOfficerNew = legalEntity.isOfficer;
-    this.isOfficerOld = legalEntity.isOfficer;
-    this.isShareholderNew = legalEntity.isShareholder;
-    this.isShareholderOld = legalEntity.isShareholder;
-    // this.isTrusteeNew = legalEntity.isTrustee;
-    // this.isTrusteeOld = legalEntity.isTrustee;
-    // this.BusinessAccountType = legalEntity.BusinessAccountType;
-    this.numberofSharesNew = legalEntity.percentageVotingShares;
-    this.numberofSharesOld = legalEntity.percentageVotingShares;
-    this.emailNew = legalEntity.email;
-    this.emailOld = legalEntity.email;
-    this.firstNameNew = legalEntity.firstname;
-    this.firstNameOld = legalEntity.firstname;
-    this.lastNameNew = legalEntity.lastname;
-    this.lastNameOld = legalEntity.lastname;
-    this.nameNew = legalEntity.name;
-    this.nameOld = legalEntity.name;
-    this.dateofBirthNew = legalEntity.dateofbirth;
-    this.dateofBirthOld = legalEntity.dateofbirth;
+  constructor(legalEntity: LegalEntity = null) {
+    if (legalEntity) {
+      this.typeOfChange = 'unchanged';
+      this.isIndividual = legalEntity.isindividual;
+      this.isDirectorNew = legalEntity.isDirector;
+      this.isDirectorOld = legalEntity.isDirector;
+      this.isManagerNew = legalEntity.isSeniorManagement;
+      this.isManagerOld = legalEntity.isSeniorManagement;
+      this.isOfficerNew = legalEntity.isOfficer;
+      this.isOfficerOld = legalEntity.isOfficer;
+      this.isShareholderNew = legalEntity.isShareholder;
+      this.isShareholderOld = legalEntity.isShareholder;
+      // this.isTrusteeNew = legalEntity.isTrustee;
+      // this.isTrusteeOld = legalEntity.isTrustee;
+      // this.BusinessAccountType = legalEntity.BusinessAccountType;
+      this.numberofSharesNew = legalEntity.percentageVotingShares;
+      this.numberofSharesOld = legalEntity.percentageVotingShares;
+      this.emailNew = legalEntity.email;
+      this.emailOld = legalEntity.email;
+      this.firstNameNew = legalEntity.firstname;
+      this.firstNameOld = legalEntity.firstname;
+      this.lastNameNew = legalEntity.lastname;
+      this.lastNameOld = legalEntity.lastname;
+      this.nameNew = legalEntity.name;
+      this.nameOld = legalEntity.name;
+      this.dateofBirthNew = legalEntity.dateofbirth;
+      this.dateofBirthOld = legalEntity.dateofbirth;
+      this.titleNew = legalEntity.jobTitle;
+      this.titleOld = legalEntity.jobTitle;
 
-    this.parentLegalEntityId = legalEntity.parentLegalEntityId;
+      this.parentLegalEntityId = legalEntity.parentLegalEntityId;
 
-    // this.LicenseeChangelogid = legalEntity.LicenseeChangelogid;
-    // this.BusinessAccount = legalEntity.BusinessAccount ;
-    // this.Contact = legalEntity.Contact;
-    // this.Application = legalEntity.Application;
-    // this.ApplicationType = legalEntity.ApplicationType ;
-    // this.LegalEntity = legalEntity.LegalEntity ;
-    // this.ParentLinceseeChangeLogId = legalEntity.ParentLinceseeChangeLogId;
-    // this.LicenseechangelogLicenseechangelogs = legalEntity.LicenseechangelogLicenseechangelogs ;
+      // this.LicenseeChangelogid = legalEntity.LicenseeChangelogid;
+      // this.BusinessAccount = legalEntity.BusinessAccount ;
+      // this.Contact = legalEntity.Contact;
+      // this.Application = legalEntity.Application;
+      // this.ApplicationType = legalEntity.ApplicationType ;
+      // this.LegalEntity = legalEntity.LegalEntity ;
+      // this.ParentLinceseeChangeLogId = legalEntity.ParentLinceseeChangeLogId;
+      // this.LicenseechangelogLicenseechangelogs = legalEntity.LicenseechangelogLicenseechangelogs ;
+    }
+  }
+
+  getNewLeadershipPosition(): string {
+    let position = '';
+    if (this.isDirectorNew) {
+      position += 'Director, ';
+    }
+    if (this.isManagerNew) {
+      position += 'Manager, ';
+    }
+    if (this.isOfficerNew) {
+      position += 'Officer, ';
+    }
+    if (this.isTrusteeNew) {
+      position += 'Trustee, ';
+    }
+    if (this.titleNew) {
+      position += `${this.titleNew}, `;
+    }
+    position = position.substring(0, position.length - 2);
+    return position;
+  }
+  getOldLeadershipPosition(): string {
+    let position = '';
+    if (this.isDirectorOld) {
+      position += 'Director, ';
+    }
+    if (this.isManagerOld) {
+      position += 'Manager, ';
+    }
+    if (this.isOfficerOld) {
+      position += 'Officer, ';
+    }
+    if (this.isTrusteeOld) {
+      position += 'Trustee, ';
+    }
+    if (this.titleOld) {
+      position += `${this.titleOld}, `;
+    }
+    position = position.substring(0, position.length - 2);
+    return position;
   }
 }

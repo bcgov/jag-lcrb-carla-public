@@ -15,20 +15,24 @@
       <li class="mat-tree-node">
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
+        <strong *ngIf="node.isShareholderNew" style="margin-right: 5px">Shareholder </strong>
+        <strong *ngIf="!node.isShareholderNew" style="margin-right: 5px">Leader </strong>
         <span
-          [ngClass]="{'added-node': node.changeType === 'add', 'deleted-node': node.changeType === 'delete', 'edited-node': node.changeType === 'edit'}">
+          [ngClass]="{'added-node': node.typeOfChange === 'add', 'deleted-node': node.typeOfChange === 'delete', 'edited-node': node.typeOfChange === 'edit'}">
           {{node.nameNew}}
         </span>
+        <span *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
         &nbsp; &nbsp;
         <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-          (click)="node.changeType !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
+          (click)="node.typeOfChange !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
           Shareholder</a>
         <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-          (click)="node.changeType !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add Leadership</a>
+          (click)="node.typeOfChange !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add
+          Leadership</a>
         <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
-          (click)="node.changeType !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i> Edit</a>
+          (click)="node.typeOfChange !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i> Edit</a>
         <a *ngIf="!node.isRoot" href="javascript:void(0)"
-          (click)="node.changeType !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i> Delete</a>
+          (click)="node.typeOfChange !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i> Delete</a>
       </li>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
@@ -40,22 +44,22 @@
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
           </button>
-
+          <span *ngIf="node.isShareholderNew">Shareholder </span>
           <span
-            [ngClass]="{'added-node': node.changeType === 'add', 'deleted-node': node.changeType === 'delete', 'edited-node': node.changeType === 'edit'}">
+            [ngClass]="{'added-node': node.typeOfChange === 'add', 'deleted-node': node.typeOfChange === 'delete', 'edited-node': node.typeOfChange === 'edit'}">
             {{node.nameNew}}
           </span>
           &nbsp; &nbsp;
           <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-            (click)="node.changeType !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
+            (click)="node.typeOfChange !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
             Shareholder</a>
           <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-            (click)="node.changeType !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add
+            (click)="node.typeOfChange !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add
             Leadership</a>
           <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
-            (click)="node.changeType !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i> Edit</a>
+            (click)="node.typeOfChange !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i> Edit</a>
           <a *ngIf="!node.isRoot" href="javascript:void(0)"
-            (click)="node.changeType !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
+            (click)="node.typeOfChange !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
             Delete</a>
         </div>
         <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
@@ -113,20 +117,39 @@
         <th>Name</th>
         <th>Email</th>
         <th>Date of Birth</th>
-        <th>Is Director</th>
-        <th>Is Officer</th>
-        <th>Is Manager</th>
-        <th>Is Trustee</th>
+        <th>Position</th>
       </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+      <tr *ngFor="let item of leadershipChanges">
+        <td>
+          <span
+            [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}">
+            {{item.typeOfChange}}
+          </span>
+        </td>
+        <td>
+          <div *ngIf="item.typeOfChange === 'edit'" class="old-value">{{item.nameOld}}</div>
+          <span
+            [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}">
+            {{item.nameNew}}</span>
+        </td>
+        <td>
+          <div *ngIf="item.typeOfChange === 'edit'" class="old-value">{{item.emailOld}}</div>
+          <span
+          [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}"
+          >{{item.emailNew}}</span>
+        </td>
+        <td>
+          <div *ngIf="item.typeOfChange === 'edit'" class="old-value">{{item.dateofBirthOld}}</div>
+          <span
+          [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}"
+          >{{item.dateofBirthNew}}</span>
+        </td>
+        <td>
+          <div *ngIf="item.typeOfChange === 'edit'"  class="old-value">{{item.getOldLeadershipPosition()}}</div>
+          <span
+          [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}"
+          >{{item.getNewLeadershipPosition()}}</span>
+        </td>
       </tr>
     </table>
   </section>
