@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { filter } from 'rxjs/operators';
+import { LicenseeChangeLog } from '@appmodels/legal-entity-change.model';
 
 @Component({
   selector: 'app-shareholders-and-partners',
@@ -24,7 +25,7 @@ export class ShareholdersAndPartnersComponent implements OnInit {
       nameNew: [''],
       firstNameNew: ['', Validators.required],
       lastNameNew: ['', Validators.required],
-      dateofbirth: [''],
+      dateofBirthNew: [''],
       emailNew: ['', Validators.email],
       numberofSharesNew: ['', Validators.required],
       partnerType: ['', Validators.required],
@@ -47,11 +48,11 @@ export class ShareholdersAndPartnersComponent implements OnInit {
       });
     }
     let formData = this.data.shareholder || {};
-    formData = (<any>Object).assign(formData, this.form.value);
+    formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
     if (formData.isIndividual === true) {
       formData.nameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
     }
-    this.dialogRef.close(formData)
+    this.dialogRef.close(formData);
   }
 
 

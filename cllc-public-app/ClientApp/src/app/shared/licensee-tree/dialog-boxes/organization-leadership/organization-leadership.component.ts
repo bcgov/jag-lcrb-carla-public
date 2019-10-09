@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { LicenseeChangeLog } from '@models/legal-entity-change.model';
 
 @Component({
   selector: 'app-organization-leadership',
@@ -50,7 +51,7 @@ export class OrganizationLeadershipComponent {
 
   save() {
     let formData = this.data.person || {};
-    formData = (<any>Object).assign(formData, this.directorOfficerForm.value);
+    formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.directorOfficerForm.value);
     formData.nameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
 
     this.dialogRef.close(formData);
