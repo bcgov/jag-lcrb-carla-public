@@ -17,11 +17,12 @@
             <span *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
             &nbsp; &nbsp;
             <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-              (click)="node.typeOfChange !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
-              Shareholder</a>
-            <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-              (click)="node.typeOfChange !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add
-              Leadership</a>
+              [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item
+                (click)="node.typeOfChange !== 'delete' && addShareholder(node)">Shareholder</button>
+              <button mat-menu-item (click)="node.typeOfChange !== 'delete' && addLeadership(node)">Leadership</button>
+            </mat-menu>
             <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
               (click)="node.typeOfChange !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
               Edit</a>
@@ -46,11 +47,13 @@
               </span>
               &nbsp; &nbsp;
               <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-                (click)="node.typeOfChange !== 'delete' && addShareholder(node)"> <i class="fas fa-plus"></i> Add
-                Shareholder</a>
-              <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
-                (click)="node.typeOfChange !== 'delete' && addLeadership(node)"> <i class="fas fa-plus"></i> Add
-                Leadership</a>
+                [matMenuTriggerFor]="menu2"> <i class="fas fa-plus"></i>&nbsp;Add</a>
+              <mat-menu #menu2="matMenu">
+                <button mat-menu-item
+                  (click)="node.typeOfChange !== 'delete' && addShareholder(node)">Shareholder</button>
+                <button mat-menu-item
+                  (click)="node.typeOfChange !== 'delete' && addLeadership(node)">Leadership</button>
+              </mat-menu>
               <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
                 (click)="node.typeOfChange !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
                 Edit</a>
