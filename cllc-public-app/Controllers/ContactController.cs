@@ -174,11 +174,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError($"Error creating contact. Request: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError(odee, $"Error creating contact. ");
             }
             catch (Exception e)
             {
-                _logger.LogError($"Unknown error creating contact. Error: {e.Message} {e.ToString()}");
+                _logger.LogError(e, $"Unknown error creating contact.");
             }
 
             // if we have not yet authenticated, then this is the new record for the user.
