@@ -39,11 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error updating application");
                 // fail if we can't create.
                 throw (odee);
             }

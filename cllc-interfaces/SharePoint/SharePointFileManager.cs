@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -230,6 +231,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return null;
             }
 
+            folderName = FixFilename(folderName);
+
             string serverRelativeUrl = "";
             // ensure the webname has a slash.
             if (!string.IsNullOrEmpty(WebName))
@@ -312,6 +315,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             return fileDetailsList;
         }
 
+        public string FixFilename (string filename)
+        {
+            string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
+            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+
+            // Get the validated file name string
+            string result = Regex.Replace(filename, invalidRegStr, "_");
+            return result;
+        }
+
         /// <summary>
         /// Create Folder
         /// </summary>
@@ -324,8 +337,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 return;
             }
+            
+            folderName = FixFilename (folderName);
 
-            string relativeUrl = $"/{listTitle}/{folderName}";
+            string relativeUrl = EscapeApostrophe ($"/{listTitle}/{folderName}");
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
@@ -494,13 +509,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             return library;
         }
 
-        private object CreateNewFolderRequest(string serverRelativeUri)
-        {
-            var type = new { type = "SP.Folder" };
-            var request = new { __metadata = type, ServerRelativeUrl = serverRelativeUri };
-            return request;
-        }
-
         private object CreateNewDocumentLibraryRequest(string listName)
         {
             var type = new { type = "SP.List" };
@@ -519,6 +527,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 return false;
             }
+
+            folderName = FixFilename(folderName);
 
             bool result = false;
             // Delete is very similar to a GET.
@@ -590,6 +600,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 return null;
             }
+            folderName = FixFilename(folderName);
 
             Object result = null;
             string serverRelativeUrl = "/";
@@ -666,8 +677,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         public async Task AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
-        {            
-
+        {
+            folderName = FixFilename(folderName);
             bool folderExists = await this.FolderExists(documentLibrary, folderName);
             if (!folderExists)
             {
@@ -682,6 +693,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public string GetServerRelativeURL(string listTitle, string folderName)
         {
+            folderName = FixFilename(folderName);
             string serverRelativeUrl = "";
             if (!string.IsNullOrEmpty(WebName))
             {
@@ -709,7 +721,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return false;
             }
             bool result = false;
-            
+
+            folderName = FixFilename(folderName);
+
             // Delete is very similar to a GET.
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
@@ -841,6 +855,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 serverRelativeUrl += $"{WebName}/";
             }
+
+            folderName = FixFilename(folderName);
 
             serverRelativeUrl += $"/{listTitle}/{folderName}/{fileName}";
 
