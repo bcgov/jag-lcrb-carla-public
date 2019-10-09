@@ -156,11 +156,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error updating contact");
                 throw odee;
             }
             worker = await _dynamicsClient.GetWorkerById(workerId);
@@ -190,20 +186,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             try
             {
-                worker = await _dynamicsClient.Workers.CreateAsync(worker);
+                worker = await _dynamicsClient.Workers.CreateAsync(worker);             
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError(odee,$"Error creating worker. ");                
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating worker.");
+            }
+
+            try
+            {                
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, $"Error updating worker. ");
             }
-            return new JsonResult(worker);
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error updating worker.");
+            }
+
+
+            return new JsonResult(worker.ToViewModel());
         }
 
 
@@ -227,8 +237,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return NotFound("No access to worker");
             }
+            try
+            {
+                await _dynamicsClient.Workers.DeleteAsync(id);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError(odee, $"Error updating worker. ");
+            }
 
-            await _dynamicsClient.Workers.DeleteAsync(id);
+
             return NoContent(); // 204
         }
 
