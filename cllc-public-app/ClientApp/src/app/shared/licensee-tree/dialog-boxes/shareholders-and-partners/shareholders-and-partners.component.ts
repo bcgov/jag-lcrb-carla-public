@@ -30,6 +30,7 @@ export class ShareholdersAndPartnersComponent implements OnInit {
       numberofSharesNew: ['', Validators.required],
       partnerType: ['', Validators.required],
       isIndividual: [true],
+      isShareholderNew: [true],
       legalentitytype: [''],
       dateIssued: [''],
     });

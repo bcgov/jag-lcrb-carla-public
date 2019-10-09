@@ -42,6 +42,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public ApplicationType ApplicationType { get; set; }
         public LegalEntity LegalEntity { get; set; }
         public LicenseeChangeLog ParentLinceseeChangeLogId { get; set; }
-        public IList<LicenseeChangeLog> LicenseechangelogLicenseechangelogs { get; set; }
+        public IList<LicenseeChangeLog> Children { get; set; }
     }
 }
