@@ -34,11 +34,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Get a csv with the federal tracking report for a given reporting period
+        /// Generate a csv with the federal tracking report for a given reporting period
         /// </summary>
         /// <returns></returns>
         [HttpGet("{month}/{year}")]
-        public IActionResult GetFederalTrackingReport(int month, int year)
+        public IActionResult GenerateFederalTrackingReport(int month, int year)
         {
             if (month < 1 || month > 12 || year < 2018)
             {
@@ -117,5 +117,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new BadRequestResult();
             }
         }
+
+        /// <summary>
+        /// Get monthly report
+        /// </summary>
+        /// <returns></returns>
+        // [HttpGet("{month}/{year}")]
+        // public IActionResult GetMonthlyReport(int month, int year)
+        // {
+        //     if(month < 1 || month > 12 || year < 2018)
+        //     {
+        //         return new BadRequestResult();
+        //     }
+
+        //     string monthStr = month.ToString("00");
+        //     string yearStr = year.ToString();
+            
+        //     string filter = $"adoxio_reportingperiodmonth eq '{monthStr}' and adoxio_reportingperiodyear eq '{yearStr}'";
+            
+        //     try
+        //     {
+        //         CannabismonthlyreportsGetResponseModel resp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+        //     }
+        // }
     }
 }

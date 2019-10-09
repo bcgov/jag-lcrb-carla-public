@@ -49,6 +49,7 @@ import { ContactDataService } from './services/contact-data.service';
 import { ApplicationDataService } from './services/application-data.service';
 import { LegalEntityDataService } from './services/legal-entity-data.service';
 import { LicenseDataService } from './services/license-data.service';
+import { MonthlyReportDataService } from './services/monthly-report.service';
 import { PaymentDataService } from './services/payment-data.service';
 import { AppComponent } from './app.component';
 import { BceidConfirmationComponent } from './bceid-confirmation/bceid-confirmation.component';
@@ -351,6 +352,7 @@ import { FederalReportingComponent } from './federal-reporting/federal-reporting
     ApplicationDataService,
     LegalEntityDataService,
     LicenseDataService,
+    MonthlyReportDataService,
     AliasDataService,
     BCeidAuthGuard,
     CanDeactivateGuard,
