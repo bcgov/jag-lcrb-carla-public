@@ -30,7 +30,7 @@
     <section class="row">
       <app-field *ngIf="form.get('isIndividual').value" class="col-md-6" label="Date of Birth" [valid]="true"
         errorMessage="This is required">
-        <input type="text" formControlName='dateofbirth' style="background-color: #fff;" placeholder="yyyy-mm-dd"
+        <input type="text" formControlName='dateofBirthNew' style="background-color: #fff;" placeholder="yyyy-mm-dd"
           class="form-control" [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
         <mat-datepicker #picker2></mat-datepicker>
       </app-field>

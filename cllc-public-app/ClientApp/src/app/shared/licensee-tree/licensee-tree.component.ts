@@ -39,6 +39,10 @@ export class LicenseeTreeComponent implements OnInit {
   componentActive = true;
   account: Account;
   changeTree: LicenseeChangeLog;
+  individualShareholderChanges: LicenseeChangeLog[];
+  organizationShareholderChanges: LicenseeChangeLog[];
+  leadershipChanges: LicenseeChangeLog[];
+  treeRoot: LicenseeChangeLog;
 
   constructor(private store: Store<AppState>,
     public dialog: MatDialog,
@@ -51,11 +55,11 @@ export class LicenseeTreeComponent implements OnInit {
   ngOnInit() {
     this.legalEntityDataService.getCurrentHierachy()
       .subscribe(legalEntity => {
-        const tree = this.processLegalEntityTree(legalEntity);
-        tree.isRoot = true;
-        this.changeTree = tree;
-        this.dataSource.data = [tree];
-        this.refreshTree();
+        this.treeRoot = this.processLegalEntityTree(legalEntity);
+        this.treeRoot.isRoot = true;
+        this.changeTree = this.treeRoot;
+        this.dataSource.data = [this.treeRoot];
+        this.refreshTreeAndChangeTables();
       });
   }
 
@@ -65,11 +69,11 @@ export class LicenseeTreeComponent implements OnInit {
         .pipe(filter(data => !!data))
         .subscribe(
           formData => {
-            if (node.changeType !== 'add') {
-              formData.changeType = 'edit';
+            if (node.typeOfChange !== 'add') {
+              formData.typeOfChange = 'edit';
             }
             node = Object.assign(node, formData);
-            this.refreshTree();
+            this.refreshTreeAndChangeTables();
           }
         );
     } else {
@@ -77,11 +81,11 @@ export class LicenseeTreeComponent implements OnInit {
         .pipe(filter(data => !!data))
         .subscribe(
           formData => {
-            if (node.changeType !== 'add') {
-              formData.changeType = 'edit';
+            if (node.typeOfChange !== 'add') {
+              formData.typeOfChange = 'edit';
             }
             node = Object.assign(node, formData);
-            this.refreshTree();
+            this.refreshTreeAndChangeTables();
           }
         );
     }
@@ -92,11 +96,11 @@ export class LicenseeTreeComponent implements OnInit {
       .pipe(filter(data => !!data))
       .subscribe(
         formData => {
-          formData.changeType = 'add';
+          formData.typeOfChange = 'add';
           formData.isIndividual = true;
           node.children = node.children || [];
           node.children.push(formData);
-          this.refreshTree();
+          this.refreshTreeAndChangeTables();
         }
       );
   }
@@ -106,21 +110,21 @@ export class LicenseeTreeComponent implements OnInit {
       .pipe(filter(data => !!data))
       .subscribe(
         formData => {
-          formData.changeType = 'add';
+          formData.typeOfChange = 'add';
           node.children = node.children || [];
           node.children.push(formData);
-          this.refreshTree();
+          this.refreshTreeAndChangeTables();
         }
       );
   }
 
-  deleteAssociate(node) {
-    node.changeType = 'delete';
+  deleteAssociate(node, changeType = 'delete') {
+    node.typeOfChange = changeType;
     const children = node.children || [];
     children.forEach(element => {
-      this.deleteAssociate(element);
+      this.deleteAssociate(element, 'parent-deleted');
     });
-    this.refreshTree();
+    this.refreshTreeAndChangeTables();
   }
 
   /*
@@ -186,10 +190,34 @@ export class LicenseeTreeComponent implements OnInit {
   }
 
 
-  refreshTree() {
+  refreshTreeAndChangeTables() {
     const data = [...this.dataSource.data];
     this.dataSource.data = [];
     this.dataSource.data = data;
+    this.refreshChangeTables();
+  }
+
+  refreshChangeTables() {
+    this.individualShareholderChanges = [];
+    this.organizationShareholderChanges = [];
+    this.leadershipChanges = [];
+    this.populateChangeTables(this.treeRoot);
+  }
+
+  populateChangeTables(node: LicenseeChangeLog) {
+    if (node.isShareholderNew && node.isIndividual && node.typeOfChange !== 'unchanged') {
+      this.individualShareholderChanges.push(node);
+    } else if (node.isShareholderNew && node.typeOfChange !== 'unchanged') {
+      this.organizationShareholderChanges.push(node);
+    } else if (!node.isShareholderNew && node.typeOfChange !== 'unchanged') {
+      this.leadershipChanges.push(node);
+    }
+
+    if (node.children && node.children.length) {
+      node.children.forEach(child => {
+        this.populateChangeTables(child);
+      });
+    }
   }
 
   OnDestroy() {
