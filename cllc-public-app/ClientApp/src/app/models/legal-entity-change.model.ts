@@ -41,11 +41,11 @@ export class LicenseeChangeLog {
   ApplicationType: string;
   LegalEntityId: string;
   parentLegalEntityId: string;
-  ParentLinceseeChangeLogId: string;
+  parentLinceseeChangeLog: LicenseeChangeLog;
   children: LicenseeChangeLog[];
 
   isRoot: boolean; // This is only used on the client side
-
+  lastTypeOfChange: string; // This is only used on the client side
 
   /**
    * Create from LegalEntity

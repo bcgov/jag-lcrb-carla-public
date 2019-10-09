@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material';
 import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
 import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
 import { filter } from 'rxjs/operators';
+import { LicenseeChangeLog } from './../../models/legal-entity-change.model';
 
 
 
@@ -94,10 +95,10 @@ export class LicenseeTreeComponent implements OnInit {
   addLeadership(node) {
     this.openLeadershipDialog({})
       .pipe(filter(data => !!data))
-      .subscribe(
-        formData => {
+      .subscribe((formData: LicenseeChangeLog) => {
           formData.typeOfChange = 'add';
           formData.isIndividual = true;
+          formData.parentLinceseeChangeLog = node;
           node.children = node.children || [];
           node.children.push(formData);
           this.refreshTreeAndChangeTables();
@@ -111,6 +112,7 @@ export class LicenseeTreeComponent implements OnInit {
       .subscribe(
         formData => {
           formData.typeOfChange = 'add';
+          formData.parentLinceseeChangeLog = node;
           node.children = node.children || [];
           node.children.push(formData);
           this.refreshTreeAndChangeTables();
@@ -118,12 +120,17 @@ export class LicenseeTreeComponent implements OnInit {
       );
   }
 
-  deleteAssociate(node, changeType = 'delete') {
-    node.typeOfChange = changeType;
-    const children = node.children || [];
-    children.forEach(element => {
-      this.deleteAssociate(element, 'parent-deleted');
-    });
+  deleteAssociate(node: LicenseeChangeLog, changeType = 'delete') {
+    if (node.typeOfChange === 'add') {
+      const index = node.parentLinceseeChangeLog.children.indexOf(node);
+      node.parentLinceseeChangeLog.children.splice(index, 1);
+    } else {
+      node.typeOfChange = changeType;
+      const children = node.children || [];
+      children.forEach(child => {
+        this.deleteAssociate(child, 'parent-deleted');
+      });
+    }
     this.refreshTreeAndChangeTables();
   }
 
@@ -136,6 +143,7 @@ export class LicenseeTreeComponent implements OnInit {
       newNode.children = [];
       node.children.forEach(child => {
         const childNode = this.processLegalEntityTree(child);
+        childNode.parentLinceseeChangeLog = newNode;
         newNode.children.push(childNode);
       });
     }
@@ -202,6 +210,15 @@ export class LicenseeTreeComponent implements OnInit {
     this.organizationShareholderChanges = [];
     this.leadershipChanges = [];
     this.populateChangeTables(this.treeRoot);
+    const sortByTypeOfChange = (a, b) => {
+      if (a.titleOld <= b.typeOfChange) {
+        return 1;
+      }
+      return -1;
+    };
+    this.individualShareholderChanges.sort(sortByTypeOfChange);
+    this.organizationShareholderChanges.sort(sortByTypeOfChange);
+    this.leadershipChanges.sort(sortByTypeOfChange);
   }
 
   populateChangeTables(node: LicenseeChangeLog) {
