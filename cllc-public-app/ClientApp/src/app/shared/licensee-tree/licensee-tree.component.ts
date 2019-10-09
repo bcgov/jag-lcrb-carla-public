@@ -3,11 +3,14 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { takeWhile, filter } from 'rxjs/operators';
 import { Account } from '@models/account.model';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog } from '@models/legal-entity-change.model';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { MatDialog } from '@angular/material';
+import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
+import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
+import { filter } from 'rxjs/operators';
 
 
 
@@ -24,35 +27,6 @@ interface FoodNode {
   edited?: boolean;
 }
 
-// const TREE_DATA: FoodNode[] = [
-//   {
-//     name: 'Parent Company',
-//     children: [
-//       {
-//         name: 'Shareholder Company Alpha',
-//         children: [
-//           {
-//             name: 'Shareholder Company Beta',
-//             children: [
-//               { name: 'Shareholder George' },
-//               { name: 'Shareholder George\'s Wife' },
-//             ]
-//           },
-//           {
-//             name: 'Shareholder Company Gamma',
-//             children: [
-//               { name: 'Shareholder Carlos' },
-//               { name: 'Shareholder Carlos¿s Wife' },
-//             ]
-//           },
-//         ]
-//       },
-//     ]
-//   }
-// ];
-
-// TREE_DATA[0].children[0].children[0] = TREE_DATA[0];
-
 @Component({
   selector: 'app-licensee-tree',
   templateUrl: './licensee-tree.component.html',
@@ -64,8 +38,10 @@ export class LicenseeTreeComponent implements OnInit {
   @ViewChild('tree') tree: MatTree<any>;
   componentActive = true;
   account: Account;
+  changeTree: LicenseeChangeLog;
 
   constructor(private store: Store<AppState>,
+    public dialog: MatDialog,
     private legalEntityDataService: LegalEntityDataService) {
     // this.dataSource.data = TREE_DATA;
   }
@@ -75,27 +51,71 @@ export class LicenseeTreeComponent implements OnInit {
   ngOnInit() {
     this.legalEntityDataService.getCurrentHierachy()
       .subscribe(legalEntity => {
-        this.dataSource.data = this.processLegalEtities([legalEntity]);
+        const tree = this.processLegalEntityTree(legalEntity);
+        tree.isRoot = true;
+        this.changeTree = tree;
+        this.dataSource.data = [tree];
         this.refreshTree();
       });
   }
 
   editAssociate(node) {
-    node.name = node.name.toUpperCase();
-    node.edited = true;
+    if (node.isShareholderNew) {
+      this.openShareholderDialog(node)
+        .pipe(filter(data => !!data))
+        .subscribe(
+          formData => {
+            if (node.changeType !== 'add') {
+              formData.changeType = 'edit';
+            }
+            node = Object.assign(node, formData);
+            this.refreshTree();
+          }
+        );
+    } else {
+      this.openLeadershipDialog(node)
+        .pipe(filter(data => !!data))
+        .subscribe(
+          formData => {
+            if (node.changeType !== 'add') {
+              formData.changeType = 'edit';
+            }
+            node = Object.assign(node, formData);
+            this.refreshTree();
+          }
+        );
+    }
   }
 
-  addAssociate(node) {
-    node.children = node.children || [];
-    node.children.push({
-      name: node.name + ' - child - ' + node.children.length,
-      isNew: true
-    });
-    this.refreshTree();
+  addLeadership(node) {
+    this.openLeadershipDialog({})
+      .pipe(filter(data => !!data))
+      .subscribe(
+        formData => {
+          formData.changeType = 'add';
+          formData.isIndividual = true;
+          node.children = node.children || [];
+          node.children.push(formData);
+          this.refreshTree();
+        }
+      );
+  }
+
+  addShareholder(node) {
+    this.openShareholderDialog({})
+      .pipe(filter(data => !!data))
+      .subscribe(
+        formData => {
+          formData.changeType = 'add';
+          node.children = node.children || [];
+          node.children.push(formData);
+          this.refreshTree();
+        }
+      );
   }
 
   deleteAssociate(node) {
-    node.deleted = true;
+    node.changeType = 'delete';
     const children = node.children || [];
     children.forEach(element => {
       this.deleteAssociate(element);
@@ -103,9 +123,68 @@ export class LicenseeTreeComponent implements OnInit {
     this.refreshTree();
   }
 
-  processLegalEtities(entities: LegalEntity[]): LicenseeChangeLog[] {
-    return null;
+  /*
+  * Perform Depth First Traversal and transform tree to change objects
+  */
+  processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
+    const newNode = new LicenseeChangeLog(node);
+    if (node.children && node.children.length) {
+      newNode.children = [];
+      node.children.forEach(child => {
+        const childNode = this.processLegalEntityTree(child);
+        newNode.children.push(childNode);
+      });
+    }
+    return newNode;
   }
+
+  showAddLink(node: LicenseeChangeLog): boolean {
+    return true;
+  }
+
+  showEditLink(node: LicenseeChangeLog): boolean {
+    return true;
+  }
+
+  showDeleteLink(node: LicenseeChangeLog): boolean {
+    return true;
+  }
+
+  openShareholderDialog(shareholder) {
+    // set dialogConfig settings
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      maxWidth: '400px',
+      data: {
+        businessType: 'PrivateCorporation',
+        shareholder: shareholder
+      }
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(ShareholdersAndPartnersComponent, dialogConfig);
+    return dialogRef.afterClosed();
+  }
+
+  openLeadershipDialog(leader) {
+    // set dialogConfig settings
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: '500px',
+      data: {
+        person: leader,
+        businessType: 'PrivateCorporation'
+      }
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(OrganizationLeadershipComponent, dialogConfig);
+    return dialogRef.afterClosed();
+
+  }
+
 
   refreshTree() {
     const data = [...this.dataSource.data];
