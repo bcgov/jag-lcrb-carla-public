@@ -40,7 +40,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'federal-reporting/:licenseId',
+    path: 'federal-reporting',
     component: FederalReportingComponent,
   },
   {
