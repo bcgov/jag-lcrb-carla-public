@@ -44,15 +44,15 @@
     <section class="row" *ngIf="!form.get('isIndividual').value">
       <app-field class="col-md-12" label="What type of organization is the shareholder?" [valid]="true"
         errorMessage="Please select a business type from the dropdown list">
-        <input type="radio" group="legalentitytype" formControlName="legalentitytype" value="PrivateCorporation">
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="PrivateCorporation">
         <span>Private Corporation</span> <br>
-        <input type="radio" group="legalentitytype" formControlName="legalentitytype" value="PublicCorporation">
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="PublicCorporation">
         <span>Public Corporation</span> <br>
-        <input type="radio" group="legalentitytype" formControlName="legalentitytype" value="Partnership">
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="Partnership">
         <span>Partnership</span> <br>
-        <input type="radio" group="legalentitytype" formControlName="legalentitytype" value="Society">
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="Society">
         <span>Society</span> <br>
-        <input type="radio" group="legalentitytype" formControlName="legalentitytype" value="IndigenousNation">
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="IndigenousNation">
         <span>Indigenous nation</span> <br>
       </app-field>
     </section>
