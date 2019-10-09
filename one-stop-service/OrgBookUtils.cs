@@ -132,8 +132,8 @@ namespace Gov.Lclb.Cllb.OneStopService
         {
             if (hangfireContext != null)
             {
-                _logger.LogInformation("Starting check for new issued credentials.");
-                hangfireContext.WriteLine("Starting check for new issued credentials.");
+                _logger.LogInformation("Starting CheckForMissingCredentials");
+                hangfireContext.WriteLine("Starting CheckForMissingCredentials");
             }
             IList<MicrosoftDynamicsCRMadoxioLicences> result = null;
             try
@@ -175,10 +175,12 @@ namespace Gov.Lclb.Cllb.OneStopService
                     
                     var schemaId = await _orgbookClient.GetSchemaId(schemaName, schemaVersion);
                     var credentialId = await _orgbookClient.GetLicenceCredentialId((int)orgbookTopicId, (int)schemaId);
+                    string credentialLink = _orgbookClient.ORGBOOK_BASE_URL + "/en/organization/" + registrationId + "/cred/" + credentialId.ToString();
 
                     _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
                     {
-                        AdoxioOrgbookcredentialid = credentialId.ToString()
+                        AdoxioOrgbookcredentialid = credentialId.ToString(),
+                        AdoxioOrgbookcredentiallink = credentialLink
                     });
                     _logger.LogInformation($"Successfully updated licence - credential ID: {credentialId} to {registrationId}.");
                     hangfireContext.WriteLine($"Successfully updated licence - credential ID: {credentialId} to {registrationId}.");
@@ -190,8 +192,79 @@ namespace Gov.Lclb.Cllb.OneStopService
                 }
             }
 
-            _logger.LogInformation("End of check for new licences for orgbook job.");
-            hangfireContext.WriteLine("End of check for new licences for orgbook job.");
+            _logger.LogInformation("End of CheckForMissingCredentials");
+            hangfireContext.WriteLine("End of CheckForMissingCredentials");
+        }
+
+        /// <summary>
+        /// Hangfire job to check for organizations in the orgbook and attach their links to an account
+        /// </summary>
+        [AutomaticRetry(Attempts = 0)]
+        public async Task CheckForOrgbookLinks(PerformContext hangfireContext)
+        {
+            if (hangfireContext != null)
+            {
+                _logger.LogInformation("Starting CheckForOrgbookLinks.");
+                hangfireContext.WriteLine("Starting CheckForOrgbookLinks.");
+            }
+            IList<MicrosoftDynamicsCRMaccount> result = null;
+            try
+            {
+                var select = new List<string> {"adoxio_bcincorporationnumber", "accountid"};
+                string filter = $"adoxio_businessregistrationnumber eq null";
+                result = _dynamics.Accounts.Get(filter: filter, select: select).Value;
+            }
+            catch (OdataerrorException odee)
+            {
+                if (hangfireContext != null)
+                {
+                    _logger.LogError("Error getting accounts");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                    hangfireContext.WriteLine("Error getting accounts");
+                    hangfireContext.WriteLine("Request:");
+                    hangfireContext.WriteLine(odee.Request.Content);
+                    hangfireContext.WriteLine("Response:");
+                    hangfireContext.WriteLine(odee.Response.Content);
+                }
+
+                // fail if we can't get results.
+                throw (odee);
+            }
+
+            // now for each one process it.
+            foreach (var item in result)
+            {
+                string registrationId = item.AdoxioBcincorporationnumber;
+                string accountId = item.Accountid;
+                int? orgbookTopicId = await _orgbookClient.GetTopicId(registrationId);
+
+                if (orgbookTopicId != null)
+                {
+                    string orgbookLink = _orgbookClient.ORGBOOK_BASE_URL + "/en/organization/" + item.AdoxioBcincorporationnumber;
+                    _dynamics.Accounts.Update(accountId, new MicrosoftDynamicsCRMaccount()
+                    {
+                        AdoxioOrgbookLink = orgbookLink,
+                        AdoxioIsOrgbookLinkFound = Yes
+                    });
+                    _logger.LogInformation($"Successfully added orgbook link to account with registration id {registrationId}.");
+                    hangfireContext.WriteLine($"Successfully added orgbook link to account with registration id {registrationId}.");
+                }
+                else
+                {
+                    _dynamics.Accounts.Update(accountId, new MicrosoftDynamicsCRMaccount()
+                    {
+                        AdoxioIsOrgbookLinkFound = No
+                    });
+                    _logger.LogError($"Failed to add orgbook link to account with registration id {registrationId}.");
+                    hangfireContext.WriteLine($"Failed to add orgbook link to account with registration id {registrationId}.");
+                }
+            }
+
+            _logger.LogInformation("End of CheckForOrgbookLinks");
+            hangfireContext.WriteLine("End of CheckForOrgbookLinks");
         }
 
         private static (string, string) GetSchemaFromConfig(string licenceType)
