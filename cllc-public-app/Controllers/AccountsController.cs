@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(AccountsController));
         }
-
+        
         /// GET account in Dynamics for the current user
         [HttpGet("current")]
         public async Task<IActionResult> GetCurrentAccount()
@@ -159,11 +159,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error while getting autocomplete data");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error while getting autocomplete data.");                
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error while getting autocomplete data.");
             }
 
             return new JsonResult(results);
@@ -195,11 +195,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError(LoggingEvents.Error, "Error while checking if current user has access to account.");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error while checking if current user has access to account.");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error while checking if current user has access to account.");
                 }
 
                 if (!userAccessToAccount)
@@ -272,11 +272,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error getting legal entities for the account {accountId}.");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error getting legal entities for the account {accountId}. ");
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting legal entities for the account");
                 return null;
             }
 
@@ -336,19 +337,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             return entity;
                         })
                         .ToList();
+                _logger.LogDebug(LoggingEvents.Get, "LegalEntityChildren: " +
+                JsonConvert.SerializeObject(children, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error getting legal entity children for parentLegalEntityId {parentLegalEntityId}.");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, $"Error getting legal entity children for parentLegalEntityId {parentLegalEntityId}. ");
+                children = null;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error getting legal entity children for parentLegalEntityId");
                 return null;
             }
+            
 
-            _logger.LogDebug(LoggingEvents.Get, "LegalEntityChildren: " +
-                JsonConvert.SerializeObject(children, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             return children;
         }
 
@@ -432,12 +435,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid.");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new OdataerrorException("Error getting contact by Siteminder Guid");
+                _logger.LogError(odee, $"Error getting contact by Siteminder Guid. ");
+                throw new Exception("Error getting contact by Siteminder Guid");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error getting contact by Siteminder Guid.");
+                throw new Exception("Error getting contact by Siteminder Guid");
             }
 
             if (userContact == null)
@@ -540,13 +544,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     else
                     {
-                        _logger.LogError(LoggingEvents.Error, "Error creating legal entity.");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, $"Error creating legal entity. ");
                         throw new OdataerrorException("Error creating legal entitiy");
                     }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, $"Error creating legal entity.");
+                    throw new Exception("Error creating legal entity.");
                 }
 
                 account.Accountid = legalEntity._adoxioAccountValue;
@@ -580,17 +585,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     string tiedHouseId = _dynamicsClient.GetCreatedRecord(odee, null);
                     if (string.IsNullOrEmpty(tiedHouseId))
                     {
-                        _logger.LogError(LoggingEvents.Error, "Error creating Tied house connection.");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(odee, "Error creating Tied house connection. ");
                         throw new OdataerrorException("Error creating Tied house connection.");
                     }
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e.Message);
+                    _logger.LogError(e, "Error creating Tied house connection.");
                 }
             }
             else // it is a new user only.
@@ -611,13 +612,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         }
                         else
                         {
-                            _logger.LogError(LoggingEvents.Error, "Error creating contact");
-                            _logger.LogError("Request:");
-                            _logger.LogError(odee.Request.Content);
-                            _logger.LogError("Response:");
-                            _logger.LogError(odee.Response.Content);
-                            throw new OdataerrorException("Error creating contact");
+                            _logger.LogError(odee, "Error creating contact. ");                            
+                            throw new Exception("Error creating contact");
                         }
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Error creating contact.");
+                        throw new Exception("Error creating contact");
                     }
                 }
             }
@@ -634,12 +636,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error binding contact to account");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new OdataerrorException("Error binding contact to account");
+                _logger.LogError(odee, $"Error binding contact to account. ");
+                throw new Exception("Error binding contact to account");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error binding contact to account");
+                throw new Exception("Error binding contact to account");
             }
 
             // if we have not yet authenticated, then this is the new record for the user.
@@ -742,12 +745,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error updating the account.");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new OdataerrorException("Error updating the account.");
+                _logger.LogError(odee, "Error updating the account. ");
+                throw new Exception("Error updating the account.");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error updating the account.");
+                throw new Exception("Error updating the account.");
             }
 
             var updatedAccount = adoxioAccount.ToViewModel();
@@ -758,7 +762,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Delete a legal entity.  Using a HTTP Post to avoid Siteminder issues with DELETE
+        /// Delete an account.  Using a HTTP Post to avoid Siteminder issues with DELETE
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -795,12 +799,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError(LoggingEvents.Error, "Error deleting the Legal Entity: " + le.AdoxioLegalentityid);
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    throw new OdataerrorException("Error deleting the Legal Entity: " + le.AdoxioLegalentityid);
+                    _logger.LogError(odee, "Error deleting the Legal Entity: ");
+                    throw new Exception("Error deleting the Legal Entity");
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Legal Entity");
+                    throw new Exception("Error deleting the Legal Entity");
                 }
             });
 
@@ -811,12 +816,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError(LoggingEvents.Error, "Error deleting the account: " + accountId.ToString());
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw new OdataerrorException("Error deleting the account: " + accountId.ToString());
+                _logger.LogError(odee, "Error deleting the account: " );
+                throw new Exception("Error deleting the account" );
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error deleting the account");
+                throw new Exception("Error deleting the account");
             }
 
             _logger.LogDebug(LoggingEvents.HttpDelete, "No content returned.");
@@ -837,7 +843,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                return await DeleteDynamicsAccount(userSettings.AccountId);
+                return await DeleteDynamicsAccount(userSettings.AccountId);                                
             }
             else
             {
@@ -902,18 +908,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 tiedHouse.AdoxioTiedhouseconnectionid = _dynamicsClient.GetCreatedRecord(odee, null);
                 if (string.IsNullOrEmpty(tiedHouse.AdoxioTiedhouseconnectionid))
                 {
-                    _logger.LogError("Error creating tiedhouse connection");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    throw new Exception("Unable to update tied house connections");
-                }
+                    _logger.LogError(odee, "Error creating tiedhouse connection ");
+                    throw new Exception("Error creating tiedhouse connection");
+                }            
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error creating tiedhouse connection");
+                throw new Exception("Error creating tiedhouse connection");
             }
 
             return new JsonResult(tiedHouse.ToViewModel());
         }
-
 
     }
 }

@@ -94,6 +94,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAreas Areas { get; }
 
         /// <summary>
+        /// Gets the IAuditlogrequests.
+        /// </summary>
+        IAuditlogrequests Auditlogrequests { get; }
+
+        /// <summary>
         /// Gets the IBusinessaccounts.
         /// </summary>
         IBusinessaccounts Businessaccounts { get; }

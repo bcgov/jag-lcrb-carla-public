@@ -107,20 +107,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (OdataerrorException odee)
             {
-                _logger.LogError("Error querying federal tracking reports");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(odee, "Error querying federal tracking reports");                
                 return new BadRequestResult();
             }
             catch (SharePointRestException e)
             {
-                _logger.LogError("Error saving csv to sharepoint");
-                _logger.LogError("Request:");
-                _logger.LogError(e.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(e.Response.Content);
+                _logger.LogError(e,"Error saving csv to sharepoint");
                 return new BadRequestResult();
             }
         }

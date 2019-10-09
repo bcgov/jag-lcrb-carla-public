@@ -132,11 +132,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error creating invoice");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error creating invoice");
                     throw new Exception("Unable to create invoice");
                 }
 
@@ -155,12 +151,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error patching invoice");
-                    _logger.LogError(odee.Request.RequestUri.ToString());
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error patching invoice");
                 }
 
                 return new JsonResult(invoice.ToViewModel());
@@ -229,12 +220,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (OdataerrorException odee)
                 {
-                    _logger.LogError("Error deleteing invoice");
-                    _logger.LogError(odee.Request.RequestUri.ToString());
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee, "Error deleteing invoice");
                 }                
 			}
             return new NotFoundResult();

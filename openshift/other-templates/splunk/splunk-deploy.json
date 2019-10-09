@@ -203,7 +203,7 @@
                 "livenessProbe": {
                   "initialDelaySeconds": 120,
                   "tcpSocket": {
-                    "port": 8
+                    "port": 8000
                   },
                   "timeoutSeconds": 1
                 },
