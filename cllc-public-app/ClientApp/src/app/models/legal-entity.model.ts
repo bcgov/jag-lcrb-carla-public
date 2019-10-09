@@ -26,7 +26,7 @@ export class LegalEntity {
   commonnonvotingshares: number;
   preferrednonvotingshares: number;
   account: Account;
-  relatedentities: LegalEntity[];
+  children: LegalEntity[];
   email: string;
   dateofappointment: Date;
   dateIssued: Date;

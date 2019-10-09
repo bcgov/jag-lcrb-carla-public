@@ -5,7 +5,8 @@ import { Contact } from './contact.model';
 
 export class LicenseeChangeLog {
   id: string; // guid
-
+  typeOfChange: string;
+  isIndividual: boolean;
   isDirectorNew: boolean;
   isDirectorOld: boolean;
   isManagerNew: boolean;
@@ -16,33 +17,39 @@ export class LicenseeChangeLog {
   isShareholderOld: boolean;
   isTrusteeNew: boolean;
   isTrusteeOld: boolean;
-  BusinessAccountType: string;
-  NumberofSharesNew: number;
-  NumberofSharesOld: number;
-  EmailNew: string;
-  EmailOld: string;
-  FirstNameNew: string;
-  FirstNameOld: string;
+  businessAccountType: string;
+  numberofSharesNew: number;
+  numberofSharesOld: number;
+  emailNew: string;
+  emailOld: string;
+  firstNameNew: string;
+  firstNameOld: string;
   JobNumber: string;
-  LastNameNew: string;
-  LastNameOld: string;
+  lastNameNew: string;
+  lastNameOld: string;
   LicenseeChangelogid: string;
-  Name: string;
-  DateofBirthNew: Date;
-  DateofBirthOld: Date;
+  nameNew: string;
+  nameOld: string;
+  dateofBirthNew: Date;
+  dateofBirthOld: Date;
 
   BusinessAccount: Account;
   Contact: Contact;
   Application: Application;
   ApplicationType: string;
-  LegalEntity: LegalEntity;
-  ParentLinceseeChangeLogId: LicenseeChangeLog;
-  LicenseechangelogLicenseechangelogs: LicenseeChangeLog[];
+  LegalEntityId: string;
+  parentLegalEntityId: string;
+  ParentLinceseeChangeLogId: string;
+  children: LicenseeChangeLog[];
+
+  isRoot: boolean; // This is only used on the client side
 
   /**
    * Create from LegalEntity
    */
   constructor(legalEntity: LegalEntity) {
+    this.typeOfChange = 'unchanged';
+    this.isIndividual = legalEntity.isindividual;
     this.isDirectorNew = legalEntity.isDirector;
     this.isDirectorOld = legalEntity.isDirector;
     this.isManagerNew = legalEntity.isSeniorManagement;
@@ -54,17 +61,20 @@ export class LicenseeChangeLog {
     // this.isTrusteeNew = legalEntity.isTrustee;
     // this.isTrusteeOld = legalEntity.isTrustee;
     // this.BusinessAccountType = legalEntity.BusinessAccountType;
-    this.NumberofSharesNew = legalEntity.percentageVotingShares;
-    this.NumberofSharesOld = legalEntity.percentageVotingShares;
-    this.EmailNew = legalEntity.email;
-    this.EmailOld = legalEntity.email;
-    this.FirstNameNew = legalEntity.firstname;
-    this.FirstNameOld = legalEntity.firstname;
-    this.LastNameNew = legalEntity.lastname;
-    this.LastNameOld = legalEntity.lastname;
-    this.Name = legalEntity.name;
-    this.DateofBirthNew = legalEntity.dateofbirth;
-    this.DateofBirthOld = legalEntity.dateofbirth;
+    this.numberofSharesNew = legalEntity.percentageVotingShares;
+    this.numberofSharesOld = legalEntity.percentageVotingShares;
+    this.emailNew = legalEntity.email;
+    this.emailOld = legalEntity.email;
+    this.firstNameNew = legalEntity.firstname;
+    this.firstNameOld = legalEntity.firstname;
+    this.lastNameNew = legalEntity.lastname;
+    this.lastNameOld = legalEntity.lastname;
+    this.nameNew = legalEntity.name;
+    this.nameOld = legalEntity.name;
+    this.dateofBirthNew = legalEntity.dateofbirth;
+    this.dateofBirthOld = legalEntity.dateofbirth;
+
+    this.parentLegalEntityId = legalEntity.parentLegalEntityId;
 
     // this.LicenseeChangelogid = legalEntity.LicenseeChangelogid;
     // this.BusinessAccount = legalEntity.BusinessAccount ;
