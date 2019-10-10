@@ -16,17 +16,17 @@
             </span>
             <span *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
             &nbsp; &nbsp;
-            <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
+            <a *ngIf="!node.isIndividual && node.typeOfChange !== 'delete'" href="javascript:void(0)" style="margin-right: 10px;"
               [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
             <mat-menu #menu="matMenu">
               <button mat-menu-item
                 (click)="node.typeOfChange !== 'delete' && addShareholder(node)">Shareholder</button>
               <button mat-menu-item (click)="node.typeOfChange !== 'delete' && addLeadership(node)">Leadership</button>
             </mat-menu>
-            <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
+            <a *ngIf="!node.isRoot && node.typeOfChange !== 'delete'" href="javascript:void(0)" style="margin-right: 10px;"
               (click)="node.typeOfChange !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
               Edit</a>
-            <a *ngIf="!node.isRoot" href="javascript:void(0)"
+            <a *ngIf="!node.isRoot && node.typeOfChange !== 'delete'" href="javascript:void(0)"
               (click)="node.typeOfChange !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
               Delete</a>
           </li>
@@ -46,7 +46,7 @@
                 {{node.nameNew}}
               </span>
               &nbsp; &nbsp;
-              <a *ngIf="!node.isIndividual" href="javascript:void(0)" style="margin-right: 10px;"
+              <a *ngIf="!node.isIndividual && node.typeOfChange !== 'delete'" href="javascript:void(0)" style="margin-right: 10px;"
                 [matMenuTriggerFor]="menu2"> <i class="fas fa-plus"></i>&nbsp;Add</a>
               <mat-menu #menu2="matMenu">
                 <button mat-menu-item
@@ -54,10 +54,10 @@
                 <button mat-menu-item
                   (click)="node.typeOfChange !== 'delete' && addLeadership(node)">Leadership</button>
               </mat-menu>
-              <a *ngIf="!node.isRoot" href="javascript:void(0)" style="margin-right: 10px;"
+              <a *ngIf="!node.isRoot && node.typeOfChange !== 'delete'" href="javascript:void(0)" style="margin-right: 10px;"
                 (click)="node.typeOfChange !== 'delete' && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
                 Edit</a>
-              <a *ngIf="!node.isRoot" href="javascript:void(0)"
+              <a *ngIf="!node.isRoot && node.typeOfChange !== 'delete'" href="javascript:void(0)"
                 (click)="node.typeOfChange !== 'delete' && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
                 Delete</a>
             </div>
@@ -94,7 +94,7 @@
         <td>
           <span
             [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}">
-            {{item.typeOfChange}}
+            {{item.typeOfChange.toUpperCase()}}
           </span>
         </td>
         <td>
@@ -137,7 +137,7 @@
         <td>
           <span
             [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}">
-            {{item.typeOfChange}}
+            {{item.typeOfChange.toUpperCase()}}
           </span>
         </td>
         <td>
@@ -180,7 +180,7 @@
         <td>
           <span
             [ngClass]="{'added-node': item.typeOfChange === 'add', 'deleted-node': item.typeOfChange === 'delete', 'edited-node': item.typeOfChange === 'edit'}">
-            {{item.typeOfChange}}
+            {{item.typeOfChange.toUpperCase()}}
           </span>
         </td>
         <td>
