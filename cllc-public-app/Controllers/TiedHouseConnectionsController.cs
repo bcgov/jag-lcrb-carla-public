@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Interfaces.Models;
+using Microsoft.Rest;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -17,12 +18,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     [Authorize(Policy = "Business-User")]
     public class TiedHouseConnectionsController : ControllerBase
-    {        
-        private readonly IDynamicsClient _dynamicsClient;                
+    {
+        private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
 
         public TiedHouseConnectionsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
-        {            
+        {
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(TiedHouseConnectionsController));
         }
@@ -71,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             MicrosoftDynamicsCRMadoxioTiedhouseconnection res = await _dynamicsClient.GetTiedHouseConnectionById(tiedHouseId);
             if (res == null)
             {
-               return new NotFoundResult();
+                return new NotFoundResult();
             }
 
             // we are doing a patch, so wipe out the record.
@@ -84,13 +85,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Tiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error updating tied house connections");
                 throw new Exception("Unable to update tied house connections");
             }
 
-            
+
             return new JsonResult(tiedHouse.ToViewModel());
         }
     }

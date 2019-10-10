@@ -1,7 +1,4 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -31,7 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = worker.AdoxioMiddlename;
                 result.lastname = worker.AdoxioLastname;
                 result.dateofbirth = worker.AdoxioDateofbirth;
-                result.modifiedOn =  worker.Modifiedon;
+                result.modifiedOn = worker.Modifiedon;
                 if (worker.AdoxioGendercode != null)
                 {
                     result.gender = (ViewModels.Gender)worker.AdoxioGendercode;
@@ -74,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioWorker to, ViewModels.Worker from)
-        {            
+        {
             to.AdoxioPhonenumber = from.phonenumber;
             to.AdoxioEmail = from.email;
             to.CopyValuesNoEmailPhone(from);
@@ -117,7 +114,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             to.AdoxioBirthplace = from.birthplace;
             to.AdoxioDriverslicencenumber = from.driverslicencenumber;
-            to.AdoxioBcidcardnumber = from.bcidcardnumber;       
+            to.AdoxioBcidcardnumber = from.bcidcardnumber;
             if (from.selfdisclosure != null)
             {
                 to.AdoxioSelfdisclosure = from.selfdisclosure == true ? 1 : 0;

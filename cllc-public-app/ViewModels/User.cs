@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Gov.Lclb.Cllb.Public.ViewModels
+﻿namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class User
     {
@@ -22,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool isBceidConfirmed { get; set; }
         public string contactid { get; set; }
         public string accountid { get; set; }
-        public string  UserType { get; set; }
+        public string UserType { get; set; }
 
     }
 }

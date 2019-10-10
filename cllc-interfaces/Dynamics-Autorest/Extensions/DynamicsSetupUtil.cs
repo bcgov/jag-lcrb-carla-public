@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Rest;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {

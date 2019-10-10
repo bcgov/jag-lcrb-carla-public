@@ -1,9 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace Gov.Lclb.Cllb.Public.Contexts
@@ -22,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             // create the result object
             Dictionary<string, List<string>> results = new Dictionary<string, List<string>>();
 
-         
+
             return results;
         }
 
@@ -64,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             psr.clientId = clientId;
             psr.surveyResult = resultJson;
             context.PostSurveyResults.Add(psr);
-            context.SaveChanges();            
+            context.SaveChanges();
         }
 
         /// <summary>

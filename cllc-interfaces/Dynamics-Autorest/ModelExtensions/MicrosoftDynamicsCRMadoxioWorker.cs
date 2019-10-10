@@ -1,10 +1,6 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public enum SecurityStatusPicklist
     {
@@ -15,7 +11,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
     public partial class MicrosoftDynamicsCRMadoxioWorker
     {
-        
+
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_ContactId@odata.bind")]
@@ -23,7 +19,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateofbirth")]        
+        [JsonProperty(PropertyName = "adoxio_dateofbirth")]
         [JsonConverter(typeof(SimpleDateTimeConverter))]
         public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
     }

@@ -1,7 +1,4 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
