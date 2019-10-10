@@ -28,13 +28,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public ActionResult GetNewsletter(string slug)
         {
-            
+
             Newsletter newsletter = null;
             if (!string.IsNullOrEmpty(_configuration["DB_USER"]))
             {
                 newsletter = _db.GetNewsletterBySlug(slug);
             }
-                
+
             if (newsletter == null)
             {
                 return new NotFoundResult();
@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new JsonResult(newsletter);
             }
-            
+
         }
 
         [HttpPost("{slug}/subscribe")]
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private string GetConfirmationLink(string slug, string email)
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"];
-            result += "/newsletter-confirm/" + slug + "?code="; 
+            result += "/newsletter-confirm/" + slug + "?code=";
 
             // create a newsletter confirmation object.
 
@@ -97,18 +97,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string result = "Error";
             // validate the code.
-            
+
             string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
             if (decrypted != null)
             {
                 // convert the json back to an object.
                 ViewModels.NewsletterConfirmation newsletterConfirmation = JsonConvert.DeserializeObject<ViewModels.NewsletterConfirmation>(decrypted);
                 // check that the slugs match.
-                if (slug.Equals (newsletterConfirmation.slug))
+                if (slug.Equals(newsletterConfirmation.slug))
                 {
                     _db.AddNewsletterSubscriber(slug, newsletterConfirmation.email);
                     result = "Success";
-                }                                
+                }
             }
             return new JsonResult(result);
         }

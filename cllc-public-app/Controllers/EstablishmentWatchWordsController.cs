@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var word in watchWordsList)
             {
-                if((bool)word.AdoxioForbidden)
+                if ((bool)word.AdoxioForbidden)
                 {
                     returnVal["forbidden"].Add(word.AdoxioName.ToLower());
                 }

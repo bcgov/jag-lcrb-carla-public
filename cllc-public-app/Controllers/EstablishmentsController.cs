@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     [Authorize(Policy = "Business-User")]
     public class EstablishmentsController : ControllerBase
-    {        
+    {
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
         private readonly IMemoryCache _cache;
@@ -55,7 +56,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new JsonResult(establishment.ToViewModel());
             }
-            
+
         }
 
         /// <summary>
@@ -66,6 +67,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public IActionResult GetMap(string search)
         {
+            /*
+            string lginRegionsCacheKey = "LGIN_REGIONS";
+            Dictionary<int, string> lginRegions;
+            if (!_cache.TryGetValue(lginRegionsCacheKey, out lginRegions))
+            {
+                // populate the lginRegions.
+
+            }
+            */
 
             string cacheKey;
             if (string.IsNullOrEmpty(search))
@@ -78,7 +88,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 search = search.Trim();
                 cacheKey = $"MAP_SEARCH_{search}";
             }
-            List<EstablishmentMapData> establishmentMapData; 
+            List<EstablishmentMapData> establishmentMapData;
             if (!_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
             {
                 try
@@ -95,14 +105,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         applications = _dynamicsClient.Applications.Get(filter: applicationsFilter).Value;
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError("Error getting applications" + odee.Request.Content + "\n" + odee.Response.Content);
                         throw new Exception("Unable to get applications");
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError($"Unexpected error getting applications {e.Message}");                        
+                        _logger.LogError($"Unexpected error getting applications {e.Message}");
                     }
 
                     // get licenses
@@ -112,14 +122,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand).Value;
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
-                        _logger.LogError("Error getting licenses {odee.Request.Content} {odee.Response.Content}");
+                        _logger.LogError(odee, "Error getting licenses");
                         throw new Exception("Unable to get licences");
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError($"Unexpected error getting establishment map data. {e.Message}");                        
+                        _logger.LogError(e, $"Unexpected error getting establishment map data.");
                     }
 
                     establishmentMapData = new List<EstablishmentMapData>();
@@ -170,9 +180,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                                     if (establishment.AdoxioLGIN == null
                                                         || establishment.AdoxioLGIN.AdoxioName == null
                                                         || !establishment.AdoxioLGIN.AdoxioName.ToUpper().StartsWith(search))
+                                                    //|| !
                                                     {
                                                         add = false;
                                                     }
+
+
+
                                                 }
                                                 else
                                                 {
@@ -225,7 +239,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         _logger.LogError(e, "Error getting map data, showing long term cache data");
                     }
                 }
-                
+
             }
             return new JsonResult(establishmentMapData);
         }
@@ -247,14 +261,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxio_establishment = await _dynamicsClient.Establishments.CreateAsync(adoxio_establishment);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error creating establishment");
                 throw new Exception("Unable to create establishment");
             }
 
             ViewModels.Establishment result = adoxio_establishment.ToViewModel();
-                       
+
             return new JsonResult(result);
         }
 
@@ -291,7 +305,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Establishments.UpdateAsync(adoxio_establishmentid.ToString(), adoxioEstablishment);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error updating establishment");
                 throw new Exception("Unable to update establishment");
@@ -301,7 +315,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxioEstablishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error getting establishment");
                 throw new Exception("Unable to get establishment after update");
@@ -330,7 +344,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Establishments.DeleteAsync(adoxio_establishmentid.ToString());
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error delete establishment");
                 throw new Exception("Unable to delete establishment");

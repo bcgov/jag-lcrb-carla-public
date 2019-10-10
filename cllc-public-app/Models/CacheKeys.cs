@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Gov.Lclb.Cllb.Public.Models
+﻿namespace Gov.Lclb.Cllb.Public.Models
 {
     public static class CacheKeys
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Gov.Lclb.Cllb.Public.Authorization
 {
@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Authorization
                 {
                     context.Result = new UnauthorizedResult();
 
-                    HttpResponse response = context.HttpContext.Response;                          
+                    HttpResponse response = context.HttpContext.Response;
 
                     string responseText = "<HTML><HEAD><META http-equiv=\"Content - Type\" content=\"text / html; charset = windows - 1252\"></HEAD><BODY></BODY></HTML>";
                     byte[] data = Encoding.UTF8.GetBytes(responseText);
@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Authorization
                     await response.Body.FlushAsync();
                 }
 
-                await next();                
+                await next();
             }
         }
     }
