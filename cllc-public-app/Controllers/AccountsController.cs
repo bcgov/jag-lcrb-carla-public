@@ -158,9 +158,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     results.Add(transferAccount);
                 }
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error while getting autocomplete data.");
+                _logger.LogError(httpOperationException, "Error while getting autocomplete data.");
             }
             catch (Exception e)
             {
@@ -194,9 +194,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     userAccessToAccount = DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, "Error while checking if current user has access to account.");
+                    _logger.LogError(httpOperationException, "Error while checking if current user has access to account.");
                 }
                 catch (Exception e)
                 {
@@ -271,9 +271,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         })
                         .ToList();
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error getting legal entities for the account {accountId}. ");
+                _logger.LogError(httpOperationException, "Error getting legal entities for the account {accountId}. ");
                 return null;
             }
             catch (Exception e)
@@ -341,9 +341,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogDebug(LoggingEvents.Get, "LegalEntityChildren: " +
                 JsonConvert.SerializeObject(children, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error getting legal entity children for parentLegalEntityId {parentLegalEntityId}. ");
+                _logger.LogError(httpOperationException, $"Error getting legal entity children for parentLegalEntityId {parentLegalEntityId}. ");
                 children = null;
             }
             catch (Exception e)
@@ -434,9 +434,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error getting contact by Siteminder Guid. ");
+                _logger.LogError(httpOperationException, $"Error getting contact by Siteminder Guid. ");
                 throw new Exception("Error getting contact by Siteminder Guid");
             }
             catch (Exception e)
@@ -536,16 +536,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     legalEntity = await _dynamicsClient.Legalentities.CreateAsync(legalEntity);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    string legalEntityId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    string legalEntityId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                     if (!string.IsNullOrEmpty(legalEntityId) && Guid.TryParse(legalEntityId, out Guid legalEntityGuid))
                     {
                         legalEntity = await _dynamicsClient.GetLegalEntityById(legalEntityGuid);
                     }
                     else
                     {
-                        _logger.LogError(odee, $"Error creating legal entity. ");
+                        _logger.LogError(httpOperationException, $"Error creating legal entity. ");
                         throw new HttpOperationException("Error creating legal entitiy");
                     }
                 }
@@ -581,12 +581,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     tiedHouse = await _dynamicsClient.Tiedhouseconnections.CreateAsync(tiedHouse);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    string tiedHouseId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    string tiedHouseId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                     if (string.IsNullOrEmpty(tiedHouseId))
                     {
-                        _logger.LogError(odee, "Error creating Tied house connection. ");
+                        _logger.LogError(httpOperationException, "Error creating Tied house connection. ");
                         throw new HttpOperationException("Error creating Tied house connection.");
                     }
                 }
@@ -604,16 +604,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        string contactId = _dynamicsClient.GetCreatedRecord(odee, null);
+                        string contactId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                         if (!string.IsNullOrEmpty(contactId) && Guid.TryParse(contactId, out Guid contactGuid))
                         {
                             userContact = await _dynamicsClient.GetContactById(contactGuid);
                         }
                         else
                         {
-                            _logger.LogError(odee, "Error creating contact. ");
+                            _logger.LogError(httpOperationException, "Error creating contact. ");
                             throw new Exception("Error creating contact");
                         }
                     }
@@ -635,9 +635,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error binding contact to account. ");
+                _logger.LogError(httpOperationException, $"Error binding contact to account. ");
                 throw new Exception("Error binding contact to account");
             }
             catch (Exception e)
@@ -745,9 +745,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Accounts.UpdateAsync(accountId.ToString(), adoxioAccount);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating the account. ");
+                _logger.LogError(httpOperationException, "Error updating the account. ");
                 throw new Exception("Error updating the account.");
             }
             catch (Exception e)
@@ -799,9 +799,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     _dynamicsClient.Legalentities.Delete(le.AdoxioLegalentityid);
                     _logger.LogDebug(LoggingEvents.HttpDelete, "Legal Entity deleted: " + le.AdoxioLegalentityid);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, "Error deleting the Legal Entity: ");
+                    _logger.LogError(httpOperationException, "Error deleting the Legal Entity: ");
                     throw new Exception("Error deleting the Legal Entity");
                 }
                 catch (Exception e)
@@ -816,9 +816,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
                 _logger.LogDebug(LoggingEvents.HttpDelete, "Account deleted: " + accountId.ToString());
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error deleting the account: ");
+                _logger.LogError(httpOperationException, "Error deleting the account: ");
                 throw new Exception("Error deleting the account");
             }
             catch (Exception e)
@@ -905,12 +905,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 tiedHouse = _dynamicsClient.Tiedhouseconnections.Create(tiedHouse);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                tiedHouse.AdoxioTiedhouseconnectionid = _dynamicsClient.GetCreatedRecord(odee, null);
+                tiedHouse.AdoxioTiedhouseconnectionid = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                 if (string.IsNullOrEmpty(tiedHouse.AdoxioTiedhouseconnectionid))
                 {
-                    _logger.LogError(odee, "Error creating tiedhouse connection ");
+                    _logger.LogError(httpOperationException, "Error creating tiedhouse connection ");
                     throw new Exception("Error creating tiedhouse connection");
                 }
             }

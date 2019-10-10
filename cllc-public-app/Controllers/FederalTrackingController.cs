@@ -106,9 +106,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     { "year", year.ToString() }
                 });
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error querying federal tracking reports");
+                _logger.LogError(httpOperationException, "Error querying federal tracking reports");
                 return new BadRequestResult();
             }
             catch (SharePointRestException e)
