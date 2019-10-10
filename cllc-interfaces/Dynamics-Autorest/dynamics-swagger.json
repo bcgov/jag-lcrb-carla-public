@@ -16586,6 +16586,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_orgbookorganizationlink": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_termsofuseaccepteddate": {
           "type": "string",
           "format": "date-time"
@@ -16860,6 +16864,10 @@
         },
         "address1_postofficebox": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_isorgbooklinkfound": {
+          "type": "integer",
           "x-nullable": true
         },
         "_modifiedby_value": {
@@ -25957,6 +25965,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "_adoxio_regionid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_saturdayopen": {
           "type": "integer",
           "x-nullable": true
@@ -26252,6 +26264,9 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_cannabisinventoryreport"
           }
+        },
+        "adoxio_RegionId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_region"
         }
       }
     },
@@ -28530,6 +28545,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_orgbookorganizationlink": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_adoxio_inspectorid_value": {
           "type": "string",
           "x-nullable": true
@@ -28663,10 +28682,6 @@
           "type": "string",
           "x-nullable": true
         },
-        "adoxio_ownershiptransferinprogress": {
-          "type": "integer",
-          "x-nullable": true
-        },
         "createdon": {
           "type": "string",
           "format": "date-time"
@@ -28694,6 +28709,10 @@
         "modifiedon": {
           "type": "string",
           "format": "date-time"
+        },
+        "adoxio_ownershiptransferinprogress": {
+          "type": "integer",
+          "x-nullable": true
         },
         "_modifiedby_value": {
           "type": "string",
@@ -30994,6 +31013,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
+          }
+        },
+        "adoxio_region_establishments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_establishment"
           }
         }
       }
