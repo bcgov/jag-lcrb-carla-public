@@ -39,7 +39,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'licensee-changes',
+    path: 'licensee-changes/:applicationId',
     component: LicenseeTreeComponent
   },
   {

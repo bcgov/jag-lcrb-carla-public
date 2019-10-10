@@ -35,11 +35,11 @@ export class LicenseeChangeLog {
   titleOld: string;
 
 
-  BusinessAccount: Account;
-  Contact: Contact;
-  Application: Application;
-  ApplicationType: string;
-  LegalEntityId: string;
+  businessAccount: Account;
+  contact: Contact;
+  applicationId: string;
+  applicationType: string;
+  legalEntityId: string;
   parentLegalEntityId: string;
   parentLinceseeChangeLog: LicenseeChangeLog;
   children: LicenseeChangeLog[];
@@ -52,6 +52,8 @@ export class LicenseeChangeLog {
    */
   constructor(legalEntity: LegalEntity = null) {
     if (legalEntity) {
+      this.legalEntityId = legalEntity.id;
+      this.parentLegalEntityId = legalEntity.parentLegalEntityId;
       this.typeOfChange = 'unchanged';
       this.isIndividual = legalEntity.isindividual;
       this.isDirectorNew = legalEntity.isDirector;

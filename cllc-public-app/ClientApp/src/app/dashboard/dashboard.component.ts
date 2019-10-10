@@ -42,15 +42,15 @@ export class DashboardComponent extends FormBase implements OnInit {
 
   startLicenseeChangeApplication() {
     const newLicenceApplicationData: Application = <Application>{
-      licenseType: 'Leadership Change',
+      // licenseType: ApplicationTypeNames.LeaderhsipChange,
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.Marketer },
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.LeaderhsipChange },
       account: this.account,
     };
 
     this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        this.router.navigateByUrl(`/account-profile/${data.id}`);
+        this.router.navigateByUrl(`/licensee-changes/${data.id}`);
       },
       () => {
         this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
