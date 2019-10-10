@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { filter } from 'rxjs/operators';
-import { LicenseeChangeLog } from '@appmodels/legal-entity-change.model';
+import { LicenseeChangeLog } from '@models/legal-entity-change.model';
 
 @Component({
   selector: 'app-shareholders-and-partners',

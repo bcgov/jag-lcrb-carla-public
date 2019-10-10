@@ -46,8 +46,8 @@ export class LegalEntityDataService extends DataService {
    * Create a new legal entity in Dynamics
    * @param data - legal entity data
    */
-  saveLicenseeChanges(changeTree: LicenseeChangeLog) {
-    return this.http.post<LegalEntity>('api/legalentities/change-tree', changeTree, { headers: this.headers })
+  saveLicenseeChanges(changeTree: LicenseeChangeLog, applicationId: string) {
+    return this.http.post<LegalEntity>(`api/legalentities/save-change-tree/${applicationId}`, changeTree, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

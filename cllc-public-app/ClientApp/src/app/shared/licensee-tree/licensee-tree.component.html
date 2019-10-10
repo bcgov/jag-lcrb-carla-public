@@ -8,8 +8,8 @@
           <li class="mat-tree-node">
             <!-- use a disabled button to provide padding for tree leaf -->
             <button mat-icon-button disabled></button>
-            <strong *ngIf="node.isShareholderNew" style="margin-right: 5px">Shareholder </strong>
-            <strong *ngIf="!node.isShareholderNew" style="margin-right: 5px">Leader </strong>
+            <strong *ngIf="node.isShareholderNew && !node.isRoot" style="margin-right: 5px">Shareholder </strong>
+            <strong *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px">Leader </strong>
             <span
               [ngClass]="{'added-node': node.typeOfChange === 'add', 'deleted-node': node.typeOfChange === 'delete', 'edited-node': node.typeOfChange === 'edit'}">
               {{node.nameNew}}
@@ -208,3 +208,7 @@
     </table>
   </section>
 </div>
+
+<button class="btn btn-primary" (click)="save()">Save</button>
+
+{{treeRoot | json}}
