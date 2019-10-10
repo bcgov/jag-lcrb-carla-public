@@ -1,11 +1,6 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Security.Authentication;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;

@@ -7,12 +7,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("websurge-allow.txt")]
     [ApiController]
     public class LoadTestController : ControllerBase
-    {        
-        private readonly IHostingEnvironment _env;        
+    {
+        private readonly IHostingEnvironment _env;
 
         public LoadTestController(IHostingEnvironment env)
         {
-            _env = env;            
+            _env = env;
         }
 
         [HttpGet]
@@ -22,13 +22,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // check to see if we have a local path.  (do not allow a redirect to another website)
             if (!_env.IsProduction())
             {
-                return Ok();                
+                return Ok();
             }
             else
             {
                 return NotFound();
             }
         }
-    
-	}
+
+    }
 }
