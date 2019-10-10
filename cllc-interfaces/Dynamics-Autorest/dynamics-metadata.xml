@@ -420,6 +420,9 @@
         <Property Name="address2_line1" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the first line of the secondary address." />
         </Property>
+        <Property Name="adoxio_orgbookorganizationlink" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_termsofuseaccepteddate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -709,6 +712,9 @@
         </Property>
         <Property Name="address1_postofficebox" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the post office box number of the primary address." />
+        </Property>
+        <Property Name="adoxio_isorgbooklinkfound" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_modifiedby_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Shows who last updated the record." />
@@ -8511,6 +8517,13 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="_adoxio_regionid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Region associated with Establishment." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_saturdayopen" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -8726,6 +8739,9 @@
         <NavigationProperty Name="adoxio_establishment_investigations" Type="Collection(mscrm.adoxio_complianceinvestigation)" Partner="adoxio_EstablishmentId" />
         <NavigationProperty Name="adoxio_establishment_cannabismonthlyreports" Type="Collection(mscrm.adoxio_cannabismonthlyreport)" Partner="adoxio_EstablishmentId" />
         <NavigationProperty Name="adoxio_establishment_inventoryreports" Type="Collection(mscrm.adoxio_cannabisinventoryreport)" Partner="adoxio_EstablishmentId" />
+        <NavigationProperty Name="adoxio_RegionId" Type="mscrm.adoxio_region" Nullable="false" Partner="adoxio_region_establishments">
+          <ReferentialConstraint Property="_adoxio_regionid_value" ReferencedProperty="adoxio_regionid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_establishmentwatchword" BaseType="mscrm.crmbaseentity">
@@ -10835,6 +10851,9 @@
         <Property Name="adoxio_establishmentaddresspostalcode" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_orgbookorganizationlink" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="_adoxio_inspectorid_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for User associated with Licence." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -10981,9 +11000,6 @@
         <Property Name="adoxio_establishmentaddresscity" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_ownershiptransferinprogress" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="createdon" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was created." />
           <Annotation Term="Org.OData.Core.V1.Permissions">
@@ -11018,6 +11034,9 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_ownershiptransferinprogress" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_modifiedby_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who modified the record." />
@@ -12955,6 +12974,7 @@
           <ReferentialConstraint Property="_adoxio_regionalinspectorid_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
         <NavigationProperty Name="adoxio_region_investigations" Type="Collection(mscrm.adoxio_complianceinvestigation)" Partner="adoxio_RegionId" />
+        <NavigationProperty Name="adoxio_region_establishments" Type="Collection(mscrm.adoxio_establishment)" Partner="adoxio_RegionId" />
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
       <EntityType Name="adoxio_relatedparty" BaseType="mscrm.crmbaseentity">
@@ -63123,6 +63143,7 @@
           <NavigationPropertyBinding Path="adoxio_establishment_investigations" Target="adoxio_complianceinvestigations" />
           <NavigationPropertyBinding Path="adoxio_establishment_cannabismonthlyreports" Target="adoxio_cannabismonthlyreports" />
           <NavigationPropertyBinding Path="adoxio_establishment_inventoryreports" Target="adoxio_cannabisinventoryreports" />
+          <NavigationPropertyBinding Path="adoxio_RegionId" Target="adoxio_regions" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -64154,6 +64175,7 @@
           <NavigationPropertyBinding Path="adoxio_region_contraventions" Target="adoxio_contraventions" />
           <NavigationPropertyBinding Path="adoxio_RegionalInspectorId" Target="systemusers" />
           <NavigationPropertyBinding Path="adoxio_region_investigations" Target="adoxio_complianceinvestigations" />
+          <NavigationPropertyBinding Path="adoxio_region_establishments" Target="adoxio_establishments" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
