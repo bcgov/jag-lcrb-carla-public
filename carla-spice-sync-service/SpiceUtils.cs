@@ -54,8 +54,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     string contactId;
                     if (workerResponse.RecordIdentifier == null)
                     {
-                        MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
+                        MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.SpdJobId}").Value[0];
                         contactId = contact.Contactid;
+                    }
+                    else if(workerResponse.RecordIdentifier.Substring(0,2) == "WR")
+                    {
+                        // Check if using old WR record
+                        MicrosoftDynamicsCRMadoxioPersonalhistorysummary history = _dynamicsClient.Personalhistorysummaries.Get(filter: $"adoxio_workerjobnumber eq '{workerResponse.RecordIdentifier}'").Value[0];
+                        contactId = history._adoxioContactidValue;
                     }
                     else
                     {
