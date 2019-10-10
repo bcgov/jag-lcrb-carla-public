@@ -11,12 +11,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     public class TokenTestController : ControllerBase
     {
-        private readonly IConfiguration _configuration;        
+        private readonly IConfiguration _configuration;
         private readonly string _encryptionKey;
 
         public TokenTestController(IConfiguration configuration)
         {
-            _configuration = configuration;            
+            _configuration = configuration;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
         }
         [HttpGet()]
@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public ActionResult GetToken()
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"];
-            result += "/bcservice?code="; 
+            result += "/bcservice?code=";
 
             // generate a payload.
             string payload = "Sample token generated " + DateTime.Now.ToLongDateString();
