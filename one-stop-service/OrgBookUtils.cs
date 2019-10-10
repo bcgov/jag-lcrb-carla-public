@@ -221,15 +221,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string filter = $"adoxio_orgbookorganizationlink eq null and adoxio_businessregistrationnumber eq null and adoxio_bcincorporationnumber ne null";
                 result = _dynamics.Accounts.Get(filter: filter, select: select).Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {
-                    _logger.LogError("Error getting accounts");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee,"Error getting accounts");                    
                     hangfireContext.WriteLine("Error getting accounts");
                     hangfireContext.WriteLine("Request:");
                     hangfireContext.WriteLine(odee.Request.Content);
