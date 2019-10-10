@@ -253,6 +253,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     ILogger orbookLog = loggerFactory.CreateLogger(typeof(OrgBookUtils));
                     RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForNewLicences(null), Cron.Hourly());
                     RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForMissingCredentials(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForOrgbookLinks(null), Cron.Daily());
 
                     log.LogInformation("Hangfire License issuance check jobs setup.");
                 }
