@@ -4,8 +4,6 @@ using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Utils
 {

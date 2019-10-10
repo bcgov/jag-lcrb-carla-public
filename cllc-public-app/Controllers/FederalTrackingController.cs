@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
 using CsvHelper;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
@@ -9,6 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -39,14 +40,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{month}/{year}")]
         public IActionResult GetFederalTrackingReport(int month, int year)
         {
-            if(month < 1 || month > 12 || year < 2018)
+            if (month < 1 || month > 12 || year < 2018)
             {
                 return new BadRequestResult();
             }
 
             string monthStr = month.ToString("00");
             string yearStr = year.ToString();
-            
+
             string filter = $"adoxio_reportingperiodmonth eq '{monthStr}' and adoxio_reportingperiodyear eq '{yearStr}'";
             try
             {
@@ -62,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         //TBR
                         CompanyName = report.AdoxioLicenseeId?.ToString(),
                         //TBR
-                        SiteID = "BC"+report.AdoxioLicencenumber,
+                        SiteID = "BC" + report.AdoxioLicencenumber,
                         City = report.AdoxioCity,
                         PostalCode = report.AdoxioPostalcode,
                         ManagementEmployees = report.AdoxioEmployeesmanagement ?? 0,
@@ -89,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     csv.Configuration.RegisterClassMap<FederalTrackingMonthlyExportMap>();
                     csv.WriteRecords(monthlyReports);
-                    
+
                     writer.Flush();
                     mem.Position = 0;
                     string filename = $"{yearStr}-{monthStr}-CannabisTrackingReport.csv";
@@ -105,14 +106,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     { "year", year.ToString() }
                 });
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
-                _logger.LogError(odee, "Error querying federal tracking reports");                
+                _logger.LogError(odee, "Error querying federal tracking reports");
                 return new BadRequestResult();
             }
             catch (SharePointRestException e)
             {
-                _logger.LogError(e,"Error saving csv to sharepoint");
+                _logger.LogError(e, "Error saving csv to sharepoint");
                 return new BadRequestResult();
             }
         }

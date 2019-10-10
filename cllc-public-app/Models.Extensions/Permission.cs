@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         public const string Admin = "Admin";
 
-        
+
         public const string NewUserRegistration = "NewUserRegistration";
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Code = Admin,
                 Name = "Admin",
                 Description = "Allows the user to perform special administrative tasks"
-            },                
+            },
             new Permission
             {
                 Code = BusinessLogin,

@@ -7,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class VoteQuestionController : ControllerBase
-    {        
+    {
         private readonly AppDbContext db;
         public VoteQuestionController(AppDbContext db)
         {

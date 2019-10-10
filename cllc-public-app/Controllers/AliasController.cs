@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize]
     // No authorize policy as this controller is used by both workers and BCeID users
     public class AliasController : ControllerBase
-    {        
+    {
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
         public AliasController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
-        {                      
+        {
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(AliasController));
@@ -42,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("by-contactid/{contactId}")]
         public IActionResult GetAliasByContactId(string contactId)
         {
-             var result = new List<ViewModels.Alias>();
+            var result = new List<ViewModels.Alias>();
 
             if (!string.IsNullOrEmpty(contactId))
             {
@@ -79,15 +80,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAlias([FromBody] ViewModels.Alias item, string id)
-        {            
+        {
             if (id != null && item.id != null && id != item.id)
             {
                 return BadRequest();
             }
-            
+
             // get the contact
             Guid aliasId = Guid.Parse(id);
-            
+
             MicrosoftDynamicsCRMadoxioAlias alias = await _dynamicsClient.GetAliasById(aliasId);
 
             if (alias == null)
@@ -100,10 +101,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Aliases.UpdateAsync(aliasId.ToString(), patchAlias);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error updating contact");
-            }            
+            }
 
             alias = await _dynamicsClient.GetAliasById(aliasId);
             return new JsonResult(alias.ToViewModel());
@@ -117,7 +118,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateAlias([FromBody] ViewModels.Alias item)
         {
-            if(item?.contact?.id == null || item?.worker?.id == null){
+            if (item?.contact?.id == null || item?.worker?.id == null)
+            {
                 return BadRequest();
             }
 
@@ -132,9 +134,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 alias = _dynamicsClient.Aliases.Create(alias);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
-                _logger.LogError(odee, "Error creating application");               
+                _logger.LogError(odee, "Error creating application");
                 // fail if we can't create.
                 throw (odee);
             }
@@ -147,15 +149,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var worker = _dynamicsClient.GetWorkerById(Guid.Parse(item.worker.id));
                 patchAlias.WorkerIdODataBind = _dynamicsClient.GetEntityURI("adoxio_workers", item.worker.id);
-                
+
                 var contact = _dynamicsClient.GetContactById(Guid.Parse(item.contact.id));
                 patchAlias.ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
 
                 await _dynamicsClient.Aliases.UpdateAsync(alias.AdoxioAliasid, patchAlias);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
-                _logger.LogError(odee, "Error updating application");                
+                _logger.LogError(odee, "Error updating application");
                 // fail if we can't create.
                 throw (odee);
             }

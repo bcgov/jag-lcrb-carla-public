@@ -10,6 +10,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -61,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return Forbid();
                 }
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error getting licence by id");
                 // fail if we can't create.
@@ -106,7 +107,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create application
                 _dynamicsClient.Licenceses.Update(item.LicenceId, patchLicence);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error initiating licence transfer");
                 // fail if we can't create.
@@ -165,7 +166,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     application = _dynamicsClient.Applications.Create(application);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     string applicationId = _dynamicsClient.GetCreatedRecord(odee, null);
                     if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
@@ -175,7 +176,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     else
                     {
 
-                        _logger.LogError(odee, "Error creating application");                       
+                        _logger.LogError(odee, "Error creating application");
                         // fail if we can't create.
                         throw (odee);
                     }
@@ -193,7 +194,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchApplication);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError(odee, "Error updating application");
                 }
@@ -232,7 +233,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             return licence;
                         });
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
                     licences = null;
                 }

@@ -1,7 +1,4 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -27,10 +24,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.firstname = alias.AdoxioFirstname;
                 result.middlename = alias.AdoxioMiddlename;
                 result.lastname = alias.AdoxioLastname;
-                if(alias.AdoxioContactId != null){
+                if (alias.AdoxioContactId != null)
+                {
                     result.contact = alias.AdoxioContactId.ToViewModel();
                 }
-                if(alias.AdoxioWorkerId != null){
+                if (alias.AdoxioWorkerId != null)
+                {
                     result.worker = alias.AdoxioWorkerId.ToViewModel();
                 }
             }

@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
     /// Helper methods for working with encryption
     /// </summary>
     public static class EncryptionUtility
-	{
+    {
 
         /// <summary>
         /// Encrypt a string using AES

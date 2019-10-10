@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        
+
 
         public PaymentController(IConfiguration configuration,
                                  IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory,
@@ -38,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             _configuration = configuration;
             _bcep = bcep;
-            _dynamicsClient = dynamicsClient;            
+            _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _geocoderClient = geocoderClient;
             _logger = loggerFactory.CreateLogger(typeof(PaymentController));
@@ -64,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
             if (adoxioApplication.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
-            {                
+            {
                 return NotFound("Payment already made");
             }
 
@@ -80,7 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _dynamicsClient.Applications.Update(id, patchApplication);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error updating application");
                 // fail 
@@ -163,7 +164,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         };
                         _dynamicsClient.Applications.Update(id, fixApplication);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating application");
                         // fail 
@@ -185,14 +186,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
                         AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
                     };
-                    
+
                     try
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
-                        _logger.LogError(odee, "Error updating application");                        
+                        _logger.LogError(odee, "Error updating application");
                         // fail 
                         throw (odee);
                     }
@@ -307,7 +308,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating invoice");
                         // fail 
@@ -325,7 +326,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating application");
                         // fail 
@@ -347,9 +348,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
-                        _logger.LogError(odee, "Error updating invoice");                        
+                        _logger.LogError(odee, "Error updating invoice");
                         // fail 
                         throw (odee);
                     }
@@ -362,7 +363,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating application");
                         // fail 
@@ -440,7 +441,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating invoice");
                         // fail 
@@ -456,7 +457,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, patchApplication);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating application");
                         // fail 
@@ -464,11 +465,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     // trigger geocoding
-                    if (!string.IsNullOrEmpty (_configuration["FEATURE_MAPS"]))
+                    if (!string.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
                     {
                         await _geocoderClient.GeocodeEstablishment(adoxioApplication._adoxioLicenceestablishmentValue, _logger);
                     }
-                    
+
                 }
                 // if payment failed:
                 else
@@ -485,10 +486,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating invoice");
-                       
+
                         // fail 
                         throw (odee);
                     }
@@ -503,7 +504,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, patchApplication);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating application");
                         // fail 
@@ -530,8 +531,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug("User id = " + userSettings.AccountId);
             var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice", "adoxio_Establishment" };
 
-            MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren( Guid.Parse(id) );
-            
+            MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
+
             if (dynamicsApplication == null)
             {
                 return null;
@@ -659,7 +660,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _dynamicsClient.Workers.Update(workerId, patchWorker);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, "Error updating worker");
                 // fail 
@@ -772,7 +773,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating invoice");
                         // fail 
@@ -788,7 +789,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Workers.Update(workerId, patchWorker);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError("Error updating worker");
                         _logger.LogError("Request:");
@@ -815,7 +816,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating invoice");
                         // fail 
@@ -834,7 +835,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Workers.Update(workerId, patchWorker);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         _logger.LogError(odee, "Error updating worker");
                         // fail 

@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDateemailsent = from.securityAssessmentEmailSentOn;
         }
 
-        
+
 
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
@@ -97,7 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.interestpercentage = Convert.ToDecimal(adoxio_legalentity.AdoxioInterestpercentage);
                 }
-                
+
                 // convert from int to bool.
                 result.isindividual = (adoxio_legalentity.AdoxioIsindividual != null && adoxio_legalentity.AdoxioIsindividual != 0);
                 result.lastname = adoxio_legalentity.AdoxioLastname;

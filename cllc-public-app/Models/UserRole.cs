@@ -1,8 +1,7 @@
-using System;
-using System.Text;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -21,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="expiryDate">The date on which a role previously assigned to a user was removed from that user..</param>
         /// <param name="role">A foreign key reference to the system-generated unique identifier for a Role.</param>
         public UserRole(Guid id, DateTime effectiveDate, DateTime? expiryDate = null, Role role = null)
-        {   
+        {
             Id = id;
             EffectiveDate = effectiveDate;
             ExpiryDate = expiryDate;
@@ -45,26 +44,26 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <value>The date on which the user was given the related role.</value>
         public DateTime EffectiveDate { get; set; }
-        
+
         /// <summary>
         /// The date on which a role previously assigned to a user was removed from that user.
         /// </summary>
         /// <value>The date on which a role previously assigned to a user was removed from that user.</value>
         public DateTime? ExpiryDate { get; set; }
-        
+
         /// <summary>
         /// A foreign key reference to the system-generated unique identifier for a Role
         /// </summary>
         /// <value>A foreign key reference to the system-generated unique identifier for a Role</value>
         public Role Role { get; set; }
-        
+
         /// <summary>
         /// Foreign key for Role 
         /// </summary>   
         [ForeignKey("Role")]
-		[JsonIgnore]
+        [JsonIgnore]
         public Guid? RoleId { get; set; }
-        
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -114,20 +113,20 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (other is null) { return false; }
             if (ReferenceEquals(this, other)) { return true; }
 
-            return                 
+            return
                 (
                     Id == other.Id ||
                     Id.Equals(other.Id)
-                ) &&                 
+                ) &&
                 (
                     EffectiveDate == other.EffectiveDate ||
                     EffectiveDate.Equals(other.EffectiveDate)
-                ) &&                 
+                ) &&
                 (
                     ExpiryDate == other.ExpiryDate ||
                     ExpiryDate != null &&
                     ExpiryDate.Equals(other.ExpiryDate)
-                ) &&                 
+                ) &&
                 (
                     Role == other.Role ||
                     Role != null &&
@@ -147,14 +146,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 int hash = 41;
 
                 // Suitable nullity checks                                   
-                hash = hash * 59 + Id.GetHashCode();    
+                hash = hash * 59 + Id.GetHashCode();
                 hash = hash * 59 + EffectiveDate.GetHashCode();
 
                 if (ExpiryDate != null)
                 {
                     hash = hash * 59 + ExpiryDate.GetHashCode();
-                }                
-                                   
+                }
+
                 if (Role != null)
                 {
                     hash = hash * 59 + Role.GetHashCode();
@@ -165,7 +164,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

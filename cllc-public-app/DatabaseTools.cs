@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -87,7 +83,7 @@ namespace Gov.Lclb.Cllb.Public
                         // fix for OpenShift bug where the pod reports the number of sockets / logical processors in the host computer rather than the amount available.
                         string sql = "EXEC sp_configure 'show advanced options', 1;";
                         SqlCommand cmd = new SqlCommand(sql, conn);
-                        cmd.ExecuteNonQuery();                       
+                        cmd.ExecuteNonQuery();
 
                         sql = "RECONFIGURE WITH OVERRIDE;";
                         cmd = new SqlCommand(sql, conn);

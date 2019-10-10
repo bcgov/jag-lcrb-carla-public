@@ -1,15 +1,15 @@
-using System;
-using System.Text;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Permission Database Model
     /// </summary>
-        public sealed partial class Permission : IEquatable<Permission>
+    public sealed partial class Permission : IEquatable<Permission>
     {
 
 
@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="name">The &amp;#39;user friendly&amp;#39; name of the permission exposed to the user selecting the permissions to be included in a Role. (required).</param>
         /// <param name="description">A description of the purpose of the permission and exposed to the user selecting the permissions to be included in a Role..</param>
         public Permission(Guid id, string code, string name, string description = null)
-        {   
+        {
             Id = id;
             Code = code;
             Name = name;
@@ -29,14 +29,14 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         public Permission(string code, string name, string description = null)
-        {            
+        {
             Code = code;
             Name = name;
             Description = description;
         }
 
         public Permission()
-        {            
+        {
         }
 
         /// <summary>
@@ -50,23 +50,23 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// The name of the permission referenced in the software of the application.
         /// </summary>
         /// <value>The name of the permission referenced in the software of the application.</value>
-        [MaxLength(50)]        
+        [MaxLength(50)]
         public string Code { get; set; }
-        
+
         /// <summary>
         /// The &#39;user friendly&#39; name of the permission exposed to the user selecting the permissions to be included in a Role.
         /// </summary>
         /// <value>The &#39;user friendly&#39; name of the permission exposed to the user selecting the permissions to be included in a Role.</value>
-         [MaxLength(150)]        
+        [MaxLength(150)]
         public string Name { get; set; }
-        
+
         /// <summary>
         /// A description of the purpose of the permission and exposed to the user selecting the permissions to be included in a Role.
         /// </summary>
         /// <value>A description of the purpose of the permission and exposed to the user selecting the permissions to be included in a Role.</value>
-        [MaxLength(2048)]        
+        [MaxLength(2048)]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -116,21 +116,21 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (other is null) { return false; }
             if (ReferenceEquals(this, other)) { return true; }
 
-            return                 
+            return
                 (
                     Id == other.Id ||
                     Id.Equals(other.Id)
-                ) &&                 
+                ) &&
                 (
                     Code == other.Code ||
                     Code != null &&
                     Code.Equals(other.Code)
-                ) &&                 
+                ) &&
                 (
                     Name == other.Name ||
                     Name != null &&
                     Name.Equals(other.Name)
-                ) &&                 
+                ) &&
                 (
                     Description == other.Description ||
                     Description != null &&
@@ -165,14 +165,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (Description != null)
                 {
                     hash = hash * 59 + Description.GetHashCode();
-                }                
-                
+                }
+
                 return hash;
             }
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

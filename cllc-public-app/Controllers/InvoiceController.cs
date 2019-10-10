@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -22,17 +23,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize]
     public class InvoiceController : ControllerBase
     {
-        private readonly IConfiguration _configuration;        
+        private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
-		private readonly ILogger _logger;        
+        private readonly ILogger _logger;
 
-		public InvoiceController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public InvoiceController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(InvoiceController));                    
+            _logger = loggerFactory.CreateLogger(typeof(InvoiceController));
         }
 
         /// <summary>
@@ -41,11 +42,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpGet()]
-		public IActionResult GetInvoices()
+        public IActionResult GetInvoices()
         {
-			if (TestUtility.InUnitTestMode())
+            if (TestUtility.InUnitTestMode())
             {
-				List<ViewModels.Invoice> result = new List<Invoice>();
+                List<ViewModels.Invoice> result = new List<Invoice>();
                 IEnumerable<MicrosoftDynamicsCRMinvoice> invoices = null;
 
                 invoices = _dynamicsClient.Invoices.Get().Value;
@@ -69,7 +70,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetInvoice(string id)
         {
-			if (TestUtility.InUnitTestMode())
+            if (TestUtility.InUnitTestMode())
             {
                 ViewModels.Invoice result = null;
                 // query the Dynamics system to get the invoice record.
@@ -79,17 +80,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else
                 {
-    				// get the current user.
+                    // get the current user.
                     string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
                     UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-    				Guid adoxio_legalentityid = new Guid(id);
-                    MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);                
+                    Guid adoxio_legalentityid = new Guid(id);
+                    MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(adoxio_legalentityid);
                     if (invoice == null)
                     {
                         return new NotFoundResult();
-                    }      
-                    
+                    }
+
                     // setup the related account.
                     if (invoice._accountidValue != null)
                     {
@@ -97,11 +98,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         invoice.CustomeridAccount = await _dynamicsClient.GetAccountById(accountId);
                     }
 
-                    result = invoice.ToViewModel();                
+                    result = invoice.ToViewModel();
                 }
 
                 return new JsonResult(result);
-			}
+            }
             return new NotFoundResult();
         }
 
@@ -114,12 +115,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateInvoice([FromBody] ViewModels.Invoice item)
         {
-			if (TestUtility.InUnitTestMode())
+            if (TestUtility.InUnitTestMode())
             {
                 // create a new invoice.
                 MicrosoftDynamicsCRMinvoice invoice = new MicrosoftDynamicsCRMinvoice();
 
-    			// get the current user.
+                // get the current user.
                 string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
                 UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
                 // check that the session is setup correctly.
@@ -130,7 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     invoice = await _dynamicsClient.Invoices.CreateAsync(invoice);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError(odee, "Error creating invoice");
                     throw new Exception("Unable to create invoice");
@@ -149,13 +150,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // setup the view model.
                     invoice.CustomeridAccount = userAccount;
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError(odee, "Error patching invoice");
                 }
 
                 return new JsonResult(invoice.ToViewModel());
-			}
+            }
             return new NotFoundResult();
         }
 
@@ -168,7 +169,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateInvoice([FromBody] ViewModels.Invoice item, string id)
         {
-			if (TestUtility.InUnitTestMode())
+            if (TestUtility.InUnitTestMode())
             {
                 if (id != item.id)
                 {
@@ -192,7 +193,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 await _dynamicsClient.Invoices.UpdateAsync(adoxio_legalentityid.ToString(), invoice);
                 return new JsonResult(invoice.ToViewModel());
-			}
+            }
             return new NotFoundResult();
         }
 
@@ -204,7 +205,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteInvoice(string id)
         {
-			if (TestUtility.InUnitTestMode())
+            if (TestUtility.InUnitTestMode())
             {
                 // get the invoice.
                 Guid adoxio_legalentityid = new Guid(id);
@@ -218,11 +219,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     await _dynamicsClient.Invoices.DeleteAsync(adoxio_legalentityid.ToString());
                     return NoContent(); // 204
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError(odee, "Error deleteing invoice");
-                }                
-			}
+                }
+            }
             return new NotFoundResult();
         }
     }

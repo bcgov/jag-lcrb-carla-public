@@ -1,14 +1,13 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using System;
+using Microsoft.Rest;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
     static partial class PersonalhistorysummariesExtensions
     {
-        public static MicrosoftDynamicsCRMadoxioPersonalhistorysummary GetByWorkerJobNumber (this IPersonalhistorysummaries operations, string workerJobNumber)
+        public static MicrosoftDynamicsCRMadoxioPersonalhistorysummary GetByWorkerJobNumber(this IPersonalhistorysummaries operations, string workerJobNumber)
         {
             MicrosoftDynamicsCRMadoxioPersonalhistorysummary result = null;
             try
@@ -17,7 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 IEnumerable<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> dataRows = operations.Get(filter: jobNumberFilter).Value;
                 result = dataRows.FirstOrDefault();
             }
-            catch (OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }

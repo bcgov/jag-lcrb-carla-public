@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -34,10 +33,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 if (!string.IsNullOrEmpty(voteOption.id))
                     result.Id = new Guid(voteOption.id);
-                    result.TotalVotes = voteOption.totalVotes;
-                    result.Option = voteOption.option;
-                    result.DisplayOrder = voteOption.displayOrder;
-            }            
+                result.TotalVotes = voteOption.totalVotes;
+                result.Option = voteOption.option;
+                result.DisplayOrder = voteOption.displayOrder;
+            }
             return result;
         }
     }

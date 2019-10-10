@@ -1,5 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System;
 using System.Threading;
@@ -21,9 +20,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         HealthCheckContext context,
         CancellationToken cancellationToken = default(CancellationToken))
         {
-        GeocoderClient geocoder = new GeocoderClient(_configuration);
-        // Try and get the Account document library
-        bool healthCheckResultHealthy;
+            GeocoderClient geocoder = new GeocoderClient(_configuration);
+            // Try and get the Account document library
+            bool healthCheckResultHealthy;
             try
             {
                 healthCheckResultHealthy = geocoder.TestAuthentication().GetAwaiter().GetResult();
@@ -40,7 +39,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 return Task.FromResult(HealthCheckResult.Unhealthy("Geocoder is unhealthy."));
-            }            
+            }
         }
     }
 }

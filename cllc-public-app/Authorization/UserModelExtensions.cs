@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         private static List<Claim> GetClaims(this User user, string userType)
         {
             List<Claim> claims = new List<Claim>();
-            if (user == null ) //a user is only a new users if they are a BCeID user or BC service card
+            if (user == null) //a user is only a new users if they are a BCeID user or BC service card
             {
                 claims.Add(new Claim(User.PermissionClaim, Permission.NewUserRegistration));
                 claims.Add(new Claim(User.UserTypeClaim, userType));
@@ -40,26 +40,26 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     claims.Add(new Claim(ClaimTypes.Name, user.SmUserId));
                 }
-                
+
                 if (!string.IsNullOrEmpty(user.Surname))
                 {
                     claims.Add(new Claim(ClaimTypes.Surname, user.Surname));
                 }
-                    
+
                 if (!string.IsNullOrEmpty(user.GivenName))
                 {
                     claims.Add(new Claim(ClaimTypes.GivenName, user.GivenName));
                 }
-                    
+
                 if (!string.IsNullOrEmpty(user.Email))
                 {
                     claims.Add(new Claim(ClaimTypes.Email, user.Email));
-                }                    
+                }
 
                 if (user.ContactId != null)
                 {
                     claims.Add(new Claim(User.UseridClaim, user.ContactId.ToString()));
-                }                    
+                }
                 if (!string.IsNullOrEmpty(user.UserType))
                 {
                     claims.Add(new Claim(User.UserTypeClaim, user.UserType));
@@ -70,14 +70,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     claims.AddRange(permissions);
                 }
-                    
+
 
                 var roles = user.GetActiveRoles().Select(r => new Claim(ClaimTypes.Role, r.Name)).ToList();
                 if (roles.Any())
                 {
                     claims.AddRange(roles);
                 }
-                    
+
 
             }
 
@@ -91,27 +91,27 @@ namespace Gov.Lclb.Cllb.Public.Models
             var activeRoles = user.GetActiveRoles();
 
             if (activeRoles != null)
-            {                
+            {
                 IEnumerable<RolePermission> rolePermissions = activeRoles
-                        .Where (x => x != null && x.RolePermissions != null)
+                        .Where(x => x != null && x.RolePermissions != null)
                         .SelectMany(x => x.RolePermissions);
 
                 result = rolePermissions.Select(x => x.Permission).Distinct().ToList();
             }
 
-            return result;            
+            return result;
         }
 
         private static List<Role> GetActiveRoles(this User user)
         {
             List<Role> roles = new List<Role>();
-            
+
             if (user.UserRoles == null)
                 return roles;
 
             roles = user.UserRoles.Where(
                 x => x.Role != null
-                && x.EffectiveDate <= DateTime.UtcNow 
+                && x.EffectiveDate <= DateTime.UtcNow
                 && (x.ExpiryDate == null || x.ExpiryDate > DateTime.UtcNow))
                 .Select(x => x.Role).ToList();
 

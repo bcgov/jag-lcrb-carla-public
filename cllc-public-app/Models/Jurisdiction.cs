@@ -1,17 +1,15 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Role Database Model
     /// </summary>
-        public sealed partial class Jurisdiction :  IEquatable<Jurisdiction>
+    public sealed partial class Jurisdiction : IEquatable<Jurisdiction>
     {
 
         /// <summary>
@@ -23,10 +21,10 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="rolePermissions">RolePermissions.</param>
         /// <param name="userRoles">UserRoles.</param>
         public Jurisdiction(Guid id, string name, string selectMessage)
-        {   
+        {
             Id = id;
             Name = name;
-            SelectMessage = selectMessage;            
+            SelectMessage = selectMessage;
         }
 
         public Jurisdiction()
@@ -45,16 +43,16 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// The name of the Role, as established by the user creating the role.
         /// </summary>
         /// <value>The name of the Role, as established by the user creating the role.</value>
-        [MaxLength(255)]        
+        [MaxLength(255)]
         public string Name { get; set; }
-        
+
         /// <summary>
         /// A description of the role as set by the user creating&#x2F;updating the role.
         /// </summary>
         /// <value>A description of the role as set by the user creating&#x2F;updating the role.</value>
-        [MaxLength(2048)]        
+        [MaxLength(2048)]
         public string SelectMessage { get; set; }
-                
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -142,14 +140,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (SelectMessage != null)
                 {
                     hash = hash * 59 + SelectMessage.GetHashCode();
-                }                
-                                   
+                }
+
                 return hash;
             }
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

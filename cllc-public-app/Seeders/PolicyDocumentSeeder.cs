@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using Gov.Lclb.Cllb.Public.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public PolicyDocumentSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient) 
+        public PolicyDocumentSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
             : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 
@@ -23,12 +23,12 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         protected override void Invoke(AppDbContext context)
         {
             UpdatePolicyDocuments(_dynamicsClient);
-            
+
         }
 
         private void UpdatePolicyDocuments(IDynamicsClient dynamicsClient)
         {
-            AddInitialPolicyDocuments(dynamicsClient);            
+            AddInitialPolicyDocuments(dynamicsClient);
         }
 
         private void AddInitialPolicyDocuments(IDynamicsClient dynamicsClient)
@@ -37,10 +37,10 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             if (string.IsNullOrEmpty(PolicyDocumentInitializationFile))
             {
                 // default to sample data, which is stored in the "SeedData" directory.
-                PolicyDocumentInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "PolicyDocuments.json"); 
+                PolicyDocumentInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "PolicyDocuments.json");
             }
             bool forceupdate = false;
-            if (! string.IsNullOrEmpty(Configuration["FORCE_POLICY_UPDATE"]))
+            if (!string.IsNullOrEmpty(Configuration["FORCE_POLICY_UPDATE"]))
             {
                 forceupdate = true;
             }
@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         private List<PolicyDocument> GetSeedPolicyDocuments()
         {
-            List<PolicyDocument> PolicyDocuments = new List<PolicyDocument>(GetDefaultPolicyDocuments());            
+            List<PolicyDocument> PolicyDocuments = new List<PolicyDocument>(GetDefaultPolicyDocuments());
 
             if (IsProductionEnvironment)
             {
@@ -58,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             else
             {
                 PolicyDocuments.AddRange(GetDevPolicyDocuments());
-            }                
+            }
 
             return PolicyDocuments;
         }
@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// </summary>
         private List<PolicyDocument> GetDevPolicyDocuments()
         {
-            return new List<PolicyDocument>();            
+            return new List<PolicyDocument>();
         }
 
         /// <summary>

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Gov.Lclb.Cllb.Public.ViewModels
+﻿namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class ApplicationVersionInfo
     {
@@ -14,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         /// <summary>
         /// Base URI for the application
         /// </summary>
-        public string BaseUri { get; set; }        
+        public string BaseUri { get; set; }
 
         /// <summary>
         /// Dotnet Environment (Development, Staging, Production...)
@@ -44,6 +39,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         /// <summary>
         /// Git repository used to build the application
         /// </summary>
-        public string SourceRepository { get; set; }              
+        public string SourceRepository { get; set; }
     }
 }

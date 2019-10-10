@@ -1,17 +1,15 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Role Database Model
     /// </summary>
-        public sealed partial class Subscriber :  IEquatable<Subscriber>
+    public sealed partial class Subscriber : IEquatable<Subscriber>
     {
 
         /// <summary>
@@ -23,9 +21,9 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="rolePermissions">RolePermissions.</param>
         /// <param name="userRoles">UserRoles.</param>
         public Subscriber(Guid id, string email)
-        {   
+        {
             Id = id;
-            Email = email;            
+            Email = email;
         }
 
         public Subscriber(string email)
@@ -35,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public Subscriber()
         {
-           
+
         }
 
         /// <summary>
@@ -45,14 +43,14 @@ namespace Gov.Lclb.Cllb.Public.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        
+
         /// <summary>
         /// The name of the Role, as established by the user creating the role.
         /// </summary>
         /// <value>The name of the Role, as established by the user creating the role.</value>
-        [MaxLength(512)]        
+        [MaxLength(512)]
         public string Email { get; set; }
-        
+
 
 
         /// <summary>
@@ -128,7 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

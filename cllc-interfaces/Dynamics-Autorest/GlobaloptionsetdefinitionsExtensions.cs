@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Extension methods for Msdynlicencetypeknowledgebaserecset.
+    /// Extension methods for Globaloptionsetdefinitions.
     /// </summary>
-    public static partial class MsdynlicencetypeknowledgebaserecsetExtensions
+    public static partial class GlobaloptionsetdefinitionsExtensions
     {
             /// <summary>
-            /// Get entities from msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Get entities from GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -43,13 +43,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MsdynlicencetypeknowledgebaserecsetGetResponseModel Get(this IMsdynlicencetypeknowledgebaserecset operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static GlobaloptionsetdefinitionsGetResponseModel Get(this IGlobaloptionsetdefinitions operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
                 return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entities from msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Get entities from GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MsdynlicencetypeknowledgebaserecsetGetResponseModel> GetAsync(this IMsdynlicencetypeknowledgebaserecset operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<GlobaloptionsetdefinitionsGetResponseModel> GetAsync(this IGlobaloptionsetdefinitions operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -85,7 +85,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Get entities from msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Get entities from GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -112,13 +112,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MsdynlicencetypeknowledgebaserecsetGetResponseModel> GetWithHttpMessages(this IMsdynlicencetypeknowledgebaserecset operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<GlobaloptionsetdefinitionsGetResponseModel> GetWithHttpMessages(this IGlobaloptionsetdefinitions operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Add new entity to GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -130,13 +130,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// Required in order for the service to return a JSON representation of the
             /// object.
             /// </param>
-            public static MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec Create(this IMsdynlicencetypeknowledgebaserecset operations, MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec body, string prefer = "return=representation")
+            public static MicrosoftDynamicsCRMOptionSetMetadataBase Create(this IGlobaloptionsetdefinitions operations, MicrosoftDynamicsCRMOptionSetMetadataBase body, string prefer = "return=representation")
             {
                 return operations.CreateAsync(body, prefer).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Add new entity to msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Add new entity to GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -151,7 +151,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec> CreateAsync(this IMsdynlicencetypeknowledgebaserecset operations, MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMOptionSetMetadataBase> CreateAsync(this IGlobaloptionsetdefinitions operations, MicrosoftDynamicsCRMOptionSetMetadataBase body, string prefer = "return=representation", CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(body, prefer, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Add new entity to msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Add new entity to GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -175,19 +175,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec> CreateWithHttpMessages(this IMsdynlicencetypeknowledgebaserecset operations, MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBase> CreateWithHttpMessages(this IGlobaloptionsetdefinitions operations, MicrosoftDynamicsCRMOptionSetMetadataBase body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.CreateWithHttpMessagesAsync(body, prefer, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from msdyn_adoxio_licencetype_knowledgebaserecset by key
+            /// Get entity from GlobalOptionSetDefinitions by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -195,19 +195,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec GetByKey(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMOptionSetMetadataBase GetByKey(this IGlobaloptionsetdefinitions operations, string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyAsync(msdynAdoxioLicencetypeKnowledgebaserecid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(metadataId, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get entity from msdyn_adoxio_licencetype_knowledgebaserecset by key
+            /// Get entity from GlobalOptionSetDefinitions by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -218,22 +218,22 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec> GetByKeyAsync(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMOptionSetMetadataBase> GetByKeyAsync(this IGlobaloptionsetdefinitions operations, string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(msdynAdoxioLicencetypeKnowledgebaserecid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(metadataId, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
             }
 
             /// <summary>
-            /// Get entity from msdyn_adoxio_licencetype_knowledgebaserecset by key
+            /// Get entity from GlobalOptionSetDefinitions by key
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -244,36 +244,36 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec> GetByKeyWithHttpMessages(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBase> GetByKeyWithHttpMessages(this IGlobaloptionsetdefinitions operations, string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetByKeyWithHttpMessagesAsync(msdynAdoxioLicencetypeKnowledgebaserecid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(metadataId, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Delete entity from msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Delete entity from GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void Delete(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, string ifMatch = default(string))
+            public static void Delete(this IGlobaloptionsetdefinitions operations, string metadataId, string ifMatch = default(string))
             {
-                operations.DeleteAsync(msdynAdoxioLicencetypeKnowledgebaserecid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(metadataId, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Delete entity from msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Delete entity from GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
@@ -281,19 +281,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteAsync(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IGlobaloptionsetdefinitions operations, string metadataId, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteWithHttpMessagesAsync(msdynAdoxioLicencetypeKnowledgebaserecid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(metadataId, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Delete entity from msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Delete entity from GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='ifMatch'>
             /// ETag
@@ -301,36 +301,36 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse DeleteWithHttpMessages(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IGlobaloptionsetdefinitions operations, string metadataId, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.DeleteWithHttpMessagesAsync(msdynAdoxioLicencetypeKnowledgebaserecid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(metadataId, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Update entity in GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Update(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec body)
+            public static void Update(this IGlobaloptionsetdefinitions operations, string metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body)
             {
-                operations.UpdateAsync(msdynAdoxioLicencetypeKnowledgebaserecid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(metadataId, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Update entity in msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Update entity in GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -338,19 +338,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateAsync(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IGlobaloptionsetdefinitions operations, string metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateWithHttpMessagesAsync(msdynAdoxioLicencetypeKnowledgebaserecid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(metadataId, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
-            /// Update entity in msdyn_adoxio_licencetype_knowledgebaserecset
+            /// Update entity in GlobalOptionSetDefinitions
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='msdynAdoxioLicencetypeKnowledgebaserecid'>
-            /// key: msdyn_adoxio_licencetype_knowledgebaserecid
+            /// <param name='metadataId'>
+            /// key: MetadataId
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -358,9 +358,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse UpdateWithHttpMessages(this IMsdynlicencetypeknowledgebaserecset operations, string msdynAdoxioLicencetypeKnowledgebaserecid, MicrosoftDynamicsCRMmsdynAdoxioLicencetypeKnowledgebaserec body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IGlobaloptionsetdefinitions operations, string metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.UpdateWithHttpMessagesAsync(msdynAdoxioLicencetypeKnowledgebaserecid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(metadataId, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

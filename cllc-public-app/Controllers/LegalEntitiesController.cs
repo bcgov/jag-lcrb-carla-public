@@ -4,17 +4,18 @@ using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -27,14 +28,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
-        private readonly string _encryptionKey;        
+        private readonly string _encryptionKey;
 
         public LegalEntitiesController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
-            _encryptionKey = _configuration["ENCRYPTION_KEY"];            
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _logger = loggerFactory.CreateLogger(typeof(LegalEntitiesController));
         }
 
@@ -64,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: accountfilter).Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error while getting legal entities. ");
             }
@@ -103,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 result.Add(legalEntity.ToViewModel());
             }
-            
+
             return new JsonResult(result);
         }
 
@@ -134,14 +135,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var filter = "_adoxio_account_value eq " + accountId;
             if (shareHolders == null)
             {
-                shareHolders = new List<string>();                
+                shareHolders = new List<string>();
             }
-            
+
             var response = _dynamicsClient.Legalentities.Get(filter: filter);
 
             if (response != null && response.Value != null)
             {
-                var legalEntities = response.Value.ToList();                
+                var legalEntities = response.Value.ToList();
 
                 foreach (var legalEntity in legalEntities)
                 {
@@ -150,12 +151,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue) && !shareHolders.Contains(legalEntity._adoxioShareholderaccountidValue))
                     {
                         shareHolders.Add(legalEntity._adoxioShareholderaccountidValue);
-                        viewModel.relatedentities.AddRange ( GetAccountHierarchy(legalEntity._adoxioShareholderaccountidValue, shareHolders));
-                    }                    
+                        viewModel.relatedentities.AddRange(GetAccountHierarchy(legalEntity._adoxioShareholderaccountidValue, shareHolders));
+                    }
 
                     result.Add(viewModel);
                 }
-                
+
             }
             return result;
 
@@ -171,13 +172,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var filter = "_adoxio_account_value eq " + accountId;
             filter += " and adoxio_isindividual eq 0";
 
-            IList<MicrosoftDynamicsCRMadoxioLegalentity> response = null;
-
             try
             {
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value.ToList();
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error while getting account legal entities. ");
             }
@@ -185,10 +184,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(e, $"Unexpected Exception while getting legal entities.");
             }
-             
+
 
             if (legalEntities != null)
-            {                
+            {
                 var children = new List<MicrosoftDynamicsCRMadoxioLegalentity>();
 
                 foreach (var legalEntity in legalEntities)
@@ -257,7 +256,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value;
 
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error while getting account legal entities. ");
             }
@@ -265,7 +264,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(e, $"Unexpected Exception while getting legal entities.");
             }
-            
+
 
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
@@ -380,7 +379,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxioLegalEntity = await _dynamicsClient.Legalentities.CreateAsync(adoxioLegalEntity);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error while creating legal entity ");
                 throw new Exception("Unable to create legal entity");
@@ -402,13 +401,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
-                _logger.LogError(odee, $"Error while patching legal entity: {odee.Request.Content} Response: {odee.Response.Content}");                
+                _logger.LogError(odee, $"Error while patching legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Unexpected Exception while patching legal entity");                
+                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
             }
 
             // TODO take the default for now from the parent account's legal entity record
@@ -427,14 +426,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError(odee, $"Error adding LegalEntityOwned reference to legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
-                }                
+                }
             }
 
             return new JsonResult(adoxioLegalEntity.ToViewModel());
@@ -477,7 +476,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     account = _dynamicsClient.Accounts.Create(account);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError(odee, $"Error creating account: {odee.Request.Content} Response: {odee.Response.Content}");
                 }
@@ -491,20 +490,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid)
                 };
-                
+
                 adoxioLegalEntity.AdoxioShareholderAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
                 try
                 {
                     _dynamicsClient.Tiedhouseconnections.Create(tiedHouse);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
-                    _logger.LogError(odee, $"Error creating tied house connection: {odee.Request.Content} Response: {odee.Response.Content}");
+                    _logger.LogError(odee, $"Error creating tied house connection");
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e, $"Unexpected Exception while creating tied house connection");
-                }                
+                }
             }
             adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
             adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", item.parentLegalEntityId);
@@ -513,7 +512,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxioLegalEntity = _dynamicsClient.Legalentities.Create(adoxioLegalEntity);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error creating legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
             }
@@ -557,7 +556,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _dynamicsClient.Legalentities.Update(adoxio_legalentityid.ToString(), adoxioLegalEntity);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error updating legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
             }
@@ -565,7 +564,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(e, $"Unexpected Exception while updating legal entity");
             }
-            
+
 
             adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
 
@@ -592,7 +591,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Legalentities.DeleteAsync(adoxio_legalentityid.ToString());
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error deleting legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
             }
@@ -600,7 +599,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _logger.LogError(e, $"Unexpected Exception while deleting legal entity");
             }
-            
+
 
             return NoContent(); // 204
         }
@@ -673,7 +672,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
             // check that the session is setup correctly.
             userSettings.Validate();
-            
+
             MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
 
             // get the legal entity.
@@ -751,7 +750,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError(odee, $"Error updating date email sent. ");
                 }

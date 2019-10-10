@@ -10,6 +10,7 @@ using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -51,7 +52,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string filter = $"adoxio_orgbookcredentialresult eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {
@@ -142,7 +143,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string filter = $"adoxio_orgbookcredentialresult eq {(int)OrgBookCredentialStatus.Pass} and adoxio_orgbookcredentialid eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {
