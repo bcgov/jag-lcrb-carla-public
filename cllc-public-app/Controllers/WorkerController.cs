@@ -155,10 +155,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating contact");
-                throw odee;
+                _logger.LogError(httpOperationException, "Error updating contact");
+                throw httpOperationException;
             }
             worker = await _dynamicsClient.GetWorkerById(workerId);
             return new JsonResult(worker.ToViewModel());
@@ -189,9 +189,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error creating worker. ");
+                _logger.LogError(httpOperationException, $"Error creating worker. ");
             }
             catch (Exception e)
             {
@@ -204,9 +204,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error updating worker. ");
+                _logger.LogError(httpOperationException, $"Error updating worker. ");
             }
             catch (Exception e)
             {
@@ -242,9 +242,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Workers.DeleteAsync(id);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error updating worker. ");
+                _logger.LogError(httpOperationException, $"Error updating worker. ");
             }
 
 

@@ -29776,6 +29776,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "adoxio_changetype": {
+          "type": "integer",
+          "x-nullable": true
+        },
         "_adoxio_shareholderbusinessaccount_value": {
           "type": "string",
           "x-nullable": true

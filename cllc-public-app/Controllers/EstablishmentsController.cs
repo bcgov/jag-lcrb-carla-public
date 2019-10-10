@@ -66,16 +66,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("map")]
         [AllowAnonymous]
         public IActionResult GetMap(string search)
-        {
+        {     
             /*
-            string lginRegionsCacheKey = "LGIN_REGIONS";
-            Dictionary<int, string> lginRegions;
-            if (!_cache.TryGetValue(lginRegionsCacheKey, out lginRegions))
+            string communicationRegionsCacheKey = "LGIN_REGIONS";
+            Dictionary<int, string> communicationRegions;
+            if (!_cache.TryGetValue(communicationRegionsCacheKey, out communicationRegions))
             {
-                // populate the lginRegions.
+                // populate the communicationRegions.
+                try
+                {
+                    var regions = _dynamicsClient.Globaloptionsetdefinitions.GetByKey("46b91aec-49a5-4859-bd5b-e9edba00bb9d");
+                    foreach (var region in regions.Options)
+                    {
 
+                    }
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error getting communication regions.");
+                }
+                
             }
+
             */
+            
 
             string cacheKey;
             if (string.IsNullOrEmpty(search))
@@ -105,9 +119,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         applications = _dynamicsClient.Applications.Get(filter: applicationsFilter).Value;
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError("Error getting applications" + odee.Request.Content + "\n" + odee.Response.Content);
+                        _logger.LogError("Error getting applications" + httpOperationException.Request.Content + "\n" + httpOperationException.Response.Content);
                         throw new Exception("Unable to get applications");
                     }
                     catch (Exception e)
@@ -122,9 +136,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand).Value;
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error getting licenses");
+                        _logger.LogError(httpOperationException, "Error getting licenses");
                         throw new Exception("Unable to get licences");
                     }
                     catch (Exception e)
@@ -261,9 +275,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxio_establishment = await _dynamicsClient.Establishments.CreateAsync(adoxio_establishment);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error creating establishment");
+                _logger.LogError(httpOperationException, "Error creating establishment");
                 throw new Exception("Unable to create establishment");
             }
 
@@ -305,9 +319,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Establishments.UpdateAsync(adoxio_establishmentid.ToString(), adoxioEstablishment);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating establishment");
+                _logger.LogError(httpOperationException, "Error updating establishment");
                 throw new Exception("Unable to update establishment");
             }
 
@@ -315,9 +329,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxioEstablishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error getting establishment");
+                _logger.LogError(httpOperationException, "Error getting establishment");
                 throw new Exception("Unable to get establishment after update");
             }
 
@@ -344,9 +358,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Establishments.DeleteAsync(adoxio_establishmentid.ToString());
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error delete establishment");
+                _logger.LogError(httpOperationException, "Error delete establishment");
                 throw new Exception("Unable to delete establishment");
             }
 
