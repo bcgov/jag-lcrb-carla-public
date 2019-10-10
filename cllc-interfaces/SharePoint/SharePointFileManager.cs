@@ -99,7 +99,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 WebName = "/" + WebName;
             }
-            
+
 
             ApiEndpoint = sharePointOdataUri;
             // ensure there is a trailing slash.
@@ -173,22 +173,22 @@ namespace Gov.Lclb.Cllb.Interfaces
         public bool IsValid()
         {
             bool result = false;
-            if (! string.IsNullOrEmpty (OdataUri))
+            if (!string.IsNullOrEmpty(OdataUri))
             {
                 result = true;
             }
             return result;
         }
-        
+
         /// <summary>
         /// Escape the apostrophe character.  Since we use it to enclose the filename it must be escaped.
         /// </summary>
         /// <param name="filename"></param>
         /// <returns>Filename, with apropstophes escaped.</returns>
-        private string EscapeApostrophe (string filename)
+        private string EscapeApostrophe(string filename)
         {
             string result = null;
-            if (! string.IsNullOrEmpty(filename))
+            if (!string.IsNullOrEmpty(filename))
             {
                 result = filename.Replace("'", "''");
             }
@@ -205,7 +205,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             public DateTime Timecreated { get; set; }
             public DateTime Timelastmodified { get; set; }
         }
-        
+
 
         public class FileDetailsList
         {
@@ -226,7 +226,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
         {
             // return early if SharePoint is disabled.
-            if (! IsValid())
+            if (!IsValid())
             {
                 return null;
             }
@@ -255,7 +255,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     { "Accept", "application/json" }
                 }
             };
-            
+
             // make the request.
             var _httpResponse = await _Client.SendAsync(_httpRequest);
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return fileDetailsList;
         }
 
-        public string FixFilename (string filename)
+        public string FixFilename(string filename)
         {
             string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
@@ -337,10 +337,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 return;
             }
-            
-            folderName = FixFilename (folderName);
 
-            string relativeUrl = EscapeApostrophe ($"/{listTitle}/{folderName}");
+            folderName = FixFilename(folderName);
+
+            string relativeUrl = EscapeApostrophe($"/{listTitle}/{folderName}");
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
@@ -383,7 +383,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 string jsonString = await response.Content.ReadAsStringAsync();
             }
 
-            
+
         }
         /// <summary>
         /// Create Folder
@@ -401,7 +401,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/Lists");
 
-            if(documentTemplateUrlTitle == null)
+            if (documentTemplateUrlTitle == null)
             {
                 documentTemplateUrlTitle = listTitle;
             }
@@ -437,7 +437,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 jsonString = await response.Content.ReadAsStringAsync();
                 var ob = Newtonsoft.Json.JsonConvert.DeserializeObject<DocumentLibraryResponse>(jsonString);
 
-                if(listTitle != documentTemplateUrlTitle)
+                if (listTitle != documentTemplateUrlTitle)
                 {
                     // update list title
                     endpointRequest = new HttpRequestMessage(HttpMethod.Post, $"{ApiEndpoint}web/lists(guid'{ob.d.Id}')");
@@ -512,7 +512,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         private object CreateNewDocumentLibraryRequest(string listName)
         {
             var type = new { type = "SP.List" };
-            var request = new { __metadata = type,
+            var request = new
+            {
+                __metadata = type,
                 BaseTemplate = 101,
                 Title = listName
             };
@@ -610,7 +612,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             serverRelativeUrl += $"{listTitle}/{folderName}";
-            
+
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage()
             {
@@ -620,8 +622,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                     { "Accept", "application/json" }
                 }
             };
-            
-                        
+
+
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
@@ -701,7 +703,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
-            
+
             return serverRelativeUrl;
         }
 
@@ -813,7 +815,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     { "Accept", "application/json;odata=verbose" }
                 }
             };
-            
+
             // make the request.
             var response = await client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
@@ -835,7 +837,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         result = digests[0].InnerText;
                     }
                 }
-                
+
             }
 
             return result;
@@ -951,7 +953,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
     }
 
-   class DocumentLibraryResponse
+    class DocumentLibraryResponse
     {
         public DocumentLibraryResponseContent d { get; set; }
     }
