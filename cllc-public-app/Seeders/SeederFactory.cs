@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private readonly IDynamicsClient _dynamicsClient;
 
         private readonly List<Seeder<T>> _seederInstances = new List<Seeder<T>>();
-        
+
 
         /// <summary>
         /// SeedFactory Constructor
@@ -72,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         }
 
         private class SeederComparer<TY> : Comparer<Seeder<TY>> where TY : AppDbContext
-        {            
+        {
             public override int Compare(Seeder<TY> x, Seeder<TY> y)
             {
                 // < 0 x is less than y
@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                     rtnValue = 0;
                 }
 
-                if (x != null &&  y != null && (x.InvokeAfter == null && y.InvokeAfter != null))
+                if (x != null && y != null && (x.InvokeAfter == null && y.InvokeAfter != null))
                 {
                     rtnValue = -1;
                 }
@@ -100,7 +100,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                 }
 
                 return rtnValue;
-            }            
+            }
         }
     }
 }

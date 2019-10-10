@@ -7,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// ViewModel transforms.
     /// </summary>
     public static class ApplicationTypeContentExtensions
-    {        
+    {
 
         public static ApplicationTypeContent ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtypecontent dynamicsApplicationTypeContent)
         {
@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
                 */
             }
-            
+
 
             return result;
         }

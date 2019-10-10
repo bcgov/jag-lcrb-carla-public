@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(ContactController));
-            _env = env;            
+            _env = env;
         }
 
 
@@ -100,7 +101,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Contacts.UpdateAsync(contactId.ToString(), patchContact);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError("Error updating contact");
                 _logger.LogError("Request:");
@@ -146,33 +147,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     throw new Exception("Contact already Exists");
                 }
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid.");
                 _logger.LogError("Request:");
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
-                throw new OdataerrorException("Error getting contact by Siteminder Guid");
+                throw new HttpOperationException("Error getting contact by Siteminder Guid");
             }
 
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
             contact.CopyValues(item);
-            
+
 
             if (userSettings.IsNewUserRegistration)
             {
                 // get additional information from the service card headers.
-                contact.CopyHeaderValues( _httpContextAccessor );
-            }        
+                contact.CopyHeaderValues(_httpContextAccessor);
+            }
 
             contact.AdoxioExternalid = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
             try
             {
                 contact = await _dynamicsClient.Contacts.CreateAsync(contact);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(odee, $"Error creating contact. ");
             }
@@ -247,36 +248,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     throw new Exception("Contact already Exists");
                 }
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError(LoggingEvents.Error, "Error getting contact by Siteminder Guid.");
                 _logger.LogError("Request:");
                 _logger.LogError(odee.Request.Content);
                 _logger.LogError("Response:");
                 _logger.LogError(odee.Response.Content);
-                throw new OdataerrorException("Error getting contact by Siteminder Guid");
+                throw new HttpOperationException("Error getting contact by Siteminder Guid");
             }
 
             // create a new contact.
             MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact();
-            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker() {
+            MicrosoftDynamicsCRMadoxioWorker worker = new MicrosoftDynamicsCRMadoxioWorker()
+            {
                 AdoxioFirstname = item.firstname,
                 AdoxioMiddlename = item.middlename,
                 AdoxioLastname = item.lastname,
                 AdoxioIsmanual = 0 // 0 for false - is a portal user.
             };
-            
+
 
             contact.CopyValues(item);
             // set the type to Retail Worker.
             contact.Customertypecode = 845280000;
 
-      
+
             if (userSettings.IsNewUserRegistration && userSettings.NewWorker != null && !_env.IsDevelopment())
             {
                 // get additional information from the service card headers.
                 contact.CopyContactUserSettings(userSettings.NewContact);
-                worker.CopyValues(userSettings.NewWorker);                
+                worker.CopyValues(userSettings.NewWorker);
             }
 
             //Default the country to Canada
@@ -300,7 +302,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 contact = await _dynamicsClient.GetContactById(Guid.Parse(worker._adoxioContactidValue));
                 await CreateSharepointDynamicsLink(worker);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError("Error updating contact");
                 _logger.LogError("Request:");
@@ -386,7 +388,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError("Error creating SharepointDocumentLocation");
                 _logger.LogError("Request:");
@@ -409,7 +411,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError("Error adding reference SharepointDocumentLocation to application");
                     _logger.LogError("Request:");
@@ -429,7 +431,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _dynamicsClient.Workers.AddReference(worker.AdoxioWorkerid, "adoxio_worker_SharePointDocumentLocations", oDataId);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError("Error adding reference to SharepointDocumentLocation");
                     _logger.LogError("Request:");
@@ -471,7 +473,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError("Error creating document location");
                     _logger.LogError("Request:");

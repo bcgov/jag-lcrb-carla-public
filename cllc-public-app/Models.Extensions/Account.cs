@@ -1,5 +1,5 @@
-﻿using System;
-using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using System;
 
 
 namespace Gov.Lclb.Cllb.Public.Models

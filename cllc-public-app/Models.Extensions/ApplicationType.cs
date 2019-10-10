@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
                     EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
                     StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
-                    EstablishmentName = (FormControlState?) applicationType.AdoxioEstablishmentname,
+                    EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,
                     newEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
                     CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,
                     Signage = (FormControlState?)applicationType.AdoxioSignage,

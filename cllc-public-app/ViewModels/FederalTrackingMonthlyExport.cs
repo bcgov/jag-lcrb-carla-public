@@ -216,7 +216,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public void PopulateProduct(MicrosoftDynamicsCRMadoxioCannabisinventoryreport inventoryReport, MicrosoftDynamicsCRMadoxioCannabisproductadmin product)
         {
-            switch(product.AdoxioName)
+            switch (product.AdoxioName)
             {
                 case "Seeds":
                     SeedsPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
