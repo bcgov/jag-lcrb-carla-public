@@ -10,7 +10,11 @@ import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { MatDialog } from '@angular/material';
 import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
 import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
-import { filter } from 'rxjs/operators';
+import { filter, takeWhile } from 'rxjs/operators';
+import { Route, ActivatedRoute } from '@angular/router';
+import { ApplicationDataService } from '@services/application-data.service';
+import { FormBase } from '@shared/form-base';
+import { Application } from '@models/application.model';
 
 
 
@@ -32,7 +36,7 @@ interface FoodNode {
   templateUrl: './licensee-tree.component.html',
   styleUrls: ['./licensee-tree.component.scss'],
 })
-export class LicenseeTreeComponent implements OnInit {
+export class LicenseeTreeComponent extends FormBase implements OnInit {
   treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   dataSource = new MatTreeNestedDataSource<any>();
   @ViewChild('tree') tree: MatTree<any>;
@@ -43,11 +47,16 @@ export class LicenseeTreeComponent implements OnInit {
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
   treeRoot: LicenseeChangeLog;
+  applicationId: string;
+  application: Application;
 
   constructor(private store: Store<AppState>,
     public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService) {
-    // this.dataSource.data = TREE_DATA;
+    super();
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
@@ -61,6 +70,38 @@ export class LicenseeTreeComponent implements OnInit {
         this.dataSource.data = [this.treeRoot];
         this.refreshTreeAndChangeTables();
       });
+
+    this.applicationDataService.getApplicationById(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: Application) => {
+        if (data.establishmentParcelId) {
+          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+        }
+        if (data.applicantType === 'IndigenousNation') {
+          (<any>data).applyAsIndigenousNation = true;
+        }
+        this.application = data;
+        // this.hideFormControlByType();
+
+        // this.addDynamicContent();
+
+        const noNulls = Object.keys(data)
+          .filter(e => data[e] !== null)
+          .reduce((o, e) => {
+            o[e] = data[e];
+            return o;
+          }, {});
+
+        this.form.patchValue(noNulls);
+        if (data.isPaid) {
+          this.form.disable();
+        }
+        // this.savedFormData = this.form.value;
+      },
+        () => {
+          console.log('Error occured');
+        }
+      );
   }
 
   editAssociate(node) {
@@ -95,13 +136,13 @@ export class LicenseeTreeComponent implements OnInit {
     this.openLeadershipDialog({})
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
-          formData.typeOfChange = 'add';
-          formData.isIndividual = true;
-          formData.parentLinceseeChangeLog = node;
-          node.children = node.children || [];
-          node.children.push(formData);
-          this.refreshTreeAndChangeTables();
-        }
+        formData.typeOfChange = 'add';
+        formData.isIndividual = true;
+        formData.parentLinceseeChangeLog = node;
+        node.children = node.children || [];
+        node.children.push(formData);
+        this.refreshTreeAndChangeTables();
+      }
       );
   }
 
@@ -147,18 +188,6 @@ export class LicenseeTreeComponent implements OnInit {
       });
     }
     return newNode;
-  }
-
-  showAddLink(node: LicenseeChangeLog): boolean {
-    return true;
-  }
-
-  showEditLink(node: LicenseeChangeLog): boolean {
-    return true;
-  }
-
-  showDeleteLink(node: LicenseeChangeLog): boolean {
-    return true;
   }
 
   openShareholderDialog(shareholder) {
@@ -234,6 +263,13 @@ export class LicenseeTreeComponent implements OnInit {
         this.populateChangeTables(child);
       });
     }
+  }
+
+  save() {
+    this.legalEntityDataService.saveLicenseeChanges(this.treeRoot, this.applicationId)
+    .subscribe((data) => {
+      debugger;
+    });
   }
 
   OnDestroy() {

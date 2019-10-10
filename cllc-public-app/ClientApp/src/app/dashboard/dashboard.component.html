@@ -38,7 +38,7 @@
       <p>Inquires related to your application can be directed to <a
           href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
       <p></p>
-
+      <button (click)="startLicenseeChangeApplication()">Start Licensee Change Application</button>
       <app-applications-and-licences [account]="account">
       </app-applications-and-licences>
 
@@ -65,7 +65,8 @@
         </div>
       </section>
       <p></p>
-      <app-associate-content [account]="account" [isIndigenousNation]="indigenousNationModeActive"></app-associate-content>
+      <app-associate-content [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      </app-associate-content>
       <p></p>
     </div>
   </div>
