@@ -187,7 +187,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
                     {
                         AdoxioOrgbookcredentialid = credentialId.ToString(),
-                        AdoxioOrgbookorganizationlink = credentialLink
+                        AdoxioOrgbookcredentiallink = credentialLink
                     });
                     _logger.LogInformation($"Successfully updated licence - credential ID: {credentialId} to {registrationId}.");
                     hangfireContext.WriteLine($"Successfully updated licence - credential ID: {credentialId} to {registrationId}.");
