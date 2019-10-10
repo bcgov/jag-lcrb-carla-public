@@ -37,11 +37,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 return new JsonResult(result);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating application");
+                _logger.LogError(httpOperationException, "Error updating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
         }
 

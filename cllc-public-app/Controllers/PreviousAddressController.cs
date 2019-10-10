@@ -103,9 +103,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Previousaddresses.UpdateAsync(id, patchAddress);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating Address");
+                _logger.LogError(httpOperationException, "Error updating Address");
             }
 
             Address = await _dynamicsClient.GetPreviousAddressById(id);
@@ -132,11 +132,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 address = _dynamicsClient.Previousaddresses.Create(address);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error creating application");
+                _logger.LogError(httpOperationException, "Error creating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
 
@@ -153,11 +153,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 await _dynamicsClient.Previousaddresses.UpdateAsync(address.AdoxioPreviousaddressid, patchAddress);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating application");
+                _logger.LogError(httpOperationException, "Error updating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
             return new JsonResult(address.ToViewModel());

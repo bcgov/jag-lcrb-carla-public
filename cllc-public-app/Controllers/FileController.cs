@@ -92,9 +92,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, "Error creating document location");
+                    _logger.LogError(httpOperationException, "Error creating document location");
                 }
             }
 
@@ -240,11 +240,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(entityId, patchApplication);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating application");
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail if we can't create.
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     break;
                 case "contact":
@@ -253,11 +253,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Contacts.Update(entityId, patchContact);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating Contact");
+                        _logger.LogError(httpOperationException, "Error updating Contact");
                         // fail if we can't create.
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     break;
                 case "worker":
@@ -266,11 +266,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Workers.Update(entityId, patchWorker);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating Contact");
+                        _logger.LogError(httpOperationException, "Error updating Contact");
                         // fail if we can't create.
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     break;
 
