@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         hangfireContext.WriteLine($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
                     }
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     hangfireContext.WriteLine("Error updating worker security status");
                     hangfireContext.WriteLine("Request:");
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             _logger.LogError($"Error updating application - received an invalid status of {applicationResponse.Result}");
                         }
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         hangfireContext.WriteLine("Error updating application");
                         hangfireContext.WriteLine("Request:");
@@ -562,7 +562,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 return screeningRequest;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError("Error creating application screening request");
                 _logger.LogError("Request:");

@@ -397,6 +397,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISharepointsites Sharepointsites { get; private set; }
 
         /// <summary>
+        /// Gets the IEntitydefinitions.
+        /// </summary>
+        public virtual IEntitydefinitions Entitydefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IGlobaloptionsetdefinitions.
+        /// </summary>
+        public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
         /// </summary>
         /// <param name='httpClient'>
@@ -708,6 +718,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
+            Entitydefinitions = new Entitydefinitions(this);
+            Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             BaseUri = new System.Uri("https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2");
             SerializationSettings = new JsonSerializerSettings
             {

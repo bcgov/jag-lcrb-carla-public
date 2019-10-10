@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Gov.Lclb.Cllb.Public.Models
+﻿namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// ViewModel transforms.
@@ -21,8 +18,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.description = newsletter.Description;
                 result.slug = newsletter.Slug;
                 result.title = newsletter.Title;
-            }            
+            }
             return result;
-        }        
+        }
     }
 }

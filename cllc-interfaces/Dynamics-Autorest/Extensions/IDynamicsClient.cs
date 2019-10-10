@@ -2,9 +2,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 {
     using Microsoft.Rest;
     using Models;
-    using Newtonsoft.Json;
-    using System.Threading.Tasks;
     using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Auto Generated
@@ -18,7 +17,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         string GetEntityURI(string entityType, string id);
 
-        string GetCreatedRecord(OdataerrorException odee, string errorMessage);
+        string GetCreatedRecord(HttpOperationException odee, string errorMessage);
 
         Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(Guid id);
         Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(Guid id);

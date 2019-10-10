@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -50,19 +46,19 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public MarketerYesNo? CrsConnectionToMarketer { get; set; }
 
-        public string CrsConnectionToMarketerDetails {  get; set; }
+        public string CrsConnectionToMarketerDetails { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public MarketerYesNo? MarketerConnectionToCrs {  get; set; }
+        public MarketerYesNo? MarketerConnectionToCrs { get; set; }
 
-        public string MarketerConnectionToCrsDetails {  get; set; }
+        public string MarketerConnectionToCrsDetails { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty(PropertyName = "iNConnectionToFederalProducer")]
-        public MarketerYesNo? INConnectionToFederalProducer {  get; set; }
+        public MarketerYesNo? INConnectionToFederalProducer { get; set; }
 
         [JsonProperty(PropertyName = "iNConnectionToFederalProducerDetails")]
-        public string INConnectionToFederalProducerDetails {  get; set; }
+        public string INConnectionToFederalProducerDetails { get; set; }
 
         public bool isConnectionToProducersComplete(AdoxioApplicantTypeCodes? legalentitytype)
         {

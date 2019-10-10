@@ -10,6 +10,7 @@ using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -51,7 +52,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string filter = $"adoxio_orgbookcredentialresult eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {
@@ -142,7 +143,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string filter = $"adoxio_orgbookcredentialresult eq {(int)OrgBookCredentialStatus.Pass} and adoxio_orgbookcredentialid eq null and statuscode eq 1";
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {
@@ -186,7 +187,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
                     {
                         AdoxioOrgbookcredentialid = credentialId.ToString(),
-                        AdoxioOrgbookorganizationlink = credentialLink
+                        AdoxioOrgbookcredentiallink = credentialLink
                     });
                     _logger.LogInformation($"Successfully updated licence - credential ID: {credentialId} to {registrationId}.");
                     hangfireContext.WriteLine($"Successfully updated licence - credential ID: {credentialId} to {registrationId}.");
@@ -220,15 +221,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                 string filter = $"adoxio_orgbookorganizationlink eq null and adoxio_businessregistrationnumber eq null and adoxio_bcincorporationnumber ne null";
                 result = _dynamics.Accounts.Get(filter: filter, select: select).Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {
-                    _logger.LogError("Error getting accounts");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(odee,"Error getting accounts");                    
                     hangfireContext.WriteLine("Error getting accounts");
                     hangfireContext.WriteLine("Request:");
                     hangfireContext.WriteLine(odee.Request.Content);

@@ -1,17 +1,17 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Role Database Model
     /// </summary>
-        public sealed partial class Role :  IEquatable<Role>
+    public sealed partial class Role : IEquatable<Role>
     {
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="rolePermissions">RolePermissions.</param>
         /// <param name="userRoles">UserRoles.</param>
         public Role(Guid id, string name, string description, List<RolePermission> rolePermissions = null, List<UserRole> userRoles = null)
-        {   
+        {
             Id = id;
             Name = name;
             Description = description;
@@ -45,26 +45,26 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// The name of the Role, as established by the user creating the role.
         /// </summary>
         /// <value>The name of the Role, as established by the user creating the role.</value>
-        [MaxLength(255)]        
+        [MaxLength(255)]
         public string Name { get; set; }
-        
+
         /// <summary>
         /// A description of the role as set by the user creating&#x2F;updating the role.
         /// </summary>
         /// <value>A description of the role as set by the user creating&#x2F;updating the role.</value>
-        [MaxLength(2048)]        
+        [MaxLength(2048)]
         public string Description { get; set; }
-        
+
         /// <summary>
         /// Gets or Sets RolePermissions
         /// </summary>
         public List<RolePermission> RolePermissions { get; set; }
-        
+
         /// <summary>
         /// Gets or Sets UserRoles
         /// </summary>
         public List<UserRole> UserRoles { get; set; }
-        
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -115,26 +115,26 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (other is null) { return false; }
             if (ReferenceEquals(this, other)) { return true; }
 
-            return                 
+            return
                 (
                     Id == other.Id ||
                     Id.Equals(other.Id)
-                ) &&                 
+                ) &&
                 (
                     Name == other.Name ||
                     Name != null &&
                     Name.Equals(other.Name)
-                ) &&                 
+                ) &&
                 (
                     Description == other.Description ||
                     Description != null &&
                     Description.Equals(other.Description)
-                ) && 
+                ) &&
                 (
                     RolePermissions == other.RolePermissions ||
                     RolePermissions != null &&
                     RolePermissions.SequenceEqual(other.RolePermissions)
-                ) && 
+                ) &&
                 (
                     UserRoles == other.UserRoles ||
                     UserRoles != null &&
@@ -164,8 +164,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (Description != null)
                 {
                     hash = hash * 59 + Description.GetHashCode();
-                }                
-                                   
+                }
+
                 if (RolePermissions != null)
                 {
                     hash = hash * 59 + RolePermissions.GetHashCode();
@@ -181,7 +181,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

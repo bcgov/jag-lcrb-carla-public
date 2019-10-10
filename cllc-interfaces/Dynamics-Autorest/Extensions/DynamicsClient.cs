@@ -1,15 +1,10 @@
 namespace Gov.Lclb.Cllb.Interfaces
 {
     using Microsoft.Rest;
-    using Microsoft.Rest.Serialization;
     using Models;
-    using Newtonsoft.Json;
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
-    using System.Net.Http;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -35,7 +30,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="odee">the source exception</param>
         /// <param name="errorMessage">The error message to present if no entity was created, or null if no error should be shown.</param>
         /// <returns>The ID of a new record, or null of no record was created</returns>
-        public string GetCreatedRecord(OdataerrorException odee, string errorMessage)
+        public string GetCreatedRecord(HttpOperationException odee, string errorMessage)
         {
             string result = null;
             if (odee.Response.StatusCode == System.Net.HttpStatusCode.NoContent && odee.Response.Headers.ContainsKey("OData-EntityId") && odee.Response.Headers["OData-EntityId"] != null)
@@ -78,7 +73,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioApplicant = await GetAccountById(Guid.Parse(result._adoxioApplicantValue));
                 }
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -96,7 +91,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     "adoxio_AssignedLicence",
                     "adoxio_ApplicationTypeId",
                     "adoxio_LicenceFeeInvoice",
-                    "adoxio_Invoice"                    
+                    "adoxio_Invoice"
                 };
 
                 // fetch from Dynamics.
@@ -124,7 +119,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioAssignedLicence.AdoxioEstablishment = GetEstablishmentById(Guid.Parse(result.AdoxioAssignedLicence._adoxioEstablishmentValue));
                 }
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException ex)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -152,7 +147,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = this.Licencetypes.GetByKey(adoxioLicencetypeid: id, expand: expand);
 
             }
-            catch (OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -190,7 +185,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await Accounts.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -202,7 +197,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     result.Primarycontactid = await GetContactById(Guid.Parse(result._primarycontactidValue));
                 }
-                catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+                catch (HttpOperationException)
                 {
                     result.Primarycontactid = null;
                 }
@@ -218,7 +213,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await Contacts.GetByKeyAsync(id);
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -236,7 +231,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(Guid id)
         {
-            return GetEstablishmentById(id.ToString());            
+            return GetEstablishmentById(id.ToString());
         }
 
 
@@ -248,7 +243,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = Establishments.GetByKey(id);
             }
-            catch (OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -265,7 +260,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 result = this.Localgovindigenousnations.GetByKey(id);
             }
-            catch (OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -282,7 +277,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await Workers.GetByKeyAsync(id);
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -304,7 +299,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
                 result = this.Workers.GetByKey(adoxioWorkerid: id, expand: expand);
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -326,7 +321,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment", "adoxio_LicenceType" };
                 result = this.Licenceses.GetByKey(adoxioLicencesid: id, expand: expand);
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 // return null if we can't get results.
                 result = null;

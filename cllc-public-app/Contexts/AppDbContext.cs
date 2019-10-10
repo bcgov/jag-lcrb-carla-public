@@ -1,13 +1,8 @@
 ﻿using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
@@ -51,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             return new AppDbContext(_httpContextAccessor, _options);
         }
     }
-    
+
 
     public class AppDbContext : DbContext
     {
@@ -97,8 +92,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserRole> UserRoles { get; set; } 
-        
+        public DbSet<UserRole> UserRoles { get; set; }
+
         public DbSet<VoteOption> VoteOptions { get; set; }
 
         public DbSet<VoteQuestion> VoteQuestions { get; set; }

@@ -1,13 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-    public enum IdentificationType {
+    public enum IdentificationType
+    {
         DriversLicence = 845280000,
         BCIdCard = 845280005
     }

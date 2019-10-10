@@ -1,17 +1,15 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Role Database Model
     /// </summary>
-        public sealed partial class VoteOption :  IEquatable<VoteOption>
+    public sealed partial class VoteOption : IEquatable<VoteOption>
     {
 
         /// <summary>
@@ -23,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="rolePermissions">RolePermissions.</param>
         /// <param name="userRoles">UserRoles.</param>
         public VoteOption(Guid id, string question, int totalVotes, int displayOrder)
-        {   
+        {
             Id = id;
             Option = question;
             TotalVotes = totalVotes;
@@ -32,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public VoteOption()
         {
-           
+
         }
 
         /// <summary>
@@ -42,12 +40,12 @@ namespace Gov.Lclb.Cllb.Public.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        
+
         /// <summary>
         /// The name of the Role, as established by the user creating the role.
         /// </summary>
         /// <value>The name of the Role, as established by the user creating the role.</value>
-        [MaxLength(512)]        
+        [MaxLength(512)]
         public string Option { get; set; }
 
         public int TotalVotes { get; set; }
@@ -119,7 +117,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     TotalVotes.Equals(other.TotalVotes)
                 ) &&
                 (
-                    DisplayOrder == other.DisplayOrder ||                    
+                    DisplayOrder == other.DisplayOrder ||
                     DisplayOrder.Equals(other.DisplayOrder)
                 );
         }
@@ -145,16 +143,16 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 // TotalVotes is never null
                 hash = hash * 59 + TotalVotes.GetHashCode();
-                
+
                 // DisplayOrder is never null, so no null check.
-                hash = hash * 59 + DisplayOrder.GetHashCode();                                
+                hash = hash * 59 + DisplayOrder.GetHashCode();
 
                 return hash;
             }
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

@@ -8,17 +8,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     // public controller.
     public class SurveyController : ControllerBase
-    {        
+    {
         private readonly AppDbContext db;
         public SurveyController(AppDbContext db)
-        {            
+        {
             this.db = db;
         }
         [HttpGet("getActive")]
         [AllowAnonymous]
         public JsonResult GetActive()
         {
-            
+
             return new JsonResult(db.GetSurveys());
         }
 

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Gov.Lclb.Cllb.Public.Utils
 {
     public class TestUtility
     {
-		public static bool InUnitTestMode()
+        public static bool InUnitTestMode()
         {
             foreach (var assem in Assembly.GetEntryAssembly().GetReferencedAssemblies())
             {

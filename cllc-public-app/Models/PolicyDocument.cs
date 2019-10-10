@@ -1,17 +1,15 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Policy Database Model
     /// </summary>
-        public sealed partial class PolicyDocument :  IEquatable<PolicyDocument>
+    public sealed partial class PolicyDocument : IEquatable<PolicyDocument>
     {
 
         /// <summary>
@@ -20,9 +18,9 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a VoteQuestion (required).</param>
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
-        public PolicyDocument(Guid id,  string slug, string title, string menuText, string category, string body, int displayOrder)
-        {   
-            Id = id;            
+        public PolicyDocument(Guid id, string slug, string title, string menuText, string category, string body, int displayOrder)
+        {
+            Id = id;
             Slug = slug;
             Title = title;
             MenuText = menuText;
@@ -38,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
         public PolicyDocument(string slug, string title, string menuText, string category, string body, int displayOrder)
-        {            
+        {
             Slug = slug;
             Title = title;
             MenuText = menuText;
@@ -52,15 +50,15 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
 
         }
-        
+
 
         /// <summary>
         /// A system-generated unique identifier for a Newsletter
         /// </summary>
         /// <value>A system-generated unique identifier for a Role</value>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }        
-        
+        public Guid Id { get; set; }
+
         public string MenuText { get; set; }
 
         // category is used to build the side nav.
@@ -72,10 +70,10 @@ namespace Gov.Lclb.Cllb.Public.Models
         public string Title { get; set; }
 
         // string used to query the database to get a given question data.
-        public string Slug { get; set; }   
-        
+        public string Slug { get; set; }
+
         public int DisplayOrder { get; set; }
-        
+
         /// <summary>
         /// <summary>
         /// Returns the string presentation of the object
@@ -165,14 +163,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (Slug != null)
                 {
                     hash = hash * 59 + Slug.GetHashCode();
-                }                
-                                   
+                }
+
                 return hash;
             }
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

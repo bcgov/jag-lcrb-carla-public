@@ -1,9 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -40,7 +37,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsUniversity { get; set; }
         public bool? IsUnlimitedLiabilityCorporation { get; set; }
 
-        public List<string> BusinessTypes { get
+        public List<string> BusinessTypes
+        {
+            get
             {
                 var businessTypes = new List<string>();
 
@@ -111,6 +110,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 }
 
                 return businessTypes;
-            } }
+            }
+        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 
 namespace Gov.Lclb.Cllb.Public.Authorization
 {
@@ -38,7 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Authorization
         {
             _httpContext = httpContextAccessor.HttpContext;
             _hostingEnv = hostingEnv;
-        }       
+        }
 
         /// <summary>
         /// Permission Handler
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Authorization
         /// <param name="requirement"></param>
         /// <returns></returns>
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
-        {            
+        {
             // **************************************************
             // Check if we have a Dev Environment Cookie
             // **************************************************
@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Public.Authorization
                 string temp = _httpContext.Request.Cookies["DEV-USER"];
 
                 if (string.IsNullOrEmpty(temp))
-                { 
+                {
                     // may be a dev header.
                     temp = _httpContext.Request.Headers["DEV-USER"];
                 }
@@ -70,9 +70,9 @@ namespace Gov.Lclb.Cllb.Public.Authorization
                     await Task.CompletedTask;
                     return;
                 }
-				else
-				{
-					temp = _httpContext.Request.Cookies["DEV-BCSC-USER"];
+                else
+                {
+                    temp = _httpContext.Request.Cookies["DEV-BCSC-USER"];
 
                     if (string.IsNullOrEmpty(temp))
                     {
@@ -89,9 +89,9 @@ namespace Gov.Lclb.Cllb.Public.Authorization
                         await Task.CompletedTask;
                         return;
                     }
-				}
+                }
             }
-            
+
             // **************************************************
             // If not - check the users permissions
             // **************************************************

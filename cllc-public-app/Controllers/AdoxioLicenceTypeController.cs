@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 // TODO implement this with autorest
 
 namespace Gov.Lclb.Cllb.Public.Controllers
-{    
+{
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
     public class AdoxioLicenceTypeController : ControllerBase
-    {                  
+    {
         private readonly IDynamicsClient _dynamicsClient;
 
         public AdoxioLicenceTypeController(IDynamicsClient dynamicsClient)
-        {                      
+        {
             _dynamicsClient = dynamicsClient;
         }
 
@@ -44,13 +44,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public ActionResult GetDynamicsLicenseType(string id)
         {
             Guid licenceTypeId;
-            if (string.IsNullOrEmpty (id) || !Guid.TryParse(id, out licenceTypeId))
+            if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out licenceTypeId))
             {
                 return new NotFoundResult();
             }
 
             // get all licenses in Dynamics by Licencee Id
-            var adoxioLicenceType =_dynamicsClient.GetAdoxioLicencetypeById(licenceTypeId);
+            var adoxioLicenceType = _dynamicsClient.GetAdoxioLicencetypeById(licenceTypeId);
             if (adoxioLicenceType == null)
             {
                 return new NotFoundResult();
@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new JsonResult(adoxioLicenceType.ToViewModel());
             }
-            
+
         }
 
     }
