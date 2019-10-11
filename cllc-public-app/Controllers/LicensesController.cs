@@ -62,11 +62,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return Forbid();
                 }
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error getting licence by id");
+                _logger.LogError(httpOperationException, "Error getting licence by id");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
 
@@ -107,11 +107,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create application
                 _dynamicsClient.Licenceses.Update(item.LicenceId, patchLicence);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error initiating licence transfer");
+                _logger.LogError(httpOperationException, "Error initiating licence transfer");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
             return Ok();
         }
@@ -166,9 +166,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     application = _dynamicsClient.Applications.Create(application);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    string applicationId = _dynamicsClient.GetCreatedRecord(odee, null);
+                    string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                     if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
                     {
                         application = await _dynamicsClient.GetApplicationById(applicationGuid);
@@ -176,9 +176,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     else
                     {
 
-                        _logger.LogError(odee, "Error creating application");
+                        _logger.LogError(httpOperationException, "Error creating application");
                         // fail if we can't create.
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
                 }
@@ -194,9 +194,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchApplication);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, "Error updating application");
+                    _logger.LogError(httpOperationException, "Error updating application");
                 }
 
                 return new JsonResult(await application.ToViewModel(_dynamicsClient));

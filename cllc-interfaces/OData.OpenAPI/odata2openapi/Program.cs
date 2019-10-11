@@ -510,8 +510,7 @@ namespace odata2openapi
                     if (//!definition.Key.Contains("_GetResponseModel") && 
                         !definition.Key.Contains("odata.error") &&
                         !definition.Key.Contains("crmbaseentity") &&
-                        
-
+                        !definition.Key.ToLower().Contains("optionmetadata") &&
                         !defsToKeep.Contains(definition.Value.Title))
                     {
                         defsToRemove.Add(definition.Key);
