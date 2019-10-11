@@ -5,7 +5,7 @@ import { Contact } from './contact.model';
 
 export class LicenseeChangeLog {
   id: string; // guid
-  typeOfChange: string;
+  changeType: string;
   isIndividual: boolean;
   isDirectorNew: boolean;
   isDirectorOld: boolean;
@@ -54,7 +54,7 @@ export class LicenseeChangeLog {
     if (legalEntity) {
       this.legalEntityId = legalEntity.id;
       this.parentLegalEntityId = legalEntity.parentLegalEntityId;
-      this.typeOfChange = 'unchanged';
+      this.changeType = 'unchanged';
       this.isIndividual = legalEntity.isindividual;
       this.isDirectorNew = legalEntity.isDirector;
       this.isDirectorOld = legalEntity.isDirector;
