@@ -363,6 +363,7 @@
           "targetPort": "8443-tcp"
         },
         "tls": {
+		  "insecureEdgeTerminationPolicy": "Allow",
           "termination": "reencrypt"
         },
         "to": {
@@ -403,6 +404,9 @@
         "name": "${NAME}-8088"
       },
       "spec": {
+        "tls": {
+		  "insecureEdgeTerminationPolicy": "Allow"
+        },
         "port": {
           "targetPort": "8088-tcp"
         },

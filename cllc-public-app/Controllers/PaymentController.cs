@@ -81,11 +81,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _dynamicsClient.Applications.Update(id, patchApplication);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating application");
+                _logger.LogError(httpOperationException, "Error updating application");
                 // fail 
-                throw (odee);
+                throw (httpOperationException);
             }
             var application = await GetDynamicsApplication(id);
 
@@ -164,11 +164,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         };
                         _dynamicsClient.Applications.Update(id, fixApplication);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating application");
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                 }
                 return NotFound("Payment already made");
@@ -191,11 +191,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating application");
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     application = await GetDynamicsApplication(id);
                 }
@@ -308,11 +308,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating invoice");
+                        _logger.LogError(httpOperationException, "Error updating invoice");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
                     MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
@@ -326,11 +326,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating application");
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                 }
                 // if payment failed:
@@ -348,11 +348,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating invoice");
+                        _logger.LogError(httpOperationException, "Error updating invoice");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     // set the Application invoice status back to No
                     MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication()
@@ -363,11 +363,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, adoxioApplication2);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating application");
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
                 }
@@ -441,11 +441,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating invoice");
+                        _logger.LogError(httpOperationException, "Error updating invoice");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
                     // set the Application payment status
@@ -457,11 +457,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, patchApplication);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating application");
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
                     // trigger geocoding
@@ -486,12 +486,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating invoice");
+                        _logger.LogError(httpOperationException, "Error updating invoice");
 
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
 
@@ -504,11 +504,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(id, patchApplication);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating application");
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                 }
             }
@@ -660,11 +660,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _dynamicsClient.Workers.Update(workerId, patchWorker);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating worker");
+                _logger.LogError(httpOperationException, "Error updating worker");
                 // fail 
-                throw (odee);
+                throw (httpOperationException);
             }
             // we set the getInvoice parameter to false here as there is a chance the Invoice is not created yet - so we may not be able to expand.
             patchWorker = await GetDynamicsWorker(workerId, false);
@@ -773,11 +773,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating invoice");
+                        _logger.LogError(httpOperationException, "Error updating invoice");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker()
                     {
@@ -789,15 +789,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Workers.Update(workerId, patchWorker);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
                         _logger.LogError("Error updating worker");
                         _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
+                        _logger.LogError(httpOperationException.Request.Content);
                         _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(httpOperationException.Response.Content);
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
                 }
@@ -816,11 +816,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating invoice");
+                        _logger.LogError(httpOperationException, "Error updating invoice");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
 
 
@@ -835,11 +835,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Workers.Update(workerId, patchWorker);
                     }
-                    catch (HttpOperationException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, "Error updating worker");
+                        _logger.LogError(httpOperationException, "Error updating worker");
                         // fail 
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                 }
             }

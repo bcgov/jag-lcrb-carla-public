@@ -85,9 +85,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Tiedhouseconnections.UpdateAsync(tiedHouseId.ToString(), tiedHouse);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating tied house connections");
+                _logger.LogError(httpOperationException, "Error updating tied house connections");
                 throw new Exception("Unable to update tied house connections");
             }
 

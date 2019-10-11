@@ -27,16 +27,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Get 
         /// </summary>
-        /// <param name="odee">the source exception</param>
+        /// <param name="httpOperationException">the source exception</param>
         /// <param name="errorMessage">The error message to present if no entity was created, or null if no error should be shown.</param>
         /// <returns>The ID of a new record, or null of no record was created</returns>
-        public string GetCreatedRecord(HttpOperationException odee, string errorMessage)
+        public string GetCreatedRecord(HttpOperationException httpOperationException, string errorMessage)
         {
             string result = null;
-            if (odee.Response.StatusCode == System.Net.HttpStatusCode.NoContent && odee.Response.Headers.ContainsKey("OData-EntityId") && odee.Response.Headers["OData-EntityId"] != null)
+            if (httpOperationException.Response.StatusCode == System.Net.HttpStatusCode.NoContent && httpOperationException.Response.Headers.ContainsKey("OData-EntityId") && httpOperationException.Response.Headers["OData-EntityId"] != null)
             {
 
-                string temp = odee.Response.Headers["OData-EntityId"].FirstOrDefault();
+                string temp = httpOperationException.Response.Headers["OData-EntityId"].FirstOrDefault();
                 int guidStart = temp.LastIndexOf("(");
                 int guidEnd = temp.LastIndexOf(")");
                 result = temp.Substring(guidStart + 1, guidEnd - (guidStart + 1));
@@ -47,9 +47,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (errorMessage != null)
                 {
                     Console.WriteLine(errorMessage);
-                    Console.WriteLine(odee.Message);
-                    Console.WriteLine(odee.Request.Content);
-                    Console.WriteLine(odee.Response.Content);
+                    Console.WriteLine(httpOperationException.Message);
+                    Console.WriteLine(httpOperationException.Request.Content);
+                    Console.WriteLine(httpOperationException.Response.Content);
                 }
             }
             return result;

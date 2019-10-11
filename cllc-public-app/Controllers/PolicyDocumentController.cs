@@ -103,10 +103,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
                     // this will gracefully handle situations where Dynamics is not available however we have a cache version.
-                    _logger.LogError(odee, "Error getting policy documents by category");
+                    _logger.LogError(httpOperationException, "Error getting policy documents by category");
                 }
                 catch (Exception e)
                 {
@@ -189,10 +189,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         _logger.LogError($"Unable to get Policy Document {slug} - does it exist?");
                     }
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
                     // this will gracefully handle situations where Dynamics is not available however we have a cache version.
-                    _logger.LogError(odee, "Error getting policy document");
+                    _logger.LogError(httpOperationException, "Error getting policy document");
                 }
                 catch (Exception e)
                 {

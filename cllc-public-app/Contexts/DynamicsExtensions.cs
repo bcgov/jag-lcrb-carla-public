@@ -515,15 +515,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                         {
                             _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
                         }
-                        catch (HttpOperationException odee)
+                        catch (HttpOperationException httpOperationException)
                         {
                             _logger.LogError("Error updating Contact");
                             _logger.LogError("Request:");
-                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError(httpOperationException.Request.Content);
                             _logger.LogError("Response:");
-                            _logger.LogError(odee.Response.Content);
+                            _logger.LogError(httpOperationException.Response.Content);
                             // fail if we can't create.
-                            throw (odee);
+                            throw (httpOperationException);
                         }
 
                         // The account will be patched when we fetch data from bceid.
@@ -556,15 +556,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                         {
                             _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
                         }
-                        catch (HttpOperationException odee)
+                        catch (HttpOperationException httpOperationException)
                         {
                             _logger.LogError("Error updating Contact");
                             _logger.LogError("Request:");
-                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError(httpOperationException.Request.Content);
                             _logger.LogError("Response:");
-                            _logger.LogError(odee.Response.Content);
+                            _logger.LogError(httpOperationException.Response.Content);
                             // fail if we can't update.
-                            throw (odee);
+                            throw (httpOperationException);
                         }
 
                         // update worker(s)
@@ -579,13 +579,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                                 _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
                             }
                         }
-                        catch (HttpOperationException odee)
+                        catch (HttpOperationException httpOperationException)
                         {
                             _logger.LogError("Error updating Worker");
                             _logger.LogError("Request:");
-                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError(httpOperationException.Request.Content);
                             _logger.LogError("Response:");
-                            _logger.LogError(odee.Response.Content);
+                            _logger.LogError(httpOperationException.Response.Content);
                         }
 
                     }

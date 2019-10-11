@@ -101,9 +101,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Aliases.UpdateAsync(aliasId.ToString(), patchAlias);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating contact");
+                _logger.LogError(httpOperationException, "Error updating contact");
             }
 
             alias = await _dynamicsClient.GetAliasById(aliasId);
@@ -134,11 +134,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 alias = _dynamicsClient.Aliases.Create(alias);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error creating application");
+                _logger.LogError(httpOperationException, "Error creating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
 
@@ -155,11 +155,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 await _dynamicsClient.Aliases.UpdateAsync(alias.AdoxioAliasid, patchAlias);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating application");
+                _logger.LogError(httpOperationException, "Error updating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
             return new JsonResult(alias.ToViewModel());
