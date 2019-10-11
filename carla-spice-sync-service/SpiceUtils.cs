@@ -76,9 +76,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         // update the record.
                         MicrosoftDynamicsCRMadoxioWorker patchRecord = new MicrosoftDynamicsCRMadoxioWorker()
                         {
+                            Statuscode = (int?)TranslateStatus.WorkerResultSpiceToLCRBStatusCode(workerResponse.Result),
                             AdoxioSecuritystatus = (int?)TranslateStatus.WorkerResultSpiceToLCRB(workerResponse.Result),
                             AdoxioSecuritycompletedon = DateTimeOffset.Now
                         };
+
+                        if (workerResponse.Result == SpiceApplicationStatus.Cleared)
+                        {
+                            patchRecord.AdoxioExpirydate = DateTimeOffset.Now.AddYears(2);
+                        }
 
                         _dynamicsClient.Workers.Update(resp.Value[0].AdoxioWorkerid, patchRecord);
                     }
