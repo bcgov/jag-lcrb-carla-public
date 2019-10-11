@@ -2965,6 +2965,9 @@
         <Property Name="statecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Status of the Application" />
         </Property>
+        <Property Name="adoxio_securityscreeningcompleteness" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_inspectioncomplete" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3096,6 +3099,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_policedecision" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_datesecurityscreeningcompletenessassessed" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_finalcapassessmentdate" Type="Edm.DateTimeOffset">
@@ -10806,6 +10812,8 @@
         <NavigationProperty Name="adoxio_legalentity_aliases" Type="Collection(mscrm.adoxio_alias)" Partner="adoxio_LegalEntityId" />
         <NavigationProperty Name="adoxio_legalentity_personalhistorysummaries" Type="Collection(mscrm.adoxio_personalhistorysummary)" Partner="adoxio_LegalEntityId" />
         <NavigationProperty Name="adoxio_licenseechangelog_LegalEntity" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_LegalEntity" />
+        <NavigationProperty Name="adoxio_parentlegalentity_changelogs" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_ParentLegalEntityId" />
+        <NavigationProperty Name="adoxio_legalentity_changelogs" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_LegalEntityId" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Hold shareholders/owners and company structure" />
       </EntityType>
       <EntityType Name="adoxio_licences" BaseType="mscrm.crmbaseentity">
@@ -11352,6 +11360,9 @@
         <Key>
           <PropertyRef Name="adoxio_licenseechangelogid" />
         </Key>
+        <Property Name="adoxio_isindividualnew" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
         </Property>
@@ -11423,13 +11434,6 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
-        <Property Name="_adoxio_application_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
         <Property Name="adoxio_ismanagerold" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -11452,6 +11456,13 @@
         <Property Name="adoxio_numberofsharesold" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="_adoxio_application_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="_adoxio_businessaccount_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -11462,12 +11473,18 @@
         <Property Name="adoxio_changetype" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_iskeypersonnelold" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="_adoxio_shareholderbusinessaccount_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
+        </Property>
+        <Property Name="adoxio_iskeypersonnelnew" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
@@ -11496,10 +11513,23 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="_adoxio_parentlegalentityid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Legal Entity associated with Licensee Change Log." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_isshareholdernew" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_businessnamenew" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_isshareholderold" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_businesnameold" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_ownerid_value" Type="Edm.Guid">
@@ -11530,6 +11560,13 @@
         <Property Name="adoxio_emailnew" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="_adoxio_legalentityid_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Legal Entity associated with Licensee Change Log." />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="adoxio_istrusteeold" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -11550,6 +11587,9 @@
           </Annotation>
         </Property>
         <Property Name="adoxio_dateofbirthold" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_isindividualold" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_firstnamenew" Type="Edm.String" Unicode="false">
@@ -11628,6 +11668,12 @@
         <NavigationProperty Name="adoxio_licenseechangelog_licenseechangelogs" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_ParentLinceseeChangeLogId" />
         <NavigationProperty Name="adoxio_ShareholderBusinessAccount" Type="mscrm.account" Nullable="false" Partner="adoxio_licenseechangelog_ShareholderBusinessAccount">
           <ReferentialConstraint Property="_adoxio_shareholderbusinessaccount_value" ReferencedProperty="accountid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_ParentLegalEntityId" Type="mscrm.adoxio_legalentity" Nullable="false" Partner="adoxio_parentlegalentity_changelogs">
+          <ReferentialConstraint Property="_adoxio_parentlegalentityid_value" ReferencedProperty="adoxio_legalentityid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_LegalEntityId" Type="mscrm.adoxio_legalentity" Nullable="false" Partner="adoxio_legalentity_changelogs">
+          <ReferentialConstraint Property="_adoxio_legalentityid_value" ReferencedProperty="adoxio_legalentityid" />
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
@@ -63640,6 +63686,8 @@
           <NavigationPropertyBinding Path="adoxio_legalentity_aliases" Target="adoxio_aliases" />
           <NavigationPropertyBinding Path="adoxio_legalentity_personalhistorysummaries" Target="adoxio_personalhistorysummaries" />
           <NavigationPropertyBinding Path="adoxio_licenseechangelog_LegalEntity" Target="adoxio_licenseechangelogs" />
+          <NavigationPropertyBinding Path="adoxio_parentlegalentity_changelogs" Target="adoxio_licenseechangelogs" />
+          <NavigationPropertyBinding Path="adoxio_legalentity_changelogs" Target="adoxio_licenseechangelogs" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -63841,6 +63889,8 @@
           <NavigationPropertyBinding Path="adoxio_ParentLinceseeChangeLogId" Target="adoxio_licenseechangelogs" />
           <NavigationPropertyBinding Path="adoxio_licenseechangelog_licenseechangelogs" Target="adoxio_licenseechangelogs" />
           <NavigationPropertyBinding Path="adoxio_ShareholderBusinessAccount" Target="accounts" />
+          <NavigationPropertyBinding Path="adoxio_ParentLegalEntityId" Target="adoxio_legalentities" />
+          <NavigationPropertyBinding Path="adoxio_LegalEntityId" Target="adoxio_legalentities" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -77032,7 +77082,7 @@
         <FunctionImport Name="RetrieveEntityChanges" Function="Microsoft.Dynamics.CRM.RetrieveEntityChanges" />
         <FunctionImport Name="RetrieveEntityRibbon" Function="Microsoft.Dynamics.CRM.RetrieveEntityRibbon" />
         <FunctionImport Name="RetrieveExchangeAppointments" Function="Microsoft.Dynamics.CRM.RetrieveExchangeAppointments" />
-        <FunctionImport Name="RetrieveExchangeRate" Function="Microsoft.Dynamics.CRM.RetrieveExchangeRate" />Microsoft.Dynamics.CRM.OptionSetMetadataBa
+        <FunctionImport Name="RetrieveExchangeRate" Function="Microsoft.Dynamics.CRM.RetrieveExchangeRate" />
         <FunctionImport Name="RetrieveFormattedImportJobResults" Function="Microsoft.Dynamics.CRM.RetrieveFormattedImportJobResults" />
         <FunctionImport Name="RetrieveInstalledLanguagePacks" Function="Microsoft.Dynamics.CRM.RetrieveInstalledLanguagePacks" />
         <FunctionImport Name="RetrieveInstalledLanguagePackVersion" Function="Microsoft.Dynamics.CRM.RetrieveInstalledLanguagePackVersion" />

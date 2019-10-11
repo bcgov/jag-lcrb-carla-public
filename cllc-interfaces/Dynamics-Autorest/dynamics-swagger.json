@@ -20115,6 +20115,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_securityscreeningcompleteness": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_inspectioncomplete": {
           "type": "boolean",
           "x-nullable": true
@@ -20283,6 +20287,10 @@
         "adoxio_policedecision": {
           "type": "integer",
           "x-nullable": true
+        },
+        "adoxio_datesecurityscreeningcompletenessassessed": {
+          "type": "string",
+          "format": "date-time"
         },
         "adoxio_finalcapassessmentdate": {
           "type": "string",
@@ -28952,6 +28960,18 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licenseechangelog"
           }
+        },
+        "adoxio_parentlegalentity_changelogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licenseechangelog"
+          }
+        },
+        "adoxio_legalentity_changelogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licenseechangelog"
+          }
         }
       }
     },
@@ -29683,6 +29703,10 @@
       "title": "adoxio_licenseechangelog",
       "type": "object",
       "properties": {
+        "adoxio_isindividualnew": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "adoxio_name": {
           "type": "string",
           "x-nullable": true
@@ -29744,10 +29768,6 @@
           "type": "string",
           "x-nullable": true
         },
-        "_adoxio_application_value": {
-          "type": "string",
-          "x-nullable": true
-        },
         "adoxio_ismanagerold": {
           "type": "boolean",
           "x-nullable": true
@@ -29772,6 +29792,10 @@
           "type": "integer",
           "x-nullable": true
         },
+        "_adoxio_application_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "_adoxio_businessaccount_value": {
           "type": "string",
           "x-nullable": true
@@ -29780,8 +29804,16 @@
           "type": "integer",
           "x-nullable": true
         },
+        "adoxio_iskeypersonnelold": {
+          "type": "boolean",
+          "x-nullable": true
+        },
         "_adoxio_shareholderbusinessaccount_value": {
           "type": "string",
+          "x-nullable": true
+        },
+        "adoxio_iskeypersonnelnew": {
+          "type": "boolean",
           "x-nullable": true
         },
         "timezoneruleversionnumber": {
@@ -29804,12 +29836,24 @@
           "type": "string",
           "x-nullable": true
         },
+        "_adoxio_parentlegalentityid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_isshareholdernew": {
           "type": "boolean",
           "x-nullable": true
         },
+        "adoxio_businessnamenew": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_isshareholderold": {
           "type": "boolean",
+          "x-nullable": true
+        },
+        "adoxio_businesnameold": {
+          "type": "string",
           "x-nullable": true
         },
         "_ownerid_value": {
@@ -29840,6 +29884,10 @@
           "type": "string",
           "x-nullable": true
         },
+        "_adoxio_legalentityid_value": {
+          "type": "string",
+          "x-nullable": true
+        },
         "adoxio_istrusteeold": {
           "type": "boolean",
           "x-nullable": true
@@ -29863,6 +29911,10 @@
         "adoxio_dateofbirthold": {
           "type": "string",
           "format": "date-time"
+        },
+        "adoxio_isindividualold": {
+          "type": "boolean",
+          "x-nullable": true
         },
         "adoxio_firstnamenew": {
           "type": "string",
@@ -29961,6 +30013,12 @@
         },
         "adoxio_ShareholderBusinessAccount": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.account"
+        },
+        "adoxio_ParentLegalEntityId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+        },
+        "adoxio_LegalEntityId": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
         }
       }
     },
@@ -87770,6 +87828,34 @@
         "Lookup": {}
       }
     },
+    "Microsoft.Dynamics.CRM.OptionMetadata": {
+      "title": "OptionMetadata",
+      "type": "object",
+      "properties": {
+        "Value": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "Label": {},
+        "Description": {},
+        "Color": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "IsManaged": {
+          "type": "boolean",
+          "x-nullable": true
+        },
+        "MetadataId": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "HasChanged": {
+          "type": "boolean",
+          "x-nullable": true
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.SecurityPrivilegeMetadata": {
       "title": "SecurityPrivilegeMetadata",
       "type": "object",
@@ -87807,6 +87893,34 @@
           "x-nullable": true
         },
         "PrivilegeType": {}
+      }
+    },
+    "Microsoft.Dynamics.CRM.StateOptionMetadata": {
+      "title": "StateOptionMetadata",
+      "type": "object",
+      "properties": {
+        "DefaultStatus": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "InvariantName": {
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.StatusOptionMetadata": {
+      "title": "StatusOptionMetadata",
+      "type": "object",
+      "properties": {
+        "State": {
+          "type": "integer",
+          "x-nullable": true
+        },
+        "TransitionData": {
+          "type": "string",
+          "x-nullable": true
+        }
       }
     },
     "odata.error": {
