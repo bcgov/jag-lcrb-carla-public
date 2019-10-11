@@ -92,10 +92,10 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
             return o;
           }, {});
 
-        this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
+        // this.form.patchValue(noNulls);
+        // if (data.isPaid) {
+        //   this.form.disable();
+        // }
         // this.savedFormData = this.form.value;
       },
         () => {
@@ -110,8 +110,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         .pipe(filter(data => !!data))
         .subscribe(
           formData => {
-            if (node.typeOfChange !== 'add') {
-              formData.typeOfChange = 'edit';
+            if (node.changeType !== 'add') {
+              formData.changeType = 'edit';
             }
             node = Object.assign(node, formData);
             this.refreshTreeAndChangeTables();
@@ -122,8 +122,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         .pipe(filter(data => !!data))
         .subscribe(
           formData => {
-            if (node.typeOfChange !== 'add') {
-              formData.typeOfChange = 'edit';
+            if (node.changeType !== 'add') {
+              formData.changeType = 'edit';
             }
             node = Object.assign(node, formData);
             this.refreshTreeAndChangeTables();
@@ -136,9 +136,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.openLeadershipDialog({})
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
-        formData.typeOfChange = 'add';
+        formData.changeType = 'add';
         formData.isIndividual = true;
-        formData.parentLinceseeChangeLog = node;
+        // formData.parentLinceseeChangeLog = node;
         node.children = node.children || [];
         node.children.push(formData);
         this.refreshTreeAndChangeTables();
@@ -151,8 +151,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       .pipe(filter(data => !!data))
       .subscribe(
         formData => {
-          formData.typeOfChange = 'add';
-          formData.parentLinceseeChangeLog = node;
+          formData.changeType = 'add';
+          // formData.parentLinceseeChangeLog = node;
           node.children = node.children || [];
           node.children.push(formData);
           this.refreshTreeAndChangeTables();
@@ -161,16 +161,16 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   }
 
   deleteAssociate(node: LicenseeChangeLog, changeType = 'delete') {
-    if (node.typeOfChange === 'add') {
-      const index = node.parentLinceseeChangeLog.children.indexOf(node);
-      node.parentLinceseeChangeLog.children.splice(index, 1);
-    } else {
-      node.typeOfChange = changeType;
+    // if (node.changeType === 'add') {
+    //   const index = node.parentLinceseeChangeLog.children.indexOf(node);
+    //   node.parentLinceseeChangeLog.children.splice(index, 1);
+    // } else {
+      node.changeType = changeType;
       const children = node.children || [];
       children.forEach(child => {
         this.deleteAssociate(child, 'parent-deleted');
       });
-    }
+    // }
     this.refreshTreeAndChangeTables();
   }
 
@@ -183,7 +183,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       newNode.children = [];
       node.children.forEach(child => {
         const childNode = this.processLegalEntityTree(child);
-        childNode.parentLinceseeChangeLog = newNode;
+        // childNode.parentLinceseeChangeLog = newNode;
         newNode.children.push(childNode);
       });
     }
@@ -238,23 +238,25 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.organizationShareholderChanges = [];
     this.leadershipChanges = [];
     this.populateChangeTables(this.treeRoot);
-    const sortByTypeOfChange = (a, b) => {
-      if (a.titleOld <= b.typeOfChange) {
+
+    const sortByChangeType = (a: LicenseeChangeLog, b: LicenseeChangeLog) => {
+      if (a.titleOld <= b.changeType) {
         return 1;
       }
       return -1;
     };
-    this.individualShareholderChanges.sort(sortByTypeOfChange);
-    this.organizationShareholderChanges.sort(sortByTypeOfChange);
-    this.leadershipChanges.sort(sortByTypeOfChange);
+
+    this.individualShareholderChanges.sort(sortByChangeType);
+    this.organizationShareholderChanges.sort(sortByChangeType);
+    this.leadershipChanges.sort(sortByChangeType);
   }
 
   populateChangeTables(node: LicenseeChangeLog) {
-    if (node.isShareholderNew && node.isIndividual && node.typeOfChange !== 'unchanged') {
+    if (node.isShareholderNew && node.isIndividual && node.changeType !== 'unchanged') {
       this.individualShareholderChanges.push(node);
-    } else if (node.isShareholderNew && node.typeOfChange !== 'unchanged') {
+    } else if (node.isShareholderNew && node.changeType !== 'unchanged') {
       this.organizationShareholderChanges.push(node);
-    } else if (!node.isShareholderNew && node.typeOfChange !== 'unchanged') {
+    } else if (!node.isShareholderNew && node.changeType !== 'unchanged') {
       this.leadershipChanges.push(node);
     }
 
@@ -267,9 +269,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
 
   save() {
     this.legalEntityDataService.saveLicenseeChanges(this.treeRoot, this.applicationId)
-    .subscribe((data) => {
-      debugger;
-    });
+      .subscribe((data) => {
+        debugger;
+      });
   }
 
   OnDestroy() {

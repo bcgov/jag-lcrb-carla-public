@@ -1,13 +1,22 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+
+    public enum LicenseeChangeType
+    {
+        Unchanged  = 0, // never save this kind of change to dynamics
+        Add = 845280001,
+        Edit = 845280002,
+        Delete  = 845280000
+    }
     public class LicenseeChangeLog
     {
-        public string id;
+        public string Id { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public LicenseeChangeType ChangeType { get; set; }
         public bool? IsDirectorNew { get; set; }
         public bool? IsDirectorOld { get; set; }
         public bool? IsManagerNew { get; set; }
@@ -30,7 +39,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string JobNumber { get; set; }
         public string LastNameNew { get; set; }
         public string LastNameOld { get; set; }
-        public string LicenseeChangelogid { get; set; }
         public string Name { get; set; }
         public System.DateTimeOffset? DateofBirthNew { get; set; }
         public System.DateTimeOffset? DateofBirthOld { get; set; }
@@ -38,10 +46,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Account BusinessAccount { get; set; }
         public Contact Contact { get; set; }
         public Account ParentBusinessAccount { get; set; }
-        public Application Application { get; set; }
-        public ApplicationType ApplicationType { get; set; }
-        public LegalEntity LegalEntity { get; set; }
-        public LicenseeChangeLog ParentLinceseeChangeLogId { get; set; }
+        public string ApplicationId { get; set; }
+        public string LegalEntityId { get; set; }
+        public string ParentLinceseeChangeLogId { get; set; }
         public IList<LicenseeChangeLog> Children { get; set; }
     }
 }
