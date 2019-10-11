@@ -65,9 +65,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: accountfilter).Value;
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error while getting legal entities. ");
+                _logger.LogError(httpOperationException, $"Error while getting legal entities. ");
             }
             catch (Exception e)
             {
@@ -176,9 +176,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value.ToList();
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error while getting account legal entities. ");
+                _logger.LogError(httpOperationException, $"Error while getting account legal entities. ");
             }
             catch (Exception e)
             {
@@ -256,9 +256,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value;
 
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error while getting account legal entities. ");
+                _logger.LogError(httpOperationException, $"Error while getting account legal entities. ");
             }
             catch (Exception e)
             {
@@ -379,9 +379,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxioLegalEntity = await _dynamicsClient.Legalentities.CreateAsync(adoxioLegalEntity);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error while creating legal entity ");
+                _logger.LogError(httpOperationException, $"Error while creating legal entity ");
                 throw new Exception("Unable to create legal entity");
             }
             catch (Exception e)
@@ -401,9 +401,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error while patching legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError(httpOperationException, $"Error while patching legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
             }
             catch (Exception e)
             {
@@ -426,9 +426,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, $"Error adding LegalEntityOwned reference to legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
+                    _logger.LogError(httpOperationException, $"Error adding LegalEntityOwned reference to legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
                 }
                 catch (Exception e)
                 {
@@ -476,9 +476,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     account = _dynamicsClient.Accounts.Create(account);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, $"Error creating account: {odee.Request.Content} Response: {odee.Response.Content}");
+                    _logger.LogError(httpOperationException, $"Error creating account: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
                 }
                 catch (Exception e)
                 {
@@ -496,9 +496,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _dynamicsClient.Tiedhouseconnections.Create(tiedHouse);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, $"Error creating tied house connection");
+                    _logger.LogError(httpOperationException, $"Error creating tied house connection");
                 }
                 catch (Exception e)
                 {
@@ -512,9 +512,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 adoxioLegalEntity = _dynamicsClient.Legalentities.Create(adoxioLegalEntity);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error creating legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError(httpOperationException, $"Error creating legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
             }
             catch (Exception e)
             {
@@ -556,9 +556,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _dynamicsClient.Legalentities.Update(adoxio_legalentityid.ToString(), adoxioLegalEntity);
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error updating legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError(httpOperationException, $"Error updating legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
             }
             catch (Exception e)
             {
@@ -591,9 +591,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Legalentities.DeleteAsync(adoxio_legalentityid.ToString());
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, $"Error deleting legal entity: {odee.Request.Content} Response: {odee.Response.Content}");
+                _logger.LogError(httpOperationException, $"Error deleting legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
             }
             catch (Exception e)
             {
@@ -750,9 +750,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, $"Error updating date email sent. ");
+                    _logger.LogError(httpOperationException, $"Error updating date email sent. ");
                 }
                 catch (Exception e)
                 {

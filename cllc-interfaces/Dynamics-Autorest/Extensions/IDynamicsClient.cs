@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         string GetEntityURI(string entityType, string id);
 
-        string GetCreatedRecord(HttpOperationException odee, string errorMessage);
+        string GetCreatedRecord(HttpOperationException httpOperationException, string errorMessage);
 
         Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(Guid id);
         Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationByIdWithChildren(Guid id);

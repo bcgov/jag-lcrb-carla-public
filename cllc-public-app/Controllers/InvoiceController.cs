@@ -131,9 +131,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     invoice = await _dynamicsClient.Invoices.CreateAsync(invoice);
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, "Error creating invoice");
+                    _logger.LogError(httpOperationException, "Error creating invoice");
                     throw new Exception("Unable to create invoice");
                 }
 
@@ -150,9 +150,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // setup the view model.
                     invoice.CustomeridAccount = userAccount;
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, "Error patching invoice");
+                    _logger.LogError(httpOperationException, "Error patching invoice");
                 }
 
                 return new JsonResult(invoice.ToViewModel());
@@ -219,9 +219,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     await _dynamicsClient.Invoices.DeleteAsync(adoxio_legalentityid.ToString());
                     return NoContent(); // 204
                 }
-                catch (HttpOperationException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError(odee, "Error deleteing invoice");
+                    _logger.LogError(httpOperationException, "Error deleteing invoice");
                 }
             }
             return new NotFoundResult();
