@@ -29,9 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMEntityKeyMetadata class.
         /// </summary>
-        /// <param name="entityKeyIndexStatus">Possible values include:
-        /// 'Pending', 'InProgress', 'Active', 'Failed'</param>
-        public MicrosoftDynamicsCRMEntityKeyMetadata(MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), string asyncJob = default(string))
+        public MicrosoftDynamicsCRMEntityKeyMetadata(object displayName = default(object), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), object isCustomizable = default(object), bool? isManaged = default(bool?), string introducedVersion = default(string), object entityKeyIndexStatus = default(object), string asyncJob = default(string))
         {
             DisplayName = displayName;
             LogicalName = logicalName;
@@ -54,7 +52,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
-        public MicrosoftDynamicsCRMLabel DisplayName { get; set; }
+        public object DisplayName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -79,7 +77,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
+        public object IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -92,11 +90,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string IntroducedVersion { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Pending', 'InProgress',
-        /// 'Active', 'Failed'
         /// </summary>
         [JsonProperty(PropertyName = "EntityKeyIndexStatus")]
-        public string EntityKeyIndexStatus { get; set; }
+        public object EntityKeyIndexStatus { get; set; }
 
         /// <summary>
         /// </summary>

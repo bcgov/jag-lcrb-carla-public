@@ -2,11 +2,9 @@
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
@@ -47,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             {
                 Subscriber existing = newsletter.Subscribers.FirstOrDefault(x => x.Email == email);
                 if (existing != null)
-                {                    
+                {
                     newsletter.Subscribers.Remove(existing);
                     context.Newsletters.Update(newsletter);
                     context.SaveChanges();
@@ -110,10 +108,10 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
 
             newsletter = new Newsletter
-            (                
+            (
                 initialNewsletter.slug,
                 initialNewsletter.title,
-                initialNewsletter.description                
+                initialNewsletter.description
             );
 
             context.AddNewsletter(newsletter);

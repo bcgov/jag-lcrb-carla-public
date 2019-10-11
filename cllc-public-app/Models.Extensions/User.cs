@@ -20,12 +20,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.ContactId = Guid.Parse(from.Contactid);
             }
-            
+
             if (from._parentcustomeridValue != null)
             {
                 to.AccountId = Guid.Parse(from._parentcustomeridValue);
             }
-            
+
             to.GivenName = from.Firstname;
             to.Surname = from.Lastname;
             to.SmUserId = from.Employeeid;

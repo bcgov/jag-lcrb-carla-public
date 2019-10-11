@@ -235,7 +235,15 @@ namespace odata2openapi
                         bool ok2Delete = true;
                         string firstTagLower = firstTag.ToLower();
 
-                        if (firstTagLower.Equals("contacts") || firstTagLower.Equals("accounts") || firstTagLower.Equals("invoices") || firstTagLower.Equals("sharepointsites") || firstTagLower.Equals("savedqueries") || firstTagLower.Equals("sharepointdocumentlocations"))
+                        if (firstTagLower.Equals("contacts") || 
+                            firstTagLower.Equals("accounts") || 
+                            firstTagLower.Equals("invoices") || 
+                            firstTagLower.Equals("sharepointsites") || 
+                            firstTagLower.Equals("savedqueries") || 
+                            firstTagLower.Equals("sharepointdocumentlocations") ||
+                            firstTagLower.Equals("entitydefinitions") ||
+                            firstTagLower.Equals("globaloptionsetdefinitions")
+                            )
                         {
                             ok2Delete = false;
                         }
@@ -263,7 +271,6 @@ namespace odata2openapi
                         }
                         prefix = firstTagLower;
                         // Capitalize the first character.
-
 
                         if (prefix.Length > 0)
                         {
@@ -452,10 +459,8 @@ namespace odata2openapi
                 }
                 
                 foreach (var opDelete in itemsToRemove)
-                {
-                    
+                {                    
                     swaggerDocument.Paths.Remove(opDelete);
-
                 }
 
                 foreach (var path in swaggerDocument.Paths)
@@ -505,8 +510,7 @@ namespace odata2openapi
                     if (//!definition.Key.Contains("_GetResponseModel") && 
                         !definition.Key.Contains("odata.error") &&
                         !definition.Key.Contains("crmbaseentity") &&
-                        
-
+                        !definition.Key.ToLower().Contains("optionmetadata") &&
                         !defsToKeep.Contains(definition.Value.Title))
                     {
                         defsToRemove.Add(definition.Key);
