@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -54,7 +54,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Street2 = association.AdoxioStreet2;
 
                 var tiedHouse = association.AdoxioTiedhouseassociationAdoxioTiedhouseconnectionTiedHouse.FirstOrDefault();
-                if(tiedHouse != null){
+                if (tiedHouse != null)
+                {
                     result.TiedHouse = tiedHouse.ToViewModel();
                 }
 

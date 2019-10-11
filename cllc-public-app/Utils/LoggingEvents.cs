@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Utils
 {
@@ -24,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
         public const int Error = 5000;
         public const int BadRequest = 5001;
 
-        public static string GetHeaders (HttpRequest request)
+        public static string GetHeaders(HttpRequest request)
         {
             StringBuilder html = new StringBuilder();
             html.AppendLine("<html>");

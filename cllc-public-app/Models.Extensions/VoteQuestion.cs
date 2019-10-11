@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -18,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 result = new ViewModels.VoteQuestion();
                 result.id = voteQuestion.Id.ToString();
-                List<ViewModels.VoteOption> options = new List<ViewModels.VoteOption>();                
+                List<ViewModels.VoteOption> options = new List<ViewModels.VoteOption>();
                 foreach (Models.VoteOption option in voteQuestion.Options)
                 {
                     options.Add(option.ToViewModel());
@@ -33,8 +32,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.question = voteQuestion.Question;
                 result.slug = voteQuestion.Slug;
                 result.title = voteQuestion.Title;
-            }            
+            }
             return result;
-        }        
+        }
     }
 }

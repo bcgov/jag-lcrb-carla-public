@@ -1,10 +1,6 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public partial class MicrosoftDynamicsCRMadoxioApplication
     {
@@ -30,7 +26,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_Invoice@odata.bind")]
         public string AdoxioInvoiceODataBind { get; set; }
 
-        
+
         [JsonProperty(PropertyName = "adoxio_AssignedLicence@odata.bind")]
         public string AdoxioAssignedLicenceODataBind { get; set; }
 
@@ -38,7 +34,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_application_SharePointDocumentLocations@odata.bind")]
         public string[] AdoxioApplicationSharePointDocumentLocationsODataBind { get; set; }
 
-        
+
         [JsonProperty(PropertyName = "adoxio_localgovindigenousnationid@odata.bind")]
         public string AdoxioLocalgovindigenousnationidODataBind { get; set; }
 

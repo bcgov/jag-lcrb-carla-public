@@ -1,10 +1,10 @@
 ﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     [Authorize]
     public class IndigenousNationsController : ControllerBase
-    {            
+    {
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
@@ -37,11 +37,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 return new JsonResult(result);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(odee, "Error updating application");
+                _logger.LogError(httpOperationException, "Error updating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
         }
 

@@ -4,6 +4,7 @@ using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using SpdSync;
 using SpdSync.models;
 using System;
@@ -64,7 +65,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                     {
                         _dynamics.Personalhistorysummaries.Update(record.AdoxioPersonalhistorysummaryid, patchRecord);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         hangfireContext.WriteLine("Error updating worker personal history");
                         hangfireContext.WriteLine("Request:");
