@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;
             }
-            if(crsApplication != null)
+            if (crsApplication != null)
             {
                 licenseSummary.StoreInspected = crsApplication.AdoxioAppchecklistinspectionresults == (int)InspectionStatus.Pass;
             }

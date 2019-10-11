@@ -14,12 +14,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Applicationmodules operations.
+    /// Globaloptionsetdefinitions operations.
     /// </summary>
-    public partial interface IApplicationmodules
+    public partial interface IGlobaloptionsetdefinitions
     {
         /// <summary>
-        /// Get entities from adoxio_applicationmodules
+        /// Get entities from GlobalOptionSetDefinitions
         /// </summary>
         /// <param name='top'>
         /// </param>
@@ -46,15 +46,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<ApplicationmodulesGetResponseModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<GlobaloptionsetdefinitionsGetResponseModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Add new entity to adoxio_applicationmodules
+        /// Add new entity to GlobalOptionSetDefinitions
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -69,7 +69,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -78,12 +78,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationmodule>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMadoxioApplicationmodule body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBase>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMOptionSetMetadataBase body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Get entity from adoxio_applicationmodules by key
+        /// Get entity from GlobalOptionSetDefinitions by key
         /// </summary>
-        /// <param name='adoxioApplicationmoduleid'>
-        /// key: adoxio_applicationmoduleid
+        /// <param name='metadataId'>
+        /// key: MetadataId
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -97,7 +97,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -106,12 +106,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationmodule>> GetByKeyWithHttpMessagesAsync(string adoxioApplicationmoduleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBase>> GetByKeyWithHttpMessagesAsync(string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_applicationmodules
+        /// Delete entity from GlobalOptionSetDefinitions
         /// </summary>
-        /// <param name='adoxioApplicationmoduleid'>
-        /// key: adoxio_applicationmoduleid
+        /// <param name='metadataId'>
+        /// key: MetadataId
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -122,18 +122,18 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioApplicationmoduleid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string metadataId, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Update entity in adoxio_applicationmodules
+        /// Update entity in GlobalOptionSetDefinitions
         /// </summary>
-        /// <param name='adoxioApplicationmoduleid'>
-        /// key: adoxio_applicationmoduleid
+        /// <param name='metadataId'>
+        /// key: MetadataId
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -144,12 +144,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioApplicationmoduleid, MicrosoftDynamicsCRMadoxioApplicationmodule body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

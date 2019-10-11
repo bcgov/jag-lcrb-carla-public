@@ -1,17 +1,16 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Role Database Model
     /// </summary>
-        public sealed partial class Newsletter :  IEquatable<Newsletter>
+    public sealed partial class Newsletter : IEquatable<Newsletter>
     {
 
         /// <summary>
@@ -20,9 +19,9 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a VoteQuestion (required).</param>
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
-        public Newsletter(Guid id,  string slug, string title, string description)
-        {   
-            Id = id;            
+        public Newsletter(Guid id, string slug, string title, string description)
+        {
+            Id = id;
             Slug = slug;
             Title = title;
             Description = description;
@@ -35,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
         public Newsletter(string slug, string title, string description)
-        {            
+        {
             Slug = slug;
             Title = title;
             Description = description;
@@ -46,14 +45,14 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
 
         }
-        
+
 
         /// <summary>
         /// A system-generated unique identifier for a Newsletter
         /// </summary>
         /// <value>A system-generated unique identifier for a Role</value>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }        
+        public Guid Id { get; set; }
 
         [MaxLength(512)]
         public string Description { get; set; }
@@ -65,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public string Slug { get; set; }
 
         public List<Subscriber> Subscribers { get; set; }
-        
+
         /// <summary>
         /// <summary>
         /// Returns the string presentation of the object
@@ -155,14 +154,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (Slug != null)
                 {
                     hash = hash * 59 + Slug.GetHashCode();
-                }                
-                                   
+                }
+
                 return hash;
             }
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

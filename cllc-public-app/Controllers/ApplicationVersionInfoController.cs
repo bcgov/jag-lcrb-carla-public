@@ -13,11 +13,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     // public API
     public class ApplicationVersionInfoController : ControllerBase
     {
-        private readonly IConfiguration _configuration;        
-        
+        private readonly IConfiguration _configuration;
+
         public ApplicationVersionInfoController(IConfiguration configuration)
         {
-            _configuration = configuration;                  
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -32,12 +32,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             DateTime creationTime = System.IO.File.GetLastWriteTimeUtc(assembly.Location);
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             string fileVersion = fvi.FileVersion;
-            
+
             ApplicationVersionInfo avi = new ApplicationVersionInfo()
             {
                 BaseUri = _configuration["BASE_URI"],
                 BasePath = _configuration["BASE_PATH"],
-                Environment = _configuration["ASPNETCORE_ENVIRONMENT"],                
+                Environment = _configuration["ASPNETCORE_ENVIRONMENT"],
                 SourceCommit = _configuration["OPENSHIFT_BUILD_COMMIT"],
                 SourceRepository = _configuration["OPENSHIFT_BUILD_SOURCE"],
                 SourceReference = _configuration["OPENSHIFT_BUILD_REFERENCE"],
@@ -47,6 +47,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new JsonResult(avi);
         }
-    
-	}
+
+    }
 }

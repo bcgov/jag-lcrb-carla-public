@@ -1,6 +1,7 @@
 ﻿
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -20,9 +21,9 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         const string REPEATER_START_TAG = "<custom:repeater";
         const string REPEATER_END_TAG = "</custom:repeater>";
 
-        public static void ProcessTemplate (this IDynamicsClient dynamicsClient, MicrosoftDynamicsCRMadoxioPolicydocument document)
+        public static void ProcessTemplate(this IDynamicsClient dynamicsClient, MicrosoftDynamicsCRMadoxioPolicydocument document)
         {
-            
+
             string body = document.AdoxioBody;
 
             if (body != null)
@@ -47,15 +48,15 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         public static MicrosoftDynamicsCRMadoxioPolicydocument GetPolicyDocumentBySlug(this IDynamicsClient dynamicsClient, string slug)
         {
 
-            MicrosoftDynamicsCRMadoxioPolicydocument result = null;            
+            MicrosoftDynamicsCRMadoxioPolicydocument result = null;
             slug = slug.Replace("'", "''");
             string filter = "adoxio_slug eq '" + slug + "'";
             PolicydocumentsGetResponseModel pdgrm = dynamicsClient.Policydocuments.Get(filter: filter);
             result = pdgrm.Value
-                .FirstOrDefault();            
+                .FirstOrDefault();
             return result;
         }
-        
+
 
         /// <summary>
         /// Add a PolicyDocument
@@ -68,12 +69,12 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             {
                 try
                 {
-                    dynamicsClient.Policydocuments.Create(PolicyDocument);                    
+                    dynamicsClient.Policydocuments.Create(PolicyDocument);
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
-                    
-                }                
+
+                }
             }
         }
 
@@ -86,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         {
             // only add policy documents if they are empty.
             bool addPolicyDocuments = true;
-            if (! forceUpdate)
+            if (!forceUpdate)
             {
                 try
                 {
@@ -96,13 +97,13 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                         addPolicyDocuments = false;
                     }
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
                     addPolicyDocuments = true;
                 }
             }
-            
-            
+
+
             if (addPolicyDocuments && !string.IsNullOrEmpty(PolicyDocumentJsonPath) && File.Exists(PolicyDocumentJsonPath))
             {
                 string PolicyDocumentJson = File.ReadAllText(PolicyDocumentJsonPath);

@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOneToManyRelationshipMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(MicrosoftDynamicsCRMAssociatedMenuConfiguration associatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMCascadeConfiguration cascadeConfiguration = default(MicrosoftDynamicsCRMCascadeConfiguration), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata))
+        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(object associatedMenuConfiguration = default(object), object cascadeConfiguration = default(object), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), object lookup = default(object))
         {
             AssociatedMenuConfiguration = associatedMenuConfiguration;
             CascadeConfiguration = cascadeConfiguration;
@@ -50,12 +50,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "AssociatedMenuConfiguration")]
-        public MicrosoftDynamicsCRMAssociatedMenuConfiguration AssociatedMenuConfiguration { get; set; }
+        public object AssociatedMenuConfiguration { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "CascadeConfiguration")]
-        public MicrosoftDynamicsCRMCascadeConfiguration CascadeConfiguration { get; set; }
+        public object CascadeConfiguration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Lookup")]
-        public MicrosoftDynamicsCRMLookupAttributeMetadata Lookup { get; set; }
+        public object Lookup { get; set; }
 
     }
 }

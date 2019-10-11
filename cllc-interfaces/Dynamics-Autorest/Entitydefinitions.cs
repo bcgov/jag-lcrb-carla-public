@@ -19,12 +19,12 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Msdynapplicationknowledgearticleset operations.
+    /// Entitydefinitions operations.
     /// </summary>
-    public partial class Msdynapplicationknowledgearticleset : IServiceOperations<DynamicsClient>, IMsdynapplicationknowledgearticleset
+    public partial class Entitydefinitions : IServiceOperations<DynamicsClient>, IEntitydefinitions
     {
         /// <summary>
-        /// Initializes a new instance of the Msdynapplicationknowledgearticleset class.
+        /// Initializes a new instance of the Entitydefinitions class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="System.ArgumentNullException">
         /// Thrown when a required parameter is null
         /// </exception>
-        public Msdynapplicationknowledgearticleset(DynamicsClient client)
+        public Entitydefinitions(DynamicsClient client)
         {
             if (client == null)
             {
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public DynamicsClient Client { get; private set; }
 
         /// <summary>
-        /// Get entities from msdyn_adoxio_application_knowledgearticleset
+        /// Get entities from EntityDefinitions
         /// </summary>
         /// <param name='top'>
         /// </param>
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -83,7 +83,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MsdynapplicationknowledgearticlesetGetResponseModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<EntitydefinitionsGetResponseModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -105,7 +105,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "msdyn_adoxio_application_knowledgearticleset").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "EntityDefinitions").ToString();
             List<string> _queryParameters = new List<string>();
             if (top != null)
             {
@@ -187,19 +187,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
+                else {
+                    _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
@@ -215,7 +208,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MsdynapplicationknowledgearticlesetGetResponseModel>();
+            var _result = new HttpOperationResponse<EntitydefinitionsGetResponseModel>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -224,7 +217,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MsdynapplicationknowledgearticlesetGetResponseModel>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<EntitydefinitionsGetResponseModel>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -244,7 +237,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Add new entity to msdyn_adoxio_application_knowledgearticleset
+        /// Add new entity to EntityDefinitions
         /// </summary>
         /// <param name='body'>
         /// New entity
@@ -259,7 +252,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -274,7 +267,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMEntityMetadata>> CreateWithHttpMessagesAsync(MicrosoftDynamicsCRMEntityMetadata body, string prefer = "return=representation", Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (body == null)
             {
@@ -294,7 +287,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "msdyn_adoxio_application_knowledgearticleset").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "EntityDefinitions").ToString();
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -353,19 +346,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 201)
             {
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
+                else {
+                    _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
@@ -381,7 +367,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMEntityMetadata>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -390,7 +376,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMEntityMetadata>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -410,10 +396,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Get entity from msdyn_adoxio_application_knowledgearticleset by key
+        /// Get entity from EntityDefinitions by key
         /// </summary>
-        /// <param name='msdynAdoxioApplicationKnowledgearticleid'>
-        /// key: msdyn_adoxio_application_knowledgearticleid
+        /// <param name='metadataId'>
+        /// key: MetadataId
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -427,7 +413,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="SerializationException">
@@ -442,11 +428,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle>> GetByKeyWithHttpMessagesAsync(string msdynAdoxioApplicationKnowledgearticleid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<MicrosoftDynamicsCRMEntityMetadata>> GetByKeyWithHttpMessagesAsync(string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (msdynAdoxioApplicationKnowledgearticleid == null)
+            if (metadataId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "msdynAdoxioApplicationKnowledgearticleid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "metadataId");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -455,7 +441,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("msdynAdoxioApplicationKnowledgearticleid", msdynAdoxioApplicationKnowledgearticleid);
+                tracingParameters.Add("metadataId", metadataId);
                 tracingParameters.Add("select", select);
                 tracingParameters.Add("expand", expand);
                 tracingParameters.Add("cancellationToken", cancellationToken);
@@ -463,8 +449,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "msdyn_adoxio_application_knowledgearticleset({msdyn_adoxio_application_knowledgearticleid})").ToString();
-            _url = _url.Replace("{msdyn_adoxio_application_knowledgearticleid}", System.Uri.EscapeDataString(msdynAdoxioApplicationKnowledgearticleid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "EntityDefinitions({MetadataId})").ToString();
+            _url = _url.Replace("{MetadataId}", System.Uri.EscapeDataString(metadataId));
             List<string> _queryParameters = new List<string>();
             if (select != null)
             {
@@ -522,19 +508,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 200)
             {
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
+                else {
+                    _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
@@ -550,7 +529,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle>();
+            var _result = new HttpOperationResponse<MicrosoftDynamicsCRMEntityMetadata>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
@@ -559,7 +538,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle>(_responseContent, Client.DeserializationSettings);
+                    _result.Body = Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<MicrosoftDynamicsCRMEntityMetadata>(_responseContent, Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
@@ -579,10 +558,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Delete entity from msdyn_adoxio_application_knowledgearticleset
+        /// Delete entity from EntityDefinitions
         /// </summary>
-        /// <param name='msdynAdoxioApplicationKnowledgearticleid'>
-        /// key: msdyn_adoxio_application_knowledgearticleid
+        /// <param name='metadataId'>
+        /// key: MetadataId
         /// </param>
         /// <param name='ifMatch'>
         /// ETag
@@ -593,7 +572,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -605,11 +584,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string msdynAdoxioApplicationKnowledgearticleid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string metadataId, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (msdynAdoxioApplicationKnowledgearticleid == null)
+            if (metadataId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "msdynAdoxioApplicationKnowledgearticleid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "metadataId");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -618,15 +597,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("msdynAdoxioApplicationKnowledgearticleid", msdynAdoxioApplicationKnowledgearticleid);
+                tracingParameters.Add("metadataId", metadataId);
                 tracingParameters.Add("ifMatch", ifMatch);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Delete", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "msdyn_adoxio_application_knowledgearticleset({msdyn_adoxio_application_knowledgearticleid})").ToString();
-            _url = _url.Replace("{msdyn_adoxio_application_knowledgearticleid}", System.Uri.EscapeDataString(msdynAdoxioApplicationKnowledgearticleid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "EntityDefinitions({MetadataId})").ToString();
+            _url = _url.Replace("{MetadataId}", System.Uri.EscapeDataString(metadataId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -679,19 +658,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 204)
             {
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
+                else {
+                    _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
@@ -718,10 +690,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Update entity in msdyn_adoxio_application_knowledgearticleset
+        /// Update entity in EntityDefinitions
         /// </summary>
-        /// <param name='msdynAdoxioApplicationKnowledgearticleid'>
-        /// key: msdyn_adoxio_application_knowledgearticleid
+        /// <param name='metadataId'>
+        /// key: MetadataId
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -732,7 +704,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="ValidationException">
@@ -744,11 +716,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string msdynAdoxioApplicationKnowledgearticleid, MicrosoftDynamicsCRMmsdynAdoxioApplicationKnowledgearticle body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string metadataId, MicrosoftDynamicsCRMEntityMetadata body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (msdynAdoxioApplicationKnowledgearticleid == null)
+            if (metadataId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "msdynAdoxioApplicationKnowledgearticleid");
+                throw new ValidationException(ValidationRules.CannotBeNull, "metadataId");
             }
             if (body == null)
             {
@@ -761,15 +733,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("msdynAdoxioApplicationKnowledgearticleid", msdynAdoxioApplicationKnowledgearticleid);
+                tracingParameters.Add("metadataId", metadataId);
                 tracingParameters.Add("body", body);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "Update", tracingParameters);
             }
             // Construct URL
             var _baseUrl = Client.BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "msdyn_adoxio_application_knowledgearticleset({msdyn_adoxio_application_knowledgearticleid})").ToString();
-            _url = _url.Replace("{msdyn_adoxio_application_knowledgearticleid}", System.Uri.EscapeDataString(msdynAdoxioApplicationKnowledgearticleid));
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "EntityDefinitions({MetadataId})").ToString();
+            _url = _url.Replace("{MetadataId}", System.Uri.EscapeDataString(metadataId));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -820,19 +792,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             string _responseContent = null;
             if ((int)_statusCode != 204)
             {
-                var ex = new OdataerrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Odataerror _errorBody =  Microsoft.Rest.Serialization.SafeJsonConvert.DeserializeObject<Odataerror>(_responseContent, Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
                 }
-                catch (JsonException)
-                {
-                    // Ignore the exception
+                else {
+                    _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);

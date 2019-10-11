@@ -30,7 +30,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var content = await response.Content.ReadAsStringAsync();
                 logger.LogDebug("OneStop message sequence completed successfully ");
                 return content;
-            } else
+            }
+            else
             {
                 string content = await response.Content.ReadAsStringAsync();
                 string ex = response.ReasonPhrase + " \n >>>" + content;

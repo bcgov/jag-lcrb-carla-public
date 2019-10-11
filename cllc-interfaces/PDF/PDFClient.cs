@@ -13,28 +13,28 @@ namespace Gov.Lclb.Cllb.Interfaces
     {
 
         public string BaseUri { get; set; }
-        
+
         private HttpClient client;
 
-        public PdfClient ( string baseUri, string Authorization )
+        public PdfClient(string baseUri, string Authorization)
         {
-            BaseUri = baseUri;                       
+            BaseUri = baseUri;
 
             // create the HttpClient that is used for our direct REST calls.
             client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             client.DefaultRequestHeaders.Add("Authorization", Authorization);
-            
+
         }
-        
-        
+
+
         /// <summary>
         /// GetPDF
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<byte[]> GetPdf(Dictionary<string,string> parameters, string template)
+        public async Task<byte[]> GetPdf(Dictionary<string, string> parameters, string template)
         {
             byte[] result = null;
 
@@ -56,7 +56,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (_statusCode == HttpStatusCode.OK)
             {
                 result = await response.Content.ReadAsByteArrayAsync();
-            } else {
+            }
+            else
+            {
                 throw new Exception("PDF service did not return OK result.");
             }
 

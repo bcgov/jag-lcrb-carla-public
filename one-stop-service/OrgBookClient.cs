@@ -8,20 +8,20 @@ namespace Gov.Lclb.Cllb.OneStopService
     public class OrgBookClient
     {
         private readonly HttpClient Client;
-        public readonly string ORGBOOK_API_BASE_URL;
+        public readonly string ORGBOOK_BASE_URL;
         public readonly string ORGBOOK_API_REGISTRATION_ENDPOINT = "/api/v2/topic/ident/registration/";
         public readonly string ORGBOOK_API_SCHEMA_ENDPOINT = "/api/v2/schema";
         public readonly string ORGBOOK_API_CREDENTIAL_ENDPOINT = "/api/v2/search/credential/topic";
         
         public OrgBookClient(HttpClient client, string BASE_URL)
         {
-            ORGBOOK_API_BASE_URL = BASE_URL;
+            ORGBOOK_BASE_URL = BASE_URL;
             Client = client;
         }
 
         public async Task<int?> GetTopicId(string registrationId)
         {
-            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_API_BASE_URL + ORGBOOK_API_REGISTRATION_ENDPOINT + registrationId);
+            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_BASE_URL + ORGBOOK_API_REGISTRATION_ENDPOINT + registrationId);
             if (resp.IsSuccessStatusCode)
             {
                 string _responseContent = await resp.Content.ReadAsStringAsync();
@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public async Task<int?> GetSchemaId(string schemaName, string schemaVersion)
         {
-            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_API_BASE_URL + ORGBOOK_API_SCHEMA_ENDPOINT + "?name=" + schemaName + "&version=" + schemaVersion);
+            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_BASE_URL + ORGBOOK_API_SCHEMA_ENDPOINT + "?name=" + schemaName + "&version=" + schemaVersion);
             if (resp.IsSuccessStatusCode)
             {
                 string _responseContent = await resp.Content.ReadAsStringAsync();
@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public async Task<int?> GetLicenceCredentialId(int topicId, int schemaId)
         {
-            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_API_BASE_URL + ORGBOOK_API_CREDENTIAL_ENDPOINT + $"?inactive=false&latest=true&revoked=false&credential_type_id={schemaId}&topic_id={topicId}");
+            HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_BASE_URL + ORGBOOK_API_CREDENTIAL_ENDPOINT + $"?inactive=false&latest=true&revoked=false&credential_type_id={schemaId}&topic_id={topicId}");
             if (resp.IsSuccessStatusCode)
             {
                 string _responseContent = await resp.Content.ReadAsStringAsync();

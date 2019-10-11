@@ -1,6 +1,4 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -29,8 +27,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (policyDocument.AdoxioDisplayorder != null)
                 {
                     result.displayOrder = (int)policyDocument.AdoxioDisplayorder;
-                }                
-            }            
+                }
+            }
             return result;
         }
 
@@ -43,7 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     slug = policyDocument.AdoxioSlug,
                     menuText = policyDocument.AdoxioMenutext
-                };               
+                };
             }
             return result;
         }

@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using Gov.Lclb.Cllb.Public.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient) 
+        public VoteQuestionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
             : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 
@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         protected override void Invoke(AppDbContext context)
         {
             UpdateVoteQuestions(context);
-            
+
         }
 
         private void UpdateVoteQuestions(AppDbContext context)
@@ -32,10 +32,10 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
             foreach (VoteQuestion voteQuestion in seedVoteQuestions)
             {
-                context.UpdateSeedVoteQuestionInfo(voteQuestion.ToViewModel());                
+                context.UpdateSeedVoteQuestionInfo(voteQuestion.ToViewModel());
             }
 
-            AddInitialVoteQuestions(context);            
+            AddInitialVoteQuestions(context);
         }
 
         private void AddInitialVoteQuestions(AppDbContext context)
@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             if (string.IsNullOrEmpty(VoteQuestionInitializationFile))
             {
                 // default to sample data, which is stored in the "SeedData" directory.
-                VoteQuestionInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "VoteQuestions.json"); 
+                VoteQuestionInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "VoteQuestions.json");
             }
             context.AddInitialVoteQuestionsFromFile(VoteQuestionInitializationFile);
         }
@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             {
                 VoteQuestions.AddRange(GetDevVoteQuestions());
             }
-                
+
 
             return VoteQuestions;
         }
@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// </summary>
         private List<VoteQuestion> GetDevVoteQuestions()
         {
-            return new List<VoteQuestion>();            
+            return new List<VoteQuestion>();
         }
 
         /// <summary>

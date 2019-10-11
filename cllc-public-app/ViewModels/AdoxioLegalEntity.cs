@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -127,7 +125,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public List<LegalEntity> children { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
-        public DateTimeOffset? dateIssued { get; set; } 
+        public DateTimeOffset? dateIssued { get; set; }
         public DateTimeOffset? securityAssessmentEmailSentOn { get; set; } //adoxio_dateemailsent (date time)
 
         //adoxio_contact (lookup contact)

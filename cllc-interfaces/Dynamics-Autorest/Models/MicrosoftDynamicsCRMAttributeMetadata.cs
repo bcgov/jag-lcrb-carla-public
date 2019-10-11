@@ -27,12 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAttributeMetadata class.
         /// </summary>
-        /// <param name="attributeType">Possible values include: 'Boolean',
-        /// 'Customer', 'DateTime', 'Decimal', 'Double', 'Integer', 'Lookup',
-        /// 'Memo', 'Money', 'Owner', 'PartyList', 'Picklist', 'State',
-        /// 'Status', 'String', 'Uniqueidentifier', 'CalendarRules', 'Virtual',
-        /// 'BigInt', 'ManagedProperty', 'EntityName'</param>
-        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), string attributeType = default(string), MicrosoftDynamicsCRMAttributeTypeDisplayName attributeTypeName = default(MicrosoftDynamicsCRMAttributeTypeDisplayName), int? columnNumber = default(int?), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), MicrosoftDynamicsCRMBooleanManagedProperty isAuditEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isGlobalFilterEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty isSortableEnabled = default(MicrosoftDynamicsCRMBooleanManagedProperty), string linkedAttributeId = default(string), string logicalName = default(string), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty isRenameable = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty isValidForAdvancedFind = default(MicrosoftDynamicsCRMBooleanManagedProperty), MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty requiredLevel = default(MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty), MicrosoftDynamicsCRMBooleanManagedProperty canModifyAdditionalSettings = default(MicrosoftDynamicsCRMBooleanManagedProperty), string schemaName = default(string), bool? isLogical = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?))
+        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), object attributeType = default(object), object attributeTypeName = default(object), int? columnNumber = default(int?), object description = default(object), object displayName = default(object), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), object isAuditEnabled = default(object), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), object isGlobalFilterEnabled = default(object), object isSortableEnabled = default(object), string linkedAttributeId = default(string), string logicalName = default(string), object isCustomizable = default(object), object isRenameable = default(object), object isValidForAdvancedFind = default(object), object requiredLevel = default(object), object canModifyAdditionalSettings = default(object), string schemaName = default(string), bool? isLogical = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?))
         {
             AttributeOf = attributeOf;
             AttributeType = attributeType;
@@ -85,19 +80,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AttributeOf { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Boolean', 'Customer',
-        /// 'DateTime', 'Decimal', 'Double', 'Integer', 'Lookup', 'Memo',
-        /// 'Money', 'Owner', 'PartyList', 'Picklist', 'State', 'Status',
-        /// 'String', 'Uniqueidentifier', 'CalendarRules', 'Virtual', 'BigInt',
-        /// 'ManagedProperty', 'EntityName'
         /// </summary>
         [JsonProperty(PropertyName = "AttributeType")]
-        public string AttributeType { get; set; }
+        public object AttributeType { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "AttributeTypeName")]
-        public MicrosoftDynamicsCRMAttributeTypeDisplayName AttributeTypeName { get; set; }
+        public object AttributeTypeName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -107,12 +97,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Description")]
-        public MicrosoftDynamicsCRMLabel Description { get; set; }
+        public object Description { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
-        public MicrosoftDynamicsCRMLabel DisplayName { get; set; }
+        public object DisplayName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -132,7 +122,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsAuditEnabled")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsAuditEnabled { get; set; }
+        public object IsAuditEnabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -207,12 +197,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsGlobalFilterEnabled")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsGlobalFilterEnabled { get; set; }
+        public object IsGlobalFilterEnabled { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsSortableEnabled")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsSortableEnabled { get; set; }
+        public object IsSortableEnabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -227,27 +217,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
+        public object IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsRenameable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsRenameable { get; set; }
+        public object IsRenameable { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsValidForAdvancedFind")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsValidForAdvancedFind { get; set; }
+        public object IsValidForAdvancedFind { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "RequiredLevel")]
-        public MicrosoftDynamicsCRMAttributeRequiredLevelManagedProperty RequiredLevel { get; set; }
+        public object RequiredLevel { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "CanModifyAdditionalSettings")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty CanModifyAdditionalSettings { get; set; }
+        public object CanModifyAdditionalSettings { get; set; }
 
         /// <summary>
         /// </summary>

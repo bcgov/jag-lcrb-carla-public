@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -16,6 +13,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string formxml { get; set; }
 
         public List<FormTab> tabs { get; set; }
-        
+
     }
 }

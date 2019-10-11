@@ -393,5 +393,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         ISharepointsites Sharepointsites { get; }
 
+        /// <summary>
+        /// Gets the IEntitydefinitions.
+        /// </summary>
+        IEntitydefinitions Entitydefinitions { get; }
+
+        /// <summary>
+        /// Gets the IGlobaloptionsetdefinitions.
+        /// </summary>
+        IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
+
     }
 }

@@ -11,11 +11,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [AllowAnonymous]
     public class FeaturesController : ControllerBase
     {
-        private readonly IConfiguration _configuration;                
+        private readonly IConfiguration _configuration;
 
         public FeaturesController(IConfiguration configuration)
         {
-            _configuration = configuration;            
+            _configuration = configuration;
         }
 
 

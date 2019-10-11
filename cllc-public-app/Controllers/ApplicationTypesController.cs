@@ -3,23 +3,22 @@ using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // TODO implement this with autorest
 
 namespace Gov.Lclb.Cllb.Public.Controllers
-{    
+{
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(Policy = "Business-User")]
     public class ApplicationTypesController : ControllerBase
-    {                  
+    {
         private readonly IDynamicsClient _dynamicsClient;
 
         public ApplicationTypesController(IDynamicsClient dynamicsClient)
-        {                      
+        {
             _dynamicsClient = dynamicsClient;
         }
 
@@ -59,7 +58,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("GetByName/{name}")]
         public ActionResult GetApplicationTypeByName([FromRoute] string name)
         {
-            var applicationType =_dynamicsClient.GetApplicationTypeByName(name);
+            var applicationType = _dynamicsClient.GetApplicationTypeByName(name);
             if (applicationType == null)
             {
                 return new NotFoundResult();
@@ -68,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new JsonResult(applicationType.ToViewModel());
             }
-            
+
         }
 
     }
