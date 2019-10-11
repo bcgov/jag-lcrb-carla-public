@@ -7,16 +7,17 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum LicenseeChangeType
     {
-        Unchanged  = 0, // never save this kind of change to dynamics
-        Add = 845280001,
-        Edit = 845280002,
-        Delete  = 845280000
+        unchanged  = 0, // never save this kind of change to dynamics
+        add = 845280001,
+        edit = 845280002,
+        delete  = 845280000
     }
+
     public class LicenseeChangeLog
     {
         public string Id { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public LicenseeChangeType ChangeType { get; set; }
+        public LicenseeChangeType? ChangeType { get; set; }
         public bool? IsDirectorNew { get; set; }
         public bool? IsDirectorOld { get; set; }
         public bool? IsManagerNew { get; set; }
@@ -47,6 +48,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Contact Contact { get; set; }
         public Account ParentBusinessAccount { get; set; }
         public string ApplicationId { get; set; }
+        public string ParentLegalEntityId { get; set; }
         public string LegalEntityId { get; set; }
         public string ParentLinceseeChangeLogId { get; set; }
         public IList<LicenseeChangeLog> Children { get; set; }
