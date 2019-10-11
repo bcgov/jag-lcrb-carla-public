@@ -16,5 +16,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         [JsonProperty(PropertyName = "adoxio_ParentLinceseeChangeLogId@odata.bind")]
         public string ParentLinceseeChangeLogOdataBind { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_ParentLegalEntityId")]
+        public MicrosoftDynamicsCRMadoxioLegalentity ParentLegalEntity { get; set; }
+
+        [JsonProperty(PropertyName = "adoxio_ParentLegalEntityId@odata.bind")]
+        public string ParentLegalEntityOdataBind { get; set; }
+
+
+        [JsonProperty(PropertyName = "_adoxio_parentlegalentityid_value")]
+        public string _adoxioParentlegalentityidValue { get; set; }
     }
 }

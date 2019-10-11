@@ -15,6 +15,7 @@ import { Route, ActivatedRoute } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { FormBase } from '@shared/form-base';
 import { Application } from '@models/application.model';
+import { forkJoin } from 'rxjs';
 
 
 
@@ -49,6 +50,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   treeRoot: LicenseeChangeLog;
   applicationId: string;
   application: Application;
+  changeLogs: LicenseeChangeLog[];
 
   constructor(private store: Store<AppState>,
     public dialog: MatDialog,
@@ -62,46 +64,81 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
-    this.legalEntityDataService.getCurrentHierachy()
-      .subscribe(legalEntity => {
-        this.treeRoot = this.processLegalEntityTree(legalEntity);
+    forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
+      this.legalEntityDataService.getChangeLogs(this.applicationId),
+      this.legalEntityDataService.getCurrentHierachy())
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
+        this.application = data[0];
+        this.changeLogs = data[1] || [];
+
+        // convert legal entity tree to change logs
+        this.treeRoot = this.processLegalEntityTree(data[2]);
         this.treeRoot.isRoot = true;
         this.changeTree = this.treeRoot;
         this.dataSource.data = [this.treeRoot];
+        this.applySavedChangeLogs();
         this.refreshTreeAndChangeTables();
-      });
-
-    this.applicationDataService.getApplicationById(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
-        if (data.applicantType === 'IndigenousNation') {
-          (<any>data).applyAsIndigenousNation = true;
-        }
-        this.application = data;
-        // this.hideFormControlByType();
-
-        // this.addDynamicContent();
-
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
-
-        // this.form.patchValue(noNulls);
-        // if (data.isPaid) {
-        //   this.form.disable();
-        // }
-        // this.savedFormData = this.form.value;
       },
         () => {
           console.log('Error occured');
         }
       );
+  }
+
+  applySavedChangeLogs() {
+    const changesWithLegalEntityId = this.changeLogs.filter(item => !!item.legalEntityId);
+    const changesWithParentLegalEntityId = this.changeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
+    const changesWithParentChangeLogId =
+      this.changeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !item.parentLinceseeChangeLogId);
+
+    changesWithLegalEntityId.forEach(change => {
+      const node = this.findNodeInTree(this.treeRoot, change.legalEntityId);
+      if (node) {
+        Object.assign(node, change);
+      }
+    });
+
+    changesWithParentLegalEntityId.forEach(change => {
+      const node = this.findNodeInTree(this.treeRoot, change.parentLegalEntityId);
+      if (node) {
+        node.children = node.children || [];
+        const newNode = Object.assign(new LicenseeChangeLog(), change);
+        if (newNode.firstNameNew) {
+          newNode.nameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
+        }
+        node.children.push(newNode);
+      }
+    });
+
+    changesWithParentChangeLogId.forEach(change => {
+      const node = this.findNodeInTree(this.treeRoot, null, change.parentLinceseeChangeLogId);
+      if (node) {
+        node.children = node.children || [];
+        const newNode = Object.assign(new LicenseeChangeLog(), change);
+        node.children.push(newNode);
+      }
+    });
+  }
+
+  findNodeInTree(node: LicenseeChangeLog, legalEntityId: string = null, changeLogId: string = null): LicenseeChangeLog {
+    let result = null;
+
+    if (legalEntityId && node.legalEntityId === legalEntityId) {
+      result = node;
+    } else if (changeLogId && node.id === changeLogId) {
+      result = node;
+    } else {
+      const children = node.children || [];
+      for (const child of children) {
+        const res = this.findNodeInTree(child, legalEntityId, changeLogId);
+        if (res) {
+          result = res;
+          break;
+        }
+      }
+    }
+    return result;
   }
 
   editAssociate(node) {
@@ -165,11 +202,11 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     //   const index = node.parentLinceseeChangeLog.children.indexOf(node);
     //   node.parentLinceseeChangeLog.children.splice(index, 1);
     // } else {
-      node.changeType = changeType;
-      const children = node.children || [];
-      children.forEach(child => {
-        this.deleteAssociate(child, 'parent-deleted');
-      });
+    node.changeType = changeType;
+    const children = node.children || [];
+    children.forEach(child => {
+      this.deleteAssociate(child, 'parent-deleted');
+    });
     // }
     this.refreshTreeAndChangeTables();
   }

@@ -41,7 +41,7 @@ export class LicenseeChangeLog {
   applicationType: string;
   legalEntityId: string;
   parentLegalEntityId: string;
-  parentLinceseeChangeLog: LicenseeChangeLog;
+  parentLinceseeChangeLogId: string;
   children: LicenseeChangeLog[];
 
   isRoot: boolean; // This is only used on the client side

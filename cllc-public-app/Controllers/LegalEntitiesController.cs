@@ -121,6 +121,93 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(legalEntity);
         }
 
+        [HttpGet("legal-entity-change-logs/{applicationId}")]
+        public ActionResult GetChangeLogsForApplication(string applicationId)
+        {
+            var result = new List<LicenseeChangeLog>();
+            var filter = "_adoxio_application_value eq " + applicationId;
+            try
+            {
+                var response = _dynamicsClient.Licenseechangelogs.Get(filter: filter).Value.ToList();
+                foreach (var item in response)
+                {
+                    result.Add(item.ToViewModel());
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangeLogy");
+            }
+            return new JsonResult(result);
+        }
+
+        private LegalEntity GetLegalEntityTree(string accountId)
+        {
+            LegalEntity result = null;
+            var filter = "_adoxio_account_value eq " + accountId;
+            filter += " and _adoxio_legalentityowned_value eq null";
+
+            var response = _dynamicsClient.Legalentities.Get(filter: filter);
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntity = response.Value.FirstOrDefault();
+                if (legalEntity != null)
+                {
+                    result = legalEntity.ToViewModel();
+                    result.children = this.GetLegalEntityChildren(result.id);
+                }
+            }
+            return result;
+        }
+
+        private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities = null)
+        {
+            List<LegalEntity> result = new List<LegalEntity>();
+            LegalentitiesGetResponseModel response = null;
+            var filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
+            if (processedEntities == null)
+            {
+                processedEntities = new List<string>();
+            }
+            try
+            {
+                response = _dynamicsClient.Legalentities.Get(filter: filter);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error while patching legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected Exception while patching legal entity");
+            }
+
+            if (response != null && response.Value != null)
+            {
+                var legalEntities = response.Value.ToList();
+
+                foreach (var legalEntity in legalEntities)
+                {
+                    var viewModel = legalEntity.ToViewModel();
+                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
+                    {
+                        processedEntities.Add(legalEntity.AdoxioLegalentityid);
+                        viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
+                    }
+
+                    result.Add(viewModel);
+                }
+
+            }
+            return result;
+
+        }
+
         private List<LegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
         {
             List<LegalEntity> result = null;
@@ -431,7 +518,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("save-change-tree/{applicationId}")]
-        public async Task<IActionResult> SaveLicenseeChangeTree(string applicationId, LicenseeChangeLog treeRoot)
+        public IActionResult SaveLicenseeChangeTree(string applicationId, LicenseeChangeLog treeRoot)
         {
             if (!ModelState.IsValid)
             {
@@ -441,17 +528,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
-        private void SaveChangeObjects(LicenseeChangeLog node, string applicationId, MicrosoftDynamicsCRMadoxioLicenseechangelog parentNode = null)
+        private void SaveChangeObjects(LicenseeChangeLog node, string applicationId, string parentLegalEntityId = null, string parentChangeLogId = null)
         {
-            if (node.ChangeType != LicenseeChangeType.Unchanged)
+            if (node.ChangeType != LicenseeChangeType.unchanged)
             {
                 MicrosoftDynamicsCRMadoxioLicenseechangelog patchEntity = new MicrosoftDynamicsCRMadoxioLicenseechangelog();
                 patchEntity.CopyValues(node);
                 node.ApplicationId = applicationId;
+                node.ParentLegalEntityId = parentLegalEntityId;
+                node.ParentLinceseeChangeLogId = parentChangeLogId;
 
                 if (string.IsNullOrEmpty(node.Id)) // create
                 {
+                    // bind to Parent legal entity
+                    if (!string.IsNullOrEmpty(node.ParentLegalEntityId))
+                    {
 
+                        patchEntity.ParentLegalEntityOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.ParentLegalEntityId);
+                    }
                     // bind to legal entity
                     if (!string.IsNullOrEmpty(node.LegalEntityId))
                     {
@@ -469,19 +563,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (!string.IsNullOrEmpty(node.ApplicationId))
                     {
                         patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
+                        parentLegalEntityId = node.LegalEntityId;
                     }
 
                     try
                     {
-                        parentNode = _dynamicsClient.Licenseechangelogs.Create(patchEntity);
+                        var result = _dynamicsClient.Licenseechangelogs.Create(patchEntity);
+                        parentChangeLogId = result.AdoxioLicenseechangelogid;
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, $"Error saving LicenseeChangeLog: {odee.Request.Content} Response: {odee.Response.Content}");
+                        _logger.LogError(httpOperationException, $"Error saving LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while saveLicenseeChangeLog");
+                        _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
                     }
                 }
                 else // update
@@ -496,21 +592,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     try
                     {
-                        parentNode = _dynamicsClient.Licenseechangelogs.GetByKey(patchEntity.AdoxioLicenseechangelogid);
+                        var result = _dynamicsClient.Licenseechangelogs.GetByKey(patchEntity.AdoxioLicenseechangelogid);
+                        parentChangeLogId = result.AdoxioLicenseechangelogid;
+                        parentLegalEntityId = node.LegalEntityId;
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError(odee, $"Error saving LicenseeChangeLog: {odee.Request.Content} Response: {odee.Response.Content}");
+                        _logger.LogError(httpOperationException, $"Error saving LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while saveLicenseeChangeLog");
+                        _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
                     }
                 }
-            }
-            foreach (var item in node.Children)
+            } else
             {
-                SaveChangeObjects(item, applicationId, parentNode);
+                parentLegalEntityId = node.LegalEntityId;
+                parentChangeLogId = node.Id;
+            }
+
+            if (node.Children != null)
+            {
+                foreach (var item in node.Children)
+                {
+                    SaveChangeObjects(item, applicationId, parentLegalEntityId, parentChangeLogId);
+                }
             }
         }
 

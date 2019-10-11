@@ -35,6 +35,9 @@ export class LegalEntityDataService extends DataService {
 
   }
 
+  /**
+   * Gets the legal entity tree
+   */
   getCurrentHierachy() {
     const apiPath = 'api/legalentities/current-hierarchy';
     return this.http.get<LegalEntity>(apiPath, { headers: this.headers })
@@ -43,8 +46,19 @@ export class LegalEntityDataService extends DataService {
   }
 
   /**
-   * Create a new legal entity in Dynamics
-   * @param data - legal entity data
+   * Gets the list of change logs for an application
+   */
+  getChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
+    const apiPath = `api/legalentities/legal-entity-change-logs/${applicationId}`;
+    return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+
+  }
+
+  /**
+   *  Saves the legal entity change log tree
+   * @param changeTree - The root of the change tree (This is the change tree)
+   * @param applicationId - The application to associte to the change logs
    */
   saveLicenseeChanges(changeTree: LicenseeChangeLog, applicationId: string) {
     return this.http.post<LegalEntity>(`api/legalentities/save-change-tree/${applicationId}`, changeTree, { headers: this.headers })
