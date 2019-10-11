@@ -38,7 +38,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         string Authorization { get; set; }
         private HttpClient _Client;
         private string Digest;
-        private string FedAuthValue;
         private CookieContainer _CookieContainer;
         private HttpClientHandler _HttpClientHandler;
 
@@ -108,7 +107,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 ApiEndpoint += "/";
             }
             ApiEndpoint += "_api/";
-            FedAuthValue = null;
+
 
             // Scenario #1 - ADFS (2016) using FedAuth
             if (!string.IsNullOrEmpty(sharePointRelyingPartyIdentifier)

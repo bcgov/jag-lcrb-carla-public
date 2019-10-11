@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Authorization
 {
@@ -32,9 +33,9 @@ namespace Gov.Lclb.Cllb.Public.Authorization
     public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
     {
         private readonly HttpContext _httpContext;
-        private readonly IHostingEnvironment _hostingEnv;
+        private readonly IWebHostEnvironment _hostingEnv;
 
-        public PermissionHandler(IHttpContextAccessor httpContextAccessor, IHostingEnvironment hostingEnv)
+        public PermissionHandler(IHttpContextAccessor httpContextAccessor, IWebHostEnvironment hostingEnv)
         {
             _httpContext = httpContextAccessor.HttpContext;
             _hostingEnv = hostingEnv;
