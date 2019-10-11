@@ -551,7 +551,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         }
                         catch (ArgumentNullException e)
                         {
-                            _logger.LogError($"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                            _logger.LogError(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                         }
                     }
                 }
@@ -603,7 +603,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     }
                     catch (ArgumentNullException e)
                     {
-                        _logger.LogError($"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                        _logger.LogError (e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                     }
                 }
             }
