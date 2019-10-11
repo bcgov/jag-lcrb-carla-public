@@ -14,7 +14,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         private HttpClient client;
         private IConfiguration _configuration;
-        private ILogger _logger;
 
 
         public GeocoderClient(IConfiguration configuration)

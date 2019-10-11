@@ -13,7 +13,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public PermissionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public PermissionSeeder(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
             : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 

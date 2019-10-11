@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public NewsletterSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public NewsletterSeeder(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
             : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 

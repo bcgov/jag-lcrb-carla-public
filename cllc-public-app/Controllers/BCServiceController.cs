@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -16,11 +17,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class BCServiceController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
         private readonly string _encryptionKey;
 
-        public BCServiceController(IConfiguration configuration, IHostingEnvironment env)
+        public BCServiceController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
