@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Serilog;
 using Swashbuckle.AspNetCore.Swagger;
@@ -47,6 +48,7 @@ namespace Gov.Lclb.Cllb.Geocoder
 
             services.AddMvc(config =>
             {
+                config.EnableEndpointRouting = false;
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
                 {
                     var policy = new AuthorizationPolicyBuilder()
@@ -58,7 +60,7 @@ namespace Gov.Lclb.Cllb.Geocoder
             // Other ConfigureServices() code...
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB GeoCoder Service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB GeoCoder Service", Version = "v1" });
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()

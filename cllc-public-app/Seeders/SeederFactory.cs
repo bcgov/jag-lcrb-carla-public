@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     /// </summary>
     public class SeedFactory<T> where T : AppDbContext
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _logger;
         private readonly IConfiguration _configuration;
@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// <param name="configuration"></param>
         /// <param name="env"></param>
         /// <param name="loggerFactory"></param>
-        public SeedFactory(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public SeedFactory(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _env = env;
             _loggerFactory = loggerFactory;
