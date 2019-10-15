@@ -27,6 +27,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         Withdrawn = 845280003
     }
 
+    public enum LCRBWorkerSecurityStatusCode
+    {
+        Active = 1,
+        Rejected = 850280005,
+        Withdrawn = 850280004
+    }
+
     public class TranslateStatus
     {
         public static LCRBApplicationSecurityStatus? BusinessResultSpiceToLCRB(SpiceApplicationStatus status)
@@ -54,6 +61,21 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     return LCRBWorkerSecurityStatus.Fail;
                 case SpiceApplicationStatus.Withdrawn:
                     return LCRBWorkerSecurityStatus.Withdrawn;
+                default:
+                    return null;
+            }
+        }
+
+        public static LCRBWorkerSecurityStatusCode? WorkerResultSpiceToLCRBStatusCode(SpiceApplicationStatus status)
+        {
+            switch (status)
+            {
+                case SpiceApplicationStatus.Cleared:
+                    return LCRBWorkerSecurityStatusCode.Active;
+                case SpiceApplicationStatus.NotCleared:
+                    return LCRBWorkerSecurityStatusCode.Rejected;
+                case SpiceApplicationStatus.Withdrawn:
+                    return LCRBWorkerSecurityStatusCode.Withdrawn;
                 default:
                     return null;
             }
