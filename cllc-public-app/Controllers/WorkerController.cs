@@ -257,9 +257,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
 
             var expand = new List<string> {
-               "adoxio_ContactId",
-               "adoxio_workerregistration_personalhistorysummary"
-           };
+               "adoxio_ContactId"
+            };
 
             MicrosoftDynamicsCRMadoxioWorker adoxioWorker = _dynamicsClient.Workers.GetByKey(workerId, expand: expand);
             if (adoxioWorker == null)
@@ -280,17 +279,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var effectiveDateParam = "";
-            var securityClearance = adoxioWorker.AdoxioWorkerregistrationPersonalhistorysummary.FirstOrDefault();
-            if (securityClearance != null && securityClearance.AdoxioCompletedon.HasValue)
+            if (adoxioWorker.AdoxioSecuritycompletedon != null)
             {
-                DateTime effectiveDate = securityClearance.AdoxioCompletedon.Value.DateTime;
+                DateTime effectiveDate = adoxioWorker.AdoxioSecuritycompletedon.Value.DateTime;
                 effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
             }
 
             var expiryDateParam = "";
-            if (securityClearance != null && securityClearance.AdoxioExpirydate.HasValue)
+            if (adoxioWorker.AdoxioExpirydate != null)
             {
-                DateTime expiryDate = securityClearance.AdoxioExpirydate.Value.DateTime;
+                DateTime expiryDate = adoxioWorker.AdoxioExpirydate.Value.DateTime;
                 expiryDateParam = expiryDate.ToString("dd/MM/yyyy");
             }
 
