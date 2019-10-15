@@ -15,12 +15,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     // public API
     public class MapServerController : ControllerBase
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly IMemoryCache _cache;
 
         string _mapserver;
         HttpClient _client;
-        public MapServerController(IConfiguration configuration, IHostingEnvironment env, IMemoryCache memoryCache)
+        public MapServerController(IConfiguration configuration, IWebHostEnvironment env, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _client = new HttpClient();
