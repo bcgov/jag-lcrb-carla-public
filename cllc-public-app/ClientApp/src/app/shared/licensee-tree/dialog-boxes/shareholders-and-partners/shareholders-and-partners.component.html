@@ -28,12 +28,6 @@
     </section>
 
     <section class="row">
-      <app-field *ngIf="form.get('isIndividual').value" class="col-md-6" label="Date of Birth" [valid]="true"
-        errorMessage="This is required">
-        <input type="text" formControlName='dateofBirthNew' style="background-color: #fff;" placeholder="yyyy-mm-dd"
-          class="form-control" [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()">
-        <mat-datepicker #picker2></mat-datepicker>
-      </app-field>
 
       <app-field *ngIf="!form.get('isIndividual').value" class="col-md-12" label="Name" [isFullWidth]="true"
         [valid]="true" errorMessage="This is required">
@@ -64,15 +58,6 @@
 
       <app-field class="col-md-6" label="Number of Voting Shares" [valid]="true" errorMessage="This is required">
         <input type="number" class="form-control" formControlName="numberofSharesNew">
-      </app-field>
-    </section>
-
-    <section class="row">
-      <app-field class="col-md-6" label="Date of Shares Issued" [valid]="true" errorMessage="This is required">
-        <input type="text" formControlName='dateIssued' style="width: 200px; background-color: #fff;"
-          placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
-          (click)="picker.open()">
-        <mat-datepicker #picker></mat-datepicker>
       </app-field>
     </section>
   </form>

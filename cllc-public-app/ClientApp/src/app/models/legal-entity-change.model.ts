@@ -6,7 +6,6 @@ import { Contact } from './contact.model';
 export class LicenseeChangeLog {
   id: string; // guid
   changeType: string;
-  isIndividual: boolean;
   isDirectorNew: boolean;
   isDirectorOld: boolean;
   isManagerNew: boolean;
@@ -34,9 +33,6 @@ export class LicenseeChangeLog {
   titleNew: string;
   titleOld: string;
 
-
-  businessAccount: Account;
-  contact: Contact;
   applicationId: string;
   applicationType: string;
   legalEntityId: string;
@@ -45,7 +41,7 @@ export class LicenseeChangeLog {
   children: LicenseeChangeLog[];
 
   isRoot: boolean; // This is only used on the client side
-  lastTypeOfChange: string; // This is only used on the client side
+  isIndividual: boolean; // This is only used on the client side
 
   /**
    * Create from LegalEntity
@@ -53,9 +49,9 @@ export class LicenseeChangeLog {
   constructor(legalEntity: LegalEntity = null) {
     if (legalEntity) {
       this.legalEntityId = legalEntity.id;
+      this.isIndividual = legalEntity.isindividual;
       this.parentLegalEntityId = legalEntity.parentLegalEntityId;
       this.changeType = 'unchanged';
-      this.isIndividual = legalEntity.isindividual;
       this.isDirectorNew = legalEntity.isDirector;
       this.isDirectorOld = legalEntity.isDirector;
       this.isManagerNew = legalEntity.isSeniorManagement;
@@ -64,9 +60,11 @@ export class LicenseeChangeLog {
       this.isOfficerOld = legalEntity.isOfficer;
       this.isShareholderNew = legalEntity.isShareholder;
       this.isShareholderOld = legalEntity.isShareholder;
-      // this.isTrusteeNew = legalEntity.isTrustee;
-      // this.isTrusteeOld = legalEntity.isTrustee;
-      // this.BusinessAccountType = legalEntity.BusinessAccountType;
+      this.isTrusteeNew = legalEntity.isTrustee;
+      this.isTrusteeOld = legalEntity.isTrustee;
+      if (legalEntity.account) {
+        this.businessAccountType = legalEntity.account.businessType;
+      }
       this.numberofSharesNew = legalEntity.percentageVotingShares;
       this.numberofSharesOld = legalEntity.percentageVotingShares;
       this.emailNew = legalEntity.email;
@@ -82,16 +80,7 @@ export class LicenseeChangeLog {
       this.titleNew = legalEntity.jobTitle;
       this.titleOld = legalEntity.jobTitle;
 
-      this.parentLegalEntityId = legalEntity.parentLegalEntityId;
 
-      // this.LicenseeChangelogid = legalEntity.LicenseeChangelogid;
-      // this.BusinessAccount = legalEntity.BusinessAccount ;
-      // this.Contact = legalEntity.Contact;
-      // this.Application = legalEntity.Application;
-      // this.ApplicationType = legalEntity.ApplicationType ;
-      // this.LegalEntity = legalEntity.LegalEntity ;
-      // this.ParentLinceseeChangeLogId = legalEntity.ParentLinceseeChangeLogId;
-      // this.LicenseechangelogLicenseechangelogs = legalEntity.LicenseechangelogLicenseechangelogs ;
     }
   }
 
@@ -115,6 +104,7 @@ export class LicenseeChangeLog {
     position = position.substring(0, position.length - 2);
     return position;
   }
+
   getOldLeadershipPosition(): string {
     let position = '';
     if (this.isDirectorOld) {
@@ -136,3 +126,17 @@ export class LicenseeChangeLog {
     return position;
   }
 }
+
+
+export enum LicenseeChangeType {
+  addLeadership = 'addLeadership',
+  updateLeadership = 'updateLeadership',
+  removeLeadership = 'removeLeadership',
+  addBusinessShareholder = 'addBusinessShareholder',
+  updateBusinessShareholder = 'updateBusinessShareholder',
+  removeBusinessShareholder = 'removeBusinessShareholder',
+  addIndividualShareholder = 'addIndividualShareholder',
+  updateIndividualShareholder = 'updateIndividualShareholder',
+  removeIndividualShareholder = 'removeIndividualShareholder'
+}
+

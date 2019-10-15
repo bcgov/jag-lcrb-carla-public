@@ -46,13 +46,14 @@ export class ShareholdersAndPartnersComponent implements OnInit {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
+    } else {
+      let formData = this.data.shareholder || {};
+      formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
+      if (formData.isIndividual === true) {
+        formData.nameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
+      }
+      this.dialogRef.close(formData);
     }
-    let formData = this.data.shareholder || {};
-    formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
-    if (formData.isIndividual === true) {
-      formData.nameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
-    }
-    this.dialogRef.close(formData);
   }
 
 
