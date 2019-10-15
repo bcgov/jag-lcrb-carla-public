@@ -17,13 +17,13 @@ export class OrganizationLeadershipComponent {
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.directorOfficerForm = fb.group({
       id: [''],
-      leaderType: ['key-personnel'],
       isDirectorNew: [false],
       isOfficerNew: [false],
       isSeniorManagementNew: [false],
       firstNameNew: ['', Validators.required],
       lastNameNew: ['', Validators.required],
       emailNew: ['', Validators.email],
+      isIndividual: [true],
       titleNew: [''],
       dateofappointment: ['', Validators.required]
     }, { validator: this.dateLessThanToday('dateofappointment') }

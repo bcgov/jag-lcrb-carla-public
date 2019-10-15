@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
 import { LegalEntity } from '@models/legal-entity.model';
-import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { LicenseeChangeLog, LicenseeChangeType } from '@models/legal-entity-change.model';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { MatDialog } from '@angular/material';
 import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
@@ -18,27 +18,13 @@ import { Application } from '@models/application.model';
 import { forkJoin } from 'rxjs';
 
 
-
-/**
- * Food; data; with nested structure.
- * Each; node; has; a; name; and; an; optiona; list; of; children.
- */
-interface FoodNode {
-  name: string;
-  newName?: string;
-  children?: FoodNode[];
-  isNew?: boolean;
-  deleted?: boolean;
-  edited?: boolean;
-}
-
 @Component({
   selector: 'app-licensee-tree',
   templateUrl: './licensee-tree.component.html',
   styleUrls: ['./licensee-tree.component.scss'],
 })
 export class LicenseeTreeComponent extends FormBase implements OnInit {
-  treeControl = new NestedTreeControl<FoodNode>(node => node.children);
+  treeControl = new NestedTreeControl<LicenseeChangeLog>(node => node.children);
   dataSource = new MatTreeNestedDataSource<any>();
   @ViewChild('tree') tree: MatTree<any>;
   componentActive = true;
@@ -61,7 +47,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
-  hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
+  hasChild = (_: number, node: LicenseeChangeLog) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
     forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
@@ -141,26 +127,27 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     return result;
   }
 
-  editAssociate(node) {
+  editAssociate(node: LicenseeChangeLog) {
     if (node.isShareholderNew) {
       this.openShareholderDialog(node)
         .pipe(filter(data => !!data))
-        .subscribe(
-          formData => {
-            if (node.changeType !== 'add') {
-              formData.changeType = 'edit';
-            }
-            node = Object.assign(node, formData);
-            this.refreshTreeAndChangeTables();
+        .subscribe((formData: LicenseeChangeLog) => {
+          if (node.changeType !== LicenseeChangeType.addBusinessShareholder
+            && node.changeType !== LicenseeChangeType.addIndividualShareholder) {
+            formData.changeType = formData.isIndividual ? LicenseeChangeType.updateIndividualShareholder
+              : LicenseeChangeType.updateIndividualShareholder;
           }
+          node = Object.assign(node, formData);
+          this.refreshTreeAndChangeTables();
+        }
         );
     } else {
       this.openLeadershipDialog(node)
         .pipe(filter(data => !!data))
         .subscribe(
           formData => {
-            if (node.changeType !== 'add') {
-              formData.changeType = 'edit';
+            if (node.changeType !== LicenseeChangeType.addLeadership) {
+              formData.changeType = LicenseeChangeType.updateLeadership;
             }
             node = Object.assign(node, formData);
             this.refreshTreeAndChangeTables();
@@ -173,9 +160,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.openLeadershipDialog({})
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
-        formData.changeType = 'add';
-        formData.isIndividual = true;
-        // formData.parentLinceseeChangeLog = node;
+        formData.changeType = LicenseeChangeType.addLeadership;
         node.children = node.children || [];
         node.children.push(formData);
         this.refreshTreeAndChangeTables();
@@ -186,14 +171,16 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   addShareholder(node) {
     this.openShareholderDialog({})
       .pipe(filter(data => !!data))
-      .subscribe(
-        formData => {
-          formData.changeType = 'add';
-          // formData.parentLinceseeChangeLog = node;
-          node.children = node.children || [];
-          node.children.push(formData);
-          this.refreshTreeAndChangeTables();
+      .subscribe((formData: LicenseeChangeLog) => {
+        if (formData.isIndividual) {
+          formData.changeType = LicenseeChangeType.addIndividualShareholder;
+        } else {
+          formData.changeType = LicenseeChangeType.addBusinessShareholder;
         }
+        node.children = node.children || [];
+        node.children.push(formData);
+        this.refreshTreeAndChangeTables();
+      }
       );
   }
 
@@ -302,6 +289,39 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         this.populateChangeTables(child);
       });
     }
+  }
+
+  isAddChangeType(node: LicenseeChangeLog): boolean {
+    const result = node.changeType === LicenseeChangeType.addLeadership
+      || node.changeType === LicenseeChangeType.addBusinessShareholder
+      || node.changeType === LicenseeChangeType.addIndividualShareholder;
+    return result;
+  }
+
+  isUpdateChangeType(node: LicenseeChangeLog): boolean {
+    const result = node.changeType === LicenseeChangeType.updateLeadership
+      || node.changeType === LicenseeChangeType.updateBusinessShareholder
+      || node.changeType === LicenseeChangeType.updateIndividualShareholder;
+    return result;
+  }
+
+  isRemoveChangeType(node: LicenseeChangeLog): boolean {
+    const result = node.changeType === LicenseeChangeType.removeLeadership
+      || node.changeType === LicenseeChangeType.removeBusinessShareholder
+      || node.changeType === LicenseeChangeType.removeIndividualShareholder;
+    return result;
+  }
+
+  getRenderChangeType(item: LicenseeChangeLog): string {
+    let changeType = '';
+    if (this.isAddChangeType(item)) {
+      changeType = 'Add';
+    } else if (this.isUpdateChangeType(item)) {
+      changeType = 'Update';
+    } else if (this.isRemoveChangeType(item)) {
+      changeType = 'Remove';
+    }
+    return changeType;
   }
 
   save() {

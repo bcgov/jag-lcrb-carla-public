@@ -37,17 +37,8 @@
         <app-field class="col-md-6" label="Email" [valid]="true" errorMessage="Email is invalid">
           <input type="text" class="form-control" formControlName="emailNew">
         </app-field>
-  
-        <app-field class="col-md-6" label="Date of Appointment" [valid]="true" errorMessage="This is required">
-          <input type="text" formControlName='dateofappointment' style="max-width: 200px; background-color: #fff;"
-            autocomplete="false" placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
-            (focus)="picker.open()" (click)="picker.open()">
-          <mat-datepicker #picker></mat-datepicker>
-        </app-field>
-      </div>
-  
-      <div class="row">
-        <app-field class="col-md-6" label="Title" [valid]="true" errorMessage="Email is invalid">
+
+        <app-field class="col-md-6" label="Title" [valid]="true">
           <input type="text" class="form-control" formControlName="titleNew">
         </app-field>
       </div>
