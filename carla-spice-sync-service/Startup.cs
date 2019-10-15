@@ -16,13 +16,15 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Rest;
-using Splunk;
-using Splunk.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Serilog;
+using Serilog.Exceptions;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 [assembly: ApiController]
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
@@ -43,7 +45,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         {
             
             services.AddMvc(config =>
-            {                
+            {
+                config.EnableEndpointRouting = false;
                 if (!string.IsNullOrEmpty(_configuration["JWT_TOKEN_KEY"]))
                 {
                      var policy = new AuthorizationPolicyBuilder()
@@ -51,13 +54,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                                   .Build();
                      config.Filters.Add(new AuthorizeFilter(policy));
                 }
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             // Other ConfigureServices() code...
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB SPD Transfer Service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB SPD Transfer Service", Version = "v1" });
                 c.DescribeAllEnumsAsStrings();
                 c.SchemaFilter<EnumTypeSchemaFilter>();
             });
@@ -136,7 +139,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {            
 
             if (env.IsDevelopment())
@@ -186,43 +189,20 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
             });
 
-            // enable Splunk logger
-            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]))
+            // enable Splunk logger using Serilog
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
+                )
             {
-                var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
-
-                //Append Http Json logger
-                loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.EventCollector(_configuration["SPLUNK_COLLECTOR_URL"],
+                        _configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .CreateLogger();
             }
         }
 
-        SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
-        {
-            SplunkLoggerConfiguration result = null;
-            string splunkCollectorUrl = _configuration["SPLUNK_COLLECTOR_URL"];
-            if (!string.IsNullOrEmpty(splunkCollectorUrl))
-            {
-                string splunkToken = _configuration["SPLUNK_TOKEN"];
-                if (!string.IsNullOrEmpty(splunkToken))
-                {
-                    result = new SplunkLoggerConfiguration()
-                    {
-                        HecConfiguration = new HECConfiguration()
-                        {
-                            BatchIntervalInMilliseconds = 5000,
-                            BatchSizeCount = 10,
-                            ChannelIdType = HECConfiguration.ChannelIdOption.None,
-                            DefaultTimeoutInMilliseconds = 10000,
-
-                            SplunkCollectorUrl = splunkCollectorUrl,
-                            Token = splunkToken,
-                            UseAuthTokenAsQueryString = false
-                        }
-                    };
-                }
-            }
-            return result;
-        }
 
         /// <summary>
         /// Setup the Hangfire jobs.
@@ -231,7 +211,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// <param name="loggerFactory"></param>
         private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            ILogger log = loggerFactory.CreateLogger(typeof(Startup));
+            Microsoft.Extensions.Logging.ILogger log = loggerFactory.CreateLogger(typeof(Startup));
             log.LogInformation("Starting setup of Hangfire jobs ...");
 
             try

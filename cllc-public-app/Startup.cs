@@ -32,6 +32,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -74,6 +75,7 @@ namespace Gov.Lclb.Cllb.Public
             // for security reasons, the following headers are set.
             services.AddMvc(opts =>
             {
+                opts.EnableEndpointRouting = false;
                 // default deny
                 var policy = new AuthorizationPolicyBuilder()
                  .RequireAuthenticatedUser()
@@ -90,18 +92,16 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(typeof(CspReportOnlyAttribute));
                 opts.Filters.Add(new CspScriptSrcReportOnlyAttribute { None = true });
             })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-            .AddJsonOptions(
-                opts =>
-                {
-                    opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                    opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
-                    opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+            .AddNewtonsoftJson(opts =>
+           {
+               opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+               opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+               opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
 
-                    // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
-                    opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                });
-
+                // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
+                opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+           })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);            
 
             // setup siteminder authentication (core 2.0)
             services.AddAuthentication(options =>
@@ -237,7 +237,7 @@ namespace Gov.Lclb.Cllb.Public
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             var log = loggerFactory.CreateLogger("Startup");
 

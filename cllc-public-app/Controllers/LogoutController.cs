@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -13,10 +14,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LogoutController : ControllerBase
     {
         private readonly IConfiguration Configuration;
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
 
-        public LogoutController(IConfiguration configuration, IHostingEnvironment env)
+        public LogoutController(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             _env = env;

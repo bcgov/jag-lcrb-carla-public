@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,11 +15,11 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         public const string AllProfiles = "all";
 
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
         protected ILogger Logger;
         protected IDynamicsClient _dynamicsClient;
 
-        protected Seeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        protected Seeder(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _env = env;
             Logger = loggerFactory.CreateLogger(typeof(Seeder<T>));
@@ -28,7 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected bool IsEnvironment(string environmentName)
         {
-            return _env.IsEnvironment(environmentName);
+            return _env.EnvironmentName.Equals(environmentName);
         }
 
         protected bool IsDevelopmentEnvironment => _env.IsDevelopment();
@@ -38,6 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         protected bool IsStagingEnvironment => _env.IsStaging();
 
         protected bool IsProductionEnvironment => _env.IsProduction();
+
 
         protected IConfiguration Configuration { get; set; }
 
