@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -8,9 +9,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     public class LoadTestController : ControllerBase
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public LoadTestController(IHostingEnvironment env)
+        public LoadTestController(IWebHostEnvironment env)
         {
             _env = env;
         }
