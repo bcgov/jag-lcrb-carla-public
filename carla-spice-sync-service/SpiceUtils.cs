@@ -54,8 +54,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     string contactId;
                     if (workerResponse.RecordIdentifier == null)
                     {
-                        MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.RecordIdentifier}").Value[0];
+                        MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.SpdJobId}").Value[0];
                         contactId = contact.Contactid;
+                    }
+                    else if(workerResponse.RecordIdentifier.Substring(0,2) == "WR")
+                    {
+                        // Check if using old WR record
+                        MicrosoftDynamicsCRMadoxioPersonalhistorysummary history = _dynamicsClient.Personalhistorysummaries.Get(filter: $"adoxio_workerjobnumber eq '{workerResponse.RecordIdentifier}'").Value[0];
+                        contactId = history._adoxioContactidValue;
                     }
                     else
                     {
@@ -70,9 +76,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         // update the record.
                         MicrosoftDynamicsCRMadoxioWorker patchRecord = new MicrosoftDynamicsCRMadoxioWorker()
                         {
+                            Statuscode = (int?)TranslateStatus.WorkerResultSpiceToLCRBStatusCode(workerResponse.Result),
                             AdoxioSecuritystatus = (int?)TranslateStatus.WorkerResultSpiceToLCRB(workerResponse.Result),
                             AdoxioSecuritycompletedon = DateTimeOffset.Now
                         };
+
+                        if (workerResponse.Result == SpiceApplicationStatus.Cleared)
+                        {
+                            patchRecord.AdoxioExpirydate = DateTimeOffset.Now.AddYears(2);
+                        }
 
                         _dynamicsClient.Workers.Update(resp.Value[0].AdoxioWorkerid, patchRecord);
                     }
@@ -86,7 +98,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         hangfireContext.WriteLine($"Worker not found for spd job id: {workerResponse.RecordIdentifier}");
                     }
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     hangfireContext.WriteLine("Error updating worker security status");
                     hangfireContext.WriteLine("Request:");
@@ -152,7 +164,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             _logger.LogError($"Error updating application - received an invalid status of {applicationResponse.Result}");
                         }
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException odee)
                     {
                         hangfireContext.WriteLine("Error updating application");
                         hangfireContext.WriteLine("Request:");
@@ -545,7 +557,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         }
                         catch (ArgumentNullException e)
                         {
-                            _logger.LogError($"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                            _logger.LogError(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                         }
                     }
                 }
@@ -556,7 +568,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
                 return screeningRequest;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 _logger.LogError("Error creating application screening request");
                 _logger.LogError("Request:");
@@ -597,7 +609,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     }
                     catch (ArgumentNullException e)
                     {
-                        _logger.LogError($"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                        _logger.LogError (e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                     }
                 }
             }

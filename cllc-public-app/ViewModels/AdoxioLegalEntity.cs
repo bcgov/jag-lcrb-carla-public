@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -82,7 +80,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool isFinanceIntegrityComplete { get; set; }
         public bool isSecurityAssessmentComplete { get; set; }
     }
-    public class AdoxioLegalEntity
+    public class LegalEntity
     {
         // string form of the guid.
         public string id { get; set; } //adoxio_legalentityid (primary key)
@@ -124,10 +122,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? commonnonvotingshares { get; set; } //adoxio_commonnonvotingshares (whole number)
         public int? preferrednonvotingshares { get; set; } //adoxio_preferrednonvotingshares (whole number)
         public Account account { get; set; } //adoxio_account (lookup account)
-        List<AdoxioLegalEntity> relatedentities { get; set; }
+        public List<LegalEntity> relatedentities { get; set; }
         public string email { get; set; } //adoxio_email
         public DateTimeOffset? dateofappointment { get; set; } //adoxio_dateofappointment (date time)
-        public DateTimeOffset? dateIssued { get; set; } 
+        public DateTimeOffset? dateIssued { get; set; }
         public DateTimeOffset? securityAssessmentEmailSentOn { get; set; } //adoxio_dateemailsent (date time)
 
         //adoxio_contact (lookup contact)

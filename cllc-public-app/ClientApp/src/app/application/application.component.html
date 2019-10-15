@@ -29,7 +29,8 @@
               <br>
 
               <p>
-                A name cannot mislead the public about what kind of business the licensee operates. The name cannot imply a
+                A name cannot mislead the public about what kind of business the licensee operates. The name cannot
+                imply a
                 licensee is selling medical cannabis, and cannot include words in any form or combination or manner
                 the
                 words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
@@ -463,35 +464,34 @@
         </section>
       </div>
 
-      <div class="ngtest-photos-renderings"
-      *ngIf="showExteriorRenderings()">
-      <hr>
-      <label for="">Photos or renderings of the store's proposed exterior changes </label>
-      <br>
-      <section>
-        <app-more-less-content>
-          <div less>
-            <ul>
-              <li>Must show that cannabis is not visible from outside the store</li>
-              <li>If submitting photos, the photos must be taken specifically for the purpose of the application (not
-                general/stock images) and must be no more than six months old</li>
-              <li>If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
-                legible)</li>
-            </ul>
-          </div>
-        </app-more-less-content>
-      </section>
+      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings()">
+        <hr>
+        <label for="">Photos or renderings of the store's proposed exterior changes </label>
+        <br>
+        <section>
+          <app-more-less-content>
+            <div less>
+              <ul>
+                <li>Must show that cannabis is not visible from outside the store</li>
+                <li>If submitting photos, the photos must be taken specifically for the purpose of the application (not
+                  general/stock images) and must be no more than six months old</li>
+                <li>If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
+                  legible)</li>
+              </ul>
+            </div>
+          </app-more-less-content>
+        </section>
 
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
-          [enableFileDeletion]="true" [useDocumentTypeForName]="true"
-          fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-          [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-          (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
-        </app-file-uploader>
-      </section>
-    </div>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
+            [enableFileDeletion]="true" [useDocumentTypeForName]="true"
+            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+            (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
+          </app-file-uploader>
+        </section>
+      </div>
 
       <!-- Hours of Sale -->
       <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
@@ -703,26 +703,50 @@
         <label for="">Supporting Documents</label>
         <br>
         <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Please download the
-          <a *ngIf="account?.businessType === 'SoleProprietor'"
-            href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf="account?.businessType === 'Society'"
-            href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf="account?.businessType === 'IndigenousNation'"
-            href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf="businessTypeIsPartnership()"
-            href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf=" businessTypeIsPrivateCorporation()"
-            href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
-            Document Checklist
-          </a>
+          <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
+          <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/9CC0BA56735E466AB09FEAEE3241F46C" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/9A8C9C2E49564C54A2232E60F5B266DB" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
           <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">and assemble
             all
             required documents.</span>
@@ -1053,25 +1077,59 @@
       </div>
       <label for="">Supporting Documents</label>
       <br>
-      <p *ngIf="ApplicationTypeNames.Marketer !== application?.applicationType?.name">Please download the
-        <a *ngIf="account?.businessType === 'SoleProprietor'"
-          href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
-          Document Checklist
-        </a>
-        <a *ngIf="account?.businessType === 'Society'"
-          href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
-          Document Checklist
-        </a>
-        <a *ngIf="businessTypeIsPartnership()"
-          href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
-          Document Checklist
-        </a>
-        <a *ngIf=" businessTypeIsPrivateCorporation()"
-          href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
-          Document Checklist
-        </a>
-        and assemble all required documents.
-      </p>
+      <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Please download the
+          <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
+          <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/9CC0BA56735E466AB09FEAEE3241F46C" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/9A8C9C2E49564C54A2232E60F5B266DB" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
+          <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">and assemble
+            all
+            required documents.</span>
+          <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">and assemble
+            all
+            required documents listed in the 'Documents
+            Related to the Proposed Store' section.</span>
+        </p>
       <section *ngIf="ApplicationTypeNames.Marketer === application?.applicationType?.name">
         <p *ngIf="account?.businessType === 'Society'">
           Please upload the society’s Statement of Directors and Registered Office.

@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -17,20 +16,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     public class BCServiceController : ControllerBase
     {
-        private readonly IConfiguration _configuration;        
-        private readonly IHostingEnvironment _env;
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
         private readonly string _encryptionKey;
 
-        public BCServiceController(IConfiguration configuration, IHostingEnvironment env)
+        public BCServiceController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
-            _env = env;            
+            _env = env;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
         }
 
         [HttpGet]
-        [Authorize] 
+        [Authorize]
         public ActionResult BCServiceLogin(string path, string code)
         {
             // check to see if we have a local path.  (do not allow a redirect to another website)
@@ -38,7 +37,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // diagnostic feature for development - echo headers back.
                 if ((!_env.IsProduction()) && path.Equals("headers"))
-                {                    
+                {
                     ContentResult contentResult = new ContentResult();
                     contentResult.Content = LoggingEvents.GetHeaders(Request);
                     contentResult.ContentType = "text/html";
@@ -70,9 +69,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     };
                 }
             }
-        }    
+        }
 
-		/// <summary>
+        /// <summary>
         /// Injects an authentication token cookie into the response for use with the 
         /// SiteMinder authentication middleware
         /// </summary>
@@ -91,8 +90,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // clear session
             HttpContext.Session.Clear();
 
-			// expire "dev" user cookie
-			string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
+            // expire "dev" user cookie
+            string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
             if (temp == null)
             {
                 temp = "";
@@ -125,5 +124,5 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Redirect(basePath);
         }
 
-	}
+    }
 }

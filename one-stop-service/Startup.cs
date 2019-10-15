@@ -15,8 +15,6 @@ using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using SoapCore;
-using Splunk;
-using Splunk.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Linq;
@@ -24,6 +22,10 @@ using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using Serilog.Exceptions;
+using Microsoft.OpenApi.Models;
 
 namespace Gov.Lclb.Cllb.OneStopService
 {
@@ -31,7 +33,7 @@ namespace Gov.Lclb.Cllb.OneStopService
     {
         private readonly ILoggerFactory _loggerFactory;
 
-        public Startup(IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;
             var builder = new ConfigurationBuilder()
@@ -58,10 +60,11 @@ namespace Gov.Lclb.Cllb.OneStopService
             IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
             services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(dynamicsClient, _loggerFactory.CreateLogger("IReceiveFromHubService"), Configuration));
 
-            services.AddSingleton<ILogger>(_loggerFactory.CreateLogger("OneStopController"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("OneStopController"));
 
             services.AddMvc(config =>
             {
+                config.EnableEndpointRouting = false;
                 if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
                 {
                     var policy = new AuthorizationPolicyBuilder()
@@ -76,7 +79,7 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "JAG LCRB One Stop Service", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB One Stop Service", Version = "v1" });
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -122,7 +125,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             
             
@@ -131,8 +134,9 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             app.Use(async (context, next) =>
             {
+                
                 if (context.Request.Path.Value.Equals("/receiveFromHub"))
-                {
+                {                    
                     string soapAction = context.Request.Headers["SOAPAction"];
                     if (string.IsNullOrEmpty(soapAction) || soapAction.Equals("\"\""))
                     {
@@ -140,7 +144,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     }
                 }
 
-                await next.Invoke();
+                await next();
 
             });
 
@@ -192,43 +196,21 @@ namespace Gov.Lclb.Cllb.OneStopService
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB One Stop Service");
             });
 
-            // enable Splunk logger
-            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]))
+            // enable Splunk logger using Serilog
+            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
+                )
             {
-                var splunkLoggerConfiguration = GetSplunkLoggerConfiguration(app);
-
-                //Append Http Json logger
-                loggerFactory.AddHECJsonSplunkLogger(splunkLoggerConfiguration);
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
+                        Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .CreateLogger();
             }
 
         }
 
-        SplunkLoggerConfiguration GetSplunkLoggerConfiguration(IApplicationBuilder app)
-        {
-            SplunkLoggerConfiguration result = null;
-            string splunkCollectorUrl = Configuration["SPLUNK_COLLECTOR_URL"];
-            if (!string.IsNullOrEmpty(splunkCollectorUrl))
-            {
-                string splunkToken = Configuration["SPLUNK_TOKEN"];
-                if (!string.IsNullOrEmpty(splunkToken))
-                {
-                    result = new SplunkLoggerConfiguration()
-                    {
-                        HecConfiguration = new HECConfiguration()
-                        {
-                            BatchIntervalInMilliseconds = 5000,
-                            BatchSizeCount = 10,
-                            ChannelIdType = HECConfiguration.ChannelIdOption.None,
-                            DefaultTimeoutInMilliseconds = 10000,
-                            SplunkCollectorUrl = splunkCollectorUrl,
-                            Token = splunkToken,
-                            UseAuthTokenAsQueryString = false
-                        }
-                    };
-                }
-            }
-            return result;
-        }        
     
 
         /// <summary>
@@ -238,7 +220,7 @@ namespace Gov.Lclb.Cllb.OneStopService
         /// <param name="loggerFactory"></param>
         private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
-            ILogger log = loggerFactory.CreateLogger(typeof(Startup));
+            Microsoft.Extensions.Logging.ILogger log = loggerFactory.CreateLogger(typeof(Startup));
             log.LogInformation("Starting setup of Hangfire job ...");
 
             try
@@ -247,12 +229,13 @@ namespace Gov.Lclb.Cllb.OneStopService
                 {
                     log.LogInformation("Creating Hangfire jobs for License issuance check ...");
 
-                    ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
+                    Microsoft.Extensions.Logging.ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
                     RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.Hourly());
 
-                    ILogger orbookLog = loggerFactory.CreateLogger(typeof(OrgBookUtils));
+                    Microsoft.Extensions.Logging.ILogger orbookLog = loggerFactory.CreateLogger(typeof(OrgBookUtils));
                     RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForNewLicences(null), Cron.Hourly());
                     RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForMissingCredentials(null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForOrgbookLinks(null), Cron.Daily());
 
                     log.LogInformation("Hangfire License issuance check jobs setup.");
                 }

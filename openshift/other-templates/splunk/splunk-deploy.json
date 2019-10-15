@@ -24,6 +24,16 @@
       }
     },
     {
+      "apiVersion": "v1",
+      "kind": "ServiceAccount",
+      "metadata": {
+        "name": "${NAME}",
+        "annotations": {
+          "serviceaccounts.openshift.io/oauth-redirectreference.primary": "{\"kind\":\"OAuthRedirectReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"Route\",\"name\":\"${NAME}\"}}"
+        }
+      }
+    },
+    {
       "kind": "DeploymentConfig",
       "apiVersion": "v1",
       "metadata": {
@@ -39,16 +49,12 @@
       },
       "spec": {
         "strategy": {
-          "type": "Rolling",
-          "rollingParams": {
-            "updatePeriodSeconds": 1,
-            "intervalSeconds": 1,
-            "timeoutSeconds": 600,
-            "maxUnavailable": "25%",
-            "maxSurge": "25%"
+          "activeDeadlineSeconds": 21600,
+          "recreateParams": {
+            "timeoutSeconds": 600
           },
           "resources": {},
-          "activeDeadlineSeconds": 21600
+          "type": "Recreate"
         },
         "triggers": [
           {
@@ -64,7 +70,7 @@
               "from": {
                 "kind": "ImageStreamTag",
                 "namespace": "${NAMESPACE}",
-                "name": "${NAME}:latest"
+                "name": "${SOURCE_IMAGE_NAME}:latest"
               }
             }
           }
@@ -93,9 +99,49 @@
                 "persistentVolumeClaim": {
                   "claimName": "${NAME}"
                 }
+              },
+              {
+                "name": "proxy-tls",
+                "secret": {
+                  "defaultMode": 420,
+                  "secretName": "${NAME}-proxy-tls"
+                }
               }
             ],
+            "serviceAccountName": "${NAME}",
             "containers": [
+              {
+                "args": [
+                  "--https-address=:8443",
+                  "--provider=openshift",
+                  "--openshift-service-account=${NAME}",
+                  "--upstream=http://localhost:8000",
+                  "--tls-cert=/etc/tls/private/tls.crt",
+                  "--tls-key=/etc/tls/private/tls.key",
+                  "--cookie-secure=false",
+                  "--cookie-secret=SECRET",
+                  "--openshift-sar={\"namespace\":\"${NAMESPACE}\",\"resource\":\"services\",\"name\":\"${NAME}\",\"verb\":\"get\"}"
+                ],
+                "image": "openshift/oauth-proxy:latest",
+                "imagePullPolicy": "IfNotPresent",
+                "name": "oauth-proxy",
+                "ports": [
+                  {
+                    "containerPort": 8443,
+                    "name": "public",
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File",
+                "volumeMounts": [
+                  {
+                    "mountPath": "/etc/tls/private",
+                    "name": "proxy-tls"
+                  }
+                ]
+              },
               {
                 "name": "${NAME}",
                 "image": "${SOURCE_IMAGE_NAME}",
@@ -203,7 +249,7 @@
                 "livenessProbe": {
                   "initialDelaySeconds": 120,
                   "tcpSocket": {
-                    "port": 8
+                    "port": 8000
                   },
                   "timeoutSeconds": 1
                 },
@@ -238,7 +284,7 @@
           "app": "splunk-server-linux"
         },
         "annotations": {
-          "openshift.io/generated-by": "OpenShiftNewApp"
+          "service.alpha.openshift.io/serving-cert-secret-name": "${NAME}-proxy-tls"
         }
       },
       "spec": {
@@ -274,6 +320,12 @@
             "targetPort": 8191
           },
           {
+            "name": "8443-tcp",
+            "port": 8443,
+            "protocol": "TCP",
+            "targetPort": 8443
+          },
+          {
             "name": "9887-tcp",
             "protocol": "TCP",
             "port": 9887,
@@ -296,6 +348,75 @@
       "status": {
         "loadBalancer": {}
       }
+    },
+    {
+      "apiVersion": "route.openshift.io/v1",
+      "kind": "Route",
+      "metadata": {
+        "annotations": {
+          "openshift.io/host.generated": "true"
+        },
+        "name": "${NAME}"
+      },
+      "spec": {
+        "port": {
+          "targetPort": "8443-tcp"
+        },
+        "tls": {
+		  "insecureEdgeTerminationPolicy": "Allow",
+          "termination": "reencrypt"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}",
+          "weight": 100
+        },
+        "wildcardPolicy": "None"
+      },
+      "status": {
+        "ingress": [
+          {
+            "conditions": [
+              {
+                "lastTransitionTime": "2019-10-09T20:57:05Z",
+                "status": "True",
+                "type": "Admitted"
+              }
+            ],
+            "host": "splunk-lclb-cllc-tools.pathfinder.gov.bc.ca",
+            "routerName": "router",
+            "wildcardPolicy": "None"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "route.openshift.io/v1",
+      "kind": "Route",
+      "metadata": {
+        "annotations": {
+          "openshift.io/host.generated": "true"
+        },
+        "creationTimestamp": "2019-08-12T22:32:36Z",
+        "labels": {
+          "app": "splunk-server-linux"
+        },
+        "name": "${NAME}-8088"
+      },
+      "spec": {
+        "tls": {
+		  "insecureEdgeTerminationPolicy": "Allow"
+        },
+        "port": {
+          "targetPort": "8088-tcp"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}",
+          "weight": 100
+        },
+        "wildcardPolicy": "None"
+      }
     }
   ],
   "parameters": [
@@ -306,7 +427,7 @@
       "required": true,
       "value": "splunk"
     },
-	{
+    {
       "name": "SECRET_NAME",
       "displayName": "NAME",
       "description": "The secret containing the admin password",
@@ -352,7 +473,7 @@
       "name": "NAMESPACE",
       "displayName": "Namespace",
       "description": "The OpenShift Namespace where the ImageStream resides.",
-      "value": "lclb-cllc-tools"
+      "value": "yuumcs-tools"
     },
     {
       "name": "NAME",
@@ -361,7 +482,7 @@
       "value": "splunk",
       "required": true
     },
-	{
+    {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
@@ -373,7 +494,7 @@
       "displayName": "Source Image Namespace",
       "description": "The namespace of the source image.",
       "required": true,
-      "value": "lclb-cllc-tools"
+      "value": "yuumcs-tools"
     },
     {
       "name": "SOURCE_IMAGE_TAG",

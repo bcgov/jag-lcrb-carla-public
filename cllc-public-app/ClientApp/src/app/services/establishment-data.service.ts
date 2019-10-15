@@ -3,7 +3,7 @@ import { DataService } from './data.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { KeyValue } from '../../../node_modules/@angular/common';
+import { Establishment } from '@models/establishment.model';
 
 
 @Injectable({
@@ -17,13 +17,18 @@ export class EstablishmentDataService extends DataService {
     }
 
     public getEstablishmentsMap(): Observable<string> {
-      return this.http.get<string>(this.apiPath + "/map", { headers: this.headers })
+      return this.http.get<string>(this.apiPath + '/map', { headers: this.headers })
       .pipe(catchError(this.handleError));
     }
 
     public getEstablishmentsMapSearch(search: string): Observable<string> {
-      return this.http.get<string>(this.apiPath + "/map?search=" + encodeURI(search), { headers: this.headers })
+      return this.http.get<string>(this.apiPath + '/map?search=' + encodeURIComponent(search), { headers: this.headers })
       .pipe(catchError(this.handleError));
+    }
+
+    upEstablishment(establishment: Establishment) {
+      return this.http.put(this.apiPath + '/' + establishment.id, establishment, { headers: this.headers })
+        .pipe(catchError(this.handleError));
     }
 
 }

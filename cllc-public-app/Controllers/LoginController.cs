@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -15,14 +14,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IConfiguration _configuration;        
-        private readonly IHostingEnvironment _env;
+        private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
 
-        public LoginController(IConfiguration configuration, IHostingEnvironment env)
+        public LoginController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
-            _env = env;                      
+            _env = env;
         }
 
         [HttpGet]
@@ -52,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        
+
 
         /// <summary>
         /// Injects an authentication token cookie into the response for use with the 
@@ -73,8 +72,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // clear session
             HttpContext.Session.Clear();
 
-			// expire "dev" user cookie
-			string temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
+            // expire "dev" user cookie
+            string temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
             if (temp == null)
             {
                 temp = "";

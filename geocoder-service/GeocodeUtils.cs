@@ -11,6 +11,7 @@ using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -92,7 +93,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                     _logger.LogInformation($"Updated establishment with address {address}");
                     hangfireContext.WriteLine($"Updated establishment with address {address}");
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     if (hangfireContext != null)
                     {
@@ -132,7 +133,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                 string filter = $"adoxio_longitude eq null";
                 result = _dynamics.Establishments.Get().Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {
