@@ -8,10 +8,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class JurisdictionController : ControllerBase
-    {        
+    {
         private readonly AppDbContext _db;
         public JurisdictionController(AppDbContext db, IConfiguration configuration)
-        {            
+        {
             _db = db;
         }
 
@@ -21,6 +21,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             return new JsonResult(_db.GetJurisdictions());
         }
-        
+
     }
 }

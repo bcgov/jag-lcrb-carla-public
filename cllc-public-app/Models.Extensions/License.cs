@@ -28,7 +28,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (adoxioEstablishmentId != null)
             {
                 var establishment = dynamicsClient.Establishments.GetByKey(adoxioEstablishmentId.ToString());
+                adoxioLicenseVM.establishmentId = establishment.AdoxioEstablishmentid;
                 adoxioLicenseVM.establishmentName = establishment.AdoxioName;
+                adoxioLicenseVM.establishmentEmail = establishment.AdoxioEmail;
+                adoxioLicenseVM.establishmentPhone = establishment.AdoxioPhone;
                 adoxioLicenseVM.establishmentAddress = establishment.AdoxioAddressstreet
                                                     + ", " + establishment.AdoxioAddresscity
                                                     + " " + establishment.AdoxioAddresspostalcode;
@@ -99,7 +102,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 licenseSummary.ApplicationId = mainApplication.AdoxioApplicationid;
             }
-            if(crsApplication != null)
+            if (crsApplication != null)
             {
                 licenseSummary.StoreInspected = crsApplication.AdoxioAppchecklistinspectionresults == (int)InspectionStatus.Pass;
             }

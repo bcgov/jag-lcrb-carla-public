@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using System;
 using System.IO;
 using System.Linq;
@@ -87,7 +88,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                     _dynamicsClient.Licenceses.Update(licence.AdoxioLicencesid, pathLicence);
                     _logger.LogInformation($"Updated Licence record {licence.AdoxioLicencesid} to {businessProgramAccountNumber}");
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     _logger.LogError("Error updating Licence");
                     _logger.LogError("Request:");

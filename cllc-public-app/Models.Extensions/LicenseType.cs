@@ -7,11 +7,11 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// ViewModel transforms.
     /// </summary>
     public static class LicenseTypeExtensions
-    {        
+    {
 
         public static LicenseType ToViewModel(this MicrosoftDynamicsCRMadoxioLicencetype dynamicsLicenseType)
         {
-            LicenseType result = new LicenseType();            
+            LicenseType result = new LicenseType();
 
             if (dynamicsLicenseType.AdoxioLicencetypeid != null)
             {

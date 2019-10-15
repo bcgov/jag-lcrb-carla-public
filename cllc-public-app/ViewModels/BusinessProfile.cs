@@ -11,7 +11,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         /// The List of all legal entities in the account
         /// </summary>
         /// <value></value>
-        public List<LegalEntity> LegalEntities { get; set; }
+        public List<BusinessProfileLegalEntity> LegalEntities { get; set; }
     }
 
     public class ProfileValidation
@@ -20,7 +20,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool IsComplete { get; set; }
     }
 
-    public class LegalEntity
+    public class BusinessProfileLegalEntity
     {
         /// <summary>
         /// This is the adoxio_Account for the Applicant
@@ -29,8 +29,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         /// <value></value>
         public ViewModels.Account Account { get; set; }
 
-        public ViewModels.AdoxioLegalEntity AdoxioLegalEntity { get; set; }
-        public List<LegalEntity> ChildEntities { get; set; }
+        public ViewModels.LegalEntity AdoxioLegalEntity { get; set; }
+        public List<BusinessProfileLegalEntity> ChildEntities { get; set; }
 
         /// <summary>
         /// The tied house associated with the <see cref="Account"/>

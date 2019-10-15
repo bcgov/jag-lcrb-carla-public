@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMManyToManyRelationshipMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMManyToManyRelationshipMetadata(MicrosoftDynamicsCRMAssociatedMenuConfiguration entity1AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), MicrosoftDynamicsCRMAssociatedMenuConfiguration entity2AssociatedMenuConfiguration = default(MicrosoftDynamicsCRMAssociatedMenuConfiguration), string entity1LogicalName = default(string), string entity2LogicalName = default(string), string intersectEntityName = default(string), string entity1IntersectAttribute = default(string), string entity2IntersectAttribute = default(string), string entity1NavigationPropertyName = default(string), string entity2NavigationPropertyName = default(string))
+        public MicrosoftDynamicsCRMManyToManyRelationshipMetadata(object entity1AssociatedMenuConfiguration = default(object), object entity2AssociatedMenuConfiguration = default(object), string entity1LogicalName = default(string), string entity2LogicalName = default(string), string intersectEntityName = default(string), string entity1IntersectAttribute = default(string), string entity2IntersectAttribute = default(string), string entity1NavigationPropertyName = default(string), string entity2NavigationPropertyName = default(string))
         {
             Entity1AssociatedMenuConfiguration = entity1AssociatedMenuConfiguration;
             Entity2AssociatedMenuConfiguration = entity2AssociatedMenuConfiguration;
@@ -49,12 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Entity1AssociatedMenuConfiguration")]
-        public MicrosoftDynamicsCRMAssociatedMenuConfiguration Entity1AssociatedMenuConfiguration { get; set; }
+        public object Entity1AssociatedMenuConfiguration { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Entity2AssociatedMenuConfiguration")]
-        public MicrosoftDynamicsCRMAssociatedMenuConfiguration Entity2AssociatedMenuConfiguration { get; set; }
+        public object Entity2AssociatedMenuConfiguration { get; set; }
 
         /// <summary>
         /// </summary>

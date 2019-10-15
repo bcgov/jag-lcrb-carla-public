@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 			// fetch our current account
 			ViewModels.Account account1 = await GetAccountForCurrentUser();
-			ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+			ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
 			Assert.Equal(user1.accountid, account1.id);
 
 			// logout and verify we are logged out
@@ -89,17 +89,17 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
 
 			// *** create some shareholders and directors
-			ViewModels.AdoxioLegalEntity dos1 = await SecurityHelper.CreateDirectorOrShareholder(_client, user1, legalEntity1.id, true, false, false);
+			ViewModels.LegalEntity dos1 = await SecurityHelper.CreateDirectorOrShareholder(_client, user1, legalEntity1.id, true, false, false);
 			Assert.NotNull(dos1);
-			ViewModels.AdoxioLegalEntity dos2 = await SecurityHelper.CreateDirectorOrShareholder(_client, user1, legalEntity1.id, false, true, false);
+			ViewModels.LegalEntity dos2 = await SecurityHelper.CreateDirectorOrShareholder(_client, user1, legalEntity1.id, false, true, false);
 			Assert.NotNull(dos2);
-			ViewModels.AdoxioLegalEntity dos3 = await SecurityHelper.CreateDirectorOrShareholder(_client, user1, legalEntity1.id, false, false, true);
+			ViewModels.LegalEntity dos3 = await SecurityHelper.CreateDirectorOrShareholder(_client, user1, legalEntity1.id, false, false, true);
 			Assert.NotNull(dos3);
-			List<ViewModels.AdoxioLegalEntity> dos1s = await SecurityHelper.GetLegalEntitiesByPosition(_client, legalEntity1.id, "director-officer-shareholder", true);
+			List<ViewModels.LegalEntity> dos1s = await SecurityHelper.GetLegalEntitiesByPosition(_client, legalEntity1.id, "director-officer-shareholder", true);
 			Assert.NotNull(dos1s);
 			Assert.Equal(3, dos1s.Count);
             // ***
@@ -126,7 +126,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Null(tmp);
 			tmp = await SecurityHelper.GetLegalEntityRecord(_client, dos3.id, false);
             Assert.Null(tmp);
-			List<ViewModels.AdoxioLegalEntity> dos2s = await SecurityHelper.GetLegalEntitiesByPosition(_client, legalEntity1.id, "director-officer-shareholder", false);
+			List<ViewModels.LegalEntity> dos2s = await SecurityHelper.GetLegalEntitiesByPosition(_client, legalEntity1.id, "director-officer-shareholder", false);
 			Assert.Null(dos2s);
             // ***
 
@@ -176,11 +176,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
 
             // *** create some org shareholders and child business profiles
-			ViewModels.AdoxioLegalEntity org1 = await SecurityHelper.CreateOrganizationalShareholder(_client, user1, legalEntity1.id);
+			ViewModels.LegalEntity org1 = await SecurityHelper.CreateOrganizationalShareholder(_client, user1, legalEntity1.id);
 			Assert.NotNull(org1);
 
             // TODO create a sub-profile of org1 profile as well
@@ -253,7 +253,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
 
 			// *** upload some legal entity attachments
@@ -323,12 +323,12 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
             Assert.Equal(user1.accountid, legalEntity1.accountId);
 
             // *** create some org shareholders and child business profiles
-            ViewModels.AdoxioLegalEntity org1 = await SecurityHelper.CreateOrganizationalShareholder(_client, user1, legalEntity1.id);
+            ViewModels.LegalEntity org1 = await SecurityHelper.CreateOrganizationalShareholder(_client, user1, legalEntity1.id);
             Assert.NotNull(org1);
 
 			// upload some files under new org1
@@ -418,7 +418,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
 
 			// *** create some license applications
@@ -486,7 +486,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
 
             // *** create some license applications
@@ -569,7 +569,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // fetch our current account
             ViewModels.Account account1 = await GetAccountForCurrentUser();
-            ViewModels.AdoxioLegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
+            ViewModels.LegalEntity legalEntity1 = await SecurityHelper.GetLegalEntityRecordForCurrent(_client);
             Assert.Equal(user1.accountid, account1.id);
 
             // *** create some license applications and invoices

@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Gov.Lclb.Cllb.Public.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public RoleSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient) 
+        public RoleSeeder(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
             : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 
@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                                     Permission.CodeTableManagement,
                                     Permission.UserManagement,
                                     Permission.RolesAndPermissions,
-                                    Permission.Admin                                    
+                                    Permission.Admin
                                 }
                                 .Contains(p.Code))
                         .Select(p => new RolePermission

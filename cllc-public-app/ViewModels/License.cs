@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -22,7 +17,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     public class License
     {
         public string id { get; set; }
+        public string establishmentId { get; set; }
         public string establishmentName { get; set; }
+        public string establishmentEmail { get; set; }
+        public string establishmentPhone { get; set; }
         public string establishmentAddress { get; set; }
 
         public string establishmentAddressStreet { get; set; }
