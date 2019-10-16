@@ -9,7 +9,7 @@ USER 0
 RUN pushd /opt \
     && yum install -y yum-utils \
 	&& rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" \
-    && INSTALL_PKGS="tar unzip bc rh-dotnet20-dotnet-runtime-2.0 nss_wrapper which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" \
+    && INSTALL_PKGS="tar unzip bc rh-dotnet20-dotnet-runtime-2.0 rh-dotnet20-dotnet-sdk-2.0 rh-dotnet20-dotnet-sdk-2.1 rh-dotnet20-dotnet-sdk-2.2 nss_wrapper which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" \
     && yum install -y $INSTALL_PKGS --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms \
     && rpm -V $INSTALL_PKGS \
     && yum clean all -y \
