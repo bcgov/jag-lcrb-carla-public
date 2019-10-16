@@ -2,27 +2,29 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { FormBase } from '@shared/form-base';
 
 @Component({
   selector: 'app-organization-leadership',
   templateUrl: './organization-leadership.component.html',
   styleUrls: ['./organization-leadership.component.scss']
 })
-export class OrganizationLeadershipComponent {
-  directorOfficerForm: FormGroup;
+export class OrganizationLeadershipComponent extends FormBase {
+  form: FormGroup;
   businessType: string;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<OrganizationLeadershipComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.directorOfficerForm = fb.group({
+    super();
+    this.form = fb.group({
       id: [''],
       isDirectorNew: [false],
       isOfficerNew: [false],
       isSeniorManagementNew: [false],
       firstNameNew: ['', Validators.required],
       lastNameNew: ['', Validators.required],
-      emailNew: ['', Validators.email],
+      emailNew: ['', [Validators.email, Validators.required]],
       isIndividual: [true],
       titleNew: [''],
       dateofappointment: ['', Validators.required]
@@ -30,7 +32,7 @@ export class OrganizationLeadershipComponent {
     );
 
     if (data && data.person) {
-      this.directorOfficerForm.patchValue(data.person);
+      this.form.patchValue(data.person);
     }
     this.businessType = data.businessType;
   }
@@ -51,14 +53,14 @@ export class OrganizationLeadershipComponent {
 
   save() {
     let formData = this.data.person || {};
-    formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.directorOfficerForm.value);
+    formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
     formData.nameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
 
     this.dialogRef.close(formData);
 
-    if (!this.directorOfficerForm.valid) {
-      Object.keys(this.directorOfficerForm.controls).forEach(field => {
-        const control = this.directorOfficerForm.get(field);
+    if (!this.form.valid) {
+      Object.keys(this.form.controls).forEach(field => {
+        const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
     }
@@ -69,7 +71,7 @@ export class OrganizationLeadershipComponent {
   }
 
   isFieldError(field: string) {
-    const isError = !this.directorOfficerForm.get(field).valid && this.directorOfficerForm.get(field).touched;
+    const isError = !this.form.get(field).valid && this.form.get(field).touched;
     return isError;
   }
 }

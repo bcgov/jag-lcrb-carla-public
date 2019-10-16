@@ -18,11 +18,11 @@
     </app-field>
 
     <section class="row" *ngIf="form.get('isIndividual').value">
-      <app-field class="col-md-6" label="First Name" [valid]="true" errorMessage="This is required">
+      <app-field class="col-md-6" label="First Name" [valid]="!isTouchedAndInvalid('firstNameNew')" errorMessage="This is required">
         <input type="text" class="form-control" formControlName="firstNameNew" placeholder="First Name">
       </app-field>
 
-      <app-field class="col-md-6" label="Last Name" [valid]="true" errorMessage="This is required">
+      <app-field class="col-md-6" label="Last Name" [valid]="!isTouchedAndInvalid('lastNameNew')" errorMessage="This is required">
         <input type="text" class="form-control" formControlName="lastNameNew" placeholder="Last Name">
       </app-field>
     </section>
@@ -30,13 +30,13 @@
     <section class="row">
 
       <app-field *ngIf="!form.get('isIndividual').value" class="col-md-12" label="Name" [isFullWidth]="true"
-        [valid]="true" errorMessage="This is required">
-        <input type="text" class="form-control" formControlName="nameNew" placeholder="Name">
+        [valid]="!isTouchedAndInvalid('businessNameNew')" errorMessage="This is required">
+        <input type="text" class="form-control" formControlName="businessNameNew" placeholder="Name">
       </app-field>
     </section>
 
-    <section class="row" *ngIf="!form.get('isIndividual').value">
-      <app-field class="col-md-12" label="What type of organization is the shareholder?" [valid]="true"
+    <!-- <section class="row" *ngIf="!form.get('isIndividual').value">
+      <app-field class="col-md-12" label="What type of organization is the shareholder?" [showChevrons]="false" [valid]="!isTouchedAndInvalid('legalentitytype')"
         errorMessage="Please select a business type from the dropdown list">
         <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="PrivateCorporation">
         <span>Private Corporation</span> <br>
@@ -49,14 +49,14 @@
         <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="IndigenousNation">
         <span>Indigenous nation</span> <br>
       </app-field>
-    </section>
+    </section> -->
 
     <section class="row">
-      <app-field class="col-md-6" label="Email" [valid]="true" errorMessage="Email is invalid">
+      <app-field class="col-md-6" label="Email" [valid]="!isTouchedAndInvalid('emailNew')" errorMessage="Email is invalid">
         <input type="text" class="form-control" formControlName="emailNew">
       </app-field>
 
-      <app-field class="col-md-6" label="Number of Voting Shares" [valid]="true" errorMessage="This is required">
+      <app-field class="col-md-6" label="Number of Voting Shares" [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
         <input type="number" class="form-control" formControlName="numberofSharesNew">
       </app-field>
     </section>
