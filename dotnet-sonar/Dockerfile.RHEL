@@ -19,6 +19,7 @@ RUN pushd /opt \
     && chmod -R a+rx /usr/lib/sonar-scanner \
     && rm sonar-scanner-msbuild.zip \
     && rm -R /opt/app-root/.pki \
+	&& mv /opt/rh/rh-dotnet20/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App/2.0.9  /opt/rh/rh-dotnet30/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App \
     && popd
 
 
