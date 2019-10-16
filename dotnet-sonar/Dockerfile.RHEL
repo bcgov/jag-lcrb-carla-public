@@ -19,7 +19,7 @@ RUN pushd /opt \
     && mkdir /usr/lib/sonar-scanner  \
     && unzip sonar-scanner-msbuild.zip -d /usr/lib/sonar-scanner \
     && chmod -R a+rx /usr/lib/sonar-scanner \
-    && rm sonar-scanner-msbuild-4.0.2.892.zip \
+    && rm sonar-scanner-msbuild.zip \
     && rm -R /opt/app-root/.pki \
     && popd
 
