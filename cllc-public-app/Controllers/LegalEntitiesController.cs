@@ -555,7 +555,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // bind to parent licensee change log
                     if (!string.IsNullOrEmpty(node.ParentLinceseeChangeLogId))
                     {
-                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.LegalEntityId);
+                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLinceseeChangeLogId);
                     }
 
 
@@ -588,10 +588,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
                     }
 
-                    _dynamicsClient.Licenseechangelogs.Update(patchEntity.AdoxioLicenseechangelogid, patchEntity);
 
                     try
                     {
+                    _dynamicsClient.Licenseechangelogs.Update(node.Id, patchEntity);
                         var result = _dynamicsClient.Licenseechangelogs.GetByKey(patchEntity.AdoxioLicenseechangelogid);
                         parentChangeLogId = result.AdoxioLicenseechangelogid;
                         parentLegalEntityId = node.LegalEntityId;

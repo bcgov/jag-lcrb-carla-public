@@ -26,7 +26,8 @@ export class LicenseeChangeLog {
   lastNameNew: string;
   lastNameOld: string;
   LicenseeChangelogid: string;
-  nameNew: string;
+  businessNameNew: string;
+  businessNameOld: string;
   nameOld: string;
   dateofBirthNew: Date;
   dateofBirthOld: Date;
@@ -73,7 +74,7 @@ export class LicenseeChangeLog {
       this.firstNameOld = legalEntity.firstname;
       this.lastNameNew = legalEntity.lastname;
       this.lastNameOld = legalEntity.lastname;
-      this.nameNew = legalEntity.name;
+      this.businessNameNew = legalEntity.name;
       this.nameOld = legalEntity.name;
       this.dateofBirthNew = legalEntity.dateofbirth;
       this.dateofBirthOld = legalEntity.dateofbirth;
