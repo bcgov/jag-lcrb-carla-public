@@ -12,15 +12,14 @@
             <strong *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px">Leader </strong>
             <span
               [ngClass]="{'added-node': isAddChangeType(node), 'deleted-node': isRemoveChangeType(node), 'edited-node': isUpdateChangeType(node)}">
-              {{node.nameNew}}
+              {{node.businessNameNew}}
             </span>
             <span *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
             &nbsp; &nbsp;
-            <a *ngIf="!node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)" style="margin-right: 10px;"
-              [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
+            <a *ngIf="!node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)"
+              style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
             <mat-menu #menu="matMenu">
-              <button mat-menu-item
-                (click)="!isRemoveChangeType(node) && addShareholder(node)">Shareholder</button>
+              <button mat-menu-item (click)="!isRemoveChangeType(node) && addShareholder(node)">Shareholder</button>
               <button mat-menu-item (click)="!isRemoveChangeType(node) && addLeadership(node)">Leadership</button>
             </mat-menu>
             <a *ngIf="!node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)" style="margin-right: 10px;"
@@ -43,16 +42,15 @@
               <strong *ngIf="node.isShareholderNew" style="margin-right: 5px">Shareholder </strong>
               <span
                 [ngClass]="{'added-node': isAddChangeType(node), 'deleted-node': isRemoveChangeType(node), 'edited-node': isUpdateChangeType(node)}">
-                {{node.nameNew}}
+                {{node.businessNameNew}}
               </span>
+              <span *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
               &nbsp; &nbsp;
-              <a *ngIf="!node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)" style="margin-right: 10px;"
-                [matMenuTriggerFor]="menu2"> <i class="fas fa-plus"></i>&nbsp;Add</a>
+              <a *ngIf="!node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)"
+                style="margin-right: 10px;" [matMenuTriggerFor]="menu2"> <i class="fas fa-plus"></i>&nbsp;Add</a>
               <mat-menu #menu2="matMenu">
-                <button mat-menu-item
-                  (click)="!isRemoveChangeType(node) && addShareholder(node)">Shareholder</button>
-                <button mat-menu-item
-                  (click)="!isRemoveChangeType(node) && addLeadership(node)">Leadership</button>
+                <button mat-menu-item (click)="!isRemoveChangeType(node) && addShareholder(node)">Shareholder</button>
+                <button mat-menu-item (click)="!isRemoveChangeType(node) && addLeadership(node)">Leadership</button>
               </mat-menu>
               <a *ngIf="!node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)" style="margin-right: 10px;"
                 (click)="!isRemoveChangeType(node) && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
@@ -100,7 +98,7 @@
           <div *ngIf="isUpdateChangeType(item)" class="old-value">{{item.nameOld}}</div>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
-            {{item.nameNew}}</span>
+            {{item.businessNameNew}}</span>
         </td>
         <td>
           <div *ngIf="isUpdateChangeType(item)" class="old-value">{{item.emailOld}}</div>
@@ -136,7 +134,7 @@
           <div *ngIf="isUpdateChangeType(item)" class="old-value">{{item.nameOld}}</div>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
-            {{item.nameNew}}</span>
+            {{item.businessNameNew}}</span>
         </td>
         <td>
           <div *ngIf="isUpdateChangeType(item)" class="old-value">{{item.emailOld}}</div>
@@ -172,7 +170,7 @@
           <div *ngIf="isUpdateChangeType(item)" class="old-value">{{item.nameOld}}</div>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
-            {{item.nameNew}}</span>
+            {{item.businessNameNew}}</span>
         </td>
         <td>
           <div *ngIf="isUpdateChangeType(item)" class="old-value">{{item.emailOld}}</div>
@@ -190,4 +188,3 @@
 </div>
 
 <button class="btn btn-primary" (click)="save()">Save</button>
-

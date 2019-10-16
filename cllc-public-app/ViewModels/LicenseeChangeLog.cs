@@ -7,10 +7,16 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
     public enum LicenseeChangeType
     {
-        unchanged  = 0, // never save this kind of change to dynamics
-        add = 845280001,
-        edit = 845280002,
-        delete  = 845280000
+        unchanged = 0, // never save this kind of change to dynamics
+        addLeadership = 845280003,
+        updateLeadership = 845280004,
+        removeLeadership = 845280005,
+        addBusinessShareholder = 845280006,
+        updateBusinessShareholder = 845280007,
+        removeBusinessShareholder = 845280008,
+        addIndividualShareholder = 845280009,
+        updateIndividualShareholder = 845280010,
+        removeIndividualShareholder = 845280011,
     }
 
     public class LicenseeChangeLog
@@ -28,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsShareholderOld { get; set; }
         public bool? IsTrusteeNew { get; set; }
         public bool? IsTrusteeOld { get; set; }
-        public int? BusinessAccountType { get; set; }
+        public string BusinessAccountType { get; set; }
         public int? NumberofSharesNew { get; set; }
         public int? NumberofSharesOld { get; set; }
         public int? Statecode { get; set; }
@@ -40,7 +46,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string JobNumber { get; set; }
         public string LastNameNew { get; set; }
         public string LastNameOld { get; set; }
-        public string Name { get; set; }
+        public string BusinessNameNew { get; set; }
+        public string BusinessNameOld { get; set; }
         public System.DateTimeOffset? DateofBirthNew { get; set; }
         public System.DateTimeOffset? DateofBirthOld { get; set; }
 

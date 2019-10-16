@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>
-    <span *ngIf="!directorOfficerForm.get('id').value">Add Leadership Associate</span>
-    <span *ngIf="directorOfficerForm.get('id').value">Edit Leadership Associate</span>
+    <span *ngIf="!form.get('id').value">Add Leadership Associate</span>
+    <span *ngIf="form.get('id').value">Edit Leadership Associate</span>
   </h2>
   <mat-dialog-content>
-    <form [formGroup]='directorOfficerForm' class="form-horizontal">
+    <form [formGroup]='form' class="form-horizontal">
   
       <div class="form-group row">
         <div class="col-md-12">
@@ -24,17 +24,17 @@
       </div>
   
       <div class="row">
-        <app-field class="col-md-6" label="First Name" [valid]="true" errorMessage="This is required">
+        <app-field class="col-md-6" label="First Name" [valid]="!isTouchedAndInvalid('firstNameNew')" errorMessage="This is required">
           <input type="text" class="form-control"  formControlName="firstNameNew" placeholder="First Name">
         </app-field>
   
-        <app-field class="col-md-6" label="Last Name" [valid]="true" errorMessage="This is required">
+        <app-field class="col-md-6" label="Last Name" [valid]="!isTouchedAndInvalid('lastNameNew')" errorMessage="This is required">
           <input type="text" class="form-control" formControlName="lastNameNew" placeholder="Last Name">
         </app-field>
       </div>
   
       <div class="row">
-        <app-field class="col-md-6" label="Email" [valid]="true" errorMessage="Email is invalid">
+        <app-field class="col-md-6" label="Email" [valid]="!isTouchedAndInvalid('emailNew')" errorMessage="Email is invalid">
           <input type="text" class="form-control" formControlName="emailNew">
         </app-field>
 

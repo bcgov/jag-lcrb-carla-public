@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material';
 import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
 import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
 import { filter, takeWhile } from 'rxjs/operators';
-import { Route, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { FormBase } from '@shared/form-base';
 import { Application } from '@models/application.model';
@@ -38,8 +38,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   application: Application;
   changeLogs: LicenseeChangeLog[];
 
-  constructor(private store: Store<AppState>,
-    public dialog: MatDialog,
+  constructor(public dialog: MatDialog,
     private route: ActivatedRoute,
     private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService) {
@@ -65,6 +64,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         this.dataSource.data = [this.treeRoot];
         this.applySavedChangeLogs();
         this.refreshTreeAndChangeTables();
+        this.treeControl.dataNodes = this.dataSource.data;
+        this.tree.treeControl.expandAll();
       },
         () => {
           console.log('Error occured');
@@ -72,15 +73,25 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       );
   }
 
+
+
   applySavedChangeLogs() {
     const changesWithLegalEntityId = this.changeLogs.filter(item => !!item.legalEntityId);
     const changesWithParentLegalEntityId = this.changeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
     const changesWithParentChangeLogId =
-      this.changeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !item.parentLinceseeChangeLogId);
+      this.changeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLinceseeChangeLogId);
 
     changesWithLegalEntityId.forEach(change => {
       const node = this.findNodeInTree(this.treeRoot, change.legalEntityId);
       if (node) {
+        if (change.firstNameNew) {
+          change.businessNameNew = `${change.firstNameNew} ${change.lastNameNew}`;
+        }
+
+        change.isIndividual = false;
+        if (change.changeType.toLocaleLowerCase().indexOf('individual') !== -1) {
+          change.isIndividual = true;
+        }
         Object.assign(node, change);
       }
     });
@@ -91,7 +102,12 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         node.children = node.children || [];
         const newNode = Object.assign(new LicenseeChangeLog(), change);
         if (newNode.firstNameNew) {
-          newNode.nameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
+          newNode.businessNameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
+        }
+
+        newNode.isIndividual = false;
+        if (newNode.changeType.toLocaleLowerCase().indexOf('individual') !== -1) {
+          newNode.isIndividual = true;
         }
         node.children.push(newNode);
       }
@@ -102,6 +118,14 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       if (node) {
         node.children = node.children || [];
         const newNode = Object.assign(new LicenseeChangeLog(), change);
+        if (newNode.firstNameNew) {
+          newNode.businessNameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
+        }
+
+        newNode.isIndividual = false;
+        if (newNode.changeType.toLocaleLowerCase().indexOf('individual') !== -1) {
+          newNode.isIndividual = true;
+        }
         node.children.push(newNode);
       }
     });
@@ -184,16 +208,23 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       );
   }
 
-  deleteAssociate(node: LicenseeChangeLog, changeType = 'delete') {
+  deleteAssociate(node: LicenseeChangeLog, changeType = 'deleted') {
     // if (node.changeType === 'add') {
     //   const index = node.parentLinceseeChangeLog.children.indexOf(node);
     //   node.parentLinceseeChangeLog.children.splice(index, 1);
     // } else {
+    if (node.isShareholderNew && node.isIndividual) {
+      changeType = LicenseeChangeType.removeIndividualShareholder;
+    } else if (node.isShareholderNew) {
+      changeType = LicenseeChangeType.removeBusinessShareholder;
+    } else if (node.isShareholderNew) {
+      changeType = LicenseeChangeType.removeLeadership;
+    }
     node.changeType = changeType;
-    const children = node.children || [];
-    children.forEach(child => {
-      this.deleteAssociate(child, 'parent-deleted');
-    });
+    // const children = node.children || [];
+    // children.forEach(child => {
+    //   this.deleteAssociate(child, 'parent-deleted');
+    // });
     // }
     this.refreshTreeAndChangeTables();
   }
@@ -326,7 +357,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
 
   save() {
     this.legalEntityDataService.saveLicenseeChanges(this.treeRoot, this.applicationId)
-      .subscribe((data) => {
+      .subscribe(() => {
         debugger;
       });
   }

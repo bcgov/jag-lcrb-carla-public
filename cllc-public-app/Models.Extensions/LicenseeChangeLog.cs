@@ -22,27 +22,19 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.AdoxioIsshareholderold = fromVM.IsShareholderOld;
             toDynamics.AdoxioIstrusteenew = fromVM.IsTrusteeNew;
             toDynamics.AdoxioIstrusteeold = fromVM.IsTrusteeOld;
-            //toDynamics = fromVM.BusinessAccountType;
             toDynamics.AdoxioNumberofsharesnew = fromVM.NumberofSharesNew;
             toDynamics.AdoxioNumberofsharesold = fromVM.NumberofSharesOld;
-            //toDynamics = fromVM.Statecode;
-            //toDynamics = fromVM.Statuscode;
             toDynamics.AdoxioEmailnew = fromVM.EmailNew;
             toDynamics.AdoxioEmailold = fromVM.EmailOld;
             toDynamics.AdoxioFirstnamenew = fromVM.FirstNameNew;
             toDynamics.AdoxioFirstnameold = fromVM.FirstNameOld;
-            //toDynamics = fromVM.JobNumber;
             toDynamics.AdoxioLastnamenew = fromVM.LastNameNew;
             toDynamics.AdoxioLastnameold = fromVM.LastNameOld;
-            toDynamics.AdoxioName = fromVM.Name;
+            toDynamics.AdoxioBusinessnamenew = fromVM.BusinessNameNew;
+            toDynamics.AdoxioBusinesnameold = fromVM.BusinessNameOld;
             toDynamics.AdoxioDateofbirthnew = fromVM.DateofBirthNew;
             toDynamics.AdoxioDateofbirthold = fromVM.DateofBirthOld;
-            //toDynamics = fromVM.BusinessAccount;
-            //toDynamics = fromVM.Contact;
-            //toDynamics = fromVM.ParentBusinessAccount;
-            //toDynamics = fromVM.ApplicationId;
-            //toDynamics.le = fromVM.LegalEntityId;
-            //toDynamics.pare = fromVM.ParentLinceseeChangeLogId;
+
         }
 
         public static LicenseeChangeLog ToViewModel(this MicrosoftDynamicsCRMadoxioLicenseechangelog changeLog)
@@ -61,26 +53,19 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsShareholderOld = changeLog.AdoxioIsshareholderold,
                 IsTrusteeNew = changeLog.AdoxioIstrusteenew,
                 IsTrusteeOld = changeLog.AdoxioIstrusteeold,
-                //BusinessAccountType = changeLog,
                 NumberofSharesNew = changeLog.AdoxioNumberofsharesnew,
                 NumberofSharesOld = changeLog.AdoxioNumberofsharesold,
-                //Statecode = changeLog,
-                //Statuscode = changeLog,
                 EmailNew = changeLog.AdoxioEmailnew,
                 EmailOld = changeLog.AdoxioEmailold,
                 FirstNameNew = changeLog.AdoxioFirstnamenew,
                 FirstNameOld = changeLog.AdoxioFirstnameold,
-                //JobNumber = changeLog,
                 LastNameNew = changeLog.AdoxioLastnamenew,
                 LastNameOld = changeLog.AdoxioLastnameold,
-                Name = changeLog.AdoxioName,
+                BusinessNameNew = changeLog.AdoxioBusinessnamenew,
+                BusinessNameOld = changeLog.AdoxioBusinesnameold,
                 DateofBirthNew = changeLog.AdoxioDateofbirthnew,
                 DateofBirthOld = changeLog.AdoxioDateofbirthold,
 
-                //BusinessAccount = changeLog,
-                //Contact = changeLog,
-                //ParentBusinessAccount = changeLog,
-                //ApplicationId = changeLog,
                 LegalEntityId = changeLog._adoxioLegalentityValue,
                 ParentLegalEntityId = changeLog._adoxioParentlegalentityidValue,
                 ParentLinceseeChangeLogId = changeLog._adoxioParentlinceseechangelogidValue,
