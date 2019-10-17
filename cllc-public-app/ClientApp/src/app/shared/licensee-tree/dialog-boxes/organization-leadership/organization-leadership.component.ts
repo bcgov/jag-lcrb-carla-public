@@ -21,7 +21,7 @@ export class OrganizationLeadershipComponent extends FormBase {
       id: [''],
       isDirectorNew: [false],
       isOfficerNew: [false],
-      isSeniorManagementNew: [false],
+      isManagerNew: [false],
       firstNameNew: ['', Validators.required],
       lastNameNew: ['', Validators.required],
       emailNew: ['', [Validators.email, Validators.required]],
@@ -54,7 +54,7 @@ export class OrganizationLeadershipComponent extends FormBase {
   save() {
     let formData = this.data.person || {};
     formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
-    formData.nameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
+    formData.businessNameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
 
     this.dialogRef.close(formData);
 
