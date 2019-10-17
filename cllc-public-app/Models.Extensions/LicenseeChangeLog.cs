@@ -63,6 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 LastNameOld = changeLog.AdoxioLastnameold,
                 BusinessNameNew = changeLog.AdoxioBusinessnamenew,
                 BusinessNameOld = changeLog.AdoxioBusinesnameold,
+                
                 DateofBirthNew = changeLog.AdoxioDateofbirthnew,
                 DateofBirthOld = changeLog.AdoxioDateofbirthold,
 

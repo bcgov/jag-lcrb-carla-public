@@ -2,19 +2,24 @@
   <h1>Licensee Changes Application</h1>
   <div class="row">
     <div class="col-md-8 col-sm-12">
+      <!-- <mat-card class="mat-elevation-z12"> -->
       <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree" #tree>
         <!-- This is the tree node template for leaf nodes -->
         <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
           <li class="mat-tree-node">
             <!-- use a disabled button to provide padding for tree leaf -->
             <button mat-icon-button disabled></button>
-            <strong *ngIf="node.isShareholderNew && !node.isRoot" style="margin-right: 5px">Shareholder </strong>
-            <strong *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px">Leader </strong>
-            <span
+            <span class="tree-label" *ngIf="node.isShareholderNew && !node.isRoot" style="margin-right: 5px">
+              <i *ngIf="node.isIndividual" class="fas fa-user-tie"></i>
+              <i *ngIf="!node.isIndividual" class="fas fa-building"></i> </span>
+            <span class="tree-label" *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px"> <i
+                class="fa fa-user" style="margin-right: 5px"></i> {{node.getNewLeadershipPosition()}} </span>
+            <span class="tree-label"
               [ngClass]="{'added-node': isAddChangeType(node), 'deleted-node': isRemoveChangeType(node), 'edited-node': isUpdateChangeType(node)}">
               {{node.businessNameNew}}
             </span>
-            <span *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
+            <span class="tree-label" *ngIf="node.isShareholderNew"
+              style="margin-left: 5px">({{node.numberofSharesNew}})</span>
             &nbsp; &nbsp;
             <a *ngIf="!node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)"
               style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
@@ -39,12 +44,16 @@
                   {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                 </mat-icon>
               </button>
-              <strong *ngIf="node.isShareholderNew" style="margin-right: 5px">Shareholder </strong>
-              <span
+              <span *ngIf="node.isShareholderNew" class="tree-label" style="margin-right: 5px;">
+                <i *ngIf="node.isIndividual" class="fas fa-user-tie"></i>
+                <i *ngIf="!node.isIndividual" class="fas fa-building"></i>
+              </span>
+              <span class="tree-label"
                 [ngClass]="{'added-node': isAddChangeType(node), 'deleted-node': isRemoveChangeType(node), 'edited-node': isUpdateChangeType(node)}">
                 {{node.businessNameNew}}
               </span>
-              <span *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
+              <span class="tree-label" *ngIf="node.isShareholderNew"
+                style="margin-left: 5px">({{node.numberofSharesNew}})</span>
               &nbsp; &nbsp;
               <a *ngIf="!node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)"
                 style="margin-right: 10px;" [matMenuTriggerFor]="menu2"> <i class="fas fa-plus"></i>&nbsp;Add</a>
@@ -65,6 +74,7 @@
           </li>
         </mat-nested-tree-node>
       </mat-tree>
+      <!-- </mat-card> -->
     </div>
     <div class="col-md-4 col-sm-12">
       <h4>Key:</h4>
