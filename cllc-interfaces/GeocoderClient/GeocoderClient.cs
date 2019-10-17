@@ -9,11 +9,10 @@ namespace Gov.Lclb.Cllb.Interfaces
 {
     public class GeocoderClient
     {
-
         public string BaseUri { get; set; }
 
-        private HttpClient client;
-        private IConfiguration _configuration;
+        private readonly HttpClient client;
+        private readonly IConfiguration _configuration;
 
 
         public GeocoderClient(IConfiguration configuration)
@@ -23,8 +22,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (!string.IsNullOrEmpty(_configuration["GEOCODER_SERVICE_BASE_URI"]) && !string.IsNullOrEmpty(_configuration["GEOCODER_JWT_TOKEN"]))
             {
-
-
                 BaseUri = _configuration["GEOCODER_SERVICE_BASE_URI"];
                 string bearer_token = $"Bearer {_configuration["GEOCODER_JWT_TOKEN"]}";
 
@@ -38,36 +35,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// GetPDF
+        /// GeocodeEstablishment
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         public async Task GeocodeEstablishment(string establishmentId, ILogger logger)
         {
 
-
-            HttpRequestMessage endpointRequest =
-                new HttpRequestMessage(HttpMethod.Get, BaseUri + "/api/geocoder/GeocodeEstablishment/" + establishmentId);
-
-            // make the request.
-            var response = await client.SendAsync(endpointRequest);
-            HttpStatusCode _statusCode = response.StatusCode;
-
-            if (_statusCode == HttpStatusCode.OK)
+            if (String.IsNullOrEmpty (BaseUri))
             {
-                logger.LogInformation("Geocoded establishment " + establishmentId);
+                logger.LogError($"Unable to gecode establishment {establishmentId} because geocoder service is not configured.");
             }
             else
             {
-                logger.LogError("Unable to gecode establishment " + establishmentId);
+                HttpRequestMessage endpointRequest =
+                new HttpRequestMessage(HttpMethod.Get, BaseUri + "/api/geocoder/GeocodeEstablishment/" + establishmentId);
 
-            }
+                // make the request.
+                var response = await client.SendAsync(endpointRequest);
+                HttpStatusCode _statusCode = response.StatusCode;
 
+                if (_statusCode == HttpStatusCode.OK)
+                {
+                    logger.LogInformation("Geocoded establishment " + establishmentId);
+                }
+                else
+                {
+                    logger.LogError("Unable to gecode establishment " + establishmentId);
+
+                }
+            }            
         }
 
 
         /// <summary>
-        /// GetPDF
+        /// TestAuthentication
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -91,7 +93,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             catch (Exception)
             {
-
+                // ignore the authentication issue.
+                result = false;
             }
 
 
