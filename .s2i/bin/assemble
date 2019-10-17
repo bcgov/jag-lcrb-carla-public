@@ -217,9 +217,9 @@ fi
   
 if [ -n "$SONAR_TOKEN" ]; then
 	echo "---> Running SonarQube Scan..."
-	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe begin /d:sonar.login=$SONAR_TOKEN /k:$SONAR_PROJECT /d:sonar.host.url=$SONAR_URL /v:$VERSION_PREFIX$BUILDNUMBER 
-	dotnet build "$DOTNET_STARTUP_PROJECT" -f "$DOTNET_FRAMEWORK" /m:1 -c "$DOTNET_CONFIGURATION" 
-	mono /usr/lib/sonar-scanner/SonarQube.Scanner.MSBuild.exe end /d:sonar.login=$SONAR_TOKEN 
+	dotnet /usr/lib/sonar-scanner/SonarScanner.MSBuild.dll begin /d:sonar.login=$SONAR_TOKEN /k:$SONAR_PROJECT_KEY /d:sonar.host.url=$SONAR_URL /v:$VERSION_PREFIX$BUILDNUMBER 
+	dotnet build "$SONAR_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" 
+	dotnet /usr/lib/sonar-scanner/SonarScanner.MSBuild.dll end /d:sonar.login=$SONAR_TOKEN 
 	exit 0
 elif [ -n "$SNYK_TOKEN" ]; then
 		# run the snyk scan.  Note SNYK_TOKEN is automatically used by the snyk scanner for authentication.
