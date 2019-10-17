@@ -48,6 +48,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LastNameOld { get; set; }
         public string BusinessNameNew { get; set; }
         public string BusinessNameOld { get; set; }
+        public string TitleNew { get; set; }
+        public string TitleOld { get; set; }
         public System.DateTimeOffset? DateofBirthNew { get; set; }
         public System.DateTimeOffset? DateofBirthOld { get; set; }
 

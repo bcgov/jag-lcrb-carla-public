@@ -89,7 +89,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         }
 
         change.isIndividual = false;
-        if (change.changeType.toLocaleLowerCase().indexOf('individual') !== -1) {
+        if (this.isIndividualFromChangeType(change.changeType)) {
           change.isIndividual = true;
         }
         Object.assign(node, change);
@@ -106,7 +106,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         }
 
         newNode.isIndividual = false;
-        if (newNode.changeType.toLocaleLowerCase().indexOf('individual') !== -1) {
+        if (this.isIndividualFromChangeType(newNode.changeType)) {
           newNode.isIndividual = true;
         }
         node.children.push(newNode);
@@ -123,7 +123,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         }
 
         newNode.isIndividual = false;
-        if (newNode.changeType.toLocaleLowerCase().indexOf('individual') !== -1) {
+        if (this.isIndividualFromChangeType(newNode.changeType)) {
           newNode.isIndividual = true;
         }
         node.children.push(newNode);
@@ -148,6 +148,12 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         }
       }
     }
+    return result;
+  }
+
+  isIndividualFromChangeType(changeType: string) {
+    const result = changeType.toLowerCase().indexOf('individual') !== -1
+      || changeType.toLowerCase().indexOf('leadership') !== -1;
     return result;
   }
 
@@ -295,7 +301,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.populateChangeTables(this.treeRoot);
 
     const sortByChangeType = (a: LicenseeChangeLog, b: LicenseeChangeLog) => {
-      if (a.titleOld <= b.changeType) {
+      if (a.changeType <= b.changeType) {
         return 1;
       }
       return -1;
