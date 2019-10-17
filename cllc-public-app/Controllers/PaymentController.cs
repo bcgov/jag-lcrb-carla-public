@@ -116,6 +116,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
              *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
              */
 
+            if (string.IsNullOrEmpty (invoiceId))
+            {                
+                throw new ArgumentNullException("Payment URL Error - Invoice ID is blank after 10 tries");
+            }            
+
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
             // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
             var ordernum = invoice.AdoxioTransactionid;
