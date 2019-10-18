@@ -31,6 +31,7 @@ import { FeatureGuard } from './services/feaure-guard.service';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
+import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
 
 
 const routes: Routes = [
@@ -40,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'licensee-changes/:applicationId',
-    component: LicenseeTreeComponent
+    component: ApplicationLicenseeChangesComponent
   },
   {
     path: 'account-profile',

@@ -9,6 +9,9 @@ import { ApplicationType, ApplicationTypeNames } from '@models/application-type.
 import { ApplicationDataService } from '@services/application-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,10 +21,12 @@ import { MatSnackBar } from '@angular/material';
 export class DashboardComponent extends FormBase implements OnInit {
   account: Account;
   indigenousNationModeActive: boolean;
+  currentLegalEntities: LegalEntity;
 
   constructor(private store: Store<AppState>,
     private router: Router,
     private snackBar: MatSnackBar,
+    private legalEntityDataService: LegalEntityDataService,
     private applicationDataService: ApplicationDataService) {
     super();
   }
@@ -38,6 +43,16 @@ export class DashboardComponent extends FormBase implements OnInit {
       .subscribe((active) => {
         this.indigenousNationModeActive = active;
       });
+
+      this.legalEntityDataService.getCurrentHierachy()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: LegalEntity) => {
+        this.currentLegalEntities = data;
+      },
+        () => {
+          console.log('Error occured');
+        }
+      );
   }
 
   startLicenseeChangeApplication() {
