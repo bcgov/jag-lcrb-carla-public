@@ -52,6 +52,11 @@
             height: 20px !important;
         }
     }
+
+    .not-editable.mat-tree {
+        background-color: #F1F4FA !important;
+    }
+
 }
 
 .name-cell {
