@@ -38,7 +38,7 @@
       <p>Inquires related to your application can be directed to <a
           href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
       <p></p>
-      <button (click)="startLicenseeChangeApplication()">Start Licensee Change Application</button>
+
       <app-applications-and-licences [account]="account">
       </app-applications-and-licences>
 
@@ -62,6 +62,20 @@
               <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Account Profile</a>
             <div style="clear: both;"></div>
           </div>
+        </div>
+      </section>
+      <p></p>
+      <section>
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <app-licensee-tree *ngIf="currentLegalEntities" [currentChangeLogs]="[]"
+            [currentLegalEntityTree]="currentLegalEntities" [enableEditing]="false"></app-licensee-tree>
+          <br>
+          <br>
+          <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
+            <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Start Licensee Change Application</a>
+          <div style="clear: both;"></div>
         </div>
       </section>
       <p></p>

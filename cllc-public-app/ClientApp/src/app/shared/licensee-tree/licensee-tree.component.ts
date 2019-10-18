@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
 import { Store } from '@ngrx/store';
@@ -24,11 +24,14 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./licensee-tree.component.scss'],
 })
 export class LicenseeTreeComponent extends FormBase implements OnInit {
+  @Input() currentChangeLogs: LicenseeChangeLog[];
+  @Input() currentLegalEntityTree: LegalEntity;
+  @Input() enableEditing = true;
+  @Output() editedTree: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
   treeControl = new NestedTreeControl<LicenseeChangeLog>(node => node.children);
   dataSource = new MatTreeNestedDataSource<any>();
   @ViewChild('tree') tree: MatTree<any>;
   componentActive = true;
-  account: Account;
   changeTree: LicenseeChangeLog;
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
@@ -36,7 +39,6 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   treeRoot: LicenseeChangeLog;
   applicationId: string;
   application: Application;
-  changeLogs: LicenseeChangeLog[];
 
   constructor(public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -49,37 +51,24 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   hasChild = (_: number, node: LicenseeChangeLog) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
-    forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
-      this.legalEntityDataService.getChangeLogs(this.applicationId),
-      this.legalEntityDataService.getCurrentHierachy())
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
-        this.application = data[0];
-        this.changeLogs = data[1] || [];
-
-        // convert legal entity tree to change logs
-        this.treeRoot = this.processLegalEntityTree(data[2]);
-        this.treeRoot.isRoot = true;
-        this.changeTree = this.treeRoot;
-        this.dataSource.data = [this.treeRoot];
-        this.applySavedChangeLogs();
-        this.refreshTreeAndChangeTables();
-        this.treeControl.dataNodes = this.dataSource.data;
-        this.tree.treeControl.expandAll();
-      },
-        () => {
-          console.log('Error occured');
-        }
-      );
+    this.treeRoot = this.processLegalEntityTree(this.currentLegalEntityTree);
+    this.editedTree.emit(this.treeRoot);
+    this.treeRoot.isRoot = true;
+    this.changeTree = this.treeRoot;
+    this.dataSource.data = [this.treeRoot];
+    this.applySavedChangeLogs();
+    this.refreshTreeAndChangeTables();
+    this.treeControl.dataNodes = this.dataSource.data;
+    this.treeControl.expandAll();
   }
 
 
 
   applySavedChangeLogs() {
-    const changesWithLegalEntityId = this.changeLogs.filter(item => !!item.legalEntityId);
-    const changesWithParentLegalEntityId = this.changeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
+    const changesWithLegalEntityId = this.currentChangeLogs.filter(item => !!item.legalEntityId);
+    const changesWithParentLegalEntityId = this.currentChangeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
     const changesWithParentChangeLogId =
-      this.changeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLinceseeChangeLogId);
+      this.currentChangeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLinceseeChangeLogId);
 
     changesWithLegalEntityId.forEach(change => {
       const node = this.findNodeInTree(this.treeRoot, change.legalEntityId);
@@ -310,6 +299,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.individualShareholderChanges.sort(sortByChangeType);
     this.organizationShareholderChanges.sort(sortByChangeType);
     this.leadershipChanges.sort(sortByChangeType);
+
   }
 
   populateChangeTables(node: LicenseeChangeLog) {
@@ -359,13 +349,6 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       changeType = 'Remove';
     }
     return changeType;
-  }
-
-  save() {
-    this.legalEntityDataService.saveLicenseeChanges(this.treeRoot, this.applicationId)
-      .subscribe(() => {
-        debugger;
-      });
   }
 
   OnDestroy() {
