@@ -4,6 +4,14 @@ import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
+import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationDataService } from '@services/application-data.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,8 +21,13 @@ import { Account } from '@models/account.model';
 export class DashboardComponent extends FormBase implements OnInit {
   account: Account;
   indigenousNationModeActive: boolean;
+  currentLegalEntities: LegalEntity;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>,
+    private router: Router,
+    private snackBar: MatSnackBar,
+    private legalEntityDataService: LegalEntityDataService,
+    private applicationDataService: ApplicationDataService) {
     super();
   }
 
@@ -30,5 +43,35 @@ export class DashboardComponent extends FormBase implements OnInit {
       .subscribe((active) => {
         this.indigenousNationModeActive = active;
       });
+
+      this.legalEntityDataService.getCurrentHierachy()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: LegalEntity) => {
+        this.currentLegalEntities = data;
+      },
+        () => {
+          console.log('Error occured');
+        }
+      );
   }
+
+  startLicenseeChangeApplication() {
+    const newLicenceApplicationData: Application = <Application>{
+      // licenseType: ApplicationTypeNames.LeaderhsipChange,
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.LeaderhsipChange },
+      account: this.account,
+    };
+
+    this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigateByUrl(`/licensee-changes/${data.id}`);
+      },
+      () => {
+        this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a New Marketer Application');
+      }
+    );
+  }
+
 }
