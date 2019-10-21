@@ -23,18 +23,10 @@
       "dom"
     ],
     "paths": {
-      "@app*": [
-        "app/*"
-      ],
-      "@models*": [
-        "app/models*"
-      ],
-      "@services*": [
-        "app/services*"
-      ],
-      "@shared*": [
-        "app/shared*"
-      ]
+      "@models*": ["app/models*"],
+      "@services*": ["app/services*"],
+      "@shared*": ["app/shared*"],
+      "@app*": ["app*"]
     }
   },
   "angularCompilerOptions": {

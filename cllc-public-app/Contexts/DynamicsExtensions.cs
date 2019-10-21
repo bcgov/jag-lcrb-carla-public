@@ -1,12 +1,11 @@
-﻿
-using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,7 +18,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     public static class DynamicsExtensions
     {
 
-        
+
 
 
 
@@ -208,7 +207,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Invoices.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -224,7 +223,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Legalentities.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -239,7 +238,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Tiedhouseconnections.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -256,7 +255,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Aliases.GetByKeyAsync(id.ToString());
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -281,7 +280,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
                 }
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -314,7 +313,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result.AdoxioAssignedLicence.AdoxioEstablishment = system.GetEstablishmentById(Guid.Parse(result.AdoxioAssignedLicence._adoxioEstablishmentValue));
                 }
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -341,7 +340,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
                     dynamicsApplicationList = null;
                 }
@@ -367,9 +366,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 try
                 {
-                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand,orderby: new List<string> { "modifiedon desc" }).Value;
+                    dynamicsApplicationList = _dynamicsClient.Applications.Get(filter: filter, expand: expand, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
                     dynamicsApplicationList = null;
                 }
@@ -393,7 +392,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var contactsResponse = system.Contacts.Get(filter: "adoxio_externalid eq '" + sanitizedSiteminderId + "'");
                 result = contactsResponse.Value.FirstOrDefault();
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -446,7 +445,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await _dynamicsClient.Applicationtypes.GetByKeyAsync(id);
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -458,10 +457,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="raw"></param>
         /// <returns></returns>
-        public static string GetServiceCardID (string raw)
+        public static string GetServiceCardID(string raw)
         {
             string result = "";
-            if (! string.IsNullOrEmpty(raw))
+            if (!string.IsNullOrEmpty(raw))
             {
                 var tokens = raw.Split('|');
                 if (tokens.Length > 0)
@@ -475,7 +474,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     result = tokens[tokens.Length - 1];
                 }
             }
-            result  = GuidUtility.SanitizeGuidString(result);
+            result = GuidUtility.SanitizeGuidString(result);
             return result;
         }
 
@@ -516,15 +515,15 @@ namespace Gov.Lclb.Cllb.Interfaces
                         {
                             _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
                         }
-                        catch (OdataerrorException odee)
+                        catch (HttpOperationException httpOperationException)
                         {
                             _logger.LogError("Error updating Contact");
                             _logger.LogError("Request:");
-                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError(httpOperationException.Request.Content);
                             _logger.LogError("Response:");
-                            _logger.LogError(odee.Response.Content);
+                            _logger.LogError(httpOperationException.Response.Content);
                             // fail if we can't create.
-                            throw (odee);
+                            throw (httpOperationException);
                         }
 
                         // The account will be patched when we fetch data from bceid.
@@ -551,21 +550,21 @@ namespace Gov.Lclb.Cllb.Interfaces
                         contactVM.CopyHeaderValues(Headers);
                         workerVm.CopyHeaderValues(Headers);
                         MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
-                        
-                        patchContact.CopyValuesNoEmailPhone(contactVM);                        
+
+                        patchContact.CopyValuesNoEmailPhone(contactVM);
                         try
-                        {                            
+                        {
                             _dynamicsClient.Contacts.Update(user.ContactId.ToString(), patchContact);
                         }
-                        catch (OdataerrorException odee)
+                        catch (HttpOperationException httpOperationException)
                         {
                             _logger.LogError("Error updating Contact");
                             _logger.LogError("Request:");
-                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError(httpOperationException.Request.Content);
                             _logger.LogError("Response:");
-                            _logger.LogError(odee.Response.Content);
+                            _logger.LogError(httpOperationException.Response.Content);
                             // fail if we can't update.
-                            throw (odee);
+                            throw (httpOperationException);
                         }
 
                         // update worker(s)
@@ -580,13 +579,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                                 _dynamicsClient.Workers.Update(item.AdoxioWorkerid, patchWorker);
                             }
                         }
-                        catch (OdataerrorException odee)
+                        catch (HttpOperationException httpOperationException)
                         {
                             _logger.LogError("Error updating Worker");
                             _logger.LogError("Request:");
-                            _logger.LogError(odee.Request.Content);
+                            _logger.LogError(httpOperationException.Request.Content);
                             _logger.LogError("Response:");
-                            _logger.LogError(odee.Response.Content);
+                            _logger.LogError(httpOperationException.Response.Content);
                         }
 
                     }
@@ -666,7 +665,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var filter = "_adoxio_contactid_value eq " + guid;
                 result = system.Previousaddresses.Get(filter: filter).Value.ToList();
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }
@@ -687,7 +686,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 // fetch from Dynamics.
                 result = await system.Previousaddresses.GetByKeyAsync(guid);
             }
-            catch (Gov.Lclb.Cllb.Interfaces.Models.OdataerrorException)
+            catch (HttpOperationException)
             {
                 result = null;
             }

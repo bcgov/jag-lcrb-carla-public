@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gov.Lclb.Cllb.Interfaces
+﻿namespace Gov.Lclb.Cllb.Interfaces
 {
     using Microsoft.Rest;
 
@@ -21,14 +17,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 
 
         /// <summary>
-        /// Initializes a new instance of the OdataerrorException class.
+        /// Initializes a new instance of the HttpOperationException class.
         /// </summary>
         public SharePointRestException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the OdataerrorException class.
+        /// Initializes a new instance of the HttpOperationException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         public SharePointRestException(string message)
@@ -37,7 +33,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         }
 
         /// <summary>
-        /// Initializes a new instance of the OdataerrorException class.
+        /// Initializes a new instance of the HttpOperationException class.
         /// </summary>
         /// <param name="message">The exception message.</param>
         /// <param name="innerException">Inner exception.</param>

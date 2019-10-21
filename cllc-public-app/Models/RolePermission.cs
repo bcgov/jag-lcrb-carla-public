@@ -1,8 +1,7 @@
-using System;
-using System.Text;
 using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -18,20 +17,20 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="role">Role (required).</param>
         /// <param name="permission">A foreign key reference to the system-generated unique identifier for a Permission (required).</param>
         public RolePermission(Guid id, Role role, Permission permission)
-        {   
+        {
             Id = id;
             Role = role;
             Permission = permission;
         }
 
         public RolePermission(Role role, Permission permission)
-        {            
+        {
             Role = role;
             Permission = permission;
         }
 
         public RolePermission()
-        {         
+        {
         }
 
         /// <summary>
@@ -45,27 +44,27 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// Gets or Sets Role
         /// </summary>
         public Role Role { get; set; }
-        
+
         /// <summary>
         /// Foreign key for Role 
         /// </summary>   
         [ForeignKey("Role")]
-		[JsonIgnore]		
+        [JsonIgnore]
         public Guid? RoleId { get; set; }
-        
+
         /// <summary>
         /// A foreign key reference to the system-generated unique identifier for a Permission
         /// </summary>
         /// <value>A foreign key reference to the system-generated unique identifier for a Permission</value>
-                public Permission Permission { get; set; }
-        
+        public Permission Permission { get; set; }
+
         /// <summary>
         /// Foreign key for Permission 
         /// </summary>   
         [ForeignKey("Permission")]
-		[JsonIgnore]
+        [JsonIgnore]
         public Guid? PermissionId { get; set; }
-        
+
         /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
@@ -114,16 +113,16 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (other is null) { return false; }
             if (ReferenceEquals(this, other)) { return true; }
 
-            return                 
+            return
                 (
                     Id == other.Id ||
                     Id.Equals(other.Id)
-                ) &&                 
+                ) &&
                 (
                     Role == other.Role ||
                     Role != null &&
                     Role.Equals(other.Role)
-                ) &&                 
+                ) &&
                 (
                     Permission == other.Permission ||
                     Permission != null &&
@@ -143,8 +142,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 int hash = 41;
 
                 // Suitable nullity checks                                   
-                hash = hash * 59 + Id.GetHashCode();        
-                
+                hash = hash * 59 + Id.GetHashCode();
+
                 if (Role != null)
                 {
                     hash = hash * 59 + Role.GetHashCode();
@@ -160,7 +159,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

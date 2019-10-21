@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,14 +25,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class FileController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;        
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
         public FileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;            
+            _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(FileController));
         }
@@ -91,13 +92,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError("Error creating document location");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error creating document location");
                 }
             }
 
@@ -117,7 +114,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             ViewModels.FileSystemItem result = null;
             ValidateSession();
-            
+
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
                 return BadRequest();
@@ -148,12 +145,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
 
-                
+
                 _logger.LogInformation($"SUCCESS in uploading file {fileName} to folder {folderName} Headers: {headers} ");
             }
             catch (SharePointRestException ex)
             {
-                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} - SharePointRestException - {ex.Message} {ex.Response.Content}");                
+                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} - SharePointRestException - {ex.Message} {ex.Response.Content}");
                 return new NotFoundResult();
             }
             catch (Exception e)
@@ -243,15 +240,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Applications.Update(entityId, patchApplication);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError("Error updating application");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(httpOperationException, "Error updating application");
                         // fail if we can't create.
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     break;
                 case "contact":
@@ -260,15 +253,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Contacts.Update(entityId, patchContact);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError("Error updating Contact");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(httpOperationException, "Error updating Contact");
                         // fail if we can't create.
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     break;
                 case "worker":
@@ -277,15 +266,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _dynamicsClient.Workers.Update(entityId, patchWorker);
                     }
-                    catch (OdataerrorException odee)
+                    catch (HttpOperationException httpOperationException)
                     {
-                        _logger.LogError("Error updating Contact");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(httpOperationException, "Error updating Contact");
                         // fail if we can't create.
-                        throw (odee);
+                        throw (httpOperationException);
                     }
                     break;
 
@@ -361,7 +346,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             ValidateSession();
 
-            
+
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType))
             {
                 return fileSystemItemVMList;
@@ -381,11 +366,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (SharePointRestException spre)
                 {
-                    _logger.LogError("Error getting SharePoint File List");
-                    _logger.LogError("Request URI:");
-                    _logger.LogError(spre.Request.RequestUri.ToString());
-                    _logger.LogError("Response:");
-                    _logger.LogError(spre.Response.Content);
+                    _logger.LogError(spre, "Error getting SharePoint File List");
                     throw new Exception("Unable to get Sharepoint File List.");
                 }
 
@@ -411,7 +392,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             catch (Exception e)
             {
                 _logger.LogError("Error getting SharePoint File List");
-                
+
                 _logger.LogError(e.Message);
             }
 

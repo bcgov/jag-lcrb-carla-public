@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Http;
-using Gov.Lclb.Cllb.Public.Models;
+using Newtonsoft.Json;
 using System;
-using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {

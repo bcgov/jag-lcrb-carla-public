@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Gov.Lclb.Cllb.Public.ViewModels
+﻿namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class PolicyDocument
     {
@@ -12,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string menuText { get; set; }
         public string category { get; set; }
         public string body { get; set; }
-        public string slug { get; set; }         
+        public string slug { get; set; }
         public int displayOrder { get; set; }
     }
 }

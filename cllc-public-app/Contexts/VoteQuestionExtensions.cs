@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Contexts
 {
@@ -116,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
 
             voteQuestion = new VoteQuestion
-            (                
+            (
                 initialVoteQuestion.question,
                 initialVoteQuestion.slug,
                 initialVoteQuestion.title,
@@ -125,7 +124,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
 
             context.AddVoteQuestion(voteQuestion);
         }
-        
+
         /// <summary>
         /// Update region
         /// </summary>
@@ -162,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     List<VoteOption> itemsToRemove = new List<VoteOption>();
                     // second pass to identify items that are no longer present.
                     foreach (var option in voteQuestion.Options)
-                    {  
+                    {
                         if (option != null)
                         {
                             if (voteQuestionInfo.options.FirstOrDefault(x => x != null && x.option.Equals(option.Option)) == null)
@@ -170,7 +169,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                                 itemsToRemove.Add(option);
                             }
                         }
-                        
+
                     }
                     // third pass to remove the items.
                     foreach (var option in itemsToRemove)

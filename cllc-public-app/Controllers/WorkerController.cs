@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -154,14 +155,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-                throw odee;
+                _logger.LogError(httpOperationException, "Error updating contact");
+                throw httpOperationException;
             }
             worker = await _dynamicsClient.GetWorkerById(workerId);
             return new JsonResult(worker.ToViewModel());
@@ -191,19 +188,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 worker = await _dynamicsClient.Workers.CreateAsync(worker);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error creating worker. ");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating worker.");
+            }
+
+            try
+            {
                 var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
                 patchWorker.ContactIdAccountODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
                 await _dynamicsClient.Workers.UpdateAsync(worker.AdoxioWorkerid.ToString(), patchWorker);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating contact");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(httpOperationException, $"Error updating worker. ");
             }
-            return new JsonResult(worker);
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error updating worker.");
+            }
+
+
+            return new JsonResult(worker.ToViewModel());
         }
 
 
@@ -227,8 +238,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return NotFound("No access to worker");
             }
+            try
+            {
+                await _dynamicsClient.Workers.DeleteAsync(id);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error updating worker. ");
+            }
 
-            await _dynamicsClient.Workers.DeleteAsync(id);
+
             return NoContent(); // 204
         }
 
@@ -238,9 +257,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
 
             var expand = new List<string> {
-               "adoxio_ContactId",
-               "adoxio_workerregistration_personalhistorysummary"
-           };
+               "adoxio_ContactId"
+            };
 
             MicrosoftDynamicsCRMadoxioWorker adoxioWorker = _dynamicsClient.Workers.GetByKey(workerId, expand: expand);
             if (adoxioWorker == null)
@@ -261,17 +279,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var effectiveDateParam = "";
-            var securityClearance = adoxioWorker.AdoxioWorkerregistrationPersonalhistorysummary.FirstOrDefault();
-            if (securityClearance != null && securityClearance.AdoxioCompletedon.HasValue)
+            if (adoxioWorker.AdoxioSecuritycompletedon != null)
             {
-                DateTime effectiveDate = securityClearance.AdoxioCompletedon.Value.DateTime;
+                DateTime effectiveDate = adoxioWorker.AdoxioSecuritycompletedon.Value.DateTime;
                 effectiveDateParam = effectiveDate.ToString("dd/MM/yyyy");
             }
 
             var expiryDateParam = "";
-            if (securityClearance != null && securityClearance.AdoxioExpirydate.HasValue)
+            if (adoxioWorker.AdoxioExpirydate != null)
             {
-                DateTime expiryDate = securityClearance.AdoxioExpirydate.Value.DateTime;
+                DateTime expiryDate = adoxioWorker.AdoxioExpirydate.Value.DateTime;
                 expiryDateParam = expiryDate.ToString("dd/MM/yyyy");
             }
 

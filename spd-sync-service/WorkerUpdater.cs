@@ -5,6 +5,7 @@ using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using SpdSync.models;
 using System;
 using System.Collections.Generic;
@@ -219,7 +220,7 @@ namespace SpdSync
             {
                 response = _dynamics.Personalhistorysummaries.Get(filter: filter).Value.FirstOrDefault();
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 hangfireContext.WriteLine("Unable to get personal history summary.");
                 hangfireContext.WriteLine("Request:");
@@ -245,7 +246,7 @@ namespace SpdSync
             {
                 await _dynamics.Personalhistorysummaries.UpdateAsync(response.AdoxioPersonalhistorysummaryid, patchPHS);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 hangfireContext.WriteLine("Unable to patch personal history summary.");
                 hangfireContext.WriteLine("Request:");

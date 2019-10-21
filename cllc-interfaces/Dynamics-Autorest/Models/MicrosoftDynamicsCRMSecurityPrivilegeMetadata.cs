@@ -27,10 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMSecurityPrivilegeMetadata class.
         /// </summary>
-        /// <param name="privilegeType">Possible values include: 'None',
-        /// 'Create', 'Read', 'Write', 'Delete', 'Assign', 'Share', 'Append',
-        /// 'AppendTo'</param>
-        public MicrosoftDynamicsCRMSecurityPrivilegeMetadata(bool? canBeBasic = default(bool?), bool? canBeDeep = default(bool?), bool? canBeGlobal = default(bool?), bool? canBeLocal = default(bool?), bool? canBeEntityReference = default(bool?), bool? canBeParentEntityReference = default(bool?), string name = default(string), string privilegeId = default(string), string privilegeType = default(string))
+        public MicrosoftDynamicsCRMSecurityPrivilegeMetadata(bool? canBeBasic = default(bool?), bool? canBeDeep = default(bool?), bool? canBeGlobal = default(bool?), bool? canBeLocal = default(bool?), bool? canBeEntityReference = default(bool?), bool? canBeParentEntityReference = default(bool?), string name = default(string), string privilegeId = default(string), object privilegeType = default(object))
         {
             CanBeBasic = canBeBasic;
             CanBeDeep = canBeDeep;
@@ -90,11 +87,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string PrivilegeId { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'None', 'Create', 'Read',
-        /// 'Write', 'Delete', 'Assign', 'Share', 'Append', 'AppendTo'
         /// </summary>
         [JsonProperty(PropertyName = "PrivilegeType")]
-        public string PrivilegeType { get; set; }
+        public object PrivilegeType { get; set; }
 
     }
 }
