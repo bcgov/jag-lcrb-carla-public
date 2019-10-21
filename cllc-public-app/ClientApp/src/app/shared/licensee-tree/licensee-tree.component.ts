@@ -290,7 +290,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.populateChangeTables(this.treeRoot);
 
     const sortByChangeType = (a: LicenseeChangeLog, b: LicenseeChangeLog) => {
-      if (a.changeType <= b.changeType) {
+      if (this. getRenderChangeType(a) >= this. getRenderChangeType(b)) {
         return 1;
       }
       return -1;
