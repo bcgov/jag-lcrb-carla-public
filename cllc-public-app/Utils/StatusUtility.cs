@@ -39,10 +39,13 @@ namespace Gov.Lclb.Cllb.Public.Utils
                     {
                         shownStatus = "Transfer Initiated";
                     }
-                    else
-                        if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Location Change")
+                    else if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Location Change")
                     {
                         shownStatus = "Relocation Initiated";
+                    }
+                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "Leadership Change")
+                    {
+                        shownStatus = "Licensee Change Initiated";
                     }
                     else
                     {
@@ -58,6 +61,10 @@ namespace Gov.Lclb.Cllb.Public.Utils
                     else if (application.AdoxioLicenceType != null && application.AdoxioLicenceType.AdoxioName == "CRS Location Change")
                     {
                         shownStatus = "Relocation Application Under Review";
+                    }
+                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "CRS Location Change")
+                    {
+                        shownStatus = "Licensee Change Under Review";
                     }
                     else
                     {

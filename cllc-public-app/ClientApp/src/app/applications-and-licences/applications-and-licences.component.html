@@ -136,9 +136,15 @@
                     <span>Complete Transfer</span>
                   </a>
                 </div>
+                <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'">
+                  <a [routerLink]="['/licensee-changes/' + item.id]">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Licensee Change</span>
+                  </a>
+                </div>
                 <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
                   (click)="cancelApplication(item.id, item.establishmentName, item.name)">
-                  <a href="javascript: void(0)" id="cancelApp{{item.id}}">
+                  <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Cancel Application</span>
                   </a>
@@ -155,6 +161,13 @@
                   <a href="javascript: void(0)">
                     <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Cancel Transfer</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'" style="margin-top: 5px;"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Licensee Change</span>
                   </a>
                 </div>
                 <div
