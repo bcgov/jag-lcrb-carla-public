@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>
+Application Version  
+</h2>
+<mat-dialog-content> 
+    <section class="row">     
+        <table class="mat-list mat-list-base">
+          <tr class="mat-list-item">
+            <td>Environment:</td>
+            <td>{{versionInfo?.environment}}</td>
+          </tr>
+          <tr class="mat-list-item">
+            <td>Last Updated:</td>
+            <td>{{versionInfo?.fileCreationTime | date:'medium' }}</td>
+          </tr>
+          <tr class="mat-list-item">
+            <td>Reference:</td>
+            <td>{{versionInfo?.sourceReference}}</td>
+          </tr>
+          <tr class="mat-list-item">
+            <td>Repository:</td>
+            <td>{{versionInfo?.sourceRepository}}</td>
+          </tr>
+          <tr class="mat-list-item">
+            <td>Commit:</td>
+            <td>{{versionInfo?.sourceCommit}}</td>
+          </tr>
+        </table>      
+      </section>  
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="btn btn-secondary" (click)="close()">OK</button>  
+</mat-dialog-actions>
+
+<style>
+    ::ng-deep .mat-calendar-body-selected {
+        background-color: #337AB7;
+        color: #000 !important;
+    }
+    
+    ::ng-deep .mat-calendar-body-cell-content {
+        color: #54708b;
+    }
+    
+    ::ng-deep .mat-calendar-header {
+        background-color: #337AB7;
+        color: #fff;
+    }
+    </style>
