@@ -6,6 +6,8 @@ using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -15,23 +17,22 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
-using Microsoft.Rest;
+using Newtonsoft.Json;
 using NWebsec.AspNetCore.Mvc;
 using NWebsec.AspNetCore.Mvc.Csp;
 using Serilog;
+using Serilog.Exceptions;
 using System;
 using System.IO;
-using System.Text;
-using System.Net.Mime;
-using Newtonsoft.Json;
 using System.Linq;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Net.Http;
-using Microsoft.AspNetCore.Diagnostics;
+using System.Net.Mime;
+using System.Text;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -74,6 +75,7 @@ namespace Gov.Lclb.Cllb.Public
             // for security reasons, the following headers are set.
             services.AddMvc(opts =>
             {
+                opts.EnableEndpointRouting = false;
                 // default deny
                 var policy = new AuthorizationPolicyBuilder()
                  .RequireAuthenticatedUser()
@@ -90,18 +92,16 @@ namespace Gov.Lclb.Cllb.Public
                 opts.Filters.Add(typeof(CspReportOnlyAttribute));
                 opts.Filters.Add(new CspScriptSrcReportOnlyAttribute { None = true });
             })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-            .AddJsonOptions(
-                opts =>
-                {
-                    opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                    opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
-                    opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+            .AddNewtonsoftJson(opts =>
+           {
+               opts.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+               opts.SerializerSettings.DateFormatHandling = Newtonsoft.Json.DateFormatHandling.IsoDateFormat;
+               opts.SerializerSettings.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
 
-                    // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
-                    opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                });
-
+                // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
+                opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+           })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);            
 
             // setup siteminder authentication (core 2.0)
             services.AddAuthentication(options =>
@@ -138,7 +138,7 @@ namespace Gov.Lclb.Cllb.Public
 
             var orgBook = new OrgBookClient(new HttpClient());
             orgBook.ReadResponseAsString = true;
-            services.AddTransient<IOrgBookClient>(_ => (IOrgBookClient)orgBook); 
+            services.AddTransient<IOrgBookClient>(_ => (IOrgBookClient)orgBook);
 
             // health checks
             services.AddHealthChecks()
@@ -194,14 +194,14 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
             {
-                
-                IDynamicsClient client = DynamicsSetupUtil.SetupDynamics( Configuration );
+
+                IDynamicsClient client = DynamicsSetupUtil.SetupDynamics(Configuration);
 
                 return client;
             }));
 
             // add SharePoint.
-            
+
             services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(Configuration));
 
             // add BCeID Web Services
@@ -237,7 +237,7 @@ namespace Gov.Lclb.Cllb.Public
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             var log = loggerFactory.CreateLogger("Startup");
 
@@ -299,15 +299,15 @@ namespace Gov.Lclb.Cllb.Public
                         context.Response.ContentType = "text/html";
 
                         await context.Response.WriteAsync("An unexpected server error occurred.\r\n");
-                        
+
 
                         var exceptionHandlerPathFeature =
                             context.Features.Get<IExceptionHandlerPathFeature>();
-                        
+
                         if (exceptionHandlerPathFeature?.Error != null)
                         {
                             Log.Logger.Error(exceptionHandlerPathFeature?.Error, "Unexpected Error");
-                        }                        
+                        }
                     });
                 });
                 app.UseHsts(); // Strict-Transport-Security
@@ -323,11 +323,12 @@ namespace Gov.Lclb.Cllb.Public
                        new
                        {
                            checks = r.Entries.Select(e =>
-                      new {
-                                 description = e.Key,
-                                 status = e.Value.Status.ToString(),
-                                 responseTime = e.Value.Duration.TotalMilliseconds
-                             }),
+                      new
+                      {
+                          description = e.Key,
+                          status = e.Value.Status.ToString(),
+                          responseTime = e.Value.Duration.TotalMilliseconds
+                      }),
                            totalResponseTime = r.TotalDuration.TotalMilliseconds
                        });
                     await c.Response.WriteAsync(result);
@@ -391,12 +392,13 @@ namespace Gov.Lclb.Cllb.Public
             {
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
                     .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
-                        Configuration["SPLUNK_TOKEN"])
-                    .CreateLogger();                                
+                        Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .CreateLogger();
             }
 
         }
-        
+
     }
 }

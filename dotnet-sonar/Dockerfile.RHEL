@@ -9,18 +9,17 @@ USER 0
 RUN pushd /opt \
     && yum install -y yum-utils \
 	&& rpm --import "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF" \
-    && yum-config-manager --add-repo http://download.mono-project.com/repo/centos/ \
-    && yum install -y mono-complete \
-    && INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" \
-    && yum install -y $INSTALL_PKGS \
+    && INSTALL_PKGS="tar unzip bc rh-dotnet20-dotnet-runtime-2.0 nss_wrapper which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" \
+    && yum install -y $INSTALL_PKGS --enablerepo=rhel-7-server-rpms,rhel-server-rhscl-7-rpms,rhel-7-server-dotnet-rpms \
     && rpm -V $INSTALL_PKGS \
     && yum clean all -y \
-    && curl -L https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.0.2.892/sonar-scanner-msbuild-4.0.2.892.zip -o sonar-scanner-msbuild-4.0.2.892.zip \
+    && curl -L https://github.com/SonarSource/sonar-scanner-msbuild/releases/download/4.7.1.2311/sonar-scanner-msbuild-4.7.1.2311-netcoreapp2.0.zip -o sonar-scanner-msbuild.zip \
     && mkdir /usr/lib/sonar-scanner  \
-    && unzip sonar-scanner-msbuild-4.0.2.892.zip -d /usr/lib/sonar-scanner \
+    && unzip sonar-scanner-msbuild.zip -d /usr/lib/sonar-scanner \
     && chmod -R a+rx /usr/lib/sonar-scanner \
-    && rm sonar-scanner-msbuild-4.0.2.892.zip \
+    && rm sonar-scanner-msbuild.zip \
     && rm -R /opt/app-root/.pki \
+	&& mv /opt/rh/rh-dotnet20/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App/2.0.9  /opt/rh/rh-dotnet30/root/usr/lib64/dotnet/shared/Microsoft.NETCore.App \
     && popd
 
 

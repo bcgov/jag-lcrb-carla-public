@@ -27,9 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionSetMetadataBase class.
         /// </summary>
-        /// <param name="optionSetType">Possible values include: 'Picklist',
-        /// 'State', 'Status', 'Boolean'</param>
-        public MicrosoftDynamicsCRMOptionSetMetadataBase(MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel displayName = default(MicrosoftDynamicsCRMLabel), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), string name = default(string), string optionSetType = default(string), string introducedVersion = default(string))
+        public MicrosoftDynamicsCRMOptionSetMetadataBase(object description = default(object), object displayName = default(object), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), object isCustomizable = default(object), string name = default(string), object optionSetType = default(object), string introducedVersion = default(string))
         {
             Description = description;
             DisplayName = displayName;
@@ -51,12 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Description")]
-        public MicrosoftDynamicsCRMLabel Description { get; set; }
+        public object Description { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
-        public MicrosoftDynamicsCRMLabel DisplayName { get; set; }
+        public object DisplayName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -76,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
+        public object IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -84,11 +82,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Picklist', 'State',
-        /// 'Status', 'Boolean'
         /// </summary>
         [JsonProperty(PropertyName = "OptionSetType")]
-        public string OptionSetType { get; set; }
+        public object OptionSetType { get; set; }
 
         /// <summary>
         /// </summary>

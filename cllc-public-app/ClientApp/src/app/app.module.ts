@@ -157,6 +157,13 @@ import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { ProductInventoryPackagedComponent } from './shared/product-inventory-packaged/product-inventory-packaged.component';
 import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.component';
+import {
+  OrganizationLeadershipComponent
+} from './shared/licensee-tree/dialog-boxes/organization-leadership/organization-leadership.component';
+import {
+  ShareholdersAndPartnersComponent
+} from './shared/licensee-tree/dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
+import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
 
 
 @NgModule({
@@ -238,7 +245,10 @@ import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.comp
     ApplicationAndLicenceFeeComponent,
     ApplicationOwnershipTransferComponent,
     ProductInventoryPackagedComponent,
-    LicenseeTreeComponent
+    LicenseeTreeComponent,
+    OrganizationLeadershipComponent,
+    ShareholdersAndPartnersComponent,
+    ApplicationLicenseeChangesComponent
   ],
   imports: [
     ChartsModule,
@@ -376,6 +386,8 @@ import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.comp
     KeyPersonnelDialogComponent,
     WorkerHomeDialogComponent,
     ShareholderDialogComponent,
+    ShareholdersAndPartnersComponent,
+    OrganizationLeadershipComponent,
   ],
   bootstrap: [AppComponent]
 })

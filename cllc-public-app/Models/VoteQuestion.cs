@@ -1,17 +1,16 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Role Database Model
     /// </summary>
-        public sealed partial class VoteQuestion :  IEquatable<VoteQuestion>
+    public sealed partial class VoteQuestion : IEquatable<VoteQuestion>
     {
 
         /// <summary>
@@ -20,8 +19,8 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="id">A system-generated unique identifier for a VoteQuestion (required).</param>
         /// <param name="question">The text of the voting question.</param>
         /// <param name="slug">A string that can be used to identify the question</param>
-        public VoteQuestion(Guid id, string question, string slug, string title, ViewModels.VoteOption [] options)
-        {   
+        public VoteQuestion(Guid id, string question, string slug, string title, ViewModels.VoteOption[] options)
+        {
             Id = id;
             Question = question;
             Slug = slug;
@@ -43,7 +42,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             Title = title;
             AddOptions(options);
         }
-        
+
 
         public VoteQuestion()
         {
@@ -73,7 +72,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [MaxLength(512)]        
+        [MaxLength(512)]
         public string Question { get; set; }
 
         [MaxLength(256)]
@@ -172,14 +171,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 if (Slug != null)
                 {
                     hash = hash * 59 + Slug.GetHashCode();
-                }                
-                                   
+                }
+
                 return hash;
             }
         }
 
         #region Operators
-        
+
         /// <summary>
         /// Equals
         /// </summary>

@@ -4,7 +4,6 @@ using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -116,6 +115,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioIsreadysurveillancenotice = from.IsReadySurveillanceNotice;
             to.AdoxioIsreadyproductnotvisibleoutside = from.IsReadyProductNotVisibleOutside;
             to.AdoxioEstablishmentopeningdate = from.Establishmentopeningdate;
+            to.AdoxioIsreadyvalidinterest = from.IsReadyValidInterest;
+
 
 
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
@@ -302,7 +303,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsReadyExtranceExit = dynamicsApplication.AdoxioIsreadyentranceexit,
                 IsReadySurveillanceNotice = dynamicsApplication.AdoxioIsreadysurveillancenotice,
                 IsReadyProductNotVisibleOutside = dynamicsApplication.AdoxioIsreadyproductnotvisibleoutside,
-                Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate
+                Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate,
+                IsReadyValidInterest = dynamicsApplication.AdoxioIsreadyvalidinterest,
 
             };
 

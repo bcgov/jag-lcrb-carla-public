@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using Gov.Lclb.Cllb.Public.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public JurisdictionSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory  loggerFactory, IDynamicsClient dynamicsClient) 
+        public JurisdictionSeeder(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
             : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 
@@ -23,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         protected override void Invoke(AppDbContext context)
         {
             UpdateJurisdictions(context);
-            
+
         }
 
         private void UpdateJurisdictions(AppDbContext context)
@@ -32,10 +33,10 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
             foreach (Jurisdiction jurisdiction in seedJurisdictions)
             {
-                context.UpdateSeedJurisdictionInfo(jurisdiction);                
+                context.UpdateSeedJurisdictionInfo(jurisdiction);
             }
 
-            AddInitialJurisdictions(context);            
+            AddInitialJurisdictions(context);
         }
 
         private void AddInitialJurisdictions(AppDbContext context)
@@ -44,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             if (string.IsNullOrEmpty(jurisdictionInitializationFile))
             {
                 // default to sample data, which is stored in the "SeedData" directory.
-                jurisdictionInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "Jurisdictions.json"); 
+                jurisdictionInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "Jurisdictions.json");
             }
             context.AddInitialJurisdictionsFromFile(jurisdictionInitializationFile);
         }
@@ -52,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         private List<Jurisdiction> GetSeedJurisdictions()
         {
             List<Jurisdiction> jurisdictions = new List<Jurisdiction>(GetDefaultJurisdictions());
-                
+
             if (IsProductionEnvironment)
             {
                 jurisdictions.AddRange(GetProdJurisdictions());
@@ -62,7 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                 jurisdictions.AddRange(GetDevJurisdictions());
             }
 
-                
+
 
             return jurisdictions;
         }
@@ -80,7 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// </summary>
         private List<Jurisdiction> GetDevJurisdictions()
         {
-            return new List<Jurisdiction>();            
+            return new List<Jurisdiction>();
         }
 
         /// <summary>

@@ -16,18 +16,18 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <param name="to"></param>
         /// <param name="from"></param>
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioEstablishment to, ViewModels.Establishment from)
-        {            
+        {
             // Only copy email and phone number
             if (from.Email != null)
             {
                 to.AdoxioEmail = from.Email;
             }
 
-             if (from.Phone != null)
+            if (from.Phone != null)
             {
                 to.AdoxioPhone = from.Phone;
             }
-            
+
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result._licencee_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioLicenceeValue);
                 result._licencetypeid_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioLicencetypeidValue);
                 //result._municipality_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioMunicipalityValue);
-                result._policejurisdiction_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioPdjurisdictionValue);                
+                result._policejurisdiction_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioPdjurisdictionValue);
                 result._primaryinspectorid_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioPrimaryinspectoridValue);
                 result._territory_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._adoxioTerritoryValue);
                 result._createdby_value = GuidUtility.SafeNullableGuidConvert(adoxio_establishment._createdbyValue);
@@ -104,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.Versionnumber = adoxio_establishment.Versionnumber;
                 }
-                
+
             }
             return result;
         }

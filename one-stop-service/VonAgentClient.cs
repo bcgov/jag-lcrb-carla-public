@@ -49,7 +49,16 @@ namespace Gov.Lclb.Cllb.OneStopService
 
             try
             {
-                HttpResponseMessage response = await Client.PostAsJsonAsync(AGENT_URL + ISSUE_URL, new List<Credential>() { credential });
+                // can't use PostAsJson in dotnet core
+
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, AGENT_URL + ISSUE_URL);
+
+                string json = JsonConvert.SerializeObject(new List<Credential>() { credential });
+
+                request.Content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+                HttpClient http = new HttpClient();
+                HttpResponseMessage response = await http.SendAsync(request);                
 
                 if (!response.IsSuccessStatusCode)
                 {

@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// </summary>
         /// <param name="to"></param>
         /// <param name="from"></param>
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioLegalentity to, ViewModels.AdoxioLegalEntity from)
+        public static void CopyValues(this MicrosoftDynamicsCRMadoxioLegalentity to, ViewModels.LegalEntity from)
         {
 
             to.AdoxioCommonnonvotingshares = from.commonnonvotingshares;
@@ -62,17 +62,17 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioDateemailsent = from.securityAssessmentEmailSentOn;
         }
 
-        
+
 
         /// <summary>
         /// Convert a Dynamics Legal Entity to a ViewModel
         /// </summary>        
-        public static ViewModels.AdoxioLegalEntity ToViewModel(this MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity)
+        public static ViewModels.LegalEntity ToViewModel(this MicrosoftDynamicsCRMadoxioLegalentity adoxio_legalentity)
         {
-            ViewModels.AdoxioLegalEntity result = null;
+            ViewModels.LegalEntity result = null;
             if (adoxio_legalentity != null)
             {
-                result = new ViewModels.AdoxioLegalEntity();
+                result = new ViewModels.LegalEntity();
                 if (adoxio_legalentity.AdoxioLegalentityid != null)
                 {
                     result.id = adoxio_legalentity.AdoxioLegalentityid.ToString();
@@ -97,7 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     result.interestpercentage = Convert.ToDecimal(adoxio_legalentity.AdoxioInterestpercentage);
                 }
-                
+
                 // convert from int to bool.
                 result.isindividual = (adoxio_legalentity.AdoxioIsindividual != null && adoxio_legalentity.AdoxioIsindividual != 0);
                 result.lastname = adoxio_legalentity.AdoxioLastname;

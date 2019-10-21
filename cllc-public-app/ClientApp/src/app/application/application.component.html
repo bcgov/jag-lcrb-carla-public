@@ -29,7 +29,8 @@
               <br>
 
               <p>
-                A name cannot mislead the public about what kind of business the licensee operates. The name cannot imply a
+                A name cannot mislead the public about what kind of business the licensee operates. The name cannot
+                imply a
                 licensee is selling medical cannabis, and cannot include words in any form or combination or manner
                 the
                 words "apothecary", "pharmacy", "medicines", "drugs", "drug store", "drug department", "dispensary"
@@ -58,7 +59,7 @@
               errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
               <input class="form-control" style="width: 500px;" type="text"
                 [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
-                (change)="checkPossibleProblematicWords()" formControlName="establishmentName">
+                (change)="checkPossibleProblematicWords()" formControlName="establishmentName" id="establishmentName">
             </app-field>
             <div *ngIf="possibleProblematicNameWarning" class="warning-state">
               Caution: The store name might contain at least one word that doesn’t comply with the naming
@@ -72,10 +73,10 @@
             <h3 class="blue-header" style="margin-left: -15px;">CURRENT ADDRESS</h3>
             <address class="row">
               <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
-                <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet">
+                <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
               </app-field>
               <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
-                <input class="form-control" type="text" readonly formControlName="establishmentAddressCity">
+                <input class="form-control" type="text" readonly formControlName="establishmentAddressCity" id="establishmentAddressCity">
               </app-field>
               <section class="col-md-4 col-xs-12">
                 <app-field label="Province" [isFullWidth]="true">
@@ -84,7 +85,7 @@
               </section>
               <section class="col-md-4 col-xs-12">
                 <app-field label="Postal Code">
-                  <input class="form-control" type="text" readonly formControlName="establishmentAddressPostalCode">
+                  <input class="form-control" type="text" readonly formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode">
                 </app-field>
               </section>
               <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
@@ -95,7 +96,7 @@
               <div style="flex: 0 0 210px;">
                 <app-field label="Parcel Identifier (PID)">
                   <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                    style="width: 200px;" formControlName="establishmentParcelId">
+                    style="width: 200px;" formControlName="establishmentParcelId" id="establishmentAddressPostalCode">
                 </app-field>
               </div>
             </div>
@@ -111,12 +112,12 @@
                 [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                 errorMessage="Please enter the street address">
                 <input class="form-control" type="text" autocomplete="address-line1"
-                  formControlName="establishmentAddressStreet">
+                  formControlName="establishmentAddressStreet" id="establishmentAddressStreet">
               </app-field>
               <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
                 [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">
                 <input class="form-control" type="text" autocomplete="address-level2"
-                  formControlName="establishmentAddressCity">
+                  formControlName="establishmentAddressCity" id="establishmentAddressCity">
               </app-field>
               <section class="col-md-4 col-xs-12">
                 <app-field label="Province" [isFullWidth]="true">
@@ -129,7 +130,7 @@
                   [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                   errorMessage="Please enter the postal code">
                   <input class="form-control" type="text" autocomplete="postal-code"
-                    formControlName="establishmentAddressPostalCode">
+                    formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode">
                 </app-field>
               </section>
               <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
@@ -142,7 +143,7 @@
                 <app-field label="Parcel Identifier (PID)" [valid]="isValidOrNotTouched('establishmentParcelId')"
                   errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
                   <input type="text" class="form-control" style="width: 200px;"
-                    (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength=9 formControlName="establishmentParcelId">
+                    (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength=9 formControlName="establishmentParcelId" id="establishmentParcelId">
                 </app-field>
               </div>
               <div style="flex: 1; font-size: 11px;">
@@ -177,7 +178,7 @@
                 errorMessage="Please enter an email address">
                 <input type="text" class="form-control" style="width: 200px;" autocomplete="email"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
-                  formControlName="establishmentEmail">
+                  formControlName="establishmentEmail" id="establishmentEmail">
               </app-field>
             </div>
             <div style="flex: 0 0 210px;">
@@ -185,7 +186,7 @@
                 errorMessage="Please enter a phone number ">
                 <input type="text" class="form-control" style="width: 200px;" maxlength="10" autocomplete="tel"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.Reaonly"
-                  (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone">
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" formControlName="establishmentPhone" id="establishmentPhone">
               </app-field>
             </div>
             <p>&nbsp;</p>
@@ -201,7 +202,7 @@
             [showChevrons]="false" [valid]="isValidOrNotTouched('description1')"
             errorMessage="Please enter a description ">
             <textarea formControlName="description1" rows="8" style="width: 100%;" maxlength="5000"
-              minlength="10"></textarea>
+              minlength="10" id="description1"></textarea>
           </app-field>
         </div>
       </section>
@@ -463,35 +464,34 @@
         </section>
       </div>
 
-      <div class="ngtest-photos-renderings"
-      *ngIf="showExteriorRenderings()">
-      <hr>
-      <label for="">Photos or renderings of the store's proposed exterior changes </label>
-      <br>
-      <section>
-        <app-more-less-content>
-          <div less>
-            <ul>
-              <li>Must show that cannabis is not visible from outside the store</li>
-              <li>If submitting photos, the photos must be taken specifically for the purpose of the application (not
-                general/stock images) and must be no more than six months old</li>
-              <li>If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
-                legible)</li>
-            </ul>
-          </div>
-        </app-more-less-content>
-      </section>
+      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings()">
+        <hr>
+        <label for="">Photos or renderings of the store's proposed exterior changes </label>
+        <br>
+        <section>
+          <app-more-less-content>
+            <div less>
+              <ul>
+                <li>Must show that cannabis is not visible from outside the store</li>
+                <li>If submitting photos, the photos must be taken specifically for the purpose of the application (not
+                  general/stock images) and must be no more than six months old</li>
+                <li>If submitting renderings, renderings may be either printed or hand-drawn (as long as they are
+                  legible)</li>
+              </ul>
+            </div>
+          </app-more-less-content>
+        </section>
 
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
-          [enableFileDeletion]="true" [useDocumentTypeForName]="true"
-          fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-          [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
-          (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
-        </app-file-uploader>
-      </section>
-    </div>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Exterior Photos or Renderings"
+            [enableFileDeletion]="true" [useDocumentTypeForName]="true"
+            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+            (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
+          </app-file-uploader>
+        </section>
+      </div>
 
       <!-- Hours of Sale -->
       <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
@@ -621,7 +621,7 @@
           </p>
           <app-field label="Name of Federal Producer " [required]="true" [valid]="true"
             errorMessage="Please enter the name of federal producer">
-            <input class="form-control" formControlName="federalProducerNames" style="width: 350px;" type="text">
+            <input class="form-control" formControlName="federalProducerNames" id="federalProducerNames" style="width: 350px;" type="text">
           </app-field>
         </section>
       </div>
@@ -703,26 +703,50 @@
         <label for="">Supporting Documents</label>
         <br>
         <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Please download the
-          <a *ngIf="account?.businessType === 'SoleProprietor'"
-            href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf="account?.businessType === 'Society'"
-            href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf="account?.businessType === 'IndigenousNation'"
-            href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf="businessTypeIsPartnership()"
-            href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
-            Document Checklist
-          </a>
-          <a *ngIf=" businessTypeIsPrivateCorporation()"
-            href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
-            Document Checklist
-          </a>
+          <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
+          <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/9CC0BA56735E466AB09FEAEE3241F46C" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/9A8C9C2E49564C54A2232E60F5B266DB" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
           <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">and assemble
             all
             required documents.</span>
@@ -793,13 +817,13 @@
         <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
           errorMessage="Please enter the business contact's first name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-            formControlName="contactPersonFirstName">
+            formControlName="contactPersonFirstName" id="contactPersonFirstName">
         </app-field>
 
         <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
           errorMessage="Please enter the business contact's last name">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-            formControlName="contactPersonLastName">
+            formControlName="contactPersonLastName" id="contactPersonLastName">
         </app-field>
 
         <app-field label="Title/ Position" [required]="false" [valid]="true">
@@ -816,7 +840,7 @@
           errorMessage="Please enter the business contact's email address"
           afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
           <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-            formControlName="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+            formControlName="contactPersonEmail" id="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
         </app-field>
       </address>
 
@@ -896,7 +920,7 @@
         <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
           errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
           <section style="display: flex">
-            <input type="checkbox" formControlName="authorizedToSubmit">
+            <input type="checkbox" formControlName="authorizedToSubmit" id="authorizedToSubmit">
             <span class="error-states">*</span>
             <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
             </div>
@@ -914,7 +938,7 @@
           errorMessage="Please affirm that all of the information provided for this application is true and complete."
           [showChevrons]="false">
           <section style="display: flex">
-            <input type="checkbox" formControlName="signatureAgreement">
+            <input type="checkbox" formControlName="signatureAgreement" id="signatureAgreement">
             <span class="error-states">*</span>
             <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
               application is true and complete
@@ -976,7 +1000,7 @@
         <span style="float: right; color: #1a5a96; padding-top: 10px;">
           <span (click)="cancelApplication()">
             <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-            <a href="javascript: void(0)">
+            <a href="javascript: void(0)" id="cancelApp">
               Cancel Application
             </a>
           </span>
@@ -1053,25 +1077,59 @@
       </div>
       <label for="">Supporting Documents</label>
       <br>
-      <p *ngIf="ApplicationTypeNames.Marketer !== application?.applicationType?.name">Please download the
-        <a *ngIf="account?.businessType === 'SoleProprietor'"
-          href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
-          Document Checklist
-        </a>
-        <a *ngIf="account?.businessType === 'Society'"
-          href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
-          Document Checklist
-        </a>
-        <a *ngIf="businessTypeIsPartnership()"
-          href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
-          Document Checklist
-        </a>
-        <a *ngIf=" businessTypeIsPrivateCorporation()"
-          href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
-          Document Checklist
-        </a>
-        and assemble all required documents.
-      </p>
+      <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Please download the
+          <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
+          <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
+            <a *ngIf="account?.businessType === 'SoleProprietor'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'Society'"
+              href="https://www2.gov.bc.ca/assets/download/9CC0BA56735E466AB09FEAEE3241F46C" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="account?.businessType === 'IndigenousNation'"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf="businessTypeIsPartnership()"
+              href="https://www2.gov.bc.ca/assets/download/9A8C9C2E49564C54A2232E60F5B266DB" download target="_blank">
+              Document Checklist
+            </a>
+            <a *ngIf=" businessTypeIsPrivateCorporation()"
+              href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank">
+              Document Checklist
+            </a>
+          </span>
+          <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">and assemble
+            all
+            required documents.</span>
+          <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">and assemble
+            all
+            required documents listed in the 'Documents
+            Related to the Proposed Store' section.</span>
+        </p>
       <section *ngIf="ApplicationTypeNames.Marketer === application?.applicationType?.name">
         <p *ngIf="account?.businessType === 'Society'">
           Please upload the society’s Statement of Directors and Registered Office.

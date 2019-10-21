@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class PolicyDocumentController : ControllerBase
-    {        
+    {
         private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
         private IMemoryCache _cache;
 
         public PolicyDocumentController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
-        {            
+        {
             _cache = memoryCache;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(PolicyDocumentController));
@@ -99,17 +100,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         // Save data in cache.
                         _cache.Set(cacheKey, PolicyDocuments, cacheEntryOptions);
                         _cache.Set(cacheAgeKey, DateTimeOffset.Now, cacheEntryOptions);
-                    }                    
+                    }
 
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException httpOperationException)
                 {
                     // this will gracefully handle situations where Dynamics is not available however we have a cache version.
-                    _logger.LogError("Error getting policy documents by category");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error getting policy documents by category");
                 }
                 catch (Exception e)
                 {
@@ -130,7 +127,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new JsonResult(PolicyDocuments);
             }
 
-            
+
         }
 
         /// <summary>
@@ -192,20 +189,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         _logger.LogError($"Unable to get Policy Document {slug} - does it exist?");
                     }
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException httpOperationException)
                 {
                     // this will gracefully handle situations where Dynamics is not available however we have a cache version.
-                    _logger.LogError("Error getting policy document");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error getting policy document");
                 }
                 catch (Exception e)
                 {
                     // unexpected exception
-                    _logger.LogError("Unknown error occured");
-                    _logger.LogError(e.Message);
+                    _logger.LogError(e, "Unknown error occured");
                 }
             }
 
@@ -216,7 +208,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             else
             {
                 return new JsonResult(policyDocument.ToViewModel());
-            }            
+            }
         }
     }
 }
