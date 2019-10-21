@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     [Authorize]
     public class PreviousAddressController : ControllerBase
-    {        
+    {
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
         public PreviousAddressController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
-        {            
+        {
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(PreviousAddressController));
@@ -45,7 +46,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 // query the Dynamics system to get the Address record.
                 List<MicrosoftDynamicsCRMadoxioPreviousaddress> addresses = _dynamicsClient.GetPreviousAddressByContactId(contactId);
-                addresses.Sort((a, b) => {
+                addresses.Sort((a, b) =>
+                {
                     var res = 0;
                     if (a.AdoxioFromdate < b.AdoxioFromdate)
                     {
@@ -101,13 +103,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 await _dynamicsClient.Previousaddresses.UpdateAsync(id, patchAddress);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating Address");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(httpOperationException, "Error updating Address");
             }
 
             Address = await _dynamicsClient.GetPreviousAddressById(id);
@@ -134,15 +132,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 address = _dynamicsClient.Previousaddresses.Create(address);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error creating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(httpOperationException, "Error creating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
 
@@ -159,15 +153,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 await _dynamicsClient.Previousaddresses.UpdateAsync(address.AdoxioPreviousaddressid, patchAddress);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(httpOperationException, "Error updating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
             return new JsonResult(address.ToViewModel());

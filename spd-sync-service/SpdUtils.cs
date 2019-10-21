@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.SpdSync
             {
                 result = _dynamics.Spddatarows.Get(filter: filter).Value.ToList();
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 hangfireContext.WriteLine("Error getting SPD data rows");
                 hangfireContext.WriteLine("Request:");
@@ -171,7 +171,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                                 _dynamics.Spddatarows.Update(row.AdoxioSpddatarowid, patchApplication);
                             }
                         }
-                        catch (OdataerrorException odee)
+                        catch (HttpOperationException odee)
                         {
                             hangfireContext.WriteLine("Error updating application");
                             hangfireContext.WriteLine("Request:");
@@ -271,7 +271,7 @@ namespace Gov.Lclb.Cllb.SpdSync
                                 {
                                     _dynamics.Personalhistorysummaries.Update(record.AdoxioPersonalhistorysummaryid, patchRecord);
                                 }
-                                catch (OdataerrorException odee)
+                                catch (HttpOperationException odee)
                                 {
                                     hangfireContext.WriteLine("Error updating worker personal history");
                                     hangfireContext.WriteLine("Request:");

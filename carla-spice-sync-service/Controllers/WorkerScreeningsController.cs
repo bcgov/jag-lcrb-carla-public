@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         /// <returns></returns>
         [HttpPost("send/{workerIdString}")]
         [AllowAnonymous]
-        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString, string bearer)
+        public ActionResult SendWorkerScreeningRequest(string workerIdString, string bearer)
         {
             if (JwtChecker.Check(bearer, Configuration))
             {

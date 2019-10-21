@@ -2,8 +2,6 @@
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -49,6 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.middlename = contact.Middlename;
                 result.lastname = contact.Lastname;
                 result.telephone1 = contact.Telephone1;
+                result.Birthdate = contact.Birthdate;
                 result.BirthPlace = contact.AdoxioBirthplace;
                 result.Gender = (ViewModels.Gender?)contact.AdoxioGendercode;
                 result.MobilePhone = contact.Mobilephone;
@@ -309,8 +308,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSecondaryidnumber = from.SecondaryIdNumber;
             to.AdoxioIsworker = from.IsWorker;
             to.AdoxioSelfdisclosure = from.SelfDisclosure;
-            to.AdoxioIdentificationtype= (int?)from.PrimaryIdentificationType;
-            to.AdoxioSecondaryidentificationtype= (int?)from.SecondaryIdentificationType;
+            to.AdoxioIdentificationtype = (int?)from.PrimaryIdentificationType;
+            to.AdoxioSecondaryidentificationtype = (int?)from.SecondaryIdentificationType;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)

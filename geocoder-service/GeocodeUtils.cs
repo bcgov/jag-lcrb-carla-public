@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.GeoCoder;
@@ -11,6 +12,7 @@ using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -36,6 +38,28 @@ namespace Gov.Lclb.Cllb.Geocoder
             _geocoder = GeocoderSetupUtil.SetupGeocoder(Configuration);
         }
 
+        public string SanitizeStreetAddress (string address)
+        {
+            string result = null;
+            if (address != null)
+            {
+                // check for spaces between unit number and street address.
+                Regex regex = new Regex(@"\s*(\d+)\s*-\s*(\d+)\s*(.*)");
+                Match match = regex.Match(address);
+                if (match.Success)
+                {
+                    // Groups is indexed at 1.
+                    result = $"{match.Groups[1].Value}-{match.Groups[2].Value} {match.Groups[3].Value}";
+                }
+                else
+                {
+                    result = address;
+                }
+            }            
+
+            return result;
+        }
+
         /// <summary>
         /// Hangfire job to check for and send recent licences
         /// </summary>
@@ -56,6 +80,7 @@ namespace Gov.Lclb.Cllb.Geocoder
         {
             if (establishment != null && ! string.IsNullOrEmpty(establishment.AdoxioAddresscity) )
             {
+                string streetAddress = SanitizeStreetAddress(establishment.AdoxioAddressstreet);
                 string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
                 // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
                 var output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
@@ -92,7 +117,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                     _logger.LogInformation($"Updated establishment with address {address}");
                     hangfireContext.WriteLine($"Updated establishment with address {address}");
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException odee)
                 {
                     if (hangfireContext != null)
                     {
@@ -132,7 +157,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                 string filter = $"adoxio_longitude eq null";
                 result = _dynamics.Establishments.Get().Value;
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 if (hangfireContext != null)
                 {

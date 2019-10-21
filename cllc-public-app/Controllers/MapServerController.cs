@@ -5,7 +5,6 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -15,13 +14,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     // public API
     public class MapServerController : ControllerBase
-    {        
-        private readonly IHostingEnvironment _env;
+    {
+        private readonly IWebHostEnvironment _env;
         private readonly IMemoryCache _cache;
 
         string _mapserver;
         HttpClient _client;
-        public MapServerController(IConfiguration configuration, IHostingEnvironment env, IMemoryCache memoryCache)
+        public MapServerController(IConfiguration configuration, IWebHostEnvironment env, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _client = new HttpClient();
@@ -35,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string urlString = _mapserver
                 + Request.QueryString.ToUriComponent();
-            
+
 
             // get the content.
             var client = new HttpClient();
@@ -52,9 +51,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("tile/{a}/{b}/{c}")]
         public async Task<ActionResult> MapServer(string a, string b, string c)
         {
-            string cacheKey = "TILE_" + a + "_" + b + "_" + c;            
+            string cacheKey = "TILE_" + a + "_" + b + "_" + c;
             byte[] result;
-            
+
             if (!_cache.TryGetValue(cacheKey, out result))
             {
                 string urlString = _mapserver
@@ -72,9 +71,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // Save data in cache.
                 _cache.Set(cacheKey, result, cacheEntryOptions);
-            }                
+            }
 
-            return File( result, "image/jpeg");            
+            return File(result, "image/jpeg");
         }
 
     }

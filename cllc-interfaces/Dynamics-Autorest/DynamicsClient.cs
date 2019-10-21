@@ -97,6 +97,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAreas Areas { get; private set; }
 
         /// <summary>
+        /// Gets the IAuditlogrequests.
+        /// </summary>
+        public virtual IAuditlogrequests Auditlogrequests { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessaccounts.
         /// </summary>
         public virtual IBusinessaccounts Businessaccounts { get; private set; }
@@ -232,6 +237,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvestigationactivities Investigationactivities { get; private set; }
 
         /// <summary>
+        /// Gets the IInvestigationreactivationhistories.
+        /// </summary>
+        public virtual IInvestigationreactivationhistories Investigationreactivationhistories { get; private set; }
+
+        /// <summary>
         /// Gets the IInvestigations.
         /// </summary>
         public virtual IInvestigations Investigations { get; private set; }
@@ -255,6 +265,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypesapplicationtypesset.
         /// </summary>
         public virtual ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; private set; }
+
+        /// <summary>
+        /// Gets the ILicenseechangelogs.
+        /// </summary>
+        public virtual ILicenseechangelogs Licenseechangelogs { get; private set; }
 
         /// <summary>
         /// Gets the ILoans.
@@ -367,26 +382,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvoices Invoices { get; private set; }
 
         /// <summary>
-        /// Gets the IMsdynapplicationknowledgearticleset.
-        /// </summary>
-        public virtual IMsdynapplicationknowledgearticleset Msdynapplicationknowledgearticleset { get; private set; }
-
-        /// <summary>
-        /// Gets the IMsdynapplicationknowledgebaserecset.
-        /// </summary>
-        public virtual IMsdynapplicationknowledgebaserecset Msdynapplicationknowledgebaserecset { get; private set; }
-
-        /// <summary>
-        /// Gets the IMsdynlicencetypeknowledgearticleset.
-        /// </summary>
-        public virtual IMsdynlicencetypeknowledgearticleset Msdynlicencetypeknowledgearticleset { get; private set; }
-
-        /// <summary>
-        /// Gets the IMsdynlicencetypeknowledgebaserecset.
-        /// </summary>
-        public virtual IMsdynlicencetypeknowledgebaserecset Msdynlicencetypeknowledgebaserecset { get; private set; }
-
-        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         public virtual ISavedqueries Savedqueries { get; private set; }
@@ -400,6 +395,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         public virtual ISharepointsites Sharepointsites { get; private set; }
+
+        /// <summary>
+        /// Gets the IEntitydefinitions.
+        /// </summary>
+        public virtual IEntitydefinitions Entitydefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IGlobaloptionsetdefinitions.
+        /// </summary>
+        public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -653,6 +658,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypes = new Applicationtypes(this);
             Areas = new Areas(this);
+            Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
             Cannabisinventoryreports = new Cannabisinventoryreports(this);
             Cannabismonthlyreports = new Cannabismonthlyreports(this);
@@ -680,11 +686,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             Inspectorcommentsrollups = new Inspectorcommentsrollups(this);
             Interests = new Interests(this);
             Investigationactivities = new Investigationactivities(this);
+            Investigationreactivationhistories = new Investigationreactivationhistories(this);
             Investigations = new Investigations(this);
             Legalentities = new Legalentities(this);
             Licenceses = new Licenceses(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
+            Licenseechangelogs = new Licenseechangelogs(this);
             Loans = new Loans(this);
             Localgovindigenousnations = new Localgovindigenousnations(this);
             Personalhistorysummaries = new Personalhistorysummaries(this);
@@ -707,13 +715,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             Workers = new Workers(this);
             Contacts = new Contacts(this);
             Invoices = new Invoices(this);
-            Msdynapplicationknowledgearticleset = new Msdynapplicationknowledgearticleset(this);
-            Msdynapplicationknowledgebaserecset = new Msdynapplicationknowledgebaserecset(this);
-            Msdynlicencetypeknowledgearticleset = new Msdynlicencetypeknowledgearticleset(this);
-            Msdynlicencetypeknowledgebaserecset = new Msdynlicencetypeknowledgebaserecset(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
+            Entitydefinitions = new Entitydefinitions(this);
+            Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             BaseUri = new System.Uri("https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2");
             SerializationSettings = new JsonSerializerSettings
             {

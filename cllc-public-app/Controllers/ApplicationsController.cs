@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class ApplicationsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;        
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
 
         public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;            
+            _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
         }
@@ -148,7 +149,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     result = _dynamicsClient.Applications.Get(filter: filter).Value.Count;
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
                     result = 0;
                 }
@@ -271,13 +272,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     location = _dynamicsClient.Sharepointdocumentlocations.Create(newRecord);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError("Error creating document location");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error creating document location");
                 }
             }
 
@@ -314,8 +311,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 // set license type relationship 
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
-                adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+                if (!string.IsNullOrEmpty(item.LicenseType))
+                {
+                    var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName(item.LicenseType);
+                    adoxioApplication.AdoxioLicenceTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_licencetypes", adoxioLicencetype.AdoxioLicencetypeid);
+                }
 
                 // set account relationship
                 adoxioApplication.AdoxioApplicantODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
@@ -338,9 +338,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // create application
                 adoxioApplication = _dynamicsClient.Applications.Create(adoxioApplication);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                string applicationId = _dynamicsClient.GetCreatedRecord(odee, null);
+                string applicationId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                 if (!string.IsNullOrEmpty(applicationId) && Guid.TryParse(applicationId, out Guid applicationGuid))
                 {
                     adoxioApplication = await _dynamicsClient.GetApplicationById(applicationGuid);
@@ -348,13 +348,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else
                 {
 
-                    _logger.LogError("Error creating application");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error creating application");
                     // fail if we can't create.
-                    throw (odee);
+                    throw (httpOperationException);
                 }
 
             }
@@ -395,20 +391,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 catch (SharePointRestException spre)
                 {
-                    _logger.LogError("Error creating Sharepoint Folder");
-                    _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
-                    _logger.LogError($"FolderName is: {folderName}");
-                    _logger.LogError($"Request is: {spre.Request.Content}");
-                    _logger.LogError($"Response is: {spre.Response.Content}");
-                    _logger.LogError($"Error is: {spre.Message} {spre.StackTrace}");
+                    _logger.LogError(spre, "Error creating Sharepoint Folder");
                     throw spre;
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError("Error creating Sharepoint Folder");
-                    _logger.LogError($"List is: {ApplicationDocumentUrlTitle}");
-                    _logger.LogError($"FolderName is: {folderName}");
-                    _logger.LogError($"Error is: {e.Message} {e.StackTrace}");
+                    _logger.LogError(e, "Error creating Sharepoint Folder");
                     throw e;
                 }
 
@@ -427,20 +415,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                string mdcsdlId = _dynamicsClient.GetCreatedRecord(odee, null);
+                string mdcsdlId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
                 if (!string.IsNullOrEmpty(mdcsdlId))
                 {
                     mdcsdl.Sharepointdocumentlocationid = mdcsdlId;
                 }
                 else
                 {
-                    _logger.LogError("Error creating SharepointDocumentLocation");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error creating SharepointDocumentLocation");
                     mdcsdl = null;
                 }
 
@@ -459,13 +443,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocation);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError("Error adding reference SharepointDocumentLocation to application");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error adding reference SharepointDocumentLocation to application");
                 }
 
                 string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
@@ -478,13 +458,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     _dynamicsClient.Applications.AddReference(adoxioApplication.AdoxioApplicationid, "adoxio_application_SharePointDocumentLocations", oDataId);
                 }
-                catch (OdataerrorException odee)
+                catch (HttpOperationException httpOperationException)
                 {
-                    _logger.LogError("Error adding reference to SharepointDocumentLocation");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
+                    _logger.LogError(httpOperationException, "Error adding reference to SharepointDocumentLocation");
                 }
             }
         }
@@ -527,7 +503,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (!string.IsNullOrEmpty(item.IndigenousNationId))
                 {
                     adoxioApplication.AdoxioLocalgovindigenousnationidODataBind = _dynamicsClient.GetEntityURI("adoxio_localgovindigenousnations", item.IndigenousNationId);
-                } else
+                }
+                else
                 {
                     //remove reference
                     await _dynamicsClient.Applications.DeleteReferenceAsync(item.Id, "adoxio_localgovindigenousnationid");
@@ -535,15 +512,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 _dynamicsClient.Applications.Update(id, adoxioApplication);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error updating application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(httpOperationException, "Error updating application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
             adoxioApplication = await _dynamicsClient.GetApplicationById(adoxio_applicationId);
@@ -584,15 +557,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 _dynamicsClient.Applications.Update(id, patchRecord);
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError("Error cancelling application");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
+                _logger.LogError(httpOperationException, "Error cancelling application");
                 // fail if we can't create.
-                throw (odee);
+                throw (httpOperationException);
             }
 
 

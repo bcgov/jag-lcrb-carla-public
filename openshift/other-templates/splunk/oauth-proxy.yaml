@@ -1,0 +1,74 @@
+kind: List
+apiVersion: v1
+items:
+# Create a proxy service account and ensure it will use the route "proxy"
+- apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: splunk-proxy
+    annotations:
+      serviceaccounts.openshift.io/oauth-redirectreference.primary: '{"kind":"OAuthRedirectReference","apiVersion":"v1","reference":{"kind":"Route","name":"splunk-proxy"}}'
+# Create a secure connection to the proxy via a route
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: splunk-proxy
+  spec:
+    to:
+      kind: Service
+      name: splunk-proxy
+    tls:
+      termination: Reencrypt
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: splunk-proxy
+    annotations:
+      service.alpha.openshift.io/serving-cert-secret-name: proxy-tls
+  spec:
+    ports:
+    - name: splunk-proxy
+      port: 443
+      targetPort: 8443
+    selector:
+      app: splunk-proxy
+# Launch a proxy as a sidecar
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: splunk-proxy
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: splunk-proxy
+    template:
+      metadata:
+        labels:
+          app: splunk-proxy
+      spec:
+        serviceAccountName: splunk-proxy
+        containers:
+        - name: oauth-proxy
+          image: openshift/oauth-proxy:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+          - containerPort: 8443
+            name: public
+          args:
+          - --https-address=:8443
+          - --provider=openshift
+          - --openshift-service-account=splunk-proxy
+          - --upstream=http://localhost:8000
+          - --tls-cert=/etc/tls/private/tls.crt
+          - --tls-key=/etc/tls/private/tls.key
+          - --cookie-secret=SECRET
+          volumeMounts:
+          - mountPath: /etc/tls/private
+            name: proxy-tls
+            
+        volumes:
+        - name: proxy-tls
+          secret:
+            secretName: proxy-tls
+        

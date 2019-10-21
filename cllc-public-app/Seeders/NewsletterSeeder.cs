@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using Gov.Lclb.Cllb.Public.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Interfaces;
+using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Public.Seeders
 {
@@ -14,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
     {
         private readonly string[] _profileTriggers = { AllProfiles };
 
-        public NewsletterSeeder(IConfiguration configuration, IHostingEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient) 
+        public NewsletterSeeder(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
             : base(configuration, env, loggerFactory, dynamicsClient)
         { }
 
@@ -23,7 +24,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         protected override void Invoke(AppDbContext context)
         {
             UpdateNewsletters(context);
-            
+
         }
 
         private void UpdateNewsletters(AppDbContext context)
@@ -32,10 +33,10 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
             foreach (Newsletter Newsletter in seedNewsletters)
             {
-                context.UpdateSeedNewsletterInfo(Newsletter);                
+                context.UpdateSeedNewsletterInfo(Newsletter);
             }
 
-            AddInitialNewsletters(context);            
+            AddInitialNewsletters(context);
         }
 
         private void AddInitialNewsletters(AppDbContext context)
@@ -44,7 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             if (string.IsNullOrEmpty(NewsletterInitializationFile))
             {
                 // default to sample data, which is stored in the "SeedData" directory.
-                NewsletterInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "Newsletters.json"); 
+                NewsletterInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "Newsletters.json");
             }
             context.AddInitialNewslettersFromFile(NewsletterInitializationFile);
         }
@@ -61,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
             {
                 Newsletters.AddRange(GetDevNewsletters());
             }
-                
+
 
             return Newsletters;
         }
@@ -79,7 +80,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
         /// </summary>
         private List<Newsletter> GetDevNewsletters()
         {
-            return new List<Newsletter>();            
+            return new List<Newsletter>();
         }
 
         /// <summary>

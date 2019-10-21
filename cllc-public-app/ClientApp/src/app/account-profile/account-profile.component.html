@@ -69,7 +69,7 @@
 
             <section *ngIf="['Partnership', 'Sole Proprietor'].indexOf(getBusinessTypeName()) == -1 && getBusinessTypeName() !== 'Indigenous Nation'">
               <div [ngClass]="{'has-error': false}">
-                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">B.C. Incorporation
+                <label *ngIf="['Corporation'].indexOf(getBusinessTypeName()) !== -1" for="">Incorporation
                   Number</label>
                 <label *ngIf="getBusinessTypeName() == 'Society'" for="">B.C. Society
                   Incorporation Number</label>
@@ -273,7 +273,7 @@
             <a routerLink="/dashboard">
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">
+              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont" id="continueToApp">
                 <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
                 <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
                 <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>&nbsp;

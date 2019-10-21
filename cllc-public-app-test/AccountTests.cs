@@ -87,12 +87,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             account.Accountid = id.ToString();
 
             // get legal entity record for account
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal(id.ToString(), legalentityViewModel.account.id);
 
             // U - Update            
@@ -200,12 +200,12 @@ namespace Gov.Lclb.Cllb.Public.Test
                 account.Accountid = id.ToString();
 
                 // get legal entity record for account
-                request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+                request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
                 response = await _client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
 
                 jsonString = await response.Content.ReadAsStringAsync();
-                ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+                ViewModels.LegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
                 Assert.Equal(id.ToString(), legalentityViewModel.account.id);
 
                 // U - Update            
@@ -307,12 +307,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             account.Accountid = id.ToString();
 
             // get legal entity record for account
-            request = new HttpRequestMessage(HttpMethod.Get, "/api/adoxiolegalentity/applicant");
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
-            ViewModels.AdoxioLegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.AdoxioLegalEntity>(jsonString);
+            ViewModels.LegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal(id.ToString(), legalentityViewModel.account.id);
 
             // U - Update            

@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), MicrosoftDynamicsCRMLabel label = default(MicrosoftDynamicsCRMLabel), MicrosoftDynamicsCRMLabel description = default(MicrosoftDynamicsCRMLabel), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?))
+        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), object label = default(object), object description = default(object), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
             Value = value;
             Label = label;
@@ -52,12 +52,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Label")]
-        public MicrosoftDynamicsCRMLabel Label { get; set; }
+        public object Label { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Description")]
-        public MicrosoftDynamicsCRMLabel Description { get; set; }
+        public object Description { get; set; }
 
         /// <summary>
         /// </summary>

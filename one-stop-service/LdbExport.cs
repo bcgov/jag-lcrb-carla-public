@@ -3,6 +3,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Rest;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,7 +47,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value.ToList();
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 hangfireContext.WriteLine("Error getting Licence data rows");
                 hangfireContext.WriteLine("Request:");
@@ -235,7 +236,7 @@ namespace Gov.Lclb.Cllb.OneStopService
                 var expand = new List<string> { "adoxio_Licencee", "adoxio_establishment" };
                 result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             }
-            catch (OdataerrorException odee)
+            catch (HttpOperationException odee)
             {
                 hangfireContext.WriteLine("Error getting Licence");
                 hangfireContext.WriteLine("Request:");

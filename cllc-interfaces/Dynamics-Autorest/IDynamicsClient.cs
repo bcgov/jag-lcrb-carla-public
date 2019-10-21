@@ -94,6 +94,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAreas Areas { get; }
 
         /// <summary>
+        /// Gets the IAuditlogrequests.
+        /// </summary>
+        IAuditlogrequests Auditlogrequests { get; }
+
+        /// <summary>
         /// Gets the IBusinessaccounts.
         /// </summary>
         IBusinessaccounts Businessaccounts { get; }
@@ -229,6 +234,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvestigationactivities Investigationactivities { get; }
 
         /// <summary>
+        /// Gets the IInvestigationreactivationhistories.
+        /// </summary>
+        IInvestigationreactivationhistories Investigationreactivationhistories { get; }
+
+        /// <summary>
         /// Gets the IInvestigations.
         /// </summary>
         IInvestigations Investigations { get; }
@@ -252,6 +262,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILicencetypesapplicationtypesset.
         /// </summary>
         ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; }
+
+        /// <summary>
+        /// Gets the ILicenseechangelogs.
+        /// </summary>
+        ILicenseechangelogs Licenseechangelogs { get; }
 
         /// <summary>
         /// Gets the ILoans.
@@ -364,26 +379,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IInvoices Invoices { get; }
 
         /// <summary>
-        /// Gets the IMsdynapplicationknowledgearticleset.
-        /// </summary>
-        IMsdynapplicationknowledgearticleset Msdynapplicationknowledgearticleset { get; }
-
-        /// <summary>
-        /// Gets the IMsdynapplicationknowledgebaserecset.
-        /// </summary>
-        IMsdynapplicationknowledgebaserecset Msdynapplicationknowledgebaserecset { get; }
-
-        /// <summary>
-        /// Gets the IMsdynlicencetypeknowledgearticleset.
-        /// </summary>
-        IMsdynlicencetypeknowledgearticleset Msdynlicencetypeknowledgearticleset { get; }
-
-        /// <summary>
-        /// Gets the IMsdynlicencetypeknowledgebaserecset.
-        /// </summary>
-        IMsdynlicencetypeknowledgebaserecset Msdynlicencetypeknowledgebaserecset { get; }
-
-        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         ISavedqueries Savedqueries { get; }
@@ -397,6 +392,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         ISharepointsites Sharepointsites { get; }
+
+        /// <summary>
+        /// Gets the IEntitydefinitions.
+        /// </summary>
+        IEntitydefinitions Entitydefinitions { get; }
+
+        /// <summary>
+        /// Gets the IGlobaloptionsetdefinitions.
+        /// </summary>
+        IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
 
     }
 }
