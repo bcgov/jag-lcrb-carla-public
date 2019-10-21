@@ -147,22 +147,23 @@
           <ul class="navbar-nav">
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank"
-                title="Goes to BC Gov Disclaimer Page">Disclaimer</a>
+                 title="Goes to BC Gov Disclaimer Page">Disclaimer</a>
             </li>
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank"
-                title="Goes to BC Gov Privacy Page">Privacy</a>
+                 title="Goes to BC Gov Privacy Page">Privacy</a>
             </li>
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank"
-                title="Goes to BC Gov Accessibility Page">Accessibility</a>
+                 title="Goes to BC Gov Accessibility Page">Accessibility</a>
             </li>
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank"
-                title="Goes to BC Gov Copyright Page">Copyright</a>
+                 title="Goes to BC Gov Copyright Page">Copyright</a>
             </li>
           </ul>
         </div>
+        <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()" class="nav-link version-info">{{versionInfo.fileVersion}}</a>        
       </nav>
     </footer>
   </div>

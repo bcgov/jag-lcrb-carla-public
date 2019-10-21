@@ -159,6 +159,8 @@ import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { ProductInventoryPackagedComponent } from './shared/product-inventory-packaged/product-inventory-packaged.component';
 import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.component';
+import { VersionInfoDataService } from './services/version-info-data.service';
+import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
 
 
 @NgModule({
@@ -240,7 +242,8 @@ import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.comp
     ApplicationAndLicenceFeeComponent,
     ApplicationOwnershipTransferComponent,
     ProductInventoryPackagedComponent,
-    LicenseeTreeComponent
+    LicenseeTreeComponent,
+    VersionInfoDialogComponent
   ],
   imports: [
     ChartsModule,
@@ -366,6 +369,7 @@ import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.comp
     Title,
     UserDataService,
     VoteDataService,
+    VersionInfoDataService,
     WorkerDataService,
     {
       provide: APP_INITIALIZER,
@@ -382,6 +386,7 @@ import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.comp
     KeyPersonnelDialogComponent,
     WorkerHomeDialogComponent,
     ShareholderDialogComponent,
+    VersionInfoDialogComponent
   ],
   bootstrap: [AppComponent]
 })
