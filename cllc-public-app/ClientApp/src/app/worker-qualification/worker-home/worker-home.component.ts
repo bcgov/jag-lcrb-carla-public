@@ -16,7 +16,7 @@ export class WorkerHomeComponent implements OnInit, AfterViewInit {
 
   policySlug = 'worker-qualification-training';
   currentSlug = this.policySlug;
-  @ViewChild('policyDocs') policyDocs: PolicyDocumentComponent;
+  @ViewChild('policyDocs', { static: true }) policyDocs: PolicyDocumentComponent;
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private ref: ChangeDetectorRef) {
     this.route.data.pipe(
       filter(data => !!data && !!data.slug))

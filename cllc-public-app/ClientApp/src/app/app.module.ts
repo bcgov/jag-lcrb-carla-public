@@ -2,8 +2,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -82,7 +80,6 @@ import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsl
 import { NewsletterDataService } from './services/newsletter-data.service';
 import { UserDataService } from './services/user-data.service';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './account-profile/tabs/corporate-details/corporate-details.component';
 import {
@@ -261,7 +258,6 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     BrowserAnimationsModule,
     BrowserModule,
     CdkTableModule,
-    FileDropModule,
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,
@@ -299,7 +295,6 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     MatTooltipModule,
     MatTreeModule,
     NgBusyModule,
-    NgbModule.forRoot(),
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -314,7 +309,6 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     BrowserAnimationsModule,
     BrowserModule,
     CdkTableModule,
-    FileDropModule,
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,
@@ -351,7 +345,6 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     MatTooltipModule,
     MatTreeModule,
     MatStepperModule,
-    NgbModule,
     ReactiveFormsModule
   ],
   providers: [
@@ -363,12 +356,10 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     BCeidAuthGuard,
     CanDeactivateGuard,
     ContactDataService,
-    CookieService,
     DynamicsDataService,
     GeneralDataService,
     InsertService,
     NewsletterDataService,
-    NgbDropdown,
     PaymentDataService,
     PolicyDocumentDataService,
     PreviousAddressDataService,

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { debounce, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog } from '@models/legal-entity-change.model';
