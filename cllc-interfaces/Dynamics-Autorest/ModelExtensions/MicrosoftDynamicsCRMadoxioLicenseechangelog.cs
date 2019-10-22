@@ -8,8 +8,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
     public partial class MicrosoftDynamicsCRMadoxioLicenseechangelog
     {
-        [JsonProperty(PropertyName = "adoxio_LegalEntity@odata.bind")]
-        public string LegalEntityOdataBind { get; set; }
+        [JsonProperty(PropertyName = "adoxio_LegalEntityId@odata.bind")]
+        public string LegalEntityIdOdataBind { get; set; }
 
         [JsonProperty(PropertyName = "adoxio_Application@odata.bind")]
         public string ApplicationOdataBind { get; set; }
