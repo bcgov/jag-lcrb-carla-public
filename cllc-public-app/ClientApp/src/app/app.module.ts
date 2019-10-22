@@ -98,7 +98,6 @@ import { ConnectionToProducersComponent } from './account-profile/tabs/connectio
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 
-import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
@@ -298,13 +297,11 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     NgBusyModule,
     NgxFileDropModule,
     ReactiveFormsModule,
-    BsDatepickerModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument
       ({
         maxAge: 5
-      }),
-    AlertModule.forRoot()
+      })
   ],
   exports: [
     AppRoutingModule,
