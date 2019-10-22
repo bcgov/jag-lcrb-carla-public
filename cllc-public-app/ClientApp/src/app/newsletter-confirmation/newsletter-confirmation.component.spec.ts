@@ -6,6 +6,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { NewsletterDataService } from '@services/newsletter-data.service';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { ActivatedRoute, Router } from '@angular/router';
+import { of } from 'rxjs/internal/observable/of';
 
 let component: NewsletterConfirmationComponent;
 let fixture: ComponentFixture<NewsletterConfirmationComponent>;
@@ -20,7 +21,7 @@ describe('newsletter-confirmation component', () => {
             providers: [
                 { provide: ComponentFixtureAutoDetect, useValue: true },
                 { provide: Router, useValue: routerSpy },
-                { provide: NewsletterDataService, useValue: {} },
+                { provide: NewsletterDataService, useValue: { verifyCode: () => of('')} },
                 { provide: ActivatedRoute, useValue: activatedRouteStub }
             ],
             schemas: [NO_ERRORS_SCHEMA]
@@ -29,7 +30,7 @@ describe('newsletter-confirmation component', () => {
         component = fixture.componentInstance;
     }));
 
-    it('should do something', async(() => {
+    it('should do create', async(() => {
         expect(true).toEqual(true);
     }));
 });
