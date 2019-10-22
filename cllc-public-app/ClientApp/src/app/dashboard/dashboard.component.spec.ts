@@ -1,16 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
-import { Component, Input } from '@angular/core';
+import { Component, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { StoreModule, Store } from '@ngrx/store';
 import { reducers, metaReducers } from '@app/app-state/reducers/reducers';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '../app-state/models/app-state';
 import { AssociateContentComponent } from '../associate-content/associate-content.component';
 import { Account } from '@models/account.model';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { ApplicationDataService } from '@services/application-data.service';
+import { of } from 'rxjs/internal/observable/of';
 
 
-@Component({selector: 'app-applications-and-licences', template: ''})
+@Component({ selector: 'app-applications-and-licences', template: '' })
 class ApplicationsAndLicencesComponent {
   @Input() account: any;
 }
@@ -35,10 +40,14 @@ describe('DashboardComponent', () => {
         StoreModule.forRoot(reducers, { metaReducers }),
       ],
       declarations: [DashboardComponent, AssociateContentComponent, ApplicationsAndLicencesComponent],
-
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        provideMockStore({ initialState })
-        ]
+        provideMockStore({ initialState }),
+        { provide: Router, useValue: {} },
+        { provide: ApplicationDataService, useValue: {} },
+        { provide: LegalEntityDataService, useValue: { getCurrentHierachy: () => of({}) } },
+        { provide: MatSnackBar, useValue: {} }
+      ]
     })
       .compileComponents();
 
