@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "@app*": ["app/*"],
       "@models*": ["app/models*"],
       "@services*": ["app/services*"],
-      "@shared*": ["app/shared*"]
+      "@shared*": ["app/shared*"],
+      "@app*": ["app*"]
     }
   }
 }

@@ -118,7 +118,7 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run builduat -- --prod" Condition="'$(UAT_BUILD)' == '1'" />
 	<Exec WorkingDirectory="$(SpaRoot)" Command="npm run buildprod -- --prod" Condition="'$(PROD_BUILD)' == '1'" />
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
-
++
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
