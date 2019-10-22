@@ -11,7 +11,7 @@ import { TransferAccount, Account } from '@models/account.model';
   styleUrls: ['./account-picker.component.scss']
 })
 export class AccountPickerComponent implements OnInit {
-  @ViewChild('autocomplete', { read: MatAutocompleteTrigger }) inputAutoComplit: MatAutocompleteTrigger;
+  @ViewChild('autocomplete', { read: MatAutocompleteTrigger, static: true }) inputAutoComplit: MatAutocompleteTrigger;
   @Output() valueSelected: EventEmitter<string> = new EventEmitter<string>();
   form: FormGroup;
   autocompleteAccounts: any[];

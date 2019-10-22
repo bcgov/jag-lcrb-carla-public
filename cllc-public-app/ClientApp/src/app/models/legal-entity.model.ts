@@ -19,6 +19,7 @@ export class LegalEntity {
   partnerType: string;
   isOwner: boolean;
   isKeyPersonnel: boolean;
+  isTrustee: boolean;
   dateofbirth: Date;
   interestpercentage: number;
   commonvotingshares: number;
@@ -26,7 +27,7 @@ export class LegalEntity {
   commonnonvotingshares: number;
   preferrednonvotingshares: number;
   account: Account;
-  relatedentities: LegalEntity[];
+  children: LegalEntity[];
   email: string;
   dateofappointment: Date;
   dateIssued: Date;
