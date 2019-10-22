@@ -6,6 +6,11 @@ $bootstrap-sass-asset-helper: true;
     color: #fff;
 }
 
+.version-info {
+  float: right;
+  margin-top: 10px;
+}
+
 @media (max-width: 575.98px) {
     .title {
         font-size: 20px;
