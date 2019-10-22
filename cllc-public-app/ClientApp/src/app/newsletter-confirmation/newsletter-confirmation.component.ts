@@ -20,10 +20,9 @@ export class NewsletterConfirmationComponent implements OnInit {
   /** newsletter-confirmation ctor */
   constructor(private newsletterDataService: NewsletterDataService, private route: ActivatedRoute,
     private router: Router) {
-    this.route.paramMap.subscribe(params => this.slug = params.get('slug'));
-    this.route.paramMap.subscribe(params => {
-      this.code = params.get('code');
-    });
+      this.route.paramMap.subscribe(params => this.slug = params.get('slug'));
+      this.route.queryParamMap.subscribe(params => this.code = params.get('code'));
+    
   }
 
   ngOnInit(): void {
