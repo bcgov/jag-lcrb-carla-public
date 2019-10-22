@@ -1,142 +1,357 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, merge } from 'rxjs';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { CollectionViewer, SelectionChange } from '@angular/cdk/collections';
-import { map } from 'rxjs/operators';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app-state/models/app-state';
+import { Account } from '@models/account.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { LicenseeChangeLog, LicenseeChangeType } from '@models/legal-entity-change.model';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { MatDialog } from '@angular/material';
+import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
+import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
+import { filter, takeWhile } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { ApplicationDataService } from '@services/application-data.service';
+import { FormBase } from '@shared/form-base';
+import { Application } from '@models/application.model';
+import { forkJoin } from 'rxjs';
 
-
-
-
-export class DynamicFlatNode {
-  constructor(public item: string, public level = 1, public expandable = false,
-    public isLoading = false) { }
-}
-
-/**
- * Database for dynamic data. When expanding a node in the tree, the data source will need to fetch
- * the descendants data from the database.
- */
-export class DynamicDatabase {
-  dataMap = new Map<string, string[]>([
-    ['Fruits', ['Apple', 'Orange', 'Banana']],
-    ['Vegetables', ['Tomato', 'Potato', 'Onion']],
-    ['Apple', ['Fuji', 'Macintosh']],
-    ['Onion', ['Yellow', 'White', 'Purple']]
-  ]);
-
-  rootLevelNodes: string[] = ['Fruits', 'Vegetables'];
-
-  /** Initial data from database */
-  initialData(): DynamicFlatNode[] {
-    return this.rootLevelNodes.map(name => new DynamicFlatNode(name, 0, true));
-  }
-
-  getChildren(node: string): string[] | undefined {
-    return this.dataMap.get(node);
-  }
-
-  isExpandable(node: string): boolean {
-    return this.dataMap.has(node);
-  }
-}
-/**
- * File database, it can build a tree structured Json object from string.
- * Each node in Json object represents a file or a directory. For a file, it has filename and type.
- * For a directory, it has filename and children (a list of files or directories).
- * The input will be a json object string, and the output is a list of `FileNode` with nested
- * structure.
- */
-@Injectable()
-export class DynamicDataSource {
-
-  dataChange = new BehaviorSubject<DynamicFlatNode[]>([]);
-
-  get data(): DynamicFlatNode[] { return this.dataChange.value; }
-  set data(value: DynamicFlatNode[]) {
-    this._treeControl.dataNodes = value;
-    this.dataChange.next(value);
-  }
-
-  constructor(private _treeControl: FlatTreeControl<DynamicFlatNode>,
-    private _database: DynamicDatabase) { }
-
-  connect(collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
-    this._treeControl.expansionModel.onChange.subscribe(change => {
-      if ((change as SelectionChange<DynamicFlatNode>).added ||
-        (change as SelectionChange<DynamicFlatNode>).removed) {
-        this.handleTreeControl(change as SelectionChange<DynamicFlatNode>);
-      }
-    });
-
-    return merge(collectionViewer.viewChange, this.dataChange).pipe(map(() => this.data));
-  }
-
-  /** Handle expand/collapse behaviors */
-  handleTreeControl(change: SelectionChange<DynamicFlatNode>) {
-    if (change.added) {
-      change.added.forEach(node => this.toggleNode(node, true));
-    }
-    if (change.removed) {
-      change.removed.slice().reverse().forEach(node => this.toggleNode(node, false));
-    }
-  }
-
-  /**
-   * Toggle the node, remove from display list
-   */
-  toggleNode(node: DynamicFlatNode, expand: boolean) {
-    const children = this._database.getChildren(node.item);
-    const index = this.data.indexOf(node);
-    if (!children || index < 0) { // If no children, or cannot find the node, no op
-      return;
-    }
-
-    node.isLoading = true;
-
-    setTimeout(() => {
-      if (expand) {
-        const nodes = children.map(name =>
-          new DynamicFlatNode(name, node.level + 1, this._database.isExpandable(name)));
-        this.data.splice(index + 1, 0, ...nodes);
-      } else {
-        let count = 0;
-        for (let i = index + 1; i < this.data.length
-          && this.data[i].level > node.level; i++ , count++) { }
-        this.data.splice(index + 1, count);
-      }
-
-      // notify the change
-      this.dataChange.next(this.data);
-      node.isLoading = false;
-    }, 1000);
-  }
-}
 
 @Component({
   selector: 'app-licensee-tree',
   templateUrl: './licensee-tree.component.html',
   styleUrls: ['./licensee-tree.component.scss'],
-  providers: [DynamicDatabase]
 })
-export class LicenseeTreeComponent implements OnInit {
+export class LicenseeTreeComponent extends FormBase implements OnInit {
+  @Input() currentChangeLogs: LicenseeChangeLog[];
+  @Input() currentLegalEntityTree: LegalEntity;
+  @Input() enableEditing = true;
+  @Output() editedTree: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
+  treeControl = new NestedTreeControl<LicenseeChangeLog>(node => node.children);
+  dataSource = new MatTreeNestedDataSource<any>();
+  @ViewChild('tree', { static: false }) tree: MatTree<any>;
+  componentActive = true;
+  changeTree: LicenseeChangeLog;
+  individualShareholderChanges: LicenseeChangeLog[];
+  organizationShareholderChanges: LicenseeChangeLog[];
+  leadershipChanges: LicenseeChangeLog[];
+  treeRoot: LicenseeChangeLog;
+  applicationId: string;
+  application: Application;
 
-  constructor(database: DynamicDatabase) {
-    this.treeControl = new FlatTreeControl<DynamicFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource = new DynamicDataSource(this.treeControl, database);
-
-    this.dataSource.data = database.initialData();
+  constructor(public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private applicationDataService: ApplicationDataService,
+    private legalEntityDataService: LegalEntityDataService) {
+    super();
+    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
-  treeControl: FlatTreeControl<DynamicFlatNode>;
+  hasChild = (_: number, node: LicenseeChangeLog) => !!node.children && node.children.length > 0;
 
-  dataSource: DynamicDataSource;
+  ngOnInit() {
+    this.treeRoot = this.processLegalEntityTree(this.currentLegalEntityTree);
+    this.editedTree.emit(this.treeRoot);
+    this.treeRoot.isRoot = true;
+    this.changeTree = this.treeRoot;
+    this.dataSource.data = [this.treeRoot];
+    this.applySavedChangeLogs();
+    this.refreshTreeAndChangeTables();
+    this.treeControl.dataNodes = this.dataSource.data;
+    this.treeControl.expandAll();
+  }
 
-  getLevel = (node: DynamicFlatNode) => node.level;
 
-  isExpandable = (node: DynamicFlatNode) => node.expandable;
 
-  hasChild = (_: number, _nodeData: DynamicFlatNode) => _nodeData.expandable;
+  applySavedChangeLogs() {
+    const changesWithLegalEntityId = this.currentChangeLogs.filter(item => !!item.legalEntityId);
+    const changesWithParentLegalEntityId = this.currentChangeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
+    const changesWithParentChangeLogId =
+      this.currentChangeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLinceseeChangeLogId);
 
-  ngOnInit() { }
+    changesWithLegalEntityId.forEach(change => {
+      const node = this.findNodeInTree(this.treeRoot, change.legalEntityId);
+      if (node) {
+        if (change.firstNameNew) {
+          change.businessNameNew = `${change.firstNameNew} ${change.lastNameNew}`;
+        }
 
+        change.isIndividual = false;
+        if (this.isIndividualFromChangeType(change.changeType)) {
+          change.isIndividual = true;
+        }
+        Object.assign(node, change);
+      }
+    });
+
+    changesWithParentLegalEntityId.forEach(change => {
+      const node = this.findNodeInTree(this.treeRoot, change.parentLegalEntityId);
+      if (node) {
+        node.children = node.children || [];
+        const newNode = Object.assign(new LicenseeChangeLog(), change);
+        if (newNode.firstNameNew) {
+          newNode.businessNameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
+        }
+
+        newNode.isIndividual = false;
+        if (this.isIndividualFromChangeType(newNode.changeType)) {
+          newNode.isIndividual = true;
+        }
+        node.children.push(newNode);
+      }
+    });
+
+    changesWithParentChangeLogId.forEach(change => {
+      const node = this.findNodeInTree(this.treeRoot, null, change.parentLinceseeChangeLogId);
+      if (node) {
+        node.children = node.children || [];
+        const newNode = Object.assign(new LicenseeChangeLog(), change);
+        if (newNode.firstNameNew) {
+          newNode.businessNameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
+        }
+
+        newNode.isIndividual = false;
+        if (this.isIndividualFromChangeType(newNode.changeType)) {
+          newNode.isIndividual = true;
+        }
+        node.children.push(newNode);
+      }
+    });
+  }
+
+  findNodeInTree(node: LicenseeChangeLog, legalEntityId: string = null, changeLogId: string = null): LicenseeChangeLog {
+    let result = null;
+
+    if (legalEntityId && node.legalEntityId === legalEntityId) {
+      result = node;
+    } else if (changeLogId && node.id === changeLogId) {
+      result = node;
+    } else {
+      const children = node.children || [];
+      for (const child of children) {
+        const res = this.findNodeInTree(child, legalEntityId, changeLogId);
+        if (res) {
+          result = res;
+          break;
+        }
+      }
+    }
+    return result;
+  }
+
+  isIndividualFromChangeType(changeType: string) {
+    const result = changeType.toLowerCase().indexOf('individual') !== -1
+      || changeType.toLowerCase().indexOf('leadership') !== -1;
+    return result;
+  }
+
+  editAssociate(node: LicenseeChangeLog) {
+    if (node.isShareholderNew) {
+      this.openShareholderDialog(node)
+        .pipe(filter(data => !!data))
+        .subscribe((formData: LicenseeChangeLog) => {
+          if (node.changeType !== LicenseeChangeType.addBusinessShareholder
+            && node.changeType !== LicenseeChangeType.addIndividualShareholder) {
+            formData.changeType = formData.isIndividual ? LicenseeChangeType.updateIndividualShareholder
+              : LicenseeChangeType.updateIndividualShareholder;
+          }
+          node = Object.assign(node, formData);
+          this.refreshTreeAndChangeTables();
+        }
+        );
+    } else {
+      this.openLeadershipDialog(node)
+        .pipe(filter(data => !!data))
+        .subscribe(
+          formData => {
+            if (node.changeType !== LicenseeChangeType.addLeadership) {
+              formData.changeType = LicenseeChangeType.updateLeadership;
+            }
+            node = Object.assign(node, formData);
+            this.refreshTreeAndChangeTables();
+          }
+        );
+    }
+  }
+
+  addLeadership(node) {
+    this.openLeadershipDialog({})
+      .pipe(filter(data => !!data))
+      .subscribe((formData: LicenseeChangeLog) => {
+        formData.changeType = LicenseeChangeType.addLeadership;
+        node.children = node.children || [];
+        node.children.push(formData);
+        this.refreshTreeAndChangeTables();
+      }
+      );
+  }
+
+  addShareholder(node) {
+    this.openShareholderDialog({})
+      .pipe(filter(data => !!data))
+      .subscribe((formData: LicenseeChangeLog) => {
+        if (formData.isIndividual) {
+          formData.changeType = LicenseeChangeType.addIndividualShareholder;
+        } else {
+          formData.changeType = LicenseeChangeType.addBusinessShareholder;
+        }
+        node.children = node.children || [];
+        node.children.push(formData);
+        this.refreshTreeAndChangeTables();
+      }
+      );
+  }
+
+  deleteAssociate(node: LicenseeChangeLog, changeType = 'deleted') {
+    // if (node.changeType === 'add') {
+    //   const index = node.parentLinceseeChangeLog.children.indexOf(node);
+    //   node.parentLinceseeChangeLog.children.splice(index, 1);
+    // } else {
+    if (node.isShareholderNew && node.isIndividual) {
+      changeType = LicenseeChangeType.removeIndividualShareholder;
+    } else if (node.isShareholderNew) {
+      changeType = LicenseeChangeType.removeBusinessShareholder;
+    } else if (node.isShareholderNew) {
+      changeType = LicenseeChangeType.removeLeadership;
+    }
+    node.changeType = changeType;
+    // const children = node.children || [];
+    // children.forEach(child => {
+    //   this.deleteAssociate(child, 'parent-deleted');
+    // });
+    // }
+    this.refreshTreeAndChangeTables();
+  }
+
+  /*
+  * Perform Depth First Traversal and transform tree to change objects
+  */
+  processLegalEntityTree(node: LegalEntity): LicenseeChangeLog {
+    const newNode = new LicenseeChangeLog(node);
+    if (node.children && node.children.length) {
+      newNode.children = [];
+      node.children.forEach(child => {
+        const childNode = this.processLegalEntityTree(child);
+        // childNode.parentLinceseeChangeLog = newNode;
+        newNode.children.push(childNode);
+      });
+    }
+    return newNode;
+  }
+
+  openShareholderDialog(shareholder) {
+    // set dialogConfig settings
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      maxWidth: '400px',
+      data: {
+        businessType: 'PrivateCorporation',
+        shareholder: shareholder
+      }
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(ShareholdersAndPartnersComponent, dialogConfig);
+    return dialogRef.afterClosed();
+  }
+
+  openLeadershipDialog(leader) {
+    // set dialogConfig settings
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: '500px',
+      data: {
+        person: leader,
+        businessType: 'PrivateCorporation'
+      }
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(OrganizationLeadershipComponent, dialogConfig);
+    return dialogRef.afterClosed();
+
+  }
+
+
+  refreshTreeAndChangeTables() {
+    const data = [...this.dataSource.data];
+    this.dataSource.data = [];
+    this.dataSource.data = data;
+    this.refreshChangeTables();
+  }
+
+  refreshChangeTables() {
+    this.individualShareholderChanges = [];
+    this.organizationShareholderChanges = [];
+    this.leadershipChanges = [];
+    this.populateChangeTables(this.treeRoot);
+
+    const sortByChangeType = (a: LicenseeChangeLog, b: LicenseeChangeLog) => {
+      if (this. getRenderChangeType(a) >= this. getRenderChangeType(b)) {
+        return 1;
+      }
+      return -1;
+    };
+
+    this.individualShareholderChanges.sort(sortByChangeType);
+    this.organizationShareholderChanges.sort(sortByChangeType);
+    this.leadershipChanges.sort(sortByChangeType);
+
+  }
+
+  populateChangeTables(node: LicenseeChangeLog) {
+    if (node.isShareholderNew && node.isIndividual && node.changeType !== 'unchanged') {
+      this.individualShareholderChanges.push(node);
+    } else if (node.isShareholderNew && node.changeType !== 'unchanged') {
+      this.organizationShareholderChanges.push(node);
+    } else if (!node.isShareholderNew && node.changeType !== 'unchanged') {
+      this.leadershipChanges.push(node);
+    }
+
+    if (node.children && node.children.length) {
+      node.children.forEach(child => {
+        this.populateChangeTables(child);
+      });
+    }
+  }
+
+  isAddChangeType(node: LicenseeChangeLog): boolean {
+    const result = node.changeType === LicenseeChangeType.addLeadership
+      || node.changeType === LicenseeChangeType.addBusinessShareholder
+      || node.changeType === LicenseeChangeType.addIndividualShareholder;
+    return result;
+  }
+
+  isUpdateChangeType(node: LicenseeChangeLog): boolean {
+    const result = node.changeType === LicenseeChangeType.updateLeadership
+      || node.changeType === LicenseeChangeType.updateBusinessShareholder
+      || node.changeType === LicenseeChangeType.updateIndividualShareholder;
+    return result;
+  }
+
+  isRemoveChangeType(node: LicenseeChangeLog): boolean {
+    const result = node.changeType === LicenseeChangeType.removeLeadership
+      || node.changeType === LicenseeChangeType.removeBusinessShareholder
+      || node.changeType === LicenseeChangeType.removeIndividualShareholder;
+    return result;
+  }
+
+  getRenderChangeType(item: LicenseeChangeLog): string {
+    let changeType = '';
+    if (this.isAddChangeType(item)) {
+      changeType = 'Add';
+    } else if (this.isUpdateChangeType(item)) {
+      changeType = 'Update';
+    } else if (this.isRemoveChangeType(item)) {
+      changeType = 'Remove';
+    }
+    return changeType;
+  }
+
+  OnDestroy() {
+    this.componentActive = false;
+  }
 }
