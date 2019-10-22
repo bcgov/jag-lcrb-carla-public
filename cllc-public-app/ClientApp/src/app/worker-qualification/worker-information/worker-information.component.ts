@@ -9,7 +9,7 @@ import { PolicyDocumentComponent } from '../../policy-document/policy-document.c
 export class WorkerInformationComponent implements OnInit, AfterViewInit {
 
   policySlug = 'worker-qualification-training';
-  @ViewChild('policyDocs') policyDocs: PolicyDocumentComponent;
+  @ViewChild('policyDocs', { static: true }) policyDocs: PolicyDocumentComponent;
   constructor() { }
 
   ngOnInit() {

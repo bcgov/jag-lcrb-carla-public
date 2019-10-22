@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-
 import { PolicyDocument } from '../models/policy-document.model';
 import { PolicyDocumentSummary } from '../models/policy-document-summary.model';
 import { HttpClient } from '@angular/common/http';
