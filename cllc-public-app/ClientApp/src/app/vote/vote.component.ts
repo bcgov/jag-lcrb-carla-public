@@ -1,8 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CookieService } from 'ngx-cookie-service';
-import { Validators, FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-
 import { VoteDataService } from '../services/vote-data.service';
 
 // simple voting feature, based on https://github.com/cjsheets/angular-voting-app
@@ -23,9 +19,10 @@ export class VoteComponent implements OnInit {
   private id: string;
   public alreadyVoted = false;
   public showVoteResults = false;
+  localStorage = window.localStorage;
 
   /** vote constructor */
-  constructor(private cookieService: CookieService, private voteDataService: VoteDataService) {
+  constructor(private voteDataService: VoteDataService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +35,7 @@ export class VoteComponent implements OnInit {
           this.title = voteQuestion.title;
           this.id = voteQuestion.id;
 
-          const cookieValue = this.cookieService.get('HasVoted' + this.id);
+          const cookieValue = this.localStorage.getItem('HasVoted' + this.id);
           if (cookieValue != null && cookieValue === 'Y') {
             this.alreadyVoted = true;
             this.showVoteResults = true;
@@ -51,7 +48,7 @@ export class VoteComponent implements OnInit {
     this.showVoteResults = value;
   }
   sendVote(option) {
-    this.cookieService.set('HasVoted' + this.id, 'Y');
+    this.localStorage.setItem('HasVoted' + this.id, 'Y');
     this.alreadyVoted = true;
     // send the vote in.
     this.voteDataService.postVote(this.slug, option)
