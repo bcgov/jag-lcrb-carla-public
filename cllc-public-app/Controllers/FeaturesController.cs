@@ -46,6 +46,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 features.Add("LicenceTransfer");
             }
+            if (!String.IsNullOrEmpty(_configuration["FEATURE_LICENSEE_CHANGES"]))
+            {
+                features.Add("LicenseeChanges");
+            }
 
             return new JsonResult(features);
         }

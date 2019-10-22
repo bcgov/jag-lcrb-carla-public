@@ -549,7 +549,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // bind to legal entity
                     if (!string.IsNullOrEmpty(node.LegalEntityId))
                     {
-                        patchEntity.LegalEntityOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.LegalEntityId);
+                        patchEntity.LegalEntityIdOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.LegalEntityId);
                     }
 
                     // bind to parent licensee change log

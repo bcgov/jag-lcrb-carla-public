@@ -41,7 +41,9 @@ const routes: Routes = [
   },
   {
     path: 'licensee-changes/:applicationId',
-    component: ApplicationLicenseeChangesComponent
+    component: ApplicationLicenseeChangesComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'account-profile',
