@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 DateofBirthNew = changeLog.AdoxioDateofbirthnew,
                 DateofBirthOld = changeLog.AdoxioDateofbirthold,
 
-                LegalEntityId = changeLog._adoxioLegalentityValue,
+                LegalEntityId = changeLog._adoxioLegalentityidValue,
                 ParentLegalEntityId = changeLog._adoxioParentlegalentityidValue,
                 ParentLinceseeChangeLogId = changeLog._adoxioParentlinceseechangelogidValue,
             };
