@@ -17,6 +17,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "progress": true,
             "polyfills": "src/polyfills.ts",
+            "aot": true,
             "assets": [
               "src/assets"
             ],
