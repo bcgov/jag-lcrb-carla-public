@@ -30,7 +30,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   @Output() editedTree: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
   treeControl = new NestedTreeControl<LicenseeChangeLog>(node => node.children);
   dataSource = new MatTreeNestedDataSource<any>();
-  @ViewChild('tree') tree: MatTree<any>;
+  @ViewChild('tree', { static: false }) tree: MatTree<any>;
   componentActive = true;
   changeTree: LicenseeChangeLog;
   individualShareholderChanges: LicenseeChangeLog[];
