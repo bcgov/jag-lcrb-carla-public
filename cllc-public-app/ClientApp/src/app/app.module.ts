@@ -125,6 +125,7 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualifi
 import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { SolePropResultsComponent } from './associate-wizard/sole-prop-results/sole-prop-results.component';
+import { NgxFileDropModule  } from 'ngx-file-drop';
 import {
   IndividualAssociatesResultsComponent
 } from './associate-wizard/individual-associates-results/individual-associates-results.component';
@@ -295,6 +296,7 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     MatTooltipModule,
     MatTreeModule,
     NgBusyModule,
+    NgxFileDropModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -345,6 +347,7 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     MatTooltipModule,
     MatTreeModule,
     MatStepperModule,
+    NgxFileDropModule,
     ReactiveFormsModule
   ],
   providers: [

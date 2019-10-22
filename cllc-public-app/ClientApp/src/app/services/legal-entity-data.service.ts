@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class LegalEntityDataService extends DataService {
