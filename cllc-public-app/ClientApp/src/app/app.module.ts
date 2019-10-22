@@ -2,8 +2,6 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgbModule, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
-import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -82,7 +80,6 @@ import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsl
 import { NewsletterDataService } from './services/newsletter-data.service';
 import { UserDataService } from './services/user-data.service';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { FileDropModule } from 'ngx-file-drop';
 import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
 import { CorporateDetailsComponent } from './account-profile/tabs/corporate-details/corporate-details.component';
 import {
@@ -128,6 +125,7 @@ import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualifi
 import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { SolePropResultsComponent } from './associate-wizard/sole-prop-results/sole-prop-results.component';
+import { NgxFileDropModule  } from 'ngx-file-drop';
 import {
   IndividualAssociatesResultsComponent
 } from './associate-wizard/individual-associates-results/individual-associates-results.component';
@@ -159,6 +157,13 @@ import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { ProductInventoryPackagedComponent } from './shared/product-inventory-packaged/product-inventory-packaged.component';
 import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.component';
+import {
+  OrganizationLeadershipComponent
+} from './shared/licensee-tree/dialog-boxes/organization-leadership/organization-leadership.component';
+import {
+  ShareholdersAndPartnersComponent
+} from './shared/licensee-tree/dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
+import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
 import { VersionInfoDataService } from './services/version-info-data.service';
 import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
 
@@ -243,6 +248,9 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     ApplicationOwnershipTransferComponent,
     ProductInventoryPackagedComponent,
     LicenseeTreeComponent,
+    OrganizationLeadershipComponent,
+    ShareholdersAndPartnersComponent,
+    ApplicationLicenseeChangesComponent,
     VersionInfoDialogComponent
   ],
   imports: [
@@ -251,7 +259,6 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     BrowserAnimationsModule,
     BrowserModule,
     CdkTableModule,
-    FileDropModule,
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,
@@ -289,7 +296,7 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     MatTooltipModule,
     MatTreeModule,
     NgBusyModule,
-    NgbModule.forRoot(),
+    NgxFileDropModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -304,7 +311,6 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     BrowserAnimationsModule,
     BrowserModule,
     CdkTableModule,
-    FileDropModule,
     FormsModule,
     HttpClientModule,
     MatAutocompleteModule,
@@ -341,7 +347,7 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     MatTooltipModule,
     MatTreeModule,
     MatStepperModule,
-    NgbModule,
+    NgxFileDropModule,
     ReactiveFormsModule
   ],
   providers: [
@@ -353,12 +359,10 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     BCeidAuthGuard,
     CanDeactivateGuard,
     ContactDataService,
-    CookieService,
     DynamicsDataService,
     GeneralDataService,
     InsertService,
     NewsletterDataService,
-    NgbDropdown,
     PaymentDataService,
     PolicyDocumentDataService,
     PreviousAddressDataService,
@@ -386,6 +390,8 @@ import { VersionInfoDialogComponent } from './version-info/version-info-dialog.c
     KeyPersonnelDialogComponent,
     WorkerHomeDialogComponent,
     ShareholderDialogComponent,
+    ShareholdersAndPartnersComponent,
+    OrganizationLeadershipComponent,
     VersionInfoDialogComponent
   ],
   bootstrap: [AppComponent]

@@ -1,0 +1,50 @@
+.eq-table {
+    border-spacing: 1px 3px;
+    border-collapse: separate;
+    width: 100%;
+
+    td,
+    th {
+        background-color: #F1F4FA;
+        color: #000;
+        padding: 10px;
+    }
+
+    th {
+        text-align: center;
+    }
+}
+
+.name-cell {
+    width: 300px;
+}
+
+.change-type-cell {
+    width: 100px;
+}
+
+.email-cell {
+    width: 300px;
+}
+
+.dob-cell,
+.shares-cell {
+    width: 200px;
+}
+
+.edited-node {
+    color: orange;
+}
+
+.added-node {
+    color: green;
+}
+
+.deleted-node {
+    text-decoration: line-through;
+    color: red;
+}
+
+.old-value {
+    text-decoration: line-through;
+}

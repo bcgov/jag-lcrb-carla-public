@@ -1,12 +1,10 @@
 
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {
   Router, Resolve, RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Http, Response } from '@angular/http';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 
