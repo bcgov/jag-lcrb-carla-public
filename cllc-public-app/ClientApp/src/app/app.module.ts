@@ -166,6 +166,8 @@ import {
   ShareholdersAndPartnersComponent
 } from './shared/licensee-tree/dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
 import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
+import { VersionInfoDataService } from './services/version-info-data.service';
+import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
 
 
 @NgModule({
@@ -250,7 +252,8 @@ import { ApplicationLicenseeChangesComponent } from './application-licensee-chan
     LicenseeTreeComponent,
     OrganizationLeadershipComponent,
     ShareholdersAndPartnersComponent,
-    ApplicationLicenseeChangesComponent
+    ApplicationLicenseeChangesComponent,
+    VersionInfoDialogComponent
   ],
   imports: [
     ChartsModule,
@@ -376,6 +379,7 @@ import { ApplicationLicenseeChangesComponent } from './application-licensee-chan
     Title,
     UserDataService,
     VoteDataService,
+    VersionInfoDataService,
     WorkerDataService,
     {
       provide: APP_INITIALIZER,
@@ -394,6 +398,7 @@ import { ApplicationLicenseeChangesComponent } from './application-licensee-chan
     ShareholderDialogComponent,
     ShareholdersAndPartnersComponent,
     OrganizationLeadershipComponent,
+    VersionInfoDialogComponent
   ],
   bootstrap: [AppComponent]
 })
