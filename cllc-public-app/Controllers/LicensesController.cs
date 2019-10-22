@@ -75,8 +75,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        [HttpPost("initiate-transfer")]
-        public ActionResult InitiateTranster(LicenceTranster item)
+        [HttpPost("cancel-transfer")]
+        public ActionResult CancelTransfer(LicenceTranster item)
         {
             if (!ModelState.IsValid)
             {
@@ -97,11 +97,61 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var yes = 845280001;
+                var no = 845280000;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
                     ProposedOwnerODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
-                    AdoxioTransferrequested = yes
+                    AdoxioTransferrequested = no 
+                };
+
+                // create application
+                _dynamicsClient.Licenceses.Update(item.LicenceId, patchLicence);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error cancelling licence transfer");
+                // fail if we can't create.
+                throw;
+            }
+
+            // Delete the Proposed Owner.
+
+
+
+            return Ok();
+        }
+
+        [HttpPost("initiate-transfer")]
+        public ActionResult InitiateTranster(LicenceTranster item)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            // check access to licence
+            MicrosoftDynamicsCRMadoxioLicences adoxioLicense = _dynamicsClient.GetLicenceByIdWithChildren(item.LicenceId);
+            if (adoxioLicense == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(adoxioLicense.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            // delete the related application
+
+            // update the licence such that the transfer requested is cleared.
+
+            try
+            {
+                var no = 845280001;
+                var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
+                {
+                    ProposedOwnerODataBind = null,
+                    AdoxioTransferrequested = no
                 };
 
                 // create application

@@ -29,6 +29,7 @@ import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence
 import { MapComponent } from './map/map.component';
 import { FeatureGuard } from './services/feaure-guard.service';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
+import { ApplicationCancelOwnershipTransferComponent } from './application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
 
@@ -85,9 +86,14 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'ownership-transfer/:licenceId',
-    component: ApplicationOwnershipTransferComponent,
+    path: 'ownership-cancel-transfer/:licenceId',
+      component: ApplicationCancelOwnershipTransferComponent,
     canActivate: [BCeidAuthGuard]
+  },
+  {
+      path: 'ownership-transfer/:licenceId',
+      component: ApplicationOwnershipTransferComponent,
+      canActivate: [BCeidAuthGuard]
   },
   {
     path: 'worker-qualification/home',
