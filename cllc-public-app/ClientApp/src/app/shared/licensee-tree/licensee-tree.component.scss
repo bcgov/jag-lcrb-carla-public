@@ -57,11 +57,9 @@
         background-color: #F1F4FA !important;
     }
 
-    .not-editable{
-        .tree-label {
-            font-weight: normal;
-            font-size: 14px;
-        }
+    .not-editable .tree-label {
+            font-weight: normal !important;
+            font-size: 14px !important;
     }
 
 }
