@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
-import { MonthlyReport } from '@appmodels/monthly-report.model';
+import { MonthlyReport } from '@models/monthly-report.model';
 
 @Injectable()
 export class MonthlyReportDataService extends DataService {
