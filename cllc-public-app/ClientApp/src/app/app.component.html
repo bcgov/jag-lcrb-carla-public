@@ -120,7 +120,7 @@
                       class="nav-link" routerLink="/dashboard">Dashboard</a>
                     <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
-                    <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                    <a *ngIf="currentUser.userType == 'Business' && showFederalReporting" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/federal-reporting">Federal Reporting</a>
                   </li>
                 </ul>
@@ -165,7 +165,7 @@
             </li>
           </ul>
         </div>
-        <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()" class="nav-link version-info">{{versionInfo.fileVersion}}</a>        
+        <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()" class="nav-link version-info">{{versionInfo.fileVersion}}</a>
       </nav>
     </footer>
   </div>
