@@ -230,8 +230,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     SeedsPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     SeedsPackagedClosingInventoryTotal = inventoryReport.AdoxioClosinginventory ?? 0;
                     SeedsPackagedClosingInventoryTotalValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
-                    // TODO needs "Total number of seeds (#)" field
-                    // SeedsPackagedClosingTotalSeeds = inventoryReport.AdoxioWeightofclosinginventory;
+                    SeedsPackagedClosingTotalSeeds = inventoryReport.AdoxioTotalnumberseeds ?? 0;
                     BCSeedsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
                     BCSeedsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     SeedsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;

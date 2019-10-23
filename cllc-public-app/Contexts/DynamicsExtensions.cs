@@ -363,7 +363,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     inventoryReportsList = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
                     inventoryReportsList = null;
                 }

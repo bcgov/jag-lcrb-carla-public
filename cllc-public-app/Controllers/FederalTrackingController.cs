@@ -15,7 +15,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class FederalTrackingController : ControllerBase
     {
         private readonly string DOCUMENT_LIBRARY = "Federal Reporting";
@@ -40,6 +39,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{month}/{year}")]
         public IActionResult GenerateFederalTrackingReport(int month, int year)
         {
+            if (_configuration["FEATURE_FEDERAL_CSV"] == null)
+            {
+                return new NotFoundResult();
+            }
             if (month < 1 || month > 12 || year < 2018)
             {
                 return new BadRequestResult();
@@ -60,10 +63,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         ReportingPeriodMonth = monthStr,
                         ReportingPeriodYear = yearStr,
                         RetailerDistributor = report.AdoxioRetailerdistributor?.ToString() ?? "1",
-                        //TBR
-                        CompanyName = report.AdoxioLicenseeId?.ToString(),
-                        //TBR
-                        SiteID = "BC" + report.AdoxioLicencenumber,
+                        CompanyName = report.AdoxioLicenseenametext,
+                        SiteID = report.AdoxioSiteidnumber,
                         City = report.AdoxioCity,
                         PostalCode = report.AdoxioPostalcode,
                         ManagementEmployees = report.AdoxioEmployeesmanagement ?? 0,
@@ -117,28 +118,5 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new BadRequestResult();
             }
         }
-
-        /// <summary>
-        /// Get monthly report
-        /// </summary>
-        /// <returns></returns>
-        // [HttpGet("{month}/{year}")]
-        // public IActionResult GetMonthlyReport(int month, int year)
-        // {
-        //     if(month < 1 || month > 12 || year < 2018)
-        //     {
-        //         return new BadRequestResult();
-        //     }
-
-        //     string monthStr = month.ToString("00");
-        //     string yearStr = year.ToString();
-            
-        //     string filter = $"adoxio_reportingperiodmonth eq '{monthStr}' and adoxio_reportingperiodyear eq '{yearStr}'";
-            
-        //     try
-        //     {
-        //         CannabismonthlyreportsGetResponseModel resp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
-        //     }
-        // }
     }
 }
