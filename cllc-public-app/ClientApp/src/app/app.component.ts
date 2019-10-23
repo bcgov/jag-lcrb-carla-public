@@ -47,7 +47,7 @@ export class AppComponent extends FormBase implements OnInit {
     featureFlagService.featureOn('Maps')
       .subscribe(x => this.showMap = x);
     featureFlagService.featureOn('FederalReporting')
-      .subscribe(x => this.showFederalReporting = true);
+      .subscribe(x => this.showFederalReporting = x);
 
     this.isDevMode = isDevMode();
     this.router.events
