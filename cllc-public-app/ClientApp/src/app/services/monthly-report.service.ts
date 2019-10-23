@@ -21,6 +21,13 @@ export class MonthlyReportDataService extends DataService {
     return this.http.get<MonthlyReport>(url, { headers: this.headers });
   }
 
+  getMonthlyReportsByLicence(licenceId: string): Observable<MonthlyReport[]> {
+    return this.http.get<MonthlyReport[]>(this.apiPath + 'licence/' + licenceId, {
+      headers: this.headers
+    })
+      .pipe(catchError(this.handleError));
+  }
+
   getAllCurrentMonthlyReports(): Observable<MonthlyReport[]> {
     return this.http.get<MonthlyReport[]>(this.apiPath + 'current', {
       headers: this.headers

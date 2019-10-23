@@ -5,6 +5,7 @@ import { ApplicationLicenseSummary } from '@appmodels/application-license-summar
 import { Subscription, forkJoin } from 'rxjs';
 import { MonthlyReport } from '@appmodels/monthly-report.model';
 import { MonthlyReportDataService } from '@appservices/monthly-report.service';
+import { FeatureFlagService } from '@appservices/feature-flag.service';
 
 @Component({
   selector: 'app-federal-reporting',
@@ -36,17 +37,23 @@ export class FederalReportingComponent implements OnInit {
 
   ngOnInit() {
     this.busy = forkJoin(
-      this.licenceDataService.getAllCurrentLicenses(),
-      this.monthlyReportDataService.getAllCurrentMonthlyReports()
+      this.licenceDataService.getAllCurrentLicenses()
     )
-    .subscribe(([licenses, monthlyReports]) => {
+    .subscribe(([licenses]) => {
       this.licenses = licenses;
-      this.monthlyReports = monthlyReports;
     });
+
   }
 
   licenceChanged(event) {
     this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === event.target.value);
+
+    this.busy = forkJoin(
+      this.monthlyReportDataService.getMonthlyReportsByLicence(event.target.value)
+    )
+    .subscribe(([monthlyReports]) => {
+      this.monthlyReports = monthlyReports;
+    });
   }
 
   periodChanged(event) {
