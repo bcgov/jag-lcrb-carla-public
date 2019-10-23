@@ -25,7 +25,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
   account: Account;
   legalEntityId: string;
-  lockAssociates = true;
+  lockAssociates = false;
   applicationId: string;
   application: Application;
   busy: any;
