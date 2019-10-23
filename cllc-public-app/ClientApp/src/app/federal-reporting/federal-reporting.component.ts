@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LicenseDataService } from '@appservices/license-data.service';
-import { ApplicationLicenseSummary } from '@appmodels/application-license-summary.model';
+import { LicenseDataService } from '@services/license-data.service';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Subscription, forkJoin } from 'rxjs';
-import { MonthlyReport } from '@appmodels/monthly-report.model';
-import { MonthlyReportDataService } from '@appservices/monthly-report.service';
-import { FeatureFlagService } from '@appservices/feature-flag.service';
+import { MonthlyReport } from '@models/monthly-report.model';
+import { MonthlyReportDataService } from '@services/monthly-report.service';
 
 @Component({
   selector: 'app-federal-reporting',
