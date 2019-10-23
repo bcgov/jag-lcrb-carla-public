@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "cllc-public-app/bin/Debug/netcoreapp2.0/cllc-public-app.dll",
+            "program": "cllc-public-app/bin/Debug/netcoreapp3.0/cllc-public-app.dll",
             "args": [],
             "cwd": "cllc-public-app",
             "stopAtEntry": false,
