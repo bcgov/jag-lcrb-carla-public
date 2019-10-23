@@ -249,7 +249,7 @@ import { FederalReportingComponent } from './federal-reporting/federal-reporting
     ApplicationOwnershipTransferComponent,
     ProductInventoryPackagedComponent,
     LicenseeTreeComponent,
-    FederalReportingComponent
+    FederalReportingComponent,
     OrganizationLeadershipComponent,
     ShareholdersAndPartnersComponent,
     ApplicationLicenseeChangesComponent,
