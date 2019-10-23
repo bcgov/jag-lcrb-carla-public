@@ -43,6 +43,8 @@ const routes: Routes = [
   {
     path: 'federal-reporting',
     component: FederalReportingComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'FederalReporting' }
   },
   {
     path: 'licensee-changes',
