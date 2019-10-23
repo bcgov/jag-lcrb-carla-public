@@ -8,12 +8,14 @@ using Gov.Lclb.Cllb.Public.ClassMaps;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Rest;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -41,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private List<MonthlyReport> GetMonthlyReportsByUser(string licenceeId)
         {
             List<MonthlyReport> monthlyReportsList = new List<MonthlyReport>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports = null;
+            IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports;
             if (string.IsNullOrEmpty(licenceeId))
             {
                 monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get().Value;
@@ -53,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var filter = $"_adoxio_licenseeid_value eq {licenceeId}";
                     monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
                 }
-                catch (OdataerrorException)
+                catch (HttpOperationException)
                 {
                     monthlyReports = null;
                 }
@@ -71,18 +73,58 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return monthlyReportsList;
         }
 
-        /// GET all monthly reports in Dynamics by Licencee using the account Id assigned to the user logged in
-        [HttpGet("current")]
-        public JsonResult GetCurrentUserMonthlyReports()
+        /// GET all monthly reports in Dynamics by Licence filtered by the current user's licencee
+        [HttpGet("licence/{licenceId}")]
+        public async Task<IActionResult> GetMonthlyReportsByLicence(string licenceId)
         {
+            if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
+            {
+                return new NotFoundResult();
+            }
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-            List<MonthlyReport> monthlyReports = GetMonthlyReportsByUser(userSettings.AccountId);
+            List<MonthlyReport> monthlyReportsList = new List<MonthlyReport>();
+            IEnumerable<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> monthlyReports;
+            try
+            {
+                var filter = $"_adoxio_licenceid_value eq {licenceId} and _adoxio_licenseeid_value eq {userSettings.AccountId}";
+                monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
+            }
+            catch (HttpOperationException)
+            {
+                monthlyReports = null;
+            }
 
-            return new JsonResult(monthlyReports);
+            if (monthlyReports != null)
+            {
+                foreach (var monthlyReport in monthlyReports)
+                {
+                    monthlyReportsList.Add(monthlyReport.ToViewModel(_dynamicsClient));
+                }
+            }
+
+            return new JsonResult(monthlyReportsList);
+        }
+
+
+        /// GET all monthly reports in Dynamics by Licencee using the account Id assigned to the user logged in
+        [HttpGet("current")]
+        public async Task<IActionResult> GetCurrentUserMonthlyReports()
+        {
+          if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
+          {
+              return new NotFoundResult();
+          }
+          // get the current user.
+          string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+          UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+          // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+          List<MonthlyReport> monthlyReports = GetMonthlyReportsByUser(userSettings.AccountId);
+
+          return new JsonResult(monthlyReports);
         }
     }
 }
