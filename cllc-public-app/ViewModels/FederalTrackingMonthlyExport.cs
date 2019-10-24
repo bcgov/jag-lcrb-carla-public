@@ -229,13 +229,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     SeedsPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     SeedsPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     SeedsPackagedClosingInventoryTotal = inventoryReport.AdoxioClosinginventory ?? 0;
-                    SeedsPackagedClosingInventoryTotalValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    // TODO needs "Total number of seeds (#)" field
-                    // SeedsPackagedClosingTotalSeeds = inventoryReport.AdoxioWeightofclosinginventory;
-                    BCSeedsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCSeedsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    SeedsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    SeedsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    SeedsPackagedClosingInventoryTotalValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    SeedsPackagedClosingTotalSeeds = inventoryReport.AdoxioTotalnumberseeds ?? 0;
+                    BCSeedsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCSeedsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    SeedsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    SeedsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Vegetative Cannabis":
                     VegetativeCannabisPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -248,11 +247,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     VegetativeCannabisPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     VegetativeCannabisPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     VegetativeCannabisPackagedClosingInventoryTotal = inventoryReport.AdoxioClosinginventory ?? 0;
-                    VegetativeCannabisPackagedClosingInventoryTotalValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    BCVegetativeCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCVegetativeCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    VegetativeCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    VegetativeCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    VegetativeCannabisPackagedClosingInventoryTotalValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    BCVegetativeCannabisPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCVegetativeCannabisTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    VegetativeCannabisPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    VegetativeCannabisTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Fresh Cannabis":
                     FreshCannabisPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -265,12 +264,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     FreshCannabisPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     FreshCannabisPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     FreshCannabisPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    FreshCannabisPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    FreshCannabisPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCFreshCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCFreshCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    FreshCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    FreshCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    FreshCannabisPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    FreshCannabisPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCFreshCannabisPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCFreshCannabisTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    FreshCannabisPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    FreshCannabisTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Dried Cannabis":
                     DriedCannabisPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -283,12 +282,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     DriedCannabisPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     DriedCannabisPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     DriedCannabisPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    DriedCannabisPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    DriedCannabisPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCDriedCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCDriedCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    DriedCannabisPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    DriedCannabisTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    DriedCannabisPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    DriedCannabisPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCDriedCannabisPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCDriedCannabisTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    DriedCannabisPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    DriedCannabisTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Edibles - Solids":
                     SolidEdiblesPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -301,12 +300,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     SolidEdiblesPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     SolidEdiblesPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     SolidEdiblesPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    SolidEdiblesPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    SolidEdiblesPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCSolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCSolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    SolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    SolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    SolidEdiblesPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    SolidEdiblesPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCSolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCSolidEdiblesTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    SolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    SolidEdiblesTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Edibles - Non-Solids":
                     NonSolidEdiblesPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -319,12 +318,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     NonSolidEdiblesPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     NonSolidEdiblesPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     NonSolidEdiblesPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    NonSolidEdiblesPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    NonSolidEdiblesPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCNonSolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCNonSolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    NonSolidEdiblesPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    NonSolidEdiblesTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    NonSolidEdiblesPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    NonSolidEdiblesPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCNonSolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCNonSolidEdiblesTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    NonSolidEdiblesPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    NonSolidEdiblesTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Extracts - Inhaled":
                     InhaledExtractsPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -337,12 +336,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     InhaledExtractsPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     InhaledExtractsPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     InhaledExtractsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    InhaledExtractsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    InhaledExtractsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCInhaledExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCInhaledExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    InhaledExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    InhaledExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    InhaledExtractsPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    InhaledExtractsPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCInhaledExtractsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCInhaledExtractsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    InhaledExtractsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    InhaledExtractsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Extracts - Ingested":
                     IngestedExtractsPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -355,12 +354,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     IngestedExtractsPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     IngestedExtractsPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     IngestedExtractsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    IngestedExtractsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    IngestedExtractsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCIngestedExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCIngestedExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    IngestedExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    IngestedExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    IngestedExtractsPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    IngestedExtractsPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCIngestedExtractsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCIngestedExtractsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    IngestedExtractsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    IngestedExtractsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Extracts - Other":
                     OtherExtractsPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -373,12 +372,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     OtherExtractsPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     OtherExtractsPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     OtherExtractsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    OtherExtractsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    OtherExtractsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCOtherExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCOtherExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    OtherExtractsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    OtherExtractsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    OtherExtractsPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    OtherExtractsPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCOtherExtractsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCOtherExtractsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    OtherExtractsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    OtherExtractsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Topicals":
                     TopicalsPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -391,12 +390,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     TopicalsPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     TopicalsPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     TopicalsPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    TopicalsPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    TopicalsPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCTopicalsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCTopicalsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    TopicalsPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    TopicalsTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    TopicalsPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    TopicalsPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCTopicalsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCTopicalsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    TopicalsPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    TopicalsTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
                 case "Other":
                     OtherPackagedOpeningInventory = inventoryReport.AdoxioOpeninginventory ?? 0;
@@ -409,12 +408,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                     OtherPackagedReductionsLostStolen = inventoryReport.AdoxioQtyloststolen ?? 0;
                     OtherPackagedReductionsOther = inventoryReport.AdoxioOtherreductions ?? 0;
                     OtherPackagedClosingInventory = inventoryReport.AdoxioClosinginventory ?? 0;
-                    OtherPackagedClosingInventoryValue = (double)inventoryReport.AdoxioValueofclosinginventory;
-                    OtherPackagedClosingInventoryWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
-                    BCOtherPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    BCOtherTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
-                    OtherPackagedUnitsSold = (double)inventoryReport.AdoxioPackagedunitsnumber;
-                    OtherTotalValueSold = (double)inventoryReport.AdoxioTotalvalue;
+                    OtherPackagedClosingInventoryValue = inventoryReport.AdoxioValueofclosinginventory != null ? (double)inventoryReport.AdoxioValueofclosinginventory : 0;
+                    OtherPackagedClosingInventoryWeight = inventoryReport.AdoxioWeightofclosinginventory != null ? (double)inventoryReport.AdoxioWeightofclosinginventory : 0;
+                    BCOtherPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    BCOtherTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
+                    OtherPackagedUnitsSold = inventoryReport.AdoxioPackagedunitsnumber != null ? (double)inventoryReport.AdoxioPackagedunitsnumber : 0;
+                    OtherTotalValueSold = inventoryReport.AdoxioTotalvalue != null ? (double)inventoryReport.AdoxioTotalvalue : 0;
                     break;
             }
         }

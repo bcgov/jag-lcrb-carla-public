@@ -29,11 +29,12 @@ export class AppComponent extends FormBase implements OnInit {
   public isNewUser: boolean;
   public isDevMode: boolean;
   public showMap: boolean;
+  public showFederalReporting: boolean;
   public versionInfo: VersionInfo;
   isAssociate = false;
   account: Account;
 
-    constructor(
+  constructor(
     public dialog: MatDialog,
     private renderer: Renderer2,
     private router: Router,
@@ -41,11 +42,14 @@ export class AppComponent extends FormBase implements OnInit {
     private accountDataService: AccountDataService,
     public featureFlagService: FeatureFlagService,
     private versionInfoDataService: VersionInfoDataService,
-    ) {
+  ) {
     super();
     featureFlagService.featureOn('Maps')
       .subscribe(x => this.showMap = x);
-    
+
+    featureFlagService.featureOn('FederalReporting')
+      .subscribe(x => this.showFederalReporting = x);
+
     this.isDevMode = isDevMode();
     this.router.events
       .pipe(takeWhile(() => this.componentActive))
@@ -76,31 +80,31 @@ export class AppComponent extends FormBase implements OnInit {
         this.businessProfiles = state.legalEntities;
       });
 
-    }
+  }
 
-    loadVersionInfo() {
-        this.versionInfoDataService.getVersionInfo()
-            .pipe(takeWhile(() => this.componentActive))
-            .subscribe((versionInfo: VersionInfo) => {
-                this.versionInfo = versionInfo;
-            });
-    }
+  loadVersionInfo() {
+    this.versionInfoDataService.getVersionInfo()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((versionInfo: VersionInfo) => {
+        this.versionInfo = versionInfo;
+      });
+  }
 
-    openVersionInfoDialog() {
-        // set dialogConfig settings
-        const dialogConfig = {
-            disableClose: true,
-            autoFocus: true,
-            width: '500px',
-            data: this.versionInfo
-        };
+  openVersionInfoDialog() {
+    // set dialogConfig settings
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: '500px',
+      data: this.versionInfo
+    };
 
-        // open dialog, get reference and process returned data from dialog
-        const dialogRef = this.dialog.open(VersionInfoDialogComponent, dialogConfig);
-    }
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(VersionInfoDialogComponent, dialogConfig);
+  }
 
 
-    reloadUser() {
+  reloadUser() {
     this.store.select(state => state.currentUserState.currentUser)
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: User) => {
@@ -122,11 +126,11 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   showBceidTermsOfUse(): boolean {
-    const result =  (this.currentUser
+    const result = (this.currentUser
       && this.currentUser.businessname
       && this.currentUser.isNewUser === true)
       || (this.account && !this.account.termsOfUseAccepted);
-      return result;
+    return result;
   }
 
   isIE10orLower() {

@@ -51,6 +51,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("LicenseeChanges");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_FEDERAL_REPORTING"]))
+            {
+                features.Add("FederalReporting");
+            }
+
             return new JsonResult(features);
         }
 
