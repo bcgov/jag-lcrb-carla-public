@@ -1,21 +1,17 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { Account } from '@models/account.model';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/legal-entity-change.model';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { MatDialog } from '@angular/material';
 import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
 import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
-import { filter, takeWhile } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { FormBase } from '@shared/form-base';
 import { Application } from '@models/application.model';
-import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -41,9 +37,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   application: Application;
 
   constructor(public dialog: MatDialog,
-    private route: ActivatedRoute,
-    private applicationDataService: ApplicationDataService,
-    private legalEntityDataService: LegalEntityDataService) {
+    private route: ActivatedRoute) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
@@ -63,7 +57,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   }
 
 
-
+  /**
+   * Update licensee tree with the save changelogs
+   */
   applySavedChangeLogs() {
     const changesWithLegalEntityId = this.currentChangeLogs.filter(item => !!item.legalEntityId);
     const changesWithParentLegalEntityId = this.currentChangeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
@@ -120,6 +116,12 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     });
   }
 
+  /**
+   * Finds a node in the tree with the @legalEntityId or @changeLogId
+   * @param node 'Node in tree to search from'
+   * @param legalEntityId
+   * @param changeLogId
+   */
   findNodeInTree(node: LicenseeChangeLog, legalEntityId: string = null, changeLogId: string = null): LicenseeChangeLog {
     let result = null;
 
@@ -140,12 +142,20 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     return result;
   }
 
-  isIndividualFromChangeType(changeType: string) {
+  /**
+   * Use the chagetype to check if the licensee is an individual
+   * @param changeType
+   */
+  isIndividualFromChangeType(changeType: string): boolean {
     const result = changeType.toLowerCase().indexOf('individual') !== -1
       || changeType.toLowerCase().indexOf('leadership') !== -1;
     return result;
   }
 
+  /**
+   * Opens a dialog to edit a leader or shareholder
+   * @param node 'A LicenseeChangeLog to edit'
+   */
   editAssociate(node: LicenseeChangeLog) {
     if (node.isShareholderNew) {
       this.openShareholderDialog(node)
@@ -175,6 +185,10 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     }
   }
 
+  /**
+   * Add a leader to the parent node
+   * @param parentNode 'A LicenseeChangeLog to add the leader to'
+   */
   addLeadership(parentNode: LicenseeChangeLog) {
     this.openLeadershipDialog({} as LicenseeChangeLog)
       .pipe(filter(data => !!data))
@@ -187,6 +201,10 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       );
   }
 
+  /**
+   * Add a shareholder to the parent node
+   * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
+   */
   addShareholder(parentNode: LicenseeChangeLog) {
     this.openShareholderDialog({} as LicenseeChangeLog)
       .pipe(filter(data => !!data))
