@@ -38,28 +38,25 @@
           <div class="row">
             <table *ngIf="mapData?.length > 0" class="eq-table">
               <tr>
-                <th>#</th>
-                <th>Establishment Name</th>
-                <th>Type</th>
                 <th>Licence</th>
-                <th>Phone</th>
+                <th>Establishment Name</th>
+                <th style="width:150px">Phone</th>
                 <th>Address</th>
                 <th>City</th>
                 <th>Postal</th>
+                <th>Status</th>
               </tr>
-              <tr *ngFor="let item of mapData; let i = index;">
-                <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
-                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
-                  <span style="font-weight: 600">{{item.name}}</span>
-                </td>
-                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
-                  <span style="font-weight: 600">Non-Medical Cannabis Retail Store</span>
-                </td>
+              <tr *ngFor="let item of mapData; let i = index;">                
                 <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
                   <span style="font-weight: 600">{{item.license}}</span>
                 </td>
                 <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
-                  <span style="font-weight: 600">{{item.phone}}</span>
+                  <span style="font-weight: 600">{{item.name}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+
+                  <span style="font-weight: 600" *ngIf="item.Phone">{{item.phone}}</span>
+                  <span style="font-weight: 600" *ngIf="!item.Phone">&nbsp;</span>
                 </td>
                 <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
                   <span style="font-weight: 600">{{item.addressStreet}}</span>
@@ -69,6 +66,10 @@
                 </td>
                 <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
                   <span style="font-weight: 600">{{item.addressPostal}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600" *ngIf="item.isOpen === true">Open</span>
+                  <span style="font-weight: 600" *ngIf="item.isOpen !== true">Coming Soon</span>
                 </td>
               </tr>
             </table>
