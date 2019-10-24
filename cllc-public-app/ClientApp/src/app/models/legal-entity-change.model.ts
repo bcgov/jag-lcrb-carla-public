@@ -66,8 +66,8 @@ export class LicenseeChangeLog {
       if (legalEntity.account) {
         this.businessAccountType = legalEntity.account.businessType;
       }
-      this.numberofSharesNew = legalEntity.percentageVotingShares;
-      this.numberofSharesOld = legalEntity.percentageVotingShares;
+      this.numberofSharesNew = legalEntity.commonvotingshares;
+      this.numberofSharesOld = legalEntity.commonvotingshares;
       this.emailNew = legalEntity.email;
       this.emailOld = legalEntity.email;
       this.firstNameNew = legalEntity.firstname;
