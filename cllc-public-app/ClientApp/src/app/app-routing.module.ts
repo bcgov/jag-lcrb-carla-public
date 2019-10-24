@@ -32,6 +32,7 @@ import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee
 import { ApplicationCancelOwnershipTransferComponent } from './application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
+import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
 import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
 
 
@@ -39,6 +40,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'federal-reporting',
+    component: FederalReportingComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'FederalReporting' }
   },
   {
     path: 'licensee-changes/:applicationId',
