@@ -7,19 +7,30 @@
 
   <form [formGroup]="reportForm">
     <div class="row">
-      <app-field class="col-md-6 col-xs-12" label="Licence" [required]="true"
+      <app-field class="col-md-3 col-xs-12" label="Licence" [required]="true"
         errorMessage="Please select a licence from the dropdown list" [isFullWidth]="true">
         <select class="form-control" style="width: 250px;" formControlName="licence" (change)="licenceChanged($event);">
           <option value="">Choose the licence</option>
           <option *ngFor="let licence of licenses" [value]="licence.licenseId">{{ licence.establishmentName }}</option>
         </select>
       </app-field>
-      <app-field class="col-md-6 col-xs-12" label="Reporting Period" [required]="true" *ngIf="reportForm.get('licence').valid"
+      <app-field class="col-md-3 col-xs-12" label="Reporting Period" [required]="true" *ngIf="reportForm.get('licence').valid"
         errorMessage="Please select a reporting period from the dropdown list" [isFullWidth]="true">
         <select class="form-control" style="width: 250px;" formControlName="period" (change)="periodChanged($event);">
           <option value="">Choose the reporting period</option>
-          <option *ngFor="let report of monthlyReports" [value]="report.monthlyReportId">{{ report.reportingPeriodMonth }}-{{ report.reportingPeriodYear }}</option>
+          <option *ngFor="let report of monthlyReports" [value]="report.monthlyReportId">{{ report.reportingPeriodMonth }}-{{ report.reportingPeriodYear }} - {{ report.status }}</option>
         </select>
+      </app-field>
+    </div>
+    <div class="row" *ngIf="selectedMonthlyReport">
+      <app-field class="col-md-2 col-xs-12" label="Reporting Month" disabled>
+        <p>{{selectedMonthlyReport.reportingPeriodMonth}}</p>
+      </app-field>
+      <app-field class="col-md-2 col-xs-12" label="Reporting Year" disabled>
+        <p>{{selectedMonthlyReport.reportingPeriodYear}}</p>
+      </app-field>
+      <app-field class="col-md-2 col-xs-12" label="Status" disabled>
+        <p>{{selectedMonthlyReport.status}}</p>
       </app-field>
     </div>
     <div class="row" *ngIf="selectedMonthlyReport">
