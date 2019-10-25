@@ -52,12 +52,6 @@
         </div>
       </section>
 
-      <h3 class="blue-header">PROPOSED LICENSEE</h3>
-      <section class="padded-section">
-        <label>Account: </label> <span> {{form.get('proposedOwner.accountName')?.value}}</span> <br>
-        <label>Type: </label> <span> {{form.get('proposedOwner.businessType')?.value}}</span><br>
-        <label>Contact Person: </label> <span> {{form.get('proposedOwner.contactName')?.value}}</span><br>
-      </section>
 
       <h3 class="blue-header">CONFIRM CANCELLATION OF TRANSFER</h3>
       <section class="padded-section">
@@ -66,8 +60,7 @@
           <section style="display: flex">
             <input type="checkbox" formControlName="transferConsent">
             <!-- <span class="error-states">*</span> -->
-            <div style="padding-left: 10px;"> I agree to cancel the transfer of my cannabis retail store licence to the above legal
-              entity.
+            <div style="padding-left: 10px;"> I agree to cancel the transfer of my cannabis retail store licence.
             </div>
           </section>
         </app-field>
