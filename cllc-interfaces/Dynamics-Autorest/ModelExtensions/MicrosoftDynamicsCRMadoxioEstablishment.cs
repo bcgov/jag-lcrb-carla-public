@@ -10,8 +10,5 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_Licencee@odata.bind")]
         public string AdoxioLicenceeODataBind { get; set; }
 
-        [JsonProperty(PropertyName = "adoxio_isopen")]
-        public bool? AdoxioIsopen { get; set; }
-
     }
 }

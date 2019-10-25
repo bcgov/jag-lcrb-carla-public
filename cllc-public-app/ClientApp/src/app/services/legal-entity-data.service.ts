@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
+import { Observable } from 'rxjs';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { debounce, catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { LegalEntity } from '@models/legal-entity.model';
-import { LicenseeChangeLog } from '@models/legal-entity-change.model';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class LegalEntityDataService extends DataService {
@@ -32,36 +32,6 @@ export class LegalEntityDataService extends DataService {
     return this.http.get<LegalEntity[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
 
-  }
-
-  /**
-   * Gets the legal entity tree
-   */
-  getCurrentHierachy() {
-    const apiPath = 'api/legalentities/current-hierarchy';
-    return this.http.get<LegalEntity>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
-
-  }
-
-  /**
-   * Gets the list of change logs for an application
-   */
-  getChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
-    const apiPath = `api/legalentities/legal-entity-change-logs/${applicationId}`;
-    return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
-
-  }
-
-  /**
-   *  Saves the legal entity change log tree
-   * @param changeTree - The root of the change tree (This is the change tree)
-   * @param applicationId - The application to associte to the change logs
-   */
-  saveLicenseeChanges(changeTree: LicenseeChangeLog, applicationId: string) {
-    return this.http.post<LegalEntity>(`api/legalentities/save-change-tree/${applicationId}`, changeTree, { headers: this.headers })
-      .pipe(catchError(this.handleError));
   }
 
   /**

@@ -397,14 +397,6 @@ namespace Gov.Lclb.Cllb.Public
                         Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
                     .CreateLogger();
             }
-            else
-            {
-                Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
-                    .CreateLogger();
-            }
 
         }
 

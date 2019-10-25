@@ -348,28 +348,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             return dynamicsApplicationList;
         }
 
-        public static IEnumerable<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> GetInventoryReportsForMonthlyReport(this IDynamicsClient _dynamicsClient, string monthlyReportId)
-        {
-            IEnumerable<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> inventoryReportsList = null;
-            if (string.IsNullOrEmpty(monthlyReportId))
-            {
-                inventoryReportsList = _dynamicsClient.Cannabisinventoryreports.Get().Value;
-            }
-            else
-            {
-                var filter = $"_adoxio_monthlyreportid_value eq {monthlyReportId}";
-
-                try
-                {
-                    inventoryReportsList = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
-                }
-                catch (HttpOperationException)
-                {
-                    inventoryReportsList = null;
-                }
-            }
-            return inventoryReportsList;
-        }
 
         public static IEnumerable<MicrosoftDynamicsCRMadoxioApplication> GetApplicationsForLicenceByApplicant(this IDynamicsClient _dynamicsClient, string applicantId)
         {
@@ -758,5 +736,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
+
     }
 }

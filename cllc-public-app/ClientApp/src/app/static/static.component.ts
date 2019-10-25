@@ -1,4 +1,5 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({

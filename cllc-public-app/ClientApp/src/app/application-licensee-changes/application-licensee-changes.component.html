@@ -1,8 +1,0 @@
-<div style="margin: 0 20px;">
-  <h1>Licensee Changes Application</h1>
-
-  <app-licensee-tree *ngIf="currentChangeLogs && currentLegalEntities" [currentChangeLogs]="currentChangeLogs" (editedTree)="editedTree = $event"
-    [currentLegalEntityTree]="currentLegalEntities" [enableEditing]="true"></app-licensee-tree>
-
-    <button class="btn btn-primary" style="margin-top: 10px;" (click)="save()">Save</button>
-</div>

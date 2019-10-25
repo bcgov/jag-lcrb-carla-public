@@ -1,31 +1,26 @@
 <div class="upload-wrapper">
   <p></p>
-  <ngx-file-drop [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}"
-    (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)"
-    (onFileLeave)="fileLeave($event)">
-    <ng-template ngx-file-drop-content-tmp>
-      <div style="text-align: center">
-        <h3></h3>
-        <br>
-        <br>
-        <span>{{uploadHeader}} </span>
-        <a href="javascript:void(0)" [ngClass]="{'no-drop': disableFileUpload()}"
-          (click)="browseFiles(fileBrowserM, fileBrowser)">BROWSE</a>.
-        <br>
-        <span style="color: #A9A9A9">{{fileTypes}}</span>
-        <br>
-        <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
-        <br>
-        <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" multiple style="visibility: hidden;"
-          #fileBrowserM>
-        <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" style="visibility: hidden;" #fileBrowser>
-      </div>
-    </ng-template>
-  </ngx-file-drop>
+  <file-drop [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}" (onFileDrop)="dropped($event)"
+    customstype="filedrop" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+    <div style="text-align: center">
+      <h3></h3>
+      <br>
+      <br>
+      <span>{{uploadHeader}} </span>
+      <a href="javascript:void(0)" [ngClass]="{'no-drop': disableFileUpload()}" (click)="browseFiles(fileBrowserM, fileBrowser)">BROWSE</a>.
+      <br>
+      <span style="color: #A9A9A9">{{fileTypes}}</span>
+      <br>
+      <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
+      <br>
+      <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" multiple style="visibility: hidden;" #fileBrowserM>
+      <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" style="visibility: hidden;" #fileBrowser>
+    </div>
+  </file-drop>
   <div style="margin-top: 5px; color: #2C679E;">
     <div [ngBusy]="busy"></div>
     <section *ngFor="let item of files; let i=index" class="file-list">
-      <a href="{{item.downloadUrl}}">{{ item.name }}</a>
+    <a href="{{item.downloadUrl}}" >{{ item.name }}</a>
       <span>
         <span style="margin-right: 20px; color: #A9A9A9">{{item.size}} kb</span>
         <a *ngIf="enableFileDeletion" href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
