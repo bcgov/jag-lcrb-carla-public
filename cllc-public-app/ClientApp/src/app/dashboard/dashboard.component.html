@@ -16,7 +16,7 @@
             details.
           </p>
           <div>
-            <a routerLink="/account-profile" style="float: right;">
+            <a routerLink="/account-profile" style="float: right;" id="editAccountProfile">
               <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Account Profile</a>
             <div style="clear: both;"></div>
           </div>
@@ -65,7 +65,22 @@
         </div>
       </section>
       <p></p>
-      <app-associate-content [account]="account" [isIndigenousNation]="indigenousNationModeActive"></app-associate-content>
+      <section appRemoveIfFeatureOff="LicenseeChanges">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <app-licensee-tree *ngIf="currentLegalEntities" [currentChangeLogs]="[]"
+            [currentLegalEntityTree]="currentLegalEntities" [enableEditing]="false"></app-licensee-tree>
+          <br>
+          <br>
+          <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
+            <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Start Licensee Change Application</a>
+          <div style="clear: both;"></div>
+        </div>
+      </section>
+      <p></p>
+      <app-associate-content [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      </app-associate-content>
       <p></p>
     </div>
   </div>
