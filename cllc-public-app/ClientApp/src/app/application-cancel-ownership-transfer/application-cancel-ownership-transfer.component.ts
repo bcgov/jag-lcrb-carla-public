@@ -54,16 +54,8 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
       establishmentAddressStreet: [''],
       establishmentAddressCity: [''],
       establishmentAddressPostalCode: [''],
-      establishmentParcelId: [''],
-      proposedOwner: this.fb.group({
-        accountId: ['', [Validators.required]],
-        accountName: [{value: '', disabled: true}],
-        contactName: [{value: '', disabled: true}],
-        businessType: [{value: '', disabled: true}],
-      }),
-      transferConsent: ['', [this.customRequiredCheckboxValidator()]],
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      establishmentParcelId: [''],      
+      transferConsent: ['', [this.customRequiredCheckboxValidator()]]     
     });
 
     this.store.select(state => state.currentAccountState.currentAccount)
@@ -88,14 +80,12 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
 
 
 
-
-
   /**
    * Save form data
    * @param showProgress
    */
     save(showProgress: boolean = false): Observable<boolean> {
-      return this.licenseDataService.cancelTransfer(this.licence.id, this.form.get('proposedOwner.accountId').value)
+        return this.licenseDataService.cancelTransfer(this.licence.id, this.account.id)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error submitting cancel transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -131,11 +121,6 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
     for (const c in this.form.controls) {
       if (typeof (this.form.get(c).markAsTouched) === 'function') {
         this.form.get(c).markAsTouched();
-      }
-    }
-    for (const c in (<FormGroup>this.form.get('proposedOwner')).controls) {
-      if (typeof (this.form.get(`proposedOwner.${c}`).markAsTouched) === 'function') {
-        this.form.get(`proposedOwner.${c}`).markAsTouched();
       }
     }
     this.showValidationMessages = false;
