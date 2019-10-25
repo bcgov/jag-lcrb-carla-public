@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Response, Http } from '@angular/http';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Worker } from '../models/worker.model';

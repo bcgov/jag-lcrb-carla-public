@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Headers, Response, ResponseContentType } from '@angular/http';
-
 import { FileSystemItem } from '../models/file-system-item.model';
 import { Application } from '../models/application.model';
 import { ApplicationSummary } from '../models/application-summary.model';

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NewsletterDataService } from '../services/newsletter-data.service'
+import { NewsletterDataService } from '../services/newsletter-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -21,9 +21,7 @@ export class NewsletterConfirmationComponent implements OnInit {
   constructor(private newsletterDataService: NewsletterDataService, private route: ActivatedRoute,
     private router: Router) {
     this.route.paramMap.subscribe(params => this.slug = params.get('slug'));
-    this.route.paramMap.subscribe(params => {
-      this.code = params.get('code');
-    });
+    this.route.queryParamMap.subscribe(params => this.code = params.get('code'));
   }
 
   ngOnInit(): void {
