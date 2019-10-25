@@ -1,8 +1,6 @@
 <div [ngClass]="{ 'less': !showMore, 'more': showMore}">
-  <ng-container class="content-insert">
-    <ng-content select="[less]"></ng-content>
-    <ng-content select="[more]"></ng-content>
-  </ng-container>
+  <ng-content select="[less]"></ng-content>
+  <ng-content select="[more]"></ng-content>
 
   <div *ngIf="!showMore" class="fade">
   </div>

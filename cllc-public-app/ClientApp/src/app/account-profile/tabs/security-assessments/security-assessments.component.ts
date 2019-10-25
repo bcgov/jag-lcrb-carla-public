@@ -23,7 +23,7 @@ export class SecurityAssessmentsComponent implements OnInit {
   busy: Promise<any>;
   busyObsv: Subscription;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private legalEntityDataservice: LegalEntityDataService,
     private route: ActivatedRoute,

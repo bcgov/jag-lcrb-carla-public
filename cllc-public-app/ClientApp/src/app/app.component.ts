@@ -1,7 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { User } from './models/user.model';
-import { MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { isDevMode } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
@@ -12,9 +11,6 @@ import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
 import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
 import { Account } from './models/account.model';
-import { VersionInfoDataService } from '@services/version-info-data.service';
-import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
-import { VersionInfo } from './models/version-info.model';
 
 @Component({
   selector: 'app-root',
@@ -29,27 +25,19 @@ export class AppComponent extends FormBase implements OnInit {
   public isNewUser: boolean;
   public isDevMode: boolean;
   public showMap: boolean;
-  public showFederalReporting: boolean;
-  public versionInfo: VersionInfo;
   isAssociate = false;
   account: Account;
 
   constructor(
-    public dialog: MatDialog,
     private renderer: Renderer2,
     private router: Router,
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
-    public featureFlagService: FeatureFlagService,
-    private versionInfoDataService: VersionInfoDataService,
-  ) {
+    public featureFlagService: FeatureFlagService) {
     super();
     featureFlagService.featureOn('Maps')
       .subscribe(x => this.showMap = x);
-
-    featureFlagService.featureOn('FederalReporting')
-      .subscribe(x => this.showFederalReporting = x);
-
+    
     this.isDevMode = isDevMode();
     this.router.events
       .pipe(takeWhile(() => this.componentActive))
@@ -71,7 +59,6 @@ export class AppComponent extends FormBase implements OnInit {
 
   ngOnInit(): void {
     this.reloadUser();
-    this.loadVersionInfo();
 
     this.store.select(state => state.legalEntitiesState)
       .pipe(takeWhile(() => this.componentActive))
@@ -81,28 +68,6 @@ export class AppComponent extends FormBase implements OnInit {
       });
 
   }
-
-  loadVersionInfo() {
-    this.versionInfoDataService.getVersionInfo()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((versionInfo: VersionInfo) => {
-        this.versionInfo = versionInfo;
-      });
-  }
-
-  openVersionInfoDialog() {
-    // set dialogConfig settings
-    const dialogConfig = {
-      disableClose: true,
-      autoFocus: true,
-      width: '500px',
-      data: this.versionInfo
-    };
-
-    // open dialog, get reference and process returned data from dialog
-    const dialogRef = this.dialog.open(VersionInfoDialogComponent, dialogConfig);
-  }
-
 
   reloadUser() {
     this.store.select(state => state.currentUserState.currentUser)
@@ -126,11 +91,11 @@ export class AppComponent extends FormBase implements OnInit {
   }
 
   showBceidTermsOfUse(): boolean {
-    const result = (this.currentUser
+    const result =  (this.currentUser
       && this.currentUser.businessname
       && this.currentUser.isNewUser === true)
       || (this.account && !this.account.termsOfUseAccepted);
-    return result;
+      return result;
   }
 
   isIE10orLower() {
