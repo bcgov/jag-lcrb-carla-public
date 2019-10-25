@@ -21,6 +21,11 @@ export class LicenseDataService extends DataService {
     return this.http.get<License>(url, { headers: this.headers });
   }
 
+  cancelTransfer(licenceId: string, accountId: string) {
+    const url = `${this.apiPath}cancel-transfer`;
+    return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
+  }
+
   initiateTransfer(licenceId: string, accountId: string) {
     const url = `${this.apiPath}initiate-transfer`;
     return this.http.post<Application>(url, {licenceId, accountId}, { headers: this.headers });
