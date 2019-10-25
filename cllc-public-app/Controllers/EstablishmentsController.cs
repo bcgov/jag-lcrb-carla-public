@@ -153,7 +153,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             if (license.AdoxioLicenceType != null && license.AdoxioLicenceType.AdoxioName.Equals("Cannabis Retail Store"))
                             {
-                                bool add = false;
+                                // Change 2019-10-24 - default to add, as we no longer check to see if the establishment has had the final inspection.
+                                bool add = true;
 
                                 // only consider the item if the inspection is complete.
 
@@ -161,7 +162,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                                 var relatedApplications = applications.Where(app => app._adoxioAssignedlicenceValue == license.AdoxioLicencesid).ToList();
 
-
+                                // Change 2019-10-24 - no longer filter out establishments that have not passed the final inspection.
+                                /*
                                 if (relatedApplications != null)
                                 {
                                     foreach (var item in relatedApplications)
@@ -173,7 +175,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                         }
                                     }
                                 }
-
+                                */
 
                                 if (add && license._adoxioEstablishmentValue != null)
                                 {
@@ -199,8 +201,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                                         add = false;
                                                     }
 
-
-
                                                 }
                                                 else
                                                 {
@@ -213,7 +213,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                         {
                                             establishmentMapData.Add(new EstablishmentMapData()
                                             {
-                                                id = establishment.AdoxioEstablishmentid.ToString(),
+                                                id = establishment.AdoxioEstablishmentid,
                                                 Name = establishment.AdoxioName,
                                                 License = license.AdoxioLicencenumber,
                                                 Phone = establishment.AdoxioPhone,
@@ -222,7 +222,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                                 AddressStreet = establishment.AdoxioAddressstreet,
                                                 Latitude = (decimal)establishment.AdoxioLatitude,
                                                 Longitude = (decimal)establishment.AdoxioLongitude,
-                                            });
+                                                IsOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value
+                                            }) ;
                                         }
                                     }
                                 }
@@ -255,6 +256,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
             }
+
+            // sort the establishment list by the city alphabetically 
+            establishmentMapData = establishmentMapData.OrderBy(o => o.AddressCity).ToList();
+
             return new JsonResult(establishmentMapData);
         }
 

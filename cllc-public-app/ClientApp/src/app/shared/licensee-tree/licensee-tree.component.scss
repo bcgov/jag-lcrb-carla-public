@@ -1,0 +1,87 @@
+.example-tree-invisible {
+    display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+}
+
+.edited-node {
+    color: orange;
+}
+
+.added-node {
+    color: green;
+}
+
+.deleted-node {
+    text-decoration: line-through;
+    color: red;
+}
+
+.old-value {
+    text-decoration: line-through;
+}
+
+.eq-table {
+    border-spacing: 1px 3px;
+    border-collapse: separate;
+    width: 100%;
+
+    td,
+    th {
+        background-color: #F1F4FA;
+        color: #000;
+        padding: 10px;
+    }
+
+    th {
+        text-align: center;
+    }
+}
+
+::ng-deep {
+    .mat-tree-node {
+        min-height: 28px !important;
+
+        .mat-icon-button {
+            line-height: 20px !important;
+            height: 20px !important;
+        }
+    }
+
+    .not-editable.mat-tree {
+        background-color: #F1F4FA !important;
+    }
+
+    .not-editable .tree-label {
+            font-weight: normal !important;
+            font-size: 14px !important;
+    }
+
+}
+
+.name-cell {
+    width: 300px;
+}
+
+.change-type-cell {
+    width: 100px;
+}
+
+.email-cell {
+    width: 300px;
+}
+
+.dob-cell,
+.shares-cell {
+    width: 200px;
+}
+
+.tree-label {
+    font-weight: 700;
+    font-size: 18px;
+}

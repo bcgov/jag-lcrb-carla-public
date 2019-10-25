@@ -273,7 +273,7 @@
             <a routerLink="/dashboard">
               <i class="fas fa-trash-alt" style="margin-right: 10px;"></i>Cancel & Close</a>
             <span style="float: right;">
-              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont">
+              <button style="margin-left: 10px" (click)="gotoReview()" class="btn btn-primary save-cont" id="continueToApp">
                 <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
                 <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>
                 <span *ngIf="useInStepperMode">CONTINUE TO ORGANIZATION REVIEW</span>&nbsp;

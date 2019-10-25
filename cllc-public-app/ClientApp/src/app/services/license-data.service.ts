@@ -1,7 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-
-
 import { ApplicationLicenseSummary } from '../models/application-license-summary.model';
 import { Application } from '../models/application.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -22,6 +19,11 @@ export class LicenseDataService extends DataService {
   getLicenceById(licenseId: string): Observable<License> {
     const url = `${this.apiPath}${licenseId}`;
     return this.http.get<License>(url, { headers: this.headers });
+  }
+
+  cancelTransfer(licenceId: string, accountId: string) {
+    const url = `${this.apiPath}cancel-transfer`;
+    return this.http.post<Application>(url, { licenceId, accountId }, { headers: this.headers });
   }
 
   initiateTransfer(licenceId: string, accountId: string) {
