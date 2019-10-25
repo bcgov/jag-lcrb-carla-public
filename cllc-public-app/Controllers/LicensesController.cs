@@ -120,19 +120,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error deleting proposed owner");
-                // fail if we can't create.
-                throw;
+                if (httpOperationException.Response.StatusCode != System.Net.HttpStatusCode.NotFound)
+                {
+                    _logger.LogError(httpOperationException, "Error deleting proposed owner");
+                    throw;
+                }                
             }            
 
             // find the related application and delete it.
             foreach (var application in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence)
             {
-                if (application.AdoxioApplicationTypeId.AdoxioName.Contains( "CRS Transfer of Ownership"))
+                // get the full application type.]
+                var applicationType = _dynamicsClient.GetApplicationTypeById(application._adoxioApplicationtypeidValue).GetAwaiter().GetResult();
+                if (applicationType.AdoxioName.Contains( "CRS Transfer of Ownership"))
                 {
                     var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
                     {
-                        Statuscode = (int?)AdoxioApplicationStatusCodes.Cancelled
+                        //Statecode = (int?)AdoxioApplicationStatusCodes.Cancelled,
+                        Statuscode = (int?)AdoxioApplicationStatusCodes.Terminated
                     };
                     try
                     {
