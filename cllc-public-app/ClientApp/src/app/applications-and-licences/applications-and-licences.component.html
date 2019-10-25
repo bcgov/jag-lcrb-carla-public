@@ -275,9 +275,13 @@
                 </div>
               </td>
               <td *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired"> LICENCE EXPIRED</td>
-              <td
-                *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
-                class="licence-expired"> TRANSFER INITIATED</td>
+              <td *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
+                  class="licence-expired">
+                TRANSFER INITIATED <br />
+                <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]">
+                  <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
+                </a>
+              </td>
             </tr>
           </table>
         </mat-tab>
