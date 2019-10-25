@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpPost("cancel-transfer")]
-        public ActionResult CancelTransfer(LicenceTranster item)
+        public ActionResult CancelTransfer(LicenceTransfer item)
         {
             if (!ModelState.IsValid)
             {
@@ -99,8 +99,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var no = 845280000;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    ProposedOwnerODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
+                {                    
                     AdoxioTransferrequested = no 
                 };
 
@@ -114,15 +113,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw;
             }
 
-            // Delete the Proposed Owner.
+            // Delete the Proposed Owner (ProposedOwnerODataBind)
+            try
+            {
+                _dynamicsClient.Licenceses.DeleteReferenceWithHttpMessagesAsync(item.LicenceId, "adoxio_ProposedOwner").GetAwaiter().GetResult();
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error deleting proposed owner");
+                // fail if we can't create.
+                throw;
+            }            
 
+            // find the related application and delete it.
+            foreach (var application in adoxioLicense.AdoxioAdoxioLicencesAdoxioApplicationAssignedLicence)
+            {
+                if (application.AdoxioApplicationTypeId.AdoxioName.Contains( "CRS Transfer of Ownership"))
+                {
+                    var patchApplication = new MicrosoftDynamicsCRMadoxioApplication()
+                    {
+                        Statuscode = (int?)AdoxioApplicationStatusCodes.Cancelled
+                    };
+                    try
+                    {
+                        _dynamicsClient.Applications.Update(application.AdoxioApplicationid, patchApplication);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, "Error cancelling related application");
+                        // fail if we can't create.
+                        throw;
+                    }
+
+                }
+            }
 
 
             return Ok();
         }
 
         [HttpPost("initiate-transfer")]
-        public ActionResult InitiateTranster(LicenceTranster item)
+        public ActionResult InitiateTransfer(LicenceTransfer item)
         {
             if (!ModelState.IsValid)
             {
@@ -141,17 +172,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
-            // delete the related application
-
-            // update the licence such that the transfer requested is cleared.
 
             try
             {
-                var no = 845280001;
+                var yes = 845280001;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
                     ProposedOwnerODataBind = null,
-                    AdoxioTransferrequested = no
+                    AdoxioTransferrequested = yes
                 };
 
                 // create application
@@ -801,7 +829,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
     }
 
-    public class LicenceTranster
+    public class LicenceTransfer
     {
         public string AccountId { get; set; }
         public string LicenceId { get; set; }
