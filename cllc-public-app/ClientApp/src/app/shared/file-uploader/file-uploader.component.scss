@@ -1,11 +1,11 @@
-::ng-deep .ngx-file-drop__drop-zone {
+::ng-deep .drop-zone {
     border: 1px dashed #CCC !important;
     background-color: #F2F2F2;
     border-radius: 5PX !important;
     padding-bottom: 20px;
 }
 
-::ng-deep .ngx-file-drop__content {
+::ng-deep .content {
     color: #424242 !important;
     overflow: hidden;
 }

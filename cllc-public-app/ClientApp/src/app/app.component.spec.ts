@@ -12,8 +12,6 @@ import { AppState } from '@app/app-state/models/app-state';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { Account } from '@models/account.model';
 import { of } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
-import { VersionInfoDataService } from '@services/version-info-data.service';
 
 let accountDataServiceStub: Partial<AccountDataService>;
 let featureFlagServiceStub: Partial<FeatureFlagService>;
@@ -41,8 +39,6 @@ describe('AppComponent', () => {
       ],
       providers: [
         provideMockStore({ initialState }),
-        { provide: VersionInfoDataService, useValue: {getVersionInfo: () => of({})} },
-        { provide: MatDialog, useValue: {} },
         { provide: FeatureFlagService, useValue: featureFlagServiceStub },
         { provide: AccountDataService, useValue: accountDataServiceStub }
       ],

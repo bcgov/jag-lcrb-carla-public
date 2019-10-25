@@ -19,7 +19,7 @@ export const INSERT_TYPES = {
   template: `<div #container></div>`,
 })
 export class InsertComponent implements OnInit {
-  @ViewChild('container', { read: ViewContainerRef, static: true }) container: ViewContainerRef;
+  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
   currentInsert: any = null;
 
   @Input() id: string;
