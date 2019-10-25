@@ -15,6 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FederalTrackingController : ControllerBase
     {
         private readonly string DOCUMENT_LIBRARY = "Federal Reporting";
@@ -33,16 +34,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Generate a csv with the federal tracking report for a given reporting period
+        /// Get a csv with the federal tracking report for a given reporting period
         /// </summary>
         /// <returns></returns>
         [HttpGet("{month}/{year}")]
-        public IActionResult GenerateFederalTrackingReport(int month, int year)
+        public IActionResult GetFederalTrackingReport(int month, int year)
         {
-            if (_configuration["FEATURE_FEDERAL_CSV"] == null)
-            {
-                return new NotFoundResult();
-            }
             if (month < 1 || month > 12 || year < 2018)
             {
                 return new BadRequestResult();
@@ -63,8 +60,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         ReportingPeriodMonth = monthStr,
                         ReportingPeriodYear = yearStr,
                         RetailerDistributor = report.AdoxioRetailerdistributor?.ToString() ?? "1",
-                        CompanyName = report.AdoxioLicenseenametext,
-                        SiteID = report.AdoxioSiteidnumber,
+                        //TBR
+                        CompanyName = report.AdoxioLicenseeId?.ToString(),
+                        //TBR
+                        SiteID = "BC" + report.AdoxioLicencenumber,
                         City = report.AdoxioCity,
                         PostalCode = report.AdoxioPostalcode,
                         ManagementEmployees = report.AdoxioEmployeesmanagement ?? 0,

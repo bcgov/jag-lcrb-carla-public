@@ -60,10 +60,10 @@ export class ApplicationHTMLContent {
 export class ApplicationComponent extends FormBase implements OnInit {
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
-  @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
-  @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
-  @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
-  @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
+  @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('financialIntegrityDocuments') financialIntegrityDocuments: FileUploaderComponent;
+  @ViewChild('supportingDocuments') supportingDocuments: FileUploaderComponent;
+  @ViewChild(ConnectionToNonMedicalStoresComponent) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
   savedFormData: any;
   applicationId: string;

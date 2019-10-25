@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             {
                 // start by scanning the document for blocks.
 
-                int startRepeaterPos = body.IndexOf(REPEATER_START_TAG);
+                int startRepeaterPos = body.IndexOf("<custom:repeater");
                 if (startRepeaterPos > -1)
                 {
                     int endRepeaterStartTagPos = body.IndexOf(">", startRepeaterPos);
