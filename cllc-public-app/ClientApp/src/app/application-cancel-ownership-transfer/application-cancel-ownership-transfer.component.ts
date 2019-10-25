@@ -94,8 +94,8 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
    * Save form data
    * @param showProgress
    */
-  save(showProgress: boolean = false): Observable<boolean> {
-    return this.licenseDataService.initiateTransfer(this.licence.id, this.form.get('proposedOwner.accountId').value)
+    save(showProgress: boolean = false): Observable<boolean> {
+      return this.licenseDataService.cancelTransfer(this.licence.id, this.form.get('proposedOwner.accountId').value)
       .pipe(takeWhile(() => this.componentActive))
       .pipe(catchError(() => {
         this.snackBar.open('Error submitting cancel transfer', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
