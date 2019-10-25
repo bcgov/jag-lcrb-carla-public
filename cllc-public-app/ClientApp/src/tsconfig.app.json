@@ -2,16 +2,15 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "downlevelIteration": true,
     "outDir": "../out-tsc/app",
     "sourceMap": true,
     "declaration": false,
-    "module": "esnext",
+    "module": "es2015",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -23,14 +22,11 @@
       "dom"
     ],
     "paths": {
+      "@app*": ["app/*"],
       "@models*": ["app/models*"],
       "@services*": ["app/services*"],
-      "@shared*": ["app/shared*"],
-      "@app*": ["app*"]
+      "@shared*": ["app/shared*"]
     }
-  },
-  "angularCompilerOptions": {
-    "enableIvy": true
   },
   "exclude": [
     "test.ts",

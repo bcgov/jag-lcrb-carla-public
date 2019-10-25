@@ -155,16 +155,10 @@ function EstablishmentsMap(options) {
     var _SEARCH_MIN_ZOOM_LEVEL = 14;
 
     // Leaflet style for the _establishmentMarkers
-    var _establishment_OPEN_MARKER_STYLE = {
+    var _establishment_MARKER_STYLE = {
           radius: 3, // The radius of the circleMarker
           color: '#355A20', // The color of the circleMarker; green for Cannabis.
           fillOpacity: 1.0 // How transparent the circleMarker's fill is
-    };
-
-    var _establishment_NOT_OPEN_MARKER_STYLE = {
-        radius: 3, // The radius of the circleMarker
-        color: '#999999', // The color of the circleMarker; grey for not open.
-        fillOpacity: 1.0 // How transparent the circleMarker's fill is
     };
 
     /** Private members dynamically set */
@@ -435,14 +429,13 @@ function EstablishmentsMap(options) {
         // subset of the JSON returned by the Python establishment search service.
       var contentObj = {
         // <img src=assets/placeholder_credential.png height=50 width=50>
-        'License': 'License:' + (establishment.license || ''),
-//          'Type': '<strong>Non-Medical Cannabis Retail Store</strong>',
+        'Type': '<strong>Non-Medical Cannabis Retail Store</strong>',
         'Name': establishment.name || '',
+//            'License': 'License:' + (establishment.license || ''),
         'Phone': establishment.phone || '',
         'Street Address': establishment.addressStreet || '',
         'City': establishment.addressCity || '',
-        'Postal': establishment.addressPostal || '',
-        'Status': establishment.isOpen ? 'Open' : 'Coming Soon'
+        'Postal': establishment.addressPostal || ''
         };
 
         // We build the contentString from the contentObj dictionary, using paragraphs as property delimiters.
@@ -467,6 +460,8 @@ function EstablishmentsMap(options) {
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
 
+        // Markers should only be clickable when there is no establishmentPushpin available.
+      var style = $.extend({}, _establishment_MARKER_STYLE, { interactive: !_establishmentPushpin});
         var establishmentPushpinGuid = null;
         // Now we draw the Establishments, checking to prevent a marker from being drawn where a pushpin will be.
         if (_exists(_establishmentPushpin) && _exists(_establishmentPushpin.establishmentDetails) && _exists(_establishmentPushpin.establishmentDetails.guid)) {
@@ -475,15 +470,9 @@ function EstablishmentsMap(options) {
         Establishments.forEach(function (establishment) {
             var latLong = _getLatLngInBC(establishment.latitude, establishment.longitude);
             var establishmentGuid = establishment.id;
-            if (_exists(latLong) && _canDrawestablishment(establishmentPushpinGuid, establishmentGuid))
-            {
+          if (_exists(latLong) && _canDrawestablishment(establishmentPushpinGuid, establishmentGuid)) {
               // icon marker
               // var establishmentMarker = L.marker(latLong, { icon: greenIcon, interactive: !_establishmentPushpin });
-
-              var markerStyle = establishment.isOpen ? _establishment_OPEN_MARKER_STYLE : _establishment_NOT_OPEN_MARKER_STYLE;
-              var style = $.extend({}, markerStyle, { interactive: !_establishmentPushpin });
-              // Markers should only be clickable when there is no establishmentPushpin available.           
-
               var establishmentMarker =L.circleMarker(latLong, style);
                 establishmentMarker.bindPopup(_generateestablishmentMarkerPopupContents(establishment));
                 establishmentMarker.addTo(_leafletMap);

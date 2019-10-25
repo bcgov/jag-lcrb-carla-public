@@ -1,114 +1,133 @@
 <mat-table #table [dataSource]="dataSource">
 
   <!-- Column -->
-  <ng-container matColumnDef="product">
-    <mat-header-cell *matHeaderCellDef>Product</mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.product}} </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{totalsLabel}} </mat-footer-cell> -->
+  <ng-container matColumnDef="rowLabel">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.rowLabel}} </mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{totalsLabel}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="openingInventory">
-    <mat-header-cell *matHeaderCellDef style="padding-left: 5px;">Opening Inventory
+  <ng-container matColumnDef="seeds">
+    <mat-header-cell *matHeaderCellDef style="padding-left: 5px;">Seeds
+      <br> (Packaged units)
     </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.openingInventory">
+      <input type="number" class="form-control" [(ngModel)]="element.seeds">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('seeds')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('seeds')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="domesticAdditions">
-    <mat-header-cell *matHeaderCellDef>Quantity received - domestic</mat-header-cell>
+  <ng-container matColumnDef="vegetativeCannabisPlants">
+    <mat-header-cell *matHeaderCellDef>Vegetative cannabis plants
+      <br> (Packaged units / # of plants)</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.domesticAdditions">
+      <input type="number" class="form-control" [(ngModel)]="element.vegetativeCannabisPlants">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('vegetativeCannabisPlants')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('vegetativeCannabisPlants')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="returnsAdditions">
-    <mat-header-cell *matHeaderCellDef>Quantity received - returns</mat-header-cell>
+  <ng-container matColumnDef="freshCannabis">
+    <mat-header-cell *matHeaderCellDef>Fresh cannabis
+      <br> (Packaged units)</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.returnsAdditions">
+      <input type="number" class="form-control" [(ngModel)]="element.freshCannabis">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('freshCannabis')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('freshCannabis')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="otherAdditions">
-    <mat-header-cell *matHeaderCellDef>Other additions to inventory</mat-header-cell>
+  <ng-container matColumnDef="driedCannabis">
+    <mat-header-cell *matHeaderCellDef>Dried Cannabis
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.otherAdditions">
+      <input type="number" class="form-control" [(ngModel)]="element.driedCannabis">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('driedCannabis')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('driedCannabis')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="domesticReductions">
-    <mat-header-cell *matHeaderCellDef>Quantity shipped - domestic</mat-header-cell>
+  <ng-container matColumnDef="ediblesSolids">
+    <mat-header-cell *matHeaderCellDef>Edibles - Solids
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.domesticReductions">
+      <input type="number" class="form-control" [(ngModel)]="element.ediblesSolids">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('ediblesSolids')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('ediblesSolids')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="returnsReductions">
-    <mat-header-cell *matHeaderCellDef>Quantity shipped - returns</mat-header-cell>
+  <ng-container matColumnDef="ediblesNonSolids">
+    <mat-header-cell *matHeaderCellDef>Edibles - Non - Solids
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.returnsReductions">
+      <input type="number" class="form-control" [(ngModel)]="element.ediblesNonSolids">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('ediblesNonSolids')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('ediblesNonSolids')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="destroyedReductions">
-    <mat-header-cell *matHeaderCellDef>Quantity destroyed</mat-header-cell>
+  <ng-container matColumnDef="inhaledExtracts">
+    <mat-header-cell *matHeaderCellDef>Extracts - Inhaled
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.destroyedReductions">
+      <input type="number" class="form-control" [(ngModel)]="element.inhaledExtracts">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('inhaledExtracts')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('inhaledExtracts')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="lostReductions">
-    <mat-header-cell *matHeaderCellDef>Quantity lost/stolen</mat-header-cell>
+  <ng-container matColumnDef="ingestedExtracts">
+    <mat-header-cell *matHeaderCellDef>Extracts - Ingested
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.lostReductions">
+      <input type="number" class="form-control" [(ngModel)]="element.ingestedExtracts">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('ingestedExtracts')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('ingestedExtracts')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="otherReductions">
-    <mat-header-cell *matHeaderCellDef>Other reductions to inventory</mat-header-cell>
+  <ng-container matColumnDef="otherExtracts">
+    <mat-header-cell *matHeaderCellDef>Extracts - Other
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.otherReductions">
+      <input type="number" class="form-control" [(ngModel)]="element.otherExtracts">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('otherExtracts')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('otherExtracts')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="closingValue">
-    <mat-header-cell *matHeaderCellDef>Value of closing inventory ($)</mat-header-cell>
+  <ng-container matColumnDef="tropicals">
+    <mat-header-cell *matHeaderCellDef>Tropicals
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.closingValue"></mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('topicals')}} </mat-footer-cell> -->
+      <input type="number" class="form-control" [(ngModel)]="element.tropicals"></mat-cell>
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('tropicals')}} </mat-footer-cell>
   </ng-container>
 
   <!-- Column -->
-  <ng-container matColumnDef="closingWeight">
-    <mat-header-cell *matHeaderCellDef>Weight of closing inventory (kg)</mat-header-cell>
+  <ng-container matColumnDef="other">
+    <mat-header-cell *matHeaderCellDef>Other
+      <br> (Packaged units)
+    </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      <input type="number" class="form-control" [(ngModel)]="element.closingWeight">
+      <input type="number" class="form-control" [(ngModel)]="element.other">
     </mat-cell>
-    <!-- <mat-footer-cell *matFooterCellDef> {{ getRowTotal('other')}} </mat-footer-cell> -->
+    <mat-footer-cell *matFooterCellDef> {{ getRowTotal('other')}} </mat-footer-cell>
   </ng-container>
 
-  <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   <ng-container *ngIf="showTotals">
-    <mat-footer-row *matFooterRowDef="columns"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
   </ng-container>
 </mat-table>

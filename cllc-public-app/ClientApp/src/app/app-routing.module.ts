@@ -29,11 +29,8 @@ import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence
 import { MapComponent } from './map/map.component';
 import { FeatureGuard } from './services/feaure-guard.service';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
-import { ApplicationCancelOwnershipTransferComponent } from './application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
 import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
-import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
-import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
 
 
 const routes: Routes = [
@@ -42,16 +39,8 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'federal-reporting',
-    component: FederalReportingComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: 'FederalReporting' }
-  },
-  {
-    path: 'licensee-changes/:applicationId',
-    component: ApplicationLicenseeChangesComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: 'LicenseeChanges' }
+    path: 'licensee-changes',
+    component: LicenseeTreeComponent
   },
   {
     path: 'account-profile',
@@ -96,14 +85,9 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard]
   },
   {
-    path: 'ownership-cancel-transfer/:licenceId',
-      component: ApplicationCancelOwnershipTransferComponent,
+    path: 'ownership-transfer/:licenceId',
+    component: ApplicationOwnershipTransferComponent,
     canActivate: [BCeidAuthGuard]
-  },
-  {
-      path: 'ownership-transfer/:licenceId',
-      component: ApplicationOwnershipTransferComponent,
-      canActivate: [BCeidAuthGuard]
   },
   {
     path: 'worker-qualification/home',

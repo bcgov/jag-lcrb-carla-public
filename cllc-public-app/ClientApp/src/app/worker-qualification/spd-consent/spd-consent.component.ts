@@ -16,8 +16,8 @@ import { ContactDataService } from '@services/contact-data.service';
   styleUrls: ['./spd-consent.component.scss']
 })
 export class SpdConsentComponent implements OnInit {
-  @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
-  @ViewChild('name', { static: true }) nameInputRef: NgForm;
+  @ViewChild('mainForm') mainForm: FileUploaderComponent;
+  @ViewChild('name') nameInputRef: NgForm;
   currentUser: any;
   workerId: string;
   form: FormGroup;
