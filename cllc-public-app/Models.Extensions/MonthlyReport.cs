@@ -8,6 +8,14 @@ using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
+    public enum MonthlyReportStatus
+    {
+        Created = 1,
+        Draft = 845280000,
+        Submitted = 845280001,
+        Closed = 845280002
+    }
+    
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
@@ -21,6 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseNumber = dynamicsMonthlyReport.AdoxioLicencenumber,
                 reportingPeriodMonth = dynamicsMonthlyReport.AdoxioReportingperiodmonth,
                 reportingPeriodYear = dynamicsMonthlyReport.AdoxioReportingperiodyear,
+                status = ((MonthlyReportStatus)dynamicsMonthlyReport.Statuscode).ToString(),
                 employeesManagement = dynamicsMonthlyReport.AdoxioEmployeesmanagement,
                 employeesAdministrative = dynamicsMonthlyReport.AdoxioEmployeesadministrative,
                 employeesSales = dynamicsMonthlyReport.AdoxioEmployeessales,
@@ -62,8 +71,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                     lostReductions = inventoryReport.AdoxioQtyloststolen,
                     otherReductions = inventoryReport.AdoxioOtherreductions,
                     closingValue = (double)inventoryReport.AdoxioValueofclosinginventory,
-                    closingWeight = (double)inventoryReport.AdoxioWeightofclosinginventory
                 };
+                if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
+                {
+                    inv.closingWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
+                }
+                if (product.AdoxioName == "Seeds")
+                {
+                    inv.totalSeeds = inventoryReport.AdoxioTotalnumberseeds;
+                }
                 monthlyReportVM.inventorySalesReports.Add(inv);
             }
 
