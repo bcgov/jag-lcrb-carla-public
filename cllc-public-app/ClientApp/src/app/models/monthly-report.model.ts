@@ -4,6 +4,7 @@ export class MonthlyReport {
   monthlyReportId: string;
   licenseId: string;
   licenseNumber: string;
+  status: string;
   establishmentName: string;
   city: string;
   postalCode: string;
