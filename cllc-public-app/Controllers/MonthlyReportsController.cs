@@ -59,7 +59,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     monthlyReports = null;
                 }
-
             }
 
             if (monthlyReports != null)
@@ -71,6 +70,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return monthlyReportsList;
+        }
+
+        /// <summary>
+        /// Verify whether currently logged in user has access to this account id
+        /// </summary>
+        /// <returns>boolean</returns>
+        private bool CurrentUserHasAccessToMonthlyReportOwnedBy(string accountId)
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            // For now, check if the account id matches the user's account.
+            // TODO there may be some account relationships in the future
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            {
+                return userSettings.AccountId == accountId;
+            }
+
+            // if current user doesn't have an account they are probably not logged in
+            return false;
         }
 
         /// GET all monthly reports in Dynamics by Licence filtered by the current user's licencee
@@ -113,18 +133,42 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("current")]
         public async Task<IActionResult> GetCurrentUserMonthlyReports()
         {
-          if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
-          {
-              return new NotFoundResult();
-          }
-          // get the current user.
-          string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
-          UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
+            {
+                return new NotFoundResult();
+            }
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
 
-          // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
-          List<MonthlyReport> monthlyReports = GetMonthlyReportsByUser(userSettings.AccountId);
+            // get all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
+            List<MonthlyReport> monthlyReports = GetMonthlyReportsByUser(userSettings.AccountId);
 
-          return new JsonResult(monthlyReports);
+            return new JsonResult(monthlyReports);
+        }
+
+        /// GET monthly report by id in Dynamics by if owned by user
+        [HttpGet("{reportId}")]
+        public async Task<IActionResult> GetMonthlyReport(string reportId)
+        {
+            if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
+            {
+                return new NotFoundResult();
+            }
+            try
+            {
+                var filter = $"adoxio_cannabismonthlyreportid eq {reportId}";
+                CannabismonthlyreportsGetResponseModel monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+                if (monthlyReportResp.Value.Count == 1 && CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReportResp.Value[0]._adoxioLicenseeidValue))
+                {
+                    return new JsonResult(monthlyReportResp.Value);
+                }
+            }
+            catch (HttpOperationException ex)
+            {
+                _logger.LogError(ex, "Error getting cannabis monthly report");
+            }
+            return new NotFoundResult();
         }
     }
 }

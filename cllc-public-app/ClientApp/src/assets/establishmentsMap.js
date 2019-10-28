@@ -446,10 +446,21 @@ function EstablishmentsMap(options) {
         };
 
         // We build the contentString from the contentObj dictionary, using paragraphs as property delimiters.
-        var contentString = '';
-        $.each(contentObj, function (contentKey, contentVal) {
-          contentString += contentVal + '<br />'; // contentKey + ': '
-        });
+        var contentString = "<table><tr><td><b><u>" + (establishment.name || '') +"</u> - <font color=\"";
+
+        if (establishment.isOpen) {
+            contentString += "#355A20\">OPEN";
+        }
+        else {  // gray for not open.
+            contentString += "#999999\">COMING SOON";
+        }
+        // <td rowspan=5 align=center valign=middle><img src=assets/BUY_LEGAL_DECAL.png alt=\"Licenced Retail Store\" style=\"width: 112px; height: 100px; max-width:112px; max-height:100px \" height=112 width=100></td>
+        contentString += "</font></b></td></tr>";
+        contentString += "<tr><td>" + (establishment.addressStreet || '') + "</td></tr >";
+        contentString += "<tr><td>" + (establishment.addressCity || '') + ", " + establishment.addressPostal + "</td></tr>";
+        contentString += "<tr><td>" + (establishment.phone || '&nbsp;') + "</td></tr>";
+        contentString += "<tr><td>Licence No: " + (establishment.license || '') + "</td></tr>";
+        contentString += "</table >";
         return contentString;
     };
 
