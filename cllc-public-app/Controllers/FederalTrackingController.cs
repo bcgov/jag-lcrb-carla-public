@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -54,9 +55,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string filter = $"adoxio_reportingperiodmonth eq '{monthStr}' and adoxio_reportingperiodyear eq '{yearStr}'";
             try
             {
-                CannabismonthlyreportsGetResponseModel resp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+                CannabismonthlyreportsGetResponseModel dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
                 List<FederalTrackingMonthlyExport> monthlyReports = new List<FederalTrackingMonthlyExport>();
-                foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in resp.Value)
+                foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in dynamicsMonthlyReports.Value)
                 {
                     FederalTrackingMonthlyExport export = new FederalTrackingMonthlyExport()
                     {
@@ -82,6 +83,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         export.PopulateProduct(inventoryReport, product);
                     }
                     monthlyReports.Add(export);
+
+                    MicrosoftDynamicsCRMadoxioCannabismonthlyreport patchRecord = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport()
+                    {
+                        AdoxioCsvexportdate = DateTime.UtcNow
+                    };
+                    _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
+                    
                 }
 
                 string filePath = "";
@@ -102,7 +110,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 return new JsonResult(new Dictionary<string, string>{
                     { "file", filePath },
-                    { "count", resp.Value.Count.ToString() },
+                    { "count", dynamicsMonthlyReports.Value.Count.ToString() },
                     { "month", month.ToString() },
                     { "year", year.ToString() }
                 });
