@@ -85,6 +85,9 @@
     <None Remove="ClientApp\src\app\models\invoice.model.ts" />
   </ItemGroup>
   <ItemGroup>
+    <None Update="ClientApp\src\assets\BUY_LEGAL_DECAL.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Contexts\ODataClient.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ODataClient.cs</LastGenOutput>
