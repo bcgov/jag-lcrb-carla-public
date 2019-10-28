@@ -2,6 +2,14 @@
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
+    public enum CannabisMonthlyReportStatus
+    {
+        Created = 1,
+        Draf = 845280000,
+        Submitted = 845280001,
+        Closed = 845280002
+    }
+
     public class MonthlyReport
     {
         public string monthlyReportId { get; set; }
