@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <h1 style="margin-top: 0;" *ngIf="['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation', 'PublicCorporation'].indexOf(businessType) !== -1">Corporate Details</h1>
   <h1 style="margin-top: 0;" *ngIf="businessType == 'Society'">Society Details</h1>
   <h1 style="margin-top: 0;" *ngIf="['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership'].indexOf(businessType) !== -1" >Patnership Details</h1>
@@ -164,7 +164,6 @@
           <div [ngClass]="{'has-error': this.isFieldError('mailingAddressProvince')}">
             <label for="">Province/State</label>
             <br>
-            <!--<input class="form-control" style="width: 250px;" type="text" id="mailProvince" formControlName="mailProvince">-->
             <select *ngIf="(corporateDetailsForm.get('mailingAddressCountry').value||'').trim().toLowerCase() == 'canada'" required class="form-control" id="mailingAddressProvince" formControlName="mailingAddressProvince" style="width: 250px;">
               <option value=""></option>
               <option value="Alberta">Alberta</option>
@@ -206,4 +205,4 @@
       </div>
     </form>
   </div>
-</div>
+</div> -->

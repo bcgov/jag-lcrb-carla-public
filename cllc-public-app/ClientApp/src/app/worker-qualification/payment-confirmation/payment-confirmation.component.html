@@ -44,12 +44,12 @@
     </div>
     <div *ngIf="!isApproved && loaded">
       <br />
-      <alert type="danger">
+      <div class="error">
         <strong>{{paymentTransactionTitle}}</strong>
         <br />
         <br />
         <div [innerHTML]="paymentTransactionMessage"></div>
-      </alert>
+      </div>
     </div>
     <div *ngIf="loaded" style="padding-top:20px">
       <p><a class="" routerLink="/worker-qualification/dashboard">
