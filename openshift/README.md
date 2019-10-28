@@ -7,7 +7,7 @@ This project uses the scripts found in [openshift-project-tools](https://github.
 
 **These scripts are designed to be run on the command line (using Git Bash for example) in the root `openshift` directory of your project's source code.**
 
-### Adding a pull secret to the OpenShift project
+### Adding a pull secret to the OpenShift project, and import Dotnet builder image
 
 RedHat requires authentication to the image repository where the Dotnet images are stored.  Follow these steps to enable this:
 
