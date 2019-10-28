@@ -268,7 +268,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Applications.Update(applicationId.ToString(), new MicrosoftDynamicsCRMadoxioApplication()
             {
                 AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
-                AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.ConsentNotValidated
+                AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.Incomplete
             });
             return false;
         }
