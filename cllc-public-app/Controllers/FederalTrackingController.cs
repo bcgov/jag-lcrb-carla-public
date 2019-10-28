@@ -11,6 +11,7 @@ using Microsoft.Rest;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Gov.Lclb.Cllb.Public.Models;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -37,32 +38,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Generate a csv with the federal tracking report for a given reporting period
         /// </summary>
         /// <returns></returns>
-        [HttpGet("{month}/{year}")]
-        public IActionResult GenerateFederalTrackingReport(int month, int year)
+        [HttpGet("generate")]
+        public IActionResult GenerateFederalTrackingReport()
         {
             if (_configuration["FEATURE_FEDERAL_CSV"] == null)
             {
                 return new NotFoundResult();
             }
-            if (month < 1 || month > 12 || year < 2018)
-            {
-                return new BadRequestResult();
-            }
 
-            string monthStr = month.ToString("00");
-            string yearStr = year.ToString();
-
-            string filter = $"adoxio_reportingperiodmonth eq '{monthStr}' and adoxio_reportingperiodyear eq '{yearStr}'";
             try
             {
+                CannabismonthlyreportsGetResponseModel previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"});
+                int currentExportId = (previousReport.Value.Count > 0) ? previousReport.Value[0].AdoxioCsvexportid + 1 : 1;
+
+                // Submitted reports
+                string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
                 CannabismonthlyreportsGetResponseModel dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
                 List<FederalTrackingMonthlyExport> monthlyReports = new List<FederalTrackingMonthlyExport>();
                 foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in dynamicsMonthlyReports.Value)
                 {
                     FederalTrackingMonthlyExport export = new FederalTrackingMonthlyExport()
                     {
-                        ReportingPeriodMonth = monthStr,
-                        ReportingPeriodYear = yearStr,
+                        ReportingPeriodMonth = report.AdoxioReportingperiodmonth,
+                        ReportingPeriodYear = report.AdoxioReportingperiodyear,
                         RetailerDistributor = report.AdoxioRetailerdistributor?.ToString() ?? "1",
                         CompanyName = report.AdoxioLicenseenametext,
                         SiteID = report.AdoxioSiteidnumber,
@@ -86,38 +84,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     MicrosoftDynamicsCRMadoxioCannabismonthlyreport patchRecord = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport()
                     {
-                        AdoxioCsvexportdate = DateTime.UtcNow
+                        AdoxioCsvexportdate = DateTime.UtcNow,
+                        AdoxioCsvexportid = currentExportId,
+                        Statuscode = (int)MonthlyReportStatus.Closed
                     };
                     _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
                     
                 }
-
-                string filePath = "";
-                using (var mem = new MemoryStream())
-                using (var writer = new StreamWriter(mem))
-                using (var csv = new CsvWriter(writer))
+                if (monthlyReports.Count > 0)
                 {
-                    csv.Configuration.RegisterClassMap<FederalTrackingMonthlyExportMap>();
-                    csv.WriteRecords(monthlyReports);
+                    string filePath = "";
+                    using (var mem = new MemoryStream())
+                    using (var writer = new StreamWriter(mem))
+                    using (var csv = new CsvWriter(writer))
+                    {
+                        csv.Configuration.RegisterClassMap<FederalTrackingMonthlyExportMap>();
+                        csv.WriteRecords(monthlyReports);
 
-                    writer.Flush();
-                    mem.Position = 0;
-                    string filename = $"{yearStr}-{monthStr}-CannabisTrackingReport.csv";
-                    bool result = _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv").GetAwaiter().GetResult();
-                    string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
-                    filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + url + filename;
+                        writer.Flush();
+                        mem.Position = 0;
+                        string filename = $"{currentExportId.ToString("0000")}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
+                        bool result = _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv").GetAwaiter().GetResult();
+                        string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
+                        filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + url + filename;
+                    }
+
+                    return new JsonResult(new Dictionary<string, string>{
+                        { "file", filePath },
+                        { "csvexportid", currentExportId.ToString("0000") },
+                        { "count", dynamicsMonthlyReports.Value.Count.ToString() }
+                    });
                 }
-
                 return new JsonResult(new Dictionary<string, string>{
-                    { "file", filePath },
-                    { "count", dynamicsMonthlyReports.Value.Count.ToString() },
-                    { "month", month.ToString() },
-                    { "year", year.ToString() }
+                    { "count", dynamicsMonthlyReports.Value.Count.ToString() }
                 });
             }
             catch (HttpOperationException httpOperationException)
             {
-                _logger.LogError(httpOperationException, "Error querying federal tracking reports");
+                _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
                 return new BadRequestResult();
             }
             catch (SharePointRestException e)
