@@ -7,11 +7,37 @@ This project uses the scripts found in [openshift-project-tools](https://github.
 
 **These scripts are designed to be run on the command line (using Git Bash for example) in the root `openshift` directory of your project's source code.**
 
-### Special notes for Non BC Government Production OpenShift deployments
+### Adding a pull secret to the OpenShift project
 
-If you are not using the BC Government Pathfinder OpenShift instance, you may need to import image streams for RHEL Dotnet Core.  A file "imagestreams.json" has been provided in the "other-templates" folder that contains a definition for these image streams.
+RedHat requires authentication to the image repository where the Dotnet images are stored.  Follow these steps to enable this:
 
-This does not apply if you are doing local testing with OpenShift Origin or Minishift; if you are using OpenShift Origin or Minishift, follow the instructions below for the use of Centos as a source image on a local build.
+1)  Sign on with a developer account to https://registry.redhat.io.  Developer accounts are free as of October 2019.
+
+2) Go to the Service Accounts section of the website, which as of October 2019 was in the top right of the web page.
+
+3) Add a service account if one does not exist.
+
+4) Once you have a service account, click on it and select the OpenShift Secret tab.
+
+5) Click on "view its contents" at the Step 1: Download secret section.  
+
+6) Copy the contents of the secret 
+
+7) Import the secret into OpenShift.  Note that you will likely need to edit the name of the secret to match naming conventions.
+
+8) In a command line with an active connection to OpenShift, and the current project set to the Tools project, run the following commands:
+
+`oc secrets link default <SECRETNAME> --for=pull`
+`oc secrets add serviceaccount/builder secrets/<SECRETNAME>`
+
+Where `<SECRETNAME>` is the name you specified in step 7 when you imported the secret.
+
+9) You can now import images from the Redhat repository.  For example:
+
+`oc import-image dotnet/dotnet-30-rhel7 --from=registry.redhat.io/dotnet/dotnet-30-rhel7 --confirm` 
+
+10) Adjust your builds to use this imported image
+
 
 ## Running in a Local OpenShift Cluster
 
@@ -40,19 +66,6 @@ This will generate local settings files for all of the builds, deployments, and 
 The settings in these files will be specific to your local configuration and will be applied when you run the `genBuilds.sh` or `genDepls.sh` scripts with the `-l` switch.
 
 ### Important Local Configuration 
-
-Before you deploy your local build configurations ...
-
-The application uses .Net 2.0 s2i images for the builds.  In the pathfinder environment these components utilize the `dotnet-20-rhel7` image which is available at registry.access.redhat.com/dotnet/dotnet-20-rhel7.  For local builds this image can still be downloaded, however you will receive errors during any builds (Docker builds) that try to use `yum` to install any additional packages.  
-
-To resolve this issue the project defines builds for `dotnet-20-runtime-centos7` and `dotnet-20-centos7`; which at the time of writing were not available in image form.  The `dotnet-20-centos7` s2i image is the CentOS equivalent of the `dotnet-20-rhel7` s2i image that can be used for local development.  These two images are not used in the Pathfinder environment and exist only to be used in a local environment.
-
-To switch to the `dotnet-20-centos7` image for local deployment, open your `cllc-public.build.local.param` file and add the following 2 lines;
-
-```
-SOURCE_IMAGE_KIND=ImageStreamTag
-SOURCE_IMAGE_NAME=dotnet-20-centos7
-```
 
 Note that you may have to comment out variables in the .param files found in jag-lcrb-carla-public-openshift\openshift.
 
