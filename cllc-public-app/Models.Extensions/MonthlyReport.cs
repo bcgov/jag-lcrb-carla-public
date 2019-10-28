@@ -15,7 +15,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         Submitted = 845280001,
         Closed = 845280002
     }
-    
     /// <summary>
     /// ViewModel transforms.
     /// </summary>
