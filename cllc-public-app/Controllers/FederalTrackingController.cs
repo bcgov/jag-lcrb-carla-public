@@ -11,6 +11,7 @@ using Microsoft.Rest;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using Gov.Lclb.Cllb.Public.Models;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -51,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 int currentExportId = (previousReport.Value.Count > 0) ? previousReport.Value[0].AdoxioCsvexportid + 1 : 1;
 
                 // Submitted reports
-                string filter = $"statuscode eq {(int)CannabisMonthlyReportStatus.Submitted}";
+                string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
                 CannabismonthlyreportsGetResponseModel dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
                 List<FederalTrackingMonthlyExport> monthlyReports = new List<FederalTrackingMonthlyExport>();
                 foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in dynamicsMonthlyReports.Value)
@@ -85,7 +86,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         AdoxioCsvexportdate = DateTime.UtcNow,
                         AdoxioCsvexportid = currentExportId,
-                        Statuscode = (int)CannabisMonthlyReportStatus.Closed
+                        Statuscode = (int)MonthlyReportStatus.Closed
                     };
                     _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
                     
