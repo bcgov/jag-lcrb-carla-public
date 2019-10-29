@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("initiate-transfer")]
         public ActionResult InitiateTransfer(LicenceTransfer item)
         {
-            if (!ModelState.IsValid)
+             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
@@ -177,13 +177,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
-
             try
             {
                 var yes = 845280001;
                 var patchLicence = new MicrosoftDynamicsCRMadoxioLicences()
                 {
-                    ProposedOwnerODataBind = null,
+                    ProposedOwnerODataBind = _dynamicsClient.GetEntityURI("accounts", item.AccountId),
                     AdoxioTransferrequested = yes
                 };
 
@@ -195,7 +194,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(httpOperationException, "Error initiating licence transfer");
                 // fail if we can't create.
                 throw (httpOperationException);
-            }
+            } 
             return Ok();
         }
 
