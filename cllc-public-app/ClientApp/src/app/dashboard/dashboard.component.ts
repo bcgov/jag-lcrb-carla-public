@@ -59,7 +59,7 @@ export class DashboardComponent extends FormBase implements OnInit {
     const newLicenceApplicationData: Application = <Application>{
       // licenseType: ApplicationTypeNames.LeaderhsipChange,
       applicantType: this.account.businessType,
-      applicationType: <ApplicationType>{ name: ApplicationTypeNames.LeaderhsipChange },
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.LicenseeChanges },
       account: this.account,
     };
 
