@@ -34,4 +34,5 @@ export interface LicenceActionApplication {
   applicationId: string;
   applicationTypeName: string;
   isPaid: boolean;
+  applicationStatus: string;
 }
