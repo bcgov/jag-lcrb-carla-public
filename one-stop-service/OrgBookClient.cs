@@ -48,18 +48,22 @@ namespace Gov.Lclb.Cllb.OneStopService
             return null;
         }
 
-        public async Task<int?> GetLicenceCredentialId(int topicId, int schemaId)
+        public async Task<int?> GetLicenceCredentialId(int topicId, int schemaId, string licenceNumber)
         {
             HttpResponseMessage resp = await Client.GetAsync(ORGBOOK_BASE_URL + ORGBOOK_API_CREDENTIAL_ENDPOINT + $"?inactive=false&latest=true&revoked=false&credential_type_id={schemaId}&topic_id={topicId}");
             if (resp.IsSuccessStatusCode)
             {
                 string _responseContent = await resp.Content.ReadAsStringAsync();
-                var response = (JObject)JsonConvert.DeserializeObject(_responseContent);
-                int count = (int)response.GetValue("total");
-                JArray results = (JArray)response.GetValue("results");
-                if (count == 1)
+                dynamic response = JObject.Parse(_responseContent);
+                foreach (JObject result in response.results)
                 {
-                    return results.First.Value<int>("id");
+                    foreach (JObject attribute in result["attributes"])
+                    {
+                        if (attribute["type"].ToString() == "licence_number" && attribute["value"].ToString() == licenceNumber)
+                        {
+                            return int.Parse(result["id"].ToString());
+                        }
+                    }
                 }
             }
             return null;
