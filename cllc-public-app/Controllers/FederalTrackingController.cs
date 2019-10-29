@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         ReportingPeriodMonth = report.AdoxioReportingperiodmonth,
                         ReportingPeriodYear = report.AdoxioReportingperiodyear,
                         RetailerDistributor = report.AdoxioRetailerdistributor?.ToString() ?? "1",
-                        CompanyName = report.AdoxioLicenseenametext,
+                        CompanyName = report.AdoxioEstablishmentnametext,
                         SiteID = report.AdoxioSiteidnumber,
                         City = report.AdoxioCity,
                         PostalCode = report.AdoxioPostalcode,
