@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
                     {
                         shownStatus = "Relocation Initiated";
                     }
-                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "Leadership Change")
+                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "Licensee Changes")
                     {
                         shownStatus = "Licensee Change Initiated";
                     }
