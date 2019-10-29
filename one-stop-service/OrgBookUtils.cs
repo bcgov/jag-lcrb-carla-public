@@ -168,6 +168,7 @@ namespace Gov.Lclb.Cllb.OneStopService
             {
                 string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
                 string licenceId = item.AdoxioLicencesid;
+                string licenceNumber = item.AdoxioLicencenumber;
                 int? orgbookTopicId = await _orgbookClient.GetTopicId(registrationId);
 
                 if (orgbookTopicId != null)
@@ -175,11 +176,11 @@ namespace Gov.Lclb.Cllb.OneStopService
                     var (schemaName, schemaVersion) = GetSchemaFromConfig(item.AdoxioLicenceType.AdoxioName);
                     
                     var schemaId = await _orgbookClient.GetSchemaId(schemaName, schemaVersion);
-                    var credentialId = await _orgbookClient.GetLicenceCredentialId((int)orgbookTopicId, (int)schemaId);
+                    var credentialId = await _orgbookClient.GetLicenceCredentialId((int)orgbookTopicId, (int)schemaId, licenceNumber);
                     if (credentialId == null)
                     {
-                        _logger.LogInformation($"Credential ID for {licenceId} not found in the orgbook.");
-                        hangfireContext.WriteLine($"Credential ID for {licenceId} not found in the orgbook.");
+                        _logger.LogInformation($"Credential ID for {licenceNumber} not found in the orgbook.");
+                        hangfireContext.WriteLine($"Credential ID for {licenceNumber} not found in the orgbook.");
                         continue;
                     }
                     string credentialLink = _orgbookClient.ORGBOOK_BASE_URL + "/en/organization/" + registrationId + "/cred/" + credentialId.ToString();
