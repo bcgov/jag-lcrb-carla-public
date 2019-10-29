@@ -95,7 +95,7 @@
         <th class="email-cell">Email</th>
         <th class="shares-cell">Number of Shares</th>
       </tr>
-      <tr *ngFor="let item of organizationShareholderChanges">
+      <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of organizationShareholderChanges;  let i = index;">
         <td>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
@@ -131,7 +131,7 @@
         <th class="email-cell">Email</th>
         <th class="shares-cell">Number of Shares</th>
       </tr>
-      <tr *ngFor="let item of individualShareholderChanges">
+      <tr  [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of individualShareholderChanges; let i = index;">
         <td>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
@@ -167,7 +167,7 @@
         <th class="email-cell">Email</th>
         <th>Position(s)</th>
       </tr>
-      <tr *ngFor="let item of leadershipChanges">
+      <tr [ngClass]="{'alt-row': i%2 === 0}"  *ngFor="let item of leadershipChanges; let i = index;">
         <td>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
