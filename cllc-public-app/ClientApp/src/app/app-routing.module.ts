@@ -28,12 +28,12 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
 import { LicenceRenewalStepsComponent } from '@app/licences/licence-renewal-steps/licence-renewal-steps.component';
 import { MapComponent } from './map/map.component';
 import { FeatureGuard } from './services/feaure-guard.service';
-import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
-import { ApplicationCancelOwnershipTransferComponent } from './application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
-import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
+import { ApplicationCancelOwnershipTransferComponent } from './applications/application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
+import { ApplicationOwnershipTransferComponent } from './applications/application-ownership-transfer/application-ownership-transfer.component';
 import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
-import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
+import { ApplicationLicenseeChangesComponent } from './applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from './licences/licences.component';
+import { ApplicationAndLicenceFeeComponent } from './applications/application-and-licence-fee/application-and-licence-fee.component';
 
 
 const routes: Routes = [

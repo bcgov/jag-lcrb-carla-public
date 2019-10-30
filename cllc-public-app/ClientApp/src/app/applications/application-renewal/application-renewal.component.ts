@@ -2,7 +2,7 @@
 
 
 import { filter, takeWhile, catchError, mergeMap } from 'rxjs/operators';
-import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
@@ -12,24 +12,19 @@ import * as currentApplicationActions from '@app/app-state/actions/current-appli
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { PaymentDataService } from '@services/payment-data.service';
-import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { Application } from '@models/application.model';
-import { FormBase, CanadaPostalRegex } from '@shared/form-base';
-import { DomSanitizer } from '@angular/platform-browser';
+import { FormBase } from '@shared/form-base';
 import {
   ApplicationCancellationDialogComponent,
   UPLOAD_FILES_MODE
-} from '@app/applications-and-licences/applications-and-licences.component';
+} from '@app/dashboard/applications-and-licences/applications-and-licences.component';
 import { Account } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
-import { EstablishmentWatchWordsService } from '../services/establishment-watch-words.service';
+import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { KeyValue } from '@angular/common';
-import { FeatureFlagService } from './../services/feature-flag.service';
-import {
-  ConnectionToNonMedicalStoresComponent
-} from '@app/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
+import { FeatureFlagService } from '@services/feature-flag.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 
 

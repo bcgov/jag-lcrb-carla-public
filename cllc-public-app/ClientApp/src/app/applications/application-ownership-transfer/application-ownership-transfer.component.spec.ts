@@ -1,5 +1,5 @@
 
-import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee.component';
+import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -9,7 +9,6 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ApplicationDataService } from '@services/application-data.service';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
@@ -17,21 +16,24 @@ import { of } from 'rxjs';
 import { Application } from '@models/application.model';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
-import { ActivatedRouteStub } from './../testing/activated-route-stub';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { FieldComponent } from '@shared/field/field.component';
 import { Account } from '@models/account.model';
+import { LicenseDataService } from '@services/license-data.service';
+import { License } from '@models/license.model';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
-let applicationDataServiceStub: Partial<ApplicationDataService>;
+let licenceDataServiceStub: Partial<LicenseDataService>;
 let dynamicsDataServiceStub: Partial<DynamicsDataService>;
 let tiedHouseConnectionsDataServiceStub: Partial<TiedHouseConnectionsDataService>;
 let matDialogStub: Partial<MatDialog>;
 let matSnackBarStub: Partial<MatSnackBar>;
 let activatedRouteStub: ActivatedRouteStub;
 
-describe('ApplicationAndLicenceFeeComponent', () => {
-  let component: ApplicationAndLicenceFeeComponent;
-  let fixture: ComponentFixture<ApplicationAndLicenceFeeComponent>;
+describe('ApplicationOwnershipTransferComponent', () => {
+  let component: ApplicationOwnershipTransferComponent;
+  let fixture: ComponentFixture<ApplicationOwnershipTransferComponent>;
+  let licenceService: LicenseDataService;
 
   const account = new Account();
   account.businessType = 'PublicCorporation';
@@ -42,15 +44,8 @@ describe('ApplicationAndLicenceFeeComponent', () => {
 
   beforeEach(async(() => {
     paymentDataServiceStub = {};
-    applicationDataServiceStub = {
-      getSubmittedApplicationCount: () => of(0),
-      cancelApplication: () => of(null),
-      updateApplication: () => of(null),
-      getApplicationById: () => of(<Application>{
-        applicationType: <any>{
-          contentTypes: []
-        }
-      }),
+    licenceDataServiceStub = {
+      getLicenceById: () => of(<License>{}),
 
     };
     dynamicsDataServiceStub = { getRecord: () => of([]) };
@@ -61,7 +56,7 @@ describe('ApplicationAndLicenceFeeComponent', () => {
     matSnackBarStub = {};
     activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
     TestBed.configureTestingModule({
-      declarations: [ApplicationAndLicenceFeeComponent, FieldComponent],
+      declarations: [ApplicationOwnershipTransferComponent, FieldComponent],
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
@@ -71,7 +66,7 @@ describe('ApplicationAndLicenceFeeComponent', () => {
         provideMockStore({ initialState }),
         FormBuilder,
         { provide: PaymentDataService, useValue: paymentDataServiceStub },
-        { provide: ApplicationDataService, useValue: applicationDataServiceStub },
+        { provide: LicenseDataService, useValue: licenceDataServiceStub },
         { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
         { provide: TiedHouseConnectionsDataService, useValue: tiedHouseConnectionsDataServiceStub },
         { provide: MatDialog, useValue: matDialogStub },
@@ -81,11 +76,13 @@ describe('ApplicationAndLicenceFeeComponent', () => {
       schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
+
+    licenceService = TestBed.get(LicenseDataService);
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApplicationAndLicenceFeeComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(ApplicationOwnershipTransferComponent);
+    component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
   });
 
