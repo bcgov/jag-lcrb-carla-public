@@ -14,11 +14,10 @@ import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.compo
 import { Application } from '@models/application.model';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { DynamicsDataService } from '@services/dynamics-data.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import {
   ApplicationCancellationDialogComponent,
   UPLOAD_FILES_MODE
-} from '@app/applications-and-licences/applications-and-licences.component';
+} from '@app/dashboard/applications-and-licences/applications-and-licences.component';
 import { Account } from '@models/account.model';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { TiedHouseConnection } from '@models/tied-house-connection.model';

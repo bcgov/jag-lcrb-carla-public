@@ -11,7 +11,6 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { of } from 'rxjs';
 import { Application } from '@models/application.model';
-import { ApplicationComponent } from '@app/application/application.component';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { FieldComponent } from '@shared/field/field.component';
 import { RouterTestingModule } from '@angular/router/testing';
