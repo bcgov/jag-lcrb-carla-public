@@ -1,9 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PaymentDataService } from '../services/payment-data.service';
+import { PaymentDataService } from '@services/payment-data.service';
 import { Subscription } from 'rxjs';
-import { AlertModule } from 'ngx-bootstrap/alert';
 
 @Component({
   selector: 'app-licence-fee-payment-confirmation',
@@ -111,7 +109,7 @@ export class LicenceFeePaymentConfirmationComponent implements OnInit {
 
         this.loaded = true;
       },
-      err => {
+      () => {
         console.log('Error occured');
       }
     );

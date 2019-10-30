@@ -14,7 +14,7 @@ import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
 import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
 import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ApplicationComponent } from './application/application.component';
+import { ApplicationComponent } from './applications/application/application.component';
 import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
@@ -22,24 +22,28 @@ import { UserConfirmationComponent } from './worker-qualification/user-confirmat
 import { WorkerPaymentConfirmationComponent } from './worker-qualification/payment-confirmation/payment-confirmation.component';
 import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-consent.component';
 import { WorkerHomeComponent } from './worker-qualification/worker-home/worker-home.component';
-import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
+import { LicenceFeePaymentConfirmationComponent } from './licences/licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
-import { LicenceRenewalStepsComponent } from '@app/licence-renewal-steps/licence-renewal-steps.component';
+import { LicenceRenewalStepsComponent } from '@app/licences/licence-renewal-steps/licence-renewal-steps.component';
 import { MapComponent } from './map/map.component';
 import { FeatureGuard } from './services/feaure-guard.service';
 import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
 import { ApplicationCancelOwnershipTransferComponent } from './application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
 import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
-import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
 import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
 import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
+import { LicencesComponent } from './licences/licences.component';
 
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'licences',
+    component: LicencesComponent
   },
   {
     path: 'federal-reporting',

@@ -16,7 +16,7 @@ import { ApplicationDataService } from '@services/application-data.service';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
-import { ApplicationHTMLContent } from '@app/application/application.component';
+import { ApplicationHTMLContent } from '@app/applications/application/application.component';
 import { Account } from '@models/account.model';
 import * as currentApplicationActions from '@app/app-state/actions/current-application.action';
 import { DynamicsDataService } from '@services/dynamics-data.service';
