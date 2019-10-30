@@ -97,7 +97,7 @@ import { NgBusyModule } from 'ng-busy';
 import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
 import { ConnectionToProducersComponent } from './account-profile/tabs/connection-to-producers/connection-to-producers.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
-import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
+import { LicenceFeePaymentConfirmationComponent } from './licences/licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 
 import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
 import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
@@ -106,7 +106,7 @@ import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule, Store } from '@ngrx/store';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ApplicationComponent } from './application/application.component';
+import { ApplicationComponent } from './applications/application/application.component';
 import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
 import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
@@ -148,7 +148,7 @@ import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
-import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-renewal-steps.component';
+import { LicenceRenewalStepsComponent } from './licences/licence-renewal-steps/licence-renewal-steps.component';
 import { ApplicationRenewalComponent } from './application-renewal/application-renewal.component';
 import { MoreLessContentComponent } from './shared/more-less-content/more-less-content.component';
 import { MapComponent } from './map/map.component';
@@ -168,6 +168,8 @@ import { ApplicationLicenseeChangesComponent } from './application-licensee-chan
 import { VersionInfoDataService } from './services/version-info-data.service';
 import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
 import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
+import { LicencesComponent } from './licences/licences.component';
+import { ApplicationsComponent } from './applications/applications.component';
 
 
 @NgModule({
@@ -255,7 +257,9 @@ import { FederalReportingComponent } from './federal-reporting/federal-reporting
     OrganizationLeadershipComponent,
     ShareholdersAndPartnersComponent,
     ApplicationLicenseeChangesComponent,
-    VersionInfoDialogComponent
+    VersionInfoDialogComponent,
+    LicencesComponent,
+    ApplicationsComponent
   ],
   imports: [
     ChartsModule,

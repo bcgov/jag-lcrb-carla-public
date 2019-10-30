@@ -19,7 +19,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { FileUploaderComponent } from '@shared/file-uploader/file-uploader.component';
 import { FileSystemItem } from '@models/file-system-item.model';
-import { ActivatedRouteStub } from './../testing/activated-route-stub';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { FieldComponent } from '@shared/field/field.component';
 import { Account } from '@models/account.model';
 
