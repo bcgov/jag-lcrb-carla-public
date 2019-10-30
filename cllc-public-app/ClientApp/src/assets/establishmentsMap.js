@@ -1,5 +1,7 @@
 
-  var searchMap = null;
+var searchMap = null;
+
+var LDB_Licence_String = "Public Store";
   // Options for creating the searchMap. This map instance has the ability to drive search queries via the
   // startIdentifyCrsOperation, which allows a user to draw a rectangle, and the endIdentifyCrsOperation,
   // which bundles opposite corners of this rectangle into the form before submitting it for the server
@@ -446,7 +448,8 @@ function EstablishmentsMap(options) {
         };
 
         // We build the contentString from the contentObj dictionary, using paragraphs as property delimiters.
-        var contentString = "<table><tr><td><b><u>" + (establishment.name || '') +"</u> - <font color=\"";
+        var contentString = "<table><tr><td>";
+        contentString +="<b><u>" + (establishment.name || '') + "</u> - <font color=\"";
 
         if (establishment.isOpen) {
             contentString += "#355A20\">OPEN";
@@ -455,11 +458,23 @@ function EstablishmentsMap(options) {
             contentString += "#999999\">COMING SOON";
         }
         // <td rowspan=5 align=center valign=middle><img src=assets/BUY_LEGAL_DECAL.png alt=\"Licenced Retail Store\" style=\"width: 112px; height: 100px; max-width:112px; max-height:100px \" height=112 width=100></td>
-        contentString += "</font></b></td></tr>";
-        contentString += "<tr><td>" + (establishment.addressStreet || '') + "</td></tr >";
+        contentString += "</font></b>";
+
+              
+
+        contentString +="</td></tr>";
+        contentString += "<tr><td>" + (establishment.addressStreet || '') + "</td>";
+        if (establishment.license === LDB_Licence_String) {
+            contentString += "<td rowspan=3 valign=center><img src = 'assets/LDB_32x32.png' width='32' height='32' alt='BC Cannabis Store'></td>";
+        }
+
+        contentString += "</tr>";
         contentString += "<tr><td>" + (establishment.addressCity || '') + ", " + establishment.addressPostal + "</td></tr>";
         contentString += "<tr><td>" + (establishment.phone || '&nbsp;') + "</td></tr>";
-        contentString += "<tr><td>Licence No: " + (establishment.license || '') + "</td></tr>";
+        if (establishment.license !== LDB_Licence_String) {
+            contentString += "<tr><td>Licence No: " + (establishment.license || '') + "</td></tr>";
+        }
+        
         contentString += "</table >";
         return contentString;
     };
@@ -469,12 +484,12 @@ function EstablishmentsMap(options) {
         // First we clear any extant markers
         _clearEstablishments();
 
-      var greenIcon = L.icon({
-        iconUrl: 'assets/placeholder_credential.png',
+      var ldbIcon = L.icon({
+          iconUrl: 'assets/LDB_32x32.png',
 
 
-        iconSize: [50, 50], // size of the icon
-        iconAnchor: [25, 25], // point of the icon which will correspond to marker's location        
+        iconSize: [16, 16], // size of the icon
+        iconAnchor: [16, 16], // point of the icon which will correspond to marker's location        
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
       });
 
@@ -489,13 +504,23 @@ function EstablishmentsMap(options) {
             if (_exists(latLong) && _canDrawestablishment(establishmentPushpinGuid, establishmentGuid))
             {
               // icon marker
-              // var establishmentMarker = L.marker(latLong, { icon: greenIcon, interactive: !_establishmentPushpin });
 
+                
               var markerStyle = establishment.isOpen ? _establishment_OPEN_MARKER_STYLE : _establishment_NOT_OPEN_MARKER_STYLE;
               var style = $.extend({}, markerStyle, { interactive: !_establishmentPushpin });
               // Markers should only be clickable when there is no establishmentPushpin available.           
 
-              var establishmentMarker =L.circleMarker(latLong, style);
+                var establishmentMarker = null;
+
+                
+                if (establishment.license === LDB_Licence_String) {
+                    establishmentMarker = L.marker(latLong, { icon: ldbIcon, interactive: !_establishmentPushpin });
+                }
+                else {
+                
+                    establishmentMarker = L.circleMarker(latLong, style);
+                }
+
                 establishmentMarker.bindPopup(_generateestablishmentMarkerPopupContents(establishment));
                 establishmentMarker.addTo(_leafletMap);
                 _establishmentMarkers.push(establishmentMarker);
@@ -542,7 +567,7 @@ function EstablishmentsMap(options) {
             _clearEstablishments();
         }
 
-    }
+    };
 
     /** Public methods */
 
