@@ -16,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -95,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all monthly reports in Dynamics by Licence filtered by the current user's licencee
         [HttpGet("licence/{licenceId}")]
-        public async Task<IActionResult> GetMonthlyReportsByLicence(string licenceId)
+        public IActionResult GetMonthlyReportsByLicence(string licenceId)
         {
             if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
             {
@@ -131,7 +132,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all monthly reports in Dynamics by Licencee using the account Id assigned to the user logged in
         [HttpGet("current")]
-        public async Task<IActionResult> GetCurrentUserMonthlyReports()
+        public IActionResult GetCurrentUserMonthlyReports()
         {
             if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
             {
@@ -149,7 +150,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET monthly report by id in Dynamics by if owned by user
         [HttpGet("{reportId}")]
-        public async Task<IActionResult> GetMonthlyReport(string reportId)
+        public IActionResult GetMonthlyReport(string reportId)
         {
             if (_configuration["FEATURE_FEDERAL_REPORTING"] == null)
             {
@@ -169,6 +170,81 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError(ex, "Error getting cannabis monthly report");
             }
             return new NotFoundResult();
+        }
+
+        /// PUT update monthly report by id
+        [HttpPut("{id}")]
+        public IActionResult UpdateMonthlyReport([FromBody] ViewModels.MonthlyReport item, string id)
+        {
+            if (item != null && id != item.monthlyReportId)
+            {
+                return BadRequest();
+            }
+
+            // for association with current user
+            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+
+            Guid monthlyReportId = new Guid(id);
+            string filter = $"adoxio_cannabismonthlyreportid eq {monthlyReportId}";
+            CannabismonthlyreportsGetResponseModel monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+            if (monthlyReportResp.Value.Count < 1 || !CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReportResp.Value[0]._adoxioLicenseeidValue))
+            {
+                return new NotFoundResult();
+            }
+
+            try
+            {
+                // Update monthly report
+                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = new MicrosoftDynamicsCRMadoxioCannabismonthlyreport()
+                {
+                    AdoxioEmployeesmanagement = item.employeesManagement,
+                    AdoxioEmployeesadministrative = item.employeesAdministrative,
+                    AdoxioEmployeessales = item.employeesSales,
+                    AdoxioEmployeesproduction = item.employeesProduction,
+                    AdoxioEmployeesother = item.employeesOther,
+                    Statuscode = item.statusCode
+                };
+                _dynamicsClient.Cannabismonthlyreports.Update(item.monthlyReportId, monthlyReport);
+
+                // Update inventory reports
+                if (item.inventorySalesReports.Count > 0) {
+                  foreach (InventorySalesReport invReport in item.inventorySalesReports)
+                  {
+                      MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport()
+                      {
+                          AdoxioOpeninginventory = invReport.openingInventory,
+                          AdoxioQtyreceiveddomestic = invReport.domesticAdditions,
+                          AdoxioQtyreceivedreturns = invReport.returnsAdditions,
+                          AdoxioQtyreceivedother = invReport.otherAdditions,
+                          AdoxioQtyshippeddomestic = invReport.domesticReductions,
+                          AdoxioQtyshippedreturned = invReport.returnsReductions,
+                          AdoxioQtydestroyed = invReport.destroyedReductions,
+                          AdoxioQtyloststolen = invReport.lostReductions,
+                          AdoxioOtherreductions = invReport.otherReductions,
+                          AdoxioClosinginventory = invReport.closingNumber,
+                          AdoxioValueofclosinginventory = invReport.closingValue
+                      };
+                      if (invReport.product == "Seeds")
+                      {
+                          updateReport.AdoxioTotalnumberseeds = invReport.totalSeeds;
+                      }
+                      else if (invReport.product != "Vegetative Cannabis")
+                      {
+                          updateReport.AdoxioWeightofclosinginventory = invReport.closingWeight;
+                      }
+                      _dynamicsClient.Cannabisinventoryreports.Update(invReport.inventoryReportId, updateReport);
+                  }
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating monthly report");
+                // fail if we can't update.
+                throw (httpOperationException);
+            }
+
+            return GetMonthlyReport(id);
         }
     }
 }
