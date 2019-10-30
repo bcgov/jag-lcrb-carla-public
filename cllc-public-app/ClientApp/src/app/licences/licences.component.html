@@ -1,0 +1,121 @@
+<div class="form-wrapper">
+    <div [ngBusy]="busy"></div>
+    <h1>Licences</h1>
+    <section>
+        <section>
+
+            <p *ngIf="licensedApplications?.length > 0">
+                <span>Here are your current approved Licences.</span>
+            </p>
+            <p *ngIf="licensedApplications?.length == 0">
+                <span>You do not have any Licences.</span>
+            </p>
+
+            <table *ngIf="licensedApplications?.length > 0" class="eq-table">
+                <tr>
+                    <th colspan=2>Non-Medical Cannabis Retail Store Licence ???</th>
+                    <th>Store Location ????</th>
+                    <th style="width: 335px">Operate</th>
+                    <th style="width: 335px">Request Changes</th>
+                </tr>
+                <tr *ngFor="let item of licensedApplications; let i = index;" style="border: 1px solid #ccc; ">
+                    <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+                    <td style="padding: 10px;">
+                        <div>
+                            <strong *ngIf="item?.licenceTypeName !== 'Marketer'"
+                                style="color: #1a5a96;">{{item.establishmentName}}</strong>
+                            <span *ngIf="item?.licenceTypeName === 'Marketer'" style="color: #1a5a96;">Marketing
+                                Licence</span>
+                        </div>
+                        <span>Licence Number: </span> <i>{{item.licenseNumber}}</i> <br>
+                        <span>Status #: {{item.status}} </span> <br>
+                        <span>Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span> <br>
+                        <div *ngIf="item.status !== PAYMENT_REQUIRED" style="min-width: 10px; margin-bottom: 10px;">
+                            <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'"
+                                download>
+                                <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
+                            </a>
+                        </div>
+                        <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
+                            *ngIf="isAboutToExpire(item.expiryDate) && !item.relatedApplicationPaid">Renew Licence</a>
+                    </td>
+                    <td style="padding: 10px;">
+                        <div *ngIf="item?.licenceTypeName !== 'Marketer'">
+                            {{item?.establishmentAddressStreet}} <br>
+                            {{item?.establishmentAddressCity}} <br>
+                            British Columbia <br>
+                            {{item?.establishmentAddressPostalCode}} <br>
+                            Canada <br>
+                        </div>
+                        <div *ngIf="item?.licenceTypeName === 'Marketer'">
+                            {{account?.physicalAddressStreet}} <br>
+                            {{account?.physicalAddressCity}} <br>
+                            {{account?.physicalAddressProvince}} <br>
+                            {{account?.physicalAddressPostalCode}} <br>
+                            {{account?.physicalAddressCountry}} <br>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="!item.storeInspected  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
+                            style="min-width: 10px; margin-bottom: 10px;">
+                            <a href="javascript:void(0);" (click)="planStoreOpening(item)">
+                                <span *ngIf="item.status == PAYMENT_REQUIRED">
+                                    <i class="fas fa-shopping-cart" style="margin-right: 10px;">
+                                    </i>Pay Licence Fee and Plan Store Opening</span>
+                                <span *ngIf="item.status != PAYMENT_REQUIRED">
+                                    <i class="fas fa-pencil-alt" style="margin-right: 10px;">
+                                    </i>Plan Store Opening</span>
+                            </a>
+                        </div>
+                        <div *ngIf="item.storeInspected && item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
+                            style="min-width: 10px; margin-bottom: 10px;">
+                            <a href="javascript:void(0);" (click)="payLicenceFee(item)">
+                                <span>
+                                    <i class="fas fa-shopping-cart" style="margin-right: 10px;">
+                                    </i>Pay Licence Fee</span>
+                            </a>
+                        </div>       <div>
+                            <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
+                                <a [routerLink]="[ '/federal-reporting/' + item.licenseId]">
+                                    <span><i class="fas fa-pencil-alt" style="margin-right: 10px;"></i>Federal
+                                        Reporting</span>
+                                </a>
+                            </p>
+                        </div>
+                    </td>
+                    <td *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn)"
+                        style="background-color: #E1E8F2; padding: 10px;">
+
+
+
+                        <div *ngIf="item.status != PAYMENT_REQUIRED">
+                            <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
+                                <a *ngIf="licenceTransferFeatureOn"
+                                    [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
+                                    <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer
+                                        Ownership</span>
+                                </a>
+                            </p>
+                            <p *ngFor="let action of item.allowedActions">
+                                <a href="javascript:void(0);" (click)="doAction(item,action.name)">
+                                    <span><i class="fas fa-sync"
+                                            style="margin-right: 10px;"></i>{{action?.actionText}}</span>
+                                </a>
+                            </p>
+                        </div>
+                 
+                    </td>
+                    <td *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired"> LICENCE EXPIRED</td>
+                    <td *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
+                        class="licence-expired">
+                        TRANSFER INITIATED <br />
+                        <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]">
+                            <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+    </section>
+</div>

@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
-import { ApplicationHTMLContent } from '@app/application/application.component';
+import { ApplicationHTMLContent } from '@app/applications/application/application.component';
 import { Account, TransferAccount } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
