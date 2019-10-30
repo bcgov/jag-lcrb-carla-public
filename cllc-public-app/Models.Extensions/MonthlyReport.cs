@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 licenseNumber = dynamicsMonthlyReport.AdoxioLicencenumber,
                 reportingPeriodMonth = dynamicsMonthlyReport.AdoxioReportingperiodmonth,
                 reportingPeriodYear = dynamicsMonthlyReport.AdoxioReportingperiodyear,
-                status = ((MonthlyReportStatus)dynamicsMonthlyReport.Statuscode).ToString(),
+                statusCode = dynamicsMonthlyReport.Statuscode,
                 employeesManagement = dynamicsMonthlyReport.AdoxioEmployeesmanagement,
                 employeesAdministrative = dynamicsMonthlyReport.AdoxioEmployeesadministrative,
                 employeesSales = dynamicsMonthlyReport.AdoxioEmployeessales,
@@ -60,6 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 InventorySalesReport inv = new InventorySalesReport()
                 {
                     product = product.AdoxioName,
+                    inventoryReportId = inventoryReport.AdoxioCannabisinventoryreportid,
                     openingInventory = inventoryReport.AdoxioOpeninginventory,
                     domesticAdditions = inventoryReport.AdoxioQtyreceiveddomestic,
                     returnsAdditions = inventoryReport.AdoxioQtyreceivedreturns,
