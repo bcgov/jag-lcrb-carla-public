@@ -16,7 +16,7 @@ import { of } from 'rxjs';
 import { Application } from '@models/application.model';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
-import { ActivatedRouteStub } from './../testing/activated-route-stub';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 import { FieldComponent } from '@shared/field/field.component';
 import { Account } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';

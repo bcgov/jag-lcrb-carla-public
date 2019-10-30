@@ -132,10 +132,6 @@ import {
 import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { FieldComponent } from './shared/field/field.component';
-import {
-  ApplicationsAndLicencesComponent,
-  ApplicationCancellationDialogComponent
-} from './applications-and-licences/applications-and-licences.component';
 import { AppRemoveIfFeatureOnDirective } from './directives/remove-if-feature-on.directive';
 import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-off.directive';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -143,19 +139,17 @@ import { AppState } from '@app/app-state/models/app-state';
 import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
 import { map } from 'rxjs/operators';
 import { EstablishmentWatchWordsService } from './services/establishment-watch-words.service';
-import { AssociateContentComponent } from './associate-content/associate-content.component';
 import {
   ConnectionToNonMedicalStoresComponent
 } from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { AssociatePageComponent } from './associate-page/associate-page.component';
 import { LicenceRenewalStepsComponent } from './licences/licence-renewal-steps/licence-renewal-steps.component';
-import { ApplicationRenewalComponent } from './application-renewal/application-renewal.component';
+import { ApplicationRenewalComponent } from './applications/application-renewal/application-renewal.component';
 import { MoreLessContentComponent } from './shared/more-less-content/more-less-content.component';
 import { MapComponent } from './map/map.component';
 import { AccountPickerComponent } from './shared/account-picker/account-picker.component';
-import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
-import { ApplicationCancelOwnershipTransferComponent } from './application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
-import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
+import { ApplicationCancelOwnershipTransferComponent } from './applications/application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
+import { ApplicationOwnershipTransferComponent } from './applications/application-ownership-transfer/application-ownership-transfer.component';
 import { ProductInventoryPackagedComponent } from './shared/product-inventory-packaged/product-inventory-packaged.component';
 import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.component';
 import {
@@ -164,12 +158,15 @@ import {
 import {
   ShareholdersAndPartnersComponent
 } from './shared/licensee-tree/dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
-import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
+import { ApplicationLicenseeChangesComponent } from './applications/application-licensee-changes/application-licensee-changes.component';
 import { VersionInfoDataService } from './services/version-info-data.service';
 import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
 import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
 import { LicencesComponent } from './licences/licences.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from './dashboard/applications-and-licences/applications-and-licences.component';
+import { AssociateContentComponent } from './dashboard/associate-content/associate-content.component';
+import { ApplicationAndLicenceFeeComponent } from './applications/application-and-licence-fee/application-and-licence-fee.component';
 
 
 @NgModule({

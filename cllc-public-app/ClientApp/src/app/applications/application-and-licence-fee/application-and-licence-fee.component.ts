@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable, Subject, of, forkJoin } from 'rxjs';
 import {
   ApplicationCancellationDialogComponent
-} from '@app/applications-and-licences/applications-and-licences.component';
+} from '@app/dashboard/applications-and-licences/applications-and-licences.component';
 import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
