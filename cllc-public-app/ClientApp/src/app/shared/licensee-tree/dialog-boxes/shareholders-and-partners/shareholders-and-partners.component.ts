@@ -11,11 +11,14 @@ import { FormBase } from '@shared/form-base';
 })
 export class ShareholdersAndPartnersComponent extends FormBase implements OnInit {
   form: FormGroup;
+  parentName: any;
+  shareholder: any;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<ShareholdersAndPartnersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, ) {
     super();
+    this.shareholder = data.shareholder;
   }
 
   ngOnInit() {
@@ -24,7 +27,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       businessNameNew: [''],
       firstNameNew: ['', Validators.required],
       lastNameNew: ['', Validators.required],
-      dateofBirthNew: [''],
+      dateofBirthNew: ['', Validators.required],
       emailNew: ['', [Validators.email, Validators.required]],
       numberofSharesNew: ['', Validators.required],
       // partnerType: ['', Validators.required],

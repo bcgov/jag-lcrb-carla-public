@@ -12,11 +12,13 @@ import { FormBase } from '@shared/form-base';
 export class OrganizationLeadershipComponent extends FormBase {
   form: FormGroup;
   businessType: string;
+  parentName: string;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<OrganizationLeadershipComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
+    this.parentName = data.parentName;
     this.form = fb.group({
       id: [''],
       isDirectorNew: [false],
@@ -26,6 +28,7 @@ export class OrganizationLeadershipComponent extends FormBase {
       lastNameNew: ['', Validators.required],
       emailNew: ['', [Validators.email, Validators.required]],
       isIndividual: [true],
+      dateofBirthNew: ['', Validators.required],
       titleNew: [''],
       dateofappointment: ['', Validators.required]
     }, { validator: this.dateLessThanToday('dateofappointment') }
