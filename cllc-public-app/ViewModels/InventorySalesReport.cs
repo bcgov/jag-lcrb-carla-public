@@ -2,7 +2,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class InventorySalesReport
     {
+        // Won't change
+        public string inventoryReportId { get; set; }
         public string product { get; set; }
+        
+        // Will change
         public int? openingInventory { get; set; }
         public int? domesticAdditions { get; set; }
         public int? returnsAdditions { get; set; }
@@ -12,6 +16,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? destroyedReductions { get; set; }
         public int? lostReductions { get; set; }
         public int? otherReductions { get; set; }
+        public int? closingNumber { get; set; }
         public double closingValue { get; set; }
         public double closingWeight { get; set; }
         // only used for seeds
