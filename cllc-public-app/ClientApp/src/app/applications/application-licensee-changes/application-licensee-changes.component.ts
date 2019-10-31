@@ -39,6 +39,10 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData() {
     forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
       this.legalEntityDataService.getChangeLogs(this.applicationId),
       this.legalEntityDataService.getCurrentHierachy())
@@ -53,10 +57,6 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         }
       );
   }
-
-
-
-
 
   populateChangeTables(node: LicenseeChangeLog) {
     if (node.isShareholderNew && node.isIndividual && node.changeType !== 'unchanged') {
@@ -110,7 +110,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   save() {
     this.legalEntityDataService.saveLicenseeChanges(this.editedTree, this.applicationId)
       .subscribe(() => {
-        debugger;
+        this.loadData();
       });
   }
 }

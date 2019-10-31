@@ -1,5 +1,6 @@
 <h2 mat-dialog-title>
-  <span *ngIf="!form.get('id').value">Add Shareholder</span>
+  <span *ngIf="!form.get('id').value">Add Shareholder of {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}
+  </span>
   <span *ngIf="form.get('id').value">Edit Shareholder</span>
 </h2>
 <mat-dialog-content>
@@ -17,46 +18,71 @@
       <span>Organization or Indigenous Nation</span> <br>
     </app-field>
 
+    <section class="row" *ngIf="!form.get('isIndividual').value">
+      <app-field class="col-md-12" label="What type of organization is the shareholder?" [showChevrons]="false"
+        [valid]="!isTouchedAndInvalid('legalentitytype')"
+        errorMessage="Please select a business type from the dropdown list">
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+          value="PrivateCorporation">
+        <span>Private Corporation</span> <br>
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+          value="PublicCorporation">
+        <span>Public Corporation</span> <br>
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+          value="Partnership">
+        <span>Partnership</span> <br>
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+          value="Society">
+        <span>Society</span> <br>
+        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+          value="IndigenousNation">
+        <span>Indigenous nation</span> <br>
+      </app-field>
+    </section>
+
     <section class="row" *ngIf="form.get('isIndividual').value">
-      <app-field class="col-md-6" label="First Name" [valid]="!isTouchedAndInvalid('firstNameNew')" errorMessage="This is required">
+      <app-field class="col-md-6" label="First Name" [valid]="!isTouchedAndInvalid('firstNameNew')"
+        errorMessage="This is required">
         <input type="text" class="form-control" formControlName="firstNameNew" placeholder="First Name">
       </app-field>
 
-      <app-field class="col-md-6" label="Last Name" [valid]="!isTouchedAndInvalid('lastNameNew')" errorMessage="This is required">
+      <app-field class="col-md-6" label="Last Name" [valid]="!isTouchedAndInvalid('lastNameNew')"
+        errorMessage="This is required">
         <input type="text" class="form-control" formControlName="lastNameNew" placeholder="Last Name">
       </app-field>
     </section>
 
     <section class="row">
-
       <app-field *ngIf="!form.get('isIndividual').value" class="col-md-12" label="Name" [isFullWidth]="true"
         [valid]="!isTouchedAndInvalid('businessNameNew')" errorMessage="This is required">
         <input type="text" class="form-control" formControlName="businessNameNew" placeholder="Name">
       </app-field>
     </section>
 
-    <!-- <section class="row" *ngIf="!form.get('isIndividual').value">
-      <app-field class="col-md-12" label="What type of organization is the shareholder?" [showChevrons]="false" [valid]="!isTouchedAndInvalid('legalentitytype')"
-        errorMessage="Please select a business type from the dropdown list">
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="PrivateCorporation">
-        <span>Private Corporation</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="PublicCorporation">
-        <span>Public Corporation</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="Partnership">
-        <span>Partnership</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="Society">
-        <span>Society</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype" value="IndigenousNation">
-        <span>Indigenous nation</span> <br>
-      </app-field>
-    </section> -->
 
     <section class="row">
-      <app-field class="col-md-6" label="Email" [valid]="!isTouchedAndInvalid('emailNew')" errorMessage="Email is invalid">
+      <app-field class="col-md-6" label="Email" [valid]="!isTouchedAndInvalid('emailNew')"
+        errorMessage="Email is invalid">
         <input type="text" class="form-control" formControlName="emailNew">
       </app-field>
+      <app-field *ngIf="form.get('isIndividual').value" class="col-md-6" label="Date of Birth"
+        [valid]="!isTouchedAndInvalid('dateofBirthNew')" errorMessage="This is required">
+        <input type="text" formControlName='dateofBirthNew' style="background-color: #fff;" autocomplete="false"
+          placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
+          (click)="picker.open()">
+        <mat-datepicker #picker></mat-datepicker>
+      </app-field>
+    </section>
 
-      <app-field class="col-md-6" label="Number of Voting Shares" [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
+    <section class="row">
+      <app-field class="col-md-12"
+        *ngIf="form.get('legalentitytype').value === 'PrivateCorporation' || form.get('legalentitytype').value === 'PublicCorporation'"
+        label="Total Shares Issued" [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
+        <input type="number" class="form-control" formControlName="numberofSharesNew">
+      </app-field>
+      <app-field class="col-md-12"
+        label="Number of Voting Shares in {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}"
+        [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
         <input type="number" class="form-control" formControlName="numberofSharesNew">
       </app-field>
     </section>
@@ -67,19 +93,3 @@
   &nbsp;
   <button class="btn btn-primary" (click)="save()">Save</button>
 </mat-dialog-actions>
-
-<style>
-  ::ng-deep .mat-calendar-body-selected {
-    background-color: #337AB7;
-    color: #000 !important;
-  }
-
-  ::ng-deep .mat-calendar-body-cell-content {
-    color: #54708b;
-  }
-
-  ::ng-deep .mat-calendar-header {
-    background-color: #337AB7;
-    color: #fff;
-  }
-</style>
