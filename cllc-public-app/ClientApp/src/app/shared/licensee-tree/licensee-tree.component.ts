@@ -158,7 +158,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    */
   editAssociate(node: LicenseeChangeLog) {
     if (node.isShareholderNew) {
-      this.openShareholderDialog(node)
+      this.openShareholderDialog(node, '')
         .pipe(filter(data => !!data))
         .subscribe((formData: LicenseeChangeLog) => {
           if (node.changeType !== LicenseeChangeType.addBusinessShareholder
@@ -171,7 +171,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         }
         );
     } else {
-      this.openLeadershipDialog(node)
+      this.openLeadershipDialog(node, '')
         .pipe(filter(data => !!data))
         .subscribe(
           formData => {
@@ -190,7 +190,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the leader to'
    */
   addLeadership(parentNode: LicenseeChangeLog) {
-    this.openLeadershipDialog({} as LicenseeChangeLog)
+    this.openLeadershipDialog({} as LicenseeChangeLog, parentNode.businessNameNew)
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
         formData.changeType = LicenseeChangeType.addLeadership;
@@ -206,7 +206,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
    */
   addShareholder(parentNode: LicenseeChangeLog) {
-    this.openShareholderDialog({} as LicenseeChangeLog)
+    this.openShareholderDialog({ parentLinceseeChangeLog: parentNode} as LicenseeChangeLog, parentNode.businessNameNew)
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
         if (formData.isIndividual) {
@@ -246,7 +246,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       newNode.children = [];
       node.children.forEach(child => {
         const childNode = this.processLegalEntityTree(child);
-        // childNode.parentLinceseeChangeLog = newNode;
+        childNode.parentLinceseeChangeLog = newNode;
         newNode.children.push(childNode);
       });
     }
@@ -257,7 +257,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * Opens dialog for adding and editting shareholders
    * @param leader 'A LicenseeChangeLog'
    */
-  openShareholderDialog(shareholder: LicenseeChangeLog) {
+  openShareholderDialog(shareholder: LicenseeChangeLog, parentName: string) {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
@@ -265,7 +265,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       maxWidth: '400px',
       data: {
         businessType: 'PrivateCorporation',
-        shareholder: shareholder
+        shareholder: shareholder,
+        parentName
       }
     };
 
@@ -278,7 +279,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * Opens dialog for adding and editting leaders
    * @param leader 'A LicenseeChangeLog'
    */
-  openLeadershipDialog(leader: LicenseeChangeLog) {
+  openLeadershipDialog(leader: LicenseeChangeLog, parentName: string) {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
@@ -286,7 +287,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       width: '500px',
       data: {
         person: leader,
-        businessType: 'PrivateCorporation'
+        businessType: 'PrivateCorporation',
+        parentName
       }
     };
 

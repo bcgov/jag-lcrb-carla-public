@@ -79,15 +79,18 @@
       <!-- </mat-card> -->
     </div>
     <div class="col-md-4 col-sm-12">
-      <h4>Key:</h4>
-      Edited Associate: <span class="edited-node">Orange</span> <br>
-      Added Associate: <span class="added-node">Green</span> <br>
-      Deleted Associate: <span class="deleted-node">Red Strikethough</span> <br>
+      <h3>Key:</h3>
+      Edited Associate -- <span class="edited-node">Orange</span> <br>
+      Added Associate -- <span class="added-node">Green</span> <br>
+      Deleted Associate -- <span class="deleted-node">Red Strikethough</span> <br>
+      <i class="fas fa-lg fa-building"></i> -- Business Shareholder <br>
+      <i class="fas fa-lg fa-user-tie"></i> -- Individual Shareholder <br>
+      <i class="fas fa-lg fa-user"></i> -- Leadership<br>
     </div>
   </div>
 
-  <h3 class="blue-header">BUSINESS SHAREHOLDER CHANGES</h3>
-  <section class="padded-section">
+  <h3 class="blue-header" *ngIf="organizationShareholderChanges && organizationShareholderChanges.length">BUSINESS SHAREHOLDER CHANGES</h3>
+  <section class="padded-section" *ngIf="organizationShareholderChanges && organizationShareholderChanges.length">
     <table class="eq-table">
       <tr>
         <th class="change-type-cell">Change Type</th>
@@ -122,8 +125,8 @@
     </table>
   </section>
 
-  <h3 class="blue-header">INDIVIDUAL SHAREHOLDER CHANGES</h3>
-  <section class="padded-section">
+  <h3 class="blue-header" *ngIf="individualShareholderChanges && individualShareholderChanges.length">INDIVIDUAL SHAREHOLDER CHANGES</h3>
+  <section *ngIf="individualShareholderChanges && individualShareholderChanges.length" class="padded-section">
     <table class="eq-table">
       <tr>
         <th class="change-type-cell">Change Type</th>
@@ -158,8 +161,8 @@
     </table>
   </section>
 
-  <h3 class="blue-header">LEADERSHIP CHANGES</h3>
-  <section class="padded-section">
+  <h3 class="blue-header" *ngIf="leadershipChanges && leadershipChanges.length">LEADERSHIP CHANGES</h3>
+  <section class="padded-section" *ngIf="leadershipChanges && leadershipChanges.length">
     <table class="eq-table">
       <tr>
         <th class="change-type-cell">Change Type</th>
