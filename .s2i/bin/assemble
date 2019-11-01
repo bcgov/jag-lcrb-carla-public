@@ -218,7 +218,7 @@ fi
 if [ -n "$SONAR_TOKEN" ]; then
 	echo "---> Running SonarQube Scan..."
 	dotnet /usr/lib/sonar-scanner/SonarScanner.MSBuild.dll begin /d:sonar.login=$SONAR_TOKEN /k:$SONAR_PROJECT_KEY /d:sonar.host.url=$SONAR_URL /v:$VERSION_PREFIX$BUILDNUMBER 
-	dotnet build "$SONAR_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" 
+	dotnet build "$SONAR_PROJECT" -f "$DOTNET_FRAMEWORK" -c "$DOTNET_CONFIGURATION" /maxcpucount:1
 	dotnet /usr/lib/sonar-scanner/SonarScanner.MSBuild.dll end /d:sonar.login=$SONAR_TOKEN 
 	exit 0
 elif [ -n "$SNYK_TOKEN" ]; then
