@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Account } from '../models/account.model';
+import { Account } from '@models/account.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';
-import { Stat } from '../models/stat.model';
+import { Stat } from '@models/stat.model';
 
 @Injectable({
   providedIn: 'root'
