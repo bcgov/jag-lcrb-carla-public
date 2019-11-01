@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SpdConsentComponent } from './spd-consent.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { provideMockStore } from '@ngrx/store/testing';
-import { ActivatedRouteStub } from './../../testing/activated-route-stub';
 import { UserDataService } from '@services/user-data.service';
 import { AliasDataService } from '@services/alias-data.service';
 import { PreviousAddressDataService } from '@services/previous-address-data.service';
@@ -13,6 +12,7 @@ import { FormBuilder, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
 import { PaymentDataService } from '@services/payment-data.service';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 
 const userDataServiceStub: Partial<UserDataService> = {
   getCurrentUser: () => of(null)

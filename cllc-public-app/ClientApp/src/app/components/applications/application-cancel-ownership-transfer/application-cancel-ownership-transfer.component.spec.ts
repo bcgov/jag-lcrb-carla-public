@@ -13,14 +13,13 @@ import { DynamicsDataService } from '@services/dynamics-data.service';
 import { FormBuilder } from '@angular/forms';
 import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
 import { of } from 'rxjs';
-import { Application } from '@models/application.model';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
-import { FieldComponent } from '@shared/field/field.component';
 import { Account } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
+import { FieldComponent } from '@shared/components/field/field.component';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let licenceDataServiceStub: Partial<LicenseDataService>;
@@ -33,7 +32,6 @@ let activatedRouteStub: ActivatedRouteStub;
 describe('ApplicationCancelOwnershipTransferComponent', () => {
   let component: ApplicationCancelOwnershipTransferComponent;
   let fixture: ComponentFixture<ApplicationCancelOwnershipTransferComponent>;
-  let licenceService: LicenseDataService;
 
   const account = new Account();
   account.businessType = 'PublicCorporation';
@@ -77,7 +75,6 @@ describe('ApplicationCancelOwnershipTransferComponent', () => {
     })
       .compileComponents();
 
-    licenceService = TestBed.get(LicenseDataService);
   }));
 
   beforeEach(() => {
