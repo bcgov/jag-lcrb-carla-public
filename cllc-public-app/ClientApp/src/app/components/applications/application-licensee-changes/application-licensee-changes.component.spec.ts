@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ApplicationLicenseeChangesComponent } from './application-licensee-changes.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { LicenseeTreeComponent } from '@shared/licensee-tree/licensee-tree.component';
+import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 import { MatMenuModule, MatTreeModule, MatDialogModule } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
