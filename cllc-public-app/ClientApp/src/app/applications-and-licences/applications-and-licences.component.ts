@@ -111,6 +111,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
               licence.actionApplications.push({
                 applicationId: app.id,
                 applicationTypeName: app.applicationTypeName,
+                applicationStatus: app.applicationStatus,
                 isPaid: app.isPaid
               });
             });
@@ -176,10 +177,10 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
-    const actionApplication = licence.actionApplications.find(app => app.applicationTypeName === actionName);
+    const actionApplication = licence.actionApplications.find(app => app.applicationTypeName === actionName && app.applicationStatus !== 'Active');
     if (actionApplication && !actionApplication.isPaid) {
       this.router.navigateByUrl('/account-profile/' + actionApplication.applicationId);
-    } else if (actionApplication && actionApplication.isPaid) {
+    } else if (actionApplication && actionApplication.isPaid ) {
       this.snackBar.open('Application already submitted', 'Fail',
         { duration: 3500, panelClass: ['red-snackbar'] });
     } else {
