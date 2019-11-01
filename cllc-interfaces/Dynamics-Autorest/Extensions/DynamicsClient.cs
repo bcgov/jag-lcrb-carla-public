@@ -182,26 +182,49 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMaccount result;
             try
             {
+                string[] expand = { "primarycontactid" };
                 // fetch from Dynamics.
-                result = await Accounts.GetByKeyAsync(id.ToString());
+                result = await Accounts.GetByKeyAsync(accountid: id.ToString(),expand:expand);
             }
             catch (HttpOperationException)
             {
                 result = null;
             }
 
-            // get the primary contact.
-            if (result != null && result.Primarycontactid == null && result._primarycontactidValue != null)
+            return result;
+        }
+
+
+        /// <summary>
+        /// Get a Account by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public MicrosoftDynamicsCRMaccount GetAccountByNameWithEstablishments(string name)
+        {
+            name = name.Replace("'", "''");
+            string[] expand = { "primarycontactid", "adoxio_account_adoxio_establishment_Licencee" };
+
+            MicrosoftDynamicsCRMaccount result;
+            try
             {
-                try
+                string filter = $"name eq '{name}'";
+                // fetch from Dynamics.
+                result = Accounts.Get(filter: filter).Value.FirstOrDefault();
+
+                if (result != null)
                 {
-                    result.Primarycontactid = await GetContactById(Guid.Parse(result._primarycontactidValue));
+                    result = Accounts.GetByKey(result.Accountid, expand: expand);
                 }
-                catch (HttpOperationException)
-                {
-                    result.Primarycontactid = null;
-                }
+
             }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+
             return result;
         }
 
@@ -238,10 +261,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         public MicrosoftDynamicsCRMadoxioEstablishment GetEstablishmentById(string id)
         {
             MicrosoftDynamicsCRMadoxioEstablishment result = null;
-
+            string[] expand = { "adoxio_Licencee" };
             try
             {
-                result = Establishments.GetByKey(id);
+                result = Establishments.GetByKey(adoxioEstablishmentid:id, expand:expand );
             }
             catch (HttpOperationException)
             {
@@ -297,7 +320,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 // fetch from Dynamics.
                 string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
-                result = this.Workers.GetByKey(adoxioWorkerid: id, expand: expand);
+                result = await this.Workers.GetByKeyAsync(adoxioWorkerid: id, expand: expand);
             }
             catch (HttpOperationException)
             {
