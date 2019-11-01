@@ -1,10 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { InsertComponent } from './insert.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { StaticComponent } from '@app/static/static.component';
-import { SurveySidebarComponent } from '@app/survey/sidebar.component';
 import { InsertService } from './insert.service';
+import { StaticComponent } from '@components/static/static.component';
+import { SurveySidebarComponent } from '@components/survey/sidebar.component';
 
 const insertServiceStub: Partial<InsertService> = {};
 
