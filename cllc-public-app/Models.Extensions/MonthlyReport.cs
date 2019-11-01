@@ -10,8 +10,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 {
     public enum MonthlyReportStatus
     {
-        Created = 1,
-        Draft = 845280000,
+        Draft = 1,
         Submitted = 845280001,
         Closed = 845280002
     }
@@ -70,7 +69,12 @@ namespace Gov.Lclb.Cllb.Public.Models
                     destroyedReductions = inventoryReport.AdoxioQtydestroyed,
                     lostReductions = inventoryReport.AdoxioQtyloststolen,
                     otherReductions = inventoryReport.AdoxioOtherreductions,
+                    closingNumber = inventoryReport.AdoxioClosinginventory,
                     closingValue = (double)inventoryReport.AdoxioValueofclosinginventory,
+                    totalSalesToConsumerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumber),
+                    totalSalesToConsumerValue = (double)inventoryReport.AdoxioTotalvalue,
+                    totalSalesToRetailerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumberretailer),
+                    totalSalesToRetailerValue = (double)inventoryReport.AdoxioTotalvalueretailer,
                 };
                 if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
                 {
