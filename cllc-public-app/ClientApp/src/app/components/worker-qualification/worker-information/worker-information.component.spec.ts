@@ -2,11 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkerInformationComponent } from './worker-information.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { PolicyDocumentComponent } from '@app/policy-document/policy-document.component';
 import { PolicyDocumentDataService } from '@app/services/policy-document-data.service';
-import { ActivatedRouteStub } from './../../testing/activated-route-stub';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
+import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
 
 const PolicyDocumentDataServiceStub: Partial<PolicyDocumentDataService> = {
   getPolicyDocument: () => of(null)

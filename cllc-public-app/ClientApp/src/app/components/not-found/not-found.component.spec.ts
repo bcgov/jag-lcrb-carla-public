@@ -1,11 +1,9 @@
 
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
-import { BrowserModule, By } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NotFoundComponent } from './not-found.component';
-import { ActivatedRouteStub } from './../testing/activated-route-stub';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
-let component: NotFoundComponent;
 let fixture: ComponentFixture<NotFoundComponent>;
 const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
@@ -20,7 +18,6 @@ describe('NotFound component', () => {
             ]
         });
         fixture = TestBed.createComponent(NotFoundComponent);
-        component = fixture.componentInstance;
     }));
 
     it('should do something', async(() => {

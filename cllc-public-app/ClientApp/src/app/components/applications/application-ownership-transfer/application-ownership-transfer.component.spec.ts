@@ -17,7 +17,7 @@ import { Application } from '@models/application.model';
 import { provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
-import { FieldComponent } from '@shared/field/field.component';
+import { FieldComponent } from '@shared/components/field/field.component';
 import { Account } from '@models/account.model';
 import { LicenseDataService } from '@services/license-data.service';
 import { License } from '@models/license.model';
