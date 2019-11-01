@@ -3,9 +3,9 @@ import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@a
 import { BrowserModule, By } from '@angular/platform-browser';
 import { FormViewerComponent } from './form-viewer.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ActivatedRouteStub } from './../testing/activated-route-stub';
 import { ActivatedRoute } from '@angular/router';
 import { DynamicsDataService } from '@services/dynamics-data.service';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
 
 let component: FormViewerComponent;
 let fixture: ComponentFixture<FormViewerComponent>;
