@@ -1,95 +1,103 @@
 .example-tree-invisible {
-    display: none;
+  display: none;
 }
 
 .example-tree ul,
 .example-tree li {
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
 }
-
+.mat-tree ul {
+  padding: 0 0 0 20px !important;
+}
 .edited-node {
-    color: orange;
+  color: orange;
 }
 
 .added-node {
-    color: green;
+  color: green;
 }
 
 .deleted-node {
-    text-decoration: line-through;
-    color: red;
+  text-decoration: line-through;
+  color: red;
 }
 
 .old-value {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .eq-table {
-    border-spacing: 1px 3px;
-    border-collapse: separate;
-    max-width: 900px;
-    width: 100%;
+  border-spacing: 1px 3px;
+  border-collapse: separate;
+  max-width: 900px;
+  width: 100%;
 
-    td,
-    th {
-        background-color: #F1F4FA;
-        color: #000;
-        padding: 10px;
-        text-align: center;
-    }
+  td,
+  th {
+    background-color: #f1f4fa;
+    color: #000;
+    padding: 10px;
+    text-align: center;
+  }
 
-    th {
-        text-align: center;
-    }
+  th {
+    text-align: center;
+  }
 }
 
 ::ng-deep {
-    .mat-tree-node {
-        min-height: 28px !important;
+  .mat-tree-node {
+    min-height: 28px !important;
 
-        .mat-icon-button {
-            line-height: 20px !important;
-            height: 20px !important;
-        }
+    .mat-icon-button:focus {
+      outline: none !important;
     }
 
-    .not-editable.mat-tree {
-        background-color: #F1F4FA !important;
+    .mat-icon-button {
+      line-height: 20px !important;
+      height: 20px !important;
+      width: 20px !important;
+      margin-right: 10px;
+      margin-left: 10px;
     }
+  }
 
-    .not-editable .tree-label {
-            font-weight: normal !important;
-            font-size: 14px !important;
-    }
+  .not-editable.mat-tree {
+    background-color: #f1f4fa !important;
+  }
 
+  .not-editable .tree-label {
+    font-weight: normal !important;
+    font-size: 14px !important;
+  }
 }
 
 .name-cell {
-    width: 300px;
+  width: 300px;
 }
 
 .change-type-cell {
-    width: 110px;
+  width: 110px;
 }
 
 .email-cell {
-    width: 300px;
+  width: 300px;
 }
 
 .dob-cell,
 .shares-cell {
-    width: 200px;
+  width: 200px;
 }
 
 .tree-label {
-    font-weight: 700;
-    font-size: 18px;
+  font-weight: 700;
+  font-size: 18px;
 }
- 
+
 .alt-row {
-    td{
+  td {
     background-color: #fff;
-    }
+  }
 }
