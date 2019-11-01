@@ -150,7 +150,7 @@ import { MapComponent } from '@components/map/map.component';
 import { AccountPickerComponent } from '@shared/components/account-picker/account-picker.component';
 import { ApplicationCancelOwnershipTransferComponent } from '@components/applications/application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
 import { ApplicationOwnershipTransferComponent } from '@components/applications/application-ownership-transfer/application-ownership-transfer.component';
-import { ProductInventoryPackagedComponent } from '@shared/components/product-inventory-packaged/product-inventory-packaged.component';
+import { ProductInventorySalesReportComponent } from '@shared/product-inventory-sales-report/product-inventory-sales-report.component';
 import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 import {
   OrganizationLeadershipComponent
@@ -248,7 +248,7 @@ import { ApplicationAndLicenceFeeComponent } from '@components/applications/appl
     ApplicationAndLicenceFeeComponent,
     ApplicationCancelOwnershipTransferComponent,
     ApplicationOwnershipTransferComponent,
-    ProductInventoryPackagedComponent,
+    ProductInventorySalesReportComponent,
     LicenseeTreeComponent,
     FederalReportingComponent,
     OrganizationLeadershipComponent,
