@@ -108,9 +108,23 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   save() {
-    this.legalEntityDataService.saveLicenseeChanges(this.editedTree, this.applicationId)
+    const data = this.cleanSaveData(this.editedTree);
+    this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId)
       .subscribe(() => {
         this.loadData();
       });
+  }
+
+  cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
+    const result = { ...data } as LicenseeChangeLog;
+    this.removeParentReference(result);
+    return result;
+  }
+
+  removeParentReference(node: LicenseeChangeLog) {
+    node.parentLinceseeChangeLog = undefined;
+    if (node.children && node.children.length) {
+      node.children.forEach(child => this.removeParentReference(child))
+    }
   }
 }
