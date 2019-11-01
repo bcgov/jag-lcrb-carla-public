@@ -1,34 +1,21 @@
+<ng-container *ngIf="!enableEditing">
+  <ng-container *ngTemplateOutlet="treeTemplate"></ng-container>
+</ng-container>
+
+<ng-container *ngIf="enableEditing">
+  <ng-container *ngTemplateOutlet="editTemplate"></ng-container>
+</ng-container>
+
 <ng-template #treeTemplate>
-  <mat-tree [ngClass]="{'not-editable': !enableEditing}" [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree" #tree>
+  <mat-tree [ngClass]="{'not-editable': !enableEditing}" [dataSource]="dataSource" [treeControl]="treeControl"
+    class="example-tree" #tree>
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
       <li class="mat-tree-node">
         <!-- use a disabled button to provide padding for tree leaf -->
         <button mat-icon-button disabled></button>
-        <span class="tree-label" *ngIf="node.isShareholderNew && !node.isRoot" style="margin-right: 5px">
-          <i *ngIf="node.isIndividual" class="fas fa-user-tie"></i>
-          <i *ngIf="!node.isIndividual" class="fas fa-building"></i> </span>
-        <span class="tree-label" *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px"> <i
-            class="fa fa-user" style="margin-right: 5px"></i> {{node.getNewLeadershipPosition()}} </span>
-        <span class="tree-label"
-          [ngClass]="{'added-node': isAddChangeType(node), 'deleted-node': isRemoveChangeType(node), 'edited-node': isUpdateChangeType(node)}">
-          {{node.businessNameNew}}
-        </span>
-        <span class="tree-label" *ngIf="node.isShareholderNew"
-          style="margin-left: 5px">({{node.numberofSharesNew}})</span>
-        &nbsp; &nbsp;
-        <a *ngIf="enableEditing && !node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)" style="margin-right: 10px;"
-          [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="!isRemoveChangeType(node) && addShareholder(node)">Shareholder</button>
-          <button mat-menu-item (click)="!isRemoveChangeType(node) && addLeadership(node)">Leadership</button>
-        </mat-menu>
-        <a *ngIf="enableEditing && !node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)" style="margin-right: 10px;"
-          (click)="!isRemoveChangeType(node) && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
-          Edit</a>
-        <a *ngIf="enableEditing && !node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)"
-          (click)="!isRemoveChangeType(node) && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
-          Delete</a>
+
+        <ng-container *ngTemplateOutlet="treeNode; context: { node: node }"></ng-container>
       </li>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
@@ -40,29 +27,7 @@
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
           </button>
-          <span *ngIf="node.isShareholderNew" class="tree-label" style="margin-right: 5px;">
-            <i *ngIf="node.isIndividual" class="fas fa-user-tie"></i>
-            <i *ngIf="!node.isIndividual" class="fas fa-building"></i>
-          </span>
-          <span class="tree-label"
-            [ngClass]="{'added-node': isAddChangeType(node), 'deleted-node': isRemoveChangeType(node), 'edited-node': isUpdateChangeType(node)}">
-            {{node.businessNameNew}}
-          </span>
-          <span class="tree-label" *ngIf="node.isShareholderNew"
-            style="margin-left: 5px">({{node.numberofSharesNew}})</span>
-          &nbsp; &nbsp;
-          <a *ngIf="enableEditing && !node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)"
-            style="margin-right: 10px;" [matMenuTriggerFor]="menu2"> <i class="fas fa-plus"></i>&nbsp;Add</a>
-          <mat-menu #menu2="matMenu">
-            <button mat-menu-item (click)="!isRemoveChangeType(node) && addShareholder(node)">Shareholder</button>
-            <button mat-menu-item (click)="!isRemoveChangeType(node) && addLeadership(node)">Leadership</button>
-          </mat-menu>
-          <a *ngIf="enableEditing && !node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)" style="margin-right: 10px;"
-            (click)="!isRemoveChangeType(node) && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
-            Edit</a>
-          <a *ngIf="enableEditing && !node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)"
-            (click)="!isRemoveChangeType(node) && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
-            Delete</a>
+          <ng-container *ngTemplateOutlet="treeNode; context: { node: node }"></ng-container>
         </div>
         <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
           <ng-container matTreeNodeOutlet></ng-container>
@@ -70,6 +35,35 @@
       </li>
     </mat-nested-tree-node>
   </mat-tree>
+</ng-template>
+
+<ng-template let-node="node" #treeNode>
+  <ng-container>
+    <span class="tree-label" *ngIf="node.isShareholderNew && !node.isRoot" style="margin-right: 5px">
+      <i *ngIf="node.isIndividual" class="fas fa-user-tie"></i>
+      <i *ngIf="!node.isIndividual" class="fas fa-building"></i> </span>
+    <span class="tree-label" *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px"> <i
+        class="fa fa-user" style="margin-right: 5px"></i> {{node.getNewLeadershipPosition()}} </span>
+    <span class="tree-label"
+      [ngClass]="{'added-node': isAddChangeType(node), 'deleted-node': isRemoveChangeType(node), 'edited-node': isUpdateChangeType(node)}">
+      {{node.businessNameNew}}
+    </span>
+    <span class="tree-label" *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
+    &nbsp; &nbsp;
+    <a *ngIf="enableEditing && !node.isIndividual && !isRemoveChangeType(node)" href="javascript:void(0)"
+      style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="!isRemoveChangeType(node) && addShareholder(node)">Shareholder</button>
+      <button mat-menu-item (click)="!isRemoveChangeType(node) && addLeadership(node)">Leadership</button>
+    </mat-menu>
+    <a *ngIf="enableEditing && !node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)"
+      style="margin-right: 10px;" (click)="!isRemoveChangeType(node) && editAssociate(node)"> <i
+        class="fas fa-pencil-alt"></i>
+      Edit</a>
+    <a *ngIf="enableEditing && !node.isRoot && !isRemoveChangeType(node)" href="javascript:void(0)"
+      (click)="!isRemoveChangeType(node) && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
+      Delete</a>
+  </ng-container>
 </ng-template>
 
 <ng-template #editTemplate>
@@ -89,7 +83,8 @@
     </div>
   </div>
 
-  <h3 class="blue-header" *ngIf="organizationShareholderChanges && organizationShareholderChanges.length">BUSINESS SHAREHOLDER CHANGES</h3>
+  <h3 class="blue-header" *ngIf="organizationShareholderChanges && organizationShareholderChanges.length">BUSINESS
+    SHAREHOLDER CHANGES</h3>
   <section class="padded-section" *ngIf="organizationShareholderChanges && organizationShareholderChanges.length">
     <table class="eq-table">
       <tr>
@@ -125,7 +120,8 @@
     </table>
   </section>
 
-  <h3 class="blue-header" *ngIf="individualShareholderChanges && individualShareholderChanges.length">INDIVIDUAL SHAREHOLDER CHANGES</h3>
+  <h3 class="blue-header" *ngIf="individualShareholderChanges && individualShareholderChanges.length">INDIVIDUAL
+    SHAREHOLDER CHANGES</h3>
   <section *ngIf="individualShareholderChanges && individualShareholderChanges.length" class="padded-section">
     <table class="eq-table">
       <tr>
@@ -134,7 +130,7 @@
         <th class="email-cell">Email</th>
         <th class="shares-cell">Number of Shares</th>
       </tr>
-      <tr  [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of individualShareholderChanges; let i = index;">
+      <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of individualShareholderChanges; let i = index;">
         <td>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
@@ -170,7 +166,7 @@
         <th class="email-cell">Email</th>
         <th>Position(s)</th>
       </tr>
-      <tr [ngClass]="{'alt-row': i%2 === 0}"  *ngFor="let item of leadershipChanges; let i = index;">
+      <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of leadershipChanges; let i = index;">
         <td>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">
@@ -197,11 +193,3 @@
     </table>
   </section>
 </ng-template>
-
-<ng-container *ngIf="!enableEditing">
-    <ng-container *ngTemplateOutlet="treeTemplate"></ng-container>
-</ng-container>
-
-<ng-container  *ngIf="enableEditing">
-    <ng-container *ngTemplateOutlet="editTemplate"></ng-container>
-</ng-container>
