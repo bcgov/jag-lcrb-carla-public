@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>
+    <span *ngIf="!form.get('id').value">Add Leadership Associate<ng-container *ngIf="parentName"> of {{parentName}}</ng-container></span>
+    <span *ngIf="form.get('id').value">Edit Leadership Associate</span>
+  </h2>
+  <mat-dialog-content>
+    <form [formGroup]='form' class="form-horizontal">
+  
+      <div class="form-group row">
+        <div class="col-md-12">
+
+          <fieldset *ngIf="businessType !== 'SoleProprietor'">
+            <label>Position</label>
+            <br>
+            <section>
+              <input type="checkbox" style="margin-right: 5px;" formControlName="isDirectorNew"> <label style="padding-right: 10px;"
+                for="">Director</label>
+              <input type="checkbox" style="margin-right: 5px;" formControlName="isOfficerNew"> <label style="padding-right: 10px;"
+                for="">Officer</label>
+              <input type="checkbox" style="margin-right: 5px;" formControlName="isManagerNew"> <label style="padding-right: 10px;"
+                for="">Senior Manager</label>
+            </section>
+          </fieldset>
+        </div>
+      </div>
+  
+      <div class="row">
+        <app-field class="col-md-6" label="First Name" [valid]="!isTouchedAndInvalid('firstNameNew')" errorMessage="This is required">
+          <input type="text" class="form-control"  formControlName="firstNameNew" placeholder="First Name">
+        </app-field>
+  
+        <app-field class="col-md-6" label="Last Name" [valid]="!isTouchedAndInvalid('lastNameNew')" errorMessage="This is required">
+          <input type="text" class="form-control" formControlName="lastNameNew" placeholder="Last Name">
+        </app-field>
+      </div>
+  
+      <div class="row">
+        <app-field class="col-md-6" label="Email" [valid]="!isTouchedAndInvalid('emailNew')" errorMessage="Email is invalid">
+          <input type="text" class="form-control" formControlName="emailNew">
+        </app-field>
+
+        <app-field class="col-md-6" label="Title" [valid]="true">
+          <input type="text" class="form-control" formControlName="titleNew">
+        </app-field>
+      </div>
+    <section class="row">
+      <app-field class="col-md-6" label="Date of Birth" [valid]="!isTouchedAndInvalid('dateofBirthNew')"
+        errorMessage="This is required">
+        <input type="text" formControlName='dateofBirthNew' style="width: 200px; background-color: #fff;"
+          autocomplete="false" placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
+          (focus)="picker.open()" (click)="picker.open()">
+        <mat-datepicker #picker></mat-datepicker>
+      </app-field>
+    </section>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="btn btn-secondary" (click)="close()">Cancel</button>
+    &nbsp;
+    <button class="btn btn-primary" (click)="save()">Save</button>
+  </mat-dialog-actions>
+  
