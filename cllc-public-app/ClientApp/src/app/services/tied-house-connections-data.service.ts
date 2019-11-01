@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TiedHouseConnection } from '../models/tied-house-connection.model';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
 import { catchError, retry } from 'rxjs/operators';
 import { DataService } from './data.service';
 
