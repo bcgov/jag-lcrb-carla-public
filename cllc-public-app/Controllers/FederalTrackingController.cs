@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         string filename = $"{currentExportId.ToString("0000")}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
                         bool result = _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv").GetAwaiter().GetResult();
                         string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
-                        filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + url + filename;
+                        filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + "/" + url + filename;
                     }
 
                     return new JsonResult(new Dictionary<string, string>{

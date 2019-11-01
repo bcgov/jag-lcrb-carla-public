@@ -24,6 +24,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly ILogger _logger;
         private readonly IMemoryCache _cache;
 
+        private const string LDB_ACCOUNT_NAME = "Liquor Distribution Branch";
+
         public EstablishmentsController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
@@ -66,7 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("map")]
         [AllowAnonymous]
         public IActionResult GetMap(string search)
-        {     
+        {
             /*
             string communicationRegionsCacheKey = "LGIN_REGIONS";
             Dictionary<int, string> communicationRegions;
@@ -89,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             */
-            
+
 
             string cacheKey;
             if (string.IsNullOrEmpty(search))
@@ -160,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                                 // note that the Linq query is required because the License does not contain accurate data to show the related applications.
 
-                                var relatedApplications = applications.Where(app => app._adoxioAssignedlicenceValue == license.AdoxioLicencesid).ToList();
+                                //var relatedApplications = applications.Where(app => app._adoxioAssignedlicenceValue == license.AdoxioLicencesid).ToList();
 
                                 // Change 2019-10-24 - no longer filter out establishments that have not passed the final inspection.
                                 /*
@@ -176,11 +178,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     }
                                 }
                                 */
-
+                                // do not add LDB stores at this time.
                                 if (add && license._adoxioEstablishmentValue != null)
                                 {
                                     var establishment = _dynamicsClient.GetEstablishmentById(license._adoxioEstablishmentValue);
-                                    if (establishment != null && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null)
+
+
+                                    if (establishment != null &&
+                                        (establishment.AdoxioLicencee == null || establishment.AdoxioLicencee.Name != LDB_ACCOUNT_NAME) &&
+                                        establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null)
                                     {
 
                                         if (add && !string.IsNullOrEmpty(search) && establishment.AdoxioName != null && establishment.AdoxioAddresscity != null)
@@ -223,7 +229,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                                 Latitude = (decimal)establishment.AdoxioLatitude,
                                                 Longitude = (decimal)establishment.AdoxioLongitude,
                                                 IsOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value
-                                            }) ;
+                                            });
                                         }
                                     }
                                 }
@@ -257,10 +263,51 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             }
 
-            // sort the establishment list by the city alphabetically 
-            establishmentMapData = establishmentMapData.OrderBy(o => o.AddressCity).ToList();
+            // make a copy of the results to guard against accidental cache pollution.
+            List<EstablishmentMapData> result = establishmentMapData.ToList();
 
-            return new JsonResult(establishmentMapData);
+            // add LDB stores
+            result.AddRange(GetLDBStores());
+
+            // sort the establishment list by the city alphabetically 
+            result = result.OrderBy(o => o.AddressCity).ToList();
+
+            return new JsonResult(result);
+        }
+
+        /// <summary>
+        /// Get the list of LDB stores.
+        /// </summary>
+        /// <returns></returns>
+        private List<EstablishmentMapData> GetLDBStores()
+        {
+            List<EstablishmentMapData> result = new List<EstablishmentMapData>();
+            // find master account.
+            var account = _dynamicsClient.GetAccountByNameWithEstablishments(LDB_ACCOUNT_NAME);
+            if (account != null && account.AdoxioAccountAdoxioEstablishmentLicencee != null)
+            {
+                foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
+                {
+                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000) // Licensed
+                    {
+                        EstablishmentMapData data = new EstablishmentMapData()
+                        {
+                            id = establishment.AdoxioEstablishmentid,
+                            Name = "BC Cannabis Store",
+                            IsOpen = establishment.AdoxioIsopen.Value,
+                            License = "Public Store",
+                            AddressStreet = establishment.AdoxioAddressstreet,
+                            AddressCity = establishment.AdoxioAddresscity,
+                            AddressPostal = establishment.AdoxioAddresspostalcode,
+                            Latitude = establishment.AdoxioLatitude.Value,
+                            Longitude = establishment.AdoxioLongitude.Value
+                        };
+                        result.Add(data);
+                    }
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -300,7 +347,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEstablishment([FromBody] ViewModels.Establishment item, string id)
         {
-            if (string.IsNullOrEmpty(id) || id != item.id)
+            if (item == null || string.IsNullOrEmpty(id) || id != item.id)
             {
                 return BadRequest();
             }

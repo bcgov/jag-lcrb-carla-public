@@ -4,6 +4,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 {
     public class MonthlyReport
     {
+        // shouldn't change
         public string monthlyReportId { get; set; }
         public string licenseId { get; set; }
         public string licenseNumber { get; set; }
@@ -13,8 +14,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string reportingPeriodYear { get; set; }
         public string reportingPeriodMonth { get; set; }
 
-        public string status { get; set; }
-
+        // will change
+        public int? statusCode { get; set; }
         public int? employeesManagement { get; set; }
         public int? employeesAdministrative { get; set; }
         public int? employeesSales { get; set; }
