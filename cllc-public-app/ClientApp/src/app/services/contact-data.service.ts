@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import { Contact } from '../models/contact.model';
+import { Contact } from '@models/contact.model';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';
 
