@@ -157,7 +157,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param node 'A LicenseeChangeLog to edit'
    */
   editAssociate(node: LicenseeChangeLog) {
-    if (node.isShareholderNew) {
+    if (node.isShareholderNew || node.isRoot) {
       this.openShareholderDialog(node, '')
         .pipe(filter(data => !!data))
         .subscribe((formData: LicenseeChangeLog) => {
