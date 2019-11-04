@@ -10,10 +10,10 @@
 
     <app-field label="Is the shareholder a person, an organization or an Indigenous nation?" [valid]="true"
       errorMessage="Please select a business type from the dropdown list">
-      <input type="radio" style="margin-right: 10px;" group="isIndividual" formControlName="isIndividual"
+      <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 10px;" group="isIndividual" formControlName="isIndividual"
         [value]="true">
       <span>Person</span> <br>
-      <input type="radio" style="margin-right: 10px;" group="isIndividual" formControlName="isIndividual"
+      <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 10px;" group="isIndividual" formControlName="isIndividual"
         [value]="false">
       <span>Organization or Indigenous Nation</span> <br>
     </app-field>
@@ -22,19 +22,19 @@
       <app-field class="col-md-12" label="What type of organization is the shareholder?" [showChevrons]="false"
         [valid]="!isTouchedAndInvalid('legalentitytype')"
         errorMessage="Please select a business type from the dropdown list">
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
           value="PrivateCorporation">
         <span>Private Corporation</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
           value="PublicCorporation">
         <span>Public Corporation</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
           value="Partnership">
         <span>Partnership</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
           value="Society">
         <span>Society</span> <br>
-        <input type="radio" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="legalentitytype" formControlName="legalentitytype"
           value="IndigenousNation">
         <span>Indigenous nation</span> <br>
       </app-field>
@@ -43,19 +43,19 @@
     <section class="row" *ngIf="form.get('isIndividual').value">
       <app-field class="col-md-6" label="First Name" [valid]="!isTouchedAndInvalid('firstNameNew')"
         errorMessage="This is required">
-        <input type="text" class="form-control" formControlName="firstNameNew" placeholder="First Name">
+        <input type="text" [readonly]="shareholder?.isRoot" class="form-control" formControlName="firstNameNew" placeholder="First Name">
       </app-field>
 
       <app-field class="col-md-6" label="Last Name" [valid]="!isTouchedAndInvalid('lastNameNew')"
         errorMessage="This is required">
-        <input type="text" class="form-control" formControlName="lastNameNew" placeholder="Last Name">
+        <input type="text" [readonly]="shareholder?.isRoot" class="form-control" formControlName="lastNameNew" placeholder="Last Name">
       </app-field>
     </section>
 
     <section class="row">
       <app-field *ngIf="!form.get('isIndividual').value" class="col-md-12" label="Name" [isFullWidth]="true"
         [valid]="!isTouchedAndInvalid('businessNameNew')" errorMessage="This is required">
-        <input type="text" class="form-control" formControlName="businessNameNew" placeholder="Name">
+        <input type="text" [readonly]="shareholder?.isRoot" class="form-control" formControlName="businessNameNew" placeholder="Name">
       </app-field>
     </section>
 
@@ -63,11 +63,11 @@
     <section class="row">
       <app-field class="col-md-6" label="Email" [valid]="!isTouchedAndInvalid('emailNew')"
         errorMessage="Email is invalid">
-        <input type="text" class="form-control" formControlName="emailNew">
+        <input type="text" [readonly]="shareholder?.isRoot" class="form-control" formControlName="emailNew">
       </app-field>
       <app-field *ngIf="form.get('isIndividual').value" class="col-md-6" label="Date of Birth"
         [valid]="!isTouchedAndInvalid('dateofBirthNew')" errorMessage="This is required">
-        <input type="text" formControlName='dateofBirthNew' style="background-color: #fff;" autocomplete="false"
+        <input type="text" [readonly]="shareholder?.isRoot" formControlName='dateofBirthNew' style="background-color: #fff;" autocomplete="false"
           placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
           (click)="picker.open()">
         <mat-datepicker #picker></mat-datepicker>
@@ -83,7 +83,7 @@
       <app-field class="col-md-12"
         label="Number of Voting Shares in {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}"
         [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
-        <input type="number" class="form-control" formControlName="numberofSharesNew">
+        <input type="number" [readonly]="shareholder?.isRoot" class="form-control" formControlName="numberofSharesNew">
       </app-field>
     </section>
   </form>
