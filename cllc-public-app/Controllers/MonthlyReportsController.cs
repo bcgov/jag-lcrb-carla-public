@@ -186,7 +186,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
 
             Guid monthlyReportId = new Guid(id);
-            string filter = $"adoxio_cannabismonthlyreportid eq {monthlyReportId}";
+            string filter = $"adoxio_cannabismonthlyreportid eq {id}";
             CannabismonthlyreportsGetResponseModel monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
             if (monthlyReportResp.Value.Count < 1 || !CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReportResp.Value[0]._adoxioLicenseeidValue))
             {
@@ -208,7 +208,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _dynamicsClient.Cannabismonthlyreports.Update(item.monthlyReportId, monthlyReport);
 
                 // Update inventory reports
-                if (item.inventorySalesReports.Count > 0) {
+                if (item.inventorySalesReports != null && item.inventorySalesReports.Count > 0) {
                   foreach (InventorySalesReport invReport in item.inventorySalesReports)
                   {
                       MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport()
@@ -223,7 +223,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                           AdoxioQtyloststolen = invReport.lostReductions,
                           AdoxioOtherreductions = invReport.otherReductions,
                           AdoxioClosinginventory = invReport.closingNumber,
-                          AdoxioValueofclosinginventory = invReport.closingValue
+                          AdoxioValueofclosinginventory = invReport.closingValue,
+                          AdoxioPackagedunitsnumber = invReport.totalSalesToConsumerQty,
+                          AdoxioTotalvalue = invReport.totalSalesToConsumerValue,
+                          AdoxioPackagedunitsnumberretailer = invReport.totalSalesToRetailerQty,
+                          AdoxioTotalvalueretailer = invReport.totalSalesToRetailerValue
                       };
                       if (invReport.product == "Seeds")
                       {

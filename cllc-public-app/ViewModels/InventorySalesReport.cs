@@ -21,5 +21,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public double closingWeight { get; set; }
         // only used for seeds
         public int? totalSeeds { get; set; }
+
+        // Sales
+        public int? totalSalesToConsumerQty { get; set; }
+        public double totalSalesToConsumerValue { get; set; }
+        public int? totalSalesToRetailerQty { get; set; }
+        public double totalSalesToRetailerValue { get; set; }
     }
 }
