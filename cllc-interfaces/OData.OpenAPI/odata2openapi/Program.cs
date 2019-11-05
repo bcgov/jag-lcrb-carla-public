@@ -263,8 +263,10 @@ namespace odata2openapi
                                             // move the inline schema to defs.
                                             swaggerDocument.Components.Schemas.Add(resultName, schema.Value.Schema);
 
-                                            schema.Value.Schema = new OpenApiSchema() { Reference = new OpenApiReference() { Id = resultName }, Type = "none"};
-                                        }                                       
+                                            schema.Value.Schema = new OpenApiSchema() { Reference = new OpenApiReference() { Id = resultName }, Type = "none" };
+
+                                            defsToKeep.Add(resultName);
+                                        }
                                     }
 
                                     /*
@@ -280,8 +282,9 @@ namespace odata2openapi
                                     */
                                 }
                             }
+                        }
 
-                            string prefix = "Unknown";
+                        string prefix = "Unknown";
                         var firstTag = operation.Value.Tags.FirstOrDefault();
 
                         if (firstTag == null)
