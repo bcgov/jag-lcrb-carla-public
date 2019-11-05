@@ -33,6 +33,7 @@ using System.Net.Http;
 using System.Net.Mime;
 using System.Text;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -389,10 +390,17 @@ namespace Gov.Lclb.Cllb.Public
                 !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
                 )
             {
+
+                Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
+                if (!string.IsNullOrEmpty (Configuration["SPLUNK_CHANNEL"]))
+                {
+                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
+                }                
+
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.EventCollector ( splunkHost: Configuration["SPLUNK_COLLECTOR_URL"], uriPath: Configuration["SPLUNK_URI_PATH"],
+                    .WriteTo.EventCollector(fields: fields, splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
                        eventCollectorToken: Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
                     .WriteTo.Console()
                     .CreateLogger();
