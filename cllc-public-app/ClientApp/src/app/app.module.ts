@@ -42,132 +42,131 @@ import {
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
-import { AccountDataService } from './services/account-data.service';
-import { ContactDataService } from './services/contact-data.service';
-import { ApplicationDataService } from './services/application-data.service';
-import { LegalEntityDataService } from './services/legal-entity-data.service';
-import { LicenseDataService } from './services/license-data.service';
-import { MonthlyReportDataService } from './services/monthly-report.service';
-import { PaymentDataService } from './services/payment-data.service';
+import { AccountDataService } from '@services/account-data.service';
+import { ContactDataService } from '@services/contact-data.service';
+import { ApplicationDataService } from '@services/application-data.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { LicenseDataService } from '@services/license-data.service';
+import { MonthlyReportDataService } from '@services/monthly-report.service';
+import { PaymentDataService } from '@services/payment-data.service';
 import { AppComponent } from './app.component';
-import { BceidConfirmationComponent } from './bceid-confirmation/bceid-confirmation.component';
+import { BceidConfirmationComponent } from '@components/bceid-confirmation/bceid-confirmation.component';
 import { GeneralDataService } from './general-data.service';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
-import { DynamicsDataService } from './services/dynamics-data.service';
-import { DynamicsFormComponent } from './dynamics-form/dynamics-form.component';
+import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component';
+import { DynamicsDataService } from '@services/dynamics-data.service';
+import { DynamicsFormComponent } from '@components/dynamics-form/dynamics-form.component';
 import {
   EditShareholdersComponent, ShareholderDialogComponent,
-} from './account-profile/tabs/shareholders/shareholders.component';
-import { FormViewerComponent } from './form-viewer/form-viewer.component';
-import { InsertComponent } from './insert/insert.component';
-import { InsertService } from './insert/insert.service';
-import { StaticComponent } from './static/static.component';
-import { HomeComponent } from './home/home.component';
-import { PolicyDocumentComponent } from './policy-document/policy-document.component';
-import { PolicyDocumentDataService } from './services/policy-document-data.service';
-import { PolicyDocumentSidebarComponent } from './policy-document-sidebar/policy-document-sidebar.component';
-import { StatusBadgeComponent } from './status-badge/status-badge.component';
-import { SurveyComponent } from './survey/survey.component';
-import { SurveyPrimaryComponent } from './survey/primary.component';
-import { SurveyTestComponent } from './survey/test.component';
-import { SurveySidebarComponent } from './survey/sidebar.component';
-import { SurveyDataService } from './services/survey-data.service';
-import { ResultComponent } from './result/result.component';
-import { AccordionComponent } from './accordion/accordion.component';
-import { VoteComponent } from './vote/vote.component';
-import { VoteDataService } from './services/vote-data.service';
-import { NewsletterSignupComponent } from './newsletter-signup/newsletter-signup.component';
-import { NewsletterConfirmationComponent } from './newsletter-confirmation/newsletter-confirmation.component';
-import { NewsletterDataService } from './services/newsletter-data.service';
-import { UserDataService } from './services/user-data.service';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { FileUploaderComponent } from './shared/file-uploader/file-uploader.component';
-import { CorporateDetailsComponent } from './account-profile/tabs/corporate-details/corporate-details.component';
+} from '@components/account-profile/tabs/shareholders/shareholders.component';
+import { FormViewerComponent } from '@components/form-viewer/form-viewer.component';
+import { InsertComponent } from '@components/insert/insert.component';
+import { InsertService } from '@components/insert/insert.service';
+import { StaticComponent } from '@components/static/static.component';
+import { HomeComponent } from '@components/home/home.component';
+import { PolicyDocumentComponent } from '@components/policy-document/policy-document.component';
+import { PolicyDocumentDataService } from '@services/policy-document-data.service';
+import { PolicyDocumentSidebarComponent } from '@components/policy-document-sidebar/policy-document-sidebar.component';
+import { StatusBadgeComponent } from '@components/status-badge/status-badge.component';
+import { SurveyComponent } from '@components/survey/survey.component';
+import { SurveyPrimaryComponent } from '@components/survey/primary.component';
+import { SurveyTestComponent } from '@components/survey/test.component';
+import { SurveySidebarComponent } from '@components/survey/sidebar.component';
+import { SurveyDataService } from '@services/survey-data.service';
+import { ResultComponent } from '@components/result/result.component';
+import { AccordionComponent } from '@components/accordion/accordion.component';
+import { VoteComponent } from '@components/vote/vote.component';
+import { VoteDataService } from '@services/vote-data.service';
+import { NewsletterSignupComponent } from '@components/newsletter-signup/newsletter-signup.component';
+import { NewsletterConfirmationComponent } from '@components/newsletter-confirmation/newsletter-confirmation.component';
+import { NewsletterDataService } from '@services/newsletter-data.service';
+import { UserDataService } from '@services/user-data.service';
+import { NotFoundComponent } from '@components/not-found/not-found.component';
+import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
+import { CorporateDetailsComponent } from '@components/account-profile/tabs/corporate-details/corporate-details.component';
 import {
   DirectorsAndOfficersComponent,
   DirectorAndOfficerPersonDialogComponent
-} from './account-profile/tabs/directors-and-officers/directors-and-officers.component';
-import { SecurityAssessmentsComponent } from './account-profile/tabs/security-assessments/security-assessments.component';
-import { OrganizationStructureComponent } from './account-profile/tabs/organization-structure/organization-structure.component';
-import { BeforeYouStartComponent } from './account-profile/tabs/before-you-start/before-you-start.component';
-import { FinancialInformationComponent } from './account-profile/tabs/financial-information/financial-information.component';
-import { AccountProfileSummaryComponent } from './account-profile/account-profile-summary/account-profile-summary.component';
+} from '@components/account-profile/tabs/directors-and-officers/directors-and-officers.component';
+import { SecurityAssessmentsComponent } from '@components/account-profile/tabs/security-assessments/security-assessments.component';
+import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
+import { BeforeYouStartComponent } from '@components/account-profile/tabs/before-you-start/before-you-start.component';
+import { FinancialInformationComponent } from '@components/account-profile/tabs/financial-information/financial-information.component';
+import { AccountProfileSummaryComponent } from '@components/account-profile/account-profile-summary/account-profile-summary.component';
 
 import { NgBusyModule } from 'ng-busy';
-import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from './account-profile/tabs/key-personnel/key-personnel.component';
-import { ConnectionToProducersComponent } from './account-profile/tabs/connection-to-producers/connection-to-producers.component';
-import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
-import { LicenceFeePaymentConfirmationComponent } from './licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
+import { KeyPersonnelComponent, KeyPersonnelDialogComponent } from '@components/account-profile/tabs/key-personnel/key-personnel.component';
+import { ConnectionToProducersComponent } from '@components/account-profile/tabs/connection-to-producers/connection-to-producers.component';
+import { PaymentConfirmationComponent } from '@components/payment-confirmation/payment-confirmation.component';
+import { LicenceFeePaymentConfirmationComponent } from '@components/licences/licence-fee-payment-confirmation/licence-fee-payment-confirmation.component';
 
-import { TiedHouseConnectionsDataService } from './services/tied-house-connections-data.service';
-import { CanDeactivateGuard } from './services/can-deactivate-guard.service';
-import { BCeidAuthGuard } from './services/bceid-auth-guard.service';
-import { ServiceCardAuthGuard } from './services/service-card-auth-guard.service';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { CanDeactivateGuard } from '@services/can-deactivate-guard.service';
+import { BCeidAuthGuard } from '@services/bceid-auth-guard.service';
+import { ServiceCardAuthGuard } from '@services/service-card-auth-guard.service';
 import { metaReducers, reducers } from './app-state/reducers/reducers';
 import { StoreModule, Store } from '@ngrx/store';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ApplicationComponent } from './application/application.component';
-import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
-import { WorkerApplicationComponent } from './worker-qualification/worker-application/worker-application.component';
-import { WorkerDashboardComponent } from './worker-qualification/dashboard/dashboard.component';
-import { AliasDataService } from './services/alias-data.service';
-import { PreviousAddressDataService } from './services/previous-address-data.service';
-import { WorkerDataService } from './services/worker-data.service.';
-import { SpdConsentComponent } from './worker-qualification/spd-consent/spd-consent.component';
-import { PrePaymentComponent } from './worker-qualification/pre-payment/pre-payment.component';
-import { UserConfirmationComponent } from './worker-qualification/user-confirmation/user-confirmation.component';
-import { WorkerQualificationComponent } from './worker-qualification/worker-qualification.component';
-import { WorkerPaymentConfirmationComponent } from './worker-qualification/payment-confirmation/payment-confirmation.component';
+import { DashboardComponent } from '@components/dashboard/dashboard.component';
+import { ApplicationComponent } from '@components/applications/application/application.component';
+import { TermsOfUseComponent } from '@components/terms-of-use/terms-of-use.component';
+import { WorkerApplicationComponent } from '@components/worker-qualification/worker-application/worker-application.component';
+import { WorkerDashboardComponent } from '@components/worker-qualification/dashboard/dashboard.component';
+import { AliasDataService } from '@services/alias-data.service';
+import { PreviousAddressDataService } from '@services/previous-address-data.service';
+import { WorkerDataService } from '@services/worker-data.service.';
+import { SpdConsentComponent } from '@components/worker-qualification/spd-consent/spd-consent.component';
+import { PrePaymentComponent } from '@components/worker-qualification/pre-payment/pre-payment.component';
+import { UserConfirmationComponent } from '@components/worker-qualification/user-confirmation/user-confirmation.component';
+import { WorkerQualificationComponent } from '@components/worker-qualification/worker-qualification.component';
+import { WorkerPaymentConfirmationComponent } from '@components/worker-qualification/payment-confirmation/payment-confirmation.component';
 import {
   WorkerTermsAndConditionsComponent
-} from './worker-qualification/worker-terms-and-conditions/worker-terms-and-conditions.component';
-import { WorkerHomeComponent, WorkerHomeDialogComponent } from './worker-qualification/worker-home/worker-home.component';
-import { WorkerInformationComponent } from './worker-qualification/worker-information/worker-information.component';
-import { AssosiateWizardComponent } from './associate-wizard/associate-wizard.component';
-import { SolePropResultsComponent } from './associate-wizard/sole-prop-results/sole-prop-results.component';
+} from '@components/worker-qualification/worker-terms-and-conditions/worker-terms-and-conditions.component';
+import { WorkerHomeComponent, WorkerHomeDialogComponent } from '@components/worker-qualification/worker-home/worker-home.component';
+import { WorkerInformationComponent } from '@components/worker-qualification/worker-information/worker-information.component';
+import { AssosiateWizardComponent } from '@components/associate-wizard/associate-wizard.component';
+import { SolePropResultsComponent } from '@components/associate-wizard/sole-prop-results/sole-prop-results.component';
 import { NgxFileDropModule  } from 'ngx-file-drop';
 import {
   IndividualAssociatesResultsComponent
-} from './associate-wizard/individual-associates-results/individual-associates-results.component';
-import { OrganizationResultsComponent } from './associate-wizard/organization-results/organization-results.component';
-import { AccountProfileComponent } from './account-profile/account-profile.component';
-import { FieldComponent } from './shared/field/field.component';
-import {
-  ApplicationsAndLicencesComponent,
-  ApplicationCancellationDialogComponent
-} from './applications-and-licences/applications-and-licences.component';
+} from '@components/associate-wizard/individual-associates-results/individual-associates-results.component';
+import { OrganizationResultsComponent } from '@components/associate-wizard/organization-results/organization-results.component';
+import { AccountProfileComponent } from '@components/account-profile/account-profile.component';
+import { FieldComponent } from '@shared/components/field/field.component';
 import { AppRemoveIfFeatureOnDirective } from './directives/remove-if-feature-on.directive';
 import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-off.directive';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppState } from '@app/app-state/models/app-state';
 import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
 import { map } from 'rxjs/operators';
-import { EstablishmentWatchWordsService } from './services/establishment-watch-words.service';
-import { AssociateContentComponent } from './associate-content/associate-content.component';
+import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
 import {
   ConnectionToNonMedicalStoresComponent
-} from './account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
-import { AssociatePageComponent } from './associate-page/associate-page.component';
-import { LicenceRenewalStepsComponent } from './licence-renewal-steps/licence-renewal-steps.component';
-import { ApplicationRenewalComponent } from './application-renewal/application-renewal.component';
-import { MoreLessContentComponent } from './shared/more-less-content/more-less-content.component';
-import { MapComponent } from './map/map.component';
-import { AccountPickerComponent } from './shared/account-picker/account-picker.component';
-import { ApplicationAndLicenceFeeComponent } from './application-and-licence-fee/application-and-licence-fee.component';
-import { ApplicationCancelOwnershipTransferComponent } from './application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
-import { ApplicationOwnershipTransferComponent } from './application-ownership-transfer/application-ownership-transfer.component';
-import { ProductInventoryPackagedComponent } from './shared/product-inventory-packaged/product-inventory-packaged.component';
-import { LicenseeTreeComponent } from './shared/licensee-tree/licensee-tree.component';
+} from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
+import { AssociatePageComponent } from '@components/associate-page/associate-page.component';
+import { LicenceRenewalStepsComponent } from '@components/licences/licence-renewal-steps/licence-renewal-steps.component';
+import { ApplicationRenewalComponent } from '@components/applications/application-renewal/application-renewal.component';
+import { MoreLessContentComponent } from '@shared/components/more-less-content/more-less-content.component';
+import { MapComponent } from '@components/map/map.component';
+import { AccountPickerComponent } from '@shared/components/account-picker/account-picker.component';
+import { ApplicationCancelOwnershipTransferComponent } from '@components/applications/application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
+import { ApplicationOwnershipTransferComponent } from '@components/applications/application-ownership-transfer/application-ownership-transfer.component';
+import { ProductInventorySalesReportComponent } from '@shared/product-inventory-sales-report/product-inventory-sales-report.component';
+import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 import {
   OrganizationLeadershipComponent
-} from './shared/licensee-tree/dialog-boxes/organization-leadership/organization-leadership.component';
+} from '@shared/components/licensee-tree/dialog-boxes/organization-leadership/organization-leadership.component';
 import {
   ShareholdersAndPartnersComponent
-} from './shared/licensee-tree/dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
-import { ApplicationLicenseeChangesComponent } from './application-licensee-changes/application-licensee-changes.component';
-import { VersionInfoDataService } from './services/version-info-data.service';
-import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
-import { FederalReportingComponent } from './federal-reporting/federal-reporting.component';
+} from '@shared/components/licensee-tree/dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
+import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
+import { VersionInfoDataService } from '@services/version-info-data.service';
+import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
+import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
+import { LicencesComponent } from '@components/licences/licences.component';
+import { ApplicationsComponent } from '@components/applications/applications.component';
+import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
+import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 
 
 @NgModule({
@@ -249,13 +248,15 @@ import { FederalReportingComponent } from './federal-reporting/federal-reporting
     ApplicationAndLicenceFeeComponent,
     ApplicationCancelOwnershipTransferComponent,
     ApplicationOwnershipTransferComponent,
-    ProductInventoryPackagedComponent,
+    ProductInventorySalesReportComponent,
     LicenseeTreeComponent,
     FederalReportingComponent,
     OrganizationLeadershipComponent,
     ShareholdersAndPartnersComponent,
     ApplicationLicenseeChangesComponent,
-    VersionInfoDialogComponent
+    VersionInfoDialogComponent,
+    LicencesComponent,
+    ApplicationsComponent
   ],
   imports: [
     ChartsModule,
