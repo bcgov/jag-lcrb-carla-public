@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Newsletter } from '../models/newsletter.model';
+import { Newsletter } from '@models/newsletter.model';
 import { DataService } from './data.service';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';

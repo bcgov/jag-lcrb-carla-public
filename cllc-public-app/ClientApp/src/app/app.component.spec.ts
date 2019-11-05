@@ -4,7 +4,6 @@ import {
 } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AppComponent } from './app.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { AccountDataService } from '@services/account-data.service';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -14,6 +13,7 @@ import { Account } from '@models/account.model';
 import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { VersionInfoDataService } from '@services/version-info-data.service';
+import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component';
 
 let accountDataServiceStub: Partial<AccountDataService>;
 let featureFlagServiceStub: Partial<FeatureFlagService>;
