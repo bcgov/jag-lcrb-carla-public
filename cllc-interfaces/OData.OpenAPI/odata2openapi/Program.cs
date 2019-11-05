@@ -235,7 +235,53 @@ namespace odata2openapi
                                 break;
                         }
 
-                        string prefix = "Unknown";
+
+                        // adjustments to response
+
+                        foreach (var response in operation.Value.Responses)
+                        {
+                            var val = response.Value;
+                            if (val != null && val.Reference == null)
+                            {
+                                bool hasValue = false;
+                                foreach (var schema in val.Content)
+                                {
+                                    foreach (var property in schema.Value.Schema.Properties)
+                                    {
+                                        if (property.Key.Equals("value"))
+                                        {
+                                            hasValue = true;
+                                            break;
+                                        }
+                                    }
+                                    if (hasValue)
+                                    {
+                                        string resultName = operation.Value.OperationId + "ResponseModel";
+
+                                        if (!swaggerDocument.Components.Schemas.ContainsKey(resultName))
+                                        {
+                                            // move the inline schema to defs.
+                                            swaggerDocument.Components.Schemas.Add(resultName, schema.Value.Schema);
+
+                                            schema.Value.Schema = new OpenApiSchema() { Reference = new OpenApiReference() { Id = resultName }, Type = "none"};
+                                        }                                       
+                                    }
+
+                                    /*
+                                    var schema = val.Schema;
+
+                                    foreach (var property in schema.Properties)
+                                    {
+                                        if (property.Key.Equals("value"))
+                                        {
+                                            property.Value.ExtensionData.Add("x-ms-client-flatten", true);
+                                        }
+                                    }
+                                    */
+                                }
+                            }
+
+                            string prefix = "Unknown";
                         var firstTag = operation.Value.Tags.FirstOrDefault();
 
                         if (firstTag == null)
