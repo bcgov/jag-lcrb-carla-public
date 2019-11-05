@@ -1,6 +1,5 @@
-import { Action } from '@ngrx/store';
 import * as ApplicationActions from '../actions/current-application.action';
-import {  CurrentApplicationState } from '../models/app-state';
+import { CurrentApplicationState } from '../models/app-state';
 
 // Section 1
 const initialState: CurrentApplicationState = { currentApplication: null };
