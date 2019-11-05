@@ -300,7 +300,6 @@ namespace Gov.Lclb.Cllb.Public
 
                         await context.Response.WriteAsync("An unexpected server error occurred.\r\n");
 
-
                         var exceptionHandlerPathFeature =
                             context.Features.Get<IExceptionHandlerPathFeature>();
 
@@ -393,8 +392,9 @@ namespace Gov.Lclb.Cllb.Public
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
-                        Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .WriteTo.EventCollector ( splunkHost: Configuration["SPLUNK_COLLECTOR_URL"], uriPath: Configuration["SPLUNK_URI_PATH"],
+                       eventCollectorToken: Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .WriteTo.Console()
                     .CreateLogger();
             }
             else
