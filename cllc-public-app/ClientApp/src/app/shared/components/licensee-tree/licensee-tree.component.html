@@ -91,6 +91,7 @@
         <th class="name-cell">Business Account Name</th>
         <th class="email-cell">Email</th>
         <th class="shares-cell">Number of Shares</th>
+        <th></th>
       </tr>
       <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of organizationShareholderChanges;  let i = index;">
         <td>
@@ -115,6 +116,9 @@
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">{{item.numberofSharesNew}}</span>
         </td>
+        <td>
+          <button class="btn btn-primary" (click)="chancelChange(node)">Cancel Change</button>
+        </td>
       </tr>
     </table>
   </section>
@@ -128,6 +132,7 @@
         <th class="name-cell">Name</th>
         <th class="email-cell">Email</th>
         <th class="shares-cell">Number of Shares</th>
+        <th></th>
       </tr>
       <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of individualShareholderChanges; let i = index;">
         <td>
@@ -152,6 +157,9 @@
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">{{item.numberofSharesNew}}</span>
         </td>
+        <td>
+          <button class="btn btn-primary" (click)="chancelChange(node)">Cancel Change</button>
+        </td>
       </tr>
     </table>
   </section>
@@ -164,6 +172,7 @@
         <th class="name-cell">Name</th>
         <th class="email-cell">Email</th>
         <th>Position(s)</th>
+        <th></th>
       </tr>
       <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of leadershipChanges; let i = index;">
         <td>
@@ -187,6 +196,9 @@
           <div *ngIf="isUpdateChangeType(item)" class="old-value">{{item.getOldLeadershipPosition()}}</div>
           <span
             [ngClass]="{'added-node': isAddChangeType(item), 'deleted-node': isRemoveChangeType(item), 'edited-node': isUpdateChangeType(item)}">{{item.getNewLeadershipPosition()}}</span>
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="chancelChange(node)">Cancel Change</button>
         </td>
       </tr>
     </table>

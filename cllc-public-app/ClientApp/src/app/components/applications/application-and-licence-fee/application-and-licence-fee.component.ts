@@ -123,17 +123,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
       );
   }
 
-  private addDynamicContent() {
-    if (this.application.applicationType) {
-      this.htmlContent = {
-        title: this.application.applicationType.title,
-        preamble: this.getApplicationContent('Preamble'),
-        beforeStarting: this.getApplicationContent('BeforeStarting'),
-        nextSteps: this.getApplicationContent('NextSteps'),
-      };
-    }
-  }
-
   payLicenceFee() {
     this.busy = this.paymentDataService.getInvoiceFeePaymentSubmissionUrl(this.application.id)
       .pipe(takeWhile(() => this.componentActive))
@@ -145,17 +134,6 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
           this.snackBar.open('Licence Fee payment has already been made.', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
         }
       });
-  }
-
-  private getApplicationContent(contentCartegory: string) {
-    let body = '';
-    const contents =
-      this.application.applicationType.contentTypes
-        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
-    if (contents.length > 0) {
-      body = contents[0].body;
-    }
-    return body;
   }
 
   canDeactivate(): Observable<boolean> | boolean {
