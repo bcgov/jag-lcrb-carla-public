@@ -1,5 +1,8 @@
 import { ValidatorFn, AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { OnDestroy } from '@angular/core';
+import { Application } from '@models/application.model';
+import { ApplicationHTMLContent } from '@components/applications/application/application.component';
+import { ApplicationTypeNames } from '@models/application-type.model';
 
 
 export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]$';
@@ -8,6 +11,33 @@ export const USPostalRegex = '^\\d{5}([\-]\\d{4})?$';
 export class FormBase implements OnDestroy {
     form: FormGroup;
     componentActive = true;
+    application: Application;
+    htmlContent: ApplicationHTMLContent;
+    ApplicationTypeNames = ApplicationTypeNames;
+
+    public addDynamicContent() {
+        if (this.application.applicationType) {
+            this.htmlContent = {
+                title: this.application.applicationType.title,
+                preamble: this.getApplicationContent('Preamble'),
+                beforeStarting: this.getApplicationContent('BeforeStarting'),
+                nextSteps: this.getApplicationContent('NextSteps'),
+            };
+        }
+    }
+
+    public getApplicationContent(contentCartegory: string) {
+        let body = '';
+        const contents =
+            this.application.applicationType.contentTypes
+                .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
+        if (contents.length > 0) {
+            body = contents[0].body;
+        }
+        return body;
+    }
+
+
 
     isValidOrNotTouched(field: string) {
         return this.form.get(field).disabled
