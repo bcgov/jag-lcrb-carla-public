@@ -167,7 +167,7 @@ import { ApplicationsComponent } from '@components/applications/applications.com
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
-
+import { ProductInventoryPackagedComponent } from '@shared/components/product-inventory-packaged/product-inventory-packaged.component.ts';
 
 @NgModule({
   declarations: [
@@ -256,7 +256,8 @@ import { ApplicationAndLicenceFeeComponent } from '@components/applications/appl
     ApplicationLicenseeChangesComponent,
     VersionInfoDialogComponent,
     LicencesComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    ProductInventoryPackagedComponent
   ],
   imports: [
     ChartsModule,
