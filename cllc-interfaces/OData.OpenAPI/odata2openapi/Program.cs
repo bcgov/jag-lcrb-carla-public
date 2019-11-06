@@ -196,6 +196,15 @@ namespace odata2openapi
                     foreach (var operation in path.Value.Operations)
                     {
                         string suffix = "";
+
+                        string prefix = "Unknown";
+                        var firstTag = operation.Value.Tags.FirstOrDefault();
+
+                        if (firstTag == null)
+                        {
+                            firstTag = new OpenApiTag() { Name = path.Key.Substring(1) };
+                        }
+
                         switch (operation.Key)
                         {
                             case OperationType.Post:
@@ -241,6 +250,15 @@ namespace odata2openapi
                         foreach (var response in operation.Value.Responses)
                         {
                             var val = response.Value;
+                            if (response.Key == "default")
+                            {
+                                if (string.IsNullOrEmpty(response.Value.Description))
+                                {
+                                    operation.Value.Responses["default"].Description = "OData Error";
+                                };
+
+                            }
+
                             if (val != null && val.Reference == null)
                             {
                                 bool hasValue = false;
@@ -263,11 +281,17 @@ namespace odata2openapi
                                             // move the inline schema to defs.
                                             swaggerDocument.Components.Schemas.Add(resultName, schema.Value.Schema);
 
-                                            schema.Value.Schema = new OpenApiSchema() { Reference = new OpenApiReference() { Id = resultName }, Type = "none" };
+                                            var newSchema = swaggerDocument.Components.Schemas[resultName];
+                                            if ( newSchema.Type == "array")
+                                            {
+                                                newSchema.Items = new OpenApiSchema() { Reference = new OpenApiReference() { Id = firstTag.Name, Type = ReferenceType.Schema }, Type = "none" } ;
+                                            }
+
+                                            schema.Value.Schema = new OpenApiSchema() { Reference = new OpenApiReference() { Id = resultName, Type = ReferenceType.Schema },  Type = "none" };
 
                                             defsToKeep.Add(resultName);
                                         }
-                                    }
+                                    }                                    
 
                                     /*
                                     var schema = val.Schema;
@@ -284,13 +308,7 @@ namespace odata2openapi
                             }
                         }
 
-                        string prefix = "Unknown";
-                        var firstTag = operation.Value.Tags.FirstOrDefault();
-
-                        if (firstTag == null)
-                        {
-                            firstTag = new OpenApiTag() { Name = path.Key.Substring(1) };
-                        }
+                        
 
 
                         if (firstTag != null)
@@ -578,8 +596,8 @@ namespace odata2openapi
 
                     }
                 }
-                
-                
+
+                defsToKeep.Add("Microsoft.Dynamics.CRM.LookupAttributeMetadata");
 
                 // reverse the items to keep.
 
