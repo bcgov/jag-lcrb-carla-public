@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 CannabismonthlyreportsGetResponseModel previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"});
-                int currentExportId = (previousReport.Value.Count > 0) ? previousReport.Value[0].AdoxioCsvexportid + 1 : 1;
+                int currentExportId = (previousReport.Value.Count > 0) ? previousReport.Value[0].AdoxioCsvexportid.Value + 1 : 1;
 
                 // Submitted reports
                 string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
