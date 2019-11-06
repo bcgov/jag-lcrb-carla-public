@@ -206,7 +206,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
    */
   addShareholder(parentNode: LicenseeChangeLog) {
-    this.openShareholderDialog({ parentLinceseeChangeLog: parentNode} as LicenseeChangeLog, parentNode.businessNameNew)
+    this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew)
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
         if (formData.isIndividual) {
@@ -400,5 +400,11 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       changeType = 'Remove';
     }
     return changeType;
+  }
+
+  cancelChange(node: LicenseeChangeLog) {
+    // delete change log record
+    // ??What to do with children when their parent add is cancelled
+    // 
   }
 }

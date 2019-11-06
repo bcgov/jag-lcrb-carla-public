@@ -1,15 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBase } from '@shared/form-base';
+import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/legal-entity-change.model';
 import { MatTreeNestedDataSource, MatTree, MatDialog } from '@angular/material';
 import { Application } from '@models/application.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { forkJoin } from 'rxjs';
 import { takeWhile, filter } from 'rxjs/operators';
 import { LegalEntity } from '@models/legal-entity.model';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '@app/app-state/models/app-state';
+import { Account } from '@models/account.model';
 
 @Component({
   selector: 'app-application-licensee-changes',
@@ -28,8 +32,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   currentLegalEntities: LegalEntity;
 
   editedTree: LicenseeChangeLog;
+  busy: any;
 
   constructor(public dialog: MatDialog,
+    private fb: FormBuilder,
+    public router: Router,
+    private store: Store<AppState>,
     private route: ActivatedRoute,
     private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService) {
@@ -39,6 +47,56 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
 
   ngOnInit() {
+    this.form = this.fb.group({
+      id: [''],
+      contactPersonFirstName: ['', Validators.required],
+      contactPersonLastName: ['', Validators.required],
+      contactPersonRole: [''],
+      contactPersonEmail: ['', Validators.required],
+      contactPersonPhone: ['', Validators.required],
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+    });
+
+
+    this.store.select(state => state.currentAccountState.currentAccount)
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(filter(account => !!account))
+      .subscribe((account) => {
+        this.account = account;
+      });
+
+
+
+    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data: Application) => {
+        if (data.establishmentParcelId) {
+          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
+        }
+        if (data.applicantType === 'IndigenousNation') {
+          (<any>data).applyAsIndigenousNation = true;
+        }
+        this.application = data;
+
+        this.addDynamicContent();
+
+        const noNulls = Object.keys(data)
+          .filter(e => data[e] !== null)
+          .reduce((o, e) => {
+            o[e] = data[e];
+            return o;
+          }, {});
+
+        this.form.patchValue(noNulls);
+        if (data.isPaid) {
+          this.form.disable();
+        }
+      },
+        () => {
+          console.log('Error occured');
+        }
+      );
     this.loadData();
   }
 
@@ -51,6 +109,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.application = data[0];
         this.currentChangeLogs = data[1] || [];
         this.currentLegalEntities = data[2];
+        this.addDynamicContent();
       },
         () => {
           console.log('Error occured');
@@ -115,6 +174,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       });
   }
 
+  cancelApplication(){
+  }
+
   cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
     const result = { ...data } as LicenseeChangeLog;
     this.removeParentReference(result);
@@ -128,3 +190,4 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     }
   }
 }
+

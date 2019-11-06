@@ -1,8 +1,341 @@
-<div style="margin: 0 20px;">
-  <h1>Licensee Changes Application</h1>
+<div style="margin: 0 20px;" [formGroup]="form">
+  <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
 
-  <app-licensee-tree *ngIf="currentChangeLogs && currentLegalEntities" [currentChangeLogs]="currentChangeLogs" (editedTree)="editedTree = $event"
-    [currentLegalEntityTree]="currentLegalEntities" [enableEditing]="true"></app-licensee-tree>
+  <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
 
-    <button class="btn btn-primary" style="margin-top: 10px;" (click)="save()">Save</button>
+  <!-- Before Starting -->
+  <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
+    THE APPLICATION</h3>
+  <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+    <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+  </section>
+
+  <h3 class="blue-header">UPDATE YOUR ORGANIZATION STRUCTURE</h3>
+  <div class="padded-section">
+    <p>
+      The following organization structure is on file with LCRB. You can identify changes directly to the structure
+      using
+      the Add, Remove and Update links for each associate. Depending on the changes you make, you will be asked to
+      supply
+      additional information.
+    </p>
+    <app-licensee-tree *ngIf="currentChangeLogs && currentLegalEntities" [currentChangeLogs]="currentChangeLogs"
+      (editedTree)="editedTree = $event" [currentLegalEntityTree]="currentLegalEntities" [enableEditing]="true">
+    </app-licensee-tree>
+  </div>
+
+  <h3 *ngIf="false" class="blue-header">PROVIDE SUPPORTING DOCUMENTS</h3>
+  <div *ngIf="false" class="ngtest-financial-integrity-upload">
+    <hr><br>
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <i>
+      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
+    </i>
+    <p>Upload the completed form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </div>
+  <div *ngIf="false" class="ngtest-financial-integrity-upload">
+    <hr><br>
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <i>
+      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
+    </i>
+    <p>Upload the completed form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </div>
+  <div *ngIf="false" class="ngtest-financial-integrity-upload">
+    <hr><br>
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <i>
+      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
+    </i>
+    <p>Upload the completed form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </div>
+  <div *ngIf="false" class="ngtest-financial-integrity-upload">
+    <hr><br>
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <i>
+      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
+    </i>
+    <p>Upload the completed form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </div>
+  <div *ngIf="false" class="ngtest-financial-integrity-upload">
+    <hr><br>
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <i>
+      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
+    </i>
+    <p>Upload the completed form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </div>
+  <div *ngIf="false" class="ngtest-financial-integrity-upload">
+    <hr><br>
+    <label for="">Financial Integrity Form</label>
+    <br>
+    <i>
+      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
+    </i>
+    <p>Upload the completed form below.</p>
+    <section>
+      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </div>
+
+  <!-- Contact Details -->
+  <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+  <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+    The contact LCRB should communicate with regarding the application. The contact must be authorized to
+    represent
+    the applicant and have the authority to bind the applicant.
+  </i>
+  <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+    <i *ngIf="account?.businessType === 'SoleProprietor'">
+      The contact LCRB should communicate with regarding the application
+    </i>
+    <i *ngIf="account?.businessType === 'Society'">
+      The contact LCRB should communicate with regarding the application. The contact must be authorized to
+      represent the applicant and have the authority to bind the applicant.
+    </i>
+    <i *ngIf="businessTypeIsPartnership()">
+      The contact LCRB should communicate with regarding the application. The contact must be authorized to
+      represent the applicant and have the authority to bind the applicant.
+    </i>
+    <i *ngIf="account?.businessType !== 'PublicCorporation'">
+      The contact must be authorized to represent the applicant and have the authority to bind the applicant.
+    </i>
+    <i *ngIf="businessTypeIsPrivateCorporation()">
+      The contact LCRB should communicate with regarding the application. The contact must be authorized to
+      represent the applicant and have the authority to bind the applicant.
+    </i>
+  </div>
+  <address class="padded-section">
+
+    <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
+      errorMessage="Please enter the business contact's first name">
+      <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
+        formControlName="contactPersonFirstName" id="contactPersonFirstName">
+    </app-field>
+
+    <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
+      errorMessage="Please enter the business contact's last name">
+      <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
+        formControlName="contactPersonLastName" id="contactPersonLastName">
+    </app-field>
+
+    <app-field label="Title/ Position" [required]="false" [valid]="true">
+      <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
+    </app-field>
+
+    <app-field label="Phone Number (main)" [required]="true" [valid]="isValidOrNotTouched('contactPersonPhone')"
+      errorMessage="Please enter the business contact's 10-digit phone number">
+      <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
+        (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
+    </app-field>
+
+    <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
+      errorMessage="Please enter the business contact's email address"
+      afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
+      <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
+        formControlName="contactPersonEmail" id="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
+    </app-field>
+  </address>
+
+
+
+  <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
+    DECLARATIONS
+  </h3>
+  <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
+    <section>
+      <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+        The application must only be submitted by an individual with the authority to bind the applicant. The
+        branch
+        relies on the applicant to ensure that the individual who submits this application is authorized to do
+        so.
+        Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
+        usually
+        be
+        an officer or, in some cases, a director
+      </div>
+      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+        <p *ngIf="account?.businessType === 'SoleProprietor'">
+          This application should be submitted the sole proprietor.
+        </p>
+        <p *ngIf="account?.businessType === 'Society'">
+          This application must only be submitted by an individual with the authority to bind the applicant. The
+          branch relies on the applicant to ensure that the individual who submits this application is
+          authorized to
+          do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
+          defined in the Societies Act).
+        </p>
+        <p *ngIf="account?.businessType === 'PublicCorporation'">
+          This application must only be submitted by an individual with the authority to bind the applicant. The
+          branch relies on the applicant to ensure that the individual who submits this application is
+          authorized to
+          do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+          will
+          usually be an officer or, in some cases, a director.
+        </p>
+        <div *ngIf="businessTypeIsPartnership()">
+          <p>
+            This application must only be submitted by an individual with the authority to bind the applicant.
+            The
+            branch relies on the applicant to ensure that the individual who submits this application is
+            authorized
+            to do so. Typically, an appropriate individual will be as follows:
+          </p>
+          <ul>
+            <li>If the applicant is a general partnership, one of the general partners</li>
+            <li>If the applicant is a limited partnership, the general partner of the partnership</li>
+          </ul>
+        </div>
+        <p *ngIf="businessTypeIsPrivateCorporation()">
+          The application must only be submitted by an individual with the authority to bind the applicant. The
+          branch relies on the applicant to ensure that the individual who submits this application is
+          authorized to
+          do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
+          will
+          usually be an officer or, in some cases, a director.
+        </p>
+
+      </div>
+
+    </section>
+    <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Note: A lawyer or
+      consultant,
+      may NOT submit this application on behalf of
+      the applicant.</p>
+    <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+      <p *ngIf="businessTypeIsPrivateCorporation()">
+        Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
+      </p>
+      <p *ngIf="!businessTypeIsPrivateCorporation()">
+        Note: A lawyer, licensee representative or third party operator may NOT submit this application on
+        behalf of
+        the applicant.
+      </p>
+    </section>
+    <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+      errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
+      <section style="display: flex">
+        <input type="checkbox" formControlName="authorizedToSubmit" id="authorizedToSubmit">
+        <span class="error-states">*</span>
+        <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
+        </div>
+      </section>
+    </app-field>
+    <p>
+      Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
+      manager
+      an application, or
+      information or a record included as part of the application, that contains false or misleading
+      information, or
+      fails to disclose a material fact”.
+    </p>
+    <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+      errorMessage="Please affirm that all of the information provided for this application is true and complete."
+      [showChevrons]="false">
+      <section style="display: flex">
+        <input type="checkbox" formControlName="signatureAgreement" id="signatureAgreement">
+        <span class="error-states">*</span>
+        <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
+          application is true and complete
+        </div>
+      </section>
+    </app-field>
+  </div>
+
+  <p>Proceed to pay online using a credit card through the secure web portal.</p>
+
+  <p>
+    <i>
+      <b>Please note:</b> Applications which are submitted without all required information or documents will
+      not be
+      processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+      applicants provide all required documents to the LCRB, the application will be processed.
+    </i>
+  </p>
+
+  <div class="light-blue-bg">
+    <p>
+      The Province does not know how many application for a cannabis retail store licence will be received.
+      Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
+      processing, applicants must make sure the application is complete before submitting it.
+    </p>
+    <br>
+    <p>
+      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised
+      that
+      once an application is submitted, you will be unable to upload additional documentation. For questions on
+      the
+      LCRB application process, please contact: <a href="javascript: void(0);">Cannabis.Licensing@gov.bc.ca</a>.
+    </p>
+  </div>
+
+  <section style="position: relative; margin-top: 20px;">
+    <!-- <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+      <span>
+        <i class="fa fa-save" style="color: #fff;"></i>
+        SAVE FOR LATER
+      </span>
+    </button> -->
+    <button class="btn btn-primary" (click)="save()">Save</button>
+    <!-- <span style="float: right; color: #1a5a96; padding-top: 10px;">
+      <span (click)="cancelApplication()">
+        <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+        <a href="javascript: void(0)" id="cancelApp">
+          Cancel Application
+        </a>
+      </span>
+    </span> -->
+
+    <div [ngBusy]="busy"></div>
+  </section>
 </div>

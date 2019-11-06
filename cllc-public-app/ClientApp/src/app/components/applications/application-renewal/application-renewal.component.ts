@@ -178,18 +178,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
       && !this.form.get(fieldName).valid;
   }
 
-  private addDynamicContent() {
-    if (this.application.applicationType) {
-      this.htmlContent = {
-        title: this.application.applicationType.title,
-        preamble: this.getApplicationContent('Preamble'),
-        beforeStarting: this.getApplicationContent('BeforeStarting'),
-        nextSteps: this.getApplicationContent('NextSteps'),
-      };
-    }
-  }
-
-
   doAction(licenseId: string, actionName: string) {
     this.busy = this.licenceDataService.createApplicationForActionType(licenseId, actionName)
       .pipe(takeWhile(() => this.componentActive))
@@ -202,17 +190,6 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
           console.log('Error starting a Change Licence Application');
         }
       );
-  }
-
-  private getApplicationContent(contentCartegory: string) {
-    let body = '';
-    const contents =
-      this.application.applicationType.contentTypes
-        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
-    if (contents.length > 0) {
-      body = contents[0].body;
-    }
-    return body;
   }
 
   canDeactivate(): Observable<boolean> | boolean {
