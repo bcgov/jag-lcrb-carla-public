@@ -320,21 +320,21 @@
   </div>
 
   <section style="position: relative; margin-top: 20px;">
-    <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+    <!-- <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
       <span>
         <i class="fa fa-save" style="color: #fff;"></i>
         SAVE FOR LATER
       </span>
-    </button>
-    <button class="btn btn-primary" (click)="save()">SUBMIT &amp; PAY</button>
-    <span style="float: right; color: #1a5a96; padding-top: 10px;">
+    </button> -->
+    <button class="btn btn-primary" (click)="save()">Save</button>
+    <!-- <span style="float: right; color: #1a5a96; padding-top: 10px;">
       <span (click)="cancelApplication()">
         <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
         <a href="javascript: void(0)" id="cancelApp">
           Cancel Application
         </a>
       </span>
-    </span>
+    </span> -->
 
     <div [ngBusy]="busy"></div>
   </section>
