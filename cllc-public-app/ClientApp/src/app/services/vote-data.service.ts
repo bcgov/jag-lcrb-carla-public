@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
 
-import { VoteOption } from '../models/vote-option.model';
-import { VoteQuestion } from '../models/vote-question.model';
+import { VoteOption } from '@models/vote-option.model';
+import { VoteQuestion } from '@models/vote-question.model';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PolicyDocument } from '../models/policy-document.model';
-import { PolicyDocumentSummary } from '../models/policy-document-summary.model';
+import { PolicyDocument } from '@models/policy-document.model';
+import { PolicyDocumentSummary } from '@models/policy-document-summary.model';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';

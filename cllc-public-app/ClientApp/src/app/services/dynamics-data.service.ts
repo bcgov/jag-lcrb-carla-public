@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 
-import { DynamicsForm } from '../models/dynamics-form.model';
-import { DynamicsFormTab } from '../models/dynamics-form-tab.model';
-import { DynamicsFormSection } from '../models/dynamics-form-section.model';
-import { DynamicsFormField } from '../models/dynamics-form-field.model';
-import { DynamicsFormFieldOption } from '../models/dynamics-form-field-option.model';
+import { DynamicsForm } from '@models/dynamics-form.model';
+import { DynamicsFormTab } from '@models/dynamics-form-tab.model';
+import { DynamicsFormSection } from '@models/dynamics-form-section.model';
+import { DynamicsFormField } from '@models/dynamics-form-field.model';
+import { DynamicsFormFieldOption } from '@models/dynamics-form-field-option.model';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './data.service';
 import { Observable } from 'rxjs';
