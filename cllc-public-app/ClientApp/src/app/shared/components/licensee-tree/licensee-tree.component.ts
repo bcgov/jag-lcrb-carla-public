@@ -20,7 +20,7 @@ import { Application } from '@models/application.model';
   styleUrls: ['./licensee-tree.component.scss'],
 })
 export class LicenseeTreeComponent extends FormBase implements OnInit {
-  @Input() currentChangeLogs: LicenseeChangeLog[];
+  @Input() treeRoot: LicenseeChangeLog;
   @Input() currentLegalEntityTree: LegalEntity;
   @Input() enableEditing = true;
   @Output() editedTree: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
@@ -32,7 +32,6 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
-  treeRoot: LicenseeChangeLog;
   applicationId: string;
   application: Application;
 
@@ -45,110 +44,36 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   hasChild = (_: number, node: LicenseeChangeLog) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
-    this.treeRoot = this.processLegalEntityTree(this.currentLegalEntityTree);
-    this.editedTree.emit(this.treeRoot);
-    this.treeRoot.isRoot = true;
-    this.changeTree = this.treeRoot;
+    // this.treeRoot = this.processLegalEntityTree(this.currentLegalEntityTree);
+    // this.editedTree.emit(this.treeRoot);
+    // this.treeRoot.isRoot = true;
+    // this.changeTree = this.treeRoot;
     this.dataSource.data = [this.treeRoot];
-    this.applySavedChangeLogs();
     this.refreshTreeAndChangeTables();
     this.treeControl.dataNodes = this.dataSource.data;
     this.treeControl.expandAll();
   }
 
-
   /**
-   * Update licensee tree with the save changelogs
-   */
-  applySavedChangeLogs() {
-    const changesWithLegalEntityId = this.currentChangeLogs.filter(item => !!item.legalEntityId);
-    const changesWithParentLegalEntityId = this.currentChangeLogs.filter(item => !item.legalEntityId && !!item.parentLegalEntityId);
-    const changesWithParentChangeLogId =
-      this.currentChangeLogs.filter(item => !item.legalEntityId && !item.parentLegalEntityId && !!item.parentLinceseeChangeLogId);
-
-    changesWithLegalEntityId.forEach(change => {
-      const node = this.findNodeInTree(this.treeRoot, change.legalEntityId);
-      if (node) {
-        if (change.firstNameNew) {
-          change.businessNameNew = `${change.firstNameNew} ${change.lastNameNew}`;
-        }
-
-        change.isIndividual = false;
-        if (this.isIndividualFromChangeType(change.changeType)) {
-          change.isIndividual = true;
-        }
-        Object.assign(node, change);
-      }
-    });
-
-    changesWithParentLegalEntityId.forEach(change => {
-      const node = this.findNodeInTree(this.treeRoot, change.parentLegalEntityId);
-      if (node) {
-        node.children = node.children || [];
-        const newNode = Object.assign(new LicenseeChangeLog(), change);
-        if (newNode.firstNameNew) {
-          newNode.businessNameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
-        }
-
-        newNode.isIndividual = false;
-        if (this.isIndividualFromChangeType(newNode.changeType)) {
-          newNode.isIndividual = true;
-        }
-        node.children.push(newNode);
-      }
-    });
-
-    changesWithParentChangeLogId.forEach(change => {
-      const node = this.findNodeInTree(this.treeRoot, null, change.parentLinceseeChangeLogId);
-      if (node) {
-        node.children = node.children || [];
-        const newNode = Object.assign(new LicenseeChangeLog(), change);
-        if (newNode.firstNameNew) {
-          newNode.businessNameNew = `${newNode.firstNameNew} ${newNode.lastNameNew}`;
-        }
-
-        newNode.isIndividual = false;
-        if (this.isIndividualFromChangeType(newNode.changeType)) {
-          newNode.isIndividual = true;
-        }
-        node.children.push(newNode);
-      }
-    });
-  }
-
-  /**
-   * Finds a node in the tree with the @legalEntityId or @changeLogId
-   * @param node 'Node in tree to search from'
-   * @param legalEntityId
-   * @param changeLogId
-   */
-  findNodeInTree(node: LicenseeChangeLog, legalEntityId: string = null, changeLogId: string = null): LicenseeChangeLog {
+    * Finds a node in the tree where the compare predicate returns true
+    * @param node 'Node in tree to search from'
+    * @param compareFn 'a predicate to search for a node by
+    */
+  findNodeInTree(node: LicenseeChangeLog, compareFn: (node: LicenseeChangeLog) => boolean): LicenseeChangeLog {
     let result = null;
 
-    if (legalEntityId && node.legalEntityId === legalEntityId) {
-      result = node;
-    } else if (changeLogId && node.id === changeLogId) {
+    if (compareFn(node)) {
       result = node;
     } else {
       const children = node.children || [];
       for (const child of children) {
-        const res = this.findNodeInTree(child, legalEntityId, changeLogId);
+        const res = this.findNodeInTree(child, compareFn);
         if (res) {
           result = res;
           break;
         }
       }
     }
-    return result;
-  }
-
-  /**
-   * Use the chagetype to check if the licensee is an individual
-   * @param changeType
-   */
-  isIndividualFromChangeType(changeType: string): boolean {
-    const result = changeType.toLowerCase().indexOf('individual') !== -1
-      || changeType.toLowerCase().indexOf('leadership') !== -1;
     return result;
   }
 
@@ -334,6 +259,22 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   }
 
   /**
+   * Gets a ChangeType to be rendered
+   * @param item 'A LicenseeChangeLog'
+   */
+  getRenderChangeType(item: LicenseeChangeLog): string {
+    let changeType = '';
+    if (item.isAddChangeType()) {
+      changeType = 'Add';
+    } else if (item.isUpdateChangeType()) {
+      changeType = 'Update';
+    } else if (item.isRemoveChangeType()) {
+      changeType = 'Remove';
+    }
+    return changeType;
+  }
+
+  /**
    * Read the licensee tree and the changes to the change tables
    * @param node 'A LicenseeChangeLog to process'
    */
@@ -351,60 +292,5 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         this.populateChangeTables(child);
       });
     }
-  }
-
-  /**
-   * Returns true if the change type is an add. Otherwise it returs false
-   * @param node 'A LicenseeChangeLog'
-   */
-  isAddChangeType(node: LicenseeChangeLog): boolean {
-    const result = node.changeType === LicenseeChangeType.addLeadership
-      || node.changeType === LicenseeChangeType.addBusinessShareholder
-      || node.changeType === LicenseeChangeType.addIndividualShareholder;
-    return result;
-  }
-
-  /**
-   * Returns true if the change type is an update. Otherwise it returs false
-   * @param node 'A LicenseeChangeLog'
-   */
-  isUpdateChangeType(node: LicenseeChangeLog): boolean {
-    const result = node.changeType === LicenseeChangeType.updateLeadership
-      || node.changeType === LicenseeChangeType.updateBusinessShareholder
-      || node.changeType === LicenseeChangeType.updateIndividualShareholder;
-    return result;
-  }
-
-  /**
-   * Returns true if the change type is a delete. Otherwise it returs false
-   * @param node 'A LicenseeChangeLog'
-   */
-  isRemoveChangeType(node: LicenseeChangeLog): boolean {
-    const result = node.changeType === LicenseeChangeType.removeLeadership
-      || node.changeType === LicenseeChangeType.removeBusinessShareholder
-      || node.changeType === LicenseeChangeType.removeIndividualShareholder;
-    return result;
-  }
-
-  /**
-   * Gets a ChangeType to be rendered
-   * @param item 'A LicenseeChangeLog'
-   */
-  getRenderChangeType(item: LicenseeChangeLog): string {
-    let changeType = '';
-    if (this.isAddChangeType(item)) {
-      changeType = 'Add';
-    } else if (this.isUpdateChangeType(item)) {
-      changeType = 'Update';
-    } else if (this.isRemoveChangeType(item)) {
-      changeType = 'Remove';
-    }
-    return changeType;
-  }
-
-  cancelChange(node: LicenseeChangeLog) {
-    // delete change log record
-    // ??What to do with children when their parent add is cancelled
-    // 
   }
 }
