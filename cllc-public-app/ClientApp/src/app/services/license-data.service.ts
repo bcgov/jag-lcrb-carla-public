@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApplicationLicenseSummary } from '../models/application-license-summary.model';
-import { Application } from '../models/application.model';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { Application } from '@models/application.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';

@@ -1,0 +1,82 @@
+<div appRemoveIfFeatureOff="Maps" style="position: relative;">
+  <div [ngBusy]="busy"></div>
+  <div class="form-wrapper">
+    <div class="home-margins">
+      <h1>
+        Map of Cannabis Retail Stores in B.C.
+      </h1>
+     
+      <div class="row">
+        <div class="text-left col-md-4">
+          <p>
+            The Liquor and Cannabis Regulation Branch (LCRB) licenses and monitors private non-medical cannabis retail stores and the Liquor Distribution Branch (LDB) operates public BC Cannabis Stores. While the LDB's stores are not licensed by the LCRB, they are required to follow all regulations related to the operation of non-medical cannabis retail stores in B.C.
+          </p>
+          <p>
+            This map provides the locations of cannabis retail stores in B.C. You can use the search to find stores. You can also find information about stores in the table below.
+          </p>
+
+          <app-field label="Search by city or establishment name">
+            <input type="text" [(ngModel)]="search" size="40" style="padding-right: 20px" (keyup.enter)="searchMap()">
+            &nbsp;
+            <button style="margin-right:10px; padding-left: 20px" class="btn btn-primary" (click)="searchMap()">
+              <i class="fas fa-search" style="margin-right: 10px;"></i>
+              Search
+            </button> <button class="btn btn-primary" (click)="resetMap()">
+              Reset Map
+            </button>
+          </app-field>
+
+          <p> Green markers indicate stores which are open to the public. Grey markers indicate stores which are not yet open to the public. Clicking on markers will show store details.</p>
+          <p>If you have any questions, please contact <a href="mailto:cannabisregs@gov.bc.ca">cannabisregs@gov.bc.ca</a></p>
+          
+
+        </div>
+
+        <div aria-label="A map of Cannabis Retail Stores." class="col-md-4" id="search-map"></div>
+      </div>
+
+          
+        <hr />
+          <div class="row">
+            <table *ngIf="mapData?.length > 0" class="eq-table">
+              <tr>
+                <th>Licence</th>
+                <th>Establishment Name</th>
+                <th style="width:150px">Phone</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Postal</th>
+                <th>Status</th>
+              </tr>
+              <tr *ngFor="let item of mapData; let i = index;">                
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.license}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.name}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+
+                  <span style="font-weight: 600" *ngIf="item.Phone">{{item.phone}}</span>
+                  <span style="font-weight: 600" *ngIf="!item.Phone">&nbsp;</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.addressStreet}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.addressCity}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600">{{item.addressPostal}}</span>
+                </td>
+                <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                  <span style="font-weight: 600" *ngIf="item.isOpen === true">Open</span>
+                  <span style="font-weight: 600" *ngIf="item.isOpen !== true">Coming Soon</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+</div>
+  </div>
+</div>
+

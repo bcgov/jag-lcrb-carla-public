@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Application } from '../../models/application.model';
+import { Application } from '@models/application.model';
 
 export const CURRENT_APPLICATION = 'CURRENT_APPLICATION';
 export const SET_CURRENT_APPLICATION = 'SET_CURRENT_APPLICATION';

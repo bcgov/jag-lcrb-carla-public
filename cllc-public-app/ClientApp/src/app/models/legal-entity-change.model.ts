@@ -40,6 +40,7 @@ export class LicenseeChangeLog {
   parentLegalEntityId: string;
   parentLinceseeChangeLogId: string;
   children: LicenseeChangeLog[];
+  parentLinceseeChangeLog: LicenseeChangeLog;
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
