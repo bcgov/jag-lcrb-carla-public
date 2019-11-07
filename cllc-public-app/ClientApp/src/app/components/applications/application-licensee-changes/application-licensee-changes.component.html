@@ -19,114 +19,125 @@
       supply
       additional information.
     </p>
-    <app-licensee-tree *ngIf="currentChangeLogs && currentLegalEntities" [currentChangeLogs]="currentChangeLogs"
-      (editedTree)="editedTree = $event" [currentLegalEntityTree]="currentLegalEntities" [enableEditing]="true">
+    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" [enableEditing]="true">
     </app-licensee-tree>
   </div>
-
-  <h3 *ngIf="false" class="blue-header">PROVIDE SUPPORTING DOCUMENTS</h3>
-  <div *ngIf="false" class="ngtest-financial-integrity-upload">
-    <hr><br>
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>
-      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
-    </section>
-  </div>
-  <div *ngIf="false" class="ngtest-financial-integrity-upload">
-    <hr><br>
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>
-      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
-    </section>
-  </div>
-  <div *ngIf="false" class="ngtest-financial-integrity-upload">
-    <hr><br>
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>
-      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
-    </section>
-  </div>
-  <div *ngIf="false" class="ngtest-financial-integrity-upload">
-    <hr><br>
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>
-      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
-    </section>
-  </div>
-  <div *ngIf="false" class="ngtest-financial-integrity-upload">
-    <hr><br>
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>
-      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
-    </section>
-  </div>
-  <div *ngIf="false" class="ngtest-financial-integrity-upload">
-    <hr><br>
-    <label for="">Financial Integrity Form</label>
-    <br>
-    <i>
-      Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
-        target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
-    </i>
-    <p>Upload the completed form below.</p>
-    <section>
-      <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-        [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-      </app-file-uploader>
-    </section>
-  </div>
+  <h3 class="blue-header">PROVIDE SUPPORTING DOCUMENTS</h3>
+  <section class="padded-section">
+    <div *ngIf="changeTree&& (LicenseeChangeLog.shareholderWasAdded(changeTree) ||LicenseeChangeLog.leadershipWasAdded(changeTree))">
+      <br>
+      <label for="">Register of Directors and Officers</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+    <div *ngIf="changeTree&& (LicenseeChangeLog.shareholderWasAdded(changeTree) || LicenseeChangeLog.shareholderWasRemoved(changeTree) || LicenseeChangeLog.someShareAmountWasChanged(changeTree))">
+      <hr><br>
+      <label for="">Central Securities Register</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+      <section style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="question-label">
+          Has there been an internal amalgamation of shares?
+        </div>
+        <div style="flex: 0 0 85px;">
+          <mat-button-toggle-group formControlName="amalgamationDone" aria-label="Font Style">
+            <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+            <mat-button-toggle value="No">No</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </section>
+    </div>
+    <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
+      <hr><br>
+      <label for="">Certificate of Amalgamation</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+    <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
+      <hr><br>
+      <label for="">Central Securities Register of the Amalgamated Company</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+    <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
+      <hr><br>
+      <label for="">Notice of Articles for the amalgamated company.</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+    <div *ngIf="changeTree && LicenseeChangeLog.aNameChangeWasPerformed(changeTree)">
+      <hr><br>
+      <label for="">Name Change Documents</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+  </section>
 
   <!-- Contact Details -->
   <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
@@ -320,21 +331,21 @@
   </div>
 
   <section style="position: relative; margin-top: 20px;">
-    <!-- <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+    <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
       <span>
         <i class="fa fa-save" style="color: #fff;"></i>
         SAVE FOR LATER
       </span>
-    </button> -->
-    <button class="btn btn-primary" (click)="save()">Save</button>
-    <!-- <span style="float: right; color: #1a5a96; padding-top: 10px;">
+    </button>
+    <button class="btn btn-primary" (click)="save()">SUBMIT &amp; PAY</button>
+    <span style="float: right; color: #1a5a96; padding-top: 10px;">
       <span (click)="cancelApplication()">
         <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
         <a href="javascript: void(0)" id="cancelApp">
           Cancel Application
         </a>
       </span>
-    </span> -->
+    </span>
 
     <div [ngBusy]="busy"></div>
   </section>
