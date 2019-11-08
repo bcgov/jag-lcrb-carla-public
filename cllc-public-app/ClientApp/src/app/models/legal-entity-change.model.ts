@@ -185,7 +185,7 @@ export class LicenseeChangeLog {
     });
 
     changesWithParentChangeLogId.forEach(change => {
-      const node = LicenseeChangeLog.findNodeInTree(this, (node) => node.legalEntityId === change.parentLinceseeChangeLogId);
+      const node = LicenseeChangeLog.findNodeInTree(this, (node) => node.id === change.parentLinceseeChangeLogId);
       if (node) {
         node.children = node.children || [];
         const newNode = Object.assign(new LicenseeChangeLog(), change);
