@@ -278,7 +278,7 @@ export class LicenseeChangeLog {
    * Returns true if a leader (e.g. a director or  manager) was added in
    * the application
    */
-  public static leadershipWasAdd(treeRoot: LicenseeChangeLog): boolean {
+  public static leadershipWasAdded(treeRoot: LicenseeChangeLog): boolean {
     const isLeaderAddChange = (node: LicenseeChangeLog) => node.changeType === LicenseeChangeType.addLeadership;
     const result = !!this.findNodeInTree(treeRoot, isLeaderAddChange);
     return result;
