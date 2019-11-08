@@ -17,11 +17,14 @@ using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi;
 
+// online validator that seems to work - https://apitools.dev/swagger-parser/online/
+
 namespace odata2openapi
 {
     class Program
     {
-        
+        static string solutionPrefix;
+
         static string GetDynamicsMetadata (IConfiguration Configuration )
         {
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
@@ -134,8 +137,21 @@ namespace odata2openapi
 
         static void Main(string[] args)
         {
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Please enter a solution prefix");
+                solutionPrefix = "adoxio";
+            }
+            else
+            {
+                solutionPrefix = args[0];
+            }
+
+            
+
+
             List<string> defsToKeep = new List<string>();
-            bool getMetadata = true;
+            bool getMetadata = false;
 
             // start by getting secrets.
             var builder = new ConfigurationBuilder()                
@@ -198,12 +214,20 @@ namespace odata2openapi
                         string suffix = "";
 
                         string prefix = "Unknown";
-                        var firstTag = operation.Value.Tags.FirstOrDefault();
+                        OpenApiTag firstTag = null; // operation.Value.Tags.FirstOrDefault();
+
+                        string temp = path.Key.Substring(1);
+                        if (temp.Contains("("))
+                        {
+                            temp = temp.Substring(0, temp.IndexOf("("));
+                        }
 
                         if (firstTag == null)
                         {
-                            firstTag = new OpenApiTag() { Name = path.Key.Substring(1) };
+                            firstTag = new OpenApiTag() { Name = temp };
                         }
+                        Console.Out.WriteLine(path.Key);
+                        Console.Out.WriteLine(firstTag.Name);
 
                         switch (operation.Key)
                         {
@@ -212,8 +236,8 @@ namespace odata2openapi
                                 // for creates we also want to add a header parameter to ensure we get the new object back.
                                 OpenApiParameter swaggerParameter = new OpenApiParameter()
                                 {
-                                    Schema = new OpenApiSchema() { Type = "string", Default = new OpenApiString ("return=representation") },
-                                    Name = "Prefer",                                    
+                                    Schema = new OpenApiSchema() { Type = "string", Default = new OpenApiString("return=representation") },
+                                    Name = "Prefer",
                                     Description = "Required in order for the service to return a JSON representation of the object.",
                                     In = ParameterLocation.Header
                                 };
@@ -244,7 +268,7 @@ namespace odata2openapi
                                 break;
                         }
 
-
+                        string operationDef = null;
                         // adjustments to response
 
                         foreach (var response in operation.Value.Responses)
@@ -254,12 +278,13 @@ namespace odata2openapi
                             {
                                 if (string.IsNullOrEmpty(response.Value.Description))
                                 {
-                                    operation.Value.Responses["default"].Description = "OData Error";
+                                    response.Value.Description = "OData Error";
                                 };
 
+                                //response.Value.Reference = new OpenApiReference() { Id = "odata.error", Type = ReferenceType.Schema };
                             }
 
-                            if (val != null && val.Reference == null)
+                            if (val != null)
                             {
                                 bool hasValue = false;
                                 foreach (var schema in val.Content)
@@ -274,24 +299,51 @@ namespace odata2openapi
                                     }
                                     if (hasValue)
                                     {
-                                        string resultName = operation.Value.OperationId + "ResponseModel";
+                                        var newSchema = schema.Value.Schema.Properties["value"];
+                                        string resultName;
+                                        string itemName;
+
+                                        if (newSchema.Type == "array")
+                                        {
+                                            itemName = newSchema.Items.Reference.Id;
+                                            operationDef = itemName;
+                                            resultName = $"{itemName}Collection";
+                                        }
+                                        else
+                                        {
+                                            itemName = "!ERR";
+                                            resultName = "!ERR";
+                                        }
+
+
 
                                         if (!swaggerDocument.Components.Schemas.ContainsKey(resultName))
                                         {
                                             // move the inline schema to defs.
                                             swaggerDocument.Components.Schemas.Add(resultName, schema.Value.Schema);
 
-                                            var newSchema = swaggerDocument.Components.Schemas[resultName];
-                                            if ( newSchema.Type == "array")
+                                            //var newSchema = swaggerDocument.Components.Schemas[resultName].Properties["value"];
+                                            if (newSchema.Type == "array")
                                             {
-                                                newSchema.Items = new OpenApiSchema() { Reference = new OpenApiReference() { Id = firstTag.Name, Type = ReferenceType.Schema }, Type = "none" } ;
+                                                newSchema.Items = new OpenApiSchema() { Reference = new OpenApiReference() { Id = itemName, Type = ReferenceType.Schema }, Type = "none" };
                                             }
-
-                                            schema.Value.Schema = new OpenApiSchema() { Reference = new OpenApiReference() { Id = resultName, Type = ReferenceType.Schema },  Type = "none" };
 
                                             defsToKeep.Add(resultName);
                                         }
-                                    }                                    
+
+                                        schema.Value.Schema = new OpenApiSchema { Reference = new OpenApiReference() { Id = resultName, Type = ReferenceType.Schema }, Type = "none" };
+                                        // val.Reference = new OpenApiReference() { Id = resultName, Type = ReferenceType.Schema, ExternalResource = null };
+                                    }
+                                    else
+                                    {
+                                        if (schema.Value.Schema.Reference != null)
+                                        {
+                                            operationDef = schema.Value.Schema.Reference.Id;
+                                        }
+
+                                        //val.Reference = schema.Value.Schema.Reference;
+                                    }
+
 
                                     /*
                                     var schema = val.Schema;
@@ -305,10 +357,12 @@ namespace odata2openapi
                                     }
                                     */
                                 }
+
+                                //val.Content.Clear();
                             }
                         }
 
-                        
+
 
 
                         if (firstTag != null)
@@ -329,11 +383,11 @@ namespace odata2openapi
                                 ok2Delete = false;
                             }
 
-                            if (!firstTagLower.StartsWith("msdyn") && !firstTagLower.StartsWith("abs_") && firstTagLower.IndexOf("adoxio") != -1)
+                            if (!firstTagLower.StartsWith("msdyn") && !firstTagLower.StartsWith("abs_") && firstTagLower.IndexOf(solutionPrefix) != -1)
                             {
                                 ok2Delete = false;
-                                firstTagLower = firstTagLower.Replace("adoxio_", "");
-                                firstTagLower = firstTagLower.Replace("adoxio", "");
+                                firstTagLower = firstTagLower.Replace($"{solutionPrefix}_", "");
+                                firstTagLower = firstTagLower.Replace(solutionPrefix, "");
                                 operation.Value.Tags.Clear();
                                 operation.Value.Tags.Add(new OpenApiTag() { Name = firstTagLower });
                             }
@@ -355,7 +409,7 @@ namespace odata2openapi
 
                             if (prefix.Length > 0)
                             {
-                                prefix.Replace("adoxio", "");
+                                prefix.Replace(solutionPrefix, "");
                                 prefix = ("" + prefix[0]).ToUpper() + prefix.Substring(1);
                             }
                             // remove any underscores.
@@ -365,21 +419,42 @@ namespace odata2openapi
                         operation.Value.OperationId = prefix + "_" + suffix;
 
                         // adjustments to operation parameters
-                        operation.Value.Parameters.Clear();
+                        //operation.Value.Parameters.Clear();
+
+                        string[] oDataParameters = { "top", "skip", "search", "filter", "count", "$orderby", "$select", "$expand" };
+
+                        List<OpenApiParameter> parametersToRemove = new List<OpenApiParameter>();
+
+                        foreach (var oDataParameter in oDataParameters)
+                        {
+                            foreach (var parameter in operation.Value.Parameters)
+                            {
+                                if (parameter.Name == oDataParameter)
+                                {
+                                    parametersToRemove.Add(parameter);
+                                }
+
+                                if (parameter.Reference != null && parameter.Reference.Id == oDataParameter)
+                                    {
+                                    parametersToRemove.Add(parameter);
+                                }
+
+                            }                            
+                       }
+                        foreach (var parameter in parametersToRemove)
+                        {
+                            operation.Value.Parameters.Remove(parameter);
+                        }
+
+
                         operation.Value.Extensions.Clear();
 
-                        string operationDef;
-
-                        if (firstTag.Name.LastIndexOf(".") != -1)
+                        
+                        if (operationDef != null)
                         {
-                            operationDef = "Microsoft.Dynamics.CRM" + firstTag.Name.Substring(firstTag.Name.LastIndexOf("."));
+                            operation.Value.Extensions.Add("x-ms-odata", new OpenApiString($"#/definitions/{operationDef}"));
                         }
-                        else
-                        {
-                            operationDef = firstTag.Name;
-                        }
-
-                        operation.Value.Extensions.Add("x-ms-odata", new OpenApiString($"#/definitions/{operationDef}"));
+                        
 
                         AddSubItems(swaggerDocument, defsToKeep, operationDef);
 
@@ -613,16 +688,16 @@ namespace odata2openapi
                         !defsToKeep.Contains(definition.Key))
                     {
                         defsToRemove.Add(definition.Key);
-                        Console.Out.WriteLine($"Remove: {definition.Key}");
+                        //Console.Out.WriteLine($"Remove: {definition.Key}");
                     }
                     else
                     {
-                        Console.Out.WriteLine($"Keep: {definition.Key}");
+                        //Console.Out.WriteLine($"Keep: {definition.Key}");
                     }
                 }
                 
                 defsToRemove.Add("Microsoft.Dynamics.CRM.crmbaseentity");
-
+                /*
                 foreach (string defToRemove in defsToRemove)
                 {
                     Console.Out.WriteLine($"Remove: {defToRemove}");
@@ -632,20 +707,10 @@ namespace odata2openapi
                     }
                     
                 }
-                /*
+                */
                 List<string> responsesToRemove = new List<string>();
-                foreach (var response in swaggerDocument.Components.Responses)
-                {
-                    if ( !defsToKeep.Contains(response.Value.Schema.Title) )
-                    {
-                        responsesToRemove.Add(response.Key);
-                    }
-                    else
-                    {
-                        Console.Out.WriteLine($"Keep Response: {response.Key}");
-                    }
-                }
-
+                
+                /*
                 foreach (string responseToRemove in responsesToRemove)
                 {
                     Console.Out.WriteLine($"Remove Response: {responseToRemove}");
@@ -674,6 +739,8 @@ namespace odata2openapi
                         definition.Value.AllOf.Clear();
                     }
 
+                    // **************************** extra block
+                    /*
                     if (definition.Value.Example != null)
                     {
                         definition.Value.Example = null;
@@ -688,7 +755,7 @@ namespace odata2openapi
                     {
                         definition.Value.Enum.Clear();
                     }
-
+                    */
 
                     if (definition.Value != null && definition.Value.Properties != null)
                     {                        
@@ -744,13 +811,6 @@ namespace odata2openapi
                                 property.Value.Format = null;
                             }
 
-                            if (property.Value.Type == "array" && (property.Value.Items == null || property.Value.Items.Type == null))
-                            {
-                                property.Value.Items = new OpenApiSchema()
-                                {
-                                    Type = "string"
-                                };
-                            }
                         }
                     }
                 }                               
@@ -760,7 +820,9 @@ namespace odata2openapi
                 swaggerDocument.Tags.Clear();
 
                 // cleanup parameters.
-                swaggerDocument.Components.Parameters.Clear();
+                //swaggerDocument.Components.Parameters.Clear();
+
+                
 
                 // swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0); // ToJson(SchemaType.Swagger2);
                 swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi2_0);
@@ -777,26 +839,9 @@ namespace odata2openapi
 
                 //swagger = swagger.Replace("        {\r\n          \"$ref\": \"#/definitions/Microsoft.Dynamics.CRM.crmbaseentity\"\r\n        },\r\n", "");
 //                swagger = swagger.Replace("        {\r\n          \"$ref\": \"#/definitions/Microsoft.Dynamics.CRM.crmbaseentity\"\r\n        },", "");
-                // NSwag is almost able to generate the client as well.  It does it much faster than AutoRest but unfortunately can't do multiple files yet.
-                // It does generate a single very large file in a few seconds.  We don't want a single very large file though as it does not work well with the IDE.
-                // Autorest is used to generate the client using a traditional approach.
+                           
 
-                /*
-                var generatorSettings = new SwaggerToCSharpClientGeneratorSettings
-                {
-                    ClassName = "DynamicsClient",
-                    CSharpGeneratorSettings =
-                    {
-                        Namespace = "<namespace>"
-                    }
-                };                
-
-                var generator = new SwaggerToCSharpClientGenerator(swaggerDocument, generatorSettings);
-                var code = generator.GenerateFile();
-
-                File.WriteAllText("<filename>", code);
-                */
-
+                
             }
             
             File.WriteAllText("dynamics-swagger.json", swagger);
