@@ -34,6 +34,8 @@ using System.Net.Mime;
 using System.Text;
 using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -395,13 +397,25 @@ namespace Gov.Lclb.Cllb.Public
                 if (!string.IsNullOrEmpty (Configuration["SPLUNK_CHANNEL"]))
                 {
                     fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
-                }                
+                }
+                var splunkUri = new Uri(Configuration["SPLUNK_COLLECTOR_URL"]);
+                var lowerSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
+
+                // Fix for bad SSL issues 
+
+                HttpClientHandler messageHandler = new HttpClientHandler();
+                messageHandler.ServerCertificateCustomValidationCallback +=
+                        (HttpRequestMessage message, X509Certificate2 cert, X509Chain chain, SslPolicyErrors policyErrors) =>
+                            ServerCertificateCallback(message?.RequestUri?.Host, lowerSplunkHost, policyErrors);
+                    
 
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.EventCollector(fields: fields, splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+                       messageHandler: messageHandler)
                     .WriteTo.Console()
                     .CreateLogger();
             }
@@ -414,6 +428,17 @@ namespace Gov.Lclb.Cllb.Public
                     .CreateLogger();
             }
 
+        }
+
+        private static bool ServerCertificateCallback(string requestHost, string splunkHost, SslPolicyErrors policyErrors)
+        {
+            //quick check for no error
+            if (policyErrors == SslPolicyErrors.None)
+            {
+                return true;
+            }
+
+            return requestHost.ToUpperInvariant() == splunkHost;
         }
 
     }
