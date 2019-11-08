@@ -401,7 +401,7 @@ namespace Gov.Lclb.Cllb.Public
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.EventCollector(fields: fields, splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       eventCollectorToken: Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information)
                     .WriteTo.Console()
                     .CreateLogger();
             }
