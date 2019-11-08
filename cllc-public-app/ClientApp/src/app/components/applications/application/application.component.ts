@@ -45,7 +45,6 @@ export class ApplicationHTMLContent {
   nextSteps: string;
 }
 
-
 @Component({
   selector: 'app-application',
   templateUrl: './application.component.html',
@@ -74,7 +73,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
   htmlContent: ApplicationHTMLContent = <ApplicationHTMLContent>{};
   indigenousNations: { id: string, name: string }[] = [];
   readonly UPLOAD_FILES_MODE = UPLOAD_FILES_MODE;
-  ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   mode: string;
   account: Account;
@@ -215,17 +213,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
   }
 
-  private addDynamicContent() {
-    if (this.application.applicationType) {
-      this.htmlContent = {
-        title: this.application.applicationType.title,
-        preamble: this.getApplicationContent('Preamble'),
-        beforeStarting: this.getApplicationContent('BeforeStarting'),
-        nextSteps: this.getApplicationContent('NextSteps'),
-      };
-    }
-  }
-
   private hideFormControlByType() {
     if (!this.application.applicationType.showPropertyDetails) {
       this.form.get('establishmentAddressStreet').disable();
@@ -282,16 +269,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
-  private getApplicationContent(contentCartegory: string) {
-    let body = '';
-    const contents =
-      this.application.applicationType.contentTypes
-        .filter(t => t.category === contentCartegory && t.businessTypes.indexOf(this.application.applicantType) !== -1);
-    if (contents.length > 0) {
-      body = contents[0].body;
-    }
-    return body;
-  }
 
   private isHoursOfSaleValid(): boolean {
     return !this.application.applicationType.showHoursOfSale ||
