@@ -403,11 +403,6 @@ namespace Gov.Lclb.Cllb.Public
 
                 // Fix for bad SSL issues 
 
-                HttpClientHandler messageHandler = new HttpClientHandler();
-                messageHandler.ServerCertificateCustomValidationCallback +=
-                        (HttpRequestMessage message, X509Certificate2 cert, X509Chain chain, SslPolicyErrors policyErrors) =>
-                            ServerCertificateCallback(message?.RequestUri?.Host, upperSplunkHost, policyErrors);
-                    
 
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
@@ -416,7 +411,13 @@ namespace Gov.Lclb.Cllb.Public
                     .WriteTo.EventCollector(fields: fields, splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
                        sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
-                       messageHandler: messageHandler)                    
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                       messageHandler: new HttpClientHandler()
+                       {
+                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                       }
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                     )                    
                     .CreateLogger();
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
@@ -433,20 +434,6 @@ namespace Gov.Lclb.Cllb.Public
                     .CreateLogger();
             }
 
-        }
-
-        private static bool ServerCertificateCallback(string requestHost, string splunkHost, SslPolicyErrors policyErrors)
-        {
-            return true;
-            /*
-            //quick check for no error
-            if (policyErrors == SslPolicyErrors.None)
-            {
-                return true;
-            }
-
-            return requestHost.ToUpperInvariant() == splunkHost;
-            */
         }
 
     }
