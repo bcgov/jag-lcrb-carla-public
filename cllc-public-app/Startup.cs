@@ -412,12 +412,17 @@ namespace Gov.Lclb.Cllb.Public
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
                     .WriteTo.EventCollector(fields: fields, splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
                        sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
-                       messageHandler: messageHandler)
-                    .WriteTo.Console()
+                       messageHandler: messageHandler)                    
                     .CreateLogger();
+
+                Serilog.Debugging.SelfLog.Enable(Console.Error);
+
+                Log.Logger.Information("CARLA Portal Container Started");
+                
             }
             else
             {
