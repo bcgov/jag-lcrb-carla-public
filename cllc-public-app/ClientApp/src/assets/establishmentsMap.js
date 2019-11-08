@@ -30,14 +30,31 @@ var LDB_Licence_String = "Public Store";
       }
     ],
     // WMS layers associated with the map
-    wmsLayers: [
+      wmsLayers: [
       {
         rootUrl: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?',
         format: 'image/png',
         layers: 'pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW',
         styles: 'PMBC_Parcel_Fabric_Cadastre_Outlined',
         transparent: true
-      }
+          }
+/*          ,
+        {
+            rootUrl: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES/ows?',
+            format: 'image/png',
+            layers: 'pub:WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES',
+            styles: '374_375',
+            transparent: true            
+        },
+          {
+              rootUrl: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows?',
+              format: 'image/png',
+              layers: 'pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP',
+              styles: '5381',
+              transparent: true
+          }
+  */      
+
     ],
     identifyCrsStartCallback: identifyCrsStartCallback,
     identifyCrsEndCallback: identifyCrsEndCallback
