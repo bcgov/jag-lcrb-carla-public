@@ -848,11 +848,15 @@ namespace odata2openapi
 
                 swaggerDocument.Components.Schemas["odata.error.main"].Properties.Remove("innererror");
 
-                swaggerDocument.Components.Schemas.Remove("Microsoft.Dynamics.CRM.transactioncurrency");
+                // fix for two entities that have links to everything else - this causes massive spikes in memory consumption.
 
+                swaggerDocument.Components.Schemas.Remove("Microsoft.Dynamics.CRM.transactioncurrency");
+                swaggerDocument.Components.Schemas.Remove("Microsoft.Dynamics.CRM.syncerror");
+                
                 Dictionary<string, OpenApiSchema> props = new Dictionary<string, OpenApiSchema>();
                 props.Add("nil", new OpenApiSchema() { Type = "string" });
                 swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.transactioncurrency", new OpenApiSchema() { Properties = props});
+                swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.syncerror", new OpenApiSchema() { Properties = props });
 
                 // swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0); // ToJson(SchemaType.Swagger2);
                 swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi2_0);
@@ -860,8 +864,8 @@ namespace odata2openapi
 
                 // fix up the swagger file.
 
-                swagger = swagger.Replace("('{", "({");
-                swagger = swagger.Replace("}')", "})");
+                //swagger = swagger.Replace("('{", "({");
+                //swagger = swagger.Replace("}')", "})");
 
                 //swagger = swagger.Replace("\"$ref\": \"#/responses/error\"", "\"schema\": { \"$ref\": \"#/definitions/odata.error\" }");
 
