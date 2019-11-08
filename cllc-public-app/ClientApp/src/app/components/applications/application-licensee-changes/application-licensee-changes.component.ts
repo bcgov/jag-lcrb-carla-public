@@ -177,7 +177,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   save() {
-    const data = this.cleanSaveData(this.editedTree);
+    const data = this.cleanSaveData(this.changeTree);
     this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId)
       .subscribe(() => {
         this.loadData();
