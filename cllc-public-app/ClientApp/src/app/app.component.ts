@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { User } from './models/user.model';
+import { User } from '@models/user.model';
 import { MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { isDevMode } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -11,10 +11,10 @@ import { LegalEntity } from '@models/legal-entity.model';
 import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
 import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
-import { Account } from './models/account.model';
+import { Account } from '@models/account.model';
 import { VersionInfoDataService } from '@services/version-info-data.service';
-import { VersionInfoDialogComponent } from './version-info/version-info-dialog.component';
-import { VersionInfo } from './models/version-info.model';
+import { VersionInfo } from '@models/version-info.model';
+import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 
 @Component({
   selector: 'app-root',
