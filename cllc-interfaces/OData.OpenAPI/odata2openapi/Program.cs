@@ -205,12 +205,19 @@ namespace odata2openapi
                 OpenApiDocument swaggerDocument = model.ConvertToOpenApi(openApiSettings);
 
                 List<string> allops = new List<string>();
-                List <string> itemsToRemove = new List<string>();
+                List<string> itemsToRemove = new List<string>();
                 // fix the operationIds.
                 foreach (var path in swaggerDocument.Paths)
                 {
+                    if (path.Key.Contains("transactioncurrencyid"))
+                    {
+                        itemsToRemove.Add(path.Key);
+                        break;
+                    }
+
                     foreach (var operation in path.Value.Operations)
                     {
+
                         string suffix = "";
 
                         string prefix = "Unknown";
@@ -435,12 +442,12 @@ namespace odata2openapi
                                 }
 
                                 if (parameter.Reference != null && parameter.Reference.Id == oDataParameter)
-                                    {
+                                {
                                     parametersToRemove.Add(parameter);
                                 }
 
-                            }                            
-                       }
+                            }
+                        }
                         foreach (var parameter in parametersToRemove)
                         {
                             operation.Value.Parameters.Remove(parameter);
@@ -449,14 +456,12 @@ namespace odata2openapi
 
                         operation.Value.Extensions.Clear();
 
-                        
+
                         if (operationDef != null)
                         {
                             operation.Value.Extensions.Add("x-ms-odata", new OpenApiString($"#/definitions/{operationDef}"));
-                        }
-                        
-
-                        AddSubItems(swaggerDocument, defsToKeep, operationDef);
+                            AddSubItems(swaggerDocument, defsToKeep, operationDef);
+                        }                        
 
                         foreach (var parameter in operation.Value.Parameters)
                         {
@@ -519,11 +524,11 @@ namespace odata2openapi
                                     parameter.Name = name;
                                 }
                             }
-                            
+
                             //var parameter = loopParameter.ActualParameter;
 
                             // get rid of style if it exists.
-                            if (parameter.Style !=  ParameterStyle.Simple)
+                            if (parameter.Style != ParameterStyle.Simple)
                             {
                                 parameter.Style = ParameterStyle.Simple;
                             }
@@ -631,16 +636,16 @@ namespace odata2openapi
 
                     }
 
-                    
-                        
-                    
+
+
+
                 }
-                
+
                 foreach (var opDelete in itemsToRemove)
-                {                    
+                {
                     swaggerDocument.Paths.Remove(opDelete);
                 }
-                
+
                 foreach (var path in swaggerDocument.Paths)
                 {
                     foreach (var value in path.Value.Operations)
@@ -650,7 +655,7 @@ namespace odata2openapi
                             if (response.Value.Reference != null)
                             {
                                 var schema = response.Value.Reference;
-                                if (!string.IsNullOrEmpty(schema.Id) && (schema.Type.Value.GetDisplayName() == "array" || schema.Type.Value.GetDisplayName() ==  "object"))
+                                if (!string.IsNullOrEmpty(schema.Id) && (schema.Type.Value.GetDisplayName() == "array" || schema.Type.Value.GetDisplayName() == "object"))
                                 {
                                     string title = schema.Id;
                                     AddSubItems(swaggerDocument, defsToKeep, title);
@@ -665,7 +670,7 @@ namespace odata2openapi
                                 if (!string.IsNullOrEmpty(schema.Id) && (schema.Type.Value.GetDisplayName() == "array" || schema.Type.Value.GetDisplayName() == "object"))
                                 {
                                     AddSubItems(swaggerDocument, defsToKeep, schema.Id);
-                                }                                
+                                }
                             }
                         }
 
@@ -677,8 +682,8 @@ namespace odata2openapi
                 // reverse the items to keep.
 
                 List<string> defsToRemove = new List<string>();
-                
-                 
+
+
                 foreach (var definition in swaggerDocument.Components.Schemas)
                 {
                     if (//!definition.Key.Contains("_GetResponseModel") && 
@@ -695,9 +700,9 @@ namespace odata2openapi
                         //Console.Out.WriteLine($"Keep: {definition.Key}");
                     }
                 }
+
+                //defsToRemove.Add("Microsoft.Dynamics.CRM.crmbaseentity");
                 
-                defsToRemove.Add("Microsoft.Dynamics.CRM.crmbaseentity");
-                /*
                 foreach (string defToRemove in defsToRemove)
                 {
                     Console.Out.WriteLine($"Remove: {defToRemove}");
@@ -707,9 +712,9 @@ namespace odata2openapi
                     }
                     
                 }
-                */
-                List<string> responsesToRemove = new List<string>();
                 
+                List<string> responsesToRemove = new List<string>();
+
                 /*
                 foreach (string responseToRemove in responsesToRemove)
                 {
@@ -740,12 +745,12 @@ namespace odata2openapi
                     }
 
                     // **************************** extra block
-                    /*
+
                     if (definition.Value.Example != null)
                     {
                         definition.Value.Example = null;
                     }
-
+                    /*
                     if (definition.Value.Title != null)
                     {
                         definition.Value.Title = null;
@@ -758,7 +763,7 @@ namespace odata2openapi
                     */
 
                     if (definition.Value != null && definition.Value.Properties != null)
-                    {                        
+                    {
                         foreach (var property in definition.Value.Properties)
                         {
                             if (property.Value.Type == null)
@@ -788,7 +793,7 @@ namespace odata2openapi
                                 {
                                     property.Value.OneOf.Clear();
                                 }
-                                
+
                                 // force to string.
                                 property.Value.Type = "string";
                             }
@@ -813,7 +818,7 @@ namespace odata2openapi
 
                         }
                     }
-                }                               
+                }
 
 
                 // remove extra tags.
@@ -822,7 +827,19 @@ namespace odata2openapi
                 // cleanup parameters.
                 //swaggerDocument.Components.Parameters.Clear();
 
-                
+
+
+                //**************************************
+
+                // fix for "odata.error.main" - innererror property.
+
+                swaggerDocument.Components.Schemas["odata.error.main"].Properties.Remove("innererror");
+
+                swaggerDocument.Components.Schemas.Remove("Microsoft.Dynamics.CRM.transactioncurrency");
+
+                Dictionary<string, OpenApiSchema> props = new Dictionary<string, OpenApiSchema>();
+                props.Add("nil", new OpenApiSchema() { Type = "string" });
+                swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.transactioncurrency", new OpenApiSchema() { Properties = props});
 
                 // swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0); // ToJson(SchemaType.Swagger2);
                 swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi2_0);
@@ -833,7 +850,7 @@ namespace odata2openapi
                 swagger = swagger.Replace("('{", "({");
                 swagger = swagger.Replace("}')", "})");
 
-                swagger = swagger.Replace("\"$ref\": \"#/responses/error\"", "\"schema\": { \"$ref\": \"#/definitions/odata.error\" }");
+                //swagger = swagger.Replace("\"$ref\": \"#/responses/error\"", "\"schema\": { \"$ref\": \"#/definitions/odata.error\" }");
 
                 // fix for problem with the base entity.
 
