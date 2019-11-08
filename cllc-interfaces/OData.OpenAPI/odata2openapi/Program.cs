@@ -212,29 +212,94 @@ namespace odata2openapi
                     if (path.Key.Contains("transactioncurrencyid"))
                     {
                         itemsToRemove.Add(path.Key);
-                        break;
+                        continue;
+                    }
+
+                    OpenApiTag firstTag = null; // operation.Value.Tags.FirstOrDefault();
+                    string firstTagLower = "";
+
+                    string temp = path.Key.Substring(1);
+                    if (temp.Contains("("))
+                    {
+                        temp = temp.Substring(0, temp.IndexOf("("));
+                    }
+
+                    if (firstTag == null)
+                    {
+                        firstTag = new OpenApiTag() { Name = temp };
+                    }
+
+                    string prefix = "Unknown";
+
+                    if (firstTag != null)
+                    {
+                        bool ok2Delete = true;
+                        firstTagLower = firstTag.Name.ToLower();
+                        Console.Out.WriteLine(firstTagLower);
+                        if (firstTagLower.Equals("contacts") ||
+                            firstTagLower.Equals("accounts") ||
+                            firstTagLower.Equals("invoices") ||
+                            firstTagLower.Equals("sharepointsites") ||
+                            firstTagLower.Equals("savedqueries") ||
+                            firstTagLower.Equals("sharepointdocumentlocations") ||
+                            firstTagLower.Equals("entitydefinitions") ||
+                            firstTagLower.Equals("globaloptionsetdefinitions")
+                            )
+                        {
+                            ok2Delete = false;
+                            Console.Out.WriteLine($"NOT ok to delete {firstTagLower}");
+                        }
+
+                        if (!firstTagLower.StartsWith("msdyn") && !firstTagLower.StartsWith("abs_") && firstTagLower.IndexOf(solutionPrefix) != -1)
+                        {
+                            Console.Out.WriteLine($"NOT ok to delete {firstTagLower}");
+                            ok2Delete = false;                        
+                        }
+
+                        if (ok2Delete)
+                        {
+                            Console.Out.WriteLine($"ok to delete {firstTagLower}");
+                            if (!itemsToRemove.Contains(path.Key))
+                            {
+                                itemsToRemove.Add(path.Key);
+                            }
+                            continue;
+                        }
+
+                        if (!allops.Contains(firstTag.Name))
+                        {
+                            allops.Add(firstTag.Name);
+                        }
+                        prefix = firstTagLower;
+                        // Capitalize the first character.
+
+                        if (prefix.Length > 0)
+                        {
+                            prefix.Replace(solutionPrefix, "");
+                            prefix = ("" + prefix[0]).ToUpper() + prefix.Substring(1);
+                        }
+                        // remove any underscores.
+                        prefix = prefix.Replace("_", "");
                     }
 
                     foreach (var operation in path.Value.Operations)
                     {
 
+                        if (!firstTagLower.StartsWith("msdyn") && !firstTagLower.StartsWith("abs_") && firstTagLower.IndexOf(solutionPrefix) != -1)
+                        {
+                            firstTagLower = firstTagLower.Replace($"{solutionPrefix}_", "");
+                            firstTagLower = firstTagLower.Replace(solutionPrefix, "");
+                            operation.Value.Tags.Clear();
+                            operation.Value.Tags.Add(new OpenApiTag() { Name = firstTagLower });
+                        }
+
                         string suffix = "";
 
-                        string prefix = "Unknown";
-                        OpenApiTag firstTag = null; // operation.Value.Tags.FirstOrDefault();
+                        
+                        
 
-                        string temp = path.Key.Substring(1);
-                        if (temp.Contains("("))
-                        {
-                            temp = temp.Substring(0, temp.IndexOf("("));
-                        }
+                        operation.Value.OperationId = prefix + "_" + suffix;
 
-                        if (firstTag == null)
-                        {
-                            firstTag = new OpenApiTag() { Name = temp };
-                        }
-                        Console.Out.WriteLine(path.Key);
-                        Console.Out.WriteLine(firstTag.Name);
 
                         switch (operation.Key)
                         {
@@ -372,58 +437,6 @@ namespace odata2openapi
 
 
 
-                        if (firstTag != null)
-                        {
-                            bool ok2Delete = true;
-                            string firstTagLower = firstTag.Name.ToLower();
-
-                            if (firstTagLower.Equals("contacts") ||
-                                firstTagLower.Equals("accounts") ||
-                                firstTagLower.Equals("invoices") ||
-                                firstTagLower.Equals("sharepointsites") ||
-                                firstTagLower.Equals("savedqueries") ||
-                                firstTagLower.Equals("sharepointdocumentlocations") ||
-                                firstTagLower.Equals("entitydefinitions") ||
-                                firstTagLower.Equals("globaloptionsetdefinitions")
-                                )
-                            {
-                                ok2Delete = false;
-                            }
-
-                            if (!firstTagLower.StartsWith("msdyn") && !firstTagLower.StartsWith("abs_") && firstTagLower.IndexOf(solutionPrefix) != -1)
-                            {
-                                ok2Delete = false;
-                                firstTagLower = firstTagLower.Replace($"{solutionPrefix}_", "");
-                                firstTagLower = firstTagLower.Replace(solutionPrefix, "");
-                                operation.Value.Tags.Clear();
-                                operation.Value.Tags.Add(new OpenApiTag() { Name = firstTagLower });
-                            }
-
-                            if (ok2Delete)
-                            {
-                                if (!itemsToRemove.Contains(path.Key))
-                                {
-                                    itemsToRemove.Add(path.Key);
-                                }
-                            }
-
-                            if (!allops.Contains(firstTag.Name))
-                            {
-                                allops.Add(firstTag.Name);
-                            }
-                            prefix = firstTagLower;
-                            // Capitalize the first character.
-
-                            if (prefix.Length > 0)
-                            {
-                                prefix.Replace(solutionPrefix, "");
-                                prefix = ("" + prefix[0]).ToUpper() + prefix.Substring(1);
-                            }
-                            // remove any underscores.
-                            prefix = prefix.Replace("_", "");
-                        }
-
-                        operation.Value.OperationId = prefix + "_" + suffix;
 
                         // adjustments to operation parameters
                         //operation.Value.Parameters.Clear();
