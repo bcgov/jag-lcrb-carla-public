@@ -1,4 +1,6 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿
+using CsvHelper;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
@@ -8,8 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -68,6 +72,69 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("map")]
         [AllowAnonymous]
         public IActionResult GetMap(string search)
+        {
+            var result = GetMapData(search);
+            return new JsonResult(result);
+        }
+
+        [HttpGet("map-csv")]
+        [AllowAnonymous]
+        public IActionResult GetMapCSV(string search)
+        {
+            var data = GetMapData(search);
+            StringWriter csvString = new StringWriter();
+            using (var csv = new CsvWriter(csvString))
+            {                
+                // headers
+                csv.WriteField("Licence");
+                csv.WriteField("Establishment Name");
+                csv.WriteField("Phone");
+                csv.WriteField("Address");
+                csv.WriteField("City");
+                csv.WriteField("Postal");
+                csv.WriteField("Status");
+                csv.NextRecord();
+
+                foreach (var item in data)
+                {
+                    csv.WriteField(item.License);
+                    csv.WriteField(item.Name);
+                    csv.WriteField(item.Phone);
+                    csv.WriteField(item.AddressStreet);
+                    csv.WriteField(item.AddressCity);
+                    csv.WriteField(item.AddressPostal);
+                    csv.WriteField(item.IsOpen ? "Open": "Coming Soon");
+                    csv.NextRecord();
+                }
+            }
+            return File(new System.Text.UTF8Encoding().GetBytes(csvString.ToString()), "text/csv", "BC-Retail-Cannabis-Stores.csv");
+        }
+
+        [HttpGet("map-json")]
+        [AllowAnonymous]
+        public IActionResult GetMapJson(string search)
+        {
+            var data = GetMapData(search);
+
+            List<object> dataForJson = new List<object>();
+            foreach (var item in data)
+            {
+                dataForJson.Add(new
+                {
+                    item.License,
+                    item.Name,
+                    item.Phone,
+                    Address = item.AddressStreet,
+                    City = item.AddressCity,
+                    Postal = item.AddressPostal,
+                    Status = item.IsOpen ? "Open" : "Coming Soon"
+                });
+            }
+               
+            string jsonData = JsonConvert.SerializeObject(dataForJson);
+            return File(new System.Text.UTF8Encoding().GetBytes(jsonData), "application/json", "BC-Retail-Cannabis-Stores.json");
+        }
+        private List<EstablishmentMapData> GetMapData(string search)
         {
             /*
             string communicationRegionsCacheKey = "LGIN_REGIONS";
@@ -272,7 +339,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // sort the establishment list by the city alphabetically 
             result = result.OrderBy(o => o.AddressCity).ToList();
 
-            return new JsonResult(result);
+            return result;
         }
 
         /// <summary>
