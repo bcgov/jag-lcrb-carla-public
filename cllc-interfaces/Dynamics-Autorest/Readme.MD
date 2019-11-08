@@ -52,5 +52,6 @@ csharp:
   sync-methods: all 
   generate-empty-classes: true
   namespace: Gov.Lclb.Cllb.Interfaces
-  azure-arm: false
+  azure-arm: true
+  static-initializer: true
 ```
