@@ -399,14 +399,14 @@ namespace Gov.Lclb.Cllb.Public
                     fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
                 }
                 var splunkUri = new Uri(Configuration["SPLUNK_COLLECTOR_URL"]);
-                var lowerSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
+                var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
 
                 // Fix for bad SSL issues 
 
                 HttpClientHandler messageHandler = new HttpClientHandler();
                 messageHandler.ServerCertificateCustomValidationCallback +=
                         (HttpRequestMessage message, X509Certificate2 cert, X509Chain chain, SslPolicyErrors policyErrors) =>
-                            ServerCertificateCallback(message?.RequestUri?.Host, lowerSplunkHost, policyErrors);
+                            ServerCertificateCallback(message?.RequestUri?.Host, upperSplunkHost, policyErrors);
                     
 
                 Log.Logger = new LoggerConfiguration()
@@ -432,6 +432,8 @@ namespace Gov.Lclb.Cllb.Public
 
         private static bool ServerCertificateCallback(string requestHost, string splunkHost, SslPolicyErrors policyErrors)
         {
+            return true;
+            /*
             //quick check for no error
             if (policyErrors == SslPolicyErrors.None)
             {
@@ -439,6 +441,7 @@ namespace Gov.Lclb.Cllb.Public
             }
 
             return requestHost.ToUpperInvariant() == splunkHost;
+            */
         }
 
     }
