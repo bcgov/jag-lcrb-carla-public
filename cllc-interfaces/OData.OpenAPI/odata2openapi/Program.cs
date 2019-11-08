@@ -536,7 +536,7 @@ namespace odata2openapi
                                     };
                                 }
 
-                                if (parameter.Extensions != null && parameter.Extensions["x-ms-docs-key-type"] != null)
+                                if (parameter.Extensions != null && parameter.Extensions.ContainsKey("x-ms-docs-key-type"))
                                 {
                                     parameter.Extensions.Remove("x-ms-docs-key-type");
                                 }                                
