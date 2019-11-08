@@ -69,8 +69,7 @@
         <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
 
         <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-          <app-licensee-tree *ngIf="currentLegalEntities" [currentChangeLogs]="[]"
-            [currentLegalEntityTree]="currentLegalEntities" [enableEditing]="false"></app-licensee-tree>
+          <app-licensee-tree *ngIf="tree" [treeRoot]="tree" [enableEditing]="false"></app-licensee-tree>
           <br>
           <br>
           <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">

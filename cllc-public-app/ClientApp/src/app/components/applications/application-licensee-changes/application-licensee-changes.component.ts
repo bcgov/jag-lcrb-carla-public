@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/legal-entity-change.model';
@@ -14,6 +14,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
+import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 
 @Component({
   selector: 'app-application-licensee-changes',
@@ -30,12 +31,15 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
   currentLegalEntities: LegalEntity;
+  @ViewChild(LicenseeTreeComponent, { static: false }) tree: LicenseeTreeComponent;
 
   editedTree: LicenseeChangeLog;
+  LicenseeChangeLog = LicenseeChangeLog;
   busy: any;
 
   constructor(public dialog: MatDialog,
     private fb: FormBuilder,
+    public cd: ChangeDetectorRef,
     public router: Router,
     private store: Store<AppState>,
     private route: ActivatedRoute,
@@ -52,6 +56,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
+      amalgamationDone: [''],
       contactPersonEmail: ['', Validators.required],
       contactPersonPhone: ['', Validators.required],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
@@ -107,8 +112,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
         this.application = data[0];
-        this.currentChangeLogs = data[1] || [];
-        this.currentLegalEntities = data[2];
+        const currentChangeLogs = data[1] || [];
+        const currentLegalEntities = data[2];
+        const tree = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
+        tree.isRoot = true;
+        tree.applySavedChangeLogs(currentChangeLogs);
+        this.changeTree = tree;
+
         this.addDynamicContent();
       },
         () => {
@@ -167,16 +177,23 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   save() {
-    const data = this.cleanSaveData(this.editedTree);
+    const data = this.cleanSaveData(this.changeTree);
     this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId)
       .subscribe(() => {
         this.loadData();
       });
   }
 
-  cancelApplication(){
+  cancelApplication() {
   }
 
+  /**
+   * Returns true if there is an ongoing or approved (but not terminated) 
+   * CRS application
+   */
+  aNonTerminatedCrsApplicationExistOnAccount(): boolean {
+    return true;
+  }
   cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
     const result = { ...data } as LicenseeChangeLog;
     this.removeParentReference(result);
