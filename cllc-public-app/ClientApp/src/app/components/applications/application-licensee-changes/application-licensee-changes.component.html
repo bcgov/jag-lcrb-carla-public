@@ -24,7 +24,7 @@
   </div>
   <h3 class="blue-header">PROVIDE SUPPORTING DOCUMENTS</h3>
   <section class="padded-section">
-    <div *ngIf="changeTree&& (LicenseeChangeLog.shareholderWasAdded(changeTree) ||LicenseeChangeLog.leadershipWasAdded(changeTree))">
+    <div *ngIf="changeTree && (LicenseeChangeLog.shareholderWasAdded(changeTree) || LicenseeChangeLog.leadershipWasAdded(changeTree))">
       <br>
       <label for="">Register of Directors and Officers</label>
       <br>
@@ -106,6 +106,57 @@
     <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
       <hr><br>
       <label for="">Notice of Articles for the amalgamated company.</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+    <div *ngIf="changeTree && LicenseeChangeLog.businessShareholderWasAdded (changeTree)">
+      <hr><br>
+      <label for="">Section for Business Information</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+    <div *ngIf="changeTree && (LicenseeChangeLog.individualShareholderWasAdded(changeTree) || LicenseeChangeLog.leadershipWasAdded(changeTree))">
+      <hr><br>
+      <label for="">New Associates</label>
+      <br>
+      <p>
+        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
+        illo.
+      </p>
+      <p>Upload the completed form below.</p>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </div>
+    <div *ngIf="true">
+      <hr><br>
+      <label for="">Retail Licence Cap</label>
       <br>
       <p>
         Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
