@@ -42,17 +42,17 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
         if (value) {
           this.form.get('businessNameNew').clearValidators();
           this.form.get('businessNameNew').reset();
-          // this.form.get('legalentitytype').clearValidators();
-          // this.form.get('legalentitytype').reset();
           this.form.get('firstNameNew').setValidators([Validators.required]);
           this.form.get('lastNameNew').setValidators([Validators.required]);
+          this.form.get('dateofBirthNew').setValidators([Validators.required]);
         } else {
           this.form.get('firstNameNew').clearValidators();
           this.form.get('firstNameNew').reset();
           this.form.get('lastNameNew').clearValidators();
           this.form.get('lastNameNew').reset();
+          this.form.get('dateofBirthNew').clearValidators();
+          this.form.get('dateofBirthNew').reset();
           this.form.get('businessNameNew').setValidators([Validators.required]);
-          // this.form.get('legalentitytype').setValidators([Validators.required]);
         }
       });
 

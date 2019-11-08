@@ -22,6 +22,7 @@ export class DashboardComponent extends FormBase implements OnInit {
   account: Account;
   indigenousNationModeActive: boolean;
   currentLegalEntities: LegalEntity;
+  tree: LicenseeChangeLog;
 
   constructor(private store: Store<AppState>,
     private router: Router,
@@ -47,7 +48,8 @@ export class DashboardComponent extends FormBase implements OnInit {
       this.legalEntityDataService.getCurrentHierachy()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: LegalEntity) => {
-        this.currentLegalEntities = data;
+        this.tree = LicenseeChangeLog.processLegalEntityTree(data);
+        this.tree.isRoot = true;
       },
         () => {
           console.log('Error occured');
