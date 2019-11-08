@@ -1,7 +1,6 @@
-import { Action } from '@ngrx/store';
 import * as CurrentUserActions from '../actions/current-user.action';
-import { User } from '../../models/user.model';
 import { CurrentUserState } from '../models/app-state';
+
 
 // Section 1
 const initialState: CurrentUserState = { currentUser: null };

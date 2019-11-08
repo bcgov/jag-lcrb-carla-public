@@ -33,4 +33,11 @@ export class MonthlyReportDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  updateMonthlyReport(monthlyReport: MonthlyReport) {
+    return this.http.put(
+      this.apiPath + monthlyReport.monthlyReportId,
+      monthlyReport,
+      { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
 }

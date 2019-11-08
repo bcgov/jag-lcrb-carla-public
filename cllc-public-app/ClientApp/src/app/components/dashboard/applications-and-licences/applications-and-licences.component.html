@@ -1,0 +1,285 @@
+<div>
+  <div [ngBusy]="busy"></div>
+  <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS AND LICENCES</h3>
+  <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
+    <section>
+      <div *ngIf="submittedApplications < 8  && !marketerExists">
+        <p>Submit an Application and track the status below.</p>
+        <section>
+          <table class="start-application">
+            <tr>
+              <th colspan=2>LICENCE</th>
+              <th>ACTIONS</th>
+            </tr>
+            <tr *ngIf="!(submittedApplications >= 8 || marketerExists)">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+              <td>
+                <h3>Cannabis Retail Store Licence</h3>
+                <p>To sell non-medical cannabis and accessories</p>
+                <P>(A separate application must be submitted for each proposed store)</P>
+                <a href="https://justice.gov.bc.ca/cannabislicensing/policy-document/cannabis-retail-licence"
+                  target="_blank" rel="noopener noreferrer">Learn more about this licence</a>
+              </td>
+              <td>
+                <button class="btn btn-primary" (click)="startNewLicenceApplication()" id="startCRS">START APPLICATION</button>
+              </td>
+            </tr>
+            <tr *ngIf="!(nonMarketerExists || marketerExists)">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+              <td>
+                <h3>Cannabis Marketing Licence</h3>
+                <p>To promote non-medical cannabis to licensed cannabis retail stores and the adult public</p>
+                <a href="https://justice.gov.bc.ca/cannabislicensing/policy-document/cannabis-marketing-licence">Learn
+                  more about this licence</a>
+              </td>
+              <td>
+                <button class="btn btn-primary" (click)="startNewMarketerApplication()" id="startMarketing">START APPLICATION</button>
+              </td>
+            </tr>
+          </table>
+        </section>
+      </div>
+
+      <mat-tab-group
+        [selectedIndex]="(inProgressApplications?.length > 0 || licensedApplications?.length == 0) ? 0 : 1">
+        <mat-tab label="In Progress Applications" id="inProgressApplications">
+          <section *ngIf="inProgressApplications?.length > 0">
+            <label>Please note:</label> <br>
+            <p>Due to the high volume of applications, we ask that you limit questions about the status of your
+              application
+              as much as possible. Answering fewer questions provides us more capacity to process applications.
+            </p>
+            <p>We will contact you regarding your application as soon as we have an update to communicate, have
+              information
+              that you will need to know, or are requesting additional information from you.
+            </p>
+            <p>Thank you for your patience.</p>
+          </section>
+          <p *ngIf="inProgressApplications?.length == 0 ">
+            You do not have any In Progress Applications.
+          </p>
+          <table *ngIf="inProgressApplications?.length > 0" class="eq-table">
+            <tr>
+              <th colspan=2>Application</th>
+              <!-- <th style="width: 95px">Last Updated</th> -->
+              <th style="width: 235px">Status</th>
+              <th>Actions</th>
+            </tr>
+            <tr *ngFor="let item of inProgressApplications; let i = index;" style="border: 1px solid #ccc; ">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+              <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                <span style="font-weight: 600">{{item.establishmentName}}</span> <br>
+                <span>{{item.portallabel}}</span> <br>
+                <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
+                <span>Reference #: {{item.name}} </span> <span></span> <br>
+              </td>
+              <!--
+                <td style="padding: 10px; width: 110px;">
+                  {{item.modifiedon | date:'mediumDate'}}
+                </td>
+              -->
+              <td style="background-color: #E1E8F2; padding: 10px;">
+                <div style="text-transform: uppercase; font-weight: 600;">{{item.applicationStatus}}</div>
+                <p *ngIf="item.applicationStatus === 'Not Submitted'">
+                  This application has not yet been submitted.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                  This relocation application has not yet been submitted
+                </p>
+                <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                  This transfer application has not yet been submitted
+                </p>
+                <p *ngIf="item.applicationStatus === 'Application Under Review'">
+                  Your application has been received and is being reviewed by the LCRB.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Transfer Application Under Review'">
+                  Your transfer application has been received and is being reviewed by the LCRB.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Relocation Application Under Review'">
+                  Your relocation application has been received and is being reviewed by the LCRB.
+                </p>
+
+                <p *ngIf="item.applicationStatus === 'Application Incomplete'">
+                  Your application is incomplete. You must provide additional information for it to be processed.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Pending External Review'">
+                  Your application has been sent for local government, financial integrity, and security screening
+                  reviews.
+                </p>
+                <p *ngIf="item.applicationStatus === 'Approved In Principle'">
+                  Your application has been approved in principle. An inspector will be contacting you to organize a
+                  final inspection.
+                </p>
+              </td>
+              <td style="background-color: #E1E8F2; padding: 10px;">
+                <div *ngIf="item.applicationStatus === 'Not Submitted'">
+                  <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal"
+                    routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Application</span>
+                  </a>
+                  <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal "
+                    routerLink="/renew-crs-licence/application/{{item.id}}">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Renewal</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                  <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Relocation</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                  <a [routerLink]="['/account-profile/' + item.id, { mode: TRANSFER_LICENCE_MODE }]">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Transfer</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'">
+                  <a [routerLink]="['/licensee-changes/' + item.id]">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Licensee Change</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Application</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Relocation Initiated'" style="margin-top: 5px;"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Relocation</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Transfer</span>
+                  </a>
+                </div>
+                <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'" style="margin-top: 5px;"
+                  (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                  <a href="javascript: void(0)">
+                    <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Cancel Licensee Change</span>
+                  </a>
+                </div>
+                <div
+                  *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
+                  <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
+                    <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Add Supporting Documents</span>
+                  </a>
+                </div>
+            </tr>
+          </table>
+          <p></p>
+        </mat-tab>
+        <mat-tab label="Licences" id="licences">
+          <p *ngIf="licensedApplications?.length > 0">
+            <span>Here are your current approved Licences.</span>
+          </p>
+          <p *ngIf="licensedApplications?.length == 0">
+            <span>You do not have any Licences.</span>
+          </p>
+
+          <table *ngIf="licensedApplications?.length > 0" class="eq-table">
+            <tr>
+              <th colspan=2>Licence</th>
+              <th>Location</th>
+              <th style="width: 335px">Actions</th>
+            </tr>
+            <tr *ngFor="let item of licensedApplications; let i = index;" style="border: 1px solid #ccc; ">
+              <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+              <td style="padding: 10px;">
+                <div>
+                  <span *ngIf="item?.licenceTypeName !== 'Marketer'"
+                    style="color: #1a5a96;">{{item.establishmentName}}</span>
+                  <span *ngIf="item?.licenceTypeName === 'Marketer'" style="color: #1a5a96;">Marketing Licence</span>
+                </div>
+                <span>Licence Number: </span> <i>{{item.licenseNumber}}</i> <br>
+                <span>Status #: {{item.status}} </span> <br>
+                <span>Expiry / Renewal Date: {{item.expiryDate | date: 'MM/dd/yyyy'}}</span> <br>
+                <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
+                  *ngIf="isAboutToExpire(item.expiryDate) && !item.relatedApplicationPaid">Renew Licence</a>
+              </td>
+              <td style="padding: 10px;">
+                <div *ngIf="item?.licenceTypeName !== 'Marketer'">
+                  {{item?.establishmentAddressStreet}} <br>
+                  {{item?.establishmentAddressCity}} <br>
+                  British Columbia <br>
+                  {{item?.establishmentAddressPostalCode}} <br>
+                  Canada <br>
+                </div>
+                <div *ngIf="item?.licenceTypeName === 'Marketer'">
+                  {{account?.physicalAddressStreet}} <br>
+                  {{account?.physicalAddressCity}} <br>
+                  {{account?.physicalAddressProvince}} <br>
+                  {{account?.physicalAddressPostalCode}} <br>
+                  {{account?.physicalAddressCountry}} <br>
+                </div>
+              </td>
+              <td
+                *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn)"
+                style="background-color: #E1E8F2; padding: 10px;">
+                <div *ngIf="!item.storeInspected  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
+                  style="min-width: 10px; margin-bottom: 10px;">
+                  <a href="javascript:void(0);" (click)="planStoreOpening(item)">
+                    <span *ngIf="item.status == PAYMENT_REQUIRED">
+                      <i class="fas fa-shopping-cart" style="margin-right: 10px;">
+                      </i>Pay Licence Fee and Plan Store Opening</span>
+                    <span *ngIf="item.status != PAYMENT_REQUIRED">
+                      <i class="fas fa-pencil-alt" style="margin-right: 10px;">
+                      </i>Plan Store Opening</span>
+                  </a>
+                </div>
+                <div
+                  *ngIf="item.storeInspected && item.status == PAYMENT_REQUIRED  && item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore"
+                  style="min-width: 10px; margin-bottom: 10px;">
+                  <a href="javascript:void(0);" (click)="payLicenceFee(item)">
+                    <span>
+                      <i class="fas fa-shopping-cart" style="margin-right: 10px;">
+                      </i>Pay Licence Fee</span>
+                  </a>
+                </div>
+                <div *ngIf="item.status !== PAYMENT_REQUIRED" style="min-width: 10px; margin-bottom: 10px;">
+                  <a [href]="'api/licenses/' + item?.licenseId + '/pdf/' + item?.licenseNumber + '.pdf'" download>
+                    <span><i class="fas fa-download" style="margin-right: 10px;"></i>Download Licence</span>
+                  </a>
+                </div>
+
+                <div *ngIf="item.status != PAYMENT_REQUIRED">
+                  <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
+                    <a *ngIf="licenceTransferFeatureOn" [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
+                      <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>
+                    </a>
+                  </p>
+                  <p *ngFor="let action of item.allowedActions">
+                    <a href="javascript:void(0);" (click)="doAction(item,action.name)">
+                      <span><i class="fas fa-sync" style="margin-right: 10px;"></i>{{action?.actionText}}</span>
+                    </a>
+                  </p>
+                </div>
+              </td>
+              <td *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired"> LICENCE EXPIRED</td>
+              <td *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
+                  class="licence-expired">
+                TRANSFER INITIATED <br />
+                <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]">
+                  <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </mat-tab>
+      </mat-tab-group>
+    </section>
+
+  </section>
+</div>

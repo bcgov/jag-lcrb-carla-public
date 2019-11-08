@@ -1,0 +1,97 @@
+<div class="dashboard-spacing">
+  <h1>Welcome to Cannabis Licensing</h1>
+  <div class="row">
+    <div class="col-lg-7 col-sm-12">
+      <section class="small-screen-only">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ACCOUNT PROFILE</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <strong>{{account?.name}}</strong> <br>
+          <p></p>
+          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <p></p>
+          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <p></p>
+          <p>Click below to view your complete account profile, and to update your address or contact
+            details.
+          </p>
+          <div>
+            <a routerLink="/account-profile" style="float: right;" id="editAccountProfile">
+              <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Account Profile</a>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </section>
+      <p></p>
+      <p>
+        This service allows applicants to submit an application for a non-medical cannabis licence (cannabis retail
+        store or marketing licence) in British Columbia.
+      </p>
+
+      <p>
+        Please note that the Liquor and Cannabis Regulation Branch (LCRB) will only process complete applications.
+        Applications which are submitted without all required information or documents will not be processed. Applicants
+        will be contacted and provided the opportunity to submit missing information. Once applicants provide all
+        required documents to the LCRB, the application will be processed.
+      </p>
+
+      <p>Inquires related to your application can be directed to <a
+          href="mailto:cannabis.licensing@gov.bc.ca">cannabis.licensing@gov.bc.ca</a>.</p>
+      <p></p>
+
+      <app-applications-and-licences [account]="account">
+      </app-applications-and-licences>
+
+    </div>
+    <div class="col-lg-4 col-sm-12" style="position: relative">
+      <section class="large-screen-only">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ACCOUNT PROFILE</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <strong>{{account?.name}}</strong> <br>
+          <p></p>
+          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <p></p>
+          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <p></p>
+          <p>Click below to view your complete account profile, and to update your address or contact
+            details.
+          </p>
+          <div>
+            <a routerLink="/account-profile" style="float: right;">
+              <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Account Profile</a>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </section>
+      <p></p>
+      <section appRemoveIfFeatureOff="LicenseeChanges">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <app-licensee-tree *ngIf="tree" [treeRoot]="tree" [enableEditing]="false"></app-licensee-tree>
+          <br>
+          <br>
+          <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
+            <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Start Licensee Change Application</a>
+          <div style="clear: both;"></div>
+        </div>
+      </section>
+      <p></p>
+      <app-associate-content [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      </app-associate-content>
+      <p></p>
+    </div>
+  </div>
+  <section style="margin-top: 20px;">
+    <p apappRRemoveIfFeatureOn="Marketer">All cannabis retail store licence holders must follow the terms and conditions
+      of
+      their licence as set out in
+      the
+      <a href="https://www2.gov.bc.ca/assets/download/B459B70AC1F246E4A4D58C103A94C6C8">Retail Store Licence Terms and
+        Conditions
+        Handbook
+      </a>.
+    </p>
+  </section>
+</div>

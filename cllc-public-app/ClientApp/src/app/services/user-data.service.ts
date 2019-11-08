@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { catchError, retry, map } from 'rxjs/operators';
 
-import { User } from '../models/user.model';
+import { User } from '@models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataService } from './data.service';
 import { Store } from '@ngrx/store';
