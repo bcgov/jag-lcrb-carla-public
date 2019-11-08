@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit } from '@angular/core';
-import { FeatureFlagService } from '../services/feature-flag.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
 
 
 @Directive({

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { Account } from '../models/account.model';
+import { Account } from '@models/account.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ProfileValidation } from '../models/profile-validation.model';
+import { ProfileValidation } from '@models/profile-validation.model';
 import { Observable, forkJoin } from 'rxjs';
 import { DataService } from './data.service';
 import { catchError, map } from 'rxjs/operators';

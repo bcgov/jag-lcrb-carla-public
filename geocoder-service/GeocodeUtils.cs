@@ -89,13 +89,18 @@ namespace Gov.Lclb.Cllb.Geocoder
                 if (output.Features[0].Properties.Faults.Count > 0  && establishment._adoxioLginValue != null) 
                 {
                     var lgin = _dynamics.GetLginById(establishment._adoxioLginValue);
+                    _logger.LogError($"Unable to find a good match for address {address}, using lgin of {lgin.AdoxioName}");
+                    hangfireContext.WriteLine($"Unable to find a good match for address {address}, using lgin of {lgin.AdoxioName}");
+                    
                     address = $"{establishment.AdoxioAddressstreet}, {lgin.AdoxioName}, BC";
                     output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);                    
                 }
 
                 // if the LGIN did not provide a good match just default to the specified city.
-                if (output.Features[0].Properties.Faults.Count > 1)
+                if (output.Features[0].Properties.Faults.Count > 2)
                 {
+                    _logger.LogError($"Unable to find a good match for address {address} with city {establishment._adoxioLginValue}, defaulting to just {establishment.AdoxioAddresscity}");
+                    hangfireContext.WriteLine($"Unable to find a good match for address {address} with city {establishment._adoxioLginValue}, defaulting to just {establishment.AdoxioAddresscity}");
                     output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: $"{establishment.AdoxioAddresscity}, BC");
                 }
                     
