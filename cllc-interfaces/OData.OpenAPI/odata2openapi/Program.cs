@@ -530,8 +530,17 @@ namespace odata2openapi
                                 if (name == "If-Match")
                                 {
                                     parameter.Reference = null;
-                                    parameter.Schema = null;
+                                    parameter.Schema = new OpenApiSchema()
+                                    {
+                                        Type = "string"
+                                    };
                                 }
+
+                                if (parameter.Extensions != null && parameter.Extensions["x-ms-docs-key-type"] != null)
+                                {
+                                    parameter.Extensions.Remove("x-ms-docs-key-type");
+                                }                                
+
                                 if (string.IsNullOrEmpty(parameter.Name))
                                 {
                                     parameter.Name = name;
