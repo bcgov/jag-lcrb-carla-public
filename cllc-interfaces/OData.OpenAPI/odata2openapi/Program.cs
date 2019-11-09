@@ -151,6 +151,8 @@ namespace odata2openapi
 
 
             List<string> defsToKeep = new List<string>();
+
+            defsToKeep.Add("Microsoft.Dynamics.CRM.interactionforemail");
             bool getMetadata = false;
 
             // start by getting secrets.
