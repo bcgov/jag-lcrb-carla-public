@@ -151,8 +151,8 @@ namespace odata2openapi
 
 
             List<string> defsToKeep = new List<string>();
-
-            defsToKeep.Add("Microsoft.Dynamics.CRM.interactionforemail");
+            
+            
             bool getMetadata = false;
 
             // start by getting secrets.
@@ -205,6 +205,8 @@ namespace odata2openapi
                     // configuration
                 };
                 OpenApiDocument swaggerDocument = model.ConvertToOpenApi(openApiSettings);
+                
+                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.interactionforemail");
 
                 List<string> allops = new List<string>();
                 List<string> itemsToRemove = new List<string>();
