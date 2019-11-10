@@ -155,7 +155,7 @@ namespace odata2openapi
             if (currentItem != null && ! itemsToKeep.Contains (currentItem) && swaggerDocument.Components.Schemas.ContainsKey(currentItem))
             {                
                 itemsToKeep.Add(currentItem);
-                Console.WriteLine($"Added {currentItem}");
+                //Console.WriteLine($"Added {currentItem}");
 
                 OpenApiSchema item = swaggerDocument.Components.Schemas[currentItem];
 
@@ -277,7 +277,7 @@ namespace odata2openapi
                     {
                         bool ok2Delete = true;
                         firstTagLower = firstTag.Name.ToLower();
-                        Console.Out.WriteLine(firstTagLower);
+                        //Console.Out.WriteLine(firstTagLower);
                         if (firstTagLower.Equals("contacts") ||
                             firstTagLower.Equals("accounts") ||
                             firstTagLower.Equals("invoices") ||
@@ -289,18 +289,18 @@ namespace odata2openapi
                             )
                         {
                             ok2Delete = false;
-                            Console.Out.WriteLine($"NOT ok to delete {firstTagLower}");
+                            //Console.Out.WriteLine($"NOT ok to delete {firstTagLower}");
                         }
 
                         if (!firstTagLower.StartsWith("msdyn") && !firstTagLower.StartsWith("abs_") && firstTagLower.IndexOf(solutionPrefix) != -1)
                         {
-                            Console.Out.WriteLine($"NOT ok to delete {firstTagLower}");
+                            //Console.Out.WriteLine($"NOT ok to delete {firstTagLower}");
                             ok2Delete = false;                        
                         }
 
                         if (ok2Delete)
                         {
-                            Console.Out.WriteLine($"ok to delete {firstTagLower}");
+                            //Console.Out.WriteLine($"ok to delete {firstTagLower}");
                             if (!itemsToRemove.Contains(path.Key))
                             {
                                 itemsToRemove.Add(path.Key);
@@ -772,7 +772,7 @@ namespace odata2openapi
                 
                 foreach (string defToRemove in defsToRemove)
                 {
-                    Console.Out.WriteLine($"Remove: {defToRemove}");
+                    //Console.Out.WriteLine($"Remove: {defToRemove}");
                     if (!string.IsNullOrEmpty (defToRemove) && swaggerDocument.Components.Schemas.ContainsKey (defToRemove))
                     {
                         swaggerDocument.Components.Schemas.Remove(defToRemove);
@@ -803,10 +803,14 @@ namespace odata2openapi
 
                 foreach (var definition in swaggerDocument.Components.Schemas)
                 {
-                    Console.Out.WriteLine($"Definition: {definition.Value.Title}");
+                    //Console.Out.WriteLine($"Definition: {definition.Value.Title}");
 
                     if (definition.Value.AllOf != null && definition.Value.AllOf.Count > 1)
                     {
+                        if (definition.Value.Type == null)
+                        {
+                            definition.Value.Type = "object";
+                        }
                         definition.Value.Properties = definition.Value.AllOf[1].Properties;
                         definition.Value.AllOf.Clear();
                     }
