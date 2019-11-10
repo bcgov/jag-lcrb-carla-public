@@ -96,40 +96,79 @@ namespace odata2openapi
             }
         }
         */
-        
-        static void AddSubItems (OpenApiDocument swaggerDocument, List<string> itemsToKeep, string currentItem)
+        static void CheckProperties(OpenApiDocument swaggerDocument, List<string> itemsToKeep, OpenApiSchema item)
         {
-            if (currentItem != null && ! itemsToKeep.Contains (currentItem))
+            if (item.Reference != null)
             {
-                itemsToKeep.Add(currentItem);
-                Console.WriteLine($"Added {currentItem}");
-                OpenApiSchema item = null;
-
-                // find the current item.
-                foreach (var definition in swaggerDocument.Components.Schemas)
+                string title = item.Reference.Id;
+                if (title != null && !itemsToKeep.Contains(title))
                 {
-                    if (definition.Value.Title != null && definition.Value.Title.Equals (currentItem))
+                    // recursive call.
+                    AddSubItems(swaggerDocument, itemsToKeep, title);
+                }
+            }
+            else
+            {
+                if (item.Type != null && (item.Type == "object" || item.Type == "array")
+                    && item.Items?.Reference?.Id != null)
+                {
+                    string title = item.Items.Reference.Id;
+                    if (title != null && !itemsToKeep.Contains(title))
                     {
-                        item = definition.Value;
-                        break;
+                        // recursive call.
+                        AddSubItems(swaggerDocument, itemsToKeep, title);
                     }
                 }
-                
-                if (item != null)
-                {                    
-                    foreach (var property in item.Properties)
-                    {                         
-                        if (property.Value.Reference != null && (property.Value.Type == "object" || property.Value.Type == "array"))
+            }
+            if (item.Properties != null)
+            {
+                foreach (var property in item.Properties)
+                {
+                    if (property.Value.Reference != null)
+                    {
+                        string title = property.Value.Reference.Id;
+                        if (title != null && !itemsToKeep.Contains(title))
                         {
-                            string title = property.Value.Reference.Id;
-                            if (title != null && ! itemsToKeep.Contains (title))
-                            {                            
+                            // recursive call.
+                            AddSubItems(swaggerDocument, itemsToKeep, title);
+                        }
+                    }
+                    else
+                    {
+                        if ((property.Value.Type == "object" || property.Value.Type == "array")
+                            && property.Value.Items?.Reference?.Id != null)
+                        {
+                            string id = property.Value.Items.Reference.Id;
+                            if (id != null && !itemsToKeep.Contains(id))
+                            {
                                 // recursive call.
-                                AddSubItems(swaggerDocument, itemsToKeep, title);
-                            }                        
+                                AddSubItems(swaggerDocument, itemsToKeep, id);
+                            }
                         }
                     }
                 }
+
+            }
+        }
+        static void AddSubItems (OpenApiDocument swaggerDocument, List<string> itemsToKeep, string currentItem)
+        {
+            if (currentItem != null && ! itemsToKeep.Contains (currentItem) && swaggerDocument.Components.Schemas.ContainsKey(currentItem))
+            {                
+                itemsToKeep.Add(currentItem);
+                Console.WriteLine($"Added {currentItem}");
+
+                OpenApiSchema item = swaggerDocument.Components.Schemas[currentItem];
+
+                CheckProperties(swaggerDocument, itemsToKeep, item);
+            
+                if (item.AllOf != null)
+                {
+                    foreach (var allOfItem in item.AllOf)
+                    {
+                        CheckProperties(swaggerDocument, itemsToKeep, allOfItem);
+                    }
+                }
+
             }
         }
 
@@ -206,7 +245,6 @@ namespace odata2openapi
                 };
                 OpenApiDocument swaggerDocument = model.ConvertToOpenApi(openApiSettings);
                 
-                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.interactionforemail");
 
                 List<string> allops = new List<string>();
                 List<string> itemsToRemove = new List<string>();
@@ -402,9 +440,10 @@ namespace odata2openapi
                                             if (newSchema.Type == "array")
                                             {
                                                 newSchema.Items = new OpenApiSchema() { Reference = new OpenApiReference() { Id = itemName, Type = ReferenceType.Schema }, Type = "none" };
+                                                AddSubItems(swaggerDocument, defsToKeep, itemName);
                                             }
-
-                                            defsToKeep.Add(resultName);
+                                            AddSubItems(swaggerDocument, defsToKeep, resultName);
+                                            
                                         }
 
                                         schema.Value.Schema = new OpenApiSchema { Reference = new OpenApiReference() { Id = resultName, Type = ReferenceType.Schema }, Type = "none" };
@@ -703,7 +742,7 @@ namespace odata2openapi
                     }
                 }
 
-                defsToKeep.Add("Microsoft.Dynamics.CRM.LookupAttributeMetadata");
+               
 
                 // reverse the items to keep.
 
@@ -870,6 +909,14 @@ namespace odata2openapi
                 props.Add("nil", new OpenApiSchema() { Type = "string" });
                 swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.transactioncurrency", new OpenApiSchema() { Properties = props});
                 swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.syncerror", new OpenApiSchema() { Properties = props });
+
+                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.abs_scheduledprocessexecution");
+                /*
+                 * AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.abs_scheduledprocessexecution");
+                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.interactionforemail");
+                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.entitlementtemplate");
+                defsToKeep.Add("Microsoft.Dynamics.CRM.LookupAttributeMetadata"); 
+                */
 
                 // swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0); // ToJson(SchemaType.Swagger2);
                 swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi2_0);
