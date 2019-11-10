@@ -340,7 +340,7 @@ namespace odata2openapi
                         
                         
 
-                        operation.Value.OperationId = prefix + "_" + suffix;
+                        
 
 
                         switch (operation.Key)
@@ -381,6 +381,8 @@ namespace odata2openapi
                                 }
                                 break;
                         }
+
+                        operation.Value.OperationId = prefix + "_" + suffix;
 
                         string operationDef = null;
                         // adjustments to response
