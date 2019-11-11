@@ -2,7 +2,7 @@
 
 echo Updating meta data
 
-dotnet run -p ..\OData.OpenAPI\odata2openapi\odata2openapi.csproj
+dotnet run -p ..\OData.OpenAPI\odata2openapi\odata2openapi.csproj adoxio
 
 echo Updating client
 
