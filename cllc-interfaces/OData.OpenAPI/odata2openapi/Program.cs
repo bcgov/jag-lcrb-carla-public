@@ -173,6 +173,23 @@ namespace odata2openapi
         }
 
      
+        static void MergeSubItems (Dictionary <string, OpenApiSchema> dictionary, OpenApiSchema item)
+        {
+            if (item.AllOf != null)
+            {
+                foreach (var allOfItem in item.AllOf)
+                {
+                    MergeSubItems(dictionary, allOfItem);
+                }
+            }
+            if (item.Properties != null)
+            {
+                foreach (var property in item.Properties)
+                {
+                    dictionary.Add(property.Key, property.Value);
+                }
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -256,7 +273,18 @@ namespace odata2openapi
                         itemsToRemove.Add(path.Key);
                         continue;
                     }
+                    if (path.Key.Contains("scheduledprocessexecution"))
+                    {
+                        itemsToRemove.Add(path.Key);
+                        continue;
+                    }
 
+                    string subPath = path.Key.Substring(path.Key.LastIndexOf("/") + 1);
+                    if (subPath.Contains("("))
+                    {
+                        subPath = subPath.Substring(0, subPath.IndexOf("("));
+                        subPath += "ByKey";
+                    }
                     OpenApiTag firstTag = null; // operation.Value.Tags.FirstOrDefault();
                     string firstTagLower = "";
 
@@ -270,6 +298,8 @@ namespace odata2openapi
                     {
                         firstTag = new OpenApiTag() { Name = temp };
                     }
+
+                    
 
                     string prefix = "Unknown";
 
@@ -383,6 +413,11 @@ namespace odata2openapi
                         }
 
                         operation.Value.OperationId = prefix + "_" + suffix;
+
+                        if (! firstTag.Name.Contains(subPath))
+                        {
+                            operation.Value.OperationId += subPath;
+                        }
 
                         string operationDef = null;
                         // adjustments to response
@@ -804,14 +839,20 @@ namespace odata2openapi
                 foreach (var definition in swaggerDocument.Components.Schemas)
                 {
                     //Console.Out.WriteLine($"Definition: {definition.Value.Title}");
-
-                    if (definition.Value.AllOf != null && definition.Value.AllOf.Count > 1)
+                    if (definition.Value.Description == null)
                     {
-                        if (definition.Value.Type == null)
-                        {
-                            definition.Value.Type = "object";
-                        }
-                        definition.Value.Properties = definition.Value.AllOf[1].Properties;
+                        definition.Value.Description = definition.Key;
+                    }
+                    if (definition.Value.AllOf != null && definition.Value.Type == null)
+                    {
+                        definition.Value.Type = "object";
+                    }
+                    
+                    var dictionary = new Dictionary<string, OpenApiSchema>();
+                    MergeSubItems(dictionary, definition.Value);
+                    definition.Value.Properties = dictionary;
+                    if (definition.Value.AllOf != null)
+                    {
                         definition.Value.AllOf.Clear();
                     }
 
