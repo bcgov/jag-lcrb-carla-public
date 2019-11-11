@@ -16,6 +16,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Extensions;
 using Microsoft.OpenApi;
+using Newtonsoft.Json;
 
 // online validator that seems to work - https://apitools.dev/swagger-parser/online/
 
@@ -195,12 +196,21 @@ namespace odata2openapi
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Please enter a solution prefix");
-                solutionPrefix = "adoxio";
+                Console.WriteLine("Please enter a solution prefix");                
             }
             else
             {
                 solutionPrefix = args[0];
+            }
+
+            bool generatePaths = false;
+
+            if (args.Length > 1)
+            {
+                if (args[1] == "generatePaths")
+                {
+                    generatePaths = true;
+                }
             }
 
             bool enableOdata = false;
@@ -254,20 +264,46 @@ namespace odata2openapi
            
             string swagger = null;
 
-            using (MemoryStream ms = new MemoryStream())
-            {
-                OpenApiConvertSettings openApiSettings = new OpenApiConvertSettings
+            OpenApiConvertSettings openApiSettings = new OpenApiConvertSettings
                 {
                     // configuration
                 };
                 OpenApiDocument swaggerDocument = model.ConvertToOpenApi(openApiSettings);
                 
+                if (generatePaths)
+                {
+                    List<string> paths = new List<string>();
+                    foreach (var path in swaggerDocument.Paths.Keys)
+                    {
+                        if (path.Contains("/"))
+                        {
+                            string subPath = path.Substring(path.LastIndexOf("/") + 1);
+                            if (subPath.Contains("("))
+                            {
+                                paths.Add(path);
+                            }
+                        }
+                    }
+                    File.WriteAllText("paths-excluded.json", JsonConvert.SerializeObject(paths));
+                }
+                else {
+                List<string> itemsToRemove = new List<string>();
+                if (File.Exists ("paths-excluded.json"))
+                {
+                    string pathsExcluded = File.ReadAllText("paths-excluded.json");
+                    itemsToRemove = JsonConvert.DeserializeObject<List<string>>(pathsExcluded);
+                }
+                
 
                 List<string> allops = new List<string>();
-                List<string> itemsToRemove = new List<string>();
+                
                 // fix the operationIds.
                 foreach (var path in swaggerDocument.Paths)
                 {
+                    if (itemsToRemove.Contains (path.Key))
+                    {
+                        continue;
+                    }
                     if (path.Key.Contains("transactioncurrencyid"))
                     {
                         itemsToRemove.Add(path.Key);
