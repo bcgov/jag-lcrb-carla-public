@@ -203,7 +203,7 @@ namespace odata2openapi
                 solutionPrefix = args[0];
             }
 
-            
+            bool enableOdata = false;
 
 
             List<string> defsToKeep = new List<string>();
@@ -520,37 +520,40 @@ namespace odata2openapi
 
                         // adjustments to operation parameters
                         //operation.Value.Parameters.Clear();
-
-                        string[] oDataParameters = { "top", "skip", "search", "filter", "count", "$orderby", "$select", "$expand" };
-
-                        List<OpenApiParameter> parametersToRemove = new List<OpenApiParameter>();
-
-                        foreach (var oDataParameter in oDataParameters)
+                        if (enableOdata)
                         {
-                            foreach (var parameter in operation.Value.Parameters)
+                            string[] oDataParameters = { "top", "skip", "search", "filter", "count", "$orderby", "$select", "$expand" };
+
+                            List<OpenApiParameter> parametersToRemove = new List<OpenApiParameter>();
+
+                            foreach (var oDataParameter in oDataParameters)
                             {
-                                if (parameter.Name == oDataParameter)
+                                foreach (var parameter in operation.Value.Parameters)
                                 {
-                                    parametersToRemove.Add(parameter);
-                                }
+                                    if (parameter.Name == oDataParameter)
+                                    {
+                                        parametersToRemove.Add(parameter);
+                                    }
 
-                                if (parameter.Reference != null && parameter.Reference.Id == oDataParameter)
-                                {
-                                    parametersToRemove.Add(parameter);
-                                }
+                                    if (parameter.Reference != null && parameter.Reference.Id == oDataParameter)
+                                    {
+                                        parametersToRemove.Add(parameter);
+                                    }
 
+                                }
                             }
-                        }
-                        foreach (var parameter in parametersToRemove)
-                        {
-                            operation.Value.Parameters.Remove(parameter);
+                            foreach (var parameter in parametersToRemove)
+                            {
+                                operation.Value.Parameters.Remove(parameter);
+                            }
+
                         }
 
 
                         operation.Value.Extensions.Clear();
 
 
-                        if (operationDef != null)
+                        if (operationDef != null  && enableOdata)
                         {
                             operation.Value.Extensions.Add("x-ms-odata", new OpenApiString($"#/definitions/{operationDef}"));
                             AddSubItems(swaggerDocument, defsToKeep, operationDef);
@@ -572,6 +575,7 @@ namespace odata2openapi
                                     parameter.Schema = new OpenApiSchema()
                                     {
                                         Type = "integer"
+
                                     };
                                 }
                                 if (name == "$search" || name == "$filter")
