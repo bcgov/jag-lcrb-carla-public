@@ -491,6 +491,7 @@ namespace odata2openapi
                                         if (schema.Value.Schema.Reference != null)
                                         {
                                             operationDef = schema.Value.Schema.Reference.Id;
+                                            AddSubItems(swaggerDocument, defsToKeep, operationDef);
                                         }
 
                                         //val.Reference = schema.Value.Schema.Reference;
