@@ -925,7 +925,7 @@ namespace odata2openapi
 
                             if (property.Value.Format != null && property.Value.Format == "uuid")
                             {
-                                property.Value.Format = null;
+                                //property.Value.Format = null;
                             }
 
                         }
