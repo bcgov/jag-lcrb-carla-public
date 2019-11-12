@@ -213,13 +213,24 @@ namespace odata2openapi
                 }
             }
 
-            bool enableOdata = false;
+            // Feature flags
+            
+            // True if we use the Autorest Odata extension
+            bool enableOdataExtension = false;
+
+            // True if we get metadata from Dynamics
+            bool getMetadata = false;
+
+            // True if we use strings instead of guids primary keys.
+            bool useStringForGuid = true;
+
+            bool disableCustomErrorClass = true;
 
 
             List<string> defsToKeep = new List<string>();
             
             
-            bool getMetadata = false;
+            
 
             // start by getting secrets.
             var builder = new ConfigurationBuilder()                
@@ -321,27 +332,29 @@ namespace odata2openapi
                         continue;
                     }
 
-                    string subPath = path.Key.Substring(path.Key.LastIndexOf("/") + 1);
-                    if (subPath.Contains("("))
-                    {
-                        subPath = subPath.Substring(0, subPath.IndexOf("("));
-                        subPath += "ByKey";
-                    }
-                    OpenApiTag firstTag = null; // operation.Value.Tags.FirstOrDefault();
-                    string firstTagLower = "";
+                    // determine if this is a get by key, or a get by key with additional .
+                    string subPath = "";
 
-                    string temp = path.Key.Substring(1);
+                    string temp = path.Key.Substring(path.Key.LastIndexOf("/") + 1);
                     if (temp.Contains("("))
                     {
                         temp = temp.Substring(0, temp.IndexOf("("));
+                        string pathSample = path.Key.Substring(1, temp.Length);
+                        if (pathSample != temp)
+                        {
+                            subPath = temp;
+                        }
+                        
+                        subPath += "ByKey";
                     }
 
+                    OpenApiTag firstTag = null; // operation.Value.Tags.FirstOrDefault();
+                    string firstTagLower = "";
+                    
                     if (firstTag == null)
                     {
                         firstTag = new OpenApiTag() { Name = temp };
-                    }
-
-                    
+                    }                    
 
                     string prefix = "Unknown";
 
@@ -409,11 +422,6 @@ namespace odata2openapi
 
                         string suffix = "";
 
-                        
-                        
-
-                        
-
 
                         switch (operation.Key)
                         {
@@ -432,25 +440,30 @@ namespace odata2openapi
 
                             case OperationType.Patch:
                                 suffix = "Update";
+                                if (subPath == "ByKey")
+                                {
+                                    subPath = "";
+                                }
                                 break;
 
                             case OperationType.Put:
                                 suffix = "Put";
+                                if (subPath == "ByKey")
+                                {
+                                    subPath = "";
+                                }
                                 break;
 
                             case OperationType.Delete:
                                 suffix = "Delete";
+                                if (subPath == "ByKey")
+                                {
+                                    subPath = "";
+                                }
                                 break;
 
                             case OperationType.Get:
-                                if (path.Key.Contains("{"))
-                                {
-                                    suffix = "GetByKey";
-                                }
-                                else
-                                {
-                                    suffix = "Get";
-                                }
+                                suffix = "Get";                                
                                 break;
                         }
 
@@ -474,7 +487,10 @@ namespace odata2openapi
                                     response.Value.Description = "OData Error";
                                 };
 
-                                //response.Value.Reference = new OpenApiReference() { Id = "odata.error", Type = ReferenceType.Schema };
+                                if (disableCustomErrorClass && response.Value.Reference != null)
+                                {
+                                    response.Value.Reference = null;
+                                }                                
                             }
 
                             if (val != null)
@@ -534,26 +550,9 @@ namespace odata2openapi
                                         {
                                             operationDef = schema.Value.Schema.Reference.Id;
                                             AddSubItems(swaggerDocument, defsToKeep, operationDef);
-                                        }
-
-                                        //val.Reference = schema.Value.Schema.Reference;
+                                        }                                 
                                     }
-
-
-                                    /*
-                                    var schema = val.Schema;
-
-                                    foreach (var property in schema.Properties)
-                                    {
-                                        if (property.Key.Equals("value"))
-                                        {
-                                            property.Value.ExtensionData.Add("x-ms-client-flatten", true);
-                                        }
-                                    }
-                                    */
-                                }
-
-                                //val.Content.Clear();
+                                }                                
                             }
                         }
 
@@ -561,9 +560,8 @@ namespace odata2openapi
 
 
 
-                        // adjustments to operation parameters
-                        //operation.Value.Parameters.Clear();
-                        if (enableOdata)
+                        // adjustments to operation parameters                        
+                        if (enableOdataExtension)
                         {
                             string[] oDataParameters = { "top", "skip", "search", "filter", "count", "$orderby", "$select", "$expand" };
 
@@ -596,7 +594,7 @@ namespace odata2openapi
                         operation.Value.Extensions.Clear();
 
 
-                        if (operationDef != null  && enableOdata)
+                        if (operationDef != null  && enableOdataExtension)
                         {
                             operation.Value.Extensions.Add("x-ms-odata", new OpenApiString($"#/definitions/{operationDef}"));
                             AddSubItems(swaggerDocument, defsToKeep, operationDef);
@@ -604,80 +602,118 @@ namespace odata2openapi
 
                         foreach (var parameter in operation.Value.Parameters)
                         {
-                            string name = parameter.Name;
-                            if (name == null)
+                            if (parameter.Reference != null)
                             {
-                                name = parameter.Name;
-                            }
-                            if (name != null)
-                            {
-                                if (name == "$top" || name == "$skip")
+                                if (parameter.Reference.Id == "top" || parameter.Reference.Id == "skip")
                                 {
-                                    parameter.In = ParameterLocation.Query;
-                                    parameter.Reference = null;
+                                    parameter.Name = $"${parameter.Reference.Id}";
+                                    parameter.Reference = null;                                    
+                                    parameter.In = ParameterLocation.Query;                                    
                                     parameter.Schema = new OpenApiSchema()
                                     {
                                         Type = "integer"
 
                                     };
                                 }
-                                if (name == "$search" || name == "$filter")
+                                else if (parameter.Reference.Id == "search" || parameter.Reference.Id == "filter")
                                 {
-                                    parameter.In = ParameterLocation.Query;
+                                    parameter.Name = $"${parameter.Reference.Id}";
                                     parameter.Reference = null;
+                                    parameter.In = ParameterLocation.Query;
                                     parameter.Schema = new OpenApiSchema()
                                     {
                                         Type = "string"
-                                    };
-                                }
-                                if (name == "$orderby" || name == "$select" || name == "$expand")
-                                {
-                                    parameter.In = ParameterLocation.Query;
-                                    parameter.Reference = null;
-                                    parameter.Schema = new OpenApiSchema()
-                                    {
-                                        Type = "array",
-                                        Items = new OpenApiSchema()
-                                        {
-                                            Type = "string"                                            
-                                        }
-                                        
-                                    };
-                                    parameter.Extensions.Add ("collectionFormat", new OpenApiString ( "csv" ));
-                                    
-                                    //parameter.CollectionFormat = SwaggerParameterCollectionFormat.Csv;
 
+                                    };
                                 }
-                                if (name == "$count")
+                                else if (parameter.Reference.Id == "count")
                                 {
-                                    parameter.In = ParameterLocation.Query;
+                                    parameter.Name = $"${parameter.Reference.Id}";
                                     parameter.Reference = null;
+                                    parameter.In = ParameterLocation.Query;
                                     parameter.Schema = new OpenApiSchema()
                                     {
                                         Type = "boolean"
-                                    };
-                                }
-                                if (name == "If-Match")
-                                {
-                                    parameter.Reference = null;
-                                    parameter.Schema = new OpenApiSchema()
-                                    {
-                                        Type = "string"
-                                    };
-                                }
 
-                                if (parameter.Extensions != null && parameter.Extensions.ContainsKey("x-ms-docs-key-type"))
-                                {
-                                    parameter.Extensions.Remove("x-ms-docs-key-type");
-                                }                                
-
-                                if (string.IsNullOrEmpty(parameter.Name))
-                                {
-                                    parameter.Name = name;
+                                    };
                                 }
                             }
+                            else
+                            {
+                                string name = parameter.Name;
+                                if (name == null)
+                                {
+                                    name = parameter.Name;
+                                }
 
-                            //var parameter = loopParameter.ActualParameter;
+                                if (name != null)
+                                {
+                                    if (name == "$top" || name == "$skip")
+                                    {
+                                        parameter.In = ParameterLocation.Query;
+                                        parameter.Reference = null;
+                                        parameter.Schema = new OpenApiSchema()
+                                        {
+                                            Type = "integer"
+
+                                        };
+                                    }
+                                    if (name == "$search" || name == "$filter")
+                                    {
+                                        parameter.In = ParameterLocation.Query;
+                                        parameter.Reference = null;
+                                        parameter.Schema = new OpenApiSchema()
+                                        {
+                                            Type = "string"
+                                        };
+                                    }
+                                    if (name == "$orderby" || name == "$select" || name == "$expand")
+                                    {
+                                        parameter.In = ParameterLocation.Query;
+                                        parameter.Reference = null;
+                                        parameter.Schema = new OpenApiSchema()
+                                        {
+                                            Type = "array",
+                                            Items = new OpenApiSchema()
+                                            {
+                                                Type = "string"
+                                            }
+
+                                        };
+                                        parameter.Extensions.Add("collectionFormat", new OpenApiString("csv"));                                        
+
+                                    }
+                                    if (name == "$count")
+                                    {
+                                        parameter.In = ParameterLocation.Query;
+                                        parameter.Reference = null;
+                                        parameter.Schema = new OpenApiSchema()
+                                        {
+                                            Type = "boolean"
+                                        };
+                                    }
+                                    if (name == "If-Match")
+                                    {
+                                        parameter.Reference = null;
+                                        parameter.Schema = new OpenApiSchema()
+                                        {
+                                            Type = "string"
+                                        };
+                                    }
+
+                                    if (parameter.Extensions != null && parameter.Extensions.ContainsKey("x-ms-docs-key-type"))
+                                    {
+                                        parameter.Extensions.Remove("x-ms-docs-key-type");
+                                    }
+
+                                    if (string.IsNullOrEmpty(parameter.Name))
+                                    {
+                                        parameter.Name = name;
+                                    }
+
+                                }
+
+                            }                            
 
                             // get rid of style if it exists.
                             if (parameter.Style != ParameterStyle.Simple)
@@ -685,111 +721,32 @@ namespace odata2openapi
                                 parameter.Style = ParameterStyle.Simple;
                             }
 
-                            // clear unique items
-                            //if (parameter.)
-                            //{
-                            //    parameter.UniqueItems = false;
-                            //}
+                            // get rid of guid type if it exists
 
-                            // we also need to align the schema if it exists.
+                            if (parameter.Schema?.Format != null && useStringForGuid && parameter.Schema.Format == "uuid")
+                            {
+                                parameter.Schema.Format = null;
+                                parameter.Schema.Pattern = null;
+                            }
+
+                            // may need to clear unique items here.
+
+                            // align the schema if it exists.
                             if (parameter.Schema != null && parameter.Schema.Items != null)
                             {
 
                                 var schema = parameter.Schema;
                                 if (schema.Type == "array" && parameter.Style == null)
                                 {
+
+                                    // may be a good idea to set collectionFormat to csv here.  It is also set below.
+
                                     parameter.Style = ParameterStyle.Simple;
                                 }
                             }
-                                /*    
-                                    //if (schema.Items.)
-                                    parameter.CollectionFormat = SwaggerParameterCollectionFormat.Csv;
-                                }
-                                else if (schema.Type == JsonObjectType.String)
-                                {
-                                    parameter.Schema = null;
-                                    parameter.Reference = null;
-                                    parameter.Type = JsonObjectType.String;
-                                }
-
-
-                            }
-                            else
-                            {
-                                // many string parameters don't have the type defined.
-                                if (!(parameter.In ==  ParameterLocation.Body) && !parameter.HasReference && (parameter.Type == JsonObjectType.Null || parameter.Type == JsonObjectType.None))
-                                {
-                                    parameter.Schema = null;
-                                    parameter.Type = JsonObjectType.String;
-                                }
-                            }
-
-
-                            */
-
-
-
-                            // adjustments to response
-                            /*
-                            foreach (var response in operation.Value.Responses)
-                                {
-                                    var val = response.Value;
-                                    if (val != null && val.Reference == null && val.Schema != null)
-                                    {
-                                        bool hasValue = false;
-                                        var schema = val.Schema;
-
-                                        foreach (var property in schema.Properties)
-                                        {
-                                            if (property.Key.Equals("value"))
-                                            {
-                                                hasValue = true;
-                                                break;
-                                            }
-                                        }
-                                        if (hasValue)
-                                        {
-                                            string resultName = operation.Operation.OperationId + "ResponseModel";
-
-                                            if (!swaggerDocument.Definitions.ContainsKey(resultName))
-                                            {
-                                                // move the inline schema to defs.
-                                                swaggerDocument.Definitions.Add(resultName, val.Schema);
-
-                                                defsToKeep.Add(resultName);
-
-                                                val.Schema = new JsonSchema4();
-                                                val.Schema.Reference = swaggerDocument.Definitions[resultName];
-                                                val.Schema.Type = JsonObjectType.None;
-
-
-                                            }
-                                            // ODATA - experimental
-                                            //operation.Operation.ExtensionData.Add ("x-ms-odata", "#/definitions/")
-
-                                        }
-
-
-
-
-                                        //var schema = val.Schema;
-
-                                        //foreach (var property in schema.Properties)
-                                        //{
-                                        //    if (property.Key.Equals("value"))
-                                        //    {
-                                        //        property.Value.ExtensionData.Add("x-ms-client-flatten", true);
-                                        //    }
-                                        //}
-
-                                    */
                         }
 
-
                     }
-
-
-
 
                 }
 
@@ -838,22 +795,15 @@ namespace odata2openapi
 
                 foreach (var definition in swaggerDocument.Components.Schemas)
                 {
-                    if (//!definition.Key.Contains("_GetResponseModel") && 
+                    if (
                         !definition.Key.Contains("odata.error") &&
                         !definition.Key.Contains("crmbaseentity") &&
                         !definition.Key.ToLower().Contains("optionmetadata") &&
                         !defsToKeep.Contains(definition.Key))
                     {
-                        defsToRemove.Add(definition.Key);
-                        //Console.Out.WriteLine($"Remove: {definition.Key}");
+                        defsToRemove.Add(definition.Key);                        
                     }
-                    else
-                    {
-                        //Console.Out.WriteLine($"Keep: {definition.Key}");
-                    }
-                }
-
-                //defsToRemove.Add("Microsoft.Dynamics.CRM.crmbaseentity");
+                }                
                 
                 foreach (string defToRemove in defsToRemove)
                 {
@@ -864,10 +814,10 @@ namespace odata2openapi
                     }
                     
                 }
-                
+                /*
                 List<string> responsesToRemove = new List<string>();
 
-                /*
+                
                 foreach (string responseToRemove in responsesToRemove)
                 {
                     Console.Out.WriteLine($"Remove Response: {responseToRemove}");
@@ -888,11 +838,14 @@ namespace odata2openapi
 
                 foreach (var definition in swaggerDocument.Components.Schemas)
                 {
-                    //Console.Out.WriteLine($"Definition: {definition.Value.Title}");
+                    
                     if (definition.Value.Description == null)
                     {
                         definition.Value.Description = definition.Key;
                     }
+
+
+                    // consolidate AllOf
                     if (definition.Value.AllOf != null && definition.Value.Type == null)
                     {
                         definition.Value.Type = "object";
@@ -906,7 +859,7 @@ namespace odata2openapi
                         definition.Value.AllOf.Clear();
                     }
 
-                    // **************************** extra block
+                    // Clear out the example if it exists
 
                     if (definition.Value.Example != null)
                     {
@@ -973,9 +926,10 @@ namespace odata2openapi
                                 property.Value.Pattern = null;
                             }
 
-                            if (property.Value.Format != null && property.Value.Format == "uuid")
+                            
+                            if (property.Value.Format != null && property.Value.Format == "uuid" && useStringForGuid)
                             {
-                                //property.Value.Format = null;
+                                property.Value.Format = null;
                             }
 
                         }
@@ -988,7 +942,6 @@ namespace odata2openapi
 
                 // cleanup parameters.
                 //swaggerDocument.Components.Parameters.Clear();
-
 
 
                 //**************************************
@@ -1007,31 +960,9 @@ namespace odata2openapi
                 swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.transactioncurrency", new OpenApiSchema() { Properties = props});
                 swaggerDocument.Components.Schemas.Add("Microsoft.Dynamics.CRM.syncerror", new OpenApiSchema() { Properties = props });
 
-                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.abs_scheduledprocessexecution");
-                /*
-                 * AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.abs_scheduledprocessexecution");
-                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.interactionforemail");
-                AddSubItems(swaggerDocument, defsToKeep, "Microsoft.Dynamics.CRM.entitlementtemplate");
-                defsToKeep.Add("Microsoft.Dynamics.CRM.LookupAttributeMetadata"); 
-                */
 
                 // swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi3_0); // ToJson(SchemaType.Swagger2);
                 swagger = swaggerDocument.SerializeAsJson(OpenApiSpecVersion.OpenApi2_0);
-
-
-                // fix up the swagger file.
-
-                //swagger = swagger.Replace("('{", "({");
-                //swagger = swagger.Replace("}')", "})");
-
-                //swagger = swagger.Replace("\"$ref\": \"#/responses/error\"", "\"schema\": { \"$ref\": \"#/definitions/odata.error\" }");
-
-                // fix for problem with the base entity.
-
-                //swagger = swagger.Replace("        {\r\n          \"$ref\": \"#/definitions/Microsoft.Dynamics.CRM.crmbaseentity\"\r\n        },\r\n", "");
-//                swagger = swagger.Replace("        {\r\n          \"$ref\": \"#/definitions/Microsoft.Dynamics.CRM.crmbaseentity\"\r\n        },", "");
-                           
-
                 
             }
             
