@@ -273,16 +273,22 @@ namespace odata2openapi
                 if (generatePaths)
                 {
                     List<string> paths = new List<string>();
-                    foreach (var path in swaggerDocument.Paths.Keys)
-                    {
-                        if (path.Contains("/"))
+                    foreach (var path in swaggerDocument.Paths)
+                    {                        
+
+                        string subPath = path.Key.Substring(path.Key.LastIndexOf("/") + 1);
+                        if (subPath.Contains("("))
                         {
-                            string subPath = path.Substring(path.LastIndexOf("/") + 1);
-                            if (subPath.Contains("("))
-                            {
-                                paths.Add(path);
-                            }
+                            subPath = subPath.Substring(0, subPath.IndexOf("("));                     
                         }
+                    
+                        string pathSample = path.Key.Substring(1, subPath.Length);
+                        if (pathSample != subPath)
+                        {
+                            paths.Add(path.Key);
+                        }
+
+
                     }
                     File.WriteAllText("paths-excluded.json", JsonConvert.SerializeObject(paths));
                 }
@@ -637,8 +643,8 @@ namespace odata2openapi
                                         }
                                         
                                     };
-                                    parameter.Extensions.Add ("collectionformat", new OpenApiString ( "csv" ));
-                                    parameter.Style = ParameterStyle.Simple;
+                                    parameter.Extensions.Add ("collectionFormat", new OpenApiString ( "csv" ));
+                                    
                                     //parameter.CollectionFormat = SwaggerParameterCollectionFormat.Csv;
 
                                 }
