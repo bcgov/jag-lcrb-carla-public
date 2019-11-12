@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// resourcegroup
+    /// Microsoft.Dynamics.CRM.resourcegroup
     /// </summary>
     public partial class MicrosoftDynamicsCRMresourcegroup
     {
@@ -29,7 +29,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMresourcegroup
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMresourcegroup(string resourcegroupid = default(string), string name = default(string), string _organizationidValue = default(string), long? versionnumber = default(long?), string _businessunitidValue = default(string), string objecttypecode = default(string), int? grouptypecode = default(int?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMconstraintbasedgroup resourcegroupidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceGroupBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMteam resourcegroupidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> resourceGroupSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> resourceGroupAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        /// <param name="resourcegroupid">Unique identifier of the scheduling
+        /// group.</param>
+        /// <param name="name">Name of the scheduling group.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the scheduling group.</param>
+        /// <param name="versionnumber">Version number of the scheduling
+        /// group.</param>
+        /// <param name="_businessunitidValue">Unique identifier of the
+        /// business unit with which the scheduling group is
+        /// associated.</param>
+        /// <param name="objecttypecode">Type of entity with which the
+        /// scheduling group is associated.</param>
+        /// <param name="grouptypecode">Scheduling group type code.</param>
+        public MicrosoftDynamicsCRMresourcegroup(System.Guid? resourcegroupid = default(System.Guid?), string name = default(string), System.Guid? _organizationidValue = default(System.Guid?), string versionnumber = default(string), System.Guid? _businessunitidValue = default(System.Guid?), string objecttypecode = default(string), int? grouptypecode = default(int?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> resourcegroupConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMconstraintbasedgroup resourcegroupidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceGroupBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMteam resourcegroupidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMduplicaterecord> resourceGroupDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> resourceGroupSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> resourceGroupAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             Resourcegroupid = resourcegroupid;
             Name = name;
@@ -58,36 +71,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the scheduling group.
         /// </summary>
         [JsonProperty(PropertyName = "resourcegroupid")]
-        public string Resourcegroupid { get; set; }
+        public System.Guid? Resourcegroupid { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the scheduling group.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the scheduling group.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the scheduling group.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit with which the
+        /// scheduling group is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
+        public System.Guid? _businessunitidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type of entity with which the scheduling group is
+        /// associated.
         /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public string Objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets scheduling group type code.
         /// </summary>
         [JsonProperty(PropertyName = "grouptypecode")]
         public int? Grouptypecode { get; set; }

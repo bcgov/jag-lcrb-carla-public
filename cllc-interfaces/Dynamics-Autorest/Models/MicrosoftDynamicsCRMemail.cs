@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// email
+    /// Microsoft.Dynamics.CRM.email
     /// </summary>
     public partial class MicrosoftDynamicsCRMemail
     {
@@ -27,7 +27,95 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMemail class.
         /// </summary>
-        public MicrosoftDynamicsCRMemail(System.DateTimeOffset? emailreminderexpirytime = default(System.DateTimeOffset?), int? notifications = default(int?), System.DateTimeOffset? delayedemailsendtime = default(System.DateTimeOffset?), string trackingtoken = default(string), int? opencount = default(int?), bool? isemailfollowed = default(bool?), string _templateidValue = default(string), bool? directioncode = default(bool?), string inreplyto = default(string), string mimetype = default(string), bool? compressed = default(bool?), string submittedby = default(string), int? replycount = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? attachmentopencount = default(int?), string reminderactioncardid = default(string), string conversationtrackingid = default(string), string category = default(string), string emailtrackingid = default(string), string torecipients = default(string), System.DateTimeOffset? lastopenedtime = default(System.DateTimeOffset?), string sender = default(string), string _emailsenderValue = default(string), bool? readreceiptrequested = default(bool?), string emailremindertext = default(string), string _parentactivityidValue = default(string), bool? deliveryreceiptrequested = default(bool?), bool? followemailuserpreference = default(bool?), string messageid = default(string), int? emailreminderstatus = default(int?), string _sendersaccountValue = default(string), string subcategory = default(string), string conversationindex = default(string), int? correlationmethod = default(int?), int? importsequencenumber = default(int?), int? emailremindertype = default(int?), int? linksclickedcount = default(int?), int? deliveryattempts = default(int?), int? baseconversationindexhash = default(int?), int? attachmentcount = default(int?), System.DateTimeOffset? postponeemailprocessinguntil = default(System.DateTimeOffset?), int? isunsafe = default(int?), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementEmail = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateEmail = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingEmail = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderEmail = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordEmail = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationEmail = default(MicrosoftDynamicsCRMbulkoperation), IList<MicrosoftDynamicsCRMsyncerror> emailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidEmail = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMasyncoperation regardingobjectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMaccount sendersaccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount emailsenderAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMlead regardingobjectidLeadEmail = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsla slaEmailSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderEmail = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMlead emailsenderLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMasyncoperation> emailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityEmail = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMduplicaterecord> emailDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMconnection> emailConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMmailbox sendermailboxidEmail = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMactivitymimeattachment> emailActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceEmail = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> emailConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceEmail = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunitEmail = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact emailsenderContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser owninguserEmail = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyEmail = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident regardingobjectidIncidentEmail = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMteam owningteamEmail = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignEmail = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMqueue emailsenderQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMsla slainvokedidEmailSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMannotation> emailAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyEmail = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> emailActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleEmail = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMequipment emailsenderEquipment = default(MicrosoftDynamicsCRMequipment), IList<MicrosoftDynamicsCRMactioncard> emailActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityEmail = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMduplicaterecord> emailDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMservice serviceidEmail = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyEmail = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcampaignresponse> emailCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMaccount regardingobjectidAccountEmail = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdbyEmail = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser emailsenderSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontract regardingobjectidContractEmail = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMtemplate templateid = default(MicrosoftDynamicsCRMtemplate), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMcontact regardingobjectidContactEmail = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMqueueitem> emailQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMemail parentactivityid = default(MicrosoftDynamicsCRMemail), IList<MicrosoftDynamicsCRMemail> emailEmailParentactivityid = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMquote regardingobjectidQuoteEmail = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessEmail = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationEmail = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintEmail = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationEmail = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesEmail = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerEmail = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationEmail = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
+        /// <param name="emailreminderexpirytime">Shows the date and time when
+        /// an email reminder expires.</param>
+        /// <param name="notifications">Select the notification code to
+        /// identify issues with the email recipients or attachments, such as
+        /// blocked attachments.</param>
+        /// <param name="delayedemailsendtime">Enter the expected date and time
+        /// when email will be sent.</param>
+        /// <param name="trackingtoken">Shows the tracking token assigned to
+        /// the email to make sure responses are automatically tracked in
+        /// Microsoft Dynamics 365.</param>
+        /// <param name="opencount">Shows the number of times an email has been
+        /// opened.</param>
+        /// <param name="isemailfollowed">For internal use only. Shows whether
+        /// this email is followed. This is evaluated state which overrides
+        /// user selection of follow email.</param>
+        /// <param name="_templateidValue">For internal use only. ID for
+        /// template used in email.</param>
+        /// <param name="directioncode">Select the direction of the email as
+        /// incoming or outbound.</param>
+        /// <param name="inreplyto">Type the ID of the email message that this
+        /// email activity is a response to.</param>
+        /// <param name="mimetype">MIME type of the email message data.</param>
+        /// <param name="compressed">Indicates if the body is
+        /// compressed.</param>
+        /// <param name="submittedby">Shows the Microsoft Office Outlook
+        /// account for the user who submitted the email to Microsoft Dynamics
+        /// 365.</param>
+        /// <param name="replycount">Shows the number of replies received for
+        /// an email.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="attachmentopencount">Shows the number of times an
+        /// email attachment has been viewed.</param>
+        /// <param name="reminderactioncardid">Reminder Action Card ID.</param>
+        /// <param name="conversationtrackingid">Conversation Tracking
+        /// Id.</param>
+        /// <param name="category">Type a category to identify the email type,
+        /// such as lead outreach, customer follow-up, or service alert, to tie
+        /// the email to a business group or function.</param>
+        /// <param name="emailtrackingid">Email Tracking Id.</param>
+        /// <param name="torecipients">Shows the email addresses corresponding
+        /// to the recipients.</param>
+        /// <param name="lastopenedtime">Shows the date and time when an email
+        /// was last opened.</param>
+        /// <param name="sender">Sender of the email.</param>
+        /// <param name="_emailsenderValue">Shows the sender of the
+        /// email.</param>
+        /// <param name="readreceiptrequested">Indicates that a read receipt is
+        /// requested.</param>
+        /// <param name="emailremindertext">For internal use only.</param>
+        /// <param name="_parentactivityidValue">Select the activity that the
+        /// email is associated with.</param>
+        /// <param name="deliveryreceiptrequested">Select whether the sender
+        /// should receive confirmation that the email was delivered.</param>
+        /// <param name="followemailuserpreference">Select whether the email
+        /// allows following recipient activities sent from Microsoft Dynamics
+        /// 365.This is user preference state which can be overridden by system
+        /// evaluated state.</param>
+        /// <param name="messageid">Unique identifier of the email message.
+        /// Used only for email that is received.</param>
+        /// <param name="emailreminderstatus">Shows the status of the email
+        /// reminder.</param>
+        /// <param name="_sendersaccountValue">Shows the parent account of the
+        /// sender of the email.</param>
+        /// <param name="subcategory">Type a subcategory to identify the email
+        /// type and relate the activity to a specific product, sales region,
+        /// business group, or other function.</param>
+        /// <param name="conversationindex">Identifier for all the email
+        /// responses for this conversation.</param>
+        /// <param name="correlationmethod">Shows how an email is matched to an
+        /// existing email in Microsoft Dynamics 365. For system use
+        /// only.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="emailremindertype">Shows the type of the email
+        /// reminder.</param>
+        /// <param name="linksclickedcount">Shows the number of times a link in
+        /// an email has been clicked.</param>
+        /// <param name="deliveryattempts">Shows the count of the number of
+        /// attempts made to send the email. The count is used as an indicator
+        /// of email routing issues.</param>
+        /// <param name="baseconversationindexhash">Hash of base of
+        /// conversation index.</param>
+        /// <param name="attachmentcount">Shows the umber of attachments of the
+        /// email message.</param>
+        /// <param name="postponeemailprocessinguntil">For internal use
+        /// only.</param>
+        /// <param name="isunsafe">For internal use only.</param>
+        public MicrosoftDynamicsCRMemail(System.DateTimeOffset? emailreminderexpirytime = default(System.DateTimeOffset?), int? notifications = default(int?), System.DateTimeOffset? delayedemailsendtime = default(System.DateTimeOffset?), string trackingtoken = default(string), int? opencount = default(int?), bool? isemailfollowed = default(bool?), System.Guid? _templateidValue = default(System.Guid?), bool? directioncode = default(bool?), string inreplyto = default(string), string mimetype = default(string), bool? compressed = default(bool?), string submittedby = default(string), int? replycount = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? attachmentopencount = default(int?), System.Guid? reminderactioncardid = default(System.Guid?), System.Guid? conversationtrackingid = default(System.Guid?), string category = default(string), System.Guid? emailtrackingid = default(System.Guid?), string torecipients = default(string), System.DateTimeOffset? lastopenedtime = default(System.DateTimeOffset?), string sender = default(string), System.Guid? _emailsenderValue = default(System.Guid?), bool? readreceiptrequested = default(bool?), string emailremindertext = default(string), System.Guid? _parentactivityidValue = default(System.Guid?), bool? deliveryreceiptrequested = default(bool?), bool? followemailuserpreference = default(bool?), string messageid = default(string), int? emailreminderstatus = default(int?), System.Guid? _sendersaccountValue = default(System.Guid?), string subcategory = default(string), string conversationindex = default(string), int? correlationmethod = default(int?), int? importsequencenumber = default(int?), int? emailremindertype = default(int?), int? linksclickedcount = default(int?), int? deliveryattempts = default(int?), int? baseconversationindexhash = default(int?), int? attachmentcount = default(int?), System.DateTimeOffset? postponeemailprocessinguntil = default(System.DateTimeOffset?), int? isunsafe = default(int?), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementEmail = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateEmail = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingEmail = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderEmail = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordEmail = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationEmail = default(MicrosoftDynamicsCRMbulkoperation), IList<MicrosoftDynamicsCRMsyncerror> emailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidEmail = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMasyncoperation regardingobjectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMaccount sendersaccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount emailsenderAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMlead regardingobjectidLeadEmail = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsla slaEmailSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderEmail = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMlead emailsenderLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMasyncoperation> emailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityEmail = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMduplicaterecord> emailDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMconnection> emailConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMmailbox sendermailboxidEmail = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMactivitymimeattachment> emailActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceEmail = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMconnection> emailConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceEmail = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunitEmail = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact emailsenderContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser owninguserEmail = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyEmail = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident regardingobjectidIncidentEmail = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMteam owningteamEmail = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignEmail = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMqueue emailsenderQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMsla slainvokedidEmailSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMannotation> emailAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyEmail = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> emailActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleEmail = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMequipment emailsenderEquipment = default(MicrosoftDynamicsCRMequipment), IList<MicrosoftDynamicsCRMactioncard> emailActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityEmail = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMduplicaterecord> emailDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMservice serviceidEmail = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyEmail = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcampaignresponse> emailCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMaccount regardingobjectidAccountEmail = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdbyEmail = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser emailsenderSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontract regardingobjectidContractEmail = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMtemplate templateid = default(MicrosoftDynamicsCRMtemplate), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMcontact regardingobjectidContactEmail = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMqueueitem> emailQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMemail parentactivityid = default(MicrosoftDynamicsCRMemail), IList<MicrosoftDynamicsCRMemail> emailEmailParentactivityid = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMquote regardingobjectidQuoteEmail = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessEmail = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationEmail = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintEmail = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationEmail = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesEmail = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerEmail = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationEmail = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             Emailreminderexpirytime = emailreminderexpirytime;
             Notifications = notifications;
@@ -144,211 +232,278 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the date and time when an email reminder
+        /// expires.
         /// </summary>
         [JsonProperty(PropertyName = "emailreminderexpirytime")]
         public System.DateTimeOffset? Emailreminderexpirytime { get; set; }
 
         /// <summary>
+        /// Gets or sets select the notification code to identify issues with
+        /// the email recipients or attachments, such as blocked attachments.
         /// </summary>
         [JsonProperty(PropertyName = "notifications")]
         public int? Notifications { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the expected date and time when email will be
+        /// sent.
         /// </summary>
         [JsonProperty(PropertyName = "delayedemailsendtime")]
         public System.DateTimeOffset? Delayedemailsendtime { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the tracking token assigned to the email to make
+        /// sure responses are automatically tracked in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "trackingtoken")]
         public string Trackingtoken { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of times an email has been opened.
         /// </summary>
         [JsonProperty(PropertyName = "opencount")]
         public int? Opencount { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only. Shows whether this email is
+        /// followed. This is evaluated state which overrides user selection of
+        /// follow email.
         /// </summary>
         [JsonProperty(PropertyName = "isemailfollowed")]
         public bool? Isemailfollowed { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only. ID for template used in email.
         /// </summary>
         [JsonProperty(PropertyName = "_templateid_value")]
-        public string _templateidValue { get; set; }
+        public System.Guid? _templateidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select the direction of the email as incoming or
+        /// outbound.
         /// </summary>
         [JsonProperty(PropertyName = "directioncode")]
         public bool? Directioncode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the ID of the email message that this email
+        /// activity is a response to.
         /// </summary>
         [JsonProperty(PropertyName = "inreplyto")]
         public string Inreplyto { get; set; }
 
         /// <summary>
+        /// Gets or sets MIME type of the email message data.
         /// </summary>
         [JsonProperty(PropertyName = "mimetype")]
         public string Mimetype { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if the body is compressed.
         /// </summary>
         [JsonProperty(PropertyName = "compressed")]
         public bool? Compressed { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Microsoft Office Outlook account for the
+        /// user who submitted the email to Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "submittedby")]
         public string Submittedby { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of replies received for an email.
         /// </summary>
         [JsonProperty(PropertyName = "replycount")]
         public int? Replycount { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of times an email attachment has been
+        /// viewed.
         /// </summary>
         [JsonProperty(PropertyName = "attachmentopencount")]
         public int? Attachmentopencount { get; set; }
 
         /// <summary>
+        /// Gets or sets reminder Action Card ID.
         /// </summary>
         [JsonProperty(PropertyName = "reminderactioncardid")]
-        public string Reminderactioncardid { get; set; }
+        public System.Guid? Reminderactioncardid { get; set; }
 
         /// <summary>
+        /// Gets or sets conversation Tracking Id.
         /// </summary>
         [JsonProperty(PropertyName = "conversationtrackingid")]
-        public string Conversationtrackingid { get; set; }
+        public System.Guid? Conversationtrackingid { get; set; }
 
         /// <summary>
+        /// Gets or sets type a category to identify the email type, such as
+        /// lead outreach, customer follow-up, or service alert, to tie the
+        /// email to a business group or function.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
+        /// Gets or sets email Tracking Id.
         /// </summary>
         [JsonProperty(PropertyName = "emailtrackingid")]
-        public string Emailtrackingid { get; set; }
+        public System.Guid? Emailtrackingid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the email addresses corresponding to the
+        /// recipients.
         /// </summary>
         [JsonProperty(PropertyName = "torecipients")]
         public string Torecipients { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when an email was last opened.
         /// </summary>
         [JsonProperty(PropertyName = "lastopenedtime")]
         public System.DateTimeOffset? Lastopenedtime { get; set; }
 
         /// <summary>
+        /// Gets or sets sender of the email.
         /// </summary>
         [JsonProperty(PropertyName = "sender")]
         public string Sender { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the sender of the email.
         /// </summary>
         [JsonProperty(PropertyName = "_emailsender_value")]
-        public string _emailsenderValue { get; set; }
+        public System.Guid? _emailsenderValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates that a read receipt is requested.
         /// </summary>
         [JsonProperty(PropertyName = "readreceiptrequested")]
         public bool? Readreceiptrequested { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "emailremindertext")]
         public string Emailremindertext { get; set; }
 
         /// <summary>
+        /// Gets or sets select the activity that the email is associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_parentactivityid_value")]
-        public string _parentactivityidValue { get; set; }
+        public System.Guid? _parentactivityidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the sender should receive confirmation
+        /// that the email was delivered.
         /// </summary>
         [JsonProperty(PropertyName = "deliveryreceiptrequested")]
         public bool? Deliveryreceiptrequested { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the email allows following recipient
+        /// activities sent from Microsoft Dynamics 365.This is user preference
+        /// state which can be overridden by system evaluated state.
         /// </summary>
         [JsonProperty(PropertyName = "followemailuserpreference")]
         public bool? Followemailuserpreference { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the email message. Used only for
+        /// email that is received.
         /// </summary>
         [JsonProperty(PropertyName = "messageid")]
         public string Messageid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of the email reminder.
         /// </summary>
         [JsonProperty(PropertyName = "emailreminderstatus")]
         public int? Emailreminderstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the parent account of the sender of the email.
         /// </summary>
         [JsonProperty(PropertyName = "_sendersaccount_value")]
-        public string _sendersaccountValue { get; set; }
+        public System.Guid? _sendersaccountValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a subcategory to identify the email type and
+        /// relate the activity to a specific product, sales region, business
+        /// group, or other function.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
+        /// Gets or sets identifier for all the email responses for this
+        /// conversation.
         /// </summary>
         [JsonProperty(PropertyName = "conversationindex")]
         public string Conversationindex { get; set; }
 
         /// <summary>
+        /// Gets or sets shows how an email is matched to an existing email in
+        /// Microsoft Dynamics 365. For system use only.
         /// </summary>
         [JsonProperty(PropertyName = "correlationmethod")]
         public int? Correlationmethod { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the type of the email reminder.
         /// </summary>
         [JsonProperty(PropertyName = "emailremindertype")]
         public int? Emailremindertype { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of times a link in an email has been
+        /// clicked.
         /// </summary>
         [JsonProperty(PropertyName = "linksclickedcount")]
         public int? Linksclickedcount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the count of the number of attempts made to send
+        /// the email. The count is used as an indicator of email routing
+        /// issues.
         /// </summary>
         [JsonProperty(PropertyName = "deliveryattempts")]
         public int? Deliveryattempts { get; set; }
 
         /// <summary>
+        /// Gets or sets hash of base of conversation index.
         /// </summary>
         [JsonProperty(PropertyName = "baseconversationindexhash")]
         public int? Baseconversationindexhash { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the umber of attachments of the email message.
         /// </summary>
         [JsonProperty(PropertyName = "attachmentcount")]
         public int? Attachmentcount { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "postponeemailprocessinguntil")]
         public System.DateTimeOffset? Postponeemailprocessinguntil { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "isunsafe")]
         public int? Isunsafe { get; set; }

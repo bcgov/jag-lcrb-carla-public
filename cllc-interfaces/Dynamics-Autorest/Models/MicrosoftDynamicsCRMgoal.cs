@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// goal
+    /// Microsoft.Dynamics.CRM.goal
     /// </summary>
     public partial class MicrosoftDynamicsCRMgoal
     {
@@ -27,7 +29,207 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMgoal class.
         /// </summary>
-        public MicrosoftDynamicsCRMgoal(object computedtargetasoftodaypercentageachieved = default(object), string stretchtargetstring = default(string), int? amountdatatype = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _rollupqueryinprogressintegeridValue = default(string), string _createdbyValue = default(string), int? inprogressinteger = default(int?), bool? rolluponlyfromchildgoals = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastrolledupdate = default(System.DateTimeOffset?), object targetmoneyBase = default(object), string _rollupqueryactualintegeridValue = default(string), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), bool? isoverridden = default(bool?), string title = default(string), System.DateTimeOffset? goalenddate = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _rollupqueryactualdecimalidValue = default(string), string _goalowneridValue = default(string), object inprogressdecimal = default(object), bool? consideronlygoalownersrecords = default(bool?), string _rollupquerycustomintegeridValue = default(string), string _rollupqueryactualmoneyidValue = default(string), string entityimageid = default(string), object targetdecimal = default(object), object computedtargetasoftodaymoney = default(object), bool? isoverride = default(bool?), bool? isamount = default(bool?), string _modifiedonbehalfbyValue = default(string), int? computedtargetasoftodayinteger = default(int?), object entityimage = default(object), string treeid = default(string), long? versionnumber = default(long?), long? entityimageTimestamp = default(long?), string _owneridValue = default(string), object percentage = default(object), string actualstring = default(string), object customrollupfieldmoneyBase = default(object), int? stretchtargetinteger = default(int?), object actualmoneyBase = default(object), object targetmoney = default(object), object computedtargetasoftodaymoneyBase = default(object), string entityimageUrl = default(string), int? targetinteger = default(int?), object actualmoney = default(object), string inprogressstring = default(string), System.DateTimeOffset? goalstartdate = default(System.DateTimeOffset?), object inprogressmoneyBase = default(object), string targetstring = default(string), int? fiscalperiod = default(int?), int? statuscode = default(int?), int? statecode = default(int?), object customrollupfieldmoney = default(object), string goalid = default(string), string _rollupquerycustommoneyidValue = default(string), string _owninguserValue = default(string), string _transactioncurrencyidValue = default(string), string _rollupqueryinprogressdecimalidValue = default(string), object exchangerate = default(object), object stretchtargetmoney = default(object), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _goalwitherroridValue = default(string), object actualdecimal = default(object), bool? isfiscalperiodgoal = default(bool?), string customrollupfieldstring = default(string), string _rollupqueryinprogressmoneyidValue = default(string), string _rollupquerycustomdecimalidValue = default(string), string _metricidValue = default(string), int? actualinteger = default(int?), object computedtargetasoftodaydecimal = default(object), object customrollupfielddecimal = default(object), int? fiscalyear = default(int?), object stretchtargetmoneyBase = default(object), object stretchtargetdecimal = default(object), int? timezoneruleversionnumber = default(int?), object inprogressmoney = default(object), int? depth = default(int?), int? rolluperrorcode = default(int?), string _parentgoalidValue = default(string), int? customrollupfieldinteger = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), object ownerid = default(object), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustommoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser goalowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMgoal parentgoalid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalParentGoal = default(IList<MicrosoftDynamicsCRMgoal>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMgoal goalwitherrorid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalRollupErrorGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMconnection> goalConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> goalSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> goalAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> goalConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> goalAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMteam goalowneridTeam = default(MicrosoftDynamicsCRMteam))
+        /// <param name="computedtargetasoftodaypercentageachieved">Shows the
+        /// expected value for percentage achieved against the target goal as
+        /// of the current date.</param>
+        /// <param name="stretchtargetstring">Stretch target value for all data
+        /// types.</param>
+        /// <param name="amountdatatype">Data type of the amount.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="_rollupqueryinprogressintegeridValue">Choose the query
+        /// that will be used to calculate data for the in-progress rollup
+        /// field (integer).</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="inprogressinteger">Shows the in-progress value
+        /// (integer) against the target. This value could contribute to a
+        /// goal, but is not counted yet as actual.</param>
+        /// <param name="rolluponlyfromchildgoals">Select whether the data
+        /// should be rolled up only from the child goals.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="lastrolledupdate">Shows the date and time when the
+        /// goal was last rolled up. The date and time are displayed in the
+        /// time zone selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="targetmoneyBase">Shows the goal target of the money
+        /// type in base currency.</param>
+        /// <param name="_rollupqueryactualintegeridValue">Choose the query
+        /// that will be used to calculate the actual data for the goal
+        /// (integer).</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="isoverridden">Select whether the system rollup fields
+        /// are updated. If set to Yes, the next system rollup will not update
+        /// the values of the rollup fields with the system calculated
+        /// values.</param>
+        /// <param name="title">Type a title or name that describes the
+        /// goal.</param>
+        /// <param name="goalenddate">Enter the date when the goal
+        /// ends.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the goal.</param>
+        /// <param name="_rollupqueryactualdecimalidValue">Choose the query
+        /// that will be used to calculate the actual data for the goal
+        /// (decimal).</param>
+        /// <param name="_goalowneridValue">Choose the user or team responsible
+        /// for meeting the goal.</param>
+        /// <param name="inprogressdecimal">Shows the in-progress value
+        /// (decimal) against the target. This value could contribute to a
+        /// goal, but is not counted yet as actual.</param>
+        /// <param name="consideronlygoalownersrecords">Select whether only the
+        /// goal owner's records, or all records, should be rolled up for goal
+        /// results.</param>
+        /// <param name="_rollupquerycustomintegeridValue">Choose the query
+        /// that will be used to calculate data for the custom rollup field
+        /// (integer).</param>
+        /// <param name="_rollupqueryactualmoneyidValue">Choose the query that
+        /// will be used to calculate the actual data for the goal
+        /// (money).</param>
+        /// <param name="entityimageid">For internal use only.</param>
+        /// <param name="targetdecimal">Select a goal target of the decimal
+        /// type to use for tracking data that include partial numbers, such as
+        /// pounds sold of a product sold by weight.</param>
+        /// <param name="computedtargetasoftodaymoney">Shows the expected
+        /// amount for actual value (money type) against the target goal as of
+        /// the current date.</param>
+        /// <param name="isoverride">Indicates whether the values of system
+        /// rollup fields can be updated.</param>
+        /// <param name="isamount">Indicates whether the metric type is Count
+        /// or Amount.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="computedtargetasoftodayinteger">Shows the expected
+        /// amount for actual value (integer type) against the target goal as
+        /// of the current date.</param>
+        /// <param name="entityimage">The default image for the entity.</param>
+        /// <param name="treeid">Unique identifier of the goal tree.</param>
+        /// <param name="versionnumber">Version number of the goal.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="percentage">Shows the percentage achieved against the
+        /// target goal.</param>
+        /// <param name="actualstring">Actual Value of the goal.</param>
+        /// <param name="customrollupfieldmoneyBase">Indicates a placeholder
+        /// rollup field for a money value in base currency to track a third
+        /// category of results other than actuals and in-progress
+        /// results.</param>
+        /// <param name="stretchtargetinteger">Select the stretch target
+        /// (integer) of the goal to define a higher or difficult level of goal
+        /// than the usual ones.</param>
+        /// <param name="actualmoneyBase">Shows the actual value (money type)
+        /// in base currency to track goal results against the target.</param>
+        /// <param name="targetmoney">Select a goal target (money) to track a
+        /// monetary amount such as revenue from a product.</param>
+        /// <param name="computedtargetasoftodaymoneyBase">Shows the expected
+        /// amount in base currency for actual value (money type) against the
+        /// target goal as of the current date.</param>
+        /// <param name="targetinteger">Select a goal target of the integer
+        /// type to use for tracking anything countable in whole numbers, such
+        /// as units sold.</param>
+        /// <param name="actualmoney">Shows the actual value (Money type)
+        /// achieved towards the target as of the last rolled-up date. This
+        /// field appears when the metric type of the goal is Amount and the
+        /// amount data type is Money.</param>
+        /// <param name="inprogressstring">In-progress value of the
+        /// goal.</param>
+        /// <param name="goalstartdate">Enter the date and time when the period
+        /// for tracking the goal begins.</param>
+        /// <param name="inprogressmoneyBase">Shows the in-progress value
+        /// (money) in base currency to track goal results against the
+        /// target.</param>
+        /// <param name="targetstring">Target value of the goal.</param>
+        /// <param name="fiscalperiod">Select the fiscal period for the
+        /// goal.</param>
+        /// <param name="statuscode">Select the goal's status.</param>
+        /// <param name="statecode">Shows whether the goal is open, completed,
+        /// or canceled. Completed and canceled goals are read-only and can't
+        /// be edited.</param>
+        /// <param name="customrollupfieldmoney">Indicates a placeholder rollup
+        /// field for a money value to track a third category of results other
+        /// than actuals and in-progress results.</param>
+        /// <param name="goalid">Unique identifier of the goal.</param>
+        /// <param name="_rollupquerycustommoneyidValue">Choose the query that
+        /// will be used to calculate data for the custom rollup field
+        /// (money).</param>
+        /// <param name="_owninguserValue">Unique identifier for the user who
+        /// owns the record.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="_rollupqueryinprogressdecimalidValue">Choose the query
+        /// that will be used to calculate data for the in-progress rollup
+        /// field (decimal).</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="stretchtargetmoney">Select stretch target (money) of
+        /// the goal to define a higher or difficult level of goal than the
+        /// usual ones.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="_goalwitherroridValue">Unique identifier of the goal
+        /// that caused an error in the rollup of the goal hierarchy.</param>
+        /// <param name="actualdecimal">Shows the actual value (Decimal type)
+        /// achieved towards the target as of the last rolled-up date. This
+        /// field appears when the metric type of the goal is Amount and the
+        /// amount data type is Decimal.</param>
+        /// <param name="isfiscalperiodgoal">Select whether the goal period is
+        /// a fiscal period or custom period.</param>
+        /// <param name="customrollupfieldstring">Placeholder rollup field for
+        /// the goal.</param>
+        /// <param name="_rollupqueryinprogressmoneyidValue">Choose the query
+        /// that will be used to calculate data for the in-progress rollup
+        /// field (money).</param>
+        /// <param name="_rollupquerycustomdecimalidValue">Choose the query
+        /// that will be used to calculate data for the custom rollup field
+        /// (decimal).</param>
+        /// <param name="_metricidValue">Choose the metric for the goal. This
+        /// metric determines how the goal is tracked.</param>
+        /// <param name="actualinteger">Shows the actual value (integer)
+        /// achieved towards the target as of the last rolled-up date. This
+        /// field appears when the metric type of the goal is Amount or Count
+        /// and the amount data type is Integer.</param>
+        /// <param name="computedtargetasoftodaydecimal">Shows the expected
+        /// amount for actual value (decimal type) against the target
+        /// goal.</param>
+        /// <param name="customrollupfielddecimal">Indicates a placeholder
+        /// rollup field for a decimal value to track a third category of
+        /// results other than actuals and in-progress results.</param>
+        /// <param name="fiscalyear">Select the fiscal year for the goal that's
+        /// being tracked.</param>
+        /// <param name="stretchtargetmoneyBase">Shows the stretch target
+        /// (money) in base currency to indicate a higher or difficult level of
+        /// goal than the usual ones.</param>
+        /// <param name="stretchtargetdecimal">Select a stretch target
+        /// (decimal) of the goal to define a higher or difficult level of goal
+        /// than the usual ones.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="inprogressmoney">Shows the in-progress value (money)
+        /// against the target. This value could contribute to a goal, but is
+        /// not counted yet as actual.</param>
+        /// <param name="depth">Depth of the goal in the tree.</param>
+        /// <param name="rolluperrorcode">Error code associated with
+        /// rollup.</param>
+        /// <param name="_parentgoalidValue">Choose a parent goal if the
+        /// current goal is a child goal. This sets up a parent-child
+        /// relationship for reporting and analytics.</param>
+        /// <param name="customrollupfieldinteger">Indicates a placeholder
+        /// rollup field for an integer value to track a third category of
+        /// results other than actuals and in-progress results.</param>
+        public MicrosoftDynamicsCRMgoal(decimal? computedtargetasoftodaypercentageachieved = default(decimal?), string stretchtargetstring = default(string), int? amountdatatype = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _rollupqueryinprogressintegeridValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), int? inprogressinteger = default(int?), bool? rolluponlyfromchildgoals = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastrolledupdate = default(System.DateTimeOffset?), decimal? targetmoneyBase = default(decimal?), System.Guid? _rollupqueryactualintegeridValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), bool? isoverridden = default(bool?), string title = default(string), System.DateTimeOffset? goalenddate = default(System.DateTimeOffset?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _rollupqueryactualdecimalidValue = default(System.Guid?), System.Guid? _goalowneridValue = default(System.Guid?), decimal? inprogressdecimal = default(decimal?), bool? consideronlygoalownersrecords = default(bool?), System.Guid? _rollupquerycustomintegeridValue = default(System.Guid?), System.Guid? _rollupqueryactualmoneyidValue = default(System.Guid?), System.Guid? entityimageid = default(System.Guid?), decimal? targetdecimal = default(decimal?), decimal? computedtargetasoftodaymoney = default(decimal?), bool? isoverride = default(bool?), bool? isamount = default(bool?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? computedtargetasoftodayinteger = default(int?), byte[] entityimage = default(byte[]), System.Guid? treeid = default(System.Guid?), string versionnumber = default(string), long? entityimageTimestamp = default(long?), System.Guid? _owneridValue = default(System.Guid?), decimal? percentage = default(decimal?), string actualstring = default(string), decimal? customrollupfieldmoneyBase = default(decimal?), int? stretchtargetinteger = default(int?), decimal? actualmoneyBase = default(decimal?), decimal? targetmoney = default(decimal?), decimal? computedtargetasoftodaymoneyBase = default(decimal?), string entityimageUrl = default(string), int? targetinteger = default(int?), decimal? actualmoney = default(decimal?), string inprogressstring = default(string), System.DateTimeOffset? goalstartdate = default(System.DateTimeOffset?), decimal? inprogressmoneyBase = default(decimal?), string targetstring = default(string), int? fiscalperiod = default(int?), int? statuscode = default(int?), int? statecode = default(int?), decimal? customrollupfieldmoney = default(decimal?), System.Guid? goalid = default(System.Guid?), System.Guid? _rollupquerycustommoneyidValue = default(System.Guid?), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _rollupqueryinprogressdecimalidValue = default(System.Guid?), decimal? exchangerate = default(decimal?), decimal? stretchtargetmoney = default(decimal?), int? importsequencenumber = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _goalwitherroridValue = default(System.Guid?), decimal? actualdecimal = default(decimal?), bool? isfiscalperiodgoal = default(bool?), string customrollupfieldstring = default(string), System.Guid? _rollupqueryinprogressmoneyidValue = default(System.Guid?), System.Guid? _rollupquerycustomdecimalidValue = default(System.Guid?), System.Guid? _metricidValue = default(System.Guid?), int? actualinteger = default(int?), decimal? computedtargetasoftodaydecimal = default(decimal?), decimal? customrollupfielddecimal = default(decimal?), int? fiscalyear = default(int?), decimal? stretchtargetmoneyBase = default(decimal?), decimal? stretchtargetdecimal = default(decimal?), int? timezoneruleversionnumber = default(int?), decimal? inprogressmoney = default(decimal?), int? depth = default(int?), int? rolluperrorcode = default(int?), System.Guid? _parentgoalidValue = default(System.Guid?), int? customrollupfieldinteger = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryactualdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustommoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupquerycustomdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressintegerid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressmoneyid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMgoalrollupquery rollupqueryinprogressdecimalid = default(MicrosoftDynamicsCRMgoalrollupquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser goalowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMgoal parentgoalid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalParentGoal = default(IList<MicrosoftDynamicsCRMgoal>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMmetric metricid = default(MicrosoftDynamicsCRMmetric), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMgoal goalwitherrorid = default(MicrosoftDynamicsCRMgoal), IList<MicrosoftDynamicsCRMgoal> goalRollupErrorGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMconnection> goalConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> goalSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMannotation> goalAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMconnection> goalConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> goalAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> goalDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMteam goalowneridTeam = default(MicrosoftDynamicsCRMteam))
         {
             Computedtargetasoftodaypercentageachieved = computedtargetasoftodaypercentageachieved;
             Stretchtargetstring = stretchtargetstring;
@@ -154,179 +356,243 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the expected value for percentage achieved
+        /// against the target goal as of the current date.
         /// </summary>
         [JsonProperty(PropertyName = "computedtargetasoftodaypercentageachieved")]
-        public object Computedtargetasoftodaypercentageachieved { get; set; }
+        public decimal? Computedtargetasoftodaypercentageachieved { get; set; }
 
         /// <summary>
+        /// Gets or sets stretch target value for all data types.
         /// </summary>
         [JsonProperty(PropertyName = "stretchtargetstring")]
         public string Stretchtargetstring { get; set; }
 
         /// <summary>
+        /// Gets or sets data type of the amount.
         /// </summary>
         [JsonProperty(PropertyName = "amountdatatype")]
         public int? Amountdatatype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate data
+        /// for the in-progress rollup field (integer).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupqueryinprogressintegerid_value")]
-        public string _rollupqueryinprogressintegeridValue { get; set; }
+        public System.Guid? _rollupqueryinprogressintegeridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the in-progress value (integer) against the
+        /// target. This value could contribute to a goal, but is not counted
+        /// yet as actual.
         /// </summary>
         [JsonProperty(PropertyName = "inprogressinteger")]
         public int? Inprogressinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the data should be rolled up only from
+        /// the child goals.
         /// </summary>
         [JsonProperty(PropertyName = "rolluponlyfromchildgoals")]
         public bool? Rolluponlyfromchildgoals { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the goal was last rolled
+        /// up. The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "lastrolledupdate")]
         public System.DateTimeOffset? Lastrolledupdate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the goal target of the money type in base
+        /// currency.
         /// </summary>
         [JsonProperty(PropertyName = "targetmoney_base")]
-        public object TargetmoneyBase { get; set; }
+        public decimal? TargetmoneyBase { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate the
+        /// actual data for the goal (integer).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupqueryactualintegerid_value")]
-        public string _rollupqueryactualintegeridValue { get; set; }
+        public System.Guid? _rollupqueryactualintegeridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the system rollup fields are updated.
+        /// If set to Yes, the next system rollup will not update the values of
+        /// the rollup fields with the system calculated values.
         /// </summary>
         [JsonProperty(PropertyName = "isoverridden")]
         public bool? Isoverridden { get; set; }
 
         /// <summary>
+        /// Gets or sets type a title or name that describes the goal.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date when the goal ends.
         /// </summary>
         [JsonProperty(PropertyName = "goalenddate")]
         public System.DateTimeOffset? Goalenddate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the goal.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate the
+        /// actual data for the goal (decimal).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupqueryactualdecimalid_value")]
-        public string _rollupqueryactualdecimalidValue { get; set; }
+        public System.Guid? _rollupqueryactualdecimalidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the user or team responsible for meeting the
+        /// goal.
         /// </summary>
         [JsonProperty(PropertyName = "_goalownerid_value")]
-        public string _goalowneridValue { get; set; }
+        public System.Guid? _goalowneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the in-progress value (decimal) against the
+        /// target. This value could contribute to a goal, but is not counted
+        /// yet as actual.
         /// </summary>
         [JsonProperty(PropertyName = "inprogressdecimal")]
-        public object Inprogressdecimal { get; set; }
+        public decimal? Inprogressdecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether only the goal owner's records, or all
+        /// records, should be rolled up for goal results.
         /// </summary>
         [JsonProperty(PropertyName = "consideronlygoalownersrecords")]
         public bool? Consideronlygoalownersrecords { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate data
+        /// for the custom rollup field (integer).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupquerycustomintegerid_value")]
-        public string _rollupquerycustomintegeridValue { get; set; }
+        public System.Guid? _rollupquerycustomintegeridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate the
+        /// actual data for the goal (money).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupqueryactualmoneyid_value")]
-        public string _rollupqueryactualmoneyidValue { get; set; }
+        public System.Guid? _rollupqueryactualmoneyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
+        public System.Guid? Entityimageid { get; set; }
 
         /// <summary>
+        /// Gets or sets select a goal target of the decimal type to use for
+        /// tracking data that include partial numbers, such as pounds sold of
+        /// a product sold by weight.
         /// </summary>
         [JsonProperty(PropertyName = "targetdecimal")]
-        public object Targetdecimal { get; set; }
+        public decimal? Targetdecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the expected amount for actual value (money
+        /// type) against the target goal as of the current date.
         /// </summary>
         [JsonProperty(PropertyName = "computedtargetasoftodaymoney")]
-        public object Computedtargetasoftodaymoney { get; set; }
+        public decimal? Computedtargetasoftodaymoney { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the values of system rollup fields
+        /// can be updated.
         /// </summary>
         [JsonProperty(PropertyName = "isoverride")]
         public bool? Isoverride { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the metric type is Count or Amount.
         /// </summary>
         [JsonProperty(PropertyName = "isamount")]
         public bool? Isamount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the expected amount for actual value (integer
+        /// type) against the target goal as of the current date.
         /// </summary>
         [JsonProperty(PropertyName = "computedtargetasoftodayinteger")]
         public int? Computedtargetasoftodayinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets the default image for the entity.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
-        public object Entityimage { get; set; }
+        public byte[] Entityimage { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the goal tree.
         /// </summary>
         [JsonProperty(PropertyName = "treeid")]
-        public string Treeid { get; set; }
+        public System.Guid? Treeid { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the goal.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -334,44 +600,60 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the percentage achieved against the target goal.
         /// </summary>
         [JsonProperty(PropertyName = "percentage")]
-        public object Percentage { get; set; }
+        public decimal? Percentage { get; set; }
 
         /// <summary>
+        /// Gets or sets actual Value of the goal.
         /// </summary>
         [JsonProperty(PropertyName = "actualstring")]
         public string Actualstring { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates a placeholder rollup field for a money value
+        /// in base currency to track a third category of results other than
+        /// actuals and in-progress results.
         /// </summary>
         [JsonProperty(PropertyName = "customrollupfieldmoney_base")]
-        public object CustomrollupfieldmoneyBase { get; set; }
+        public decimal? CustomrollupfieldmoneyBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select the stretch target (integer) of the goal to
+        /// define a higher or difficult level of goal than the usual ones.
         /// </summary>
         [JsonProperty(PropertyName = "stretchtargetinteger")]
         public int? Stretchtargetinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the actual value (money type) in base currency
+        /// to track goal results against the target.
         /// </summary>
         [JsonProperty(PropertyName = "actualmoney_base")]
-        public object ActualmoneyBase { get; set; }
+        public decimal? ActualmoneyBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select a goal target (money) to track a monetary
+        /// amount such as revenue from a product.
         /// </summary>
         [JsonProperty(PropertyName = "targetmoney")]
-        public object Targetmoney { get; set; }
+        public decimal? Targetmoney { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the expected amount in base currency for actual
+        /// value (money type) against the target goal as of the current date.
         /// </summary>
         [JsonProperty(PropertyName = "computedtargetasoftodaymoney_base")]
-        public object ComputedtargetasoftodaymoneyBase { get; set; }
+        public decimal? ComputedtargetasoftodaymoneyBase { get; set; }
 
         /// <summary>
         /// </summary>
@@ -379,196 +661,278 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets select a goal target of the integer type to use for
+        /// tracking anything countable in whole numbers, such as units sold.
         /// </summary>
         [JsonProperty(PropertyName = "targetinteger")]
         public int? Targetinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the actual value (Money type) achieved towards
+        /// the target as of the last rolled-up date. This field appears when
+        /// the metric type of the goal is Amount and the amount data type is
+        /// Money.
         /// </summary>
         [JsonProperty(PropertyName = "actualmoney")]
-        public object Actualmoney { get; set; }
+        public decimal? Actualmoney { get; set; }
 
         /// <summary>
+        /// Gets or sets in-progress value of the goal.
         /// </summary>
         [JsonProperty(PropertyName = "inprogressstring")]
         public string Inprogressstring { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date and time when the period for tracking
+        /// the goal begins.
         /// </summary>
         [JsonProperty(PropertyName = "goalstartdate")]
         public System.DateTimeOffset? Goalstartdate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the in-progress value (money) in base currency
+        /// to track goal results against the target.
         /// </summary>
         [JsonProperty(PropertyName = "inprogressmoney_base")]
-        public object InprogressmoneyBase { get; set; }
+        public decimal? InprogressmoneyBase { get; set; }
 
         /// <summary>
+        /// Gets or sets target value of the goal.
         /// </summary>
         [JsonProperty(PropertyName = "targetstring")]
         public string Targetstring { get; set; }
 
         /// <summary>
+        /// Gets or sets select the fiscal period for the goal.
         /// </summary>
         [JsonProperty(PropertyName = "fiscalperiod")]
         public int? Fiscalperiod { get; set; }
 
         /// <summary>
+        /// Gets or sets select the goal's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the goal is open, completed, or
+        /// canceled. Completed and canceled goals are read-only and can't be
+        /// edited.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates a placeholder rollup field for a money value
+        /// to track a third category of results other than actuals and
+        /// in-progress results.
         /// </summary>
         [JsonProperty(PropertyName = "customrollupfieldmoney")]
-        public object Customrollupfieldmoney { get; set; }
+        public decimal? Customrollupfieldmoney { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the goal.
         /// </summary>
         [JsonProperty(PropertyName = "goalid")]
-        public string Goalid { get; set; }
+        public System.Guid? Goalid { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate data
+        /// for the custom rollup field (money).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupquerycustommoneyid_value")]
-        public string _rollupquerycustommoneyidValue { get; set; }
+        public System.Guid? _rollupquerycustommoneyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the user who owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate data
+        /// for the in-progress rollup field (decimal).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupqueryinprogressdecimalid_value")]
-        public string _rollupqueryinprogressdecimalidValue { get; set; }
+        public System.Guid? _rollupqueryinprogressdecimalidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets select stretch target (money) of the goal to define a
+        /// higher or difficult level of goal than the usual ones.
         /// </summary>
         [JsonProperty(PropertyName = "stretchtargetmoney")]
-        public object Stretchtargetmoney { get; set; }
+        public decimal? Stretchtargetmoney { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the goal that caused an error in
+        /// the rollup of the goal hierarchy.
         /// </summary>
         [JsonProperty(PropertyName = "_goalwitherrorid_value")]
-        public string _goalwitherroridValue { get; set; }
+        public System.Guid? _goalwitherroridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the actual value (Decimal type) achieved towards
+        /// the target as of the last rolled-up date. This field appears when
+        /// the metric type of the goal is Amount and the amount data type is
+        /// Decimal.
         /// </summary>
         [JsonProperty(PropertyName = "actualdecimal")]
-        public object Actualdecimal { get; set; }
+        public decimal? Actualdecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the goal period is a fiscal period or
+        /// custom period.
         /// </summary>
         [JsonProperty(PropertyName = "isfiscalperiodgoal")]
         public bool? Isfiscalperiodgoal { get; set; }
 
         /// <summary>
+        /// Gets or sets placeholder rollup field for the goal.
         /// </summary>
         [JsonProperty(PropertyName = "customrollupfieldstring")]
         public string Customrollupfieldstring { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate data
+        /// for the in-progress rollup field (money).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupqueryinprogressmoneyid_value")]
-        public string _rollupqueryinprogressmoneyidValue { get; set; }
+        public System.Guid? _rollupqueryinprogressmoneyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the query that will be used to calculate data
+        /// for the custom rollup field (decimal).
         /// </summary>
         [JsonProperty(PropertyName = "_rollupquerycustomdecimalid_value")]
-        public string _rollupquerycustomdecimalidValue { get; set; }
+        public System.Guid? _rollupquerycustomdecimalidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the metric for the goal. This metric determines
+        /// how the goal is tracked.
         /// </summary>
         [JsonProperty(PropertyName = "_metricid_value")]
-        public string _metricidValue { get; set; }
+        public System.Guid? _metricidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the actual value (integer) achieved towards the
+        /// target as of the last rolled-up date. This field appears when the
+        /// metric type of the goal is Amount or Count and the amount data type
+        /// is Integer.
         /// </summary>
         [JsonProperty(PropertyName = "actualinteger")]
         public int? Actualinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the expected amount for actual value (decimal
+        /// type) against the target goal.
         /// </summary>
         [JsonProperty(PropertyName = "computedtargetasoftodaydecimal")]
-        public object Computedtargetasoftodaydecimal { get; set; }
+        public decimal? Computedtargetasoftodaydecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates a placeholder rollup field for a decimal
+        /// value to track a third category of results other than actuals and
+        /// in-progress results.
         /// </summary>
         [JsonProperty(PropertyName = "customrollupfielddecimal")]
-        public object Customrollupfielddecimal { get; set; }
+        public decimal? Customrollupfielddecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets select the fiscal year for the goal that's being
+        /// tracked.
         /// </summary>
         [JsonProperty(PropertyName = "fiscalyear")]
         public int? Fiscalyear { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the stretch target (money) in base currency to
+        /// indicate a higher or difficult level of goal than the usual ones.
         /// </summary>
         [JsonProperty(PropertyName = "stretchtargetmoney_base")]
-        public object StretchtargetmoneyBase { get; set; }
+        public decimal? StretchtargetmoneyBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select a stretch target (decimal) of the goal to
+        /// define a higher or difficult level of goal than the usual ones.
         /// </summary>
         [JsonProperty(PropertyName = "stretchtargetdecimal")]
-        public object Stretchtargetdecimal { get; set; }
+        public decimal? Stretchtargetdecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the in-progress value (money) against the
+        /// target. This value could contribute to a goal, but is not counted
+        /// yet as actual.
         /// </summary>
         [JsonProperty(PropertyName = "inprogressmoney")]
-        public object Inprogressmoney { get; set; }
+        public decimal? Inprogressmoney { get; set; }
 
         /// <summary>
+        /// Gets or sets depth of the goal in the tree.
         /// </summary>
         [JsonProperty(PropertyName = "depth")]
         public int? Depth { get; set; }
 
         /// <summary>
+        /// Gets or sets error code associated with rollup.
         /// </summary>
         [JsonProperty(PropertyName = "rolluperrorcode")]
         public int? Rolluperrorcode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose a parent goal if the current goal is a child
+        /// goal. This sets up a parent-child relationship for reporting and
+        /// analytics.
         /// </summary>
         [JsonProperty(PropertyName = "_parentgoalid_value")]
-        public string _parentgoalidValue { get; set; }
+        public System.Guid? _parentgoalidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates a placeholder rollup field for an integer
+        /// value to track a third category of results other than actuals and
+        /// in-progress results.
         /// </summary>
         [JsonProperty(PropertyName = "customrollupfieldinteger")]
         public int? Customrollupfieldinteger { get; set; }
@@ -581,7 +945,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

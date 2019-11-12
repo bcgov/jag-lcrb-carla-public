@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// knowledgearticleviews
+    /// Microsoft.Dynamics.CRM.knowledgearticleviews
     /// </summary>
     public partial class MicrosoftDynamicsCRMknowledgearticleviews
     {
@@ -29,7 +29,52 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMknowledgearticleviews class.
         /// </summary>
-        public MicrosoftDynamicsCRMknowledgearticleviews(string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? location = default(int?), int? statecode = default(int?), object exchangerate = default(object), int? knowledgearticleview = default(int?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? viewdate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _knowledgearticleidValue = default(string), string owninguser = default(string), string knowledgearticleviewsid = default(string), string owningbusinessunit = default(string), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleViewsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="statuscode">Reason for the status of the Knowledge
+        /// Article Views</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="location">Shows where the knowledge was used</param>
+        /// <param name="statecode">Status of the Knowledge Article
+        /// Views</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="knowledgearticleview">Number of Knowledge Article
+        /// Views visited per day</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the knowledge article views.</param>
+        /// <param name="viewdate">Information about the Day</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="_knowledgearticleidValue">Choose the Knowledge
+        /// Article.</param>
+        /// <param name="owninguser">Unique identifier of the user who owns the
+        /// knowledge article views.</param>
+        /// <param name="knowledgearticleviewsid">Unique identifier of the
+        /// Knowledge Article Views</param>
+        /// <param name="owningbusinessunit">Unique identifier of the business
+        /// unit that owns the knowledge article views.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        public MicrosoftDynamicsCRMknowledgearticleviews(System.Guid? _createdbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? location = default(int?), int? statecode = default(int?), decimal? exchangerate = default(decimal?), int? knowledgearticleview = default(int?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.DateTimeOffset? viewdate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? _knowledgearticleidValue = default(System.Guid?), System.Guid? owninguser = default(System.Guid?), System.Guid? knowledgearticleviewsid = default(System.Guid?), System.Guid? owningbusinessunit = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleViewsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -70,86 +115,113 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the Knowledge Article Views
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows where the knowledge was used
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public int? Location { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the Knowledge Article Views
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets number of Knowledge Article Views visited per day
         /// </summary>
         [JsonProperty(PropertyName = "knowledgearticleview")]
         public int? Knowledgearticleview { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// knowledge article views.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets information about the Day
         /// </summary>
         [JsonProperty(PropertyName = "viewdate")]
         public System.DateTimeOffset? Viewdate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
@@ -157,32 +229,39 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the Knowledge Article.
         /// </summary>
         [JsonProperty(PropertyName = "_knowledgearticleid_value")]
-        public string _knowledgearticleidValue { get; set; }
+        public System.Guid? _knowledgearticleidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the knowledge
+        /// article views.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
+        public System.Guid? Owninguser { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Knowledge Article Views
         /// </summary>
         [JsonProperty(PropertyName = "knowledgearticleviewsid")]
-        public string Knowledgearticleviewsid { get; set; }
+        public System.Guid? Knowledgearticleviewsid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// knowledge article views.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
+        public System.Guid? Owningbusinessunit { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// adoxio_fiainvestigationlog
+    /// Microsoft.Dynamics.CRM.adoxio_fiainvestigationlog
     /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioFiainvestigationlog
     {
@@ -29,7 +29,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioFiainvestigationlog class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioFiainvestigationlog(string adoxioDetails = default(string), string adoxioTitle = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _owningbusinessunitValue = default(string), string _adoxioInvestigationidValue = default(string), string _createdonbehalfbyValue = default(string), string adoxioFiainvestigationlogid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? adoxioActivitydatetime = default(System.DateTimeOffset?), int? statuscode = default(int?), long? versionnumber = default(long?), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string _modifiedonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), object ownerid = default(object), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFiainvestigationlogSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFiainvestigationlogDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFiainvestigationlogDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFiainvestigationlogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFiainvestigationlogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioInvestigation))
+        /// <param name="adoxioTitle">The name of the custom entity.</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        /// <param name="_owninguserValue">Unique identifier for the user that
+        /// owns the record.</param>
+        /// <param name="_owneridValue">Owner Id</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record</param>
+        /// <param name="_adoxioInvestigationidValue">Unique identifier for
+        /// Investigation associated with FIA Investigation Log.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="adoxioFiainvestigationlogid">Unique identifier for
+        /// entity instances</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="statecode">Status of the FIA Investigation Log</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="statuscode">Reason for the status of the FIA
+        /// Investigation Log</param>
+        /// <param name="versionnumber">Version Number</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="_owningteamValue">Unique identifier for the team that
+        /// owns the record.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        public MicrosoftDynamicsCRMadoxioFiainvestigationlog(string adoxioDetails = default(string), string adoxioTitle = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), int? importsequencenumber = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _adoxioInvestigationidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? adoxioFiainvestigationlogid = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _createdbyValue = default(System.Guid?), int? statecode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? adoxioActivitydatetime = default(System.DateTimeOffset?), int? statuscode = default(int?), string versionnumber = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFiainvestigationlogSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFiainvestigationlogDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFiainvestigationlogDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFiainvestigationlogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFiainvestigationlogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioInvestigation))
         {
             AdoxioDetails = adoxioDetails;
             AdoxioTitle = adoxioTitle;
@@ -81,76 +117,96 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioDetails { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the custom entity.
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_title")]
         public string AdoxioTitle { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for Investigation associated with
+        /// FIA Investigation Log.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_investigationid_value")]
-        public string _adoxioInvestigationidValue { get; set; }
+        public System.Guid? _adoxioInvestigationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_fiainvestigationlogid")]
-        public string AdoxioFiainvestigationlogid { get; set; }
+        public System.Guid? AdoxioFiainvestigationlogid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the FIA Investigation Log
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
@@ -161,29 +217,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? AdoxioActivitydatetime { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the FIA Investigation Log
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets version Number
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -218,7 +280,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>
