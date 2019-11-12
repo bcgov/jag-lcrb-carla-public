@@ -633,9 +633,12 @@ namespace odata2openapi
                                         Type = "array",
                                         Items = new OpenApiSchema()
                                         {
-                                            Type = "string"
+                                            Type = "string"                                            
                                         }
+                                        
                                     };
+                                    parameter.Extensions.Add ("collectionformat", new OpenApiString ( "csv" ));
+                                    parameter.Style = ParameterStyle.Simple;
                                     //parameter.CollectionFormat = SwaggerParameterCollectionFormat.Csv;
 
                                 }
