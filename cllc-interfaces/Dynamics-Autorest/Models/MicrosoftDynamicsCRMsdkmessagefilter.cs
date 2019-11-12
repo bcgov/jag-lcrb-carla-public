@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// sdkmessagefilter
+    /// Microsoft.Dynamics.CRM.sdkmessagefilter
     /// </summary>
     public partial class MicrosoftDynamicsCRMsdkmessagefilter
     {
@@ -29,7 +29,42 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsdkmessagefilter class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessagefilter(string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? availability = default(int?), string _modifiedbyValue = default(string), string _sdkmessageidValue = default(string), int? customizationlevel = default(int?), string _modifiedonbehalfbyValue = default(string), bool? isvisible = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? iscustomprocessingstepallowed = default(bool?), string primaryobjecttypecode = default(string), long? versionnumber = default(long?), bool? workflowsdkstepenabled = default(bool?), string secondaryobjecttypecode = default(string), string sdkmessagefilteridunique = default(string), string sdkmessagefilterid = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessagefilteridSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization with which the SDK message filter is
+        /// associated.</param>
+        /// <param name="createdon">Date and time when the SDK message filter
+        /// was created.</param>
+        /// <param name="availability">Identifies where a method will be
+        /// exposed. 0 - Server, 1 - Client, 2 - both.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the SDK message filter.</param>
+        /// <param name="_sdkmessageidValue">Unique identifier of the related
+        /// SDK message.</param>
+        /// <param name="customizationlevel">Customization level of the SDK
+        /// message filter.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the sdkmessagefilter.</param>
+        /// <param name="isvisible">Indicates whether the filter should be
+        /// visible.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the sdkmessagefilter.</param>
+        /// <param name="modifiedon">Date and time when the SDK message filter
+        /// was last modified.</param>
+        /// <param name="iscustomprocessingstepallowed">Indicates whether a
+        /// custom SDK message processing step is allowed.</param>
+        /// <param name="primaryobjecttypecode">Type of entity with which the
+        /// SDK message filter is primarily associated.</param>
+        /// <param name="workflowsdkstepenabled">Whether or not the SDK message
+        /// can be called from a workflow.</param>
+        /// <param name="secondaryobjecttypecode">Type of entity with which the
+        /// SDK message filter is secondarily associated.</param>
+        /// <param name="sdkmessagefilteridunique">Unique identifier of the SDK
+        /// message filter.</param>
+        /// <param name="sdkmessagefilterid">Unique identifier of the SDK
+        /// message filter entity.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the SDK message filter.</param>
+        public MicrosoftDynamicsCRMsdkmessagefilter(System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? availability = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _sdkmessageidValue = default(System.Guid?), int? customizationlevel = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), bool? isvisible = default(bool?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? iscustomprocessingstepallowed = default(bool?), string primaryobjecttypecode = default(string), string versionnumber = default(string), bool? workflowsdkstepenabled = default(bool?), string secondaryobjecttypecode = default(string), System.Guid? sdkmessagefilteridunique = default(System.Guid?), System.Guid? sdkmessagefilterid = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessagefilteridSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._organizationidValue = _organizationidValue;
             Createdon = createdon;
@@ -65,61 +100,81 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// SDK message filter is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SDK message filter was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets identifies where a method will be exposed. 0 - Server,
+        /// 1 - Client, 2 - both.
         /// </summary>
         [JsonProperty(PropertyName = "availability")]
         public int? Availability { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// SDK message filter.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the related SDK message.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessageid_value")]
-        public string _sdkmessageidValue { get; set; }
+        public System.Guid? _sdkmessageidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets customization level of the SDK message filter.
         /// </summary>
         [JsonProperty(PropertyName = "customizationlevel")]
         public int? Customizationlevel { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the sdkmessagefilter.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the filter should be visible.
         /// </summary>
         [JsonProperty(PropertyName = "isvisible")]
         public bool? Isvisible { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// sdkmessagefilter.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SDK message filter was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether a custom SDK message processing step
+        /// is allowed.
         /// </summary>
         [JsonProperty(PropertyName = "iscustomprocessingstepallowed")]
         public bool? Iscustomprocessingstepallowed { get; set; }
 
         /// <summary>
+        /// Gets or sets type of entity with which the SDK message filter is
+        /// primarily associated.
         /// </summary>
         [JsonProperty(PropertyName = "primaryobjecttypecode")]
         public string Primaryobjecttypecode { get; set; }
@@ -127,32 +182,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets whether or not the SDK message can be called from a
+        /// workflow.
         /// </summary>
         [JsonProperty(PropertyName = "workflowsdkstepenabled")]
         public bool? Workflowsdkstepenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets type of entity with which the SDK message filter is
+        /// secondarily associated.
         /// </summary>
         [JsonProperty(PropertyName = "secondaryobjecttypecode")]
         public string Secondaryobjecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SDK message filter.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessagefilteridunique")]
-        public string Sdkmessagefilteridunique { get; set; }
+        public System.Guid? Sdkmessagefilteridunique { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SDK message filter entity.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessagefilterid")]
-        public string Sdkmessagefilterid { get; set; }
+        public System.Guid? Sdkmessagefilterid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the SDK
+        /// message filter.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

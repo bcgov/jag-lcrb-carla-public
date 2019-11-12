@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// EntityKeyMetadata
+    /// Microsoft.Dynamics.CRM.EntityKeyMetadata
     /// </summary>
     public partial class MicrosoftDynamicsCRMEntityKeyMetadata
     {
@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMEntityKeyMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMEntityKeyMetadata(object displayName = default(object), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), object isCustomizable = default(object), bool? isManaged = default(bool?), string introducedVersion = default(string), object entityKeyIndexStatus = default(object), string asyncJob = default(string))
+        public MicrosoftDynamicsCRMEntityKeyMetadata(string displayName = default(string), string logicalName = default(string), string schemaName = default(string), string entityLogicalName = default(string), IList<string> keyAttributes = default(IList<string>), string isCustomizable = default(string), bool? isManaged = default(bool?), string introducedVersion = default(string), string entityKeyIndexStatus = default(string), System.Guid? asyncJob = default(System.Guid?))
         {
             DisplayName = displayName;
             LogicalName = logicalName;
@@ -52,7 +52,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
-        public object DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public object IsCustomizable { get; set; }
+        public string IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -92,12 +92,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "EntityKeyIndexStatus")]
-        public object EntityKeyIndexStatus { get; set; }
+        public string EntityKeyIndexStatus { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "AsyncJob")]
-        public string AsyncJob { get; set; }
+        public System.Guid? AsyncJob { get; set; }
 
     }
 }

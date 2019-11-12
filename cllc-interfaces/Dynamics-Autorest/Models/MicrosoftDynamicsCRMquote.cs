@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// quote
+    /// Microsoft.Dynamics.CRM.quote
     /// </summary>
     public partial class MicrosoftDynamicsCRMquote
     {
@@ -27,7 +29,220 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMquote class.
         /// </summary>
-        public MicrosoftDynamicsCRMquote(int? statuscode = default(int?), string billtoStateorprovince = default(string), string processid = default(string), string stageid = default(string), int? onholdtime = default(int?), string quotenumber = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string billtoComposite = default(string), string billtoLine1 = default(string), string _modifiedonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string billtoFax = default(string), object totaltaxBase = default(object), string shiptoAddressid = default(string), string _owninguserValue = default(string), string shiptoComposite = default(string), string shiptoCountry = default(string), object totallineitemamount = default(object), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), string _customeridValue = default(string), string billtoContactname = default(string), int? utcconversiontimezonecode = default(int?), string _pricelevelidValue = default(string), string shiptoName = default(string), object totalamount = default(object), string _contactidValue = default(string), object freightamount = default(object), string billtoTelephone = default(string), object totallineitemamountBase = default(object), int? pricingerrorcode = default(int?), string description = default(string), object totaldiscountamount = default(object), string _accountidValue = default(string), string _opportunityidValue = default(string), string shiptoLine1 = default(string), string billtoAddressid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? effectiveto = default(System.DateTimeOffset?), string shiptoCity = default(string), string billtoName = default(string), System.DateTimeOffset? expireson = default(System.DateTimeOffset?), object totalamountlessfreight = default(object), bool? willcall = default(bool?), System.DateTimeOffset? closedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), object freightamountBase = default(object), object totaltax = default(object), string shiptoTelephone = default(string), string _slainvokedidValue = default(string), int? statecode = default(int?), string traversedpath = default(string), string billtoPostalcode = default(string), string billtoCity = default(string), string _owneridValue = default(string), string billtoLine2 = default(string), string quoteid = default(string), object totalamountlessfreightBase = default(object), object discountpercentage = default(object), int? shiptoFreighttermscode = default(int?), object discountamount = default(object), string shiptoLine3 = default(string), string billtoLine3 = default(string), System.DateTimeOffset? effectivefrom = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string shiptoContactname = default(string), string _createdbyValue = default(string), string _slaidValue = default(string), int? revisionnumber = default(int?), string _owningteamValue = default(string), object discountamountBase = default(object), string shiptoStateorprovince = default(string), string shiptoPostalcode = default(string), object totalamountBase = default(object), string _transactioncurrencyidValue = default(string), string _owningbusinessunitValue = default(string), long? versionnumber = default(long?), string _modifiedbyValue = default(string), object totallineitemdiscountamountBase = default(object), object totallineitemdiscountamount = default(object), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string shiptoLine2 = default(string), int? paymenttermscode = default(int?), string shiptoFax = default(string), object exchangerate = default(object), string name = default(string), object totaldiscountamountBase = default(object), string _campaignidValue = default(string), int? shippingmethodcode = default(int?), string billtoCountry = default(string), int? freighttermscode = default(int?), IList<MicrosoftDynamicsCRMcontact> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunitysalesprocess> quoteOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> quoteSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMquoteclose> quoteQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMconnection> quoteConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> quoteConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> quoteLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMtask> quoteTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsla slainvokedidQuoteSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsocialactivity> quoteSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsla slaQuoteSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMactivitypointer> quoteActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsalesorder> quoteOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMappointment> quoteAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), object ownerid = default(object), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMactivityparty> quoteActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> quoteFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMsyncerror> quoteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> quoteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMasyncoperation> quoteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> quoteRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceQuote = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMannotation> quoteAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMquotedetail> quoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMphonecall> quotePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMemail> quoteEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> quoteAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        /// <param name="statuscode">Select the quote's status.</param>
+        /// <param name="billtoStateorprovince">Type the state or province for
+        /// the billing address.</param>
+        /// <param name="processid">Shows the ID of the process.</param>
+        /// <param name="stageid">Shows the ID of the stage.</param>
+        /// <param name="onholdtime">Shows the duration in minutes for which
+        /// the quote was on hold.</param>
+        /// <param name="quotenumber">Shows the quote number for customer
+        /// reference and searching capabilities. The number cannot be
+        /// modified.</param>
+        /// <param name="lastonholdtime">Contains the date time stamp of the
+        /// last on hold time.</param>
+        /// <param name="billtoComposite">Shows the complete Bill To
+        /// address.</param>
+        /// <param name="billtoLine1">Type the first line of the customer's
+        /// billing address.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="billtoFax">Type the fax number for the customer's
+        /// billing address.</param>
+        /// <param name="totaltaxBase">Shows the Total Tax field converted to
+        /// the system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.</param>
+        /// <param name="shiptoAddressid">Unique identifier of the shipping
+        /// address.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the quote.</param>
+        /// <param name="shiptoComposite">Shows the complete Ship To
+        /// address.</param>
+        /// <param name="shiptoCountry">Type the country or region for the
+        /// customer's shipping address.</param>
+        /// <param name="totallineitemamount">Shows the sum of all existing and
+        /// write-in products included on the quote, based on the specified
+        /// price list and quantities.</param>
+        /// <param name="requestdeliveryby">Enter the delivery date requested
+        /// by the customer for all products in the quote.</param>
+        /// <param name="_customeridValue">Select the customer account or
+        /// contact to provide a quick link to additional customer details,
+        /// such as account information, activities, and opportunities.</param>
+        /// <param name="billtoContactname">Type the primary contact name at
+        /// the customer's billing address.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_pricelevelidValue">Choose the price list associated
+        /// with this record to make sure the products associated with the
+        /// campaign are offered at the correct prices.</param>
+        /// <param name="shiptoName">Type a name for the customer's shipping
+        /// address, such as "Headquarters" or "Field office", to identify the
+        /// address.</param>
+        /// <param name="totalamount">Shows the total amount due, calculated as
+        /// the sum of the products, discounts, freight, and taxes for the
+        /// quote.</param>
+        /// <param name="_contactidValue">Unique identifier of the contact
+        /// associated with the quote.</param>
+        /// <param name="freightamount">Type the cost of freight or shipping
+        /// for the products included in the quote for use in calculating the
+        /// Total Amount field.</param>
+        /// <param name="billtoTelephone">Type the phone number for the
+        /// customer's billing address.</param>
+        /// <param name="totallineitemamountBase">Shows the Detail Amount field
+        /// converted to the system's default base currency. The calculation
+        /// uses the exchange rate specified in the Currencies area.</param>
+        /// <param name="pricingerrorcode">Pricing error for the quote.</param>
+        /// <param name="description">Type additional information to describe
+        /// the quote, such as the products or services offered or details
+        /// about the customer's product preferences.</param>
+        /// <param name="totaldiscountamount">Shows the total discount amount,
+        /// based on the discount price and rate entered on the quote.</param>
+        /// <param name="_accountidValue">Unique identifier of the account with
+        /// which the quote is associated.</param>
+        /// <param name="_opportunityidValue">Choose the opportunity that the
+        /// quote is related to for reporting and analytics.</param>
+        /// <param name="shiptoLine1">Type the first line of the customer's
+        /// shipping address.</param>
+        /// <param name="billtoAddressid">Unique identifier of the billing
+        /// address.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="effectiveto">Enter the expiration date or last day the
+        /// quote pricing is effective for the customer.</param>
+        /// <param name="shiptoCity">Type the city for the customer's shipping
+        /// address.</param>
+        /// <param name="billtoName">Type a name for the customer's billing
+        /// address, such as "Headquarters" or "Field office", to identify the
+        /// address.</param>
+        /// <param name="expireson">Enter the date a decision or order is due
+        /// from the customer to indicate the expiration date of the
+        /// quote.</param>
+        /// <param name="totalamountlessfreight">Shows the total product amount
+        /// for the quote, minus any discounts. This value is added to freight
+        /// and tax amounts in the calculation for the total amount due for the
+        /// quote.</param>
+        /// <param name="willcall">Select whether the products included in the
+        /// quote should be shipped to the specified address or held until the
+        /// customer calls with further pick up or delivery
+        /// instructions.</param>
+        /// <param name="closedon">Enter the date when the quote was closed to
+        /// indicate the expiration, revision, or cancellation date.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="freightamountBase">Shows the Freight Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="totaltax">Shows the total of the Tax amounts specified
+        /// on all products included in the quote, included in the Total Amount
+        /// due calculation for the quote.</param>
+        /// <param name="shiptoTelephone">Type the phone number for the
+        /// customer's shipping address.</param>
+        /// <param name="_slainvokedidValue">Last SLA that was applied to this
+        /// quote. This field is for internal use only.</param>
+        /// <param name="statecode">Shows whether the quote is draft, active,
+        /// won, or closed. Only draft quotes can be edited.</param>
+        /// <param name="traversedpath">For internal use only.</param>
+        /// <param name="billtoPostalcode">Type the ZIP Code or postal code for
+        /// the billing address.</param>
+        /// <param name="billtoCity">Type the city for the customer's billing
+        /// address.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="billtoLine2">Type the second line of the customer's
+        /// billing address.</param>
+        /// <param name="quoteid">Unique identifier of the quote.</param>
+        /// <param name="totalamountlessfreightBase">Shows the Pre-Freight
+        /// Amount converted field to the system's default base currency for
+        /// reporting purposes. The calculation uses the exchange rate
+        /// specified in the Currencies area.</param>
+        /// <param name="discountpercentage">Type the discount rate that should
+        /// be applied to the Detail Amount field to include additional savings
+        /// for the customer in the quote.</param>
+        /// <param name="shiptoFreighttermscode">Select the freight terms to
+        /// make sure shipping orders are processed correctly.</param>
+        /// <param name="discountamount">Type the discount amount for the quote
+        /// if the customer is eligible for special savings.</param>
+        /// <param name="shiptoLine3">Type the third line of the shipping
+        /// address.</param>
+        /// <param name="billtoLine3">Type the third line of the billing
+        /// address.</param>
+        /// <param name="effectivefrom">Enter the date when the quote pricing
+        /// is effective or was first communicated to the customer.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="shiptoContactname">Type the primary contact name at
+        /// the customer's shipping address.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="_slaidValue">Choose the service level agreement (SLA)
+        /// that you want to apply to the quote record.</param>
+        /// <param name="revisionnumber">Shows the version number of the quote
+        /// for revision history tracking.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the quote.</param>
+        /// <param name="discountamountBase">Shows the Discount Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="shiptoStateorprovince">Type the state or province for
+        /// the shipping address.</param>
+        /// <param name="shiptoPostalcode">Type the ZIP Code or postal code for
+        /// the shipping address.</param>
+        /// <param name="totalamountBase">Shows the Total Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the quote.</param>
+        /// <param name="versionnumber">Version number of the quote.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="totallineitemdiscountamountBase">Shows the Total Line
+        /// Item Discount Amount field converted to the system's default base
+        /// currency for reporting purposes. The calculation uses the exchange
+        /// rate specified in the Currencies area.</param>
+        /// <param name="totallineitemdiscountamount">Shows the total of the
+        /// Manual Discount amounts specified on all products included in the
+        /// quote. This value is reflected in the Detail Amount field on the
+        /// quote and is added to any discount amount or rate specified on the
+        /// quote</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="shiptoLine2">Type the second line of the customer's
+        /// shipping address.</param>
+        /// <param name="paymenttermscode">Select the payment terms to indicate
+        /// when the customer needs to pay the total amount.</param>
+        /// <param name="shiptoFax">Type the fax number for the customer's
+        /// shipping address.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="name">Type a descriptive name for the quote.</param>
+        /// <param name="totaldiscountamountBase">Shows the Total Discount
+        /// Amount converted field to the system's default base currency for
+        /// reporting purposes. The calculation uses the exchange rate
+        /// specified in the Currencies area.</param>
+        /// <param name="_campaignidValue">Shows the campaign that the order
+        /// was created from.</param>
+        /// <param name="shippingmethodcode">Select a shipping method for
+        /// deliveries sent to this address.</param>
+        /// <param name="billtoCountry">Type the country or region for the
+        /// customer's billing address.</param>
+        /// <param name="freighttermscode">Select the freight terms to make
+        /// sure shipping charges are processed correctly.</param>
+        public MicrosoftDynamicsCRMquote(int? statuscode = default(int?), string billtoStateorprovince = default(string), System.Guid? processid = default(System.Guid?), System.Guid? stageid = default(System.Guid?), int? onholdtime = default(int?), string quotenumber = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string billtoComposite = default(string), string billtoLine1 = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string billtoFax = default(string), decimal? totaltaxBase = default(decimal?), System.Guid? shiptoAddressid = default(System.Guid?), System.Guid? _owninguserValue = default(System.Guid?), string shiptoComposite = default(string), string shiptoCountry = default(string), decimal? totallineitemamount = default(decimal?), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), System.Guid? _customeridValue = default(System.Guid?), string billtoContactname = default(string), int? utcconversiontimezonecode = default(int?), System.Guid? _pricelevelidValue = default(System.Guid?), string shiptoName = default(string), decimal? totalamount = default(decimal?), System.Guid? _contactidValue = default(System.Guid?), decimal? freightamount = default(decimal?), string billtoTelephone = default(string), decimal? totallineitemamountBase = default(decimal?), int? pricingerrorcode = default(int?), string description = default(string), decimal? totaldiscountamount = default(decimal?), System.Guid? _accountidValue = default(System.Guid?), System.Guid? _opportunityidValue = default(System.Guid?), string shiptoLine1 = default(string), System.Guid? billtoAddressid = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? effectiveto = default(System.DateTimeOffset?), string shiptoCity = default(string), string billtoName = default(string), System.DateTime? expireson = default(System.DateTime?), decimal? totalamountlessfreight = default(decimal?), bool? willcall = default(bool?), System.DateTime? closedon = default(System.DateTime?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? freightamountBase = default(decimal?), decimal? totaltax = default(decimal?), string shiptoTelephone = default(string), System.Guid? _slainvokedidValue = default(System.Guid?), int? statecode = default(int?), string traversedpath = default(string), string billtoPostalcode = default(string), string billtoCity = default(string), System.Guid? _owneridValue = default(System.Guid?), string billtoLine2 = default(string), System.Guid? quoteid = default(System.Guid?), decimal? totalamountlessfreightBase = default(decimal?), decimal? discountpercentage = default(decimal?), int? shiptoFreighttermscode = default(int?), decimal? discountamount = default(decimal?), string shiptoLine3 = default(string), string billtoLine3 = default(string), System.DateTimeOffset? effectivefrom = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string shiptoContactname = default(string), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _slaidValue = default(System.Guid?), int? revisionnumber = default(int?), System.Guid? _owningteamValue = default(System.Guid?), decimal? discountamountBase = default(decimal?), string shiptoStateorprovince = default(string), string shiptoPostalcode = default(string), decimal? totalamountBase = default(decimal?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), string versionnumber = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), decimal? totallineitemdiscountamountBase = default(decimal?), decimal? totallineitemdiscountamount = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string shiptoLine2 = default(string), int? paymenttermscode = default(int?), string shiptoFax = default(string), decimal? exchangerate = default(decimal?), string name = default(string), decimal? totaldiscountamountBase = default(decimal?), System.Guid? _campaignidValue = default(System.Guid?), int? shippingmethodcode = default(int?), string billtoCountry = default(string), int? freighttermscode = default(int?), IList<MicrosoftDynamicsCRMcontact> contactquotesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMopportunitysalesprocess> quoteOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> quoteSharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMquoteclose> quoteQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMconnection> quoteConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> quoteConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> quoteLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMtask> quoteTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsla slainvokedidQuoteSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMsocialactivity> quoteSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMsla slaQuoteSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMactivitypointer> quoteActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMsalesorder> quoteOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMappointment> quoteAppointments = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMactivityparty> quoteActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMfax> quoteFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMsyncerror> quoteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> quoteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMasyncoperation> quoteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> quoteRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceQuote = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMannotation> quoteAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMquotedetail> quoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMphonecall> quotePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMemail> quoteEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMduplicaterecord> quoteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> quoteAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
         {
             Statuscode = statuscode;
             BilltoStateorprovince = billtoStateorprovince;
@@ -173,456 +388,641 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets select the quote's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the state or province for the billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_stateorprovince")]
         public string BilltoStateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        public System.Guid? Processid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        public System.Guid? Stageid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the duration in minutes for which the quote was
+        /// on hold.
         /// </summary>
         [JsonProperty(PropertyName = "onholdtime")]
         public int? Onholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the quote number for customer reference and
+        /// searching capabilities. The number cannot be modified.
         /// </summary>
         [JsonProperty(PropertyName = "quotenumber")]
         public string Quotenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets contains the date time stamp of the last on hold time.
         /// </summary>
         [JsonProperty(PropertyName = "lastonholdtime")]
         public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the complete Bill To address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_composite")]
         public string BilltoComposite { get; set; }
 
         /// <summary>
+        /// Gets or sets type the first line of the customer's billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_line1")]
         public string BilltoLine1 { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the fax number for the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_fax")]
         public string BilltoFax { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Tax field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totaltax_base")]
-        public object TotaltaxBase { get; set; }
+        public decimal? TotaltaxBase { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_addressid")]
-        public string ShiptoAddressid { get; set; }
+        public System.Guid? ShiptoAddressid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the quote.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the complete Ship To address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_composite")]
         public string ShiptoComposite { get; set; }
 
         /// <summary>
+        /// Gets or sets type the country or region for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_country")]
         public string ShiptoCountry { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the sum of all existing and write-in products
+        /// included on the quote, based on the specified price list and
+        /// quantities.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemamount")]
-        public object Totallineitemamount { get; set; }
+        public decimal? Totallineitemamount { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the delivery date requested by the customer for
+        /// all products in the quote.
         /// </summary>
         [JsonProperty(PropertyName = "requestdeliveryby")]
         public System.DateTimeOffset? Requestdeliveryby { get; set; }
 
         /// <summary>
+        /// Gets or sets select the customer account or contact to provide a
+        /// quick link to additional customer details, such as account
+        /// information, activities, and opportunities.
         /// </summary>
         [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        public System.Guid? _customeridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the primary contact name at the customer's
+        /// billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_contactname")]
         public string BilltoContactname { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the price list associated with this record to
+        /// make sure the products associated with the campaign are offered at
+        /// the correct prices.
         /// </summary>
         [JsonProperty(PropertyName = "_pricelevelid_value")]
-        public string _pricelevelidValue { get; set; }
+        public System.Guid? _pricelevelidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the customer's shipping address, such
+        /// as "Headquarters" or "Field office", to identify the address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_name")]
         public string ShiptoName { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total amount due, calculated as the sum of
+        /// the products, discounts, freight, and taxes for the quote.
         /// </summary>
         [JsonProperty(PropertyName = "totalamount")]
-        public object Totalamount { get; set; }
+        public decimal? Totalamount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the contact associated with the
+        /// quote.
         /// </summary>
         [JsonProperty(PropertyName = "_contactid_value")]
-        public string _contactidValue { get; set; }
+        public System.Guid? _contactidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the cost of freight or shipping for the products
+        /// included in the quote for use in calculating the Total Amount
+        /// field.
         /// </summary>
         [JsonProperty(PropertyName = "freightamount")]
-        public object Freightamount { get; set; }
+        public decimal? Freightamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phone number for the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_telephone")]
         public string BilltoTelephone { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Detail Amount field converted to the
+        /// system's default base currency. The calculation uses the exchange
+        /// rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemamount_base")]
-        public object TotallineitemamountBase { get; set; }
+        public decimal? TotallineitemamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets pricing error for the quote.
         /// </summary>
         [JsonProperty(PropertyName = "pricingerrorcode")]
         public int? Pricingerrorcode { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the quote,
+        /// such as the products or services offered or details about the
+        /// customer's product preferences.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total discount amount, based on the discount
+        /// price and rate entered on the quote.
         /// </summary>
         [JsonProperty(PropertyName = "totaldiscountamount")]
-        public object Totaldiscountamount { get; set; }
+        public decimal? Totaldiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the account with which the quote
+        /// is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
+        public System.Guid? _accountidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the opportunity that the quote is related to
+        /// for reporting and analytics.
         /// </summary>
         [JsonProperty(PropertyName = "_opportunityid_value")]
-        public string _opportunityidValue { get; set; }
+        public System.Guid? _opportunityidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the first line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line1")]
         public string ShiptoLine1 { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_addressid")]
-        public string BilltoAddressid { get; set; }
+        public System.Guid? BilltoAddressid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the expiration date or last day the quote
+        /// pricing is effective for the customer.
         /// </summary>
         [JsonProperty(PropertyName = "effectiveto")]
         public System.DateTimeOffset? Effectiveto { get; set; }
 
         /// <summary>
+        /// Gets or sets type the city for the customer's shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_city")]
         public string ShiptoCity { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the customer's billing address, such
+        /// as "Headquarters" or "Field office", to identify the address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_name")]
         public string BilltoName { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date a decision or order is due from the
+        /// customer to indicate the expiration date of the quote.
         /// </summary>
+        [JsonConverter(typeof(DateJsonConverter))]
         [JsonProperty(PropertyName = "expireson")]
-        public System.DateTimeOffset? Expireson { get; set; }
+        public System.DateTime? Expireson { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total product amount for the quote, minus
+        /// any discounts. This value is added to freight and tax amounts in
+        /// the calculation for the total amount due for the quote.
         /// </summary>
         [JsonProperty(PropertyName = "totalamountlessfreight")]
-        public object Totalamountlessfreight { get; set; }
+        public decimal? Totalamountlessfreight { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the products included in the quote
+        /// should be shipped to the specified address or held until the
+        /// customer calls with further pick up or delivery instructions.
         /// </summary>
         [JsonProperty(PropertyName = "willcall")]
         public bool? Willcall { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date when the quote was closed to indicate
+        /// the expiration, revision, or cancellation date.
         /// </summary>
+        [JsonConverter(typeof(DateJsonConverter))]
         [JsonProperty(PropertyName = "closedon")]
-        public System.DateTimeOffset? Closedon { get; set; }
+        public System.DateTime? Closedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Freight Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "freightamount_base")]
-        public object FreightamountBase { get; set; }
+        public decimal? FreightamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total of the Tax amounts specified on all
+        /// products included in the quote, included in the Total Amount due
+        /// calculation for the quote.
         /// </summary>
         [JsonProperty(PropertyName = "totaltax")]
-        public object Totaltax { get; set; }
+        public decimal? Totaltax { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phone number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_telephone")]
         public string ShiptoTelephone { get; set; }
 
         /// <summary>
+        /// Gets or sets last SLA that was applied to this quote. This field is
+        /// for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
+        public System.Guid? _slainvokedidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the quote is draft, active, won, or
+        /// closed. Only draft quotes can be edited.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
+        /// Gets or sets type the ZIP Code or postal code for the billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_postalcode")]
         public string BilltoPostalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the city for the customer's billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_city")]
         public string BilltoCity { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the second line of the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_line2")]
         public string BilltoLine2 { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the quote.
         /// </summary>
         [JsonProperty(PropertyName = "quoteid")]
-        public string Quoteid { get; set; }
+        public System.Guid? Quoteid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Pre-Freight Amount converted field to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totalamountlessfreight_base")]
-        public object TotalamountlessfreightBase { get; set; }
+        public decimal? TotalamountlessfreightBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the discount rate that should be applied to the
+        /// Detail Amount field to include additional savings for the customer
+        /// in the quote.
         /// </summary>
         [JsonProperty(PropertyName = "discountpercentage")]
-        public object Discountpercentage { get; set; }
+        public decimal? Discountpercentage { get; set; }
 
         /// <summary>
+        /// Gets or sets select the freight terms to make sure shipping orders
+        /// are processed correctly.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_freighttermscode")]
         public int? ShiptoFreighttermscode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the discount amount for the quote if the customer
+        /// is eligible for special savings.
         /// </summary>
         [JsonProperty(PropertyName = "discountamount")]
-        public object Discountamount { get; set; }
+        public decimal? Discountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type the third line of the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line3")]
         public string ShiptoLine3 { get; set; }
 
         /// <summary>
+        /// Gets or sets type the third line of the billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_line3")]
         public string BilltoLine3 { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date when the quote pricing is effective or
+        /// was first communicated to the customer.
         /// </summary>
         [JsonProperty(PropertyName = "effectivefrom")]
         public System.DateTimeOffset? Effectivefrom { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type the primary contact name at the customer's
+        /// shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_contactname")]
         public string ShiptoContactname { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the service level agreement (SLA) that you want
+        /// to apply to the quote record.
         /// </summary>
         [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
+        public System.Guid? _slaidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the version number of the quote for revision
+        /// history tracking.
         /// </summary>
         [JsonProperty(PropertyName = "revisionnumber")]
         public int? Revisionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the quote.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Discount Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "discountamount_base")]
-        public object DiscountamountBase { get; set; }
+        public decimal? DiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the state or province for the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_stateorprovince")]
         public string ShiptoStateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets type the ZIP Code or postal code for the shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_postalcode")]
         public string ShiptoPostalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Amount field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totalamount_base")]
-        public object TotalamountBase { get; set; }
+        public decimal? TotalamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// quote.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the quote.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Line Item Discount Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemdiscountamount_base")]
-        public object TotallineitemdiscountamountBase { get; set; }
+        public decimal? TotallineitemdiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total of the Manual Discount amounts
+        /// specified on all products included in the quote. This value is
+        /// reflected in the Detail Amount field on the quote and is added to
+        /// any discount amount or rate specified on the quote
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemdiscountamount")]
-        public object Totallineitemdiscountamount { get; set; }
+        public decimal? Totallineitemdiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the second line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line2")]
         public string ShiptoLine2 { get; set; }
 
         /// <summary>
+        /// Gets or sets select the payment terms to indicate when the customer
+        /// needs to pay the total amount.
         /// </summary>
         [JsonProperty(PropertyName = "paymenttermscode")]
         public int? Paymenttermscode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the fax number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_fax")]
         public string ShiptoFax { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets type a descriptive name for the quote.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Discount Amount converted field to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totaldiscountamount_base")]
-        public object TotaldiscountamountBase { get; set; }
+        public decimal? TotaldiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the campaign that the order was created from.
         /// </summary>
         [JsonProperty(PropertyName = "_campaignid_value")]
-        public string _campaignidValue { get; set; }
+        public System.Guid? _campaignidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select a shipping method for deliveries sent to this
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shippingmethodcode")]
         public int? Shippingmethodcode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the country or region for the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_country")]
         public string BilltoCountry { get; set; }
 
         /// <summary>
+        /// Gets or sets select the freight terms to make sure shipping charges
+        /// are processed correctly.
         /// </summary>
         [JsonProperty(PropertyName = "freighttermscode")]
         public int? Freighttermscode { get; set; }
@@ -750,7 +1150,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -12,6 +12,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Collections.Generic;
     using System.Linq;
 
+    /// <summary>
+    /// odata.error.main
+    /// </summary>
     public partial class Odataerrormain
     {
         /// <summary>
@@ -25,15 +28,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the Odataerrormain class.
         /// </summary>
-        /// <param name="innererror">The structure of this object is
-        /// service-specific</param>
-        public Odataerrormain(string code, string message, string target = default(string), IList<Odataerrordetail> details = default(IList<Odataerrordetail>), object innererror = default(object))
+        public Odataerrormain(string code, string message, string target = default(string), IList<Odataerrordetail> details = default(IList<Odataerrordetail>))
         {
             Code = code;
             Message = message;
             Target = target;
             Details = details;
-            Innererror = innererror;
             CustomInit();
         }
 
@@ -61,12 +61,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "details")]
         public IList<Odataerrordetail> Details { get; set; }
-
-        /// <summary>
-        /// Gets or sets the structure of this object is service-specific
-        /// </summary>
-        [JsonProperty(PropertyName = "innererror")]
-        public object Innererror { get; set; }
 
         /// <summary>
         /// Validate the object.
