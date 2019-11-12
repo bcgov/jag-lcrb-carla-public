@@ -681,19 +681,19 @@ namespace odata2openapi
                             //{
                             //    parameter.UniqueItems = false;
                             //}
-                            /*
+
                             // we also need to align the schema if it exists.
-                            if (parameter.Schema != null && parameter.Schema.Item != null)
+                            if (parameter.Schema != null && parameter.Schema.Items != null)
                             {
 
                                 var schema = parameter.Schema;
-                                if (schema.Type == JsonObjectType.Array)
+                                if (schema.Type == "array" && parameter.Style == null)
                                 {
-                                    // move schema up a level.
-                                    parameter.Item = schema.Item;
-                                    parameter.Schema = null;
-                                    parameter.Reference = null;
-                                    parameter.Type = JsonObjectType.Array;
+                                    parameter.Style = ParameterStyle.Simple;
+                                }
+                            }
+                                /*    
+                                    //if (schema.Items.)
                                     parameter.CollectionFormat = SwaggerParameterCollectionFormat.Csv;
                                 }
                                 else if (schema.Type == JsonObjectType.String)
