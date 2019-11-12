@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// queueitem
+    /// Microsoft.Dynamics.CRM.queueitem
     /// </summary>
     public partial class MicrosoftDynamicsCRMqueueitem
     {
@@ -29,7 +29,66 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMqueueitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMqueueitem(string _workeridValue = default(string), string _createdbyValue = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? workeridmodifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), object exchangerate = default(object), int? utcconversiontimezonecode = default(int?), string _queueidValue = default(string), int? statecode = default(int?), System.DateTimeOffset? enteredon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _owneridValue = default(string), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), int? objecttypecode = default(int?), string queueitemid = default(string), int? statuscode = default(int?), string _objectidValue = default(string), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), string title = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsystemuser workeridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMasyncoperation> queueItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam workeridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), IList<MicrosoftDynamicsCRMsyncerror> queueItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), IList<MicrosoftDynamicsCRMbulkdeletefailure> queueItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMbulkoperation objectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint))
+        /// <param name="_workeridValue">Shows who is working on the queue
+        /// item.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="workeridmodifiedon">Shows the date and time when the
+        /// queue item was last assigned to a user.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the queueitem.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_queueidValue">Choose the queue that the item is
+        /// assigned to.</param>
+        /// <param name="statecode">Shows whether the queue record is active or
+        /// inactive. Inactive queue records are read-only and can't be edited
+        /// unless they are reactivated.</param>
+        /// <param name="enteredon">Shows the date the record was assigned to
+        /// the queue.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the queue item.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="versionnumber">Version number of the queue
+        /// item.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the queue item.</param>
+        /// <param name="objecttypecode">Select the type of the queue item,
+        /// such as activity, case, or appointment.</param>
+        /// <param name="queueitemid">Unique identifier of the queue
+        /// item.</param>
+        /// <param name="statuscode">Select the item's status.</param>
+        /// <param name="_objectidValue">Choose the activity, case, or article
+        /// assigned to the queue.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the queue item.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="title">Shows the title or name that describes the
+        /// queue record. This value is copied from the record that was
+        /// assigned to the queue.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization with which the queue item is associated.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        public MicrosoftDynamicsCRMqueueitem(System.Guid? _workeridValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), int? importsequencenumber = default(int?), System.DateTimeOffset? workeridmodifiedon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), decimal? exchangerate = default(decimal?), int? utcconversiontimezonecode = default(int?), System.Guid? _queueidValue = default(System.Guid?), int? statecode = default(int?), System.DateTimeOffset? enteredon = default(System.DateTimeOffset?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? _owneridValue = default(System.Guid?), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), int? objecttypecode = default(int?), System.Guid? queueitemid = default(System.Guid?), int? statuscode = default(int?), System.Guid? _objectidValue = default(System.Guid?), System.Guid? _owninguserValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string title = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsystemuser workeridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMasyncoperation> queueItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam workeridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), IList<MicrosoftDynamicsCRMsyncerror> queueItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), IList<MicrosoftDynamicsCRMbulkdeletefailure> queueItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMbulkoperation objectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint))
         {
             this._workeridValue = _workeridValue;
             this._createdbyValue = _createdbyValue;
@@ -100,79 +159,104 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows who is working on the queue item.
         /// </summary>
         [JsonProperty(PropertyName = "_workerid_value")]
-        public string _workeridValue { get; set; }
+        public System.Guid? _workeridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the queue item was last
+        /// assigned to a user.
         /// </summary>
         [JsonProperty(PropertyName = "workeridmodifiedon")]
         public System.DateTimeOffset? Workeridmodifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the queueitem.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the queue that the item is assigned to.
         /// </summary>
         [JsonProperty(PropertyName = "_queueid_value")]
-        public string _queueidValue { get; set; }
+        public System.Guid? _queueidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the queue record is active or inactive.
+        /// Inactive queue records are read-only and can't be edited unless
+        /// they are reactivated.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date the record was assigned to the queue.
         /// </summary>
         [JsonProperty(PropertyName = "enteredon")]
         public System.DateTimeOffset? Enteredon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// queue item.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the queue item.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// queue item.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -180,61 +264,84 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? AdoxioPaymentreceiveddate { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of the queue item, such as activity,
+        /// case, or appointment.
         /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public int? Objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the queue item.
         /// </summary>
         [JsonProperty(PropertyName = "queueitemid")]
-        public string Queueitemid { get; set; }
+        public System.Guid? Queueitemid { get; set; }
 
         /// <summary>
+        /// Gets or sets select the item's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the activity, case, or article assigned to the
+        /// queue.
         /// </summary>
         [JsonProperty(PropertyName = "_objectid_value")]
-        public string _objectidValue { get; set; }
+        public System.Guid? _objectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the queue item.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the title or name that describes the queue
+        /// record. This value is copied from the record that was assigned to
+        /// the queue.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// queue item is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }

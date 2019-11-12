@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// activitypointer
+    /// Microsoft.Dynamics.CRM.activitypointer
     /// </summary>
     public partial class MicrosoftDynamicsCRMactivitypointer
     {
@@ -29,7 +29,105 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactivitypointer class.
         /// </summary>
-        public MicrosoftDynamicsCRMactivitypointer(string _owneridValue = default(string), string activityadditionalparams = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _regardingobjectidValue = default(string), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), bool? isbilled = default(bool?), string _transactioncurrencyidValue = default(string), int? prioritycode = default(int?), string _sendermailboxidValue = default(string), int? scheduleddurationminutes = default(int?), string _owninguserValue = default(string), string exchangeweblink = default(string), long? versionnumber = default(long?), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), string _slainvokedidValue = default(string), System.DateTimeOffset? postponeactivityprocessinguntil = default(System.DateTimeOffset?), string _createdbyValue = default(string), int? deliveryprioritycode = default(int?), string _owningteamValue = default(string), bool? ismapiprivate = default(bool?), string traversedpath = default(string), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), int? actualdurationminutes = default(int?), string _serviceidValue = default(string), int? instancetypecode = default(int?), string _createdonbehalfbyValue = default(string), string seriesid = default(string), string activityid = default(string), string description = default(string), bool? leftvoicemail = default(bool?), bool? isworkflowcreated = default(bool?), System.DateTimeOffset? senton = default(System.DateTimeOffset?), string processid = default(string), int? community = default(int?), string _modifiedbyValue = default(string), string exchangeitemid = default(string), int? statecode = default(int?), string activitytypecode = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), string subject = default(string), System.DateTimeOffset? deliverylastattemptedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), string stageid = default(string), int? onholdtime = default(int?), System.DateTimeOffset? sortdate = default(System.DateTimeOffset?), bool? isregularactivity = default(bool?), object exchangerate = default(object), string _slaidValue = default(string), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbulkoperationlog> createdActivityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMsocialactivity> activityPointerSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> activityPointerRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMemail> activityPointerEmail = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMmailbox sendermailboxid = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMquoteclose> activityPointerQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMqueueitem> activityPointerQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), object ownerid = default(object), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperation> activityPointerBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignactivityitem> activityPointerCampaignActivityItems = default(IList<MicrosoftDynamicsCRMcampaignactivityitem>), MicrosoftDynamicsCRMsla slaActivitypointerSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMcampaignresponse> activityPointerCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMserviceappointment> activityPointerServiceAppointment = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMactivitymimeattachment> activityPointerActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMfax> activityPointerFax = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperationlog> activityPointerBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMtask> activityPointerTask = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMopportunityclose> activityPointerOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMcampaignresponse> activityCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMcampaignactivity> activityPointerCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMphonecall> activityPointerPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMappointment> activityPointerAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMorderclose> activityPointerOrderClose = default(IList<MicrosoftDynamicsCRMorderclose>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMincidentresolution> activityPointerIncidentResolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMletter> activityPointerLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceActivitypointer = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityPointerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> activityPointerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMactivityparty> activitypointerActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocess = default(MicrosoftDynamicsCRMabsScheduledprocess), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> activityPointerAbsScheduledprocessexecution = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the activity.</param>
+        /// <param name="activityadditionalparams">Additional information
+        /// provided by the external application as JSON. For internal use
+        /// only.</param>
+        /// <param name="createdon">Date and time when the activity was
+        /// created.</param>
+        /// <param name="statuscode">Reason for the status of the
+        /// activity.</param>
+        /// <param name="modifiedon">Date and time when activity was last
+        /// modified.</param>
+        /// <param name="_regardingobjectidValue">Unique identifier of the
+        /// object with which the activity is associated.</param>
+        /// <param name="scheduledstart">Scheduled start time of the
+        /// activity.</param>
+        /// <param name="lastonholdtime">Contains the date and time stamp of
+        /// the last on hold time.</param>
+        /// <param name="isbilled">Information regarding whether the activity
+        /// was billed as part of resolving a case.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// currency associated with the activitypointer.</param>
+        /// <param name="prioritycode">Priority of the activity.</param>
+        /// <param name="_sendermailboxidValue">Unique identifier of the
+        /// mailbox associated with the sender of the email message.</param>
+        /// <param name="scheduleddurationminutes">Scheduled duration of the
+        /// activity, specified in minutes.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user that
+        /// owns the activity.</param>
+        /// <param name="exchangeweblink">Shows the web link of Activity of
+        /// type email.</param>
+        /// <param name="versionnumber">Version number of the activity.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the activity.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the activitypointer.</param>
+        /// <param name="scheduledend">Scheduled end time of the
+        /// activity.</param>
+        /// <param name="_slainvokedidValue">Last SLA that was applied to this
+        /// case. This field is for internal use only.</param>
+        /// <param name="postponeactivityprocessinguntil">For internal use
+        /// only.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the activity.</param>
+        /// <param name="deliveryprioritycode">Priority of delivery of the
+        /// activity to the email server.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team that
+        /// owns the activity.</param>
+        /// <param name="ismapiprivate">For internal use only.</param>
+        /// <param name="traversedpath">For internal use only.</param>
+        /// <param name="actualend">Actual end time of the activity.</param>
+        /// <param name="actualdurationminutes">Actual duration of the activity
+        /// in minutes.</param>
+        /// <param name="_serviceidValue">Unique identifier of an associated
+        /// service.</param>
+        /// <param name="instancetypecode">Type of instance of a recurring
+        /// series.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the activitypointer.</param>
+        /// <param name="seriesid">Uniqueidentifier specifying the id of
+        /// recurring series of an instance.</param>
+        /// <param name="activityid">Unique identifier of the activity.</param>
+        /// <param name="description">Description of the activity.</param>
+        /// <param name="leftvoicemail">Left the voice mail</param>
+        /// <param name="isworkflowcreated">Information regarding whether the
+        /// activity was created from a workflow rule.</param>
+        /// <param name="senton">Date and time when the activity was
+        /// sent.</param>
+        /// <param name="processid">Unique identifier of the Process.</param>
+        /// <param name="community">Shows how contact about the social activity
+        /// originated, such as from Twitter or Facebook. This field is
+        /// read-only.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of user who last
+        /// modified the activity.</param>
+        /// <param name="exchangeitemid">The message id of activity which is
+        /// returned from Exchange Server.</param>
+        /// <param name="statecode">Status of the activity.</param>
+        /// <param name="activitytypecode">Type of activity.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="actualstart">Actual start time of the
+        /// activity.</param>
+        /// <param name="subject">Subject associated with the activity.</param>
+        /// <param name="deliverylastattemptedon">Date and time when the
+        /// delivery of the activity was last attempted.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="stageid">Unique identifier of the Stage.</param>
+        /// <param name="onholdtime">Shows how long, in minutes, that the
+        /// record was on hold.</param>
+        /// <param name="sortdate">Shows the date and time by which the
+        /// activities are sorted.</param>
+        /// <param name="isregularactivity">Information regarding whether the
+        /// activity is a regular activity type or event type.</param>
+        /// <param name="exchangerate">Exchange rate for the currency
+        /// associated with the activitypointer with respect to the base
+        /// currency.</param>
+        /// <param name="_slaidValue">Choose the service level agreement (SLA)
+        /// that you want to apply to the case record.</param>
+        public MicrosoftDynamicsCRMactivitypointer(System.Guid? _owneridValue = default(System.Guid?), string activityadditionalparams = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _regardingobjectidValue = default(System.Guid?), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), bool? isbilled = default(bool?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), int? prioritycode = default(int?), System.Guid? _sendermailboxidValue = default(System.Guid?), int? scheduleddurationminutes = default(int?), System.Guid? _owninguserValue = default(System.Guid?), string exchangeweblink = default(string), string versionnumber = default(string), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), System.Guid? _slainvokedidValue = default(System.Guid?), System.DateTimeOffset? postponeactivityprocessinguntil = default(System.DateTimeOffset?), System.Guid? _createdbyValue = default(System.Guid?), int? deliveryprioritycode = default(int?), System.Guid? _owningteamValue = default(System.Guid?), bool? ismapiprivate = default(bool?), string traversedpath = default(string), System.DateTimeOffset? actualend = default(System.DateTimeOffset?), int? actualdurationminutes = default(int?), System.Guid? _serviceidValue = default(System.Guid?), int? instancetypecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? seriesid = default(System.Guid?), System.Guid? activityid = default(System.Guid?), string description = default(string), bool? leftvoicemail = default(bool?), bool? isworkflowcreated = default(bool?), System.DateTimeOffset? senton = default(System.DateTimeOffset?), System.Guid? processid = default(System.Guid?), int? community = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), string exchangeitemid = default(string), int? statecode = default(int?), string activitytypecode = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? actualstart = default(System.DateTimeOffset?), string subject = default(string), System.DateTimeOffset? deliverylastattemptedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.Guid? stageid = default(System.Guid?), int? onholdtime = default(int?), System.DateTimeOffset? sortdate = default(System.DateTimeOffset?), bool? isregularactivity = default(bool?), decimal? exchangerate = default(decimal?), System.Guid? _slaidValue = default(System.Guid?), MicrosoftDynamicsCRMinteractionforemail regardingobjectidNewInteractionforemail = default(MicrosoftDynamicsCRMinteractionforemail), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontract regardingobjectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbulkoperationlog> createdActivityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), IList<MicrosoftDynamicsCRMsocialactivity> activityPointerSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> activityPointerRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMemail> activityPointerEmail = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMmailbox sendermailboxid = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMquoteclose> activityPointerQuoteClose = default(IList<MicrosoftDynamicsCRMquoteclose>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMqueueitem> activityPointerQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperation> activityPointerBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMcampaignactivityitem> activityPointerCampaignActivityItems = default(IList<MicrosoftDynamicsCRMcampaignactivityitem>), MicrosoftDynamicsCRMsla slaActivitypointerSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMinvoice regardingobjectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMcampaignresponse> activityPointerCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMserviceappointment> activityPointerServiceAppointment = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMactivitymimeattachment> activityPointerActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMfax> activityPointerFax = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperationlog> activityPointerBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMtask> activityPointerTask = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMopportunityclose> activityPointerOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMcampaignresponse> activityCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMcampaignactivity> activityPointerCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMphonecall> activityPointerPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMappointment> activityPointerAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMorderclose> activityPointerOrderClose = default(IList<MicrosoftDynamicsCRMorderclose>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaign = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMincidentresolution> activityPointerIncidentResolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMletter> activityPointerLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceActivitypointer = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityPointerBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsla slainvokedidActivitypointerSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMconnection> activitypointerConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> activityPointerAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMactivityparty> activitypointerActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocess = default(MicrosoftDynamicsCRMabsScheduledprocess), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> activityPointerAbsScheduledprocessexecution = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             this._owneridValue = _owneridValue;
             Activityadditionalparams = activityadditionalparams;
@@ -162,274 +260,355 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// activity.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets additional information provided by the external
+        /// application as JSON. For internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "activityadditionalparams")]
         public string Activityadditionalparams { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the activity was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when activity was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the object with which the
+        /// activity is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        public System.Guid? _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets scheduled start time of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "scheduledstart")]
         public System.DateTimeOffset? Scheduledstart { get; set; }
 
         /// <summary>
+        /// Gets or sets contains the date and time stamp of the last on hold
+        /// time.
         /// </summary>
         [JsonProperty(PropertyName = "lastonholdtime")]
         public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets information regarding whether the activity was billed
+        /// as part of resolving a case.
         /// </summary>
         [JsonProperty(PropertyName = "isbilled")]
         public bool? Isbilled { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the currency associated with the
+        /// activitypointer.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets priority of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "prioritycode")]
         public int? Prioritycode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the mailbox associated with the
+        /// sender of the email message.
         /// </summary>
         [JsonProperty(PropertyName = "_sendermailboxid_value")]
-        public string _sendermailboxidValue { get; set; }
+        public System.Guid? _sendermailboxidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets scheduled duration of the activity, specified in
+        /// minutes.
         /// </summary>
         [JsonProperty(PropertyName = "scheduleddurationminutes")]
         public int? Scheduleddurationminutes { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user that owns the activity.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the web link of Activity of type email.
         /// </summary>
         [JsonProperty(PropertyName = "exchangeweblink")]
         public string Exchangeweblink { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// activity.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the activitypointer.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets scheduled end time of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "scheduledend")]
         public System.DateTimeOffset? Scheduledend { get; set; }
 
         /// <summary>
+        /// Gets or sets last SLA that was applied to this case. This field is
+        /// for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
+        public System.Guid? _slainvokedidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "postponeactivityprocessinguntil")]
         public System.DateTimeOffset? Postponeactivityprocessinguntil { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the
+        /// activity.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets priority of delivery of the activity to the email
+        /// server.
         /// </summary>
         [JsonProperty(PropertyName = "deliveryprioritycode")]
         public int? Deliveryprioritycode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team that owns the activity.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "ismapiprivate")]
         public bool? Ismapiprivate { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
+        /// Gets or sets actual end time of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "actualend")]
         public System.DateTimeOffset? Actualend { get; set; }
 
         /// <summary>
+        /// Gets or sets actual duration of the activity in minutes.
         /// </summary>
         [JsonProperty(PropertyName = "actualdurationminutes")]
         public int? Actualdurationminutes { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of an associated service.
         /// </summary>
         [JsonProperty(PropertyName = "_serviceid_value")]
-        public string _serviceidValue { get; set; }
+        public System.Guid? _serviceidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type of instance of a recurring series.
         /// </summary>
         [JsonProperty(PropertyName = "instancetypecode")]
         public int? Instancetypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// activitypointer.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets uniqueidentifier specifying the id of recurring series
+        /// of an instance.
         /// </summary>
         [JsonProperty(PropertyName = "seriesid")]
-        public string Seriesid { get; set; }
+        public System.Guid? Seriesid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "activityid")]
-        public string Activityid { get; set; }
+        public System.Guid? Activityid { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets left the voice mail
         /// </summary>
         [JsonProperty(PropertyName = "leftvoicemail")]
         public bool? Leftvoicemail { get; set; }
 
         /// <summary>
+        /// Gets or sets information regarding whether the activity was created
+        /// from a workflow rule.
         /// </summary>
         [JsonProperty(PropertyName = "isworkflowcreated")]
         public bool? Isworkflowcreated { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the activity was sent.
         /// </summary>
         [JsonProperty(PropertyName = "senton")]
         public System.DateTimeOffset? Senton { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        public System.Guid? Processid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows how contact about the social activity
+        /// originated, such as from Twitter or Facebook. This field is
+        /// read-only.
         /// </summary>
         [JsonProperty(PropertyName = "community")]
         public int? Community { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of user who last modified the
+        /// activity.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the message id of activity which is returned from
+        /// Exchange Server.
         /// </summary>
         [JsonProperty(PropertyName = "exchangeitemid")]
         public string Exchangeitemid { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets type of activity.
         /// </summary>
         [JsonProperty(PropertyName = "activitytypecode")]
         public string Activitytypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets actual start time of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "actualstart")]
         public System.DateTimeOffset? Actualstart { get; set; }
 
         /// <summary>
+        /// Gets or sets subject associated with the activity.
         /// </summary>
         [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the delivery of the activity was
+        /// last attempted.
         /// </summary>
         [JsonProperty(PropertyName = "deliverylastattemptedon")]
         public System.DateTimeOffset? Deliverylastattemptedon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        public System.Guid? Stageid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows how long, in minutes, that the record was on
+        /// hold.
         /// </summary>
         [JsonProperty(PropertyName = "onholdtime")]
         public int? Onholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time by which the activities are
+        /// sorted.
         /// </summary>
         [JsonProperty(PropertyName = "sortdate")]
         public System.DateTimeOffset? Sortdate { get; set; }
 
         /// <summary>
+        /// Gets or sets information regarding whether the activity is a
+        /// regular activity type or event type.
         /// </summary>
         [JsonProperty(PropertyName = "isregularactivity")]
         public bool? Isregularactivity { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// activitypointer with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the service level agreement (SLA) that you want
+        /// to apply to the case record.
         /// </summary>
         [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
+        public System.Guid? _slaidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -529,7 +708,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

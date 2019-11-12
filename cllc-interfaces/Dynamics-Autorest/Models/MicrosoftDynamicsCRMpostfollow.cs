@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// postfollow
+    /// Microsoft.Dynamics.CRM.postfollow
     /// </summary>
     public partial class MicrosoftDynamicsCRMpostfollow
     {
@@ -29,7 +29,32 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpostfollow
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpostfollow(string _owningteamValue = default(string), string postfollowid = default(string), string _owninguserValue = default(string), string _regardingobjectidValue = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _owneridValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), int? yammerpoststate = default(int?), long? versionnumber = default(long?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> postFollowAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), object ownerid = default(object), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMsyncerror> postFollowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor))
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the follow.</param>
+        /// <param name="postfollowid">Shows the ID of the post follow.</param>
+        /// <param name="_owninguserValue">Unique identifier for the user who
+        /// owns the record.</param>
+        /// <param name="_regardingobjectidValue">Choose the parent record for
+        /// the followed post to identify the customer, opportunity, case, or
+        /// other record type that the post most closely relates to.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record.</param>
+        /// <param name="yammerpoststate">Internal Use Only</param>
+        /// <param name="versionnumber">Version number of post follow.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        public MicrosoftDynamicsCRMpostfollow(System.Guid? _owningteamValue = default(System.Guid?), System.Guid? postfollowid = default(System.Guid?), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _regardingobjectidValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _owningbusinessunitValue = default(System.Guid?), int? yammerpoststate = default(int?), string versionnumber = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> postFollowAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMsyncerror> postFollowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor))
         {
             this._owningteamValue = _owningteamValue;
             Postfollowid = postfollowid;
@@ -74,69 +99,91 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the follow.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the post follow.
         /// </summary>
         [JsonProperty(PropertyName = "postfollowid")]
-        public string Postfollowid { get; set; }
+        public System.Guid? Postfollowid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the user who owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the parent record for the followed post to
+        /// identify the customer, opportunity, case, or other record type that
+        /// the post most closely relates to.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        public System.Guid? _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "yammerpoststate")]
         public int? Yammerpoststate { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of post follow.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -201,7 +248,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// postregarding
+    /// Microsoft.Dynamics.CRM.postregarding
     /// </summary>
     public partial class MicrosoftDynamicsCRMpostregarding
     {
@@ -29,7 +29,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpostregarding
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpostregarding(string postregardingid = default(string), string _regardingobjectidValue = default(string), string _regardingobjectowningbusinessunitValue = default(string), System.DateTimeOffset? latestmanualpostmodifiedon = default(System.DateTimeOffset?), string _regardingobjectowneridValue = default(string), System.DateTimeOffset? latestautopostmodifiedon = default(System.DateTimeOffset?), string regardingobjecttypecodeforsharing = default(string), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), IList<MicrosoftDynamicsCRMpost> postPostRegardings = default(IList<MicrosoftDynamicsCRMpost>), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit regardingobjectowningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMteam regardingobjectidTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor))
+        /// <param name="postregardingid">Shows the ID of the record that the
+        /// post is referring to.</param>
+        /// <param name="_regardingobjectidValue">Choose the record that the
+        /// post relates to.</param>
+        /// <param name="_regardingobjectowningbusinessunitValue">Select the
+        /// business unit that owns the regarding object.</param>
+        /// <param name="latestmanualpostmodifiedon">Date of Latest Manual Post
+        /// on the Regarding entity</param>
+        /// <param name="_regardingobjectowneridValue">Unique identifier of the
+        /// user or team who owns the regarding object.</param>
+        /// <param name="latestautopostmodifiedon">Date of Latest Auto Post on
+        /// the Regarding entity</param>
+        /// <param name="regardingobjecttypecodeforsharing">Indicates the
+        /// entity type of the regarding object for sharing.</param>
+        public MicrosoftDynamicsCRMpostregarding(System.Guid? postregardingid = default(System.Guid?), System.Guid? _regardingobjectidValue = default(System.Guid?), System.Guid? _regardingobjectowningbusinessunitValue = default(System.Guid?), System.DateTimeOffset? latestmanualpostmodifiedon = default(System.DateTimeOffset?), System.Guid? _regardingobjectowneridValue = default(System.Guid?), System.DateTimeOffset? latestautopostmodifiedon = default(System.DateTimeOffset?), string regardingobjecttypecodeforsharing = default(string), MicrosoftDynamicsCRMtask regardingobjectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMappointment regardingobjectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMphonecall regardingobjectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMrecurringappointmentmaster regardingobjectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), IList<MicrosoftDynamicsCRMpost> postPostRegardings = default(IList<MicrosoftDynamicsCRMpost>), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser regardingobjectidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit regardingobjectowningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMteam regardingobjectidTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMqueue regardingobjectidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMcompetitor regardingobjectidCompetitor = default(MicrosoftDynamicsCRMcompetitor))
         {
             Postregardingid = postregardingid;
             this._regardingobjectidValue = _regardingobjectidValue;
@@ -63,36 +77,47 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the ID of the record that the post is referring
+        /// to.
         /// </summary>
         [JsonProperty(PropertyName = "postregardingid")]
-        public string Postregardingid { get; set; }
+        public System.Guid? Postregardingid { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the record that the post relates to.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        public System.Guid? _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select the business unit that owns the regarding
+        /// object.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectowningbusinessunit_value")]
-        public string _regardingobjectowningbusinessunitValue { get; set; }
+        public System.Guid? _regardingobjectowningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date of Latest Manual Post on the Regarding entity
         /// </summary>
         [JsonProperty(PropertyName = "latestmanualpostmodifiedon")]
         public System.DateTimeOffset? Latestmanualpostmodifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// regarding object.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectownerid_value")]
-        public string _regardingobjectowneridValue { get; set; }
+        public System.Guid? _regardingobjectowneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date of Latest Auto Post on the Regarding entity
         /// </summary>
         [JsonProperty(PropertyName = "latestautopostmodifiedon")]
         public System.DateTimeOffset? Latestautopostmodifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the entity type of the regarding object for
+        /// sharing.
         /// </summary>
         [JsonProperty(PropertyName = "regardingobjecttypecodeforsharing")]
         public string Regardingobjecttypecodeforsharing { get; set; }

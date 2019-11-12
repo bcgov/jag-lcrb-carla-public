@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// monthlyfiscalcalendar
+    /// Microsoft.Dynamics.CRM.monthlyfiscalcalendar
     /// </summary>
     public partial class MicrosoftDynamicsCRMmonthlyfiscalcalendar
     {
@@ -29,7 +29,84 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmonthlyfiscalcalendar class.
         /// </summary>
-        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(object month8 = default(object), object month12Base = default(object), object month10Base = default(object), object exchangerate = default(object), string _createdonbehalfbyValue = default(string), object month6Base = default(object), object month9Base = default(object), string _salespersonidValue = default(string), object month9 = default(object), int? fiscalperiodtype = default(int?), object month4Base = default(object), string _createdbyValue = default(string), object month3Base = default(object), object month12 = default(object), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), int? utcconversiontimezonecode = default(int?), object month11Base = default(object), object month2 = default(object), string _modifiedbyValue = default(string), object month5 = default(object), object month7 = default(object), object month1 = default(object), object month6 = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), object month11 = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), object month8Base = default(object), object month7Base = default(object), object month10 = default(object), object month5Base = default(object), object month2Base = default(object), object month3 = default(object), object month1Base = default(object), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), object month4 = default(object), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="month8">Sales quota for the eighth month in the fiscal
+        /// year.</param>
+        /// <param name="month12Base">Base currency equivalent of the sales
+        /// quota for the twelfth month in the fiscal year.</param>
+        /// <param name="month10Base">Base currency equivalent of the sales
+        /// quota for the tenth month in the fiscal year.</param>
+        /// <param name="exchangerate">Exchange rate for the currency
+        /// associated with the monthly fiscal calendar with respect to the
+        /// base currency.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the monthlyfiscalcalendar.</param>
+        /// <param name="month6Base">Base currency equivalent of the sales
+        /// quota for the sixth month in the fiscal year.</param>
+        /// <param name="month9Base">Base currency equivalent of the sales
+        /// quota for the ninth month in the fiscal year.</param>
+        /// <param name="_salespersonidValue">Unique identifier of the
+        /// associated salesperson.</param>
+        /// <param name="month9">Sales quota for the ninth month in the fiscal
+        /// year.</param>
+        /// <param name="fiscalperiodtype">Type of fiscal period used in the
+        /// sales quota.</param>
+        /// <param name="month4Base">Base currency equivalent of the sales
+        /// quota for the fourth month in the fiscal year.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the fiscal calendar.</param>
+        /// <param name="month3Base">Base currency equivalent of the sales
+        /// quota for the third month in the fiscal year.</param>
+        /// <param name="month12">Sales quota for the twelfth month in the
+        /// fiscal year.</param>
+        /// <param name="userfiscalcalendarid">Unique identifier of the monthly
+        /// fiscal calendar.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="month11Base">Base currency equivalent of the sales
+        /// quota for the eleventh month in the fiscal year.</param>
+        /// <param name="month2">Sales quota for the second month in the fiscal
+        /// year.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the quota for the monthly fiscal calendar.</param>
+        /// <param name="month5">Sales quota for the fifth month in the fiscal
+        /// year.</param>
+        /// <param name="month7">Sales quota for the seventh month in the
+        /// fiscal year.</param>
+        /// <param name="month1">Sales quota for the first month in the fiscal
+        /// year.</param>
+        /// <param name="month6">Sales quota for the sixth month in the fiscal
+        /// year.</param>
+        /// <param name="modifiedon">Date and time when the quota for the
+        /// monthly fiscal calendar was last modified.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="month11">Sales quota for the eleventh month in the
+        /// fiscal year.</param>
+        /// <param name="createdon">Date and time when the quota for the
+        /// monthly fiscal calendar was modified.</param>
+        /// <param name="effectiveon">Date and time when the monthly fiscal
+        /// calendar sales quota takes effect.</param>
+        /// <param name="month8Base">Base currency equivalent of the sales
+        /// quota for the eighth month in the fiscal year.</param>
+        /// <param name="month7Base">Base currency equivalent of the sales
+        /// quota for the seventh month in the fiscal year.</param>
+        /// <param name="month10">Sales quota for the tenth month in the fiscal
+        /// year.</param>
+        /// <param name="month5Base">Base currency equivalent of the sales
+        /// quota for the fifth month in the fiscal year.</param>
+        /// <param name="month2Base">Base currency equivalent of the sales
+        /// quota for the second month in the fiscal year.</param>
+        /// <param name="month3">Sales quota for the third month in the fiscal
+        /// year.</param>
+        /// <param name="month1Base">Base currency equivalent of the sales
+        /// quota for the first month in the fiscal year.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the monthlyfiscalcalendar.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// currency associated with the monthly fiscal calendar.</param>
+        /// <param name="month4">Sales quota for the fourth month in the fiscal
+        /// year.</param>
+        public MicrosoftDynamicsCRMmonthlyfiscalcalendar(decimal? month8 = default(decimal?), decimal? month12Base = default(decimal?), decimal? month10Base = default(decimal?), decimal? exchangerate = default(decimal?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), decimal? month6Base = default(decimal?), decimal? month9Base = default(decimal?), System.Guid? _salespersonidValue = default(System.Guid?), decimal? month9 = default(decimal?), int? fiscalperiodtype = default(int?), decimal? month4Base = default(decimal?), System.Guid? _createdbyValue = default(System.Guid?), decimal? month3Base = default(decimal?), decimal? month12 = default(decimal?), System.Guid? userfiscalcalendarid = default(System.Guid?), System.Guid? _businessunitidValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), decimal? month11Base = default(decimal?), decimal? month2 = default(decimal?), System.Guid? _modifiedbyValue = default(System.Guid?), decimal? month5 = default(decimal?), decimal? month7 = default(decimal?), decimal? month1 = default(decimal?), decimal? month6 = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), decimal? month11 = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), decimal? month8Base = default(decimal?), decimal? month7Base = default(decimal?), decimal? month10 = default(decimal?), decimal? month5Base = default(decimal?), decimal? month2Base = default(decimal?), decimal? month3 = default(decimal?), decimal? month1Base = default(decimal?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), decimal? month4 = default(decimal?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> monthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> monthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Month8 = month8;
             Month12Base = month12Base;
@@ -87,199 +164,259 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets sales quota for the eighth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month8")]
-        public object Month8 { get; set; }
+        public decimal? Month8 { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// twelfth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month12_base")]
-        public object Month12Base { get; set; }
+        public decimal? Month12Base { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// tenth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month10_base")]
-        public object Month10Base { get; set; }
+        public decimal? Month10Base { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// monthly fiscal calendar with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// monthlyfiscalcalendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// sixth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month6_base")]
-        public object Month6Base { get; set; }
+        public decimal? Month6Base { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// ninth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month9_base")]
-        public object Month9Base { get; set; }
+        public decimal? Month9Base { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated salesperson.
         /// </summary>
         [JsonProperty(PropertyName = "_salespersonid_value")]
-        public string _salespersonidValue { get; set; }
+        public System.Guid? _salespersonidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the ninth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month9")]
-        public object Month9 { get; set; }
+        public decimal? Month9 { get; set; }
 
         /// <summary>
+        /// Gets or sets type of fiscal period used in the sales quota.
         /// </summary>
         [JsonProperty(PropertyName = "fiscalperiodtype")]
         public int? Fiscalperiodtype { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// fourth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month4_base")]
-        public object Month4Base { get; set; }
+        public decimal? Month4Base { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the fiscal
+        /// calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// third month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month3_base")]
-        public object Month3Base { get; set; }
+        public decimal? Month3Base { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the twelfth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month12")]
-        public object Month12 { get; set; }
+        public decimal? Month12 { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the monthly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "userfiscalcalendarid")]
-        public string Userfiscalcalendarid { get; set; }
+        public System.Guid? Userfiscalcalendarid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
+        public System.Guid? _businessunitidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// eleventh month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month11_base")]
-        public object Month11Base { get; set; }
+        public decimal? Month11Base { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the second month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month2")]
-        public object Month2 { get; set; }
+        public decimal? Month2 { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// quota for the monthly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the fifth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month5")]
-        public object Month5 { get; set; }
+        public decimal? Month5 { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the seventh month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month7")]
-        public object Month7 { get; set; }
+        public decimal? Month7 { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the first month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month1")]
-        public object Month1 { get; set; }
+        public decimal? Month1 { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the sixth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month6")]
-        public object Month6 { get; set; }
+        public decimal? Month6 { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the quota for the monthly fiscal
+        /// calendar was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the eleventh month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month11")]
-        public object Month11 { get; set; }
+        public decimal? Month11 { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the quota for the monthly fiscal
+        /// calendar was modified.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the monthly fiscal calendar sales
+        /// quota takes effect.
         /// </summary>
         [JsonProperty(PropertyName = "effectiveon")]
         public System.DateTimeOffset? Effectiveon { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// eighth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month8_base")]
-        public object Month8Base { get; set; }
+        public decimal? Month8Base { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// seventh month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month7_base")]
-        public object Month7Base { get; set; }
+        public decimal? Month7Base { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the tenth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month10")]
-        public object Month10 { get; set; }
+        public decimal? Month10 { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// fifth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month5_base")]
-        public object Month5Base { get; set; }
+        public decimal? Month5Base { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// second month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month2_base")]
-        public object Month2Base { get; set; }
+        public decimal? Month2Base { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the third month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month3")]
-        public object Month3 { get; set; }
+        public decimal? Month3 { get; set; }
 
         /// <summary>
+        /// Gets or sets base currency equivalent of the sales quota for the
+        /// first month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month1_base")]
-        public object Month1Base { get; set; }
+        public decimal? Month1Base { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the monthlyfiscalcalendar.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the currency associated with the
+        /// monthly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets sales quota for the fourth month in the fiscal year.
         /// </summary>
         [JsonProperty(PropertyName = "month4")]
-        public object Month4 { get; set; }
+        public decimal? Month4 { get; set; }
 
         /// <summary>
         /// </summary>

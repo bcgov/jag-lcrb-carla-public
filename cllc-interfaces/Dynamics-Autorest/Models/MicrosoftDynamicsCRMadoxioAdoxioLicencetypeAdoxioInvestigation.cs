@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// adoxio_adoxio_licencetype_adoxio_investigation
+    /// Microsoft.Dynamics.CRM.adoxio_adoxio_licencetype_adoxio_investigation
     /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
     {
@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(string adoxioInvestigationid = default(string), string adoxioLicencetypeid = default(string), string adoxioAdoxioLicencetypeAdoxioInvestigationid = default(string), long? versionnumber = default(long?))
+        public MicrosoftDynamicsCRMadoxioAdoxioLicencetypeAdoxioInvestigation(System.Guid? adoxioInvestigationid = default(System.Guid?), System.Guid? adoxioLicencetypeid = default(System.Guid?), System.Guid? adoxioAdoxioLicencetypeAdoxioInvestigationid = default(System.Guid?), string versionnumber = default(string))
         {
             AdoxioInvestigationid = adoxioInvestigationid;
             AdoxioLicencetypeid = adoxioLicencetypeid;
@@ -46,22 +46,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_investigationid")]
-        public string AdoxioInvestigationid { get; set; }
+        public System.Guid? AdoxioInvestigationid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
+        public System.Guid? AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_adoxio_licencetype_adoxio_investigationid")]
-        public string AdoxioAdoxioLicencetypeAdoxioInvestigationid { get; set; }
+        public System.Guid? AdoxioAdoxioLicencetypeAdoxioInvestigationid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
     }
 }

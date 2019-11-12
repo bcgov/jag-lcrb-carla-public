@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// documenttemplate
+    /// Microsoft.Dynamics.CRM.documenttemplate
     /// </summary>
     public partial class MicrosoftDynamicsCRMdocumenttemplate
     {
@@ -27,7 +27,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdocumenttemplate class.
         /// </summary>
-        public MicrosoftDynamicsCRMdocumenttemplate(int? documenttype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string associatedentitytypecode = default(string), string documenttemplateid = default(string), string clientdata = default(string), long? versionnumber = default(long?), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), bool? status = default(bool?), string content = default(string), string _modifiedbyValue = default(string), int? languagecode = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="documenttype">Option set for selecting the type of the
+        /// document template</param>
+        /// <param name="modifiedon">Date and time when the document template
+        /// was last modified.</param>
+        /// <param name="name">Name of the document template.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the document template.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the document template.</param>
+        /// <param name="associatedentitytypecode">Associated Entity Type
+        /// Code.</param>
+        /// <param name="documenttemplateid">Unique identifier of the document
+        /// template.</param>
+        /// <param name="clientdata">Client data regarding this document
+        /// template.</param>
+        /// <param name="description">Additional information to describe the
+        /// Document Template</param>
+        /// <param name="createdon">Date and time when the document template
+        /// was created.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the web resource.</param>
+        /// <param name="status">Information about whether the document
+        /// template is active.</param>
+        /// <param name="content">Bytes of the document template.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the document template.</param>
+        /// <param name="languagecode">Language of Document Template.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the document template.</param>
+        public MicrosoftDynamicsCRMdocumenttemplate(int? documenttype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), string associatedentitytypecode = default(string), System.Guid? documenttemplateid = default(System.Guid?), string clientdata = default(string), string versionnumber = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), bool? status = default(bool?), string content = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), int? languagecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Documenttype = documenttype;
             Modifiedon = modifiedon;
@@ -60,41 +89,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets option set for selecting the type of the document
+        /// template
         /// </summary>
         [JsonProperty(PropertyName = "documenttype")]
         public int? Documenttype { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the document template was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the document template.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the document template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the document
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets associated Entity Type Code.
         /// </summary>
         [JsonProperty(PropertyName = "associatedentitytypecode")]
         public string Associatedentitytypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the document template.
         /// </summary>
         [JsonProperty(PropertyName = "documenttemplateid")]
-        public string Documenttemplateid { get; set; }
+        public System.Guid? Documenttemplateid { get; set; }
 
         /// <summary>
+        /// Gets or sets client data regarding this document template.
         /// </summary>
         [JsonProperty(PropertyName = "clientdata")]
         public string Clientdata { get; set; }
@@ -102,47 +143,60 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets additional information to describe the Document
+        /// Template
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the document template was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the document template is
+        /// active.
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public bool? Status { get; set; }
 
         /// <summary>
+        /// Gets or sets bytes of the document template.
         /// </summary>
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// document template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets language of Document Template.
         /// </summary>
         [JsonProperty(PropertyName = "languagecode")]
         public int? Languagecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// document template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

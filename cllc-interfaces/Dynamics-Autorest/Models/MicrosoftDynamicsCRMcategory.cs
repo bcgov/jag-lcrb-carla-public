@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// category
+    /// Microsoft.Dynamics.CRM.category
     /// </summary>
     public partial class MicrosoftDynamicsCRMcategory
     {
@@ -29,7 +29,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMcategory
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMcategory(long? versionnumber = default(long?), string _createdonbehalfbyValue = default(string), object exchangerate = default(object), string _owninguserValue = default(string), string _owningteamValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string categoryid = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string categorynumber = default(string), string _owneridValue = default(string), string _transactioncurrencyidValue = default(string), string description = default(string), string _parentcategoryidValue = default(string), int? sequencenumber = default(int?), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string title = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMcategory parentcategoryid = default(MicrosoftDynamicsCRMcategory), IList<MicrosoftDynamicsCRMcategory> categoryParentCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMsyncerror> categorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleCategory = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns this category.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the category.</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        /// <param name="categoryid">Shows the category.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="categorynumber">Shows the category number for customer
+        /// reference.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="description">Type a detailed description of the
+        /// category</param>
+        /// <param name="_parentcategoryidValue">Select an existing category
+        /// article for the category.</param>
+        /// <param name="sequencenumber">Enter a number to define the display
+        /// position of the category in the hierarchy.</param>
+        /// <param name="_owningbusinessunitValue">Shows the business unit that
+        /// the record owner belongs to.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="title">Type a title for the Category.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        public MicrosoftDynamicsCRMcategory(string versionnumber = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), decimal? exchangerate = default(decimal?), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? categoryid = default(System.Guid?), int? importsequencenumber = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string categorynumber = default(string), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), string description = default(string), System.Guid? _parentcategoryidValue = default(System.Guid?), int? sequencenumber = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), string title = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMcategory parentcategoryid = default(MicrosoftDynamicsCRMcategory), IList<MicrosoftDynamicsCRMcategory> categoryParentCategory = default(IList<MicrosoftDynamicsCRMcategory>), IList<MicrosoftDynamicsCRMsyncerror> categorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser lkCategoryModifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleCategory = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMsystemuser lkCategoryCreatedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
             Versionnumber = versionnumber;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -74,104 +116,134 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns this category.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the category.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the category.
         /// </summary>
         [JsonProperty(PropertyName = "categoryid")]
-        public string Categoryid { get; set; }
+        public System.Guid? Categoryid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the category number for customer reference.
         /// </summary>
         [JsonProperty(PropertyName = "categorynumber")]
         public string Categorynumber { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a detailed description of the category
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets select an existing category article for the category.
         /// </summary>
         [JsonProperty(PropertyName = "_parentcategoryid_value")]
-        public string _parentcategoryidValue { get; set; }
+        public System.Guid? _parentcategoryidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter a number to define the display position of the
+        /// category in the hierarchy.
         /// </summary>
         [JsonProperty(PropertyName = "sequencenumber")]
         public int? Sequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the business unit that the record owner belongs
+        /// to.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a title for the Category.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
@@ -199,7 +271,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

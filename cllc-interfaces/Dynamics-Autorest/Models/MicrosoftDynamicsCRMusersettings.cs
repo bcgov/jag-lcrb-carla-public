@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// usersettings
+    /// Microsoft.Dynamics.CRM.usersettings
     /// </summary>
     public partial class MicrosoftDynamicsCRMusersettings
     {
@@ -27,7 +27,210 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMusersettings
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMusersettings(string numberseparator = default(string), int? timezonedaylightbias = default(int?), string homepagelayout = default(string), string _modifiedonbehalfbyValue = default(string), string homepagearea = default(string), int? defaultsearchexperience = default(int?), int? longdateformatcode = default(int?), int? timezonedaylightmonth = default(int?), int? reportscripterrors = default(int?), int? outlooksyncinterval = default(int?), int? timezonecode = default(int?), bool? usecrmformforcontact = default(bool?), long? versionnumber = default(long?), bool? getstartedpanecontentenabled = default(bool?), string dateseparator = default(string), string _createdonbehalfbyValue = default(string), bool? usecrmformfortask = default(bool?), string amdesignator = default(string), int? timezonestandarddayofweek = default(int?), int? defaultcalendarview = default(int?), int? advancedfindstartupmode = default(int?), string personalizationsettings = default(string), string defaultcountrycode = default(string), int? negativeformatcode = default(int?), bool? isresourcebookingexchangesyncenabled = default(bool?), int? negativecurrencyformatcode = default(int?), int? localeid = default(int?), string decimalsymbol = default(string), string numbergroupformat = default(string), string _modifiedbyValue = default(string), string userprofile = default(string), string _createdbyValue = default(string), bool? splitviewstate = default(bool?), string homepagesubarea = default(string), int? helplanguageid = default(int?), int? addressbooksyncinterval = default(int?), int? timezonebias = default(int?), int? autocreatecontactonpromote = default(int?), bool? usecrmformforappointment = default(bool?), string dateformatstring = default(string), int? trackingtokenid = default(int?), bool? issendasallowed = default(bool?), bool? isdefaultcountrycodecheckenabled = default(bool?), int? timezonedaylightdayofweek = default(int?), int? fullnameconventioncode = default(int?), System.DateTimeOffset? lastalertsviewedtime = default(System.DateTimeOffset?), int? timezonestandardbias = default(int?), int? timezonestandardmonth = default(int?), int? timezonestandardsecond = default(int?), int? timezonestandardminute = default(int?), int? timezonedaylighthour = default(int?), bool? isduplicatedetectionenabledwhengoingonline = default(bool?), string businessunitid = default(string), int? paginglimit = default(int?), int? timezonestandardday = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string systemuserid = default(string), int? uilanguageid = default(int?), string pmdesignator = default(string), string currencysymbol = default(string), int? timezonedaylightminute = default(int?), int? incomingemailfilteringmethod = default(int?), bool? usecrmformforemail = default(bool?), bool? isguidedhelpenabled = default(bool?), int? currencyformatcode = default(int?), int? timezonedaylightday = default(int?), int? nexttrackingnumber = default(int?), int? timezonedaylightsecond = default(int?), int? entityformmode = default(int?), int? datavalidationmodeforexporttoexcel = default(int?), int? visualizationpanelayout = default(int?), long? resourcebookingexchangesyncversion = default(long?), bool? showweeknumber = default(bool?), int? timezonestandardyear = default(int?), string timeformatstring = default(string), int? timeformatcode = default(int?), bool? ignoreunsolicitedemail = default(bool?), int? dateformatcode = default(int?), int? calendartype = default(int?), string timeseparator = default(string), string workdaystarttime = default(string), string _transactioncurrencyidValue = default(string), int? timezonestandardhour = default(int?), bool? isappsforcrmalertdismissed = default(bool?), string workdaystoptime = default(string), int? offlinesyncinterval = default(int?), int? timezonedaylightyear = default(int?), bool? synccontactcompany = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isautodatacaptureenabled = default(bool?), string defaultdashboardid = default(string), bool? useimagestrips = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser systemuseridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit businessunitidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="numberseparator">Symbol used for number separation in
+        /// Microsoft Dynamics 365.</param>
+        /// <param name="timezonedaylightbias">Local time zone daylight
+        /// adjustment for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="homepagelayout">Configuration of the home page
+        /// layout.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the usersettings.</param>
+        /// <param name="homepagearea">Web site home page for the user.</param>
+        /// <param name="defaultsearchexperience">Default search experience for
+        /// the user.</param>
+        /// <param name="longdateformatcode">Information that specifies how
+        /// Long Date is displayed throughout Microsoft 365.</param>
+        /// <param name="timezonedaylightmonth">Local time zone daylight month
+        /// for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="reportscripterrors">Picklist for selecting the user
+        /// preference for reporting scripting errors.</param>
+        /// <param name="outlooksyncinterval">Normal polling frequency used for
+        /// record synchronization in Microsoft Office Outlook.</param>
+        /// <param name="timezonecode">Local time zone for the user.</param>
+        /// <param name="usecrmformforcontact">Indicates whether to use the
+        /// Microsoft Dynamics 365 contact form within Microsoft Office Outlook
+        /// for creating new contacts.</param>
+        /// <param name="getstartedpanecontentenabled">Information that
+        /// specifies whether the Get Started pane in lists is enabled.</param>
+        /// <param name="dateseparator">Character used to separate the month,
+        /// the day, and the year in dates in Microsoft Dynamics 365.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the usersettings.</param>
+        /// <param name="usecrmformfortask">Indicates whether to use the
+        /// Microsoft Dynamics 365 task form within Microsoft Office Outlook
+        /// for creating new tasks.</param>
+        /// <param name="amdesignator">AM designator to use in Microsoft
+        /// Dynamics 365.</param>
+        /// <param name="timezonestandarddayofweek">Local time zone standard
+        /// day of week for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="defaultcalendarview">Default calendar view for the
+        /// user.</param>
+        /// <param name="advancedfindstartupmode">Default mode, such as simple
+        /// or detailed, for advanced find.</param>
+        /// <param name="personalizationsettings">For internal use
+        /// only.</param>
+        /// <param name="defaultcountrycode">Text area to enter default country
+        /// code.</param>
+        /// <param name="negativeformatcode">Information that specifies how
+        /// negative numbers are displayed in Microsoft Dynamics 365.</param>
+        /// <param name="isresourcebookingexchangesyncenabled">Indicates if the
+        /// synchronization of user resource booking with Exchange is enabled
+        /// at user level.</param>
+        /// <param name="negativecurrencyformatcode">Information that specifies
+        /// how negative currency numbers are displayed in Microsoft Dynamics
+        /// 365.</param>
+        /// <param name="localeid">Unique identifier of the user
+        /// locale.</param>
+        /// <param name="decimalsymbol">Symbol used for decimal in Microsoft
+        /// Dynamics 365.</param>
+        /// <param name="numbergroupformat">Information that specifies how
+        /// numbers are grouped in Microsoft Dynamics 365.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the user settings.</param>
+        /// <param name="userprofile">Specifies user profile ids in comma
+        /// separated list.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the user settings.</param>
+        /// <param name="splitviewstate">For Internal use only</param>
+        /// <param name="homepagesubarea">Web site page for the user.</param>
+        /// <param name="helplanguageid">Unique identifier of the Help
+        /// language.</param>
+        /// <param name="addressbooksyncinterval">Normal polling frequency used
+        /// for address book synchronization in Microsoft Office
+        /// Outlook.</param>
+        /// <param name="timezonebias">Local time zone adjustment for the user.
+        /// System calculated based on the time zone selected.</param>
+        /// <param name="autocreatecontactonpromote">Auto-create contact on
+        /// client promote</param>
+        /// <param name="usecrmformforappointment">Indicates whether to use the
+        /// Microsoft Dynamics 365 appointment form within Microsoft Office
+        /// Outlook for creating new appointments.</param>
+        /// <param name="dateformatstring">String showing how the date is
+        /// displayed throughout Microsoft 365.</param>
+        /// <param name="trackingtokenid">Tracking token ID.</param>
+        /// <param name="issendasallowed">Indicates if send as other user
+        /// privilege is enabled or not.</param>
+        /// <param name="isdefaultcountrycodecheckenabled">Enable or disable
+        /// country code selection .</param>
+        /// <param name="timezonedaylightdayofweek">Local time zone daylight
+        /// day of week for the user. System calculated based on the time zone
+        /// selected in Options.</param>
+        /// <param name="fullnameconventioncode">Order in which names are to be
+        /// displayed in Microsoft Dynamics 365.</param>
+        /// <param name="lastalertsviewedtime">Shows the last time when the
+        /// traces were read from the database.</param>
+        /// <param name="timezonestandardbias">Local time zone standard time
+        /// bias for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="timezonestandardmonth">Local time zone standard month
+        /// for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="timezonestandardsecond">Local time zone standard
+        /// second for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="timezonestandardminute">Local time zone standard
+        /// minute for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="timezonedaylighthour">Local time zone daylight hour
+        /// for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="isduplicatedetectionenabledwhengoingonline">Indicates
+        /// if duplicate detection is enabled when going online.</param>
+        /// <param name="businessunitid">Unique identifier of the business unit
+        /// with which the user is associated.</param>
+        /// <param name="paginglimit">Information that specifies how many items
+        /// to list on a page in list views.</param>
+        /// <param name="timezonestandardday">Local time zone standard day for
+        /// the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="createdon">Date and time when the user settings object
+        /// was created.</param>
+        /// <param name="systemuserid">Unique identifier of the user.</param>
+        /// <param name="uilanguageid">Unique identifier of the language in
+        /// which to view the user interface (UI).</param>
+        /// <param name="pmdesignator">PM designator to use in Microsoft
+        /// Dynamics 365.</param>
+        /// <param name="currencysymbol">Symbol used for currency in Microsoft
+        /// Dynamics 365.</param>
+        /// <param name="timezonedaylightminute">Local time zone daylight
+        /// minute for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="incomingemailfilteringmethod">Incoming email filtering
+        /// method.</param>
+        /// <param name="usecrmformforemail">Indicates whether to use the
+        /// Microsoft Dynamics 365 email form within Microsoft Office Outlook
+        /// for creating new emails.</param>
+        /// <param name="isguidedhelpenabled">Enable or disable guided
+        /// help.</param>
+        /// <param name="currencyformatcode">Information about how currency
+        /// symbols are placed in Microsoft Dynamics 365.</param>
+        /// <param name="timezonedaylightday">Local time zone daylight day for
+        /// the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="nexttrackingnumber">Next tracking number.</param>
+        /// <param name="timezonedaylightsecond">Local time zone daylight
+        /// second for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="entityformmode">Indicates the form mode to be
+        /// used.</param>
+        /// <param name="datavalidationmodeforexporttoexcel">Information that
+        /// specifies the level of data validation in excel worksheets exported
+        /// in a format suitable for import.</param>
+        /// <param name="visualizationpanelayout">The layout of the
+        /// visualization pane.</param>
+        /// <param name="resourcebookingexchangesyncversion">The version number
+        /// for resource booking synchronization with Exchange.</param>
+        /// <param name="showweeknumber">Information that specifies whether to
+        /// display the week number in calendar displays in Microsoft Dynamics
+        /// 365.</param>
+        /// <param name="timezonestandardyear">Local time zone standard year
+        /// for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="timeformatstring">Text for how time is displayed in
+        /// Microsoft Dynamics 365.</param>
+        /// <param name="timeformatcode">Information that specifies how the
+        /// time is displayed in Microsoft Dynamics 365.</param>
+        /// <param name="ignoreunsolicitedemail">Information that specifies
+        /// whether a user account is to ignore unsolicited email
+        /// (deprecated).</param>
+        /// <param name="dateformatcode">Information about how the date is
+        /// displayed in Microsoft Dynamics 365.</param>
+        /// <param name="calendartype">Calendar type for the system. Set to
+        /// Gregorian US by default.</param>
+        /// <param name="timeseparator">Text for how time is displayed in
+        /// Microsoft Dynamics 365.</param>
+        /// <param name="workdaystarttime">Workday start time for the
+        /// user.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// default currency of the user.</param>
+        /// <param name="timezonestandardhour">Local time zone standard hour
+        /// for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="isappsforcrmalertdismissed">Show or dismiss alert for
+        /// Apps for 365.</param>
+        /// <param name="workdaystoptime">Workday stop time for the
+        /// user.</param>
+        /// <param name="offlinesyncinterval">Normal polling frequency used for
+        /// background offline synchronization in Microsoft Office
+        /// Outlook.</param>
+        /// <param name="timezonedaylightyear">Local time zone daylight year
+        /// for the user. System calculated based on the time zone
+        /// selected.</param>
+        /// <param name="synccontactcompany">Indicates if the company field in
+        /// Microsoft Office Outlook items are set during Outlook
+        /// synchronization.</param>
+        /// <param name="modifiedon">Date and time when the user settings
+        /// object was last modified.</param>
+        /// <param name="isautodatacaptureenabled">Indicates whether to use the
+        /// Auto Capture feature enabled or not.</param>
+        /// <param name="defaultdashboardid">Unique identifier of the default
+        /// dashboard.</param>
+        /// <param name="useimagestrips">Indicates whether image strips are
+        /// used to render images.</param>
+        public MicrosoftDynamicsCRMusersettings(string numberseparator = default(string), int? timezonedaylightbias = default(int?), string homepagelayout = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string homepagearea = default(string), int? defaultsearchexperience = default(int?), int? longdateformatcode = default(int?), int? timezonedaylightmonth = default(int?), int? reportscripterrors = default(int?), int? outlooksyncinterval = default(int?), int? timezonecode = default(int?), bool? usecrmformforcontact = default(bool?), string versionnumber = default(string), bool? getstartedpanecontentenabled = default(bool?), string dateseparator = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), bool? usecrmformfortask = default(bool?), string amdesignator = default(string), int? timezonestandarddayofweek = default(int?), int? defaultcalendarview = default(int?), int? advancedfindstartupmode = default(int?), string personalizationsettings = default(string), string defaultcountrycode = default(string), int? negativeformatcode = default(int?), bool? isresourcebookingexchangesyncenabled = default(bool?), int? negativecurrencyformatcode = default(int?), int? localeid = default(int?), string decimalsymbol = default(string), string numbergroupformat = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), string userprofile = default(string), System.Guid? _createdbyValue = default(System.Guid?), bool? splitviewstate = default(bool?), string homepagesubarea = default(string), int? helplanguageid = default(int?), int? addressbooksyncinterval = default(int?), int? timezonebias = default(int?), int? autocreatecontactonpromote = default(int?), bool? usecrmformforappointment = default(bool?), string dateformatstring = default(string), int? trackingtokenid = default(int?), bool? issendasallowed = default(bool?), bool? isdefaultcountrycodecheckenabled = default(bool?), int? timezonedaylightdayofweek = default(int?), int? fullnameconventioncode = default(int?), System.DateTimeOffset? lastalertsviewedtime = default(System.DateTimeOffset?), int? timezonestandardbias = default(int?), int? timezonestandardmonth = default(int?), int? timezonestandardsecond = default(int?), int? timezonestandardminute = default(int?), int? timezonedaylighthour = default(int?), bool? isduplicatedetectionenabledwhengoingonline = default(bool?), System.Guid? businessunitid = default(System.Guid?), int? paginglimit = default(int?), int? timezonestandardday = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? systemuserid = default(System.Guid?), int? uilanguageid = default(int?), string pmdesignator = default(string), string currencysymbol = default(string), int? timezonedaylightminute = default(int?), int? incomingemailfilteringmethod = default(int?), bool? usecrmformforemail = default(bool?), bool? isguidedhelpenabled = default(bool?), int? currencyformatcode = default(int?), int? timezonedaylightday = default(int?), int? nexttrackingnumber = default(int?), int? timezonedaylightsecond = default(int?), int? entityformmode = default(int?), int? datavalidationmodeforexporttoexcel = default(int?), int? visualizationpanelayout = default(int?), long? resourcebookingexchangesyncversion = default(long?), bool? showweeknumber = default(bool?), int? timezonestandardyear = default(int?), string timeformatstring = default(string), int? timeformatcode = default(int?), bool? ignoreunsolicitedemail = default(bool?), int? dateformatcode = default(int?), int? calendartype = default(int?), string timeseparator = default(string), string workdaystarttime = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), int? timezonestandardhour = default(int?), bool? isappsforcrmalertdismissed = default(bool?), string workdaystoptime = default(string), int? offlinesyncinterval = default(int?), int? timezonedaylightyear = default(int?), bool? synccontactcompany = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isautodatacaptureenabled = default(bool?), System.Guid? defaultdashboardid = default(System.Guid?), bool? useimagestrips = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser systemuseridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit businessunitidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Numberseparator = numberseparator;
             Timezonedaylightbias = timezonedaylightbias;
@@ -137,61 +340,82 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets symbol used for number separation in Microsoft
+        /// Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "numberseparator")]
         public string Numberseparator { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight adjustment for the user.
+        /// System calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylightbias")]
         public int? Timezonedaylightbias { get; set; }
 
         /// <summary>
+        /// Gets or sets configuration of the home page layout.
         /// </summary>
         [JsonProperty(PropertyName = "homepagelayout")]
         public string Homepagelayout { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the usersettings.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets web site home page for the user.
         /// </summary>
         [JsonProperty(PropertyName = "homepagearea")]
         public string Homepagearea { get; set; }
 
         /// <summary>
+        /// Gets or sets default search experience for the user.
         /// </summary>
         [JsonProperty(PropertyName = "defaultsearchexperience")]
         public int? Defaultsearchexperience { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies how Long Date is displayed
+        /// throughout Microsoft 365.
         /// </summary>
         [JsonProperty(PropertyName = "longdateformatcode")]
         public int? Longdateformatcode { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight month for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylightmonth")]
         public int? Timezonedaylightmonth { get; set; }
 
         /// <summary>
+        /// Gets or sets picklist for selecting the user preference for
+        /// reporting scripting errors.
         /// </summary>
         [JsonProperty(PropertyName = "reportscripterrors")]
         public int? Reportscripterrors { get; set; }
 
         /// <summary>
+        /// Gets or sets normal polling frequency used for record
+        /// synchronization in Microsoft Office Outlook.
         /// </summary>
         [JsonProperty(PropertyName = "outlooksyncinterval")]
         public int? Outlooksyncinterval { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone for the user.
         /// </summary>
         [JsonProperty(PropertyName = "timezonecode")]
         public int? Timezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether to use the Microsoft Dynamics 365
+        /// contact form within Microsoft Office Outlook for creating new
+        /// contacts.
         /// </summary>
         [JsonProperty(PropertyName = "usecrmformforcontact")]
         public bool? Usecrmformforcontact { get; set; }
@@ -199,399 +423,533 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether the Get Started
+        /// pane in lists is enabled.
         /// </summary>
         [JsonProperty(PropertyName = "getstartedpanecontentenabled")]
         public bool? Getstartedpanecontentenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets character used to separate the month, the day, and the
+        /// year in dates in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "dateseparator")]
         public string Dateseparator { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// usersettings.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether to use the Microsoft Dynamics 365
+        /// task form within Microsoft Office Outlook for creating new tasks.
         /// </summary>
         [JsonProperty(PropertyName = "usecrmformfortask")]
         public bool? Usecrmformfortask { get; set; }
 
         /// <summary>
+        /// Gets or sets AM designator to use in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "amdesignator")]
         public string Amdesignator { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard day of week for the user.
+        /// System calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandarddayofweek")]
         public int? Timezonestandarddayofweek { get; set; }
 
         /// <summary>
+        /// Gets or sets default calendar view for the user.
         /// </summary>
         [JsonProperty(PropertyName = "defaultcalendarview")]
         public int? Defaultcalendarview { get; set; }
 
         /// <summary>
+        /// Gets or sets default mode, such as simple or detailed, for advanced
+        /// find.
         /// </summary>
         [JsonProperty(PropertyName = "advancedfindstartupmode")]
         public int? Advancedfindstartupmode { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "personalizationsettings")]
         public string Personalizationsettings { get; set; }
 
         /// <summary>
+        /// Gets or sets text area to enter default country code.
         /// </summary>
         [JsonProperty(PropertyName = "defaultcountrycode")]
         public string Defaultcountrycode { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies how negative numbers are
+        /// displayed in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "negativeformatcode")]
         public int? Negativeformatcode { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if the synchronization of user resource
+        /// booking with Exchange is enabled at user level.
         /// </summary>
         [JsonProperty(PropertyName = "isresourcebookingexchangesyncenabled")]
         public bool? Isresourcebookingexchangesyncenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies how negative currency
+        /// numbers are displayed in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "negativecurrencyformatcode")]
         public int? Negativecurrencyformatcode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user locale.
         /// </summary>
         [JsonProperty(PropertyName = "localeid")]
         public int? Localeid { get; set; }
 
         /// <summary>
+        /// Gets or sets symbol used for decimal in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "decimalsymbol")]
         public string Decimalsymbol { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies how numbers are grouped in
+        /// Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "numbergroupformat")]
         public string Numbergroupformat { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// user settings.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies user profile ids in comma separated list.
         /// </summary>
         [JsonProperty(PropertyName = "userprofile")]
         public string Userprofile { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the user
+        /// settings.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for Internal use only
         /// </summary>
         [JsonProperty(PropertyName = "splitviewstate")]
         public bool? Splitviewstate { get; set; }
 
         /// <summary>
+        /// Gets or sets web site page for the user.
         /// </summary>
         [JsonProperty(PropertyName = "homepagesubarea")]
         public string Homepagesubarea { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Help language.
         /// </summary>
         [JsonProperty(PropertyName = "helplanguageid")]
         public int? Helplanguageid { get; set; }
 
         /// <summary>
+        /// Gets or sets normal polling frequency used for address book
+        /// synchronization in Microsoft Office Outlook.
         /// </summary>
         [JsonProperty(PropertyName = "addressbooksyncinterval")]
         public int? Addressbooksyncinterval { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone adjustment for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonebias")]
         public int? Timezonebias { get; set; }
 
         /// <summary>
+        /// Gets or sets auto-create contact on client promote
         /// </summary>
         [JsonProperty(PropertyName = "autocreatecontactonpromote")]
         public int? Autocreatecontactonpromote { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether to use the Microsoft Dynamics 365
+        /// appointment form within Microsoft Office Outlook for creating new
+        /// appointments.
         /// </summary>
         [JsonProperty(PropertyName = "usecrmformforappointment")]
         public bool? Usecrmformforappointment { get; set; }
 
         /// <summary>
+        /// Gets or sets string showing how the date is displayed throughout
+        /// Microsoft 365.
         /// </summary>
         [JsonProperty(PropertyName = "dateformatstring")]
         public string Dateformatstring { get; set; }
 
         /// <summary>
+        /// Gets or sets tracking token ID.
         /// </summary>
         [JsonProperty(PropertyName = "trackingtokenid")]
         public int? Trackingtokenid { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if send as other user privilege is enabled
+        /// or not.
         /// </summary>
         [JsonProperty(PropertyName = "issendasallowed")]
         public bool? Issendasallowed { get; set; }
 
         /// <summary>
+        /// Gets or sets enable or disable country code selection .
         /// </summary>
         [JsonProperty(PropertyName = "isdefaultcountrycodecheckenabled")]
         public bool? Isdefaultcountrycodecheckenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight day of week for the user.
+        /// System calculated based on the time zone selected in Options.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylightdayofweek")]
         public int? Timezonedaylightdayofweek { get; set; }
 
         /// <summary>
+        /// Gets or sets order in which names are to be displayed in Microsoft
+        /// Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "fullnameconventioncode")]
         public int? Fullnameconventioncode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the last time when the traces were read from the
+        /// database.
         /// </summary>
         [JsonProperty(PropertyName = "lastalertsviewedtime")]
         public System.DateTimeOffset? Lastalertsviewedtime { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard time bias for the user.
+        /// System calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandardbias")]
         public int? Timezonestandardbias { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard month for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandardmonth")]
         public int? Timezonestandardmonth { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard second for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandardsecond")]
         public int? Timezonestandardsecond { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard minute for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandardminute")]
         public int? Timezonestandardminute { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight hour for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylighthour")]
         public int? Timezonedaylighthour { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if duplicate detection is enabled when going
+        /// online.
         /// </summary>
         [JsonProperty(PropertyName = "isduplicatedetectionenabledwhengoingonline")]
         public bool? Isduplicatedetectionenabledwhengoingonline { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit with which the
+        /// user is associated.
         /// </summary>
         [JsonProperty(PropertyName = "businessunitid")]
-        public string Businessunitid { get; set; }
+        public System.Guid? Businessunitid { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies how many items to list on a
+        /// page in list views.
         /// </summary>
         [JsonProperty(PropertyName = "paginglimit")]
         public int? Paginglimit { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard day for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandardday")]
         public int? Timezonestandardday { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the user settings object was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user.
         /// </summary>
         [JsonProperty(PropertyName = "systemuserid")]
-        public string Systemuserid { get; set; }
+        public System.Guid? Systemuserid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the language in which to view the
+        /// user interface (UI).
         /// </summary>
         [JsonProperty(PropertyName = "uilanguageid")]
         public int? Uilanguageid { get; set; }
 
         /// <summary>
+        /// Gets or sets PM designator to use in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "pmdesignator")]
         public string Pmdesignator { get; set; }
 
         /// <summary>
+        /// Gets or sets symbol used for currency in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "currencysymbol")]
         public string Currencysymbol { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight minute for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylightminute")]
         public int? Timezonedaylightminute { get; set; }
 
         /// <summary>
+        /// Gets or sets incoming email filtering method.
         /// </summary>
         [JsonProperty(PropertyName = "incomingemailfilteringmethod")]
         public int? Incomingemailfilteringmethod { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether to use the Microsoft Dynamics 365
+        /// email form within Microsoft Office Outlook for creating new emails.
         /// </summary>
         [JsonProperty(PropertyName = "usecrmformforemail")]
         public bool? Usecrmformforemail { get; set; }
 
         /// <summary>
+        /// Gets or sets enable or disable guided help.
         /// </summary>
         [JsonProperty(PropertyName = "isguidedhelpenabled")]
         public bool? Isguidedhelpenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets information about how currency symbols are placed in
+        /// Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "currencyformatcode")]
         public int? Currencyformatcode { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight day for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylightday")]
         public int? Timezonedaylightday { get; set; }
 
         /// <summary>
+        /// Gets or sets next tracking number.
         /// </summary>
         [JsonProperty(PropertyName = "nexttrackingnumber")]
         public int? Nexttrackingnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight second for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylightsecond")]
         public int? Timezonedaylightsecond { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the form mode to be used.
         /// </summary>
         [JsonProperty(PropertyName = "entityformmode")]
         public int? Entityformmode { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies the level of data
+        /// validation in excel worksheets exported in a format suitable for
+        /// import.
         /// </summary>
         [JsonProperty(PropertyName = "datavalidationmodeforexporttoexcel")]
         public int? Datavalidationmodeforexporttoexcel { get; set; }
 
         /// <summary>
+        /// Gets or sets the layout of the visualization pane.
         /// </summary>
         [JsonProperty(PropertyName = "visualizationpanelayout")]
         public int? Visualizationpanelayout { get; set; }
 
         /// <summary>
+        /// Gets or sets the version number for resource booking
+        /// synchronization with Exchange.
         /// </summary>
         [JsonProperty(PropertyName = "resourcebookingexchangesyncversion")]
         public long? Resourcebookingexchangesyncversion { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether to display the week
+        /// number in calendar displays in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "showweeknumber")]
         public bool? Showweeknumber { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard year for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandardyear")]
         public int? Timezonestandardyear { get; set; }
 
         /// <summary>
+        /// Gets or sets text for how time is displayed in Microsoft Dynamics
+        /// 365.
         /// </summary>
         [JsonProperty(PropertyName = "timeformatstring")]
         public string Timeformatstring { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies how the time is displayed
+        /// in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "timeformatcode")]
         public int? Timeformatcode { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether a user account is
+        /// to ignore unsolicited email (deprecated).
         /// </summary>
         [JsonProperty(PropertyName = "ignoreunsolicitedemail")]
         public bool? Ignoreunsolicitedemail { get; set; }
 
         /// <summary>
+        /// Gets or sets information about how the date is displayed in
+        /// Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "dateformatcode")]
         public int? Dateformatcode { get; set; }
 
         /// <summary>
+        /// Gets or sets calendar type for the system. Set to Gregorian US by
+        /// default.
         /// </summary>
         [JsonProperty(PropertyName = "calendartype")]
         public int? Calendartype { get; set; }
 
         /// <summary>
+        /// Gets or sets text for how time is displayed in Microsoft Dynamics
+        /// 365.
         /// </summary>
         [JsonProperty(PropertyName = "timeseparator")]
         public string Timeseparator { get; set; }
 
         /// <summary>
+        /// Gets or sets workday start time for the user.
         /// </summary>
         [JsonProperty(PropertyName = "workdaystarttime")]
         public string Workdaystarttime { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the default currency of the user.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone standard hour for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonestandardhour")]
         public int? Timezonestandardhour { get; set; }
 
         /// <summary>
+        /// Gets or sets show or dismiss alert for Apps for 365.
         /// </summary>
         [JsonProperty(PropertyName = "isappsforcrmalertdismissed")]
         public bool? Isappsforcrmalertdismissed { get; set; }
 
         /// <summary>
+        /// Gets or sets workday stop time for the user.
         /// </summary>
         [JsonProperty(PropertyName = "workdaystoptime")]
         public string Workdaystoptime { get; set; }
 
         /// <summary>
+        /// Gets or sets normal polling frequency used for background offline
+        /// synchronization in Microsoft Office Outlook.
         /// </summary>
         [JsonProperty(PropertyName = "offlinesyncinterval")]
         public int? Offlinesyncinterval { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone daylight year for the user. System
+        /// calculated based on the time zone selected.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedaylightyear")]
         public int? Timezonedaylightyear { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if the company field in Microsoft Office
+        /// Outlook items are set during Outlook synchronization.
         /// </summary>
         [JsonProperty(PropertyName = "synccontactcompany")]
         public bool? Synccontactcompany { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the user settings object was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether to use the Auto Capture feature
+        /// enabled or not.
         /// </summary>
         [JsonProperty(PropertyName = "isautodatacaptureenabled")]
         public bool? Isautodatacaptureenabled { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the default dashboard.
         /// </summary>
         [JsonProperty(PropertyName = "defaultdashboardid")]
-        public string Defaultdashboardid { get; set; }
+        public System.Guid? Defaultdashboardid { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether image strips are used to render
+        /// images.
         /// </summary>
         [JsonProperty(PropertyName = "useimagestrips")]
         public bool? Useimagestrips { get; set; }
