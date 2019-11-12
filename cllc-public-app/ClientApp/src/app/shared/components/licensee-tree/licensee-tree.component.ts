@@ -9,7 +9,6 @@ import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-an
 import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
 import { FormBase } from '@shared/form-base';
 import { Application } from '@models/application.model';
 
@@ -21,9 +20,7 @@ import { Application } from '@models/application.model';
 })
 export class LicenseeTreeComponent extends FormBase implements OnInit {
   @Input() treeRoot: LicenseeChangeLog;
-  @Input() currentLegalEntityTree: LegalEntity;
   @Input() enableEditing = true;
-  @Output() editedTree: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
   treeControl = new NestedTreeControl<LicenseeChangeLog>(node => node.children);
   dataSource = new MatTreeNestedDataSource<any>();
   @ViewChild('tree', { static: false }) tree: MatTree<any>;
@@ -32,49 +29,19 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
-  applicationId: string;
-  application: Application;
 
   constructor(public dialog: MatDialog,
     private route: ActivatedRoute) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
   hasChild = (_: number, node: LicenseeChangeLog) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
-    // this.treeRoot = this.processLegalEntityTree(this.currentLegalEntityTree);
-    // this.editedTree.emit(this.treeRoot);
-    // this.treeRoot.isRoot = true;
-    // this.changeTree = this.treeRoot;
     this.dataSource.data = [this.treeRoot];
     this.refreshTreeAndChangeTables();
     this.treeControl.dataNodes = this.dataSource.data;
     this.treeControl.expandAll();
-  }
-
-  /**
-    * Finds a node in the tree where the compare predicate returns true
-    * @param node 'Node in tree to search from'
-    * @param compareFn 'a predicate to search for a node by
-    */
-  findNodeInTree(node: LicenseeChangeLog, compareFn: (node: LicenseeChangeLog) => boolean): LicenseeChangeLog {
-    let result = null;
-
-    if (compareFn(node)) {
-      result = node;
-    } else {
-      const children = node.children || [];
-      for (const child of children) {
-        const res = this.findNodeInTree(child, compareFn);
-        if (res) {
-          result = res;
-          break;
-        }
-      }
-    }
-    return result;
   }
 
   /**
@@ -122,6 +89,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         parentNode.children = parentNode.children || [];
         parentNode.children.push(formData);
         this.refreshTreeAndChangeTables();
+        this.treeControl.expandAll();
       }
       );
   }
@@ -142,6 +110,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         parentNode.children = parentNode.children || [];
         parentNode.children.push(formData);
         this.refreshTreeAndChangeTables();
+        this.treeControl.expandAll();
       }
       );
   }
@@ -294,3 +263,4 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     }
   }
 }
+

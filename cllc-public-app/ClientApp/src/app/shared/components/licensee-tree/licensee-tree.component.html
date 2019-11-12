@@ -48,7 +48,7 @@
       [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}">
       {{node.businessNameNew}}
     </span>
-    <span class="tree-label" *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span>
+    <!-- <span class="tree-label" *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span> -->
     &nbsp; &nbsp;
     <a *ngIf="enableEditing && !node.isIndividual && !node.isRemoveChangeType()" href="javascript:void(0)"
       style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
