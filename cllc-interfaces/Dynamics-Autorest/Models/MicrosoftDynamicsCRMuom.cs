@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// uom
+    /// Microsoft.Dynamics.CRM.uom
     /// </summary>
     public partial class MicrosoftDynamicsCRMuom
     {
@@ -27,7 +27,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMuom class.
         /// </summary>
-        public MicrosoftDynamicsCRMuom(string _modifiedonbehalfbyValue = default(string), string _modifiedbyexternalpartyValue = default(string), string name = default(string), string _uomscheduleidValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string uomid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), object quantity = default(object), string _baseuomValue = default(string), long? versionnumber = default(long?), string organizationid = default(string), int? importsequencenumber = default(int?), string _createdbyexternalpartyValue = default(string), bool? isschedulebaseuom = default(bool?), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMproductpricelevel> unitOfMeasurementProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMinvoicedetail> unitOfMeasurementInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), IList<MicrosoftDynamicsCRMquotedetail> unitOfMeasurementQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMproduct> unitOfMeasurementProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMsalesorderdetail> unitOfMeasurementOrderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom baseuom = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMuom> unitOfMeasurementBaseUnit = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMproductassociation> unitOfMeasurementProductassociation = default(IList<MicrosoftDynamicsCRMproductassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontractdetail> unitOfMeasurementContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMopportunityproduct> unitOfMeasurementOpportunityProducts = default(IList<MicrosoftDynamicsCRMopportunityproduct>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> uoMBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> uoMSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> uoMAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the uom.</param>
+        /// <param name="_modifiedbyexternalpartyValue">Shows the external
+        /// party who modified the record.</param>
+        /// <param name="name">Type a descriptive title or name for the unit of
+        /// measure.</param>
+        /// <param name="_uomscheduleidValue">Choose the ID of the unit group
+        /// that the unit is associated with.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the uom.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the unit.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="modifiedon">Date and time when the unit was last
+        /// modified.</param>
+        /// <param name="uomid">Unique identifier of the unit.</param>
+        /// <param name="createdon">Date and time when the unit was
+        /// created.</param>
+        /// <param name="quantity">Unit quantity for the product.</param>
+        /// <param name="_baseuomValue">Choose the base or primary unit on
+        /// which the unit is based.</param>
+        /// <param name="versionnumber">Version number of the unit.</param>
+        /// <param name="organizationid">Unique identifier of the organization
+        /// associated with the unit of measure.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_createdbyexternalpartyValue">Shows the external party
+        /// who created the record.</param>
+        /// <param name="isschedulebaseuom">Tells whether the unit is the base
+        /// unit for the associated unit group.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the unit.</param>
+        public MicrosoftDynamicsCRMuom(System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _modifiedbyexternalpartyValue = default(System.Guid?), string name = default(string), System.Guid? _uomscheduleidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? uomid = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? quantity = default(decimal?), System.Guid? _baseuomValue = default(System.Guid?), string versionnumber = default(string), System.Guid? organizationid = default(System.Guid?), int? importsequencenumber = default(int?), System.Guid? _createdbyexternalpartyValue = default(System.Guid?), bool? isschedulebaseuom = default(bool?), System.Guid? _createdbyValue = default(System.Guid?), IList<MicrosoftDynamicsCRMproductpricelevel> unitOfMeasurementProductPriceLevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMinvoicedetail> unitOfMeasurementInvoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), IList<MicrosoftDynamicsCRMquotedetail> unitOfMeasurementQuoteDetails = default(IList<MicrosoftDynamicsCRMquotedetail>), IList<MicrosoftDynamicsCRMproduct> unitOfMeasurementProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMsalesorderdetail> unitOfMeasurementOrderDetails = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom baseuom = default(MicrosoftDynamicsCRMuom), IList<MicrosoftDynamicsCRMuom> unitOfMeasurementBaseUnit = default(IList<MicrosoftDynamicsCRMuom>), IList<MicrosoftDynamicsCRMproductassociation> unitOfMeasurementProductassociation = default(IList<MicrosoftDynamicsCRMproductassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontractdetail> unitOfMeasurementContractLineItems = default(IList<MicrosoftDynamicsCRMcontractdetail>), IList<MicrosoftDynamicsCRMopportunityproduct> unitOfMeasurementOpportunityProducts = default(IList<MicrosoftDynamicsCRMopportunityproduct>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> uoMBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> uoMSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> uoMAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
@@ -74,94 +107,121 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the uom.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the external party who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
-        public string _modifiedbyexternalpartyValue { get; set; }
+        public System.Guid? _modifiedbyexternalpartyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a descriptive title or name for the unit of
+        /// measure.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the ID of the unit group that the unit is
+        /// associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_uomscheduleid_value")]
-        public string _uomscheduleidValue { get; set; }
+        public System.Guid? _uomscheduleidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// uom.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// unit.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the unit was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the unit.
         /// </summary>
         [JsonProperty(PropertyName = "uomid")]
-        public string Uomid { get; set; }
+        public System.Guid? Uomid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the unit was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unit quantity for the product.
         /// </summary>
         [JsonProperty(PropertyName = "quantity")]
-        public object Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the base or primary unit on which the unit is
+        /// based.
         /// </summary>
         [JsonProperty(PropertyName = "_baseuom_value")]
-        public string _baseuomValue { get; set; }
+        public System.Guid? _baseuomValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the unit.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the unit of measure.
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
+        public System.Guid? Organizationid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the external party who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
-        public string _createdbyexternalpartyValue { get; set; }
+        public System.Guid? _createdbyexternalpartyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether the unit is the base unit for the
+        /// associated unit group.
         /// </summary>
         [JsonProperty(PropertyName = "isschedulebaseuom")]
         public bool? Isschedulebaseuom { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the unit.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// slaitem
+    /// Microsoft.Dynamics.CRM.slaitem
     /// </summary>
     public partial class MicrosoftDynamicsCRMslaitem
     {
@@ -29,7 +29,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMslaitem
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMslaitem(string _createdbyValue = default(string), string _owneridValue = default(string), int? failureafter = default(int?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), int? warnafter = default(int?), string description = default(string), bool? ismanaged = default(bool?), string _owninguserValue = default(string), int? sequencenumber = default(int?), string _slaidValue = default(string), int? componentstate = default(int?), string solutionid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _workflowidValue = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string applicablewhenxml = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), long? versionnumber = default(long?), string slaitemidunique = default(string), string relatedfield = default(string), object exchangerate = default(object), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string successconditionsxml = default(string), string slaitemid = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMworkflow workflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> sLAItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="_owneridValue">Enter the user or team who owns the
+        /// SLA. This field is updated every time the item is assigned to a
+        /// different user.</param>
+        /// <param name="failureafter">Select how soon the success criteria
+        /// must be met until the SLA item is considered failed and failure
+        /// actions are initiated. The actual duration is based on the business
+        /// hours as specified in the associated SLA record.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// currency associated with the SLA Item record.</param>
+        /// <param name="warnafter">Select how soon the success criteria must
+        /// be met before warning actions are initiated. The actual duration is
+        /// based on the business hours as specified in the associated SLA
+        /// record.</param>
+        /// <param name="description">Type additional information to describe
+        /// the SLA Item</param>
+        /// <param name="ismanaged">For internal use only.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the SLA Item record.</param>
+        /// <param name="sequencenumber">Select the time zone, or UTC offset,
+        /// for this address so that other people can reference it when they
+        /// contact someone at this address.</param>
+        /// <param name="_slaidValue">Unique identifier for SLA associated with
+        /// SLA Item.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record</param>
+        /// <param name="_workflowidValue">Workflow associated with the SLA
+        /// Item.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="applicablewhenxml">Condition for SLA item</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="name">Type a descriptive name of the service level
+        /// agreement (SLA) item.</param>
+        /// <param name="versionnumber">Version number of the SLA Item.</param>
+        /// <param name="slaitemidunique">For internal use only.</param>
+        /// <param name="relatedfield">Select the service level agreement (SLA)
+        /// key performance indicator (KPI) that this SLA Item is created
+        /// for.</param>
+        /// <param name="exchangerate">Exchange rate between the currency
+        /// associated with the SLA Item record and the base currency.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="successconditionsxml">Condition for SLA item</param>
+        /// <param name="slaitemid">Unique identifier of the SLA Item.</param>
+        public MicrosoftDynamicsCRMslaitem(System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), int? failureafter = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), int? warnafter = default(int?), string description = default(string), bool? ismanaged = default(bool?), System.Guid? _owninguserValue = default(System.Guid?), int? sequencenumber = default(int?), System.Guid? _slaidValue = default(System.Guid?), int? componentstate = default(int?), System.Guid? solutionid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _workflowidValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string applicablewhenxml = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), string versionnumber = default(string), System.Guid? slaitemidunique = default(System.Guid?), string relatedfield = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string successconditionsxml = default(string), System.Guid? slaitemid = default(System.Guid?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMworkflow workflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMsyncerror> sLAItemSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             this._owneridValue = _owneridValue;
@@ -76,144 +132,192 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who owns the SLA. This field is
+        /// updated every time the item is assigned to a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select how soon the success criteria must be met until
+        /// the SLA item is considered failed and failure actions are
+        /// initiated. The actual duration is based on the business hours as
+        /// specified in the associated SLA record.
         /// </summary>
         [JsonProperty(PropertyName = "failureafter")]
         public int? Failureafter { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the currency associated with the
+        /// SLA Item record.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select how soon the success criteria must be met
+        /// before warning actions are initiated. The actual duration is based
+        /// on the business hours as specified in the associated SLA record.
         /// </summary>
         [JsonProperty(PropertyName = "warnafter")]
         public int? Warnafter { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the SLA Item
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the SLA Item
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select the time zone, or UTC offset, for this address
+        /// so that other people can reference it when they contact someone at
+        /// this address.
         /// </summary>
         [JsonProperty(PropertyName = "sequencenumber")]
         public int? Sequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for SLA associated with SLA Item.
         /// </summary>
         [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
+        public System.Guid? _slaidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        public System.Guid? Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets workflow associated with the SLA Item.
         /// </summary>
         [JsonProperty(PropertyName = "_workflowid_value")]
-        public string _workflowidValue { get; set; }
+        public System.Guid? _workflowidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets condition for SLA item
         /// </summary>
         [JsonProperty(PropertyName = "applicablewhenxml")]
         public string Applicablewhenxml { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets type a descriptive name of the service level agreement
+        /// (SLA) item.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the SLA Item.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "slaitemidunique")]
-        public string Slaitemidunique { get; set; }
+        public System.Guid? Slaitemidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets select the service level agreement (SLA) key
+        /// performance indicator (KPI) that this SLA Item is created for.
         /// </summary>
         [JsonProperty(PropertyName = "relatedfield")]
         public string Relatedfield { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate between the currency associated with the
+        /// SLA Item record and the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets condition for SLA item
         /// </summary>
         [JsonProperty(PropertyName = "successconditionsxml")]
         public string Successconditionsxml { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SLA Item.
         /// </summary>
         [JsonProperty(PropertyName = "slaitemid")]
-        public string Slaitemid { get; set; }
+        public System.Guid? Slaitemid { get; set; }
 
         /// <summary>
         /// </summary>

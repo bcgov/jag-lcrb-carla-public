@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// discount
+    /// Microsoft.Dynamics.CRM.discount
     /// </summary>
     public partial class MicrosoftDynamicsCRMdiscount
     {
@@ -29,7 +29,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMdiscount
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMdiscount(object amount = default(object), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), bool? isamounttype = default(bool?), string _modifiedonbehalfbyValue = default(string), string organizationid = default(string), object amountBase = default(object), object highquantity = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), object exchangerate = default(object), string discountid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), object percentage = default(object), object lowquantity = default(object), string _discounttypeidValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _transactioncurrencyidValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> discountAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> discountSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdiscounttype discounttypeid = default(MicrosoftDynamicsCRMdiscounttype), IList<MicrosoftDynamicsCRMbulkdeletefailure> discountBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="amount">Amount of the discount, specified either as a
+        /// percentage or as a monetary amount.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the discount.</param>
+        /// <param name="isamounttype">Specifies whether the discount is
+        /// specified as a monetary amount or a percentage.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the discount.</param>
+        /// <param name="organizationid">Unique identifier of the organization
+        /// associated with the discount.</param>
+        /// <param name="amountBase">Shows the Amount field converted to the
+        /// system's default base currency, if specified as a fixed amount. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.</param>
+        /// <param name="highquantity">Upper boundary for the quantity range to
+        /// which a particular discount can be applied.</param>
+        /// <param name="createdon">Date and time when the discount was
+        /// created.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="discountid">Unique identifier of the discount.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the discount.</param>
+        /// <param name="modifiedon">Date and time when the discount was last
+        /// modified.</param>
+        /// <param name="percentage">Percentage discount value.</param>
+        /// <param name="lowquantity">Lower boundary for the quantity range to
+        /// which a particular discount is applied.</param>
+        /// <param name="_discounttypeidValue">Unique identifier of the
+        /// discount list associated with the discount.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the discount.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="versionnumber">Version number of the discount.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        public MicrosoftDynamicsCRMdiscount(decimal? amount = default(decimal?), int? importsequencenumber = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), bool? isamounttype = default(bool?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? organizationid = default(System.Guid?), decimal? amountBase = default(decimal?), decimal? highquantity = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), System.Guid? discountid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? percentage = default(decimal?), decimal? lowquantity = default(decimal?), System.Guid? _discounttypeidValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), IList<MicrosoftDynamicsCRMasyncoperation> discountAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> discountSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdiscounttype discounttypeid = default(MicrosoftDynamicsCRMdiscounttype), IList<MicrosoftDynamicsCRMbulkdeletefailure> discountBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Amount = amount;
             Importsequencenumber = importsequencenumber;
@@ -69,104 +111,141 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets amount of the discount, specified either as a
+        /// percentage or as a monetary amount.
         /// </summary>
         [JsonProperty(PropertyName = "amount")]
-        public object Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// discount.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies whether the discount is specified as a
+        /// monetary amount or a percentage.
         /// </summary>
         [JsonProperty(PropertyName = "isamounttype")]
         public bool? Isamounttype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the discount.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the discount.
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
-        public string Organizationid { get; set; }
+        public System.Guid? Organizationid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Amount field converted to the system's
+        /// default base currency, if specified as a fixed amount. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "amount_base")]
-        public object AmountBase { get; set; }
+        public decimal? AmountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets upper boundary for the quantity range to which a
+        /// particular discount can be applied.
         /// </summary>
         [JsonProperty(PropertyName = "highquantity")]
-        public object Highquantity { get; set; }
+        public decimal? Highquantity { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the discount was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the discount.
         /// </summary>
         [JsonProperty(PropertyName = "discountid")]
-        public string Discountid { get; set; }
+        public System.Guid? Discountid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// discount.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the discount was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets percentage discount value.
         /// </summary>
         [JsonProperty(PropertyName = "percentage")]
-        public object Percentage { get; set; }
+        public decimal? Percentage { get; set; }
 
         /// <summary>
+        /// Gets or sets lower boundary for the quantity range to which a
+        /// particular discount is applied.
         /// </summary>
         [JsonProperty(PropertyName = "lowquantity")]
-        public object Lowquantity { get; set; }
+        public decimal? Lowquantity { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the discount list associated with
+        /// the discount.
         /// </summary>
         [JsonProperty(PropertyName = "_discounttypeid_value")]
-        public string _discounttypeidValue { get; set; }
+        public System.Guid? _discounttypeidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the
+        /// discount.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the discount.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -16,8 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Net.Http;
 
     /// <summary>
-    /// This OData service is located at
-    /// https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2/
+    /// This OData service is located at http://localhost
     /// </summary>
     public partial class DynamicsClient : ServiceClient<DynamicsClient>, IDynamicsClient
     {
@@ -37,6 +36,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
+        /// Show only the first n items
+        /// </summary>
+        public int? Top { get; set; }
+
+        /// <summary>
+        /// Skip the first n items
+        /// </summary>
+        public int? Skip { get; set; }
+
+        /// <summary>
+        /// Include count of items
+        /// </summary>
+        public bool? Count { get; set; }
+
+        /// <summary>
+        /// Filter items by property values
+        /// </summary>
+        public string Filter { get; set; }
+
+        /// <summary>
+        /// Search items by search phrases
+        /// </summary>
+        public string Search { get; set; }
+
+        /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
@@ -47,334 +71,344 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccounts Accounts { get; private set; }
 
         /// <summary>
-        /// Gets the ILicencetypeinvestigationset.
+        /// Gets the IAdoxioadoxiolicencetypeadoxioinvestigationset.
         /// </summary>
-        public virtual ILicencetypeinvestigationset Licencetypeinvestigationset { get; private set; }
+        public virtual IAdoxioadoxiolicencetypeadoxioinvestigationset Adoxioadoxiolicencetypeadoxioinvestigationset { get; private set; }
 
         /// <summary>
-        /// Gets the IAliases.
+        /// Gets the IAdoxioaliases.
         /// </summary>
-        public virtual IAliases Aliases { get; private set; }
+        public virtual IAdoxioaliases Adoxioaliases { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationbpfmvpv2s.
+        /// Gets the IAdoxioapplicationbpfmvpv2s.
         /// </summary>
-        public virtual IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; private set; }
+        public virtual IAdoxioapplicationbpfmvpv2s Adoxioapplicationbpfmvpv2s { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationbpfv3s.
+        /// Gets the IAdoxioapplicationbpfv3s.
         /// </summary>
-        public virtual IApplicationbpfv3s Applicationbpfv3s { get; private set; }
+        public virtual IAdoxioapplicationbpfv3s Adoxioapplicationbpfv3s { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationinvoicehistories.
+        /// Gets the IAdoxioapplicationinvoicehistories.
         /// </summary>
-        public virtual IApplicationinvoicehistories Applicationinvoicehistories { get; private set; }
+        public virtual IAdoxioapplicationinvoicehistories Adoxioapplicationinvoicehistories { get; private set; }
 
         /// <summary>
-        /// Gets the IApplications.
+        /// Gets the IAdoxioapplications.
         /// </summary>
-        public virtual IApplications Applications { get; private set; }
+        public virtual IAdoxioapplications Adoxioapplications { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationtermsconditionslimitations.
+        /// Gets the IAdoxioapplicationtermsconditionslimitations.
         /// </summary>
-        public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
+        public virtual IAdoxioapplicationtermsconditionslimitations Adoxioapplicationtermsconditionslimitations { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationtypecontents.
+        /// Gets the IAdoxioapplicationtypecontents.
         /// </summary>
-        public virtual IApplicationtypecontents Applicationtypecontents { get; private set; }
+        public virtual IAdoxioapplicationtypecontents Adoxioapplicationtypecontents { get; private set; }
 
         /// <summary>
-        /// Gets the IApplicationtypes.
+        /// Gets the IAdoxioapplicationtypes.
         /// </summary>
-        public virtual IApplicationtypes Applicationtypes { get; private set; }
+        public virtual IAdoxioapplicationtypes Adoxioapplicationtypes { get; private set; }
 
         /// <summary>
-        /// Gets the IAreas.
+        /// Gets the IAdoxioareas.
         /// </summary>
-        public virtual IAreas Areas { get; private set; }
+        public virtual IAdoxioareas Adoxioareas { get; private set; }
 
         /// <summary>
-        /// Gets the IAuditlogrequests.
+        /// Gets the IAdoxioauditlogrequests.
         /// </summary>
-        public virtual IAuditlogrequests Auditlogrequests { get; private set; }
+        public virtual IAdoxioauditlogrequests Adoxioauditlogrequests { get; private set; }
 
         /// <summary>
-        /// Gets the IBusinessaccounts.
+        /// Gets the IAdoxiobusinessaccounts.
         /// </summary>
-        public virtual IBusinessaccounts Businessaccounts { get; private set; }
+        public virtual IAdoxiobusinessaccounts Adoxiobusinessaccounts { get; private set; }
 
         /// <summary>
-        /// Gets the ICannabisinventoryreports.
+        /// Gets the IAdoxiocannabisinventoryreports.
         /// </summary>
-        public virtual ICannabisinventoryreports Cannabisinventoryreports { get; private set; }
+        public virtual IAdoxiocannabisinventoryreports Adoxiocannabisinventoryreports { get; private set; }
 
         /// <summary>
-        /// Gets the ICannabismonthlyreports.
+        /// Gets the IAdoxiocannabismonthlyreports.
         /// </summary>
-        public virtual ICannabismonthlyreports Cannabismonthlyreports { get; private set; }
+        public virtual IAdoxiocannabismonthlyreports Adoxiocannabismonthlyreports { get; private set; }
 
         /// <summary>
-        /// Gets the ICannabisproductadmins.
+        /// Gets the IAdoxiocannabisproductadmins.
         /// </summary>
-        public virtual ICannabisproductadmins Cannabisproductadmins { get; private set; }
+        public virtual IAdoxiocannabisproductadmins Adoxiocannabisproductadmins { get; private set; }
 
         /// <summary>
-        /// Gets the ICitydistricts.
+        /// Gets the IAdoxiocitydistricts.
         /// </summary>
-        public virtual ICitydistricts Citydistricts { get; private set; }
+        public virtual IAdoxiocitydistricts Adoxiocitydistricts { get; private set; }
 
         /// <summary>
-        /// Gets the IComplaintpublicbpfs.
+        /// Gets the IAdoxiocomplaintpublicbpfs.
         /// </summary>
-        public virtual IComplaintpublicbpfs Complaintpublicbpfs { get; private set; }
+        public virtual IAdoxiocomplaintpublicbpfs Adoxiocomplaintpublicbpfs { get; private set; }
 
         /// <summary>
-        /// Gets the IComplaints.
+        /// Gets the IAdoxiocomplaints.
         /// </summary>
-        public virtual IComplaints Complaints { get; private set; }
+        public virtual IAdoxiocomplaints Adoxiocomplaints { get; private set; }
 
         /// <summary>
-        /// Gets the IComplianceinvestigations.
+        /// Gets the IAdoxiocomplianceinvestigations.
         /// </summary>
-        public virtual IComplianceinvestigations Complianceinvestigations { get; private set; }
+        public virtual IAdoxiocomplianceinvestigations Adoxiocomplianceinvestigations { get; private set; }
 
         /// <summary>
-        /// Gets the ICompliancemeetings.
+        /// Gets the IAdoxiocompliancemeetings.
         /// </summary>
-        public virtual ICompliancemeetings Compliancemeetings { get; private set; }
+        public virtual IAdoxiocompliancemeetings Adoxiocompliancemeetings { get; private set; }
 
         /// <summary>
-        /// Gets the IContraventionadmins.
+        /// Gets the IAdoxiocontraventionadmins.
         /// </summary>
-        public virtual IContraventionadmins Contraventionadmins { get; private set; }
+        public virtual IAdoxiocontraventionadmins Adoxiocontraventionadmins { get; private set; }
 
         /// <summary>
-        /// Gets the IContraventions.
+        /// Gets the IAdoxiocontraventions.
         /// </summary>
-        public virtual IContraventions Contraventions { get; private set; }
+        public virtual IAdoxiocontraventions Adoxiocontraventions { get; private set; }
 
         /// <summary>
-        /// Gets the ICorporatehistorysummaries.
+        /// Gets the IAdoxiocorporatehistorysummaries.
         /// </summary>
-        public virtual ICorporatehistorysummaries Corporatehistorysummaries { get; private set; }
+        public virtual IAdoxiocorporatehistorysummaries Adoxiocorporatehistorysummaries { get; private set; }
 
         /// <summary>
-        /// Gets the ICorporateroles.
+        /// Gets the IAdoxiocorporateroles.
         /// </summary>
-        public virtual ICorporateroles Corporateroles { get; private set; }
+        public virtual IAdoxiocorporateroles Adoxiocorporateroles { get; private set; }
 
         /// <summary>
-        /// Gets the ICustomautonumberdefinitions.
+        /// Gets the IAdoxiocustomautonumberdefinitions.
         /// </summary>
-        public virtual ICustomautonumberdefinitions Customautonumberdefinitions { get; private set; }
+        public virtual IAdoxiocustomautonumberdefinitions Adoxiocustomautonumberdefinitions { get; private set; }
 
         /// <summary>
-        /// Gets the ICustomautonumberrequests.
+        /// Gets the IAdoxiocustomautonumberrequests.
         /// </summary>
-        public virtual ICustomautonumberrequests Customautonumberrequests { get; private set; }
+        public virtual IAdoxiocustomautonumberrequests Adoxiocustomautonumberrequests { get; private set; }
 
         /// <summary>
-        /// Gets the IDocumentadmins.
+        /// Gets the IAdoxiodocumentadmins.
         /// </summary>
-        public virtual IDocumentadmins Documentadmins { get; private set; }
+        public virtual IAdoxiodocumentadmins Adoxiodocumentadmins { get; private set; }
 
         /// <summary>
-        /// Gets the IDocuments.
+        /// Gets the IAdoxiodocuments.
         /// </summary>
-        public virtual IDocuments Documents { get; private set; }
+        public virtual IAdoxiodocuments Adoxiodocuments { get; private set; }
 
         /// <summary>
-        /// Gets the IEstablishments.
+        /// Gets the IAdoxioestablishments.
         /// </summary>
-        public virtual IEstablishments Establishments { get; private set; }
+        public virtual IAdoxioestablishments Adoxioestablishments { get; private set; }
 
         /// <summary>
-        /// Gets the IEstablishmentwatchwords.
+        /// Gets the IAdoxioestablishmentwatchwords.
         /// </summary>
-        public virtual IEstablishmentwatchwords Establishmentwatchwords { get; private set; }
+        public virtual IAdoxioestablishmentwatchwords Adoxioestablishmentwatchwords { get; private set; }
 
         /// <summary>
-        /// Gets the IFiainvestigationlogs.
+        /// Gets the IAdoxiofiainvestigationlogs.
         /// </summary>
-        public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
+        public virtual IAdoxiofiainvestigationlogs Adoxiofiainvestigationlogs { get; private set; }
 
         /// <summary>
-        /// Gets the IFundingsources.
+        /// Gets the IAdoxiofundingsources.
         /// </summary>
-        public virtual IFundingsources Fundingsources { get; private set; }
+        public virtual IAdoxiofundingsources Adoxiofundingsources { get; private set; }
 
         /// <summary>
-        /// Gets the IIncidentlicencetypeset.
+        /// Gets the IAdoxioincidentadoxiolicencetypeset.
         /// </summary>
-        public virtual IIncidentlicencetypeset Incidentlicencetypeset { get; private set; }
+        public virtual IAdoxioincidentadoxiolicencetypeset Adoxioincidentadoxiolicencetypeset { get; private set; }
 
         /// <summary>
-        /// Gets the IInspectioninspectorsset.
+        /// Gets the IAdoxioinspectioninspectorsset.
         /// </summary>
-        public virtual IInspectioninspectorsset Inspectioninspectorsset { get; private set; }
+        public virtual IAdoxioinspectioninspectorsset Adoxioinspectioninspectorsset { get; private set; }
 
         /// <summary>
-        /// Gets the IInspectionreactivationhistories.
+        /// Gets the IAdoxioinspectionreactivationhistories.
         /// </summary>
-        public virtual IInspectionreactivationhistories Inspectionreactivationhistories { get; private set; }
+        public virtual IAdoxioinspectionreactivationhistories Adoxioinspectionreactivationhistories { get; private set; }
 
         /// <summary>
-        /// Gets the IInspectorcommentsrollups.
+        /// Gets the IAdoxioinspectorcommentsrollups.
         /// </summary>
-        public virtual IInspectorcommentsrollups Inspectorcommentsrollups { get; private set; }
+        public virtual IAdoxioinspectorcommentsrollups Adoxioinspectorcommentsrollups { get; private set; }
 
         /// <summary>
-        /// Gets the IInterests.
+        /// Gets the IAdoxiointerests.
         /// </summary>
-        public virtual IInterests Interests { get; private set; }
+        public virtual IAdoxiointerests Adoxiointerests { get; private set; }
 
         /// <summary>
-        /// Gets the IInvestigationactivities.
+        /// Gets the IAdoxioinvestigationactivities.
         /// </summary>
-        public virtual IInvestigationactivities Investigationactivities { get; private set; }
+        public virtual IAdoxioinvestigationactivities Adoxioinvestigationactivities { get; private set; }
 
         /// <summary>
-        /// Gets the IInvestigationreactivationhistories.
+        /// Gets the IAdoxioinvestigationreactivationhistories.
         /// </summary>
-        public virtual IInvestigationreactivationhistories Investigationreactivationhistories { get; private set; }
+        public virtual IAdoxioinvestigationreactivationhistories Adoxioinvestigationreactivationhistories { get; private set; }
 
         /// <summary>
-        /// Gets the IInvestigations.
+        /// Gets the IAdoxioinvestigations.
         /// </summary>
-        public virtual IInvestigations Investigations { get; private set; }
+        public virtual IAdoxioinvestigations Adoxioinvestigations { get; private set; }
 
         /// <summary>
-        /// Gets the ILegalentities.
+        /// Gets the IAdoxiolegalentities.
         /// </summary>
-        public virtual ILegalentities Legalentities { get; private set; }
+        public virtual IAdoxiolegalentities Adoxiolegalentities { get; private set; }
 
         /// <summary>
-        /// Gets the ILicenceses.
+        /// Gets the IAdoxiolicenceses.
         /// </summary>
-        public virtual ILicenceses Licenceses { get; private set; }
+        public virtual IAdoxiolicenceses Adoxiolicenceses { get; private set; }
 
         /// <summary>
-        /// Gets the ILicencetypes.
+        /// Gets the IAdoxiolicencetypes.
         /// </summary>
-        public virtual ILicencetypes Licencetypes { get; private set; }
+        public virtual IAdoxiolicencetypes Adoxiolicencetypes { get; private set; }
 
         /// <summary>
-        /// Gets the ILicencetypesapplicationtypesset.
+        /// Gets the IAdoxiolicencetypesapplicationtypesset.
         /// </summary>
-        public virtual ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; private set; }
+        public virtual IAdoxiolicencetypesapplicationtypesset Adoxiolicencetypesapplicationtypesset { get; private set; }
 
         /// <summary>
-        /// Gets the ILicenseechangelogs.
+        /// Gets the IAdoxiolicenseechangelogs.
         /// </summary>
-        public virtual ILicenseechangelogs Licenseechangelogs { get; private set; }
+        public virtual IAdoxiolicenseechangelogs Adoxiolicenseechangelogs { get; private set; }
 
         /// <summary>
-        /// Gets the ILoans.
+        /// Gets the IAdoxioloans.
         /// </summary>
-        public virtual ILoans Loans { get; private set; }
+        public virtual IAdoxioloans Adoxioloans { get; private set; }
 
         /// <summary>
-        /// Gets the ILocalgovindigenousnations.
+        /// Gets the IAdoxiolocalgovindigenousnations.
         /// </summary>
-        public virtual ILocalgovindigenousnations Localgovindigenousnations { get; private set; }
+        public virtual IAdoxiolocalgovindigenousnations Adoxiolocalgovindigenousnations { get; private set; }
 
         /// <summary>
-        /// Gets the IPersonalhistorysummaries.
+        /// Gets the IAdoxiopersonalhistorysummaries.
         /// </summary>
-        public virtual IPersonalhistorysummaries Personalhistorysummaries { get; private set; }
+        public virtual IAdoxiopersonalhistorysummaries Adoxiopersonalhistorysummaries { get; private set; }
 
         /// <summary>
-        /// Gets the IPolicejurisdictions.
+        /// Gets the IAdoxiopolicejurisdictions.
         /// </summary>
-        public virtual IPolicejurisdictions Policejurisdictions { get; private set; }
+        public virtual IAdoxiopolicejurisdictions Adoxiopolicejurisdictions { get; private set; }
 
         /// <summary>
-        /// Gets the IPolicydocuments.
+        /// Gets the IAdoxiopolicydocuments.
         /// </summary>
-        public virtual IPolicydocuments Policydocuments { get; private set; }
+        public virtual IAdoxiopolicydocuments Adoxiopolicydocuments { get; private set; }
 
         /// <summary>
-        /// Gets the IPostalcodes.
+        /// Gets the IAdoxiopostalcodes.
         /// </summary>
-        public virtual IPostalcodes Postalcodes { get; private set; }
+        public virtual IAdoxiopostalcodes Adoxiopostalcodes { get; private set; }
 
         /// <summary>
-        /// Gets the IPreviousaddresses.
+        /// Gets the IAdoxiopreviousaddresses.
         /// </summary>
-        public virtual IPreviousaddresses Previousaddresses { get; private set; }
+        public virtual IAdoxiopreviousaddresses Adoxiopreviousaddresses { get; private set; }
 
         /// <summary>
-        /// Gets the IRegions.
+        /// Gets the IAdoxioregions.
         /// </summary>
-        public virtual IRegions Regions { get; private set; }
+        public virtual IAdoxioregions Adoxioregions { get; private set; }
 
         /// <summary>
-        /// Gets the IRelatedparties.
+        /// Gets the IAdoxiorelatedparties.
         /// </summary>
-        public virtual IRelatedparties Relatedparties { get; private set; }
+        public virtual IAdoxiorelatedparties Adoxiorelatedparties { get; private set; }
 
         /// <summary>
-        /// Gets the ISettings.
+        /// Gets the IAdoxiosettings.
         /// </summary>
-        public virtual ISettings Settings { get; private set; }
+        public virtual IAdoxiosettings Adoxiosettings { get; private set; }
 
         /// <summary>
-        /// Gets the ISpddatarows.
+        /// Gets the IAdoxiospddatarows.
         /// </summary>
-        public virtual ISpddatarows Spddatarows { get; private set; }
+        public virtual IAdoxiospddatarows Adoxiospddatarows { get; private set; }
 
         /// <summary>
-        /// Gets the ISpdexportses.
+        /// Gets the IAdoxiospdexportses.
         /// </summary>
-        public virtual ISpdexportses Spdexportses { get; private set; }
+        public virtual IAdoxiospdexportses Adoxiospdexportses { get; private set; }
 
         /// <summary>
-        /// Gets the ITaxandaccountings.
+        /// Gets the IAdoxiotaxandaccountings.
         /// </summary>
-        public virtual ITaxandaccountings Taxandaccountings { get; private set; }
+        public virtual IAdoxiotaxandaccountings Adoxiotaxandaccountings { get; private set; }
 
         /// <summary>
-        /// Gets the ITermsconditionslimitationspresets.
+        /// Gets the IAdoxiotermsconditionslimitationspresets.
         /// </summary>
-        public virtual ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; private set; }
+        public virtual IAdoxiotermsconditionslimitationspresets Adoxiotermsconditionslimitationspresets { get; private set; }
 
         /// <summary>
-        /// Gets the ITerritories.
+        /// Gets the IAdoxioterritories.
         /// </summary>
-        public virtual ITerritories Territories { get; private set; }
+        public virtual IAdoxioterritories Adoxioterritories { get; private set; }
 
         /// <summary>
-        /// Gets the ITiedhouseassociations.
+        /// Gets the IAdoxiotiedhouseassociations.
         /// </summary>
-        public virtual ITiedhouseassociations Tiedhouseassociations { get; private set; }
+        public virtual IAdoxiotiedhouseassociations Adoxiotiedhouseassociations { get; private set; }
 
         /// <summary>
-        /// Gets the ITiedhouseconnections.
+        /// Gets the IAdoxiotiedhouseconnections.
         /// </summary>
-        public virtual ITiedhouseconnections Tiedhouseconnections { get; private set; }
+        public virtual IAdoxiotiedhouseconnections Adoxiotiedhouseconnections { get; private set; }
 
         /// <summary>
-        /// Gets the IWitnesses.
+        /// Gets the IAdoxiowitnesses.
         /// </summary>
-        public virtual IWitnesses Witnesses { get; private set; }
+        public virtual IAdoxiowitnesses Adoxiowitnesses { get; private set; }
 
         /// <summary>
-        /// Gets the IWorkerinvoicehistories.
+        /// Gets the IAdoxioworkerinvoicehistories.
         /// </summary>
-        public virtual IWorkerinvoicehistories Workerinvoicehistories { get; private set; }
+        public virtual IAdoxioworkerinvoicehistories Adoxioworkerinvoicehistories { get; private set; }
 
         /// <summary>
-        /// Gets the IWorkers.
+        /// Gets the IAdoxioworkers.
         /// </summary>
-        public virtual IWorkers Workers { get; private set; }
+        public virtual IAdoxioworkers Adoxioworkers { get; private set; }
 
         /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
+
+        /// <summary>
+        /// Gets the IEntitydefinitions.
+        /// </summary>
+        public virtual IEntitydefinitions Entitydefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IGlobaloptionsetdefinitions.
+        /// </summary>
+        public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -395,16 +429,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         public virtual ISharepointsites Sharepointsites { get; private set; }
-
-        /// <summary>
-        /// Gets the IEntitydefinitions.
-        /// </summary>
-        public virtual IEntitydefinitions Entitydefinitions { get; private set; }
-
-        /// <summary>
-        /// Gets the IGlobaloptionsetdefinitions.
-        /// </summary>
-        public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -648,79 +672,79 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
-            Licencetypeinvestigationset = new Licencetypeinvestigationset(this);
-            Aliases = new Aliases(this);
-            Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
-            Applicationbpfv3s = new Applicationbpfv3s(this);
-            Applicationinvoicehistories = new Applicationinvoicehistories(this);
-            Applications = new Applications(this);
-            Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
-            Applicationtypecontents = new Applicationtypecontents(this);
-            Applicationtypes = new Applicationtypes(this);
-            Areas = new Areas(this);
-            Auditlogrequests = new Auditlogrequests(this);
-            Businessaccounts = new Businessaccounts(this);
-            Cannabisinventoryreports = new Cannabisinventoryreports(this);
-            Cannabismonthlyreports = new Cannabismonthlyreports(this);
-            Cannabisproductadmins = new Cannabisproductadmins(this);
-            Citydistricts = new Citydistricts(this);
-            Complaintpublicbpfs = new Complaintpublicbpfs(this);
-            Complaints = new Complaints(this);
-            Complianceinvestigations = new Complianceinvestigations(this);
-            Compliancemeetings = new Compliancemeetings(this);
-            Contraventionadmins = new Contraventionadmins(this);
-            Contraventions = new Contraventions(this);
-            Corporatehistorysummaries = new Corporatehistorysummaries(this);
-            Corporateroles = new Corporateroles(this);
-            Customautonumberdefinitions = new Customautonumberdefinitions(this);
-            Customautonumberrequests = new Customautonumberrequests(this);
-            Documentadmins = new Documentadmins(this);
-            Documents = new Documents(this);
-            Establishments = new Establishments(this);
-            Establishmentwatchwords = new Establishmentwatchwords(this);
-            Fiainvestigationlogs = new Fiainvestigationlogs(this);
-            Fundingsources = new Fundingsources(this);
-            Incidentlicencetypeset = new Incidentlicencetypeset(this);
-            Inspectioninspectorsset = new Inspectioninspectorsset(this);
-            Inspectionreactivationhistories = new Inspectionreactivationhistories(this);
-            Inspectorcommentsrollups = new Inspectorcommentsrollups(this);
-            Interests = new Interests(this);
-            Investigationactivities = new Investigationactivities(this);
-            Investigationreactivationhistories = new Investigationreactivationhistories(this);
-            Investigations = new Investigations(this);
-            Legalentities = new Legalentities(this);
-            Licenceses = new Licenceses(this);
-            Licencetypes = new Licencetypes(this);
-            Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
-            Licenseechangelogs = new Licenseechangelogs(this);
-            Loans = new Loans(this);
-            Localgovindigenousnations = new Localgovindigenousnations(this);
-            Personalhistorysummaries = new Personalhistorysummaries(this);
-            Policejurisdictions = new Policejurisdictions(this);
-            Policydocuments = new Policydocuments(this);
-            Postalcodes = new Postalcodes(this);
-            Previousaddresses = new Previousaddresses(this);
-            Regions = new Regions(this);
-            Relatedparties = new Relatedparties(this);
-            Settings = new Settings(this);
-            Spddatarows = new Spddatarows(this);
-            Spdexportses = new Spdexportses(this);
-            Taxandaccountings = new Taxandaccountings(this);
-            Termsconditionslimitationspresets = new Termsconditionslimitationspresets(this);
-            Territories = new Territories(this);
-            Tiedhouseassociations = new Tiedhouseassociations(this);
-            Tiedhouseconnections = new Tiedhouseconnections(this);
-            Witnesses = new Witnesses(this);
-            Workerinvoicehistories = new Workerinvoicehistories(this);
-            Workers = new Workers(this);
+            Adoxioadoxiolicencetypeadoxioinvestigationset = new Adoxioadoxiolicencetypeadoxioinvestigationset(this);
+            Adoxioaliases = new Adoxioaliases(this);
+            Adoxioapplicationbpfmvpv2s = new Adoxioapplicationbpfmvpv2s(this);
+            Adoxioapplicationbpfv3s = new Adoxioapplicationbpfv3s(this);
+            Adoxioapplicationinvoicehistories = new Adoxioapplicationinvoicehistories(this);
+            Adoxioapplications = new Adoxioapplications(this);
+            Adoxioapplicationtermsconditionslimitations = new Adoxioapplicationtermsconditionslimitations(this);
+            Adoxioapplicationtypecontents = new Adoxioapplicationtypecontents(this);
+            Adoxioapplicationtypes = new Adoxioapplicationtypes(this);
+            Adoxioareas = new Adoxioareas(this);
+            Adoxioauditlogrequests = new Adoxioauditlogrequests(this);
+            Adoxiobusinessaccounts = new Adoxiobusinessaccounts(this);
+            Adoxiocannabisinventoryreports = new Adoxiocannabisinventoryreports(this);
+            Adoxiocannabismonthlyreports = new Adoxiocannabismonthlyreports(this);
+            Adoxiocannabisproductadmins = new Adoxiocannabisproductadmins(this);
+            Adoxiocitydistricts = new Adoxiocitydistricts(this);
+            Adoxiocomplaintpublicbpfs = new Adoxiocomplaintpublicbpfs(this);
+            Adoxiocomplaints = new Adoxiocomplaints(this);
+            Adoxiocomplianceinvestigations = new Adoxiocomplianceinvestigations(this);
+            Adoxiocompliancemeetings = new Adoxiocompliancemeetings(this);
+            Adoxiocontraventionadmins = new Adoxiocontraventionadmins(this);
+            Adoxiocontraventions = new Adoxiocontraventions(this);
+            Adoxiocorporatehistorysummaries = new Adoxiocorporatehistorysummaries(this);
+            Adoxiocorporateroles = new Adoxiocorporateroles(this);
+            Adoxiocustomautonumberdefinitions = new Adoxiocustomautonumberdefinitions(this);
+            Adoxiocustomautonumberrequests = new Adoxiocustomautonumberrequests(this);
+            Adoxiodocumentadmins = new Adoxiodocumentadmins(this);
+            Adoxiodocuments = new Adoxiodocuments(this);
+            Adoxioestablishments = new Adoxioestablishments(this);
+            Adoxioestablishmentwatchwords = new Adoxioestablishmentwatchwords(this);
+            Adoxiofiainvestigationlogs = new Adoxiofiainvestigationlogs(this);
+            Adoxiofundingsources = new Adoxiofundingsources(this);
+            Adoxioincidentadoxiolicencetypeset = new Adoxioincidentadoxiolicencetypeset(this);
+            Adoxioinspectioninspectorsset = new Adoxioinspectioninspectorsset(this);
+            Adoxioinspectionreactivationhistories = new Adoxioinspectionreactivationhistories(this);
+            Adoxioinspectorcommentsrollups = new Adoxioinspectorcommentsrollups(this);
+            Adoxiointerests = new Adoxiointerests(this);
+            Adoxioinvestigationactivities = new Adoxioinvestigationactivities(this);
+            Adoxioinvestigationreactivationhistories = new Adoxioinvestigationreactivationhistories(this);
+            Adoxioinvestigations = new Adoxioinvestigations(this);
+            Adoxiolegalentities = new Adoxiolegalentities(this);
+            Adoxiolicenceses = new Adoxiolicenceses(this);
+            Adoxiolicencetypes = new Adoxiolicencetypes(this);
+            Adoxiolicencetypesapplicationtypesset = new Adoxiolicencetypesapplicationtypesset(this);
+            Adoxiolicenseechangelogs = new Adoxiolicenseechangelogs(this);
+            Adoxioloans = new Adoxioloans(this);
+            Adoxiolocalgovindigenousnations = new Adoxiolocalgovindigenousnations(this);
+            Adoxiopersonalhistorysummaries = new Adoxiopersonalhistorysummaries(this);
+            Adoxiopolicejurisdictions = new Adoxiopolicejurisdictions(this);
+            Adoxiopolicydocuments = new Adoxiopolicydocuments(this);
+            Adoxiopostalcodes = new Adoxiopostalcodes(this);
+            Adoxiopreviousaddresses = new Adoxiopreviousaddresses(this);
+            Adoxioregions = new Adoxioregions(this);
+            Adoxiorelatedparties = new Adoxiorelatedparties(this);
+            Adoxiosettings = new Adoxiosettings(this);
+            Adoxiospddatarows = new Adoxiospddatarows(this);
+            Adoxiospdexportses = new Adoxiospdexportses(this);
+            Adoxiotaxandaccountings = new Adoxiotaxandaccountings(this);
+            Adoxiotermsconditionslimitationspresets = new Adoxiotermsconditionslimitationspresets(this);
+            Adoxioterritories = new Adoxioterritories(this);
+            Adoxiotiedhouseassociations = new Adoxiotiedhouseassociations(this);
+            Adoxiotiedhouseconnections = new Adoxiotiedhouseconnections(this);
+            Adoxiowitnesses = new Adoxiowitnesses(this);
+            Adoxioworkerinvoicehistories = new Adoxioworkerinvoicehistories(this);
+            Adoxioworkers = new Adoxioworkers(this);
             Contacts = new Contacts(this);
+            Entitydefinitions = new Entitydefinitions(this);
+            Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Invoices = new Invoices(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
-            Entitydefinitions = new Entitydefinitions(this);
-            Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
-            BaseUri = new System.Uri("https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2");
+            BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

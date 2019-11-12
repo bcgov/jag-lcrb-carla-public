@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// principalentitymap
+    /// Microsoft.Dynamics.CRM.principalentitymap
     /// </summary>
     public partial class MicrosoftDynamicsCRMprincipalentitymap
     {
@@ -27,7 +27,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMprincipalentitymap class.
         /// </summary>
-        public MicrosoftDynamicsCRMprincipalentitymap(string objecttypecode = default(string), string principalid = default(string), string principalentitymapid = default(string), long? versionnumber = default(long?), MicrosoftDynamicsCRMprincipal principalidOwner = default(MicrosoftDynamicsCRMprincipal))
+        /// <param name="principalentitymapid">For internal use only.</param>
+        public MicrosoftDynamicsCRMprincipalentitymap(string objecttypecode = default(string), System.Guid? principalid = default(System.Guid?), System.Guid? principalentitymapid = default(System.Guid?), string versionnumber = default(string), MicrosoftDynamicsCRMprincipal principalidOwner = default(MicrosoftDynamicsCRMprincipal))
         {
             Objecttypecode = objecttypecode;
             Principalid = principalid;
@@ -50,17 +51,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "principalid")]
-        public string Principalid { get; set; }
+        public System.Guid? Principalid { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "principalentitymapid")]
-        public string Principalentitymapid { get; set; }
+        public System.Guid? Principalentitymapid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

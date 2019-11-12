@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// opportunity
+    /// Microsoft.Dynamics.CRM.opportunity
     /// </summary>
     public partial class MicrosoftDynamicsCRMopportunity
     {
@@ -29,7 +31,282 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMopportunity
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMopportunity(System.DateTimeOffset? schedulefollowupProspect = default(System.DateTimeOffset?), object totaltax = default(object), long? versionnumber = default(long?), bool? identifycustomercontacts = default(bool?), string description = default(string), object actualvalue = default(object), bool? completefinalproposal = default(bool?), string _parentaccountidValue = default(string), bool? presentproposal = default(bool?), bool? resolvefeedback = default(bool?), string _owneridValue = default(string), object freightamount = default(object), bool? identifypursuitteam = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), object totalamountlessfreight = default(object), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), bool? captureproposalfeedback = default(bool?), object freightamountBase = default(object), string timespentbymeonemailandmeetings = default(string), string traversedpath = default(string), int? salesstage = default(int?), System.DateTimeOffset? actualclosedate = default(System.DateTimeOffset?), bool? presentfinalproposal = default(bool?), object actualvalueBase = default(object), object totallineitemamount = default(object), bool? developproposal = default(bool?), string stepname = default(string), int? statuscode = default(int?), object totaltaxBase = default(object), string quotecomments = default(string), object totallineitemdiscountamountBase = default(object), int? salesstagecode = default(int?), string _owningteamValue = default(string), string _slainvokedidValue = default(string), object discountamount = default(object), int? opportunityratingcode = default(int?), string _pricelevelidValue = default(string), object budgetamount = default(object), object totallineitemdiscountamount = default(object), int? closeprobability = default(int?), int? budgetstatus = default(int?), object totaldiscountamount = default(object), object totalamountlessfreightBase = default(object), object estimatedvalueBase = default(object), object exchangerate = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? estimatedclosedate = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), int? need = default(int?), bool? participatesinworkflow = default(bool?), int? pricingerrorcode = default(int?), object totaldiscountamountBase = default(object), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string stageid = default(string), object totallineitemamountBase = default(object), string _customeridValue = default(string), string _contactidValue = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string _originatingleadidValue = default(string), int? purchaseprocess = default(int?), string stepid = default(string), int? onholdtime = default(int?), object discountpercentage = default(object), string proposedsolution = default(string), System.DateTimeOffset? schedulefollowupQualify = default(System.DateTimeOffset?), string customerneed = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? completeinternalreview = default(bool?), string _accountidValue = default(string), System.DateTimeOffset? finaldecisiondate = default(System.DateTimeOffset?), bool? decisionmaker = default(bool?), bool? pursuitdecision = default(bool?), object estimatedvalue = default(object), int? prioritycode = default(int?), string _campaignidValue = default(string), bool? confirminterest = default(bool?), object totalamount = default(object), string _slaidValue = default(string), string _owningbusinessunitValue = default(string), string _parentcontactidValue = default(string), object discountamountBase = default(object), string processid = default(string), int? purchasetimeframe = default(int?), object budgetamountBase = default(object), bool? isrevenuesystemcalculated = default(bool?), object totalamountBase = default(object), int? statecode = default(int?), string qualificationcomments = default(string), string _createdonbehalfbyValue = default(string), bool? evaluatefit = default(bool?), string currentsituation = default(string), string _modifiedbyValue = default(string), bool? identifycompetitors = default(bool?), bool? sendthankyounote = default(bool?), string opportunityid = default(string), string customerpainpoints = default(string), bool? filedebrief = default(bool?), string _owninguserValue = default(string), System.DateTimeOffset? scheduleproposalmeeting = default(System.DateTimeOffset?), int? initialcommunication = default(int?), string name = default(string), int? timeline = default(int?), IList<MicrosoftDynamicsCRMcompetitor> opportunitycompetitorsAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcontact parentcontactid = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMopportunitysalesprocess> opportunityOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMphonecall> opportunityPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMasyncoperation> opportunityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMlead originatingleadid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMpostfollow> opportunityPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> opportunityPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMfax> opportunityFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMopportunityproduct> productOpportunities = default(IList<MicrosoftDynamicsCRMopportunityproduct>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMemail> opportunityEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), object ownerid = default(object), MicrosoftDynamicsCRMsla slainvokedidOpportunitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMactivitypointer> opportunityActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMtask> opportunityTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMduplicaterecord> opportunityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaOpportunitySla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMconnection> opportunityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> opportunitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMduplicaterecord> opportunityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount parentaccountid = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMinvoice> opportunityInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> opportunityRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMactioncard> opportunityActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> opportunitySharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> opportunityLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceOpportunity = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> opportunityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMopportunityclose> opportunityOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMteam> opportunityTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdOpportunityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> opportunityAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMserviceappointment> opportunityServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMletter> opportunityLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMlead> leadQualifyingOpportunity = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMactivityparty> opportunityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMsalesorder> opportunitySalesOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMsocialactivity> opportunitySocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMquote> opportunityQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMannotation> opportunityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> opportunityAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        /// <param name="schedulefollowupProspect">Enter the date and time of
+        /// the prospecting follow-up meeting with the lead.</param>
+        /// <param name="totaltax">Shows the total of the Tax amounts specified
+        /// on all products included in the opportunity, included in the Total
+        /// Amount field calculation for the opportunity.</param>
+        /// <param name="versionnumber">Version number of the
+        /// opportunity.</param>
+        /// <param name="identifycustomercontacts">Select whether the customer
+        /// contacts for this opportunity have been identified.</param>
+        /// <param name="description">Type additional information to describe
+        /// the opportunity, such as possible products to sell or past
+        /// purchases from the customer.</param>
+        /// <param name="actualvalue">Type the actual revenue amount for the
+        /// opportunity for reporting and analysis of estimated versus actual
+        /// sales. Field defaults to the Est. Revenue value when an opportunity
+        /// is won.</param>
+        /// <param name="completefinalproposal">Select whether a final proposal
+        /// has been completed for the opportunity.</param>
+        /// <param name="_parentaccountidValue">Choose an account to connect
+        /// this opportunity to, so that the relationship is visible in reports
+        /// and analytics, and to provide a quick link to additional details,
+        /// such as financial information and activities.</param>
+        /// <param name="presentproposal">Select whether a proposal for the
+        /// opportunity has been presented to the account.</param>
+        /// <param name="resolvefeedback">Choose whether the proposal feedback
+        /// has been captured and resolved for the opportunity.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="freightamount">Type the cost of freight or shipping
+        /// for the products included in the opportunity for use in calculating
+        /// the Total Amount field.</param>
+        /// <param name="identifypursuitteam">Choose whether you have recorded
+        /// who will pursue the opportunity.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="totalamountlessfreight">Shows the total product amount
+        /// for the opportunity, minus any discounts. This value is added to
+        /// freight and tax amounts in the calculation for the total amount of
+        /// the opportunity.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="captureproposalfeedback">Choose whether the proposal
+        /// feedback has been captured for the opportunity.</param>
+        /// <param name="freightamountBase">Shows the Freight Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="timespentbymeonemailandmeetings">Total time spent for
+        /// emails (read and write) and meetings by me in relation to the
+        /// opportunity record.</param>
+        /// <param name="traversedpath">For internal use only.</param>
+        /// <param name="salesstage">Select the sales stage of this opportunity
+        /// to aid the sales team in their efforts to win this
+        /// opportunity.</param>
+        /// <param name="actualclosedate">Shows the date and time when the
+        /// opportunity was closed or canceled.</param>
+        /// <param name="presentfinalproposal">Select whether the final
+        /// proposal has been presented to the account.</param>
+        /// <param name="actualvalueBase">Shows the Actual Revenue field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="totallineitemamount">Shows the sum of all existing and
+        /// write-in products included on the opportunity, based on the
+        /// specified price list and quantities.</param>
+        /// <param name="developproposal">Select whether a proposal has been
+        /// developed for the opportunity.</param>
+        /// <param name="stepname">Shows the current phase in the sales
+        /// pipeline for the opportunity. This is updated by a
+        /// workflow.</param>
+        /// <param name="statuscode">Select the opportunity's status.</param>
+        /// <param name="totaltaxBase">Shows the Total Tax field converted to
+        /// the system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.</param>
+        /// <param name="quotecomments">Type comments about the quotes
+        /// associated with the opportunity.</param>
+        /// <param name="totallineitemdiscountamountBase">Shows the Total Line
+        /// Item Discount Amount field to the system's default base currency
+        /// for reporting purposes. The calculation uses the exchange rate
+        /// specified in the Currencies area.</param>
+        /// <param name="salesstagecode">Select the sales process stage for the
+        /// opportunity to indicate the probability of closing the
+        /// opportunity.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the opportunity.</param>
+        /// <param name="_slainvokedidValue">Last SLA that was applied to this
+        /// opportunity. This field is for internal use only.</param>
+        /// <param name="discountamount">Type the discount amount for the
+        /// opportunity if the customer is eligible for special
+        /// savings.</param>
+        /// <param name="opportunityratingcode">Select the expected value or
+        /// priority of the opportunity based on revenue, customer status, or
+        /// closing probability.</param>
+        /// <param name="_pricelevelidValue">Choose the price list associated
+        /// with this record to make sure the products associated with the
+        /// campaign are offered at the correct prices.</param>
+        /// <param name="budgetamount">Type a value between 0 and
+        /// 1,000,000,000,000 to indicate the lead's potential available
+        /// budget.</param>
+        /// <param name="totallineitemdiscountamount">Shows the total of the
+        /// Manual Discount amounts specified on all products included in the
+        /// opportunity. This value is reflected in the Total Detail Amount
+        /// field on the opportunity and is added to any discount amount or
+        /// rate specified on the opportunity.</param>
+        /// <param name="closeprobability">Type a number from 0 to 100 that
+        /// represents the likelihood of closing the opportunity. This can aid
+        /// the sales team in their efforts to convert the opportunity in a
+        /// sale.</param>
+        /// <param name="budgetstatus">Select the likely budget status for the
+        /// lead's company. This may help determine the lead rating or your
+        /// sales approach.</param>
+        /// <param name="totaldiscountamount">Shows the total discount amount,
+        /// based on the discount price and rate entered on the
+        /// opportunity.</param>
+        /// <param name="totalamountlessfreightBase">Shows the Total
+        /// Pre-Freight Amount field converted to the system's default base
+        /// currency for reporting purposes. The calculation uses the exchange
+        /// rate specified in the Currencies area.</param>
+        /// <param name="estimatedvalueBase">Shows the Actual Revenue field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="estimatedclosedate">Enter the expected closing date of
+        /// the opportunity to help make accurate revenue forecasts.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="need">Choose how high the level of need is for the
+        /// lead's company.</param>
+        /// <param name="participatesinworkflow">Information about whether the
+        /// opportunity participates in workflow rules.</param>
+        /// <param name="pricingerrorcode">Pricing error for the
+        /// opportunity.</param>
+        /// <param name="totaldiscountamountBase">Shows the Total Discount
+        /// Amount field converted to the system's default base currency for
+        /// reporting purposes. The calculation uses the exchange rate
+        /// specified in the Currencies area.</param>
+        /// <param name="lastonholdtime">Contains the date time stamp of the
+        /// last on hold time.</param>
+        /// <param name="stageid">Shows the ID of the stage.</param>
+        /// <param name="totallineitemamountBase">Shows the Total Detail Amount
+        /// field converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="_customeridValue">Select the customer account or
+        /// contact to provide a quick link to additional customer details,
+        /// such as address, phone number, activities, and orders.</param>
+        /// <param name="_contactidValue">Unique identifier of the contact
+        /// associated with the opportunity.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="_originatingleadidValue">Choose the lead that the
+        /// opportunity was created from for reporting and analytics. The field
+        /// is read-only after the opportunity is created and defaults to the
+        /// correct lead when an opportunity is created from a converted
+        /// lead.</param>
+        /// <param name="purchaseprocess">Choose whether an individual or a
+        /// committee will be involved in the purchase process for the
+        /// lead.</param>
+        /// <param name="stepid">Shows the ID of the workflow step.</param>
+        /// <param name="onholdtime">Shows the duration in minutes for which
+        /// the opportunity was on hold.</param>
+        /// <param name="discountpercentage">Type the discount rate that should
+        /// be applied to the Product Totals field to include additional
+        /// savings for the customer in the opportunity.</param>
+        /// <param name="proposedsolution">Type notes about the proposed
+        /// solution for the opportunity.</param>
+        /// <param name="schedulefollowupQualify">Enter the date and time of
+        /// the qualifying follow-up meeting with the lead.</param>
+        /// <param name="customerneed">Type some notes about the customer's
+        /// requirements, to help the sales team identify products and services
+        /// that could meet their requirements.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="completeinternalreview">Select whether an internal
+        /// review has been completed for this opportunity.</param>
+        /// <param name="_accountidValue">Unique identifier of the account with
+        /// which the opportunity is associated.</param>
+        /// <param name="finaldecisiondate">Enter the date and time when the
+        /// final decision of the opportunity was made.</param>
+        /// <param name="decisionmaker">Select whether your notes include
+        /// information about who makes the purchase decisions at the lead's
+        /// company.</param>
+        /// <param name="pursuitdecision">Select whether the decision about
+        /// pursuing the opportunity has been made.</param>
+        /// <param name="estimatedvalue">Type the estimated revenue amount to
+        /// indicate the potential sale or value of the opportunity for revenue
+        /// forecasting. This field can be either system-populated or editable
+        /// based on the selection in the Revenue field.</param>
+        /// <param name="prioritycode">Select the priority so that preferred
+        /// customers or critical issues are handled quickly.</param>
+        /// <param name="_campaignidValue">Shows the campaign that the
+        /// opportunity was created from. The ID is used for tracking the
+        /// success of the campaign.</param>
+        /// <param name="confirminterest">Select whether the lead confirmed
+        /// interest in your offerings. This helps in determining the lead
+        /// quality and the probability of it turning into an
+        /// opportunity.</param>
+        /// <param name="totalamount">Shows the total amount due, calculated as
+        /// the sum of the products, discounts, freight, and taxes for the
+        /// opportunity.</param>
+        /// <param name="_slaidValue">Choose the service level agreement (SLA)
+        /// that you want to apply to the opportunity record.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the opportunity.</param>
+        /// <param name="_parentcontactidValue">Choose a contact to connect
+        /// this opportunity to, so that the relationship is visible in reports
+        /// and analytics.</param>
+        /// <param name="discountamountBase">Shows the Opportunity Discount
+        /// Amount field converted to the system's default base currency for
+        /// reporting purposes. The calculation uses the exchange rate
+        /// specified in the Currencies area.</param>
+        /// <param name="processid">Shows the ID of the process.</param>
+        /// <param name="purchasetimeframe">Choose how long the lead will
+        /// likely take to make the purchase.</param>
+        /// <param name="budgetamountBase">Shows the budget amount converted to
+        /// the system's base currency.</param>
+        /// <param name="isrevenuesystemcalculated">Select whether the
+        /// estimated revenue for the opportunity is calculated automatically
+        /// based on the products entered or entered manually by a
+        /// user.</param>
+        /// <param name="totalamountBase">Shows the Total Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="statecode">Shows whether the opportunity is open, won,
+        /// or lost. Won and lost opportunities are read-only and can't be
+        /// edited until they are reactivated.</param>
+        /// <param name="qualificationcomments">Type comments about the
+        /// qualification or scoring of the lead.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="evaluatefit">Select whether the fit between the lead's
+        /// requirements and your offerings was evaluated.</param>
+        /// <param name="currentsituation">Type notes about the company or
+        /// organization associated with the opportunity.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="identifycompetitors">Select whether information about
+        /// competitors is included.</param>
+        /// <param name="sendthankyounote">Select whether a thank you note has
+        /// been sent to the account for considering the proposal.</param>
+        /// <param name="opportunityid">Unique identifier of the
+        /// opportunity.</param>
+        /// <param name="customerpainpoints">Type notes about the customer's
+        /// pain points to help the sales team identify products and services
+        /// that could address these pain points.</param>
+        /// <param name="filedebrief">Choose whether the sales team has
+        /// recorded detailed notes on the proposals and the account's
+        /// responses.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the opportunity.</param>
+        /// <param name="scheduleproposalmeeting">Enter the date and time of
+        /// the proposal meeting for the opportunity.</param>
+        /// <param name="initialcommunication">Choose whether someone from the
+        /// sales team contacted this lead earlier.</param>
+        /// <param name="name">Type a subject or descriptive name, such as the
+        /// expected order or company name, for the opportunity.</param>
+        /// <param name="timeline">Select when the opportunity is likely to be
+        /// closed.</param>
+        public MicrosoftDynamicsCRMopportunity(System.DateTimeOffset? schedulefollowupProspect = default(System.DateTimeOffset?), decimal? totaltax = default(decimal?), string versionnumber = default(string), bool? identifycustomercontacts = default(bool?), string description = default(string), decimal? actualvalue = default(decimal?), bool? completefinalproposal = default(bool?), System.Guid? _parentaccountidValue = default(System.Guid?), bool? presentproposal = default(bool?), bool? resolvefeedback = default(bool?), System.Guid? _owneridValue = default(System.Guid?), decimal? freightamount = default(decimal?), bool? identifypursuitteam = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? totalamountlessfreight = default(decimal?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), bool? captureproposalfeedback = default(bool?), decimal? freightamountBase = default(decimal?), string timespentbymeonemailandmeetings = default(string), string traversedpath = default(string), int? salesstage = default(int?), System.DateTime? actualclosedate = default(System.DateTime?), bool? presentfinalproposal = default(bool?), decimal? actualvalueBase = default(decimal?), decimal? totallineitemamount = default(decimal?), bool? developproposal = default(bool?), string stepname = default(string), int? statuscode = default(int?), decimal? totaltaxBase = default(decimal?), string quotecomments = default(string), decimal? totallineitemdiscountamountBase = default(decimal?), int? salesstagecode = default(int?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _slainvokedidValue = default(System.Guid?), decimal? discountamount = default(decimal?), int? opportunityratingcode = default(int?), System.Guid? _pricelevelidValue = default(System.Guid?), decimal? budgetamount = default(decimal?), decimal? totallineitemdiscountamount = default(decimal?), int? closeprobability = default(int?), int? budgetstatus = default(int?), decimal? totaldiscountamount = default(decimal?), decimal? totalamountlessfreightBase = default(decimal?), decimal? estimatedvalueBase = default(decimal?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTime? estimatedclosedate = default(System.DateTime?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), int? need = default(int?), bool? participatesinworkflow = default(bool?), int? pricingerrorcode = default(int?), decimal? totaldiscountamountBase = default(decimal?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), System.Guid? stageid = default(System.Guid?), decimal? totallineitemamountBase = default(decimal?), System.Guid? _customeridValue = default(System.Guid?), System.Guid? _contactidValue = default(System.Guid?), int? importsequencenumber = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _originatingleadidValue = default(System.Guid?), int? purchaseprocess = default(int?), System.Guid? stepid = default(System.Guid?), int? onholdtime = default(int?), decimal? discountpercentage = default(decimal?), string proposedsolution = default(string), System.DateTimeOffset? schedulefollowupQualify = default(System.DateTimeOffset?), string customerneed = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), bool? completeinternalreview = default(bool?), System.Guid? _accountidValue = default(System.Guid?), System.DateTime? finaldecisiondate = default(System.DateTime?), bool? decisionmaker = default(bool?), bool? pursuitdecision = default(bool?), decimal? estimatedvalue = default(decimal?), int? prioritycode = default(int?), System.Guid? _campaignidValue = default(System.Guid?), bool? confirminterest = default(bool?), decimal? totalamount = default(decimal?), System.Guid? _slaidValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _parentcontactidValue = default(System.Guid?), decimal? discountamountBase = default(decimal?), System.Guid? processid = default(System.Guid?), int? purchasetimeframe = default(int?), decimal? budgetamountBase = default(decimal?), bool? isrevenuesystemcalculated = default(bool?), decimal? totalamountBase = default(decimal?), int? statecode = default(int?), string qualificationcomments = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), bool? evaluatefit = default(bool?), string currentsituation = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), bool? identifycompetitors = default(bool?), bool? sendthankyounote = default(bool?), System.Guid? opportunityid = default(System.Guid?), string customerpainpoints = default(string), bool? filedebrief = default(bool?), System.Guid? _owninguserValue = default(System.Guid?), System.DateTimeOffset? scheduleproposalmeeting = default(System.DateTimeOffset?), int? initialcommunication = default(int?), string name = default(string), int? timeline = default(int?), IList<MicrosoftDynamicsCRMcompetitor> opportunitycompetitorsAssociation = default(IList<MicrosoftDynamicsCRMcompetitor>), MicrosoftDynamicsCRMcampaign campaignid = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMcontact parentcontactid = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMopportunitysalesprocess> opportunityOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMphonecall> opportunityPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMasyncoperation> opportunityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMlead originatingleadid = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMpostfollow> opportunityPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMpostregarding> opportunityPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMfax> opportunityFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMopportunityproduct> productOpportunities = default(IList<MicrosoftDynamicsCRMopportunityproduct>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMemail> opportunityEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsla slainvokedidOpportunitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMactivitypointer> opportunityActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMtask> opportunityTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMduplicaterecord> opportunityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaOpportunitySla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMconnection> opportunityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> opportunitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMduplicaterecord> opportunityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMaccount parentaccountid = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMinvoice> opportunityInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> opportunityRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMactioncard> opportunityActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> opportunitySharepointDocumentLocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> opportunityLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceOpportunity = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> opportunityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMopportunityclose> opportunityOpportunityClose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMteam> opportunityTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMbulkoperationlog> createdOpportunityBulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMappointment> opportunityAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMserviceappointment> opportunityServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMletter> opportunityLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMlead> leadQualifyingOpportunity = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMactivityparty> opportunityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMsalesorder> opportunitySalesOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMsocialactivity> opportunitySocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMquote> opportunityQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMannotation> opportunityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> opportunityAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
         {
             SchedulefollowupProspect = schedulefollowupProspect;
             Totaltax = totaltax;
@@ -200,526 +477,773 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets enter the date and time of the prospecting follow-up
+        /// meeting with the lead.
         /// </summary>
         [JsonProperty(PropertyName = "schedulefollowup_prospect")]
         public System.DateTimeOffset? SchedulefollowupProspect { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total of the Tax amounts specified on all
+        /// products included in the opportunity, included in the Total Amount
+        /// field calculation for the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "totaltax")]
-        public object Totaltax { get; set; }
+        public decimal? Totaltax { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the customer contacts for this
+        /// opportunity have been identified.
         /// </summary>
         [JsonProperty(PropertyName = "identifycustomercontacts")]
         public bool? Identifycustomercontacts { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the
+        /// opportunity, such as possible products to sell or past purchases
+        /// from the customer.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets type the actual revenue amount for the opportunity for
+        /// reporting and analysis of estimated versus actual sales. Field
+        /// defaults to the Est. Revenue value when an opportunity is won.
         /// </summary>
         [JsonProperty(PropertyName = "actualvalue")]
-        public object Actualvalue { get; set; }
+        public decimal? Actualvalue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether a final proposal has been completed for
+        /// the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "completefinalproposal")]
         public bool? Completefinalproposal { get; set; }
 
         /// <summary>
+        /// Gets or sets choose an account to connect this opportunity to, so
+        /// that the relationship is visible in reports and analytics, and to
+        /// provide a quick link to additional details, such as financial
+        /// information and activities.
         /// </summary>
         [JsonProperty(PropertyName = "_parentaccountid_value")]
-        public string _parentaccountidValue { get; set; }
+        public System.Guid? _parentaccountidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether a proposal for the opportunity has been
+        /// presented to the account.
         /// </summary>
         [JsonProperty(PropertyName = "presentproposal")]
         public bool? Presentproposal { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether the proposal feedback has been captured
+        /// and resolved for the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "resolvefeedback")]
         public bool? Resolvefeedback { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the cost of freight or shipping for the products
+        /// included in the opportunity for use in calculating the Total Amount
+        /// field.
         /// </summary>
         [JsonProperty(PropertyName = "freightamount")]
-        public object Freightamount { get; set; }
+        public decimal? Freightamount { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether you have recorded who will pursue the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "identifypursuitteam")]
         public bool? Identifypursuitteam { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total product amount for the opportunity,
+        /// minus any discounts. This value is added to freight and tax amounts
+        /// in the calculation for the total amount of the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "totalamountlessfreight")]
-        public object Totalamountlessfreight { get; set; }
+        public decimal? Totalamountlessfreight { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether the proposal feedback has been captured
+        /// for the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "captureproposalfeedback")]
         public bool? Captureproposalfeedback { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Freight Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "freightamount_base")]
-        public object FreightamountBase { get; set; }
+        public decimal? FreightamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets total time spent for emails (read and write) and
+        /// meetings by me in relation to the opportunity record.
         /// </summary>
         [JsonProperty(PropertyName = "timespentbymeonemailandmeetings")]
         public string Timespentbymeonemailandmeetings { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
+        /// Gets or sets select the sales stage of this opportunity to aid the
+        /// sales team in their efforts to win this opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "salesstage")]
         public int? Salesstage { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the opportunity was
+        /// closed or canceled.
         /// </summary>
+        [JsonConverter(typeof(DateJsonConverter))]
         [JsonProperty(PropertyName = "actualclosedate")]
-        public System.DateTimeOffset? Actualclosedate { get; set; }
+        public System.DateTime? Actualclosedate { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the final proposal has been presented
+        /// to the account.
         /// </summary>
         [JsonProperty(PropertyName = "presentfinalproposal")]
         public bool? Presentfinalproposal { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Actual Revenue field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "actualvalue_base")]
-        public object ActualvalueBase { get; set; }
+        public decimal? ActualvalueBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the sum of all existing and write-in products
+        /// included on the opportunity, based on the specified price list and
+        /// quantities.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemamount")]
-        public object Totallineitemamount { get; set; }
+        public decimal? Totallineitemamount { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether a proposal has been developed for the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "developproposal")]
         public bool? Developproposal { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the current phase in the sales pipeline for the
+        /// opportunity. This is updated by a workflow.
         /// </summary>
         [JsonProperty(PropertyName = "stepname")]
         public string Stepname { get; set; }
 
         /// <summary>
+        /// Gets or sets select the opportunity's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Tax field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totaltax_base")]
-        public object TotaltaxBase { get; set; }
+        public decimal? TotaltaxBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type comments about the quotes associated with the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "quotecomments")]
         public string Quotecomments { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Line Item Discount Amount field to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemdiscountamount_base")]
-        public object TotallineitemdiscountamountBase { get; set; }
+        public decimal? TotallineitemdiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select the sales process stage for the opportunity to
+        /// indicate the probability of closing the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "salesstagecode")]
         public int? Salesstagecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets last SLA that was applied to this opportunity. This
+        /// field is for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
+        public System.Guid? _slainvokedidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the discount amount for the opportunity if the
+        /// customer is eligible for special savings.
         /// </summary>
         [JsonProperty(PropertyName = "discountamount")]
-        public object Discountamount { get; set; }
+        public decimal? Discountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets select the expected value or priority of the
+        /// opportunity based on revenue, customer status, or closing
+        /// probability.
         /// </summary>
         [JsonProperty(PropertyName = "opportunityratingcode")]
         public int? Opportunityratingcode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the price list associated with this record to
+        /// make sure the products associated with the campaign are offered at
+        /// the correct prices.
         /// </summary>
         [JsonProperty(PropertyName = "_pricelevelid_value")]
-        public string _pricelevelidValue { get; set; }
+        public System.Guid? _pricelevelidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a value between 0 and 1,000,000,000,000 to
+        /// indicate the lead's potential available budget.
         /// </summary>
         [JsonProperty(PropertyName = "budgetamount")]
-        public object Budgetamount { get; set; }
+        public decimal? Budgetamount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total of the Manual Discount amounts
+        /// specified on all products included in the opportunity. This value
+        /// is reflected in the Total Detail Amount field on the opportunity
+        /// and is added to any discount amount or rate specified on the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemdiscountamount")]
-        public object Totallineitemdiscountamount { get; set; }
+        public decimal? Totallineitemdiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type a number from 0 to 100 that represents the
+        /// likelihood of closing the opportunity. This can aid the sales team
+        /// in their efforts to convert the opportunity in a sale.
         /// </summary>
         [JsonProperty(PropertyName = "closeprobability")]
         public int? Closeprobability { get; set; }
 
         /// <summary>
+        /// Gets or sets select the likely budget status for the lead's
+        /// company. This may help determine the lead rating or your sales
+        /// approach.
         /// </summary>
         [JsonProperty(PropertyName = "budgetstatus")]
         public int? Budgetstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total discount amount, based on the discount
+        /// price and rate entered on the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "totaldiscountamount")]
-        public object Totaldiscountamount { get; set; }
+        public decimal? Totaldiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Pre-Freight Amount field converted to
+        /// the system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totalamountlessfreight_base")]
-        public object TotalamountlessfreightBase { get; set; }
+        public decimal? TotalamountlessfreightBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Actual Revenue field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "estimatedvalue_base")]
-        public object EstimatedvalueBase { get; set; }
+        public decimal? EstimatedvalueBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the expected closing date of the opportunity to
+        /// help make accurate revenue forecasts.
         /// </summary>
+        [JsonConverter(typeof(DateJsonConverter))]
         [JsonProperty(PropertyName = "estimatedclosedate")]
-        public System.DateTimeOffset? Estimatedclosedate { get; set; }
+        public System.DateTime? Estimatedclosedate { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose how high the level of need is for the lead's
+        /// company.
         /// </summary>
         [JsonProperty(PropertyName = "need")]
         public int? Need { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the opportunity participates
+        /// in workflow rules.
         /// </summary>
         [JsonProperty(PropertyName = "participatesinworkflow")]
         public bool? Participatesinworkflow { get; set; }
 
         /// <summary>
+        /// Gets or sets pricing error for the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "pricingerrorcode")]
         public int? Pricingerrorcode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Discount Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totaldiscountamount_base")]
-        public object TotaldiscountamountBase { get; set; }
+        public decimal? TotaldiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets contains the date time stamp of the last on hold time.
         /// </summary>
         [JsonProperty(PropertyName = "lastonholdtime")]
         public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        public System.Guid? Stageid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Detail Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemamount_base")]
-        public object TotallineitemamountBase { get; set; }
+        public decimal? TotallineitemamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select the customer account or contact to provide a
+        /// quick link to additional customer details, such as address, phone
+        /// number, activities, and orders.
         /// </summary>
         [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        public System.Guid? _customeridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the contact associated with the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "_contactid_value")]
-        public string _contactidValue { get; set; }
+        public System.Guid? _contactidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the lead that the opportunity was created from
+        /// for reporting and analytics. The field is read-only after the
+        /// opportunity is created and defaults to the correct lead when an
+        /// opportunity is created from a converted lead.
         /// </summary>
         [JsonProperty(PropertyName = "_originatingleadid_value")]
-        public string _originatingleadidValue { get; set; }
+        public System.Guid? _originatingleadidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether an individual or a committee will be
+        /// involved in the purchase process for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "purchaseprocess")]
         public int? Purchaseprocess { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the workflow step.
         /// </summary>
         [JsonProperty(PropertyName = "stepid")]
-        public string Stepid { get; set; }
+        public System.Guid? Stepid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the duration in minutes for which the
+        /// opportunity was on hold.
         /// </summary>
         [JsonProperty(PropertyName = "onholdtime")]
         public int? Onholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets type the discount rate that should be applied to the
+        /// Product Totals field to include additional savings for the customer
+        /// in the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "discountpercentage")]
-        public object Discountpercentage { get; set; }
+        public decimal? Discountpercentage { get; set; }
 
         /// <summary>
+        /// Gets or sets type notes about the proposed solution for the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "proposedsolution")]
         public string Proposedsolution { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date and time of the qualifying follow-up
+        /// meeting with the lead.
         /// </summary>
         [JsonProperty(PropertyName = "schedulefollowup_qualify")]
         public System.DateTimeOffset? SchedulefollowupQualify { get; set; }
 
         /// <summary>
+        /// Gets or sets type some notes about the customer's requirements, to
+        /// help the sales team identify products and services that could meet
+        /// their requirements.
         /// </summary>
         [JsonProperty(PropertyName = "customerneed")]
         public string Customerneed { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether an internal review has been completed
+        /// for this opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "completeinternalreview")]
         public bool? Completeinternalreview { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the account with which the
+        /// opportunity is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
+        public System.Guid? _accountidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date and time when the final decision of the
+        /// opportunity was made.
         /// </summary>
+        [JsonConverter(typeof(DateJsonConverter))]
         [JsonProperty(PropertyName = "finaldecisiondate")]
-        public System.DateTimeOffset? Finaldecisiondate { get; set; }
+        public System.DateTime? Finaldecisiondate { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether your notes include information about
+        /// who makes the purchase decisions at the lead's company.
         /// </summary>
         [JsonProperty(PropertyName = "decisionmaker")]
         public bool? Decisionmaker { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the decision about pursuing the
+        /// opportunity has been made.
         /// </summary>
         [JsonProperty(PropertyName = "pursuitdecision")]
         public bool? Pursuitdecision { get; set; }
 
         /// <summary>
+        /// Gets or sets type the estimated revenue amount to indicate the
+        /// potential sale or value of the opportunity for revenue forecasting.
+        /// This field can be either system-populated or editable based on the
+        /// selection in the Revenue field.
         /// </summary>
         [JsonProperty(PropertyName = "estimatedvalue")]
-        public object Estimatedvalue { get; set; }
+        public decimal? Estimatedvalue { get; set; }
 
         /// <summary>
+        /// Gets or sets select the priority so that preferred customers or
+        /// critical issues are handled quickly.
         /// </summary>
         [JsonProperty(PropertyName = "prioritycode")]
         public int? Prioritycode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the campaign that the opportunity was created
+        /// from. The ID is used for tracking the success of the campaign.
         /// </summary>
         [JsonProperty(PropertyName = "_campaignid_value")]
-        public string _campaignidValue { get; set; }
+        public System.Guid? _campaignidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the lead confirmed interest in your
+        /// offerings. This helps in determining the lead quality and the
+        /// probability of it turning into an opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "confirminterest")]
         public bool? Confirminterest { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total amount due, calculated as the sum of
+        /// the products, discounts, freight, and taxes for the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "totalamount")]
-        public object Totalamount { get; set; }
+        public decimal? Totalamount { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the service level agreement (SLA) that you want
+        /// to apply to the opportunity record.
         /// </summary>
         [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
+        public System.Guid? _slaidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose a contact to connect this opportunity to, so
+        /// that the relationship is visible in reports and analytics.
         /// </summary>
         [JsonProperty(PropertyName = "_parentcontactid_value")]
-        public string _parentcontactidValue { get; set; }
+        public System.Guid? _parentcontactidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Opportunity Discount Amount field converted
+        /// to the system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "discountamount_base")]
-        public object DiscountamountBase { get; set; }
+        public decimal? DiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        public System.Guid? Processid { get; set; }
 
         /// <summary>
+        /// Gets or sets choose how long the lead will likely take to make the
+        /// purchase.
         /// </summary>
         [JsonProperty(PropertyName = "purchasetimeframe")]
         public int? Purchasetimeframe { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the budget amount converted to the system's base
+        /// currency.
         /// </summary>
         [JsonProperty(PropertyName = "budgetamount_base")]
-        public object BudgetamountBase { get; set; }
+        public decimal? BudgetamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the estimated revenue for the
+        /// opportunity is calculated automatically based on the products
+        /// entered or entered manually by a user.
         /// </summary>
         [JsonProperty(PropertyName = "isrevenuesystemcalculated")]
         public bool? Isrevenuesystemcalculated { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Amount field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totalamount_base")]
-        public object TotalamountBase { get; set; }
+        public decimal? TotalamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the opportunity is open, won, or lost.
+        /// Won and lost opportunities are read-only and can't be edited until
+        /// they are reactivated.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets type comments about the qualification or scoring of
+        /// the lead.
         /// </summary>
         [JsonProperty(PropertyName = "qualificationcomments")]
         public string Qualificationcomments { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the fit between the lead's requirements
+        /// and your offerings was evaluated.
         /// </summary>
         [JsonProperty(PropertyName = "evaluatefit")]
         public bool? Evaluatefit { get; set; }
 
         /// <summary>
+        /// Gets or sets type notes about the company or organization
+        /// associated with the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "currentsituation")]
         public string Currentsituation { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether information about competitors is
+        /// included.
         /// </summary>
         [JsonProperty(PropertyName = "identifycompetitors")]
         public bool? Identifycompetitors { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether a thank you note has been sent to the
+        /// account for considering the proposal.
         /// </summary>
         [JsonProperty(PropertyName = "sendthankyounote")]
         public bool? Sendthankyounote { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "opportunityid")]
-        public string Opportunityid { get; set; }
+        public System.Guid? Opportunityid { get; set; }
 
         /// <summary>
+        /// Gets or sets type notes about the customer's pain points to help
+        /// the sales team identify products and services that could address
+        /// these pain points.
         /// </summary>
         [JsonProperty(PropertyName = "customerpainpoints")]
         public string Customerpainpoints { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether the sales team has recorded detailed
+        /// notes on the proposals and the account's responses.
         /// </summary>
         [JsonProperty(PropertyName = "filedebrief")]
         public bool? Filedebrief { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the
+        /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date and time of the proposal meeting for
+        /// the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "scheduleproposalmeeting")]
         public System.DateTimeOffset? Scheduleproposalmeeting { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether someone from the sales team contacted
+        /// this lead earlier.
         /// </summary>
         [JsonProperty(PropertyName = "initialcommunication")]
         public int? Initialcommunication { get; set; }
 
         /// <summary>
+        /// Gets or sets type a subject or descriptive name, such as the
+        /// expected order or company name, for the opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets select when the opportunity is likely to be closed.
         /// </summary>
         [JsonProperty(PropertyName = "timeline")]
         public int? Timeline { get; set; }
@@ -802,7 +1326,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// campaignresponse
+    /// Microsoft.Dynamics.CRM.campaignresponse
     /// </summary>
     public partial class MicrosoftDynamicsCRMcampaignresponse
     {
@@ -29,7 +29,57 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignresponse class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignresponse(string firstname = default(string), string lastname = default(string), System.DateTimeOffset? receivedon = default(System.DateTimeOffset?), string yomifirstname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? responsecode = default(int?), string yomilastname = default(string), string companyname = default(string), string promotioncodename = default(string), string category = default(string), string telephone = default(string), int? channeltypecode = default(int?), string _originatingactivityidValue = default(string), string fax = default(string), int? importsequencenumber = default(int?), string emailaddress = default(string), string yomicompanyname = default(string), string subcategory = default(string), MicrosoftDynamicsCRMfax originatingactivityidFax = default(MicrosoftDynamicsCRMfax), IList<MicrosoftDynamicsCRMannotation> campaignResponseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMletter originatingactivityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMphonecall originatingactivityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignresponse = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignResponseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationCampaignresponse = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> campaignresponseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMteam owningteamCampaignresponse = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguserCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> campaignResponseQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMrecurringappointmentmaster originatingactivityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMactivitypointer originatingactivityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMlead> campaignResponseLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignresponse = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignresponse = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> campaignResponseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMemail originatingactivityidEmail = default(MicrosoftDynamicsCRMemail), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> campaignResponseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment originatingactivityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMabsScheduledprocessexecution originatingactivityidAbsScheduledprocessexecutionCampaignresponse = default(MicrosoftDynamicsCRMabsScheduledprocessexecution))
+        /// <param name="firstname">Type the responder's first name if the
+        /// campaign response was received from a new prospect or
+        /// customer.</param>
+        /// <param name="lastname">Type the responder's last name if the
+        /// campaign response was received from a new prospect or
+        /// customer.</param>
+        /// <param name="receivedon">Enter the date when the campaign response
+        /// was received.</param>
+        /// <param name="yomifirstname">Type the phonetic spelling of the
+        /// campaign responder's first name, if specified in Japanese, to make
+        /// sure the name is pronounced correctly in phone calls and other
+        /// communications.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="responsecode">Select the type of response from the
+        /// prospect or customer to indicate their interest in the
+        /// campaign.</param>
+        /// <param name="yomilastname">Type the phonetic spelling of the
+        /// campaign responder's last name, if specified in Japanese, to make
+        /// sure the name is pronounced correctly in phone calls and other
+        /// communications.</param>
+        /// <param name="companyname">Type the name of the company if the
+        /// campaign response was received from a new prospect or
+        /// customer.</param>
+        /// <param name="promotioncodename">Type a promotional code to track
+        /// sales related to the campaign response or to allow the responder to
+        /// redeem a discount offer.</param>
+        /// <param name="category">Type a category to identify the campaign
+        /// response type, such as new business development or customer
+        /// retention, to tie the campaign response to a business group or
+        /// function.</param>
+        /// <param name="telephone">Type the responder's primary phone
+        /// number.</param>
+        /// <param name="channeltypecode">Select how the response was received,
+        /// such as phone, letter, fax, or email.</param>
+        /// <param name="_originatingactivityidValue">Choose the phone call,
+        /// email, fax, letter, or appointment activity that led the prospect
+        /// or customer to respond to the campaign.</param>
+        /// <param name="fax">Type the responder's fax number.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="emailaddress">Type the responder's email
+        /// address.</param>
+        /// <param name="yomicompanyname">Type the phonetic spelling of the
+        /// company name, if specified in Japanese, to make sure the name is
+        /// pronounced correctly in phone calls and other
+        /// communications.</param>
+        /// <param name="subcategory">Type a subcategory to identify the
+        /// campaign response type and relate the activity to a specific
+        /// product, sales region, business group, or other function.</param>
+        public MicrosoftDynamicsCRMcampaignresponse(string firstname = default(string), string lastname = default(string), System.DateTimeOffset? receivedon = default(System.DateTimeOffset?), string yomifirstname = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? responsecode = default(int?), string yomilastname = default(string), string companyname = default(string), string promotioncodename = default(string), string category = default(string), string telephone = default(string), int? channeltypecode = default(int?), System.Guid? _originatingactivityidValue = default(System.Guid?), string fax = default(string), int? importsequencenumber = default(int?), string emailaddress = default(string), string yomicompanyname = default(string), string subcategory = default(string), MicrosoftDynamicsCRMfax originatingactivityidFax = default(MicrosoftDynamicsCRMfax), IList<MicrosoftDynamicsCRMannotation> campaignResponseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMletter originatingactivityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMphonecall originatingactivityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignresponse = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignResponseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationCampaignresponse = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> campaignresponseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMteam owningteamCampaignresponse = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguserCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> campaignResponseQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMrecurringappointmentmaster originatingactivityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMactivitypointer originatingactivityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMlead> campaignResponseLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignresponse = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignresponse = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> campaignResponseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMemail originatingactivityidEmail = default(MicrosoftDynamicsCRMemail), IList<MicrosoftDynamicsCRMduplicaterecord> campaignResponseDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> campaignResponseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMappointment originatingactivityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignresponse = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMabsScheduledprocessexecution originatingactivityidAbsScheduledprocessexecutionCampaignresponse = default(MicrosoftDynamicsCRMabsScheduledprocessexecution))
         {
             Firstname = firstname;
             Lastname = lastname;
@@ -87,91 +137,130 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets type the responder's first name if the campaign
+        /// response was received from a new prospect or customer.
         /// </summary>
         [JsonProperty(PropertyName = "firstname")]
         public string Firstname { get; set; }
 
         /// <summary>
+        /// Gets or sets type the responder's last name if the campaign
+        /// response was received from a new prospect or customer.
         /// </summary>
         [JsonProperty(PropertyName = "lastname")]
         public string Lastname { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date when the campaign response was
+        /// received.
         /// </summary>
         [JsonProperty(PropertyName = "receivedon")]
         public System.DateTimeOffset? Receivedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phonetic spelling of the campaign responder's
+        /// first name, if specified in Japanese, to make sure the name is
+        /// pronounced correctly in phone calls and other communications.
         /// </summary>
         [JsonProperty(PropertyName = "yomifirstname")]
         public string Yomifirstname { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of response from the prospect or
+        /// customer to indicate their interest in the campaign.
         /// </summary>
         [JsonProperty(PropertyName = "responsecode")]
         public int? Responsecode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phonetic spelling of the campaign responder's
+        /// last name, if specified in Japanese, to make sure the name is
+        /// pronounced correctly in phone calls and other communications.
         /// </summary>
         [JsonProperty(PropertyName = "yomilastname")]
         public string Yomilastname { get; set; }
 
         /// <summary>
+        /// Gets or sets type the name of the company if the campaign response
+        /// was received from a new prospect or customer.
         /// </summary>
         [JsonProperty(PropertyName = "companyname")]
         public string Companyname { get; set; }
 
         /// <summary>
+        /// Gets or sets type a promotional code to track sales related to the
+        /// campaign response or to allow the responder to redeem a discount
+        /// offer.
         /// </summary>
         [JsonProperty(PropertyName = "promotioncodename")]
         public string Promotioncodename { get; set; }
 
         /// <summary>
+        /// Gets or sets type a category to identify the campaign response
+        /// type, such as new business development or customer retention, to
+        /// tie the campaign response to a business group or function.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
+        /// Gets or sets type the responder's primary phone number.
         /// </summary>
         [JsonProperty(PropertyName = "telephone")]
         public string Telephone { get; set; }
 
         /// <summary>
+        /// Gets or sets select how the response was received, such as phone,
+        /// letter, fax, or email.
         /// </summary>
         [JsonProperty(PropertyName = "channeltypecode")]
         public int? Channeltypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the phone call, email, fax, letter, or
+        /// appointment activity that led the prospect or customer to respond
+        /// to the campaign.
         /// </summary>
         [JsonProperty(PropertyName = "_originatingactivityid_value")]
-        public string _originatingactivityidValue { get; set; }
+        public System.Guid? _originatingactivityidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the responder's fax number.
         /// </summary>
         [JsonProperty(PropertyName = "fax")]
         public string Fax { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type the responder's email address.
         /// </summary>
         [JsonProperty(PropertyName = "emailaddress")]
         public string Emailaddress { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phonetic spelling of the company name, if
+        /// specified in Japanese, to make sure the name is pronounced
+        /// correctly in phone calls and other communications.
         /// </summary>
         [JsonProperty(PropertyName = "yomicompanyname")]
         public string Yomicompanyname { get; set; }
 
         /// <summary>
+        /// Gets or sets type a subcategory to identify the campaign response
+        /// type and relate the activity to a specific product, sales region,
+        /// business group, or other function.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }

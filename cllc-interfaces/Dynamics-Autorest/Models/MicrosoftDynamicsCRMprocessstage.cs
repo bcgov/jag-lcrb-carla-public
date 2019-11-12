@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// processstage
+    /// Microsoft.Dynamics.CRM.processstage
     /// </summary>
     public partial class MicrosoftDynamicsCRMprocessstage
     {
@@ -29,7 +29,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMprocessstage
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMprocessstage(long? versionnumber = default(long?), string processstageid = default(string), int? stagecategory = default(int?), string owningbusinessunit = default(string), string _processidValue = default(string), string _owneridValue = default(string), string primaryentitytypecode = default(string), string clientdata = default(string), string stagename = default(string), IList<MicrosoftDynamicsCRMknowledgearticle> processstageKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMsalesorder> processstageSalesorders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcontact> processstageContact = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlist> processstageLists = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMfax> processstageFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMteam> processstageTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMsyncerror> processStageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMletter> processstageLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMinvoice> processstageInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMcampaignresponse> processstageCampaignresponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMappointment> processstageAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcompetitor> processstageCompetitors = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMproductpricelevel> processstageProductpricelevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMsalesliterature> processstageSalesliteratures = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> processstageOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMexpiredprocess> processstageExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMquote> processstageQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMtask> processstageTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMnewprocess> processstageNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMincident> processstageIncident = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMopportunity> processstageOpportunity = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> processstageLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMphonecall> processstagePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMphonetocaseprocess> processstagePhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMproduct> processstageProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> processstageRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsystemuser> processstageSystemusers = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMcampaign> processstageCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMlead> processstageLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcampaignactivity> processstageCampaignactivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMemail> processstageEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtranslationprocess> processstageTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMaccount> processstageAccount = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMadoxioApplication> processstageAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioComplaint> processstageAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfActivestageid = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> lkAdoxioApplicationbpfv3Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>))
+        /// <param name="versionnumber">Version number of the process
+        /// stage.</param>
+        /// <param name="processstageid">Shows the ID of the process stage
+        /// record.</param>
+        /// <param name="stagecategory">Select the category of the sales
+        /// process.</param>
+        /// <param name="owningbusinessunit">Select the business unit that owns
+        /// the record.</param>
+        /// <param name="_processidValue">Shows the ID of the process.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="primaryentitytypecode">Primary entity associated with
+        /// the stage.</param>
+        /// <param name="clientdata">Step metadata for process stage</param>
+        /// <param name="stagename">Type a name for the process stage.</param>
+        public MicrosoftDynamicsCRMprocessstage(string versionnumber = default(string), System.Guid? processstageid = default(System.Guid?), int? stagecategory = default(int?), System.Guid? owningbusinessunit = default(System.Guid?), System.Guid? _processidValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), string primaryentitytypecode = default(string), string clientdata = default(string), string stagename = default(string), IList<MicrosoftDynamicsCRMknowledgearticle> processstageKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), IList<MicrosoftDynamicsCRMsalesorder> processstageSalesorders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMcontact> processstageContact = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMlist> processstageLists = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMfax> processstageFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMteam> processstageTeams = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMsyncerror> processStageSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMletter> processstageLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMinvoice> processstageInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMcampaignresponse> processstageCampaignresponses = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMappointment> processstageAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMcompetitor> processstageCompetitors = default(IList<MicrosoftDynamicsCRMcompetitor>), IList<MicrosoftDynamicsCRMproductpricelevel> processstageProductpricelevels = default(IList<MicrosoftDynamicsCRMproductpricelevel>), IList<MicrosoftDynamicsCRMsalesliterature> processstageSalesliteratures = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> processstageOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMexpiredprocess> processstageExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMquote> processstageQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMtask> processstageTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMnewprocess> processstageNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), IList<MicrosoftDynamicsCRMincident> processstageIncident = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMopportunity> processstageOpportunity = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> processstageLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMphonecall> processstagePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMphonetocaseprocess> processstagePhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMproduct> processstageProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> processstageRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsystemuser> processstageSystemusers = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMcampaign> processstageCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMlead> processstageLead = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcampaignactivity> processstageCampaignactivities = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMemail> processstageEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMtranslationprocess> processstageTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), IList<MicrosoftDynamicsCRMaccount> processstageAccount = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMadoxioApplication> processstageAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioComplaint> processstageAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfActivestageid = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> lkAdoxioApplicationbpfv3Activestageid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>))
         {
             Versionnumber = versionnumber;
             Processstageid = processstageid;
@@ -88,46 +104,57 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets version number of the process stage.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the process stage record.
         /// </summary>
         [JsonProperty(PropertyName = "processstageid")]
-        public string Processstageid { get; set; }
+        public System.Guid? Processstageid { get; set; }
 
         /// <summary>
+        /// Gets or sets select the category of the sales process.
         /// </summary>
         [JsonProperty(PropertyName = "stagecategory")]
         public int? Stagecategory { get; set; }
 
         /// <summary>
+        /// Gets or sets select the business unit that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
+        public System.Guid? Owningbusinessunit { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "_processid_value")]
-        public string _processidValue { get; set; }
+        public System.Guid? _processidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets primary entity associated with the stage.
         /// </summary>
         [JsonProperty(PropertyName = "primaryentitytypecode")]
         public string Primaryentitytypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets step metadata for process stage
         /// </summary>
         [JsonProperty(PropertyName = "clientdata")]
         public string Clientdata { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the process stage.
         /// </summary>
         [JsonProperty(PropertyName = "stagename")]
         public string Stagename { get; set; }

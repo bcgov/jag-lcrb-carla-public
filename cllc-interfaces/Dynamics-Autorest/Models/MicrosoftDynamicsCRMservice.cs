@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// service
+    /// Microsoft.Dynamics.CRM.service
     /// </summary>
     public partial class MicrosoftDynamicsCRMservice
     {
@@ -29,7 +29,52 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMservice
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMservice(string _organizationidValue = default(string), string granularity = default(string), bool? isschedulable = default(bool?), string _createdbyValue = default(string), string _resourcespecidValue = default(string), int? initialstatuscode = default(int?), int? anchoroffset = default(int?), bool? isvisible = default(bool?), string serviceid = default(string), string calendarid = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? duration = default(int?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string _strategyidValue = default(string), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), bool? showresources = default(bool?), string description = default(string), MicrosoftDynamicsCRMplugintype strategyid = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMincidentresolution> serviceIncidentresolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMaccount> serviceAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMserviceappointment> serviceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMquoteclose> serviceQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMopportunityclose> serviceOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMphonecall> servicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> serviceRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMfax> serviceFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> serviceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMtask> serviceTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMsocialactivity> serviceSocialactivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMcalendar calendaridCalendar = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMsyncerror> serviceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorderclose> serviceOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMletter> serviceLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMactivitypointer> serviceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMbulkdeletefailure> serviceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontact> serviceContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMappointment> serviceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMemail> serviceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMcalendarrule> serviceCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), IList<MicrosoftDynamicsCRMasyncoperation> serviceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionServiceServiceid = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization with which the service is associated.</param>
+        /// <param name="granularity">Describes how often the service is
+        /// performed.</param>
+        /// <param name="isschedulable">Information about whether the service
+        /// can be scheduled.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the service.</param>
+        /// <param name="_resourcespecidValue">Unique identifier of the
+        /// resource specification with which the service is
+        /// associated.</param>
+        /// <param name="initialstatuscode">Initial status reason for the
+        /// service activity.</param>
+        /// <param name="anchoroffset">Used in conjunction with granularity to
+        /// describes when services can be performed in relation to midnight on
+        /// a given day.</param>
+        /// <param name="isvisible">Information about whether the service is
+        /// visible to users.</param>
+        /// <param name="serviceid">Unique identifier of the associated
+        /// service.</param>
+        /// <param name="calendarid">Unique identifier of the calendar.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the service.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="duration">Duration of the service.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the service.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the service.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_strategyidValue">Value that is taken from
+        /// PluginTypeId in the Plugin Type record for the scheduling strategy.
+        /// This is the ID of the scheduling strategy plug-in associated with
+        /// the service.</param>
+        /// <param name="name">Name of the service.</param>
+        /// <param name="createdon">Date and time when the service was
+        /// created.</param>
+        /// <param name="modifiedon">Date and time when the service was last
+        /// modified.</param>
+        /// <param name="versionnumber">Version number of the service.</param>
+        /// <param name="showresources">For internal use only.</param>
+        /// <param name="description">Description of activity that represents
+        /// work done to satisfy a customer's need.</param>
+        public MicrosoftDynamicsCRMservice(System.Guid? _organizationidValue = default(System.Guid?), string granularity = default(string), bool? isschedulable = default(bool?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _resourcespecidValue = default(System.Guid?), int? initialstatuscode = default(int?), int? anchoroffset = default(int?), bool? isvisible = default(bool?), System.Guid? serviceid = default(System.Guid?), System.Guid? calendarid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? duration = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? importsequencenumber = default(int?), System.Guid? _strategyidValue = default(System.Guid?), string name = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), bool? showresources = default(bool?), string description = default(string), MicrosoftDynamicsCRMplugintype strategyid = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMincidentresolution> serviceIncidentresolutions = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMaccount> serviceAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMserviceappointment> serviceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMquoteclose> serviceQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMopportunityclose> serviceOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), IList<MicrosoftDynamicsCRMphonecall> servicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> serviceRecurringappointmentmasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMfax> serviceFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> serviceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMtask> serviceTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMsocialactivity> serviceSocialactivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), MicrosoftDynamicsCRMcalendar calendaridCalendar = default(MicrosoftDynamicsCRMcalendar), IList<MicrosoftDynamicsCRMsyncerror> serviceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorderclose> serviceOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMletter> serviceLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMactivitypointer> serviceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMbulkdeletefailure> serviceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontact> serviceContacts = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMappointment> serviceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMemail> serviceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMcalendarrule> serviceCalendarRules = default(IList<MicrosoftDynamicsCRMcalendarrule>), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), IList<MicrosoftDynamicsCRMasyncoperation> serviceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> serviceDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionServiceServiceid = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
         {
             this._organizationidValue = _organizationidValue;
             Granularity = granularity;
@@ -95,116 +140,151 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// service is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets describes how often the service is performed.
         /// </summary>
         [JsonProperty(PropertyName = "granularity")]
         public string Granularity { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the service can be
+        /// scheduled.
         /// </summary>
         [JsonProperty(PropertyName = "isschedulable")]
         public bool? Isschedulable { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the service.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the resource specification with
+        /// which the service is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_resourcespecid_value")]
-        public string _resourcespecidValue { get; set; }
+        public System.Guid? _resourcespecidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets initial status reason for the service activity.
         /// </summary>
         [JsonProperty(PropertyName = "initialstatuscode")]
         public int? Initialstatuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets used in conjunction with granularity to describes when
+        /// services can be performed in relation to midnight on a given day.
         /// </summary>
         [JsonProperty(PropertyName = "anchoroffset")]
         public int? Anchoroffset { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the service is visible to
+        /// users.
         /// </summary>
         [JsonProperty(PropertyName = "isvisible")]
         public bool? Isvisible { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated service.
         /// </summary>
         [JsonProperty(PropertyName = "serviceid")]
-        public string Serviceid { get; set; }
+        public System.Guid? Serviceid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the calendar.
         /// </summary>
         [JsonProperty(PropertyName = "calendarid")]
-        public string Calendarid { get; set; }
+        public System.Guid? Calendarid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// service.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets duration of the service.
         /// </summary>
         [JsonProperty(PropertyName = "duration")]
         public int? Duration { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// service.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the service.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets value that is taken from PluginTypeId in the Plugin
+        /// Type record for the scheduling strategy. This is the ID of the
+        /// scheduling strategy plug-in associated with the service.
         /// </summary>
         [JsonProperty(PropertyName = "_strategyid_value")]
-        public string _strategyidValue { get; set; }
+        public System.Guid? _strategyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the service.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the service was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the service was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the service.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "showresources")]
         public bool? Showresources { get; set; }
 
         /// <summary>
+        /// Gets or sets description of activity that represents work done to
+        /// satisfy a customer's need.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }

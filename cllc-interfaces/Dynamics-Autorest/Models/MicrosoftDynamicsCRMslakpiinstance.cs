@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// slakpiinstance
+    /// Microsoft.Dynamics.CRM.slakpiinstance
     /// </summary>
     public partial class MicrosoftDynamicsCRMslakpiinstance
     {
@@ -29,7 +29,53 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMslakpiinstance class.
         /// </summary>
-        public MicrosoftDynamicsCRMslakpiinstance(string slakpiinstanceid = default(string), int? status = default(int?), long? versionnumber = default(long?), string _transactioncurrencyidValue = default(string), string description = default(string), System.DateTimeOffset? warningtime = default(System.DateTimeOffset?), object exchangerate = default(object), string _owninguserValue = default(string), string _owningteamValue = default(string), System.DateTimeOffset? succeededon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? computedfailuretime = default(System.DateTimeOffset?), int? warningtimereached = default(int?), string _regardingValue = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? failuretime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? computedwarningtime = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMserviceappointment regardingServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter regardingLetter = default(MicrosoftDynamicsCRMletter), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentFirstresponsebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident regarding = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMtask regardingTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail regardingEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMsalesorder regardingSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsocialactivity regardingSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMaccount regardingAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMappointment regardingAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMopportunity regardingOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcontact regardingContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentResolvebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMfax regardingFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMphonecall regardingPhonecall = default(MicrosoftDynamicsCRMphonecall), object ownerid = default(object), MicrosoftDynamicsCRMquote regardingQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMactivitypointer regardingActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlead regardingLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMsyncerror> sLAKPIInstanceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMinvoice regardingInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioApplication regardingAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSlakpiinstanceAdoxioApplicationSLA = default(IList<MicrosoftDynamicsCRMadoxioApplication>))
+        /// <param name="slakpiinstanceid">Unique identifier of the SLA KPI
+        /// Instance.</param>
+        /// <param name="status">Reason for the status of the service level
+        /// agreement (SLA) key performance indicator (KPI) instance. For
+        /// example, the SLA KPI could be Noncompliant or Succeeded.</param>
+        /// <param name="versionnumber">For internal use only.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="description">For internal use only.</param>
+        /// <param name="warningtime">Enter the date and time when the service
+        /// level agreement (SLA) key performance indicator (KPI)will go to a
+        /// warning state.</param>
+        /// <param name="exchangerate">For internal use only.</param>
+        /// <param name="_owninguserValue">Owning User.</param>
+        /// <param name="_owningteamValue">OwningTeam.</param>
+        /// <param name="succeededon">Shows the date and time when the service
+        /// level agreement (SLA) key performance indicator (KPI) success
+        /// criteria was met.</param>
+        /// <param name="_modifiedonbehalfbyValue">For internal use
+        /// only.</param>
+        /// <param name="computedfailuretime">Computed Failure Date and
+        /// time</param>
+        /// <param name="warningtimereached">Shows information about whether
+        /// the case has reached its warning time.</param>
+        /// <param name="_regardingValue">Unique identifier of the record that
+        /// this service level agreement (SLA) key performance indicator (KPI)
+        /// instance is associated with.</param>
+        /// <param name="_owningbusinessunitValue">Owning Business
+        /// Unit.</param>
+        /// <param name="failuretime">Enter the date and time when the service
+        /// level agreement (SLA) key performance indicator (KPI) will
+        /// expire.</param>
+        /// <param name="_modifiedbyValue">For internal use only.</param>
+        /// <param name="createdon">For internal use only.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user or team.</param>
+        /// <param name="modifiedon">For internal use only.</param>
+        /// <param name="name">Type a descriptive name for the service level
+        /// agreement (SLA) key performance indicator (KPI) instance.</param>
+        /// <param name="computedwarningtime">Computed Warning Date and
+        /// time</param>
+        /// <param name="_createdonbehalfbyValue">For internal use
+        /// only.</param>
+        /// <param name="_createdbyValue">For internal use only.</param>
+        public MicrosoftDynamicsCRMslakpiinstance(System.Guid? slakpiinstanceid = default(System.Guid?), int? status = default(int?), string versionnumber = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), string description = default(string), System.DateTimeOffset? warningtime = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), System.DateTimeOffset? succeededon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? computedfailuretime = default(System.DateTimeOffset?), int? warningtimereached = default(int?), System.Guid? _regardingValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.DateTimeOffset? failuretime = default(System.DateTimeOffset?), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _owneridValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? computedwarningtime = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMserviceappointment regardingServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter regardingLetter = default(MicrosoftDynamicsCRMletter), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentFirstresponsebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMincident regarding = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMtask regardingTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail regardingEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMsalesorder regardingSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsocialactivity regardingSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMaccount regardingAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMappointment regardingAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMopportunity regardingOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcontact regardingContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMincident> slakpiinstanceIncidentResolvebykpi = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMfax regardingFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMphonecall regardingPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMquote regardingQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMactivitypointer regardingActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlead regardingLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMsyncerror> sLAKPIInstanceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMinvoice regardingInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMadoxioApplication regardingAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioSlakpiinstanceAdoxioApplicationSLA = default(IList<MicrosoftDynamicsCRMadoxioApplication>))
         {
             Slakpiinstanceid = slakpiinstanceid;
             Status = status;
@@ -93,124 +139,162 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the SLA KPI Instance.
         /// </summary>
         [JsonProperty(PropertyName = "slakpiinstanceid")]
-        public string Slakpiinstanceid { get; set; }
+        public System.Guid? Slakpiinstanceid { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the service level agreement
+        /// (SLA) key performance indicator (KPI) instance. For example, the
+        /// SLA KPI could be Noncompliant or Succeeded.
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public int? Status { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date and time when the service level
+        /// agreement (SLA) key performance indicator (KPI)will go to a warning
+        /// state.
         /// </summary>
         [JsonProperty(PropertyName = "warningtime")]
         public System.DateTimeOffset? Warningtime { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets owning User.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets owningTeam.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the service level
+        /// agreement (SLA) key performance indicator (KPI) success criteria
+        /// was met.
         /// </summary>
         [JsonProperty(PropertyName = "succeededon")]
         public System.DateTimeOffset? Succeededon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets computed Failure Date and time
         /// </summary>
         [JsonProperty(PropertyName = "computedfailuretime")]
         public System.DateTimeOffset? Computedfailuretime { get; set; }
 
         /// <summary>
+        /// Gets or sets shows information about whether the case has reached
+        /// its warning time.
         /// </summary>
         [JsonProperty(PropertyName = "warningtimereached")]
         public int? Warningtimereached { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the record that this service
+        /// level agreement (SLA) key performance indicator (KPI) instance is
+        /// associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_regarding_value")]
-        public string _regardingValue { get; set; }
+        public System.Guid? _regardingValue { get; set; }
 
         /// <summary>
+        /// Gets or sets owning Business Unit.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date and time when the service level
+        /// agreement (SLA) key performance indicator (KPI) will expire.
         /// </summary>
         [JsonProperty(PropertyName = "failuretime")]
         public System.DateTimeOffset? Failuretime { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user or team.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type a descriptive name for the service level
+        /// agreement (SLA) key performance indicator (KPI) instance.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets computed Warning Date and time
         /// </summary>
         [JsonProperty(PropertyName = "computedwarningtime")]
         public System.DateTimeOffset? Computedwarningtime { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -310,7 +394,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

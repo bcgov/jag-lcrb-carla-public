@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// dynamicproperty
+    /// Microsoft.Dynamics.CRM.dynamicproperty
     /// </summary>
     public partial class MicrosoftDynamicsCRMdynamicproperty
     {
@@ -29,7 +29,76 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdynamicproperty class.
         /// </summary>
-        public MicrosoftDynamicsCRMdynamicproperty(string rootdynamicpropertyid = default(string), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultvaluestring = default(string), int? importsequencenumber = default(int?), string _basedynamicpropertyidValue = default(string), bool? isreadonly = default(bool?), int? defaultvalueinteger = default(int?), bool? isrequired = default(bool?), int? dmtimportstate = default(int?), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? maxvalueinteger = default(int?), decimal? maxvaluedouble = default(decimal?), string _modifiedbyValue = default(string), object minvaluedecimal = default(object), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), object defaultvaluedecimal = default(object), int? maxlengthstring = default(int?), string description = default(string), object maxvaluedecimal = default(object), decimal? defaultvaluedouble = default(decimal?), string overwrittendynamicpropertyid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? minvaluedouble = default(decimal?), string _defaultvalueoptionsetValue = default(string), int? statuscode = default(int?), int? precision = default(int?), string dynamicpropertyid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _regardingobjectidValue = default(string), int? minvalueinteger = default(int?), bool? ishidden = default(bool?), long? versionnumber = default(long?), int? datatype = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty basedynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), IList<MicrosoftDynamicsCRMdynamicproperty> dynamicpropertyBaseDynamicproperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> dynamicPropertyDynamicPropertyInstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> dynamicpropertyDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> dynamicPropertyDynamicPropertyOptionSetItem = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), MicrosoftDynamicsCRMdynamicpropertyoptionsetitem dynamicpropertyoptionsetvalueid = default(MicrosoftDynamicsCRMdynamicpropertyoptionsetitem), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="rootdynamicpropertyid">Shows the root property that
+        /// this property is derived from.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the property.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created.</param>
+        /// <param name="defaultvaluestring">Shows the default value of the
+        /// property for a string data type.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this property.</param>
+        /// <param name="_basedynamicpropertyidValue">Shows the property in the
+        /// product family that this property is being inherited from.</param>
+        /// <param name="isreadonly">Defines whether the attribute is read-only
+        /// or if it can be edited.</param>
+        /// <param name="defaultvalueinteger">Shows the default value of the
+        /// property for a whole number data type.</param>
+        /// <param name="isrequired">Defines whether the attribute is
+        /// mandatory.</param>
+        /// <param name="dmtimportstate">Internal Use Only</param>
+        /// <param name="statecode">Shows the state of the property.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="maxvalueinteger">Shows the maximum allowed value of
+        /// the property for a whole number data type.</param>
+        /// <param name="maxvaluedouble">Shows the maximum allowed value of the
+        /// property for a double data type.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="minvaluedecimal">Shows the minimum allowed value of
+        /// the property for a decimal data type.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="name">Type the name of the property.</param>
+        /// <param name="defaultvaluedecimal">Shows the default value of the
+        /// property for a decimal data type.</param>
+        /// <param name="maxlengthstring">Shows the maximum allowed length of
+        /// the property for a string data type.</param>
+        /// <param name="description">Type a description for the
+        /// property.</param>
+        /// <param name="maxvaluedecimal">Shows the maximum allowed value of
+        /// the property for a decimal data type.</param>
+        /// <param name="defaultvaluedouble">Shows the default value of the
+        /// property for a double data type.</param>
+        /// <param name="overwrittendynamicpropertyid">Shows the related
+        /// overwritten property.</param>
+        /// <param name="overriddencreatedon">Date and time that the attribute
+        /// was migrated.</param>
+        /// <param name="minvaluedouble">Shows the minimum allowed value of the
+        /// property for a double data type.</param>
+        /// <param name="_defaultvalueoptionsetValue">Shows the default value
+        /// of the property.</param>
+        /// <param name="statuscode">Shows whether the property is active or
+        /// inactive.</param>
+        /// <param name="precision">Shows the allowed precision of the property
+        /// for a whole number data type.</param>
+        /// <param name="dynamicpropertyid">Shows the unique identifier of the
+        /// property.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated.</param>
+        /// <param name="_regardingobjectidValue">Choose the product that the
+        /// property is associated with.</param>
+        /// <param name="minvalueinteger">Shows the minimum allowed value of
+        /// the property for a whole number data type.</param>
+        /// <param name="ishidden">Defines whether the attribute is hidden or
+        /// shown.</param>
+        /// <param name="versionnumber">Version number of the property.</param>
+        /// <param name="datatype">Select the data type of the
+        /// property.</param>
+        public MicrosoftDynamicsCRMdynamicproperty(System.Guid? rootdynamicpropertyid = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultvaluestring = default(string), int? importsequencenumber = default(int?), System.Guid? _basedynamicpropertyidValue = default(System.Guid?), bool? isreadonly = default(bool?), int? defaultvalueinteger = default(int?), bool? isrequired = default(bool?), int? dmtimportstate = default(int?), int? statecode = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? maxvalueinteger = default(int?), string maxvaluedouble = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), decimal? minvaluedecimal = default(decimal?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string name = default(string), decimal? defaultvaluedecimal = default(decimal?), int? maxlengthstring = default(int?), string description = default(string), decimal? maxvaluedecimal = default(decimal?), string defaultvaluedouble = default(string), System.Guid? overwrittendynamicpropertyid = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string minvaluedouble = default(string), System.Guid? _defaultvalueoptionsetValue = default(System.Guid?), int? statuscode = default(int?), int? precision = default(int?), System.Guid? dynamicpropertyid = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _regardingobjectidValue = default(System.Guid?), int? minvalueinteger = default(int?), bool? ishidden = default(bool?), string versionnumber = default(string), int? datatype = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty basedynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), IList<MicrosoftDynamicsCRMdynamicproperty> dynamicpropertyBaseDynamicproperty = default(IList<MicrosoftDynamicsCRMdynamicproperty>), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> dynamicPropertyDynamicPropertyInstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyassociation> dynamicpropertyDynamicPropertyAssociation = default(IList<MicrosoftDynamicsCRMdynamicpropertyassociation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem> dynamicPropertyDynamicPropertyOptionSetItem = default(IList<MicrosoftDynamicsCRMdynamicpropertyoptionsetitem>), MicrosoftDynamicsCRMdynamicpropertyoptionsetitem dynamicpropertyoptionsetvalueid = default(MicrosoftDynamicsCRMdynamicpropertyoptionsetitem), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Rootdynamicpropertyid = rootdynamicpropertyid;
             this._organizationidValue = _organizationidValue;
@@ -90,186 +159,244 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the root property that this property is derived
+        /// from.
         /// </summary>
         [JsonProperty(PropertyName = "rootdynamicpropertyid")]
-        public string Rootdynamicpropertyid { get; set; }
+        public System.Guid? Rootdynamicpropertyid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the property.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the default value of the property for a string
+        /// data type.
         /// </summary>
         [JsonProperty(PropertyName = "defaultvaluestring")]
         public string Defaultvaluestring { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this property.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the property in the product family that this
+        /// property is being inherited from.
         /// </summary>
         [JsonProperty(PropertyName = "_basedynamicpropertyid_value")]
-        public string _basedynamicpropertyidValue { get; set; }
+        public System.Guid? _basedynamicpropertyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets defines whether the attribute is read-only or if it
+        /// can be edited.
         /// </summary>
         [JsonProperty(PropertyName = "isreadonly")]
         public bool? Isreadonly { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the default value of the property for a whole
+        /// number data type.
         /// </summary>
         [JsonProperty(PropertyName = "defaultvalueinteger")]
         public int? Defaultvalueinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets defines whether the attribute is mandatory.
         /// </summary>
         [JsonProperty(PropertyName = "isrequired")]
         public bool? Isrequired { get; set; }
 
         /// <summary>
+        /// Gets or sets internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "dmtimportstate")]
         public int? Dmtimportstate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the state of the property.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the maximum allowed value of the property for a
+        /// whole number data type.
         /// </summary>
         [JsonProperty(PropertyName = "maxvalueinteger")]
         public int? Maxvalueinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the maximum allowed value of the property for a
+        /// double data type.
         /// </summary>
         [JsonProperty(PropertyName = "maxvaluedouble")]
-        public decimal? Maxvaluedouble { get; set; }
+        public string Maxvaluedouble { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the minimum allowed value of the property for a
+        /// decimal data type.
         /// </summary>
         [JsonProperty(PropertyName = "minvaluedecimal")]
-        public object Minvaluedecimal { get; set; }
+        public decimal? Minvaluedecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the name of the property.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the default value of the property for a decimal
+        /// data type.
         /// </summary>
         [JsonProperty(PropertyName = "defaultvaluedecimal")]
-        public object Defaultvaluedecimal { get; set; }
+        public decimal? Defaultvaluedecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the maximum allowed length of the property for a
+        /// string data type.
         /// </summary>
         [JsonProperty(PropertyName = "maxlengthstring")]
         public int? Maxlengthstring { get; set; }
 
         /// <summary>
+        /// Gets or sets type a description for the property.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the maximum allowed value of the property for a
+        /// decimal data type.
         /// </summary>
         [JsonProperty(PropertyName = "maxvaluedecimal")]
-        public object Maxvaluedecimal { get; set; }
+        public decimal? Maxvaluedecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the default value of the property for a double
+        /// data type.
         /// </summary>
         [JsonProperty(PropertyName = "defaultvaluedouble")]
-        public decimal? Defaultvaluedouble { get; set; }
+        public string Defaultvaluedouble { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the related overwritten property.
         /// </summary>
         [JsonProperty(PropertyName = "overwrittendynamicpropertyid")]
-        public string Overwrittendynamicpropertyid { get; set; }
+        public System.Guid? Overwrittendynamicpropertyid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the attribute was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the minimum allowed value of the property for a
+        /// double data type.
         /// </summary>
         [JsonProperty(PropertyName = "minvaluedouble")]
-        public decimal? Minvaluedouble { get; set; }
+        public string Minvaluedouble { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the default value of the property.
         /// </summary>
         [JsonProperty(PropertyName = "_defaultvalueoptionset_value")]
-        public string _defaultvalueoptionsetValue { get; set; }
+        public System.Guid? _defaultvalueoptionsetValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the property is active or inactive.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the allowed precision of the property for a
+        /// whole number data type.
         /// </summary>
         [JsonProperty(PropertyName = "precision")]
         public int? Precision { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the unique identifier of the property.
         /// </summary>
         [JsonProperty(PropertyName = "dynamicpropertyid")]
-        public string Dynamicpropertyid { get; set; }
+        public System.Guid? Dynamicpropertyid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the product that the property is associated
+        /// with.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        public System.Guid? _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the minimum allowed value of the property for a
+        /// whole number data type.
         /// </summary>
         [JsonProperty(PropertyName = "minvalueinteger")]
         public int? Minvalueinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets defines whether the attribute is hidden or shown.
         /// </summary>
         [JsonProperty(PropertyName = "ishidden")]
         public bool? Ishidden { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the property.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets select the data type of the property.
         /// </summary>
         [JsonProperty(PropertyName = "datatype")]
         public int? Datatype { get; set; }

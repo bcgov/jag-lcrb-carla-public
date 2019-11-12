@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// recurringappointmentmaster
+    /// Microsoft.Dynamics.CRM.recurringappointmentmaster
     /// </summary>
     public partial class MicrosoftDynamicsCRMrecurringappointmentmaster
     {
@@ -29,7 +29,91 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMrecurringappointmentmaster class.
         /// </summary>
-        public MicrosoftDynamicsCRMrecurringappointmentmaster(int? occurrences = default(int?), int? importsequencenumber = default(int?), string category = default(string), string _ruleidValue = default(string), bool? isregenerate = default(bool?), bool? isnthmonthly = default(bool?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), int? daysofweekmask = default(int?), int? outlookownerapptid = default(int?), string subscriptionid = default(string), System.DateTimeOffset? effectiveenddate = default(System.DateTimeOffset?), bool? isalldayevent = default(bool?), System.DateTimeOffset? patternenddate = default(System.DateTimeOffset?), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string globalobjectid = default(string), System.DateTimeOffset? patternstartdate = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? instance = default(int?), int? patternendtype = default(int?), string deletedexceptionslist = default(string), System.DateTimeOffset? nextexpansioninstancedate = default(System.DateTimeOffset?), int? monthofyear = default(int?), System.DateTimeOffset? lastexpandedinstancedate = default(System.DateTimeOffset?), int? duration = default(int?), bool? isweekdaypattern = default(bool?), int? firstdayofweek = default(int?), bool? isnthyearly = default(bool?), bool? seriesstatus = default(bool?), string subcategory = default(string), int? dayofmonth = default(int?), int? expansionstatecode = default(int?), System.DateTimeOffset? effectivestartdate = default(System.DateTimeOffset?), int? recurrencepatterntype = default(int?), string _groupidValue = default(string), string location = default(string), int? interval = default(int?), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlementtemplate), IList<MicrosoftDynamicsCRMpostregarding> recurringappointmentmasterPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> recurringappointmentmasterPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMbulkdeletefailure> recurringAppointmentMasterBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> recurringAppointmentMasterAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguserRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamRecurringappointmentmaster = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcontract regardingobjectidContractRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> recurringappointmentmasterActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitRecurringappointmentmaster = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceRecurringappointmentmaster = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMservice serviceidRecurringappointmentmaster = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsystemuser createdonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMappointment> recurringappointmentmasterAppointment = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMaccount regardingobjectidAccountRecurringappointmentmaster = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMqueueitem> recurringAppointmentMasterQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLeadRecurringappointmentmaster = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityRecurringappointmentmaster = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidRecurringappointmentmaster = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMcampaignresponse> recurringappointmentmasterCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> recurringAppointmentMasterSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMincident regardingobjectidIncidentRecurringappointmentmaster = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactioncard> recurringappointmentmasterActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderRecurringappointmentmaster = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquote regardingobjectidQuoteRecurringappointmentmaster = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMcontact regardingobjectidContactRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationRecurringappointmentmaster = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMannotation> recurringAppointmentMasterAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessRecurringappointmentmaster = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
+        /// <param name="occurrences">Number of appointment occurrences in a
+        /// recurring appointment series.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="category">Type a category to identify the recurring
+        /// appointment type, such as status meeting or service call, to tie
+        /// the appointment to a business group or function.</param>
+        /// <param name="_ruleidValue">Unique identifier of the recurrence rule
+        /// that is associated with the recurring appointment series.</param>
+        /// <param name="isregenerate">For internal use only.</param>
+        /// <param name="isnthmonthly">Indicates whether the recurring
+        /// appointment series should occur after every N months. Valid for
+        /// monthly recurrence pattern only.</param>
+        /// <param name="endtime">End time of the associated activity.</param>
+        /// <param name="daysofweekmask">Bitmask that represents the days of
+        /// the week on which the recurring appointment occurs.</param>
+        /// <param name="outlookownerapptid">Unique identifier of the Microsoft
+        /// Office Outlook recurring appointment series owner that correlates
+        /// to the PR_OWNER_APPT_ID MAPI property.</param>
+        /// <param name="subscriptionid">For internal use only.</param>
+        /// <param name="effectiveenddate">Actual end date of the recurring
+        /// appointment series based on the specified end date and recurrence
+        /// pattern.</param>
+        /// <param name="isalldayevent">Select whether the recurring
+        /// appointment is an all-day event to make sure that the required
+        /// resources are scheduled for the full day.</param>
+        /// <param name="patternenddate">End date of the recurrence
+        /// range.</param>
+        /// <param name="starttime">Start time of the recurring appointment
+        /// series.</param>
+        /// <param name="globalobjectid">Unique Outlook identifier to correlate
+        /// recurring appointment series across Exchange mailboxes.</param>
+        /// <param name="patternstartdate">Start date of the recurrence
+        /// range.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="instance">Specifies the recurring appointment series
+        /// to occur on every Nth day of a month. Valid for monthly and yearly
+        /// recurrence patterns only.</param>
+        /// <param name="patternendtype">Select the type of end date for the
+        /// recurring appointment, such as no end date or the number of
+        /// occurrences.</param>
+        /// <param name="deletedexceptionslist">List of deleted instances of
+        /// the recurring appointment series.</param>
+        /// <param name="nextexpansioninstancedate">Date of the next expanded
+        /// instance of a recurring appointment series.</param>
+        /// <param name="monthofyear">Indicates the month of the year for the
+        /// recurrence pattern.</param>
+        /// <param name="lastexpandedinstancedate">Date of last expanded
+        /// instance of a recurring appointment series.</param>
+        /// <param name="duration">Duration of the recurring appointment series
+        /// in minutes.</param>
+        /// <param name="isweekdaypattern">Indicates whether the weekly
+        /// recurrence pattern is a daily weekday pattern. Valid for weekly
+        /// recurrence pattern only.</param>
+        /// <param name="firstdayofweek">First day of week for the recurrence
+        /// pattern.</param>
+        /// <param name="isnthyearly">Indicates whether the recurring
+        /// appointment series should occur after every N years. Valid for
+        /// yearly recurrence pattern only.</param>
+        /// <param name="seriesstatus">Indicates whether the recurring
+        /// appointment series is active or inactive.</param>
+        /// <param name="subcategory">Type a subcategory to identify the
+        /// recurring appointment type and relate the activity to a specific
+        /// product, sales region, business group, or other function.</param>
+        /// <param name="dayofmonth">The day of the month on which the
+        /// recurring appointment occurs.</param>
+        /// <param name="expansionstatecode">State code to indicate whether the
+        /// recurring appointment series is expanded fully or
+        /// partially.</param>
+        /// <param name="effectivestartdate">Actual start date of the recurring
+        /// appointment series based on the specified start date and recurrence
+        /// pattern.</param>
+        /// <param name="recurrencepatterntype">Select the pattern type for the
+        /// recurring appointment to indicate whether the appointment occurs
+        /// daily, weekly, monthly, or yearly.</param>
+        /// <param name="_groupidValue">Unique identifier of the recurring
+        /// appointment series for which the recurrence information was
+        /// updated. </param>
+        /// <param name="location">Type the location where the recurring
+        /// appointment will take place, such as a conference room or customer
+        /// office.</param>
+        /// <param name="interval">Number of units of a given recurrence type
+        /// between occurrences.</param>
+        public MicrosoftDynamicsCRMrecurringappointmentmaster(int? occurrences = default(int?), int? importsequencenumber = default(int?), string category = default(string), System.Guid? _ruleidValue = default(System.Guid?), bool? isregenerate = default(bool?), bool? isnthmonthly = default(bool?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), int? daysofweekmask = default(int?), int? outlookownerapptid = default(int?), System.Guid? subscriptionid = default(System.Guid?), System.DateTimeOffset? effectiveenddate = default(System.DateTimeOffset?), bool? isalldayevent = default(bool?), System.DateTimeOffset? patternenddate = default(System.DateTimeOffset?), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string globalobjectid = default(string), System.DateTimeOffset? patternstartdate = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? instance = default(int?), int? patternendtype = default(int?), string deletedexceptionslist = default(string), System.DateTimeOffset? nextexpansioninstancedate = default(System.DateTimeOffset?), int? monthofyear = default(int?), System.DateTimeOffset? lastexpandedinstancedate = default(System.DateTimeOffset?), int? duration = default(int?), bool? isweekdaypattern = default(bool?), int? firstdayofweek = default(int?), bool? isnthyearly = default(bool?), bool? seriesstatus = default(bool?), string subcategory = default(string), int? dayofmonth = default(int?), int? expansionstatecode = default(int?), System.DateTimeOffset? effectivestartdate = default(System.DateTimeOffset?), int? recurrencepatterntype = default(int?), System.Guid? _groupidValue = default(System.Guid?), string location = default(string), int? interval = default(int?), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateRecurringappointmentmaster = default(MicrosoftDynamicsCRMentitlementtemplate), IList<MicrosoftDynamicsCRMpostregarding> recurringappointmentmasterPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> recurringappointmentmasterPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderRecurringappointmentmaster = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMbulkdeletefailure> recurringAppointmentMasterBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> recurringAppointmentMasterAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguserRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamRecurringappointmentmaster = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMcontract regardingobjectidContractRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMactivityparty> recurringappointmentmasterActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMduplicaterecord> recurringAppointmentMasterDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitRecurringappointmentmaster = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceRecurringappointmentmaster = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMservice serviceidRecurringappointmentmaster = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsystemuser createdonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleRecurringappointmentmaster = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMappointment> recurringappointmentmasterAppointment = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMaccount regardingobjectidAccountRecurringappointmentmaster = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMqueueitem> recurringAppointmentMasterQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLeadRecurringappointmentmaster = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityRecurringappointmentmaster = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidRecurringappointmentmaster = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMcampaignresponse> recurringappointmentmasterCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMconnection> recurringappointmentmasterConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> recurringAppointmentMasterSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMincident regardingobjectidIncidentRecurringappointmentmaster = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactioncard> recurringappointmentmasterActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderRecurringappointmentmaster = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquote regardingobjectidQuoteRecurringappointmentmaster = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMcontact regardingobjectidContactRecurringappointmentmaster = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedbyRecurringappointmentmaster = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationRecurringappointmentmaster = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityRecurringappointmentmaster = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMannotation> recurringAppointmentMasterAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessRecurringappointmentmaster = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationRecurringappointmentmaster = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             Occurrences = occurrences;
             Importsequencenumber = importsequencenumber;
@@ -127,181 +211,253 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets number of appointment occurrences in a recurring
+        /// appointment series.
         /// </summary>
         [JsonProperty(PropertyName = "occurrences")]
         public int? Occurrences { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type a category to identify the recurring appointment
+        /// type, such as status meeting or service call, to tie the
+        /// appointment to a business group or function.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the recurrence rule that is
+        /// associated with the recurring appointment series.
         /// </summary>
         [JsonProperty(PropertyName = "_ruleid_value")]
-        public string _ruleidValue { get; set; }
+        public System.Guid? _ruleidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "isregenerate")]
         public bool? Isregenerate { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the recurring appointment series
+        /// should occur after every N months. Valid for monthly recurrence
+        /// pattern only.
         /// </summary>
         [JsonProperty(PropertyName = "isnthmonthly")]
         public bool? Isnthmonthly { get; set; }
 
         /// <summary>
+        /// Gets or sets end time of the associated activity.
         /// </summary>
         [JsonProperty(PropertyName = "endtime")]
         public System.DateTimeOffset? Endtime { get; set; }
 
         /// <summary>
+        /// Gets or sets bitmask that represents the days of the week on which
+        /// the recurring appointment occurs.
         /// </summary>
         [JsonProperty(PropertyName = "daysofweekmask")]
         public int? Daysofweekmask { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Microsoft Office Outlook
+        /// recurring appointment series owner that correlates to the
+        /// PR_OWNER_APPT_ID MAPI property.
         /// </summary>
         [JsonProperty(PropertyName = "outlookownerapptid")]
         public int? Outlookownerapptid { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "subscriptionid")]
-        public string Subscriptionid { get; set; }
+        public System.Guid? Subscriptionid { get; set; }
 
         /// <summary>
+        /// Gets or sets actual end date of the recurring appointment series
+        /// based on the specified end date and recurrence pattern.
         /// </summary>
         [JsonProperty(PropertyName = "effectiveenddate")]
         public System.DateTimeOffset? Effectiveenddate { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the recurring appointment is an all-day
+        /// event to make sure that the required resources are scheduled for
+        /// the full day.
         /// </summary>
         [JsonProperty(PropertyName = "isalldayevent")]
         public bool? Isalldayevent { get; set; }
 
         /// <summary>
+        /// Gets or sets end date of the recurrence range.
         /// </summary>
         [JsonProperty(PropertyName = "patternenddate")]
         public System.DateTimeOffset? Patternenddate { get; set; }
 
         /// <summary>
+        /// Gets or sets start time of the recurring appointment series.
         /// </summary>
         [JsonProperty(PropertyName = "starttime")]
         public System.DateTimeOffset? Starttime { get; set; }
 
         /// <summary>
+        /// Gets or sets unique Outlook identifier to correlate recurring
+        /// appointment series across Exchange mailboxes.
         /// </summary>
         [JsonProperty(PropertyName = "globalobjectid")]
         public string Globalobjectid { get; set; }
 
         /// <summary>
+        /// Gets or sets start date of the recurrence range.
         /// </summary>
         [JsonProperty(PropertyName = "patternstartdate")]
         public System.DateTimeOffset? Patternstartdate { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies the recurring appointment series to occur on
+        /// every Nth day of a month. Valid for monthly and yearly recurrence
+        /// patterns only.
         /// </summary>
         [JsonProperty(PropertyName = "instance")]
         public int? Instance { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of end date for the recurring
+        /// appointment, such as no end date or the number of occurrences.
         /// </summary>
         [JsonProperty(PropertyName = "patternendtype")]
         public int? Patternendtype { get; set; }
 
         /// <summary>
+        /// Gets or sets list of deleted instances of the recurring appointment
+        /// series.
         /// </summary>
         [JsonProperty(PropertyName = "deletedexceptionslist")]
         public string Deletedexceptionslist { get; set; }
 
         /// <summary>
+        /// Gets or sets date of the next expanded instance of a recurring
+        /// appointment series.
         /// </summary>
         [JsonProperty(PropertyName = "nextexpansioninstancedate")]
         public System.DateTimeOffset? Nextexpansioninstancedate { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the month of the year for the recurrence
+        /// pattern.
         /// </summary>
         [JsonProperty(PropertyName = "monthofyear")]
         public int? Monthofyear { get; set; }
 
         /// <summary>
+        /// Gets or sets date of last expanded instance of a recurring
+        /// appointment series.
         /// </summary>
         [JsonProperty(PropertyName = "lastexpandedinstancedate")]
         public System.DateTimeOffset? Lastexpandedinstancedate { get; set; }
 
         /// <summary>
+        /// Gets or sets duration of the recurring appointment series in
+        /// minutes.
         /// </summary>
         [JsonProperty(PropertyName = "duration")]
         public int? Duration { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the weekly recurrence pattern is a
+        /// daily weekday pattern. Valid for weekly recurrence pattern only.
         /// </summary>
         [JsonProperty(PropertyName = "isweekdaypattern")]
         public bool? Isweekdaypattern { get; set; }
 
         /// <summary>
+        /// Gets or sets first day of week for the recurrence pattern.
         /// </summary>
         [JsonProperty(PropertyName = "firstdayofweek")]
         public int? Firstdayofweek { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the recurring appointment series
+        /// should occur after every N years. Valid for yearly recurrence
+        /// pattern only.
         /// </summary>
         [JsonProperty(PropertyName = "isnthyearly")]
         public bool? Isnthyearly { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the recurring appointment series is
+        /// active or inactive.
         /// </summary>
         [JsonProperty(PropertyName = "seriesstatus")]
         public bool? Seriesstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets type a subcategory to identify the recurring
+        /// appointment type and relate the activity to a specific product,
+        /// sales region, business group, or other function.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
+        /// Gets or sets the day of the month on which the recurring
+        /// appointment occurs.
         /// </summary>
         [JsonProperty(PropertyName = "dayofmonth")]
         public int? Dayofmonth { get; set; }
 
         /// <summary>
+        /// Gets or sets state code to indicate whether the recurring
+        /// appointment series is expanded fully or partially.
         /// </summary>
         [JsonProperty(PropertyName = "expansionstatecode")]
         public int? Expansionstatecode { get; set; }
 
         /// <summary>
+        /// Gets or sets actual start date of the recurring appointment series
+        /// based on the specified start date and recurrence pattern.
         /// </summary>
         [JsonProperty(PropertyName = "effectivestartdate")]
         public System.DateTimeOffset? Effectivestartdate { get; set; }
 
         /// <summary>
+        /// Gets or sets select the pattern type for the recurring appointment
+        /// to indicate whether the appointment occurs daily, weekly, monthly,
+        /// or yearly.
         /// </summary>
         [JsonProperty(PropertyName = "recurrencepatterntype")]
         public int? Recurrencepatterntype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the recurring appointment series
+        /// for which the recurrence information was updated.
         /// </summary>
         [JsonProperty(PropertyName = "_groupid_value")]
-        public string _groupidValue { get; set; }
+        public System.Guid? _groupidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the location where the recurring appointment will
+        /// take place, such as a conference room or customer office.
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
+        /// Gets or sets number of units of a given recurrence type between
+        /// occurrences.
         /// </summary>
         [JsonProperty(PropertyName = "interval")]
         public int? Interval { get; set; }

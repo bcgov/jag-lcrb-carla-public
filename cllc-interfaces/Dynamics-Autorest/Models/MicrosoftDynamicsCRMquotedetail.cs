@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// quotedetail
+    /// Microsoft.Dynamics.CRM.quotedetail
     /// </summary>
     public partial class MicrosoftDynamicsCRMquotedetail
     {
@@ -29,7 +29,154 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMquotedetail
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMquotedetail(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string quotedetailid = default(string), int? pricingerrorcode = default(int?), string owningbusinessunit = default(string), object extendedamount = default(object), string description = default(string), bool? isproductoverridden = default(bool?), object volumediscountamount = default(object), bool? willcall = default(bool?), object quantity = default(object), int? shiptoFreighttermscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), object tax = default(object), string _createdbyValue = default(string), string shiptoLine1 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? ispriceoverridden = default(bool?), string _productidValue = default(string), string shiptoTelephone = default(string), string shiptoAddressid = default(string), string shiptoFax = default(string), string shiptoStateorprovince = default(string), long? versionnumber = default(long?), object volumediscountamountBase = default(object), string parentbundleid = default(string), object priceperunitBase = default(object), string _modifiedbyValue = default(string), int? producttypecode = default(int?), string shiptoLine2 = default(string), object baseamountBase = default(object), object priceperunit = default(object), string _createdonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), int? importsequencenumber = default(int?), int? sequencenumber = default(int?), string _uomidValue = default(string), string shiptoCountry = default(string), int? lineitemnumber = default(int?), string _quoteidValue = default(string), string productdescription = default(string), string shiptoLine3 = default(string), string shiptoName = default(string), object exchangerate = default(object), int? timezoneruleversionnumber = default(int?), string _salesrepidValue = default(string), string _modifiedonbehalfbyValue = default(string), object baseamount = default(object), object manualdiscountamountBase = default(object), object taxBase = default(object), string shiptoContactname = default(string), string productassociationid = default(string), object manualdiscountamount = default(object), string owninguser = default(string), string shiptoPostalcode = default(string), string _owneridValue = default(string), string shiptoCity = default(string), int? quotestatecode = default(int?), object extendedamountBase = default(object), int? propertyconfigurationstatus = default(int?), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> quoteDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMquotedetail parentbundleidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), IList<MicrosoftDynamicsCRMquotedetail> quotedetailParentQuotedetail = default(IList<MicrosoftDynamicsCRMquotedetail>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> quoteDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> quoteDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMquote quoteid = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="quotedetailid">Unique identifier of the product line
+        /// item in the quote.</param>
+        /// <param name="pricingerrorcode">Select the type of pricing error,
+        /// such as a missing or invalid product, or missing quantity.</param>
+        /// <param name="owningbusinessunit">Unique identifier of the business
+        /// unit that owns the quote detail.</param>
+        /// <param name="extendedamount">Shows the total amount due for the
+        /// quote product, based on the sum of the unit price, quantity,
+        /// discounts ,and tax.</param>
+        /// <param name="description">Type additional information to describe
+        /// the quote product, such as manufacturing details or acceptable
+        /// substitutions.</param>
+        /// <param name="isproductoverridden">Select whether the product exists
+        /// in the Microsoft Dynamics 365 product catalog or is a write-in
+        /// product specific to the quote.</param>
+        /// <param name="volumediscountamount">Shows the discount amount per
+        /// unit if a specified volume is purchased. Configure volume discounts
+        /// in the Product Catalog in the Settings area.</param>
+        /// <param name="willcall">Select whether the quote product should be
+        /// shipped to the specified address or held until the customer calls
+        /// with further pick up or delivery instructions.</param>
+        /// <param name="quantity">Type the amount or quantity of the product
+        /// requested by the customer.</param>
+        /// <param name="shiptoFreighttermscode">Select the freight terms to
+        /// make sure shipping orders are processed correctly.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="tax">Type the tax amount for the quote
+        /// product.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="shiptoLine1">Type the first line of the customer's
+        /// shipping address.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="ispriceoverridden">Select whether the price per unit
+        /// is fixed at the value in the specified price list or can be
+        /// overridden by users who have edit rights to the quote
+        /// product.</param>
+        /// <param name="_productidValue">Choose the product to include on the
+        /// quote to link the product's pricing and other information to the
+        /// quote.</param>
+        /// <param name="shiptoTelephone">Type the phone number for the
+        /// customer's shipping address.</param>
+        /// <param name="shiptoAddressid">Unique identifier of the shipping
+        /// address.</param>
+        /// <param name="shiptoFax">Type the fax number for the customer's
+        /// shipping address.</param>
+        /// <param name="shiptoStateorprovince">Type the state or province for
+        /// the shipping address.</param>
+        /// <param name="versionnumber">Version number of the quote
+        /// detail.</param>
+        /// <param name="volumediscountamountBase">Shows the discount amount
+        /// per unit if a specified volume is purchased. Configure volume
+        /// discounts in the Product Catalog in the Settings area.</param>
+        /// <param name="parentbundleid">Choose the parent bundle associated
+        /// with this product</param>
+        /// <param name="priceperunitBase">Shows the Price Per Unit field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="producttypecode">Product Type</param>
+        /// <param name="shiptoLine2">Type the second line of the customer's
+        /// shipping address.</param>
+        /// <param name="baseamountBase">Shows the Amount field converted to
+        /// the system's default base currency. The calculation uses the
+        /// exchange rate specified in the Currencies area.</param>
+        /// <param name="priceperunit">Type the price per unit of the quote
+        /// product. The default is to the value in the price list specified on
+        /// the quote for existing products.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="sequencenumber">Unique identifier of the data that
+        /// maintains the sequence.</param>
+        /// <param name="_uomidValue">Choose the unit of measurement for the
+        /// base unit quantity for this purchase, such as each or
+        /// dozen.</param>
+        /// <param name="shiptoCountry">Type the country or region for the
+        /// customer's shipping address.</param>
+        /// <param name="lineitemnumber">Type the line item number for the
+        /// quote product to easily identify the product in the quote and make
+        /// sure it's listed in the correct order.</param>
+        /// <param name="_quoteidValue">Unique identifier of the quote for the
+        /// quote product.</param>
+        /// <param name="productdescription">Type a name or description to
+        /// identify the type of write-in product included in the
+        /// quote.</param>
+        /// <param name="shiptoLine3">Type the third line of the shipping
+        /// address.</param>
+        /// <param name="shiptoName">Type a name for the customer's shipping
+        /// address, such as "Headquarters" or "Field office", to identify the
+        /// address.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_salesrepidValue">Choose the user responsible for the
+        /// sale of the quote product.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="baseamount">Shows the total price of the quote
+        /// product, based on the price per unit, volume discount, and
+        /// quantity.</param>
+        /// <param name="manualdiscountamountBase">Shows the Manual Discount
+        /// field converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="taxBase">Shows the Tax field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.</param>
+        /// <param name="shiptoContactname">Type the primary contact name at
+        /// the customer's shipping address.</param>
+        /// <param name="productassociationid">Unique identifier of the product
+        /// line item association with bundle in the quote</param>
+        /// <param name="manualdiscountamount">Type the manual discount amount
+        /// for the quote product to deduct any negotiated or other savings
+        /// from the product total on the quote.</param>
+        /// <param name="owninguser">Unique identifier of the user who owns the
+        /// quote detail.</param>
+        /// <param name="shiptoPostalcode">Type the ZIP Code or postal code for
+        /// the shipping address.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the quote detail.</param>
+        /// <param name="shiptoCity">Type the city for the customer's shipping
+        /// address.</param>
+        /// <param name="quotestatecode">Status of the quote product.</param>
+        /// <param name="extendedamountBase">Shows the Extended Amount field
+        /// converted to the system's default base currency. The calculation
+        /// uses the exchange rate specified in the Currencies area.</param>
+        /// <param name="propertyconfigurationstatus">Status of the property
+        /// configuration.</param>
+        /// <param name="requestdeliveryby">Enter the delivery date requested
+        /// by the customer for the quote product.</param>
+        public MicrosoftDynamicsCRMquotedetail(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? quotedetailid = default(System.Guid?), int? pricingerrorcode = default(int?), System.Guid? owningbusinessunit = default(System.Guid?), decimal? extendedamount = default(decimal?), string description = default(string), bool? isproductoverridden = default(bool?), decimal? volumediscountamount = default(decimal?), bool? willcall = default(bool?), decimal? quantity = default(decimal?), int? shiptoFreighttermscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), decimal? tax = default(decimal?), System.Guid? _createdbyValue = default(System.Guid?), string shiptoLine1 = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? ispriceoverridden = default(bool?), System.Guid? _productidValue = default(System.Guid?), string shiptoTelephone = default(string), System.Guid? shiptoAddressid = default(System.Guid?), string shiptoFax = default(string), string shiptoStateorprovince = default(string), string versionnumber = default(string), decimal? volumediscountamountBase = default(decimal?), System.Guid? parentbundleid = default(System.Guid?), decimal? priceperunitBase = default(decimal?), System.Guid? _modifiedbyValue = default(System.Guid?), int? producttypecode = default(int?), string shiptoLine2 = default(string), decimal? baseamountBase = default(decimal?), decimal? priceperunit = default(decimal?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), int? importsequencenumber = default(int?), int? sequencenumber = default(int?), System.Guid? _uomidValue = default(System.Guid?), string shiptoCountry = default(string), int? lineitemnumber = default(int?), System.Guid? _quoteidValue = default(System.Guid?), string productdescription = default(string), string shiptoLine3 = default(string), string shiptoName = default(string), decimal? exchangerate = default(decimal?), int? timezoneruleversionnumber = default(int?), System.Guid? _salesrepidValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), decimal? baseamount = default(decimal?), decimal? manualdiscountamountBase = default(decimal?), decimal? taxBase = default(decimal?), string shiptoContactname = default(string), System.Guid? productassociationid = default(System.Guid?), decimal? manualdiscountamount = default(decimal?), System.Guid? owninguser = default(System.Guid?), string shiptoPostalcode = default(string), System.Guid? _owneridValue = default(System.Guid?), string shiptoCity = default(string), int? quotestatecode = default(int?), decimal? extendedamountBase = default(decimal?), int? propertyconfigurationstatus = default(int?), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> quoteDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> quoteDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMquotedetail parentbundleidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), IList<MicrosoftDynamicsCRMquotedetail> quotedetailParentQuotedetail = default(IList<MicrosoftDynamicsCRMquotedetail>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> quoteDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> quoteDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMquote quoteid = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser))
         {
             Createdon = createdon;
             Quotedetailid = quotedetailid;
@@ -117,306 +264,431 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the product line item in the
+        /// quote.
         /// </summary>
         [JsonProperty(PropertyName = "quotedetailid")]
-        public string Quotedetailid { get; set; }
+        public System.Guid? Quotedetailid { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of pricing error, such as a missing or
+        /// invalid product, or missing quantity.
         /// </summary>
         [JsonProperty(PropertyName = "pricingerrorcode")]
         public int? Pricingerrorcode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// quote detail.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public string Owningbusinessunit { get; set; }
+        public System.Guid? Owningbusinessunit { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total amount due for the quote product,
+        /// based on the sum of the unit price, quantity, discounts ,and tax.
         /// </summary>
         [JsonProperty(PropertyName = "extendedamount")]
-        public object Extendedamount { get; set; }
+        public decimal? Extendedamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the quote
+        /// product, such as manufacturing details or acceptable substitutions.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the product exists in the Microsoft
+        /// Dynamics 365 product catalog or is a write-in product specific to
+        /// the quote.
         /// </summary>
         [JsonProperty(PropertyName = "isproductoverridden")]
         public bool? Isproductoverridden { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the discount amount per unit if a specified
+        /// volume is purchased. Configure volume discounts in the Product
+        /// Catalog in the Settings area.
         /// </summary>
         [JsonProperty(PropertyName = "volumediscountamount")]
-        public object Volumediscountamount { get; set; }
+        public decimal? Volumediscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the quote product should be shipped to
+        /// the specified address or held until the customer calls with further
+        /// pick up or delivery instructions.
         /// </summary>
         [JsonProperty(PropertyName = "willcall")]
         public bool? Willcall { get; set; }
 
         /// <summary>
+        /// Gets or sets type the amount or quantity of the product requested
+        /// by the customer.
         /// </summary>
         [JsonProperty(PropertyName = "quantity")]
-        public object Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         /// <summary>
+        /// Gets or sets select the freight terms to make sure shipping orders
+        /// are processed correctly.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_freighttermscode")]
         public int? ShiptoFreighttermscode { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the tax amount for the quote product.
         /// </summary>
         [JsonProperty(PropertyName = "tax")]
-        public object Tax { get; set; }
+        public decimal? Tax { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the first line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line1")]
         public string ShiptoLine1 { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the price per unit is fixed at the
+        /// value in the specified price list or can be overridden by users who
+        /// have edit rights to the quote product.
         /// </summary>
         [JsonProperty(PropertyName = "ispriceoverridden")]
         public bool? Ispriceoverridden { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the product to include on the quote to link the
+        /// product's pricing and other information to the quote.
         /// </summary>
         [JsonProperty(PropertyName = "_productid_value")]
-        public string _productidValue { get; set; }
+        public System.Guid? _productidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phone number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_telephone")]
         public string ShiptoTelephone { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_addressid")]
-        public string ShiptoAddressid { get; set; }
+        public System.Guid? ShiptoAddressid { get; set; }
 
         /// <summary>
+        /// Gets or sets type the fax number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_fax")]
         public string ShiptoFax { get; set; }
 
         /// <summary>
+        /// Gets or sets type the state or province for the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_stateorprovince")]
         public string ShiptoStateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the quote detail.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the discount amount per unit if a specified
+        /// volume is purchased. Configure volume discounts in the Product
+        /// Catalog in the Settings area.
         /// </summary>
         [JsonProperty(PropertyName = "volumediscountamount_base")]
-        public object VolumediscountamountBase { get; set; }
+        public decimal? VolumediscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the parent bundle associated with this product
         /// </summary>
         [JsonProperty(PropertyName = "parentbundleid")]
-        public string Parentbundleid { get; set; }
+        public System.Guid? Parentbundleid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Price Per Unit field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "priceperunit_base")]
-        public object PriceperunitBase { get; set; }
+        public decimal? PriceperunitBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets product Type
         /// </summary>
         [JsonProperty(PropertyName = "producttypecode")]
         public int? Producttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the second line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line2")]
         public string ShiptoLine2 { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Amount field converted to the system's
+        /// default base currency. The calculation uses the exchange rate
+        /// specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "baseamount_base")]
-        public object BaseamountBase { get; set; }
+        public decimal? BaseamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the price per unit of the quote product. The
+        /// default is to the value in the price list specified on the quote
+        /// for existing products.
         /// </summary>
         [JsonProperty(PropertyName = "priceperunit")]
-        public object Priceperunit { get; set; }
+        public decimal? Priceperunit { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data that maintains the
+        /// sequence.
         /// </summary>
         [JsonProperty(PropertyName = "sequencenumber")]
         public int? Sequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the unit of measurement for the base unit
+        /// quantity for this purchase, such as each or dozen.
         /// </summary>
         [JsonProperty(PropertyName = "_uomid_value")]
-        public string _uomidValue { get; set; }
+        public System.Guid? _uomidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the country or region for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_country")]
         public string ShiptoCountry { get; set; }
 
         /// <summary>
+        /// Gets or sets type the line item number for the quote product to
+        /// easily identify the product in the quote and make sure it's listed
+        /// in the correct order.
         /// </summary>
         [JsonProperty(PropertyName = "lineitemnumber")]
         public int? Lineitemnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the quote for the quote product.
         /// </summary>
         [JsonProperty(PropertyName = "_quoteid_value")]
-        public string _quoteidValue { get; set; }
+        public System.Guid? _quoteidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name or description to identify the type of
+        /// write-in product included in the quote.
         /// </summary>
         [JsonProperty(PropertyName = "productdescription")]
         public string Productdescription { get; set; }
 
         /// <summary>
+        /// Gets or sets type the third line of the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line3")]
         public string ShiptoLine3 { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the customer's shipping address, such
+        /// as "Headquarters" or "Field office", to identify the address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_name")]
         public string ShiptoName { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the user responsible for the sale of the quote
+        /// product.
         /// </summary>
         [JsonProperty(PropertyName = "_salesrepid_value")]
-        public string _salesrepidValue { get; set; }
+        public System.Guid? _salesrepidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total price of the quote product, based on
+        /// the price per unit, volume discount, and quantity.
         /// </summary>
         [JsonProperty(PropertyName = "baseamount")]
-        public object Baseamount { get; set; }
+        public decimal? Baseamount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Manual Discount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "manualdiscountamount_base")]
-        public object ManualdiscountamountBase { get; set; }
+        public decimal? ManualdiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Tax field converted to the system's default
+        /// base currency for reporting purposes. The calculation uses the
+        /// exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "tax_base")]
-        public object TaxBase { get; set; }
+        public decimal? TaxBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the primary contact name at the customer's
+        /// shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_contactname")]
         public string ShiptoContactname { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the product line item association
+        /// with bundle in the quote
         /// </summary>
         [JsonProperty(PropertyName = "productassociationid")]
-        public string Productassociationid { get; set; }
+        public System.Guid? Productassociationid { get; set; }
 
         /// <summary>
+        /// Gets or sets type the manual discount amount for the quote product
+        /// to deduct any negotiated or other savings from the product total on
+        /// the quote.
         /// </summary>
         [JsonProperty(PropertyName = "manualdiscountamount")]
-        public object Manualdiscountamount { get; set; }
+        public decimal? Manualdiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the quote
+        /// detail.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public string Owninguser { get; set; }
+        public System.Guid? Owninguser { get; set; }
 
         /// <summary>
+        /// Gets or sets type the ZIP Code or postal code for the shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_postalcode")]
         public string ShiptoPostalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// quote detail.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the city for the customer's shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_city")]
         public string ShiptoCity { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the quote product.
         /// </summary>
         [JsonProperty(PropertyName = "quotestatecode")]
         public int? Quotestatecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Extended Amount field converted to the
+        /// system's default base currency. The calculation uses the exchange
+        /// rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "extendedamount_base")]
-        public object ExtendedamountBase { get; set; }
+        public decimal? ExtendedamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the property configuration.
         /// </summary>
         [JsonProperty(PropertyName = "propertyconfigurationstatus")]
         public int? Propertyconfigurationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the delivery date requested by the customer for
+        /// the quote product.
         /// </summary>
         [JsonProperty(PropertyName = "requestdeliveryby")]
         public System.DateTimeOffset? Requestdeliveryby { get; set; }
