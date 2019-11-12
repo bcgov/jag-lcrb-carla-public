@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// teamtemplate
+    /// Microsoft.Dynamics.CRM.teamtemplate
     /// </summary>
     public partial class MicrosoftDynamicsCRMteamtemplate
     {
@@ -29,7 +29,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMteamtemplate
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMteamtemplate(string description = default(string), int? objecttypecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string teamtemplatename = default(string), string teamtemplateid = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? defaultaccessrightsmask = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? issystem = default(bool?), IList<MicrosoftDynamicsCRMteam> teamtemplateTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> teamTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        /// <param name="description">Type additional information that
+        /// describes the team.</param>
+        /// <param name="objecttypecode">Object type code of entity which is
+        /// enabled for access teams</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the team template.</param>
+        /// <param name="modifiedon">Date and time when the team template was
+        /// last modified.</param>
+        /// <param name="teamtemplatename">Type the name of the team
+        /// template.</param>
+        /// <param name="teamtemplateid">Unique identifier of the team
+        /// template.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the team template.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the team template.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the team template.</param>
+        /// <param name="defaultaccessrightsmask">Default access rights mask
+        /// for the access teams associated with entity instances.</param>
+        /// <param name="createdon">Date and time when the team template was
+        /// created.</param>
+        /// <param name="issystem">Information about whether this team template
+        /// is user-defined or system-defined.</param>
+        public MicrosoftDynamicsCRMteamtemplate(string description = default(string), int? objecttypecode = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string teamtemplatename = default(string), System.Guid? teamtemplateid = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? defaultaccessrightsmask = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? issystem = default(bool?), IList<MicrosoftDynamicsCRMteam> teamtemplateTeams = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> teamTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Description = description;
             Objecttypecode = objecttypecode;
@@ -58,61 +82,81 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets type additional information that describes the team.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets object type code of entity which is enabled for access
+        /// teams
         /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public int? Objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// team template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the team template was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the name of the team template.
         /// </summary>
         [JsonProperty(PropertyName = "teamtemplatename")]
         public string Teamtemplatename { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team template.
         /// </summary>
         [JsonProperty(PropertyName = "teamtemplateid")]
-        public string Teamtemplateid { get; set; }
+        public System.Guid? Teamtemplateid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the team
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// team template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the team template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets default access rights mask for the access teams
+        /// associated with entity instances.
         /// </summary>
         [JsonProperty(PropertyName = "defaultaccessrightsmask")]
         public int? Defaultaccessrightsmask { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the team template was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether this team template is
+        /// user-defined or system-defined.
         /// </summary>
         [JsonProperty(PropertyName = "issystem")]
         public bool? Issystem { get; set; }

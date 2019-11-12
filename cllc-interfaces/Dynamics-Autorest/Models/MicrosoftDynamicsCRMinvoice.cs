@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// invoice
+    /// Microsoft.Dynamics.CRM.invoice
     /// </summary>
     public partial class MicrosoftDynamicsCRMinvoice
     {
@@ -29,7 +31,218 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMinvoice
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMinvoice(string name = default(string), int? statuscode = default(int?), object totaltax = default(object), int? onholdtime = default(int?), bool? ispricelocked = default(bool?), object discountamountBase = default(object), string shiptoFax = default(string), string entityimageid = default(string), int? pricingerrorcode = default(int?), object discountpercentage = default(object), string _modifiedbyValue = default(string), string _createdbyValue = default(string), object freightamount = default(object), string shiptoCity = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string shiptoPostalcode = default(string), string shiptoLine2 = default(string), object totallineitemdiscountamount = default(object), string description = default(string), object totallineitemamountBase = default(object), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string billtoPostalcode = default(string), string shiptoComposite = default(string), string shiptoStateorprovince = default(string), int? importsequencenumber = default(int?), string shiptoLine1 = default(string), string processid = default(string), string entityimageUrl = default(string), object totalamountBase = default(object), object exchangerate = default(object), string _opportunityidValue = default(string), string _accountidValue = default(string), string shiptoTelephone = default(string), string billtoLine3 = default(string), object discountamount = default(object), string billtoTelephone = default(string), int? prioritycode = default(int?), string billtoComposite = default(string), string _salesorderidValue = default(string), object freightamountBase = default(object), string traversedpath = default(string), string shiptoCountry = default(string), string _contactidValue = default(string), string _owningbusinessunitValue = default(string), string _slaidValue = default(string), string _pricelevelidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioReturnedtransactionid = default(string), string billtoStateorprovince = default(string), string billtoLine2 = default(string), string shiptoLine3 = default(string), object totaldiscountamount = default(object), int? timezoneruleversionnumber = default(int?), object totallineitemdiscountamountBase = default(object), long? versionnumber = default(long?), int? paymenttermscode = default(int?), object totalamount = default(object), string _owningteamValue = default(string), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string adoxioTransactionid = default(string), object totalamountlessfreight = default(object), string _slainvokedidValue = default(string), string shiptoName = default(string), bool? willcall = default(bool?), string adoxioStatuschangedatelongstring = default(string), string invoicenumber = default(string), string billtoFax = default(string), string billtoCountry = default(string), string _createdonbehalfbyValue = default(string), string stageid = default(string), System.DateTimeOffset? adoxioStatuschangedate = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owneridValue = default(string), string invoiceid = default(string), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? datedelivered = default(System.DateTimeOffset?), string billtoName = default(string), object totalamountlessfreightBase = default(object), object entityimage = default(object), string _owninguserValue = default(string), System.DateTimeOffset? lastbackofficesubmit = default(System.DateTimeOffset?), string billtoCity = default(string), int? shiptoFreighttermscode = default(int?), object totaldiscountamountBase = default(object), int? shippingmethodcode = default(int?), object totallineitemamount = default(object), string _customeridValue = default(string), string billtoLine1 = default(string), long? entityimageTimestamp = default(long?), object totaltaxBase = default(object), System.DateTimeOffset? duedate = default(System.DateTimeOffset?), IList<MicrosoftDynamicsCRMcontact> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsla slaInvoiceSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMappointment> invoiceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMconnection> invoiceConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivityparty> invoiceActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> invoiceRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMactivitypointer> invoiceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMphonecall> invoicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> invoiceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMbulkdeletefailure> invoiceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMletter> invoiceLetters = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), object ownerid = default(object), IList<MicrosoftDynamicsCRMtask> invoiceTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> invoiceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMconnection> invoiceConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMinvoicedetail> invoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMfax> invoiceFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMsocialactivity> invoiceSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMannotation> invoiceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> invoiceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceInvoice = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMsla slainvokedidInvoiceSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMserviceappointment> invoiceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> invoiceAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationLicenceFeeInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> adoxioInvoiceAdoxioApplicationinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioInvoiceAdoxioWorkerInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> adoxioInvoiceAdoxioWorkerinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>))
+        /// <param name="name">Type a descriptive name for the invoice.</param>
+        /// <param name="statuscode">Select the invoice's status.</param>
+        /// <param name="totaltax">Shows the total of the Tax amounts specified
+        /// on all products included in the invoice, included in the Total
+        /// Amount due calculation for the invoice.</param>
+        /// <param name="onholdtime">Shows the duration in minutes for which
+        /// the invoice was on hold.</param>
+        /// <param name="ispricelocked">Select whether prices specified on the
+        /// invoice are locked from any further updates.</param>
+        /// <param name="discountamountBase">Shows the Invoice Discount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="shiptoFax">Type the fax number for the customer's
+        /// shipping address.</param>
+        /// <param name="entityimageid">For internal use only.</param>
+        /// <param name="pricingerrorcode">Type of pricing error for the
+        /// invoice.</param>
+        /// <param name="discountpercentage">Type the discount rate that should
+        /// be applied to the Detail Amount field, for use in calculating the
+        /// Pre-Freight Amount and Total Amount values for the invoice.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="freightamount">Type the cost of freight or shipping
+        /// for the products included in the invoice for use in calculating the
+        /// total amount due.</param>
+        /// <param name="shiptoCity">Type the city for the customer's shipping
+        /// address.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="shiptoPostalcode">Type the ZIP Code or postal code for
+        /// the shipping address.</param>
+        /// <param name="shiptoLine2">Type the second line of the customer's
+        /// shipping address.</param>
+        /// <param name="totallineitemdiscountamount">Shows the Manual Discount
+        /// amounts specified on all products included in the invoice. This
+        /// value is reflected in the Detail Amount field on the invoice and is
+        /// added to any discount amount or rate specified on the
+        /// invoice.</param>
+        /// <param name="description">Type additional information to describe
+        /// the invoice, such as shipping details or product
+        /// substitutions.</param>
+        /// <param name="totallineitemamountBase">Shows the Detail Amount field
+        /// converted to the system's default base currency. The calculation
+        /// uses the exchange rate specified in the Currencies area.</param>
+        /// <param name="statecode">Shows whether the invoice is active, paid,
+        /// or canceled. Paid and canceled invoices are read-only and can't be
+        /// edited unless they are reactivated.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="billtoPostalcode">Type the ZIP Code or postal code for
+        /// the billing address.</param>
+        /// <param name="shiptoComposite">Shows the complete Ship To
+        /// address.</param>
+        /// <param name="shiptoStateorprovince">Type the state or province for
+        /// the shipping address.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="shiptoLine1">Type the first line of the customer's
+        /// shipping address.</param>
+        /// <param name="processid">Shows the ID of the process.</param>
+        /// <param name="totalamountBase">Shows the Total Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="_opportunityidValue">Choose the opportunity that the
+        /// invoice is related to for reporting and analytics.</param>
+        /// <param name="_accountidValue">Unique identifier of the account with
+        /// which the invoice is associated.</param>
+        /// <param name="shiptoTelephone">Type the phone number for the
+        /// customer's shipping address.</param>
+        /// <param name="billtoLine3">Type the third line of the billing
+        /// address.</param>
+        /// <param name="discountamount">Type the discount amount for the
+        /// invoice if the customer is eligible for special savings.</param>
+        /// <param name="billtoTelephone">Type the phone number for the
+        /// customer's billing address.</param>
+        /// <param name="prioritycode">Select the priority so that preferred
+        /// customers or critical issues are handled quickly.</param>
+        /// <param name="billtoComposite">Shows the complete Bill To
+        /// address.</param>
+        /// <param name="_salesorderidValue">Choose the order related to the
+        /// invoice to make sure the order is fulfilled and invoiced
+        /// correctly.</param>
+        /// <param name="freightamountBase">Shows the Freight Amount field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="traversedpath">For internal use only.</param>
+        /// <param name="shiptoCountry">Type the country or region for the
+        /// customer's shipping address.</param>
+        /// <param name="_contactidValue">Unique identifier of the contact
+        /// associated with the invoice.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the invoice.</param>
+        /// <param name="_slaidValue">Choose the service level agreement (SLA)
+        /// that you want to apply to the invoice record.</param>
+        /// <param name="_pricelevelidValue">Choose the price list associated
+        /// with this record to make sure the products associated with the
+        /// campaign are offered at the correct prices.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="billtoStateorprovince">Type the state or province for
+        /// the billing address.</param>
+        /// <param name="billtoLine2">Type the second line of the customer's
+        /// billing address.</param>
+        /// <param name="shiptoLine3">Type the third line of the shipping
+        /// address.</param>
+        /// <param name="totaldiscountamount">Shows the total discount amount,
+        /// based on the discount price and rate entered on the
+        /// invoice.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="totallineitemdiscountamountBase">Shows the total of
+        /// the Manual Discount amounts specified on all products included in
+        /// the invoice. This value is reflected in the Detail Amount field on
+        /// the invoice and is added to any discount amount or rate specified
+        /// on the invoice.</param>
+        /// <param name="versionnumber">Version number of the invoice.</param>
+        /// <param name="paymenttermscode">Select the payment terms to indicate
+        /// when the customer needs to pay the total amount.</param>
+        /// <param name="totalamount">Shows the total amount due, calculated as
+        /// the sum of the products, discount, freight, and taxes for the
+        /// invoice.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the invoice.</param>
+        /// <param name="lastonholdtime">Contains the date time stamp of the
+        /// last on hold time.</param>
+        /// <param name="adoxioTransactionid">Transaction ID for Payment
+        /// Gateway.  Unique number starts from 500 million</param>
+        /// <param name="totalamountlessfreight">Shows the total product amount
+        /// due, minus any discounts. This value is added to freight and tax
+        /// amounts in the calculation for the total amount due for the
+        /// invoice.</param>
+        /// <param name="_slainvokedidValue">Last SLA that was applied to this
+        /// invoice. This field is for internal use only.</param>
+        /// <param name="shiptoName">Type a name for the customer's shipping
+        /// address, such as "Headquarters" or "Field office", to identify the
+        /// address.</param>
+        /// <param name="willcall">Select whether the products included in the
+        /// invoice should be shipped to the specified address or held until
+        /// the customer calls with further pick up or delivery
+        /// instructions.</param>
+        /// <param name="invoicenumber">Shows the identifying number or code of
+        /// the invoice.</param>
+        /// <param name="billtoFax">Type the fax number for the customer's
+        /// billing address.</param>
+        /// <param name="billtoCountry">Type the country or region for the
+        /// customer's billing address.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="stageid">Shows the ID of the stage.</param>
+        /// <param name="adoxioStatuschangedate">When an Invoice is created,
+        /// paid, or cancelled</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="invoiceid">Unique identifier of the invoice.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="datedelivered">Enter the date when the products
+        /// included in the invoice were delivered.</param>
+        /// <param name="billtoName">Type a name for the customer's billing
+        /// address, such as "Headquarters" or "Field office", to identify the
+        /// address.</param>
+        /// <param name="totalamountlessfreightBase">Shows the Pre-Freight
+        /// Amount field converted to the system's default base currency for
+        /// reporting purposes. The calculation uses the exchange rate
+        /// specified in the Currencies area.</param>
+        /// <param name="entityimage">The default image for the entity.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the invoice.</param>
+        /// <param name="lastbackofficesubmit">Enter the date and time when the
+        /// invoice was last submitted to an accounting or ERP system for
+        /// processing.</param>
+        /// <param name="billtoCity">Type the city for the customer's billing
+        /// address.</param>
+        /// <param name="shiptoFreighttermscode">Select the freight terms to
+        /// make sure shipping orders are processed correctly.</param>
+        /// <param name="totaldiscountamountBase">Shows the Total Discount
+        /// Amount field converted to the system's default base currency for
+        /// reporting purposes. The calculation uses the exchange rate
+        /// specified in the Currencies area.</param>
+        /// <param name="shippingmethodcode">Select a shipping method for
+        /// deliveries sent to this address.</param>
+        /// <param name="totallineitemamount">Shows the sum of all existing and
+        /// write-in products included on the invoice, based on the specified
+        /// price list and quantities.</param>
+        /// <param name="_customeridValue">Select the customer account or
+        /// contact to provide a quick link to additional customer details,
+        /// such as account information, activities, and opportunities.</param>
+        /// <param name="billtoLine1">Type the first line of the customer's
+        /// billing address.</param>
+        /// <param name="totaltaxBase">Shows the Total Tax field converted to
+        /// the system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.</param>
+        /// <param name="duedate">Enter the date by which the invoice should be
+        /// paid by the customer.</param>
+        public MicrosoftDynamicsCRMinvoice(string name = default(string), int? statuscode = default(int?), decimal? totaltax = default(decimal?), int? onholdtime = default(int?), bool? ispricelocked = default(bool?), decimal? discountamountBase = default(decimal?), string shiptoFax = default(string), System.Guid? entityimageid = default(System.Guid?), int? pricingerrorcode = default(int?), decimal? discountpercentage = default(decimal?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), decimal? freightamount = default(decimal?), string shiptoCity = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string shiptoPostalcode = default(string), string shiptoLine2 = default(string), decimal? totallineitemdiscountamount = default(decimal?), string description = default(string), decimal? totallineitemamountBase = default(decimal?), int? statecode = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string billtoPostalcode = default(string), string shiptoComposite = default(string), string shiptoStateorprovince = default(string), int? importsequencenumber = default(int?), string shiptoLine1 = default(string), System.Guid? processid = default(System.Guid?), string entityimageUrl = default(string), decimal? totalamountBase = default(decimal?), decimal? exchangerate = default(decimal?), System.Guid? _opportunityidValue = default(System.Guid?), System.Guid? _accountidValue = default(System.Guid?), string shiptoTelephone = default(string), string billtoLine3 = default(string), decimal? discountamount = default(decimal?), string billtoTelephone = default(string), int? prioritycode = default(int?), string billtoComposite = default(string), System.Guid? _salesorderidValue = default(System.Guid?), decimal? freightamountBase = default(decimal?), string traversedpath = default(string), string shiptoCountry = default(string), System.Guid? _contactidValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _slaidValue = default(System.Guid?), System.Guid? _pricelevelidValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioReturnedtransactionid = default(string), string billtoStateorprovince = default(string), string billtoLine2 = default(string), string shiptoLine3 = default(string), decimal? totaldiscountamount = default(decimal?), int? timezoneruleversionnumber = default(int?), decimal? totallineitemdiscountamountBase = default(decimal?), string versionnumber = default(string), int? paymenttermscode = default(int?), decimal? totalamount = default(decimal?), System.Guid? _owningteamValue = default(System.Guid?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), string adoxioTransactionid = default(string), decimal? totalamountlessfreight = default(decimal?), System.Guid? _slainvokedidValue = default(System.Guid?), string shiptoName = default(string), bool? willcall = default(bool?), string adoxioStatuschangedatelongstring = default(string), string invoicenumber = default(string), string billtoFax = default(string), string billtoCountry = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? stageid = default(System.Guid?), System.DateTimeOffset? adoxioStatuschangedate = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? invoiceid = default(System.Guid?), int? utcconversiontimezonecode = default(int?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.DateTimeOffset? datedelivered = default(System.DateTimeOffset?), string billtoName = default(string), decimal? totalamountlessfreightBase = default(decimal?), byte[] entityimage = default(byte[]), System.Guid? _owninguserValue = default(System.Guid?), System.DateTimeOffset? lastbackofficesubmit = default(System.DateTimeOffset?), string billtoCity = default(string), int? shiptoFreighttermscode = default(int?), decimal? totaldiscountamountBase = default(decimal?), int? shippingmethodcode = default(int?), decimal? totallineitemamount = default(decimal?), System.Guid? _customeridValue = default(System.Guid?), string billtoLine1 = default(string), long? entityimageTimestamp = default(long?), decimal? totaltaxBase = default(decimal?), System.DateTime? duedate = default(System.DateTime?), IList<MicrosoftDynamicsCRMcontact> contactinvoicesAssociation = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMsla slaInvoiceSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMappointment> invoiceAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMconnection> invoiceConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMactivityparty> invoiceActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> invoiceRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMactivitypointer> invoiceActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMphonecall> invoicePhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> invoiceEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMbulkdeletefailure> invoiceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMletter> invoiceLetters = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMtask> invoiceTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> invoiceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMconnection> invoiceConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMinvoicedetail> invoiceDetails = default(IList<MicrosoftDynamicsCRMinvoicedetail>), IList<MicrosoftDynamicsCRMfax> invoiceFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMpricelevel pricelevelid = default(MicrosoftDynamicsCRMpricelevel), IList<MicrosoftDynamicsCRMsocialactivity> invoiceSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMannotation> invoiceAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> invoiceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceInvoice = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMsla slainvokedidInvoiceSla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMserviceappointment> invoiceServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> invoiceAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioInvoiceAdoxioApplicationLicenceFeeInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> adoxioInvoiceAdoxioApplicationinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioWorker> adoxioInvoiceAdoxioWorkerInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> adoxioInvoiceAdoxioWorkerinvoicehistoryInvoice = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>))
         {
             Name = name;
             Statuscode = statuscode;
@@ -176,144 +389,200 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets type a descriptive name for the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets select the invoice's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total of the Tax amounts specified on all
+        /// products included in the invoice, included in the Total Amount due
+        /// calculation for the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "totaltax")]
-        public object Totaltax { get; set; }
+        public decimal? Totaltax { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the duration in minutes for which the invoice
+        /// was on hold.
         /// </summary>
         [JsonProperty(PropertyName = "onholdtime")]
         public int? Onholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether prices specified on the invoice are
+        /// locked from any further updates.
         /// </summary>
         [JsonProperty(PropertyName = "ispricelocked")]
         public bool? Ispricelocked { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Invoice Discount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "discountamount_base")]
-        public object DiscountamountBase { get; set; }
+        public decimal? DiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the fax number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_fax")]
         public string ShiptoFax { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
-        public string Entityimageid { get; set; }
+        public System.Guid? Entityimageid { get; set; }
 
         /// <summary>
+        /// Gets or sets type of pricing error for the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "pricingerrorcode")]
         public int? Pricingerrorcode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the discount rate that should be applied to the
+        /// Detail Amount field, for use in calculating the Pre-Freight Amount
+        /// and Total Amount values for the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "discountpercentage")]
-        public object Discountpercentage { get; set; }
+        public decimal? Discountpercentage { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the cost of freight or shipping for the products
+        /// included in the invoice for use in calculating the total amount
+        /// due.
         /// </summary>
         [JsonProperty(PropertyName = "freightamount")]
-        public object Freightamount { get; set; }
+        public decimal? Freightamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type the city for the customer's shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_city")]
         public string ShiptoCity { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the ZIP Code or postal code for the shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_postalcode")]
         public string ShiptoPostalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the second line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line2")]
         public string ShiptoLine2 { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Manual Discount amounts specified on all
+        /// products included in the invoice. This value is reflected in the
+        /// Detail Amount field on the invoice and is added to any discount
+        /// amount or rate specified on the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemdiscountamount")]
-        public object Totallineitemdiscountamount { get; set; }
+        public decimal? Totallineitemdiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the invoice,
+        /// such as shipping details or product substitutions.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Detail Amount field converted to the
+        /// system's default base currency. The calculation uses the exchange
+        /// rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemamount_base")]
-        public object TotallineitemamountBase { get; set; }
+        public decimal? TotallineitemamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the invoice is active, paid, or
+        /// canceled. Paid and canceled invoices are read-only and can't be
+        /// edited unless they are reactivated.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the ZIP Code or postal code for the billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_postalcode")]
         public string BilltoPostalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the complete Ship To address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_composite")]
         public string ShiptoComposite { get; set; }
 
         /// <summary>
+        /// Gets or sets type the state or province for the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_stateorprovince")]
         public string ShiptoStateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type the first line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line1")]
         public string ShiptoLine1 { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
-        public string Processid { get; set; }
+        public System.Guid? Processid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -321,96 +590,137 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Amount field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totalamount_base")]
-        public object TotalamountBase { get; set; }
+        public decimal? TotalamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the opportunity that the invoice is related to
+        /// for reporting and analytics.
         /// </summary>
         [JsonProperty(PropertyName = "_opportunityid_value")]
-        public string _opportunityidValue { get; set; }
+        public System.Guid? _opportunityidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the account with which the
+        /// invoice is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_accountid_value")]
-        public string _accountidValue { get; set; }
+        public System.Guid? _accountidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phone number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_telephone")]
         public string ShiptoTelephone { get; set; }
 
         /// <summary>
+        /// Gets or sets type the third line of the billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_line3")]
         public string BilltoLine3 { get; set; }
 
         /// <summary>
+        /// Gets or sets type the discount amount for the invoice if the
+        /// customer is eligible for special savings.
         /// </summary>
         [JsonProperty(PropertyName = "discountamount")]
-        public object Discountamount { get; set; }
+        public decimal? Discountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phone number for the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_telephone")]
         public string BilltoTelephone { get; set; }
 
         /// <summary>
+        /// Gets or sets select the priority so that preferred customers or
+        /// critical issues are handled quickly.
         /// </summary>
         [JsonProperty(PropertyName = "prioritycode")]
         public int? Prioritycode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the complete Bill To address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_composite")]
         public string BilltoComposite { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the order related to the invoice to make sure
+        /// the order is fulfilled and invoiced correctly.
         /// </summary>
         [JsonProperty(PropertyName = "_salesorderid_value")]
-        public string _salesorderidValue { get; set; }
+        public System.Guid? _salesorderidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Freight Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "freightamount_base")]
-        public object FreightamountBase { get; set; }
+        public decimal? FreightamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
+        /// Gets or sets type the country or region for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_country")]
         public string ShiptoCountry { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the contact associated with the
+        /// invoice.
         /// </summary>
         [JsonProperty(PropertyName = "_contactid_value")]
-        public string _contactidValue { get; set; }
+        public System.Guid? _contactidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// invoice.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the service level agreement (SLA) that you want
+        /// to apply to the invoice record.
         /// </summary>
         [JsonProperty(PropertyName = "_slaid_value")]
-        public string _slaidValue { get; set; }
+        public System.Guid? _slaidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the price list associated with this record to
+        /// make sure the products associated with the campaign are offered at
+        /// the correct prices.
         /// </summary>
         [JsonProperty(PropertyName = "_pricelevelid_value")]
-        public string _pricelevelidValue { get; set; }
+        public System.Guid? _pricelevelidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
@@ -421,81 +731,111 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioReturnedtransactionid { get; set; }
 
         /// <summary>
+        /// Gets or sets type the state or province for the billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_stateorprovince")]
         public string BilltoStateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets type the second line of the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_line2")]
         public string BilltoLine2 { get; set; }
 
         /// <summary>
+        /// Gets or sets type the third line of the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line3")]
         public string ShiptoLine3 { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total discount amount, based on the discount
+        /// price and rate entered on the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "totaldiscountamount")]
-        public object Totaldiscountamount { get; set; }
+        public decimal? Totaldiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total of the Manual Discount amounts
+        /// specified on all products included in the invoice. This value is
+        /// reflected in the Detail Amount field on the invoice and is added to
+        /// any discount amount or rate specified on the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemdiscountamount_base")]
-        public object TotallineitemdiscountamountBase { get; set; }
+        public decimal? TotallineitemdiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets select the payment terms to indicate when the customer
+        /// needs to pay the total amount.
         /// </summary>
         [JsonProperty(PropertyName = "paymenttermscode")]
         public int? Paymenttermscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total amount due, calculated as the sum of
+        /// the products, discount, freight, and taxes for the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "totalamount")]
-        public object Totalamount { get; set; }
+        public decimal? Totalamount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets contains the date time stamp of the last on hold time.
         /// </summary>
         [JsonProperty(PropertyName = "lastonholdtime")]
         public System.DateTimeOffset? Lastonholdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets transaction ID for Payment Gateway.  Unique number
+        /// starts from 500 million
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_transactionid")]
         public string AdoxioTransactionid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total product amount due, minus any
+        /// discounts. This value is added to freight and tax amounts in the
+        /// calculation for the total amount due for the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "totalamountlessfreight")]
-        public object Totalamountlessfreight { get; set; }
+        public decimal? Totalamountlessfreight { get; set; }
 
         /// <summary>
+        /// Gets or sets last SLA that was applied to this invoice. This field
+        /// is for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "_slainvokedid_value")]
-        public string _slainvokedidValue { get; set; }
+        public System.Guid? _slainvokedidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the customer's shipping address, such
+        /// as "Headquarters" or "Field office", to identify the address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_name")]
         public string ShiptoName { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the products included in the invoice
+        /// should be shipped to the specified address or held until the
+        /// customer calls with further pick up or delivery instructions.
         /// </summary>
         [JsonProperty(PropertyName = "willcall")]
         public bool? Willcall { get; set; }
@@ -506,121 +846,168 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioStatuschangedatelongstring { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the identifying number or code of the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "invoicenumber")]
         public string Invoicenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type the fax number for the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_fax")]
         public string BilltoFax { get; set; }
 
         /// <summary>
+        /// Gets or sets type the country or region for the customer's billing
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_country")]
         public string BilltoCountry { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
-        public string Stageid { get; set; }
+        public System.Guid? Stageid { get; set; }
 
         /// <summary>
+        /// Gets or sets when an Invoice is created, paid, or cancelled
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_statuschangedate")]
         public System.DateTimeOffset? AdoxioStatuschangedate { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "invoiceid")]
-        public string Invoiceid { get; set; }
+        public System.Guid? Invoiceid { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date when the products included in the
+        /// invoice were delivered.
         /// </summary>
         [JsonProperty(PropertyName = "datedelivered")]
         public System.DateTimeOffset? Datedelivered { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the customer's billing address, such
+        /// as "Headquarters" or "Field office", to identify the address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_name")]
         public string BilltoName { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Pre-Freight Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totalamountlessfreight_base")]
-        public object TotalamountlessfreightBase { get; set; }
+        public decimal? TotalamountlessfreightBase { get; set; }
 
         /// <summary>
+        /// Gets or sets the default image for the entity.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
-        public object Entityimage { get; set; }
+        public byte[] Entityimage { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date and time when the invoice was last
+        /// submitted to an accounting or ERP system for processing.
         /// </summary>
         [JsonProperty(PropertyName = "lastbackofficesubmit")]
         public System.DateTimeOffset? Lastbackofficesubmit { get; set; }
 
         /// <summary>
+        /// Gets or sets type the city for the customer's billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_city")]
         public string BilltoCity { get; set; }
 
         /// <summary>
+        /// Gets or sets select the freight terms to make sure shipping orders
+        /// are processed correctly.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_freighttermscode")]
         public int? ShiptoFreighttermscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Discount Amount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "totaldiscountamount_base")]
-        public object TotaldiscountamountBase { get; set; }
+        public decimal? TotaldiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select a shipping method for deliveries sent to this
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shippingmethodcode")]
         public int? Shippingmethodcode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the sum of all existing and write-in products
+        /// included on the invoice, based on the specified price list and
+        /// quantities.
         /// </summary>
         [JsonProperty(PropertyName = "totallineitemamount")]
-        public object Totallineitemamount { get; set; }
+        public decimal? Totallineitemamount { get; set; }
 
         /// <summary>
+        /// Gets or sets select the customer account or contact to provide a
+        /// quick link to additional customer details, such as account
+        /// information, activities, and opportunities.
         /// </summary>
         [JsonProperty(PropertyName = "_customerid_value")]
-        public string _customeridValue { get; set; }
+        public System.Guid? _customeridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the first line of the customer's billing address.
         /// </summary>
         [JsonProperty(PropertyName = "billto_line1")]
         public string BilltoLine1 { get; set; }
@@ -631,14 +1018,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Total Tax field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "totaltax_base")]
-        public object TotaltaxBase { get; set; }
+        public decimal? TotaltaxBase { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the date by which the invoice should be paid by
+        /// the customer.
         /// </summary>
+        [JsonConverter(typeof(DateJsonConverter))]
         [JsonProperty(PropertyName = "duedate")]
-        public System.DateTimeOffset? Duedate { get; set; }
+        public System.DateTime? Duedate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -733,7 +1126,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

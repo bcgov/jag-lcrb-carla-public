@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// orderclose
+    /// Microsoft.Dynamics.CRM.orderclose
     /// </summary>
     public partial class MicrosoftDynamicsCRMorderclose
     {
@@ -29,7 +29,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMorderclose
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMorderclose(int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? revision = default(int?), string category = default(string), string _salesorderidValue = default(string), string subcategory = default(string), string ordernumber = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunitOrderclose = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> orderCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> orderCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMservice serviceidOrderclose = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMannotation> orderCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactivityparty> ordercloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser owninguserOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> orderCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMteam owningteamOrderclose = default(MicrosoftDynamicsCRMteam))
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="revision">Order revision number.</param>
+        /// <param name="category">Category of the order close
+        /// activity.</param>
+        /// <param name="_salesorderidValue">Unique identifier of the order
+        /// with which the order close activity is associated.</param>
+        /// <param name="subcategory">Subcategory of the order close
+        /// activity.</param>
+        /// <param name="ordernumber">Order number.</param>
+        public MicrosoftDynamicsCRMorderclose(int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? revision = default(int?), string category = default(string), System.Guid? _salesorderidValue = default(System.Guid?), string subcategory = default(string), string ordernumber = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunitOrderclose = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> orderCloseSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> orderCloseBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMservice serviceidOrderclose = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMannotation> orderCloseAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMactivityparty> ordercloseActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser owninguserOrderclose = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> orderCloseAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMteam owningteamOrderclose = default(MicrosoftDynamicsCRMteam))
         {
             Importsequencenumber = importsequencenumber;
             Overriddencreatedon = overriddencreatedon;
@@ -62,36 +74,45 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets order revision number.
         /// </summary>
         [JsonProperty(PropertyName = "revision")]
         public int? Revision { get; set; }
 
         /// <summary>
+        /// Gets or sets category of the order close activity.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the order with which the order
+        /// close activity is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_salesorderid_value")]
-        public string _salesorderidValue { get; set; }
+        public System.Guid? _salesorderidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets subcategory of the order close activity.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
+        /// Gets or sets order number.
         /// </summary>
         [JsonProperty(PropertyName = "ordernumber")]
         public string Ordernumber { get; set; }

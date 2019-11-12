@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// officegraphdocument
+    /// Microsoft.Dynamics.CRM.officegraphdocument
     /// </summary>
     public partial class MicrosoftDynamicsCRMofficegraphdocument
     {
@@ -27,7 +27,62 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMofficegraphdocument class.
         /// </summary>
-        public MicrosoftDynamicsCRMofficegraphdocument(string previewimageurl = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string fileextension = default(string), string readurl = default(string), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), string officegraphdocumentid = default(string), object exchangerate = default(object), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string weblocationurl = default(string), string secondaryfileextension = default(string), int? rank = default(int?), string modifiedby = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string authornames = default(string), string siteurl = default(string), string title = default(string), string createdby = default(string), string documentlastmodifiedby = default(string), string _modifiedonbehalfbyValue = default(string), string documentpreviewmetadata = default(string), int? querytype = default(int?), string documentid = default(string), int? viewcount = default(int?), string sitetitle = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string filetype = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        /// <param name="previewimageurl">Shows the Preview Image Url Office
+        /// Graph Document.</param>
+        /// <param name="modifiedtime">Date and time when the record was
+        /// modified.</param>
+        /// <param name="fileextension">File Extension of Office Graph
+        /// Document.</param>
+        /// <param name="readurl">The online read url</param>
+        /// <param name="_organizationidValue">Unique identifier for the
+        /// organization</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="officegraphdocumentid">Unique identifier for entity
+        /// instances</param>
+        /// <param name="exchangerate">Exchange rate for the currency
+        /// associated with the Office Graph Document with respect to the base
+        /// currency.</param>
+        /// <param name="createdtime">Date and time when the record was
+        /// created.</param>
+        /// <param name="weblocationurl">Shows the Web Location Url of Office
+        /// Graph Document.</param>
+        /// <param name="secondaryfileextension">Secondary File Extension of
+        /// Office Graph Document.</param>
+        /// <param name="rank">The relevancy rank of the document
+        /// retrieved</param>
+        /// <param name="modifiedby">Shows modified by of Office Graph
+        /// Document.</param>
+        /// <param name="documentlastmodifiedon">Document Last Modified
+        /// On</param>
+        /// <param name="authornames">Shows Author Names of Office Graph
+        /// Document.</param>
+        /// <param name="siteurl">The site url for the parent document
+        /// site</param>
+        /// <param name="title">The title of the entity.</param>
+        /// <param name="createdby">Shows Created By of Office Graph
+        /// Document.</param>
+        /// <param name="documentlastmodifiedby">Document Last Modified
+        /// By</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="documentpreviewmetadata">document preview
+        /// metadata</param>
+        /// <param name="querytype">Shows Query Type of child folders</param>
+        /// <param name="documentid">Document Id.</param>
+        /// <param name="viewcount">Shows View Count of child folders.</param>
+        /// <param name="sitetitle">The title of the parent document
+        /// site</param>
+        /// <param name="_transactioncurrencyidValue">Exchange rate for the
+        /// currency associated with the Office Graph Document with respect to
+        /// the base currency.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="filetype">Shows the File Type of Office Graph
+        /// Document.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        public MicrosoftDynamicsCRMofficegraphdocument(string previewimageurl = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string fileextension = default(string), string readurl = default(string), System.Guid? _organizationidValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), System.Guid? officegraphdocumentid = default(System.Guid?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string weblocationurl = default(string), string secondaryfileextension = default(string), int? rank = default(int?), string modifiedby = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string authornames = default(string), string siteurl = default(string), string title = default(string), string createdby = default(string), string documentlastmodifiedby = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string documentpreviewmetadata = default(string), int? querytype = default(int?), string documentid = default(string), int? viewcount = default(int?), string sitetitle = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string filetype = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Previewimageurl = previewimageurl;
             Modifiedtime = modifiedtime;
@@ -72,141 +127,174 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the Preview Image Url Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "previewimageurl")]
         public string Previewimageurl { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedtime")]
         public System.DateTimeOffset? Modifiedtime { get; set; }
 
         /// <summary>
+        /// Gets or sets file Extension of Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "fileextension")]
         public string Fileextension { get; set; }
 
         /// <summary>
+        /// Gets or sets the online read url
         /// </summary>
         [JsonProperty(PropertyName = "readurl")]
         public string Readurl { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the organization
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "officegraphdocumentid")]
-        public string Officegraphdocumentid { get; set; }
+        public System.Guid? Officegraphdocumentid { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// Office Graph Document with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdtime")]
         public System.DateTimeOffset? Createdtime { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Web Location Url of Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "weblocationurl")]
         public string Weblocationurl { get; set; }
 
         /// <summary>
+        /// Gets or sets secondary File Extension of Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "secondaryfileextension")]
         public string Secondaryfileextension { get; set; }
 
         /// <summary>
+        /// Gets or sets the relevancy rank of the document retrieved
         /// </summary>
         [JsonProperty(PropertyName = "rank")]
         public int? Rank { get; set; }
 
         /// <summary>
+        /// Gets or sets shows modified by of Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedby")]
         public string Modifiedby { get; set; }
 
         /// <summary>
+        /// Gets or sets document Last Modified On
         /// </summary>
         [JsonProperty(PropertyName = "documentlastmodifiedon")]
         public System.DateTimeOffset? Documentlastmodifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows Author Names of Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "authornames")]
         public string Authornames { get; set; }
 
         /// <summary>
+        /// Gets or sets the site url for the parent document site
         /// </summary>
         [JsonProperty(PropertyName = "siteurl")]
         public string Siteurl { get; set; }
 
         /// <summary>
+        /// Gets or sets the title of the entity.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets shows Created By of Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "createdby")]
         public string Createdby { get; set; }
 
         /// <summary>
+        /// Gets or sets document Last Modified By
         /// </summary>
         [JsonProperty(PropertyName = "documentlastmodifiedby")]
         public string Documentlastmodifiedby { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets document preview metadata
         /// </summary>
         [JsonProperty(PropertyName = "documentpreviewmetadata")]
         public string Documentpreviewmetadata { get; set; }
 
         /// <summary>
+        /// Gets or sets shows Query Type of child folders
         /// </summary>
         [JsonProperty(PropertyName = "querytype")]
         public int? Querytype { get; set; }
 
         /// <summary>
+        /// Gets or sets document Id.
         /// </summary>
         [JsonProperty(PropertyName = "documentid")]
         public string Documentid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows View Count of child folders.
         /// </summary>
         [JsonProperty(PropertyName = "viewcount")]
         public int? Viewcount { get; set; }
 
         /// <summary>
+        /// Gets or sets the title of the parent document site
         /// </summary>
         [JsonProperty(PropertyName = "sitetitle")]
         public string Sitetitle { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// Office Graph Document with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the File Type of Office Graph Document.
         /// </summary>
         [JsonProperty(PropertyName = "filetype")]
         public string Filetype { get; set; }
@@ -214,9 +302,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }

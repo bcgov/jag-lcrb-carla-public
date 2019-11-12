@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// annotation
+    /// Microsoft.Dynamics.CRM.annotation
     /// </summary>
     public partial class MicrosoftDynamicsCRMannotation
     {
@@ -29,7 +31,51 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMannotation
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMannotation(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? filesize = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string objecttypecode = default(string), string mimetype = default(string), string _modifiedbyValue = default(string), string documentbody = default(string), object documentbodyBinary = default(object), string _owningteamValue = default(string), long? versionnumber = default(long?), string filename = default(string), string notetext = default(string), string _owninguserValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string stepid = default(string), string annotationid = default(string), string langid = default(string), bool? isdocument = default(bool?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string _createdonbehalfbyValue = default(string), string _objectidValue = default(string), string subject = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMentitlement objectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementchannel objectidEntitlementchannel = default(MicrosoftDynamicsCRMentitlementchannel), MicrosoftDynamicsCRMentitlementtemplate objectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresource objectidBookableresource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMbookableresourcebooking objectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader objectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbookableresourcecategoryassn objectidBookableresourcecategoryassn = default(MicrosoftDynamicsCRMbookableresourcecategoryassn), MicrosoftDynamicsCRMbookableresourcecharacteristic objectidBookableresourcecharacteristic = default(MicrosoftDynamicsCRMbookableresourcecharacteristic), MicrosoftDynamicsCRMbookableresourcegroup objectidBookableresourcegroup = default(MicrosoftDynamicsCRMbookableresourcegroup), MicrosoftDynamicsCRMknowledgebaserecord objectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount objectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlist objectidList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMkbarticle objectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbulkdeletefailure> annotationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsla objectidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMcalendar objectidCalendar = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMincidentresolution objectidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMcontact objectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMservice objectidService = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsalesorder objectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquoteclose objectidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMcompetitor objectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), object ownerid = default(object), MicrosoftDynamicsCRMcontract objectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMgoal objectidGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMorderclose objectidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMworkflow objectidWorkflow = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMequipment objectidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMcontractdetail objectidContractdetail = default(MicrosoftDynamicsCRMcontractdetail), MicrosoftDynamicsCRMcampaign objectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> annotationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMlead objectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMmailbox objectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMresourcespec objectidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMduplicaterule objectidDuplicaterule = default(MicrosoftDynamicsCRMduplicaterule), IList<MicrosoftDynamicsCRMsyncerror> annotationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMquote objectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMinvoice objectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMemailserverprofile objectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), MicrosoftDynamicsCRMopportunityclose objectidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMproduct objectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMopportunity objectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences objectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation objectidAdoxioLocalgovindigenousnation = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation objectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
+        /// <param name="modifiedon">Date and time when the note was last
+        /// modified.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="filesize">File size of the note.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="objecttypecode">Type of entity with which the note is
+        /// associated.</param>
+        /// <param name="mimetype">MIME type of the note's attachment.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the note.</param>
+        /// <param name="documentbody">Contents of the note's
+        /// attachment.</param>
+        /// <param name="documentbodyBinary">Contents of the note's
+        /// attachment.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the note.</param>
+        /// <param name="versionnumber">Version number of the note.</param>
+        /// <param name="filename">File name of the note.</param>
+        /// <param name="notetext">Text of the note.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the note.</param>
+        /// <param name="createdon">Date and time when the note was
+        /// created.</param>
+        /// <param name="stepid">workflow step id associated with the
+        /// note.</param>
+        /// <param name="annotationid">Unique identifier of the note.</param>
+        /// <param name="langid">Language identifier for the note.</param>
+        /// <param name="isdocument">Specifies whether the note is an
+        /// attachment.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the note.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the note.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the annotation.</param>
+        /// <param name="_objectidValue">Unique identifier of the object with
+        /// which the note is associated.</param>
+        /// <param name="subject">Subject associated with the note.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the annotation.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the note.</param>
+        public MicrosoftDynamicsCRMannotation(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? filesize = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string objecttypecode = default(string), string mimetype = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), string documentbody = default(string), byte[] documentbodyBinary = default(byte[]), System.Guid? _owningteamValue = default(System.Guid?), string versionnumber = default(string), string filename = default(string), string notetext = default(string), System.Guid? _owninguserValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string stepid = default(string), System.Guid? annotationid = default(System.Guid?), string langid = default(string), bool? isdocument = default(bool?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _objectidValue = default(System.Guid?), string subject = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), MicrosoftDynamicsCRMknowledgearticle objectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMentitlement objectidEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementchannel objectidEntitlementchannel = default(MicrosoftDynamicsCRMentitlementchannel), MicrosoftDynamicsCRMentitlementtemplate objectidEntitlementtemplate = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresource objectidBookableresource = default(MicrosoftDynamicsCRMbookableresource), MicrosoftDynamicsCRMbookableresourcebooking objectidBookableresourcebooking = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader objectidBookableresourcebookingheader = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMbookableresourcecategoryassn objectidBookableresourcecategoryassn = default(MicrosoftDynamicsCRMbookableresourcecategoryassn), MicrosoftDynamicsCRMbookableresourcecharacteristic objectidBookableresourcecharacteristic = default(MicrosoftDynamicsCRMbookableresourcecharacteristic), MicrosoftDynamicsCRMbookableresourcegroup objectidBookableresourcegroup = default(MicrosoftDynamicsCRMbookableresourcegroup), MicrosoftDynamicsCRMknowledgebaserecord objectidKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount objectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlist objectidList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMcampaignresponse objectidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMkbarticle objectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMcampaignactivity objectidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMbulkdeletefailure> annotationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsla objectidSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMcalendar objectidCalendar = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfax objectidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMincidentresolution objectidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMcontact objectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMletter objectidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMservice objectidService = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMsalesorder objectidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMquoteclose objectidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMcompetitor objectidCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMcontract objectidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMgoal objectidGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMtask objectidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMorderclose objectidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMworkflow objectidWorkflow = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident objectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMequipment objectidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMcontractdetail objectidContractdetail = default(MicrosoftDynamicsCRMcontractdetail), MicrosoftDynamicsCRMcampaign objectidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> annotationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMlead objectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMmailbox objectidMailbox = default(MicrosoftDynamicsCRMmailbox), MicrosoftDynamicsCRMsocialactivity objectidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMresourcespec objectidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMduplicaterule objectidDuplicaterule = default(MicrosoftDynamicsCRMduplicaterule), IList<MicrosoftDynamicsCRMsyncerror> annotationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMserviceappointment objectidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMquote objectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMinvoice objectidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMphonecall objectidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMemailserverprofile objectidEmailserverprofile = default(MicrosoftDynamicsCRMemailserverprofile), MicrosoftDynamicsCRMopportunityclose objectidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMproduct objectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMopportunity objectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMrecurringappointmentmaster objectidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMabsScheduledprocessexecution objectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication objectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint objectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation objectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences objectidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation objectidAdoxioLocalgovindigenousnation = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioWorker objectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation objectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             Modifiedon = modifiedon;
             Importsequencenumber = importsequencenumber;
@@ -136,134 +182,168 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets date and time when the note was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets file size of the note.
         /// </summary>
         [JsonProperty(PropertyName = "filesize")]
         public int? Filesize { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type of entity with which the note is associated.
         /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public string Objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets MIME type of the note's attachment.
         /// </summary>
         [JsonProperty(PropertyName = "mimetype")]
         public string Mimetype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// note.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets contents of the note's attachment.
         /// </summary>
         [JsonProperty(PropertyName = "documentbody")]
         public string Documentbody { get; set; }
 
         /// <summary>
+        /// Gets or sets contents of the note's attachment.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "documentbody_binary")]
-        public object DocumentbodyBinary { get; set; }
+        public byte[] DocumentbodyBinary { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the note.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the note.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets file name of the note.
         /// </summary>
         [JsonProperty(PropertyName = "filename")]
         public string Filename { get; set; }
 
         /// <summary>
+        /// Gets or sets text of the note.
         /// </summary>
         [JsonProperty(PropertyName = "notetext")]
         public string Notetext { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the note.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the note was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets workflow step id associated with the note.
         /// </summary>
         [JsonProperty(PropertyName = "stepid")]
         public string Stepid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the note.
         /// </summary>
         [JsonProperty(PropertyName = "annotationid")]
-        public string Annotationid { get; set; }
+        public System.Guid? Annotationid { get; set; }
 
         /// <summary>
+        /// Gets or sets language identifier for the note.
         /// </summary>
         [JsonProperty(PropertyName = "langid")]
         public string Langid { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies whether the note is an attachment.
         /// </summary>
         [JsonProperty(PropertyName = "isdocument")]
         public bool? Isdocument { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// note.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// note.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// annotation.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the object with which the note is
+        /// associated.
         /// </summary>
         [JsonProperty(PropertyName = "_objectid_value")]
-        public string _objectidValue { get; set; }
+        public System.Guid? _objectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets subject associated with the note.
         /// </summary>
         [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the annotation.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the note.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -428,7 +508,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

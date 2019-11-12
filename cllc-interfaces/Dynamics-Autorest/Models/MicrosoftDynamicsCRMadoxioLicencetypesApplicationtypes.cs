@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// adoxio_licencetypes_applicationtypes
+    /// Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes
     /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes(long? versionnumber = default(long?), string adoxioLicencetypesApplicationtypesid = default(string), string adoxioApplicationtypeid = default(string), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes(string versionnumber = default(string), System.Guid? adoxioLicencetypesApplicationtypesid = default(System.Guid?), System.Guid? adoxioApplicationtypeid = default(System.Guid?), System.Guid? adoxioLicencetypeid = default(System.Guid?))
         {
             Versionnumber = versionnumber;
             AdoxioLicencetypesApplicationtypesid = adoxioLicencetypesApplicationtypesid;
@@ -44,22 +44,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licencetypes_applicationtypesid")]
-        public string AdoxioLicencetypesApplicationtypesid { get; set; }
+        public System.Guid? AdoxioLicencetypesApplicationtypesid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_applicationtypeid")]
-        public string AdoxioApplicationtypeid { get; set; }
+        public System.Guid? AdoxioApplicationtypeid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public string AdoxioLicencetypeid { get; set; }
+        public System.Guid? AdoxioLicencetypeid { get; set; }
 
     }
 }

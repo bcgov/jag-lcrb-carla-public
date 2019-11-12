@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// theme
+    /// Microsoft.Dynamics.CRM.theme
     /// </summary>
     public partial class MicrosoftDynamicsCRMtheme
     {
@@ -27,7 +27,70 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMtheme class.
         /// </summary>
-        public MicrosoftDynamicsCRMtheme(string headercolor = default(string), string name = default(string), string controlborder = default(string), string globallinkcolor = default(string), string navbarbackgroundcolor = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string backgroundcolor = default(string), string _logoidValue = default(string), string _organizationidValue = default(string), bool? isdefaulttheme = default(bool?), object exchangerate = default(object), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string processcontrolcolor = default(string), string _transactioncurrencyidValue = default(string), bool? type = default(bool?), string hoverlinkeffect = default(string), int? utcconversiontimezonecode = default(int?), string defaultentitycolor = default(string), string logotooltip = default(string), string _createdonbehalfbyValue = default(string), string themeid = default(string), string defaultcustomentitycolor = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string selectedlinkeffect = default(string), string navbarshelfcolor = default(string), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _createdbyValue = default(string), string controlshade = default(string), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> themeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> themeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMwebresource logoimage = default(MicrosoftDynamicsCRMwebresource))
+        /// <param name="headercolor">Choose the color for header text, such as
+        /// form tab labels</param>
+        /// <param name="name">The name of the Theme Entity.</param>
+        /// <param name="controlborder">Choose the color that controls will use
+        /// for borders</param>
+        /// <param name="globallinkcolor">Choose the color for links, such as
+        /// email addresses or lookups</param>
+        /// <param name="navbarbackgroundcolor">Choose the primary Navigation
+        /// Bar color</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="backgroundcolor">For internal use only.</param>
+        /// <param name="_logoidValue">Upload a web resource to use as a logo.
+        /// Recommended dimensions are a height of 50 pixels and a maximum
+        /// width of 400 pixels.</param>
+        /// <param name="_organizationidValue">Unique identifier for the
+        /// organization</param>
+        /// <param name="isdefaulttheme">Default status of theme.</param>
+        /// <param name="exchangerate">Exchange rate for the currency
+        /// associated with the Theme with respect to the base
+        /// currency.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="processcontrolcolor">Choose the primary color for
+        /// process controls</param>
+        /// <param name="_transactioncurrencyidValue">Exchange rate for the
+        /// currency associated with the Theme with respect to the base
+        /// currency.</param>
+        /// <param name="type">Define type of theme.</param>
+        /// <param name="hoverlinkeffect">Choose the color that commands or
+        /// lists will use when you hover over the items</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="defaultentitycolor">Choose the default color for
+        /// system entities if no color is assigned</param>
+        /// <param name="logotooltip">Enter text that will be used as the
+        /// tooltip and alt text for the logo.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="themeid">Unique identifier for entity
+        /// instances</param>
+        /// <param name="defaultcustomentitycolor">Choose the default custom
+        /// entity color if no color is assigned</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="selectedlinkeffect">Choose the color that commands or
+        /// lists will use to indicate selected items</param>
+        /// <param name="navbarshelfcolor">Choose the secondary Navigation Bar
+        /// color</param>
+        /// <param name="statecode">Status of the Theme</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="controlshade">Choose the color for controls to use to
+        /// indicate when you hover over items</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="statuscode">Reason for the status of the Theme</param>
+        public MicrosoftDynamicsCRMtheme(string headercolor = default(string), string name = default(string), string controlborder = default(string), string globallinkcolor = default(string), string navbarbackgroundcolor = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), string backgroundcolor = default(string), System.Guid? _logoidValue = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), bool? isdefaulttheme = default(bool?), decimal? exchangerate = default(decimal?), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string processcontrolcolor = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), bool? type = default(bool?), string hoverlinkeffect = default(string), int? utcconversiontimezonecode = default(int?), string defaultentitycolor = default(string), string logotooltip = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? themeid = default(System.Guid?), string defaultcustomentitycolor = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string selectedlinkeffect = default(string), string navbarshelfcolor = default(string), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? _createdbyValue = default(System.Guid?), string controlshade = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? statuscode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> themeAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> themeBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMwebresource logoimage = default(MicrosoftDynamicsCRMwebresource))
         {
             Headercolor = headercolor;
             Name = name;
@@ -81,146 +144,189 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets choose the color for header text, such as form tab
+        /// labels
         /// </summary>
         [JsonProperty(PropertyName = "headercolor")]
         public string Headercolor { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the Theme Entity.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the color that controls will use for borders
         /// </summary>
         [JsonProperty(PropertyName = "controlborder")]
         public string Controlborder { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the color for links, such as email addresses or
+        /// lookups
         /// </summary>
         [JsonProperty(PropertyName = "globallinkcolor")]
         public string Globallinkcolor { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the primary Navigation Bar color
         /// </summary>
         [JsonProperty(PropertyName = "navbarbackgroundcolor")]
         public string Navbarbackgroundcolor { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "backgroundcolor")]
         public string Backgroundcolor { get; set; }
 
         /// <summary>
+        /// Gets or sets upload a web resource to use as a logo. Recommended
+        /// dimensions are a height of 50 pixels and a maximum width of 400
+        /// pixels.
         /// </summary>
         [JsonProperty(PropertyName = "_logoid_value")]
-        public string _logoidValue { get; set; }
+        public System.Guid? _logoidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the organization
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets default status of theme.
         /// </summary>
         [JsonProperty(PropertyName = "isdefaulttheme")]
         public bool? Isdefaulttheme { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// Theme with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the primary color for process controls
         /// </summary>
         [JsonProperty(PropertyName = "processcontrolcolor")]
         public string Processcontrolcolor { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// Theme with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets define type of theme.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public bool? Type { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the color that commands or lists will use when
+        /// you hover over the items
         /// </summary>
         [JsonProperty(PropertyName = "hoverlinkeffect")]
         public string Hoverlinkeffect { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the default color for system entities if no
+        /// color is assigned
         /// </summary>
         [JsonProperty(PropertyName = "defaultentitycolor")]
         public string Defaultentitycolor { get; set; }
 
         /// <summary>
+        /// Gets or sets enter text that will be used as the tooltip and alt
+        /// text for the logo.
         /// </summary>
         [JsonProperty(PropertyName = "logotooltip")]
         public string Logotooltip { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "themeid")]
-        public string Themeid { get; set; }
+        public System.Guid? Themeid { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the default custom entity color if no color is
+        /// assigned
         /// </summary>
         [JsonProperty(PropertyName = "defaultcustomentitycolor")]
         public string Defaultcustomentitycolor { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the color that commands or lists will use to
+        /// indicate selected items
         /// </summary>
         [JsonProperty(PropertyName = "selectedlinkeffect")]
         public string Selectedlinkeffect { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the secondary Navigation Bar color
         /// </summary>
         [JsonProperty(PropertyName = "navbarshelfcolor")]
         public string Navbarshelfcolor { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the Theme
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
@@ -228,24 +334,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the color for controls to use to indicate when
+        /// you hover over items
         /// </summary>
         [JsonProperty(PropertyName = "controlshade")]
         public string Controlshade { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the Theme
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }

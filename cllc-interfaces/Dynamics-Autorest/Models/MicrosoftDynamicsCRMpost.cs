@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// post
+    /// Microsoft.Dynamics.CRM.post
     /// </summary>
     public partial class MicrosoftDynamicsCRMpost
     {
@@ -27,7 +27,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMpost class.
         /// </summary>
-        public MicrosoftDynamicsCRMpost(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _regardingobjectowningbusinessunitValue = default(string), string _modifiedbyValue = default(string), string text = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _regardingobjectidValue = default(string), string _regardingobjectowneridValue = default(string), string _createdbyValue = default(string), int? source = default(int?), string _organizationidValue = default(string), string postid = default(string), int? type = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> postAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> postBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMpostregarding postregardingid = default(MicrosoftDynamicsCRMpostregarding), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMpostcomment> postComments = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> postLikes = default(IList<MicrosoftDynamicsCRMpostlike>))
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="_regardingobjectowningbusinessunitValue">Unique
+        /// identifier of the business unit that owns the regarding
+        /// object.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="text">Shows the text of a post. If this is a manual
+        /// post, it appears in plain text. If this is an auto post, it appears
+        /// in XML.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_regardingobjectidValue">Choose the parent record for
+        /// the post to identify the customer, opportunity, case, or other
+        /// record that the post most closely relates to.</param>
+        /// <param name="_regardingobjectowneridValue">Unique identifier of the
+        /// user or team who owns the regarding object.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="source">Select whether the post was created manually
+        /// or automatically.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the solution.</param>
+        /// <param name="postid">Unique identifier for entity instances</param>
+        /// <param name="type">Select the post type.</param>
+        public MicrosoftDynamicsCRMpost(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _regardingobjectowningbusinessunitValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), string text = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), System.Guid? _regardingobjectidValue = default(System.Guid?), System.Guid? _regardingobjectowneridValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), int? source = default(int?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? postid = default(System.Guid?), int? type = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> postAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> postBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMpostregarding postregardingid = default(MicrosoftDynamicsCRMpostregarding), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMpostcomment> postComments = default(IList<MicrosoftDynamicsCRMpostcomment>), IList<MicrosoftDynamicsCRMpostlike> postLikes = default(IList<MicrosoftDynamicsCRMpostlike>))
         {
             Modifiedon = modifiedon;
             Createdon = createdon;
@@ -64,81 +98,111 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// regarding object.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectowningbusinessunit_value")]
-        public string _regardingobjectowningbusinessunitValue { get; set; }
+        public System.Guid? _regardingobjectowningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the text of a post. If this is a manual post, it
+        /// appears in plain text. If this is an auto post, it appears in XML.
         /// </summary>
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the parent record for the post to identify the
+        /// customer, opportunity, case, or other record that the post most
+        /// closely relates to.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        public System.Guid? _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// regarding object.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectownerid_value")]
-        public string _regardingobjectowneridValue { get; set; }
+        public System.Guid? _regardingobjectowneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the post was created manually or
+        /// automatically.
         /// </summary>
         [JsonProperty(PropertyName = "source")]
         public int? Source { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "postid")]
-        public string Postid { get; set; }
+        public System.Guid? Postid { get; set; }
 
         /// <summary>
+        /// Gets or sets select the post type.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public int? Type { get; set; }

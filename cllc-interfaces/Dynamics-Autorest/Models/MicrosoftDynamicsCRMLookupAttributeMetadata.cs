@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// LookupAttributeMetadata
+    /// Microsoft.Dynamics.CRM.LookupAttributeMetadata
     /// </summary>
     public partial class MicrosoftDynamicsCRMLookupAttributeMetadata
     {

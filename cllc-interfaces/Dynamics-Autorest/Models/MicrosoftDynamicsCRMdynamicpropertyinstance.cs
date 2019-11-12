@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// dynamicpropertyinstance
+    /// Microsoft.Dynamics.CRM.dynamicpropertyinstance
     /// </summary>
     public partial class MicrosoftDynamicsCRMdynamicpropertyinstance
     {
@@ -27,7 +27,52 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdynamicpropertyinstance class.
         /// </summary>
-        public MicrosoftDynamicsCRMdynamicpropertyinstance(long? versionnumber = default(long?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? valuedouble = default(decimal?), object valuedecimal = default(object), string _modifiedonbehalfbyValue = default(string), string valuestring = default(string), string _createdonbehalfbyValue = default(string), int? dmtimportstate = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), bool? validationstatus = default(bool?), string _dynamicpropertyidValue = default(string), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _regardingobjectidValue = default(string), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), object exchangerate = default(object), int? valueinteger = default(int?), string dynamicpropertyinstanceid = default(string), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), MicrosoftDynamicsCRMquotedetail regardingobjectidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMinvoicedetail regardingobjectidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), object ownerid = default(object), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMopportunityproduct regardingobjectidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorderdetail regardingobjectidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="versionnumber">Shows the version number of the
+        /// property instance.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated.</param>
+        /// <param name="valuedouble">Shows the double value of the
+        /// property.</param>
+        /// <param name="valuedecimal">Shows the decimal value of the
+        /// property.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="valuestring">Shows the string value of the
+        /// property.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="dmtimportstate">Internal Use Only</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="validationstatus">Shows whether the property value is
+        /// valid.</param>
+        /// <param name="_dynamicpropertyidValue">Shows the property that this
+        /// record is associated with.</param>
+        /// <param name="_transactioncurrencyidValue">Shows the currency
+        /// associated with the record.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created.</param>
+        /// <param name="_regardingobjectidValue">Shows the object that the
+        /// property is associated with.</param>
+        /// <param name="_owningbusinessunitValue">Shows the business unit that
+        /// the record owner belongs to.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="_owninguserValue">Shows the user who owns the property
+        /// instance.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="valueinteger">Shows the integer value of the
+        /// property.</param>
+        /// <param name="dynamicpropertyinstanceid">Shows the unique identifier
+        /// of the property instance.</param>
+        /// <param name="_owningteamValue">Shows the team who owns the property
+        /// instance.</param>
+        public MicrosoftDynamicsCRMdynamicpropertyinstance(string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string valuedouble = default(string), decimal? valuedecimal = default(decimal?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string valuestring = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? dmtimportstate = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), bool? validationstatus = default(bool?), System.Guid? _dynamicpropertyidValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _regardingobjectidValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _owninguserValue = default(System.Guid?), decimal? exchangerate = default(decimal?), int? valueinteger = default(int?), System.Guid? dynamicpropertyinstanceid = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), MicrosoftDynamicsCRMquotedetail regardingobjectidQuotedetail = default(MicrosoftDynamicsCRMquotedetail), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMinvoicedetail regardingobjectidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMopportunityproduct regardingobjectidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorderdetail regardingobjectidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Versionnumber = versionnumber;
             Modifiedon = modifiedon;
@@ -74,114 +119,145 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the version number of the property instance.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the double value of the property.
         /// </summary>
         [JsonProperty(PropertyName = "valuedouble")]
-        public decimal? Valuedouble { get; set; }
+        public string Valuedouble { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the decimal value of the property.
         /// </summary>
         [JsonProperty(PropertyName = "valuedecimal")]
-        public object Valuedecimal { get; set; }
+        public decimal? Valuedecimal { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the string value of the property.
         /// </summary>
         [JsonProperty(PropertyName = "valuestring")]
         public string Valuestring { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "dmtimportstate")]
         public int? Dmtimportstate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the property value is valid.
         /// </summary>
         [JsonProperty(PropertyName = "validationstatus")]
         public bool? Validationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the property that this record is associated
+        /// with.
         /// </summary>
         [JsonProperty(PropertyName = "_dynamicpropertyid_value")]
-        public string _dynamicpropertyidValue { get; set; }
+        public System.Guid? _dynamicpropertyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the currency associated with the record.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the object that the property is associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public string _regardingobjectidValue { get; set; }
+        public System.Guid? _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the business unit that the record owner belongs
+        /// to.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the user who owns the property instance.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the integer value of the property.
         /// </summary>
         [JsonProperty(PropertyName = "valueinteger")]
         public int? Valueinteger { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the unique identifier of the property instance.
         /// </summary>
         [JsonProperty(PropertyName = "dynamicpropertyinstanceid")]
-        public string Dynamicpropertyinstanceid { get; set; }
+        public System.Guid? Dynamicpropertyinstanceid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the team who owns the property instance.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -216,7 +292,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

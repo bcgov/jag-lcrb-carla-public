@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// complexcontrol
+    /// Microsoft.Dynamics.CRM.complexcontrol
     /// </summary>
     public partial class MicrosoftDynamicsCRMcomplexcontrol
     {
@@ -27,7 +27,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcomplexcontrol class.
         /// </summary>
-        public MicrosoftDynamicsCRMcomplexcontrol(long? versionnumber = default(long?), string complexcontrolxml = default(string), string complexcontrolid = default(string), string _organizationidValue = default(string), int? type = default(int?), string complexcontrolidunique = default(string), int? version = default(int?), string name = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        /// <param name="versionnumber">Represents a version of customizations
+        /// to be synchronized with the Microsoft Dynamics 365 client for
+        /// Outlook.</param>
+        /// <param name="complexcontrolxml">XML representation of the complex
+        /// control layout.</param>
+        /// <param name="complexcontrolid">Unique identifier of the complex
+        /// control.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization.</param>
+        /// <param name="type">Type of the complex control, for example,
+        /// Process Control or Link Control.</param>
+        /// <param name="complexcontrolidunique">Unique identifier of the form
+        /// used when synchronizing customizations for the Microsoft Dynamics
+        /// 365 client for Outlook.</param>
+        /// <param name="version">For internal use only.</param>
+        /// <param name="name">Name of the complex control.</param>
+        /// <param name="description">Description of the complex
+        /// control.</param>
+        public MicrosoftDynamicsCRMcomplexcontrol(string versionnumber = default(string), string complexcontrolxml = default(string), System.Guid? complexcontrolid = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), int? type = default(int?), System.Guid? complexcontrolidunique = default(System.Guid?), int? version = default(int?), string name = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Versionnumber = versionnumber;
             Complexcontrolxml = complexcontrolxml;
@@ -48,46 +66,58 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets represents a version of customizations to be
+        /// synchronized with the Microsoft Dynamics 365 client for Outlook.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets XML representation of the complex control layout.
         /// </summary>
         [JsonProperty(PropertyName = "complexcontrolxml")]
         public string Complexcontrolxml { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the complex control.
         /// </summary>
         [JsonProperty(PropertyName = "complexcontrolid")]
-        public string Complexcontrolid { get; set; }
+        public System.Guid? Complexcontrolid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type of the complex control, for example, Process
+        /// Control or Link Control.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public int? Type { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the form used when synchronizing
+        /// customizations for the Microsoft Dynamics 365 client for Outlook.
         /// </summary>
         [JsonProperty(PropertyName = "complexcontrolidunique")]
-        public string Complexcontrolidunique { get; set; }
+        public System.Guid? Complexcontrolidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "version")]
         public int? Version { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the complex control.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the complex control.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }

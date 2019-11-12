@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// translationprocess
+    /// Microsoft.Dynamics.CRM.translationprocess
     /// </summary>
     public partial class MicrosoftDynamicsCRMtranslationprocess
     {
@@ -29,7 +29,56 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMtranslationprocess class.
         /// </summary>
-        public MicrosoftDynamicsCRMtranslationprocess(System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? duration = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), int? statuscode = default(int?), object exchangerate = default(object), string _transactioncurrencyidValue = default(string), string _organizationidValue = default(string), string _activestageidValue = default(string), string _processidValue = default(string), string name = default(string), string _knowledgearticleidValue = default(string), int? importsequencenumber = default(int?), string businessprocessflowinstanceid = default(string), string traversedpath = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> translationProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsTranslationprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage))
+        /// <param name="completedon">Date and time when Business Process Flow
+        /// instance is completed.</param>
+        /// <param name="duration">Duration between completed on and started
+        /// on, used by business process flow.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics CRM options.</param>
+        /// <param name="statecode">Shows whether the Delve action record is
+        /// pending, completed, or tracking.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="activestagestartedon">Date and time when current
+        /// active stage is started.</param>
+        /// <param name="statuscode">Select the delve action record
+        /// status.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization with which the SDK message request is
+        /// associated.</param>
+        /// <param name="_activestageidValue">Unique identifier of the active
+        /// stage for the Business Process Flow instance.</param>
+        /// <param name="_processidValue">Unique identifier of the workflow
+        /// associated to the Business Process Flow instance.</param>
+        /// <param name="name">Process Name.</param>
+        /// <param name="_knowledgearticleidValue">Unique identifier of the
+        /// workflow associated to the Business Process Flow instance.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="businessprocessflowinstanceid">Unique identifier for
+        /// Translation Process bpf entity instances</param>
+        /// <param name="traversedpath">Traversed Path</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics CRM options.</param>
+        /// <param name="versionnumber">Version number of the business process
+        /// instance.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        public MicrosoftDynamicsCRMtranslationprocess(System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? duration = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? activestagestartedon = default(System.DateTimeOffset?), int? statuscode = default(int?), decimal? exchangerate = default(decimal?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? _activestageidValue = default(System.Guid?), System.Guid? _processidValue = default(System.Guid?), string name = default(string), System.Guid? _knowledgearticleidValue = default(System.Guid?), int? importsequencenumber = default(int?), System.Guid? businessprocessflowinstanceid = default(System.Guid?), string traversedpath = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), IList<MicrosoftDynamicsCRMsyncerror> translationProcessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMworkflowlog> workflowlogsTranslationprocess = default(IList<MicrosoftDynamicsCRMworkflowlog>), MicrosoftDynamicsCRMworkflow processid = default(MicrosoftDynamicsCRMworkflow), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprocessstage activestageid = default(MicrosoftDynamicsCRMprocessstage))
         {
             Completedon = completedon;
             Duration = duration;
@@ -74,119 +123,160 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets date and time when Business Process Flow instance is
+        /// completed.
         /// </summary>
         [JsonProperty(PropertyName = "completedon")]
         public System.DateTimeOffset? Completedon { get; set; }
 
         /// <summary>
+        /// Gets or sets duration between completed on and started on, used by
+        /// business process flow.
         /// </summary>
         [JsonProperty(PropertyName = "duration")]
         public int? Duration { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics CRM options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the Delve action record is pending,
+        /// completed, or tracking.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when current active stage is started.
         /// </summary>
         [JsonProperty(PropertyName = "activestagestartedon")]
         public System.DateTimeOffset? Activestagestartedon { get; set; }
 
         /// <summary>
+        /// Gets or sets select the delve action record status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// SDK message request is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the active stage for the Business
+        /// Process Flow instance.
         /// </summary>
         [JsonProperty(PropertyName = "_activestageid_value")]
-        public string _activestageidValue { get; set; }
+        public System.Guid? _activestageidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the workflow associated to the
+        /// Business Process Flow instance.
         /// </summary>
         [JsonProperty(PropertyName = "_processid_value")]
-        public string _processidValue { get; set; }
+        public System.Guid? _processidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets process Name.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the workflow associated to the
+        /// Business Process Flow instance.
         /// </summary>
         [JsonProperty(PropertyName = "_knowledgearticleid_value")]
-        public string _knowledgearticleidValue { get; set; }
+        public System.Guid? _knowledgearticleidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for Translation Process bpf entity
+        /// instances
         /// </summary>
         [JsonProperty(PropertyName = "businessprocessflowinstanceid")]
-        public string Businessprocessflowinstanceid { get; set; }
+        public System.Guid? Businessprocessflowinstanceid { get; set; }
 
         /// <summary>
+        /// Gets or sets traversed Path
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics CRM options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the business process instance.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

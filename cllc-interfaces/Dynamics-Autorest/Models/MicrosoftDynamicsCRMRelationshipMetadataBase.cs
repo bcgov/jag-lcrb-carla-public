@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// RelationshipMetadataBase
+    /// Microsoft.Dynamics.CRM.RelationshipMetadataBase
     /// </summary>
     public partial class MicrosoftDynamicsCRMRelationshipMetadataBase
     {
@@ -27,11 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMRelationshipMetadataBase class.
         /// </summary>
-        /// <param name="securityTypes">Possible values include: 'None',
-        /// 'Append', 'ParentChild', 'Pointer', 'Inheritance'</param>
-        /// <param name="relationshipType">Possible values include:
-        /// 'OneToManyRelationship', 'ManyToManyRelationship'</param>
-        public MicrosoftDynamicsCRMRelationshipMetadataBase(bool? isCustomRelationship = default(bool?), MicrosoftDynamicsCRMBooleanManagedProperty isCustomizable = default(MicrosoftDynamicsCRMBooleanManagedProperty), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string))
+        public MicrosoftDynamicsCRMRelationshipMetadataBase(bool? isCustomRelationship = default(bool?), string isCustomizable = default(string), bool? isValidForAdvancedFind = default(bool?), string schemaName = default(string), string securityTypes = default(string), bool? isManaged = default(bool?), string relationshipType = default(string), string introducedVersion = default(string))
         {
             IsCustomRelationship = isCustomRelationship;
             IsCustomizable = isCustomizable;
@@ -57,7 +53,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public MicrosoftDynamicsCRMBooleanManagedProperty IsCustomizable { get; set; }
+        public string IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -70,8 +66,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string SchemaName { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'None', 'Append',
-        /// 'ParentChild', 'Pointer', 'Inheritance'
         /// </summary>
         [JsonProperty(PropertyName = "SecurityTypes")]
         public string SecurityTypes { get; set; }
@@ -82,8 +76,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? IsManaged { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'OneToManyRelationship',
-        /// 'ManyToManyRelationship'
         /// </summary>
         [JsonProperty(PropertyName = "RelationshipType")]
         public string RelationshipType { get; set; }

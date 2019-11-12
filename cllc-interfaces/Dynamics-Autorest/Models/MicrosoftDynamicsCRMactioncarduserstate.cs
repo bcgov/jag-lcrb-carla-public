@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// actioncarduserstate
+    /// Microsoft.Dynamics.CRM.actioncarduserstate
     /// </summary>
     public partial class MicrosoftDynamicsCRMactioncarduserstate
     {
@@ -27,7 +27,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactioncarduserstate class.
         /// </summary>
-        public MicrosoftDynamicsCRMactioncarduserstate(object exchangerate = default(object), int? state = default(int?), string _owneridValue = default(string), string actioncarduserstateid = default(string), string _actioncardidValue = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        /// <param name="exchangerate">Exchange rate for the currency
+        /// associated with the ActionCardUserState with respect to the base
+        /// currency.</param>
+        /// <param name="state">State of the Action Card</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the state of this action card.</param>
+        /// <param name="actioncarduserstateid">Unique identifier for entity
+        /// instances</param>
+        /// <param name="_actioncardidValue">Parent ActionCard Id.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record</param>
+        /// <param name="startdate">Shows the Start Date</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_transactioncurrencyidValue">Exchange rate for the
+        /// currency associated with the ActionCardUserState with respect to
+        /// the base currency.</param>
+        public MicrosoftDynamicsCRMactioncarduserstate(decimal? exchangerate = default(decimal?), int? state = default(int?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? actioncarduserstateid = default(System.Guid?), System.Guid? _actioncardidValue = default(System.Guid?), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Exchangerate = exchangerate;
             State = state;
@@ -51,59 +70,74 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// ActionCardUserState with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets state of the Action Card
         /// </summary>
         [JsonProperty(PropertyName = "state")]
         public int? State { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// state of this action card.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "actioncarduserstateid")]
-        public string Actioncarduserstateid { get; set; }
+        public System.Guid? Actioncarduserstateid { get; set; }
 
         /// <summary>
+        /// Gets or sets parent ActionCard Id.
         /// </summary>
         [JsonProperty(PropertyName = "_actioncardid_value")]
-        public string _actioncardidValue { get; set; }
+        public System.Guid? _actioncardidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Start Date
         /// </summary>
         [JsonProperty(PropertyName = "startdate")]
         public System.DateTimeOffset? Startdate { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// ActionCardUserState with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>

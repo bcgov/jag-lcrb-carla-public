@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// fieldsecurityprofile
+    /// Microsoft.Dynamics.CRM.fieldsecurityprofile
     /// </summary>
     public partial class MicrosoftDynamicsCRMfieldsecurityprofile
     {
@@ -29,7 +29,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfieldsecurityprofile class.
         /// </summary>
-        public MicrosoftDynamicsCRMfieldsecurityprofile(string _modifiedbyValue = default(string), long? versionnumber = default(long?), string name = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string description = default(string), bool? ismanaged = default(bool?), string solutionid = default(string), string _organizationidValue = default(string), string fieldsecurityprofileidunique = default(string), string fieldsecurityprofileid = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> fieldSecurityProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsystemuser> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMfieldpermission> lkFieldpermissionFieldsecurityprofileid = default(IList<MicrosoftDynamicsCRMfieldpermission>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the profile.</param>
+        /// <param name="name">Name of the profile.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the profile.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="createdon">Date and time when the profile was
+        /// created.</param>
+        /// <param name="modifiedon">Date and time when the profile was last
+        /// modified.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="description">Description of the Profile</param>
+        /// <param name="ismanaged">Indicates whether the solution component is
+        /// part of a managed solution.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// associated organization.</param>
+        /// <param name="fieldsecurityprofileidunique">For internal use
+        /// only.</param>
+        /// <param name="fieldsecurityprofileid">Unique identifier of the
+        /// profile.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the profile.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the role.</param>
+        public MicrosoftDynamicsCRMfieldsecurityprofile(System.Guid? _modifiedbyValue = default(System.Guid?), string versionnumber = default(string), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string description = default(string), bool? ismanaged = default(bool?), System.Guid? solutionid = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? fieldsecurityprofileidunique = default(System.Guid?), System.Guid? fieldsecurityprofileid = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> fieldSecurityProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsystemuser> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMfieldpermission> lkFieldpermissionFieldsecurityprofileid = default(IList<MicrosoftDynamicsCRMfieldpermission>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._modifiedbyValue = _modifiedbyValue;
             Versionnumber = versionnumber;
@@ -65,84 +91,103 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// profile.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the profile.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the profile.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the profile was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the profile was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the Profile
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the solution component is part of a
+        /// managed solution.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        public System.Guid? Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "fieldsecurityprofileidunique")]
-        public string Fieldsecurityprofileidunique { get; set; }
+        public System.Guid? Fieldsecurityprofileidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the profile.
         /// </summary>
         [JsonProperty(PropertyName = "fieldsecurityprofileid")]
-        public string Fieldsecurityprofileid { get; set; }
+        public System.Guid? Fieldsecurityprofileid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the profile.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// role.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

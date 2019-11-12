@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// sharepointsite
+    /// Microsoft.Dynamics.CRM.sharepointsite
     /// </summary>
     public partial class MicrosoftDynamicsCRMsharepointsite
     {
@@ -29,7 +29,75 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsharepointsite class.
         /// </summary>
-        public MicrosoftDynamicsCRMsharepointsite(string userid = default(string), int? statecode = default(int?), int? validationstatus = default(int?), string _modifiedonbehalfbyValue = default(string), string absoluteurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sitecollectionid = default(string), string _modifiedbyValue = default(string), object exchangerate = default(object), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), bool? isgridpresent = default(bool?), string _parentsiteValue = default(string), int? validationstatuserrorcode = default(int?), int? servicetype = default(int?), string _createdbyValue = default(string), string _owningteamValue = default(string), string _transactioncurrencyidValue = default(string), int? timezoneruleversionnumber = default(int?), string relativeurl = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string description = default(string), System.DateTimeOffset? lastvalidated = default(System.DateTimeOffset?), bool? isdefault = default(bool?), int? utcconversiontimezonecode = default(int?), bool? ispowerbisite = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string sharepointsiteid = default(string), int? importsequencenumber = default(int?), string folderstructureentity = default(string), string name = default(string), string _owninguserValue = default(string), string _owneridValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsharepointsite parentsite = default(MicrosoftDynamicsCRMsharepointsite), IList<MicrosoftDynamicsCRMsharepointsite> sharepointsiteParentsiteSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> sharePointSiteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointSiteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        /// <param name="userid">Choose the user who owns the SharePoint
+        /// site.</param>
+        /// <param name="statecode">Status of the SharePoint site
+        /// record.</param>
+        /// <param name="validationstatus">Validation status of the SharePoint
+        /// site URL.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the SharePoint site record.</param>
+        /// <param name="absoluteurl">Absolute URL of the SharePoint
+        /// site.</param>
+        /// <param name="modifiedon">Date and time when the SharePoint site
+        /// record was last modified.</param>
+        /// <param name="sitecollectionid">For internal use only.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the SharePoint site record.</param>
+        /// <param name="exchangerate">Exchange rate between the currency
+        /// associated with the SharePoint site record and the base
+        /// currency.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the SharePoint site record.</param>
+        /// <param name="statuscode">Reason for the status of the SharePoint
+        /// site record.</param>
+        /// <param name="isgridpresent">Indicates if SharePoint Grid is present
+        /// or not.</param>
+        /// <param name="_parentsiteValue">Unique identifier of the parent
+        /// SharePoint site.</param>
+        /// <param name="validationstatuserrorcode">Reason for validation
+        /// status of the URL</param>
+        /// <param name="servicetype">Shows the service type of location of the
+        /// SharePoint site.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the SharePoint site record.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team that
+        /// owns the SharePoint site record.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// currency associated with the SharePoint site record.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="relativeurl">Relative URL of the SharePoint
+        /// site.</param>
+        /// <param name="createdon">Date and time when the SharePoint site
+        /// record was created.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the document location record.</param>
+        /// <param name="description">Description of the SharePoint site
+        /// record.</param>
+        /// <param name="lastvalidated">Date and time when the SharePoint site
+        /// URL was last validated.</param>
+        /// <param name="isdefault">Indicates whether the SharePoint site is
+        /// the default site or not.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="ispowerbisite">Allows embedding of Power BI Reports
+        /// available in this SharePoint site.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="sharepointsiteid">Unique identifier of the SharePoint
+        /// site in Dynamics 365</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="folderstructureentity">Entity on which the folder
+        /// structure for Microsoft Dynamics 365 records will be created in
+        /// SharePoint.</param>
+        /// <param name="name">Name of the SharePoint site record.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the SharePoint site record.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the SharePoint site.</param>
+        public MicrosoftDynamicsCRMsharepointsite(System.Guid? userid = default(System.Guid?), int? statecode = default(int?), int? validationstatus = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string absoluteurl = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? sitecollectionid = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), decimal? exchangerate = default(decimal?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? statuscode = default(int?), bool? isgridpresent = default(bool?), System.Guid? _parentsiteValue = default(System.Guid?), int? validationstatuserrorcode = default(int?), int? servicetype = default(int?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), string relativeurl = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _owningbusinessunitValue = default(System.Guid?), string description = default(string), System.DateTimeOffset? lastvalidated = default(System.DateTimeOffset?), bool? isdefault = default(bool?), int? utcconversiontimezonecode = default(int?), bool? ispowerbisite = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? sharepointsiteid = default(System.Guid?), int? importsequencenumber = default(int?), string folderstructureentity = default(string), string name = default(string), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsharepointsite parentsite = default(MicrosoftDynamicsCRMsharepointsite), IList<MicrosoftDynamicsCRMsharepointsite> sharepointsiteParentsiteSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointSiteDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> sharePointSiteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointSiteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Userid = userid;
             Statecode = statecode;
@@ -91,141 +159,184 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets choose the user who owns the SharePoint site.
         /// </summary>
         [JsonProperty(PropertyName = "userid")]
-        public string Userid { get; set; }
+        public System.Guid? Userid { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets validation status of the SharePoint site URL.
         /// </summary>
         [JsonProperty(PropertyName = "validationstatus")]
         public int? Validationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets absolute URL of the SharePoint site.
         /// </summary>
         [JsonProperty(PropertyName = "absoluteurl")]
         public string Absoluteurl { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SharePoint site record was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "sitecollectionid")]
-        public string Sitecollectionid { get; set; }
+        public System.Guid? Sitecollectionid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate between the currency associated with the
+        /// SharePoint site record and the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if SharePoint Grid is present or not.
         /// </summary>
         [JsonProperty(PropertyName = "isgridpresent")]
         public bool? Isgridpresent { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the parent SharePoint site.
         /// </summary>
         [JsonProperty(PropertyName = "_parentsite_value")]
-        public string _parentsiteValue { get; set; }
+        public System.Guid? _parentsiteValue { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for validation status of the URL
         /// </summary>
         [JsonProperty(PropertyName = "validationstatuserrorcode")]
         public int? Validationstatuserrorcode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the service type of location of the SharePoint
+        /// site.
         /// </summary>
         [JsonProperty(PropertyName = "servicetype")]
         public int? Servicetype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the
+        /// SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team that owns the SharePoint
+        /// site record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the currency associated with the
+        /// SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public string _transactioncurrencyidValue { get; set; }
+        public System.Guid? _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets relative URL of the SharePoint site.
         /// </summary>
         [JsonProperty(PropertyName = "relativeurl")]
         public string Relativeurl { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SharePoint site record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SharePoint site URL was last
+        /// validated.
         /// </summary>
         [JsonProperty(PropertyName = "lastvalidated")]
         public System.DateTimeOffset? Lastvalidated { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the SharePoint site is the default
+        /// site or not.
         /// </summary>
         [JsonProperty(PropertyName = "isdefault")]
         public bool? Isdefault { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets allows embedding of Power BI Reports available in this
+        /// SharePoint site.
         /// </summary>
         [JsonProperty(PropertyName = "ispowerbisite")]
         public bool? Ispowerbisite { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
@@ -233,37 +344,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SharePoint site in Dynamics
+        /// 365
         /// </summary>
         [JsonProperty(PropertyName = "sharepointsiteid")]
-        public string Sharepointsiteid { get; set; }
+        public System.Guid? Sharepointsiteid { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets entity on which the folder structure for Microsoft
+        /// Dynamics 365 records will be created in SharePoint.
         /// </summary>
         [JsonProperty(PropertyName = "folderstructureentity")]
         public string Folderstructureentity { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the SharePoint site record.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the SharePoint
+        /// site record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// SharePoint site.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -278,7 +400,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>
