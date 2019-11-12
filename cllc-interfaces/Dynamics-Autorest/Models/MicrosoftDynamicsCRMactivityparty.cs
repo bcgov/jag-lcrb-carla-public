@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// activityparty
+    /// Microsoft.Dynamics.CRM.activityparty
     /// </summary>
     public partial class MicrosoftDynamicsCRMactivityparty
     {
@@ -29,7 +29,44 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMactivityparty
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMactivityparty(bool? donotemail = default(bool?), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), string _partyidValue = default(string), string _activityidValue = default(string), string exchangeentryid = default(string), string activitypartyid = default(string), bool? donotpostalmail = default(bool?), long? versionnumber = default(long?), int? participationtypemask = default(int?), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), string _owneridValue = default(string), decimal? effort = default(decimal?), int? instancetypecode = default(int?), bool? donotphone = default(bool?), bool? ispartydeleted = default(bool?), int? addressusedemailcolumnnumber = default(int?), bool? donotfax = default(bool?), string addressused = default(string), string _resourcespecidValue = default(string), MicrosoftDynamicsCRMcampaignactivity partyidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMincident partyidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMserviceappointment activityidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), IList<MicrosoftDynamicsCRMsyncerror> activityPartySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMrecurringappointmentmaster activityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMinvoice partyidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMcontract partyidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMcampaignactivity activityidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsocialactivity activityidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMappointment activityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMqueue partyidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMsystemuser partyidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfax activityidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMsalesorder partyidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMphonecall activityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMtask activityidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMcampaignresponse activityidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMquoteclose activityidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMletter activityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMorderclose activityidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMbulkoperation partyidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMquote partyidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMemail activityidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMknowledgearticle partyidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead partyidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunityclose activityidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMequipment partyidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMopportunity partyidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcampaign partyidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMaccount partyidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMincidentresolution activityidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontact partyidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMabsScheduledprocessexecution activityidAbsScheduledprocessexecutionActivityparty = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication partyidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences partyidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences))
+        /// <param name="donotemail">Information about whether to allow sending
+        /// email to the activity party.</param>
+        /// <param name="scheduledend">Scheduled end time of the
+        /// activity.</param>
+        /// <param name="_partyidValue">Unique identifier of the party
+        /// associated with the activity.</param>
+        /// <param name="_activityidValue">Unique identifier of the activity
+        /// associated with the activity party. (A "party" is any person who is
+        /// associated with an activity.)</param>
+        /// <param name="exchangeentryid">For internal use only.</param>
+        /// <param name="activitypartyid">Unique identifier of the activity
+        /// party.</param>
+        /// <param name="donotpostalmail">Information about whether to allow
+        /// sending postal mail to the lead.</param>
+        /// <param name="participationtypemask">Role of the person in the
+        /// activity, such as sender, to, cc, bcc, required, optional,
+        /// organizer, regarding, or owner.</param>
+        /// <param name="scheduledstart">Scheduled start time of the
+        /// activity.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the activity_party.</param>
+        /// <param name="effort">Amount of effort used by the resource in a
+        /// service appointment activity.</param>
+        /// <param name="instancetypecode">Type of instance of a recurring
+        /// series.</param>
+        /// <param name="donotphone">Information about whether to allow phone
+        /// calls to the lead.</param>
+        /// <param name="ispartydeleted">Information about whether the
+        /// underlying entity record is deleted.</param>
+        /// <param name="addressusedemailcolumnnumber">Email address column
+        /// number from associated party.</param>
+        /// <param name="donotfax">Information about whether to allow sending
+        /// faxes to the activity party.</param>
+        /// <param name="addressused">Email address to which an email is
+        /// delivered, and which is associated with the target entity.</param>
+        /// <param name="_resourcespecidValue">Unique identifier of the
+        /// resource specification for the activity party.</param>
+        public MicrosoftDynamicsCRMactivityparty(bool? donotemail = default(bool?), System.DateTimeOffset? scheduledend = default(System.DateTimeOffset?), System.Guid? _partyidValue = default(System.Guid?), System.Guid? _activityidValue = default(System.Guid?), string exchangeentryid = default(string), System.Guid? activitypartyid = default(System.Guid?), bool? donotpostalmail = default(bool?), string versionnumber = default(string), int? participationtypemask = default(int?), System.DateTimeOffset? scheduledstart = default(System.DateTimeOffset?), System.Guid? _owneridValue = default(System.Guid?), string effort = default(string), int? instancetypecode = default(int?), bool? donotphone = default(bool?), bool? ispartydeleted = default(bool?), int? addressusedemailcolumnnumber = default(int?), bool? donotfax = default(bool?), string addressused = default(string), System.Guid? _resourcespecidValue = default(System.Guid?), MicrosoftDynamicsCRMcampaignactivity partyidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMincident partyidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMserviceappointment activityidServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), IList<MicrosoftDynamicsCRMsyncerror> activityPartySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMrecurringappointmentmaster activityidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMinvoice partyidInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMcontract partyidContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMcampaignactivity activityidCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMsocialactivity activityidSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMappointment activityidAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMqueue partyidQueue = default(MicrosoftDynamicsCRMqueue), MicrosoftDynamicsCRMsystemuser partyidSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfax activityidFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMsalesorder partyidSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMphonecall activityidPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMtask activityidTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMcampaignresponse activityidCampaignresponse = default(MicrosoftDynamicsCRMcampaignresponse), MicrosoftDynamicsCRMquoteclose activityidQuoteclose = default(MicrosoftDynamicsCRMquoteclose), MicrosoftDynamicsCRMresourcespec resourcespecid = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMletter activityidLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMorderclose activityidOrderclose = default(MicrosoftDynamicsCRMorderclose), MicrosoftDynamicsCRMbulkoperation partyidBulkoperation = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMquote partyidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMemail activityidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMknowledgearticle partyidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMlead partyidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunityclose activityidOpportunityclose = default(MicrosoftDynamicsCRMopportunityclose), MicrosoftDynamicsCRMequipment partyidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMopportunity partyidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcampaign partyidCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMaccount partyidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMincidentresolution activityidIncidentresolution = default(MicrosoftDynamicsCRMincidentresolution), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontact partyidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMabsScheduledprocessexecution activityidAbsScheduledprocessexecutionActivityparty = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMadoxioApplication partyidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioLicences partyidAdoxioLicences = default(MicrosoftDynamicsCRMadoxioLicences))
         {
             Donotemail = donotemail;
             Scheduledend = scheduledend;
@@ -96,36 +133,48 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets information about whether to allow sending email to
+        /// the activity party.
         /// </summary>
         [JsonProperty(PropertyName = "donotemail")]
         public bool? Donotemail { get; set; }
 
         /// <summary>
+        /// Gets or sets scheduled end time of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "scheduledend")]
         public System.DateTimeOffset? Scheduledend { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the party associated with the
+        /// activity.
         /// </summary>
         [JsonProperty(PropertyName = "_partyid_value")]
-        public string _partyidValue { get; set; }
+        public System.Guid? _partyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the activity associated with the
+        /// activity party. (A "party" is any person who is associated with an
+        /// activity.)
         /// </summary>
         [JsonProperty(PropertyName = "_activityid_value")]
-        public string _activityidValue { get; set; }
+        public System.Guid? _activityidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "exchangeentryid")]
         public string Exchangeentryid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the activity party.
         /// </summary>
         [JsonProperty(PropertyName = "activitypartyid")]
-        public string Activitypartyid { get; set; }
+        public System.Guid? Activitypartyid { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether to allow sending postal mail
+        /// to the lead.
         /// </summary>
         [JsonProperty(PropertyName = "donotpostalmail")]
         public bool? Donotpostalmail { get; set; }
@@ -133,62 +182,81 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets role of the person in the activity, such as sender,
+        /// to, cc, bcc, required, optional, organizer, regarding, or owner.
         /// </summary>
         [JsonProperty(PropertyName = "participationtypemask")]
         public int? Participationtypemask { get; set; }
 
         /// <summary>
+        /// Gets or sets scheduled start time of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "scheduledstart")]
         public System.DateTimeOffset? Scheduledstart { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// activity_party.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets amount of effort used by the resource in a service
+        /// appointment activity.
         /// </summary>
         [JsonProperty(PropertyName = "effort")]
-        public decimal? Effort { get; set; }
+        public string Effort { get; set; }
 
         /// <summary>
+        /// Gets or sets type of instance of a recurring series.
         /// </summary>
         [JsonProperty(PropertyName = "instancetypecode")]
         public int? Instancetypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether to allow phone calls to the
+        /// lead.
         /// </summary>
         [JsonProperty(PropertyName = "donotphone")]
         public bool? Donotphone { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the underlying entity record
+        /// is deleted.
         /// </summary>
         [JsonProperty(PropertyName = "ispartydeleted")]
         public bool? Ispartydeleted { get; set; }
 
         /// <summary>
+        /// Gets or sets email address column number from associated party.
         /// </summary>
         [JsonProperty(PropertyName = "addressusedemailcolumnnumber")]
         public int? Addressusedemailcolumnnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether to allow sending faxes to
+        /// the activity party.
         /// </summary>
         [JsonProperty(PropertyName = "donotfax")]
         public bool? Donotfax { get; set; }
 
         /// <summary>
+        /// Gets or sets email address to which an email is delivered, and
+        /// which is associated with the target entity.
         /// </summary>
         [JsonProperty(PropertyName = "addressused")]
         public string Addressused { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the resource specification for
+        /// the activity party.
         /// </summary>
         [JsonProperty(PropertyName = "_resourcespecid_value")]
-        public string _resourcespecidValue { get; set; }
+        public System.Guid? _resourcespecidValue { get; set; }
 
         /// <summary>
         /// </summary>

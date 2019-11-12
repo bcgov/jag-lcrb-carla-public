@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// OneToManyRelationshipMetadata
+    /// Microsoft.Dynamics.CRM.OneToManyRelationshipMetadata
     /// </summary>
     public partial class MicrosoftDynamicsCRMOneToManyRelationshipMetadata
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOneToManyRelationshipMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(object associatedMenuConfiguration = default(object), object cascadeConfiguration = default(object), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), object lookup = default(object))
+        public MicrosoftDynamicsCRMOneToManyRelationshipMetadata(string associatedMenuConfiguration = default(string), string cascadeConfiguration = default(string), string referencedAttribute = default(string), string referencedEntity = default(string), string referencingAttribute = default(string), string referencingEntity = default(string), bool? isHierarchical = default(bool?), string referencedEntityNavigationPropertyName = default(string), string referencingEntityNavigationPropertyName = default(string), MicrosoftDynamicsCRMLookupAttributeMetadata lookup = default(MicrosoftDynamicsCRMLookupAttributeMetadata))
         {
             AssociatedMenuConfiguration = associatedMenuConfiguration;
             CascadeConfiguration = cascadeConfiguration;
@@ -50,12 +50,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "AssociatedMenuConfiguration")]
-        public object AssociatedMenuConfiguration { get; set; }
+        public string AssociatedMenuConfiguration { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "CascadeConfiguration")]
-        public object CascadeConfiguration { get; set; }
+        public string CascadeConfiguration { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Lookup")]
-        public object Lookup { get; set; }
+        public MicrosoftDynamicsCRMLookupAttributeMetadata Lookup { get; set; }
 
     }
 }

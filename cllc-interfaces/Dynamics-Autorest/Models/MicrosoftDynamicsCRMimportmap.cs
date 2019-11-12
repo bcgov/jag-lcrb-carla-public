@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// importmap
+    /// Microsoft.Dynamics.CRM.importmap
     /// </summary>
     public partial class MicrosoftDynamicsCRMimportmap
     {
@@ -29,7 +29,61 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportmap
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportmap(string _owningbusinessunitValue = default(string), string source = default(string), int? sourcetype = default(int?), int? entitiesperfile = default(int?), bool? isvalidforimport = default(bool?), string targetuseridentifierforsourcecrmuserlink = default(string), string sourceuseridentifierforsourcedatasourceuserlink = default(string), string importmapid = default(string), string _owneridValue = default(string), bool? iswizardcreated = default(bool?), int? targetentity = default(int?), string _modifiedbyValue = default(string), string _owningteamValue = default(string), string _createdonbehalfbyValue = default(string), string mapcustomizations = default(string), string description = default(string), int? statuscode = default(int?), string name = default(string), string sourceuseridentifierforsourcecrmuserlink = default(string), int? statecode = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importmaptype = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> importMapSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importMapAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportentitymapping> importEntityMappingImportMap = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importMapBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportfile> importMapImportFile = default(IList<MicrosoftDynamicsCRMimportfile>))
+        /// <param name="_owningbusinessunitValue">Business unit that owns the
+        /// data map.</param>
+        /// <param name="source">Type the name of the migration source that
+        /// this data map is used for.</param>
+        /// <param name="sourcetype">Select the migration source type that this
+        /// data map is used for.</param>
+        /// <param name="entitiesperfile">Choose whether a data file can
+        /// contain data for one or more record types.</param>
+        /// <param name="isvalidforimport">Information about whether the data
+        /// map is valid for use with data import.</param>
+        /// <param name="targetuseridentifierforsourcecrmuserlink">Microsoft
+        /// Dynamics 365 user.</param>
+        /// <param
+        /// name="sourceuseridentifierforsourcedatasourceuserlink">Column in
+        /// the source file that uniquely identifies a user.</param>
+        /// <param name="importmapid">Unique identifier of the data
+        /// map.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="iswizardcreated">Information about whether this data
+        /// map was created by the Data Migration Manager.</param>
+        /// <param name="targetentity">Select the name of the Microsoft
+        /// Dynamics 365 record type that this data map is defined for.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the data map.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="mapcustomizations">Customizations XML</param>
+        /// <param name="description">Type additional information to describe
+        /// the data map, such as the intended use or data source.</param>
+        /// <param name="statuscode">Select the data map's status.</param>
+        /// <param name="name">Type a descriptive name for the data
+        /// map.</param>
+        /// <param name="sourceuseridentifierforsourcecrmuserlink">Source user
+        /// value for source Microsoft Dynamics 365 user link.</param>
+        /// <param name="statecode">Shows whether the data map is active or
+        /// inactive. Inactive data maps are read-only and can't be
+        /// edited.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="importmaptype">Select the type of data map to
+        /// distinguish out-of-the-box data maps from custom maps.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the data map.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        public MicrosoftDynamicsCRMimportmap(System.Guid? _owningbusinessunitValue = default(System.Guid?), string source = default(string), int? sourcetype = default(int?), int? entitiesperfile = default(int?), bool? isvalidforimport = default(bool?), string targetuseridentifierforsourcecrmuserlink = default(string), string sourceuseridentifierforsourcedatasourceuserlink = default(string), System.Guid? importmapid = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), bool? iswizardcreated = default(bool?), int? targetentity = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string mapcustomizations = default(string), string description = default(string), int? statuscode = default(int?), string name = default(string), string sourceuseridentifierforsourcecrmuserlink = default(string), int? statecode = default(int?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importmaptype = default(int?), System.Guid? _owninguserValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), IList<MicrosoftDynamicsCRMsyncerror> importMapSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importMapAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportentitymapping> importEntityMappingImportMap = default(IList<MicrosoftDynamicsCRMimportentitymapping>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importMapBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportfile> importMapImportFile = default(IList<MicrosoftDynamicsCRMimportfile>))
         {
             this._owningbusinessunitValue = _owningbusinessunitValue;
             Source = source;
@@ -79,134 +133,179 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets business unit that owns the data map.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the name of the migration source that this data
+        /// map is used for.
         /// </summary>
         [JsonProperty(PropertyName = "source")]
         public string Source { get; set; }
 
         /// <summary>
+        /// Gets or sets select the migration source type that this data map is
+        /// used for.
         /// </summary>
         [JsonProperty(PropertyName = "sourcetype")]
         public int? Sourcetype { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether a data file can contain data for one or
+        /// more record types.
         /// </summary>
         [JsonProperty(PropertyName = "entitiesperfile")]
         public int? Entitiesperfile { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the data map is valid for
+        /// use with data import.
         /// </summary>
         [JsonProperty(PropertyName = "isvalidforimport")]
         public bool? Isvalidforimport { get; set; }
 
         /// <summary>
+        /// Gets or sets microsoft Dynamics 365 user.
         /// </summary>
         [JsonProperty(PropertyName = "targetuseridentifierforsourcecrmuserlink")]
         public string Targetuseridentifierforsourcecrmuserlink { get; set; }
 
         /// <summary>
+        /// Gets or sets column in the source file that uniquely identifies a
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "sourceuseridentifierforsourcedatasourceuserlink")]
         public string Sourceuseridentifierforsourcedatasourceuserlink { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data map.
         /// </summary>
         [JsonProperty(PropertyName = "importmapid")]
-        public string Importmapid { get; set; }
+        public System.Guid? Importmapid { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether this data map was created by
+        /// the Data Migration Manager.
         /// </summary>
         [JsonProperty(PropertyName = "iswizardcreated")]
         public bool? Iswizardcreated { get; set; }
 
         /// <summary>
+        /// Gets or sets select the name of the Microsoft Dynamics 365 record
+        /// type that this data map is defined for.
         /// </summary>
         [JsonProperty(PropertyName = "targetentity")]
         public int? Targetentity { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the data map.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        public System.Guid? _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets customizations XML
         /// </summary>
         [JsonProperty(PropertyName = "mapcustomizations")]
         public string Mapcustomizations { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the data map,
+        /// such as the intended use or data source.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets select the data map's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets type a descriptive name for the data map.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets source user value for source Microsoft Dynamics 365
+        /// user link.
         /// </summary>
         [JsonProperty(PropertyName = "sourceuseridentifierforsourcecrmuserlink")]
         public string Sourceuseridentifierforsourcecrmuserlink { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the data map is active or inactive.
+        /// Inactive data maps are read-only and can't be edited.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of data map to distinguish
+        /// out-of-the-box data maps from custom maps.
         /// </summary>
         [JsonProperty(PropertyName = "importmaptype")]
         public int? Importmaptype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the data map.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -216,7 +315,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

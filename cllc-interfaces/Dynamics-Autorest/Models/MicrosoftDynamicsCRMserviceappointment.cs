@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// serviceappointment
+    /// Microsoft.Dynamics.CRM.serviceappointment
     /// </summary>
     public partial class MicrosoftDynamicsCRMserviceappointment
     {
@@ -29,7 +29,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMserviceappointment class.
         /// </summary>
-        public MicrosoftDynamicsCRMserviceappointment(string category = default(string), int? importsequencenumber = default(int?), string subcategory = default(string), bool? isalldayevent = default(bool?), string location = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string subscriptionid = default(string), string _siteidValue = default(string), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementServiceappointment = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateServiceappointment = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingServiceappointment = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderServiceappointment = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordServiceappointment = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount regardingobjectidAccountServiceappointment = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceServiceappointment = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMactivityparty> serviceappointmentActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMservice serviceidServiceappointment = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMbulkdeletefailure> serviceAppointmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> serviceAppointmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident regardingobjectidIncidentServiceappointment = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMconnection> serviceappointmentConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguserServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderServiceappointment = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> serviceAppointmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMcontact regardingobjectidContactServiceappointment = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMconnection> serviceappointmentConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontract regardingobjectidContractServiceappointment = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMactioncard> serviceappointmentActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignServiceappointment = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMqueueitem> serviceAppointmentQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityServiceappointment = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingobjectidQuoteServiceappointment = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleServiceappointment = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMsystemuser createdbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidServiceappointment = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsla sLAId = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMannotation> serviceAppointmentAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsystemuser modifiedbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamServiceappointment = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceServiceappointment = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMsla slainvokedidServiceappointmentSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMbusinessunit owningbusinessunitServiceappointment = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMlead regardingobjectidLeadServiceappointment = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessServiceappointment = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationServiceappointment = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintServiceappointment = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationServiceappointment = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesServiceappointment = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerServiceappointment = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationServiceappointment = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
+        /// <param name="category">Type a category to identify the service
+        /// activity type, such as routine maintenance or service call, to tie
+        /// the service activity to a business group or function.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="subcategory">Type a subcategory to identify the
+        /// service activity type and relate the activity to a specific
+        /// product, service region, business group, or other function.</param>
+        /// <param name="isalldayevent">Select whether the service activity is
+        /// an all-day event to make sure the required resources are scheduled
+        /// for the full day.</param>
+        /// <param name="location">Type the location where the service activity
+        /// will take place, such as a conference room, customer office, or
+        /// other venue.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="subscriptionid">For internal use only.</param>
+        /// <param name="_siteidValue">Choose the site or location where the
+        /// service activity will be performed.</param>
+        public MicrosoftDynamicsCRMserviceappointment(string category = default(string), int? importsequencenumber = default(int?), string subcategory = default(string), bool? isalldayevent = default(bool?), string location = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? subscriptionid = default(System.Guid?), System.Guid? _siteidValue = default(System.Guid?), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementServiceappointment = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateServiceappointment = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingServiceappointment = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderServiceappointment = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordServiceappointment = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMaccount regardingobjectidAccountServiceappointment = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceServiceappointment = default(IList<MicrosoftDynamicsCRMslakpiinstance>), IList<MicrosoftDynamicsCRMactivityparty> serviceappointmentActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMservice serviceidServiceappointment = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMbulkdeletefailure> serviceAppointmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> serviceAppointmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident regardingobjectidIncidentServiceappointment = default(MicrosoftDynamicsCRMincident), IList<MicrosoftDynamicsCRMconnection> serviceappointmentConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguserServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderServiceappointment = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> serviceAppointmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMcontact regardingobjectidContactServiceappointment = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMconnection> serviceappointmentConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontract regardingobjectidContractServiceappointment = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMactioncard> serviceappointmentActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignServiceappointment = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMqueueitem> serviceAppointmentQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityServiceappointment = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMquote regardingobjectidQuoteServiceappointment = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleServiceappointment = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite), MicrosoftDynamicsCRMsystemuser createdbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidServiceappointment = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsla sLAId = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMannotation> serviceAppointmentAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsystemuser modifiedbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamServiceappointment = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyServiceappointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceServiceappointment = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMsla slainvokedidServiceappointmentSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMbusinessunit owningbusinessunitServiceappointment = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMlead regardingobjectidLeadServiceappointment = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessServiceappointment = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationServiceappointment = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintServiceappointment = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationServiceappointment = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesServiceappointment = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerServiceappointment = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationServiceappointment = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             Category = category;
             Importsequencenumber = importsequencenumber;
@@ -94,44 +113,61 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets type a category to identify the service activity type,
+        /// such as routine maintenance or service call, to tie the service
+        /// activity to a business group or function.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type a subcategory to identify the service activity
+        /// type and relate the activity to a specific product, service region,
+        /// business group, or other function.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the service activity is an all-day
+        /// event to make sure the required resources are scheduled for the
+        /// full day.
         /// </summary>
         [JsonProperty(PropertyName = "isalldayevent")]
         public bool? Isalldayevent { get; set; }
 
         /// <summary>
+        /// Gets or sets type the location where the service activity will take
+        /// place, such as a conference room, customer office, or other venue.
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "subscriptionid")]
-        public string Subscriptionid { get; set; }
+        public System.Guid? Subscriptionid { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the site or location where the service activity
+        /// will be performed.
         /// </summary>
         [JsonProperty(PropertyName = "_siteid_value")]
-        public string _siteidValue { get; set; }
+        public System.Guid? _siteidValue { get; set; }
 
         /// <summary>
         /// </summary>

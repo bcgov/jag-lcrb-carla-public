@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// resourcespec
+    /// Microsoft.Dynamics.CRM.resourcespec
     /// </summary>
     public partial class MicrosoftDynamicsCRMresourcespec
     {
@@ -29,7 +29,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMresourcespec
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMresourcespec(int? requiredcount = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string constraints = default(string), string description = default(string), string resourcespecid = default(string), long? versionnumber = default(long?), bool? samesite = default(bool?), string objectiveexpression = default(string), string objecttypecode = default(string), string _businessunitidValue = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), decimal? effortrequired = default(decimal?), string _modifiedbyValue = default(string), string groupobjectid = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMconstraintbasedgroup groupobjectidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> activityPartyResourceSpec = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceSpecBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam groupobjectidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMresource> resourcespecResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMannotation> resourceSpecAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMservice> resourceSpecServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMasyncoperation> resourceSpecAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        /// <param name="requiredcount">Required number of resources that must
+        /// be available. Use -1 to indicate all resources.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization with which the resource specification is
+        /// associated.</param>
+        /// <param name="modifiedon">Date and time when the resource
+        /// specification was last modified.</param>
+        /// <param name="createdon">Date and time when the resource
+        /// specification was created.</param>
+        /// <param name="constraints">Additional constraints, specified as
+        /// expressions, which are used to filter a set of valid
+        /// resources.</param>
+        /// <param name="description">Selection rule that allows the scheduling
+        /// engine to select a number of resources from a pool of resources.
+        /// The rules can be associated with a service.</param>
+        /// <param name="resourcespecid">Unique identifier of the resource
+        /// specification.</param>
+        /// <param name="samesite">Value that specifies that all valid and
+        /// available resources must be in the same site.</param>
+        /// <param name="objectiveexpression">Search strategy to use for the
+        /// resource specification.</param>
+        /// <param name="objecttypecode">Type of entity with which the resource
+        /// specification is associated.</param>
+        /// <param name="_businessunitidValue">Unique identifier of the
+        /// business unit with which the resource specification is
+        /// associated.</param>
+        /// <param name="name">Name of the resource specification.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the resourcespec.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the resourcespec.</param>
+        /// <param name="effortrequired">Number that specifies the minimal
+        /// effort required from resources.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the resource specification.</param>
+        /// <param name="groupobjectid">Unique identifier of the scheduling
+        /// group with which the resource specification is associated.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the resource specification.</param>
+        public MicrosoftDynamicsCRMresourcespec(int? requiredcount = default(int?), System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string constraints = default(string), string description = default(string), System.Guid? resourcespecid = default(System.Guid?), string versionnumber = default(string), bool? samesite = default(bool?), string objectiveexpression = default(string), string objecttypecode = default(string), System.Guid? _businessunitidValue = default(System.Guid?), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string effortrequired = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? groupobjectid = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMconstraintbasedgroup groupobjectidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> activityPartyResourceSpec = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceSpecBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam groupobjectidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMresource> resourcespecResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMannotation> resourceSpecAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMservice> resourceSpecServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMasyncoperation> resourceSpecAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             Requiredcount = requiredcount;
             this._organizationidValue = _organizationidValue;
@@ -73,99 +112,133 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets required number of resources that must be available.
+        /// Use -1 to indicate all resources.
         /// </summary>
         [JsonProperty(PropertyName = "requiredcount")]
         public int? Requiredcount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// resource specification is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the resource specification was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the resource specification was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets additional constraints, specified as expressions,
+        /// which are used to filter a set of valid resources.
         /// </summary>
         [JsonProperty(PropertyName = "constraints")]
         public string Constraints { get; set; }
 
         /// <summary>
+        /// Gets or sets selection rule that allows the scheduling engine to
+        /// select a number of resources from a pool of resources. The rules
+        /// can be associated with a service.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the resource specification.
         /// </summary>
         [JsonProperty(PropertyName = "resourcespecid")]
-        public string Resourcespecid { get; set; }
+        public System.Guid? Resourcespecid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets value that specifies that all valid and available
+        /// resources must be in the same site.
         /// </summary>
         [JsonProperty(PropertyName = "samesite")]
         public bool? Samesite { get; set; }
 
         /// <summary>
+        /// Gets or sets search strategy to use for the resource specification.
         /// </summary>
         [JsonProperty(PropertyName = "objectiveexpression")]
         public string Objectiveexpression { get; set; }
 
         /// <summary>
+        /// Gets or sets type of entity with which the resource specification
+        /// is associated.
         /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public string Objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit with which the
+        /// resource specification is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
-        public string _businessunitidValue { get; set; }
+        public System.Guid? _businessunitidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the resource specification.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the resourcespec.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// resourcespec.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets number that specifies the minimal effort required from
+        /// resources.
         /// </summary>
         [JsonProperty(PropertyName = "effortrequired")]
-        public decimal? Effortrequired { get; set; }
+        public string Effortrequired { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// resource specification.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the scheduling group with which
+        /// the resource specification is associated.
         /// </summary>
         [JsonProperty(PropertyName = "groupobjectid")]
-        public string Groupobjectid { get; set; }
+        public System.Guid? Groupobjectid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the resource
+        /// specification.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

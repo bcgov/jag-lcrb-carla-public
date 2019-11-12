@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// activitymimeattachment
+    /// Microsoft.Dynamics.CRM.activitymimeattachment
     /// </summary>
     public partial class MicrosoftDynamicsCRMactivitymimeattachment
     {
@@ -29,7 +31,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMactivitymimeattachment class.
         /// </summary>
-        public MicrosoftDynamicsCRMactivitymimeattachment(long? versionnumber = default(long?), string filename = default(string), string _attachmentidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? filesize = default(int?), int? attachmentnumber = default(int?), string activitymimeattachmentid = default(string), string activitysubject = default(string), string _owninguserValue = default(string), bool? isfollowed = default(bool?), string objecttypecode = default(string), string activitymimeattachmentidunique = default(string), string mimetype = default(string), int? componentstate = default(int?), string subject = default(string), string _owneridValue = default(string), string _objectidValue = default(string), string solutionid = default(string), string _owningbusinessunitValue = default(string), string body = default(string), object bodyBinary = default(object), string attachmentcontentid = default(string), string anonymouslink = default(string), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMsyncerror> activityMimeAttachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMtemplate objectidTemplate = default(MicrosoftDynamicsCRMtemplate), object attachmentid = default(object), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), IList<MicrosoftDynamicsCRMasyncoperation> activityMimeAttachmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityMimeAttachmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        /// <param name="versionnumber">Version number of the activity mime
+        /// attachment.</param>
+        /// <param name="filename">File name of the attachment.</param>
+        /// <param name="_attachmentidValue">Unique identifier of the
+        /// attachment with which this activitymimeattachment is
+        /// associated.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="filesize">File size of the attachment.</param>
+        /// <param name="attachmentnumber">Number of the attachment.</param>
+        /// <param name="activitymimeattachmentid">Unique identifier of the
+        /// attachment.</param>
+        /// <param name="activitysubject">Descriptive subject for the
+        /// activity.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the activity mime attachment.</param>
+        /// <param name="isfollowed">Indicates if this attachment is
+        /// followed.</param>
+        /// <param name="objecttypecode">Object Type Code of the entity that is
+        /// associated with the attachment.</param>
+        /// <param name="activitymimeattachmentidunique">For internal use
+        /// only.</param>
+        /// <param name="mimetype">MIME type of the attachment.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="subject">Descriptive subject for the
+        /// attachment.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the activity_mime_attachment.</param>
+        /// <param name="_objectidValue">Unique identifier of the record with
+        /// which the attachment is associated</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the activity mime attachment.</param>
+        /// <param name="body">Contents of the attachment.</param>
+        /// <param name="bodyBinary">Contents of the attachment.</param>
+        /// <param name="attachmentcontentid">For internal use only</param>
+        /// <param name="anonymouslink">anonymous link</param>
+        /// <param name="ismanaged">Indicates whether the solution component is
+        /// part of a managed solution.</param>
+        public MicrosoftDynamicsCRMactivitymimeattachment(string versionnumber = default(string), string filename = default(string), System.Guid? _attachmentidValue = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? filesize = default(int?), int? attachmentnumber = default(int?), System.Guid? activitymimeattachmentid = default(System.Guid?), string activitysubject = default(string), System.Guid? _owninguserValue = default(System.Guid?), bool? isfollowed = default(bool?), string objecttypecode = default(string), System.Guid? activitymimeattachmentidunique = default(System.Guid?), string mimetype = default(string), int? componentstate = default(int?), string subject = default(string), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _objectidValue = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), string body = default(string), byte[] bodyBinary = default(byte[]), string attachmentcontentid = default(string), string anonymouslink = default(string), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMsyncerror> activityMimeAttachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMemail objectidEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMactivitypointer objectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMtemplate objectidTemplate = default(MicrosoftDynamicsCRMtemplate), MicrosoftDynamicsCRMattachment attachmentid = default(MicrosoftDynamicsCRMattachment), MicrosoftDynamicsCRMappointment objectidAppointment = default(MicrosoftDynamicsCRMappointment), IList<MicrosoftDynamicsCRMasyncoperation> activityMimeAttachmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> activityMimeAttachmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
             Versionnumber = versionnumber;
             Filename = filename;
@@ -72,121 +113,153 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets version number of the activity mime attachment.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets file name of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "filename")]
         public string Filename { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the attachment with which this
+        /// activitymimeattachment is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_attachmentid_value")]
-        public string _attachmentidValue { get; set; }
+        public System.Guid? _attachmentidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets file size of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "filesize")]
         public int? Filesize { get; set; }
 
         /// <summary>
+        /// Gets or sets number of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "attachmentnumber")]
         public int? Attachmentnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "activitymimeattachmentid")]
-        public string Activitymimeattachmentid { get; set; }
+        public System.Guid? Activitymimeattachmentid { get; set; }
 
         /// <summary>
+        /// Gets or sets descriptive subject for the activity.
         /// </summary>
         [JsonProperty(PropertyName = "activitysubject")]
         public string Activitysubject { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the activity
+        /// mime attachment.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
+        public System.Guid? _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if this attachment is followed.
         /// </summary>
         [JsonProperty(PropertyName = "isfollowed")]
         public bool? Isfollowed { get; set; }
 
         /// <summary>
+        /// Gets or sets object Type Code of the entity that is associated with
+        /// the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "objecttypecode")]
         public string Objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "activitymimeattachmentidunique")]
-        public string Activitymimeattachmentidunique { get; set; }
+        public System.Guid? Activitymimeattachmentidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets MIME type of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "mimetype")]
         public string Mimetype { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets descriptive subject for the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// activity_mime_attachment.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        public System.Guid? _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the record with which the
+        /// attachment is associated
         /// </summary>
         [JsonProperty(PropertyName = "_objectid_value")]
-        public string _objectidValue { get; set; }
+        public System.Guid? _objectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        public System.Guid? Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// activity mime attachment.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        public System.Guid? _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets contents of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "body")]
         public string Body { get; set; }
 
         /// <summary>
+        /// Gets or sets contents of the attachment.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "body_binary")]
-        public object BodyBinary { get; set; }
+        public byte[] BodyBinary { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only
         /// </summary>
         [JsonProperty(PropertyName = "attachmentcontentid")]
         public string Attachmentcontentid { get; set; }
 
         /// <summary>
+        /// Gets or sets anonymous link
         /// </summary>
         [JsonProperty(PropertyName = "anonymouslink")]
         public string Anonymouslink { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the solution component is part of a
+        /// managed solution.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
@@ -214,7 +287,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "attachmentid")]
-        public object Attachmentid { get; set; }
+        public MicrosoftDynamicsCRMattachment Attachmentid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// customcontroldefaultconfig
+    /// Microsoft.Dynamics.CRM.customcontroldefaultconfig
     /// </summary>
     public partial class MicrosoftDynamicsCRMcustomcontroldefaultconfig
     {
@@ -27,7 +27,40 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcustomcontroldefaultconfig class.
         /// </summary>
-        public MicrosoftDynamicsCRMcustomcontroldefaultconfig(string _createdbyValue = default(string), string primaryentitytypecode = default(string), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string customcontroldefaultconfigidunique = default(string), int? componentstate = default(int?), long? versionnumber = default(long?), string _organizationidValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string solutionid = default(string), string controldescriptionxml = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string eventsxml = default(string), bool? ismanaged = default(bool?), string _modifiedonbehalfbyValue = default(string), string customcontroldefaultconfigid = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="primaryentitytypecode">Entity Type Code of the Custom
+        /// Control Default Config.</param>
+        /// <param name="introducedversion">Version in which the form is
+        /// introduced.</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="customcontroldefaultconfigidunique">For internal use
+        /// only.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="versionnumber">Version number of the Custom Control
+        /// Default Config.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the web resource.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="controldescriptionxml">controlDescriptionXML of the
+        /// custom control default config.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="eventsxml">The events XML of the custom control
+        /// default config.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="customcontroldefaultconfigid">Unique identifier of the
+        /// Custom Control Default Config for the Microsoft Dynamics
+        /// 365.</param>
+        public MicrosoftDynamicsCRMcustomcontroldefaultconfig(System.Guid? _createdbyValue = default(System.Guid?), string primaryentitytypecode = default(string), string introducedversion = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? customcontroldefaultconfigidunique = default(System.Guid?), int? componentstate = default(int?), string versionnumber = default(string), System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? solutionid = default(System.Guid?), string controldescriptionxml = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string eventsxml = default(string), bool? ismanaged = default(bool?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? customcontroldefaultconfigid = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             Primaryentitytypecode = primaryentitytypecode;
@@ -61,76 +94,94 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets entity Type Code of the Custom Control Default Config.
         /// </summary>
         [JsonProperty(PropertyName = "primaryentitytypecode")]
         public string Primaryentitytypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the form is introduced.
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "customcontroldefaultconfigidunique")]
-        public string Customcontroldefaultconfigidunique { get; set; }
+        public System.Guid? Customcontroldefaultconfigidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the Custom Control Default Config.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        public System.Guid? Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets controlDescriptionXML of the custom control default
+        /// config.
         /// </summary>
         [JsonProperty(PropertyName = "controldescriptionxml")]
         public string Controldescriptionxml { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the events XML of the custom control default config.
         /// </summary>
         [JsonProperty(PropertyName = "eventsxml")]
         public string Eventsxml { get; set; }
@@ -141,14 +192,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Custom Control Default Config
+        /// for the Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "customcontroldefaultconfigid")]
-        public string Customcontroldefaultconfigid { get; set; }
+        public System.Guid? Customcontroldefaultconfigid { get; set; }
 
         /// <summary>
         /// </summary>

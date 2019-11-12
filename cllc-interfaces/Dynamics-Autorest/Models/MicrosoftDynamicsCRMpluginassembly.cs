@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// pluginassembly
+    /// Microsoft.Dynamics.CRM.pluginassembly
     /// </summary>
     public partial class MicrosoftDynamicsCRMpluginassembly
     {
@@ -29,7 +31,63 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpluginassembly class.
         /// </summary>
-        public MicrosoftDynamicsCRMpluginassembly(object ishidden = default(object), int? sourcetype = default(int?), string _organizationidValue = default(string), string sourcehash = default(string), string introducedversion = default(string), string name = default(string), string publickeytoken = default(string), string _createdbyValue = default(string), int? customizationlevel = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string version = default(string), string description = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), string culture = default(string), string pluginassemblyidunique = default(string), long? versionnumber = default(long?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string pluginassemblyid = default(string), string _modifiedbyValue = default(string), int? major = default(int?), int? componentstate = default(int?), object iscustomizable = default(object), string path = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? minor = default(int?), string content = default(string), object contentBinary = default(object), int? isolationmode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="ishidden">Information that specifies whether this
+        /// component should be hidden.</param>
+        /// <param name="sourcetype">Location of the assembly, for example
+        /// 0=database, 1=on-disk.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization with which the plug-in assembly is associated.</param>
+        /// <param name="sourcehash">Hash of the source of the
+        /// assembly.</param>
+        /// <param name="introducedversion">Version in which the form is
+        /// introduced.</param>
+        /// <param name="name">Name of the plug-in assembly.</param>
+        /// <param name="publickeytoken">Public key token of the assembly. This
+        /// value can be obtained from the assembly by using
+        /// reflection.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the plug-in assembly.</param>
+        /// <param name="customizationlevel">Customization Level.</param>
+        /// <param name="createdon">Date and time when the plug-in assembly was
+        /// created.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the pluginassembly.</param>
+        /// <param name="version">Version number of the assembly. The value can
+        /// be obtained from the assembly through reflection.</param>
+        /// <param name="description">Description of the plug-in
+        /// assembly.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="ismanaged">Information that specifies whether this
+        /// component is managed.</param>
+        /// <param name="culture">Culture code for the plug-in
+        /// assembly.</param>
+        /// <param name="pluginassemblyidunique">Unique identifier of the
+        /// plug-in assembly.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the pluginassembly.</param>
+        /// <param name="pluginassemblyid">Unique identifier of the plug-in
+        /// assembly.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the plug-in assembly.</param>
+        /// <param name="major">Major of the assembly version.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="iscustomizable">Information that specifies whether
+        /// this component can be customized.</param>
+        /// <param name="path">File name of the plug-in assembly. Used when the
+        /// source type is set to 1.</param>
+        /// <param name="modifiedon">Date and time when the plug-in assembly
+        /// was last modified.</param>
+        /// <param name="minor">Minor of the assembly version.</param>
+        /// <param name="content">Bytes of the assembly, in Base64
+        /// format.</param>
+        /// <param name="contentBinary">Bytes of the assembly, in Base64
+        /// format.</param>
+        /// <param name="isolationmode">Information about how the plugin
+        /// assembly is to be isolated at execution time; None /
+        /// Sandboxed.</param>
+        public MicrosoftDynamicsCRMpluginassembly(string ishidden = default(string), int? sourcetype = default(int?), System.Guid? _organizationidValue = default(System.Guid?), string sourcehash = default(string), string introducedversion = default(string), string name = default(string), string publickeytoken = default(string), System.Guid? _createdbyValue = default(System.Guid?), int? customizationlevel = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string version = default(string), string description = default(string), System.Guid? solutionid = default(System.Guid?), bool? ismanaged = default(bool?), string culture = default(string), System.Guid? pluginassemblyidunique = default(System.Guid?), string versionnumber = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? pluginassemblyid = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), int? major = default(int?), int? componentstate = default(int?), string iscustomizable = default(string), string path = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? minor = default(int?), string content = default(string), byte[] contentBinary = default(byte[]), int? isolationmode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Ishidden = ishidden;
             Sourcetype = sourcetype;
@@ -77,156 +135,201 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component
+        /// should be hidden.
         /// </summary>
         [JsonProperty(PropertyName = "ishidden")]
-        public object Ishidden { get; set; }
+        public string Ishidden { get; set; }
 
         /// <summary>
+        /// Gets or sets location of the assembly, for example 0=database,
+        /// 1=on-disk.
         /// </summary>
         [JsonProperty(PropertyName = "sourcetype")]
         public int? Sourcetype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// plug-in assembly is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets hash of the source of the assembly.
         /// </summary>
         [JsonProperty(PropertyName = "sourcehash")]
         public string Sourcehash { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the form is introduced.
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets public key token of the assembly. This value can be
+        /// obtained from the assembly by using reflection.
         /// </summary>
         [JsonProperty(PropertyName = "publickeytoken")]
         public string Publickeytoken { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the plug-in
+        /// assembly.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets customization Level.
         /// </summary>
         [JsonProperty(PropertyName = "customizationlevel")]
         public int? Customizationlevel { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the plug-in assembly was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// pluginassembly.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the assembly. The value can be
+        /// obtained from the assembly through reflection.
         /// </summary>
         [JsonProperty(PropertyName = "version")]
         public string Version { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public string Solutionid { get; set; }
+        public System.Guid? Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component is
+        /// managed.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets culture code for the plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "culture")]
         public string Culture { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "pluginassemblyidunique")]
-        public string Pluginassemblyidunique { get; set; }
+        public System.Guid? Pluginassemblyidunique { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the pluginassembly.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        public System.Guid? _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "pluginassemblyid")]
-        public string Pluginassemblyid { get; set; }
+        public System.Guid? Pluginassemblyid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        public System.Guid? _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets major of the assembly version.
         /// </summary>
         [JsonProperty(PropertyName = "major")]
         public int? Major { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component can
+        /// be customized.
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public object Iscustomizable { get; set; }
+        public string Iscustomizable { get; set; }
 
         /// <summary>
+        /// Gets or sets file name of the plug-in assembly. Used when the
+        /// source type is set to 1.
         /// </summary>
         [JsonProperty(PropertyName = "path")]
         public string Path { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the plug-in assembly was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets minor of the assembly version.
         /// </summary>
         [JsonProperty(PropertyName = "minor")]
         public int? Minor { get; set; }
 
         /// <summary>
+        /// Gets or sets bytes of the assembly, in Base64 format.
         /// </summary>
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
 
         /// <summary>
+        /// Gets or sets bytes of the assembly, in Base64 format.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "content_binary")]
-        public object ContentBinary { get; set; }
+        public byte[] ContentBinary { get; set; }
 
         /// <summary>
+        /// Gets or sets information about how the plugin assembly is to be
+        /// isolated at execution time; None / Sandboxed.
         /// </summary>
         [JsonProperty(PropertyName = "isolationmode")]
         public int? Isolationmode { get; set; }

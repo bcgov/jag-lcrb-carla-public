@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// postcomment
+    /// Microsoft.Dynamics.CRM.postcomment
     /// </summary>
     public partial class MicrosoftDynamicsCRMpostcomment
     {
@@ -27,7 +27,24 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMpostcomment
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMpostcomment(string postcommentid = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), string text = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _postidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost))
+        /// <param name="postcommentid">Shows the ID of the post
+        /// comment.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the solution.</param>
+        /// <param name="text">Text of the comment.</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="_postidValue">Unique identifier of the post with which
+        /// the comment is associated.</param>
+        public MicrosoftDynamicsCRMpostcomment(System.Guid? postcommentid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), System.Guid? _organizationidValue = default(System.Guid?), string text = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _postidValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost))
         {
             Postcommentid = postcommentid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -51,49 +68,62 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the ID of the post comment.
         /// </summary>
         [JsonProperty(PropertyName = "postcommentid")]
-        public string Postcommentid { get; set; }
+        public System.Guid? Postcommentid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        public System.Guid? _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
+        public System.Guid? _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public string _organizationidValue { get; set; }
+        public System.Guid? _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets text of the comment.
         /// </summary>
         [JsonProperty(PropertyName = "text")]
         public string Text { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the post with which the comment
+        /// is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_postid_value")]
-        public string _postidValue { get; set; }
+        public System.Guid? _postidValue { get; set; }
 
         /// <summary>
         /// </summary>

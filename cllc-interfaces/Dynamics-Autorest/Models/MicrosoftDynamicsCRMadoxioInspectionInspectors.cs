@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// adoxio_inspection_inspectors
+    /// Microsoft.Dynamics.CRM.adoxio_inspection_inspectors
     /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioInspectionInspectors
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioInspectionInspectors class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioInspectionInspectors(string incidentid = default(string), long? versionnumber = default(long?), string systemuserid = default(string), string adoxioInspectionInspectorsid = default(string))
+        public MicrosoftDynamicsCRMadoxioInspectionInspectors(System.Guid? incidentid = default(System.Guid?), string versionnumber = default(string), System.Guid? systemuserid = default(System.Guid?), System.Guid? adoxioInspectionInspectorsid = default(System.Guid?))
         {
             Incidentid = incidentid;
             Versionnumber = versionnumber;
@@ -44,22 +44,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "incidentid")]
-        public string Incidentid { get; set; }
+        public System.Guid? Incidentid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "systemuserid")]
-        public string Systemuserid { get; set; }
+        public System.Guid? Systemuserid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspection_inspectorsid")]
-        public string AdoxioInspectionInspectorsid { get; set; }
+        public System.Guid? AdoxioInspectionInspectorsid { get; set; }
 
     }
 }
