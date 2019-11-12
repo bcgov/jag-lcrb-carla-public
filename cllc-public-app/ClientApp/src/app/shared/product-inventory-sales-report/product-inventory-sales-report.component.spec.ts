@@ -1,9 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { ProductInventorySalesReportComponent } from './product-inventory-sales-report.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ProductInventorySalesReportComponent', () => {
   let component: ProductInventorySalesReportComponent;
@@ -11,7 +10,8 @@ describe('ProductInventorySalesReportComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProductInventorySalesReportComponent ]
+      declarations: [ ProductInventorySalesReportComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));
