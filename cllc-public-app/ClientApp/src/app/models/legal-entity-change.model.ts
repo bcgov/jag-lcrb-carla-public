@@ -19,6 +19,8 @@ export class LicenseeChangeLog {
   businessAccountType: string;
   numberofSharesNew: number;
   numberofSharesOld: number;
+  totalSharesNew: number;
+  totalSharesOld: number;
   emailNew: string;
   emailOld: string;
   firstNameNew: string;
@@ -44,6 +46,7 @@ export class LicenseeChangeLog {
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
+  percentageShares: number; // This in only used on the client side
 
   /**
    * Create from LegalEntity
@@ -159,10 +162,10 @@ export class LicenseeChangeLog {
           change.businessNameNew = `${change.firstNameNew} ${change.lastNameNew}`;
         }
 
-        change.isIndividual = false;
-        if (change.isIndividualFromChangeType()) {
-          change.isIndividual = true;
-        }
+        change.isIndividual = change.isIndividualFromChangeType();
+        change.children = node.children; //do not overide
+        change.isRoot = node.isRoot; //do not overide
+        change.parentLinceseeChangeLog = node.parentLinceseeChangeLog; // do not overide
         Object.assign(node, change);
       }
     });
@@ -180,6 +183,7 @@ export class LicenseeChangeLog {
         if (newNode.isIndividualFromChangeType()) {
           newNode.isIndividual = true;
         }
+        newNode.parentLinceseeChangeLog = node;
         node.children.push(newNode);
       }
     });
@@ -197,6 +201,7 @@ export class LicenseeChangeLog {
         if (newNode.isIndividualFromChangeType()) {
           newNode.isIndividual = true;
         }
+        newNode.parentLinceseeChangeLog = node;
         node.children.push(newNode);
       }
     });
@@ -250,9 +255,9 @@ export class LicenseeChangeLog {
    * @param node 'A LicenseeChangeLog'
    */
   isUpdateChangeType(): boolean {
-    const result =this.changeType === LicenseeChangeType.updateLeadership
-      ||this.changeType === LicenseeChangeType.updateBusinessShareholder
-      ||this.changeType === LicenseeChangeType.updateIndividualShareholder;
+    const result = this.changeType === LicenseeChangeType.updateLeadership
+      || this.changeType === LicenseeChangeType.updateBusinessShareholder
+      || this.changeType === LicenseeChangeType.updateIndividualShareholder;
     return result;
   }
 
@@ -261,9 +266,9 @@ export class LicenseeChangeLog {
    * @param node 'A LicenseeChangeLog'
    */
   isRemoveChangeType(): boolean {
-    const result =this.changeType === LicenseeChangeType.removeLeadership
-      ||this.changeType === LicenseeChangeType.removeBusinessShareholder
-      ||this.changeType === LicenseeChangeType.removeIndividualShareholder;
+    const result = this.changeType === LicenseeChangeType.removeLeadership
+      || this.changeType === LicenseeChangeType.removeBusinessShareholder
+      || this.changeType === LicenseeChangeType.removeIndividualShareholder;
     return result;
   }
 
