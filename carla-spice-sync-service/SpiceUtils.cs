@@ -435,7 +435,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         CompanyName = companyName,
                         MiddleName = application.AdoxioApplyingPerson.Middlename,
                         LastName = application.AdoxioApplyingPerson.Lastname,
-                        Email = application.AdoxioApplyingPerson.Emailaddress1,
+                        Email = application.AdoxioApplyingPerson.Emailaddress1, 
                     };
                 }
                 /* Add applicant details */
@@ -541,7 +541,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     };
                 }
 
-                /* Add key personnel and deemed associates */
+                /* Add key personnel and deemed associates from application */
                 string keypersonnelfilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_iskeypersonnel eq true and adoxio_isindividual eq 1)";
                 string deemedassociatefilter = "(_adoxio_relatedapplication_value eq " + application.AdoxioApplicationid + " and adoxio_isdeemedassociate eq true and adoxio_isindividual eq 1)";
                 string[] expand = { "adoxio_Contact" };
@@ -552,8 +552,16 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     {
                         try
                         {
-                            LegalEntity person = CreateAssociate(legalEntity);
-                            screeningRequest.Associates.Add(person);
+                            LegalEntity entity = CreateAssociate(legalEntity);
+                            if((bool)entity.IsIndividual)
+                            {
+                                screeningRequest.Associates.Add(entity);
+                            }
+                            else
+                            {
+                                var accountAssociates = CreateAssociatesForAccount(entity.Account.AccountId);
+                                screeningRequest.Associates = screeningRequest.Associates.Concat(accountAssociates).ToList();
+                            }
                         }
                         catch (ArgumentNullException e)
                         {
@@ -563,9 +571,22 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
 
                 /* Add associates from account */
-                var moreAssociates = CreateApplicationAssociatesScreeningRequest(application._adoxioApplicantValue, screeningRequest.Associates);
+                var moreAssociates = CreateAssociatesForAccount(application._adoxioApplicantValue);
                 screeningRequest.Associates = screeningRequest.Associates.Concat(moreAssociates).ToList();
-
+                /* remove duplicate associates */
+                List<string> contactIds = new List<string>{};
+                int i = 0;
+                List<LegalEntity> finalAssociates = new List<LegalEntity>();
+                foreach(var assoc in screeningRequest.Associates)
+                {
+                    if(!contactIds.Contains(assoc.Contact.ContactId))
+                    {
+                        finalAssociates.Add(assoc);
+                        contactIds.Add(assoc.Contact.ContactId);
+                    }
+                    i++;
+                }
+                screeningRequest.Associates = finalAssociates;
                 return screeningRequest;
             }
             catch (HttpOperationException odee)
@@ -579,22 +600,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
         }
 
-        private List<LegalEntity> CreateApplicationAssociatesScreeningRequest(string accountId, IList<LegalEntity> foundAssociates)
+        private List<LegalEntity> CreateAssociatesForAccount(string accountId)
         {
             List<LegalEntity> newAssociates = new List<LegalEntity>();
             string entityFilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
             entityFilter += " and adoxio_isdonotsendtospd ne true";
-            foreach (var assoc in foundAssociates)
-            {
-                if (accountId != assoc.EntityId && assoc.Contact?.ContactId != null)
-                {
-                    entityFilter += " and _adoxio_contact_value ne " + assoc.Contact.ContactId;
-                }
-                else if(assoc.EntityId != null && accountId != assoc.EntityId)
-                {
-                    entityFilter += " and adoxio_legalentityid ne " + assoc.EntityId;
-                }
-            }
             string[] expand = { "adoxio_Contact", "adoxio_Account"};
 
             var legalEntities = _dynamicsClient.Legalentities.Get(filter: entityFilter, expand: expand).Value;
@@ -605,22 +615,20 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     try
                     {
                         LegalEntity associate = CreateAssociate(legalEntity);
-                        newAssociates.Add(associate);
+                        if((bool)associate.IsIndividual)
+                        {
+                            newAssociates.Add(associate);
+                        }
+                        else
+                        {
+                            var moreAssociates = CreateAssociatesForAccount(associate.Account.AccountId);
+                            newAssociates.AddRange(moreAssociates);
+                        }
                     }
                     catch (ArgumentNullException e)
                     {
-                        _logger.LogError (e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
+                        _logger.LogError(e, $"Attempted to create null associate: {legalEntity.AdoxioLegalentityid}");
                     }
-                }
-            }
-            var newFoundAssociates = new List<LegalEntity>(foundAssociates);
-            newFoundAssociates.AddRange(newAssociates);
-            foreach (var assoc in newAssociates.ToList())
-            {
-                if (assoc.IsIndividual != true)
-                {
-                    var moreAssociates = CreateApplicationAssociatesScreeningRequest(assoc.Account.AccountId, newFoundAssociates);
-                    assoc.Account.Associates = moreAssociates;
                 }
             }
             return newAssociates;
@@ -738,7 +746,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             return associate;
         }
-        public List<string> GetLegalEntityPositions(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
+        
+        private List<string> GetLegalEntityPositions(MicrosoftDynamicsCRMadoxioLegalentity legalEntity)
         {
             List<string> positions = new List<string>();
             if (legalEntity.AdoxioIsdirector != null && (bool)legalEntity.AdoxioIsdirector)
@@ -780,15 +789,20 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             return positions;
         }
 
-        public int UpdateConsentExpiry(IList<LegalEntity> associates)
+        private int UpdateConsentExpiry(IList<LegalEntity> associates)
         {
             var i = 0;
             foreach(var associate in associates)
             {
-                _logger.LogError(associate.Name);
                 if((bool) associate.IsIndividual)
                 {
-                    UpdateContactConsent(associate.Contact.ContactId);
+                    // update consent validated to yes and expire it in 3 months
+                    MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact()
+                    {
+                        AdoxioConsentvalidated = 845280000,
+                        AdoxioConsentvalidatedexpirydate = DateTimeOffset.Now.AddMonths(3)
+                    };
+                    _dynamicsClient.Contacts.Update(associate.Contact.ContactId, contact);
                     i += 1;
                 }
                 else
@@ -797,17 +811,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
             }
             return i;
-        }
-
-        public void UpdateContactConsent(string ContactId)
-        {
-            // update consent validated to yes and expire it in 3 months
-            MicrosoftDynamicsCRMcontact contact = new MicrosoftDynamicsCRMcontact()
-            {
-                AdoxioConsentvalidated = 845280000,
-                AdoxioConsentvalidatedexpirydate = DateTimeOffset.Now.AddMonths(3)
-            };
-            _dynamicsClient.Contacts.Update(ContactId, contact);
         }
 
         [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
@@ -839,7 +842,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     {
                         hangfireContext.WriteLine($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
                         _logger.LogError($"Successfully sent worker {screeningRequest.RecordIdentifier} to SPD");
-                        UpdateWorkerSent(worker.AdoxioWorkerid);
+                        MicrosoftDynamicsCRMadoxioWorker workerPatch = new MicrosoftDynamicsCRMadoxioWorker()
+                        {
+                            AdoxioExporteddate = DateTime.UtcNow
+                        };
+                        _dynamicsClient.Workers.Update(worker.AdoxioWorkerid, workerPatch);
                     }
                     else
                     {
@@ -851,15 +858,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             
             _logger.LogError("End of SendFoundWorkers Job");
             hangfireContext.WriteLine("End of SendFoundWorkers Job");
-        }
-
-        private void UpdateWorkerSent(string workerId)
-        {
-            MicrosoftDynamicsCRMadoxioWorker workerPatch = new MicrosoftDynamicsCRMadoxioWorker()
-            {
-                AdoxioExporteddate = DateTime.UtcNow
-            };
-            _dynamicsClient.Workers.Update(workerId, workerPatch);
         }
 
         [DisableConcurrentExecution(timeoutInSeconds: 10 * 60)]
