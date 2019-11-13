@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// savedquery
+    /// Microsoft.Dynamics.CRM.savedquery
     /// </summary>
     public partial class MicrosoftDynamicsCRMsavedquery
     {
@@ -29,7 +29,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsavedquery
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsavedquery(int? organizationtaborder = default(int?), int? statecode = default(int?), string _createdbyValue = default(string), bool? isuserdefined = default(bool?), string columnsetxml = default(string), object canbedeleted = default(object), int? querytype = default(int?), string conditionalformatting = default(string), string _modifiedbyValue = default(string), string queryapi = default(string), string advancedgroupby = default(string), string returnedtypecode = default(string), bool? isquickfindquery = default(bool?), string _organizationidValue = default(string), string solutionid = default(string), string name = default(string), object iscustomizable = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string layoutxml = default(string), string fetchxml = default(string), string description = default(string), long? versionnumber = default(long?), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string savedqueryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string introducedversion = default(string), bool? iscustom = default(bool?), int? statuscode = default(int?), int? queryappusage = default(int?), string savedqueryidunique = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isdefault = default(bool?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>))
+        /// <param name="organizationtaborder">For the organization, type the
+        /// tab order to determine how users navigate through the screen using
+        /// only the Tab key.</param>
+        /// <param name="statecode">Shows the status of the view.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="isuserdefined">Tells whether the view was created by a
+        /// user.</param>
+        /// <param name="columnsetxml">Contains the columns and sorting
+        /// criteria for the view, stored in XML format.</param>
+        /// <param name="canbedeleted">Tells whether the view can be
+        /// deleted.</param>
+        /// <param name="querytype">Shows the type of the query.</param>
+        /// <param name="conditionalformatting">Type information about how the
+        /// items in the system view are formatted.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="queryapi">For internal use only.</param>
+        /// <param name="advancedgroupby">Type the column name that will be
+        /// used to group the results from the data collected across multiple
+        /// records from a system view.</param>
+        /// <param name="returnedtypecode">Type of entity displayed in the
+        /// view.</param>
+        /// <param name="isquickfindquery">Choose whether the view is
+        /// compatible with Quick Find. When users search for specific items,
+        /// you define the fields that are searched in.</param>
+        /// <param name="_organizationidValue">Choose the ID of the
+        /// organization that the record is associated with.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="name">Type a name for the view to describe what
+        /// results the view will contain. This name is visible to users in the
+        /// View list.</param>
+        /// <param name="iscustomizable">Tells whether the component can be
+        /// customized.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="layoutxml">For internal use only.</param>
+        /// <param name="fetchxml">String specifying the query in Fetch XML
+        /// language.</param>
+        /// <param name="description">Type additional information to describe
+        /// the view, such as the filter criteria or intended results
+        /// set.</param>
+        /// <param name="versionnumber">Version number of the view.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="savedqueryid">Unique identifier of the view.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="introducedversion">Version in which the form is
+        /// introduced.</param>
+        /// <param name="iscustom">Tells whether a user created the
+        /// view.</param>
+        /// <param name="statuscode">Shows the reason code that explains the
+        /// status of the record.</param>
+        /// <param name="queryappusage">For internal use only.</param>
+        /// <param name="savedqueryidunique">For internal use only.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="isdefault">Tells whether the view is the default view
+        /// for the specified record type (entity).</param>
+        /// <param name="ismanaged">Tells whether the record is part of a
+        /// managed solution.</param>
+        public MicrosoftDynamicsCRMsavedquery(int? organizationtaborder = default(int?), int? statecode = default(int?), string _createdbyValue = default(string), bool? isuserdefined = default(bool?), string columnsetxml = default(string), string canbedeleted = default(string), int? querytype = default(int?), string conditionalformatting = default(string), string _modifiedbyValue = default(string), string queryapi = default(string), string advancedgroupby = default(string), string returnedtypecode = default(string), bool? isquickfindquery = default(bool?), string _organizationidValue = default(string), string solutionid = default(string), string name = default(string), string iscustomizable = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string layoutxml = default(string), string fetchxml = default(string), string description = default(string), string versionnumber = default(string), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string savedqueryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string introducedversion = default(string), bool? iscustom = default(bool?), int? statuscode = default(int?), int? queryappusage = default(int?), string savedqueryidunique = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isdefault = default(bool?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>))
         {
             Organizationtaborder = organizationtaborder;
             Statecode = statecode;
@@ -84,176 +150,230 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets for the organization, type the tab order to determine
+        /// how users navigate through the screen using only the Tab key.
         /// </summary>
         [JsonProperty(PropertyName = "organizationtaborder")]
         public int? Organizationtaborder { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of the view.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether the view was created by a user.
         /// </summary>
         [JsonProperty(PropertyName = "isuserdefined")]
         public bool? Isuserdefined { get; set; }
 
         /// <summary>
+        /// Gets or sets contains the columns and sorting criteria for the
+        /// view, stored in XML format.
         /// </summary>
         [JsonProperty(PropertyName = "columnsetxml")]
         public string Columnsetxml { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether the view can be deleted.
         /// </summary>
         [JsonProperty(PropertyName = "canbedeleted")]
-        public object Canbedeleted { get; set; }
+        public string Canbedeleted { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the type of the query.
         /// </summary>
         [JsonProperty(PropertyName = "querytype")]
         public int? Querytype { get; set; }
 
         /// <summary>
+        /// Gets or sets type information about how the items in the system
+        /// view are formatted.
         /// </summary>
         [JsonProperty(PropertyName = "conditionalformatting")]
         public string Conditionalformatting { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "queryapi")]
         public string Queryapi { get; set; }
 
         /// <summary>
+        /// Gets or sets type the column name that will be used to group the
+        /// results from the data collected across multiple records from a
+        /// system view.
         /// </summary>
         [JsonProperty(PropertyName = "advancedgroupby")]
         public string Advancedgroupby { get; set; }
 
         /// <summary>
+        /// Gets or sets type of entity displayed in the view.
         /// </summary>
         [JsonProperty(PropertyName = "returnedtypecode")]
         public string Returnedtypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose whether the view is compatible with Quick Find.
+        /// When users search for specific items, you define the fields that
+        /// are searched in.
         /// </summary>
         [JsonProperty(PropertyName = "isquickfindquery")]
         public bool? Isquickfindquery { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the ID of the organization that the record is
+        /// associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the view to describe what results the
+        /// view will contain. This name is visible to users in the View list.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether the component can be customized.
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public object Iscustomizable { get; set; }
+        public string Iscustomizable { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "layoutxml")]
         public string Layoutxml { get; set; }
 
         /// <summary>
+        /// Gets or sets string specifying the query in Fetch XML language.
         /// </summary>
         [JsonProperty(PropertyName = "fetchxml")]
         public string Fetchxml { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the view, such
+        /// as the filter criteria or intended results set.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the view.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the view.
         /// </summary>
         [JsonProperty(PropertyName = "savedqueryid")]
         public string Savedqueryid { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the form is introduced.
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether a user created the view.
         /// </summary>
         [JsonProperty(PropertyName = "iscustom")]
         public bool? Iscustom { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the reason code that explains the status of the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "queryappusage")]
         public int? Queryappusage { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "savedqueryidunique")]
         public string Savedqueryidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether the view is the default view for the
+        /// specified record type (entity).
         /// </summary>
         [JsonProperty(PropertyName = "isdefault")]
         public bool? Isdefault { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether the record is part of a managed
+        /// solution.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }

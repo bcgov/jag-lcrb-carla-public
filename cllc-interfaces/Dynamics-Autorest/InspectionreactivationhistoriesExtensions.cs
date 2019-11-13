@@ -26,10 +26,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </param>
             /// <param name='top'>
             /// </param>
-            /// <param name='skip'>
-            /// </param>
-            /// <param name='search'>
-            /// </param>
             /// <param name='filter'>
             /// </param>
             /// <param name='count'>
@@ -43,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static InspectionreactivationhistoriesGetResponseModel Get(this IInspectionreactivationhistories operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioInspectionreactivationhistoryCollection Get(this IInspectionreactivationhistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,10 +51,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// </param>
-            /// <param name='skip'>
-            /// </param>
-            /// <param name='search'>
             /// </param>
             /// <param name='filter'>
             /// </param>
@@ -76,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<InspectionreactivationhistoriesGetResponseModel> GetAsync(this IInspectionreactivationhistories operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioInspectionreactivationhistoryCollection> GetAsync(this IInspectionreactivationhistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -91,10 +83,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// </param>
-            /// <param name='skip'>
-            /// </param>
-            /// <param name='search'>
             /// </param>
             /// <param name='filter'>
             /// </param>
@@ -112,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<InspectionreactivationhistoriesGetResponseModel> GetWithHttpMessages(this IInspectionreactivationhistories operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInspectionreactivationhistoryCollection> GetWithHttpMessages(this IInspectionreactivationhistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -187,7 +175,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -207,7 +196,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -233,7 +223,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -250,70 +241,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from adoxio_inspectionreactivationhistories
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            public static void Delete(this IInspectionreactivationhistories operations, string adoxioInspectionreactivationhistoryid, string ifMatch = default(string))
-            {
-                operations.DeleteAsync(adoxioInspectionreactivationhistoryid, ifMatch).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Delete entity from adoxio_inspectionreactivationhistories
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task DeleteAsync(this IInspectionreactivationhistories operations, string adoxioInspectionreactivationhistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.DeleteWithHttpMessagesAsync(adoxioInspectionreactivationhistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Delete entity from adoxio_inspectionreactivationhistories
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse DeleteWithHttpMessages(this IInspectionreactivationhistories operations, string adoxioInspectionreactivationhistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.DeleteWithHttpMessagesAsync(adoxioInspectionreactivationhistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
             /// Update entity in adoxio_inspectionreactivationhistories
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -330,7 +265,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -350,7 +286,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioInspectionreactivationhistoryid'>
-            /// key: adoxio_inspectionreactivationhistoryid
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -361,6 +298,66 @@ namespace Gov.Lclb.Cllb.Interfaces
             public static HttpOperationResponse UpdateWithHttpMessages(this IInspectionreactivationhistories operations, string adoxioInspectionreactivationhistoryid, MicrosoftDynamicsCRMadoxioInspectionreactivationhistory body, Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.UpdateWithHttpMessagesAsync(adoxioInspectionreactivationhistoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_inspectionreactivationhistories
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioInspectionreactivationhistoryid'>
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            public static void Delete(this IInspectionreactivationhistories operations, string adoxioInspectionreactivationhistoryid, string ifMatch = default(string))
+            {
+                operations.DeleteAsync(adoxioInspectionreactivationhistoryid, ifMatch).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_inspectionreactivationhistories
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioInspectionreactivationhistoryid'>
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAsync(this IInspectionreactivationhistories operations, string adoxioInspectionreactivationhistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteWithHttpMessagesAsync(adoxioInspectionreactivationhistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_inspectionreactivationhistories
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioInspectionreactivationhistoryid'>
+            /// key: adoxio_inspectionreactivationhistoryid of
+            /// adoxio_inspectionreactivationhistory
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse DeleteWithHttpMessages(this IInspectionreactivationhistories operations, string adoxioInspectionreactivationhistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.DeleteWithHttpMessagesAsync(adoxioInspectionreactivationhistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

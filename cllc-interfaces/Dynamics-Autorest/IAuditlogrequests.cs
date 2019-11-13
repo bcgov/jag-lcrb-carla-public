@@ -23,10 +23,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name='top'>
         /// </param>
-        /// <param name='skip'>
-        /// </param>
-        /// <param name='search'>
-        /// </param>
         /// <param name='filter'>
         /// </param>
         /// <param name='count'>
@@ -52,7 +48,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<AuditlogrequestsGetResponseModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioAuditlogrequestCollection>> GetWithHttpMessagesAsync(int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Add new entity to adoxio_auditlogrequests
         /// </summary>
@@ -83,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Get entity from adoxio_auditlogrequests by key
         /// </summary>
         /// <param name='adoxioAuditlogrequestid'>
-        /// key: adoxio_auditlogrequestid
+        /// key: adoxio_auditlogrequestid of adoxio_auditlogrequest
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -108,32 +104,10 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </exception>
         Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioAuditlogrequest>> GetByKeyWithHttpMessagesAsync(string adoxioAuditlogrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_auditlogrequests
-        /// </summary>
-        /// <param name='adoxioAuditlogrequestid'>
-        /// key: adoxio_auditlogrequestid
-        /// </param>
-        /// <param name='ifMatch'>
-        /// ETag
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioAuditlogrequestid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Update entity in adoxio_auditlogrequests
         /// </summary>
         /// <param name='adoxioAuditlogrequestid'>
-        /// key: adoxio_auditlogrequestid
+        /// key: adoxio_auditlogrequestid of adoxio_auditlogrequest
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -151,5 +125,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioAuditlogrequestid, MicrosoftDynamicsCRMadoxioAuditlogrequest body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Delete entity from adoxio_auditlogrequests
+        /// </summary>
+        /// <param name='adoxioAuditlogrequestid'>
+        /// key: adoxio_auditlogrequestid of adoxio_auditlogrequest
+        /// </param>
+        /// <param name='ifMatch'>
+        /// ETag
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioAuditlogrequestid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

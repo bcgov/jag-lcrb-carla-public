@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// StatusOptionMetadata
+    /// Microsoft.Dynamics.CRM.StatusOptionMetadata
     /// </summary>
     public partial class MicrosoftDynamicsCRMStatusOptionMetadata
     {

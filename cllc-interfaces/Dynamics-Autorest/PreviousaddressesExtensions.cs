@@ -26,10 +26,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </param>
             /// <param name='top'>
             /// </param>
-            /// <param name='skip'>
-            /// </param>
-            /// <param name='search'>
-            /// </param>
             /// <param name='filter'>
             /// </param>
             /// <param name='count'>
@@ -43,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static PreviousaddressesGetResponseModel Get(this IPreviousaddresses operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioPreviousaddressCollection Get(this IPreviousaddresses operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -55,10 +51,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// </param>
-            /// <param name='skip'>
-            /// </param>
-            /// <param name='search'>
             /// </param>
             /// <param name='filter'>
             /// </param>
@@ -76,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<PreviousaddressesGetResponseModel> GetAsync(this IPreviousaddresses operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioPreviousaddressCollection> GetAsync(this IPreviousaddresses operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -91,10 +83,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='top'>
-            /// </param>
-            /// <param name='skip'>
-            /// </param>
-            /// <param name='search'>
             /// </param>
             /// <param name='filter'>
             /// </param>
@@ -112,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<PreviousaddressesGetResponseModel> GetWithHttpMessages(this IPreviousaddresses operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioPreviousaddressCollection> GetWithHttpMessages(this IPreviousaddresses operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -187,7 +175,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -207,7 +195,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -233,7 +221,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
             /// </param>
             /// <param name='select'>
             /// Select properties to be returned
@@ -250,70 +238,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             /// <summary>
-            /// Delete entity from adoxio_previousaddresses
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            public static void Delete(this IPreviousaddresses operations, string adoxioPreviousaddressid, string ifMatch = default(string))
-            {
-                operations.DeleteAsync(adoxioPreviousaddressid, ifMatch).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Delete entity from adoxio_previousaddresses
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task DeleteAsync(this IPreviousaddresses operations, string adoxioPreviousaddressid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
-            {
-                (await operations.DeleteWithHttpMessagesAsync(adoxioPreviousaddressid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
-            }
-
-            /// <summary>
-            /// Delete entity from adoxio_previousaddresses
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
-            /// </param>
-            /// <param name='ifMatch'>
-            /// ETag
-            /// </param>
-            /// <param name='customHeaders'>
-            /// Headers that will be added to request.
-            /// </param>
-            public static HttpOperationResponse DeleteWithHttpMessages(this IPreviousaddresses operations, string adoxioPreviousaddressid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
-            {
-                return operations.DeleteWithHttpMessagesAsync(adoxioPreviousaddressid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-            }
-
-            /// <summary>
             /// Update entity in adoxio_previousaddresses
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -330,7 +261,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -350,7 +281,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// The operations group for this extension method.
             /// </param>
             /// <param name='adoxioPreviousaddressid'>
-            /// key: adoxio_previousaddressid
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
             /// </param>
             /// <param name='body'>
             /// New property values
@@ -361,6 +292,63 @@ namespace Gov.Lclb.Cllb.Interfaces
             public static HttpOperationResponse UpdateWithHttpMessages(this IPreviousaddresses operations, string adoxioPreviousaddressid, MicrosoftDynamicsCRMadoxioPreviousaddress body, Dictionary<string, List<string>> customHeaders = null)
             {
                 return operations.UpdateWithHttpMessagesAsync(adoxioPreviousaddressid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_previousaddresses
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioPreviousaddressid'>
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            public static void Delete(this IPreviousaddresses operations, string adoxioPreviousaddressid, string ifMatch = default(string))
+            {
+                operations.DeleteAsync(adoxioPreviousaddressid, ifMatch).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_previousaddresses
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioPreviousaddressid'>
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAsync(this IPreviousaddresses operations, string adoxioPreviousaddressid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteWithHttpMessagesAsync(adoxioPreviousaddressid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Delete entity from adoxio_previousaddresses
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='adoxioPreviousaddressid'>
+            /// key: adoxio_previousaddressid of adoxio_previousaddress
+            /// </param>
+            /// <param name='ifMatch'>
+            /// ETag
+            /// </param>
+            /// <param name='customHeaders'>
+            /// Headers that will be added to request.
+            /// </param>
+            public static HttpOperationResponse DeleteWithHttpMessages(this IPreviousaddresses operations, string adoxioPreviousaddressid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            {
+                return operations.DeleteWithHttpMessagesAsync(adoxioPreviousaddressid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

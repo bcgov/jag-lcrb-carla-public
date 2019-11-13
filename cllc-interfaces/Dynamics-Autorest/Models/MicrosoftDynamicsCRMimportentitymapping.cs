@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// importentitymapping
+    /// Microsoft.Dynamics.CRM.importentitymapping
     /// </summary>
     public partial class MicrosoftDynamicsCRMimportentitymapping
     {
@@ -27,6 +27,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMimportentitymapping class.
         /// </summary>
+        /// <param name="dedupe">Information about whether the entity needs to
+        /// be processed to find and delete duplicate records.</param>
+        /// <param name="processcode">Information about whether the import
+        /// entity mapping needs to be processed.</param>
+        /// <param name="importentitymappingid">Unique identifier of the import
+        /// entity mapping.</param>
+        /// <param name="sourceentityname">Name of the source entity.</param>
+        /// <param name="statuscode">Reason for the status of the import entity
+        /// mapping.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the importentitymapping.</param>
+        /// <param name="targetentityname">Name of the Microsoft Dynamics 365
+        /// entity.</param>
+        /// <param name="statecode">Status of the import entity
+        /// mapping.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the importentitymapping.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the import entity mapping.</param>
+        /// <param name="modifiedon">Date and time when the import entity
+        /// mapping was last modified.</param>
+        /// <param name="createdon">Date and time when the import entity
+        /// mapping was created.</param>
+        /// <param name="_importmapidValue">Unique identifier of the associated
+        /// data map.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the import entity mapping.</param>
         public MicrosoftDynamicsCRMimportentitymapping(int? dedupe = default(int?), int? processcode = default(int?), string importentitymappingid = default(string), string sourceentityname = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string targetentityname = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _importmapidValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Dedupe = dedupe;
@@ -57,71 +84,93 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets information about whether the entity needs to be
+        /// processed to find and delete duplicate records.
         /// </summary>
         [JsonProperty(PropertyName = "dedupe")]
         public int? Dedupe { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the import entity mapping
+        /// needs to be processed.
         /// </summary>
         [JsonProperty(PropertyName = "processcode")]
         public int? Processcode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the import entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "importentitymappingid")]
         public string Importentitymappingid { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the source entity.
         /// </summary>
         [JsonProperty(PropertyName = "sourceentityname")]
         public string Sourceentityname { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the import entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the importentitymapping.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the Microsoft Dynamics 365 entity.
         /// </summary>
         [JsonProperty(PropertyName = "targetentityname")]
         public string Targetentityname { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the import entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// importentitymapping.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the import
+        /// entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the import entity mapping was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the import entity mapping was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated data map.
         /// </summary>
         [JsonProperty(PropertyName = "_importmapid_value")]
         public string _importmapidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// import entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }

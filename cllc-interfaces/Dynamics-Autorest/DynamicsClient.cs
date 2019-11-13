@@ -16,8 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     using System.Net.Http;
 
     /// <summary>
-    /// This OData service is located at
-    /// https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2/
+    /// This OData service is located at http://localhost
     /// </summary>
     public partial class DynamicsClient : ServiceClient<DynamicsClient>, IDynamicsClient
     {
@@ -37,6 +36,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         public JsonSerializerSettings DeserializationSettings { get; private set; }
 
         /// <summary>
+        /// Show only the first n items
+        /// </summary>
+        public int? Top88 { get; set; }
+
+        /// <summary>
+        /// Skip the first n items
+        /// </summary>
+        public int? Skip16 { get; set; }
+
+        /// <summary>
+        /// Include count of items
+        /// </summary>
+        public bool? Count88 { get; set; }
+
+        /// <summary>
+        /// Filter items by property values
+        /// </summary>
+        public string Filter88 { get; set; }
+
+        /// <summary>
+        /// Search items by search phrases
+        /// </summary>
+        public string Search16 { get; set; }
+
+        /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
@@ -47,9 +71,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAccounts Accounts { get; private set; }
 
         /// <summary>
-        /// Gets the ILicencetypeinvestigationset.
+        /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
         /// </summary>
-        public virtual ILicencetypeinvestigationset Licencetypeinvestigationset { get; private set; }
+        public virtual IAdoxiolicencetypeadoxioinvestigationset Adoxiolicencetypeadoxioinvestigationset { get; private set; }
 
         /// <summary>
         /// Gets the IAliases.
@@ -142,9 +166,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IComplianceinvestigations Complianceinvestigations { get; private set; }
 
         /// <summary>
+        /// Gets the IInvestigationexhibits.
+        /// </summary>
+        public virtual IInvestigationexhibits Investigationexhibits { get; private set; }
+
+        /// <summary>
         /// Gets the ICompliancemeetings.
         /// </summary>
         public virtual ICompliancemeetings Compliancemeetings { get; private set; }
+
+        /// <summary>
+        /// Gets the ICompliancemeetingrelatedparties.
+        /// </summary>
+        public virtual ICompliancemeetingrelatedparties Compliancemeetingrelatedparties { get; private set; }
 
         /// <summary>
         /// Gets the IContraventionadmins.
@@ -197,6 +231,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IEstablishmentwatchwords Establishmentwatchwords { get; private set; }
 
         /// <summary>
+        /// Gets the IExhibits.
+        /// </summary>
+        public virtual IExhibits Exhibits { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitasyncoperations.
+        /// </summary>
+        public virtual IExhibitasyncoperations Exhibitasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitbulkdeletefailures.
+        /// </summary>
+        public virtual IExhibitbulkdeletefailures Exhibitbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitduplicatebaserecord.
+        /// </summary>
+        public virtual IExhibitduplicatebaserecord Exhibitduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitduplicatematchingrecord.
+        /// </summary>
+        public virtual IExhibitduplicatematchingrecord Exhibitduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IExhibitsyncerrors.
+        /// </summary>
+        public virtual IExhibitsyncerrors Exhibitsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IInvestigationid.
+        /// </summary>
+        public virtual IInvestigationid Investigationid { get; private set; }
+
+        /// <summary>
         /// Gets the IFiainvestigationlogs.
         /// </summary>
         public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
@@ -207,9 +276,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IFundingsources Fundingsources { get; private set; }
 
         /// <summary>
-        /// Gets the IIncidentlicencetypeset.
+        /// Gets the IIncidentadoxiolicencetypeset.
         /// </summary>
-        public virtual IIncidentlicencetypeset Incidentlicencetypeset { get; private set; }
+        public virtual IIncidentadoxiolicencetypeset Incidentadoxiolicencetypeset { get; private set; }
 
         /// <summary>
         /// Gets the IInspectioninspectorsset.
@@ -317,6 +386,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRelatedparties Relatedparties { get; private set; }
 
         /// <summary>
+        /// Gets the ICompliancemeetingid.
+        /// </summary>
+        public virtual ICompliancemeetingid Compliancemeetingid { get; private set; }
+
+        /// <summary>
         /// Gets the ISettings.
         /// </summary>
         public virtual ISettings Settings { get; private set; }
@@ -372,9 +446,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioexhibit.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioexhibit.
+        /// </summary>
+        public virtual IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; private set; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         public virtual IContacts Contacts { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioexhibit.
+        /// </summary>
+        public virtual IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioexhibit.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IEntitydefinitions.
+        /// </summary>
+        public virtual IEntitydefinitions Entitydefinitions { get; private set; }
+
+        /// <summary>
+        /// Gets the IGlobaloptionsetdefinitions.
+        /// </summary>
+        public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -397,14 +501,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ISharepointsites Sharepointsites { get; private set; }
 
         /// <summary>
-        /// Gets the IEntitydefinitions.
+        /// Gets the ILkadoxioexhibitcreatedby.
         /// </summary>
-        public virtual IEntitydefinitions Entitydefinitions { get; private set; }
+        public virtual ILkadoxioexhibitcreatedby Lkadoxioexhibitcreatedby { get; private set; }
 
         /// <summary>
-        /// Gets the IGlobaloptionsetdefinitions.
+        /// Gets the ILkadoxioexhibitcreatedonbehalfby.
         /// </summary>
-        public virtual IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; private set; }
+        public virtual ILkadoxioexhibitcreatedonbehalfby Lkadoxioexhibitcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioexhibitmodifiedby Lkadoxioexhibitmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioexhibit.
+        /// </summary>
+        public virtual IUseradoxioexhibit Useradoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioexhibit.
+        /// </summary>
+        public virtual ITeamadoxioexhibit Teamadoxioexhibit { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -648,7 +772,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         private void Initialize()
         {
             Accounts = new Accounts(this);
-            Licencetypeinvestigationset = new Licencetypeinvestigationset(this);
+            Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
             Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
             Applicationbpfv3s = new Applicationbpfv3s(this);
@@ -667,7 +791,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             Complaintpublicbpfs = new Complaintpublicbpfs(this);
             Complaints = new Complaints(this);
             Complianceinvestigations = new Complianceinvestigations(this);
+            Investigationexhibits = new Investigationexhibits(this);
             Compliancemeetings = new Compliancemeetings(this);
+            Compliancemeetingrelatedparties = new Compliancemeetingrelatedparties(this);
             Contraventionadmins = new Contraventionadmins(this);
             Contraventions = new Contraventions(this);
             Corporatehistorysummaries = new Corporatehistorysummaries(this);
@@ -678,9 +804,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             Documents = new Documents(this);
             Establishments = new Establishments(this);
             Establishmentwatchwords = new Establishmentwatchwords(this);
+            Exhibits = new Exhibits(this);
+            Exhibitasyncoperations = new Exhibitasyncoperations(this);
+            Exhibitbulkdeletefailures = new Exhibitbulkdeletefailures(this);
+            Exhibitduplicatebaserecord = new Exhibitduplicatebaserecord(this);
+            Exhibitduplicatematchingrecord = new Exhibitduplicatematchingrecord(this);
+            Exhibitsyncerrors = new Exhibitsyncerrors(this);
+            Investigationid = new Investigationid(this);
             Fiainvestigationlogs = new Fiainvestigationlogs(this);
             Fundingsources = new Fundingsources(this);
-            Incidentlicencetypeset = new Incidentlicencetypeset(this);
+            Incidentadoxiolicencetypeset = new Incidentadoxiolicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
             Inspectionreactivationhistories = new Inspectionreactivationhistories(this);
             Inspectorcommentsrollups = new Inspectorcommentsrollups(this);
@@ -702,6 +835,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Previousaddresses = new Previousaddresses(this);
             Regions = new Regions(this);
             Relatedparties = new Relatedparties(this);
+            Compliancemeetingid = new Compliancemeetingid(this);
             Settings = new Settings(this);
             Spddatarows = new Spddatarows(this);
             Spdexportses = new Spdexportses(this);
@@ -713,14 +847,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Regardingobjectidadoxioexhibit = new Regardingobjectidadoxioexhibit(this);
+            Businessunitadoxioexhibit = new Businessunitadoxioexhibit(this);
             Contacts = new Contacts(this);
+            Baserecordidadoxioexhibit = new Baserecordidadoxioexhibit(this);
+            Duplicaterecordidadoxioexhibit = new Duplicaterecordidadoxioexhibit(this);
+            Entitydefinitions = new Entitydefinitions(this);
+            Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Invoices = new Invoices(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
-            Entitydefinitions = new Entitydefinitions(this);
-            Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
-            BaseUri = new System.Uri("https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2");
+            Lkadoxioexhibitcreatedby = new Lkadoxioexhibitcreatedby(this);
+            Lkadoxioexhibitcreatedonbehalfby = new Lkadoxioexhibitcreatedonbehalfby(this);
+            Lkadoxioexhibitmodifiedby = new Lkadoxioexhibitmodifiedby(this);
+            Lkadoxioexhibitmodifiedonbehalfby = new Lkadoxioexhibitmodifiedonbehalfby(this);
+            Useradoxioexhibit = new Useradoxioexhibit(this);
+            Teamadoxioexhibit = new Teamadoxioexhibit(this);
+            BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,

@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// businessunitnewsarticle
+    /// Microsoft.Dynamics.CRM.businessunitnewsarticle
     /// </summary>
     public partial class MicrosoftDynamicsCRMbusinessunitnewsarticle
     {
@@ -29,7 +29,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMbusinessunitnewsarticle class.
         /// </summary>
-        public MicrosoftDynamicsCRMbusinessunitnewsarticle(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? activeuntil = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string newsarticle = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? articletypecode = default(int?), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string articleurl = default(string), string businessunitnewsarticleid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string articletitle = default(string), bool? showonhomepage = default(bool?), int? utcconversiontimezonecode = default(int?), long? versionnumber = default(long?), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitNewsArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitNewsArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="modifiedon">Date and time when the announcement was
+        /// last modified.</param>
+        /// <param name="activeuntil">Date and time of the last day the
+        /// announcement is active.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the
+        /// businessunitnewsarticle.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the announcement.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="newsarticle">Text for the announcement.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="articletypecode">Type of announcement.</param>
+        /// <param name="activeon">Date and time for the announcement to become
+        /// active.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the announcement.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the announcement.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the businessunitnewsarticle.</param>
+        /// <param name="articleurl">URL for the Website on which the
+        /// announcement is located.</param>
+        /// <param name="businessunitnewsarticleid">Unique identifier of the
+        /// announcement.</param>
+        /// <param name="createdon">Date and time when the announcement was
+        /// created.</param>
+        /// <param name="articletitle">Title of the announcement.</param>
+        /// <param name="showonhomepage">Information about whether to show the
+        /// announcement on the Website home page.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        public MicrosoftDynamicsCRMbusinessunitnewsarticle(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? activeuntil = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), int? importsequencenumber = default(int?), string newsarticle = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? articletypecode = default(int?), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string articleurl = default(string), string businessunitnewsarticleid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string articletitle = default(string), bool? showonhomepage = default(bool?), int? utcconversiontimezonecode = default(int?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMbulkdeletefailure> businessUnitNewsArticleBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> businessUnitNewsArticleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Modifiedon = modifiedon;
             Activeuntil = activeuntil;
@@ -67,96 +103,125 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets date and time when the announcement was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time of the last day the announcement is
+        /// active.
         /// </summary>
         [JsonProperty(PropertyName = "activeuntil")]
         public System.DateTimeOffset? Activeuntil { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the businessunitnewsarticle.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// announcement.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets text for the announcement.
         /// </summary>
         [JsonProperty(PropertyName = "newsarticle")]
         public string Newsarticle { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type of announcement.
         /// </summary>
         [JsonProperty(PropertyName = "articletypecode")]
         public int? Articletypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time for the announcement to become active.
         /// </summary>
         [JsonProperty(PropertyName = "activeon")]
         public System.DateTimeOffset? Activeon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the
+        /// announcement.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the announcement.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// businessunitnewsarticle.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets URL for the Website on which the announcement is
+        /// located.
         /// </summary>
         [JsonProperty(PropertyName = "articleurl")]
         public string Articleurl { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the announcement.
         /// </summary>
         [JsonProperty(PropertyName = "businessunitnewsarticleid")]
         public string Businessunitnewsarticleid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the announcement was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets title of the announcement.
         /// </summary>
         [JsonProperty(PropertyName = "articletitle")]
         public string Articletitle { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether to show the announcement on
+        /// the Website home page.
         /// </summary>
         [JsonProperty(PropertyName = "showonhomepage")]
         public bool? Showonhomepage { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
@@ -164,7 +229,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

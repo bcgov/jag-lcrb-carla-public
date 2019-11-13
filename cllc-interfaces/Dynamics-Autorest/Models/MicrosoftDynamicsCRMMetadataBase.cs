@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// MetadataBase
+    /// Microsoft.Dynamics.CRM.MetadataBase
     /// </summary>
     public partial class MicrosoftDynamicsCRMMetadataBase
     {

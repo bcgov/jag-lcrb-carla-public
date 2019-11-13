@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// importfile
+    /// Microsoft.Dynamics.CRM.importfile
     /// </summary>
     public partial class MicrosoftDynamicsCRMimportfile
     {
@@ -29,7 +29,114 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportfile
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportfile(int? totalcount = default(int?), string targetentityname = default(string), string parsedtablename = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string additionalheaderrow = default(string), bool? isfirstrowheader = default(bool?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string content = default(string), string source = default(string), int? fielddelimitercode = default(int?), string importfileid = default(string), string _modifiedonbehalfbyValue = default(string), int? partialfailurecount = default(int?), string _importmapidValue = default(string), string size = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablecolumnprefix = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), bool? usesystemmap = default(bool?), string _owninguserValue = default(string), int? datadelimitercode = default(int?), string sourceentityname = default(string), string _importidValue = default(string), bool? enableduplicatedetection = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? filetypecode = default(int?), int? failurecount = default(int?), string relatedentitycolumns = default(string), int? processingstatus = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _owneridValue = default(string), string headerrow = default(string), string _owningteamValue = default(string), int? processcode = default(int?), int? successcount = default(int?), int? parsedtablecolumnsnumber = default(int?), int? progresscounter = default(int?), string _recordsowneridValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
+        /// <param name="totalcount">Shows the total number of records in the
+        /// import file.</param>
+        /// <param name="targetentityname">Select the target record type
+        /// (entity) for the records that will be created during the import
+        /// job.</param>
+        /// <param name="parsedtablename">Shows the name of the table that
+        /// contains the parsed data from the import file.</param>
+        /// <param name="completedon">Shows the date and time when the import
+        /// associated with the import file was completed.</param>
+        /// <param name="additionalheaderrow">Shows the secondary column
+        /// headers. The additional headers are used during the process of
+        /// transforming the import file into import data records.</param>
+        /// <param name="isfirstrowheader">Select whether the first row of the
+        /// import file contains column headings, which are used for data
+        /// mapping during the import job.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="statuscode">Shows the reason code that explains the
+        /// import file's status to identify the stage of the import process,
+        /// from parsing the data to completed.</param>
+        /// <param name="statecode">Shows the status of the import file record.
+        /// By default, all records are active and can't be
+        /// deactivated.</param>
+        /// <param name="content">Stores the content of the import file, stored
+        /// as comma-separated values.</param>
+        /// <param name="source">Shows the name of the data source file
+        /// uploaded in the import job.</param>
+        /// <param name="fielddelimitercode">Select the character that is used
+        /// to separate each field in the import file. Typically, it is a
+        /// comma.</param>
+        /// <param name="importfileid">Unique identifier of the import
+        /// file.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="partialfailurecount">Shows the number of records in
+        /// this file that had failures during the import.</param>
+        /// <param name="_importmapidValue">Choose a data map to match the
+        /// import file and its column headers with the record types and fields
+        /// in Microsoft Dynamics 365. If the column headers in the file match
+        /// the display names of the target fields in Microsoft Dynamics 365,
+        /// we import the data automatically. If not, you can manually define
+        /// matches during import.</param>
+        /// <param name="size">Shows the size of the import file, in
+        /// kilobytes.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="parsedtablecolumnprefix">Shows the prefix applied to
+        /// each column after the import file is parsed.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="_owningbusinessunitValue">Shows the business unit that
+        /// the record owner belongs to.</param>
+        /// <param name="usesystemmap">Tells whether an automatic system map
+        /// was applied to the import file, which automatically maps the import
+        /// data to the target entity in Microsoft Dynamics 365.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the import file.</param>
+        /// <param name="datadelimitercode">Select the single-character data
+        /// delimiter used in the import file. This is typically a single or
+        /// double quotation mark.</param>
+        /// <param name="sourceentityname">Shows the record type (entity) of
+        /// the source data.</param>
+        /// <param name="_importidValue">Choose the import job that the file
+        /// was uploaded for.</param>
+        /// <param name="enableduplicatedetection">Select whether
+        /// duplicate-detection rules should be run against the import
+        /// job.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="filetypecode">Shows the type of source file that is
+        /// uploaded for import.</param>
+        /// <param name="failurecount">Shows the number of records in the
+        /// import file that cannot be imported.</param>
+        /// <param name="relatedentitycolumns">Shows the columns that are
+        /// mapped to a related record type (entity) of the primary record type
+        /// (entity) included in the import file.</param>
+        /// <param name="processingstatus">Shows the import file's processing
+        /// status code. This indicates whether the data in the import file has
+        /// been parsed, transformed, or imported.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="name">Shows the name of the import file. This name is
+        /// based on the name of the uploaded file.</param>
+        /// <param name="_owneridValue">Enter the user who is assigned to
+        /// follow up with or manage the import file. This field is updated
+        /// every time the import file is assigned to a different user.</param>
+        /// <param name="headerrow">Shows a list of each column header in the
+        /// import file separated by a comma. The header is used for parsing
+        /// the file during the import job.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the import file.</param>
+        /// <param name="processcode">Tells whether the import file should be
+        /// ignored or processed during the import.</param>
+        /// <param name="successcount">Shows the number of records in the
+        /// import file that are imported successfully.</param>
+        /// <param name="parsedtablecolumnsnumber">Shows the number of columns
+        /// included in the parsed import file.</param>
+        /// <param name="progresscounter">Shows the progress code for the
+        /// processing of the import file. This field is used when a paused
+        /// import job is resumed.</param>
+        /// <param name="_recordsowneridValue">Choose the user that the records
+        /// created during the import job should be assigned to.</param>
+        public MicrosoftDynamicsCRMimportfile(int? totalcount = default(int?), string targetentityname = default(string), string parsedtablename = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string additionalheaderrow = default(string), bool? isfirstrowheader = default(bool?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string content = default(string), string source = default(string), int? fielddelimitercode = default(int?), string importfileid = default(string), string _modifiedonbehalfbyValue = default(string), int? partialfailurecount = default(int?), string _importmapidValue = default(string), string size = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablecolumnprefix = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), bool? usesystemmap = default(bool?), string _owninguserValue = default(string), int? datadelimitercode = default(int?), string sourceentityname = default(string), string _importidValue = default(string), bool? enableduplicatedetection = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? filetypecode = default(int?), int? failurecount = default(int?), string relatedentitycolumns = default(string), int? processingstatus = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _owneridValue = default(string), string headerrow = default(string), string _owningteamValue = default(string), int? processcode = default(int?), int? successcount = default(int?), int? parsedtablecolumnsnumber = default(int?), int? progresscounter = default(int?), string _recordsowneridValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
         {
             Totalcount = totalcount;
             Targetentityname = targetentityname;
@@ -100,221 +207,316 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the total number of records in the import file.
         /// </summary>
         [JsonProperty(PropertyName = "totalcount")]
         public int? Totalcount { get; set; }
 
         /// <summary>
+        /// Gets or sets select the target record type (entity) for the records
+        /// that will be created during the import job.
         /// </summary>
         [JsonProperty(PropertyName = "targetentityname")]
         public string Targetentityname { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the name of the table that contains the parsed
+        /// data from the import file.
         /// </summary>
         [JsonProperty(PropertyName = "parsedtablename")]
         public string Parsedtablename { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the import associated
+        /// with the import file was completed.
         /// </summary>
         [JsonProperty(PropertyName = "completedon")]
         public System.DateTimeOffset? Completedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the secondary column headers. The additional
+        /// headers are used during the process of transforming the import file
+        /// into import data records.
         /// </summary>
         [JsonProperty(PropertyName = "additionalheaderrow")]
         public string Additionalheaderrow { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the first row of the import file
+        /// contains column headings, which are used for data mapping during
+        /// the import job.
         /// </summary>
         [JsonProperty(PropertyName = "isfirstrowheader")]
         public bool? Isfirstrowheader { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the reason code that explains the import file's
+        /// status to identify the stage of the import process, from parsing
+        /// the data to completed.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of the import file record. By
+        /// default, all records are active and can't be deactivated.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets stores the content of the import file, stored as
+        /// comma-separated values.
         /// </summary>
         [JsonProperty(PropertyName = "content")]
         public string Content { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the name of the data source file uploaded in the
+        /// import job.
         /// </summary>
         [JsonProperty(PropertyName = "source")]
         public string Source { get; set; }
 
         /// <summary>
+        /// Gets or sets select the character that is used to separate each
+        /// field in the import file. Typically, it is a comma.
         /// </summary>
         [JsonProperty(PropertyName = "fielddelimitercode")]
         public int? Fielddelimitercode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the import file.
         /// </summary>
         [JsonProperty(PropertyName = "importfileid")]
         public string Importfileid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of records in this file that had
+        /// failures during the import.
         /// </summary>
         [JsonProperty(PropertyName = "partialfailurecount")]
         public int? Partialfailurecount { get; set; }
 
         /// <summary>
+        /// Gets or sets choose a data map to match the import file and its
+        /// column headers with the record types and fields in Microsoft
+        /// Dynamics 365. If the column headers in the file match the display
+        /// names of the target fields in Microsoft Dynamics 365, we import the
+        /// data automatically. If not, you can manually define matches during
+        /// import.
         /// </summary>
         [JsonProperty(PropertyName = "_importmapid_value")]
         public string _importmapidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the size of the import file, in kilobytes.
         /// </summary>
         [JsonProperty(PropertyName = "size")]
         public string Size { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the prefix applied to each column after the
+        /// import file is parsed.
         /// </summary>
         [JsonProperty(PropertyName = "parsedtablecolumnprefix")]
         public string Parsedtablecolumnprefix { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the business unit that the record owner belongs
+        /// to.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether an automatic system map was applied to
+        /// the import file, which automatically maps the import data to the
+        /// target entity in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "usesystemmap")]
         public bool? Usesystemmap { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the import
+        /// file.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select the single-character data delimiter used in the
+        /// import file. This is typically a single or double quotation mark.
         /// </summary>
         [JsonProperty(PropertyName = "datadelimitercode")]
         public int? Datadelimitercode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the record type (entity) of the source data.
         /// </summary>
         [JsonProperty(PropertyName = "sourceentityname")]
         public string Sourceentityname { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the import job that the file was uploaded for.
         /// </summary>
         [JsonProperty(PropertyName = "_importid_value")]
         public string _importidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether duplicate-detection rules should be run
+        /// against the import job.
         /// </summary>
         [JsonProperty(PropertyName = "enableduplicatedetection")]
         public bool? Enableduplicatedetection { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the type of source file that is uploaded for
+        /// import.
         /// </summary>
         [JsonProperty(PropertyName = "filetypecode")]
         public int? Filetypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of records in the import file that
+        /// cannot be imported.
         /// </summary>
         [JsonProperty(PropertyName = "failurecount")]
         public int? Failurecount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the columns that are mapped to a related record
+        /// type (entity) of the primary record type (entity) included in the
+        /// import file.
         /// </summary>
         [JsonProperty(PropertyName = "relatedentitycolumns")]
         public string Relatedentitycolumns { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the import file's processing status code. This
+        /// indicates whether the data in the import file has been parsed,
+        /// transformed, or imported.
         /// </summary>
         [JsonProperty(PropertyName = "processingstatus")]
         public int? Processingstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the name of the import file. This name is based
+        /// on the name of the uploaded file.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user who is assigned to follow up with or
+        /// manage the import file. This field is updated every time the import
+        /// file is assigned to a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows a list of each column header in the import file
+        /// separated by a comma. The header is used for parsing the file
+        /// during the import job.
         /// </summary>
         [JsonProperty(PropertyName = "headerrow")]
         public string Headerrow { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the import
+        /// file.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether the import file should be ignored or
+        /// processed during the import.
         /// </summary>
         [JsonProperty(PropertyName = "processcode")]
         public int? Processcode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of records in the import file that
+        /// are imported successfully.
         /// </summary>
         [JsonProperty(PropertyName = "successcount")]
         public int? Successcount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of columns included in the parsed
+        /// import file.
         /// </summary>
         [JsonProperty(PropertyName = "parsedtablecolumnsnumber")]
         public int? Parsedtablecolumnsnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the progress code for the processing of the
+        /// import file. This field is used when a paused import job is
+        /// resumed.
         /// </summary>
         [JsonProperty(PropertyName = "progresscounter")]
         public int? Progresscounter { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the user that the records created during the
+        /// import job should be assigned to.
         /// </summary>
         [JsonProperty(PropertyName = "_recordsownerid_value")]
         public string _recordsowneridValue { get; set; }
@@ -377,7 +579,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

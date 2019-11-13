@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// campaignactivity
+    /// Microsoft.Dynamics.CRM.campaignactivity
     /// </summary>
     public partial class MicrosoftDynamicsCRMcampaignactivity
     {
@@ -29,7 +29,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignactivity class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignactivity(object actualcostBase = default(object), bool? donotsendonoptout = default(bool?), int? importsequencenumber = default(int?), object budgetedcostBase = default(object), object actualcost = default(object), bool? ignoreinactivelistmembers = default(bool?), int? typecode = default(int?), string subcategory = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? excludeifcontactedinxdays = default(int?), string category = default(string), object budgetedcost = default(object), int? channeltypecode = default(int?), IList<MicrosoftDynamicsCRMlist> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMsalesliterature> campaignactivitysalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityparties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignactivity = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignactivity = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMannotation> campaignActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMqueueitem> campaignActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMsyncerror> campaignActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> campaignActivityLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkoperation> campaignActivityBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMfax> campaignActivityFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguserCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMemail> campaignActivityEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMtask> campaignActivityTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMteam owningteamCampaignactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMappointment> campaignActivityAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMphonecall> campaignActivityPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> campaignActivityActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMasyncoperation> campaignActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignactivity = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> campaignActivityRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> campaignactivityAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
+        /// <param name="actualcostBase">Shows the Actual Cost field converted
+        /// to the system's default base currency for reporting purposes. The
+        /// calculations use the exchange rate specified in the Currencies
+        /// area.</param>
+        /// <param name="donotsendonoptout">Select whether to override the
+        /// opt-out settings on leads, contacts, and accounts for the members
+        /// of the target marketing lists of the campaign activity. If No is
+        /// selected, marketing materials will be sent to members who have
+        /// opted out.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="budgetedcostBase">Shows the Budget Allocated field
+        /// converted to the system's default base currency. The calculations
+        /// use the exchange rate specified in the Currencies area.</param>
+        /// <param name="actualcost">Type the actual cost of the campaign
+        /// activity. The value entered is rolled up to the related campaign in
+        /// the total cost calculations.</param>
+        /// <param name="ignoreinactivelistmembers">Select whether inactive
+        /// marketing list members will be excluded from the campaign activity
+        /// distribution.</param>
+        /// <param name="typecode">Select the type of campaign activity to
+        /// indicate the purpose of the activity.</param>
+        /// <param name="subcategory">Type a subcategory to identify the
+        /// campaign activity type and relate the activity to a specific
+        /// product, sales region, business group, or other function.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="excludeifcontactedinxdays">Type the minimum number of
+        /// days that must be passed before a marketing list member can be
+        /// contacted in a campaign again. The campaign activity will not be
+        /// applied to members contacted within the specified time
+        /// period.</param>
+        /// <param name="category">Type a category to identify the campaign
+        /// activity type, such as new business development or customer
+        /// retention, to tie the campaign activity to a business group or
+        /// function.</param>
+        /// <param name="budgetedcost">Type the allocated budget of the
+        /// campaign activity for estimated versus actual cost
+        /// reporting.</param>
+        /// <param name="channeltypecode">Select how communications for this
+        /// activity will be sent, such as phone, letter, fax, or
+        /// email.</param>
+        public MicrosoftDynamicsCRMcampaignactivity(decimal? actualcostBase = default(decimal?), bool? donotsendonoptout = default(bool?), int? importsequencenumber = default(int?), decimal? budgetedcostBase = default(decimal?), decimal? actualcost = default(decimal?), bool? ignoreinactivelistmembers = default(bool?), int? typecode = default(int?), string subcategory = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? excludeifcontactedinxdays = default(int?), string category = default(string), decimal? budgetedcost = default(decimal?), int? channeltypecode = default(int?), IList<MicrosoftDynamicsCRMlist> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMsalesliterature> campaignactivitysalesliteratureAssociation = default(IList<MicrosoftDynamicsCRMsalesliterature>), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityparties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignCampaignactivity = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidCampaignactivity = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMannotation> campaignActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMqueueitem> campaignActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnection> campaignactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser createdbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> campaignactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMsyncerror> campaignActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMletter> campaignActivityLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMbulkoperation> campaignActivityBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), IList<MicrosoftDynamicsCRMfax> campaignActivityFaxes = default(IList<MicrosoftDynamicsCRMfax>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguserCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), IList<MicrosoftDynamicsCRMemail> campaignActivityEmails = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMtask> campaignActivityTasks = default(IList<MicrosoftDynamicsCRMtask>), MicrosoftDynamicsCRMteam owningteamCampaignactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMbulkdeletefailure> campaignActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMappointment> campaignActivityAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMphonecall> campaignActivityPhonecalls = default(IList<MicrosoftDynamicsCRMphonecall>), MicrosoftDynamicsCRMsystemuser modifiedbyCampaignactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitypointer> campaignActivityActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMasyncoperation> campaignActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitCampaignactivity = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> campaignActivityRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> campaignactivityAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
         {
             ActualcostBase = actualcostBase;
             Donotsendonoptout = donotsendonoptout;
@@ -85,66 +127,100 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the Actual Cost field converted to the system's
+        /// default base currency for reporting purposes. The calculations use
+        /// the exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "actualcost_base")]
-        public object ActualcostBase { get; set; }
+        public decimal? ActualcostBase { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to override the opt-out settings on
+        /// leads, contacts, and accounts for the members of the target
+        /// marketing lists of the campaign activity. If No is selected,
+        /// marketing materials will be sent to members who have opted out.
         /// </summary>
         [JsonProperty(PropertyName = "donotsendonoptout")]
         public bool? Donotsendonoptout { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Budget Allocated field converted to the
+        /// system's default base currency. The calculations use the exchange
+        /// rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "budgetedcost_base")]
-        public object BudgetedcostBase { get; set; }
+        public decimal? BudgetedcostBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the actual cost of the campaign activity. The
+        /// value entered is rolled up to the related campaign in the total
+        /// cost calculations.
         /// </summary>
         [JsonProperty(PropertyName = "actualcost")]
-        public object Actualcost { get; set; }
+        public decimal? Actualcost { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether inactive marketing list members will be
+        /// excluded from the campaign activity distribution.
         /// </summary>
         [JsonProperty(PropertyName = "ignoreinactivelistmembers")]
         public bool? Ignoreinactivelistmembers { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of campaign activity to indicate the
+        /// purpose of the activity.
         /// </summary>
         [JsonProperty(PropertyName = "typecode")]
         public int? Typecode { get; set; }
 
         /// <summary>
+        /// Gets or sets type a subcategory to identify the campaign activity
+        /// type and relate the activity to a specific product, sales region,
+        /// business group, or other function.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the minimum number of days that must be passed
+        /// before a marketing list member can be contacted in a campaign
+        /// again. The campaign activity will not be applied to members
+        /// contacted within the specified time period.
         /// </summary>
         [JsonProperty(PropertyName = "excludeifcontactedinxdays")]
         public int? Excludeifcontactedinxdays { get; set; }
 
         /// <summary>
+        /// Gets or sets type a category to identify the campaign activity
+        /// type, such as new business development or customer retention, to
+        /// tie the campaign activity to a business group or function.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
+        /// Gets or sets type the allocated budget of the campaign activity for
+        /// estimated versus actual cost reporting.
         /// </summary>
         [JsonProperty(PropertyName = "budgetedcost")]
-        public object Budgetedcost { get; set; }
+        public decimal? Budgetedcost { get; set; }
 
         /// <summary>
+        /// Gets or sets select how communications for this activity will be
+        /// sent, such as phone, letter, fax, or email.
         /// </summary>
         [JsonProperty(PropertyName = "channeltypecode")]
         public int? Channeltypecode { get; set; }

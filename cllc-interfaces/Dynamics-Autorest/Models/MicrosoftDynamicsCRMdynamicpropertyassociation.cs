@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// dynamicpropertyassociation
+    /// Microsoft.Dynamics.CRM.dynamicpropertyassociation
     /// </summary>
     public partial class MicrosoftDynamicsCRMdynamicpropertyassociation
     {
@@ -27,7 +27,43 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdynamicpropertyassociation class.
         /// </summary>
-        public MicrosoftDynamicsCRMdynamicpropertyassociation(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string dynamicpropertyassociationid = default(string), string _organizationidValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), int? inheritancestate = default(int?), string _regardingobjectidValue = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? dmtimportstate = default(int?), long? versionnumber = default(long?), int? associationstatus = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), object exchangerate = default(object), string _dynamicpropertyidValue = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct))
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created.</param>
+        /// <param name="dynamicpropertyassociationid">Shows the unique
+        /// identifier of the property association.</param>
+        /// <param name="_organizationidValue">Shows the organization
+        /// associated with the record.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="importsequencenumber">Shows the data import or data
+        /// migration that created this record.</param>
+        /// <param name="inheritancestate">Shows the inheritance state in
+        /// relationship to the parent property.</param>
+        /// <param name="_regardingobjectidValue">Shows the object that the
+        /// property is associated with.</param>
+        /// <param name="_transactioncurrencyidValue">Shows the currency
+        /// associated with the record.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="dmtimportstate">Internal Use Only</param>
+        /// <param name="versionnumber">Shows the version number of the
+        /// property association.</param>
+        /// <param name="associationstatus">Shows the status of the property
+        /// association.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated.</param>
+        /// <param name="overriddencreatedon">Shows the date and time that the
+        /// record was migrated.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="_dynamicpropertyidValue">Shows the property that uses
+        /// this option set item.</param>
+        public MicrosoftDynamicsCRMdynamicpropertyassociation(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string dynamicpropertyassociationid = default(string), string _organizationidValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), int? importsequencenumber = default(int?), int? inheritancestate = default(int?), string _regardingobjectidValue = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? dmtimportstate = default(int?), string versionnumber = default(string), int? associationstatus = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? exchangerate = default(decimal?), string _dynamicpropertyidValue = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproductassociation regardingobjectidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMdynamicproperty dynamicpropertyid = default(MicrosoftDynamicsCRMdynamicproperty), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct))
         {
             Createdon = createdon;
             Dynamicpropertyassociationid = dynamicpropertyassociationid;
@@ -65,91 +101,117 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the unique identifier of the property
+        /// association.
         /// </summary>
         [JsonProperty(PropertyName = "dynamicpropertyassociationid")]
         public string Dynamicpropertyassociationid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the organization associated with the record.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the data import or data migration that created
+        /// this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the inheritance state in relationship to the
+        /// parent property.
         /// </summary>
         [JsonProperty(PropertyName = "inheritancestate")]
         public int? Inheritancestate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the object that the property is associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
         public string _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the currency associated with the record.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "dmtimportstate")]
         public int? Dmtimportstate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the version number of the property association.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of the property association.
         /// </summary>
         [JsonProperty(PropertyName = "associationstatus")]
         public int? Associationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the property that uses this option set item.
         /// </summary>
         [JsonProperty(PropertyName = "_dynamicpropertyid_value")]
         public string _dynamicpropertyidValue { get; set; }
