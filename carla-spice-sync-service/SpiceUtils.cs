@@ -127,9 +127,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             {
                 string appFilter = $"adoxio_jobnumber eq '{applicationResponse.RecordIdentifier}'";
                 string[] expand = { "adoxio_ApplyingPerson", "adoxio_Applicant", "adoxio_adoxio_application_contact" };
-                MicrosoftDynamicsCRMadoxioApplication applications = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value.FirstOrDefault();
+                MicrosoftDynamicsCRMadoxioApplication application = _dynamicsClient.Applications.Get(filter: appFilter, expand: expand).Value.FirstOrDefault();
 
-                if (applications != null)
+                if (application != null)
                 {
                     var screeningRequest = await CreateApplicationScreeningRequest(application);
                     if (screeningRequest == null)
@@ -813,19 +813,19 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             // Query Dynamics for worker data
             string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
             string sendFilter = $"adoxio_consentvalidated eq {(int)WorkerConsentValidated.Yes} and adoxio_exporteddate eq null";
-            List<MicrosoftDynamicsCRMadoxioWorker> workers = _dynamicsClient.Workers.Get(filter: sendFilter, expand: expand).Value;
+            IList<MicrosoftDynamicsCRMadoxioWorker> workers = _dynamicsClient.Workers.Get(filter: sendFilter, expand: expand).Value;
             
-            if (workers.Value.Count < 1)
+            if (workers.Count < 1)
             {
                 _logger.LogError("No workers found for processing");
                 hangfireContext.WriteLine("No workers found for processing");
             }
             else
             {
-                _logger.LogError($"Found {workers.Value.Count} workers to send to SPD.");
-                hangfireContext.WriteLine($"Found {workers.Value.Count} workers to send to SPD.");
+                _logger.LogError($"Found {workers.Count} workers to send to SPD.");
+                hangfireContext.WriteLine($"Found {workers.Count} workers to send to SPD.");
 
-                foreach (var worker in workers.Value)
+                foreach (var worker in workers)
                 {
                     IncompleteWorkerScreening screeningRequest = GenerateWorkerScreeningRequest(Guid.Parse(worker.AdoxioWorkerid));
                     var reqSuccess = SendWorkerScreeningRequest(screeningRequest);
@@ -860,7 +860,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public async Task SendFoundApplications(PerformContext hangfireContext)
         {
             string[] select = {"adoxio_applicationtypeid"};
-            List<Applicationtypes> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
+            IList<MicrosoftDynamicsCRMadoxioApplicationtype> selectedAppTypes = _dynamicsClient.Applicationtypes.Get(filter: "adoxio_requiressecurityscreening eq true", select: select).Value;
             if (selectedAppTypes.Count == 0)
             {
                 _logger.LogError("Failed to Start SendFoundApplicationsJob: No application types are set to send to SPD.");
