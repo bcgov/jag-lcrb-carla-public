@@ -162,10 +162,8 @@ export class LicenseeChangeLog {
           change.businessNameNew = `${change.firstNameNew} ${change.lastNameNew}`;
         }
 
-        change.isIndividual = false;
-        if (change.isIndividualFromChangeType()) {
-          change.isIndividual = true;
-        }
+        change.isIndividual = change.isIndividualFromChangeType();
+        change.children = node.children;
         Object.assign(node, change);
       }
     });
