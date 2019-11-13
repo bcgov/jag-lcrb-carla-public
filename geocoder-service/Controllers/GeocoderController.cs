@@ -36,8 +36,8 @@ namespace Gov.Lclb.Cllb.Geocoder.Controllers
         [HttpGet("GeocodeEstablishments")]
         public ActionResult GeocodeEstablishments()
         {
-            _logger.LogInformation($"Geocoding establishments");
-            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _logger).GeocodeEstablishments(null));
+            _logger.LogInformation($"Geocoding all establishments ");
+            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _logger).GeocodeEstablishments(null, true));
             return Ok();
         }
 
