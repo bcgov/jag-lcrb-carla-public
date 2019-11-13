@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// calendar was last modified.</param>
         /// <param name="quarter3Base">Base currency equivalent of the sales
         /// quota for the third quarter in the fiscal year.</param>
-        public MicrosoftDynamicsCRMquarterlyfiscalcalendar(int? fiscalperiodtype = default(int?), decimal? quarter4 = default(decimal?), System.Guid? _createdbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), decimal? quarter1 = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), decimal? quarter3 = default(decimal?), System.Guid? _salespersonidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? userfiscalcalendarid = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), decimal? quarter2 = default(decimal?), decimal? exchangerate = default(decimal?), decimal? quarter4Base = default(decimal?), System.Guid? _businessunitidValue = default(System.Guid?), decimal? quarter2Base = default(decimal?), decimal? quarter1Base = default(decimal?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? quarter3Base = default(decimal?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> quarterlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quarterlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMquarterlyfiscalcalendar(int? fiscalperiodtype = default(int?), decimal? quarter4 = default(decimal?), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), decimal? quarter1 = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _transactioncurrencyidValue = default(string), decimal? quarter3 = default(decimal?), string _salespersonidValue = default(string), string _createdonbehalfbyValue = default(string), string userfiscalcalendarid = default(string), string _modifiedonbehalfbyValue = default(string), decimal? quarter2 = default(decimal?), decimal? exchangerate = default(decimal?), decimal? quarter4Base = default(decimal?), string _businessunitidValue = default(string), decimal? quarter2Base = default(decimal?), decimal? quarter1Base = default(decimal?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? quarter3Base = default(decimal?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMasyncoperation> quarterlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> quarterlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser))
         {
             Fiscalperiodtype = fiscalperiodtype;
             Quarter4 = quarter4;
@@ -133,7 +133,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// quarterly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -159,14 +159,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// quarterly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the currency associated with the
         /// quarterly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets sales quota for the third quarter in the fiscal year.
@@ -178,27 +178,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated salesperson.
         /// </summary>
         [JsonProperty(PropertyName = "_salespersonid_value")]
-        public System.Guid? _salespersonidValue { get; set; }
+        public string _salespersonidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// quarterlyfiscalcalendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the quarterly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "userfiscalcalendarid")]
-        public System.Guid? Userfiscalcalendarid { get; set; }
+        public string Userfiscalcalendarid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who last
         /// modified the quarterlyfiscalcalendar.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets sales quota for the second quarter in the fiscal year.
@@ -223,7 +223,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
-        public System.Guid? _businessunitidValue { get; set; }
+        public string _businessunitidValue { get; set; }
 
         /// <summary>
         /// Gets or sets base currency equivalent of the sales quota for the

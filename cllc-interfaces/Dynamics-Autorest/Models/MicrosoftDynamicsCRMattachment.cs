@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// attachment.</param>
         /// <param name="versionnumber">Version number of the
         /// attachment.</param>
-        public MicrosoftDynamicsCRMattachment(string mimetype = default(string), string filename = default(string), System.Guid? attachmentid = default(System.Guid?), string body = default(string), byte[] bodyBinary = default(byte[]), int? filesize = default(int?), string subject = default(string), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
+        public MicrosoftDynamicsCRMattachment(string mimetype = default(string), string filename = default(string), string attachmentid = default(string), string body = default(string), byte[] bodyBinary = default(byte[]), int? filesize = default(int?), string subject = default(string), string versionnumber = default(string), IList<MicrosoftDynamicsCRMsyncerror> attachmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitymimeattachment> attachmentActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>))
         {
             Mimetype = mimetype;
             Filename = filename;
@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the attachment.
         /// </summary>
         [JsonProperty(PropertyName = "attachmentid")]
-        public System.Guid? Attachmentid { get; set; }
+        public string Attachmentid { get; set; }
 
         /// <summary>
         /// Gets or sets contents of the attachment.

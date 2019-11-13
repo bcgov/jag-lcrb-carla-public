@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="name">Name of the complex control.</param>
         /// <param name="description">Description of the complex
         /// control.</param>
-        public MicrosoftDynamicsCRMcomplexcontrol(string versionnumber = default(string), string complexcontrolxml = default(string), System.Guid? complexcontrolid = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), int? type = default(int?), System.Guid? complexcontrolidunique = default(System.Guid?), int? version = default(int?), string name = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMcomplexcontrol(string versionnumber = default(string), string complexcontrolxml = default(string), string complexcontrolid = default(string), string _organizationidValue = default(string), int? type = default(int?), string complexcontrolidunique = default(string), int? version = default(int?), string name = default(string), string description = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Versionnumber = versionnumber;
             Complexcontrolxml = complexcontrolxml;
@@ -82,13 +82,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the complex control.
         /// </summary>
         [JsonProperty(PropertyName = "complexcontrolid")]
-        public System.Guid? Complexcontrolid { get; set; }
+        public string Complexcontrolid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type of the complex control, for example, Process
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// customizations for the Microsoft Dynamics 365 client for Outlook.
         /// </summary>
         [JsonProperty(PropertyName = "complexcontrolidunique")]
-        public System.Guid? Complexcontrolidunique { get; set; }
+        public string Complexcontrolidunique { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.

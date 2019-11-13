@@ -28,7 +28,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// MicrosoftDynamicsCRMprincipalentitymap class.
         /// </summary>
         /// <param name="principalentitymapid">For internal use only.</param>
-        public MicrosoftDynamicsCRMprincipalentitymap(string objecttypecode = default(string), System.Guid? principalid = default(System.Guid?), System.Guid? principalentitymapid = default(System.Guid?), string versionnumber = default(string), MicrosoftDynamicsCRMprincipal principalidOwner = default(MicrosoftDynamicsCRMprincipal))
+        public MicrosoftDynamicsCRMprincipalentitymap(string objecttypecode = default(string), string principalid = default(string), string principalentitymapid = default(string), string versionnumber = default(string), MicrosoftDynamicsCRMprincipal principalidOwner = default(MicrosoftDynamicsCRMprincipal))
         {
             Objecttypecode = objecttypecode;
             Principalid = principalid;
@@ -51,13 +51,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "principalid")]
-        public System.Guid? Principalid { get; set; }
+        public string Principalid { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "principalentitymapid")]
-        public System.Guid? Principalentitymapid { get; set; }
+        public string Principalentitymapid { get; set; }
 
         /// <summary>
         /// </summary>

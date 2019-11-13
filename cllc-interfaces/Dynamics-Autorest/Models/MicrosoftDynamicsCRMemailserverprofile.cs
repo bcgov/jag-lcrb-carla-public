@@ -174,7 +174,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// encoding email content.</param>
         /// <param name="outgoingcredentialretrieval">Select how credentials
         /// will be retrieved for outgoing email.</param>
-        public MicrosoftDynamicsCRMemailserverprofile(long? lasttesttotalexecutiontime = default(long?), bool? outgoingusessl = default(bool?), string incomingserverlocation = default(string), string outgoingusername = default(string), int? statuscode = default(int?), string incomingusername = default(string), int? outgoingportnumber = default(int?), string outgoingpassword = default(string), int? incomingauthenticationprotocol = default(int?), bool? timeoutmailboxconnection = default(bool?), byte[] entityimage = default(byte[]), bool? moveundeliveredemails = default(bool?), System.Guid? _createdbyValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), bool? isoutgoingpasswordset = default(bool?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _incomingpartnerapplicationValue = default(System.Guid?), int? outgoingauthenticationprotocol = default(int?), System.Guid? _outgoingpartnerapplicationValue = default(System.Guid?), int? lasttestexecutionstatus = default(int?), int? minpollingintervalinminutes = default(int?), string owneremailaddress = default(string), int? incomingcredentialretrieval = default(int?), System.DateTimeOffset? lastteststarttime = default(System.DateTimeOffset?), int? incomingportnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timeoutmailboxconnectionafteramount = default(int?), System.Guid? emailserverprofileid = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), bool? outgoinguseimpersonation = default(bool?), int? lastauthorizationstatus = default(int?), int? maxconcurrentconnections = default(int?), string name = default(string), System.Guid? _organizationidValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), string description = default(string), bool? useautodiscover = default(bool?), System.Guid? _owninguserValue = default(System.Guid?), bool? sendemailalert = default(bool?), string lasttestrequest = default(string), string defaultserverlocation = default(string), bool? usedefaulttenantid = default(bool?), string entityimageUrl = default(string), bool? outgoingautograntdelegateaccess = default(bool?), bool? incominguseimpersonation = default(bool?), System.Guid? _modifiedbyValue = default(System.Guid?), bool? isincomingpasswordset = default(bool?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string incomingpassword = default(string), System.Guid? entityimageid = default(System.Guid?), int? statecode = default(int?), bool? usesamesettingsforoutgoingconnections = default(bool?), System.DateTimeOffset? processemailsreceivedafter = default(System.DateTimeOffset?), int? exchangeversion = default(int?), string exchangeonlinetenantid = default(string), bool? incomingusessl = default(bool?), int? lasttestvalidationstatus = default(int?), System.Guid? _owningteamValue = default(System.Guid?), string emailservertypename = default(string), string lasttestresponse = default(string), string lastcrmmessage = default(string), int? servertype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? entityimageTimestamp = default(long?), string outgoingserverlocation = default(string), System.Guid? _owningbusinessunitValue = default(System.Guid?), string encodingcodepage = default(string), int? outgoingcredentialretrieval = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailbox> emailserverprofileMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMasyncoperation> emailserverprofileAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailserverprofileBulkdeletefailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMorganization> emailServerProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtracelog> tracelogEmailServerProfile = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMannotation> emailServerProfileAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatematchingrecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> emailServerProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatebaserecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
+        public MicrosoftDynamicsCRMemailserverprofile(long? lasttesttotalexecutiontime = default(long?), bool? outgoingusessl = default(bool?), string incomingserverlocation = default(string), string outgoingusername = default(string), int? statuscode = default(int?), string incomingusername = default(string), int? outgoingportnumber = default(int?), string outgoingpassword = default(string), int? incomingauthenticationprotocol = default(int?), bool? timeoutmailboxconnection = default(bool?), byte[] entityimage = default(byte[]), bool? moveundeliveredemails = default(bool?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), bool? isoutgoingpasswordset = default(bool?), string _owneridValue = default(string), string _incomingpartnerapplicationValue = default(string), int? outgoingauthenticationprotocol = default(int?), string _outgoingpartnerapplicationValue = default(string), int? lasttestexecutionstatus = default(int?), int? minpollingintervalinminutes = default(int?), string owneremailaddress = default(string), int? incomingcredentialretrieval = default(int?), System.DateTimeOffset? lastteststarttime = default(System.DateTimeOffset?), int? incomingportnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timeoutmailboxconnectionafteramount = default(int?), string emailserverprofileid = default(string), string _modifiedonbehalfbyValue = default(string), bool? outgoinguseimpersonation = default(bool?), int? lastauthorizationstatus = default(int?), int? maxconcurrentconnections = default(int?), string name = default(string), string _organizationidValue = default(string), int? timezoneruleversionnumber = default(int?), string description = default(string), bool? useautodiscover = default(bool?), string _owninguserValue = default(string), bool? sendemailalert = default(bool?), string lasttestrequest = default(string), string defaultserverlocation = default(string), bool? usedefaulttenantid = default(bool?), string entityimageUrl = default(string), bool? outgoingautograntdelegateaccess = default(bool?), bool? incominguseimpersonation = default(bool?), string _modifiedbyValue = default(string), bool? isincomingpasswordset = default(bool?), string _createdonbehalfbyValue = default(string), string incomingpassword = default(string), string entityimageid = default(string), int? statecode = default(int?), bool? usesamesettingsforoutgoingconnections = default(bool?), System.DateTimeOffset? processemailsreceivedafter = default(System.DateTimeOffset?), int? exchangeversion = default(int?), string exchangeonlinetenantid = default(string), bool? incomingusessl = default(bool?), int? lasttestvalidationstatus = default(int?), string _owningteamValue = default(string), string emailservertypename = default(string), string lasttestresponse = default(string), string lastcrmmessage = default(string), int? servertype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? entityimageTimestamp = default(long?), string outgoingserverlocation = default(string), string _owningbusinessunitValue = default(string), string encodingcodepage = default(string), int? outgoingcredentialretrieval = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailbox> emailserverprofileMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMasyncoperation> emailserverprofileAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailserverprofileBulkdeletefailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMorganization> emailServerProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtracelog> tracelogEmailServerProfile = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMannotation> emailServerProfileAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatematchingrecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> emailServerProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatebaserecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
         {
             Lasttesttotalexecutiontime = lasttesttotalexecutiontime;
             Outgoingusessl = outgoingusessl;
@@ -349,7 +349,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -369,13 +369,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates the incoming partner application.
         /// </summary>
         [JsonProperty(PropertyName = "_incomingpartnerapplication_value")]
-        public System.Guid? _incomingpartnerapplicationValue { get; set; }
+        public string _incomingpartnerapplicationValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the outgoing email authentication protocol that
@@ -388,7 +388,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets indicates the outgoing partner application.
         /// </summary>
         [JsonProperty(PropertyName = "_outgoingpartnerapplication_value")]
-        public System.Guid? _outgoingpartnerapplicationValue { get; set; }
+        public string _outgoingpartnerapplicationValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the last test Execution status of email server
@@ -448,14 +448,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the email server profile.
         /// </summary>
         [JsonProperty(PropertyName = "emailserverprofileid")]
-        public System.Guid? Emailserverprofileid { get; set; }
+        public string Emailserverprofileid { get; set; }
 
         /// <summary>
         /// Gets or sets shows who last updated the record on behalf of another
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets select whether to use impersonation for accessing the
@@ -491,7 +491,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -517,7 +517,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets select whether to send an email alert if more than 50%
@@ -571,7 +571,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -583,7 +583,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the password for incoming email.
@@ -595,7 +595,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
-        public System.Guid? Entityimageid { get; set; }
+        public string Entityimageid { get; set; }
 
         /// <summary>
         /// Gets or sets shows whether the email server profile is active or
@@ -650,7 +650,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets email Server Type Name
@@ -700,7 +700,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets select the business unit that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates the code page to use when encoding email

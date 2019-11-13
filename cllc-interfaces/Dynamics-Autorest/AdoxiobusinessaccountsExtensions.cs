@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioBusinessaccountCollection Get(this IAdoxiobusinessaccounts operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioBusinessaccountCollection Get(this IAdoxiobusinessaccounts operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioBusinessaccountCollection> GetAsync(this IAdoxiobusinessaccounts operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioBusinessaccountCollection> GetAsync(this IAdoxiobusinessaccounts operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioBusinessaccountCollection> GetWithHttpMessages(this IAdoxiobusinessaccounts operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioBusinessaccountCollection> GetWithHttpMessages(this IAdoxiobusinessaccounts operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioBusinessaccount BusinessaccountsByKey(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioBusinessaccount GetByKey(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.BusinessaccountsByKeyAsync(adoxioBusinessaccountid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioBusinessaccountid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioBusinessaccount> BusinessaccountsByKeyAsync(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioBusinessaccount> GetByKeyAsync(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.BusinessaccountsByKeyWithHttpMessagesAsync(adoxioBusinessaccountid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioBusinessaccountid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioBusinessaccount> BusinessaccountsByKeyWithHttpMessages(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioBusinessaccount> GetByKeyWithHttpMessages(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.BusinessaccountsByKeyWithHttpMessagesAsync(adoxioBusinessaccountid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioBusinessaccountid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void BusinessaccountsByKey1(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, MicrosoftDynamicsCRMadoxioBusinessaccount body)
+            public static void Update(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, MicrosoftDynamicsCRMadoxioBusinessaccount body)
             {
-                operations.BusinessaccountsByKey1Async(adoxioBusinessaccountid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioBusinessaccountid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BusinessaccountsByKey1Async(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, MicrosoftDynamicsCRMadoxioBusinessaccount body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, MicrosoftDynamicsCRMadoxioBusinessaccount body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.BusinessaccountsByKey1WithHttpMessagesAsync(adoxioBusinessaccountid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioBusinessaccountid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse BusinessaccountsByKey1WithHttpMessages(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, MicrosoftDynamicsCRMadoxioBusinessaccount body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, MicrosoftDynamicsCRMadoxioBusinessaccount body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.BusinessaccountsByKey1WithHttpMessagesAsync(adoxioBusinessaccountid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioBusinessaccountid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void BusinessaccountsByKey2(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, string ifMatch = default(string))
             {
-                operations.BusinessaccountsByKey2Async(adoxioBusinessaccountid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioBusinessaccountid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task BusinessaccountsByKey2Async(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.BusinessaccountsByKey2WithHttpMessagesAsync(adoxioBusinessaccountid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioBusinessaccountid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse BusinessaccountsByKey2WithHttpMessages(this IAdoxiobusinessaccounts operations, System.Guid adoxioBusinessaccountid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiobusinessaccounts operations, string adoxioBusinessaccountid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.BusinessaccountsByKey2WithHttpMessagesAsync(adoxioBusinessaccountid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioBusinessaccountid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

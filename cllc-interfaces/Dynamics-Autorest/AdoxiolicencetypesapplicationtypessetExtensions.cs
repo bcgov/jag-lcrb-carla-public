@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypesCollection Get(this IAdoxiolicencetypesapplicationtypesset operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypesCollection Get(this IAdoxiolicencetypesapplicationtypesset operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypesCollection> GetAsync(this IAdoxiolicencetypesapplicationtypesset operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypesCollection> GetAsync(this IAdoxiolicencetypesapplicationtypesset operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypesCollection> GetWithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypesCollection> GetWithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -166,9 +184,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes ApplicationtypessetByKey(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes GetByKey(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.ApplicationtypessetByKeyAsync(adoxioLicencetypesApplicationtypesid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioLicencetypesApplicationtypesid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -190,9 +208,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes> ApplicationtypessetByKeyAsync(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes> GetByKeyAsync(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApplicationtypessetByKeyWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -217,9 +235,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes> ApplicationtypessetByKeyWithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes> GetByKeyWithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.ApplicationtypessetByKeyWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -235,9 +253,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void ApplicationtypessetByKey1(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes body)
+            public static void Update(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes body)
             {
-                operations.ApplicationtypessetByKey1Async(adoxioLicencetypesApplicationtypesid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioLicencetypesApplicationtypesid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -256,9 +274,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApplicationtypessetByKey1Async(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.ApplicationtypessetByKey1WithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -277,9 +295,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse ApplicationtypessetByKey1WithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.ApplicationtypessetByKey1WithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -295,9 +313,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void ApplicationtypessetByKey2(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, string ifMatch = default(string))
             {
-                operations.ApplicationtypessetByKey2Async(adoxioLicencetypesApplicationtypesid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioLicencetypesApplicationtypesid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -316,9 +334,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApplicationtypessetByKey2Async(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.ApplicationtypessetByKey2WithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -337,9 +355,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse ApplicationtypessetByKey2WithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, System.Guid adoxioLicencetypesApplicationtypesid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiolicencetypesapplicationtypesset operations, string adoxioLicencetypesApplicationtypesid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.ApplicationtypessetByKey2WithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioLicencetypesApplicationtypesid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

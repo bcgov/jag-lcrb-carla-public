@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// rules.</param>
         /// <param name="organizationid">Unique identifier of the organization
         /// with which the calendar rule is associated.</param>
-        public MicrosoftDynamicsCRMcalendarrule(System.DateTimeOffset? effectiveintervalend = default(System.DateTimeOffset?), bool? ismodified = default(bool?), int? offset = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _serviceidValue = default(System.Guid?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), System.Guid? _createdbyValue = default(System.Guid?), string groupdesignator = default(string), int? duration = default(int?), int? extentcode = default(int?), string description = default(string), string effort = default(string), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? timecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _calendaridValue = default(System.Guid?), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), bool? isvaried = default(bool?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? calendarruleid = default(System.Guid?), int? timezonecode = default(int?), int? subcode = default(int?), string pattern = default(string), System.Guid? businessunitid = default(System.Guid?), System.Guid? _innercalendaridValue = default(System.Guid?), bool? issimple = default(bool?), System.DateTimeOffset? effectiveintervalstart = default(System.DateTimeOffset?), int? rank = default(int?), bool? isselected = default(bool?), System.Guid? organizationid = default(System.Guid?), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcalendar innercalendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice))
+        public MicrosoftDynamicsCRMcalendarrule(System.DateTimeOffset? effectiveintervalend = default(System.DateTimeOffset?), bool? ismodified = default(bool?), int? offset = default(int?), string _createdonbehalfbyValue = default(string), string _serviceidValue = default(string), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), string _createdbyValue = default(string), string groupdesignator = default(string), int? duration = default(int?), int? extentcode = default(int?), string description = default(string), string effort = default(string), System.DateTimeOffset? starttime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? timecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _calendaridValue = default(string), System.DateTimeOffset? endtime = default(System.DateTimeOffset?), bool? isvaried = default(bool?), string _modifiedbyValue = default(string), string calendarruleid = default(string), int? timezonecode = default(int?), int? subcode = default(int?), string pattern = default(string), string businessunitid = default(string), string _innercalendaridValue = default(string), bool? issimple = default(bool?), System.DateTimeOffset? effectiveintervalstart = default(System.DateTimeOffset?), int? rank = default(int?), bool? isselected = default(bool?), string organizationid = default(string), MicrosoftDynamicsCRMcalendar calendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcalendar innercalendarid = default(MicrosoftDynamicsCRMcalendar), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMservice serviceid = default(MicrosoftDynamicsCRMservice))
         {
             Effectiveintervalend = effectiveintervalend;
             Ismodified = ismodified;
@@ -157,14 +157,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// calendarrule.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the service with which the
         /// calendar rule is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_serviceid_value")]
-        public System.Guid? _serviceidValue { get; set; }
+        public string _serviceidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -188,7 +188,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// rule.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the group.
@@ -234,7 +234,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the calendarrule.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type of calendar rule such as working hours, break,
@@ -255,7 +255,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// calendar rule is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_calendarid_value")]
-        public System.Guid? _calendaridValue { get; set; }
+        public string _calendaridValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -274,13 +274,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// calendar rule.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the calendar rule.
         /// </summary>
         [JsonProperty(PropertyName = "calendarruleid")]
-        public System.Guid? Calendarruleid { get; set; }
+        public string Calendarruleid { get; set; }
 
         /// <summary>
         /// Gets or sets local time zone for the calendar rule.
@@ -305,14 +305,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// calendar rule is associated.
         /// </summary>
         [JsonProperty(PropertyName = "businessunitid")]
-        public System.Guid? Businessunitid { get; set; }
+        public string Businessunitid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the inner calendar for non-leaf
         /// calendar rules.
         /// </summary>
         [JsonProperty(PropertyName = "_innercalendarid_value")]
-        public System.Guid? _innercalendaridValue { get; set; }
+        public string _innercalendaridValue { get; set; }
 
         /// <summary>
         /// Gets or sets flag used in vary-by-day calendar rules.
@@ -343,7 +343,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// calendar rule is associated.
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
-        public System.Guid? Organizationid { get; set; }
+        public string Organizationid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// item created by the bulk operation.</param>
         /// <param name="_owneridValue">Unique identifier of the user or team
         /// who owns the bulk operation log.</param>
-        public MicrosoftDynamicsCRMbulkoperationlog(string additionalinfo = default(string), System.Guid? owningbusinessunit = default(System.Guid?), System.Guid? owninguser = default(System.Guid?), int? errornumber = default(int?), System.Guid? bulkoperationlogid = default(System.Guid?), System.Guid? _bulkoperationidValue = default(System.Guid?), System.Guid? _regardingobjectidValue = default(System.Guid?), System.Guid? _createdobjectidValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), MicrosoftDynamicsCRMactivitypointer createdobjectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontact createdobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkOperationLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbulkoperation bulkoperationid = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMaccount createdobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMactivitypointer bulkoperationidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlead createdobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity createdobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMasyncoperation> bulkOperationLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead))
+        public MicrosoftDynamicsCRMbulkoperationlog(string additionalinfo = default(string), string owningbusinessunit = default(string), string owninguser = default(string), int? errornumber = default(int?), string bulkoperationlogid = default(string), string _bulkoperationidValue = default(string), string _regardingobjectidValue = default(string), string _createdobjectidValue = default(string), string _owneridValue = default(string), MicrosoftDynamicsCRMactivitypointer createdobjectidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcontact createdobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkOperationLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbulkoperation bulkoperationid = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMaccount createdobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMactivitypointer bulkoperationidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlead createdobjectidLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMopportunity createdobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), IList<MicrosoftDynamicsCRMasyncoperation> bulkOperationLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead))
         {
             Additionalinfo = additionalinfo;
             Owningbusinessunit = owningbusinessunit;
@@ -91,14 +91,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// bulk operation log.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who owns the bulk
         /// operation log.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets shows the error code that is used to troubleshoot
@@ -111,7 +111,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the bulk operation log.
         /// </summary>
         [JsonProperty(PropertyName = "bulkoperationlogid")]
-        public System.Guid? Bulkoperationlogid { get; set; }
+        public string Bulkoperationlogid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the quick campaign record that the log applies
@@ -119,28 +119,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// campaign.
         /// </summary>
         [JsonProperty(PropertyName = "_bulkoperationid_value")]
-        public System.Guid? _bulkoperationidValue { get; set; }
+        public string _bulkoperationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets choose the account, contact, lead, or list that the
         /// bulk operation log item applies to.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public System.Guid? _regardingobjectidValue { get; set; }
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
         /// Gets or sets choose the activity or other item created by the bulk
         /// operation.
         /// </summary>
         [JsonProperty(PropertyName = "_createdobjectid_value")]
-        public System.Guid? _createdobjectidValue { get; set; }
+        public string _createdobjectidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user or team who owns the
         /// bulk operation log.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>

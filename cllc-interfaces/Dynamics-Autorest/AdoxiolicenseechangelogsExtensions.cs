@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicenseechangelogCollection Get(this IAdoxiolicenseechangelogs operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicenseechangelogCollection Get(this IAdoxiolicenseechangelogs operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicenseechangelogCollection> GetAsync(this IAdoxiolicenseechangelogs operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicenseechangelogCollection> GetAsync(this IAdoxiolicenseechangelogs operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicenseechangelogCollection> GetWithHttpMessages(this IAdoxiolicenseechangelogs operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicenseechangelogCollection> GetWithHttpMessages(this IAdoxiolicenseechangelogs operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLicenseechangelog LicenseechangelogsByKey(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLicenseechangelog GetByKey(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.LicenseechangelogsByKeyAsync(adoxioLicenseechangelogid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioLicenseechangelogid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLicenseechangelog> LicenseechangelogsByKeyAsync(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLicenseechangelog> GetByKeyAsync(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.LicenseechangelogsByKeyWithHttpMessagesAsync(adoxioLicenseechangelogid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioLicenseechangelogid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicenseechangelog> LicenseechangelogsByKeyWithHttpMessages(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLicenseechangelog> GetByKeyWithHttpMessages(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.LicenseechangelogsByKeyWithHttpMessagesAsync(adoxioLicenseechangelogid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioLicenseechangelogid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void LicenseechangelogsByKey1(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, MicrosoftDynamicsCRMadoxioLicenseechangelog body)
+            public static void Update(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, MicrosoftDynamicsCRMadoxioLicenseechangelog body)
             {
-                operations.LicenseechangelogsByKey1Async(adoxioLicenseechangelogid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioLicenseechangelogid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task LicenseechangelogsByKey1Async(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, MicrosoftDynamicsCRMadoxioLicenseechangelog body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, MicrosoftDynamicsCRMadoxioLicenseechangelog body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.LicenseechangelogsByKey1WithHttpMessagesAsync(adoxioLicenseechangelogid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioLicenseechangelogid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse LicenseechangelogsByKey1WithHttpMessages(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, MicrosoftDynamicsCRMadoxioLicenseechangelog body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, MicrosoftDynamicsCRMadoxioLicenseechangelog body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.LicenseechangelogsByKey1WithHttpMessagesAsync(adoxioLicenseechangelogid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioLicenseechangelogid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void LicenseechangelogsByKey2(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, string ifMatch = default(string))
             {
-                operations.LicenseechangelogsByKey2Async(adoxioLicenseechangelogid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioLicenseechangelogid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task LicenseechangelogsByKey2Async(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.LicenseechangelogsByKey2WithHttpMessagesAsync(adoxioLicenseechangelogid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioLicenseechangelogid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse LicenseechangelogsByKey2WithHttpMessages(this IAdoxiolicenseechangelogs operations, System.Guid adoxioLicenseechangelogid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiolicenseechangelogs operations, string adoxioLicenseechangelogid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.LicenseechangelogsByKey2WithHttpMessagesAsync(adoxioLicenseechangelogid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioLicenseechangelogid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

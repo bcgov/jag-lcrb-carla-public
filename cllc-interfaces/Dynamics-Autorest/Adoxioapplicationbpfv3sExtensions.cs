@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplicationbpfv3Collection Get(this IAdoxioapplicationbpfv3s operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioApplicationbpfv3Collection Get(this IAdoxioapplicationbpfv3s operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplicationbpfv3Collection> GetAsync(this IAdoxioapplicationbpfv3s operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioApplicationbpfv3Collection> GetAsync(this IAdoxioapplicationbpfv3s operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationbpfv3Collection> GetWithHttpMessages(this IAdoxioapplicationbpfv3s operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationbpfv3Collection> GetWithHttpMessages(this IAdoxioapplicationbpfv3s operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplicationbpfv3 Applicationbpfv3sByKey(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioApplicationbpfv3 GetByKey(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.Applicationbpfv3sByKeyAsync(businessprocessflowinstanceid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(businessprocessflowinstanceid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplicationbpfv3> Applicationbpfv3sByKeyAsync(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioApplicationbpfv3> GetByKeyAsync(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.Applicationbpfv3sByKeyWithHttpMessagesAsync(businessprocessflowinstanceid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(businessprocessflowinstanceid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationbpfv3> Applicationbpfv3sByKeyWithHttpMessages(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationbpfv3> GetByKeyWithHttpMessages(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.Applicationbpfv3sByKeyWithHttpMessagesAsync(businessprocessflowinstanceid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(businessprocessflowinstanceid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void Applicationbpfv3sByKey1(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, MicrosoftDynamicsCRMadoxioApplicationbpfv3 body)
+            public static void Update(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, MicrosoftDynamicsCRMadoxioApplicationbpfv3 body)
             {
-                operations.Applicationbpfv3sByKey1Async(businessprocessflowinstanceid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(businessprocessflowinstanceid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Applicationbpfv3sByKey1Async(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, MicrosoftDynamicsCRMadoxioApplicationbpfv3 body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, MicrosoftDynamicsCRMadoxioApplicationbpfv3 body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.Applicationbpfv3sByKey1WithHttpMessagesAsync(businessprocessflowinstanceid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(businessprocessflowinstanceid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse Applicationbpfv3sByKey1WithHttpMessages(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, MicrosoftDynamicsCRMadoxioApplicationbpfv3 body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, MicrosoftDynamicsCRMadoxioApplicationbpfv3 body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.Applicationbpfv3sByKey1WithHttpMessagesAsync(businessprocessflowinstanceid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(businessprocessflowinstanceid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void Applicationbpfv3sByKey2(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, string ifMatch = default(string))
+            public static void Delete(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, string ifMatch = default(string))
             {
-                operations.Applicationbpfv3sByKey2Async(businessprocessflowinstanceid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(businessprocessflowinstanceid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Applicationbpfv3sByKey2Async(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.Applicationbpfv3sByKey2WithHttpMessagesAsync(businessprocessflowinstanceid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(businessprocessflowinstanceid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse Applicationbpfv3sByKey2WithHttpMessages(this IAdoxioapplicationbpfv3s operations, System.Guid businessprocessflowinstanceid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxioapplicationbpfv3s operations, string businessprocessflowinstanceid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.Applicationbpfv3sByKey2WithHttpMessagesAsync(businessprocessflowinstanceid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(businessprocessflowinstanceid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

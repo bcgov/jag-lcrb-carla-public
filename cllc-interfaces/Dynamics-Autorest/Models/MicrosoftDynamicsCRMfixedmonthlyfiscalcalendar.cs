@@ -113,7 +113,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// quota for the sixth period in the fiscal year.</param>
         /// <param name="period7Base">Base currency equivalent of the sales
         /// quota for the seventh period in the fiscal year.</param>
-        public MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar(System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), decimal? period10 = default(decimal?), decimal? period5Base = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? userfiscalcalendarid = default(System.Guid?), System.Guid? _businessunitidValue = default(System.Guid?), decimal? period13Base = default(decimal?), decimal? period11Base = default(decimal?), System.Guid? _salespersonidValue = default(System.Guid?), decimal? period11 = default(decimal?), decimal? period12 = default(decimal?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), decimal? period9Base = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? period13 = default(decimal?), decimal? period5 = default(decimal?), decimal? period2 = default(decimal?), int? utcconversiontimezonecode = default(int?), decimal? period2Base = default(decimal?), decimal? period1 = default(decimal?), decimal? period8Base = default(decimal?), decimal? period7 = default(decimal?), decimal? period3Base = default(decimal?), decimal? exchangerate = default(decimal?), decimal? period8 = default(decimal?), decimal? period9 = default(decimal?), decimal? period3 = default(decimal?), decimal? period4Base = default(decimal?), int? fiscalperiodtype = default(int?), decimal? period1Base = default(decimal?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), decimal? period10Base = default(decimal?), System.Guid? _createdbyValue = default(System.Guid?), decimal? period6 = default(decimal?), decimal? period4 = default(decimal?), System.Guid? _modifiedbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), decimal? period12Base = default(decimal?), decimal? period6Base = default(decimal?), decimal? period7Base = default(decimal?), IList<MicrosoftDynamicsCRMbulkdeletefailure> fixedMonthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> fixedMonthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMfixedmonthlyfiscalcalendar(string _modifiedonbehalfbyValue = default(string), decimal? period10 = default(decimal?), decimal? period5Base = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string userfiscalcalendarid = default(string), string _businessunitidValue = default(string), decimal? period13Base = default(decimal?), decimal? period11Base = default(decimal?), string _salespersonidValue = default(string), decimal? period11 = default(decimal?), decimal? period12 = default(decimal?), string _transactioncurrencyidValue = default(string), decimal? period9Base = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? period13 = default(decimal?), decimal? period5 = default(decimal?), decimal? period2 = default(decimal?), int? utcconversiontimezonecode = default(int?), decimal? period2Base = default(decimal?), decimal? period1 = default(decimal?), decimal? period8Base = default(decimal?), decimal? period7 = default(decimal?), decimal? period3Base = default(decimal?), decimal? exchangerate = default(decimal?), decimal? period8 = default(decimal?), decimal? period9 = default(decimal?), decimal? period3 = default(decimal?), decimal? period4Base = default(decimal?), int? fiscalperiodtype = default(int?), decimal? period1Base = default(decimal?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? effectiveon = default(System.DateTimeOffset?), decimal? period10Base = default(decimal?), string _createdbyValue = default(string), decimal? period6 = default(decimal?), decimal? period4 = default(decimal?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), decimal? period12Base = default(decimal?), decimal? period6Base = default(decimal?), decimal? period7Base = default(decimal?), IList<MicrosoftDynamicsCRMbulkdeletefailure> fixedMonthlyFiscalCalendarBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> fixedMonthlyFiscalCalendarAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser salespersonid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Period10 = period10;
@@ -177,7 +177,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the fixedmonthlyfiscalcalendar.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets sales quota for the tenth period in the fiscal year.
@@ -203,14 +203,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user of the fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "userfiscalcalendarid")]
-        public System.Guid? Userfiscalcalendarid { get; set; }
+        public string Userfiscalcalendarid { get; set; }
 
         /// <summary>
         /// Gets or sets business unit responsible for the quota associated
         /// with this calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
-        public System.Guid? _businessunitidValue { get; set; }
+        public string _businessunitidValue { get; set; }
 
         /// <summary>
         /// Gets or sets base currency equivalent of the sales quota for the
@@ -230,7 +230,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated salesperson.
         /// </summary>
         [JsonProperty(PropertyName = "_salespersonid_value")]
-        public System.Guid? _salespersonidValue { get; set; }
+        public string _salespersonidValue { get; set; }
 
         /// <summary>
         /// Gets or sets sales quota for the eleventh period in the fiscal
@@ -250,7 +250,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// fixed monthly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets base currency equivalent of the sales quota for the
@@ -376,7 +376,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// fixedmonthlyfiscalcalendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the fixed monthly fiscal calendar
@@ -397,7 +397,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets sales quota for the sixth period in the fiscal year.
@@ -416,7 +416,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// fixed monthly fiscal calendar.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.

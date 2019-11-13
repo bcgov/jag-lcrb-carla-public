@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// created.</param>
         /// <param name="_postidValue">Unique identifier of the post with which
         /// the comment is associated.</param>
-        public MicrosoftDynamicsCRMpostcomment(System.Guid? postcommentid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), System.Guid? _organizationidValue = default(System.Guid?), string text = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _postidValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost))
+        public MicrosoftDynamicsCRMpostcomment(string postcommentid = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), string text = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _postidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost))
         {
             Postcommentid = postcommentid;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
@@ -71,20 +71,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the ID of the post comment.
         /// </summary>
         [JsonProperty(PropertyName = "postcommentid")]
-        public System.Guid? Postcommentid { get; set; }
+        public string Postcommentid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -104,7 +104,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets text of the comment.
@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_postid_value")]
-        public System.Guid? _postidValue { get; set; }
+        public string _postidValue { get; set; }
 
         /// <summary>
         /// </summary>

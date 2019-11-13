@@ -45,7 +45,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// migrated.</param>
         /// <param name="_createdbyexternalpartyValue">Shows the external party
         /// who created the record.</param>
-        public MicrosoftDynamicsCRMincidentresolution(string subcategory = default(string), System.Guid? _modifiedbyexternalpartyValue = default(System.Guid?), string category = default(string), int? importsequencenumber = default(int?), System.Guid? _incidentidValue = default(System.Guid?), int? timespent = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _createdbyexternalpartyValue = default(System.Guid?), MicrosoftDynamicsCRMservice serviceidIncidentresolution = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMasyncoperation> incidentResolutionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> incidentResolutionAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> incidentResolutionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMsystemuser owninguserIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMbusinessunit owningbusinessunitIncidentresolution = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteamIncidentresolution = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> incidentResolutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivityparty> incidentresolutionActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser createdbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMincidentresolution(string subcategory = default(string), string _modifiedbyexternalpartyValue = default(string), string category = default(string), int? importsequencenumber = default(int?), string _incidentidValue = default(string), int? timespent = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdbyexternalpartyValue = default(string), MicrosoftDynamicsCRMservice serviceidIncidentresolution = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMasyncoperation> incidentResolutionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> incidentResolutionAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> incidentResolutionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMsystemuser owninguserIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMbusinessunit owningbusinessunitIncidentresolution = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteamIncidentresolution = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> incidentResolutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivityparty> incidentresolutionActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMsystemuser createdbyIncidentresolution = default(MicrosoftDynamicsCRMsystemuser))
         {
             Subcategory = subcategory;
             this._modifiedbyexternalpartyValue = _modifiedbyexternalpartyValue;
@@ -88,7 +88,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the external party who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
-        public System.Guid? _modifiedbyexternalpartyValue { get; set; }
+        public string _modifiedbyexternalpartyValue { get; set; }
 
         /// <summary>
         /// Gets or sets category for the case resolution activity.
@@ -107,7 +107,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the case.
         /// </summary>
         [JsonProperty(PropertyName = "_incidentid_value")]
-        public System.Guid? _incidentidValue { get; set; }
+        public string _incidentidValue { get; set; }
 
         /// <summary>
         /// Gets or sets time spent on the case resolution activity.
@@ -125,7 +125,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the external party who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
-        public System.Guid? _createdbyexternalpartyValue { get; set; }
+        public string _createdbyexternalpartyValue { get; set; }
 
         /// <summary>
         /// </summary>

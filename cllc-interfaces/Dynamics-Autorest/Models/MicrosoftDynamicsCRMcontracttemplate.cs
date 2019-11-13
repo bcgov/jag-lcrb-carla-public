@@ -82,7 +82,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="allotmenttypecode">Criteria for the contracts based on
         /// the template, such as number of cases, time, or coverage
         /// dates.</param>
-        public MicrosoftDynamicsCRMcontracttemplate(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? contractservicelevelcode = default(int?), int? componentstate = default(int?), string introducedversion = default(string), string iscustomizable = default(string), int? billingfrequencycode = default(int?), System.Guid? solutionid = default(System.Guid?), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? contracttemplateid = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), bool? ismanaged = default(bool?), string abbreviation = default(string), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), bool? usediscountaspercentage = default(bool?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string effectivitycalendar = default(string), System.Guid? contracttemplateidunique = default(System.Guid?), string name = default(string), int? allotmenttypecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> contractTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> contractTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractTemplateContracts = default(IList<MicrosoftDynamicsCRMcontract>))
+        public MicrosoftDynamicsCRMcontracttemplate(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? contractservicelevelcode = default(int?), int? componentstate = default(int?), string introducedversion = default(string), string iscustomizable = default(string), int? billingfrequencycode = default(int?), string solutionid = default(string), string versionnumber = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string contracttemplateid = default(string), string _modifiedbyValue = default(string), bool? ismanaged = default(bool?), string abbreviation = default(string), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _organizationidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), bool? usediscountaspercentage = default(bool?), string _createdonbehalfbyValue = default(string), string effectivitycalendar = default(string), string contracttemplateidunique = default(string), string name = default(string), int? allotmenttypecode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> contractTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> contractTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractTemplateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMcontract> contractTemplateContracts = default(IList<MicrosoftDynamicsCRMcontract>))
         {
             Createdon = createdon;
             Contractservicelevelcode = contractservicelevelcode;
@@ -170,7 +170,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the contract template.
@@ -190,27 +190,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the contracttemplate.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the contract
         /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the contract template.
         /// </summary>
         [JsonProperty(PropertyName = "contracttemplateid")]
-        public System.Guid? Contracttemplateid { get; set; }
+        public string Contracttemplateid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// contract template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether the solution component is part of a
@@ -242,7 +242,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the contract template.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time that the record was migrated.
@@ -269,7 +269,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// contracttemplate.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets days of the week and times for which contracts based
@@ -282,7 +282,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "contracttemplateidunique")]
-        public System.Guid? Contracttemplateidunique { get; set; }
+        public string Contracttemplateidunique { get; set; }
 
         /// <summary>
         /// Gets or sets name of the contract template.

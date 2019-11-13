@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// created the profile.</param>
         /// <param name="_createdonbehalfbyValue">Unique identifier of the
         /// delegate user who created the role.</param>
-        public MicrosoftDynamicsCRMfieldsecurityprofile(System.Guid? _modifiedbyValue = default(System.Guid?), string versionnumber = default(string), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string description = default(string), bool? ismanaged = default(bool?), System.Guid? solutionid = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? fieldsecurityprofileidunique = default(System.Guid?), System.Guid? fieldsecurityprofileid = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> fieldSecurityProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsystemuser> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMfieldpermission> lkFieldpermissionFieldsecurityprofileid = default(IList<MicrosoftDynamicsCRMfieldpermission>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMfieldsecurityprofile(string _modifiedbyValue = default(string), string versionnumber = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? componentstate = default(int?), string description = default(string), bool? ismanaged = default(bool?), string solutionid = default(string), string _organizationidValue = default(string), string fieldsecurityprofileidunique = default(string), string fieldsecurityprofileid = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> fieldSecurityProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsystemuser> systemuserprofilesAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMfieldpermission> lkFieldpermissionFieldsecurityprofileid = default(IList<MicrosoftDynamicsCRMfieldpermission>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMteam> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMteam>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._modifiedbyValue = _modifiedbyValue;
             Versionnumber = versionnumber;
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// profile.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -113,7 +113,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the profile.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -156,38 +156,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "fieldsecurityprofileidunique")]
-        public System.Guid? Fieldsecurityprofileidunique { get; set; }
+        public string Fieldsecurityprofileidunique { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the profile.
         /// </summary>
         [JsonProperty(PropertyName = "fieldsecurityprofileid")]
-        public System.Guid? Fieldsecurityprofileid { get; set; }
+        public string Fieldsecurityprofileid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the profile.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// role.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -79,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="baseentitymatchcodetable">Database table that stores
         /// match codes for the record type being evaluated for potential
         /// duplicates.</param>
-        public MicrosoftDynamicsCRMduplicaterule(System.Guid? _owneridValue = default(System.Guid?), int? statuscode = default(int?), bool? iscasesensitive = default(bool?), int? matchingentitytypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string baseentityname = default(string), int? timezoneruleversionnumber = default(int?), System.Guid? duplicateruleid = default(System.Guid?), int? baseentitytypecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string matchingentitymatchcodetable = default(string), int? utcconversiontimezonecode = default(int?), bool? excludeinactiverecords = default(bool?), System.Guid? _owninguserValue = default(System.Guid?), int? statecode = default(int?), string name = default(string), string matchingentityname = default(string), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string description = default(string), string baseentitymatchcodetable = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterulecondition> duplicateRuleDuplicateRuleConditions = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMannotation> duplicateRuleAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> duplicateRuleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMduplicaterule(string _owneridValue = default(string), int? statuscode = default(int?), bool? iscasesensitive = default(bool?), int? matchingentitytypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string baseentityname = default(string), int? timezoneruleversionnumber = default(int?), string duplicateruleid = default(string), int? baseentitytypecode = default(int?), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string matchingentitymatchcodetable = default(string), int? utcconversiontimezonecode = default(int?), bool? excludeinactiverecords = default(bool?), string _owninguserValue = default(string), int? statecode = default(int?), string name = default(string), string matchingentityname = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string description = default(string), string baseentitymatchcodetable = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterulecondition> duplicateRuleDuplicateRuleConditions = default(IList<MicrosoftDynamicsCRMduplicaterulecondition>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMannotation> duplicateRuleAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> duplicateRuleDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._owneridValue = _owneridValue;
             Statuscode = statuscode;
@@ -131,7 +131,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// duplicate detection rule.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the duplicate detection rule.
@@ -176,7 +176,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the duplicate detection rule.
         /// </summary>
         [JsonProperty(PropertyName = "duplicateruleid")]
-        public System.Guid? Duplicateruleid { get; set; }
+        public string Duplicateruleid { get; set; }
 
         /// <summary>
         /// Gets or sets record type of the record being evaluated for
@@ -190,21 +190,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// duplicaterule.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// duplicate detection rule.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who last
         /// modified the duplicaterule.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets database table that stores match codes for potential
@@ -232,7 +232,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// detection rule.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets status of the duplicate detection rule.
@@ -258,21 +258,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// duplicate detection rule.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the team who owns the duplicate
         /// detection rule.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the
         /// duplicate detection rule.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the duplicate detection rule was

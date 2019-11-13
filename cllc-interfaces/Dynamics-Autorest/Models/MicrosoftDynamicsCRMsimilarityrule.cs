@@ -93,7 +93,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="ruleconditionxml">ConditionXml for similarity rule
         /// conditions.</param>
         /// <param name="ismanaged">Is Managed</param>
-        public MicrosoftDynamicsCRMsimilarityrule(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), string name = default(string), System.Guid? similarityruleid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string matchingentityname = default(string), int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? statecode = default(int?), string introducedversion = default(string), string fetchxmllist = default(string), string activerulefetchxml = default(string), int? maxkeywords = default(int?), int? utcconversiontimezonecode = default(int?), int? baseentitytypecode = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? similarityruleidunique = default(System.Guid?), decimal? exchangerate = default(decimal?), int? ngramsize = default(int?), string description = default(string), string baseentityname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? matchingentitytypecode = default(int?), bool? excludeinactiverecords = default(bool?), string ruleconditionxml = default(string), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> similarityruleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMsimilarityrule(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), string solutionid = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string name = default(string), string similarityruleid = default(string), string _createdonbehalfbyValue = default(string), string matchingentityname = default(string), int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? statecode = default(int?), string introducedversion = default(string), string fetchxmllist = default(string), string activerulefetchxml = default(string), int? maxkeywords = default(int?), int? utcconversiontimezonecode = default(int?), int? baseentitytypecode = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string similarityruleidunique = default(string), decimal? exchangerate = default(decimal?), int? ngramsize = default(int?), string description = default(string), string baseentityname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), int? matchingentitytypecode = default(int?), bool? excludeinactiverecords = default(bool?), string ruleconditionxml = default(string), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> similarityruleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Overriddencreatedon = overriddencreatedon;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -152,20 +152,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets exchange rate for the currency associated with the
         /// SimilarityRule with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the Similarity Rule
@@ -185,7 +185,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the organization
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the custom entity.
@@ -197,14 +197,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "similarityruleid")]
-        public System.Guid? Similarityruleid { get; set; }
+        public string Similarityruleid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets record type of the records being evaluated as
@@ -290,7 +290,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// for Outlook
         /// </summary>
         [JsonProperty(PropertyName = "similarityruleidunique")]
-        public System.Guid? Similarityruleidunique { get; set; }
+        public string Similarityruleidunique { get; set; }
 
         /// <summary>
         /// Gets or sets exchange rate for the currency associated with the

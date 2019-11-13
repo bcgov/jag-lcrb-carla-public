@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="_organizationidValue">Unique identifier of the
         /// organization with which the entitlement template channel is
         /// associated.</param>
-        public MicrosoftDynamicsCRMentitlementtemplatechannel(System.Guid? _entitlementtemplateidValue = default(System.Guid?), System.Guid? entitlementtemplatechannelid = default(System.Guid?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), string versionnumber = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), decimal? totalterms = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? channel = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMentitlementtemplatechannel(string _entitlementtemplateidValue = default(string), string entitlementtemplatechannelid = default(string), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _transactioncurrencyidValue = default(string), string versionnumber = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string name = default(string), string _modifiedonbehalfbyValue = default(string), decimal? totalterms = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? channel = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMentitlementtemplate entitlementtemplateid = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._entitlementtemplateidValue = _entitlementtemplateidValue;
             Entitlementtemplatechannelid = entitlementtemplatechannelid;
@@ -108,13 +108,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// with Entitlement Template Channel.
         /// </summary>
         [JsonProperty(PropertyName = "_entitlementtemplateid_value")]
-        public System.Guid? _entitlementtemplateidValue { get; set; }
+        public string _entitlementtemplateidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "entitlementtemplatechannelid")]
-        public System.Guid? Entitlementtemplatechannelid { get; set; }
+        public string Entitlementtemplatechannelid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the data import or data migration
@@ -134,7 +134,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// incident.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the entitlement template channel
@@ -180,7 +180,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the total number of entitlement terms.
@@ -206,13 +206,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the entitlement was created.
@@ -225,7 +225,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// entitlement template channel is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// </summary>

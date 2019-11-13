@@ -136,7 +136,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// import job is resumed.</param>
         /// <param name="_recordsowneridValue">Choose the user that the records
         /// created during the import job should be assigned to.</param>
-        public MicrosoftDynamicsCRMimportfile(int? totalcount = default(int?), string targetentityname = default(string), string parsedtablename = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string additionalheaderrow = default(string), bool? isfirstrowheader = default(bool?), System.Guid? _modifiedbyValue = default(System.Guid?), int? statuscode = default(int?), int? statecode = default(int?), string content = default(string), string source = default(string), int? fielddelimitercode = default(int?), System.Guid? importfileid = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? partialfailurecount = default(int?), System.Guid? _importmapidValue = default(System.Guid?), string size = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablecolumnprefix = default(string), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), bool? usesystemmap = default(bool?), System.Guid? _owninguserValue = default(System.Guid?), int? datadelimitercode = default(int?), string sourceentityname = default(string), System.Guid? _importidValue = default(System.Guid?), bool? enableduplicatedetection = default(bool?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? filetypecode = default(int?), int? failurecount = default(int?), string relatedentitycolumns = default(string), int? processingstatus = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.Guid? _owneridValue = default(System.Guid?), string headerrow = default(string), System.Guid? _owningteamValue = default(System.Guid?), int? processcode = default(int?), int? successcount = default(int?), int? parsedtablecolumnsnumber = default(int?), int? progresscounter = default(int?), System.Guid? _recordsowneridValue = default(System.Guid?), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
+        public MicrosoftDynamicsCRMimportfile(int? totalcount = default(int?), string targetentityname = default(string), string parsedtablename = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string additionalheaderrow = default(string), bool? isfirstrowheader = default(bool?), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string content = default(string), string source = default(string), int? fielddelimitercode = default(int?), string importfileid = default(string), string _modifiedonbehalfbyValue = default(string), int? partialfailurecount = default(int?), string _importmapidValue = default(string), string size = default(string), int? timezoneruleversionnumber = default(int?), string parsedtablecolumnprefix = default(string), string _createdbyValue = default(string), string _owningbusinessunitValue = default(string), bool? usesystemmap = default(bool?), string _owninguserValue = default(string), int? datadelimitercode = default(int?), string sourceentityname = default(string), string _importidValue = default(string), bool? enableduplicatedetection = default(bool?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? filetypecode = default(int?), int? failurecount = default(int?), string relatedentitycolumns = default(string), int? processingstatus = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _owneridValue = default(string), string headerrow = default(string), string _owningteamValue = default(string), int? processcode = default(int?), int? successcount = default(int?), int? parsedtablecolumnsnumber = default(int?), int? progresscounter = default(int?), string _recordsowneridValue = default(string), IList<MicrosoftDynamicsCRMasyncoperation> importFileAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importFileBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam recordsowneridTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMimportdata> importFileImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMimport importid = default(MicrosoftDynamicsCRMimport), MicrosoftDynamicsCRMsystemuser recordsowneridSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportlog> importLogImportFile = default(IList<MicrosoftDynamicsCRMimportlog>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap))
         {
             Totalcount = totalcount;
             Targetentityname = targetentityname;
@@ -253,7 +253,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the reason code that explains the import file's
@@ -295,14 +295,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the import file.
         /// </summary>
         [JsonProperty(PropertyName = "importfileid")]
-        public System.Guid? Importfileid { get; set; }
+        public string Importfileid { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record on behalf of another
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the number of records in this file that had
@@ -320,7 +320,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// import.
         /// </summary>
         [JsonProperty(PropertyName = "_importmapid_value")]
-        public System.Guid? _importmapidValue { get; set; }
+        public string _importmapidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the size of the import file, in kilobytes.
@@ -345,14 +345,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the business unit that the record owner belongs
         /// to.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets tells whether an automatic system map was applied to
@@ -367,7 +367,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// file.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the single-character data delimiter used in the
@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets choose the import job that the file was uploaded for.
         /// </summary>
         [JsonProperty(PropertyName = "_importid_value")]
-        public System.Guid? _importidValue { get; set; }
+        public string _importidValue { get; set; }
 
         /// <summary>
         /// Gets or sets select whether duplicate-detection rules should be run
@@ -400,7 +400,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was created.
@@ -468,7 +468,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// file is assigned to a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows a list of each column header in the import file
@@ -483,7 +483,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// file.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets tells whether the import file should be ignored or
@@ -519,7 +519,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// import job should be assigned to.
         /// </summary>
         [JsonProperty(PropertyName = "_recordsownerid_value")]
-        public System.Guid? _recordsowneridValue { get; set; }
+        public string _recordsowneridValue { get; set; }
 
         /// <summary>
         /// </summary>

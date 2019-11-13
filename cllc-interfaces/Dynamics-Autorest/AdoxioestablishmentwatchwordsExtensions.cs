@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioEstablishmentwatchwordCollection Get(this IAdoxioestablishmentwatchwords operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioEstablishmentwatchwordCollection Get(this IAdoxioestablishmentwatchwords operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioEstablishmentwatchwordCollection> GetAsync(this IAdoxioestablishmentwatchwords operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioEstablishmentwatchwordCollection> GetAsync(this IAdoxioestablishmentwatchwords operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentwatchwordCollection> GetWithHttpMessages(this IAdoxioestablishmentwatchwords operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentwatchwordCollection> GetWithHttpMessages(this IAdoxioestablishmentwatchwords operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioEstablishmentwatchword EstablishmentwatchwordsByKey(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioEstablishmentwatchword GetByKey(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.EstablishmentwatchwordsByKeyAsync(adoxioEstablishmentwatchwordid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioEstablishmentwatchwordid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioEstablishmentwatchword> EstablishmentwatchwordsByKeyAsync(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioEstablishmentwatchword> GetByKeyAsync(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.EstablishmentwatchwordsByKeyWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentwatchword> EstablishmentwatchwordsByKeyWithHttpMessages(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentwatchword> GetByKeyWithHttpMessages(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.EstablishmentwatchwordsByKeyWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void EstablishmentwatchwordsByKey1(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, MicrosoftDynamicsCRMadoxioEstablishmentwatchword body)
+            public static void Update(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, MicrosoftDynamicsCRMadoxioEstablishmentwatchword body)
             {
-                operations.EstablishmentwatchwordsByKey1Async(adoxioEstablishmentwatchwordid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioEstablishmentwatchwordid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task EstablishmentwatchwordsByKey1Async(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, MicrosoftDynamicsCRMadoxioEstablishmentwatchword body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, MicrosoftDynamicsCRMadoxioEstablishmentwatchword body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.EstablishmentwatchwordsByKey1WithHttpMessagesAsync(adoxioEstablishmentwatchwordid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse EstablishmentwatchwordsByKey1WithHttpMessages(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, MicrosoftDynamicsCRMadoxioEstablishmentwatchword body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, MicrosoftDynamicsCRMadoxioEstablishmentwatchword body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.EstablishmentwatchwordsByKey1WithHttpMessagesAsync(adoxioEstablishmentwatchwordid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void EstablishmentwatchwordsByKey2(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, string ifMatch = default(string))
+            public static void Delete(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, string ifMatch = default(string))
             {
-                operations.EstablishmentwatchwordsByKey2Async(adoxioEstablishmentwatchwordid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioEstablishmentwatchwordid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task EstablishmentwatchwordsByKey2Async(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.EstablishmentwatchwordsByKey2WithHttpMessagesAsync(adoxioEstablishmentwatchwordid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse EstablishmentwatchwordsByKey2WithHttpMessages(this IAdoxioestablishmentwatchwords operations, System.Guid adoxioEstablishmentwatchwordid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxioestablishmentwatchwords operations, string adoxioEstablishmentwatchwordid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.EstablishmentwatchwordsByKey2WithHttpMessagesAsync(adoxioEstablishmentwatchwordid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioEstablishmentwatchwordid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

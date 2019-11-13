@@ -80,7 +80,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="_owneridValue">Enter the user or team who is assigned
         /// to manage the record. This field is updated every time the record
         /// is assigned to a different user.</param>
-        public MicrosoftDynamicsCRMuserquery(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), string fetchxml = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), string advancedgroupby = default(string), string columnsetxml = default(string), System.Guid? _owningteamValue = default(System.Guid?), string layoutxml = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string conditionalformatting = default(string), System.Guid? userqueryid = default(System.Guid?), int? querytype = default(int?), string returnedtypecode = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string description = default(string), string versionnumber = default(string), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _parentqueryidValue = default(System.Guid?), string name = default(string), System.Guid? _createdbyValue = default(System.Guid?), int? statuscode = default(int?), System.Guid? _owneridValue = default(System.Guid?), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> userQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkdeletefailure> userQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> userQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMuserquery(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? statecode = default(int?), string fetchxml = default(string), string _modifiedbyValue = default(string), string advancedgroupby = default(string), string columnsetxml = default(string), string _owningteamValue = default(string), string layoutxml = default(string), string _createdonbehalfbyValue = default(string), string conditionalformatting = default(string), string userqueryid = default(string), int? querytype = default(int?), string returnedtypecode = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string description = default(string), string versionnumber = default(string), string _owninguserValue = default(string), string _parentqueryidValue = default(string), string name = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string _owneridValue = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> userQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMbulkdeletefailure> userQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> userQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser))
         {
             Modifiedon = modifiedon;
             Statecode = statecode;
@@ -150,7 +150,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the column name that will be used to group the
@@ -172,7 +172,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// view.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -185,7 +185,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type information about how the items in the user view
@@ -198,7 +198,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the saved view.
         /// </summary>
         [JsonProperty(PropertyName = "userqueryid")]
-        public System.Guid? Userqueryid { get; set; }
+        public string Userqueryid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the code for the query type to indicate whether
@@ -227,14 +227,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// to.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows who last updated the record on behalf of another
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type additional information to describe the saved
@@ -254,14 +254,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// view.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets choose the ID of the saved query that the record was
         /// created from.
         /// </summary>
         [JsonProperty(PropertyName = "_parentqueryid_value")]
-        public System.Guid? _parentqueryidValue { get; set; }
+        public string _parentqueryidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type a descriptive name for the saved view.
@@ -273,7 +273,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the item's status.
@@ -287,7 +287,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>

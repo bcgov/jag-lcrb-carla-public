@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// was modified.</param>
         /// <param name="daylightname">Time zone name for the daylight
         /// time.</param>
-        public MicrosoftDynamicsCRMtimezonedefinition(string userinterfacename = default(string), System.Guid? timezonedefinitionid = default(System.Guid?), string versionnumber = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), int? bias = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezonecode = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), string standardname = default(string), int? retiredorder = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string daylightname = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameTimezonedefinitionid = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleTimezonedefinitionid = default(IList<MicrosoftDynamicsCRMtimezonerule>))
+        public MicrosoftDynamicsCRMtimezonedefinition(string userinterfacename = default(string), string timezonedefinitionid = default(string), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), int? bias = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timezonecode = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string standardname = default(string), int? retiredorder = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string daylightname = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtimezonelocalizedname> lkTimezonelocalizednameTimezonedefinitionid = default(IList<MicrosoftDynamicsCRMtimezonelocalizedname>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtimezonerule> lkTimezoneruleTimezonedefinitionid = default(IList<MicrosoftDynamicsCRMtimezonerule>))
         {
             Userinterfacename = userinterfacename;
             Timezonedefinitionid = timezonedefinitionid;
@@ -97,7 +97,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the time zone record.
         /// </summary>
         [JsonProperty(PropertyName = "timezonedefinitionid")]
-        public System.Guid? Timezonedefinitionid { get; set; }
+        public string Timezonedefinitionid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -109,14 +109,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the timezonedefinition.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the organization associated with
         /// the time zone definition.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets base time bias of the time zone.
@@ -129,7 +129,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// timezonedefinition.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the time zone record was created.
@@ -148,14 +148,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// time zone record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the time
         /// zone record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone name for the standard time.

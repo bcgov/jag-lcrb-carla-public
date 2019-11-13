@@ -122,7 +122,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// execute.</param>
         /// <param name="_createdonbehalfbyValue">Unique identifier of the
         /// delegate user who created the record.</param>
-        public MicrosoftDynamicsCRMabsScheduledprocess(int? absInterval = default(int?), bool? absJune = default(bool?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? statecode = default(int?), bool? absMarch = default(bool?), System.Guid? _owningbusinessunitValue = default(System.Guid?), string absFetchxmlquery = default(string), bool? absOctober = default(bool?), bool? absThursday = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? absApril = default(bool?), int? absRecurrencepattern = default(int?), System.Guid? _owningteamValue = default(System.Guid?), int? statuscode = default(int?), bool? absWednesday = default(bool?), System.Guid? absScheduledprocessid = default(System.Guid?), bool? absMay = default(bool?), bool? absDecember = default(bool?), bool? absSaturday = default(bool?), System.Guid? _modifiedbyValue = default(System.Guid?), int? absHour = default(int?), bool? absFriday = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? absTuesday = default(bool?), bool? absAmpm = default(bool?), System.DateTimeOffset? absNextactivation = default(System.DateTimeOffset?), string absName = default(string), System.Guid? _createdbyValue = default(System.Guid?), bool? absJuly = default(bool?), bool? absJanuary = default(bool?), int? timezoneruleversionnumber = default(int?), bool? absSuspendonfailure = default(bool?), bool? absNovember = default(bool?), bool? absMonday = default(bool?), int? utcconversiontimezonecode = default(int?), int? absMinute = default(int?), bool? absSeptember = default(bool?), System.Guid? _owneridValue = default(System.Guid?), bool? absFebruary = default(bool?), int? absDayofmonth = default(int?), System.Guid? _owninguserValue = default(System.Guid?), bool? absAugust = default(bool?), bool? absSunday = default(bool?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _absProcessidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> absScheduledprocessActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> absScheduledprocessAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> absScheduledprocessEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> absScheduledprocessFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> absScheduledprocessLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> absScheduledprocessPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> absScheduledprocessServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> absScheduledprocessTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> absScheduledprocessRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> absScheduledprocessSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMworkflow absProcessId = default(MicrosoftDynamicsCRMworkflow))
+        public MicrosoftDynamicsCRMabsScheduledprocess(int? absInterval = default(int?), bool? absJune = default(bool?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? statecode = default(int?), bool? absMarch = default(bool?), string _owningbusinessunitValue = default(string), string absFetchxmlquery = default(string), bool? absOctober = default(bool?), bool? absThursday = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? absApril = default(bool?), int? absRecurrencepattern = default(int?), string _owningteamValue = default(string), int? statuscode = default(int?), bool? absWednesday = default(bool?), string absScheduledprocessid = default(string), bool? absMay = default(bool?), bool? absDecember = default(bool?), bool? absSaturday = default(bool?), string _modifiedbyValue = default(string), int? absHour = default(int?), bool? absFriday = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? absTuesday = default(bool?), bool? absAmpm = default(bool?), System.DateTimeOffset? absNextactivation = default(System.DateTimeOffset?), string absName = default(string), string _createdbyValue = default(string), bool? absJuly = default(bool?), bool? absJanuary = default(bool?), int? timezoneruleversionnumber = default(int?), bool? absSuspendonfailure = default(bool?), bool? absNovember = default(bool?), bool? absMonday = default(bool?), int? utcconversiontimezonecode = default(int?), int? absMinute = default(int?), bool? absSeptember = default(bool?), string _owneridValue = default(string), bool? absFebruary = default(bool?), int? absDayofmonth = default(int?), string _owninguserValue = default(string), bool? absAugust = default(bool?), bool? absSunday = default(bool?), string _modifiedonbehalfbyValue = default(string), string _absProcessidValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> absScheduledprocessActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> absScheduledprocessAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> absScheduledprocessEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> absScheduledprocessFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> absScheduledprocessLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> absScheduledprocessPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> absScheduledprocessServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> absScheduledprocessTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> absScheduledprocessRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> absScheduledprocessSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMworkflow absProcessId = default(MicrosoftDynamicsCRMworkflow))
         {
             AbsInterval = absInterval;
             AbsJune = absJune;
@@ -252,7 +252,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets the FetchXML Query to retrieve the target records for
@@ -295,7 +295,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the Scheduled Process
@@ -313,7 +313,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "abs_scheduledprocessid")]
-        public System.Guid? AbsScheduledprocessid { get; set; }
+        public string AbsScheduledprocessid { get; set; }
 
         /// <summary>
         /// Gets or sets the process should execute in the month of May
@@ -337,7 +337,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets the hour of the day at which to execute the scheduled
@@ -386,7 +386,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets the process should execute in the month of July
@@ -449,7 +449,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets the process should execute in the month of February
@@ -467,7 +467,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets the process should execute in the month of August
@@ -486,20 +486,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets the target process to execute.
         /// </summary>
         [JsonProperty(PropertyName = "_abs_processid_value")]
-        public System.Guid? _absProcessidValue { get; set; }
+        public string _absProcessidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
