@@ -37,6 +37,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string BusinessAccountType { get; set; }
         public int? NumberofSharesNew { get; set; }
         public int? NumberofSharesOld { get; set; }
+        public int? TotalSharesNew { get; set; }
+        public int? TotalSharesOld { get; set; }
         public int? Statecode { get; set; }
         public int? Statuscode { get; set; }
         public string EmailNew { get; set; }

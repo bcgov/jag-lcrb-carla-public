@@ -19,6 +19,8 @@ export class LicenseeChangeLog {
   businessAccountType: string;
   numberofSharesNew: number;
   numberofSharesOld: number;
+  totalSharesNew: number;
+  totalSharesOld: number;
   emailNew: string;
   emailOld: string;
   firstNameNew: string;
@@ -44,6 +46,7 @@ export class LicenseeChangeLog {
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
+  percentageShares: number; // This in only used on the client side
 
   /**
    * Create from LegalEntity

@@ -13,12 +13,14 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
   form: FormGroup;
   parentName: any;
   shareholder: any;
+  action = 'add';
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<ShareholdersAndPartnersComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, ) {
     super();
     this.shareholder = data.shareholder;
+    this.action = data.action;
   }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       dateofBirthNew: ['', Validators.required],
       emailNew: ['', [Validators.email, Validators.required]],
       numberofSharesNew: ['', Validators.required],
+      totalSharesNew: [],
       // partnerType: ['', Validators.required],
       isIndividual: [true],
       isShareholderNew: [true],
@@ -62,8 +65,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
   }
 
   save() {
-    // console.log('shareholderForm', this.shareholderForm.value, this.shareholderForm.valid);
-    if (!this.form.valid) {
+    if ((!this.shareholder.isRoot && !this.form.valid) || (this.shareholder.isRoot && !this.form.get('totalSharesNew').value)) {
       Object.keys(this.form.controls).forEach(field => {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
