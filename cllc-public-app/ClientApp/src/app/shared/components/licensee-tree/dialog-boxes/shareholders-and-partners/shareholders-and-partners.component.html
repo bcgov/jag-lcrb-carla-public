@@ -1,14 +1,14 @@
 <h2 mat-dialog-title>
-  <span *ngIf="!form.get('id').value">Add Shareholder of {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}
+  <span *ngIf="action === 'add'">Add Shareholder of {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}
   </span>
-  <span *ngIf="form.get('id').value">Edit Shareholder</span>
+  <span *ngIf="action === 'edit'">Edit Shareholder</span>
 </h2>
 <mat-dialog-content>
   <form [formGroup]='form' class="form-horizontal">
     <p>List all the corporation’s <strong>voting</strong> shareholders.
     </p>
 
-    <app-field label="Is the shareholder a person, an organization or an Indigenous nation?" [valid]="true"
+    <app-field *ngIf="!shareholder?.isRoot" label="Is the shareholder a person, an organization or an Indigenous nation?" [valid]="true"
       errorMessage="Please select a business type from the dropdown list">
       <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 10px;" group="isIndividual" formControlName="isIndividual"
         [value]="true">
@@ -18,7 +18,7 @@
       <span>Organization or Indigenous Nation</span> <br>
     </app-field>
 
-    <section class="row" *ngIf="!form.get('isIndividual').value">
+    <section class="row" *ngIf="!form.get('isIndividual').value && !shareholder?.isRoot">
       <app-field class="col-md-12" label="What type of organization is the shareholder?" [showChevrons]="false"
         [valid]="!isTouchedAndInvalid('legalentitytype')"
         errorMessage="Please select a business type from the dropdown list">
@@ -40,7 +40,7 @@
       </app-field>
     </section>
 
-    <section class="row" *ngIf="form.get('isIndividual').value">
+    <section class="row" *ngIf="form.get('isIndividual').value && !shareholder?.isRoot">
       <app-field class="col-md-6" label="First Name" [valid]="!isTouchedAndInvalid('firstNameNew')"
         errorMessage="This is required">
         <input type="text" [readonly]="shareholder?.isRoot" class="form-control" formControlName="firstNameNew" placeholder="First Name">
@@ -60,7 +60,7 @@
     </section>
 
 
-    <section class="row">
+    <section class="row" *ngIf="!shareholder?.isRoot">
       <app-field class="col-md-6" label="Email" [valid]="!isTouchedAndInvalid('emailNew')"
         errorMessage="Email is invalid">
         <input type="text" [readonly]="shareholder?.isRoot" class="form-control" formControlName="emailNew">
@@ -76,11 +76,11 @@
 
     <section class="row">
       <app-field class="col-md-12"
-        *ngIf="form.get('legalentitytype').value === 'PrivateCorporation' || form.get('legalentitytype').value === 'PublicCorporation'"
-        label="Total Shares Issued" [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
-        <input type="number" class="form-control" formControlName="numberofSharesNew">
+        *ngIf="shareholder?.isRoot || form.get('legalentitytype').value === 'PrivateCorporation' || form.get('legalentitytype').value === 'PublicCorporation'"
+        label="Total Shares Issued" [valid]="!isTouchedAndInvalid('totalSharesNew')" errorMessage="This is required">
+        <input type="number" class="form-control" formControlName="totalSharesNew">
       </app-field>
-      <app-field class="col-md-12"
+      <app-field class="col-md-12" *ngIf="!shareholder?.isRoot"
         label="Number of Voting Shares in {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}"
         [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
         <input type="number" [readonly]="shareholder?.isRoot" class="form-control" formControlName="numberofSharesNew">

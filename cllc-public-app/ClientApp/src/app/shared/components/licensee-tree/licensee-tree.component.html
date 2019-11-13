@@ -44,11 +44,16 @@
       <i *ngIf="!node.isIndividual" class="fas fa-building"></i> </span>
     <span class="tree-label" *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px"> <i
         class="fa fa-user" style="margin-right: 5px"></i> {{node.getNewLeadershipPosition()}} </span>
-    <span class="tree-label"
+    <span *ngIf="!(enableEditing && !node.isRemoveChangeType())"  class="tree-label"
       [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}">
       {{node.businessNameNew}}
     </span>
-    <!-- <span class="tree-label" *ngIf="node.isShareholderNew" style="margin-left: 5px">({{node.numberofSharesNew}})</span> -->
+     <a *ngIf="enableEditing && !node.isRemoveChangeType()" class="tree-label" href="javascript:void(0)" style="margin-right: 10px;"
+      (click)="!node.isRemoveChangeType() && editAssociate(node)">
+      {{node.businessNameNew}}
+      </a>
+    <span class="tree-label" *ngIf="!node.isRoot && node.percentageShares"  style="margin-left: 5px">{{ node.percentageShares }} %</span>
+    
     &nbsp; &nbsp;
     <a *ngIf="enableEditing && !node.isIndividual && !node.isRemoveChangeType()" href="javascript:void(0)"
       style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add</a>
@@ -56,12 +61,8 @@
       <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node)">Shareholder</button>
       <button mat-menu-item (click)="!node.isRemoveChangeType() && addLeadership(node)">Leadership</button>
     </mat-menu>
-    <a *ngIf="enableEditing && !node.isRemoveChangeType()" href="javascript:void(0)" style="margin-right: 10px;"
-      (click)="!node.isRemoveChangeType() && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>
-      Edit</a>
-    <a *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()" href="javascript:void(0)"
-      (click)="!node.isRemoveChangeType() && deleteAssociate(node)"> <i class="fas fa-trash-alt"></i>
-      Delete</a>
+   
+      <i *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()" (click)="!node.isRemoveChangeType() && deleteAssociate(node)" class="fas fa-trash-alt" style="color: #A12622" (click)="chancelChange(item)"></i>
   </ng-container>
 </ng-template>
 
@@ -117,7 +118,7 @@
             [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">{{item.numberofSharesNew}}</span>
         </td>
         <td>
-          <button class="btn btn-primary" (click)="chancelChange(node)">Cancel Change</button>
+            <i class="fas fa-trash-alt" style="color: #A12622" (click)="chancelChange(item)"></i>
         </td>
       </tr>
     </table>
@@ -158,7 +159,7 @@
             [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">{{item.numberofSharesNew}}</span>
         </td>
         <td>
-          <button class="btn btn-primary" (click)="chancelChange(node)">Cancel Change</button>
+           <i class="fas fa-trash-alt" style="color: #A12622" (click)="chancelChange(item)"></i>
         </td>
       </tr>
     </table>
@@ -198,7 +199,7 @@
             [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">{{item.getNewLeadershipPosition()}}</span>
         </td>
         <td>
-          <button class="btn btn-primary" (click)="chancelChange(node)">Cancel Change</button>
+           <i class="fas fa-trash-alt" style="color: #A12622" (click)="chancelChange(item)"></i>
         </td>
       </tr>
     </table>
