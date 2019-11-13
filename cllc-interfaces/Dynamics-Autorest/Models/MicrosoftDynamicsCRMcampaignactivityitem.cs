@@ -40,7 +40,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// campaign activity item.</param>
         /// <param name="campaignactivityitemid">Unique identifier of the
         /// campaign activity item.</param>
-        public MicrosoftDynamicsCRMcampaignactivityitem(System.Guid? owningbusinessunit = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? itemid = default(System.Guid?), string versionnumber = default(string), System.Guid? owninguser = default(System.Guid?), System.Guid? _campaignactivityidValue = default(System.Guid?), string itemobjecttypecode = default(string), System.Guid? campaignactivityitemid = default(System.Guid?), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
+        public MicrosoftDynamicsCRMcampaignactivityitem(string owningbusinessunit = default(string), string _owneridValue = default(string), string itemid = default(string), string versionnumber = default(string), string owninguser = default(string), string _campaignactivityidValue = default(string), string itemobjecttypecode = default(string), string campaignactivityitemid = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
         {
             Owningbusinessunit = owningbusinessunit;
             this._owneridValue = _owneridValue;
@@ -64,20 +64,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// campaign activity item.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user or team who owns the
         /// campaign activity item.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the item.
         /// </summary>
         [JsonProperty(PropertyName = "itemid")]
-        public System.Guid? Itemid { get; set; }
+        public string Itemid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -89,14 +89,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// activity item.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the campaign activity for the
         /// item.
         /// </summary>
         [JsonProperty(PropertyName = "_campaignactivityid_value")]
-        public System.Guid? _campaignactivityidValue { get; set; }
+        public string _campaignactivityidValue { get; set; }
 
         /// <summary>
         /// Gets or sets identification of the type of the campaign activity
@@ -109,7 +109,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the campaign activity item.
         /// </summary>
         [JsonProperty(PropertyName = "campaignactivityitemid")]
-        public System.Guid? Campaignactivityitemid { get; set; }
+        public string Campaignactivityitemid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioSpddatarowCollection Get(this IAdoxiospddatarows operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioSpddatarowCollection Get(this IAdoxiospddatarows operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioSpddatarowCollection> GetAsync(this IAdoxiospddatarows operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioSpddatarowCollection> GetAsync(this IAdoxiospddatarows operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarowCollection> GetWithHttpMessages(this IAdoxiospddatarows operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarowCollection> GetWithHttpMessages(this IAdoxiospddatarows operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioSpddatarow SpddatarowsByKey(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioSpddatarow GetByKey(this IAdoxiospddatarows operations, string adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.SpddatarowsByKeyAsync(adoxioSpddatarowid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioSpddatarowid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioSpddatarow> SpddatarowsByKeyAsync(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioSpddatarow> GetByKeyAsync(this IAdoxiospddatarows operations, string adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.SpddatarowsByKeyWithHttpMessagesAsync(adoxioSpddatarowid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioSpddatarowid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarow> SpddatarowsByKeyWithHttpMessages(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpddatarow> GetByKeyWithHttpMessages(this IAdoxiospddatarows operations, string adoxioSpddatarowid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.SpddatarowsByKeyWithHttpMessagesAsync(adoxioSpddatarowid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioSpddatarowid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void SpddatarowsByKey1(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body)
+            public static void Update(this IAdoxiospddatarows operations, string adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body)
             {
-                operations.SpddatarowsByKey1Async(adoxioSpddatarowid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioSpddatarowid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task SpddatarowsByKey1Async(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiospddatarows operations, string adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.SpddatarowsByKey1WithHttpMessagesAsync(adoxioSpddatarowid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioSpddatarowid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse SpddatarowsByKey1WithHttpMessages(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiospddatarows operations, string adoxioSpddatarowid, MicrosoftDynamicsCRMadoxioSpddatarow body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.SpddatarowsByKey1WithHttpMessagesAsync(adoxioSpddatarowid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioSpddatarowid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void SpddatarowsByKey2(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiospddatarows operations, string adoxioSpddatarowid, string ifMatch = default(string))
             {
-                operations.SpddatarowsByKey2Async(adoxioSpddatarowid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioSpddatarowid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task SpddatarowsByKey2Async(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiospddatarows operations, string adoxioSpddatarowid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.SpddatarowsByKey2WithHttpMessagesAsync(adoxioSpddatarowid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioSpddatarowid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse SpddatarowsByKey2WithHttpMessages(this IAdoxiospddatarows operations, System.Guid adoxioSpddatarowid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiospddatarows operations, string adoxioSpddatarowid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.SpddatarowsByKey2WithHttpMessagesAsync(adoxioSpddatarowid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioSpddatarowid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

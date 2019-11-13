@@ -21,6 +21,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Get entities from adoxio_fundingsources
         /// </summary>
+        /// <param name='top'>
+        /// </param>
+        /// <param name='filter'>
+        /// </param>
+        /// <param name='count'>
+        /// </param>
         /// <param name='orderby'>
         /// Order items by property values
         /// </param>
@@ -36,13 +42,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioFundingsourceCollection>> GetWithHttpMessagesAsync(IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioFundingsourceCollection>> GetWithHttpMessagesAsync(int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Add new entity to adoxio_fundingsources
         /// </summary>
@@ -59,7 +65,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
@@ -87,13 +93,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioFundingsource>> FundingsourcesByKeyWithHttpMessagesAsync(System.Guid adoxioFundingsourceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioFundingsource>> GetByKeyWithHttpMessagesAsync(string adoxioFundingsourceid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Update entity in adoxio_fundingsources
         /// </summary>
@@ -109,13 +118,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
         /// <exception cref="Microsoft.Rest.ValidationException">
         /// Thrown when a required parameter is null
         /// </exception>
-        Task<HttpOperationResponse> FundingsourcesByKey1WithHttpMessagesAsync(System.Guid adoxioFundingsourceid, MicrosoftDynamicsCRMadoxioFundingsource body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioFundingsourceid, MicrosoftDynamicsCRMadoxioFundingsource body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Delete entity from adoxio_fundingsources
         /// </summary>
@@ -131,9 +140,12 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        /// <exception cref="OdataerrorException">
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
         /// Thrown when the operation returned an invalid status code
         /// </exception>
-        Task<HttpOperationResponse> FundingsourcesByKey2WithHttpMessagesAsync(System.Guid adoxioFundingsourceid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioFundingsourceid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

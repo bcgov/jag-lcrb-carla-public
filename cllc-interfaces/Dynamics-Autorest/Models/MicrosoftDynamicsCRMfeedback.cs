@@ -86,7 +86,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record's currency. The exchange rate is used to convert all money
         /// fields in the record from the local currency to the system's
         /// default currency.</param>
-        public MicrosoftDynamicsCRMfeedback(System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), int? statuscode = default(int?), System.Guid? feedbackid = default(System.Guid?), System.DateTimeOffset? closedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? rating = default(int?), System.Guid? _regardingobjectidValue = default(System.Guid?), string title = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _createdbycontactValue = default(System.Guid?), string comments = default(string), int? maxrating = default(int?), System.Guid? _closedbyValue = default(System.Guid?), int? importsequencenumber = default(int?), int? source = default(int?), System.Guid? _createdonbehalfbycontactValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _owningteamValue = default(System.Guid?), string versionnumber = default(string), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), decimal? normalizedrating = default(decimal?), int? minrating = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), decimal? exchangerate = default(decimal?), MicrosoftDynamicsCRMcontact contactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontact createdOnBehalfByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedOnBehalfBy = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser closedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact createdByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfeedback feedbackId = default(MicrosoftDynamicsCRMfeedback), IList<MicrosoftDynamicsCRMfeedback> feedbackFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> feedbackSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgeArticleId = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMabsScheduledprocessexecution regardingobjectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution))
+        public MicrosoftDynamicsCRMfeedback(string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string feedbackid = default(string), System.DateTimeOffset? closedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? rating = default(int?), string _regardingobjectidValue = default(string), string title = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owneridValue = default(string), string _createdbycontactValue = default(string), string comments = default(string), int? maxrating = default(int?), string _closedbyValue = default(string), int? importsequencenumber = default(int?), int? source = default(int?), string _createdonbehalfbycontactValue = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string versionnumber = default(string), string _owninguserValue = default(string), string _modifiedonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), decimal? normalizedrating = default(decimal?), int? minrating = default(int?), string _owningbusinessunitValue = default(string), decimal? exchangerate = default(decimal?), MicrosoftDynamicsCRMcontact contactId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMcontact createdOnBehalfByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedOnBehalfBy = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser closedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact createdByContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMfeedback feedbackId = default(MicrosoftDynamicsCRMfeedback), IList<MicrosoftDynamicsCRMfeedback> feedbackFeedback = default(IList<MicrosoftDynamicsCRMfeedback>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> feedbackSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgeArticleId = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMabsScheduledprocessexecution regardingobjectidAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution))
         {
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             this._createdbyValue = _createdbyValue;
@@ -147,13 +147,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the feedback's status.
@@ -165,7 +165,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets feedbackId
         /// </summary>
         [JsonProperty(PropertyName = "feedbackid")]
-        public System.Guid? Feedbackid { get; set; }
+        public string Feedbackid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was closed.
@@ -198,7 +198,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the record that the feedback is associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public System.Guid? _regardingobjectidValue { get; set; }
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type a title for the feedback.
@@ -219,13 +219,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// knowledge article views.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the contact who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdbycontact_value")]
-        public System.Guid? _createdbycontactValue { get; set; }
+        public string _createdbycontactValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the feedback comments.
@@ -243,7 +243,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who closed the record.
         /// </summary>
         [JsonProperty(PropertyName = "_closedby_value")]
-        public System.Guid? _closedbyValue { get; set; }
+        public string _closedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the data import or data migration
@@ -263,13 +263,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// another user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfbycontact_value")]
-        public System.Guid? _createdonbehalfbycontactValue { get; set; }
+        public string _createdonbehalfbycontactValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was last
@@ -283,7 +283,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the team that owns the feedback.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the feedback.
@@ -295,21 +295,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who owns this feedback.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets choose the local currency for the record to make sure
         /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the rating scaled to a value between 0 and 1
@@ -329,7 +329,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// knowledge article views.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the conversion rate of the record's currency.

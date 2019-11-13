@@ -184,7 +184,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// included in the invoice's total amount due.</param>
         /// <param name="shiptoFax">Type the fax number for the customer's
         /// shipping address.</param>
-        public MicrosoftDynamicsCRMinvoicedetail(bool? ispriceoverridden = default(bool?), decimal? priceperunit = default(decimal?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _salesrepidValue = default(System.Guid?), string shiptoTelephone = default(string), decimal? volumediscountamount = default(decimal?), int? sequencenumber = default(int?), string shiptoCountry = default(string), string versionnumber = default(string), bool? isproductoverridden = default(bool?), decimal? extendedamountBase = default(decimal?), bool? invoiceispricelocked = default(bool?), System.Guid? _productidValue = default(System.Guid?), decimal? taxBase = default(decimal?), System.Guid? _uomidValue = default(System.Guid?), decimal? extendedamount = default(decimal?), System.Guid? owningbusinessunit = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), decimal? volumediscountamountBase = default(decimal?), int? lineitemnumber = default(int?), System.Guid? parentbundleid = default(System.Guid?), decimal? manualdiscountamountBase = default(decimal?), string shiptoStateorprovince = default(string), decimal? baseamount = default(decimal?), System.Guid? productassociationid = default(System.Guid?), System.DateTimeOffset? actualdeliveryon = default(System.DateTimeOffset?), decimal? priceperunitBase = default(decimal?), bool? iscopied = default(bool?), decimal? quantitybackordered = default(decimal?), decimal? manualdiscountamount = default(decimal?), System.Guid? invoicedetailid = default(System.Guid?), System.Guid? owninguser = default(System.Guid?), string shiptoCity = default(string), int? invoicestatecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string description = default(string), int? propertyconfigurationstatus = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string shiptoName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), int? shiptoFreighttermscode = default(int?), int? importsequencenumber = default(int?), int? producttypecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string shiptoLine2 = default(string), int? pricingerrorcode = default(int?), string shippingtrackingnumber = default(string), string shiptoPostalcode = default(string), bool? willcall = default(bool?), int? utcconversiontimezonecode = default(int?), string productdescription = default(string), int? timezoneruleversionnumber = default(int?), string shiptoLine1 = default(string), string shiptoLine3 = default(string), System.Guid? _invoiceidValue = default(System.Guid?), decimal? tax = default(decimal?), decimal? baseamountBase = default(decimal?), System.Guid? _modifiedbyValue = default(System.Guid?), decimal? quantitycancelled = default(decimal?), decimal? exchangerate = default(decimal?), decimal? quantityshipped = default(decimal?), System.Guid? _owneridValue = default(System.Guid?), decimal? quantity = default(decimal?), string shiptoFax = default(string), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> invoiceDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> invoiceDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsyncerror> invoiceDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> invoiceDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMinvoice invoiceid = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMinvoicedetail parentbundleidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), IList<MicrosoftDynamicsCRMinvoicedetail> invoicedetailParentInvoicedetail = default(IList<MicrosoftDynamicsCRMinvoicedetail>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMinvoicedetail(bool? ispriceoverridden = default(bool?), decimal? priceperunit = default(decimal?), string _modifiedonbehalfbyValue = default(string), string _salesrepidValue = default(string), string shiptoTelephone = default(string), decimal? volumediscountamount = default(decimal?), int? sequencenumber = default(int?), string shiptoCountry = default(string), string versionnumber = default(string), bool? isproductoverridden = default(bool?), decimal? extendedamountBase = default(decimal?), bool? invoiceispricelocked = default(bool?), string _productidValue = default(string), decimal? taxBase = default(decimal?), string _uomidValue = default(string), decimal? extendedamount = default(decimal?), string owningbusinessunit = default(string), string _createdbyValue = default(string), decimal? volumediscountamountBase = default(decimal?), int? lineitemnumber = default(int?), string parentbundleid = default(string), decimal? manualdiscountamountBase = default(decimal?), string shiptoStateorprovince = default(string), decimal? baseamount = default(decimal?), string productassociationid = default(string), System.DateTimeOffset? actualdeliveryon = default(System.DateTimeOffset?), decimal? priceperunitBase = default(decimal?), bool? iscopied = default(bool?), decimal? quantitybackordered = default(decimal?), decimal? manualdiscountamount = default(decimal?), string invoicedetailid = default(string), string owninguser = default(string), string shiptoCity = default(string), int? invoicestatecode = default(int?), string _createdonbehalfbyValue = default(string), string description = default(string), int? propertyconfigurationstatus = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string shiptoName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), int? shiptoFreighttermscode = default(int?), int? importsequencenumber = default(int?), int? producttypecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string shiptoLine2 = default(string), int? pricingerrorcode = default(int?), string shippingtrackingnumber = default(string), string shiptoPostalcode = default(string), bool? willcall = default(bool?), int? utcconversiontimezonecode = default(int?), string productdescription = default(string), int? timezoneruleversionnumber = default(int?), string shiptoLine1 = default(string), string shiptoLine3 = default(string), string _invoiceidValue = default(string), decimal? tax = default(decimal?), decimal? baseamountBase = default(decimal?), string _modifiedbyValue = default(string), decimal? quantitycancelled = default(decimal?), decimal? exchangerate = default(decimal?), decimal? quantityshipped = default(decimal?), string _owneridValue = default(string), decimal? quantity = default(decimal?), string shiptoFax = default(string), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> invoiceDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> invoiceDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsyncerror> invoiceDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> invoiceDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMinvoice invoiceid = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMinvoicedetail parentbundleidInvoicedetail = default(MicrosoftDynamicsCRMinvoicedetail), IList<MicrosoftDynamicsCRMinvoicedetail> invoicedetailParentInvoicedetail = default(IList<MicrosoftDynamicsCRMinvoicedetail>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Ispriceoverridden = ispriceoverridden;
             Priceperunit = priceperunit;
@@ -296,14 +296,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets choose the user responsible for the sale of the
         /// invoice product.
         /// </summary>
         [JsonProperty(PropertyName = "_salesrepid_value")]
-        public System.Guid? _salesrepidValue { get; set; }
+        public string _salesrepidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the phone number for the customer's shipping
@@ -366,7 +366,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets choose the product to include on the invoice.
         /// </summary>
         [JsonProperty(PropertyName = "_productid_value")]
-        public System.Guid? _productidValue { get; set; }
+        public string _productidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Tax field converted to the system's default
@@ -381,7 +381,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// quantity for this purchase, such as each or dozen.
         /// </summary>
         [JsonProperty(PropertyName = "_uomid_value")]
-        public System.Guid? _uomidValue { get; set; }
+        public string _uomidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the total amount due for the invoice product,
@@ -395,13 +395,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// invoice product line item.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Volume Discount field converted to the
@@ -424,7 +424,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets choose the parent bundle associated with this product
         /// </summary>
         [JsonProperty(PropertyName = "parentbundleid")]
-        public System.Guid? Parentbundleid { get; set; }
+        public string Parentbundleid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Manual Discount field converted to the
@@ -453,7 +453,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// with bundle in the invoice
         /// </summary>
         [JsonProperty(PropertyName = "productassociationid")]
-        public System.Guid? Productassociationid { get; set; }
+        public string Productassociationid { get; set; }
 
         /// <summary>
         /// Gets or sets enter the date when the invoiced product was delivered
@@ -497,14 +497,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the invoice product line item.
         /// </summary>
         [JsonProperty(PropertyName = "invoicedetailid")]
-        public System.Guid? Invoicedetailid { get; set; }
+        public string Invoicedetailid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who owns the invoice
         /// product line item.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets type the city for the customer's shipping address.
@@ -523,7 +523,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type additional information to describe the product
@@ -566,7 +566,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the freight terms to make sure shipping orders
@@ -667,7 +667,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// invoice product line item.
         /// </summary>
         [JsonProperty(PropertyName = "_invoiceid_value")]
-        public System.Guid? _invoiceidValue { get; set; }
+        public string _invoiceidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the tax amount for the invoice product.
@@ -687,7 +687,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the amount or quantity of the product that was
@@ -716,7 +716,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// invoice detail.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the amount or quantity of the product included in

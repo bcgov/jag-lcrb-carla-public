@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// unit that owns the knowledge article views.</param>
         /// <param name="_modifiedbyValue">Shows who last updated the
         /// record.</param>
-        public MicrosoftDynamicsCRMknowledgearticleviews(System.Guid? _createdbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? location = default(int?), int? statecode = default(int?), decimal? exchangerate = default(decimal?), int? knowledgearticleview = default(int?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.DateTimeOffset? viewdate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? _knowledgearticleidValue = default(System.Guid?), System.Guid? owninguser = default(System.Guid?), System.Guid? knowledgearticleviewsid = default(System.Guid?), System.Guid? owningbusinessunit = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleViewsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMknowledgearticleviews(string _createdbyValue = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? location = default(int?), int? statecode = default(int?), decimal? exchangerate = default(decimal?), int? knowledgearticleview = default(int?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), System.DateTimeOffset? viewdate = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _knowledgearticleidValue = default(string), string owninguser = default(string), string knowledgearticleviewsid = default(string), string owningbusinessunit = default(string), string _modifiedbyValue = default(string), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleViewsSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -118,7 +118,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -131,7 +131,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -157,7 +157,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows where the knowledge was used
@@ -190,14 +190,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user or team who owns the
         /// knowledge article views.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets information about the Day
@@ -235,33 +235,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets choose the Knowledge Article.
         /// </summary>
         [JsonProperty(PropertyName = "_knowledgearticleid_value")]
-        public System.Guid? _knowledgearticleidValue { get; set; }
+        public string _knowledgearticleidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who owns the knowledge
         /// article views.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the Knowledge Article Views
         /// </summary>
         [JsonProperty(PropertyName = "knowledgearticleviewsid")]
-        public System.Guid? Knowledgearticleviewsid { get; set; }
+        public string Knowledgearticleviewsid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the business unit that owns the
         /// knowledge article views.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

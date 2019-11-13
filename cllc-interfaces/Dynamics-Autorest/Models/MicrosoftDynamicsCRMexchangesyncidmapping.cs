@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="createdon">Shows the date and time when the record was
         /// created. The date and time are displayed in the time zone selected
         /// in Microsoft Dynamics 365 options.</param>
-        public MicrosoftDynamicsCRMexchangesyncidmapping(int? objecttypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), System.Guid? objectid = default(System.Guid?), System.Guid? _owninguserValue = default(System.Guid?), int? tocrmchangetype = default(int?), int? retries = default(int?), bool? isdeletedinexchange = default(bool?), string versionnumber = default(string), int? lastsyncerrorcode = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), bool? isunlinkedincrm = default(bool?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? exchangesyncidmappingid = default(System.Guid?), int? fromcrmchangetype = default(int?), int? userdecision = default(int?), string exchangeentryid = default(string), string lastsyncerror = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
+        public MicrosoftDynamicsCRMexchangesyncidmapping(int? objecttypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? lastsyncerroroccurredon = default(System.DateTimeOffset?), string objectid = default(string), string _owninguserValue = default(string), int? tocrmchangetype = default(int?), int? retries = default(int?), bool? isdeletedinexchange = default(bool?), string versionnumber = default(string), int? lastsyncerrorcode = default(int?), string _owningbusinessunitValue = default(string), string _owneridValue = default(string), bool? isunlinkedincrm = default(bool?), string _owningteamValue = default(string), string exchangesyncidmappingid = default(string), int? fromcrmchangetype = default(int?), int? userdecision = default(int?), string exchangeentryid = default(string), string lastsyncerror = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit))
         {
             Objecttypecode = objecttypecode;
             Modifiedon = modifiedon;
@@ -90,12 +90,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "objectid")]
-        public System.Guid? Objectid { get; set; }
+        public string Objectid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -125,12 +125,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -140,12 +140,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "exchangesyncidmappingid")]
-        public System.Guid? Exchangesyncidmappingid { get; set; }
+        public string Exchangesyncidmappingid { get; set; }
 
         /// <summary>
         /// </summary>

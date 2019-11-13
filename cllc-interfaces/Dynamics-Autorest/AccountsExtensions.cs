@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMaccountCollection Get(this IAccounts operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMaccountCollection Get(this IAccounts operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMaccountCollection> GetAsync(this IAccounts operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMaccountCollection> GetAsync(this IAccounts operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMaccountCollection> GetWithHttpMessages(this IAccounts operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMaccountCollection> GetWithHttpMessages(this IAccounts operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMaccount GetByKeyaccountsByKey(this IAccounts operations, System.Guid accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMaccount GetByKey(this IAccounts operations, string accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyaccountsByKeyAsync(accountid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(accountid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMaccount> GetByKeyaccountsByKeyAsync(this IAccounts operations, System.Guid accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMaccount> GetByKeyAsync(this IAccounts operations, string accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyaccountsByKeyWithHttpMessagesAsync(accountid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(accountid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMaccount> GetByKeyaccountsByKeyWithHttpMessages(this IAccounts operations, System.Guid accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMaccount> GetByKeyWithHttpMessages(this IAccounts operations, string accountid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetByKeyaccountsByKeyWithHttpMessagesAsync(accountid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(accountid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void UpdateaccountsByKey(this IAccounts operations, System.Guid accountid, MicrosoftDynamicsCRMaccount body)
+            public static void Update(this IAccounts operations, string accountid, MicrosoftDynamicsCRMaccount body)
             {
-                operations.UpdateaccountsByKeyAsync(accountid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(accountid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateaccountsByKeyAsync(this IAccounts operations, System.Guid accountid, MicrosoftDynamicsCRMaccount body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAccounts operations, string accountid, MicrosoftDynamicsCRMaccount body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateaccountsByKeyWithHttpMessagesAsync(accountid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(accountid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse UpdateaccountsByKeyWithHttpMessages(this IAccounts operations, System.Guid accountid, MicrosoftDynamicsCRMaccount body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAccounts operations, string accountid, MicrosoftDynamicsCRMaccount body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.UpdateaccountsByKeyWithHttpMessagesAsync(accountid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(accountid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void DeleteaccountsByKey(this IAccounts operations, System.Guid accountid, string ifMatch = default(string))
+            public static void Delete(this IAccounts operations, string accountid, string ifMatch = default(string))
             {
-                operations.DeleteaccountsByKeyAsync(accountid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(accountid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteaccountsByKeyAsync(this IAccounts operations, System.Guid accountid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAccounts operations, string accountid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteaccountsByKeyWithHttpMessagesAsync(accountid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(accountid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse DeleteaccountsByKeyWithHttpMessages(this IAccounts operations, System.Guid accountid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAccounts operations, string accountid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.DeleteaccountsByKeyWithHttpMessagesAsync(accountid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(accountid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

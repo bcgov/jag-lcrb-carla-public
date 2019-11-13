@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// group with which the resource specification is associated.</param>
         /// <param name="_createdbyValue">Unique identifier of the user who
         /// created the resource specification.</param>
-        public MicrosoftDynamicsCRMresourcespec(int? requiredcount = default(int?), System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string constraints = default(string), string description = default(string), System.Guid? resourcespecid = default(System.Guid?), string versionnumber = default(string), bool? samesite = default(bool?), string objectiveexpression = default(string), string objecttypecode = default(string), System.Guid? _businessunitidValue = default(System.Guid?), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string effortrequired = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? groupobjectid = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMconstraintbasedgroup groupobjectidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> activityPartyResourceSpec = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceSpecBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam groupobjectidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMresource> resourcespecResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMannotation> resourceSpecAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMservice> resourceSpecServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMasyncoperation> resourceSpecAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        public MicrosoftDynamicsCRMresourcespec(int? requiredcount = default(int?), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string constraints = default(string), string description = default(string), string resourcespecid = default(string), string versionnumber = default(string), bool? samesite = default(bool?), string objectiveexpression = default(string), string objecttypecode = default(string), string _businessunitidValue = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string effortrequired = default(string), string _modifiedbyValue = default(string), string groupobjectid = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMconstraintbasedgroup groupobjectidConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivityparty> activityPartyResourceSpec = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceSpecBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMteam groupobjectidTeam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMresource> resourcespecResources = default(IList<MicrosoftDynamicsCRMresource>), IList<MicrosoftDynamicsCRMannotation> resourceSpecAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMservice> resourceSpecServices = default(IList<MicrosoftDynamicsCRMservice>), IList<MicrosoftDynamicsCRMasyncoperation> resourceSpecAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             Requiredcount = requiredcount;
             this._organizationidValue = _organizationidValue;
@@ -123,7 +123,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// resource specification is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the resource specification was last
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the resource specification.
         /// </summary>
         [JsonProperty(PropertyName = "resourcespecid")]
-        public System.Guid? Resourcespecid { get; set; }
+        public string Resourcespecid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// resource specification is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
-        public System.Guid? _businessunitidValue { get; set; }
+        public string _businessunitidValue { get; set; }
 
         /// <summary>
         /// Gets or sets name of the resource specification.
@@ -203,14 +203,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the resourcespec.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// resourcespec.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets number that specifies the minimal effort required from
@@ -224,21 +224,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// resource specification.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the scheduling group with which
         /// the resource specification is associated.
         /// </summary>
         [JsonProperty(PropertyName = "groupobjectid")]
-        public System.Guid? Groupobjectid { get; set; }
+        public string Groupobjectid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the resource
         /// specification.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

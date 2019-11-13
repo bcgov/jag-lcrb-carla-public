@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="solutionid">Unique identifier of the associated
         /// solution.</param>
         /// <param name="ismanaged">For internal use only.</param>
-        public MicrosoftDynamicsCRMmobileofflineprofileitemassociation(System.Guid? mobileofflineprofileitemassociationidunique = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? stageid = default(System.Guid?), bool? isvalidated = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string relationshipdisplayname = default(string), System.Guid? _mobileofflineprofileitemidValue = default(System.Guid?), string relationshipname = default(string), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? relationshipid = default(System.Guid?), string relationshipdata = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string name = default(string), System.Guid? mobileofflineprofileitemassociationid = default(System.Guid?), string introducedversion = default(string), int? selectedrelationshipsschema = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? processid = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string profileitemassociationentityfilter = default(string), int? componentstate = default(int?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string traversedpath = default(string), System.Guid? solutionid = default(System.Guid?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMmobileofflineprofileitem regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofileitem), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmobileofflineprofileitemassociation(string mobileofflineprofileitemassociationidunique = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string stageid = default(string), bool? isvalidated = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string relationshipdisplayname = default(string), string _mobileofflineprofileitemidValue = default(string), string relationshipname = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), string relationshipid = default(string), string relationshipdata = default(string), string _modifiedonbehalfbyValue = default(string), string name = default(string), string mobileofflineprofileitemassociationid = default(string), string introducedversion = default(string), int? selectedrelationshipsschema = default(int?), string _modifiedbyValue = default(string), string processid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string profileitemassociationentityfilter = default(string), int? componentstate = default(int?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string traversedpath = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMmobileofflineprofileitem regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofileitem), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Mobileofflineprofileitemassociationidunique = mobileofflineprofileitemassociationidunique;
             this._createdbyValue = _createdbyValue;
@@ -125,13 +125,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for Internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "mobileofflineprofileitemassociationidunique")]
-        public System.Guid? Mobileofflineprofileitemassociationidunique { get; set; }
+        public string Mobileofflineprofileitemassociationidunique { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was created.
@@ -145,7 +145,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the ID of the stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
-        public System.Guid? Stageid { get; set; }
+        public string Stageid { get; set; }
 
         /// <summary>
         /// Gets or sets information about whether profile item association is
@@ -179,7 +179,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets id of the parent profile item.
         /// </summary>
         [JsonProperty(PropertyName = "_mobileofflineprofileitemid_value")]
-        public System.Guid? _mobileofflineprofileitemidValue { get; set; }
+        public string _mobileofflineprofileitemidValue { get; set; }
 
         /// <summary>
         /// Gets or sets display name of entity relationship
@@ -192,20 +192,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the Mobile Offline Profile Item Association.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record on behalf of another
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the relationship
         /// </summary>
         [JsonProperty(PropertyName = "relationshipid")]
-        public System.Guid? Relationshipid { get; set; }
+        public string Relationshipid { get; set; }
 
         /// <summary>
         /// Gets or sets internal Use Only
@@ -218,7 +218,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets enter the name of the mobile offline profile item
@@ -232,7 +232,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// associaition.
         /// </summary>
         [JsonProperty(PropertyName = "mobileofflineprofileitemassociationid")]
-        public System.Guid? Mobileofflineprofileitemassociationid { get; set; }
+        public string Mobileofflineprofileitemassociationid { get; set; }
 
         /// <summary>
         /// Gets or sets version in which the Mobile offline Profile Item
@@ -252,13 +252,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
-        public System.Guid? Processid { get; set; }
+        public string Processid { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -294,7 +294,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.

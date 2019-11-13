@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// report.</param>
         /// <param name="owninguser">Unique identifier of the user who owns the
         /// report category.</param>
-        public MicrosoftDynamicsCRMreportcategory(int? componentstate = default(int?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), System.Guid? _createdbyValue = default(System.Guid?), string iscustomizable = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string versionnumber = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? reportcategoryidunique = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), decimal? exchangerate = default(decimal?), System.Guid? reportcategoryid = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _modifiedbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? owningbusinessunit = default(System.Guid?), bool? ismanaged = default(bool?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), int? categorycode = default(int?), System.Guid? _reportidValue = default(System.Guid?), System.Guid? owninguser = default(System.Guid?), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMreportcategory(int? componentstate = default(int?), int? importsequencenumber = default(int?), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), string iscustomizable = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string reportcategoryidunique = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), decimal? exchangerate = default(decimal?), string reportcategoryid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string owningbusinessunit = default(string), bool? ismanaged = default(bool?), string _transactioncurrencyidValue = default(string), string _owneridValue = default(string), string solutionid = default(string), int? categorycode = default(int?), string _reportidValue = default(string), string owninguser = default(string), MicrosoftDynamicsCRMreport reportid = default(MicrosoftDynamicsCRMreport), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> reportCategorySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Componentstate = componentstate;
             Importsequencenumber = importsequencenumber;
@@ -140,7 +140,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// category.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether this component can
@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// report category.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the report category.
@@ -172,7 +172,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "reportcategoryidunique")]
-        public System.Guid? Reportcategoryidunique { get; set; }
+        public string Reportcategoryidunique { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the report category record was
@@ -186,7 +186,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the report category.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets exchange rate for the currency associated with the
@@ -199,7 +199,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the report category.
         /// </summary>
         [JsonProperty(PropertyName = "reportcategoryid")]
-        public System.Guid? Reportcategoryid { get; set; }
+        public string Reportcategoryid { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the report category was last
@@ -213,7 +213,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// report category.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -226,7 +226,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// report category.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether the solution component is part of a
@@ -240,20 +240,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Report category.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user or team who owns the
         /// report category.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets category of the report.
@@ -265,14 +265,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the report.
         /// </summary>
         [JsonProperty(PropertyName = "_reportid_value")]
-        public System.Guid? _reportidValue { get; set; }
+        public string _reportidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who owns the report
         /// category.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// </summary>

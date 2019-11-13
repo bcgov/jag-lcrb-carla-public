@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLocalgovindigenousnationCollection Get(this IAdoxiolocalgovindigenousnations operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLocalgovindigenousnationCollection Get(this IAdoxiolocalgovindigenousnations operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLocalgovindigenousnationCollection> GetAsync(this IAdoxiolocalgovindigenousnations operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLocalgovindigenousnationCollection> GetAsync(this IAdoxiolocalgovindigenousnations operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLocalgovindigenousnationCollection> GetWithHttpMessages(this IAdoxiolocalgovindigenousnations operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLocalgovindigenousnationCollection> GetWithHttpMessages(this IAdoxiolocalgovindigenousnations operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioLocalgovindigenousnation LocalgovindigenousnationsByKey(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioLocalgovindigenousnation GetByKey(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.LocalgovindigenousnationsByKeyAsync(adoxioLocalgovindigenousnationid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioLocalgovindigenousnationid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LocalgovindigenousnationsByKeyAsync(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> GetByKeyAsync(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.LocalgovindigenousnationsByKeyWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> LocalgovindigenousnationsByKeyWithHttpMessages(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioLocalgovindigenousnation> GetByKeyWithHttpMessages(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.LocalgovindigenousnationsByKeyWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void LocalgovindigenousnationsByKey1(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation body)
+            public static void Update(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation body)
             {
-                operations.LocalgovindigenousnationsByKey1Async(adoxioLocalgovindigenousnationid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioLocalgovindigenousnationid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task LocalgovindigenousnationsByKey1Async(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.LocalgovindigenousnationsByKey1WithHttpMessagesAsync(adoxioLocalgovindigenousnationid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse LocalgovindigenousnationsByKey1WithHttpMessages(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, MicrosoftDynamicsCRMadoxioLocalgovindigenousnation body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.LocalgovindigenousnationsByKey1WithHttpMessagesAsync(adoxioLocalgovindigenousnationid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void LocalgovindigenousnationsByKey2(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, string ifMatch = default(string))
             {
-                operations.LocalgovindigenousnationsByKey2Async(adoxioLocalgovindigenousnationid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioLocalgovindigenousnationid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task LocalgovindigenousnationsByKey2Async(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.LocalgovindigenousnationsByKey2WithHttpMessagesAsync(adoxioLocalgovindigenousnationid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse LocalgovindigenousnationsByKey2WithHttpMessages(this IAdoxiolocalgovindigenousnations operations, System.Guid adoxioLocalgovindigenousnationid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiolocalgovindigenousnations operations, string adoxioLocalgovindigenousnationid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.LocalgovindigenousnationsByKey2WithHttpMessagesAsync(adoxioLocalgovindigenousnationid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioLocalgovindigenousnationid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

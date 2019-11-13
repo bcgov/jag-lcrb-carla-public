@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="formpresentation">Specifies whether this form is in
         /// the updated UI layout in Microsoft Dynamics CRM 2015 or Microsoft
         /// Dynamics CRM Online 2015 Update.</param>
-        public MicrosoftDynamicsCRMsystemform(System.Guid? formid = default(System.Guid?), bool? istabletenabled = default(bool?), int? type = default(int?), string introducedversion = default(string), string objecttypecode = default(string), string versionnumber = default(string), string description = default(string), System.Guid? formidunique = default(System.Guid?), int? version = default(int?), System.Guid? _ancestorformidValue = default(System.Guid?), string formxml = default(string), System.Guid? solutionid = default(System.Guid?), bool? isdefault = default(bool?), bool? isdesktopenabled = default(bool?), string canbedeleted = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), bool? isairmerged = default(bool?), int? formactivationstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? componentstate = default(int?), bool? ismanaged = default(bool?), string iscustomizable = default(string), string name = default(string), string uniquename = default(string), System.Guid? _organizationidValue = default(System.Guid?), int? formpresentation = default(int?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMsystemform(string formid = default(string), bool? istabletenabled = default(bool?), int? type = default(int?), string introducedversion = default(string), string objecttypecode = default(string), string versionnumber = default(string), string description = default(string), string formidunique = default(string), int? version = default(int?), string _ancestorformidValue = default(string), string formxml = default(string), string solutionid = default(string), bool? isdefault = default(bool?), bool? isdesktopenabled = default(bool?), string canbedeleted = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), bool? isairmerged = default(bool?), int? formactivationstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? componentstate = default(int?), bool? ismanaged = default(bool?), string iscustomizable = default(string), string name = default(string), string uniquename = default(string), string _organizationidValue = default(string), int? formpresentation = default(int?), IList<MicrosoftDynamicsCRMasyncoperation> systemFormAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> systemFormBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemform ancestorformid = default(MicrosoftDynamicsCRMsystemform), IList<MicrosoftDynamicsCRMsystemform> formAncestorForm = default(IList<MicrosoftDynamicsCRMsystemform>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Formid = formid;
             Istabletenabled = istabletenabled;
@@ -121,7 +121,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the record type form.
         /// </summary>
         [JsonProperty(PropertyName = "formid")]
-        public System.Guid? Formid { get; set; }
+        public string Formid { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether the dashboard is
@@ -166,7 +166,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// customizations for the Microsoft Dynamics 365 client for Outlook.
         /// </summary>
         [JsonProperty(PropertyName = "formidunique")]
-        public System.Guid? Formidunique { get; set; }
+        public string Formidunique { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -178,7 +178,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the parent form.
         /// </summary>
         [JsonProperty(PropertyName = "_ancestorformid_value")]
-        public System.Guid? _ancestorformidValue { get; set; }
+        public string _ancestorformidValue { get; set; }
 
         /// <summary>
         /// Gets or sets XML representation of the form layout.
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether the form or the
@@ -272,7 +272,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets specifies whether this form is in the updated UI

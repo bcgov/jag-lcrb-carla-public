@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioCannabismonthlyreportCollection Get(this IAdoxiocannabismonthlyreports operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioCannabismonthlyreportCollection Get(this IAdoxiocannabismonthlyreports operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioCannabismonthlyreportCollection> GetAsync(this IAdoxiocannabismonthlyreports operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioCannabismonthlyreportCollection> GetAsync(this IAdoxiocannabismonthlyreports operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabismonthlyreportCollection> GetWithHttpMessages(this IAdoxiocannabismonthlyreports operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabismonthlyreportCollection> GetWithHttpMessages(this IAdoxiocannabismonthlyreports operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioCannabismonthlyreport CannabismonthlyreportsByKey(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioCannabismonthlyreport GetByKey(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.CannabismonthlyreportsByKeyAsync(adoxioCannabismonthlyreportid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioCannabismonthlyreportid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> CannabismonthlyreportsByKeyAsync(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> GetByKeyAsync(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.CannabismonthlyreportsByKeyWithHttpMessagesAsync(adoxioCannabismonthlyreportid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioCannabismonthlyreportid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> CannabismonthlyreportsByKeyWithHttpMessages(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> GetByKeyWithHttpMessages(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CannabismonthlyreportsByKeyWithHttpMessagesAsync(adoxioCannabismonthlyreportid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioCannabismonthlyreportid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void CannabismonthlyreportsByKey1(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, MicrosoftDynamicsCRMadoxioCannabismonthlyreport body)
+            public static void Update(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, MicrosoftDynamicsCRMadoxioCannabismonthlyreport body)
             {
-                operations.CannabismonthlyreportsByKey1Async(adoxioCannabismonthlyreportid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioCannabismonthlyreportid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CannabismonthlyreportsByKey1Async(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, MicrosoftDynamicsCRMadoxioCannabismonthlyreport body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, MicrosoftDynamicsCRMadoxioCannabismonthlyreport body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.CannabismonthlyreportsByKey1WithHttpMessagesAsync(adoxioCannabismonthlyreportid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioCannabismonthlyreportid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CannabismonthlyreportsByKey1WithHttpMessages(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, MicrosoftDynamicsCRMadoxioCannabismonthlyreport body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, MicrosoftDynamicsCRMadoxioCannabismonthlyreport body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CannabismonthlyreportsByKey1WithHttpMessagesAsync(adoxioCannabismonthlyreportid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioCannabismonthlyreportid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void CannabismonthlyreportsByKey2(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, string ifMatch = default(string))
             {
-                operations.CannabismonthlyreportsByKey2Async(adoxioCannabismonthlyreportid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioCannabismonthlyreportid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CannabismonthlyreportsByKey2Async(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.CannabismonthlyreportsByKey2WithHttpMessagesAsync(adoxioCannabismonthlyreportid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioCannabismonthlyreportid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CannabismonthlyreportsByKey2WithHttpMessages(this IAdoxiocannabismonthlyreports operations, System.Guid adoxioCannabismonthlyreportid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiocannabismonthlyreports operations, string adoxioCannabismonthlyreportid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CannabismonthlyreportsByKey2WithHttpMessagesAsync(adoxioCannabismonthlyreportid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioCannabismonthlyreportid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

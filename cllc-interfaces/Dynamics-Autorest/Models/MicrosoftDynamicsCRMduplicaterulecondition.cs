@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// condition.</param>
         /// <param name="operatorcode">Operator for this rule
         /// condition.</param>
-        public MicrosoftDynamicsCRMduplicaterulecondition(System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), string baseattributename = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string matchingattributename = default(string), System.Guid? _regardingobjectidValue = default(System.Guid?), System.Guid? owninguser = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), bool? ignoreblankvalues = default(bool?), int? operatorparam = default(int?), System.Guid? owningbusinessunit = default(System.Guid?), System.Guid? duplicateruleconditionid = default(System.Guid?), int? operatorcode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMduplicaterulecondition(string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), string baseattributename = default(string), string _modifiedonbehalfbyValue = default(string), string matchingattributename = default(string), string _regardingobjectidValue = default(string), string owninguser = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), bool? ignoreblankvalues = default(bool?), int? operatorparam = default(int?), string owningbusinessunit = default(string), string duplicateruleconditionid = default(string), int? operatorcode = default(int?), IList<MicrosoftDynamicsCRMsyncerror> duplicateRuleConditionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMduplicaterule regardingobjectid = default(MicrosoftDynamicsCRMduplicaterule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             this._owneridValue = _owneridValue;
@@ -99,21 +99,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// condition.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user or team who owns the
         /// duplicate rule condition.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// condition.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets field that is being compared.
@@ -126,7 +126,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the duplicate rule condition.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets field that is being compared with the base field.
@@ -139,13 +139,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// condition is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public System.Guid? _regardingobjectidValue { get; set; }
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who owns the condition.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the condition was last modified.
@@ -164,7 +164,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// duplicate rule condition.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets determines whether to consider blank values as
@@ -185,13 +185,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// condition.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the condition.
         /// </summary>
         [JsonProperty(PropertyName = "duplicateruleconditionid")]
-        public System.Guid? Duplicateruleconditionid { get; set; }
+        public string Duplicateruleconditionid { get; set; }
 
         /// <summary>
         /// Gets or sets operator for this rule condition.

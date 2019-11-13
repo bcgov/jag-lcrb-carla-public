@@ -99,7 +99,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// created the mail merge template.</param>
         /// <param name="templatetypecode">Type of mail merge template.</param>
         /// <param name="parameterxml">Parameter Xml.</param>
-        public MicrosoftDynamicsCRMmailmergetemplate(int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? languagecode = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), bool? ismanaged = default(bool?), int? filesize = default(int?), System.Guid? mailmergetemplateidunique = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), int? statuscode = default(int?), string versionnumber = default(string), string mimetype = default(string), int? mailmergetype = default(int?), string iscustomizable = default(string), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string body = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string filename = default(string), int? documentformat = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? statecode = default(int?), System.Guid? solutionid = default(System.Guid?), decimal? exchangerate = default(decimal?), string introducedversion = default(string), bool? ispersonal = default(bool?), string description = default(string), System.Guid? mailmergetemplateid = default(System.Guid?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultfilter = default(string), string name = default(string), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), string templatetypecode = default(string), string parameterxml = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMasyncoperation> mailMergeTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> mailMergeTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmailmergetemplate(int? timezoneruleversionnumber = default(int?), int? componentstate = default(int?), int? languagecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _transactioncurrencyidValue = default(string), bool? ismanaged = default(bool?), int? filesize = default(int?), string mailmergetemplateidunique = default(string), string _owningteamValue = default(string), int? statuscode = default(int?), string versionnumber = default(string), string mimetype = default(string), int? mailmergetype = default(int?), string iscustomizable = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string body = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string filename = default(string), int? documentformat = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? statecode = default(int?), string solutionid = default(string), decimal? exchangerate = default(decimal?), string introducedversion = default(string), bool? ispersonal = default(bool?), string description = default(string), string mailmergetemplateid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string defaultfilter = default(string), string name = default(string), string _owneridValue = default(string), string _createdbyValue = default(string), string templatetypecode = default(string), string parameterxml = default(string), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMasyncoperation> mailMergeTemplateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> mailMergeTemplateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Timezoneruleversionnumber = timezoneruleversionnumber;
             Componentstate = componentstate;
@@ -179,21 +179,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the mailmergetemplate.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the business unit that owns the
         /// mail merge template.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the currency associated with the
         /// mailmergetemplate.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether the solution component is part of a
@@ -212,14 +212,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "mailmergetemplateidunique")]
-        public System.Guid? Mailmergetemplateidunique { get; set; }
+        public string Mailmergetemplateidunique { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the team who owns the mail merge
         /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the mail merge template.
@@ -258,21 +258,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// mail merge template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// mailmergetemplate.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets body text of the mail merge template.
@@ -316,7 +316,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets exchange rate for the currency associated with the
@@ -348,7 +348,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the mail merge template.
         /// </summary>
         [JsonProperty(PropertyName = "mailmergetemplateid")]
-        public System.Guid? Mailmergetemplateid { get; set; }
+        public string Mailmergetemplateid { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -382,14 +382,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// mail merge template.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the mail
         /// merge template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type of mail merge template.

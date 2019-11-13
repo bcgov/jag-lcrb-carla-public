@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioInvestigationreactivationhistoryCollection Get(this IAdoxioinvestigationreactivationhistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioInvestigationreactivationhistoryCollection Get(this IAdoxioinvestigationreactivationhistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistoryCollection> GetAsync(this IAdoxioinvestigationreactivationhistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistoryCollection> GetAsync(this IAdoxioinvestigationreactivationhistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistoryCollection> GetWithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistoryCollection> GetWithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -166,9 +184,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory InvestigationreactivationhistoriesByKey(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory GetByKey(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.InvestigationreactivationhistoriesByKeyAsync(adoxioInvestigationreactivationhistoryid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioInvestigationreactivationhistoryid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -190,9 +208,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory> InvestigationreactivationhistoriesByKeyAsync(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory> GetByKeyAsync(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.InvestigationreactivationhistoriesByKeyWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -217,9 +235,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory> InvestigationreactivationhistoriesByKeyWithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory> GetByKeyWithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.InvestigationreactivationhistoriesByKeyWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -235,9 +253,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void InvestigationreactivationhistoriesByKey1(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory body)
+            public static void Update(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory body)
             {
-                operations.InvestigationreactivationhistoriesByKey1Async(adoxioInvestigationreactivationhistoryid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioInvestigationreactivationhistoryid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -256,9 +274,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task InvestigationreactivationhistoriesByKey1Async(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.InvestigationreactivationhistoriesByKey1WithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -277,9 +295,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse InvestigationreactivationhistoriesByKey1WithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.InvestigationreactivationhistoriesByKey1WithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -295,9 +313,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void InvestigationreactivationhistoriesByKey2(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, string ifMatch = default(string))
+            public static void Delete(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, string ifMatch = default(string))
             {
-                operations.InvestigationreactivationhistoriesByKey2Async(adoxioInvestigationreactivationhistoryid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioInvestigationreactivationhistoryid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -316,9 +334,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task InvestigationreactivationhistoriesByKey2Async(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.InvestigationreactivationhistoriesByKey2WithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -337,9 +355,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse InvestigationreactivationhistoriesByKey2WithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, System.Guid adoxioInvestigationreactivationhistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxioinvestigationreactivationhistories operations, string adoxioInvestigationreactivationhistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.InvestigationreactivationhistoriesByKey2WithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioInvestigationreactivationhistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

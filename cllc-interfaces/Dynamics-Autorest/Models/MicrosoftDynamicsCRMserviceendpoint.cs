@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="saskeyname">Shared Access Key Name</param>
         /// <param name="name">Name of Service end point.</param>
         /// <param name="saskey">Shared Access Key</param>
-        public MicrosoftDynamicsCRMserviceendpoint(int? connectionmode = default(int?), bool? ismanaged = default(bool?), System.Guid? solutionid = default(System.Guid?), int? messageformat = default(int?), string introducedversion = default(string), string iscustomizable = default(string), bool? issastokenset = default(bool?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), bool? issaskeyset = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sastoken = default(string), System.Guid? serviceendpointidunique = default(System.Guid?), int? componentstate = default(int?), string path = default(string), string description = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), int? namespaceformat = default(int?), System.Guid? _organizationidValue = default(System.Guid?), int? contract = default(int?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? serviceendpointid = default(System.Guid?), int? authtype = default(int?), string solutionnamespace = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string namespaceaddress = default(string), int? userclaim = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string saskeyname = default(string), string name = default(string), string saskey = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> serviceendpointSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMserviceendpoint(int? connectionmode = default(int?), bool? ismanaged = default(bool?), string solutionid = default(string), int? messageformat = default(int?), string introducedversion = default(string), string iscustomizable = default(string), bool? issastokenset = default(bool?), string _modifiedonbehalfbyValue = default(string), bool? issaskeyset = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string sastoken = default(string), string serviceendpointidunique = default(string), int? componentstate = default(int?), string path = default(string), string description = default(string), string _modifiedbyValue = default(string), int? namespaceformat = default(int?), string _organizationidValue = default(string), int? contract = default(int?), string _createdbyValue = default(string), string serviceendpointid = default(string), int? authtype = default(int?), string solutionnamespace = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string namespaceaddress = default(string), int? userclaim = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string saskeyname = default(string), string name = default(string), string saskey = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> serviceendpointSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Connectionmode = connectionmode;
             Ismanaged = ismanaged;
@@ -141,7 +141,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets content type of the message
@@ -172,7 +172,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the service endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -196,7 +196,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the service endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "serviceendpointidunique")]
-        public System.Guid? Serviceendpointidunique { get; set; }
+        public string Serviceendpointidunique { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -221,7 +221,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// service endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets format of Service Bus Namespace
@@ -234,7 +234,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// service endpoint is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type of the endpoint contract.
@@ -247,13 +247,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the service endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "serviceendpointid")]
-        public System.Guid? Serviceendpointid { get; set; }
+        public string Serviceendpointid { get; set; }
 
         /// <summary>
         /// Gets or sets specifies mode of authentication with SB
@@ -296,7 +296,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// service endpoint.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shared Access Key Name

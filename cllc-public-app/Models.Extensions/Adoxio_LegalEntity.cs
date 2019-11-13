@@ -22,7 +22,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioCommonvotingshares = from.commonvotingshares;
             to.AdoxioDateofbirth = from.dateofbirth;
             to.AdoxioFirstname = from.firstname;
-            to.AdoxioInterestpercentage = (double?)from.interestpercentage;
+            to.AdoxioInterestpercentage = from.interestpercentage;
             to.AdoxioIsindividual = (from.isindividual != null && (bool)from.isindividual) ? 1 : 0;
             to.AdoxioLastname = from.lastname;
             if (from.legalentitytype != null)

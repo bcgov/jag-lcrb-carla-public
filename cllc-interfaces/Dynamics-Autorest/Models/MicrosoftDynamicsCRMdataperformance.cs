@@ -67,7 +67,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// applied.</param>
         /// <param name="operation">Data operation that triggered the query
         /// (Retrieve Multiple, etc.)</param>
-        public MicrosoftDynamicsCRMdataperformance(System.Guid? _organizationidValue = default(System.Guid?), int? count = default(int?), decimal? optimizationstorage = default(decimal?), bool? anyoptimizationavailable = default(bool?), System.Guid? dataperformanceid = default(System.Guid?), string lastactionresult = default(string), string component = default(string), decimal? weight = default(decimal?), string entity = default(string), decimal? mediantime = default(decimal?), decimal? estimatedoptimizationimpact = default(decimal?), string solution = default(string), string executionperiod = default(string), decimal? mintime = default(decimal?), string optimizationstatus = default(string), decimal? maxtime = default(decimal?), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), int? count = default(int?), decimal? optimizationstorage = default(decimal?), bool? anyoptimizationavailable = default(bool?), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), decimal? weight = default(decimal?), string entity = default(string), decimal? mediantime = default(decimal?), decimal? estimatedoptimizationimpact = default(decimal?), string solution = default(string), string executionperiod = default(string), decimal? mintime = default(decimal?), string optimizationstatus = default(string), decimal? maxtime = default(decimal?), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
             Count = count;
@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the organization associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets number of times a queries were executed (Aggregated)
@@ -127,7 +127,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the performance suggestion.
         /// </summary>
         [JsonProperty(PropertyName = "dataperformanceid")]
-        public System.Guid? Dataperformanceid { get; set; }
+        public string Dataperformanceid { get; set; }
 
         /// <summary>
         /// Gets or sets an internal state which shows the result of the last

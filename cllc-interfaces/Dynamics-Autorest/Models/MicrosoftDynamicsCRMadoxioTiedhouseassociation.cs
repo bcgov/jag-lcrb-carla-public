@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="_owneridValue">Owner Id</param>
         /// <param name="createdon">Date and time when the record was
         /// created.</param>
-        public MicrosoftDynamicsCRMadoxioTiedhouseassociation(System.Guid? _createdbyValue = default(System.Guid?), int? statuscode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string adoxioName = default(string), string adoxioLicencenumber = default(string), string adoxioCity = default(string), string adoxioStreet1 = default(string), string adoxioCountry = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string versionnumber = default(string), int? importsequencenumber = default(int?), System.Guid? _owninguserValue = default(System.Guid?), int? adoxioType = default(int?), System.Guid? _adoxioApplicationidValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), string adoxioPostalcode = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), string adoxioBusinessname = default(string), System.Guid? adoxioTiedhouseassociationid = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioProvince = default(string), System.Guid? _owningteamValue = default(System.Guid?), string adoxioStreet2 = default(string), int? statecode = default(int?), System.Guid? _owneridValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioTiedhouseassociationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseassociationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseassociationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioTiedhouseassociationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioTiedhouseassociationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioTiedhouseassociationAdoxioTiedhouseconnectionTiedHouse = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>))
+        public MicrosoftDynamicsCRMadoxioTiedhouseassociation(string _createdbyValue = default(string), int? statuscode = default(int?), string _createdonbehalfbyValue = default(string), string adoxioName = default(string), string adoxioLicencenumber = default(string), string adoxioCity = default(string), string adoxioStreet1 = default(string), string adoxioCountry = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), int? importsequencenumber = default(int?), string _owninguserValue = default(string), int? adoxioType = default(int?), string _adoxioApplicationidValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioPostalcode = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string adoxioBusinessname = default(string), string adoxioTiedhouseassociationid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioProvince = default(string), string _owningteamValue = default(string), string adoxioStreet2 = default(string), int? statecode = default(int?), string _owneridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioTiedhouseassociationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseassociationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioTiedhouseassociationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioTiedhouseassociationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioTiedhouseassociationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioTiedhouseassociationAdoxioTiedhouseconnectionTiedHouse = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>))
         {
             this._createdbyValue = _createdbyValue;
             Statuscode = statuscode;
@@ -124,7 +124,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the Tied House Association
@@ -137,7 +137,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the custom entity.
@@ -176,14 +176,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets version Number
@@ -202,7 +202,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -214,7 +214,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// House Association.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
-        public System.Guid? _adoxioApplicationidValue { get; set; }
+        public string _adoxioApplicationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -232,7 +232,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -249,7 +249,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_tiedhouseassociationid")]
-        public System.Guid? AdoxioTiedhouseassociationid { get; set; }
+        public string AdoxioTiedhouseassociationid { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was modified.
@@ -266,7 +266,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -283,7 +283,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was created.

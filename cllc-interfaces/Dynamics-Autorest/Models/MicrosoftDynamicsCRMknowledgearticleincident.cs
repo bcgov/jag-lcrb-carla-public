@@ -75,7 +75,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.</param>
         /// <param name="_createdonbehalfbyValue">Unique identifier of the
         /// delegate user who created the record.</param>
-        public MicrosoftDynamicsCRMknowledgearticleincident(System.Guid? owninguser = default(System.Guid?), System.Guid? _knowledgearticleidValue = default(System.Guid?), int? importsequencenumber = default(int?), decimal? exchangerate = default(decimal?), int? knowledgeusage = default(int?), System.Guid? _createdbyValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? issenttocustomer = default(bool?), string versionnumber = default(string), int? statuscode = default(int?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _incidentidValue = default(System.Guid?), int? statecode = default(int?), System.Guid? knowledgearticleincidentid = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? owningbusinessunit = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleIncidentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident))
+        public MicrosoftDynamicsCRMknowledgearticleincident(string owninguser = default(string), string _knowledgearticleidValue = default(string), int? importsequencenumber = default(int?), decimal? exchangerate = default(decimal?), int? knowledgeusage = default(int?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? issenttocustomer = default(bool?), string versionnumber = default(string), int? statuscode = default(int?), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string _incidentidValue = default(string), int? statecode = default(int?), string knowledgearticleincidentid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string owningbusinessunit = default(string), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> knowledgeArticleIncidentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMknowledgearticle knowledgearticleid = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident incidentid = default(MicrosoftDynamicsCRMincident))
         {
             Owninguser = owninguser;
             this._knowledgearticleidValue = _knowledgearticleidValue;
@@ -121,13 +121,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// article incident.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets choose the Knowledge Article.
         /// </summary>
         [JsonProperty(PropertyName = "_knowledgearticleid_value")]
-        public System.Guid? _knowledgearticleidValue { get; set; }
+        public string _knowledgearticleidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the data import or data migration
@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -168,7 +168,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time that the record was migrated.
@@ -206,20 +206,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// knowledge article incident.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets choose the Incident id for the knowledge article.
         /// </summary>
         [JsonProperty(PropertyName = "_incidentid_value")]
-        public System.Guid? _incidentidValue { get; set; }
+        public string _incidentidValue { get; set; }
 
         /// <summary>
         /// Gets or sets status of the Knowledge Article Incident
@@ -232,7 +232,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// incident.
         /// </summary>
         [JsonProperty(PropertyName = "knowledgearticleincidentid")]
-        public System.Guid? Knowledgearticleincidentid { get; set; }
+        public string Knowledgearticleincidentid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was last
@@ -247,7 +247,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// knowledge article incident.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -259,14 +259,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

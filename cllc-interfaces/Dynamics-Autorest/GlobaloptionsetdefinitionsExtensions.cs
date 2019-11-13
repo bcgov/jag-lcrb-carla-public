@@ -24,6 +24,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='skip'>
+            /// </param>
+            /// <param name='search'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +43,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMOptionSetMetadataBaseCollection Get(this IGlobaloptionsetdefinitions operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMOptionSetMetadataBaseCollection Get(this IGlobaloptionsetdefinitions operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, skip, search, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +53,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='skip'>
+            /// </param>
+            /// <param name='search'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +76,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMOptionSetMetadataBaseCollection> GetAsync(this IGlobaloptionsetdefinitions operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMOptionSetMetadataBaseCollection> GetAsync(this IGlobaloptionsetdefinitions operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +89,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='skip'>
+            /// </param>
+            /// <param name='search'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +112,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBaseCollection> GetWithHttpMessages(this IGlobaloptionsetdefinitions operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBaseCollection> GetWithHttpMessages(this IGlobaloptionsetdefinitions operations, int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, skip, search, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +195,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMOptionSetMetadataBase GetByKeyGlobalOptionSetDefinitionsByKey(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMOptionSetMetadataBase GetByKey(this IGlobaloptionsetdefinitions operations, string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetByKeyGlobalOptionSetDefinitionsByKeyAsync(metadataId, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(metadataId, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +218,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMOptionSetMetadataBase> GetByKeyGlobalOptionSetDefinitionsByKeyAsync(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMOptionSetMetadataBase> GetByKeyAsync(this IGlobaloptionsetdefinitions operations, string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetByKeyGlobalOptionSetDefinitionsByKeyWithHttpMessagesAsync(metadataId, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(metadataId, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +244,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBase> GetByKeyGlobalOptionSetDefinitionsByKeyWithHttpMessages(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMOptionSetMetadataBase> GetByKeyWithHttpMessages(this IGlobaloptionsetdefinitions operations, string metadataId, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetByKeyGlobalOptionSetDefinitionsByKeyWithHttpMessagesAsync(metadataId, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(metadataId, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +261,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void UpdateGlobalOptionSetDefinitionsByKey(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body)
+            public static void Update(this IGlobaloptionsetdefinitions operations, string metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body)
             {
-                operations.UpdateGlobalOptionSetDefinitionsByKeyAsync(metadataId, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(metadataId, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +281,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdateGlobalOptionSetDefinitionsByKeyAsync(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IGlobaloptionsetdefinitions operations, string metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.UpdateGlobalOptionSetDefinitionsByKeyWithHttpMessagesAsync(metadataId, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(metadataId, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +301,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse UpdateGlobalOptionSetDefinitionsByKeyWithHttpMessages(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IGlobaloptionsetdefinitions operations, string metadataId, MicrosoftDynamicsCRMOptionSetMetadataBase body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.UpdateGlobalOptionSetDefinitionsByKeyWithHttpMessagesAsync(metadataId, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(metadataId, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +318,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void DeleteGlobalOptionSetDefinitionsByKey(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, string ifMatch = default(string))
+            public static void Delete(this IGlobaloptionsetdefinitions operations, string metadataId, string ifMatch = default(string))
             {
-                operations.DeleteGlobalOptionSetDefinitionsByKeyAsync(metadataId, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(metadataId, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +338,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DeleteGlobalOptionSetDefinitionsByKeyAsync(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IGlobaloptionsetdefinitions operations, string metadataId, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.DeleteGlobalOptionSetDefinitionsByKeyWithHttpMessagesAsync(metadataId, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(metadataId, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +358,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse DeleteGlobalOptionSetDefinitionsByKeyWithHttpMessages(this IGlobaloptionsetdefinitions operations, System.Guid metadataId, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IGlobaloptionsetdefinitions operations, string metadataId, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.DeleteGlobalOptionSetDefinitionsByKeyWithHttpMessagesAsync(metadataId, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(metadataId, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

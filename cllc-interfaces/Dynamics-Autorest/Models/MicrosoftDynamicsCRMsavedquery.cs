@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// for the specified record type (entity).</param>
         /// <param name="ismanaged">Tells whether the record is part of a
         /// managed solution.</param>
-        public MicrosoftDynamicsCRMsavedquery(int? organizationtaborder = default(int?), int? statecode = default(int?), System.Guid? _createdbyValue = default(System.Guid?), bool? isuserdefined = default(bool?), string columnsetxml = default(string), string canbedeleted = default(string), int? querytype = default(int?), string conditionalformatting = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), string queryapi = default(string), string advancedgroupby = default(string), string returnedtypecode = default(string), bool? isquickfindquery = default(bool?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), string name = default(string), string iscustomizable = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string layoutxml = default(string), string fetchxml = default(string), string description = default(string), string versionnumber = default(string), int? componentstate = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? savedqueryid = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string introducedversion = default(string), bool? iscustom = default(bool?), int? statuscode = default(int?), int? queryappusage = default(int?), System.Guid? savedqueryidunique = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isdefault = default(bool?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>))
+        public MicrosoftDynamicsCRMsavedquery(int? organizationtaborder = default(int?), int? statecode = default(int?), string _createdbyValue = default(string), bool? isuserdefined = default(bool?), string columnsetxml = default(string), string canbedeleted = default(string), int? querytype = default(int?), string conditionalformatting = default(string), string _modifiedbyValue = default(string), string queryapi = default(string), string advancedgroupby = default(string), string returnedtypecode = default(string), bool? isquickfindquery = default(bool?), string _organizationidValue = default(string), string solutionid = default(string), string name = default(string), string iscustomizable = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string layoutxml = default(string), string fetchxml = default(string), string description = default(string), string versionnumber = default(string), int? componentstate = default(int?), string _modifiedonbehalfbyValue = default(string), string savedqueryid = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string introducedversion = default(string), bool? iscustom = default(bool?), int? statuscode = default(int?), int? queryappusage = default(int?), string savedqueryidunique = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? isdefault = default(bool?), bool? ismanaged = default(bool?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> savedQuerySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> savedQueryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> savedQueryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmobileofflineprofileitem> lkMobileofflineprofileitemSavedquery = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitem>))
         {
             Organizationtaborder = organizationtaborder;
             Statecode = statecode;
@@ -166,7 +166,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets tells whether the view was created by a user.
@@ -204,7 +204,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -239,13 +239,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets type a name for the view to describe what results the
@@ -304,13 +304,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the view.
         /// </summary>
         [JsonProperty(PropertyName = "savedqueryid")]
-        public System.Guid? Savedqueryid { get; set; }
+        public string Savedqueryid { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -347,14 +347,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "savedqueryidunique")]
-        public System.Guid? Savedqueryidunique { get; set; }
+        public string Savedqueryidunique { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record on behalf of another
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was last

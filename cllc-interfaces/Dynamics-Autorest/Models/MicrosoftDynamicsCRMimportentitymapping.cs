@@ -54,7 +54,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// data map.</param>
         /// <param name="_modifiedbyValue">Unique identifier of the user who
         /// last modified the import entity mapping.</param>
-        public MicrosoftDynamicsCRMimportentitymapping(int? dedupe = default(int?), int? processcode = default(int?), System.Guid? importentitymappingid = default(System.Guid?), string sourceentityname = default(string), int? statuscode = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string targetentityname = default(string), int? statecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _importmapidValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMimportentitymapping(int? dedupe = default(int?), int? processcode = default(int?), string importentitymappingid = default(string), string sourceentityname = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string targetentityname = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _importmapidValue = default(string), string _modifiedbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMimportmap importmapid = default(MicrosoftDynamicsCRMimportmap), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Dedupe = dedupe;
             Processcode = processcode;
@@ -101,7 +101,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the import entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "importentitymappingid")]
-        public System.Guid? Importentitymappingid { get; set; }
+        public string Importentitymappingid { get; set; }
 
         /// <summary>
         /// Gets or sets name of the source entity.
@@ -120,7 +120,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the importentitymapping.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets name of the Microsoft Dynamics 365 entity.
@@ -139,14 +139,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// importentitymapping.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the import
         /// entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the import entity mapping was last
@@ -166,14 +166,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated data map.
         /// </summary>
         [JsonProperty(PropertyName = "_importmapid_value")]
-        public System.Guid? _importmapidValue { get; set; }
+        public string _importmapidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// import entity mapping.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// </summary>

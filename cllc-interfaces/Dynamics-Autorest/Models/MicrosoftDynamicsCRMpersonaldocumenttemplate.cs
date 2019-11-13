@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// template was created.</param>
         /// <param name="content">Bytes of the personal document
         /// template.</param>
-        public MicrosoftDynamicsCRMpersonaldocumenttemplate(System.Guid? personaldocumenttemplateid = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _owningteamValue = default(System.Guid?), bool? status = default(bool?), string clientdata = default(string), int? languagecode = default(int?), string associatedentitytypecode = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string description = default(string), System.Guid? _owninguserValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string name = default(string), int? documenttype = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string content = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpersonaldocumenttemplate(string personaldocumenttemplateid = default(string), string _owningbusinessunitValue = default(string), string _owningteamValue = default(string), bool? status = default(bool?), string clientdata = default(string), int? languagecode = default(int?), string associatedentitytypecode = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string description = default(string), string _owninguserValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), int? documenttype = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string content = default(string), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Personaldocumenttemplateid = personaldocumenttemplateid;
             this._owningbusinessunitValue = _owningbusinessunitValue;
@@ -105,21 +105,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the personal document template.
         /// </summary>
         [JsonProperty(PropertyName = "personaldocumenttemplateid")]
-        public System.Guid? Personaldocumenttemplateid { get; set; }
+        public string Personaldocumenttemplateid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the business unit that owns the
         /// personal document template.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the team who owns the personal
         /// document template.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets information about whether the personal document
@@ -151,7 +151,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// personal document template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the personal document template was
@@ -165,7 +165,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// document template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets enter the user or team who is assigned to manage the
@@ -173,14 +173,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
         /// the personal document template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets additional information to describe the Personal
@@ -194,14 +194,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// document template.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// personal document template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets name of the personal document template.

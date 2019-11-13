@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="recommendeddocumentid">Shows the recommended document
         /// record.</param>
         /// <param name="filetype">Shows the file type.</param>
-        public MicrosoftDynamicsCRMrecommendeddocument(string versionnumber = default(string), string readurl = default(string), string externaldocumentid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string contenttype = default(string), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string iconclassname = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), string editurl = default(string), string location = default(string), string fullname = default(string), string source = default(string), decimal? exchangerate = default(decimal?), string version = default(string), System.Guid? _regardingobjectidValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), string associatedrecordname = default(string), string externalmodifiedby = default(string), System.Guid? _organizationidValue = default(System.Guid?), int? filesize = default(int?), string title = default(string), string absoluteurl = default(string), string author = default(string), System.Guid? recommendeddocumentid = default(System.Guid?), string filetype = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMrecommendeddocument(string versionnumber = default(string), string readurl = default(string), string externaldocumentid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string contenttype = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string iconclassname = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string editurl = default(string), string location = default(string), string fullname = default(string), string source = default(string), decimal? exchangerate = default(decimal?), string version = default(string), string _regardingobjectidValue = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string associatedrecordname = default(string), string externalmodifiedby = default(string), string _organizationidValue = default(string), int? filesize = default(int?), string title = default(string), string absoluteurl = default(string), string author = default(string), string recommendeddocumentid = default(string), string filetype = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Versionnumber = versionnumber;
             Readurl = readurl;
@@ -173,21 +173,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the exchange rate for the currency associated
         /// with the recommended document with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record on behalf of another
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets stores the Icon Class name of the recommended
@@ -201,7 +201,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the time zone code that was in use when the
@@ -252,13 +252,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record is associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public System.Guid? _regardingobjectidValue { get; set; }
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -283,7 +283,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the file size.
@@ -315,7 +315,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the recommended document record.
         /// </summary>
         [JsonProperty(PropertyName = "recommendeddocumentid")]
-        public System.Guid? Recommendeddocumentid { get; set; }
+        public string Recommendeddocumentid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the file type.

@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// competitor.</param>
         /// <param name="postofficebox">Post office box number in the
         /// competitor address.</param>
-        public MicrosoftDynamicsCRMcompetitoraddress(string stateorprovince = default(string), int? utcoffset = default(int?), string composite = default(string), string upszone = default(string), int? addresstypecode = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string postalcode = default(string), string latitude = default(string), string versionnumber = default(string), string telephone1 = default(string), string name = default(string), string telephone2 = default(string), string county = default(string), int? addressnumber = default(int?), string city = default(string), string longitude = default(string), string telephone3 = default(string), string country = default(string), System.Guid? _createdbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string fax = default(string), System.Guid? _parentidValue = default(System.Guid?), string line1 = default(string), string line3 = default(string), string line2 = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? competitoraddressid = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), int? shippingmethodcode = default(int?), string postofficebox = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> competitorAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor parentid = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMcompetitoraddress(string stateorprovince = default(string), int? utcoffset = default(int?), string composite = default(string), string upszone = default(string), int? addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string postalcode = default(string), string latitude = default(string), string versionnumber = default(string), string telephone1 = default(string), string name = default(string), string telephone2 = default(string), string county = default(string), int? addressnumber = default(int?), string city = default(string), string longitude = default(string), string telephone3 = default(string), string country = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string fax = default(string), string _parentidValue = default(string), string line1 = default(string), string line3 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string competitoraddressid = default(string), string _modifiedbyValue = default(string), int? shippingmethodcode = default(int?), string postofficebox = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> competitorAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor parentid = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Stateorprovince = stateorprovince;
             Utcoffset = utcoffset;
@@ -172,7 +172,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the competitor address was last
@@ -259,7 +259,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the competitor address was created.
@@ -278,7 +278,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// competitor address is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_parentid_value")]
-        public System.Guid? _parentidValue { get; set; }
+        public string _parentidValue { get; set; }
 
         /// <summary>
         /// Gets or sets first line for entering address information.
@@ -303,20 +303,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "competitoraddressid")]
-        public System.Guid? Competitoraddressid { get; set; }
+        public string Competitoraddressid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets method of shipment for the competitor.

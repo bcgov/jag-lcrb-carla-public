@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioWorkerinvoicehistoryCollection Get(this IAdoxioworkerinvoicehistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioWorkerinvoicehistoryCollection Get(this IAdoxioworkerinvoicehistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioWorkerinvoicehistoryCollection> GetAsync(this IAdoxioworkerinvoicehistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioWorkerinvoicehistoryCollection> GetAsync(this IAdoxioworkerinvoicehistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioWorkerinvoicehistoryCollection> GetWithHttpMessages(this IAdoxioworkerinvoicehistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioWorkerinvoicehistoryCollection> GetWithHttpMessages(this IAdoxioworkerinvoicehistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioWorkerinvoicehistory WorkerinvoicehistoriesByKey(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioWorkerinvoicehistory GetByKey(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.WorkerinvoicehistoriesByKeyAsync(adoxioWorkerinvoicehistoryid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioWorkerinvoicehistoryid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> WorkerinvoicehistoriesByKeyAsync(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> GetByKeyAsync(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.WorkerinvoicehistoriesByKeyWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> WorkerinvoicehistoriesByKeyWithHttpMessages(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> GetByKeyWithHttpMessages(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.WorkerinvoicehistoriesByKeyWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void WorkerinvoicehistoriesByKey1(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, MicrosoftDynamicsCRMadoxioWorkerinvoicehistory body)
+            public static void Update(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, MicrosoftDynamicsCRMadoxioWorkerinvoicehistory body)
             {
-                operations.WorkerinvoicehistoriesByKey1Async(adoxioWorkerinvoicehistoryid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioWorkerinvoicehistoryid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task WorkerinvoicehistoriesByKey1Async(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, MicrosoftDynamicsCRMadoxioWorkerinvoicehistory body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, MicrosoftDynamicsCRMadoxioWorkerinvoicehistory body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.WorkerinvoicehistoriesByKey1WithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse WorkerinvoicehistoriesByKey1WithHttpMessages(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, MicrosoftDynamicsCRMadoxioWorkerinvoicehistory body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, MicrosoftDynamicsCRMadoxioWorkerinvoicehistory body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.WorkerinvoicehistoriesByKey1WithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void WorkerinvoicehistoriesByKey2(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, string ifMatch = default(string))
+            public static void Delete(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, string ifMatch = default(string))
             {
-                operations.WorkerinvoicehistoriesByKey2Async(adoxioWorkerinvoicehistoryid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioWorkerinvoicehistoryid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task WorkerinvoicehistoriesByKey2Async(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.WorkerinvoicehistoriesByKey2WithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse WorkerinvoicehistoriesByKey2WithHttpMessages(this IAdoxioworkerinvoicehistories operations, System.Guid adoxioWorkerinvoicehistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxioworkerinvoicehistories operations, string adoxioWorkerinvoicehistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.WorkerinvoicehistoriesByKey2WithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioWorkerinvoicehistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }
