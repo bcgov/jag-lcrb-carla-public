@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// template
+    /// Microsoft.Dynamics.CRM.template
     /// </summary>
     public partial class MicrosoftDynamicsCRMtemplate
     {
@@ -29,7 +29,72 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMtemplate
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMtemplate(string presentationxml = default(string), string _owningteamValue = default(string), string subjectpresentationxml = default(string), int? generationtypecode = default(int?), string _createdbyValue = default(string), string mimetype = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _owningbusinessunitValue = default(string), string description = default(string), string templateidunique = default(string), string body = default(string), string solutionid = default(string), string _modifiedbyValue = default(string), string templatetypecode = default(string), string _modifiedonbehalfbyValue = default(string), object iscustomizable = default(object), bool? ispersonal = default(bool?), int? opencount = default(int?), int? componentstate = default(int?), string templateid = default(string), bool? ismanaged = default(bool?), int? openrate = default(int?), string title = default(string), int? replyrate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string subject = default(string), bool? isrecommended = default(bool?), string introducedversion = default(string), int? replycount = default(int?), int? usedcount = default(int?), int? languagecode = default(int?), long? versionnumber = default(long?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> templateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> templateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMactivitymimeattachment> templateActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), object ownerid = default(object), IList<MicrosoftDynamicsCRMsyncerror> templateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> templateOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> emailEmailTemplate = default(IList<MicrosoftDynamicsCRMemail>))
+        /// <param name="presentationxml">XML data for the body of the email
+        /// template.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the template.</param>
+        /// <param name="subjectpresentationxml">XML data for the subject of
+        /// the email template.</param>
+        /// <param name="generationtypecode">For internal use only.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the email template.</param>
+        /// <param name="mimetype">MIME type of the email template.</param>
+        /// <param name="modifiedon">Date and time when the email template was
+        /// last modified.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the template.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the template for the email activity.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the template.</param>
+        /// <param name="description">Description of the email
+        /// template.</param>
+        /// <param name="templateidunique">For internal use only.</param>
+        /// <param name="body">Body text of the email template.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the template.</param>
+        /// <param name="templatetypecode">Type of email template.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the template.</param>
+        /// <param name="iscustomizable">Information that specifies whether
+        /// this component can be customized.</param>
+        /// <param name="ispersonal">Information about whether the template is
+        /// personal or is available to all users.</param>
+        /// <param name="opencount">For internal use only. Shows the number of
+        /// times emails that use this template have been opened.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="templateid">Unique identifier of the template.</param>
+        /// <param name="ismanaged">Indicates whether the solution component is
+        /// part of a managed solution.</param>
+        /// <param name="openrate">Shows the open rate of this template. This
+        /// is based on number of opens on followed emails that use this
+        /// template.</param>
+        /// <param name="title">Title of the template.</param>
+        /// <param name="replyrate">Shows the reply rate for this template.
+        /// This is based on number of replies received on followed emails that
+        /// use this template.</param>
+        /// <param name="createdon">Date and time when the email template was
+        /// created.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="subject">Subject associated with the email
+        /// template.</param>
+        /// <param name="isrecommended">Indicates if a template is recommended
+        /// by Dynamics 365.</param>
+        /// <param name="introducedversion">Version in which the form is
+        /// introduced.</param>
+        /// <param name="replycount">For internal use only. Shows the number of
+        /// times emails that use this template have received replies.</param>
+        /// <param name="usedcount">Shows the number of sent emails that use
+        /// this template.</param>
+        /// <param name="languagecode">Language of the email template.</param>
+        /// <param name="versionnumber">Version number of the template.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the template.</param>
+        public MicrosoftDynamicsCRMtemplate(string presentationxml = default(string), string _owningteamValue = default(string), string subjectpresentationxml = default(string), int? generationtypecode = default(int?), string _createdbyValue = default(string), string mimetype = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owninguserValue = default(string), string _owneridValue = default(string), int? importsequencenumber = default(int?), string _owningbusinessunitValue = default(string), string description = default(string), string templateidunique = default(string), string body = default(string), string solutionid = default(string), string _modifiedbyValue = default(string), string templatetypecode = default(string), string _modifiedonbehalfbyValue = default(string), string iscustomizable = default(string), bool? ispersonal = default(bool?), int? opencount = default(int?), int? componentstate = default(int?), string templateid = default(string), bool? ismanaged = default(bool?), int? openrate = default(int?), string title = default(string), int? replyrate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string subject = default(string), bool? isrecommended = default(bool?), string introducedversion = default(string), int? replycount = default(int?), int? usedcount = default(int?), int? languagecode = default(int?), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> templateAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> templateBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMactivitymimeattachment> templateActivityMimeAttachments = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMsyncerror> templateSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMorganization> templateOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> emailEmailTemplate = default(IList<MicrosoftDynamicsCRMemail>))
         {
             Presentationxml = presentationxml;
             this._owningteamValue = _owningteamValue;
@@ -91,186 +156,241 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets XML data for the body of the email template.
         /// </summary>
         [JsonProperty(PropertyName = "presentationxml")]
         public string Presentationxml { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the template.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets XML data for the subject of the email template.
         /// </summary>
         [JsonProperty(PropertyName = "subjectpresentationxml")]
         public string Subjectpresentationxml { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "generationtypecode")]
         public int? Generationtypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the email
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets MIME type of the email template.
         /// </summary>
         [JsonProperty(PropertyName = "mimetype")]
         public string Mimetype { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the email template was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the template.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// template for the email activity.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the email template.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "templateidunique")]
         public string Templateidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets body text of the email template.
         /// </summary>
         [JsonProperty(PropertyName = "body")]
         public string Body { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type of email template.
         /// </summary>
         [JsonProperty(PropertyName = "templatetypecode")]
         public string Templatetypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component can
+        /// be customized.
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public object Iscustomizable { get; set; }
+        public string Iscustomizable { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the template is personal or
+        /// is available to all users.
         /// </summary>
         [JsonProperty(PropertyName = "ispersonal")]
         public bool? Ispersonal { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only. Shows the number of times
+        /// emails that use this template have been opened.
         /// </summary>
         [JsonProperty(PropertyName = "opencount")]
         public int? Opencount { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the template.
         /// </summary>
         [JsonProperty(PropertyName = "templateid")]
         public string Templateid { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the solution component is part of a
+        /// managed solution.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the open rate of this template. This is based on
+        /// number of opens on followed emails that use this template.
         /// </summary>
         [JsonProperty(PropertyName = "openrate")]
         public int? Openrate { get; set; }
 
         /// <summary>
+        /// Gets or sets title of the template.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the reply rate for this template. This is based
+        /// on number of replies received on followed emails that use this
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "replyrate")]
         public int? Replyrate { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the email template was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets subject associated with the email template.
         /// </summary>
         [JsonProperty(PropertyName = "subject")]
         public string Subject { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates if a template is recommended by Dynamics
+        /// 365.
         /// </summary>
         [JsonProperty(PropertyName = "isrecommended")]
         public bool? Isrecommended { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the form is introduced.
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only. Shows the number of times
+        /// emails that use this template have received replies.
         /// </summary>
         [JsonProperty(PropertyName = "replycount")]
         public int? Replycount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number of sent emails that use this
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "usedcount")]
         public int? Usedcount { get; set; }
 
         /// <summary>
+        /// Gets or sets language of the email template.
         /// </summary>
         [JsonProperty(PropertyName = "languagecode")]
         public int? Languagecode { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the template.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
@@ -318,7 +438,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

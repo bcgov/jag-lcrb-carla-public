@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// constraintbasedgroup
+    /// Microsoft.Dynamics.CRM.constraintbasedgroup
     /// </summary>
     public partial class MicrosoftDynamicsCRMconstraintbasedgroup
     {
@@ -29,7 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMconstraintbasedgroup class.
         /// </summary>
-        public MicrosoftDynamicsCRMconstraintbasedgroup(string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), long? versionnumber = default(long?), string description = default(string), string _createdbyValue = default(string), int? grouptypecode = default(int?), string _organizationidValue = default(string), string name = default(string), string constraintbasedgroupid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _businessunitidValue = default(string), string _modifiedbyValue = default(string), string constraints = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresourcespec> constraintBasedGroupResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), MicrosoftDynamicsCRMsystemuser businessunitidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresourcegroup> constraintbasedgroupResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), IList<MicrosoftDynamicsCRMconnection> constraintbasedgroupConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit businessunitidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> constraintbasedgroupConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMbulkdeletefailure> constraintBasedGroupBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> constraintBasedGroupAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the constraintbasedgroup.</param>
+        /// <param name="modifiedon">Date and time when the resource group was
+        /// last modified.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the constraintbasedgroup.</param>
+        /// <param name="description">Type additional information to describe
+        /// the resource group, such as the intended use or associated resource
+        /// types.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the resource group.</param>
+        /// <param name="grouptypecode">Shows whether the resource group is
+        /// static, dynamic or hidden. Hidden groups are for system use only
+        /// and are not viewable in Microsoft Dynamics 365.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the resource group.</param>
+        /// <param name="name">Type a title or name that describes the resource
+        /// group.</param>
+        /// <param name="constraintbasedgroupid">Unique identifier of the
+        /// resource group.</param>
+        /// <param name="createdon">Date and time when the resource group was
+        /// created.</param>
+        /// <param name="_businessunitidValue">Shows the business unit that the
+        /// record owner belongs to.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the resource group.</param>
+        /// <param name="constraints">Shows the constraints defined for the
+        /// users, equipment, teams, and other resource groups included as
+        /// resources for the group, stored in XML format.</param>
+        public MicrosoftDynamicsCRMconstraintbasedgroup(string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string description = default(string), string _createdbyValue = default(string), int? grouptypecode = default(int?), string _organizationidValue = default(string), string name = default(string), string constraintbasedgroupid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _businessunitidValue = default(string), string _modifiedbyValue = default(string), string constraints = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresourcespec> constraintBasedGroupResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), MicrosoftDynamicsCRMsystemuser businessunitidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresourcegroup> constraintbasedgroupResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), IList<MicrosoftDynamicsCRMconnection> constraintbasedgroupConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMbusinessunit businessunitidBusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMconnection> constraintbasedgroupConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMbulkdeletefailure> constraintBasedGroupBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMasyncoperation> constraintBasedGroupAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
             Modifiedon = modifiedon;
@@ -67,16 +96,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// constraintbasedgroup.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the resource group was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the constraintbasedgroup.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
@@ -84,54 +119,74 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the resource
+        /// group, such as the intended use or associated resource types.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the resource
+        /// group.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the resource group is static, dynamic or
+        /// hidden. Hidden groups are for system use only and are not viewable
+        /// in Microsoft Dynamics 365.
         /// </summary>
         [JsonProperty(PropertyName = "grouptypecode")]
         public int? Grouptypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the resource group.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type a title or name that describes the resource
+        /// group.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the resource group.
         /// </summary>
         [JsonProperty(PropertyName = "constraintbasedgroupid")]
         public string Constraintbasedgroupid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the resource group was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the business unit that the record owner belongs
+        /// to.
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
         public string _businessunitidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// resource group.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the constraints defined for the users,
+        /// equipment, teams, and other resource groups included as resources
+        /// for the group, stored in XML format.
         /// </summary>
         [JsonProperty(PropertyName = "constraints")]
         public string Constraints { get; set; }

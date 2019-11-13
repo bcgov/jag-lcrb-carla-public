@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// importdata
+    /// Microsoft.Dynamics.CRM.importdata
     /// </summary>
     public partial class MicrosoftDynamicsCRMimportdata
     {
@@ -29,7 +29,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMimportdata
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMimportdata(string _owningteamValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? haserror = default(bool?), int? errortype = default(int?), string _importfileidValue = default(string), int? linenumber = default(int?), int? statuscode = default(int?), int? statecode = default(int?), string _owneridValue = default(string), string importdataid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string data = default(string), string _owninguserValue = default(string), string recordid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importDataAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), object ownerid = default(object), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), IList<MicrosoftDynamicsCRMimportlog> importLogImportData = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importDataBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the import data.</param>
+        /// <param name="modifiedon">Date and time when the import data was
+        /// last modified.</param>
+        /// <param name="haserror">Information about whether this import data
+        /// has an error.</param>
+        /// <param name="errortype">Type of the import error.</param>
+        /// <param name="_importfileidValue">Unique identifier of the import
+        /// file for this import data.</param>
+        /// <param name="linenumber">Original line number of the data present
+        /// in the file.</param>
+        /// <param name="statuscode">Reason for the status of the import
+        /// data.</param>
+        /// <param name="statecode">Status of the import data.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the import data.</param>
+        /// <param name="importdataid">Unique identifier of the import
+        /// data.</param>
+        /// <param name="createdon">Date and time when the import data was
+        /// created.</param>
+        /// <param name="data">Data row of the import file.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the import data.</param>
+        /// <param name="recordid">Unique identifier of the record.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the importdata.</param>
+        /// <param name="_owningbusinessunitValue">Business unit that owns the
+        /// import data.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the importdata.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the import data.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the import data.</param>
+        public MicrosoftDynamicsCRMimportdata(string _owningteamValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? haserror = default(bool?), int? errortype = default(int?), string _importfileidValue = default(string), int? linenumber = default(int?), int? statuscode = default(int?), int? statecode = default(int?), string _owneridValue = default(string), string importdataid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string data = default(string), string _owninguserValue = default(string), string recordid = default(string), string _createdonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), string _modifiedonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importDataAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), IList<MicrosoftDynamicsCRMimportlog> importLogImportData = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMbulkdeletefailure> importDataBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._owningteamValue = _owningteamValue;
             Modifiedon = modifiedon;
@@ -71,96 +105,124 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the import
+        /// data.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the import data was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether this import data has an
+        /// error.
         /// </summary>
         [JsonProperty(PropertyName = "haserror")]
         public bool? Haserror { get; set; }
 
         /// <summary>
+        /// Gets or sets type of the import error.
         /// </summary>
         [JsonProperty(PropertyName = "errortype")]
         public int? Errortype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the import file for this import
+        /// data.
         /// </summary>
         [JsonProperty(PropertyName = "_importfileid_value")]
         public string _importfileidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets original line number of the data present in the file.
         /// </summary>
         [JsonProperty(PropertyName = "linenumber")]
         public int? Linenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the import data.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the import data.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// import data.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the import data.
         /// </summary>
         [JsonProperty(PropertyName = "importdataid")]
         public string Importdataid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the import data was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets data row of the import file.
         /// </summary>
         [JsonProperty(PropertyName = "data")]
         public string Data { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the import
+        /// data.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the record.
         /// </summary>
         [JsonProperty(PropertyName = "recordid")]
         public string Recordid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// importdata.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets business unit that owns the import data.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the importdata.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// import data.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the import
+        /// data.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
@@ -188,7 +250,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

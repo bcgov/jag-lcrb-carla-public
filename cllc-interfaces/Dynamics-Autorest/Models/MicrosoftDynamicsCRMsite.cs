@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// site
+    /// Microsoft.Dynamics.CRM.site
     /// </summary>
     public partial class MicrosoftDynamicsCRMsite
     {
@@ -27,7 +27,104 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMsite class.
         /// </summary>
-        public MicrosoftDynamicsCRMsite(string _modifiedonbehalfbyValue = default(string), string address1Upszone = default(string), string address2Telephone1 = default(string), int? address2Shippingmethodcode = default(int?), string address1Name = default(string), string address2Upszone = default(string), string emailaddress = default(string), decimal? address2Latitude = default(decimal?), decimal? address1Longitude = default(decimal?), string organizationid = default(string), string _createdonbehalfbyValue = default(string), string address1Stateorprovince = default(string), string address1Telephone3 = default(string), int? address1Shippingmethodcode = default(int?), string name = default(string), string siteid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address2City = default(string), string _createdbyValue = default(string), string address1Postalcode = default(string), long? versionnumber = default(long?), string address1Line2 = default(string), string address1Postofficebox = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string address2Country = default(string), int? address1Utcoffset = default(int?), string address2County = default(string), int? importsequencenumber = default(int?), int? timezonecode = default(int?), string address2Line1 = default(string), string address1Telephone1 = default(string), string address2Stateorprovince = default(string), int? address1Addresstypecode = default(int?), string address1City = default(string), string address2Postalcode = default(string), string address2Line3 = default(string), decimal? address1Latitude = default(decimal?), string address2Telephone3 = default(string), decimal? address2Longitude = default(decimal?), string address2Line2 = default(string), string address2Name = default(string), string _modifiedbyValue = default(string), int? address2Utcoffset = default(int?), string address1Country = default(string), string address1Line3 = default(string), string address2Postofficebox = default(string), string address2Telephone2 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address1Addressid = default(string), string address1Line1 = default(string), int? address2Addresstypecode = default(int?), string address2Fax = default(string), string address1County = default(string), string address1Telephone2 = default(string), string address2Addressid = default(string), string address1Fax = default(string), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> siteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> siteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMequipment> siteEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMsystemuser> siteSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsyncerror> siteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresource> siteResources = default(IList<MicrosoftDynamicsCRMresource>))
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the site.</param>
+        /// <param name="address1Upszone">United Parcel Service (UPS) zone for
+        /// address 1.</param>
+        /// <param name="address2Telephone1">First telephone number associated
+        /// with address 2.</param>
+        /// <param name="address2Shippingmethodcode">Method of shipment for
+        /// address 2.</param>
+        /// <param name="address1Name">Name to enter for address 1.</param>
+        /// <param name="address2Upszone">United Parcel Service (UPS) zone for
+        /// address 2.</param>
+        /// <param name="emailaddress">Email address for the site.</param>
+        /// <param name="address2Latitude">Latitude for address 2.</param>
+        /// <param name="address1Longitude">Longitude for address 1.</param>
+        /// <param name="organizationid">Unique identifier of the organization
+        /// with which the site is associated.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the site.</param>
+        /// <param name="address1Stateorprovince">State or province for address
+        /// 1.</param>
+        /// <param name="address1Telephone3">Third telephone number associated
+        /// with address 1.</param>
+        /// <param name="address1Shippingmethodcode">Method of shipment for
+        /// address 1.</param>
+        /// <param name="name">Name of the site.</param>
+        /// <param name="siteid">Unique identifier of the site.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="address2City">City name for address 2.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the site.</param>
+        /// <param name="address1Postalcode">ZIP Code or postal code for
+        /// address 1.</param>
+        /// <param name="versionnumber">Version number of the site.</param>
+        /// <param name="address1Line2">Second line for entering address 1
+        /// information.</param>
+        /// <param name="address1Postofficebox">Post office box number for
+        /// address 1.</param>
+        /// <param name="modifiedon">Date and time when the site was last
+        /// modified.</param>
+        /// <param name="address2Country">Country/region name for address
+        /// 2.</param>
+        /// <param name="address1Utcoffset">UTC offset for address 1. This is
+        /// the difference between local time and standard Coordinated
+        /// Universal Time.</param>
+        /// <param name="address2County">County name for address 2.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="timezonecode">Local time zone for the site.</param>
+        /// <param name="address2Line1">First line for entering address 2
+        /// information.</param>
+        /// <param name="address1Telephone1">First telephone number associated
+        /// with address 1.</param>
+        /// <param name="address2Stateorprovince">State or province for address
+        /// 2.</param>
+        /// <param name="address1Addresstypecode">Type of address for address
+        /// 1, such as billing, shipping, or primary address.</param>
+        /// <param name="address1City">City name for address 1.</param>
+        /// <param name="address2Postalcode">ZIP Code or postal code for
+        /// address 2.</param>
+        /// <param name="address2Line3">Third line for entering address 2
+        /// information.</param>
+        /// <param name="address1Latitude">Latitude for address 1.</param>
+        /// <param name="address2Telephone3">Third telephone number associated
+        /// with address 2.</param>
+        /// <param name="address2Longitude">Longitude for address 2.</param>
+        /// <param name="address2Line2">Second line for entering address 2
+        /// information.</param>
+        /// <param name="address2Name">Name to enter for address 2.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the site.</param>
+        /// <param name="address2Utcoffset">UTC offset for address 2. This is
+        /// the difference between local time and standard Coordinated
+        /// Universal Time.</param>
+        /// <param name="address1Country">Country/region name for address
+        /// 1.</param>
+        /// <param name="address1Line3">Third line for entering address 1
+        /// information.</param>
+        /// <param name="address2Postofficebox">Post office box number for
+        /// address 2.</param>
+        /// <param name="address2Telephone2">Second telephone number associated
+        /// with address 2.</param>
+        /// <param name="createdon">Date and time when the site was
+        /// created.</param>
+        /// <param name="address1Addressid">Unique identifier for address
+        /// 1.</param>
+        /// <param name="address1Line1">First line for entering address 1
+        /// information.</param>
+        /// <param name="address2Addresstypecode">Type of address for address
+        /// 2, such as billing, shipping, or primary address.</param>
+        /// <param name="address2Fax">Fax number for address 2.</param>
+        /// <param name="address1County">County name for address 1.</param>
+        /// <param name="address1Telephone2">Second telephone number associated
+        /// with address 1.</param>
+        /// <param name="address2Addressid">Unique identifier for address
+        /// 2.</param>
+        /// <param name="address1Fax">Fax number for address 1.</param>
+        public MicrosoftDynamicsCRMsite(string _modifiedonbehalfbyValue = default(string), string address1Upszone = default(string), string address2Telephone1 = default(string), int? address2Shippingmethodcode = default(int?), string address1Name = default(string), string address2Upszone = default(string), string emailaddress = default(string), string address2Latitude = default(string), string address1Longitude = default(string), string organizationid = default(string), string _createdonbehalfbyValue = default(string), string address1Stateorprovince = default(string), string address1Telephone3 = default(string), int? address1Shippingmethodcode = default(int?), string name = default(string), string siteid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string address2City = default(string), string _createdbyValue = default(string), string address1Postalcode = default(string), string versionnumber = default(string), string address1Line2 = default(string), string address1Postofficebox = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string address2Country = default(string), int? address1Utcoffset = default(int?), string address2County = default(string), int? importsequencenumber = default(int?), int? timezonecode = default(int?), string address2Line1 = default(string), string address1Telephone1 = default(string), string address2Stateorprovince = default(string), int? address1Addresstypecode = default(int?), string address1City = default(string), string address2Postalcode = default(string), string address2Line3 = default(string), string address1Latitude = default(string), string address2Telephone3 = default(string), string address2Longitude = default(string), string address2Line2 = default(string), string address2Name = default(string), string _modifiedbyValue = default(string), int? address2Utcoffset = default(int?), string address1Country = default(string), string address1Line3 = default(string), string address2Postofficebox = default(string), string address2Telephone2 = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string address1Addressid = default(string), string address1Line1 = default(string), int? address2Addresstypecode = default(int?), string address2Fax = default(string), string address1County = default(string), string address1Telephone2 = default(string), string address2Addressid = default(string), string address1Fax = default(string), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> siteAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> siteBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMequipment> siteEquipment = default(IList<MicrosoftDynamicsCRMequipment>), IList<MicrosoftDynamicsCRMsystemuser> siteSystemUsers = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMsyncerror> siteSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMserviceappointment> siteServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMresource> siteResources = default(IList<MicrosoftDynamicsCRMresource>))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Address1Upszone = address1Upszone;
@@ -106,281 +203,346 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the site.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets united Parcel Service (UPS) zone for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_upszone")]
         public string Address1Upszone { get; set; }
 
         /// <summary>
+        /// Gets or sets first telephone number associated with address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_telephone1")]
         public string Address2Telephone1 { get; set; }
 
         /// <summary>
+        /// Gets or sets method of shipment for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_shippingmethodcode")]
         public int? Address2Shippingmethodcode { get; set; }
 
         /// <summary>
+        /// Gets or sets name to enter for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_name")]
         public string Address1Name { get; set; }
 
         /// <summary>
+        /// Gets or sets united Parcel Service (UPS) zone for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_upszone")]
         public string Address2Upszone { get; set; }
 
         /// <summary>
+        /// Gets or sets email address for the site.
         /// </summary>
         [JsonProperty(PropertyName = "emailaddress")]
         public string Emailaddress { get; set; }
 
         /// <summary>
+        /// Gets or sets latitude for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_latitude")]
-        public decimal? Address2Latitude { get; set; }
+        public string Address2Latitude { get; set; }
 
         /// <summary>
+        /// Gets or sets longitude for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_longitude")]
-        public decimal? Address1Longitude { get; set; }
+        public string Address1Longitude { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// site is associated.
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
         public string Organizationid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// site.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets state or province for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_stateorprovince")]
         public string Address1Stateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets third telephone number associated with address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_telephone3")]
         public string Address1Telephone3 { get; set; }
 
         /// <summary>
+        /// Gets or sets method of shipment for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_shippingmethodcode")]
         public int? Address1Shippingmethodcode { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the site.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the site.
         /// </summary>
         [JsonProperty(PropertyName = "siteid")]
         public string Siteid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets city name for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_city")]
         public string Address2City { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the site.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets ZIP Code or postal code for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_postalcode")]
         public string Address1Postalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the site.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets second line for entering address 1 information.
         /// </summary>
         [JsonProperty(PropertyName = "address1_line2")]
         public string Address1Line2 { get; set; }
 
         /// <summary>
+        /// Gets or sets post office box number for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_postofficebox")]
         public string Address1Postofficebox { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the site was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets country/region name for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_country")]
         public string Address2Country { get; set; }
 
         /// <summary>
+        /// Gets or sets UTC offset for address 1. This is the difference
+        /// between local time and standard Coordinated Universal Time.
         /// </summary>
         [JsonProperty(PropertyName = "address1_utcoffset")]
         public int? Address1Utcoffset { get; set; }
 
         /// <summary>
+        /// Gets or sets county name for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_county")]
         public string Address2County { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets local time zone for the site.
         /// </summary>
         [JsonProperty(PropertyName = "timezonecode")]
         public int? Timezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets first line for entering address 2 information.
         /// </summary>
         [JsonProperty(PropertyName = "address2_line1")]
         public string Address2Line1 { get; set; }
 
         /// <summary>
+        /// Gets or sets first telephone number associated with address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_telephone1")]
         public string Address1Telephone1 { get; set; }
 
         /// <summary>
+        /// Gets or sets state or province for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_stateorprovince")]
         public string Address2Stateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets type of address for address 1, such as billing,
+        /// shipping, or primary address.
         /// </summary>
         [JsonProperty(PropertyName = "address1_addresstypecode")]
         public int? Address1Addresstypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets city name for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_city")]
         public string Address1City { get; set; }
 
         /// <summary>
+        /// Gets or sets ZIP Code or postal code for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_postalcode")]
         public string Address2Postalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets third line for entering address 2 information.
         /// </summary>
         [JsonProperty(PropertyName = "address2_line3")]
         public string Address2Line3 { get; set; }
 
         /// <summary>
+        /// Gets or sets latitude for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_latitude")]
-        public decimal? Address1Latitude { get; set; }
+        public string Address1Latitude { get; set; }
 
         /// <summary>
+        /// Gets or sets third telephone number associated with address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_telephone3")]
         public string Address2Telephone3 { get; set; }
 
         /// <summary>
+        /// Gets or sets longitude for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_longitude")]
-        public decimal? Address2Longitude { get; set; }
+        public string Address2Longitude { get; set; }
 
         /// <summary>
+        /// Gets or sets second line for entering address 2 information.
         /// </summary>
         [JsonProperty(PropertyName = "address2_line2")]
         public string Address2Line2 { get; set; }
 
         /// <summary>
+        /// Gets or sets name to enter for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_name")]
         public string Address2Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// site.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets UTC offset for address 2. This is the difference
+        /// between local time and standard Coordinated Universal Time.
         /// </summary>
         [JsonProperty(PropertyName = "address2_utcoffset")]
         public int? Address2Utcoffset { get; set; }
 
         /// <summary>
+        /// Gets or sets country/region name for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_country")]
         public string Address1Country { get; set; }
 
         /// <summary>
+        /// Gets or sets third line for entering address 1 information.
         /// </summary>
         [JsonProperty(PropertyName = "address1_line3")]
         public string Address1Line3 { get; set; }
 
         /// <summary>
+        /// Gets or sets post office box number for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_postofficebox")]
         public string Address2Postofficebox { get; set; }
 
         /// <summary>
+        /// Gets or sets second telephone number associated with address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_telephone2")]
         public string Address2Telephone2 { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the site was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_addressid")]
         public string Address1Addressid { get; set; }
 
         /// <summary>
+        /// Gets or sets first line for entering address 1 information.
         /// </summary>
         [JsonProperty(PropertyName = "address1_line1")]
         public string Address1Line1 { get; set; }
 
         /// <summary>
+        /// Gets or sets type of address for address 2, such as billing,
+        /// shipping, or primary address.
         /// </summary>
         [JsonProperty(PropertyName = "address2_addresstypecode")]
         public int? Address2Addresstypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets fax number for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_fax")]
         public string Address2Fax { get; set; }
 
         /// <summary>
+        /// Gets or sets county name for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_county")]
         public string Address1County { get; set; }
 
         /// <summary>
+        /// Gets or sets second telephone number associated with address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_telephone2")]
         public string Address1Telephone2 { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for address 2.
         /// </summary>
         [JsonProperty(PropertyName = "address2_addressid")]
         public string Address2Addressid { get; set; }
 
         /// <summary>
+        /// Gets or sets fax number for address 1.
         /// </summary>
         [JsonProperty(PropertyName = "address1_fax")]
         public string Address1Fax { get; set; }

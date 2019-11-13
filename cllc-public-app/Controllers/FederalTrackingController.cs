@@ -48,12 +48,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                CannabismonthlyreportsGetResponseModel previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"});
+                var previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"});
                 int currentExportId = (previousReport.Value.Count > 0) ? previousReport.Value[0].AdoxioCsvexportid.Value + 1 : 1;
 
                 // Submitted reports
                 string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
-                CannabismonthlyreportsGetResponseModel dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+                var dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
                 List<FederalTrackingMonthlyExport> monthlyReports = new List<FederalTrackingMonthlyExport>();
                 foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in dynamicsMonthlyReports.Value)
                 {
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     };
 
                     filter = $"_adoxio_monthlyreportid_value eq {report.AdoxioCannabismonthlyreportid}";
-                    CannabisinventoryreportsGetResponseModel invResp = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter);
+                    var invResp = _dynamicsClient.Cannabisinventoryreports.Get(filter: filter);
                     foreach (MicrosoftDynamicsCRMadoxioCannabisinventoryreport inventoryReport in invResp.Value)
                     {
                         MicrosoftDynamicsCRMadoxioCannabisproductadmin product = _dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue);
