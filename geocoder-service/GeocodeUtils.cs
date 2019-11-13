@@ -148,48 +148,67 @@ namespace Gov.Lclb.Cllb.Geocoder
         /// Hangfire job to check for and send recent licences
         /// </summary>
         [AutomaticRetry(Attempts = 0)]
-        public async Task GeocodeEstablishments(PerformContext hangfireContext)
+        public async Task GeocodeEstablishments(PerformContext hangfireContext, bool redoGeocoded)
         {
             if (hangfireContext != null)
             {
                 _logger.LogInformation("Starting GeocodeEstablishments job.");
                 hangfireContext.WriteLine("Starting GeocodeEstablishments job.");
             }
-            IList<MicrosoftDynamicsCRMadoxioEstablishment> result;
+
+
+            // get licenses
+            IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
+
+            string licenseFilter = "statuscode eq 1"; // only active licenses
+            string[] licenseExpand = { "adoxio_LicenceType" };
 
             try
             {
-                string filter = $"adoxio_longitude eq null";
-                result = _dynamics.Establishments.Get().Value;
+                licences = _dynamics.Licenceses.Get(filter: licenseFilter, expand: licenseExpand).Value;
             }
-            catch (HttpOperationException odee)
+            catch (HttpOperationException httpOperationException)
             {
+                _logger.LogError(httpOperationException, "Error getting licenses");
                 if (hangfireContext != null)
                 {
-                    _logger.LogError("Error getting Establishments");
-                    _logger.LogError("Request:");
-                    _logger.LogError(odee.Request.Content);
-                    _logger.LogError("Response:");
-                    _logger.LogError(odee.Response.Content);
-                    hangfireContext.WriteLine("Error getting Establishments");
+                    hangfireContext.WriteLine("Error getting licenses");
                     hangfireContext.WriteLine("Request:");
-                    hangfireContext.WriteLine(odee.Request.Content);
+                    hangfireContext.WriteLine(httpOperationException.Request.Content);
                     hangfireContext.WriteLine("Response:");
-                    hangfireContext.WriteLine(odee.Response.Content);
+                    hangfireContext.WriteLine(httpOperationException.Response.Content);
                 }
 
-                // fail if we can't get results.
-                throw (odee);
+                throw new Exception("Unable to get licences");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected error getting establishment map data.");
             }
 
-            // now for each one process it.
-            foreach (var establishment in result)
-            {                 
-                await GeocodeEstablishment(hangfireContext, establishment);
+            if (licences != null)
+            {
+                foreach (var license in licences)
+                {
+                    if (license.AdoxioLicenceType != null &&
+                        license.AdoxioLicenceType.AdoxioName.Equals("Cannabis Retail Store") &&
+                        license._adoxioEstablishmentValue != null)
+                    {
+                        var establishment = _dynamics.GetEstablishmentById(license._adoxioEstablishmentValue);
+
+                        if (establishment != null && (redoGeocoded || establishment.AdoxioLatitude == null))
+                        {
+                            await GeocodeEstablishment(hangfireContext, establishment);
+                        }
+                    }
+                }
             }
 
             _logger.LogInformation("End of GeocodeEstablishments job.");
-            hangfireContext.WriteLine("End of GeocodeEstablishments job.");
+            if (hangfireContext != null)
+            {
+                hangfireContext.WriteLine("End of GeocodeEstablishments job.");
+            }
         }
 
     }
