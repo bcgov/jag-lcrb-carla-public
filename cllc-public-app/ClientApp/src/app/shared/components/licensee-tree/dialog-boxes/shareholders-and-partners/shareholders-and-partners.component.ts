@@ -73,6 +73,9 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     } else {
       let formData = this.data.shareholder || {};
       formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
+      if (formData.isRoot) {
+        formData.isIndividual = false;
+      }
       if (formData.isIndividual === true) {
         formData.businessNameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
       }

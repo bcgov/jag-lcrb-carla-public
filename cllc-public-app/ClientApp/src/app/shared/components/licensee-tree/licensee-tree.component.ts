@@ -56,7 +56,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
           if (node.changeType !== LicenseeChangeType.addBusinessShareholder
             && node.changeType !== LicenseeChangeType.addIndividualShareholder) {
             formData.changeType = formData.isIndividual ? LicenseeChangeType.updateIndividualShareholder
-              : LicenseeChangeType.updateIndividualShareholder;
+              : LicenseeChangeType.updateBusinessShareholder;
           }
           node = Object.assign(node, formData);
           this.refreshTreeAndChangeTables();
