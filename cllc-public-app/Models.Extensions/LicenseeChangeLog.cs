@@ -24,6 +24,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.AdoxioIstrusteeold = fromVM.IsTrusteeOld;
             toDynamics.AdoxioNumberofsharesnew = fromVM.NumberofSharesNew;
             toDynamics.AdoxioNumberofsharesold = fromVM.NumberofSharesOld;
+            toDynamics.AdoxioTotalsharesnew = fromVM.TotalSharesNew;
+            toDynamics.AdoxioTotalsharesold = fromVM.NumberofSharesOld;
             toDynamics.AdoxioEmailnew = fromVM.EmailNew;
             toDynamics.AdoxioEmailold = fromVM.EmailOld;
             toDynamics.AdoxioFirstnamenew = fromVM.FirstNameNew;
@@ -55,6 +57,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 IsTrusteeOld = changeLog.AdoxioIstrusteeold,
                 NumberofSharesNew = changeLog.AdoxioNumberofsharesnew,
                 NumberofSharesOld = changeLog.AdoxioNumberofsharesold,
+                TotalSharesNew = changeLog.AdoxioTotalsharesnew,
+                TotalSharesOld = changeLog.AdoxioTotalsharesold,
                 EmailNew = changeLog.AdoxioEmailnew,
                 EmailOld = changeLog.AdoxioEmailold,
                 FirstNameNew = changeLog.AdoxioFirstnamenew,

@@ -1,7 +1,7 @@
 <div class="product-inventory-sales-report">
   <form [formGroup]="productForm">
     <div class="row">
-      <h3 class="blue-header col-xs-12">{{productForm.value.product}} Inventory - Packaged</h3>
+      <h3 class="blue-header col-xs-12">{{productForm?.value?.product}} Inventory - Packaged</h3>
     </div>
     <div class="row">
       <app-field class="col-md-1 col-xs-12 no-gutter text-center bg-blue pt-4" [isFullWidth]="true">
@@ -77,12 +77,12 @@
             <input class="form-control" type="number" min="0" step="0.01" formControlName="closingValue">
             <p>($)</p>
           </div>
-          <div class="flex-fill p-4 bg-yellow" *ngIf="productForm.value.product !== 'Seeds'">
+          <div class="flex-fill p-4 bg-yellow" *ngIf="productForm?.value?.product !== 'Seeds'">
             <label>Weight</label>
             <input class="form-control" type="number" min="0" step="0.001" formControlName="closingWeight">
             <p>(kg)</p>
           </div>
-          <div class="flex-fill p-4 bg-yellow" *ngIf="productForm.value.product === 'Seeds'">
+          <div class="flex-fill p-4 bg-yellow" *ngIf="productForm?.value?.product === 'Seeds'">
             <label># of Seeds</label>
             <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="totalSeeds">
             <p>(#)</p>
@@ -91,7 +91,7 @@
       </app-field>
     </div>
     <div class="row">
-      <h3 class="blue-header col-xs-12">{{productForm.value.product}} Sales - Packaged</h3>
+      <h3 class="blue-header col-xs-12">{{productForm?.value?.product}} Sales - Packaged</h3>
     </div>
     <div class="row">
       <app-field class="col-md-3 col-xs-12 no-gutter text-center bg-grey pt-4" [isFullWidth]="true">

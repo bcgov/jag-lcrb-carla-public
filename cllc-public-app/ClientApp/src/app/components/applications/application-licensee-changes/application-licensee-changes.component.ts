@@ -74,44 +74,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.account = account;
       });
 
-
-
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
-        if (data.applicantType === 'IndigenousNation') {
-          (<any>data).applyAsIndigenousNation = true;
-        }
-        this.application = data;
-
-        this.addDynamicContent();
-
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
-
-        this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
-      },
-        () => {
-          console.log('Error occured');
-        }
-      );
     this.loadData();
   }
 
   loadData() {
     this.GetNotTerminatedCRSApplicationCount();
 
-    forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
+    this.busy = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
       this.legalEntityDataService.getChangeLogs(this.applicationId),
       this.legalEntityDataService.getCurrentHierachy())
       .pipe(takeWhile(() => this.componentActive))
@@ -125,6 +94,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.changeTree = tree;
 
         this.addDynamicContent();
+        this.form.patchValue(this.application);
       },
         () => {
           console.log('Error occured');
