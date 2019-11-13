@@ -230,10 +230,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   }
 
   computeSharePercentages(node: LicenseeChangeLog) {
-    if (node.isRoot) {
-      node.percentageShares = 100;
-    } else if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.totalSharesNew && node.numberofSharesNew) {
-      node.percentageShares = Math.round(node.numberofSharesNew / node.parentLinceseeChangeLog.totalSharesNew * node.parentLinceseeChangeLog.percentageShares * 100) / 100;
+    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.totalSharesNew && node.numberofSharesNew) {
+      node.percentageShares = node.numberofSharesNew / node.parentLinceseeChangeLog.totalSharesNew * 100;
+      node.percentageShares = Math.round(node.percentageShares* 100) / 100 ; // round to two decimal places
     }
 
     node.children = node.children || [];

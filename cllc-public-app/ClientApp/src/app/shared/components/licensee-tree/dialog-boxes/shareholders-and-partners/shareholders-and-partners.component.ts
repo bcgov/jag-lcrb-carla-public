@@ -76,6 +76,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       if (formData.isIndividual === true) {
         formData.businessNameNew = `${formData.firstNameNew} ${formData.lastNameNew}`;
       }
+      formData.isShareholderNew = true;
       this.dialogRef.close(formData);
     }
   }
