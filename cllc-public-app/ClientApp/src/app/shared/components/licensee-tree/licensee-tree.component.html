@@ -50,10 +50,13 @@
         {{node.businessNameNew}}
       </span>
       <a *ngIf="enableEditing && !node.isRemoveChangeType()" class="tree-label" href="javascript:void(0)"
+        [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}"
         style="margin-right: 10px;" (click)="!node.isRemoveChangeType() && editAssociate(node)">
         {{node.businessNameNew}}
       </a>
-      <a *ngIf="!node.isRoot && node.percentageShares" (click)="!node.isRemoveChangeType() && editAssociate(node)" href="javascript:void(0)">
+      <a *ngIf="!node.isRoot && node.percentageShares" (click)="!node.isRemoveChangeType() && editAssociate(node)"
+        [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}"
+        href="javascript:void(0)">
         {{node.percentageShares}} %
       </a>&nbsp;
       <span *ngIf="!node.isRoot && node.percentageShares">

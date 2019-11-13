@@ -163,7 +163,9 @@ export class LicenseeChangeLog {
         }
 
         change.isIndividual = change.isIndividualFromChangeType();
-        change.children = node.children;
+        change.children = node.children; //do not overide
+        change.isRoot = node.isRoot; //do not overide
+        change.parentLinceseeChangeLog = node.parentLinceseeChangeLog; // do not overide
         Object.assign(node, change);
       }
     });
@@ -181,6 +183,7 @@ export class LicenseeChangeLog {
         if (newNode.isIndividualFromChangeType()) {
           newNode.isIndividual = true;
         }
+        newNode.parentLinceseeChangeLog = node;
         node.children.push(newNode);
       }
     });
@@ -198,6 +201,7 @@ export class LicenseeChangeLog {
         if (newNode.isIndividualFromChangeType()) {
           newNode.isIndividual = true;
         }
+        newNode.parentLinceseeChangeLog = node;
         node.children.push(newNode);
       }
     });
@@ -251,9 +255,9 @@ export class LicenseeChangeLog {
    * @param node 'A LicenseeChangeLog'
    */
   isUpdateChangeType(): boolean {
-    const result =this.changeType === LicenseeChangeType.updateLeadership
-      ||this.changeType === LicenseeChangeType.updateBusinessShareholder
-      ||this.changeType === LicenseeChangeType.updateIndividualShareholder;
+    const result = this.changeType === LicenseeChangeType.updateLeadership
+      || this.changeType === LicenseeChangeType.updateBusinessShareholder
+      || this.changeType === LicenseeChangeType.updateIndividualShareholder;
     return result;
   }
 
@@ -262,9 +266,9 @@ export class LicenseeChangeLog {
    * @param node 'A LicenseeChangeLog'
    */
   isRemoveChangeType(): boolean {
-    const result =this.changeType === LicenseeChangeType.removeLeadership
-      ||this.changeType === LicenseeChangeType.removeBusinessShareholder
-      ||this.changeType === LicenseeChangeType.removeIndividualShareholder;
+    const result = this.changeType === LicenseeChangeType.removeLeadership
+      || this.changeType === LicenseeChangeType.removeBusinessShareholder
+      || this.changeType === LicenseeChangeType.removeIndividualShareholder;
     return result;
   }
 

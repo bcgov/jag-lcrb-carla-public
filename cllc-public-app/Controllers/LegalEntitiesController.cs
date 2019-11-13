@@ -535,8 +535,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MicrosoftDynamicsCRMadoxioLicenseechangelog patchEntity = new MicrosoftDynamicsCRMadoxioLicenseechangelog();
                 patchEntity.CopyValues(node);
                 node.ApplicationId = applicationId;
-                node.ParentLegalEntityId = parentLegalEntityId;
-                node.ParentLinceseeChangeLogId = parentChangeLogId;
+                if (parentLegalEntityId != null)
+                {
+                    node.ParentLegalEntityId = parentLegalEntityId;
+                }
+                if (parentChangeLogId != null)
+                {
+                    node.ParentLinceseeChangeLogId = parentChangeLogId;
+                }
 
                 if (string.IsNullOrEmpty(node.Id)) // create
                 {
@@ -591,8 +597,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                     try
                     {
-                    _dynamicsClient.Licenseechangelogs.Update(node.Id, patchEntity);
-                        var result = _dynamicsClient.Licenseechangelogs.GetByKey(patchEntity.AdoxioLicenseechangelogid);
+                        _dynamicsClient.Licenseechangelogs.Update(node.Id, patchEntity);
+                        var result = _dynamicsClient.Licenseechangelogs.GetByKey(node.Id);
                         parentChangeLogId = result.AdoxioLicenseechangelogid;
                         parentLegalEntityId = node.LegalEntityId;
                     }
@@ -605,7 +611,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
                     }
                 }
-            } else
+            }
+            else
             {
                 parentLegalEntityId = node.LegalEntityId;
                 parentChangeLogId = node.Id;
