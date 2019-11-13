@@ -159,7 +159,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var filter = $"adoxio_cannabismonthlyreportid eq {reportId}";
-                CannabismonthlyreportsGetResponseModel monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+                var monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
                 if (monthlyReportResp.Value.Count == 1 && CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReportResp.Value[0]._adoxioLicenseeidValue))
                 {
                     return new JsonResult(monthlyReportResp.Value);
@@ -187,7 +187,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             Guid monthlyReportId = new Guid(id);
             string filter = $"adoxio_cannabismonthlyreportid eq {id}";
-            CannabismonthlyreportsGetResponseModel monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
+            var monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
             if (monthlyReportResp.Value.Count < 1 || !CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReportResp.Value[0]._adoxioLicenseeidValue))
             {
                 return new NotFoundResult();

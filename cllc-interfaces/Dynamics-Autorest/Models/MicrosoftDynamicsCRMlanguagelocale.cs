@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// languagelocale
+    /// Microsoft.Dynamics.CRM.languagelocale
     /// </summary>
     public partial class MicrosoftDynamicsCRMlanguagelocale
     {
@@ -29,7 +29,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMlanguagelocale class.
         /// </summary>
-        public MicrosoftDynamicsCRMlanguagelocale(string region = default(string), string languagelocaleid = default(string), string language = default(string), string code = default(string), long? versionnumber = default(long?), int? statecode = default(int?), int? statuscode = default(int?), string _organizationidValue = default(string), string name = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        /// <param name="region">Region</param>
+        /// <param name="languagelocaleid">LanguageLocaleId</param>
+        /// <param name="language">Language</param>
+        /// <param name="code">Code</param>
+        /// <param name="statecode">State Code</param>
+        /// <param name="statuscode">Language Status Code</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the language locale.</param>
+        /// <param name="name">Name</param>
+        /// <param name="localeid">Locale ID</param>
+        public MicrosoftDynamicsCRMlanguagelocale(string region = default(string), string languagelocaleid = default(string), string language = default(string), string code = default(string), string versionnumber = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _organizationidValue = default(string), string name = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Region = region;
             Languagelocaleid = languagelocaleid;
@@ -52,21 +62,25 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets region
         /// </summary>
         [JsonProperty(PropertyName = "region")]
         public string Region { get; set; }
 
         /// <summary>
+        /// Gets or sets languageLocaleId
         /// </summary>
         [JsonProperty(PropertyName = "languagelocaleid")]
         public string Languagelocaleid { get; set; }
 
         /// <summary>
+        /// Gets or sets language
         /// </summary>
         [JsonProperty(PropertyName = "language")]
         public string Language { get; set; }
 
         /// <summary>
+        /// Gets or sets code
         /// </summary>
         [JsonProperty(PropertyName = "code")]
         public string Code { get; set; }
@@ -74,29 +88,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets state Code
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets language Status Code
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the language locale.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets name
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets locale ID
         /// </summary>
         [JsonProperty(PropertyName = "localeid")]
         public int? Localeid { get; set; }

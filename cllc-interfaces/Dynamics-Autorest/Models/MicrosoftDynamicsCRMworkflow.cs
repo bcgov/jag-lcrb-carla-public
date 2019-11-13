@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// workflow
+    /// Microsoft.Dynamics.CRM.workflow
     /// </summary>
     public partial class MicrosoftDynamicsCRMworkflow
     {
@@ -29,7 +31,106 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMworkflow
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMworkflow(object entityimage = default(object), string triggeronupdateattributelist = default(string), int? businessprocesstype = default(int?), string _plugintypeidValue = default(string), int? processorder = default(int?), string name = default(string), bool? triggeroncreate = default(bool?), int? mode = default(int?), int? rank = default(int?), bool? ismanaged = default(bool?), string processroleassignment = default(string), string formid = default(string), bool? asyncautodelete = default(bool?), string _modifiedbyValue = default(string), string workflowidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string xaml = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? deletestage = default(int?), string _activeworkflowidValue = default(string), string solutionid = default(string), int? createstage = default(int?), string _owningteamValue = default(string), string _createdbyValue = default(string), bool? subprocess = default(bool?), string primaryentity = default(string), int? statecode = default(int?), string _owninguserValue = default(string), bool? iscrmuiworkflow = default(bool?), int? runas = default(int?), string rendererobjecttypecode = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _parentworkflowidValue = default(string), string _owneridValue = default(string), long? entityimageTimestamp = default(long?), int? category = default(int?), int? type = default(int?), bool? triggerondelete = default(bool?), int? updatestage = default(int?), string _owningbusinessunitValue = default(string), string introducedversion = default(string), string workflowid = default(string), bool? ondemand = default(bool?), string clientdata = default(string), int? scope = default(int?), string inputparameters = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? syncworkflowlogonfailure = default(bool?), string entityimageid = default(string), object iscustomizable = default(object), int? componentstate = default(int?), int? languagecode = default(int?), string entityimageUrl = default(string), bool? istransacted = default(bool?), string uniquename = default(string), long? versionnumber = default(long?), string description = default(string), string _sdkmessageidValue = default(string), IList<MicrosoftDynamicsCRMsla> slabaseWorkflowid = default(IList<MicrosoftDynamicsCRMsla>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), object ownerid = default(object), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationWorkflowactivationid = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMworkflow parentworkflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMworkflow> workflowParentWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> workflowLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMexpiredprocess> workflowExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> workflowOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMslaitem> slaitembaseWorkflowid = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMtranslationprocess> workflowTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMphonetocaseprocess> workflowPhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMannotation> workflowAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMprocessstage> processProcessstage = default(IList<MicrosoftDynamicsCRMprocessstage>), IList<MicrosoftDynamicsCRMsyncerror> workflowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMnewprocess> workflowNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), MicrosoftDynamicsCRMworkflow activeworkflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMworkflow> workflowActiveWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMabsScheduledprocess> absWorkflowScheduledprocess = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Processid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfProcessid = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> lkAdoxioApplicationbpfv3Processid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>))
+        /// <param name="entityimage">Shows the default image for the
+        /// record.</param>
+        /// <param name="triggeronupdateattributelist">Attributes that trigger
+        /// the process when updated.</param>
+        /// <param name="businessprocesstype">Business Process Type.</param>
+        /// <param name="_plugintypeidValue">Unique identifier of the plug-in
+        /// type.</param>
+        /// <param name="processorder">Type the business process flow
+        /// order.</param>
+        /// <param name="name">Name of the process.</param>
+        /// <param name="triggeroncreate">Indicates whether the process will be
+        /// triggered when the primary entity is created.</param>
+        /// <param name="mode">Shows the mode of the process.</param>
+        /// <param name="rank">Indicates the rank for order of execution for
+        /// the synchronous workflow.</param>
+        /// <param name="ismanaged">Indicates whether the solution component is
+        /// part of a managed solution.</param>
+        /// <param name="processroleassignment">Contains the role assignment
+        /// for the process.</param>
+        /// <param name="formid">Unique identifier of the associated
+        /// form.</param>
+        /// <param name="asyncautodelete">Indicates whether the asynchronous
+        /// system job is automatically deleted on completion.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the process.</param>
+        /// <param name="workflowidunique">For internal use only.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the process.</param>
+        /// <param name="xaml">XAML that defines the process.</param>
+        /// <param name="modifiedon">Date and time when the process was last
+        /// modified.</param>
+        /// <param name="deletestage">Stage of the process when triggered on
+        /// Delete.</param>
+        /// <param name="_activeworkflowidValue">Unique identifier of the
+        /// latest activation record for the process.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="createstage">Stage of the process when triggered on
+        /// Create.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the process.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the process.</param>
+        /// <param name="subprocess">Indicates whether the process can be
+        /// included in other processes as a child process.</param>
+        /// <param name="primaryentity">Primary entity for the process. The
+        /// process can be associated for one or more SDK operations defined on
+        /// the primary entity.</param>
+        /// <param name="statecode">Status of the process.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the process.</param>
+        /// <param name="iscrmuiworkflow">Indicates whether the process was
+        /// created using the Microsoft Dynamics 365 Web application.</param>
+        /// <param name="runas">Specifies the system user account under which a
+        /// workflow executes.</param>
+        /// <param name="rendererobjecttypecode">The renderer type of
+        /// Workflow</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the process.</param>
+        /// <param name="statuscode">Additional information about status of the
+        /// process.</param>
+        /// <param name="_parentworkflowidValue">Unique identifier of the
+        /// definition for process activation.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the process.</param>
+        /// <param name="category">Category of the process.</param>
+        /// <param name="type">Type of the process.</param>
+        /// <param name="triggerondelete">Indicates whether the process will be
+        /// triggered on deletion of the primary entity.</param>
+        /// <param name="updatestage">Select the stage a process will be
+        /// triggered on update.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the process.</param>
+        /// <param name="introducedversion">Version in which the form is
+        /// introduced.</param>
+        /// <param name="workflowid">Unique identifier of the process.</param>
+        /// <param name="ondemand">Indicates whether the process is able to run
+        /// as an on-demand process.</param>
+        /// <param name="clientdata">Business logic converted into client
+        /// data</param>
+        /// <param name="scope">Scope of the process.</param>
+        /// <param name="inputparameters">Input parameters to the
+        /// process.</param>
+        /// <param name="createdon">Date and time when the process was
+        /// created.</param>
+        /// <param name="syncworkflowlogonfailure">Select whether synchronous
+        /// workflow failures will be saved to log files.</param>
+        /// <param name="entityimageid">For internal use only.</param>
+        /// <param name="iscustomizable">Information that specifies whether
+        /// this component can be customized.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="languagecode">Language of the process.</param>
+        /// <param name="istransacted">Whether or not the steps in the process
+        /// are executed in a single transaction.</param>
+        /// <param name="uniquename">Unique name of the process</param>
+        /// <param name="description">Description of the process.</param>
+        /// <param name="_sdkmessageidValue">Unique identifier of the SDK
+        /// Message associated with this workflow.</param>
+        public MicrosoftDynamicsCRMworkflow(byte[] entityimage = default(byte[]), string triggeronupdateattributelist = default(string), int? businessprocesstype = default(int?), string _plugintypeidValue = default(string), int? processorder = default(int?), string name = default(string), bool? triggeroncreate = default(bool?), int? mode = default(int?), int? rank = default(int?), bool? ismanaged = default(bool?), string processroleassignment = default(string), string formid = default(string), bool? asyncautodelete = default(bool?), string _modifiedbyValue = default(string), string workflowidunique = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string xaml = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? deletestage = default(int?), string _activeworkflowidValue = default(string), string solutionid = default(string), int? createstage = default(int?), string _owningteamValue = default(string), string _createdbyValue = default(string), bool? subprocess = default(bool?), string primaryentity = default(string), int? statecode = default(int?), string _owninguserValue = default(string), bool? iscrmuiworkflow = default(bool?), int? runas = default(int?), string rendererobjecttypecode = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _parentworkflowidValue = default(string), string _owneridValue = default(string), long? entityimageTimestamp = default(long?), int? category = default(int?), int? type = default(int?), bool? triggerondelete = default(bool?), int? updatestage = default(int?), string _owningbusinessunitValue = default(string), string introducedversion = default(string), string workflowid = default(string), bool? ondemand = default(bool?), string clientdata = default(string), int? scope = default(int?), string inputparameters = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? syncworkflowlogonfailure = default(bool?), string entityimageid = default(string), string iscustomizable = default(string), int? componentstate = default(int?), int? languagecode = default(int?), string entityimageUrl = default(string), bool? istransacted = default(bool?), string uniquename = default(string), string versionnumber = default(string), string description = default(string), string _sdkmessageidValue = default(string), IList<MicrosoftDynamicsCRMsla> slabaseWorkflowid = default(IList<MicrosoftDynamicsCRMsla>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMasyncoperation> lkAsyncoperationWorkflowactivationid = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMworkflow parentworkflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMworkflow> workflowParentWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess> workflowLeadtoopportunitysalesprocess = default(IList<MicrosoftDynamicsCRMleadtoopportunitysalesprocess>), IList<MicrosoftDynamicsCRMexpiredprocess> workflowExpiredprocess = default(IList<MicrosoftDynamicsCRMexpiredprocess>), IList<MicrosoftDynamicsCRMopportunitysalesprocess> workflowOpportunitysalesprocess = default(IList<MicrosoftDynamicsCRMopportunitysalesprocess>), IList<MicrosoftDynamicsCRMslaitem> slaitembaseWorkflowid = default(IList<MicrosoftDynamicsCRMslaitem>), IList<MicrosoftDynamicsCRMtranslationprocess> workflowTranslationprocess = default(IList<MicrosoftDynamicsCRMtranslationprocess>), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMphonetocaseprocess> workflowPhonetocaseprocess = default(IList<MicrosoftDynamicsCRMphonetocaseprocess>), IList<MicrosoftDynamicsCRMannotation> workflowAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMprocessstage> processProcessstage = default(IList<MicrosoftDynamicsCRMprocessstage>), IList<MicrosoftDynamicsCRMsyncerror> workflowSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMnewprocess> workflowNewprocess = default(IList<MicrosoftDynamicsCRMnewprocess>), MicrosoftDynamicsCRMworkflow activeworkflowid = default(MicrosoftDynamicsCRMworkflow), IList<MicrosoftDynamicsCRMworkflow> workflowActiveWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMabsScheduledprocess> absWorkflowScheduledprocess = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> lkAdoxioApplicationbpfmvpv2Processid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf> lkAdoxioComplaintpublicbpfProcessid = default(IList<MicrosoftDynamicsCRMadoxioComplaintpublicbpf>), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> lkAdoxioApplicationbpfv3Processid = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>))
         {
             Entityimage = entityimage;
             Triggeronupdateattributelist = triggeronupdateattributelist;
@@ -128,181 +229,233 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the default image for the record.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
-        public object Entityimage { get; set; }
+        public byte[] Entityimage { get; set; }
 
         /// <summary>
+        /// Gets or sets attributes that trigger the process when updated.
         /// </summary>
         [JsonProperty(PropertyName = "triggeronupdateattributelist")]
         public string Triggeronupdateattributelist { get; set; }
 
         /// <summary>
+        /// Gets or sets business Process Type.
         /// </summary>
         [JsonProperty(PropertyName = "businessprocesstype")]
         public int? Businessprocesstype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the plug-in type.
         /// </summary>
         [JsonProperty(PropertyName = "_plugintypeid_value")]
         public string _plugintypeidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the business process flow order.
         /// </summary>
         [JsonProperty(PropertyName = "processorder")]
         public int? Processorder { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the process.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the process will be triggered when
+        /// the primary entity is created.
         /// </summary>
         [JsonProperty(PropertyName = "triggeroncreate")]
         public bool? Triggeroncreate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the mode of the process.
         /// </summary>
         [JsonProperty(PropertyName = "mode")]
         public int? Mode { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the rank for order of execution for the
+        /// synchronous workflow.
         /// </summary>
         [JsonProperty(PropertyName = "rank")]
         public int? Rank { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the solution component is part of a
+        /// managed solution.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets contains the role assignment for the process.
         /// </summary>
         [JsonProperty(PropertyName = "processroleassignment")]
         public string Processroleassignment { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated form.
         /// </summary>
         [JsonProperty(PropertyName = "formid")]
         public string Formid { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the asynchronous system job is
+        /// automatically deleted on completion.
         /// </summary>
         [JsonProperty(PropertyName = "asyncautodelete")]
         public bool? Asyncautodelete { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// process.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "workflowidunique")]
         public string Workflowidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the process.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets XAML that defines the process.
         /// </summary>
         [JsonProperty(PropertyName = "xaml")]
         public string Xaml { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the process was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets stage of the process when triggered on Delete.
         /// </summary>
         [JsonProperty(PropertyName = "deletestage")]
         public int? Deletestage { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the latest activation record for
+        /// the process.
         /// </summary>
         [JsonProperty(PropertyName = "_activeworkflowid_value")]
         public string _activeworkflowidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets stage of the process when triggered on Create.
         /// </summary>
         [JsonProperty(PropertyName = "createstage")]
         public int? Createstage { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the process.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the process.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the process can be included in other
+        /// processes as a child process.
         /// </summary>
         [JsonProperty(PropertyName = "subprocess")]
         public bool? Subprocess { get; set; }
 
         /// <summary>
+        /// Gets or sets primary entity for the process. The process can be
+        /// associated for one or more SDK operations defined on the primary
+        /// entity.
         /// </summary>
         [JsonProperty(PropertyName = "primaryentity")]
         public string Primaryentity { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the process.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the process.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the process was created using the
+        /// Microsoft Dynamics 365 Web application.
         /// </summary>
         [JsonProperty(PropertyName = "iscrmuiworkflow")]
         public bool? Iscrmuiworkflow { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies the system user account under which a
+        /// workflow executes.
         /// </summary>
         [JsonProperty(PropertyName = "runas")]
         public int? Runas { get; set; }
 
         /// <summary>
+        /// Gets or sets the renderer type of Workflow
         /// </summary>
         [JsonProperty(PropertyName = "rendererobjecttypecode")]
         public string Rendererobjecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// process.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets additional information about status of the process.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the definition for process
+        /// activation.
         /// </summary>
         [JsonProperty(PropertyName = "_parentworkflowid_value")]
         public string _parentworkflowidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// process.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
@@ -313,86 +466,109 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets category of the process.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public int? Category { get; set; }
 
         /// <summary>
+        /// Gets or sets type of the process.
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public int? Type { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the process will be triggered on
+        /// deletion of the primary entity.
         /// </summary>
         [JsonProperty(PropertyName = "triggerondelete")]
         public bool? Triggerondelete { get; set; }
 
         /// <summary>
+        /// Gets or sets select the stage a process will be triggered on
+        /// update.
         /// </summary>
         [JsonProperty(PropertyName = "updatestage")]
         public int? Updatestage { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// process.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the form is introduced.
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the process.
         /// </summary>
         [JsonProperty(PropertyName = "workflowid")]
         public string Workflowid { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the process is able to run as an
+        /// on-demand process.
         /// </summary>
         [JsonProperty(PropertyName = "ondemand")]
         public bool? Ondemand { get; set; }
 
         /// <summary>
+        /// Gets or sets business logic converted into client data
         /// </summary>
         [JsonProperty(PropertyName = "clientdata")]
         public string Clientdata { get; set; }
 
         /// <summary>
+        /// Gets or sets scope of the process.
         /// </summary>
         [JsonProperty(PropertyName = "scope")]
         public int? Scope { get; set; }
 
         /// <summary>
+        /// Gets or sets input parameters to the process.
         /// </summary>
         [JsonProperty(PropertyName = "inputparameters")]
         public string Inputparameters { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the process was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether synchronous workflow failures will be
+        /// saved to log files.
         /// </summary>
         [JsonProperty(PropertyName = "syncworkflowlogonfailure")]
         public bool? Syncworkflowlogonfailure { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
         public string Entityimageid { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component can
+        /// be customized.
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public object Iscustomizable { get; set; }
+        public string Iscustomizable { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets language of the process.
         /// </summary>
         [JsonProperty(PropertyName = "languagecode")]
         public int? Languagecode { get; set; }
@@ -403,11 +579,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets whether or not the steps in the process are executed
+        /// in a single transaction.
         /// </summary>
         [JsonProperty(PropertyName = "istransacted")]
         public bool? Istransacted { get; set; }
 
         /// <summary>
+        /// Gets or sets unique name of the process
         /// </summary>
         [JsonProperty(PropertyName = "uniquename")]
         public string Uniquename { get; set; }
@@ -415,14 +594,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the process.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SDK Message associated with
+        /// this workflow.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessageid_value")]
         public string _sdkmessageidValue { get; set; }
@@ -445,7 +627,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

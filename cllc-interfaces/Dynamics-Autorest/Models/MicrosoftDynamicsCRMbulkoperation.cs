@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// bulkoperation
+    /// Microsoft.Dynamics.CRM.bulkoperation
     /// </summary>
     public partial class MicrosoftDynamicsCRMbulkoperation
     {
@@ -29,6 +29,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMbulkoperation
         /// class.
         /// </summary>
+        /// <param name="successcount">Number of records which succeeded in the
+        /// bulk operation.</param>
+        /// <param name="targetedrecordtypecode">Select the type of records
+        /// targeted in the quick campaign to identify the target
+        /// audience.</param>
+        /// <param name="bulkoperationnumber">Shows the number for the quick
+        /// campaign record, used to identify the quick campaign.</param>
+        /// <param name="errornumber">Shows the error code that is used to
+        /// troubleshoot issues in the quick campaign.</param>
+        /// <param name="parameters">XML string that contains the parameters to
+        /// the bulk operation.</param>
+        /// <param name="failurecount">Number of records which failed in the
+        /// bulk operation.</param>
+        /// <param name="createdrecordtypecode">Choose the activity to create
+        /// that determines how target prospects or customers in this quick
+        /// campaign are contacted.</param>
+        /// <param name="operationtypecode">Select the type of bulk operation
+        /// process, such as quick campaign or campaign activity
+        /// distribution.</param>
+        /// <param name="targetmemberscount">Number of members to
+        /// target.</param>
         public MicrosoftDynamicsCRMbulkoperation(int? successcount = default(int?), int? targetedrecordtypecode = default(int?), string bulkoperationnumber = default(string), int? errornumber = default(int?), string parameters = default(string), int? failurecount = default(int?), int? createdrecordtypecode = default(int?), int? operationtypecode = default(int?), int? targetmemberscount = default(int?), IList<MicrosoftDynamicsCRMemail> bulkOperationEmail = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMsystemuser createdbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsocialactivity> bulkOperationSocialActivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkOperationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMphonecall> bulkOperationPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMbulkoperationlog> bulkOperationLogs = default(IList<MicrosoftDynamicsCRMbulkoperationlog>), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMlist regardingobjectidList = default(MicrosoftDynamicsCRMlist), IList<MicrosoftDynamicsCRMcampaignresponse> bulkOperationCampaignResponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser owninguserBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityBulkoperation = default(MicrosoftDynamicsCRMcampaignactivity), IList<MicrosoftDynamicsCRMactivityparty> bulkoperationActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMbusinessunit owningbusinessunitBulkoperation = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> bulkOperationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivitypointer> bulkOperationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMfax> bulkOperationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> bulkOperationLetter = default(IList<MicrosoftDynamicsCRMletter>), MicrosoftDynamicsCRMsystemuser createdonbehalfbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteamBulkoperation = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMappointment> bulkOperationAppointment = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMasyncoperation> bulkOperationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> bulkOperationRecurringAppointmentMaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyBulkoperation = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMqueueitem> bulkOperationQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> bulkoperationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>))
         {
             Successcount = successcount;
@@ -75,46 +96,62 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets number of records which succeeded in the bulk
+        /// operation.
         /// </summary>
         [JsonProperty(PropertyName = "successcount")]
         public int? Successcount { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of records targeted in the quick
+        /// campaign to identify the target audience.
         /// </summary>
         [JsonProperty(PropertyName = "targetedrecordtypecode")]
         public int? Targetedrecordtypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the number for the quick campaign record, used
+        /// to identify the quick campaign.
         /// </summary>
         [JsonProperty(PropertyName = "bulkoperationnumber")]
         public string Bulkoperationnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the error code that is used to troubleshoot
+        /// issues in the quick campaign.
         /// </summary>
         [JsonProperty(PropertyName = "errornumber")]
         public int? Errornumber { get; set; }
 
         /// <summary>
+        /// Gets or sets XML string that contains the parameters to the bulk
+        /// operation.
         /// </summary>
         [JsonProperty(PropertyName = "parameters")]
         public string Parameters { get; set; }
 
         /// <summary>
+        /// Gets or sets number of records which failed in the bulk operation.
         /// </summary>
         [JsonProperty(PropertyName = "failurecount")]
         public int? Failurecount { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the activity to create that determines how
+        /// target prospects or customers in this quick campaign are contacted.
         /// </summary>
         [JsonProperty(PropertyName = "createdrecordtypecode")]
         public int? Createdrecordtypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of bulk operation process, such as
+        /// quick campaign or campaign activity distribution.
         /// </summary>
         [JsonProperty(PropertyName = "operationtypecode")]
         public int? Operationtypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets number of members to target.
         /// </summary>
         [JsonProperty(PropertyName = "targetmemberscount")]
         public int? Targetmemberscount { get; set; }
