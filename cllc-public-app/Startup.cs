@@ -66,7 +66,7 @@ namespace Gov.Lclb.Cllb.Public
             // determine if we wire up Dynamics.
             if (!string.IsNullOrEmpty(Configuration["DYNAMICS_ODATA_URI"]))
             {
-                SetupDynamics(services);
+                SetupServices(services);
             }
 
             // Add a memory cache
@@ -152,7 +152,7 @@ namespace Gov.Lclb.Cllb.Public
             services.AddSession();
         }
 
-        private void SetupDynamics(IServiceCollection services)
+        private void SetupServices(IServiceCollection services)
         {
 
             string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];

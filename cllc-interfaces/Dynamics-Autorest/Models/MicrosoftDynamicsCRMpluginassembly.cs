@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="isolationmode">Information about how the plugin
         /// assembly is to be isolated at execution time; None /
         /// Sandboxed.</param>
-        public MicrosoftDynamicsCRMpluginassembly(string ishidden = default(string), int? sourcetype = default(int?), System.Guid? _organizationidValue = default(System.Guid?), string sourcehash = default(string), string introducedversion = default(string), string name = default(string), string publickeytoken = default(string), System.Guid? _createdbyValue = default(System.Guid?), int? customizationlevel = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string version = default(string), string description = default(string), System.Guid? solutionid = default(System.Guid?), bool? ismanaged = default(bool?), string culture = default(string), System.Guid? pluginassemblyidunique = default(System.Guid?), string versionnumber = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? pluginassemblyid = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), int? major = default(int?), int? componentstate = default(int?), string iscustomizable = default(string), string path = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? minor = default(int?), string content = default(string), byte[] contentBinary = default(byte[]), int? isolationmode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpluginassembly(string ishidden = default(string), int? sourcetype = default(int?), string _organizationidValue = default(string), string sourcehash = default(string), string introducedversion = default(string), string name = default(string), string publickeytoken = default(string), string _createdbyValue = default(string), int? customizationlevel = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string version = default(string), string description = default(string), string solutionid = default(string), bool? ismanaged = default(bool?), string culture = default(string), string pluginassemblyidunique = default(string), string versionnumber = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string pluginassemblyid = default(string), string _modifiedbyValue = default(string), int? major = default(int?), int? componentstate = default(int?), string iscustomizable = default(string), string path = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? minor = default(int?), string content = default(string), byte[] contentBinary = default(byte[]), int? isolationmode = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMplugintype> pluginassemblyPlugintype = default(IList<MicrosoftDynamicsCRMplugintype>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Ishidden = ishidden;
             Sourcetype = sourcetype;
@@ -153,7 +153,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// plug-in assembly is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets hash of the source of the assembly.
@@ -185,7 +185,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// assembly.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets customization Level.
@@ -204,7 +204,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// pluginassembly.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the assembly. The value can be
@@ -223,7 +223,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether this component is
@@ -242,7 +242,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "pluginassemblyidunique")]
-        public System.Guid? Pluginassemblyidunique { get; set; }
+        public string Pluginassemblyidunique { get; set; }
 
         /// <summary>
         /// </summary>
@@ -260,20 +260,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the pluginassembly.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "pluginassemblyid")]
-        public System.Guid? Pluginassemblyid { get; set; }
+        public string Pluginassemblyid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// plug-in assembly.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets major of the assembly version.

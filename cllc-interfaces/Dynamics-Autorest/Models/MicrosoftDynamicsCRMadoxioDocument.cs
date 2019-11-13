@@ -77,7 +77,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// created the record.</param>
         /// <param name="_adoxioIndividualidValue">Unique identifier for
         /// Contact associated with Document.</param>
-        public MicrosoftDynamicsCRMadoxioDocument(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? _adoxioInvestigationidValue = default(System.Guid?), int? importsequencenumber = default(int?), int? statecode = default(int?), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _adoxioBusinessprofileidValue = default(System.Guid?), System.Guid? _owninguserValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _adoxioApplicationidValue = default(System.Guid?), int? adoxioDocumenttype = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _adoxioWorkerverificationidValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _adoxioDocumentlinkidValue = default(System.Guid?), System.Guid? adoxioDocumentid = default(System.Guid?), System.Guid? _adoxioInspectionidValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string adoxioName = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _adoxioIndividualidValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioDocumentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioDocumentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioDocumentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioDocumentSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioDocumentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioDocumentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMaccount adoxioBusinessProfileId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioIndividualId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioDocumentadmin adoxioDocumentLinkId = default(MicrosoftDynamicsCRMadoxioDocumentadmin), MicrosoftDynamicsCRMadoxioWorker adoxioWorkerVerificationId = default(MicrosoftDynamicsCRMadoxioWorker))
+        public MicrosoftDynamicsCRMadoxioDocument(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string versionnumber = default(string), string _modifiedbyValue = default(string), string _owneridValue = default(string), string _adoxioInvestigationidValue = default(string), int? importsequencenumber = default(int?), int? statecode = default(int?), string _owningteamValue = default(string), string _createdonbehalfbyValue = default(string), string _adoxioBusinessprofileidValue = default(string), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), string _adoxioApplicationidValue = default(string), int? adoxioDocumenttype = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), string _adoxioWorkerverificationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _adoxioDocumentlinkidValue = default(string), string adoxioDocumentid = default(string), string _adoxioInspectionidValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioName = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string _createdbyValue = default(string), string _adoxioIndividualidValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioDocumentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioDocumentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioDocumentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioDocumentSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioDocumentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioDocumentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationId = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMincident adoxioInspectionId = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioInvestigation adoxioInvestigationId = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMaccount adoxioBusinessProfileId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMcontact adoxioIndividualId = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioDocumentadmin adoxioDocumentLinkId = default(MicrosoftDynamicsCRMadoxioDocumentadmin), MicrosoftDynamicsCRMadoxioWorker adoxioWorkerVerificationId = default(MicrosoftDynamicsCRMadoxioWorker))
         {
             Overriddencreatedon = overriddencreatedon;
             Versionnumber = versionnumber;
@@ -151,20 +151,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Investigation associated with
         /// Document.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_investigationid_value")]
-        public System.Guid? _adoxioInvestigationidValue { get; set; }
+        public string _adoxioInvestigationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets sequence number of the import that created this
@@ -183,27 +183,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Account associated with
         /// Document.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_businessprofileid_value")]
-        public System.Guid? _adoxioBusinessprofileidValue { get; set; }
+        public string _adoxioBusinessprofileidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -216,7 +216,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Document.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
-        public System.Guid? _adoxioApplicationidValue { get; set; }
+        public string _adoxioApplicationidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -234,14 +234,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Worker Qualification associated
         /// with Document.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_workerverificationid_value")]
-        public System.Guid? _adoxioWorkerverificationidValue { get; set; }
+        public string _adoxioWorkerverificationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was modified.
@@ -254,27 +254,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Document.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_documentlinkid_value")]
-        public System.Guid? _adoxioDocumentlinkidValue { get; set; }
+        public string _adoxioDocumentlinkidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_documentid")]
-        public System.Guid? AdoxioDocumentid { get; set; }
+        public string AdoxioDocumentid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Inspection associated with
         /// Document.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_inspectionid_value")]
-        public System.Guid? _adoxioInspectionidValue { get; set; }
+        public string _adoxioInspectionidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the custom entity.
@@ -299,14 +299,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Contact associated with
         /// Document.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_individualid_value")]
-        public System.Guid? _adoxioIndividualidValue { get; set; }
+        public string _adoxioIndividualidValue { get; set; }
 
         /// <summary>
         /// </summary>

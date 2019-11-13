@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="expand">Indicates whether the SDK message should have
         /// its requests expanded per primary entity defined in its
         /// filters.</param>
-        public MicrosoftDynamicsCRMsdkmessage(bool? autotransact = default(bool?), bool? workflowsdkstepenabled = default(bool?), string versionnumber = default(string), System.Guid? _organizationidValue = default(System.Guid?), bool? isreadonly = default(bool?), int? customizationlevel = default(int?), int? availability = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string categoryname = default(string), bool? isactive = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? sdkmessageid = default(System.Guid?), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), bool? isprivate = default(bool?), bool? isvalidforexecuteasync = default(bool?), System.Guid? sdkmessageidunique = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), bool? template = default(bool?), string throttlesettings = default(string), bool? expand = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMsdkmessage(bool? autotransact = default(bool?), bool? workflowsdkstepenabled = default(bool?), string versionnumber = default(string), string _organizationidValue = default(string), bool? isreadonly = default(bool?), int? customizationlevel = default(int?), int? availability = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string categoryname = default(string), bool? isactive = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string sdkmessageid = default(string), string name = default(string), string _modifiedonbehalfbyValue = default(string), bool? isprivate = default(bool?), bool? isvalidforexecuteasync = default(bool?), string sdkmessageidunique = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), bool? template = default(bool?), string throttlesettings = default(string), bool? expand = default(bool?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> sdkmessageidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessagefilter> sdkmessageidSdkmessagefilter = default(IList<MicrosoftDynamicsCRMsdkmessagefilter>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Autotransact = autotransact;
             Workflowsdkstepenabled = workflowsdkstepenabled;
@@ -140,7 +140,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// SDK message is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets identifies whether an SDK message will be ReadOnly or
@@ -192,13 +192,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// message.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the SDK message entity.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageid")]
-        public System.Guid? Sdkmessageid { get; set; }
+        public string Sdkmessageid { get; set; }
 
         /// <summary>
         /// Gets or sets name of the SDK message.
@@ -211,7 +211,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the sdkmessage.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether the SDK message is private.
@@ -229,21 +229,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the SDK message.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageidunique")]
-        public System.Guid? Sdkmessageidunique { get; set; }
+        public string Sdkmessageidunique { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// sdkmessage.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// SDK message.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether the SDK message is a template.

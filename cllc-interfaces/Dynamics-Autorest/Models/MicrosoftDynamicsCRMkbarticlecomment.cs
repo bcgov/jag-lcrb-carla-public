@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// comment.</param>
         /// <param name="_createdbyValue">Unique identifier of the user who
         /// created the knowledge base article comment.</param>
-        public MicrosoftDynamicsCRMkbarticlecomment(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? organizationid = default(System.Guid?), System.Guid? _kbarticleidValue = default(System.Guid?), System.Guid? kbarticlecommentid = default(System.Guid?), string commenttext = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string title = default(string), string versionnumber = default(string), System.Guid? _createdbyValue = default(System.Guid?), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleCommentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleCommentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle kbarticleid = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMkbarticlecomment(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string organizationid = default(string), string _kbarticleidValue = default(string), string kbarticlecommentid = default(string), string commenttext = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string title = default(string), string versionnumber = default(string), string _createdbyValue = default(string), IList<MicrosoftDynamicsCRMbulkdeletefailure> kbArticleCommentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> kbArticleCommentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle kbarticleid = default(MicrosoftDynamicsCRMkbarticle), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Createdon = createdon;
             Modifiedon = modifiedon;
@@ -99,28 +99,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// knowledge base article comment.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the organization with which the
         /// article comment is associated.
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
-        public System.Guid? Organizationid { get; set; }
+        public string Organizationid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the knowledge base article to
         /// which the comment applies.
         /// </summary>
         [JsonProperty(PropertyName = "_kbarticleid_value")]
-        public System.Guid? _kbarticleidValue { get; set; }
+        public string _kbarticleidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the knowledge base article
         /// comment.
         /// </summary>
         [JsonProperty(PropertyName = "kbarticlecommentid")]
-        public System.Guid? Kbarticlecommentid { get; set; }
+        public string Kbarticlecommentid { get; set; }
 
         /// <summary>
         /// Gets or sets comment text for the knowledge base article.
@@ -133,14 +133,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the kbarticlecomment.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// kbarticlecomment.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets title of the knowledge base article comment.
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// knowledge base article comment.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

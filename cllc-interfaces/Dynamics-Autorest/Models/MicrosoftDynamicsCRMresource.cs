@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// resource.</param>
         /// <param name="resourceid">Unique identifier of the resource.</param>
         /// <param name="displayinserviceviews">For internal use only.</param>
-        public MicrosoftDynamicsCRMresource(bool? isdisabled = default(bool?), System.Guid? entityimageid = default(System.Guid?), long? entityimageTimestamp = default(long?), string versionnumber = default(string), string objecttypecode = default(string), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? _businessunitidValue = default(System.Guid?), byte[] entityimage = default(byte[]), System.Guid? _siteidValue = default(System.Guid?), string name = default(string), System.Guid? calendarid = default(System.Guid?), string entityimageUrl = default(string), System.Guid? resourceid = default(System.Guid?), bool? displayinserviceviews = default(bool?), MicrosoftDynamicsCRMsystemuser resourceidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> resourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> resourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMequipment resourceidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMresourcespec resourceidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite))
+        public MicrosoftDynamicsCRMresource(bool? isdisabled = default(bool?), string entityimageid = default(string), long? entityimageTimestamp = default(long?), string versionnumber = default(string), string objecttypecode = default(string), string _organizationidValue = default(string), string _businessunitidValue = default(string), byte[] entityimage = default(byte[]), string _siteidValue = default(string), string name = default(string), string calendarid = default(string), string entityimageUrl = default(string), string resourceid = default(string), bool? displayinserviceviews = default(bool?), MicrosoftDynamicsCRMsystemuser resourceidSystemuser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> resourceBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> resourceSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMasyncoperation> resourceAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMequipment resourceidEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMresourcespec resourceidResourcespec = default(MicrosoftDynamicsCRMresourcespec), MicrosoftDynamicsCRMsite siteid = default(MicrosoftDynamicsCRMsite))
         {
             Isdisabled = isdisabled;
             Entityimageid = entityimageid;
@@ -93,7 +93,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
-        public System.Guid? Entityimageid { get; set; }
+        public string Entityimageid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -117,14 +117,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// resource is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the business unit with which the
         /// resource is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_businessunitid_value")]
-        public System.Guid? _businessunitidValue { get; set; }
+        public string _businessunitidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the default image for the record.
@@ -138,7 +138,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// located.
         /// </summary>
         [JsonProperty(PropertyName = "_siteid_value")]
-        public System.Guid? _siteidValue { get; set; }
+        public string _siteidValue { get; set; }
 
         /// <summary>
         /// Gets or sets name of the resource.
@@ -150,7 +150,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the calendar for the resource.
         /// </summary>
         [JsonProperty(PropertyName = "calendarid")]
-        public System.Guid? Calendarid { get; set; }
+        public string Calendarid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the resource.
         /// </summary>
         [JsonProperty(PropertyName = "resourceid")]
-        public System.Guid? Resourceid { get; set; }
+        public string Resourceid { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.

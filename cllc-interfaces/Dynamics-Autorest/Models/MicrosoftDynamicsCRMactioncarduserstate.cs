@@ -46,7 +46,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="_transactioncurrencyidValue">Exchange rate for the
         /// currency associated with the ActionCardUserState with respect to
         /// the base currency.</param>
-        public MicrosoftDynamicsCRMactioncarduserstate(decimal? exchangerate = default(decimal?), int? state = default(int?), System.Guid? _owneridValue = default(System.Guid?), System.Guid? actioncarduserstateid = default(System.Guid?), System.Guid? _actioncardidValue = default(System.Guid?), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMactioncarduserstate(decimal? exchangerate = default(decimal?), int? state = default(int?), string _owneridValue = default(string), string actioncarduserstateid = default(string), string _actioncardidValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? startdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _transactioncurrencyidValue = default(string), MicrosoftDynamicsCRMactioncard actioncardid = default(MicrosoftDynamicsCRMactioncard), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Exchangerate = exchangerate;
             State = state;
@@ -87,19 +87,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// state of this action card.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "actioncarduserstateid")]
-        public System.Guid? Actioncarduserstateid { get; set; }
+        public string Actioncarduserstateid { get; set; }
 
         /// <summary>
         /// Gets or sets parent ActionCard Id.
         /// </summary>
         [JsonProperty(PropertyName = "_actioncardid_value")]
-        public System.Guid? _actioncardidValue { get; set; }
+        public string _actioncardidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -117,7 +117,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Start Date
@@ -137,7 +137,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// ActionCardUserState with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// </summary>

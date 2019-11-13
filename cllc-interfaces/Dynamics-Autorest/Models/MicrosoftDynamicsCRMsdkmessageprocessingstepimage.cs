@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="attributes">Comma-separated list of attributes that
         /// are to be passed into the SDK message processing step
         /// image.</param>
-        public MicrosoftDynamicsCRMsdkmessageprocessingstepimage(System.Guid? sdkmessageprocessingstepimageid = default(System.Guid?), System.Guid? _sdkmessageprocessingstepidValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), int? customizationlevel = default(int?), string description = default(string), string messagepropertyname = default(string), string relatedattributename = default(string), int? componentstate = default(int?), string iscustomizable = default(string), System.Guid? sdkmessageprocessingstepimageidunique = default(System.Guid?), string introducedversion = default(string), bool? ismanaged = default(bool?), string entityalias = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? imagetype = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? solutionid = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), string attributes = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsdkmessageprocessingstep sdkmessageprocessingstepid = default(MicrosoftDynamicsCRMsdkmessageprocessingstep))
+        public MicrosoftDynamicsCRMsdkmessageprocessingstepimage(string sdkmessageprocessingstepimageid = default(string), string _sdkmessageprocessingstepidValue = default(string), string _createdbyValue = default(string), int? customizationlevel = default(int?), string description = default(string), string messagepropertyname = default(string), string relatedattributename = default(string), int? componentstate = default(int?), string iscustomizable = default(string), string sdkmessageprocessingstepimageidunique = default(string), string introducedversion = default(string), bool? ismanaged = default(bool?), string entityalias = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), int? imagetype = default(int?), string versionnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string name = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string solutionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string attributes = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsdkmessageprocessingstep sdkmessageprocessingstepid = default(MicrosoftDynamicsCRMsdkmessageprocessingstep))
         {
             Sdkmessageprocessingstepimageid = sdkmessageprocessingstepimageid;
             this._sdkmessageprocessingstepidValue = _sdkmessageprocessingstepidValue;
@@ -122,20 +122,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// image entity.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageprocessingstepimageid")]
-        public System.Guid? Sdkmessageprocessingstepimageid { get; set; }
+        public string Sdkmessageprocessingstepimageid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessageprocessingstepid_value")]
-        public System.Guid? _sdkmessageprocessingstepidValue { get; set; }
+        public string _sdkmessageprocessingstepidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the SDK
         /// message processing step image.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets customization level of the SDK message processing step
@@ -180,7 +180,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// image.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageprocessingstepimageidunique")]
-        public System.Guid? Sdkmessageprocessingstepimageidunique { get; set; }
+        public string Sdkmessageprocessingstepimageidunique { get; set; }
 
         /// <summary>
         /// Gets or sets version in which the form is introduced.
@@ -205,14 +205,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the sdkmessageprocessingstepimage.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// sdkmessageprocessingstepimage.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets type of image requested.
@@ -245,7 +245,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -257,7 +257,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the SDK message processing step was
@@ -271,7 +271,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// SDK message processing step is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets comma-separated list of attributes that are to be

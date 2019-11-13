@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// component.</param>
         /// <param name="objectid">Unique identifier of the object with which
         /// the component is associated.</param>
-        public MicrosoftDynamicsCRMsolutioncomponent(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? componenttype = default(int?), int? rootcomponentbehavior = default(int?), string versionnumber = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), bool? ismetadata = default(bool?), System.Guid? rootsolutioncomponentid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _solutionidValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? solutioncomponentid = default(System.Guid?), System.Guid? objectid = default(System.Guid?), MicrosoftDynamicsCRMsolution solutionid = default(MicrosoftDynamicsCRMsolution), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsolutioncomponent rootsolutioncomponentidSolutioncomponent = default(MicrosoftDynamicsCRMsolutioncomponent), IList<MicrosoftDynamicsCRMsolutioncomponent> solutioncomponentParentSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>))
+        public MicrosoftDynamicsCRMsolutioncomponent(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? componenttype = default(int?), int? rootcomponentbehavior = default(int?), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), bool? ismetadata = default(bool?), string rootsolutioncomponentid = default(string), string _createdonbehalfbyValue = default(string), string _createdbyValue = default(string), string _solutionidValue = default(string), string _modifiedbyValue = default(string), string solutioncomponentid = default(string), string objectid = default(string), MicrosoftDynamicsCRMsolution solutionid = default(MicrosoftDynamicsCRMsolution), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsolutioncomponent rootsolutioncomponentidSolutioncomponent = default(MicrosoftDynamicsCRMsolutioncomponent), IList<MicrosoftDynamicsCRMsolutioncomponent> solutioncomponentParentSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>))
         {
             Modifiedon = modifiedon;
             Createdon = createdon;
@@ -118,7 +118,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether this component is metadata or data.
@@ -131,46 +131,46 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// root
         /// </summary>
         [JsonProperty(PropertyName = "rootsolutioncomponentid")]
-        public System.Guid? Rootsolutioncomponentid { get; set; }
+        public string Rootsolutioncomponentid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// solution.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the solution
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_solutionid_value")]
-        public System.Guid? _solutionidValue { get; set; }
+        public string _solutionidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// solution.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the solution component.
         /// </summary>
         [JsonProperty(PropertyName = "solutioncomponentid")]
-        public System.Guid? Solutioncomponentid { get; set; }
+        public string Solutioncomponentid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the object with which the
         /// component is associated.
         /// </summary>
         [JsonProperty(PropertyName = "objectid")]
-        public System.Guid? Objectid { get; set; }
+        public string Objectid { get; set; }
 
         /// <summary>
         /// </summary>

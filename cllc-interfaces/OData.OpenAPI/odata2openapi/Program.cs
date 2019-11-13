@@ -402,11 +402,15 @@ namespace odata2openapi
 
                         if (prefix.Length > 0)
                         {
-                            prefix.Replace(solutionPrefix, "");
-                            prefix = ("" + prefix[0]).ToUpper() + prefix.Substring(1);
+                            if (prefix.ToUpper().Substring(0,solutionPrefix.Length) == solutionPrefix.ToUpper())
+                            {
+                                prefix = prefix.Substring(solutionPrefix.Length);
+                            }
+                            prefix = prefix.Substring(0,1).ToUpper() + prefix.Substring(1);
                         }
                         // remove any underscores.
                         prefix = prefix.Replace("_", "");
+                        
                     }
 
                     foreach (var operation in path.Value.Operations)
@@ -466,6 +470,11 @@ namespace odata2openapi
                                 suffix = "Get";                                
                                 break;
                         }
+
+                        if (suffix.Length >= solutionPrefix.Length && suffix.ToUpper().Substring(0, solutionPrefix.Length) == solutionPrefix.ToUpper())
+                        {
+                            suffix = suffix.Substring(solutionPrefix.Length);
+                        }                        
 
                         operation.Value.OperationId = prefix + "_" + suffix;
 

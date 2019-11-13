@@ -69,7 +69,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// overwritten.</param>
         /// <param name="_createdbyValue">Unique identifier of the user who
         /// created the relationship role.</param>
-        public MicrosoftDynamicsCRMconnectionrole(string name = default(string), int? statecode = default(int?), string versionnumber = default(string), string introducedversion = default(string), string description = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? statuscode = default(int?), System.Guid? _organizationidValue = default(System.Guid?), string iscustomizable = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? category = default(int?), bool? ismanaged = default(bool?), System.Guid? connectionroleid = default(System.Guid?), int? importsequencenumber = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? connectionroleidunique = default(System.Guid?), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? _createdbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> connectionRoleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> connectionRoleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociation = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociationReferenced = default(IList<MicrosoftDynamicsCRMconnectionrole>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMconnectionrole(string name = default(string), int? statecode = default(int?), string versionnumber = default(string), string introducedversion = default(string), string description = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string _organizationidValue = default(string), string iscustomizable = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? category = default(int?), bool? ismanaged = default(bool?), string connectionroleid = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), string solutionid = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string connectionroleidunique = default(string), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> connectionRoleAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMsyncerror> connectionRoleSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> connectionRoleConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociation = default(IList<MicrosoftDynamicsCRMconnectionrole>), IList<MicrosoftDynamicsCRMconnectionrole> connectionroleassociationAssociationReferenced = default(IList<MicrosoftDynamicsCRMconnectionrole>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Name = name;
             Statecode = statecode;
@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// relationship role.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the connection role.
@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// connection role belongs to.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether this component can
@@ -193,7 +193,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the connection role.
         /// </summary>
         [JsonProperty(PropertyName = "connectionroleid")]
-        public System.Guid? Connectionroleid { get; set; }
+        public string Connectionroleid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the data import or data migration
@@ -207,20 +207,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the relationship role.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// connection role.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the connection role was created.
@@ -233,7 +233,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// connection role record.
         /// </summary>
         [JsonProperty(PropertyName = "connectionroleidunique")]
-        public System.Guid? Connectionroleidunique { get; set; }
+        public string Connectionroleidunique { get; set; }
 
         /// <summary>
         /// Gets or sets state of the component.
@@ -252,7 +252,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// relationship role.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -5,8 +5,8 @@
         public string id { get; set; }
         public string name { get; set; }
         public string invoicenumber { get; set; }
-        public double totaltax { get; set; }
-        public double totalamount { get; set; }
+        public decimal totaltax { get; set; }
+        public decimal totalamount { get; set; }
         public Account customer { get; set; }
         public string transactionId { get; set; }
         public string returnedTransactionId { get; set; }

@@ -39,7 +39,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// organization associated with the language locale.</param>
         /// <param name="name">Name</param>
         /// <param name="localeid">Locale ID</param>
-        public MicrosoftDynamicsCRMlanguagelocale(string region = default(string), System.Guid? languagelocaleid = default(System.Guid?), string language = default(string), string code = default(string), string versionnumber = default(string), int? statecode = default(int?), int? statuscode = default(int?), System.Guid? _organizationidValue = default(System.Guid?), string name = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMlanguagelocale(string region = default(string), string languagelocaleid = default(string), string language = default(string), string code = default(string), string versionnumber = default(string), int? statecode = default(int?), int? statuscode = default(int?), string _organizationidValue = default(string), string name = default(string), int? localeid = default(int?), IList<MicrosoftDynamicsCRMknowledgearticle> knowledgearticleLanguagelocaleid = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Region = region;
             Languagelocaleid = languagelocaleid;
@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets languageLocaleId
         /// </summary>
         [JsonProperty(PropertyName = "languagelocaleid")]
-        public System.Guid? Languagelocaleid { get; set; }
+        public string Languagelocaleid { get; set; }
 
         /// <summary>
         /// Gets or sets language
@@ -107,7 +107,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the language locale.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets name

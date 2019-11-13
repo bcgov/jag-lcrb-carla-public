@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="recordsownedbyme">Download my records</param>
         /// <param name="_profileitemruleValue">Saved Query associated with the
         /// Mobile offline profile item rule.</param>
-        public MicrosoftDynamicsCRMmobileofflineprofileitem(bool? recordsownedbymyteam = default(bool?), bool? canbefollowed = default(bool?), string viewquery = default(string), int? entityobjecttypecode = default(int?), System.Guid? stageid = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), string versionnumber = default(string), bool? getrelatedentityrecords = default(bool?), System.Guid? mobileofflineprofileitemid = default(System.Guid?), string introducedversion = default(string), bool? isvisibleingrid = default(bool?), string profileitementityfilter = default(string), System.Guid? _regardingobjectidValue = default(System.Guid?), int? componentstate = default(int?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string selectedentitymetadata = default(string), int? recorddistributioncriteria = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), string traversedpath = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), bool? recordsownedbymybusinessunit = default(bool?), System.Guid? mobileofflineprofileitemidunique = default(System.Guid?), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string selectedentitytypecode = default(string), string relationshipdata = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? processid = default(System.Guid?), bool? isvalidated = default(bool?), System.Guid? solutionid = default(System.Guid?), bool? recordsownedbyme = default(bool?), System.Guid? _profileitemruleValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmobileofflineprofile regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemMobileOfflineProfileItemAssociation = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsavedquery profileitemrule = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMmobileofflineprofileitem(bool? recordsownedbymyteam = default(bool?), bool? canbefollowed = default(bool?), string viewquery = default(string), int? entityobjecttypecode = default(int?), string stageid = default(string), string _createdbyValue = default(string), string versionnumber = default(string), bool? getrelatedentityrecords = default(bool?), string mobileofflineprofileitemid = default(string), string introducedversion = default(string), bool? isvisibleingrid = default(bool?), string profileitementityfilter = default(string), string _regardingobjectidValue = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string selectedentitymetadata = default(string), int? recorddistributioncriteria = default(int?), string _modifiedbyValue = default(string), string traversedpath = default(string), string _modifiedonbehalfbyValue = default(string), bool? recordsownedbymybusinessunit = default(bool?), string mobileofflineprofileitemidunique = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string selectedentitytypecode = default(string), string relationshipdata = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _organizationidValue = default(string), string processid = default(string), bool? isvalidated = default(bool?), string solutionid = default(string), bool? recordsownedbyme = default(bool?), string _profileitemruleValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmobileofflineprofile regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemMobileOfflineProfileItemAssociation = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsavedquery profileitemrule = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Recordsownedbymyteam = recordsownedbymyteam;
             Canbefollowed = canbefollowed;
@@ -178,13 +178,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the ID of the stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
-        public System.Guid? Stageid { get; set; }
+        public string Stageid { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the Mobile Offline Profile Item.
@@ -203,7 +203,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the mobile offline profile item.
         /// </summary>
         [JsonProperty(PropertyName = "mobileofflineprofileitemid")]
-        public System.Guid? Mobileofflineprofileitemid { get; set; }
+        public string Mobileofflineprofileitemid { get; set; }
 
         /// <summary>
         /// Gets or sets version in which the Mobile offline Profile Item is
@@ -229,7 +229,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets items contained with a particular Profile.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
-        public System.Guid? _regardingobjectidValue { get; set; }
+        public string _regardingobjectidValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -265,7 +265,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -278,7 +278,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets download my business unit's records
@@ -290,7 +290,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for Internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "mobileofflineprofileitemidunique")]
-        public System.Guid? Mobileofflineprofileitemidunique { get; set; }
+        public string Mobileofflineprofileitemidunique { get; set; }
 
         /// <summary>
         /// Gets or sets displays the last published date time.
@@ -303,7 +303,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets mobile offline enabled entity
@@ -344,13 +344,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the Mobile Offline Profile Item.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
-        public System.Guid? Processid { get; set; }
+        public string Processid { get; set; }
 
         /// <summary>
         /// Gets or sets information about whether profile item is validated or
@@ -363,7 +363,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets download my records
@@ -376,7 +376,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// item rule.
         /// </summary>
         [JsonProperty(PropertyName = "_profileitemrule_value")]
-        public System.Guid? _profileitemruleValue { get; set; }
+        public string _profileitemruleValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -41,11 +41,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             result.statuscode = dynamicsInvoice.Statuscode;
             if (dynamicsInvoice.Totaltax != null)
             {
-                result.totaltax = (double)dynamicsInvoice.Totaltax;
+                result.totaltax = dynamicsInvoice.Totaltax.Value;
             }
             if (dynamicsInvoice.Totalamount != null)
             {
-                result.totalamount = (double)dynamicsInvoice.Totalamount;
+                result.totalamount = dynamicsInvoice.Totalamount.Value;
             }
 
             if (dynamicsInvoice.CustomeridAccount != null)

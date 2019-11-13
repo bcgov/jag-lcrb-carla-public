@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioInspectorcommentsrollupCollection Get(this IAdoxioinspectorcommentsrollups operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioInspectorcommentsrollupCollection Get(this IAdoxioinspectorcommentsrollups operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioInspectorcommentsrollupCollection> GetAsync(this IAdoxioinspectorcommentsrollups operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioInspectorcommentsrollupCollection> GetAsync(this IAdoxioinspectorcommentsrollups operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInspectorcommentsrollupCollection> GetWithHttpMessages(this IAdoxioinspectorcommentsrollups operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInspectorcommentsrollupCollection> GetWithHttpMessages(this IAdoxioinspectorcommentsrollups operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioInspectorcommentsrollup InspectorcommentsrollupsByKey(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioInspectorcommentsrollup GetByKey(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.InspectorcommentsrollupsByKeyAsync(adoxioInspectorcommentsrollupid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioInspectorcommentsrollupid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> InspectorcommentsrollupsByKeyAsync(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> GetByKeyAsync(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.InspectorcommentsrollupsByKeyWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> InspectorcommentsrollupsByKeyWithHttpMessages(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> GetByKeyWithHttpMessages(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.InspectorcommentsrollupsByKeyWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void InspectorcommentsrollupsByKey1(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, MicrosoftDynamicsCRMadoxioInspectorcommentsrollup body)
+            public static void Update(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, MicrosoftDynamicsCRMadoxioInspectorcommentsrollup body)
             {
-                operations.InspectorcommentsrollupsByKey1Async(adoxioInspectorcommentsrollupid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioInspectorcommentsrollupid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task InspectorcommentsrollupsByKey1Async(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, MicrosoftDynamicsCRMadoxioInspectorcommentsrollup body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, MicrosoftDynamicsCRMadoxioInspectorcommentsrollup body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.InspectorcommentsrollupsByKey1WithHttpMessagesAsync(adoxioInspectorcommentsrollupid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse InspectorcommentsrollupsByKey1WithHttpMessages(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, MicrosoftDynamicsCRMadoxioInspectorcommentsrollup body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, MicrosoftDynamicsCRMadoxioInspectorcommentsrollup body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.InspectorcommentsrollupsByKey1WithHttpMessagesAsync(adoxioInspectorcommentsrollupid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void InspectorcommentsrollupsByKey2(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, string ifMatch = default(string))
+            public static void Delete(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, string ifMatch = default(string))
             {
-                operations.InspectorcommentsrollupsByKey2Async(adoxioInspectorcommentsrollupid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioInspectorcommentsrollupid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task InspectorcommentsrollupsByKey2Async(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.InspectorcommentsrollupsByKey2WithHttpMessagesAsync(adoxioInspectorcommentsrollupid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse InspectorcommentsrollupsByKey2WithHttpMessages(this IAdoxioinspectorcommentsrollups operations, System.Guid adoxioInspectorcommentsrollupid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxioinspectorcommentsrollups operations, string adoxioInspectorcommentsrollupid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.InspectorcommentsrollupsByKey2WithHttpMessagesAsync(adoxioInspectorcommentsrollupid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioInspectorcommentsrollupid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

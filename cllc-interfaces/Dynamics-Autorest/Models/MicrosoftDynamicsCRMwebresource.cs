@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// format.</param>
         /// <param name="displayname">Display name of the web resource.</param>
         /// <param name="languagecode">Language of the web resource.</param>
-        public MicrosoftDynamicsCRMwebresource(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? webresourceid = default(System.Guid?), string silverlightversion = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), int? webresourcetype = default(int?), string canbedeleted = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string dependencyxml = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? webresourceidunique = default(System.Guid?), bool? isavailableformobileoffline = default(bool?), string iscustomizable = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), bool? isenabledformobileclient = default(bool?), string name = default(string), string description = default(string), string introducedversion = default(string), string versionnumber = default(string), string ishidden = default(string), int? componentstate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), string content = default(string), byte[] contentBinary = default(byte[]), string displayname = default(string), int? languagecode = default(int?), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMwebresource(System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string webresourceid = default(string), string silverlightversion = default(string), string _modifiedbyValue = default(string), int? webresourcetype = default(int?), string canbedeleted = default(string), string _createdonbehalfbyValue = default(string), string dependencyxml = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string webresourceidunique = default(string), bool? isavailableformobileoffline = default(bool?), string iscustomizable = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), bool? isenabledformobileclient = default(bool?), string name = default(string), string description = default(string), string introducedversion = default(string), string versionnumber = default(string), string ishidden = default(string), int? componentstate = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string solutionid = default(string), string content = default(string), byte[] contentBinary = default(byte[]), string displayname = default(string), int? languagecode = default(int?), bool? ismanaged = default(bool?), IList<MicrosoftDynamicsCRMsolution> solutionConfigurationWebresource = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMuserqueryvisualization> webresourceUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsavedqueryvisualization> webresourceSavedqueryvisualizations = default(IList<MicrosoftDynamicsCRMsavedqueryvisualization>), IList<MicrosoftDynamicsCRMtheme> lkThemeLogoid = default(IList<MicrosoftDynamicsCRMtheme>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Modifiedon = modifiedon;
             Webresourceid = webresourceid;
@@ -136,7 +136,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the web resource.
         /// </summary>
         [JsonProperty(PropertyName = "webresourceid")]
-        public System.Guid? Webresourceid { get; set; }
+        public string Webresourceid { get; set; }
 
         /// <summary>
         /// Gets or sets silverlight runtime version number required by a
@@ -150,7 +150,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets drop-down list for selecting the type of the web
@@ -171,7 +171,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -189,7 +189,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "webresourceidunique")]
-        public System.Guid? Webresourceidunique { get; set; }
+        public string Webresourceidunique { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether this web resource
@@ -210,14 +210,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the web
         /// resource.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether this web resource
@@ -273,13 +273,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets bytes of the web resource, in Base64 format.

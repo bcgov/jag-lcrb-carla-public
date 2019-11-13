@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioFiainvestigationlogCollection Get(this IAdoxiofiainvestigationlogs operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioFiainvestigationlogCollection Get(this IAdoxiofiainvestigationlogs operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioFiainvestigationlogCollection> GetAsync(this IAdoxiofiainvestigationlogs operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioFiainvestigationlogCollection> GetAsync(this IAdoxiofiainvestigationlogs operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioFiainvestigationlogCollection> GetWithHttpMessages(this IAdoxiofiainvestigationlogs operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioFiainvestigationlogCollection> GetWithHttpMessages(this IAdoxiofiainvestigationlogs operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioFiainvestigationlog FiainvestigationlogsByKey(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioFiainvestigationlog GetByKey(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.FiainvestigationlogsByKeyAsync(adoxioFiainvestigationlogid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioFiainvestigationlogid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioFiainvestigationlog> FiainvestigationlogsByKeyAsync(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioFiainvestigationlog> GetByKeyAsync(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.FiainvestigationlogsByKeyWithHttpMessagesAsync(adoxioFiainvestigationlogid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioFiainvestigationlogid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioFiainvestigationlog> FiainvestigationlogsByKeyWithHttpMessages(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioFiainvestigationlog> GetByKeyWithHttpMessages(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.FiainvestigationlogsByKeyWithHttpMessagesAsync(adoxioFiainvestigationlogid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioFiainvestigationlogid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void FiainvestigationlogsByKey1(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, MicrosoftDynamicsCRMadoxioFiainvestigationlog body)
+            public static void Update(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, MicrosoftDynamicsCRMadoxioFiainvestigationlog body)
             {
-                operations.FiainvestigationlogsByKey1Async(adoxioFiainvestigationlogid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioFiainvestigationlogid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task FiainvestigationlogsByKey1Async(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, MicrosoftDynamicsCRMadoxioFiainvestigationlog body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, MicrosoftDynamicsCRMadoxioFiainvestigationlog body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.FiainvestigationlogsByKey1WithHttpMessagesAsync(adoxioFiainvestigationlogid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioFiainvestigationlogid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse FiainvestigationlogsByKey1WithHttpMessages(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, MicrosoftDynamicsCRMadoxioFiainvestigationlog body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, MicrosoftDynamicsCRMadoxioFiainvestigationlog body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.FiainvestigationlogsByKey1WithHttpMessagesAsync(adoxioFiainvestigationlogid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioFiainvestigationlogid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void FiainvestigationlogsByKey2(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, string ifMatch = default(string))
             {
-                operations.FiainvestigationlogsByKey2Async(adoxioFiainvestigationlogid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioFiainvestigationlogid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task FiainvestigationlogsByKey2Async(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.FiainvestigationlogsByKey2WithHttpMessagesAsync(adoxioFiainvestigationlogid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioFiainvestigationlogid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse FiainvestigationlogsByKey2WithHttpMessages(this IAdoxiofiainvestigationlogs operations, System.Guid adoxioFiainvestigationlogid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiofiainvestigationlogs operations, string adoxioFiainvestigationlogid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.FiainvestigationlogsByKey2WithHttpMessagesAsync(adoxioFiainvestigationlogid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioFiainvestigationlogid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

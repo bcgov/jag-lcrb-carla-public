@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioCustomautonumberrequestCollection Get(this IAdoxiocustomautonumberrequests operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioCustomautonumberrequestCollection Get(this IAdoxiocustomautonumberrequests operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioCustomautonumberrequestCollection> GetAsync(this IAdoxiocustomautonumberrequests operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioCustomautonumberrequestCollection> GetAsync(this IAdoxiocustomautonumberrequests operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCustomautonumberrequestCollection> GetWithHttpMessages(this IAdoxiocustomautonumberrequests operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCustomautonumberrequestCollection> GetWithHttpMessages(this IAdoxiocustomautonumberrequests operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioCustomautonumberrequest CustomautonumberrequestsByKey(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioCustomautonumberrequest GetByKey(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.CustomautonumberrequestsByKeyAsync(adoxioCustomautonumberrequestid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioCustomautonumberrequestid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> CustomautonumberrequestsByKeyAsync(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> GetByKeyAsync(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.CustomautonumberrequestsByKeyWithHttpMessagesAsync(adoxioCustomautonumberrequestid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioCustomautonumberrequestid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> CustomautonumberrequestsByKeyWithHttpMessages(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCustomautonumberrequest> GetByKeyWithHttpMessages(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CustomautonumberrequestsByKeyWithHttpMessagesAsync(adoxioCustomautonumberrequestid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioCustomautonumberrequestid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void CustomautonumberrequestsByKey1(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, MicrosoftDynamicsCRMadoxioCustomautonumberrequest body)
+            public static void Update(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, MicrosoftDynamicsCRMadoxioCustomautonumberrequest body)
             {
-                operations.CustomautonumberrequestsByKey1Async(adoxioCustomautonumberrequestid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioCustomautonumberrequestid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CustomautonumberrequestsByKey1Async(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, MicrosoftDynamicsCRMadoxioCustomautonumberrequest body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, MicrosoftDynamicsCRMadoxioCustomautonumberrequest body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.CustomautonumberrequestsByKey1WithHttpMessagesAsync(adoxioCustomautonumberrequestid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioCustomautonumberrequestid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CustomautonumberrequestsByKey1WithHttpMessages(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, MicrosoftDynamicsCRMadoxioCustomautonumberrequest body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, MicrosoftDynamicsCRMadoxioCustomautonumberrequest body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CustomautonumberrequestsByKey1WithHttpMessagesAsync(adoxioCustomautonumberrequestid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioCustomautonumberrequestid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void CustomautonumberrequestsByKey2(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, string ifMatch = default(string))
             {
-                operations.CustomautonumberrequestsByKey2Async(adoxioCustomautonumberrequestid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioCustomautonumberrequestid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CustomautonumberrequestsByKey2Async(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.CustomautonumberrequestsByKey2WithHttpMessagesAsync(adoxioCustomautonumberrequestid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioCustomautonumberrequestid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CustomautonumberrequestsByKey2WithHttpMessages(this IAdoxiocustomautonumberrequests operations, System.Guid adoxioCustomautonumberrequestid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiocustomautonumberrequests operations, string adoxioCustomautonumberrequestid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CustomautonumberrequestsByKey2WithHttpMessagesAsync(adoxioCustomautonumberrequestid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioCustomautonumberrequestid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

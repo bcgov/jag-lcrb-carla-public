@@ -147,7 +147,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="sequencenumber">Shows the ID of the data that
         /// maintains the sequence.</param>
         /// <param name="_createdbyValue">Shows who created the record.</param>
-        public MicrosoftDynamicsCRMopportunityproduct(System.Guid? _modifiedbyValue = default(System.Guid?), bool? isproductoverridden = default(bool?), decimal? priceperunit = default(decimal?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), decimal? taxBase = default(decimal?), decimal? quantity = default(decimal?), string productdescription = default(string), bool? ispriceoverridden = default(bool?), string description = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), decimal? baseamountBase = default(decimal?), int? lineitemnumber = default(int?), decimal? manualdiscountamount = default(decimal?), decimal? extendedamount = default(decimal?), decimal? priceperunitBase = default(decimal?), int? producttypecode = default(int?), int? opportunitystatecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? parentbundleid = default(System.Guid?), int? pricingerrorcode = default(int?), decimal? volumediscountamount = default(decimal?), decimal? baseamount = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? opportunityproductid = default(System.Guid?), System.Guid? _uomidValue = default(System.Guid?), string entityimageUrl = default(string), byte[] entityimage = default(byte[]), System.Guid? owninguser = default(System.Guid?), System.Guid? _opportunityidValue = default(System.Guid?), decimal? manualdiscountamountBase = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), System.Guid? entityimageid = default(System.Guid?), System.Guid? _productidValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), System.Guid? productassociationid = default(System.Guid?), System.Guid? owningbusinessunit = default(System.Guid?), long? entityimageTimestamp = default(long?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? propertyconfigurationstatus = default(int?), decimal? tax = default(decimal?), decimal? volumediscountamountBase = default(decimal?), decimal? extendedamountBase = default(decimal?), decimal? exchangerate = default(decimal?), int? utcconversiontimezonecode = default(int?), System.Guid? _owneridValue = default(System.Guid?), int? sequencenumber = default(int?), System.Guid? _createdbyValue = default(System.Guid?), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMasyncoperation> opportunityProductAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> opportunityProductDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsyncerror> opportunityProductSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityProductBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMopportunityproduct parentbundleidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), IList<MicrosoftDynamicsCRMopportunityproduct> opportunityproductParentOpportunityproduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>))
+        public MicrosoftDynamicsCRMopportunityproduct(string _modifiedbyValue = default(string), bool? isproductoverridden = default(bool?), decimal? priceperunit = default(decimal?), string _createdonbehalfbyValue = default(string), decimal? taxBase = default(decimal?), decimal? quantity = default(decimal?), string productdescription = default(string), bool? ispriceoverridden = default(bool?), string description = default(string), string _transactioncurrencyidValue = default(string), decimal? baseamountBase = default(decimal?), int? lineitemnumber = default(int?), decimal? manualdiscountamount = default(decimal?), decimal? extendedamount = default(decimal?), decimal? priceperunitBase = default(decimal?), int? producttypecode = default(int?), int? opportunitystatecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string parentbundleid = default(string), int? pricingerrorcode = default(int?), decimal? volumediscountamount = default(decimal?), decimal? baseamount = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string opportunityproductid = default(string), string _uomidValue = default(string), string entityimageUrl = default(string), byte[] entityimage = default(byte[]), string owninguser = default(string), string _opportunityidValue = default(string), decimal? manualdiscountamountBase = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string versionnumber = default(string), string entityimageid = default(string), string _productidValue = default(string), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), string productassociationid = default(string), string owningbusinessunit = default(string), long? entityimageTimestamp = default(long?), string _modifiedonbehalfbyValue = default(string), int? propertyconfigurationstatus = default(int?), decimal? tax = default(decimal?), decimal? volumediscountamountBase = default(decimal?), decimal? extendedamountBase = default(decimal?), decimal? exchangerate = default(decimal?), int? utcconversiontimezonecode = default(int?), string _owneridValue = default(string), int? sequencenumber = default(int?), string _createdbyValue = default(string), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMopportunity opportunityid = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMasyncoperation> opportunityProductAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> opportunityProductDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMsyncerror> opportunityProductSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> opportunityProductBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMopportunityproduct parentbundleidOpportunityproduct = default(MicrosoftDynamicsCRMopportunityproduct), IList<MicrosoftDynamicsCRMopportunityproduct> opportunityproductParentOpportunityproduct = default(IList<MicrosoftDynamicsCRMopportunityproduct>))
         {
             this._modifiedbyValue = _modifiedbyValue;
             Isproductoverridden = isproductoverridden;
@@ -225,7 +225,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for system use only.
@@ -245,7 +245,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Tax field converted to the system's default
@@ -290,7 +290,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Amount field converted to the system's
@@ -357,7 +357,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets choose the parent bundle associated with this product
         /// </summary>
         [JsonProperty(PropertyName = "parentbundleid")]
-        public System.Guid? Parentbundleid { get; set; }
+        public string Parentbundleid { get; set; }
 
         /// <summary>
         /// Gets or sets select the pricing error for the opportunity product.
@@ -390,14 +390,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the opportunity product.
         /// </summary>
         [JsonProperty(PropertyName = "opportunityproductid")]
-        public System.Guid? Opportunityproductid { get; set; }
+        public string Opportunityproductid { get; set; }
 
         /// <summary>
         /// Gets or sets choose the unit of measurement for the base unit
         /// quantity for this purchase, such as each or dozen.
         /// </summary>
         [JsonProperty(PropertyName = "_uomid_value")]
-        public System.Guid? _uomidValue { get; set; }
+        public string _uomidValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -416,14 +416,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// product.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the opportunity with which the
         /// opportunity product is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_opportunityid_value")]
-        public System.Guid? _opportunityidValue { get; set; }
+        public string _opportunityidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Manual Discount field converted to the
@@ -452,7 +452,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
-        public System.Guid? Entityimageid { get; set; }
+        public string Entityimageid { get; set; }
 
         /// <summary>
         /// Gets or sets choose the product to include on the opportunity to
@@ -460,7 +460,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// opportunity.
         /// </summary>
         [JsonProperty(PropertyName = "_productid_value")]
-        public System.Guid? _productidValue { get; set; }
+        public string _productidValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -480,14 +480,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// with bundle in the opportunity
         /// </summary>
         [JsonProperty(PropertyName = "productassociationid")]
-        public System.Guid? Productassociationid { get; set; }
+        public string Productassociationid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the business unit that owns the
         /// opportunity product.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// </summary>
@@ -499,7 +499,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the opportunityproduct.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets status of the property configuration.
@@ -551,7 +551,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// opportunity product.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the ID of the data that maintains the sequence.
@@ -563,7 +563,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>

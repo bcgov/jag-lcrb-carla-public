@@ -76,7 +76,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="filesize">File size of the document.</param>
         /// <param name="importsequencenumber">Unique identifier of the data
         /// import or data migration that created this record.</param>
-        public MicrosoftDynamicsCRMsalesliteratureitem(System.Guid? _salesliteratureidValue = default(System.Guid?), bool? iscustomerviewable = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string versionnumber = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), int? filetypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string title = default(string), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? organizationid = default(System.Guid?), string mimetype = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string authorname = default(string), System.Guid? salesliteratureitemid = default(System.Guid?), string abstractProperty = default(string), string keywords = default(string), string documentbody = default(string), byte[] documentbodyBinary = default(byte[]), string filename = default(string), string attacheddocumenturl = default(string), int? filesize = default(int?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature salesliteratureid = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesLiteratureItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> salesLiteratureItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        public MicrosoftDynamicsCRMsalesliteratureitem(string _salesliteratureidValue = default(string), bool? iscustomerviewable = default(bool?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), string _modifiedbyValue = default(string), int? filetypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string title = default(string), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), string organizationid = default(string), string mimetype = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string authorname = default(string), string salesliteratureitemid = default(string), string abstractProperty = default(string), string keywords = default(string), string documentbody = default(string), byte[] documentbodyBinary = default(byte[]), string filename = default(string), string attacheddocumenturl = default(string), int? filesize = default(int?), int? importsequencenumber = default(int?), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature salesliteratureid = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesLiteratureItemBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> salesLiteratureItemAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             this._salesliteratureidValue = _salesliteratureidValue;
             Iscustomerviewable = iscustomerviewable;
@@ -122,7 +122,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// associated with the individual item.
         /// </summary>
         [JsonProperty(PropertyName = "_salesliteratureid_value")]
-        public System.Guid? _salesliteratureidValue { get; set; }
+        public string _salesliteratureidValue { get; set; }
 
         /// <summary>
         /// Gets or sets tells whether the document can be shared with
@@ -142,7 +142,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// salesliteratureitem.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the sales literature item.
@@ -155,7 +155,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// document.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the file type of the document.
@@ -180,21 +180,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// document.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who last
         /// modified the salesliteratureitem.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the organization associated with
         /// the document.
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
-        public System.Guid? Organizationid { get; set; }
+        public string Organizationid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the file type of the sales literature document
@@ -219,7 +219,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the document.
         /// </summary>
         [JsonProperty(PropertyName = "salesliteratureitemid")]
-        public System.Guid? Salesliteratureitemid { get; set; }
+        public string Salesliteratureitemid { get; set; }
 
         /// <summary>
         /// Gets or sets abstract of the document.

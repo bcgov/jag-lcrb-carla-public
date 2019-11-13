@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplicationinvoicehistoryCollection Get(this IAdoxioapplicationinvoicehistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioApplicationinvoicehistoryCollection Get(this IAdoxioapplicationinvoicehistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplicationinvoicehistoryCollection> GetAsync(this IAdoxioapplicationinvoicehistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioApplicationinvoicehistoryCollection> GetAsync(this IAdoxioapplicationinvoicehistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationinvoicehistoryCollection> GetWithHttpMessages(this IAdoxioapplicationinvoicehistories operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationinvoicehistoryCollection> GetWithHttpMessages(this IAdoxioapplicationinvoicehistories operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioApplicationinvoicehistory ApplicationinvoicehistoriesByKey(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioApplicationinvoicehistory GetByKey(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.ApplicationinvoicehistoriesByKeyAsync(adoxioApplicationinvoicehistoryid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioApplicationinvoicehistoryid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> ApplicationinvoicehistoriesByKeyAsync(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> GetByKeyAsync(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.ApplicationinvoicehistoriesByKeyWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> ApplicationinvoicehistoriesByKeyWithHttpMessages(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> GetByKeyWithHttpMessages(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.ApplicationinvoicehistoriesByKeyWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void ApplicationinvoicehistoriesByKey1(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, MicrosoftDynamicsCRMadoxioApplicationinvoicehistory body)
+            public static void Update(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, MicrosoftDynamicsCRMadoxioApplicationinvoicehistory body)
             {
-                operations.ApplicationinvoicehistoriesByKey1Async(adoxioApplicationinvoicehistoryid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioApplicationinvoicehistoryid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApplicationinvoicehistoriesByKey1Async(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, MicrosoftDynamicsCRMadoxioApplicationinvoicehistory body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, MicrosoftDynamicsCRMadoxioApplicationinvoicehistory body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.ApplicationinvoicehistoriesByKey1WithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse ApplicationinvoicehistoriesByKey1WithHttpMessages(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, MicrosoftDynamicsCRMadoxioApplicationinvoicehistory body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, MicrosoftDynamicsCRMadoxioApplicationinvoicehistory body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.ApplicationinvoicehistoriesByKey1WithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void ApplicationinvoicehistoriesByKey2(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, string ifMatch = default(string))
+            public static void Delete(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, string ifMatch = default(string))
             {
-                operations.ApplicationinvoicehistoriesByKey2Async(adoxioApplicationinvoicehistoryid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioApplicationinvoicehistoryid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApplicationinvoicehistoriesByKey2Async(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.ApplicationinvoicehistoriesByKey2WithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse ApplicationinvoicehistoriesByKey2WithHttpMessages(this IAdoxioapplicationinvoicehistories operations, System.Guid adoxioApplicationinvoicehistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxioapplicationinvoicehistories operations, string adoxioApplicationinvoicehistoryid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.ApplicationinvoicehistoriesByKey2WithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioApplicationinvoicehistoryid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

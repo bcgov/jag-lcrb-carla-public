@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="ismanaged">Indicates whether the solution component is
         /// part of a managed solution.</param>
         /// <param name="canread">Can this Profile read the attribute</param>
-        public MicrosoftDynamicsCRMfieldpermission(string attributelogicalname = default(string), System.Guid? fieldpermissionid = default(System.Guid?), int? cancreate = default(int?), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? canupdate = default(int?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? fieldpermissionidunique = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), System.Guid? _fieldsecurityprofileidValue = default(System.Guid?), string versionnumber = default(string), string entityname = default(string), bool? ismanaged = default(bool?), int? canread = default(int?), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile))
+        public MicrosoftDynamicsCRMfieldpermission(string attributelogicalname = default(string), string fieldpermissionid = default(string), int? cancreate = default(int?), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? canupdate = default(int?), string _organizationidValue = default(string), string fieldpermissionidunique = default(string), string solutionid = default(string), string _fieldsecurityprofileidValue = default(string), string versionnumber = default(string), string entityname = default(string), bool? ismanaged = default(bool?), int? canread = default(int?), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile))
         {
             Attributelogicalname = attributelogicalname;
             Fieldpermissionid = fieldpermissionid;
@@ -86,7 +86,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the Field Permission.
         /// </summary>
         [JsonProperty(PropertyName = "fieldpermissionid")]
-        public System.Guid? Fieldpermissionid { get; set; }
+        public string Fieldpermissionid { get; set; }
 
         /// <summary>
         /// Gets or sets can this Profile create the attribute
@@ -116,26 +116,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the organization
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "fieldpermissionidunique")]
-        public System.Guid? Fieldpermissionidunique { get; set; }
+        public string Fieldpermissionidunique { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of profile to which this privilege
         /// belongs.
         /// </summary>
         [JsonProperty(PropertyName = "_fieldsecurityprofileid_value")]
-        public System.Guid? _fieldsecurityprofileidValue { get; set; }
+        public string _fieldsecurityprofileidValue { get; set; }
 
         /// <summary>
         /// </summary>

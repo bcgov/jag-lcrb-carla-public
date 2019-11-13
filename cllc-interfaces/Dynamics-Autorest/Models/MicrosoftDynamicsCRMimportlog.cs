@@ -70,7 +70,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// log.</param>
         /// <param name="_importdataidValue">Unique identifier of the import
         /// data for this import log.</param>
-        public MicrosoftDynamicsCRMimportlog(System.Guid? _createdbyValue = default(System.Guid?), int? linenumber = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? errornumber = default(int?), System.Guid? _owninguserValue = default(System.Guid?), int? statecode = default(int?), string errordescription = default(string), string additionalinfo = default(string), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), int? sequencenumber = default(int?), string headercolumn = default(string), System.Guid? _owningteamValue = default(System.Guid?), System.Guid? _importfileidValue = default(System.Guid?), int? logphasecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? importlogid = default(System.Guid?), System.Guid? _owneridValue = default(System.Guid?), string columnvalue = default(string), int? statuscode = default(int?), System.Guid? _importdataidValue = default(System.Guid?), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> importLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMimportdata importdataid = default(MicrosoftDynamicsCRMimportdata), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> importLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMimportlog(string _createdbyValue = default(string), int? linenumber = default(int?), string _modifiedonbehalfbyValue = default(string), int? errornumber = default(int?), string _owninguserValue = default(string), int? statecode = default(int?), string errordescription = default(string), string additionalinfo = default(string), string _owningbusinessunitValue = default(string), string _modifiedbyValue = default(string), int? sequencenumber = default(int?), string headercolumn = default(string), string _owningteamValue = default(string), string _importfileidValue = default(string), int? logphasecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string importlogid = default(string), string _owneridValue = default(string), string columnvalue = default(string), int? statuscode = default(int?), string _importdataidValue = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> importLogBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMimportdata importdataid = default(MicrosoftDynamicsCRMimportdata), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMasyncoperation> importLogAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMimportfile importfileid = default(MicrosoftDynamicsCRMimportfile), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             this._createdbyValue = _createdbyValue;
             Linenumber = linenumber;
@@ -120,7 +120,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// log.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets original line number of the data used in this log.
@@ -133,7 +133,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the importlog.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets error code of an error.
@@ -145,7 +145,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who owns the import log.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets status of the import log.
@@ -169,14 +169,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets business unit that owns the import log.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// import log.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets sequence number of the error in this log.
@@ -194,14 +194,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the team who owns the import log.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the import file for this import
         /// log.
         /// </summary>
         [JsonProperty(PropertyName = "_importfileid_value")]
-        public System.Guid? _importfileidValue { get; set; }
+        public string _importfileidValue { get; set; }
 
         /// <summary>
         /// Gets or sets phase for which the log is recorded.
@@ -220,7 +220,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// importlog.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the import log was last modified.
@@ -232,14 +232,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the import log.
         /// </summary>
         [JsonProperty(PropertyName = "importlogid")]
-        public System.Guid? Importlogid { get; set; }
+        public string Importlogid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user or team who owns the
         /// import log.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets value in the column.
@@ -258,7 +258,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// log.
         /// </summary>
         [JsonProperty(PropertyName = "_importdataid_value")]
-        public System.Guid? _importdataidValue { get; set; }
+        public string _importdataidValue { get; set; }
 
         /// <summary>
         /// </summary>

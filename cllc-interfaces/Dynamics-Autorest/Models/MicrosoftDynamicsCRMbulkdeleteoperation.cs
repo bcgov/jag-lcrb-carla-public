@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="statecode">Status of the bulk deletion job.</param>
         /// <param name="_createdonbehalfbyValue">Unique identifier of the
         /// delegate user who created the bulkdeleteoperation.</param>
-        public MicrosoftDynamicsCRMbulkdeleteoperation(int? successcount = default(int?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _owningbusinessunitValue = default(System.Guid?), int? statuscode = default(int?), bool? isrecurring = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? processingqeindex = default(int?), int? failurecount = default(int?), System.DateTimeOffset? nextrun = default(System.DateTimeOffset?), System.Guid? _owninguserValue = default(System.Guid?), string orderedquerysetxml = default(string), System.Guid? _owneridValue = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string name = default(string), System.Guid? bulkdeleteoperationid = default(System.Guid?), System.Guid? _asyncoperationidValue = default(System.Guid?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? statecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationid = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkDeleteOperationBulkDeleteFailure = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMbulkdeleteoperation(int? successcount = default(int?), string _createdbyValue = default(string), string _modifiedbyValue = default(string), string _owningbusinessunitValue = default(string), int? statuscode = default(int?), bool? isrecurring = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? processingqeindex = default(int?), int? failurecount = default(int?), System.DateTimeOffset? nextrun = default(System.DateTimeOffset?), string _owninguserValue = default(string), string orderedquerysetxml = default(string), string _owneridValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string name = default(string), string bulkdeleteoperationid = default(string), string _asyncoperationidValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationid = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> bulkDeleteOperationBulkDeleteFailure = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Successcount = successcount;
             this._createdbyValue = _createdbyValue;
@@ -121,20 +121,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// deletion job.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// bulk deletion job.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets business unit that owns the bulk deletion job.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the bulk deletion job.
@@ -179,7 +179,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets business user what owns the bulk delete operation.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// Gets or sets fetch XML of the ordered query set.
@@ -192,7 +192,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// bulk delete operation.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -224,21 +224,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the bulk deletion job.
         /// </summary>
         [JsonProperty(PropertyName = "bulkdeleteoperationid")]
-        public System.Guid? Bulkdeleteoperationid { get; set; }
+        public string Bulkdeleteoperationid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the system job that created this
         /// record
         /// </summary>
         [JsonProperty(PropertyName = "_asyncoperationid_value")]
-        public System.Guid? _asyncoperationidValue { get; set; }
+        public string _asyncoperationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who last
         /// modified the bulkdeleteoperation.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets status of the bulk deletion job.
@@ -251,7 +251,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// bulkdeleteoperation.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

@@ -24,6 +24,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
+            /// </param>
             /// <param name='orderby'>
             /// Order items by property values
             /// </param>
@@ -33,9 +39,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioCannabisproductadminCollection Get(this IAdoxiocannabisproductadmins operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioCannabisproductadminCollection Get(this IAdoxiocannabisproductadmins operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.GetAsync(orderby, select, expand).GetAwaiter().GetResult();
+                return operations.GetAsync(top, filter, count, orderby, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -43,6 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -56,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioCannabisproductadminCollection> GetAsync(this IAdoxiocannabisproductadmins operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioCannabisproductadminCollection> GetAsync(this IAdoxiocannabisproductadmins operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetWithHttpMessagesAsync(orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -69,6 +81,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
+            /// </param>
+            /// <param name='top'>
+            /// </param>
+            /// <param name='filter'>
+            /// </param>
+            /// <param name='count'>
             /// </param>
             /// <param name='orderby'>
             /// Order items by property values
@@ -82,9 +100,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabisproductadminCollection> GetWithHttpMessages(this IAdoxiocannabisproductadmins operations, IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabisproductadminCollection> GetWithHttpMessages(this IAdoxiocannabisproductadmins operations, int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.GetWithHttpMessagesAsync(orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetWithHttpMessagesAsync(top, filter, count, orderby, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -165,9 +183,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='expand'>
             /// Expand related entities
             /// </param>
-            public static MicrosoftDynamicsCRMadoxioCannabisproductadmin CannabisproductadminsByKey(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
+            public static MicrosoftDynamicsCRMadoxioCannabisproductadmin GetByKey(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>))
             {
-                return operations.CannabisproductadminsByKeyAsync(adoxioCannabisproductadminid, select, expand).GetAwaiter().GetResult();
+                return operations.GetByKeyAsync(adoxioCannabisproductadminid, select, expand).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -188,9 +206,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MicrosoftDynamicsCRMadoxioCannabisproductadmin> CannabisproductadminsByKeyAsync(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MicrosoftDynamicsCRMadoxioCannabisproductadmin> GetByKeyAsync(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.CannabisproductadminsByKeyWithHttpMessagesAsync(adoxioCannabisproductadminid, select, expand, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetByKeyWithHttpMessagesAsync(adoxioCannabisproductadminid, select, expand, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
@@ -214,9 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabisproductadmin> CannabisproductadminsByKeyWithHttpMessages(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse<MicrosoftDynamicsCRMadoxioCannabisproductadmin> GetByKeyWithHttpMessages(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CannabisproductadminsByKeyWithHttpMessagesAsync(adoxioCannabisproductadminid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.GetByKeyWithHttpMessagesAsync(adoxioCannabisproductadminid, select, expand, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -231,9 +249,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='body'>
             /// New property values
             /// </param>
-            public static void CannabisproductadminsByKey1(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, MicrosoftDynamicsCRMadoxioCannabisproductadmin body)
+            public static void Update(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, MicrosoftDynamicsCRMadoxioCannabisproductadmin body)
             {
-                operations.CannabisproductadminsByKey1Async(adoxioCannabisproductadminid, body).GetAwaiter().GetResult();
+                operations.UpdateAsync(adoxioCannabisproductadminid, body).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -251,9 +269,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CannabisproductadminsByKey1Async(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, MicrosoftDynamicsCRMadoxioCannabisproductadmin body, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdateAsync(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, MicrosoftDynamicsCRMadoxioCannabisproductadmin body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.CannabisproductadminsByKey1WithHttpMessagesAsync(adoxioCannabisproductadminid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.UpdateWithHttpMessagesAsync(adoxioCannabisproductadminid, body, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -271,9 +289,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CannabisproductadminsByKey1WithHttpMessages(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, MicrosoftDynamicsCRMadoxioCannabisproductadmin body, Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse UpdateWithHttpMessages(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, MicrosoftDynamicsCRMadoxioCannabisproductadmin body, Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CannabisproductadminsByKey1WithHttpMessagesAsync(adoxioCannabisproductadminid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.UpdateWithHttpMessagesAsync(adoxioCannabisproductadminid, body, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -288,9 +306,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='ifMatch'>
             /// ETag
             /// </param>
-            public static void CannabisproductadminsByKey2(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, string ifMatch = default(string))
+            public static void Delete(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, string ifMatch = default(string))
             {
-                operations.CannabisproductadminsByKey2Async(adoxioCannabisproductadminid, ifMatch).GetAwaiter().GetResult();
+                operations.DeleteAsync(adoxioCannabisproductadminid, ifMatch).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -308,9 +326,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task CannabisproductadminsByKey2Async(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DeleteAsync(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, string ifMatch = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.CannabisproductadminsByKey2WithHttpMessagesAsync(adoxioCannabisproductadminid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.DeleteWithHttpMessagesAsync(adoxioCannabisproductadminid, ifMatch, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -328,9 +346,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             /// <param name='customHeaders'>
             /// Headers that will be added to request.
             /// </param>
-            public static HttpOperationResponse CannabisproductadminsByKey2WithHttpMessages(this IAdoxiocannabisproductadmins operations, System.Guid adoxioCannabisproductadminid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
+            public static HttpOperationResponse DeleteWithHttpMessages(this IAdoxiocannabisproductadmins operations, string adoxioCannabisproductadminid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null)
             {
-                return operations.CannabisproductadminsByKey2WithHttpMessagesAsync(adoxioCannabisproductadminid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
+                return operations.DeleteWithHttpMessagesAsync(adoxioCannabisproductadminid, ifMatch, customHeaders, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
     }

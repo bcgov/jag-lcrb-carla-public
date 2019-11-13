@@ -23,10 +23,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name='top'>
         /// </param>
-        /// <param name='skip'>
-        /// </param>
-        /// <param name='search'>
-        /// </param>
         /// <param name='filter'>
         /// </param>
         /// <param name='count'>
@@ -52,7 +48,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <exception cref="Microsoft.Rest.SerializationException">
         /// Thrown when unable to deserialize the response
         /// </exception>
-        Task<HttpOperationResponse<EstablishmentwatchwordsGetResponseModel>> GetWithHttpMessagesAsync(int? top = default(int?), int? skip = default(int?), string search = default(string), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentwatchwordCollection>> GetWithHttpMessagesAsync(int? top = default(int?), string filter = default(string), bool? count = default(bool?), IList<string> orderby = default(IList<string>), IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Add new entity to adoxio_establishmentwatchwords
         /// </summary>
@@ -83,7 +79,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Get entity from adoxio_establishmentwatchwords by key
         /// </summary>
         /// <param name='adoxioEstablishmentwatchwordid'>
-        /// key: adoxio_establishmentwatchwordid
+        /// key: adoxio_establishmentwatchwordid of
+        /// adoxio_establishmentwatchword
         /// </param>
         /// <param name='select'>
         /// Select properties to be returned
@@ -108,32 +105,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </exception>
         Task<HttpOperationResponse<MicrosoftDynamicsCRMadoxioEstablishmentwatchword>> GetByKeyWithHttpMessagesAsync(string adoxioEstablishmentwatchwordid, IList<string> select = default(IList<string>), IList<string> expand = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
-        /// Delete entity from adoxio_establishmentwatchwords
-        /// </summary>
-        /// <param name='adoxioEstablishmentwatchwordid'>
-        /// key: adoxio_establishmentwatchwordid
-        /// </param>
-        /// <param name='ifMatch'>
-        /// ETag
-        /// </param>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        /// <exception cref="Microsoft.Rest.HttpOperationException">
-        /// Thrown when the operation returned an invalid status code
-        /// </exception>
-        /// <exception cref="Microsoft.Rest.ValidationException">
-        /// Thrown when a required parameter is null
-        /// </exception>
-        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioEstablishmentwatchwordid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
         /// Update entity in adoxio_establishmentwatchwords
         /// </summary>
         /// <param name='adoxioEstablishmentwatchwordid'>
-        /// key: adoxio_establishmentwatchwordid
+        /// key: adoxio_establishmentwatchwordid of
+        /// adoxio_establishmentwatchword
         /// </param>
         /// <param name='body'>
         /// New property values
@@ -151,5 +127,28 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Thrown when a required parameter is null
         /// </exception>
         Task<HttpOperationResponse> UpdateWithHttpMessagesAsync(string adoxioEstablishmentwatchwordid, MicrosoftDynamicsCRMadoxioEstablishmentwatchword body, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        /// <summary>
+        /// Delete entity from adoxio_establishmentwatchwords
+        /// </summary>
+        /// <param name='adoxioEstablishmentwatchwordid'>
+        /// key: adoxio_establishmentwatchwordid of
+        /// adoxio_establishmentwatchword
+        /// </param>
+        /// <param name='ifMatch'>
+        /// ETag
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        /// <exception cref="Microsoft.Rest.HttpOperationException">
+        /// Thrown when the operation returned an invalid status code
+        /// </exception>
+        /// <exception cref="Microsoft.Rest.ValidationException">
+        /// Thrown when a required parameter is null
+        /// </exception>
+        Task<HttpOperationResponse> DeleteWithHttpMessagesAsync(string adoxioEstablishmentwatchwordid, string ifMatch = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

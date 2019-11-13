@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// created.</param>
         /// <param name="_postidValue">Unique identifier of the post with which
         /// the like is associated.</param>
-        public MicrosoftDynamicsCRMpostlike(System.Guid? postlikeid = default(System.Guid?), int? timezoneruleversionnumber = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _postidValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        public MicrosoftDynamicsCRMpostlike(string postlikeid = default(string), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _createdbyValue = default(string), string _organizationidValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _postidValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpost postid = default(MicrosoftDynamicsCRMpost), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             Postlikeid = postlikeid;
             Timezoneruleversionnumber = timezoneruleversionnumber;
@@ -68,7 +68,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows the ID of the post like.
         /// </summary>
         [JsonProperty(PropertyName = "postlikeid")]
-        public System.Guid? Postlikeid { get; set; }
+        public string Postlikeid { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -81,7 +81,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -94,14 +94,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the organization associated with
         /// the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was created.
@@ -114,7 +114,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// associated.
         /// </summary>
         [JsonProperty(PropertyName = "_postid_value")]
-        public System.Guid? _postidValue { get; set; }
+        public string _postidValue { get; set; }
 
         /// <summary>
         /// </summary>

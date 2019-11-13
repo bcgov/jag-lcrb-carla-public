@@ -149,7 +149,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.</param>
         /// <param name="_createdonbehalfbyValue">Shows who created the record
         /// on behalf of another user.</param>
-        public MicrosoftDynamicsCRMcontractdetail(System.DateTimeOffset? expireson = default(System.DateTimeOffset?), decimal? priceBase = default(decimal?), decimal? rateBase = default(decimal?), decimal? netBase = default(decimal?), int? allotmentsused = default(int?), int? statecode = default(int?), System.Guid? owningbusinessunit = default(System.Guid?), string versionnumber = default(string), System.Guid? _customeridValue = default(System.Guid?), decimal? discountBase = default(decimal?), int? timezoneruleversionnumber = default(int?), System.Guid? _createdbyValue = default(System.Guid?), int? servicecontractunitscode = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? importsequencenumber = default(int?), string effectivitycalendar = default(string), int? utcconversiontimezonecode = default(int?), System.Guid? _uomidValue = default(System.Guid?), System.Guid? owninguser = default(System.Guid?), string title = default(string), System.Guid? _productidValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _uomscheduleidValue = default(System.Guid?), decimal? discountpercentage = default(decimal?), System.Guid? _serviceaddressValue = default(System.Guid?), int? contractstatecode = default(int?), int? initialquantity = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? rate = default(decimal?), decimal? net = default(decimal?), System.Guid? _contractidValue = default(System.Guid?), int? allotmentsoverage = default(int?), System.Guid? contractdetailid = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _transactioncurrencyidValue = default(System.Guid?), int? allotmentsremaining = default(int?), decimal? discount = default(decimal?), int? totalallotments = default(int?), decimal? price = default(decimal?), System.Guid? _contactidValue = default(System.Guid?), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), System.Guid? _accountidValue = default(System.Guid?), string productserialnumber = default(string), decimal? exchangerate = default(decimal?), System.Guid? _owneridValue = default(System.Guid?), int? statuscode = default(int?), int? lineitemorder = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> contractDetailCases = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMsyncerror> contractDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcustomeraddress serviceaddress = default(MicrosoftDynamicsCRMcustomeraddress), MicrosoftDynamicsCRMcontract contractid = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMannotation> contractDetailAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> contractDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact))
+        public MicrosoftDynamicsCRMcontractdetail(System.DateTimeOffset? expireson = default(System.DateTimeOffset?), decimal? priceBase = default(decimal?), decimal? rateBase = default(decimal?), decimal? netBase = default(decimal?), int? allotmentsused = default(int?), int? statecode = default(int?), string owningbusinessunit = default(string), string versionnumber = default(string), string _customeridValue = default(string), decimal? discountBase = default(decimal?), int? timezoneruleversionnumber = default(int?), string _createdbyValue = default(string), int? servicecontractunitscode = default(int?), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), string effectivitycalendar = default(string), int? utcconversiontimezonecode = default(int?), string _uomidValue = default(string), string owninguser = default(string), string title = default(string), string _productidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _uomscheduleidValue = default(string), decimal? discountpercentage = default(decimal?), string _serviceaddressValue = default(string), int? contractstatecode = default(int?), int? initialquantity = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? rate = default(decimal?), decimal? net = default(decimal?), string _contractidValue = default(string), int? allotmentsoverage = default(int?), string contractdetailid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), int? allotmentsremaining = default(int?), decimal? discount = default(decimal?), int? totalallotments = default(int?), decimal? price = default(decimal?), string _contactidValue = default(string), System.DateTimeOffset? activeon = default(System.DateTimeOffset?), string _accountidValue = default(string), string productserialnumber = default(string), decimal? exchangerate = default(decimal?), string _owneridValue = default(string), int? statuscode = default(int?), int? lineitemorder = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> contractDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMuomschedule uomscheduleid = default(MicrosoftDynamicsCRMuomschedule), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> contractDetailCases = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMsyncerror> contractDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcustomeraddress serviceaddress = default(MicrosoftDynamicsCRMcustomeraddress), MicrosoftDynamicsCRMcontract contractid = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMannotation> contractDetailAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> contractDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMaccount customeridAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcontact customeridContact = default(MicrosoftDynamicsCRMcontact))
         {
             Expireson = expireson;
             PriceBase = priceBase;
@@ -277,7 +277,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// contract line.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
-        public System.Guid? Owningbusinessunit { get; set; }
+        public string Owningbusinessunit { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the contract template.
@@ -291,7 +291,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// number, activities, and orders.
         /// </summary>
         [JsonProperty(PropertyName = "_customerid_value")]
-        public System.Guid? _customeridValue { get; set; }
+        public string _customeridValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the Discount field converted to the system's
@@ -311,7 +311,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the unit type allotted in the contract line,
@@ -325,7 +325,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the data import or data migration
@@ -353,14 +353,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// quantity for this purchase, such as each or dozen.
         /// </summary>
         [JsonProperty(PropertyName = "_uomid_value")]
-        public System.Guid? _uomidValue { get; set; }
+        public string _uomidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who owns the contract
         /// line.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
-        public System.Guid? Owninguser { get; set; }
+        public string Owninguser { get; set; }
 
         /// <summary>
         /// Gets or sets type a title or name that describes the contract line.
@@ -373,7 +373,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the contract line.
         /// </summary>
         [JsonProperty(PropertyName = "_productid_value")]
-        public System.Guid? _productidValue { get; set; }
+        public string _productidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was last
@@ -388,7 +388,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the contract line.
         /// </summary>
         [JsonProperty(PropertyName = "_uomscheduleid_value")]
-        public System.Guid? _uomscheduleidValue { get; set; }
+        public string _uomscheduleidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the discount rate that should be applied to the
@@ -403,7 +403,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// where the services are provided.
         /// </summary>
         [JsonProperty(PropertyName = "_serviceaddress_value")]
-        public System.Guid? _serviceaddressValue { get; set; }
+        public string _serviceaddressValue { get; set; }
 
         /// <summary>
         /// Gets or sets status of the contract.
@@ -444,7 +444,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// contract line.
         /// </summary>
         [JsonProperty(PropertyName = "_contractid_value")]
-        public System.Guid? _contractidValue { get; set; }
+        public string _contractidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the number of minutes over the Total Allotments
@@ -458,7 +458,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the contract line.
         /// </summary>
         [JsonProperty(PropertyName = "contractdetailid")]
-        public System.Guid? Contractdetailid { get; set; }
+        public string Contractdetailid { get; set; }
 
         /// <summary>
         /// Gets or sets shows the date and time when the record was created.
@@ -473,7 +473,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the number of cases or minutes remaining, based
@@ -508,7 +508,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// contract line.
         /// </summary>
         [JsonProperty(PropertyName = "_contactid_value")]
-        public System.Guid? _contactidValue { get; set; }
+        public string _contactidValue { get; set; }
 
         /// <summary>
         /// Gets or sets enter the date when the contract line becomes active.
@@ -521,7 +521,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// contract is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_accountid_value")]
-        public System.Guid? _accountidValue { get; set; }
+        public string _accountidValue { get; set; }
 
         /// <summary>
         /// Gets or sets type the serial number for the product that is
@@ -543,7 +543,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// contract detail.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// Gets or sets select the contract line's status.
@@ -563,14 +563,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows who created the record on behalf of another
         /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

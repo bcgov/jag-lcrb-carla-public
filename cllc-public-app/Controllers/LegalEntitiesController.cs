@@ -168,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities = null)
         {
             List<LegalEntity> result = new List<LegalEntity>();
-            LegalentitiesGetResponseModel response = null;
+            MicrosoftDynamicsCRMadoxioLegalentityCollection response = null;
             var filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
             if (processedEntities == null)
             {

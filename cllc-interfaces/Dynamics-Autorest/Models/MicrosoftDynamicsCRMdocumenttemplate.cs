@@ -56,7 +56,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="languagecode">Language of Document Template.</param>
         /// <param name="_createdonbehalfbyValue">Unique identifier of the
         /// delegate user who created the document template.</param>
-        public MicrosoftDynamicsCRMdocumenttemplate(int? documenttype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _createdbyValue = default(System.Guid?), string associatedentitytypecode = default(string), System.Guid? documenttemplateid = default(System.Guid?), string clientdata = default(string), string versionnumber = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _organizationidValue = default(System.Guid?), bool? status = default(bool?), string content = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), int? languagecode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMdocumenttemplate(int? documenttype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _modifiedonbehalfbyValue = default(string), string _createdbyValue = default(string), string associatedentitytypecode = default(string), string documenttemplateid = default(string), string clientdata = default(string), string versionnumber = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _organizationidValue = default(string), bool? status = default(bool?), string content = default(string), string _modifiedbyValue = default(string), int? languagecode = default(int?), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Documenttype = documenttype;
             Modifiedon = modifiedon;
@@ -113,14 +113,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the document template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who created the document
         /// template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets associated Entity Type Code.
@@ -132,7 +132,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the document template.
         /// </summary>
         [JsonProperty(PropertyName = "documenttemplateid")]
-        public System.Guid? Documenttemplateid { get; set; }
+        public string Documenttemplateid { get; set; }
 
         /// <summary>
         /// Gets or sets client data regarding this document template.
@@ -163,7 +163,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the web resource.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets information about whether the document template is
@@ -183,7 +183,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// document template.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets language of Document Template.
@@ -196,7 +196,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// document template.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>

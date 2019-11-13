@@ -82,7 +82,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Document.</param>
         /// <param name="timezoneruleversionnumber">For internal use
         /// only.</param>
-        public MicrosoftDynamicsCRMofficegraphdocument(string previewimageurl = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string fileextension = default(string), string readurl = default(string), System.Guid? _organizationidValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), System.Guid? officegraphdocumentid = default(System.Guid?), decimal? exchangerate = default(decimal?), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string weblocationurl = default(string), string secondaryfileextension = default(string), int? rank = default(int?), string modifiedby = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string authornames = default(string), string siteurl = default(string), string title = default(string), string createdby = default(string), string documentlastmodifiedby = default(string), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string documentpreviewmetadata = default(string), int? querytype = default(int?), string documentid = default(string), int? viewcount = default(int?), string sitetitle = default(string), System.Guid? _transactioncurrencyidValue = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string filetype = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        public MicrosoftDynamicsCRMofficegraphdocument(string previewimageurl = default(string), System.DateTimeOffset? modifiedtime = default(System.DateTimeOffset?), string fileextension = default(string), string readurl = default(string), string _organizationidValue = default(string), int? utcconversiontimezonecode = default(int?), string officegraphdocumentid = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? createdtime = default(System.DateTimeOffset?), string weblocationurl = default(string), string secondaryfileextension = default(string), int? rank = default(int?), string modifiedby = default(string), System.DateTimeOffset? documentlastmodifiedon = default(System.DateTimeOffset?), string authornames = default(string), string siteurl = default(string), string title = default(string), string createdby = default(string), string documentlastmodifiedby = default(string), string _modifiedonbehalfbyValue = default(string), string documentpreviewmetadata = default(string), int? querytype = default(int?), string documentid = default(string), int? viewcount = default(int?), string sitetitle = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string filetype = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Previewimageurl = previewimageurl;
             Modifiedtime = modifiedtime;
@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the organization
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -167,7 +167,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "officegraphdocumentid")]
-        public System.Guid? Officegraphdocumentid { get; set; }
+        public string Officegraphdocumentid { get; set; }
 
         /// <summary>
         /// Gets or sets exchange rate for the currency associated with the
@@ -247,7 +247,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets document preview metadata
@@ -284,14 +284,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Office Graph Document with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
-        public System.Guid? _transactioncurrencyidValue { get; set; }
+        public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets shows the File Type of Office Graph Document.

@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top { get; set; }
+        int? Top88 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip { get; set; }
+        int? Skip16 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count { get; set; }
+        bool? Count88 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter { get; set; }
+        string Filter88 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search { get; set; }
+        string Search16 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -68,334 +68,404 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccounts Accounts { get; }
 
         /// <summary>
-        /// Gets the IAdoxioadoxiolicencetypeadoxioinvestigationset.
+        /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
         /// </summary>
-        IAdoxioadoxiolicencetypeadoxioinvestigationset Adoxioadoxiolicencetypeadoxioinvestigationset { get; }
+        IAdoxiolicencetypeadoxioinvestigationset Adoxiolicencetypeadoxioinvestigationset { get; }
 
         /// <summary>
-        /// Gets the IAdoxioaliases.
+        /// Gets the IAliases.
         /// </summary>
-        IAdoxioaliases Adoxioaliases { get; }
+        IAliases Aliases { get; }
 
         /// <summary>
-        /// Gets the IAdoxioapplicationbpfmvpv2s.
+        /// Gets the IApplicationbpfmvpv2s.
         /// </summary>
-        IAdoxioapplicationbpfmvpv2s Adoxioapplicationbpfmvpv2s { get; }
+        IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; }
 
         /// <summary>
-        /// Gets the IAdoxioapplicationbpfv3s.
+        /// Gets the IApplicationbpfv3s.
         /// </summary>
-        IAdoxioapplicationbpfv3s Adoxioapplicationbpfv3s { get; }
+        IApplicationbpfv3s Applicationbpfv3s { get; }
 
         /// <summary>
-        /// Gets the IAdoxioapplicationinvoicehistories.
+        /// Gets the IApplicationinvoicehistories.
         /// </summary>
-        IAdoxioapplicationinvoicehistories Adoxioapplicationinvoicehistories { get; }
+        IApplicationinvoicehistories Applicationinvoicehistories { get; }
 
         /// <summary>
-        /// Gets the IAdoxioapplications.
+        /// Gets the IApplications.
         /// </summary>
-        IAdoxioapplications Adoxioapplications { get; }
+        IApplications Applications { get; }
 
         /// <summary>
-        /// Gets the IAdoxioapplicationtermsconditionslimitations.
+        /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
-        IAdoxioapplicationtermsconditionslimitations Adoxioapplicationtermsconditionslimitations { get; }
+        IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
 
         /// <summary>
-        /// Gets the IAdoxioapplicationtypecontents.
+        /// Gets the IApplicationtypecontents.
         /// </summary>
-        IAdoxioapplicationtypecontents Adoxioapplicationtypecontents { get; }
+        IApplicationtypecontents Applicationtypecontents { get; }
 
         /// <summary>
-        /// Gets the IAdoxioapplicationtypes.
+        /// Gets the IApplicationtypes.
         /// </summary>
-        IAdoxioapplicationtypes Adoxioapplicationtypes { get; }
+        IApplicationtypes Applicationtypes { get; }
 
         /// <summary>
-        /// Gets the IAdoxioareas.
+        /// Gets the IAreas.
         /// </summary>
-        IAdoxioareas Adoxioareas { get; }
+        IAreas Areas { get; }
 
         /// <summary>
-        /// Gets the IAdoxioauditlogrequests.
+        /// Gets the IAuditlogrequests.
         /// </summary>
-        IAdoxioauditlogrequests Adoxioauditlogrequests { get; }
+        IAuditlogrequests Auditlogrequests { get; }
 
         /// <summary>
-        /// Gets the IAdoxiobusinessaccounts.
+        /// Gets the IBusinessaccounts.
         /// </summary>
-        IAdoxiobusinessaccounts Adoxiobusinessaccounts { get; }
+        IBusinessaccounts Businessaccounts { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocannabisinventoryreports.
+        /// Gets the ICannabisinventoryreports.
         /// </summary>
-        IAdoxiocannabisinventoryreports Adoxiocannabisinventoryreports { get; }
+        ICannabisinventoryreports Cannabisinventoryreports { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocannabismonthlyreports.
+        /// Gets the ICannabismonthlyreports.
         /// </summary>
-        IAdoxiocannabismonthlyreports Adoxiocannabismonthlyreports { get; }
+        ICannabismonthlyreports Cannabismonthlyreports { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocannabisproductadmins.
+        /// Gets the ICannabisproductadmins.
         /// </summary>
-        IAdoxiocannabisproductadmins Adoxiocannabisproductadmins { get; }
+        ICannabisproductadmins Cannabisproductadmins { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocitydistricts.
+        /// Gets the ICitydistricts.
         /// </summary>
-        IAdoxiocitydistricts Adoxiocitydistricts { get; }
+        ICitydistricts Citydistricts { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocomplaintpublicbpfs.
+        /// Gets the IComplaintpublicbpfs.
         /// </summary>
-        IAdoxiocomplaintpublicbpfs Adoxiocomplaintpublicbpfs { get; }
+        IComplaintpublicbpfs Complaintpublicbpfs { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocomplaints.
+        /// Gets the IComplaints.
         /// </summary>
-        IAdoxiocomplaints Adoxiocomplaints { get; }
+        IComplaints Complaints { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocomplianceinvestigations.
+        /// Gets the IComplianceinvestigations.
         /// </summary>
-        IAdoxiocomplianceinvestigations Adoxiocomplianceinvestigations { get; }
+        IComplianceinvestigations Complianceinvestigations { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocompliancemeetings.
+        /// Gets the IInvestigationexhibits.
         /// </summary>
-        IAdoxiocompliancemeetings Adoxiocompliancemeetings { get; }
+        IInvestigationexhibits Investigationexhibits { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocontraventionadmins.
+        /// Gets the ICompliancemeetings.
         /// </summary>
-        IAdoxiocontraventionadmins Adoxiocontraventionadmins { get; }
+        ICompliancemeetings Compliancemeetings { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocontraventions.
+        /// Gets the ICompliancemeetingrelatedparties.
         /// </summary>
-        IAdoxiocontraventions Adoxiocontraventions { get; }
+        ICompliancemeetingrelatedparties Compliancemeetingrelatedparties { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocorporatehistorysummaries.
+        /// Gets the IContraventionadmins.
         /// </summary>
-        IAdoxiocorporatehistorysummaries Adoxiocorporatehistorysummaries { get; }
+        IContraventionadmins Contraventionadmins { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocorporateroles.
+        /// Gets the IContraventions.
         /// </summary>
-        IAdoxiocorporateroles Adoxiocorporateroles { get; }
+        IContraventions Contraventions { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocustomautonumberdefinitions.
+        /// Gets the ICorporatehistorysummaries.
         /// </summary>
-        IAdoxiocustomautonumberdefinitions Adoxiocustomautonumberdefinitions { get; }
+        ICorporatehistorysummaries Corporatehistorysummaries { get; }
 
         /// <summary>
-        /// Gets the IAdoxiocustomautonumberrequests.
+        /// Gets the ICorporateroles.
         /// </summary>
-        IAdoxiocustomautonumberrequests Adoxiocustomautonumberrequests { get; }
+        ICorporateroles Corporateroles { get; }
 
         /// <summary>
-        /// Gets the IAdoxiodocumentadmins.
+        /// Gets the ICustomautonumberdefinitions.
         /// </summary>
-        IAdoxiodocumentadmins Adoxiodocumentadmins { get; }
+        ICustomautonumberdefinitions Customautonumberdefinitions { get; }
 
         /// <summary>
-        /// Gets the IAdoxiodocuments.
+        /// Gets the ICustomautonumberrequests.
         /// </summary>
-        IAdoxiodocuments Adoxiodocuments { get; }
+        ICustomautonumberrequests Customautonumberrequests { get; }
 
         /// <summary>
-        /// Gets the IAdoxioestablishments.
+        /// Gets the IDocumentadmins.
         /// </summary>
-        IAdoxioestablishments Adoxioestablishments { get; }
+        IDocumentadmins Documentadmins { get; }
 
         /// <summary>
-        /// Gets the IAdoxioestablishmentwatchwords.
+        /// Gets the IDocuments.
         /// </summary>
-        IAdoxioestablishmentwatchwords Adoxioestablishmentwatchwords { get; }
+        IDocuments Documents { get; }
 
         /// <summary>
-        /// Gets the IAdoxiofiainvestigationlogs.
+        /// Gets the IEstablishments.
         /// </summary>
-        IAdoxiofiainvestigationlogs Adoxiofiainvestigationlogs { get; }
+        IEstablishments Establishments { get; }
 
         /// <summary>
-        /// Gets the IAdoxiofundingsources.
+        /// Gets the IEstablishmentwatchwords.
         /// </summary>
-        IAdoxiofundingsources Adoxiofundingsources { get; }
+        IEstablishmentwatchwords Establishmentwatchwords { get; }
 
         /// <summary>
-        /// Gets the IAdoxioincidentadoxiolicencetypeset.
+        /// Gets the IExhibits.
         /// </summary>
-        IAdoxioincidentadoxiolicencetypeset Adoxioincidentadoxiolicencetypeset { get; }
+        IExhibits Exhibits { get; }
 
         /// <summary>
-        /// Gets the IAdoxioinspectioninspectorsset.
+        /// Gets the IExhibitasyncoperations.
         /// </summary>
-        IAdoxioinspectioninspectorsset Adoxioinspectioninspectorsset { get; }
+        IExhibitasyncoperations Exhibitasyncoperations { get; }
 
         /// <summary>
-        /// Gets the IAdoxioinspectionreactivationhistories.
+        /// Gets the IExhibitbulkdeletefailures.
         /// </summary>
-        IAdoxioinspectionreactivationhistories Adoxioinspectionreactivationhistories { get; }
+        IExhibitbulkdeletefailures Exhibitbulkdeletefailures { get; }
 
         /// <summary>
-        /// Gets the IAdoxioinspectorcommentsrollups.
+        /// Gets the IExhibitduplicatebaserecord.
         /// </summary>
-        IAdoxioinspectorcommentsrollups Adoxioinspectorcommentsrollups { get; }
+        IExhibitduplicatebaserecord Exhibitduplicatebaserecord { get; }
 
         /// <summary>
-        /// Gets the IAdoxiointerests.
+        /// Gets the IExhibitduplicatematchingrecord.
         /// </summary>
-        IAdoxiointerests Adoxiointerests { get; }
+        IExhibitduplicatematchingrecord Exhibitduplicatematchingrecord { get; }
 
         /// <summary>
-        /// Gets the IAdoxioinvestigationactivities.
+        /// Gets the IExhibitsyncerrors.
         /// </summary>
-        IAdoxioinvestigationactivities Adoxioinvestigationactivities { get; }
+        IExhibitsyncerrors Exhibitsyncerrors { get; }
 
         /// <summary>
-        /// Gets the IAdoxioinvestigationreactivationhistories.
+        /// Gets the IInvestigationid.
         /// </summary>
-        IAdoxioinvestigationreactivationhistories Adoxioinvestigationreactivationhistories { get; }
+        IInvestigationid Investigationid { get; }
 
         /// <summary>
-        /// Gets the IAdoxioinvestigations.
+        /// Gets the IFiainvestigationlogs.
         /// </summary>
-        IAdoxioinvestigations Adoxioinvestigations { get; }
+        IFiainvestigationlogs Fiainvestigationlogs { get; }
 
         /// <summary>
-        /// Gets the IAdoxiolegalentities.
+        /// Gets the IFundingsources.
         /// </summary>
-        IAdoxiolegalentities Adoxiolegalentities { get; }
+        IFundingsources Fundingsources { get; }
 
         /// <summary>
-        /// Gets the IAdoxiolicenceses.
+        /// Gets the IIncidentadoxiolicencetypeset.
         /// </summary>
-        IAdoxiolicenceses Adoxiolicenceses { get; }
+        IIncidentadoxiolicencetypeset Incidentadoxiolicencetypeset { get; }
 
         /// <summary>
-        /// Gets the IAdoxiolicencetypes.
+        /// Gets the IInspectioninspectorsset.
         /// </summary>
-        IAdoxiolicencetypes Adoxiolicencetypes { get; }
+        IInspectioninspectorsset Inspectioninspectorsset { get; }
 
         /// <summary>
-        /// Gets the IAdoxiolicencetypesapplicationtypesset.
+        /// Gets the IInspectionreactivationhistories.
         /// </summary>
-        IAdoxiolicencetypesapplicationtypesset Adoxiolicencetypesapplicationtypesset { get; }
+        IInspectionreactivationhistories Inspectionreactivationhistories { get; }
 
         /// <summary>
-        /// Gets the IAdoxiolicenseechangelogs.
+        /// Gets the IInspectorcommentsrollups.
         /// </summary>
-        IAdoxiolicenseechangelogs Adoxiolicenseechangelogs { get; }
+        IInspectorcommentsrollups Inspectorcommentsrollups { get; }
 
         /// <summary>
-        /// Gets the IAdoxioloans.
+        /// Gets the IInterests.
         /// </summary>
-        IAdoxioloans Adoxioloans { get; }
+        IInterests Interests { get; }
 
         /// <summary>
-        /// Gets the IAdoxiolocalgovindigenousnations.
+        /// Gets the IInvestigationactivities.
         /// </summary>
-        IAdoxiolocalgovindigenousnations Adoxiolocalgovindigenousnations { get; }
+        IInvestigationactivities Investigationactivities { get; }
 
         /// <summary>
-        /// Gets the IAdoxiopersonalhistorysummaries.
+        /// Gets the IInvestigationreactivationhistories.
         /// </summary>
-        IAdoxiopersonalhistorysummaries Adoxiopersonalhistorysummaries { get; }
+        IInvestigationreactivationhistories Investigationreactivationhistories { get; }
 
         /// <summary>
-        /// Gets the IAdoxiopolicejurisdictions.
+        /// Gets the IInvestigations.
         /// </summary>
-        IAdoxiopolicejurisdictions Adoxiopolicejurisdictions { get; }
+        IInvestigations Investigations { get; }
 
         /// <summary>
-        /// Gets the IAdoxiopolicydocuments.
+        /// Gets the ILegalentities.
         /// </summary>
-        IAdoxiopolicydocuments Adoxiopolicydocuments { get; }
+        ILegalentities Legalentities { get; }
 
         /// <summary>
-        /// Gets the IAdoxiopostalcodes.
+        /// Gets the ILicenceses.
         /// </summary>
-        IAdoxiopostalcodes Adoxiopostalcodes { get; }
+        ILicenceses Licenceses { get; }
 
         /// <summary>
-        /// Gets the IAdoxiopreviousaddresses.
+        /// Gets the ILicencetypes.
         /// </summary>
-        IAdoxiopreviousaddresses Adoxiopreviousaddresses { get; }
+        ILicencetypes Licencetypes { get; }
 
         /// <summary>
-        /// Gets the IAdoxioregions.
+        /// Gets the ILicencetypesapplicationtypesset.
         /// </summary>
-        IAdoxioregions Adoxioregions { get; }
+        ILicencetypesapplicationtypesset Licencetypesapplicationtypesset { get; }
 
         /// <summary>
-        /// Gets the IAdoxiorelatedparties.
+        /// Gets the ILicenseechangelogs.
         /// </summary>
-        IAdoxiorelatedparties Adoxiorelatedparties { get; }
+        ILicenseechangelogs Licenseechangelogs { get; }
 
         /// <summary>
-        /// Gets the IAdoxiosettings.
+        /// Gets the ILoans.
         /// </summary>
-        IAdoxiosettings Adoxiosettings { get; }
+        ILoans Loans { get; }
 
         /// <summary>
-        /// Gets the IAdoxiospddatarows.
+        /// Gets the ILocalgovindigenousnations.
         /// </summary>
-        IAdoxiospddatarows Adoxiospddatarows { get; }
+        ILocalgovindigenousnations Localgovindigenousnations { get; }
 
         /// <summary>
-        /// Gets the IAdoxiospdexportses.
+        /// Gets the IPersonalhistorysummaries.
         /// </summary>
-        IAdoxiospdexportses Adoxiospdexportses { get; }
+        IPersonalhistorysummaries Personalhistorysummaries { get; }
 
         /// <summary>
-        /// Gets the IAdoxiotaxandaccountings.
+        /// Gets the IPolicejurisdictions.
         /// </summary>
-        IAdoxiotaxandaccountings Adoxiotaxandaccountings { get; }
+        IPolicejurisdictions Policejurisdictions { get; }
 
         /// <summary>
-        /// Gets the IAdoxiotermsconditionslimitationspresets.
+        /// Gets the IPolicydocuments.
         /// </summary>
-        IAdoxiotermsconditionslimitationspresets Adoxiotermsconditionslimitationspresets { get; }
+        IPolicydocuments Policydocuments { get; }
 
         /// <summary>
-        /// Gets the IAdoxioterritories.
+        /// Gets the IPostalcodes.
         /// </summary>
-        IAdoxioterritories Adoxioterritories { get; }
+        IPostalcodes Postalcodes { get; }
 
         /// <summary>
-        /// Gets the IAdoxiotiedhouseassociations.
+        /// Gets the IPreviousaddresses.
         /// </summary>
-        IAdoxiotiedhouseassociations Adoxiotiedhouseassociations { get; }
+        IPreviousaddresses Previousaddresses { get; }
 
         /// <summary>
-        /// Gets the IAdoxiotiedhouseconnections.
+        /// Gets the IRegions.
         /// </summary>
-        IAdoxiotiedhouseconnections Adoxiotiedhouseconnections { get; }
+        IRegions Regions { get; }
 
         /// <summary>
-        /// Gets the IAdoxiowitnesses.
+        /// Gets the IRelatedparties.
         /// </summary>
-        IAdoxiowitnesses Adoxiowitnesses { get; }
+        IRelatedparties Relatedparties { get; }
 
         /// <summary>
-        /// Gets the IAdoxioworkerinvoicehistories.
+        /// Gets the ICompliancemeetingid.
         /// </summary>
-        IAdoxioworkerinvoicehistories Adoxioworkerinvoicehistories { get; }
+        ICompliancemeetingid Compliancemeetingid { get; }
 
         /// <summary>
-        /// Gets the IAdoxioworkers.
+        /// Gets the ISettings.
         /// </summary>
-        IAdoxioworkers Adoxioworkers { get; }
+        ISettings Settings { get; }
+
+        /// <summary>
+        /// Gets the ISpddatarows.
+        /// </summary>
+        ISpddatarows Spddatarows { get; }
+
+        /// <summary>
+        /// Gets the ISpdexportses.
+        /// </summary>
+        ISpdexportses Spdexportses { get; }
+
+        /// <summary>
+        /// Gets the ITaxandaccountings.
+        /// </summary>
+        ITaxandaccountings Taxandaccountings { get; }
+
+        /// <summary>
+        /// Gets the ITermsconditionslimitationspresets.
+        /// </summary>
+        ITermsconditionslimitationspresets Termsconditionslimitationspresets { get; }
+
+        /// <summary>
+        /// Gets the ITerritories.
+        /// </summary>
+        ITerritories Territories { get; }
+
+        /// <summary>
+        /// Gets the ITiedhouseassociations.
+        /// </summary>
+        ITiedhouseassociations Tiedhouseassociations { get; }
+
+        /// <summary>
+        /// Gets the ITiedhouseconnections.
+        /// </summary>
+        ITiedhouseconnections Tiedhouseconnections { get; }
+
+        /// <summary>
+        /// Gets the IWitnesses.
+        /// </summary>
+        IWitnesses Witnesses { get; }
+
+        /// <summary>
+        /// Gets the IWorkerinvoicehistories.
+        /// </summary>
+        IWorkerinvoicehistories Workerinvoicehistories { get; }
+
+        /// <summary>
+        /// Gets the IWorkers.
+        /// </summary>
+        IWorkers Workers { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioexhibit.
+        /// </summary>
+        IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioexhibit.
+        /// </summary>
+        IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; }
 
         /// <summary>
         /// Gets the IContacts.
         /// </summary>
         IContacts Contacts { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioexhibit.
+        /// </summary>
+        IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioexhibit.
+        /// </summary>
+        IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -426,6 +496,36 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         ISharepointsites Sharepointsites { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitcreatedby.
+        /// </summary>
+        ILkadoxioexhibitcreatedby Lkadoxioexhibitcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioexhibitcreatedonbehalfby Lkadoxioexhibitcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitmodifiedby.
+        /// </summary>
+        ILkadoxioexhibitmodifiedby Lkadoxioexhibitmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioexhibit.
+        /// </summary>
+        IUseradoxioexhibit Useradoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioexhibit.
+        /// </summary>
+        ITeamadoxioexhibit Teamadoxioexhibit { get; }
 
     }
 }

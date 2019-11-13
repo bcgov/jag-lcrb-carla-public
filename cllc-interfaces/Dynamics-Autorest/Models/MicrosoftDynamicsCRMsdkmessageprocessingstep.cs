@@ -102,7 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// this component can be customized.</param>
         /// <param name="description">Description of the SDK message processing
         /// step.</param>
-        public MicrosoftDynamicsCRMsdkmessageprocessingstep(System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), System.Guid? _organizationidValue = default(System.Guid?), System.Guid? sdkmessageprocessingstepid = default(System.Guid?), System.Guid? _sdkmessagefilteridValue = default(System.Guid?), string introducedversion = default(string), System.Guid? _sdkmessageidValue = default(System.Guid?), int? componentstate = default(int?), string configuration = default(string), int? customizationlevel = default(int?), int? statecode = default(int?), int? mode = default(int?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), System.Guid? _modifiedbyValue = default(System.Guid?), System.Guid? solutionid = default(System.Guid?), bool? asyncautodelete = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? canusereadonlyconnection = default(bool?), string ishidden = default(string), System.Guid? _sdkmessageprocessingstepsecureconfigidValue = default(System.Guid?), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? stage = default(int?), string filteringattributes = default(string), string versionnumber = default(string), int? supporteddeployment = default(int?), bool? ismanaged = default(bool?), System.Guid? sdkmessageprocessingstepidunique = default(System.Guid?), System.Guid? _eventhandlerValue = default(System.Guid?), int? rank = default(int?), System.Guid? _impersonatinguseridValue = default(System.Guid?), int? statuscode = default(int?), System.Guid? _createdbyValue = default(System.Guid?), string iscustomizable = default(string), string description = default(string), MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig sdkmessageprocessingstepsecureconfigid = default(MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessagefilter sdkmessagefilterid = default(MicrosoftDynamicsCRMsdkmessagefilter), MicrosoftDynamicsCRMsystemuser impersonatinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype eventhandlerPlugintype = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMasyncoperation> sdkMessageProcessingStepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> sdkmessageprocessingstepidSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), MicrosoftDynamicsCRMserviceendpoint eventhandlerServiceendpoint = default(MicrosoftDynamicsCRMserviceendpoint))
+        public MicrosoftDynamicsCRMsdkmessageprocessingstep(string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepid = default(string), string _sdkmessagefilteridValue = default(string), string introducedversion = default(string), string _sdkmessageidValue = default(string), int? componentstate = default(int?), string configuration = default(string), int? customizationlevel = default(int?), int? statecode = default(int?), int? mode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string solutionid = default(string), bool? asyncautodelete = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? canusereadonlyconnection = default(bool?), string ishidden = default(string), string _sdkmessageprocessingstepsecureconfigidValue = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? stage = default(int?), string filteringattributes = default(string), string versionnumber = default(string), int? supporteddeployment = default(int?), bool? ismanaged = default(bool?), string sdkmessageprocessingstepidunique = default(string), string _eventhandlerValue = default(string), int? rank = default(int?), string _impersonatinguseridValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string iscustomizable = default(string), string description = default(string), MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig sdkmessageprocessingstepsecureconfigid = default(MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessagefilter sdkmessagefilterid = default(MicrosoftDynamicsCRMsdkmessagefilter), MicrosoftDynamicsCRMsystemuser impersonatinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype eventhandlerPlugintype = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMasyncoperation> sdkMessageProcessingStepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> sdkmessageprocessingstepidSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), MicrosoftDynamicsCRMserviceendpoint eventhandlerServiceendpoint = default(MicrosoftDynamicsCRMserviceendpoint))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._organizationidValue = _organizationidValue;
@@ -166,27 +166,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the sdkmessageprocessingstep.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the organization with which the
         /// SDK message processing step is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the SDK message processing step
         /// entity.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageprocessingstepid")]
-        public System.Guid? Sdkmessageprocessingstepid { get; set; }
+        public string Sdkmessageprocessingstepid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the SDK message filter.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessagefilterid_value")]
-        public System.Guid? _sdkmessagefilteridValue { get; set; }
+        public string _sdkmessagefilteridValue { get; set; }
 
         /// <summary>
         /// Gets or sets version in which the form is introduced.
@@ -198,7 +198,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the SDK message.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessageid_value")]
-        public System.Guid? _sdkmessageidValue { get; set; }
+        public string _sdkmessageidValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -238,7 +238,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// sdkmessageprocessingstep.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -251,13 +251,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// Gets or sets indicates whether the asynchronous system job is
@@ -292,7 +292,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// secure configuration.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessageprocessingstepsecureconfigid_value")]
-        public System.Guid? _sdkmessageprocessingstepsecureconfigidValue { get; set; }
+        public string _sdkmessageprocessingstepsecureconfigidValue { get; set; }
 
         /// <summary>
         /// Gets or sets name of SdkMessage processing step.
@@ -346,13 +346,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageprocessingstepidunique")]
-        public System.Guid? Sdkmessageprocessingstepidunique { get; set; }
+        public string Sdkmessageprocessingstepidunique { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the associated event handler.
         /// </summary>
         [JsonProperty(PropertyName = "_eventhandler_value")]
-        public System.Guid? _eventhandlerValue { get; set; }
+        public string _eventhandlerValue { get; set; }
 
         /// <summary>
         /// Gets or sets processing order within the stage.
@@ -365,7 +365,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// when step is executed.
         /// </summary>
         [JsonProperty(PropertyName = "_impersonatinguserid_value")]
-        public System.Guid? _impersonatinguseridValue { get; set; }
+        public string _impersonatinguseridValue { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the SDK message processing
@@ -379,7 +379,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets information that specifies whether this component can

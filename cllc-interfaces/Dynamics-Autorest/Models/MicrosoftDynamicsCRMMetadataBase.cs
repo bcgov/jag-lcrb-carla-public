@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMMetadataBase
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMMetadataBase(System.Guid? metadataId = default(System.Guid?), bool? hasChanged = default(bool?))
+        public MicrosoftDynamicsCRMMetadataBase(string metadataId = default(string), bool? hasChanged = default(bool?))
         {
             MetadataId = metadataId;
             HasChanged = hasChanged;
@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "MetadataId")]
-        public System.Guid? MetadataId { get; set; }
+        public string MetadataId { get; set; }
 
         /// <summary>
         /// </summary>

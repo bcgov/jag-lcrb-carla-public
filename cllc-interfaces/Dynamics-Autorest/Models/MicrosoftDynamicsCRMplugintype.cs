@@ -80,7 +80,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// custom activity for workflows.</param>
         /// <param name="solutionid">Unique identifier of the associated
         /// solution.</param>
-        public MicrosoftDynamicsCRMplugintype(string name = default(string), string assemblyname = default(string), System.Guid? _createdbyValue = default(System.Guid?), string friendlyname = default(string), System.Guid? _modifiedbyValue = default(System.Guid?), string publickeytoken = default(string), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string version = default(string), System.Guid? _pluginassemblyidValue = default(System.Guid?), string culture = default(string), System.Guid? plugintypeid = default(System.Guid?), string versionnumber = default(string), string customworkflowactivityinfo = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? major = default(int?), string workflowactivitygroupname = default(string), int? componentstate = default(int?), string typename = default(string), int? minor = default(int?), System.Guid? plugintypeidunique = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), int? customizationlevel = default(int?), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), System.Guid? _organizationidValue = default(System.Guid?), bool? isworkflowactivity = default(bool?), System.Guid? solutionid = default(System.Guid?), IList<MicrosoftDynamicsCRMservice> pluginTypeService = default(IList<MicrosoftDynamicsCRMservice>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpluginassembly pluginassemblyid = default(MicrosoftDynamicsCRMpluginassembly), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMplugintype(string name = default(string), string assemblyname = default(string), string _createdbyValue = default(string), string friendlyname = default(string), string _modifiedbyValue = default(string), string publickeytoken = default(string), string _createdonbehalfbyValue = default(string), string version = default(string), string _pluginassemblyidValue = default(string), string culture = default(string), string plugintypeid = default(string), string versionnumber = default(string), string customworkflowactivityinfo = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? major = default(int?), string workflowactivitygroupname = default(string), int? componentstate = default(int?), string typename = default(string), int? minor = default(int?), string plugintypeidunique = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? customizationlevel = default(int?), string description = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), bool? ismanaged = default(bool?), string _organizationidValue = default(string), bool? isworkflowactivity = default(bool?), string solutionid = default(string), IList<MicrosoftDynamicsCRMservice> pluginTypeService = default(IList<MicrosoftDynamicsCRMservice>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpluginassembly pluginassemblyid = default(MicrosoftDynamicsCRMpluginassembly), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeidSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstep> plugintypeSdkmessageprocessingstep = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstep>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Name = name;
             Assemblyname = assemblyname;
@@ -145,7 +145,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// type.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets user friendly name for the plug-in.
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// plug-in type.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets public key token of the assembly for the plug-in type.
@@ -171,7 +171,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// plugintype.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the assembly for the plug-in type.
@@ -184,7 +184,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// contains this plug-in type.
         /// </summary>
         [JsonProperty(PropertyName = "_pluginassemblyid_value")]
-        public System.Guid? _pluginassemblyidValue { get; set; }
+        public string _pluginassemblyidValue { get; set; }
 
         /// <summary>
         /// Gets or sets culture code for the plug-in assembly.
@@ -196,7 +196,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the plug-in type.
         /// </summary>
         [JsonProperty(PropertyName = "plugintypeid")]
-        public System.Guid? Plugintypeid { get; set; }
+        public string Plugintypeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -253,7 +253,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the plug-in type.
         /// </summary>
         [JsonProperty(PropertyName = "plugintypeidunique")]
-        public System.Guid? Plugintypeidunique { get; set; }
+        public string Plugintypeidunique { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the plug-in type was last modified.
@@ -266,7 +266,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the plugintype.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets customization level of the plug-in type.
@@ -296,7 +296,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// plug-in type is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets indicates if the plug-in is a custom activity for
@@ -309,7 +309,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
-        public System.Guid? Solutionid { get; set; }
+        public string Solutionid { get; set; }
 
         /// <summary>
         /// </summary>

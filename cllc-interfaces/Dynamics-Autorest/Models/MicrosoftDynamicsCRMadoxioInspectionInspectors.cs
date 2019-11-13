@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioInspectionInspectors class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioInspectionInspectors(System.Guid? incidentid = default(System.Guid?), string versionnumber = default(string), System.Guid? systemuserid = default(System.Guid?), System.Guid? adoxioInspectionInspectorsid = default(System.Guid?))
+        public MicrosoftDynamicsCRMadoxioInspectionInspectors(string incidentid = default(string), string versionnumber = default(string), string systemuserid = default(string), string adoxioInspectionInspectorsid = default(string))
         {
             Incidentid = incidentid;
             Versionnumber = versionnumber;
@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "incidentid")]
-        public System.Guid? Incidentid { get; set; }
+        public string Incidentid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -54,12 +54,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "systemuserid")]
-        public System.Guid? Systemuserid { get; set; }
+        public string Systemuserid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_inspection_inspectorsid")]
-        public System.Guid? AdoxioInspectionInspectorsid { get; set; }
+        public string AdoxioInspectionInspectorsid { get; set; }
 
     }
 }

@@ -72,7 +72,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// to execute the request.</param>
         /// <param name="messagename">Name of the message that triggered this
         /// plug-in.</param>
-        public MicrosoftDynamicsCRMplugintracelog(int? performanceconstructorduration = default(int?), int? operationtype = default(int?), string primaryentity = default(string), string secureconfiguration = default(string), string configuration = default(string), string exceptiondetails = default(string), System.Guid? plugintracelogid = default(System.Guid?), System.Guid? pluginstepid = default(System.Guid?), int? mode = default(int?), string messageblock = default(string), System.Guid? _createdbyValue = default(System.Guid?), string typename = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string profile = default(string), System.Guid? organizationid = default(System.Guid?), System.DateTimeOffset? performanceconstructorstarttime = default(System.DateTimeOffset?), System.DateTimeOffset? performanceexecutionstarttime = default(System.DateTimeOffset?), int? depth = default(int?), bool? issystemcreated = default(bool?), System.Guid? requestid = default(System.Guid?), System.Guid? correlationid = default(System.Guid?), System.Guid? persistencekey = default(System.Guid?), int? performanceexecutionduration = default(int?), string messagename = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMplugintracelog(int? performanceconstructorduration = default(int?), int? operationtype = default(int?), string primaryentity = default(string), string secureconfiguration = default(string), string configuration = default(string), string exceptiondetails = default(string), string plugintracelogid = default(string), string pluginstepid = default(string), int? mode = default(int?), string messageblock = default(string), string _createdbyValue = default(string), string typename = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string profile = default(string), string organizationid = default(string), System.DateTimeOffset? performanceconstructorstarttime = default(System.DateTimeOffset?), System.DateTimeOffset? performanceexecutionstarttime = default(System.DateTimeOffset?), int? depth = default(int?), bool? issystemcreated = default(bool?), string requestid = default(string), string correlationid = default(string), string persistencekey = default(string), int? performanceexecutionduration = default(int?), string messagename = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Performanceconstructorduration = performanceconstructorduration;
             Operationtype = operationtype;
@@ -149,13 +149,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for an entity instance.
         /// </summary>
         [JsonProperty(PropertyName = "plugintracelogid")]
-        public System.Guid? Plugintracelogid { get; set; }
+        public string Plugintracelogid { get; set; }
 
         /// <summary>
         /// Gets or sets ID of the plug-in registration step.
         /// </summary>
         [JsonProperty(PropertyName = "pluginstepid")]
-        public System.Guid? Pluginstepid { get; set; }
+        public string Pluginstepid { get; set; }
 
         /// <summary>
         /// Gets or sets type of execution.
@@ -174,7 +174,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets class name of the plug-in.
@@ -193,7 +193,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets plug-in profile formatted as serialized text.
@@ -205,7 +205,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the organization.
         /// </summary>
         [JsonProperty(PropertyName = "organizationid")]
-        public System.Guid? Organizationid { get; set; }
+        public string Organizationid { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when constructed.
@@ -237,20 +237,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the message request.
         /// </summary>
         [JsonProperty(PropertyName = "requestid")]
-        public System.Guid? Requestid { get; set; }
+        public string Requestid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for tracking plug-in or custom
         /// workflow activity execution.
         /// </summary>
         [JsonProperty(PropertyName = "correlationid")]
-        public System.Guid? Correlationid { get; set; }
+        public string Correlationid { get; set; }
 
         /// <summary>
         /// Gets or sets asynchronous workflow persistence key.
         /// </summary>
         [JsonProperty(PropertyName = "persistencekey")]
-        public System.Guid? Persistencekey { get; set; }
+        public string Persistencekey { get; set; }
 
         /// <summary>
         /// Gets or sets time, in milliseconds, to execute the request.

@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// pages for this wizard are statically defined.</param>
         /// <param name="name">Name of the wizard</param>
         /// <param name="titleresourcestring">Title of the wizard.</param>
-        public MicrosoftDynamicsCRMwebwizard(int? wizardpageheight = default(int?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string versionnumber = default(string), System.Guid? _organizationidValue = default(System.Guid?), string accessprivileges = default(string), int? startpagesequencenumber = default(int?), System.Guid? webwizardid = default(System.Guid?), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), int? wizardpagewidth = default(int?), System.Guid? _createdbyValue = default(System.Guid?), bool? isstaticpagesequence = default(bool?), string name = default(string), string titleresourcestring = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMwebwizard(int? wizardpageheight = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string _organizationidValue = default(string), string accessprivileges = default(string), int? startpagesequencenumber = default(int?), string webwizardid = default(string), string _modifiedbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), int? wizardpagewidth = default(int?), string _createdbyValue = default(string), bool? isstaticpagesequence = default(bool?), string name = default(string), string titleresourcestring = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Wizardpageheight = wizardpageheight;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// modified the webwizard.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
-        public System.Guid? _organizationidValue { get; set; }
+        public string _organizationidValue { get; set; }
 
         /// <summary>
         /// Gets or sets privileges required to use this wizard, separated with
@@ -125,14 +125,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the wizard.
         /// </summary>
         [JsonProperty(PropertyName = "webwizardid")]
-        public System.Guid? Webwizardid { get; set; }
+        public string Webwizardid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the user who last modified the
         /// wizard definition.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the wizard definition was created.
@@ -152,7 +152,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// webwizard.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets window width for the wizard.
@@ -165,7 +165,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// definition.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets information about whether all pages for this wizard

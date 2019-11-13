@@ -64,6 +64,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="modifiedon">Date and time when the record was
         /// modified.</param>
         /// <param name="versionnumber">Version Number</param>
+        /// <param name="adoxioAlreadyopen">Oct 22, 2019. CW: Has dependencies
+        /// on existing WF and old forms. Not used. Replaced by
+        /// adoxio_isopen</param>
         /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
         /// delegate user who modified the record.</param>
         /// <param name="timezoneruleversionnumber">For internal use
@@ -71,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="statecode">Status of the Establishment</param>
         /// <param name="importsequencenumber">Sequence number of the import
         /// that created this record.</param>
-        public MicrosoftDynamicsCRMadoxioEstablishment(System.Guid? _adoxioLicencetypeidValue = default(System.Guid?), System.Guid? adoxioEstablishmentid = default(System.Guid?), System.Guid? _createdonbehalfbyValue = default(System.Guid?), string adoxioLongitude = default(string), System.Guid? _owneridValue = default(System.Guid?), int? adoxioMondayclose = default(int?), int? adoxioSaturdayclose = default(int?), System.Guid? _adoxioPrimaryinspectoridValue = default(System.Guid?), bool? adoxioLocatedonfirstnationland = default(bool?), System.Guid? _owninguserValue = default(System.Guid?), int? adoxioIsoninland = default(int?), int? adoxioSendmailtoestablishmentuponapproval = default(int?), System.Guid? _owningteamValue = default(System.Guid?), int? adoxioSundayclose = default(int?), string adoxioLatitude = default(string), string adoxioParcelid = default(string), bool? adoxioLocatedatwinery = default(bool?), int? adoxioSundayopen = default(int?), int? adoxioTuesdayclose = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioOccupantcapacity = default(int?), System.Guid? _owningbusinessunitValue = default(System.Guid?), System.Guid? _adoxioLginValue = default(System.Guid?), System.Guid? _adoxioRegionidValue = default(System.Guid?), int? adoxioSaturdayopen = default(int?), int? adoxioMondayopen = default(int?), string adoxioAddressstreet = default(string), int? adoxioThursdayclose = default(int?), string adoxioName = default(string), bool? adoxioPatronparticipation = default(bool?), System.Guid? _createdbyValue = default(System.Guid?), System.Guid? _adoxioLicenceeValue = default(System.Guid?), System.DateTimeOffset? adoxioExpectedopendate = default(System.DateTimeOffset?), System.Guid? _adoxioTerritoryValue = default(System.Guid?), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), System.Guid? _adoxioPdjurisdictionValue = default(System.Guid?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioWednesdayclose = default(int?), string adoxioAddresscity = default(string), int? adoxioFridayopen = default(int?), System.Guid? _modifiedbyValue = default(System.Guid?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioOccupantload = default(int?), string versionnumber = default(string), bool? adoxioAlreadyopen = default(bool?), bool? adoxioIsstandalonepatio = default(bool?), int? adoxioTuesdayopen = default(int?), bool? adoxioStandardhours = default(bool?), bool? adoxioHasduallicence = default(bool?), System.Guid? _modifiedonbehalfbyValue = default(System.Guid?), string adoxioPhone = default(string), int? timezoneruleversionnumber = default(int?), System.Guid? _adoxioAreaValue = default(System.Guid?), string adoxioEmail = default(string), int? statecode = default(int?), int? adoxioThursdayopen = default(int?), bool? adoxioMailsenttorestaurant = default(bool?), int? importsequencenumber = default(int?), string adoxioAddresspostalcode = default(string), int? adoxioWednesdayopen = default(int?), int? adoxioFridayclose = default(int?), int? adoxioIsrural = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEstablishmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEstablishmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEstablishmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioLicencee = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioEstablishmentAdoxioApplicationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioEstablishmentAdoxioInvestigationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioEstablishmentAdoxioLicencesEstablishment = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioEstablishmentContactEstablishment = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioEstablishmentIncidentEstablishment = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGIN = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPDJurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), MicrosoftDynamicsCRMsystemuser adoxioPrimaryInspectorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioEstablishmentContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioEstablishmentComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioEstablishmentCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioEstablishmentInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> adoxioEstablishmentCannabismonthlyreports = default(IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioEstablishmentInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion))
+        public MicrosoftDynamicsCRMadoxioEstablishment(string _adoxioLicencetypeidValue = default(string), string adoxioEstablishmentid = default(string), string _createdonbehalfbyValue = default(string), decimal? adoxioLongitude = default(decimal?), string _owneridValue = default(string), int? adoxioMondayclose = default(int?), int? adoxioSaturdayclose = default(int?), string _adoxioPrimaryinspectoridValue = default(string), bool? adoxioLocatedonfirstnationland = default(bool?), string _owninguserValue = default(string), int? adoxioIsoninland = default(int?), int? adoxioSendmailtoestablishmentuponapproval = default(int?), string _owningteamValue = default(string), int? adoxioSundayclose = default(int?), decimal? adoxioLatitude = default(decimal?), string adoxioParcelid = default(string), bool? adoxioLocatedatwinery = default(bool?), int? adoxioSundayopen = default(int?), int? adoxioTuesdayclose = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioOccupantcapacity = default(int?), bool? adoxioIsopen = default(bool?), string _owningbusinessunitValue = default(string), string _adoxioLginValue = default(string), string _adoxioRegionidValue = default(string), int? adoxioSaturdayopen = default(int?), int? adoxioWednesdayopen = default(int?), int? adoxioMondayopen = default(int?), string adoxioAddressstreet = default(string), int? adoxioThursdayclose = default(int?), string adoxioName = default(string), bool? adoxioPatronparticipation = default(bool?), string _createdbyValue = default(string), string _adoxioLicenceeValue = default(string), System.DateTimeOffset? adoxioExpectedopendate = default(System.DateTimeOffset?), string _adoxioTerritoryValue = default(string), int? utcconversiontimezonecode = default(int?), int? statuscode = default(int?), string _adoxioPdjurisdictionValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioWednesdayclose = default(int?), string adoxioAddresscity = default(string), int? adoxioFridayopen = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioOccupantload = default(int?), string versionnumber = default(string), bool? adoxioAlreadyopen = default(bool?), bool? adoxioIsstandalonepatio = default(bool?), int? adoxioTuesdayopen = default(int?), bool? adoxioStandardhours = default(bool?), bool? adoxioHasduallicence = default(bool?), string _modifiedonbehalfbyValue = default(string), string adoxioPhone = default(string), int? timezoneruleversionnumber = default(int?), string _adoxioAreaValue = default(string), string adoxioEmail = default(string), int? statecode = default(int?), int? adoxioThursdayopen = default(int?), bool? adoxioMailsenttorestaurant = default(bool?), int? importsequencenumber = default(int?), string adoxioAddresspostalcode = default(string), int? adoxioFridayclose = default(int?), int? adoxioIsrural = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEstablishmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEstablishmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEstablishmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMaccount adoxioLicencee = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAdoxioEstablishmentAdoxioApplicationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioEstablishmentAdoxioInvestigationEstablishment = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAdoxioEstablishmentAdoxioLicencesEstablishment = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioEstablishmentContactEstablishment = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioEstablishmentIncidentEstablishment = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioTerritory adoxioTerritory = default(MicrosoftDynamicsCRMadoxioTerritory), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceTypeId = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLGIN = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPDJurisdiction = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), MicrosoftDynamicsCRMsystemuser adoxioPrimaryInspectorId = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioEstablishmentContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioEstablishmentComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> adoxioEstablishmentCompliancemeetings = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioEstablishmentInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> adoxioEstablishmentCannabismonthlyreports = default(IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> adoxioEstablishmentInventoryreports = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>), MicrosoftDynamicsCRMadoxioRegion adoxioRegionId = default(MicrosoftDynamicsCRMadoxioRegion))
         {
             this._adoxioLicencetypeidValue = _adoxioLicencetypeidValue;
             AdoxioEstablishmentid = adoxioEstablishmentid;
@@ -94,10 +97,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioTuesdayclose = adoxioTuesdayclose;
             Overriddencreatedon = overriddencreatedon;
             AdoxioOccupantcapacity = adoxioOccupantcapacity;
+            AdoxioIsopen = adoxioIsopen;
             this._owningbusinessunitValue = _owningbusinessunitValue;
             this._adoxioLginValue = _adoxioLginValue;
             this._adoxioRegionidValue = _adoxioRegionidValue;
             AdoxioSaturdayopen = adoxioSaturdayopen;
+            AdoxioWednesdayopen = adoxioWednesdayopen;
             AdoxioMondayopen = adoxioMondayopen;
             AdoxioAddressstreet = adoxioAddressstreet;
             AdoxioThursdayclose = adoxioThursdayclose;
@@ -133,7 +138,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioMailsenttorestaurant = adoxioMailsenttorestaurant;
             Importsequencenumber = importsequencenumber;
             AdoxioAddresspostalcode = adoxioAddresspostalcode;
-            AdoxioWednesdayopen = adoxioWednesdayopen;
             AdoxioFridayclose = adoxioFridayclose;
             AdoxioIsrural = adoxioIsrural;
             Createdbyname = createdbyname;
@@ -181,31 +185,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Establishment.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_licencetypeid_value")]
-        public System.Guid? _adoxioLicencetypeidValue { get; set; }
+        public string _adoxioLicencetypeidValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_establishmentid")]
-        public System.Guid? AdoxioEstablishmentid { get; set; }
+        public string AdoxioEstablishmentid { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
         /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public System.Guid? _createdonbehalfbyValue { get; set; }
+        public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_longitude")]
-        public string AdoxioLongitude { get; set; }
+        public decimal? AdoxioLongitude { get; set; }
 
         /// <summary>
         /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
-        public System.Guid? _owneridValue { get; set; }
+        public string _owneridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -222,7 +226,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Establishment.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_primaryinspectorid_value")]
-        public System.Guid? _adoxioPrimaryinspectoridValue { get; set; }
+        public string _adoxioPrimaryinspectoridValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -233,7 +237,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
-        public System.Guid? _owninguserValue { get; set; }
+        public string _owninguserValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -249,7 +253,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
-        public System.Guid? _owningteamValue { get; set; }
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -259,7 +263,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_latitude")]
-        public string AdoxioLatitude { get; set; }
+        public decimal? AdoxioLatitude { get; set; }
 
         /// <summary>
         /// </summary>
@@ -295,28 +299,38 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioOccupantcapacity { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isopen")]
+        public bool? AdoxioIsopen { get; set; }
+
+        /// <summary>
         /// Gets or sets unique identifier for the business unit that owns the
         /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public System.Guid? _owningbusinessunitValue { get; set; }
+        public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_lgin_value")]
-        public System.Guid? _adoxioLginValue { get; set; }
+        public string _adoxioLginValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Region associated with
         /// Establishment.
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_regionid_value")]
-        public System.Guid? _adoxioRegionidValue { get; set; }
+        public string _adoxioRegionidValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_saturdayopen")]
         public int? AdoxioSaturdayopen { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_wednesdayopen")]
+        public int? AdoxioWednesdayopen { get; set; }
 
         /// <summary>
         /// </summary>
@@ -348,12 +362,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
-        public System.Guid? _createdbyValue { get; set; }
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_licencee_value")]
-        public System.Guid? _adoxioLicenceeValue { get; set; }
+        public string _adoxioLicenceeValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -363,7 +377,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_territory_value")]
-        public System.Guid? _adoxioTerritoryValue { get; set; }
+        public string _adoxioTerritoryValue { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -381,7 +395,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_pdjurisdiction_value")]
-        public System.Guid? _adoxioPdjurisdictionValue { get; set; }
+        public string _adoxioPdjurisdictionValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was created.
@@ -408,7 +422,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
-        public System.Guid? _modifiedbyValue { get; set; }
+        public string _modifiedbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was modified.
@@ -428,6 +442,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets oct 22, 2019. CW: Has dependencies on existing WF and
+        /// old forms. Not used. Replaced by adoxio_isopen
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_alreadyopen")]
         public bool? AdoxioAlreadyopen { get; set; }
@@ -457,7 +473,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public System.Guid? _modifiedonbehalfbyValue { get; set; }
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -473,7 +489,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_area_value")]
-        public System.Guid? _adoxioAreaValue { get; set; }
+        public string _adoxioAreaValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -507,11 +523,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_addresspostalcode")]
         public string AdoxioAddresspostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_wednesdayopen")]
-        public int? AdoxioWednesdayopen { get; set; }
 
         /// <summary>
         /// </summary>

@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(System.Guid? adoxioIncidentAdoxioLicencetypeid = default(System.Guid?), System.Guid? adoxioLicencetypeid = default(System.Guid?), System.Guid? incidentid = default(System.Guid?), string versionnumber = default(string))
+        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(string adoxioIncidentAdoxioLicencetypeid = default(string), string adoxioLicencetypeid = default(string), string incidentid = default(string), string versionnumber = default(string))
         {
             AdoxioIncidentAdoxioLicencetypeid = adoxioIncidentAdoxioLicencetypeid;
             AdoxioLicencetypeid = adoxioLicencetypeid;
@@ -44,17 +44,17 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_incident_adoxio_licencetypeid")]
-        public System.Guid? AdoxioIncidentAdoxioLicencetypeid { get; set; }
+        public string AdoxioIncidentAdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_licencetypeid")]
-        public System.Guid? AdoxioLicencetypeid { get; set; }
+        public string AdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "incidentid")]
-        public System.Guid? Incidentid { get; set; }
+        public string Incidentid { get; set; }
 
         /// <summary>
         /// </summary>
