@@ -12,6 +12,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     /// <summary>
     /// OptionMetadata
     /// </summary>
+    /// <remarks>
+    /// Microsoft.Dynamics.CRM.OptionMetadata
+    /// </remarks>
     public partial class MicrosoftDynamicsCRMOptionMetadata
     {
         /// <summary>
@@ -27,7 +30,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), object label = default(object), object description = default(object), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?))
+        public MicrosoftDynamicsCRMOptionMetadata(int? value = default(int?), string label = default(string), string description = default(string), string color = default(string), bool? isManaged = default(bool?), string metadataId = default(string), bool? hasChanged = default(bool?))
         {
             Value = value;
             Label = label;
@@ -52,12 +55,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Label")]
-        public object Label { get; set; }
+        public string Label { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Description")]
-        public object Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>

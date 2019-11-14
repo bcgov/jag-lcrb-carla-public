@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// roletemplate
+    /// Microsoft.Dynamics.CRM.roletemplate
     /// </summary>
     public partial class MicrosoftDynamicsCRMroletemplate
     {
@@ -29,6 +29,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMroletemplate
         /// class.
         /// </summary>
+        /// <param name="name">Name of the role template.</param>
+        /// <param name="roletemplateid">Unique identifier of the role
+        /// template.</param>
         public MicrosoftDynamicsCRMroletemplate(string name = default(string), string roletemplateid = default(string), IList<MicrosoftDynamicsCRMprivilege> roletemplateprivilegesAssociation = default(IList<MicrosoftDynamicsCRMprivilege>), IList<MicrosoftDynamicsCRMrole> roleTemplateRoles = default(IList<MicrosoftDynamicsCRMrole>))
         {
             Name = name;
@@ -44,11 +47,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets name of the role template.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the role template.
         /// </summary>
         [JsonProperty(PropertyName = "roletemplateid")]
         public string Roletemplateid { get; set; }

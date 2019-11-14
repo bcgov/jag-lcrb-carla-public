@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// leadaddress
+    /// Microsoft.Dynamics.CRM.leadaddress
     /// </summary>
     public partial class MicrosoftDynamicsCRMleadaddress
     {
@@ -29,7 +29,71 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMleadaddress
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMleadaddress(string _parentidValue = default(string), string upszone = default(string), object exchangerate = default(object), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string line1 = default(string), string stateorprovince = default(string), string _modifiedbyValue = default(string), string name = default(string), long? versionnumber = default(long?), int? addressnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), string telephone2 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), decimal? latitude = default(decimal?), string postofficebox = default(string), string _createdbyValue = default(string), string telephone3 = default(string), string telephone1 = default(string), string fax = default(string), string composite = default(string), string leadaddressid = default(string), string line3 = default(string), int? addresstypecode = default(int?), int? shippingmethodcode = default(int?), string county = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), decimal? longitude = default(decimal?), string city = default(string), string postalcode = default(string), int? utcoffset = default(int?), IList<MicrosoftDynamicsCRMsyncerror> leadAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlead parentid = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
+        /// <param name="_parentidValue">Unique identifier of the parent object
+        /// with which the lead address is associated.</param>
+        /// <param name="upszone">United Parcel Service (UPS) zone for the
+        /// address of the lead.</param>
+        /// <param name="exchangerate">Exchange rate for the currency
+        /// associated with the leadaddress with respect to the base
+        /// currency.</param>
+        /// <param name="createdon">Date and time when the lead address was
+        /// created.</param>
+        /// <param name="line1">First line for entering address
+        /// information.</param>
+        /// <param name="stateorprovince">State or province in the address for
+        /// the lead.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the lead address.</param>
+        /// <param name="name">Name used to identify the lead address.</param>
+        /// <param name="versionnumber">Version number of the lead
+        /// address.</param>
+        /// <param name="addressnumber">Information about the address for the
+        /// lead.</param>
+        /// <param name="modifiedon">Date and time when the lead address was
+        /// last modified.</param>
+        /// <param name="country">Country/region name in the address for the
+        /// lead.</param>
+        /// <param name="telephone2">Second telephone number for the lead
+        /// address.</param>
+        /// <param name="line2">Second line for entering address
+        /// information.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the leadaddress.</param>
+        /// <param name="latitude">Latitude for the address for the
+        /// lead.</param>
+        /// <param name="postofficebox">Post office box number in the address
+        /// for the lead.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the lead address.</param>
+        /// <param name="telephone3">Third telephone number for the lead
+        /// address.</param>
+        /// <param name="telephone1">First telephone number for the lead
+        /// address.</param>
+        /// <param name="fax">Fax number for the address for the lead.</param>
+        /// <param name="composite">Shows the complete address.</param>
+        /// <param name="leadaddressid">Unique identifier of the lead
+        /// address.</param>
+        /// <param name="line3">Third line for entering address
+        /// information.</param>
+        /// <param name="addresstypecode">Type of address for the lead
+        /// address.</param>
+        /// <param name="shippingmethodcode">Method of shipment for the
+        /// lead.</param>
+        /// <param name="county">County name in the address for the
+        /// lead.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// currency associated with the leadaddress.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the leadaddress.</param>
+        /// <param name="longitude">Longitude for the address for the
+        /// lead.</param>
+        /// <param name="city">City name in the address for the lead.</param>
+        /// <param name="postalcode">ZIP Code or postal code in the address for
+        /// the lead.</param>
+        /// <param name="utcoffset">UTC offset for the lead address. This is
+        /// the difference between local time and standard Coordinated
+        /// Universal Time.</param>
+        public MicrosoftDynamicsCRMleadaddress(string _parentidValue = default(string), string upszone = default(string), decimal? exchangerate = default(decimal?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string line1 = default(string), string stateorprovince = default(string), string _modifiedbyValue = default(string), string name = default(string), string versionnumber = default(string), int? addressnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), string telephone2 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string latitude = default(string), string postofficebox = default(string), string _createdbyValue = default(string), string telephone3 = default(string), string telephone1 = default(string), string fax = default(string), string composite = default(string), string leadaddressid = default(string), string line3 = default(string), int? addresstypecode = default(int?), int? shippingmethodcode = default(int?), string county = default(string), string _transactioncurrencyidValue = default(string), string _modifiedonbehalfbyValue = default(string), string longitude = default(string), string city = default(string), string postalcode = default(string), int? utcoffset = default(int?), IList<MicrosoftDynamicsCRMsyncerror> leadAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMlead parentid = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             this._parentidValue = _parentidValue;
             Upszone = upszone;
@@ -80,166 +144,209 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the parent object with which the
+        /// lead address is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_parentid_value")]
         public string _parentidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets united Parcel Service (UPS) zone for the address of
+        /// the lead.
         /// </summary>
         [JsonProperty(PropertyName = "upszone")]
         public string Upszone { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// leadaddress with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the lead address was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets first line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line1")]
         public string Line1 { get; set; }
 
         /// <summary>
+        /// Gets or sets state or province in the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "stateorprovince")]
         public string Stateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// lead address.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets name used to identify the lead address.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the lead address.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets information about the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "addressnumber")]
         public int? Addressnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the lead address was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets country/region name in the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "country")]
         public string Country { get; set; }
 
         /// <summary>
+        /// Gets or sets second telephone number for the lead address.
         /// </summary>
         [JsonProperty(PropertyName = "telephone2")]
         public string Telephone2 { get; set; }
 
         /// <summary>
+        /// Gets or sets second line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line2")]
         public string Line2 { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// leadaddress.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets latitude for the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "latitude")]
-        public decimal? Latitude { get; set; }
+        public string Latitude { get; set; }
 
         /// <summary>
+        /// Gets or sets post office box number in the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "postofficebox")]
         public string Postofficebox { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the lead
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets third telephone number for the lead address.
         /// </summary>
         [JsonProperty(PropertyName = "telephone3")]
         public string Telephone3 { get; set; }
 
         /// <summary>
+        /// Gets or sets first telephone number for the lead address.
         /// </summary>
         [JsonProperty(PropertyName = "telephone1")]
         public string Telephone1 { get; set; }
 
         /// <summary>
+        /// Gets or sets fax number for the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "fax")]
         public string Fax { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the complete address.
         /// </summary>
         [JsonProperty(PropertyName = "composite")]
         public string Composite { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the lead address.
         /// </summary>
         [JsonProperty(PropertyName = "leadaddressid")]
         public string Leadaddressid { get; set; }
 
         /// <summary>
+        /// Gets or sets third line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line3")]
         public string Line3 { get; set; }
 
         /// <summary>
+        /// Gets or sets type of address for the lead address.
         /// </summary>
         [JsonProperty(PropertyName = "addresstypecode")]
         public int? Addresstypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets method of shipment for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "shippingmethodcode")]
         public int? Shippingmethodcode { get; set; }
 
         /// <summary>
+        /// Gets or sets county name in the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "county")]
         public string County { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the currency associated with the
+        /// leadaddress.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the leadaddress.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets longitude for the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "longitude")]
-        public decimal? Longitude { get; set; }
+        public string Longitude { get; set; }
 
         /// <summary>
+        /// Gets or sets city name in the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "city")]
         public string City { get; set; }
 
         /// <summary>
+        /// Gets or sets ZIP Code or postal code in the address for the lead.
         /// </summary>
         [JsonProperty(PropertyName = "postalcode")]
         public string Postalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets UTC offset for the lead address. This is the
+        /// difference between local time and standard Coordinated Universal
+        /// Time.
         /// </summary>
         [JsonProperty(PropertyName = "utcoffset")]
         public int? Utcoffset { get; set; }

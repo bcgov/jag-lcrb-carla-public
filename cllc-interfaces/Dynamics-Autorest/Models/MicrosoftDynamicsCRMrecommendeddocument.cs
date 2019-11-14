@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// recommendeddocument
+    /// Microsoft.Dynamics.CRM.recommendeddocument
     /// </summary>
     public partial class MicrosoftDynamicsCRMrecommendeddocument
     {
@@ -27,7 +27,64 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMrecommendeddocument class.
         /// </summary>
-        public MicrosoftDynamicsCRMrecommendeddocument(long? versionnumber = default(long?), string readurl = default(string), string externaldocumentid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string contenttype = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string iconclassname = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string editurl = default(string), string location = default(string), string fullname = default(string), string source = default(string), object exchangerate = default(object), string version = default(string), string _regardingobjectidValue = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string associatedrecordname = default(string), string externalmodifiedby = default(string), string _organizationidValue = default(string), int? filesize = default(int?), string title = default(string), string absoluteurl = default(string), string author = default(string), string recommendeddocumentid = default(string), string filetype = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency))
+        /// <param name="readurl">Shows the Read URL of the recommended
+        /// document.</param>
+        /// <param name="externaldocumentid">Shows the external
+        /// document.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="contenttype">Select the document content type.</param>
+        /// <param name="_createdbyValue">Shows the user who created the
+        /// record.</param>
+        /// <param name="_transactioncurrencyidValue">Shows the exchange rate
+        /// for the currency associated with the recommended document with
+        /// respect to the base currency.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="iconclassname">Stores the Icon Class name of the
+        /// recommended document.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="utcconversiontimezonecode">Shows the time zone code
+        /// that was in use when the record was created.</param>
+        /// <param name="editurl">Shows the Edit URL of the recommended
+        /// document.</param>
+        /// <param name="location">Shows the location of the recommended
+        /// document.</param>
+        /// <param name="fullname">Shows the full name of the recommended
+        /// document.</param>
+        /// <param name="source">Shows the source storage of the recommended
+        /// document.</param>
+        /// <param name="exchangerate">Shows the exchange rate for the currency
+        /// associated with the recommended document with respect to the base
+        /// currency.</param>
+        /// <param name="version">Shows the recommended document
+        /// version.</param>
+        /// <param name="_regardingobjectidValue">Choose the parent record that
+        /// the recommended document record is associated with.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="associatedrecordname">Shows the associated record name
+        /// of the recommended document.</param>
+        /// <param name="externalmodifiedby">Shows who last updated the
+        /// document record.</param>
+        /// <param name="_organizationidValue">Shows the organization.</param>
+        /// <param name="filesize">Shows the file size.</param>
+        /// <param name="title">Type a title for the entity.</param>
+        /// <param name="absoluteurl">Type the URL where the recommended
+        /// document is located.</param>
+        /// <param name="author">Shows the name of the author of the
+        /// recommended document.</param>
+        /// <param name="recommendeddocumentid">Shows the recommended document
+        /// record.</param>
+        /// <param name="filetype">Shows the file type.</param>
+        public MicrosoftDynamicsCRMrecommendeddocument(string versionnumber = default(string), string readurl = default(string), string externaldocumentid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string contenttype = default(string), string _createdbyValue = default(string), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), string iconclassname = default(string), string _modifiedonbehalfbyValue = default(string), int? utcconversiontimezonecode = default(int?), string editurl = default(string), string location = default(string), string fullname = default(string), string source = default(string), decimal? exchangerate = default(decimal?), string version = default(string), string _regardingobjectidValue = default(string), string _modifiedbyValue = default(string), int? timezoneruleversionnumber = default(int?), string associatedrecordname = default(string), string externalmodifiedby = default(string), string _organizationidValue = default(string), int? filesize = default(int?), string title = default(string), string absoluteurl = default(string), string author = default(string), string recommendeddocumentid = default(string), string filetype = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidname = default(MicrosoftDynamicsCRMtransactioncurrency))
         {
             Versionnumber = versionnumber;
             Readurl = readurl;
@@ -76,149 +133,192 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Read URL of the recommended document.
         /// </summary>
         [JsonProperty(PropertyName = "readurl")]
         public string Readurl { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the external document.
         /// </summary>
         [JsonProperty(PropertyName = "externaldocumentid")]
         public string Externaldocumentid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets select the document content type.
         /// </summary>
         [JsonProperty(PropertyName = "contenttype")]
         public string Contenttype { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the exchange rate for the currency associated
+        /// with the recommended document with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets stores the Icon Class name of the recommended
+        /// document.
         /// </summary>
         [JsonProperty(PropertyName = "iconclassname")]
         public string Iconclassname { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the time zone code that was in use when the
+        /// record was created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Edit URL of the recommended document.
         /// </summary>
         [JsonProperty(PropertyName = "editurl")]
         public string Editurl { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the location of the recommended document.
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the full name of the recommended document.
         /// </summary>
         [JsonProperty(PropertyName = "fullname")]
         public string Fullname { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the source storage of the recommended document.
         /// </summary>
         [JsonProperty(PropertyName = "source")]
         public string Source { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the exchange rate for the currency associated
+        /// with the recommended document with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the recommended document version.
         /// </summary>
         [JsonProperty(PropertyName = "version")]
         public string Version { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the parent record that the recommended document
+        /// record is associated with.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
         public string _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the associated record name of the recommended
+        /// document.
         /// </summary>
         [JsonProperty(PropertyName = "associatedrecordname")]
         public string Associatedrecordname { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the document record.
         /// </summary>
         [JsonProperty(PropertyName = "externalmodifiedby")]
         public string Externalmodifiedby { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the organization.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the file size.
         /// </summary>
         [JsonProperty(PropertyName = "filesize")]
         public int? Filesize { get; set; }
 
         /// <summary>
+        /// Gets or sets type a title for the entity.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets type the URL where the recommended document is
+        /// located.
         /// </summary>
         [JsonProperty(PropertyName = "absoluteurl")]
         public string Absoluteurl { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the name of the author of the recommended
+        /// document.
         /// </summary>
         [JsonProperty(PropertyName = "author")]
         public string Author { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the recommended document record.
         /// </summary>
         [JsonProperty(PropertyName = "recommendeddocumentid")]
         public string Recommendeddocumentid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the file type.
         /// </summary>
         [JsonProperty(PropertyName = "filetype")]
         public string Filetype { get; set; }

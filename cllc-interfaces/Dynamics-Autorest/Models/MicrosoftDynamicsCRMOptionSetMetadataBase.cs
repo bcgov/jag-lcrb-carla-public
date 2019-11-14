@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// OptionSetMetadataBase
+    /// Microsoft.Dynamics.CRM.OptionSetMetadataBase
     /// </summary>
     public partial class MicrosoftDynamicsCRMOptionSetMetadataBase
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMOptionSetMetadataBase class.
         /// </summary>
-        public MicrosoftDynamicsCRMOptionSetMetadataBase(object description = default(object), object displayName = default(object), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), object isCustomizable = default(object), string name = default(string), object optionSetType = default(object), string introducedVersion = default(string))
+        public MicrosoftDynamicsCRMOptionSetMetadataBase(string description = default(string), string displayName = default(string), bool? isCustomOptionSet = default(bool?), bool? isGlobal = default(bool?), bool? isManaged = default(bool?), string isCustomizable = default(string), string name = default(string), string optionSetType = default(string), string introducedVersion = default(string))
         {
             Description = description;
             DisplayName = displayName;
@@ -49,12 +49,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Description")]
-        public object Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
-        public object DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public object IsCustomizable { get; set; }
+        public string IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "OptionSetType")]
-        public object OptionSetType { get; set; }
+        public string OptionSetType { get; set; }
 
         /// <summary>
         /// </summary>
