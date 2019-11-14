@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
     <ProjectReference Include="..\cllc-interfaces\SharePoint\SharePoint.csproj" />
-    <ProjectReference Include="..\cllc-public-app\cllc-public-app.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Models;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
