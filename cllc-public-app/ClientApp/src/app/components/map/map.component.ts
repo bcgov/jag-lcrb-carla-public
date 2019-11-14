@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { takeWhile, filter, catchError, mergeMap } from 'rxjs/operators';
 import { FormBase } from '@shared/form-base';
+import { Meta } from '@angular/platform-browser';
 
 declare var EstablishmentsMap: any;
 declare var searchMapOptions: any;
@@ -19,14 +20,17 @@ export class MapComponent extends FormBase implements OnInit {
   busy: Subscription;
 
   constructor(
-    private establishmentDataService: EstablishmentDataService, private fb: FormBuilder
+      private establishmentDataService: EstablishmentDataService, private fb: FormBuilder, private meta: Meta
   ) { super(); }
   mapData: string;
   search: string;
   hasData: boolean;
   establishmentMap: any;
   rows: any;
+
   ngOnInit() {
+      this.meta.addTag({ name: 'viewport', content: 'width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no' });
+
     this.form = this.fb.group({
       name: ['']
     });
