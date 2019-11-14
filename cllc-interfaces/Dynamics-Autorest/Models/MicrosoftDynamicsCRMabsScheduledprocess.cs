@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// abs_scheduledprocess
+    /// Microsoft.Dynamics.CRM.abs_scheduledprocess
     /// </summary>
     public partial class MicrosoftDynamicsCRMabsScheduledprocess
     {
@@ -29,7 +29,100 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMabsScheduledprocess class.
         /// </summary>
-        public MicrosoftDynamicsCRMabsScheduledprocess(int? absInterval = default(int?), bool? absJune = default(bool?), long? versionnumber = default(long?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? statecode = default(int?), bool? absMarch = default(bool?), string _owningbusinessunitValue = default(string), string absFetchxmlquery = default(string), bool? absOctober = default(bool?), bool? absThursday = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? absApril = default(bool?), int? absRecurrencepattern = default(int?), string _owningteamValue = default(string), int? statuscode = default(int?), bool? absWednesday = default(bool?), string absScheduledprocessid = default(string), bool? absMay = default(bool?), bool? absDecember = default(bool?), bool? absSaturday = default(bool?), string _modifiedbyValue = default(string), int? absHour = default(int?), bool? absFriday = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? absTuesday = default(bool?), bool? absAmpm = default(bool?), System.DateTimeOffset? absNextactivation = default(System.DateTimeOffset?), string absName = default(string), string _createdbyValue = default(string), bool? absJuly = default(bool?), bool? absJanuary = default(bool?), int? timezoneruleversionnumber = default(int?), bool? absSuspendonfailure = default(bool?), bool? absNovember = default(bool?), bool? absMonday = default(bool?), int? utcconversiontimezonecode = default(int?), int? absMinute = default(int?), bool? absSeptember = default(bool?), string _owneridValue = default(string), bool? absFebruary = default(bool?), int? absDayofmonth = default(int?), string _owninguserValue = default(string), bool? absAugust = default(bool?), bool? absSunday = default(bool?), string _modifiedonbehalfbyValue = default(string), string _absProcessidValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), object ownerid = default(object), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> absScheduledprocessActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> absScheduledprocessAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> absScheduledprocessEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> absScheduledprocessFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> absScheduledprocessLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> absScheduledprocessPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> absScheduledprocessServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> absScheduledprocessTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> absScheduledprocessRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> absScheduledprocessSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMworkflow absProcessId = default(MicrosoftDynamicsCRMworkflow))
+        /// <param name="absInterval">The process should execute every number
+        /// of intervals. (Eg. Every 2 weeks, every 4 months, etc).</param>
+        /// <param name="absJune">The process should execute in the month of
+        /// June</param>
+        /// <param name="versionnumber">Version Number</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="statecode">Status of the Scheduled Process</param>
+        /// <param name="absMarch">The process should execute in the month of
+        /// March</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record</param>
+        /// <param name="absFetchxmlquery">The FetchXML Query to retrieve the
+        /// target records for the execution.</param>
+        /// <param name="absOctober">The process should execute in the month of
+        /// October</param>
+        /// <param name="absThursday">The process should execute on
+        /// Thursday</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        /// <param name="absApril">The process should execute in the month of
+        /// April</param>
+        /// <param name="absRecurrencepattern">The frequency on which the
+        /// process is executed.</param>
+        /// <param name="_owningteamValue">Unique identifier for the team that
+        /// owns the record.</param>
+        /// <param name="statuscode">Reason for the status of the Scheduled
+        /// Process</param>
+        /// <param name="absWednesday">The process should execute on
+        /// Wednesday</param>
+        /// <param name="absScheduledprocessid">Unique identifier for entity
+        /// instances</param>
+        /// <param name="absMay">The process should execute in the month of
+        /// May</param>
+        /// <param name="absDecember">The process should execute in the month
+        /// of December</param>
+        /// <param name="absSaturday">The process should execute on
+        /// Saturday</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="absHour">The hour of the day at which to execute the
+        /// scheduled process.</param>
+        /// <param name="absFriday">The process should execute on
+        /// Friday</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="absTuesday">The process should execute on
+        /// Tuesday</param>
+        /// <param name="absAmpm">Whether to execute the process before or
+        /// after noon.</param>
+        /// <param name="absNextactivation">Date and Time of the Next
+        /// Execution</param>
+        /// <param name="absName">The name of the custom entity.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="absJuly">The process should execute in the month of
+        /// July</param>
+        /// <param name="absJanuary">The process should execute in the month of
+        /// January</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="absSuspendonfailure">A Flag which sets whether or not
+        /// the process should suspend subsequent executions when there is a
+        /// processing failure.</param>
+        /// <param name="absNovember">The process should execute in the month
+        /// of November</param>
+        /// <param name="absMonday">The process should execute on
+        /// Monday</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="absMinute">Specifies the minute of the hour in which
+        /// to execute the scheduled process.</param>
+        /// <param name="absSeptember">The process should execute in the month
+        /// of September</param>
+        /// <param name="_owneridValue">Owner Id</param>
+        /// <param name="absFebruary">The process should execute in the month
+        /// of February</param>
+        /// <param name="absDayofmonth">Execute the process on the nth day of
+        /// the month</param>
+        /// <param name="_owninguserValue">Unique identifier for the user that
+        /// owns the record.</param>
+        /// <param name="absAugust">The process should execute in the month of
+        /// August</param>
+        /// <param name="absSunday">The process should execute on
+        /// Sunday</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="_absProcessidValue">The target process to
+        /// execute.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        public MicrosoftDynamicsCRMabsScheduledprocess(int? absInterval = default(int?), bool? absJune = default(bool?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), int? statecode = default(int?), bool? absMarch = default(bool?), string _owningbusinessunitValue = default(string), string absFetchxmlquery = default(string), bool? absOctober = default(bool?), bool? absThursday = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), bool? absApril = default(bool?), int? absRecurrencepattern = default(int?), string _owningteamValue = default(string), int? statuscode = default(int?), bool? absWednesday = default(bool?), string absScheduledprocessid = default(string), bool? absMay = default(bool?), bool? absDecember = default(bool?), bool? absSaturday = default(bool?), string _modifiedbyValue = default(string), int? absHour = default(int?), bool? absFriday = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? absTuesday = default(bool?), bool? absAmpm = default(bool?), System.DateTimeOffset? absNextactivation = default(System.DateTimeOffset?), string absName = default(string), string _createdbyValue = default(string), bool? absJuly = default(bool?), bool? absJanuary = default(bool?), int? timezoneruleversionnumber = default(int?), bool? absSuspendonfailure = default(bool?), bool? absNovember = default(bool?), bool? absMonday = default(bool?), int? utcconversiontimezonecode = default(int?), int? absMinute = default(int?), bool? absSeptember = default(bool?), string _owneridValue = default(string), bool? absFebruary = default(bool?), int? absDayofmonth = default(int?), string _owninguserValue = default(string), bool? absAugust = default(bool?), bool? absSunday = default(bool?), string _modifiedonbehalfbyValue = default(string), string _absProcessidValue = default(string), string _createdonbehalfbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> absScheduledprocessActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> absScheduledprocessAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> absScheduledprocessEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> absScheduledprocessFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> absScheduledprocessLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> absScheduledprocessPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> absScheduledprocessServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> absScheduledprocessTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> absScheduledprocessRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> absScheduledprocessSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMsyncerror> absScheduledprocessSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> absScheduledprocessAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> absScheduledprocessBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), MicrosoftDynamicsCRMworkflow absProcessId = default(MicrosoftDynamicsCRMworkflow))
         {
             AbsInterval = absInterval;
             AbsJune = absJune;
@@ -111,241 +204,299 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets the process should execute every number of intervals.
+        /// (Eg. Every 2 weeks, every 4 months, etc).
         /// </summary>
         [JsonProperty(PropertyName = "abs_interval")]
         public int? AbsInterval { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of June
         /// </summary>
         [JsonProperty(PropertyName = "abs_june")]
         public bool? AbsJune { get; set; }
 
         /// <summary>
+        /// Gets or sets version Number
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the Scheduled Process
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of March
         /// </summary>
         [JsonProperty(PropertyName = "abs_march")]
         public bool? AbsMarch { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the FetchXML Query to retrieve the target records for
+        /// the execution.
         /// </summary>
         [JsonProperty(PropertyName = "abs_fetchxmlquery")]
         public string AbsFetchxmlquery { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of October
         /// </summary>
         [JsonProperty(PropertyName = "abs_october")]
         public bool? AbsOctober { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute on Thursday
         /// </summary>
         [JsonProperty(PropertyName = "abs_thursday")]
         public bool? AbsThursday { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of April
         /// </summary>
         [JsonProperty(PropertyName = "abs_april")]
         public bool? AbsApril { get; set; }
 
         /// <summary>
+        /// Gets or sets the frequency on which the process is executed.
         /// </summary>
         [JsonProperty(PropertyName = "abs_recurrencepattern")]
         public int? AbsRecurrencepattern { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the Scheduled Process
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute on Wednesday
         /// </summary>
         [JsonProperty(PropertyName = "abs_wednesday")]
         public bool? AbsWednesday { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "abs_scheduledprocessid")]
         public string AbsScheduledprocessid { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of May
         /// </summary>
         [JsonProperty(PropertyName = "abs_may")]
         public bool? AbsMay { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of December
         /// </summary>
         [JsonProperty(PropertyName = "abs_december")]
         public bool? AbsDecember { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute on Saturday
         /// </summary>
         [JsonProperty(PropertyName = "abs_saturday")]
         public bool? AbsSaturday { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the hour of the day at which to execute the scheduled
+        /// process.
         /// </summary>
         [JsonProperty(PropertyName = "abs_hour")]
         public int? AbsHour { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute on Friday
         /// </summary>
         [JsonProperty(PropertyName = "abs_friday")]
         public bool? AbsFriday { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute on Tuesday
         /// </summary>
         [JsonProperty(PropertyName = "abs_tuesday")]
         public bool? AbsTuesday { get; set; }
 
         /// <summary>
+        /// Gets or sets whether to execute the process before or after noon.
         /// </summary>
         [JsonProperty(PropertyName = "abs_ampm")]
         public bool? AbsAmpm { get; set; }
 
         /// <summary>
+        /// Gets or sets date and Time of the Next Execution
         /// </summary>
         [JsonProperty(PropertyName = "abs_nextactivation")]
         public System.DateTimeOffset? AbsNextactivation { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the custom entity.
         /// </summary>
         [JsonProperty(PropertyName = "abs_name")]
         public string AbsName { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of July
         /// </summary>
         [JsonProperty(PropertyName = "abs_july")]
         public bool? AbsJuly { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of January
         /// </summary>
         [JsonProperty(PropertyName = "abs_january")]
         public bool? AbsJanuary { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets a Flag which sets whether or not the process should
+        /// suspend subsequent executions when there is a processing failure.
         /// </summary>
         [JsonProperty(PropertyName = "abs_suspendonfailure")]
         public bool? AbsSuspendonfailure { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of November
         /// </summary>
         [JsonProperty(PropertyName = "abs_november")]
         public bool? AbsNovember { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute on Monday
         /// </summary>
         [JsonProperty(PropertyName = "abs_monday")]
         public bool? AbsMonday { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies the minute of the hour in which to execute
+        /// the scheduled process.
         /// </summary>
         [JsonProperty(PropertyName = "abs_minute")]
         public int? AbsMinute { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of September
         /// </summary>
         [JsonProperty(PropertyName = "abs_september")]
         public bool? AbsSeptember { get; set; }
 
         /// <summary>
+        /// Gets or sets owner Id
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of February
         /// </summary>
         [JsonProperty(PropertyName = "abs_february")]
         public bool? AbsFebruary { get; set; }
 
         /// <summary>
+        /// Gets or sets execute the process on the nth day of the month
         /// </summary>
         [JsonProperty(PropertyName = "abs_dayofmonth")]
         public int? AbsDayofmonth { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute in the month of August
         /// </summary>
         [JsonProperty(PropertyName = "abs_august")]
         public bool? AbsAugust { get; set; }
 
         /// <summary>
+        /// Gets or sets the process should execute on Sunday
         /// </summary>
         [JsonProperty(PropertyName = "abs_sunday")]
         public bool? AbsSunday { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets the target process to execute.
         /// </summary>
         [JsonProperty(PropertyName = "_abs_processid_value")]
         public string _absProcessidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
@@ -383,7 +534,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

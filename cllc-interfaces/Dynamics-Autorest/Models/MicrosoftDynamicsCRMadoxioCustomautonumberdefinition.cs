@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// adoxio_customautonumberdefinition
+    /// Microsoft.Dynamics.CRM.adoxio_customautonumberdefinition
     /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioCustomautonumberdefinition
     {
@@ -29,7 +29,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioCustomautonumberdefinition class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioCustomautonumberdefinition(int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), string adoxioCustomautonumberdefinitionid = default(string), System.DateTimeOffset? adoxioLocktimestamp = default(System.DateTimeOffset?), int? adoxioLastnumberissued = default(int?), string adoxioFormat = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioLockverification = default(string), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioLockvalue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string adoxioName = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? adoxioDigits = default(int?), long? versionnumber = default(long?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioCustomautonumberdefinitionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCustomautonumberdefinitionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCustomautonumberdefinitionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        /// <param name="statuscode">Reason for the status of the Custom Auto
+        /// Number Definition</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="adoxioCustomautonumberdefinitionid">Unique identifier
+        /// for entity instances</param>
+        /// <param name="adoxioLastnumberissued">Last number incremented by the
+        /// plugin. Edit the value to specify a starting number or if you wish
+        /// to reset the value. If left blank the first number issued will be
+        /// 1.</param>
+        /// <param name="adoxioFormat">String format used when creating the
+        /// auto number. Place {0} in the string where you would like the
+        /// number to be inserted. If left blank, the result will simply be a
+        /// number. Example: ORD#{0}</param>
+        /// <param name="_organizationidValue">Unique identifier for the
+        /// organization</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="statecode">Status of the Custom Auto Number
+        /// Definition</param>
+        /// <param name="adoxioName">The name of the custom entity.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="adoxioDigits">Integer value used when creating the
+        /// number. The resulting number will be padded with zeros if the
+        /// length of the new number to be issued is less than this number of
+        /// digits.</param>
+        /// <param name="versionnumber">Version Number</param>
+        public MicrosoftDynamicsCRMadoxioCustomautonumberdefinition(int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), string adoxioCustomautonumberdefinitionid = default(string), System.DateTimeOffset? adoxioLocktimestamp = default(System.DateTimeOffset?), int? adoxioLastnumberissued = default(int?), string adoxioFormat = default(string), string _organizationidValue = default(string), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioLockverification = default(string), int? importsequencenumber = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioLockvalue = default(string), int? timezoneruleversionnumber = default(int?), int? statecode = default(int?), string adoxioName = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? adoxioDigits = default(int?), string versionnumber = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioCustomautonumberdefinitionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCustomautonumberdefinitionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCustomautonumberdefinitionBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
             Statuscode = statuscode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
@@ -70,16 +112,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets reason for the status of the Custom Auto Number
+        /// Definition
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for entity instances
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_customautonumberdefinitionid")]
         public string AdoxioCustomautonumberdefinitionid { get; set; }
@@ -90,26 +137,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? AdoxioLocktimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets last number incremented by the plugin. Edit the value
+        /// to specify a starting number or if you wish to reset the value. If
+        /// left blank the first number issued will be 1.
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_lastnumberissued")]
         public int? AdoxioLastnumberissued { get; set; }
 
         /// <summary>
+        /// Gets or sets string format used when creating the auto number.
+        /// Place {0} in the string where you would like the number to be
+        /// inserted. If left blank, the result will simply be a number.
+        /// Example: ORD#{0}
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_format")]
         public string AdoxioFormat { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the organization
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
@@ -120,16 +178,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioLockverification { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
@@ -140,44 +202,55 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioLockvalue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the Custom Auto Number Definition
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the custom entity.
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_name")]
         public string AdoxioName { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets integer value used when creating the number. The
+        /// resulting number will be padded with zeros if the length of the new
+        /// number to be issued is less than this number of digits.
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_digits")]
         public int? AdoxioDigits { get; set; }
 
         /// <summary>
+        /// Gets or sets version Number
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
