@@ -21,6 +21,11 @@ namespace Gov.Lclb.Cllb.Public.Models
     {
         public static MonthlyReport ToViewModel(this MicrosoftDynamicsCRMadoxioCannabismonthlyreport dynamicsMonthlyReport, IDynamicsClient dynamicsClient)
         {
+            if (dynamicsMonthlyReport == null)
+            {
+                return null;
+            }
+
             MonthlyReport monthlyReportVM = new MonthlyReport()
             {
                 licenseId = dynamicsMonthlyReport._adoxioLicenceidValue,

@@ -48,53 +48,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
-
             services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("FederalReportingService"));
-
-            // services.AddMvc(config =>
-            // {
-            //     config.EnableEndpointRouting = false;
-            //     if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
-            //     {
-            //         var policy = new AuthorizationPolicyBuilder()
-            //                      .RequireAuthenticatedUser()
-            //                      .Build();
-            //         config.Filters.Add(new AuthorizeFilter(policy));
-            //     }
-
-            // });
-
-            // Other ConfigureServices() code...
-
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB Federal Reporting Service", Version = "v1" });
-            // });
-
-            // services.AddIdentity<IdentityUser, IdentityRole>()
-            //     .AddDefaultTokenProviders();
-
-            // if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
-            // {
-            //     // Configure JWT authentication
-            //     services.AddAuthentication(o =>
-            //     {
-            //         o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //         o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //     }).AddJwtBearer(o =>
-            //     {
-            //         o.SaveToken = true;
-            //         o.RequireHttpsMetadata = false;
-            //         o.TokenValidationParameters = new TokenValidationParameters()
-            //         {
-            //             RequireExpirationTime = false,
-            //             ValidIssuer = Configuration["JWT_VALID_ISSUER"],
-            //             ValidAudience = Configuration["JWT_VALID_AUDIENCE"],
-            //             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT_TOKEN_KEY"]))
-            //         };
-            //     });
-            // }
 
             services.AddHangfire(config =>
             {
@@ -110,8 +64,6 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 checks.AddValueTaskCheck("HTTP Endpoint", () => new
                     ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
             });
-
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -184,7 +136,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 {
                     log.LogInformation($"Creating Hangfire jobs for {typeof(Startup)} ...");
 
-                    // Insert hangfire jobs here
+                    // Run 1 minute past midnight on the 15th of every month
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).GenerateFederalTrackingReport(), "1 0 15 * *");
 
                     log.LogInformation("Hangfire jobs setup.");
                 }
