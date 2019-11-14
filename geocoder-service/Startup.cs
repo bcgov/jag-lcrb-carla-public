@@ -219,10 +219,10 @@ namespace Gov.Lclb.Cllb.Geocoder
 
                     Microsoft.Extensions.Logging.ILogger geocodeLog = loggerFactory.CreateLogger(typeof(GeocodeUtils));
                     // Job for each day - updates establishments with a blank lat / long
-                    RecurringJob.AddOrUpdate(() => new GeocodeUtils(Configuration, geocodeLog).GeocodeEstablishments(null, false), "0 0 * * *"); // every Day
+                    RecurringJob.AddOrUpdate("daily-geocode-establishments",() => new GeocodeUtils(Configuration, geocodeLog).GeocodeEstablishments(null, false), "0 0 * * *"); // every Day
 
                     // Job for each week - update all establishments
-                    RecurringJob.AddOrUpdate(() => new GeocodeUtils(Configuration, geocodeLog).GeocodeEstablishments(null, true), "0 0 * * 6"); // every Saturday
+                    RecurringJob.AddOrUpdate("weekly-geocode-establishments", () => new GeocodeUtils(Configuration, geocodeLog).GeocodeEstablishments(null, true), "0 0 * * 6"); // every Saturday
 
                     log.LogInformation("Hangfire geocode jobs setup.");
                 }
