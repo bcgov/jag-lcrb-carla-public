@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// list
+    /// Microsoft.Dynamics.CRM.list
     /// </summary>
     public partial class MicrosoftDynamicsCRMlist
     {
@@ -27,7 +27,101 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMlist class.
         /// </summary>
-        public MicrosoftDynamicsCRMlist(bool? type = default(bool?), string _owningbusinessunitValue = default(string), int? membertype = default(int?), string listname = default(string), int? createdfromcode = default(int?), string processid = default(string), string traversedpath = default(string), string query = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), object exchangerate = default(object), bool? lockstatus = default(bool?), System.DateTimeOffset? lastusedon = default(System.DateTimeOffset?), string stageid = default(string), bool? donotsendonoptout = default(bool?), string _owningteamValue = default(string), object cost = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string listid = default(string), object costBase = default(object), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), int? membercount = default(int?), int? importsequencenumber = default(int?), string description = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string purpose = default(string), string _transactioncurrencyidValue = default(string), string source = default(string), bool? ignoreinactivelistmembers = default(bool?), long? versionnumber = default(long?), IList<MicrosoftDynamicsCRMcampaign> campaignlistAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMlead> listleadAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcontact> listcontactAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMaccount> listaccountAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMcampaignactivity>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMannotation> listAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMconnection> listConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperation> listBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> listSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> listConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> listAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> listBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="type">Select whether you want the marketing list to be
+        /// static or dynamic. The members in a static marketing list are
+        /// unchanging. A dynamic marketing list is based on a dynamic query
+        /// that retrieves the updated list of members</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the marketing list.</param>
+        /// <param name="membertype">Type of the members that can be stored in
+        /// the marketing list.</param>
+        /// <param name="listname">Type a name for the marketing list so that
+        /// it is identified correctly in lists.</param>
+        /// <param name="createdfromcode">Select the type of members that this
+        /// marketing list will contain: accounts, contacts, or leads. Each
+        /// list can have only one member type and this value can't be changed
+        /// after the marketing list is created.</param>
+        /// <param name="processid">Shows the ID of the process.</param>
+        /// <param name="traversedpath">For internal use only.</param>
+        /// <param name="query">Query used for retrieving members of marketing
+        /// list.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the marketing list.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="statuscode">Select the marketing list's
+        /// status.</param>
+        /// <param name="statecode">Shows whether the marketing list is active
+        /// or inactive. Inactive marketing lists are read-only and can't be
+        /// edited unless they are reactivated.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="lockstatus">Select whether the marketing list is
+        /// locked. If Yes is selected, no additional members can be added to
+        /// the marketing list.</param>
+        /// <param name="lastusedon">Shows the date and time when the marketing
+        /// list was last used in a campaign or in the creation of activities
+        /// or opportunities.</param>
+        /// <param name="stageid">Shows the ID of the stage.</param>
+        /// <param name="donotsendonoptout">Select whether to override the
+        /// opt-out settings on leads, contacts, and accounts for the members
+        /// of the target marketing lists of the campaign activity. If No is
+        /// selected, those who have chosen to opt out won't be excluded from
+        /// the list. This means they will receive marketing materials.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the marketing list.</param>
+        /// <param name="cost">Type the cost of obtaining the marketing
+        /// list.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="listid">Unique identifier of the marketing
+        /// list.</param>
+        /// <param name="costBase">Shows the Cost field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="membercount">Shows the sum of all members in the
+        /// marketing list.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="description">Type additional information to describe
+        /// the marketing list, such as the intended use or date of the last
+        /// update.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="purpose">Type the intended use of the marketing list
+        /// to identify its key segments, target offers, or business
+        /// group.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="source">Type the source of the marketing list, such as
+        /// a third-party supplier or internal database.</param>
+        /// <param name="ignoreinactivelistmembers">Select whether inactive
+        /// accounts, contacts, or leads should be excluded from the campaign
+        /// activity distribution when the marketing list is included in a
+        /// campaign.</param>
+        /// <param name="versionnumber">Version number of the marketing
+        /// list.</param>
+        public MicrosoftDynamicsCRMlist(bool? type = default(bool?), string _owningbusinessunitValue = default(string), int? membertype = default(int?), string listname = default(string), int? createdfromcode = default(int?), string processid = default(string), string traversedpath = default(string), string query = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _owninguserValue = default(string), string _modifiedbyValue = default(string), int? statuscode = default(int?), int? statecode = default(int?), string _createdbyValue = default(string), string _owneridValue = default(string), decimal? exchangerate = default(decimal?), bool? lockstatus = default(bool?), System.DateTimeOffset? lastusedon = default(System.DateTimeOffset?), string stageid = default(string), bool? donotsendonoptout = default(bool?), string _owningteamValue = default(string), decimal? cost = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string listid = default(string), decimal? costBase = default(decimal?), int? timezoneruleversionnumber = default(int?), string _createdonbehalfbyValue = default(string), int? membercount = default(int?), int? importsequencenumber = default(int?), string description = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string purpose = default(string), string _transactioncurrencyidValue = default(string), string source = default(string), bool? ignoreinactivelistmembers = default(bool?), string versionnumber = default(string), IList<MicrosoftDynamicsCRMcampaign> campaignlistAssociation = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMlead> listleadAssociation = default(IList<MicrosoftDynamicsCRMlead>), IList<MicrosoftDynamicsCRMcontact> listcontactAssociation = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMaccount> listaccountAssociation = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMcampaignactivity> campaignactivitylistAssociation = default(IList<MicrosoftDynamicsCRMcampaignactivity>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMannotation> listAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMconnection> listConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkoperation> listBulkOperations = default(IList<MicrosoftDynamicsCRMbulkoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> listSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> listConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMasyncoperation> listAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMduplicaterecord> listDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMbulkdeletefailure> listBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Type = type;
             this._owningbusinessunitValue = _owningbusinessunitValue;
@@ -100,194 +194,272 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets select whether you want the marketing list to be
+        /// static or dynamic. The members in a static marketing list are
+        /// unchanging. A dynamic marketing list is based on a dynamic query
+        /// that retrieves the updated list of members
         /// </summary>
         [JsonProperty(PropertyName = "type")]
         public bool? Type { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type of the members that can be stored in the
+        /// marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "membertype")]
         public int? Membertype { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the marketing list so that it is
+        /// identified correctly in lists.
         /// </summary>
         [JsonProperty(PropertyName = "listname")]
         public string Listname { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of members that this marketing list
+        /// will contain: accounts, contacts, or leads. Each list can have only
+        /// one member type and this value can't be changed after the marketing
+        /// list is created.
         /// </summary>
         [JsonProperty(PropertyName = "createdfromcode")]
         public int? Createdfromcode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
         public string Processid { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
+        /// Gets or sets query used for retrieving members of marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "query")]
         public string Query { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the marketing
+        /// list.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select the marketing list's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the marketing list is active or
+        /// inactive. Inactive marketing lists are read-only and can't be
+        /// edited unless they are reactivated.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the marketing list is locked. If Yes is
+        /// selected, no additional members can be added to the marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "lockstatus")]
         public bool? Lockstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the marketing list was
+        /// last used in a campaign or in the creation of activities or
+        /// opportunities.
         /// </summary>
         [JsonProperty(PropertyName = "lastusedon")]
         public System.DateTimeOffset? Lastusedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
         public string Stageid { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to override the opt-out settings on
+        /// leads, contacts, and accounts for the members of the target
+        /// marketing lists of the campaign activity. If No is selected, those
+        /// who have chosen to opt out won't be excluded from the list. This
+        /// means they will receive marketing materials.
         /// </summary>
         [JsonProperty(PropertyName = "donotsendonoptout")]
         public bool? Donotsendonoptout { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the marketing
+        /// list.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the cost of obtaining the marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "cost")]
-        public object Cost { get; set; }
+        public decimal? Cost { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "listid")]
         public string Listid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Cost field converted to the system's default
+        /// base currency for reporting purposes. The calculation uses the
+        /// exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "cost_base")]
-        public object CostBase { get; set; }
+        public decimal? CostBase { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the sum of all members in the marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "membercount")]
         public int? Membercount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the marketing
+        /// list, such as the intended use or date of the last update.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the intended use of the marketing list to
+        /// identify its key segments, target offers, or business group.
         /// </summary>
         [JsonProperty(PropertyName = "purpose")]
         public string Purpose { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the source of the marketing list, such as a
+        /// third-party supplier or internal database.
         /// </summary>
         [JsonProperty(PropertyName = "source")]
         public string Source { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether inactive accounts, contacts, or leads
+        /// should be excluded from the campaign activity distribution when the
+        /// marketing list is included in a campaign.
         /// </summary>
         [JsonProperty(PropertyName = "ignoreinactivelistmembers")]
         public bool? Ignoreinactivelistmembers { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the marketing list.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -327,7 +499,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

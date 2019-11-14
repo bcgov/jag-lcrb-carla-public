@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// socialactivity
+    /// Microsoft.Dynamics.CRM.socialactivity
     /// </summary>
     public partial class MicrosoftDynamicsCRMsocialactivity
     {
@@ -29,7 +29,36 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsocialactivity class.
         /// </summary>
-        public MicrosoftDynamicsCRMsocialactivity(string posttoprofileid = default(string), string socialadditionalparams = default(string), string _postauthorValue = default(string), string threadid = default(string), int? postmessagetype = default(int?), bool? directioncode = default(bool?), decimal? sentimentvalue = default(decimal?), string _postfromprofileidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string posturl = default(string), string postid = default(string), string _postauthoraccountValue = default(string), System.DateTimeOffset? postedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string inresponseto = default(string), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordSocialactivity = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementSocialactivity = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident regardingobjectidIncidentSocialactivity = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcontact regardingobjectidContactSocialactivity = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMasyncoperation regardingobjectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMcontact postauthorContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationSocialactivity = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsystemuser createdonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidSocialactivity = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderSocialactivity = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> socialActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleSocialactivity = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMactivityparty> socialactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMquote regardingobjectidQuoteSocialactivity = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMteam owningteamSocialactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> socialActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMaccount regardingobjectidAccountSocialactivity = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount postauthoraccountAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMservice serviceidSocialactivity = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceSocialactivity = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateSocialactivity = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMcontact postauthoraccountContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMbulkdeletefailure> socialActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsocialprofile postfromprofileid = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMaccount postauthorAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMlead regardingobjectidLeadSocialactivity = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMcontract regardingobjectidContractSocialactivity = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser modifiedbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMannotation> socialActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsla slainvokedidSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguserSocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMqueueitem> socialActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceSocialactivity = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunitSocialactivity = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunitySocialactivity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessSocialactivity = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationSocialactivity = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintSocialactivity = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesSocialactivity = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerSocialactivity = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
+        /// <param name="posttoprofileid">Shows the recipients of the social
+        /// post.</param>
+        /// <param name="socialadditionalparams">For internal use only.</param>
+        /// <param name="_postauthorValue">Shows the contact or account that
+        /// authored the post.</param>
+        /// <param name="threadid">Unique identifier of the social
+        /// conversation. For internal use only.</param>
+        /// <param name="postmessagetype">Shows if the social post originated
+        /// as a private or public message.</param>
+        /// <param name="directioncode">Select the direction of the post as
+        /// incoming or outbound.</param>
+        /// <param name="sentimentvalue">Value derived after assessing words
+        /// commonly associated with a negative, neutral, or positive sentiment
+        /// that occurs in a social post. Sentiment information can also be
+        /// reported as numeric values.</param>
+        /// <param name="_postfromprofileidValue">Shows the author of the post
+        /// on the corresponding social channel.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="posturl">Shows the URL of the post.</param>
+        /// <param name="postid">Unique identifier of the post. For internal
+        /// use only.</param>
+        /// <param name="_postauthoraccountValue">Shows the parent account of
+        /// the author of the post.</param>
+        /// <param name="postedon">For internal use only.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="inresponseto">Unique identifier for the responses to a
+        /// post. For internal use only.</param>
+        public MicrosoftDynamicsCRMsocialactivity(string posttoprofileid = default(string), string socialadditionalparams = default(string), string _postauthorValue = default(string), string threadid = default(string), int? postmessagetype = default(int?), bool? directioncode = default(bool?), string sentimentvalue = default(string), string _postfromprofileidValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string posturl = default(string), string postid = default(string), string _postauthoraccountValue = default(string), System.DateTimeOffset? postedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string inresponseto = default(string), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderSocialactivity = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordSocialactivity = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementSocialactivity = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMincident regardingobjectidIncidentSocialactivity = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMcontact regardingobjectidContactSocialactivity = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMasyncoperation regardingobjectidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMcontact postauthorContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationSocialactivity = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMsystemuser createdonbehalfbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidSocialactivity = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderSocialactivity = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> socialActivityAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleSocialactivity = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMactivityparty> socialactivityActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMquote regardingobjectidQuoteSocialactivity = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMteam owningteamSocialactivity = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMsyncerror> socialActivitySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMaccount regardingobjectidAccountSocialactivity = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMaccount postauthoraccountAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMservice serviceidSocialactivity = default(MicrosoftDynamicsCRMservice), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceSocialactivity = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateSocialactivity = default(MicrosoftDynamicsCRMentitlementtemplate), MicrosoftDynamicsCRMcontact postauthoraccountContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsla slaSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMbulkdeletefailure> socialActivityBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMsocialprofile postfromprofileid = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMaccount postauthorAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMlead regardingobjectidLeadSocialactivity = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMcontract regardingobjectidContractSocialactivity = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMsystemuser modifiedbySocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMconnection> socialactivityConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMannotation> socialActivityAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), MicrosoftDynamicsCRMsla slainvokedidSocialactivitySla = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser owninguserSocialactivity = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> socialActivityDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMqueueitem> socialActivityQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceSocialactivity = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMbusinessunit owningbusinessunitSocialactivity = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunitySocialactivity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessSocialactivity = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationSocialactivity = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintSocialactivity = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesSocialactivity = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerSocialactivity = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationSocialactivity = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             Posttoprofileid = posttoprofileid;
             Socialadditionalparams = socialadditionalparams;
@@ -107,76 +136,100 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the recipients of the social post.
         /// </summary>
         [JsonProperty(PropertyName = "posttoprofileid")]
         public string Posttoprofileid { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "socialadditionalparams")]
         public string Socialadditionalparams { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the contact or account that authored the post.
         /// </summary>
         [JsonProperty(PropertyName = "_postauthor_value")]
         public string _postauthorValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the social conversation. For
+        /// internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "threadid")]
         public string Threadid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows if the social post originated as a private or
+        /// public message.
         /// </summary>
         [JsonProperty(PropertyName = "postmessagetype")]
         public int? Postmessagetype { get; set; }
 
         /// <summary>
+        /// Gets or sets select the direction of the post as incoming or
+        /// outbound.
         /// </summary>
         [JsonProperty(PropertyName = "directioncode")]
         public bool? Directioncode { get; set; }
 
         /// <summary>
+        /// Gets or sets value derived after assessing words commonly
+        /// associated with a negative, neutral, or positive sentiment that
+        /// occurs in a social post. Sentiment information can also be reported
+        /// as numeric values.
         /// </summary>
         [JsonProperty(PropertyName = "sentimentvalue")]
-        public decimal? Sentimentvalue { get; set; }
+        public string Sentimentvalue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the author of the post on the corresponding
+        /// social channel.
         /// </summary>
         [JsonProperty(PropertyName = "_postfromprofileid_value")]
         public string _postfromprofileidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the URL of the post.
         /// </summary>
         [JsonProperty(PropertyName = "posturl")]
         public string Posturl { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the post. For internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "postid")]
         public string Postid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the parent account of the author of the post.
         /// </summary>
         [JsonProperty(PropertyName = "_postauthoraccount_value")]
         public string _postauthoraccountValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "postedon")]
         public System.DateTimeOffset? Postedon { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the responses to a post. For
+        /// internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "inresponseto")]
         public string Inresponseto { get; set; }

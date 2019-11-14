@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// sdkmessageprocessingstep
+    /// Microsoft.Dynamics.CRM.sdkmessageprocessingstep
     /// </summary>
     public partial class MicrosoftDynamicsCRMsdkmessageprocessingstep
     {
@@ -29,7 +29,80 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsdkmessageprocessingstep class.
         /// </summary>
-        public MicrosoftDynamicsCRMsdkmessageprocessingstep(string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepid = default(string), string _sdkmessagefilteridValue = default(string), string introducedversion = default(string), string _sdkmessageidValue = default(string), int? componentstate = default(int?), string configuration = default(string), int? customizationlevel = default(int?), int? statecode = default(int?), int? mode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string solutionid = default(string), bool? asyncautodelete = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? canusereadonlyconnection = default(bool?), object ishidden = default(object), string _sdkmessageprocessingstepsecureconfigidValue = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? stage = default(int?), string filteringattributes = default(string), long? versionnumber = default(long?), int? supporteddeployment = default(int?), bool? ismanaged = default(bool?), string sdkmessageprocessingstepidunique = default(string), string _eventhandlerValue = default(string), int? rank = default(int?), string _impersonatinguseridValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), object iscustomizable = default(object), string description = default(string), MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig sdkmessageprocessingstepsecureconfigid = default(MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessagefilter sdkmessagefilterid = default(MicrosoftDynamicsCRMsdkmessagefilter), MicrosoftDynamicsCRMsystemuser impersonatinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype eventhandlerPlugintype = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMasyncoperation> sdkMessageProcessingStepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> sdkmessageprocessingstepidSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), MicrosoftDynamicsCRMserviceendpoint eventhandlerServiceendpoint = default(MicrosoftDynamicsCRMserviceendpoint))
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the
+        /// sdkmessageprocessingstep.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization with which the SDK message processing step is
+        /// associated.</param>
+        /// <param name="sdkmessageprocessingstepid">Unique identifier of the
+        /// SDK message processing step entity.</param>
+        /// <param name="_sdkmessagefilteridValue">Unique identifier of the SDK
+        /// message filter.</param>
+        /// <param name="introducedversion">Version in which the form is
+        /// introduced.</param>
+        /// <param name="_sdkmessageidValue">Unique identifier of the SDK
+        /// message.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="configuration">Step-specific configuration for the
+        /// plug-in type. Passed to the plug-in constructor at run
+        /// time.</param>
+        /// <param name="customizationlevel">Customization level of the SDK
+        /// message processing step.</param>
+        /// <param name="statecode">Status of the SDK message processing
+        /// step.</param>
+        /// <param name="mode">Run-time mode of execution, for example,
+        /// synchronous or asynchronous.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the sdkmessageprocessingstep.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the SDK message processing step.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="asyncautodelete">Indicates whether the asynchronous
+        /// system job is automatically deleted on completion.</param>
+        /// <param name="createdon">Date and time when the SDK message
+        /// processing step was created.</param>
+        /// <param name="canusereadonlyconnection">Identifies whether a SDK
+        /// Message Processing Step type will be ReadOnly or Read Write. false
+        /// - ReadWrite, true - ReadOnly </param>
+        /// <param name="ishidden">Information that specifies whether this
+        /// component should be hidden.</param>
+        /// <param name="_sdkmessageprocessingstepsecureconfigidValue">Unique
+        /// identifier of the Sdk message processing step secure
+        /// configuration.</param>
+        /// <param name="name">Name of SdkMessage processing step.</param>
+        /// <param name="modifiedon">Date and time when the SDK message
+        /// processing step was last modified.</param>
+        /// <param name="stage">Stage in the execution pipeline that the SDK
+        /// message processing step is in.</param>
+        /// <param name="filteringattributes">Comma-separated list of
+        /// attributes. If at least one of these attributes is modified, the
+        /// plug-in should execute.</param>
+        /// <param name="versionnumber">Number that identifies a specific
+        /// revision of the SDK message processing step. </param>
+        /// <param name="supporteddeployment">Deployment that the SDK message
+        /// processing step should be executed on; server, client, or
+        /// both.</param>
+        /// <param name="ismanaged">Information that specifies whether this
+        /// component is managed.</param>
+        /// <param name="sdkmessageprocessingstepidunique">Unique identifier of
+        /// the SDK message processing step.</param>
+        /// <param name="_eventhandlerValue">Unique identifier of the
+        /// associated event handler.</param>
+        /// <param name="rank">Processing order within the stage.</param>
+        /// <param name="_impersonatinguseridValue">Unique identifier of the
+        /// user to impersonate context when step is executed.</param>
+        /// <param name="statuscode">Reason for the status of the SDK message
+        /// processing step.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the SDK message processing step.</param>
+        /// <param name="iscustomizable">Information that specifies whether
+        /// this component can be customized.</param>
+        /// <param name="description">Description of the SDK message processing
+        /// step.</param>
+        public MicrosoftDynamicsCRMsdkmessageprocessingstep(string _modifiedonbehalfbyValue = default(string), string _organizationidValue = default(string), string sdkmessageprocessingstepid = default(string), string _sdkmessagefilteridValue = default(string), string introducedversion = default(string), string _sdkmessageidValue = default(string), int? componentstate = default(int?), string configuration = default(string), int? customizationlevel = default(int?), int? statecode = default(int?), int? mode = default(int?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string solutionid = default(string), bool? asyncautodelete = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), bool? canusereadonlyconnection = default(bool?), string ishidden = default(string), string _sdkmessageprocessingstepsecureconfigidValue = default(string), string name = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? stage = default(int?), string filteringattributes = default(string), string versionnumber = default(string), int? supporteddeployment = default(int?), bool? ismanaged = default(bool?), string sdkmessageprocessingstepidunique = default(string), string _eventhandlerValue = default(string), int? rank = default(int?), string _impersonatinguseridValue = default(string), int? statuscode = default(int?), string _createdbyValue = default(string), string iscustomizable = default(string), string description = default(string), MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig sdkmessageprocessingstepsecureconfigid = default(MicrosoftDynamicsCRMsdkmessageprocessingstepsecureconfig), MicrosoftDynamicsCRMsdkmessage sdkmessageid = default(MicrosoftDynamicsCRMsdkmessage), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsdkmessagefilter sdkmessagefilterid = default(MicrosoftDynamicsCRMsdkmessagefilter), MicrosoftDynamicsCRMsystemuser impersonatinguserid = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMplugintype plugintypeid = default(MicrosoftDynamicsCRMplugintype), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMplugintype eventhandlerPlugintype = default(MicrosoftDynamicsCRMplugintype), IList<MicrosoftDynamicsCRMasyncoperation> sdkMessageProcessingStepAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage> sdkmessageprocessingstepidSdkmessageprocessingstepimage = default(IList<MicrosoftDynamicsCRMsdkmessageprocessingstepimage>), MicrosoftDynamicsCRMserviceendpoint eventhandlerServiceendpoint = default(MicrosoftDynamicsCRMserviceendpoint))
         {
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             this._organizationidValue = _organizationidValue;
@@ -89,176 +162,234 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the sdkmessageprocessingstep.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization with which the
+        /// SDK message processing step is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SDK message processing step
+        /// entity.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageprocessingstepid")]
         public string Sdkmessageprocessingstepid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SDK message filter.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessagefilterid_value")]
         public string _sdkmessagefilteridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the form is introduced.
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SDK message.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessageid_value")]
         public string _sdkmessageidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets step-specific configuration for the plug-in type.
+        /// Passed to the plug-in constructor at run time.
         /// </summary>
         [JsonProperty(PropertyName = "configuration")]
         public string Configuration { get; set; }
 
         /// <summary>
+        /// Gets or sets customization level of the SDK message processing
+        /// step.
         /// </summary>
         [JsonProperty(PropertyName = "customizationlevel")]
         public int? Customizationlevel { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets run-time mode of execution, for example, synchronous
+        /// or asynchronous.
         /// </summary>
         [JsonProperty(PropertyName = "mode")]
         public int? Mode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// sdkmessageprocessingstep.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the asynchronous system job is
+        /// automatically deleted on completion.
         /// </summary>
         [JsonProperty(PropertyName = "asyncautodelete")]
         public bool? Asyncautodelete { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SDK message processing step was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets identifies whether a SDK Message Processing Step type
+        /// will be ReadOnly or Read Write. false - ReadWrite, true - ReadOnly
         /// </summary>
         [JsonProperty(PropertyName = "canusereadonlyconnection")]
         public bool? Canusereadonlyconnection { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component
+        /// should be hidden.
         /// </summary>
         [JsonProperty(PropertyName = "ishidden")]
-        public object Ishidden { get; set; }
+        public string Ishidden { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Sdk message processing step
+        /// secure configuration.
         /// </summary>
         [JsonProperty(PropertyName = "_sdkmessageprocessingstepsecureconfigid_value")]
         public string _sdkmessageprocessingstepsecureconfigidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets name of SdkMessage processing step.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SDK message processing step was
+        /// last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets stage in the execution pipeline that the SDK message
+        /// processing step is in.
         /// </summary>
         [JsonProperty(PropertyName = "stage")]
         public int? Stage { get; set; }
 
         /// <summary>
+        /// Gets or sets comma-separated list of attributes. If at least one of
+        /// these attributes is modified, the plug-in should execute.
         /// </summary>
         [JsonProperty(PropertyName = "filteringattributes")]
         public string Filteringattributes { get; set; }
 
         /// <summary>
+        /// Gets or sets number that identifies a specific revision of the SDK
+        /// message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets deployment that the SDK message processing step should
+        /// be executed on; server, client, or both.
         /// </summary>
         [JsonProperty(PropertyName = "supporteddeployment")]
         public int? Supporteddeployment { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component is
+        /// managed.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "sdkmessageprocessingstepidunique")]
         public string Sdkmessageprocessingstepidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated event handler.
         /// </summary>
         [JsonProperty(PropertyName = "_eventhandler_value")]
         public string _eventhandlerValue { get; set; }
 
         /// <summary>
+        /// Gets or sets processing order within the stage.
         /// </summary>
         [JsonProperty(PropertyName = "rank")]
         public int? Rank { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user to impersonate context
+        /// when step is executed.
         /// </summary>
         [JsonProperty(PropertyName = "_impersonatinguserid_value")]
         public string _impersonatinguseridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the SDK message processing
+        /// step.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the SDK
+        /// message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether this component can
+        /// be customized.
         /// </summary>
         [JsonProperty(PropertyName = "iscustomizable")]
-        public object Iscustomizable { get; set; }
+        public string Iscustomizable { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the SDK message processing step.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }

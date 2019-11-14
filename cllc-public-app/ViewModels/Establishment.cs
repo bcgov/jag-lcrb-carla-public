@@ -64,6 +64,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public int? StatusCode { get; set; }
         public int? Timezoneruleversionnumber { get; set; }
         public int? Utcconversiontimezonecode { get; set; }
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
     }
 }

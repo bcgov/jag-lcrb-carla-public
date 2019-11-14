@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// queue
+    /// Microsoft.Dynamics.CRM.queue
     /// </summary>
     public partial class MicrosoftDynamicsCRMqueue
     {
@@ -27,7 +29,74 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMqueue class.
         /// </summary>
-        public MicrosoftDynamicsCRMqueue(string queueid = default(string), int? emailrouteraccessapproval = default(int?), int? statuscode = default(int?), string _owninguserValue = default(string), string _owningteamValue = default(string), string _owneridValue = default(string), string _createdonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), int? importsequencenumber = default(int?), string emailaddress = default(string), bool? ignoreunsolicitedemail = default(bool?), bool? isemailaddressapprovedbyo365admin = default(bool?), string _organizationidValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? numberofitems = default(int?), int? incomingemailfilteringmethod = default(int?), int? queuetypecode = default(int?), int? incomingemaildeliverymethod = default(int?), string entityimageid = default(string), string _defaultmailboxValue = default(string), int? outgoingemaildeliverymethod = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? numberofmembers = default(int?), object exchangerate = default(object), string name = default(string), object entityimage = default(object), string description = default(string), long? versionnumber = default(long?), string _modifiedonbehalfbyValue = default(string), string entityimageUrl = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), long? entityimageTimestamp = default(long?), int? queueviewtype = default(int?), MicrosoftDynamicsCRMmailbox defaultmailbox = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMbulkdeletefailure> queueBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMpostfollow> queuePostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMmailbox> mailboxRegardingQueue = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMteam> queueTeam = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMqueueitem> queueEntries = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMactivityparty> queueActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMasyncoperation> queueAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser primaryuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> queueEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> queuemembershipAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> queueSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsystemuser> queueSystemUser = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMpostregarding> queuePostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> queueDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> queueDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
+        /// <param name="queueid">Unique identifier of the queue.</param>
+        /// <param name="emailrouteraccessapproval">Shows the status of the
+        /// primary email address.</param>
+        /// <param name="statuscode">Reason for the status of the
+        /// queue.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the queue.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the queue.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the queue.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the queue.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// currency associated with the queue.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="emailaddress">Email address that is associated with
+        /// the queue.</param>
+        /// <param name="ignoreunsolicitedemail">Information that specifies
+        /// whether a queue is to ignore unsolicited email
+        /// (deprecated).</param>
+        /// <param name="isemailaddressapprovedbyo365admin">Shows the status of
+        /// approval of the email address by O365 Admin.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the queue.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the queue record.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="statecode">Status of the queue.</param>
+        /// <param name="numberofitems">Number of Queue items associated with
+        /// the queue.</param>
+        /// <param name="incomingemailfilteringmethod">Convert Incoming Email
+        /// To Activities</param>
+        /// <param name="queuetypecode">Type of queue that is automatically
+        /// assigned when a user or queue is created. The type can be public,
+        /// private, or work in process.</param>
+        /// <param name="incomingemaildeliverymethod">Incoming email delivery
+        /// method for the queue.</param>
+        /// <param name="entityimageid">For internal use only.</param>
+        /// <param name="_defaultmailboxValue">Select the mailbox associated
+        /// with this queue.</param>
+        /// <param name="outgoingemaildeliverymethod">Outgoing email delivery
+        /// method for the queue.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the queue.</param>
+        /// <param name="modifiedon">Date and time when the queue was last
+        /// modified.</param>
+        /// <param name="numberofmembers">Number of Members associated with the
+        /// queue.</param>
+        /// <param name="exchangerate">Exchange rate for the currency
+        /// associated with the queue with respect to the base
+        /// currency.</param>
+        /// <param name="name">Name of the queue.</param>
+        /// <param name="entityimage">The default image for the entity.</param>
+        /// <param name="description">Description of the queue.</param>
+        /// <param name="versionnumber">Version number of the queue.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the queue.</param>
+        /// <param name="createdon">Date and time when the queue was
+        /// created.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the queue.</param>
+        /// <param name="queueviewtype">Select whether the queue is public or
+        /// private. A public queue can be viewed by all. A private queue can
+        /// be viewed only by the members added to the queue.</param>
+        public MicrosoftDynamicsCRMqueue(string queueid = default(string), int? emailrouteraccessapproval = default(int?), int? statuscode = default(int?), string _owninguserValue = default(string), string _owningteamValue = default(string), string _owneridValue = default(string), string _createdonbehalfbyValue = default(string), string _transactioncurrencyidValue = default(string), int? importsequencenumber = default(int?), string emailaddress = default(string), bool? ignoreunsolicitedemail = default(bool?), bool? isemailaddressapprovedbyo365admin = default(bool?), string _organizationidValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? statecode = default(int?), int? numberofitems = default(int?), int? incomingemailfilteringmethod = default(int?), int? queuetypecode = default(int?), int? incomingemaildeliverymethod = default(int?), string entityimageid = default(string), string _defaultmailboxValue = default(string), int? outgoingemaildeliverymethod = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? numberofmembers = default(int?), decimal? exchangerate = default(decimal?), string name = default(string), byte[] entityimage = default(byte[]), string description = default(string), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), string entityimageUrl = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), long? entityimageTimestamp = default(long?), int? queueviewtype = default(int?), MicrosoftDynamicsCRMmailbox defaultmailbox = default(MicrosoftDynamicsCRMmailbox), IList<MicrosoftDynamicsCRMbulkdeletefailure> queueBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMpostfollow> queuePostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMmailbox> mailboxRegardingQueue = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMteam> queueTeam = default(IList<MicrosoftDynamicsCRMteam>), IList<MicrosoftDynamicsCRMqueueitem> queueEntries = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMactivityparty> queueActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMasyncoperation> queueAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser primaryuserid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMemail> queueEmailEmailSender = default(IList<MicrosoftDynamicsCRMemail>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsystemuser> queuemembershipAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> queueSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMsystemuser> queueSystemUser = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMpostregarding> queuePostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> queueDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> queueDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
         {
             Queueid = queueid;
             Emailrouteraccessapproval = emailrouteraccessapproval;
@@ -100,161 +169,207 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the queue.
         /// </summary>
         [JsonProperty(PropertyName = "queueid")]
         public string Queueid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of the primary email address.
         /// </summary>
         [JsonProperty(PropertyName = "emailrouteraccessapproval")]
         public int? Emailrouteraccessapproval { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the queue.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the queue.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the queue.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// queue.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// queue.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the currency associated with the
+        /// queue.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets email address that is associated with the queue.
         /// </summary>
         [JsonProperty(PropertyName = "emailaddress")]
         public string Emailaddress { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies whether a queue is to
+        /// ignore unsolicited email (deprecated).
         /// </summary>
         [JsonProperty(PropertyName = "ignoreunsolicitedemail")]
         public bool? Ignoreunsolicitedemail { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of approval of the email address by
+        /// O365 Admin.
         /// </summary>
         [JsonProperty(PropertyName = "isemailaddressapprovedbyo365admin")]
         public bool? Isemailaddressapprovedbyo365admin { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the queue.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the queue
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the queue.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets number of Queue items associated with the queue.
         /// </summary>
         [JsonProperty(PropertyName = "numberofitems")]
         public int? Numberofitems { get; set; }
 
         /// <summary>
+        /// Gets or sets convert Incoming Email To Activities
         /// </summary>
         [JsonProperty(PropertyName = "incomingemailfilteringmethod")]
         public int? Incomingemailfilteringmethod { get; set; }
 
         /// <summary>
+        /// Gets or sets type of queue that is automatically assigned when a
+        /// user or queue is created. The type can be public, private, or work
+        /// in process.
         /// </summary>
         [JsonProperty(PropertyName = "queuetypecode")]
         public int? Queuetypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets incoming email delivery method for the queue.
         /// </summary>
         [JsonProperty(PropertyName = "incomingemaildeliverymethod")]
         public int? Incomingemaildeliverymethod { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
         public string Entityimageid { get; set; }
 
         /// <summary>
+        /// Gets or sets select the mailbox associated with this queue.
         /// </summary>
         [JsonProperty(PropertyName = "_defaultmailbox_value")]
         public string _defaultmailboxValue { get; set; }
 
         /// <summary>
+        /// Gets or sets outgoing email delivery method for the queue.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingemaildeliverymethod")]
         public int? Outgoingemaildeliverymethod { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// queue.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the queue was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets number of Members associated with the queue.
         /// </summary>
         [JsonProperty(PropertyName = "numberofmembers")]
         public int? Numberofmembers { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate for the currency associated with the
+        /// queue with respect to the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the queue.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the default image for the entity.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
-        public object Entityimage { get; set; }
+        public byte[] Entityimage { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the queue.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the queue.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the queue.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
@@ -265,11 +380,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the queue was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// queue.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
@@ -280,6 +398,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the queue is public or private. A
+        /// public queue can be viewed by all. A private queue can be viewed
+        /// only by the members added to the queue.
         /// </summary>
         [JsonProperty(PropertyName = "queueviewtype")]
         public int? Queueviewtype { get; set; }
@@ -342,7 +463,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

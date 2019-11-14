@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// mobileofflineprofileitem
+    /// Microsoft.Dynamics.CRM.mobileofflineprofileitem
     /// </summary>
     public partial class MicrosoftDynamicsCRMmobileofflineprofileitem
     {
@@ -29,7 +29,73 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMmobileofflineprofileitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMmobileofflineprofileitem(bool? recordsownedbymyteam = default(bool?), bool? canbefollowed = default(bool?), string viewquery = default(string), int? entityobjecttypecode = default(int?), string stageid = default(string), string _createdbyValue = default(string), long? versionnumber = default(long?), bool? getrelatedentityrecords = default(bool?), string mobileofflineprofileitemid = default(string), string introducedversion = default(string), bool? isvisibleingrid = default(bool?), string profileitementityfilter = default(string), string _regardingobjectidValue = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string selectedentitymetadata = default(string), int? recorddistributioncriteria = default(int?), string _modifiedbyValue = default(string), string traversedpath = default(string), string _modifiedonbehalfbyValue = default(string), bool? recordsownedbymybusinessunit = default(bool?), string mobileofflineprofileitemidunique = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string selectedentitytypecode = default(string), string relationshipdata = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _organizationidValue = default(string), string processid = default(string), bool? isvalidated = default(bool?), string solutionid = default(string), bool? recordsownedbyme = default(bool?), string _profileitemruleValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmobileofflineprofile regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemMobileOfflineProfileItemAssociation = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsavedquery profileitemrule = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="recordsownedbymyteam">Download my team's
+        /// records</param>
+        /// <param name="canbefollowed">Specifies whether records of this
+        /// entity can be followed.</param>
+        /// <param name="viewquery">Contains converted sql of the referenced
+        /// view.</param>
+        /// <param name="entityobjecttypecode">Internal Use Only</param>
+        /// <param name="stageid">Shows the ID of the stage.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="versionnumber">Version number of the Mobile Offline
+        /// Profile Item.</param>
+        /// <param name="getrelatedentityrecords">Specify whether records
+        /// related to this entity will be made available for offline
+        /// access.</param>
+        /// <param name="mobileofflineprofileitemid">Unique identifier of the
+        /// mobile offline profile item.</param>
+        /// <param name="introducedversion">Version in which the Mobile offline
+        /// Profile Item is introduced.</param>
+        /// <param name="isvisibleingrid">Information about whether the mobile
+        /// offline profile item is visible in the Profile Item
+        /// subgrid.</param>
+        /// <param name="profileitementityfilter">Profile item entity filter
+        /// criteria</param>
+        /// <param name="_regardingobjectidValue">Items contained with a
+        /// particular Profile.</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="ismanaged">For internal use only.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="selectedentitymetadata">Internal Use Only</param>
+        /// <param name="recorddistributioncriteria">Specify data download
+        /// filter for selected entity</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="traversedpath">For internal use only.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who updated the record
+        /// on behalf of another user.</param>
+        /// <param name="recordsownedbymybusinessunit">Download my business
+        /// unit's records</param>
+        /// <param name="mobileofflineprofileitemidunique">For Internal Use
+        /// Only</param>
+        /// <param name="publishedon">Displays the last published date
+        /// time.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="selectedentitytypecode">Mobile offline enabled
+        /// entity</param>
+        /// <param name="relationshipdata">Internal Use Only</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="name">Enter the name of the mobile offline profile
+        /// item.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the Mobile Offline Profile
+        /// Item.</param>
+        /// <param name="processid">Shows the ID of the process.</param>
+        /// <param name="isvalidated">Information about whether profile item is
+        /// validated or not</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="recordsownedbyme">Download my records</param>
+        /// <param name="_profileitemruleValue">Saved Query associated with the
+        /// Mobile offline profile item rule.</param>
+        public MicrosoftDynamicsCRMmobileofflineprofileitem(bool? recordsownedbymyteam = default(bool?), bool? canbefollowed = default(bool?), string viewquery = default(string), int? entityobjecttypecode = default(int?), string stageid = default(string), string _createdbyValue = default(string), string versionnumber = default(string), bool? getrelatedentityrecords = default(bool?), string mobileofflineprofileitemid = default(string), string introducedversion = default(string), bool? isvisibleingrid = default(bool?), string profileitementityfilter = default(string), string _regardingobjectidValue = default(string), int? componentstate = default(int?), bool? ismanaged = default(bool?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), string selectedentitymetadata = default(string), int? recorddistributioncriteria = default(int?), string _modifiedbyValue = default(string), string traversedpath = default(string), string _modifiedonbehalfbyValue = default(string), bool? recordsownedbymybusinessunit = default(bool?), string mobileofflineprofileitemidunique = default(string), System.DateTimeOffset? publishedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string selectedentitytypecode = default(string), string relationshipdata = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), string _organizationidValue = default(string), string processid = default(string), bool? isvalidated = default(bool?), string solutionid = default(string), bool? recordsownedbyme = default(bool?), string _profileitemruleValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMmobileofflineprofile regardingobjectid = default(MicrosoftDynamicsCRMmobileofflineprofile), IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation> mobileOfflineProfileItemMobileOfflineProfileItemAssociation = default(IList<MicrosoftDynamicsCRMmobileofflineprofileitemassociation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsavedquery profileitemrule = default(MicrosoftDynamicsCRMsavedquery), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Recordsownedbymyteam = recordsownedbymyteam;
             Canbefollowed = canbefollowed;
@@ -84,181 +150,230 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets download my team's records
         /// </summary>
         [JsonProperty(PropertyName = "recordsownedbymyteam")]
         public bool? Recordsownedbymyteam { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies whether records of this entity can be
+        /// followed.
         /// </summary>
         [JsonProperty(PropertyName = "canbefollowed")]
         public bool? Canbefollowed { get; set; }
 
         /// <summary>
+        /// Gets or sets contains converted sql of the referenced view.
         /// </summary>
         [JsonProperty(PropertyName = "viewquery")]
         public string Viewquery { get; set; }
 
         /// <summary>
+        /// Gets or sets internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "entityobjecttypecode")]
         public int? Entityobjecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the stage.
         /// </summary>
         [JsonProperty(PropertyName = "stageid")]
         public string Stageid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the Mobile Offline Profile Item.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets specify whether records related to this entity will be
+        /// made available for offline access.
         /// </summary>
         [JsonProperty(PropertyName = "getrelatedentityrecords")]
         public bool? Getrelatedentityrecords { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the mobile offline profile item.
         /// </summary>
         [JsonProperty(PropertyName = "mobileofflineprofileitemid")]
         public string Mobileofflineprofileitemid { get; set; }
 
         /// <summary>
+        /// Gets or sets version in which the Mobile offline Profile Item is
+        /// introduced.
         /// </summary>
         [JsonProperty(PropertyName = "introducedversion")]
         public string Introducedversion { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether the mobile offline profile
+        /// item is visible in the Profile Item subgrid.
         /// </summary>
         [JsonProperty(PropertyName = "isvisibleingrid")]
         public bool? Isvisibleingrid { get; set; }
 
         /// <summary>
+        /// Gets or sets profile item entity filter criteria
         /// </summary>
         [JsonProperty(PropertyName = "profileitementityfilter")]
         public string Profileitementityfilter { get; set; }
 
         /// <summary>
+        /// Gets or sets items contained with a particular Profile.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
         public string _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "selectedentitymetadata")]
         public string Selectedentitymetadata { get; set; }
 
         /// <summary>
+        /// Gets or sets specify data download filter for selected entity
         /// </summary>
         [JsonProperty(PropertyName = "recorddistributioncriteria")]
         public int? Recorddistributioncriteria { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "traversedpath")]
         public string Traversedpath { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets download my business unit's records
         /// </summary>
         [JsonProperty(PropertyName = "recordsownedbymybusinessunit")]
         public bool? Recordsownedbymybusinessunit { get; set; }
 
         /// <summary>
+        /// Gets or sets for Internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "mobileofflineprofileitemidunique")]
         public string Mobileofflineprofileitemidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets displays the last published date time.
         /// </summary>
         [JsonProperty(PropertyName = "publishedon")]
         public System.DateTimeOffset? Publishedon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets mobile offline enabled entity
         /// </summary>
         [JsonProperty(PropertyName = "selectedentitytypecode")]
         public string Selectedentitytypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets internal Use Only
         /// </summary>
         [JsonProperty(PropertyName = "relationshipdata")]
         public string Relationshipdata { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the name of the mobile offline profile item.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the Mobile Offline Profile Item.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the process.
         /// </summary>
         [JsonProperty(PropertyName = "processid")]
         public string Processid { get; set; }
 
         /// <summary>
+        /// Gets or sets information about whether profile item is validated or
+        /// not
         /// </summary>
         [JsonProperty(PropertyName = "isvalidated")]
         public bool? Isvalidated { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets download my records
         /// </summary>
         [JsonProperty(PropertyName = "recordsownedbyme")]
         public bool? Recordsownedbyme { get; set; }
 
         /// <summary>
+        /// Gets or sets saved Query associated with the Mobile offline profile
+        /// item rule.
         /// </summary>
         [JsonProperty(PropertyName = "_profileitemrule_value")]
         public string _profileitemruleValue { get; set; }

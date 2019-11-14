@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// connection
+    /// Microsoft.Dynamics.CRM.connection
     /// </summary>
     public partial class MicrosoftDynamicsCRMconnection
     {
@@ -29,7 +31,75 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMconnection
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMconnection(int? record1objecttypecode = default(int?), string _transactioncurrencyidValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _record1roleidValue = default(string), System.DateTimeOffset? effectiveend = default(System.DateTimeOffset?), string entityimageUrl = default(string), string _modifiedbyValue = default(string), string name = default(string), object exchangerate = default(object), string _owningteamValue = default(string), int? importsequencenumber = default(int?), string _record2roleidValue = default(string), string _createdbyValue = default(string), int? record2objecttypecode = default(int?), string _owneridValue = default(string), string _owninguserValue = default(string), string _record1idValue = default(string), System.DateTimeOffset? effectivestart = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string description = default(string), long? versionnumber = default(long?), string entityimageid = default(string), long? entityimageTimestamp = default(long?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), object entityimage = default(object), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), string _relatedconnectionidValue = default(string), string _record2idValue = default(string), bool? ismaster = default(bool?), string connectionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMknowledgearticle record1idKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgearticle record2idKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMentitlement record1idEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlement record2idEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMknowledgebaserecord record1idKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMknowledgebaserecord record2idKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMcontact record1idContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMlead record2idLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsocialactivity record2idSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMtask record2idTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser record1idSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount record2idAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMterritory record1idTerritory = default(MicrosoftDynamicsCRMterritory), MicrosoftDynamicsCRMsystemuser record2idSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam record2idTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMinvoice record1idInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMquote record1idQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMterritory record2idTerritory = default(MicrosoftDynamicsCRMterritory), MicrosoftDynamicsCRMcampaignactivity record1idCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMquote record2idQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMcampaignactivity record2idCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMincident record2idIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMletter record2idLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMcontract record1idContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMresourcegroup record2idResourcegroup = default(MicrosoftDynamicsCRMresourcegroup), MicrosoftDynamicsCRMcontract record2idContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMserviceappointment record2idServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMemail record1idEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMresourcegroup record1idResourcegroup = default(MicrosoftDynamicsCRMresourcegroup), MicrosoftDynamicsCRMlist record2idList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMsocialprofile record1idSocialprofile = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpricelevel record2idPricelevel = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMtask record1idTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMcampaign record1idCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMsalesorder record2idSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMemail record2idEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMserviceappointment record1idServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMcompetitor record2idCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsocialprofile record2idSocialprofile = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMproduct record2idProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMteam record1idTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMconnectionrole record2roleid = default(MicrosoftDynamicsCRMconnectionrole), MicrosoftDynamicsCRMgoal record2idGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMposition record1idPosition = default(MicrosoftDynamicsCRMposition), MicrosoftDynamicsCRMrecurringappointmentmaster record1idRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMconstraintbasedgroup record2idConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMcompetitor record1idCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMopportunity record2idOpportunity = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMasyncoperation> connectionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMappointment record1idAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMlist record1idList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMincident record1idIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMfax record2idFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMequipment record1idEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMinvoice record2idInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMproduct record1idProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMconnection relatedconnectionid = default(MicrosoftDynamicsCRMconnection), IList<MicrosoftDynamicsCRMconnection> connectionRelatedConnection = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMrecurringappointmentmaster record2idRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMphonecall record1idPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMopportunity record1idOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMappointment record2idAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMgoal record1idGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMsocialactivity record1idSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMfax record1idFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMposition record2idPosition = default(MicrosoftDynamicsCRMposition), MicrosoftDynamicsCRMconnectionrole record1roleid = default(MicrosoftDynamicsCRMconnectionrole), MicrosoftDynamicsCRMletter record1idLetter = default(MicrosoftDynamicsCRMletter), IList<MicrosoftDynamicsCRMsyncerror> connectionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMactivitypointer record2idActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMaccount record1idAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMlead record1idLead = default(MicrosoftDynamicsCRMlead), object ownerid = default(object), MicrosoftDynamicsCRMconstraintbasedgroup record1idConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMcontact record2idContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMequipment record2idEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMactivitypointer record1idActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcampaign record2idCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMsalesorder record1idSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMphonecall record2idPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMpricelevel record1idPricelevel = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMabsScheduledprocessexecution record1idAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMabsScheduledprocessexecution record2idAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution))
+        /// <param name="record1objecttypecode">Shows the record type of the
+        /// source record.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="statecode">Shows whether the connection is active or
+        /// inactive. Inactive connections are read-only and can't be edited
+        /// unless they are reactivated.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="_record1roleidValue">Choose the primary party's role
+        /// or relationship with the second party.</param>
+        /// <param name="effectiveend">Enter the end date of the
+        /// connection.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="name">Name of the connection.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the connection.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_record2roleidValue">Choose the secondary party's role
+        /// or relationship with the primary party.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="record2objecttypecode">Shows the record type of the
+        /// target record.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the connection.</param>
+        /// <param name="_record1idValue">Unique identifier of the source
+        /// record.</param>
+        /// <param name="effectivestart">Enter the start date of the
+        /// connection.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="description">Type additional information to describe
+        /// the connection, such as the length or quality of the
+        /// relationship.</param>
+        /// <param name="versionnumber">Version number of the
+        /// connection.</param>
+        /// <param name="entityimageid">For internal use only.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="entityimage">The default image for the entity.</param>
+        /// <param name="statuscode">Reason for the status of the
+        /// connection.</param>
+        /// <param name="_owningbusinessunitValue">Shows the business unit that
+        /// the record owner belongs to.</param>
+        /// <param name="_relatedconnectionidValue">Unique identifier for the
+        /// reciprocal connection record.</param>
+        /// <param name="_record2idValue">Unique identifier of the target
+        /// record.</param>
+        /// <param name="ismaster">Indicates that this is the master
+        /// record.</param>
+        /// <param name="connectionid">Unique identifier of the
+        /// connection.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        public MicrosoftDynamicsCRMconnection(int? record1objecttypecode = default(int?), string _transactioncurrencyidValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), string _record1roleidValue = default(string), System.DateTimeOffset? effectiveend = default(System.DateTimeOffset?), string entityimageUrl = default(string), string _modifiedbyValue = default(string), string name = default(string), decimal? exchangerate = default(decimal?), string _owningteamValue = default(string), int? importsequencenumber = default(int?), string _record2roleidValue = default(string), string _createdbyValue = default(string), int? record2objecttypecode = default(int?), string _owneridValue = default(string), string _owninguserValue = default(string), string _record1idValue = default(string), System.DateTimeOffset? effectivestart = default(System.DateTimeOffset?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string description = default(string), string versionnumber = default(string), string entityimageid = default(string), long? entityimageTimestamp = default(long?), string _createdonbehalfbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), byte[] entityimage = default(byte[]), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), string _relatedconnectionidValue = default(string), string _record2idValue = default(string), bool? ismaster = default(bool?), string connectionid = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMknowledgearticle record1idKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMknowledgearticle record2idKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMentitlement record1idEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlement record2idEntitlement = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMknowledgebaserecord record1idKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMknowledgebaserecord record2idKnowledgebaserecord = default(MicrosoftDynamicsCRMknowledgebaserecord), MicrosoftDynamicsCRMcontact record1idContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMlead record2idLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMsocialactivity record2idSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMtask record2idTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser record1idSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount record2idAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMterritory record1idTerritory = default(MicrosoftDynamicsCRMterritory), MicrosoftDynamicsCRMsystemuser record2idSystemuser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam record2idTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMinvoice record1idInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMquote record1idQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMterritory record2idTerritory = default(MicrosoftDynamicsCRMterritory), MicrosoftDynamicsCRMcampaignactivity record1idCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMquote record2idQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMcampaignactivity record2idCampaignactivity = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMincident record2idIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMletter record2idLetter = default(MicrosoftDynamicsCRMletter), MicrosoftDynamicsCRMcontract record1idContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMresourcegroup record2idResourcegroup = default(MicrosoftDynamicsCRMresourcegroup), MicrosoftDynamicsCRMcontract record2idContract = default(MicrosoftDynamicsCRMcontract), MicrosoftDynamicsCRMserviceappointment record2idServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMemail record1idEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMresourcegroup record1idResourcegroup = default(MicrosoftDynamicsCRMresourcegroup), MicrosoftDynamicsCRMlist record2idList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMsocialprofile record1idSocialprofile = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpricelevel record2idPricelevel = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMtask record1idTask = default(MicrosoftDynamicsCRMtask), MicrosoftDynamicsCRMcampaign record1idCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMsalesorder record2idSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMemail record2idEmail = default(MicrosoftDynamicsCRMemail), MicrosoftDynamicsCRMserviceappointment record1idServiceappointment = default(MicrosoftDynamicsCRMserviceappointment), MicrosoftDynamicsCRMcompetitor record2idCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsocialprofile record2idSocialprofile = default(MicrosoftDynamicsCRMsocialprofile), MicrosoftDynamicsCRMproduct record2idProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMteam record1idTeam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMconnectionrole record2roleid = default(MicrosoftDynamicsCRMconnectionrole), MicrosoftDynamicsCRMgoal record2idGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMposition record1idPosition = default(MicrosoftDynamicsCRMposition), MicrosoftDynamicsCRMrecurringappointmentmaster record1idRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMconstraintbasedgroup record2idConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMcompetitor record1idCompetitor = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMopportunity record2idOpportunity = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMasyncoperation> connectionAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMappointment record1idAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMlist record1idList = default(MicrosoftDynamicsCRMlist), MicrosoftDynamicsCRMincident record1idIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMfax record2idFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMequipment record1idEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMinvoice record2idInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMproduct record1idProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMconnection relatedconnectionid = default(MicrosoftDynamicsCRMconnection), IList<MicrosoftDynamicsCRMconnection> connectionRelatedConnection = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMrecurringappointmentmaster record2idRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMphonecall record1idPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMopportunity record1idOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMappointment record2idAppointment = default(MicrosoftDynamicsCRMappointment), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMgoal record1idGoal = default(MicrosoftDynamicsCRMgoal), MicrosoftDynamicsCRMsocialactivity record1idSocialactivity = default(MicrosoftDynamicsCRMsocialactivity), MicrosoftDynamicsCRMfax record1idFax = default(MicrosoftDynamicsCRMfax), MicrosoftDynamicsCRMposition record2idPosition = default(MicrosoftDynamicsCRMposition), MicrosoftDynamicsCRMconnectionrole record1roleid = default(MicrosoftDynamicsCRMconnectionrole), MicrosoftDynamicsCRMletter record1idLetter = default(MicrosoftDynamicsCRMletter), IList<MicrosoftDynamicsCRMsyncerror> connectionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMactivitypointer record2idActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMaccount record1idAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMlead record1idLead = default(MicrosoftDynamicsCRMlead), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMconstraintbasedgroup record1idConstraintbasedgroup = default(MicrosoftDynamicsCRMconstraintbasedgroup), MicrosoftDynamicsCRMcontact record2idContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMequipment record2idEquipment = default(MicrosoftDynamicsCRMequipment), MicrosoftDynamicsCRMactivitypointer record1idActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMcampaign record2idCampaign = default(MicrosoftDynamicsCRMcampaign), MicrosoftDynamicsCRMsalesorder record1idSalesorder = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMphonecall record2idPhonecall = default(MicrosoftDynamicsCRMphonecall), MicrosoftDynamicsCRMpricelevel record1idPricelevel = default(MicrosoftDynamicsCRMpricelevel), MicrosoftDynamicsCRMabsScheduledprocessexecution record1idAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution), MicrosoftDynamicsCRMabsScheduledprocessexecution record2idAbsScheduledprocessexecution = default(MicrosoftDynamicsCRMabsScheduledprocessexecution))
         {
             Record1objecttypecode = record1objecttypecode;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
@@ -163,31 +233,42 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the record type of the source record.
         /// </summary>
         [JsonProperty(PropertyName = "record1objecttypecode")]
         public int? Record1objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the connection is active or inactive.
+        /// Inactive connections are read-only and can't be edited unless they
+        /// are reactivated.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the primary party's role or relationship with
+        /// the second party.
         /// </summary>
         [JsonProperty(PropertyName = "_record1roleid_value")]
         public string _record1roleidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the end date of the connection.
         /// </summary>
         [JsonProperty(PropertyName = "effectiveend")]
         public System.DateTimeOffset? Effectiveend { get; set; }
@@ -198,81 +279,106 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the connection.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the connection.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the secondary party's role or relationship with
+        /// the primary party.
         /// </summary>
         [JsonProperty(PropertyName = "_record2roleid_value")]
         public string _record2roleidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the record type of the target record.
         /// </summary>
         [JsonProperty(PropertyName = "record2objecttypecode")]
         public int? Record2objecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the connection.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the source record.
         /// </summary>
         [JsonProperty(PropertyName = "_record1id_value")]
         public string _record1idValue { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the start date of the connection.
         /// </summary>
         [JsonProperty(PropertyName = "effectivestart")]
         public System.DateTimeOffset? Effectivestart { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the
+        /// connection, such as the length or quality of the relationship.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the connection.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
         public string Entityimageid { get; set; }
@@ -283,51 +389,67 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets the default image for the entity.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
-        public object Entityimage { get; set; }
+        public byte[] Entityimage { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the connection.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the business unit that the record owner belongs
+        /// to.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the reciprocal connection
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "_relatedconnectionid_value")]
         public string _relatedconnectionidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the target record.
         /// </summary>
         [JsonProperty(PropertyName = "_record2id_value")]
         public string _record2idValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates that this is the master record.
         /// </summary>
         [JsonProperty(PropertyName = "ismaster")]
         public bool? Ismaster { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the connection.
         /// </summary>
         [JsonProperty(PropertyName = "connectionid")]
         public string Connectionid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
@@ -725,7 +847,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// subject
+    /// Microsoft.Dynamics.CRM.subject
     /// </summary>
     public partial class MicrosoftDynamicsCRMsubject
     {
@@ -29,7 +29,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsubject
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsubject(string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), long? versionnumber = default(long?), string _modifiedbyValue = default(string), string description = default(string), int? featuremask = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string _createdbyexternalpartyValue = default(string), string _parentsubjectValue = default(string), string _modifiedbyexternalpartyValue = default(string), string title = default(string), string subjectid = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), IList<MicrosoftDynamicsCRMsalesliterature> subjectSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsubject parentsubject = default(MicrosoftDynamicsCRMsubject), IList<MicrosoftDynamicsCRMsubject> subjectParentSubject = default(IList<MicrosoftDynamicsCRMsubject>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> subjectIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMasyncoperation> subjectAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> subjectSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMkbarticle> subjectKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMproduct> subjectProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMknowledgearticle> subjectKnowledgearticles = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMbulkdeletefailure> subjectBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the subject.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="createdon">Date and time when the subject was
+        /// created.</param>
+        /// <param name="versionnumber">Version number of the subject.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the subject.</param>
+        /// <param name="description">Description of the subject.</param>
+        /// <param name="featuremask">Information that specifies when the
+        /// subject will be displayed in lists of subjects.</param>
+        /// <param name="modifiedon">Date and time when the subject was last
+        /// modified.</param>
+        /// <param name="_organizationidValue">Unique identifier for the
+        /// organization associated with the subject.</param>
+        /// <param name="_createdbyexternalpartyValue">Shows the external party
+        /// who created the record.</param>
+        /// <param name="_parentsubjectValue">Unique identifier of the parent
+        /// subject.</param>
+        /// <param name="_modifiedbyexternalpartyValue">Shows the external
+        /// party who modified the record.</param>
+        /// <param name="title">Title of the subject.</param>
+        /// <param name="subjectid">Unique identifier of the subject.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the subject.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who last modified the subject.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        public MicrosoftDynamicsCRMsubject(string _createdbyValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), string _modifiedbyValue = default(string), string description = default(string), int? featuremask = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _organizationidValue = default(string), string _createdbyexternalpartyValue = default(string), string _parentsubjectValue = default(string), string _modifiedbyexternalpartyValue = default(string), string title = default(string), string subjectid = default(string), string _createdonbehalfbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? importsequencenumber = default(int?), IList<MicrosoftDynamicsCRMsalesliterature> subjectSalesLiterature = default(IList<MicrosoftDynamicsCRMsalesliterature>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsubject parentsubject = default(MicrosoftDynamicsCRMsubject), IList<MicrosoftDynamicsCRMsubject> subjectParentSubject = default(IList<MicrosoftDynamicsCRMsubject>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> subjectIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMasyncoperation> subjectAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> subjectSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMkbarticle> subjectKbArticles = default(IList<MicrosoftDynamicsCRMkbarticle>), IList<MicrosoftDynamicsCRMproduct> subjectProducts = default(IList<MicrosoftDynamicsCRMproduct>), IList<MicrosoftDynamicsCRMknowledgearticle> subjectKnowledgearticles = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMbulkdeletefailure> subjectBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
             this._createdbyValue = _createdbyValue;
             Overriddencreatedon = overriddencreatedon;
@@ -72,86 +102,109 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the subject.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the subject was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the subject.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// subject.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the subject.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets information that specifies when the subject will be
+        /// displayed in lists of subjects.
         /// </summary>
         [JsonProperty(PropertyName = "featuremask")]
         public int? Featuremask { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the subject was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the organization associated with
+        /// the subject.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the external party who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdbyexternalparty_value")]
         public string _createdbyexternalpartyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the parent subject.
         /// </summary>
         [JsonProperty(PropertyName = "_parentsubject_value")]
         public string _parentsubjectValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the external party who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedbyexternalparty_value")]
         public string _modifiedbyexternalpartyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets title of the subject.
         /// </summary>
         [JsonProperty(PropertyName = "title")]
         public string Title { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the subject.
         /// </summary>
         [JsonProperty(PropertyName = "subjectid")]
         public string Subjectid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// subject.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who last
+        /// modified the subject.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }

@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// publisheraddress
+    /// Microsoft.Dynamics.CRM.publisheraddress
     /// </summary>
     public partial class MicrosoftDynamicsCRMpublisheraddress
     {
@@ -27,7 +27,72 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMpublisheraddress class.
         /// </summary>
-        public MicrosoftDynamicsCRMpublisheraddress(string line2 = default(string), string name = default(string), string fax = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), string postofficebox = default(string), string _modifiedbyValue = default(string), int? freighttermscode = default(int?), decimal? longitude = default(decimal?), string postalcode = default(string), int? addresstypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), int? shippingmethodcode = default(int?), string upszone = default(string), string telephone2 = default(string), int? addressnumber = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string telephone3 = default(string), string line1 = default(string), int? utcoffset = default(int?), string primarycontactname = default(string), string _modifiedonbehalfbyValue = default(string), string county = default(string), int? utcconversiontimezonecode = default(int?), string _parentidValue = default(string), string city = default(string), string publisheraddressid = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string line3 = default(string), string telephone1 = default(string), decimal? latitude = default(decimal?), string stateorprovince = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher parentid = default(MicrosoftDynamicsCRMpublisher), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="line2">Second line for entering address
+        /// information.</param>
+        /// <param name="name">Name used to identify the publisher
+        /// address.</param>
+        /// <param name="fax">Fax number for the publisher address.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="postofficebox">Post office box number in the publisher
+        /// address.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the publisher address.</param>
+        /// <param name="freighttermscode">Freight terms for the publisher
+        /// address.</param>
+        /// <param name="longitude">Longitude for the publisher
+        /// address.</param>
+        /// <param name="postalcode">ZIP Code or postal code in the publisher
+        /// address.</param>
+        /// <param name="addresstypecode">Type of address for the publisher,
+        /// such as billing, shipping, or primary address.</param>
+        /// <param name="modifiedon">Date and time when the publisher address
+        /// was last modified.</param>
+        /// <param name="country">Country/region name in the publisher
+        /// address.</param>
+        /// <param name="shippingmethodcode">Method of shipment for the
+        /// publisher address.</param>
+        /// <param name="upszone">United Parcel Service (UPS) zone for the
+        /// address of the publisher.</param>
+        /// <param name="telephone2">Second telephone number for the publisher
+        /// address.</param>
+        /// <param name="addressnumber">Specifies which publisher address is
+        /// applicable.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the publisher address.</param>
+        /// <param name="createdon">Date and time when the publisher address
+        /// was created.</param>
+        /// <param name="telephone3">Third telephone number for the publisher
+        /// address.</param>
+        /// <param name="line1">First line for entering address
+        /// information.</param>
+        /// <param name="utcoffset">UTC offset for the address. This is the
+        /// difference between local time and standard Coordinated Universal
+        /// Time.</param>
+        /// <param name="primarycontactname">Name of the primary contact at the
+        /// publisher address.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the publisher address.</param>
+        /// <param name="county">County name in the publisher address.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_parentidValue">Unique identifier of the parent object
+        /// with which the publisher address is associated.</param>
+        /// <param name="city">City name in the publisher address.</param>
+        /// <param name="publisheraddressid">Unique identifier of the publisher
+        /// address.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the publisher address.</param>
+        /// <param name="line3">Third line for entering address
+        /// information.</param>
+        /// <param name="telephone1">First telephone number for the publisher
+        /// address.</param>
+        /// <param name="latitude">Latitude for the publisher address.</param>
+        /// <param name="stateorprovince">State or province in the publisher
+        /// address.</param>
+        public MicrosoftDynamicsCRMpublisheraddress(string line2 = default(string), string name = default(string), string fax = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string postofficebox = default(string), string _modifiedbyValue = default(string), int? freighttermscode = default(int?), string longitude = default(string), string postalcode = default(string), int? addresstypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), int? shippingmethodcode = default(int?), string upszone = default(string), string telephone2 = default(string), int? addressnumber = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string telephone3 = default(string), string line1 = default(string), int? utcoffset = default(int?), string primarycontactname = default(string), string _modifiedonbehalfbyValue = default(string), string county = default(string), int? utcconversiontimezonecode = default(int?), string _parentidValue = default(string), string city = default(string), string publisheraddressid = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string line3 = default(string), string telephone1 = default(string), string latitude = default(string), string stateorprovince = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher parentid = default(MicrosoftDynamicsCRMpublisher), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Line2 = line2;
             Name = name;
@@ -78,16 +143,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets second line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line2")]
         public string Line2 { get; set; }
 
         /// <summary>
+        /// Gets or sets name used to identify the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets fax number for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "fax")]
         public string Fax { get; set; }
@@ -95,159 +163,201 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets post office box number in the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "postofficebox")]
         public string Postofficebox { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets freight terms for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "freighttermscode")]
         public int? Freighttermscode { get; set; }
 
         /// <summary>
+        /// Gets or sets longitude for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "longitude")]
-        public decimal? Longitude { get; set; }
+        public string Longitude { get; set; }
 
         /// <summary>
+        /// Gets or sets ZIP Code or postal code in the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "postalcode")]
         public string Postalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets type of address for the publisher, such as billing,
+        /// shipping, or primary address.
         /// </summary>
         [JsonProperty(PropertyName = "addresstypecode")]
         public int? Addresstypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the publisher address was last
+        /// modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets country/region name in the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "country")]
         public string Country { get; set; }
 
         /// <summary>
+        /// Gets or sets method of shipment for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "shippingmethodcode")]
         public int? Shippingmethodcode { get; set; }
 
         /// <summary>
+        /// Gets or sets united Parcel Service (UPS) zone for the address of
+        /// the publisher.
         /// </summary>
         [JsonProperty(PropertyName = "upszone")]
         public string Upszone { get; set; }
 
         /// <summary>
+        /// Gets or sets second telephone number for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "telephone2")]
         public string Telephone2 { get; set; }
 
         /// <summary>
+        /// Gets or sets specifies which publisher address is applicable.
         /// </summary>
         [JsonProperty(PropertyName = "addressnumber")]
         public int? Addressnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the
+        /// publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the publisher address was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets third telephone number for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "telephone3")]
         public string Telephone3 { get; set; }
 
         /// <summary>
+        /// Gets or sets first line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line1")]
         public string Line1 { get; set; }
 
         /// <summary>
+        /// Gets or sets UTC offset for the address. This is the difference
+        /// between local time and standard Coordinated Universal Time.
         /// </summary>
         [JsonProperty(PropertyName = "utcoffset")]
         public int? Utcoffset { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the primary contact at the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "primarycontactname")]
         public string Primarycontactname { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets county name in the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "county")]
         public string County { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the parent object with which the
+        /// publisher address is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_parentid_value")]
         public string _parentidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets city name in the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "city")]
         public string City { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "publisheraddressid")]
         public string Publisheraddressid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets third line for entering address information.
         /// </summary>
         [JsonProperty(PropertyName = "line3")]
         public string Line3 { get; set; }
 
         /// <summary>
+        /// Gets or sets first telephone number for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "telephone1")]
         public string Telephone1 { get; set; }
 
         /// <summary>
+        /// Gets or sets latitude for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "latitude")]
-        public decimal? Latitude { get; set; }
+        public string Latitude { get; set; }
 
         /// <summary>
+        /// Gets or sets state or province in the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "stateorprovince")]
         public string Stateorprovince { get; set; }

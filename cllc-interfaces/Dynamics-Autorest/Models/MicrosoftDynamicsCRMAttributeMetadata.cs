@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// AttributeMetadata
+    /// Microsoft.Dynamics.CRM.AttributeMetadata
     /// </summary>
     public partial class MicrosoftDynamicsCRMAttributeMetadata
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMAttributeMetadata class.
         /// </summary>
-        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), object attributeType = default(object), object attributeTypeName = default(object), int? columnNumber = default(int?), object description = default(object), object displayName = default(object), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), object isAuditEnabled = default(object), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), object isGlobalFilterEnabled = default(object), object isSortableEnabled = default(object), string linkedAttributeId = default(string), string logicalName = default(string), object isCustomizable = default(object), object isRenameable = default(object), object isValidForAdvancedFind = default(object), object requiredLevel = default(object), object canModifyAdditionalSettings = default(object), string schemaName = default(string), bool? isLogical = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?))
+        public MicrosoftDynamicsCRMAttributeMetadata(string attributeOf = default(string), string attributeType = default(string), string attributeTypeName = default(string), int? columnNumber = default(int?), string description = default(string), string displayName = default(string), string deprecatedVersion = default(string), string introducedVersion = default(string), string entityLogicalName = default(string), string isAuditEnabled = default(string), bool? isCustomAttribute = default(bool?), bool? isPrimaryId = default(bool?), bool? isPrimaryName = default(bool?), bool? isValidForCreate = default(bool?), bool? isValidForRead = default(bool?), bool? isValidForUpdate = default(bool?), bool? canBeSecuredForRead = default(bool?), bool? canBeSecuredForCreate = default(bool?), bool? canBeSecuredForUpdate = default(bool?), bool? isSecured = default(bool?), bool? isRetrievable = default(bool?), bool? isFilterable = default(bool?), bool? isSearchable = default(bool?), bool? isManaged = default(bool?), string isGlobalFilterEnabled = default(string), string isSortableEnabled = default(string), string linkedAttributeId = default(string), string logicalName = default(string), string isCustomizable = default(string), string isRenameable = default(string), string isValidForAdvancedFind = default(string), string requiredLevel = default(string), string canModifyAdditionalSettings = default(string), string schemaName = default(string), bool? isLogical = default(bool?), string inheritsFrom = default(string), int? sourceType = default(int?))
         {
             AttributeOf = attributeOf;
             AttributeType = attributeType;
@@ -82,12 +82,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "AttributeType")]
-        public object AttributeType { get; set; }
+        public string AttributeType { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "AttributeTypeName")]
-        public object AttributeTypeName { get; set; }
+        public string AttributeTypeName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -97,12 +97,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "Description")]
-        public object Description { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "DisplayName")]
-        public object DisplayName { get; set; }
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -122,7 +122,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsAuditEnabled")]
-        public object IsAuditEnabled { get; set; }
+        public string IsAuditEnabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -197,12 +197,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsGlobalFilterEnabled")]
-        public object IsGlobalFilterEnabled { get; set; }
+        public string IsGlobalFilterEnabled { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsSortableEnabled")]
-        public object IsSortableEnabled { get; set; }
+        public string IsSortableEnabled { get; set; }
 
         /// <summary>
         /// </summary>
@@ -217,27 +217,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsCustomizable")]
-        public object IsCustomizable { get; set; }
+        public string IsCustomizable { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsRenameable")]
-        public object IsRenameable { get; set; }
+        public string IsRenameable { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "IsValidForAdvancedFind")]
-        public object IsValidForAdvancedFind { get; set; }
+        public string IsValidForAdvancedFind { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "RequiredLevel")]
-        public object RequiredLevel { get; set; }
+        public string RequiredLevel { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "CanModifyAdditionalSettings")]
-        public object CanModifyAdditionalSettings { get; set; }
+        public string CanModifyAdditionalSettings { get; set; }
 
         /// <summary>
         /// </summary>

@@ -11,8 +11,7 @@ namespace Gov.Lclb.Cllb.Interfaces
     using Newtonsoft.Json;
 
     /// <summary>
-    /// This OData service is located at
-    /// https://wsgw.dev.jag.gov.bc.ca/clb/crmdev/api/data/v8.2/
+    /// This OData service is located at http://localhost
     /// </summary>
     public partial interface IDynamicsClient : System.IDisposable
     {
@@ -32,6 +31,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
+        /// Show only the first n items
+        /// </summary>
+        int? Top88 { get; set; }
+
+        /// <summary>
+        /// Skip the first n items
+        /// </summary>
+        int? Skip16 { get; set; }
+
+        /// <summary>
+        /// Include count of items
+        /// </summary>
+        bool? Count88 { get; set; }
+
+        /// <summary>
+        /// Filter items by property values
+        /// </summary>
+        string Filter88 { get; set; }
+
+        /// <summary>
+        /// Search items by search phrases
+        /// </summary>
+        string Search16 { get; set; }
+
+        /// <summary>
         /// Subscription credentials which uniquely identify client
         /// subscription.
         /// </summary>
@@ -44,9 +68,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAccounts Accounts { get; }
 
         /// <summary>
-        /// Gets the ILicencetypeinvestigationset.
+        /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
         /// </summary>
-        ILicencetypeinvestigationset Licencetypeinvestigationset { get; }
+        IAdoxiolicencetypeadoxioinvestigationset Adoxiolicencetypeadoxioinvestigationset { get; }
 
         /// <summary>
         /// Gets the IAliases.
@@ -139,9 +163,19 @@ namespace Gov.Lclb.Cllb.Interfaces
         IComplianceinvestigations Complianceinvestigations { get; }
 
         /// <summary>
+        /// Gets the IInvestigationexhibits.
+        /// </summary>
+        IInvestigationexhibits Investigationexhibits { get; }
+
+        /// <summary>
         /// Gets the ICompliancemeetings.
         /// </summary>
         ICompliancemeetings Compliancemeetings { get; }
+
+        /// <summary>
+        /// Gets the ICompliancemeetingrelatedparties.
+        /// </summary>
+        ICompliancemeetingrelatedparties Compliancemeetingrelatedparties { get; }
 
         /// <summary>
         /// Gets the IContraventionadmins.
@@ -194,6 +228,41 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishmentwatchwords Establishmentwatchwords { get; }
 
         /// <summary>
+        /// Gets the IExhibits.
+        /// </summary>
+        IExhibits Exhibits { get; }
+
+        /// <summary>
+        /// Gets the IExhibitasyncoperations.
+        /// </summary>
+        IExhibitasyncoperations Exhibitasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IExhibitbulkdeletefailures.
+        /// </summary>
+        IExhibitbulkdeletefailures Exhibitbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IExhibitduplicatebaserecord.
+        /// </summary>
+        IExhibitduplicatebaserecord Exhibitduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IExhibitduplicatematchingrecord.
+        /// </summary>
+        IExhibitduplicatematchingrecord Exhibitduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IExhibitsyncerrors.
+        /// </summary>
+        IExhibitsyncerrors Exhibitsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IInvestigationid.
+        /// </summary>
+        IInvestigationid Investigationid { get; }
+
+        /// <summary>
         /// Gets the IFiainvestigationlogs.
         /// </summary>
         IFiainvestigationlogs Fiainvestigationlogs { get; }
@@ -204,9 +273,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IFundingsources Fundingsources { get; }
 
         /// <summary>
-        /// Gets the IIncidentlicencetypeset.
+        /// Gets the IIncidentadoxiolicencetypeset.
         /// </summary>
-        IIncidentlicencetypeset Incidentlicencetypeset { get; }
+        IIncidentadoxiolicencetypeset Incidentadoxiolicencetypeset { get; }
 
         /// <summary>
         /// Gets the IInspectioninspectorsset.
@@ -314,6 +383,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRelatedparties Relatedparties { get; }
 
         /// <summary>
+        /// Gets the ICompliancemeetingid.
+        /// </summary>
+        ICompliancemeetingid Compliancemeetingid { get; }
+
+        /// <summary>
         /// Gets the ISettings.
         /// </summary>
         ISettings Settings { get; }
@@ -369,9 +443,39 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWorkers Workers { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioexhibit.
+        /// </summary>
+        IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioexhibit.
+        /// </summary>
+        IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; }
+
+        /// <summary>
         /// Gets the IContacts.
         /// </summary>
         IContacts Contacts { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioexhibit.
+        /// </summary>
+        IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioexhibit.
+        /// </summary>
+        IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IEntitydefinitions.
+        /// </summary>
+        IEntitydefinitions Entitydefinitions { get; }
+
+        /// <summary>
+        /// Gets the IGlobaloptionsetdefinitions.
+        /// </summary>
+        IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
 
         /// <summary>
         /// Gets the IInvoices.
@@ -394,14 +498,34 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISharepointsites Sharepointsites { get; }
 
         /// <summary>
-        /// Gets the IEntitydefinitions.
+        /// Gets the ILkadoxioexhibitcreatedby.
         /// </summary>
-        IEntitydefinitions Entitydefinitions { get; }
+        ILkadoxioexhibitcreatedby Lkadoxioexhibitcreatedby { get; }
 
         /// <summary>
-        /// Gets the IGlobaloptionsetdefinitions.
+        /// Gets the ILkadoxioexhibitcreatedonbehalfby.
         /// </summary>
-        IGlobaloptionsetdefinitions Globaloptionsetdefinitions { get; }
+        ILkadoxioexhibitcreatedonbehalfby Lkadoxioexhibitcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitmodifiedby.
+        /// </summary>
+        ILkadoxioexhibitmodifiedby Lkadoxioexhibitmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioexhibitmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioexhibit.
+        /// </summary>
+        IUseradoxioexhibit Useradoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioexhibit.
+        /// </summary>
+        ITeamadoxioexhibit Teamadoxioexhibit { get; }
 
     }
 }

@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// fieldpermission
+    /// Microsoft.Dynamics.CRM.fieldpermission
     /// </summary>
     public partial class MicrosoftDynamicsCRMfieldpermission
     {
@@ -29,7 +29,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMfieldpermission class.
         /// </summary>
-        public MicrosoftDynamicsCRMfieldpermission(string attributelogicalname = default(string), string fieldpermissionid = default(string), int? cancreate = default(int?), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? canupdate = default(int?), string _organizationidValue = default(string), string fieldpermissionidunique = default(string), string solutionid = default(string), string _fieldsecurityprofileidValue = default(string), long? versionnumber = default(long?), string entityname = default(string), bool? ismanaged = default(bool?), int? canread = default(int?), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile))
+        /// <param name="attributelogicalname">Attribute Name.</param>
+        /// <param name="fieldpermissionid">Unique identifier of the Field
+        /// Permission.</param>
+        /// <param name="cancreate">Can this Profile create the
+        /// attribute</param>
+        /// <param name="componentstate">For internal use only.</param>
+        /// <param name="overwritetime">For internal use only.</param>
+        /// <param name="canupdate">Can this Profile update the
+        /// attribute</param>
+        /// <param name="_organizationidValue">Unique identifier for the
+        /// organization</param>
+        /// <param name="fieldpermissionidunique">For internal use
+        /// only.</param>
+        /// <param name="solutionid">Unique identifier of the associated
+        /// solution.</param>
+        /// <param name="_fieldsecurityprofileidValue">Unique identifier of
+        /// profile to which this privilege belongs.</param>
+        /// <param name="entityname">Entity name.</param>
+        /// <param name="ismanaged">Indicates whether the solution component is
+        /// part of a managed solution.</param>
+        /// <param name="canread">Can this Profile read the attribute</param>
+        public MicrosoftDynamicsCRMfieldpermission(string attributelogicalname = default(string), string fieldpermissionid = default(string), int? cancreate = default(int?), int? componentstate = default(int?), System.DateTimeOffset? overwritetime = default(System.DateTimeOffset?), int? canupdate = default(int?), string _organizationidValue = default(string), string fieldpermissionidunique = default(string), string solutionid = default(string), string _fieldsecurityprofileidValue = default(string), string versionnumber = default(string), string entityname = default(string), bool? ismanaged = default(bool?), int? canread = default(int?), IList<MicrosoftDynamicsCRMsyncerror> fieldPermissionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMfieldsecurityprofile fieldsecurityprofileid = default(MicrosoftDynamicsCRMfieldsecurityprofile))
         {
             Attributelogicalname = attributelogicalname;
             Fieldpermissionid = fieldpermissionid;
@@ -56,51 +77,62 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets attribute Name.
         /// </summary>
         [JsonProperty(PropertyName = "attributelogicalname")]
         public string Attributelogicalname { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Field Permission.
         /// </summary>
         [JsonProperty(PropertyName = "fieldpermissionid")]
         public string Fieldpermissionid { get; set; }
 
         /// <summary>
+        /// Gets or sets can this Profile create the attribute
         /// </summary>
         [JsonProperty(PropertyName = "cancreate")]
         public int? Cancreate { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "componentstate")]
         public int? Componentstate { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "overwritetime")]
         public System.DateTimeOffset? Overwritetime { get; set; }
 
         /// <summary>
+        /// Gets or sets can this Profile update the attribute
         /// </summary>
         [JsonProperty(PropertyName = "canupdate")]
         public int? Canupdate { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the organization
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "fieldpermissionidunique")]
         public string Fieldpermissionidunique { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the associated solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of profile to which this privilege
+        /// belongs.
         /// </summary>
         [JsonProperty(PropertyName = "_fieldsecurityprofileid_value")]
         public string _fieldsecurityprofileidValue { get; set; }
@@ -108,19 +140,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets entity name.
         /// </summary>
         [JsonProperty(PropertyName = "entityname")]
         public string Entityname { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the solution component is part of a
+        /// managed solution.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets can this Profile read the attribute
         /// </summary>
         [JsonProperty(PropertyName = "canread")]
         public int? Canread { get; set; }
