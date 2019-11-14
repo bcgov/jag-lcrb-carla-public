@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
@@ -59,11 +59,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks()
+                .AddCheck("Federal Reporting Service", () => HealthCheckResult.Healthy());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
