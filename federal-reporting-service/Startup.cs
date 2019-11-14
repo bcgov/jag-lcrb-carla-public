@@ -104,17 +104,23 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             }
 
             // enable Splunk logger using Serilog
-            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
-                )
-            {
-                Log.Logger = new LoggerConfiguration()
+            Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
-                        Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .WriteTo.Console()
+                    .WriteTo.EventCollector( splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                       messageHandler: new HttpClientHandler()
+                       {
+                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                       }
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                     )                    
                     .CreateLogger();
-            }
+
+                Serilog.Debugging.SelfLog.Enable(Console.Error);
 
         }
 
@@ -135,7 +141,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     log.LogInformation($"Creating Hangfire jobs for {typeof(Startup)} ...");
 
                     // Run 1 minute past midnight on the 15th of every month
-                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).GenerateFederalTrackingReport(), "1 0 15 * *");
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).GenerateFederalTrackingReport(null), "1 8 15 * *");
 
                     log.LogInformation("Hangfire jobs setup.");
                 }
