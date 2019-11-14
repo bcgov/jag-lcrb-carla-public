@@ -1,8 +1,6 @@
 using CsvHelper;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.ClassMaps;
-using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,13 +9,12 @@ using Microsoft.Rest;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.Models;
 
-namespace Gov.Lclb.Cllb.Public.Controllers
+namespace Gov.Lclb.Cllb.FederalReportingService
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class FederalTrackingController : ControllerBase
+    public class FederalReportingController
     {
         private readonly string DOCUMENT_LIBRARY = "Federal Reporting";
         private readonly IDynamicsClient _dynamicsClient;
@@ -25,12 +22,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly SharePointFileManager _sharepoint;
         private readonly ILogger _logger;
 
-        public FederalTrackingController(IDynamicsClient dynamicsClient, IConfiguration configuration, ILoggerFactory loggerFactory, SharePointFileManager sharepoint)
+        public FederalReportingController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
-            _dynamicsClient = dynamicsClient;
             _configuration = configuration;
-            _sharepoint = sharepoint;
-            _logger = loggerFactory.CreateLogger(typeof(FederalTrackingController));
+            if (_configuration["DYNAMICS_ODATA_URI"] != null)
+            {
+                _dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
+            }
+            if (_configuration["SHAREPOINT_ODATA_URI"] != null)
+            {
+                _sharepoint = new SharePointFileManager(_configuration);
+            }
+            _logger = loggerFactory.CreateLogger(typeof(FederalReportingController));
         }
 
 
@@ -38,14 +41,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Generate a csv with the federal tracking report for a given reporting period
         /// </summary>
         /// <returns></returns>
-        [HttpGet("generate")]
-        public IActionResult GenerateFederalTrackingReport()
+        public async Task GenerateFederalTrackingReport()
         {
-            if (_configuration["FEATURE_FEDERAL_CSV"] == null)
-            {
-                return new NotFoundResult();
-            }
-
             try
             {
                 var previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"});
@@ -54,10 +51,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Submitted reports
                 string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
                 var dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
-                List<FederalTrackingMonthlyExport> monthlyReports = new List<FederalTrackingMonthlyExport>();
+                List<FederalReportingMonthlyExport> monthlyReports = new List<FederalReportingMonthlyExport>();
                 foreach (MicrosoftDynamicsCRMadoxioCannabismonthlyreport report in dynamicsMonthlyReports.Value)
                 {
-                    FederalTrackingMonthlyExport export = new FederalTrackingMonthlyExport()
+                    FederalReportingMonthlyExport export = new FederalReportingMonthlyExport()
                     {
                         ReportingPeriodMonth = report.AdoxioReportingperiodmonth,
                         ReportingPeriodYear = report.AdoxioReportingperiodyear,
@@ -98,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     using (var writer = new StreamWriter(mem))
                     using (var csv = new CsvWriter(writer))
                     {
-                        csv.Configuration.RegisterClassMap<FederalTrackingMonthlyExportMap>();
+                        csv.Configuration.RegisterClassMap<FederalReportingMonthlyExportMap>();
                         csv.WriteRecords(monthlyReports);
 
                         writer.Flush();
@@ -109,25 +106,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + "/" + url + filename;
                     }
 
-                    return new JsonResult(new Dictionary<string, string>{
-                        { "file", filePath },
-                        { "csvexportid", currentExportId.ToString("0000") },
-                        { "count", dynamicsMonthlyReports.Value.Count.ToString() }
-                    });
+                _logger.LogInformation($"Successfully exported Federal Reporting CSV {currentExportId}.");
                 }
-                return new JsonResult(new Dictionary<string, string>{
-                    { "count", dynamicsMonthlyReports.Value.Count.ToString() }
-                });
             }
             catch (HttpOperationException httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
-                return new BadRequestResult();
             }
             catch (SharePointRestException e)
             {
                 _logger.LogError(e, "Error saving csv to sharepoint");
-                return new BadRequestResult();
             }
         }
     }
