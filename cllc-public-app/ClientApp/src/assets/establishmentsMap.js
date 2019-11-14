@@ -17,11 +17,11 @@ var LDB_Licence_String = "Public Store";
     maxZoom: 17,
     // Bounding lats and longs of the map, corresponding to the lat/long extremes of BC.
     mapBounds: {
-      north: 61.0223,
-      south: 47.204556,
-      west: -140.073671,
-      east: -113.033822,
-      padding: 0.05 // Margin beyond extremes to pad the bounds with, as a ratio of the total bounding box.
+      north: 60.0223 + 0.2,
+      south: 48.204556 - 0.2,
+      west: -139.073671 - 0.2,
+      east: -114.033822 + 0.3,
+      padding: 0.0 // Margin beyond extremes to pad the bounds with, as a ratio of the total bounding box.
     },
     // ESRI layers associated with the map
     esriLayers: [
@@ -715,6 +715,7 @@ function EstablishmentsMap(options) {
 
         // Now that the rectangle is drawn, fit the map to it.
         _leafletMap.fitBounds(markerBounds);
+        
     };
 
     // Starts the identifyEstablishments operation. This operation comprises several events, generally initiated when a user clicks
