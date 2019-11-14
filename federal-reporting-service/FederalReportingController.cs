@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using System.Threading.Tasks;
+using Hangfire;
+using Hangfire.Console;
+using Hangfire.Server;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -40,7 +43,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         /// Generate a csv with the federal tracking report for a given reporting period
         /// </summary>
         /// <returns></returns>
-        public async Task GenerateFederalTrackingReport()
+        public async Task GenerateFederalTrackingReport(PerformContext hangfireContext)
         {
             try
             {
@@ -87,6 +90,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
                     
                 }
+                hangfireContext.WriteLine($"Found {monthlyReports.Count} monthly reports to export.");
+                _logger.LogInformation($"Found {monthlyReports.Count} monthly reports to export.");
                 if (monthlyReports.Count > 0)
                 {
                     string filePath = "";
@@ -104,16 +109,18 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                         string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
                         filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + "/" + url + filename;
                     }
-
-                _logger.LogInformation($"Successfully exported Federal Reporting CSV {currentExportId}.");
+                    hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {currentExportId}.");
+                    _logger.LogInformation($"Successfully exported Federal Reporting CSV {currentExportId}.");
                 }
             }
             catch (HttpOperationException httpOperationException)
             {
+                hangfireContext.WriteLine("Error creating federal tracking CSV");
                 _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
             }
             catch (SharePointRestException e)
             {
+                hangfireContext.WriteLine("Error saving csv to sharepoint");
                 _logger.LogError(e, "Error saving csv to sharepoint");
             }
         }
