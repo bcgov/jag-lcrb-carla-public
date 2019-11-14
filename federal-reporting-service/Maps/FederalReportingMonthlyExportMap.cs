@@ -1,11 +1,11 @@
 using CsvHelper.Configuration;
 using Gov.Lclb.Cllb.Public.ViewModels;
 
-namespace Gov.Lclb.Cllb.Public.ClassMaps
+namespace Gov.Lclb.Cllb.FederalReportingService
 {
-    public sealed class FederalTrackingMonthlyExportMap : ClassMap<FederalTrackingMonthlyExport>
+    public sealed class FederalReportingMonthlyExportMap : ClassMap<FederalReportingMonthlyExport>
     {
-        public FederalTrackingMonthlyExportMap()
+        public FederalReportingMonthlyExportMap()
         {
             Map(m => m.ReportingPeriodYear).Name("Reporting Period Year (####)").Index(0);
             Map(m => m.ReportingPeriodMonth).Name("Reporting Period Month (##)").Index(1);

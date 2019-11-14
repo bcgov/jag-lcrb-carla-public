@@ -1,8 +1,8 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 
-namespace Gov.Lclb.Cllb.Public.ViewModels
+namespace Gov.Lclb.Cllb.FederalReportingService
 {
-    public class FederalTrackingMonthlyExport
+    public class FederalReportingMonthlyExport
     {
         public string ReportingPeriodYear;
         public string ReportingPeriodMonth;
