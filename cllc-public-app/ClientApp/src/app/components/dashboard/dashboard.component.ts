@@ -9,7 +9,7 @@ import { ApplicationType, ApplicationTypeNames } from '@models/application-type.
 import { ApplicationDataService } from '@services/application-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LegalEntityDataService } from '@services/legal-entity-data.service';
 
