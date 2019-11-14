@@ -1,0 +1,290 @@
+{
+  "kind": "Template",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "${NAME}-deployment-template",
+    "creationTimestamp": null
+  },
+  "objects": [
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "template": "${NAME}-deployment"
+        },
+        "annotations": {
+          "description": "Defines how to deploy ${NAME}"
+        }
+      },
+      "spec": {
+        "strategy": {
+          "type": "Rolling"
+        },
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          },
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "namespace": "${IMAGE_NAMESPACE}",
+                "name": "${SOURCE_IMAGE_NAME}:${TAG_NAME}"
+              }
+            }
+          }
+        ],
+        "replicas": 1,
+        "selector": {
+          "name": "${NAME}"
+        },
+        "template": {
+          "metadata": {
+            "name": "${NAME}",
+            "labels": {
+              "name": "${NAME}"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "${NAME}",
+                "image": "",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "ASPNETCORE_ENVIRONMENT",
+                    "value": "${ASPNETCORE_ENVIRONMENT}"
+                  },
+                  {
+                    "name": "DYNAMICS_NATIVE_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-native-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-password",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "DYNAMICS_USERNAME",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "dynamics-user",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SHAREPOINT_NATIVE_BASE_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-native-base-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },                  
+                  {
+                    "name": "SHAREPOINT_ODATA_URI",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-odata-uri",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SHAREPOINT_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "sharepoint-password",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SSG_USERNAME",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "ssg-username",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  },
+                  {
+                    "name": "SSG_PASSWORD",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "key": "ssg-password",
+                        "name": "${SECRET_RESOURCE_NAME}"
+                      }
+                    }
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "${CPU_LIMIT}",
+                    "memory": "${MEMORY_LIMIT}"
+                  },
+                  "requests": {
+                    "cpu": "${CPU_REQUEST}",
+                    "memory": "${MEMORY_REQUEST}"
+                  }
+                },
+                "readinessProbe": {
+                  "httpGet": {
+                    "path": "/hc",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 10,
+                  "timeoutSeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                },
+                "liveinessProbe": {
+                  "httpGet": {
+                    "path": "/hc",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 10,
+                  "timeoutSeconds": 1,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "template": "${NAME}-deployment"
+        },
+        "annotations": {
+          "description": "Exposes and load balances the application pods."
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8080-tcp",
+            "protocol": "TCP",
+            "port": 8080,
+            "targetPort": 8080
+          }
+        ],
+        "selector": {
+          "name": "${NAME}"
+        },
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "name": "NAME",
+      "displayName": "Name",
+      "description": "The name assigned to all of the resources defined in this template.",
+      "required": true,
+      "value": "federal-reporting-service"
+    },
+    {
+      "name": "SECRET_RESOURCE_NAME",
+      "displayName": "Secret resource name",
+      "description": "Secret resource name",
+      "required": true,
+      "value": "cllc-public"
+    },
+    {
+      "name": "SOURCE_IMAGE_NAME",
+      "displayName": "Source Image Name",
+      "description": "The name of the image to use for this resource.",
+      "required": true,
+      "value": "federal-reporting-service"
+    },
+    {
+      "name": "IMAGE_NAMESPACE",
+      "displayName": "Image Namespace",
+      "description": "The namespace of the OpenShift project containing the imagestream for the application.",
+      "required": true,
+      "value": "lclb-cllc-tools"
+    },
+    {
+      "name": "TAG_NAME",
+      "displayName": "Environment TAG name",
+      "description": "The TAG name for this environment, e.g., dev, test, prod",
+      "required": true,
+      "value": "dev"
+    },
+    {
+      "name": "ASPNETCORE_ENVIRONMENT",
+      "displayName": "AspNetCore Environment",
+      "description": "The ASP Net Core deployment environment setting.",
+      "required": true,
+      "value": "Production"
+    },
+    {
+      "name": "CPU_LIMIT",
+      "displayName": "CPU Limit",
+      "description": "Maximum amount of CPU the container can use.",
+      "value": "1"
+    },
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Memory Limit",
+      "description": "Maximum amount of memory the container can use.",
+      "value": "4Gi"
+    },
+    {
+      "name": "CPU_REQUEST",
+      "displayName": "CPU Request",
+      "description": "Starting amount of CPU the container can use.",
+      "value": "100m"
+    },
+    {
+      "name": "MEMORY_REQUEST",
+      "displayName": "Memory Request",
+      "description": "Starting amount of memory the container can use.",
+      "value": "2Gi"
+    }
+  ]
+}
