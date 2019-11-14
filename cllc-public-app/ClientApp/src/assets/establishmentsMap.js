@@ -17,10 +17,10 @@ var LDB_Licence_String = "Public Store";
     maxZoom: 17,
     // Bounding lats and longs of the map, corresponding to the lat/long extremes of BC.
     mapBounds: {
-      north: 60.0223,
-      south: 48.204556,
-      west: -139.073671,
-      east: -114.033822,
+      north: 61.0223,
+      south: 47.204556,
+      west: -140.073671,
+      east: -113.033822,
       padding: 0.05 // Margin beyond extremes to pad the bounds with, as a ratio of the total bounding box.
     },
     // ESRI layers associated with the map
@@ -484,6 +484,9 @@ function EstablishmentsMap(options) {
         if (establishment.license === LDB_Licence_String) {
             contentString += "<td rowspan=3 valign=center><img src = 'assets/LDB_32x32.png' width='32' height='32' alt='BC Cannabis Store'></td>";
         }
+        else if (establishment.isOpen) {
+            contentString += "<td rowspan=3 valign=center><img src = 'assets/LICENSED_ICON.png' width='32' height='32' alt='Licenced Retail Store'></td>";
+        }
 
         contentString += "</tr>";
         contentString += "<tr><td>" + (establishment.addressCity || '') + ", " + establishment.addressPostal + "</td></tr>";
@@ -507,8 +510,17 @@ function EstablishmentsMap(options) {
 
         iconSize: [16, 16], // size of the icon
         iconAnchor: [16, 16], // point of the icon which will correspond to marker's location        
-        popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        popupAnchor: [-20, -20] // point from which the popup should open relative to the iconAnchor
       });
+
+        var retailIcon = L.icon({
+            iconUrl: 'assets/RETAIL_32x32.png',
+
+
+            iconSize: [16, 16], // size of the icon
+            iconAnchor: [16, 16], // point of the icon which will correspond to marker's location        
+            popupAnchor: [-20,-20] // point from which the popup should open relative to the iconAnchor
+        });
 
         var establishmentPushpinGuid = null;
         // Now we draw the Establishments, checking to prevent a marker from being drawn where a pushpin will be.
@@ -533,7 +545,12 @@ function EstablishmentsMap(options) {
                 if (establishment.license === LDB_Licence_String) {
                     establishmentMarker = L.marker(latLong, { icon: ldbIcon, interactive: !_establishmentPushpin });
                 }
-                else {
+                else if (establishment.isOpen)
+                {
+                    establishmentMarker = L.marker(latLong, { icon: retailIcon, interactive: !_establishmentPushpin });
+                }
+                else
+                {
                 
                     establishmentMarker = L.circleMarker(latLong, style);
                 }
