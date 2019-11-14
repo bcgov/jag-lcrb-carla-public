@@ -4,7 +4,6 @@ using CsvHelper;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.ClassMaps;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -113,8 +112,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var filter = $"_adoxio_licenceid_value eq {licenceId} and _adoxio_licenseeid_value eq {userSettings.AccountId}";
                 monthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter, orderby: new List<string> { "modifiedon desc" }).Value;
             }
-            catch (HttpOperationException)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Error querying monthly reports");
                 monthlyReports = null;
             }
 
