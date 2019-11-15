@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Exceptions;
+using System.Net.Http;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
