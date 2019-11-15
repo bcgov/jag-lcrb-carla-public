@@ -82,12 +82,12 @@
           <label for="">Applicant Name</label>
           <br>
           <input type="text" class="form-control" required formControlName="electronicSignature"
-            [ngModelOptions]="{standalone: true}" style="width: 350px" #name=>
-          <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622;"></i>
-          <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs"
+             style="width: 350px" >
+          <i *ngIf="!electronicSignature.valid && electronicSignature.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622;"></i>
+          <i *ngIf="!electronicSignature.valid && electronicSignature.touched" class="fas fa-chevron-left fa-xs"
             style="color: #A12622; margin-left: -6px;"></i>
-          <div *ngIf="!name.valid && name.touched" style="color: #A12622; width: 350px; margin-top: 2px;">
-            <div *ngIf="!name.valid && name.touched ">
+          <div *ngIf="!electronicSignature.valid && electronicSignature.touched" style="color: #A12622; width: 350px; margin-top: 2px;">
+            <div *ngIf="!electronicSignature.valid && electronicSignature.touched ">
               Please enter your full legal name.
             </div>
           </div>
@@ -119,7 +119,7 @@
           <button class="btn btn-secondary" routerLink="/worker-qualification/dashboard">
             <i class="fa fa-save"></i>
             SAVE FOR LATER</button>
-          <button style="margin-left: 10px;" routerLink="/worker-qualification/application/" class="btn btn-secondary">RETURN
+          <button style="margin-left: 10px;" routerLink="/worker-qualification/application/{{workerId}}" class="btn btn-secondary">RETURN
             TO STEP 1
           </button>
           <button style="margin-left: 10px;" (click)="goToNextStep()" class="btn btn-primary">SUBMIT & PAY</button>
