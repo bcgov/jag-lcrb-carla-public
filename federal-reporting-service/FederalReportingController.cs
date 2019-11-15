@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -47,8 +48,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         {
             try
             {
-                var previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"});
-                int currentExportId = (previousReport.Value.Count > 0) ? previousReport.Value[0].AdoxioCsvexportid.Value + 1 : 1;
+                MicrosoftDynamicsCRMadoxioCannabismonthlyreport previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"}).Value.FirstOrDefault();
+                int currentExportId = (previousReport != null && previousReport.AdoxioCsvexportid != null) ? (int)previousReport.AdoxioCsvexportid + 1 : 1;
 
                 // Submitted reports
                 string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
@@ -107,7 +108,6 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                         string filename = $"{currentExportId.ToString("0000")}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
                         bool result = _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv").GetAwaiter().GetResult();
                         string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
-                        filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + "/" + url + filename;
                     }
                     hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {currentExportId}.");
                     _logger.LogInformation($"Successfully exported Federal Reporting CSV {currentExportId}.");

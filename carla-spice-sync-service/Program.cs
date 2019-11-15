@@ -10,7 +10,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = CreateWebHostBuilder(args).Build();
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
@@ -18,6 +19,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     var env = hostingContext.HostingEnvironment;
+
+                    config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
                     config.AddEnvironmentVariables();
                 })
                 .ConfigureLogging((hostingContext, logging) =>
@@ -33,7 +37,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     logging.AddEventSourceLogger();
                 })
                 .UseSerilog()
-                .UseStartup<Startup>()
-                .Build();
+                .UseStartup<Startup>();
     }
 }
