@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import { LicenseeChangeLog, LicenseeChangeType } from '@models/legal-entity-change.model';
+import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
 import { MatTreeNestedDataSource, MatTree, MatDialog } from '@angular/material';
 import { Application } from '@models/application.model';
 import { ActivatedRoute, Router } from '@angular/router';
