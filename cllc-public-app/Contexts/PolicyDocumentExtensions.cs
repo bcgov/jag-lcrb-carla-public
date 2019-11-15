@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             MicrosoftDynamicsCRMadoxioPolicydocument result = null;
             slug = slug.Replace("'", "''");
             string filter = "adoxio_slug eq '" + slug + "'";
-            PolicydocumentsGetResponseModel pdgrm = dynamicsClient.Policydocuments.Get(filter: filter);
+            var pdgrm = dynamicsClient.Policydocuments.Get(filter: filter);
             result = pdgrm.Value
                 .FirstOrDefault();
             return result;

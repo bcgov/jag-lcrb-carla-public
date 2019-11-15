@@ -15,6 +15,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
 import { Account } from '@models/account.model';
 import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
+import { ApplicationSummary } from '@models/application-summary.model';
+import { ApplicationTypeNames } from '@models/application-type.model';
 
 @Component({
   selector: 'app-application-licensee-changes',
@@ -36,6 +38,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   editedTree: LicenseeChangeLog;
   LicenseeChangeLog = LicenseeChangeLog;
   busy: any;
+  numberOfNonTerminatedApplications: number;
 
   constructor(public dialog: MatDialog,
     private fb: FormBuilder,
@@ -71,42 +74,13 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.account = account;
       });
 
-
-
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        if (data.establishmentParcelId) {
-          data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
-        }
-        if (data.applicantType === 'IndigenousNation') {
-          (<any>data).applyAsIndigenousNation = true;
-        }
-        this.application = data;
-
-        this.addDynamicContent();
-
-        const noNulls = Object.keys(data)
-          .filter(e => data[e] !== null)
-          .reduce((o, e) => {
-            o[e] = data[e];
-            return o;
-          }, {});
-
-        this.form.patchValue(noNulls);
-        if (data.isPaid) {
-          this.form.disable();
-        }
-      },
-        () => {
-          console.log('Error occured');
-        }
-      );
     this.loadData();
   }
 
   loadData() {
-    forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
+    this.GetNotTerminatedCRSApplicationCount();
+
+    this.busy = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
       this.legalEntityDataService.getChangeLogs(this.applicationId),
       this.legalEntityDataService.getCurrentHierachy())
       .pipe(takeWhile(() => this.componentActive))
@@ -120,6 +94,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.changeTree = tree;
 
         this.addDynamicContent();
+        this.form.patchValue(this.application);
       },
         () => {
           console.log('Error occured');
@@ -127,58 +102,31 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       );
   }
 
-  populateChangeTables(node: LicenseeChangeLog) {
-    if (node.isShareholderNew && node.isIndividual && node.changeType !== 'unchanged') {
-      this.individualShareholderChanges.push(node);
-    } else if (node.isShareholderNew && node.changeType !== 'unchanged') {
-      this.organizationShareholderChanges.push(node);
-    } else if (!node.isShareholderNew && node.changeType !== 'unchanged') {
-      this.leadershipChanges.push(node);
-    }
 
-    if (node.children && node.children.length) {
-      node.children.forEach(child => {
-        this.populateChangeTables(child);
-      });
-    }
-  }
-
-  isAddChangeType(node: LicenseeChangeLog): boolean {
-    const result = node.changeType === LicenseeChangeType.addLeadership
-      || node.changeType === LicenseeChangeType.addBusinessShareholder
-      || node.changeType === LicenseeChangeType.addIndividualShareholder;
-    return result;
-  }
-
-  isUpdateChangeType(node: LicenseeChangeLog): boolean {
-    const result = node.changeType === LicenseeChangeType.updateLeadership
-      || node.changeType === LicenseeChangeType.updateBusinessShareholder
-      || node.changeType === LicenseeChangeType.updateIndividualShareholder;
-    return result;
-  }
-
-  isRemoveChangeType(node: LicenseeChangeLog): boolean {
-    const result = node.changeType === LicenseeChangeType.removeLeadership
-      || node.changeType === LicenseeChangeType.removeBusinessShareholder
-      || node.changeType === LicenseeChangeType.removeIndividualShareholder;
-    return result;
-  }
-
-  getRenderChangeType(item: LicenseeChangeLog): string {
-    let changeType = '';
-    if (this.isAddChangeType(item)) {
-      changeType = 'Add';
-    } else if (this.isUpdateChangeType(item)) {
-      changeType = 'Update';
-    } else if (this.isRemoveChangeType(item)) {
-      changeType = 'Remove';
-    }
-    return changeType;
+  /**
+   * Gets the number of applications owned by the current user that are not terminated
+   */
+  private GetNotTerminatedCRSApplicationCount() {
+    this.busy =
+      this.applicationDataService.getAllCurrentApplications()
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe((applications: ApplicationSummary[]) => {
+          // filter out approved applications
+          const notTerminatedApplications =
+            applications.filter(app => {
+              let noneTerminatedCRSApplications: boolean = ['Terminated and refunded'].indexOf(app.applicationStatus) === -1
+                && app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore;
+              return noneTerminatedCRSApplications;
+            });
+          this.numberOfNonTerminatedApplications = notTerminatedApplications.length;
+        });
   }
 
   save() {
     const data = this.cleanSaveData(this.changeTree);
-    this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId)
+    forkJoin(
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId))
       .subscribe(() => {
         this.loadData();
       });
@@ -192,18 +140,19 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * CRS application
    */
   aNonTerminatedCrsApplicationExistOnAccount(): boolean {
-    return true;
+    return this.numberOfNonTerminatedApplications > 0;
   }
+
   cleanSaveData(data: LicenseeChangeLog): LicenseeChangeLog {
     const result = { ...data } as LicenseeChangeLog;
-    this.removeParentReference(result);
+    this.removeParentReferences(result);
     return result;
   }
 
-  removeParentReference(node: LicenseeChangeLog) {
+  removeParentReferences(node: LicenseeChangeLog) {
     node.parentLinceseeChangeLog = undefined;
     if (node.children && node.children.length) {
-      node.children.forEach(child => this.removeParentReference(child))
+      node.children.forEach(child => this.removeParentReferences(child))
     }
   }
 }

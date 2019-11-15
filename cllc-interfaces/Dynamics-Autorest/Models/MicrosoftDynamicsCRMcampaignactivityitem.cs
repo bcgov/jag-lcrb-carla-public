@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// campaignactivityitem
+    /// Microsoft.Dynamics.CRM.campaignactivityitem
     /// </summary>
     public partial class MicrosoftDynamicsCRMcampaignactivityitem
     {
@@ -27,7 +27,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMcampaignactivityitem class.
         /// </summary>
-        public MicrosoftDynamicsCRMcampaignactivityitem(string owningbusinessunit = default(string), string _owneridValue = default(string), string itemid = default(string), long? versionnumber = default(long?), string owninguser = default(string), string _campaignactivityidValue = default(string), string itemobjecttypecode = default(string), string campaignactivityitemid = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
+        /// <param name="owningbusinessunit">Unique identifier of the business
+        /// unit that owns the campaign activity item.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the campaign activity item.</param>
+        /// <param name="itemid">Unique identifier of the item.</param>
+        /// <param name="owninguser">Unique identifier of the user that owns
+        /// the campaign activity item.</param>
+        /// <param name="_campaignactivityidValue">Unique identifier of the
+        /// campaign activity for the item.</param>
+        /// <param name="itemobjecttypecode">Identification of the type of the
+        /// campaign activity item.</param>
+        /// <param name="campaignactivityitemid">Unique identifier of the
+        /// campaign activity item.</param>
+        public MicrosoftDynamicsCRMcampaignactivityitem(string owningbusinessunit = default(string), string _owneridValue = default(string), string itemid = default(string), string versionnumber = default(string), string owninguser = default(string), string _campaignactivityidValue = default(string), string itemobjecttypecode = default(string), string campaignactivityitemid = default(string), MicrosoftDynamicsCRMactivitypointer campaignactivityid = default(MicrosoftDynamicsCRMactivitypointer))
         {
             Owningbusinessunit = owningbusinessunit;
             this._owneridValue = _owneridValue;
@@ -47,16 +60,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// campaign activity item.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
         public string Owningbusinessunit { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// campaign activity item.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the item.
         /// </summary>
         [JsonProperty(PropertyName = "itemid")]
         public string Itemid { get; set; }
@@ -64,24 +82,31 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user that owns the campaign
+        /// activity item.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
         public string Owninguser { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the campaign activity for the
+        /// item.
         /// </summary>
         [JsonProperty(PropertyName = "_campaignactivityid_value")]
         public string _campaignactivityidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets identification of the type of the campaign activity
+        /// item.
         /// </summary>
         [JsonProperty(PropertyName = "itemobjecttypecode")]
         public string Itemobjecttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the campaign activity item.
         /// </summary>
         [JsonProperty(PropertyName = "campaignactivityitemid")]
         public string Campaignactivityitemid { get; set; }

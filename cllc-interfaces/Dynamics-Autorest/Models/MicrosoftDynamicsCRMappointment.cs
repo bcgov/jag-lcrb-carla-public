@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// appointment
+    /// Microsoft.Dynamics.CRM.appointment
     /// </summary>
     public partial class MicrosoftDynamicsCRMappointment
     {
@@ -29,6 +29,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMappointment
         /// class.
         /// </summary>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="subscriptionid">For internal use only.</param>
+        /// <param name="modifiedfieldsmask">For internal use only. </param>
+        /// <param name="globalobjectid">Shows the ID of the appointment in
+        /// Microsoft Office Outlook. The ID is used to synchronize the
+        /// appointment between Microsoft Dynamics 365 and the correct Exchange
+        /// account.</param>
+        /// <param name="attachmenterrors">Select the error code to identify
+        /// issues with the outlook item recipients or attachments, such as
+        /// blocked attachments.</param>
+        /// <param name="outlookownerapptid">Unique identifier of the Microsoft
+        /// Office Outlook appointment owner that correlates to the
+        /// PR_OWNER_APPT_ID MAPI property.</param>
+        /// <param name="isalldayevent">Select whether the appointment is an
+        /// all-day event to make sure that the required resources are
+        /// scheduled for the full day.</param>
+        /// <param name="subcategory">Type a subcategory to identify the
+        /// appointment type and relate the activity to a specific product,
+        /// sales region, business group, or other function.</param>
+        /// <param name="originalstartdate">The original start date of the
+        /// appointment.</param>
+        /// <param name="category">Type a category to identify the appointment
+        /// type, such as sales demo, prospect call, or service call, to tie
+        /// the appointment to a business group or function.</param>
+        /// <param name="location">Type the location where the appointment will
+        /// take place, such as a conference room or customer office.</param>
         public MicrosoftDynamicsCRMappointment(System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string subscriptionid = default(string), string modifiedfieldsmask = default(string), string globalobjectid = default(string), int? attachmenterrors = default(int?), int? outlookownerapptid = default(int?), bool? isalldayevent = default(bool?), string subcategory = default(string), System.DateTimeOffset? originalstartdate = default(System.DateTimeOffset?), string category = default(string), string location = default(string), MicrosoftDynamicsCRMentitlement regardingobjectidEntitlementAppointment = default(MicrosoftDynamicsCRMentitlement), MicrosoftDynamicsCRMentitlementtemplate regardingobjectidEntitlementtemplateAppointment = default(MicrosoftDynamicsCRMentitlementtemplate), IList<MicrosoftDynamicsCRMpostregarding> appointmentPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), IList<MicrosoftDynamicsCRMpostfollow> appointmentPostFollows = default(IList<MicrosoftDynamicsCRMpostfollow>), MicrosoftDynamicsCRMbookableresourcebooking regardingobjectidBookableresourcebookingAppointment = default(MicrosoftDynamicsCRMbookableresourcebooking), MicrosoftDynamicsCRMbookableresourcebookingheader regardingobjectidBookableresourcebookingheaderAppointment = default(MicrosoftDynamicsCRMbookableresourcebookingheader), MicrosoftDynamicsCRMknowledgebaserecord regardingobjectidKnowledgebaserecordAppointment = default(MicrosoftDynamicsCRMknowledgebaserecord), IList<MicrosoftDynamicsCRMqueueitem> appointmentQueueItem = default(IList<MicrosoftDynamicsCRMqueueitem>), MicrosoftDynamicsCRMinvoice regardingobjectidInvoiceAppointment = default(MicrosoftDynamicsCRMinvoice), IList<MicrosoftDynamicsCRMannotation> appointmentAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMsyncerror> appointmentSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), MicrosoftDynamicsCRMincident regardingobjectidIncidentAppointment = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMrecurringappointmentmaster seriesidRecurringappointmentmaster = default(MicrosoftDynamicsCRMrecurringappointmentmaster), MicrosoftDynamicsCRMbusinessunit owningbusinessunitAppointment = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMduplicaterecord> appointmentDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMcampaign regardingobjectidCampaignAppointment = default(MicrosoftDynamicsCRMcampaign), IList<MicrosoftDynamicsCRMactivityparty> appointmentActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), MicrosoftDynamicsCRMquote regardingobjectidQuoteAppointment = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMcontract regardingobjectidContractAppointment = default(MicrosoftDynamicsCRMcontract), IList<MicrosoftDynamicsCRMasyncoperation> appointmentAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyAppointment = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMduplicaterecord> appointmentDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMconnection> appointmentConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMslakpiinstance> slakpiinstanceAppointment = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMsystemuser modifiedbyAppointment = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMactivitymimeattachment> appointmentActivityMimeAttachment = default(IList<MicrosoftDynamicsCRMactivitymimeattachment>), IList<MicrosoftDynamicsCRMbulkdeletefailure> appointmentBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMlead regardingobjectidLeadAppointment = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMconnection> appointmentConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMactioncard> appointmentActioncard = default(IList<MicrosoftDynamicsCRMactioncard>), MicrosoftDynamicsCRMsla slaAppointmentSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunityAppointment = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMcontact regardingobjectidContactAppointment = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMsystemuser createdonbehalfbyAppointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticleAppointment = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMservice serviceidAppointment = default(MicrosoftDynamicsCRMservice), MicrosoftDynamicsCRMaccount regardingobjectidAccountAppointment = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMactivitypointer activityidActivitypointer = default(MicrosoftDynamicsCRMactivitypointer), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyidAppointment = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMsla slainvokedidAppointmentSla = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsystemuser createdbyAppointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorder regardingobjectidSalesorderAppointment = default(MicrosoftDynamicsCRMsalesorder), MicrosoftDynamicsCRMbulkoperation regardingobjectidBulkoperationAppointment = default(MicrosoftDynamicsCRMbulkoperation), MicrosoftDynamicsCRMcampaignactivity regardingobjectidCampaignactivityAppointment = default(MicrosoftDynamicsCRMcampaignactivity), MicrosoftDynamicsCRMteam owningteamAppointment = default(MicrosoftDynamicsCRMteam), IList<MicrosoftDynamicsCRMcampaignresponse> appointmentCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), MicrosoftDynamicsCRMsystemuser owninguserAppointment = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMabsScheduledprocess regardingobjectidAbsScheduledprocessAppointment = default(MicrosoftDynamicsCRMabsScheduledprocess), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplicationAppointment = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaintAppointment = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigationAppointment = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLicences regardingobjectidAdoxioLicencesAppointment = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorkerAppointment = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigationAppointment = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             Overriddencreatedon = overriddencreatedon;
@@ -107,61 +136,87 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "subscriptionid")]
         public string Subscriptionid { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedfieldsmask")]
         public string Modifiedfieldsmask { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the appointment in Microsoft Office
+        /// Outlook. The ID is used to synchronize the appointment between
+        /// Microsoft Dynamics 365 and the correct Exchange account.
         /// </summary>
         [JsonProperty(PropertyName = "globalobjectid")]
         public string Globalobjectid { get; set; }
 
         /// <summary>
+        /// Gets or sets select the error code to identify issues with the
+        /// outlook item recipients or attachments, such as blocked
+        /// attachments.
         /// </summary>
         [JsonProperty(PropertyName = "attachmenterrors")]
         public int? Attachmenterrors { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the Microsoft Office Outlook
+        /// appointment owner that correlates to the PR_OWNER_APPT_ID MAPI
+        /// property.
         /// </summary>
         [JsonProperty(PropertyName = "outlookownerapptid")]
         public int? Outlookownerapptid { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the appointment is an all-day event to
+        /// make sure that the required resources are scheduled for the full
+        /// day.
         /// </summary>
         [JsonProperty(PropertyName = "isalldayevent")]
         public bool? Isalldayevent { get; set; }
 
         /// <summary>
+        /// Gets or sets type a subcategory to identify the appointment type
+        /// and relate the activity to a specific product, sales region,
+        /// business group, or other function.
         /// </summary>
         [JsonProperty(PropertyName = "subcategory")]
         public string Subcategory { get; set; }
 
         /// <summary>
+        /// Gets or sets the original start date of the appointment.
         /// </summary>
         [JsonProperty(PropertyName = "originalstartdate")]
         public System.DateTimeOffset? Originalstartdate { get; set; }
 
         /// <summary>
+        /// Gets or sets type a category to identify the appointment type, such
+        /// as sales demo, prospect call, or service call, to tie the
+        /// appointment to a business group or function.
         /// </summary>
         [JsonProperty(PropertyName = "category")]
         public string Category { get; set; }
 
         /// <summary>
+        /// Gets or sets type the location where the appointment will take
+        /// place, such as a conference room or customer office.
         /// </summary>
         [JsonProperty(PropertyName = "location")]
         public string Location { get; set; }

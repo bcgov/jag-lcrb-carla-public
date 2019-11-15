@@ -6,13 +6,15 @@
 
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
+    using Microsoft.Rest;
+    using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
-    /// emailserverprofile
+    /// Microsoft.Dynamics.CRM.emailserverprofile
     /// </summary>
     public partial class MicrosoftDynamicsCRMemailserverprofile
     {
@@ -29,7 +31,150 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMemailserverprofile class.
         /// </summary>
-        public MicrosoftDynamicsCRMemailserverprofile(long? lasttesttotalexecutiontime = default(long?), bool? outgoingusessl = default(bool?), string incomingserverlocation = default(string), string outgoingusername = default(string), int? statuscode = default(int?), string incomingusername = default(string), int? outgoingportnumber = default(int?), string outgoingpassword = default(string), int? incomingauthenticationprotocol = default(int?), bool? timeoutmailboxconnection = default(bool?), object entityimage = default(object), bool? moveundeliveredemails = default(bool?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), bool? isoutgoingpasswordset = default(bool?), string _owneridValue = default(string), string _incomingpartnerapplicationValue = default(string), int? outgoingauthenticationprotocol = default(int?), string _outgoingpartnerapplicationValue = default(string), int? lasttestexecutionstatus = default(int?), int? minpollingintervalinminutes = default(int?), string owneremailaddress = default(string), int? incomingcredentialretrieval = default(int?), System.DateTimeOffset? lastteststarttime = default(System.DateTimeOffset?), int? incomingportnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timeoutmailboxconnectionafteramount = default(int?), string emailserverprofileid = default(string), string _modifiedonbehalfbyValue = default(string), bool? outgoinguseimpersonation = default(bool?), int? lastauthorizationstatus = default(int?), int? maxconcurrentconnections = default(int?), string name = default(string), string _organizationidValue = default(string), int? timezoneruleversionnumber = default(int?), string description = default(string), bool? useautodiscover = default(bool?), string _owninguserValue = default(string), bool? sendemailalert = default(bool?), string lasttestrequest = default(string), string defaultserverlocation = default(string), bool? usedefaulttenantid = default(bool?), string entityimageUrl = default(string), bool? outgoingautograntdelegateaccess = default(bool?), bool? incominguseimpersonation = default(bool?), string _modifiedbyValue = default(string), bool? isincomingpasswordset = default(bool?), string _createdonbehalfbyValue = default(string), string incomingpassword = default(string), string entityimageid = default(string), int? statecode = default(int?), bool? usesamesettingsforoutgoingconnections = default(bool?), System.DateTimeOffset? processemailsreceivedafter = default(System.DateTimeOffset?), int? exchangeversion = default(int?), string exchangeonlinetenantid = default(string), bool? incomingusessl = default(bool?), int? lasttestvalidationstatus = default(int?), string _owningteamValue = default(string), string emailservertypename = default(string), string lasttestresponse = default(string), string lastcrmmessage = default(string), int? servertype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? entityimageTimestamp = default(long?), string outgoingserverlocation = default(string), string _owningbusinessunitValue = default(string), string encodingcodepage = default(string), int? outgoingcredentialretrieval = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailbox> emailserverprofileMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMasyncoperation> emailserverprofileAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), object ownerid = default(object), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailserverprofileBulkdeletefailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMorganization> emailServerProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtracelog> tracelogEmailServerProfile = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMannotation> emailServerProfileAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatematchingrecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> emailServerProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatebaserecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
+        /// <param name="lasttesttotalexecutiontime">Shows the Time taken while
+        /// running the last test</param>
+        /// <param name="outgoingusessl">Select whether to use the Secure
+        /// Sockets Layer (SSL) protocol for outgoing email.</param>
+        /// <param name="incomingserverlocation">Type the location of the
+        /// server for incoming email.</param>
+        /// <param name="outgoingusername">Type the user name for outgoing
+        /// email.</param>
+        /// <param name="statuscode">Select the email server profile's
+        /// status.</param>
+        /// <param name="incomingusername">Type the user name for incoming
+        /// email.</param>
+        /// <param name="outgoingportnumber">Type the Exchange port number for
+        /// outgoing mail.</param>
+        /// <param name="outgoingpassword">Type the password for outgoing
+        /// email.</param>
+        /// <param name="incomingauthenticationprotocol">Select the incoming
+        /// email authentication protocol that is used for connecting to the
+        /// email server.</param>
+        /// <param name="timeoutmailboxconnection">Select whether to timeout a
+        /// single mailbox.</param>
+        /// <param name="entityimage">The default image for the entity.</param>
+        /// <param name="moveundeliveredemails">Indicates whether to move
+        /// undelivered incoming emails to the Undeliverable folder in
+        /// Microsoft Exchange.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="_incomingpartnerapplicationValue">Indicates the
+        /// incoming partner application.</param>
+        /// <param name="outgoingauthenticationprotocol">Select the outgoing
+        /// email authentication protocol that is used for connecting to the
+        /// email server.</param>
+        /// <param name="_outgoingpartnerapplicationValue">Indicates the
+        /// outgoing partner application.</param>
+        /// <param name="lasttestexecutionstatus">Shows the last test Execution
+        /// status of email server profile</param>
+        /// <param name="minpollingintervalinminutes">Minimum polling interval,
+        /// in minutes, for mailboxes that are associated with this email
+        /// server profile.</param>
+        /// <param name="owneremailaddress">Email Server Profile Owner's email
+        /// address</param>
+        /// <param name="incomingcredentialretrieval">Select how credentials
+        /// will be retrieved for incoming email.</param>
+        /// <param name="lastteststarttime">Shows the Last Test Start date and
+        /// time</param>
+        /// <param name="incomingportnumber">Type the Exchange port number for
+        /// incoming mail.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="timeoutmailboxconnectionafteramount">Type the number
+        /// of milliseconds to timeout a single mailbox. The upper limit is 100
+        /// seconds.</param>
+        /// <param name="emailserverprofileid">Unique identifier of the email
+        /// server profile.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="outgoinguseimpersonation">Select whether to use
+        /// impersonation for accessing the mailbox to process outgoing
+        /// emails.</param>
+        /// <param name="lastauthorizationstatus">Shows the last test
+        /// authorization status of email server profile</param>
+        /// <param name="maxconcurrentconnections">Maximum number of concurrent
+        /// connections allowed to the email server per authenticated
+        /// user.</param>
+        /// <param name="name">Type a meaningful name for the email server
+        /// profile. This name is displayed when you need to select an email
+        /// server profile.</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the record.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="description">Type additional information that
+        /// describes the email server profile.</param>
+        /// <param name="useautodiscover">Select whether to automatically
+        /// discover the server location</param>
+        /// <param name="_owninguserValue">Unique identifier for the user that
+        /// owns the record.</param>
+        /// <param name="sendemailalert">Select whether to send an email alert
+        /// if more than 50% of the mailboxes in this email server profile
+        /// failed to synchronize in an hour period.</param>
+        /// <param name="lasttestrequest">Shows the EWS Request created during
+        /// the Last Test</param>
+        /// <param name="defaultserverlocation">Type the default location of
+        /// the server.</param>
+        /// <param name="usedefaulttenantid">Select whether to use the Exchange
+        /// Online Tenant ID obtained from running Microsoft Azure PowerShell
+        /// cmdlets (highly recommended). If you select No, you can edit this
+        /// field manually</param>
+        /// <param name="outgoingautograntdelegateaccess">Indicates whether the
+        /// email connector will grant delegate access permissions to the
+        /// accessing user when required while processing outgoing
+        /// emails.</param>
+        /// <param name="incominguseimpersonation">Select whether to use
+        /// impersonation to access the mailbox to process incoming
+        /// emails.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="incomingpassword">Type the password for incoming
+        /// email.</param>
+        /// <param name="entityimageid">For internal use only.</param>
+        /// <param name="statecode">Shows whether the email server profile is
+        /// active or inactive.</param>
+        /// <param name="usesamesettingsforoutgoingconnections">Select whether
+        /// to use the same settings for incoming and outgoing
+        /// connections.</param>
+        /// <param name="processemailsreceivedafter">Shows the date and time
+        /// after which email messages that are received will be processed for
+        /// mailboxes associated with the email server profile.</param>
+        /// <param name="exchangeversion">Select the version of Exchange that
+        /// is on the email server.</param>
+        /// <param name="exchangeonlinetenantid">Type the tenant ID of Exchange
+        /// Online.</param>
+        /// <param name="incomingusessl">Select whether to use the Secure
+        /// Sockets Layer (SSL) protocol for incoming email.</param>
+        /// <param name="lasttestvalidationstatus">Shows the last test
+        /// Validation status of email server profile</param>
+        /// <param name="_owningteamValue">Unique identifier for the team that
+        /// owns the record.</param>
+        /// <param name="emailservertypename">Email Server Type Name</param>
+        /// <param name="lasttestresponse">Shows the EWS Response obtained
+        /// during the Last Test</param>
+        /// <param name="lastcrmmessage">Shows the Dynamics 365 message
+        /// obtained during the Last Test</param>
+        /// <param name="servertype">Select the profile's email server
+        /// type.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="outgoingserverlocation">Type the location of the
+        /// server for outgoing email.</param>
+        /// <param name="_owningbusinessunitValue">Select the business unit
+        /// that owns the record.</param>
+        /// <param name="encodingcodepage">Indicates the code page to use when
+        /// encoding email content.</param>
+        /// <param name="outgoingcredentialretrieval">Select how credentials
+        /// will be retrieved for outgoing email.</param>
+        public MicrosoftDynamicsCRMemailserverprofile(long? lasttesttotalexecutiontime = default(long?), bool? outgoingusessl = default(bool?), string incomingserverlocation = default(string), string outgoingusername = default(string), int? statuscode = default(int?), string incomingusername = default(string), int? outgoingportnumber = default(int?), string outgoingpassword = default(string), int? incomingauthenticationprotocol = default(int?), bool? timeoutmailboxconnection = default(bool?), byte[] entityimage = default(byte[]), bool? moveundeliveredemails = default(bool?), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), bool? isoutgoingpasswordset = default(bool?), string _owneridValue = default(string), string _incomingpartnerapplicationValue = default(string), int? outgoingauthenticationprotocol = default(int?), string _outgoingpartnerapplicationValue = default(string), int? lasttestexecutionstatus = default(int?), int? minpollingintervalinminutes = default(int?), string owneremailaddress = default(string), int? incomingcredentialretrieval = default(int?), System.DateTimeOffset? lastteststarttime = default(System.DateTimeOffset?), int? incomingportnumber = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? timeoutmailboxconnectionafteramount = default(int?), string emailserverprofileid = default(string), string _modifiedonbehalfbyValue = default(string), bool? outgoinguseimpersonation = default(bool?), int? lastauthorizationstatus = default(int?), int? maxconcurrentconnections = default(int?), string name = default(string), string _organizationidValue = default(string), int? timezoneruleversionnumber = default(int?), string description = default(string), bool? useautodiscover = default(bool?), string _owninguserValue = default(string), bool? sendemailalert = default(bool?), string lasttestrequest = default(string), string defaultserverlocation = default(string), bool? usedefaulttenantid = default(bool?), string entityimageUrl = default(string), bool? outgoingautograntdelegateaccess = default(bool?), bool? incominguseimpersonation = default(bool?), string _modifiedbyValue = default(string), bool? isincomingpasswordset = default(bool?), string _createdonbehalfbyValue = default(string), string incomingpassword = default(string), string entityimageid = default(string), int? statecode = default(int?), bool? usesamesettingsforoutgoingconnections = default(bool?), System.DateTimeOffset? processemailsreceivedafter = default(System.DateTimeOffset?), int? exchangeversion = default(int?), string exchangeonlinetenantid = default(string), bool? incomingusessl = default(bool?), int? lasttestvalidationstatus = default(int?), string _owningteamValue = default(string), string emailservertypename = default(string), string lasttestresponse = default(string), string lastcrmmessage = default(string), int? servertype = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), long? entityimageTimestamp = default(long?), string outgoingserverlocation = default(string), string _owningbusinessunitValue = default(string), string encodingcodepage = default(string), int? outgoingcredentialretrieval = default(int?), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMmailbox> emailserverprofileMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), IList<MicrosoftDynamicsCRMasyncoperation> emailserverprofileAsyncoperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), IList<MicrosoftDynamicsCRMbulkdeletefailure> emailserverprofileBulkdeletefailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMorganization> emailServerProfileOrganization = default(IList<MicrosoftDynamicsCRMorganization>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMtracelog> tracelogEmailServerProfile = default(IList<MicrosoftDynamicsCRMtracelog>), IList<MicrosoftDynamicsCRMannotation> emailServerProfileAnnotation = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatematchingrecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsyncerror> emailServerProfileSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> emailserverprofileDuplicatebaserecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>))
         {
             Lasttesttotalexecutiontime = lasttesttotalexecutiontime;
             Outgoingusessl = outgoingusessl;
@@ -125,71 +270,90 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets shows the Time taken while running the last test
         /// </summary>
         [JsonProperty(PropertyName = "lasttesttotalexecutiontime")]
         public long? Lasttesttotalexecutiontime { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to use the Secure Sockets Layer (SSL)
+        /// protocol for outgoing email.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingusessl")]
         public bool? Outgoingusessl { get; set; }
 
         /// <summary>
+        /// Gets or sets type the location of the server for incoming email.
         /// </summary>
         [JsonProperty(PropertyName = "incomingserverlocation")]
         public string Incomingserverlocation { get; set; }
 
         /// <summary>
+        /// Gets or sets type the user name for outgoing email.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingusername")]
         public string Outgoingusername { get; set; }
 
         /// <summary>
+        /// Gets or sets select the email server profile's status.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the user name for incoming email.
         /// </summary>
         [JsonProperty(PropertyName = "incomingusername")]
         public string Incomingusername { get; set; }
 
         /// <summary>
+        /// Gets or sets type the Exchange port number for outgoing mail.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingportnumber")]
         public int? Outgoingportnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type the password for outgoing email.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingpassword")]
         public string Outgoingpassword { get; set; }
 
         /// <summary>
+        /// Gets or sets select the incoming email authentication protocol that
+        /// is used for connecting to the email server.
         /// </summary>
         [JsonProperty(PropertyName = "incomingauthenticationprotocol")]
         public int? Incomingauthenticationprotocol { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to timeout a single mailbox.
         /// </summary>
         [JsonProperty(PropertyName = "timeoutmailboxconnection")]
         public bool? Timeoutmailboxconnection { get; set; }
 
         /// <summary>
+        /// Gets or sets the default image for the entity.
         /// </summary>
+        [JsonConverter(typeof(Base64UrlJsonConverter))]
         [JsonProperty(PropertyName = "entityimage")]
-        public object Entityimage { get; set; }
+        public byte[] Entityimage { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether to move undelivered incoming emails
+        /// to the Undeliverable folder in Microsoft Exchange.
         /// </summary>
         [JsonProperty(PropertyName = "moveundeliveredemails")]
         public bool? Moveundeliveredemails { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
@@ -200,136 +364,185 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? Isoutgoingpasswordset { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the incoming partner application.
         /// </summary>
         [JsonProperty(PropertyName = "_incomingpartnerapplication_value")]
         public string _incomingpartnerapplicationValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select the outgoing email authentication protocol that
+        /// is used for connecting to the email server.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingauthenticationprotocol")]
         public int? Outgoingauthenticationprotocol { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the outgoing partner application.
         /// </summary>
         [JsonProperty(PropertyName = "_outgoingpartnerapplication_value")]
         public string _outgoingpartnerapplicationValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the last test Execution status of email server
+        /// profile
         /// </summary>
         [JsonProperty(PropertyName = "lasttestexecutionstatus")]
         public int? Lasttestexecutionstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets minimum polling interval, in minutes, for mailboxes
+        /// that are associated with this email server profile.
         /// </summary>
         [JsonProperty(PropertyName = "minpollingintervalinminutes")]
         public int? Minpollingintervalinminutes { get; set; }
 
         /// <summary>
+        /// Gets or sets email Server Profile Owner's email address
         /// </summary>
         [JsonProperty(PropertyName = "owneremailaddress")]
         public string Owneremailaddress { get; set; }
 
         /// <summary>
+        /// Gets or sets select how credentials will be retrieved for incoming
+        /// email.
         /// </summary>
         [JsonProperty(PropertyName = "incomingcredentialretrieval")]
         public int? Incomingcredentialretrieval { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Last Test Start date and time
         /// </summary>
         [JsonProperty(PropertyName = "lastteststarttime")]
         public System.DateTimeOffset? Lastteststarttime { get; set; }
 
         /// <summary>
+        /// Gets or sets type the Exchange port number for incoming mail.
         /// </summary>
         [JsonProperty(PropertyName = "incomingportnumber")]
         public int? Incomingportnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the number of milliseconds to timeout a single
+        /// mailbox. The upper limit is 100 seconds.
         /// </summary>
         [JsonProperty(PropertyName = "timeoutmailboxconnectionafteramount")]
         public int? Timeoutmailboxconnectionafteramount { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the email server profile.
         /// </summary>
         [JsonProperty(PropertyName = "emailserverprofileid")]
         public string Emailserverprofileid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to use impersonation for accessing the
+        /// mailbox to process outgoing emails.
         /// </summary>
         [JsonProperty(PropertyName = "outgoinguseimpersonation")]
         public bool? Outgoinguseimpersonation { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the last test authorization status of email
+        /// server profile
         /// </summary>
         [JsonProperty(PropertyName = "lastauthorizationstatus")]
         public int? Lastauthorizationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets maximum number of concurrent connections allowed to
+        /// the email server per authenticated user.
         /// </summary>
         [JsonProperty(PropertyName = "maxconcurrentconnections")]
         public int? Maxconcurrentconnections { get; set; }
 
         /// <summary>
+        /// Gets or sets type a meaningful name for the email server profile.
+        /// This name is displayed when you need to select an email server
+        /// profile.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the record.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information that describes the email
+        /// server profile.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to automatically discover the server
+        /// location
         /// </summary>
         [JsonProperty(PropertyName = "useautodiscover")]
         public bool? Useautodiscover { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to send an email alert if more than 50%
+        /// of the mailboxes in this email server profile failed to synchronize
+        /// in an hour period.
         /// </summary>
         [JsonProperty(PropertyName = "sendemailalert")]
         public bool? Sendemailalert { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the EWS Request created during the Last Test
         /// </summary>
         [JsonProperty(PropertyName = "lasttestrequest")]
         public string Lasttestrequest { get; set; }
 
         /// <summary>
+        /// Gets or sets type the default location of the server.
         /// </summary>
         [JsonProperty(PropertyName = "defaultserverlocation")]
         public string Defaultserverlocation { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to use the Exchange Online Tenant ID
+        /// obtained from running Microsoft Azure PowerShell cmdlets (highly
+        /// recommended). If you select No, you can edit this field manually
         /// </summary>
         [JsonProperty(PropertyName = "usedefaulttenantid")]
         public bool? Usedefaulttenantid { get; set; }
@@ -340,16 +553,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string EntityimageUrl { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the email connector will grant
+        /// delegate access permissions to the accessing user when required
+        /// while processing outgoing emails.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingautograntdelegateaccess")]
         public bool? Outgoingautograntdelegateaccess { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to use impersonation to access the
+        /// mailbox to process incoming emails.
         /// </summary>
         [JsonProperty(PropertyName = "incominguseimpersonation")]
         public bool? Incominguseimpersonation { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
@@ -360,81 +579,108 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? Isincomingpasswordset { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the password for incoming email.
         /// </summary>
         [JsonProperty(PropertyName = "incomingpassword")]
         public string Incomingpassword { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "entityimageid")]
         public string Entityimageid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows whether the email server profile is active or
+        /// inactive.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to use the same settings for incoming
+        /// and outgoing connections.
         /// </summary>
         [JsonProperty(PropertyName = "usesamesettingsforoutgoingconnections")]
         public bool? Usesamesettingsforoutgoingconnections { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time after which email messages
+        /// that are received will be processed for mailboxes associated with
+        /// the email server profile.
         /// </summary>
         [JsonProperty(PropertyName = "processemailsreceivedafter")]
         public System.DateTimeOffset? Processemailsreceivedafter { get; set; }
 
         /// <summary>
+        /// Gets or sets select the version of Exchange that is on the email
+        /// server.
         /// </summary>
         [JsonProperty(PropertyName = "exchangeversion")]
         public int? Exchangeversion { get; set; }
 
         /// <summary>
+        /// Gets or sets type the tenant ID of Exchange Online.
         /// </summary>
         [JsonProperty(PropertyName = "exchangeonlinetenantid")]
         public string Exchangeonlinetenantid { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to use the Secure Sockets Layer (SSL)
+        /// protocol for incoming email.
         /// </summary>
         [JsonProperty(PropertyName = "incomingusessl")]
         public bool? Incomingusessl { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the last test Validation status of email server
+        /// profile
         /// </summary>
         [JsonProperty(PropertyName = "lasttestvalidationstatus")]
         public int? Lasttestvalidationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets email Server Type Name
         /// </summary>
         [JsonProperty(PropertyName = "emailservertypename")]
         public string Emailservertypename { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the EWS Response obtained during the Last Test
         /// </summary>
         [JsonProperty(PropertyName = "lasttestresponse")]
         public string Lasttestresponse { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Dynamics 365 message obtained during the
+        /// Last Test
         /// </summary>
         [JsonProperty(PropertyName = "lastcrmmessage")]
         public string Lastcrmmessage { get; set; }
 
         /// <summary>
+        /// Gets or sets select the profile's email server type.
         /// </summary>
         [JsonProperty(PropertyName = "servertype")]
         public int? Servertype { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
@@ -445,21 +691,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public long? EntityimageTimestamp { get; set; }
 
         /// <summary>
+        /// Gets or sets type the location of the server for outgoing email.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingserverlocation")]
         public string Outgoingserverlocation { get; set; }
 
         /// <summary>
+        /// Gets or sets select the business unit that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates the code page to use when encoding email
+        /// content.
         /// </summary>
         [JsonProperty(PropertyName = "encodingcodepage")]
         public string Encodingcodepage { get; set; }
 
         /// <summary>
+        /// Gets or sets select how credentials will be retrieved for outgoing
+        /// email.
         /// </summary>
         [JsonProperty(PropertyName = "outgoingcredentialretrieval")]
         public int? Outgoingcredentialretrieval { get; set; }
@@ -507,7 +759,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>
