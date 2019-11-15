@@ -1,5 +1,4 @@
 using CsvHelper.Configuration;
-using Gov.Lclb.Cllb.Public.ViewModels;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
