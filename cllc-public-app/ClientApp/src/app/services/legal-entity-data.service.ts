@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { LegalEntity } from '@models/legal-entity.model';
-import { LicenseeChangeLog } from '@models/legal-entity-change.model';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { Observable } from 'rxjs';
 
 @Injectable()

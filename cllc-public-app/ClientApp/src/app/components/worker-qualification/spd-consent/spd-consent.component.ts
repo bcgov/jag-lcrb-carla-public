@@ -52,6 +52,9 @@ export class SpdConsentComponent implements OnInit {
         id: [],
         selfDisclosure: [''],
       }),
+      consentToSecurityScreening: [],
+      certifyInformationIsCorrect: [],
+      electronicSignature: [],
     });
     this.reloadUser();
 
