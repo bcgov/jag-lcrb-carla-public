@@ -104,8 +104,12 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 SetupHangfireJobs(app, loggerFactory);
             }
 
-            // enable Splunk logger using Serilog
-            Log.Logger = new LoggerConfiguration()
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
+                )
+            {
+                // enable Splunk logger using Serilog
+                Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
@@ -122,6 +126,15 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     .CreateLogger();
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
+            }
+            else
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .CreateLogger();
+            }
 
         }
 
