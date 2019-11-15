@@ -9,7 +9,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     {
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
-        /// </summary>        
+        /// </summary>
         public static ViewModels.Worker ToViewModel(this MicrosoftDynamicsCRMadoxioWorker worker)
         {
             ViewModels.Worker result = null;
@@ -65,6 +65,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.paymentRecievedDate = worker.AdoxioPaymentreceiveddate;
                 result.workerId = worker.AdoxioWorkerid;
                 result.fromdate = worker.AdoxioCurrentaddressdatefrom;
+                result.ConsentToSecurityScreening = worker.AdoxioConsenttosecurityscreening;
+                result.CertifyInformationIsCorrect = worker.AdoxioCertifyinformationiscorrect;
+                result.ElectronicSignature = worker.AdoxioElectronicsignature;
             }
             return result;
         }
@@ -130,6 +133,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioPaymentreceiveddate = from.paymentRecievedDate;
             to.AdoxioWorkerid = from.workerId;
             to.AdoxioCurrentaddressdatefrom = from.fromdate;
+            to.AdoxioConsenttosecurityscreening = from.ConsentToSecurityScreening;
+            to.AdoxioCertifyinformationiscorrect = from.CertifyInformationIsCorrect;
+            to.AdoxioElectronicsignature = from.ElectronicSignature;
         }
     }
 }

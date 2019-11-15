@@ -2,6 +2,7 @@ import { Account } from './account.model';
 import { Application } from './application.model';
 import { LegalEntity } from './legal-entity.model';
 import { Contact } from './contact.model';
+import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 
 export class LicenseeChangeLog {
   id: string; // guid
@@ -228,6 +229,26 @@ export class LicenseeChangeLog {
     }
     return result;
   }
+  /**
+    * Finds a nodes in the tree where the compare predicate returns true
+    * @param node 'Node in tree to search from'
+    * @param compareFn 'a predicate to search for a node by
+    */
+  static findNodesInTree(node: LicenseeChangeLog, compareFn: (node: LicenseeChangeLog) => boolean): LicenseeChangeLog[] {
+    let result = [];
+
+    if (node) {
+      if (compareFn(node)) {
+        result.push(node);
+      }
+      const children = node.children || [];
+      for (const child of children) {
+        const res = LicenseeChangeLog.findNodesInTree(child, compareFn);
+        result = result.concat(res);
+      }
+    }
+    return result;
+  }
 
   /**
    * Use the chagetype to check if the licensee is an individual
@@ -351,7 +372,7 @@ export class LicenseeChangeLog {
             (node.firstNameNew !== node.firstNameOld || node.lastNameNew !== node.lastNameOld))
 
           // check for busines type name change
-          || (!node.isIndividualFromChangeType() && node.businessNameNew !== node.businessNameOld)
+          // || (!node.isIndividualFromChangeType() && node.businessNameNew !== node.businessNameOld)
         );
       return isNameChange;
     };
@@ -359,6 +380,58 @@ export class LicenseeChangeLog {
     return result;
   }
 
+  public static getIndivialNameChanges(treeRoot: LicenseeChangeLog): LicenseeChangeLog[] {
+    const nameWasChanged = (node: LicenseeChangeLog) => {
+      const isNameChange = node.isUpdateChangeType() &&
+        (
+          // check for individual name change
+          node.isIndividualFromChangeType() &&
+          (node.firstNameNew !== node.firstNameOld || node.lastNameNew !== node.lastNameOld)
+        );
+      return isNameChange;
+    };
+    const result = LicenseeChangeLog.findNodesInTree(treeRoot, nameWasChanged);
+    return result;
+  }
+
+  public static getNewShareholderOrganizations(treeRoot: LicenseeChangeLog): LicenseeChangeLog[] {
+    const isOrganizationShareholder = (node: LicenseeChangeLog) => node.changeType === LicenseeChangeType.addBusinessShareholder;
+    const result = LicenseeChangeLog.findNodesInTree(treeRoot, isOrganizationShareholder);
+    return result;
+  }
+
+  public static getListNeedingSupportingDocument(treeRoot: LicenseeChangeLog): DocumentGroup {
+    const result = {} as DocumentGroup;
+
+    //notice of articles
+    const needsNoticeOfArticels = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
+      && (node.businessAccountType === 'PrivateCorporation' || node.businessAccountType === 'PublicCorporation'));
+    result.noticeOfArticles = LicenseeChangeLog.findNodesInTree(treeRoot, needsNoticeOfArticels);
+
+    //central securities register
+    const needsCentralSecuritiesRegister = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
+      && node.businessAccountType === 'PrivateCorporation');
+    result.centralSecuritiesResgister = LicenseeChangeLog.findNodesInTree(treeRoot, needsCentralSecuritiesRegister);
+
+    //shareholder record
+    const needsShareholderRecord = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
+      && node.businessAccountType === 'PublicCorporation');
+    result.shareholderList = LicenseeChangeLog.findNodesInTree(treeRoot, needsShareholderRecord);
+
+    //partnership agreement
+    const needsParnershipAgreement = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
+      && node.businessAccountType === 'Partnership');
+    result.partnershipAgreement = LicenseeChangeLog.findNodesInTree(treeRoot, needsParnershipAgreement);
+
+    return result;
+  }
+}
+
+class DocumentGroup {
+  noticeOfArticles: LicenseeChangeLog[];
+  centralSecuritiesResgister: LicenseeChangeLog[];
+  shareholderList: LicenseeChangeLog[];
+  partnershipAgreement: LicenseeChangeLog[];
 }
 
 
@@ -373,4 +446,3 @@ export enum LicenseeChangeType {
   updateIndividualShareholder = 'updateIndividualShareholder',
   removeIndividualShareholder = 'removeIndividualShareholder'
 }
-
