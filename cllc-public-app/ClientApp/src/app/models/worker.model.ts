@@ -23,4 +23,7 @@ export interface Worker {
     modifiedOn: Date;
     status: string;
     clientSideStatus: string;
+    consentToSecurityScreening: boolean;
+    certifyInformationIsCorrect: boolean;
+    electronicSignature: string;
 }
