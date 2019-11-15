@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Exceptions;
+using System.Net.Http;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -59,16 +60,14 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             });
 
             // health checks. 
-            services.AddHealthChecks(checks =>
-            {
-                checks.AddValueTaskCheck("HTTP Endpoint", () => new
-                    ValueTask<IHealthCheckResult>(HealthCheckResult.Healthy("Ok")));
-            });
+            services.AddHealthChecks()
+                .AddCheck("Federal Reporting Service", () => HealthCheckResult.Healthy());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseHealthChecks("/hc");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -105,16 +104,35 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 SetupHangfireJobs(app, loggerFactory);
             }
 
-            // enable Splunk logger using Serilog
-            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
                 )
+            {
+                // enable Splunk logger using Serilog
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .WriteTo.EventCollector( splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                       restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                       messageHandler: new HttpClientHandler()
+                       {
+                           ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                       }
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                     )                    
+                    .CreateLogger();
+
+                Serilog.Debugging.SelfLog.Enable(Console.Error);
+            }
+            else
             {
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.EventCollector(Configuration["SPLUNK_COLLECTOR_URL"],
-                        Configuration["SPLUNK_TOKEN"], restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Error)
+                    .WriteTo.Console()
                     .CreateLogger();
             }
 
@@ -137,7 +155,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     log.LogInformation($"Creating Hangfire jobs for {typeof(Startup)} ...");
 
                     // Run 1 minute past midnight on the 15th of every month
-                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).GenerateFederalTrackingReport(), "1 0 15 * *");
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory).GenerateFederalTrackingReport(null), "1 8 15 * *");
 
                     log.LogInformation("Hangfire jobs setup.");
                 }
