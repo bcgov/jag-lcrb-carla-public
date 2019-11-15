@@ -10,6 +10,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using Newtonsoft.Json;
     using System.Linq;
 
+    /// <summary>
+    /// odata.error
+    /// </summary>
     public partial class Odataerror
     {
         /// <summary>

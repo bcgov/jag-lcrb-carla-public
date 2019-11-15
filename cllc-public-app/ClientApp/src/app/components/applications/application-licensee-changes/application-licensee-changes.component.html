@@ -1,4 +1,5 @@
 <div style="margin: 0 20px;" [formGroup]="form">
+  <div [ngBusy]="busy"></div>
   <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
 
   <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>

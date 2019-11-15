@@ -53,4 +53,5 @@ csharp:
   generate-empty-classes: true
   namespace: Gov.Lclb.Cllb.Interfaces
   azure-arm: false
+  static-initializer: true
 ```

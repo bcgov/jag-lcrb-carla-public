@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// adoxio_inspection_inspectors
+    /// Microsoft.Dynamics.CRM.adoxio_inspection_inspectors
     /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioInspectionInspectors
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioInspectionInspectors class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioInspectionInspectors(string incidentid = default(string), long? versionnumber = default(long?), string systemuserid = default(string), string adoxioInspectionInspectorsid = default(string))
+        public MicrosoftDynamicsCRMadoxioInspectionInspectors(string incidentid = default(string), string versionnumber = default(string), string systemuserid = default(string), string adoxioInspectionInspectorsid = default(string))
         {
             Incidentid = incidentid;
             Versionnumber = versionnumber;
@@ -49,7 +49,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

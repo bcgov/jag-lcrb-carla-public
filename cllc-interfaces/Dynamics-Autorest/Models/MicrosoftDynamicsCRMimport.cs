@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// import
+    /// Microsoft.Dynamics.CRM.import
     /// </summary>
     public partial class MicrosoftDynamicsCRMimport
     {
@@ -27,7 +27,45 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// Initializes a new instance of the MicrosoftDynamicsCRMimport class.
         /// </summary>
-        public MicrosoftDynamicsCRMimport(string importid = default(string), string _createdbyValue = default(string), string emailaddress = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? modecode = default(int?), int? statecode = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), string _owninguserValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), bool? sendnotification = default(bool?), int? sequence = default(int?), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportfile> importImportFile = default(IList<MicrosoftDynamicsCRMimportfile>), object ownerid = default(object), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> importBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
+        /// <param name="importid">Unique identifier of the import job.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        /// <param name="emailaddress">Type the email address that the import
+        /// completion notification must be sent to.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="modecode">Select whether to create or update records
+        /// in Microsoft Dynamics 365 during the import job.</param>
+        /// <param name="statecode">Shows the status of the import job. By
+        /// default, import jobs are active and can't be deactivated.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="name">Shows the name of the import job, based on the
+        /// import file and the entity being imported.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the import.</param>
+        /// <param name="statuscode">Shows the reason code that explains the
+        /// import job's status to identify the job's stage of the import
+        /// processes, from transforming the data to completed.</param>
+        /// <param name="createdon">Shows the date and time when the import was
+        /// initiated.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the import.</param>
+        /// <param name="sendnotification">Select whether to send a
+        /// notification email message to a selected user after the import is
+        /// completed.</param>
+        /// <param name="sequence">Order in which the import was
+        /// created.</param>
+        /// <param name="_owningbusinessunitValue">Business unit that owns the
+        /// import job.</param>
+        public MicrosoftDynamicsCRMimport(string importid = default(string), string _createdbyValue = default(string), string emailaddress = default(string), string _owneridValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? modecode = default(int?), int? statecode = default(int?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string name = default(string), string _owninguserValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), bool? sendnotification = default(bool?), int? sequence = default(int?), string _owningbusinessunitValue = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMimportfile> importImportFile = default(IList<MicrosoftDynamicsCRMimportfile>), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> importBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMasyncoperation> importAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>))
         {
             Importid = importid;
             this._createdbyValue = _createdbyValue;
@@ -67,91 +105,122 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the import job.
         /// </summary>
         [JsonProperty(PropertyName = "importid")]
         public string Importid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the email address that the import completion
+        /// notification must be sent to.
         /// </summary>
         [JsonProperty(PropertyName = "emailaddress")]
         public string Emailaddress { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to create or update records in
+        /// Microsoft Dynamics 365 during the import job.
         /// </summary>
         [JsonProperty(PropertyName = "modecode")]
         public int? Modecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of the import job. By default, import
+        /// jobs are active and can't be deactivated.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the name of the import job, based on the import
+        /// file and the entity being imported.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the import.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the reason code that explains the import job's
+        /// status to identify the job's stage of the import processes, from
+        /// transforming the data to completed.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the import was initiated.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the import.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether to send a notification email message to
+        /// a selected user after the import is completed.
         /// </summary>
         [JsonProperty(PropertyName = "sendnotification")]
         public bool? Sendnotification { get; set; }
 
         /// <summary>
+        /// Gets or sets order in which the import was created.
         /// </summary>
         [JsonProperty(PropertyName = "sequence")]
         public int? Sequence { get; set; }
 
         /// <summary>
+        /// Gets or sets business unit that owns the import job.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
@@ -184,7 +253,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

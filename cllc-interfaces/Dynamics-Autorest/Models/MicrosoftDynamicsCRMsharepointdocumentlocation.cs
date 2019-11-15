@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// sharepointdocumentlocation
+    /// Microsoft.Dynamics.CRM.sharepointdocumentlocation
     /// </summary>
     public partial class MicrosoftDynamicsCRMsharepointdocumentlocation
     {
@@ -29,7 +29,70 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsharepointdocumentlocation class.
         /// </summary>
-        public MicrosoftDynamicsCRMsharepointdocumentlocation(int? importsequencenumber = default(int?), string description = default(string), string _owneridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _owninguserValue = default(string), string absoluteurl = default(string), string name = default(string), string _createdbyValue = default(string), int? locationtype = default(int?), string _modifiedonbehalfbyValue = default(string), string _regardingobjectidValue = default(string), string _parentsiteorlocationValue = default(string), long? versionnumber = default(long?), int? timezoneruleversionnumber = default(int?), object exchangerate = default(object), int? statecode = default(int?), string _owningteamValue = default(string), string sitecollectionid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string relativeurl = default(string), string userid = default(string), string _modifiedbyValue = default(string), string sharepointdocumentlocationid = default(string), int? servicetype = default(int?), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), object ownerid = default(object), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsharepointdocumentlocation parentsiteorlocationSharepointdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature regardingobjectidSalesliterature = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsharepointsite parentsiteorlocationSharepointsite = default(MicrosoftDynamicsCRMsharepointsite), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle regardingobjectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointDocumentLocationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> sharePointDocumentLocationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLegalentity regardingobjectidAdoxioLegalentity = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioPersonalhistorysummary regardingobjectidAdoxioPersonalhistorysummary = default(MicrosoftDynamicsCRMadoxioPersonalhistorysummary), MicrosoftDynamicsCRMadoxioSpdexports regardingobjectidAdoxioSpdexports = default(MicrosoftDynamicsCRMadoxioSpdexports), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioDocument regardingobjectidAdoxioDocument = default(MicrosoftDynamicsCRMadoxioDocument), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created the SharePoint document location record.</param>
+        /// <param name="description">Description of the SharePoint document
+        /// location record.</param>
+        /// <param name="_owneridValue">Unique identifier of the user or team
+        /// who owns the SharePoint document location record.</param>
+        /// <param name="createdon">Date and time when the SharePoint document
+        /// location record was created.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier of the
+        /// business unit that owns the SharePoint document location
+        /// record.</param>
+        /// <param name="modifiedon">Date and time when the SharePoint document
+        /// location record was last modified.</param>
+        /// <param name="_transactioncurrencyidValue">Unique identifier of the
+        /// currency associated with the SharePoint document location
+        /// record.</param>
+        /// <param name="_owninguserValue">Unique identifier of the user who
+        /// owns the SharePoint document location record.</param>
+        /// <param name="absoluteurl">Absolute URL of the SharePoint document
+        /// location.</param>
+        /// <param name="name">Name of the SharePoint document location
+        /// record.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the SharePoint document location record.</param>
+        /// <param name="locationtype">Location type of the SharePoint document
+        /// location.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the SharePoint document location
+        /// record.</param>
+        /// <param name="_regardingobjectidValue">Unique identifier of the
+        /// object with which the SharePoint document location record is
+        /// associated.</param>
+        /// <param name="_parentsiteorlocationValue">Unique identifier of the
+        /// parent site or location.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="exchangerate">Exchange rate between the currency
+        /// associated with the SharePoint document location record and the
+        /// base currency.</param>
+        /// <param name="statecode">Status of the SharePoint document location
+        /// record.</param>
+        /// <param name="_owningteamValue">Unique identifier of the team who
+        /// owns the SharePoint document location record.</param>
+        /// <param name="sitecollectionid">For internal use only.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="relativeurl">Relative URL of the SharePoint document
+        /// location.</param>
+        /// <param name="userid">Choose the user who owns the SharePoint
+        /// document location.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the SharePoint document location record.</param>
+        /// <param name="sharepointdocumentlocationid">Unique identifier of the
+        /// SharePoint document location record.</param>
+        /// <param name="servicetype">Shows the service type of the SharePoint
+        /// site.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the SharePoint document location
+        /// record.</param>
+        /// <param name="statuscode">Reason for the status of the SharePoint
+        /// document location record.</param>
+        public MicrosoftDynamicsCRMsharepointdocumentlocation(int? importsequencenumber = default(int?), string description = default(string), string _owneridValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _transactioncurrencyidValue = default(string), string _owninguserValue = default(string), string absoluteurl = default(string), string name = default(string), string _createdbyValue = default(string), int? locationtype = default(int?), string _modifiedonbehalfbyValue = default(string), string _regardingobjectidValue = default(string), string _parentsiteorlocationValue = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), decimal? exchangerate = default(decimal?), int? statecode = default(int?), string _owningteamValue = default(string), string sitecollectionid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string relativeurl = default(string), string userid = default(string), string _modifiedbyValue = default(string), string sharepointdocumentlocationid = default(string), int? servicetype = default(int?), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMquote regardingobjectidQuote = default(MicrosoftDynamicsCRMquote), MicrosoftDynamicsCRMproduct regardingobjectidProduct = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsharepointdocumentlocation parentsiteorlocationSharepointdocumentlocation = default(MicrosoftDynamicsCRMsharepointdocumentlocation), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> sharepointdocumentlocationParentSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMlead regardingobjectidLead = default(MicrosoftDynamicsCRMlead), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesliterature regardingobjectidSalesliterature = default(MicrosoftDynamicsCRMsalesliterature), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), MicrosoftDynamicsCRMsharepointsite parentsiteorlocationSharepointsite = default(MicrosoftDynamicsCRMsharepointsite), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMkbarticle regardingobjectidKbarticle = default(MicrosoftDynamicsCRMkbarticle), IList<MicrosoftDynamicsCRMduplicaterecord> sharePointDocumentLocationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMsyncerror> sharePointDocumentLocationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMasyncoperation> sharePointDocumentLocationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMadoxioApplication regardingobjectidAdoxioApplication = default(MicrosoftDynamicsCRMadoxioApplication), MicrosoftDynamicsCRMadoxioComplaint regardingobjectidAdoxioComplaint = default(MicrosoftDynamicsCRMadoxioComplaint), MicrosoftDynamicsCRMadoxioInvestigation regardingobjectidAdoxioInvestigation = default(MicrosoftDynamicsCRMadoxioInvestigation), MicrosoftDynamicsCRMadoxioLegalentity regardingobjectidAdoxioLegalentity = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioPersonalhistorysummary regardingobjectidAdoxioPersonalhistorysummary = default(MicrosoftDynamicsCRMadoxioPersonalhistorysummary), MicrosoftDynamicsCRMadoxioSpdexports regardingobjectidAdoxioSpdexports = default(MicrosoftDynamicsCRMadoxioSpdexports), MicrosoftDynamicsCRMadoxioWorker regardingobjectidAdoxioWorker = default(MicrosoftDynamicsCRMadoxioWorker), MicrosoftDynamicsCRMincident regardingobjectidIncident = default(MicrosoftDynamicsCRMincident), MicrosoftDynamicsCRMadoxioDocument regardingobjectidAdoxioDocument = default(MicrosoftDynamicsCRMadoxioDocument), MicrosoftDynamicsCRMcontact regardingobjectidContact = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioComplianceinvestigation regardingobjectidAdoxioComplianceinvestigation = default(MicrosoftDynamicsCRMadoxioComplianceinvestigation))
         {
             Importsequencenumber = importsequencenumber;
             Description = description;
@@ -105,76 +168,102 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created the
+        /// SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the SharePoint document location
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user or team who owns the
+        /// SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SharePoint document location
+        /// record was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningbusinessunit_value")]
         public string _owningbusinessunitValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the SharePoint document location
+        /// record was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the currency associated with the
+        /// SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the SharePoint
+        /// document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_owninguser_value")]
         public string _owninguserValue { get; set; }
 
         /// <summary>
+        /// Gets or sets absolute URL of the SharePoint document location.
         /// </summary>
         [JsonProperty(PropertyName = "absoluteurl")]
         public string Absoluteurl { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the
+        /// SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets location type of the SharePoint document location.
         /// </summary>
         [JsonProperty(PropertyName = "locationtype")]
         public int? Locationtype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the object with which the
+        /// SharePoint document location record is associated.
         /// </summary>
         [JsonProperty(PropertyName = "_regardingobjectid_value")]
         public string _regardingobjectidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the parent site or location.
         /// </summary>
         [JsonProperty(PropertyName = "_parentsiteorlocation_value")]
         public string _parentsiteorlocationValue { get; set; }
@@ -182,74 +271,96 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets exchange rate between the currency associated with the
+        /// SharePoint document location record and the base currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "statecode")]
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the team who owns the SharePoint
+        /// document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "sitecollectionid")]
         public string Sitecollectionid { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets relative URL of the SharePoint document location.
         /// </summary>
         [JsonProperty(PropertyName = "relativeurl")]
         public string Relativeurl { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the user who owns the SharePoint document
+        /// location.
         /// </summary>
         [JsonProperty(PropertyName = "userid")]
         public string Userid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the SharePoint document location
+        /// record.
         /// </summary>
         [JsonProperty(PropertyName = "sharepointdocumentlocationid")]
         public string Sharepointdocumentlocationid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the service type of the SharePoint site.
         /// </summary>
         [JsonProperty(PropertyName = "servicetype")]
         public int? Servicetype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// SharePoint document location record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets reason for the status of the SharePoint document
+        /// location record.
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
@@ -272,7 +383,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "ownerid")]
-        public object Ownerid { get; set; }
+        public MicrosoftDynamicsCRMprincipal Ownerid { get; set; }
 
         /// <summary>
         /// </summary>

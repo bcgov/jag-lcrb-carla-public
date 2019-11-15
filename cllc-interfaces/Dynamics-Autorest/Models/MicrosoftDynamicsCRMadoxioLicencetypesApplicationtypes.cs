@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// adoxio_licencetypes_applicationtypes
+    /// Microsoft.Dynamics.CRM.adoxio_licencetypes_applicationtypes
     /// </summary>
     public partial class MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes
     {
@@ -27,7 +27,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes(long? versionnumber = default(long?), string adoxioLicencetypesApplicationtypesid = default(string), string adoxioApplicationtypeid = default(string), string adoxioLicencetypeid = default(string))
+        public MicrosoftDynamicsCRMadoxioLicencetypesApplicationtypes(string versionnumber = default(string), string adoxioLicencetypesApplicationtypesid = default(string), string adoxioApplicationtypeid = default(string), string adoxioLicencetypeid = default(string))
         {
             Versionnumber = versionnumber;
             AdoxioLicencetypesApplicationtypesid = adoxioLicencetypesApplicationtypesid;
@@ -44,7 +44,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>

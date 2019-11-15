@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// solution
+    /// Microsoft.Dynamics.CRM.solution
     /// </summary>
     public partial class MicrosoftDynamicsCRMsolution
     {
@@ -29,7 +29,50 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMsolution
         /// class.
         /// </summary>
-        public MicrosoftDynamicsCRMsolution(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string pinpointsolutiondefaultlocale = default(string), string _configurationpageidValue = default(string), string _publisheridValue = default(string), string _modifiedbyValue = default(string), long? versionnumber = default(long?), string description = default(string), bool? isvisible = default(bool?), string _parentsolutionidValue = default(string), long? pinpointpublisherid = default(long?), string _createdonbehalfbyValue = default(string), long? pinpointsolutionid = default(long?), string _modifiedonbehalfbyValue = default(string), string solutionpackageversion = default(string), string _createdbyValue = default(string), System.DateTimeOffset? installedon = default(System.DateTimeOffset?), string solutionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string uniquename = default(string), string friendlyname = default(string), string pinpointassetid = default(string), int? solutiontype = default(int?), string _organizationidValue = default(string), bool? ismanaged = default(bool?), string version = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource configurationpageid = default(MicrosoftDynamicsCRMwebresource), IList<MicrosoftDynamicsCRMsolutioncomponent> solutionSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), MicrosoftDynamicsCRMpublisher publisherid = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMsyncerror> solutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsolution parentsolutionid = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMsolution> solutionParentSolution = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        /// <param name="createdon">Date and time when the solution was
+        /// created.</param>
+        /// <param name="pinpointsolutiondefaultlocale">Default locale of the
+        /// solution in Microsoft Pinpoint.</param>
+        /// <param name="_configurationpageidValue">A link to an optional
+        /// configuration page for this solution.</param>
+        /// <param name="_publisheridValue">Unique identifier of the
+        /// publisher.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// last modified the solution.</param>
+        /// <param name="description">Description of the solution.</param>
+        /// <param name="isvisible">Indicates whether the solution is visible
+        /// outside of the platform.</param>
+        /// <param name="_parentsolutionidValue">Unique identifier of the
+        /// parent solution. Should only be non-null if this solution is a
+        /// patch.</param>
+        /// <param name="pinpointpublisherid">Identifier of the publisher of
+        /// this solution in Microsoft Pinpoint.</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the solution.</param>
+        /// <param name="pinpointsolutionid">Identifier of the solution in
+        /// Microsoft Pinpoint.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the solution.</param>
+        /// <param name="solutionpackageversion">Solution package source
+        /// organization version</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the solution.</param>
+        /// <param name="installedon">Date and time when the solution was
+        /// installed/upgraded.</param>
+        /// <param name="solutionid">Unique identifier of the solution.</param>
+        /// <param name="modifiedon">Date and time when the solution was last
+        /// modified.</param>
+        /// <param name="uniquename">The unique name of this solution</param>
+        /// <param name="friendlyname">User display name for the
+        /// solution.</param>
+        /// <param name="solutiontype">Solution Type</param>
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated with the solution.</param>
+        /// <param name="ismanaged">Indicates whether the solution is managed
+        /// or unmanaged.</param>
+        /// <param name="version">Solution version, used to identify a solution
+        /// for upgrades and hotfixes.</param>
+        public MicrosoftDynamicsCRMsolution(System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string pinpointsolutiondefaultlocale = default(string), string _configurationpageidValue = default(string), string _publisheridValue = default(string), string _modifiedbyValue = default(string), string versionnumber = default(string), string description = default(string), bool? isvisible = default(bool?), string _parentsolutionidValue = default(string), long? pinpointpublisherid = default(long?), string _createdonbehalfbyValue = default(string), long? pinpointsolutionid = default(long?), string _modifiedonbehalfbyValue = default(string), string solutionpackageversion = default(string), string _createdbyValue = default(string), System.DateTimeOffset? installedon = default(System.DateTimeOffset?), string solutionid = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string uniquename = default(string), string friendlyname = default(string), string pinpointassetid = default(string), int? solutiontype = default(int?), string _organizationidValue = default(string), bool? ismanaged = default(bool?), string version = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMwebresource configurationpageid = default(MicrosoftDynamicsCRMwebresource), IList<MicrosoftDynamicsCRMsolutioncomponent> solutionSolutioncomponent = default(IList<MicrosoftDynamicsCRMsolutioncomponent>), MicrosoftDynamicsCRMpublisher publisherid = default(MicrosoftDynamicsCRMpublisher), IList<MicrosoftDynamicsCRMsyncerror> solutionSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsolution parentsolutionid = default(MicrosoftDynamicsCRMsolution), IList<MicrosoftDynamicsCRMsolution> solutionParentSolution = default(IList<MicrosoftDynamicsCRMsolution>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Createdon = createdon;
             Pinpointsolutiondefaultlocale = pinpointsolutiondefaultlocale;
@@ -76,26 +119,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets date and time when the solution was created.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets default locale of the solution in Microsoft Pinpoint.
         /// </summary>
         [JsonProperty(PropertyName = "pinpointsolutiondefaultlocale")]
         public string Pinpointsolutiondefaultlocale { get; set; }
 
         /// <summary>
+        /// Gets or sets a link to an optional configuration page for this
+        /// solution.
         /// </summary>
         [JsonProperty(PropertyName = "_configurationpageid_value")]
         public string _configurationpageidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the publisher.
         /// </summary>
         [JsonProperty(PropertyName = "_publisherid_value")]
         public string _publisheridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who last modified the
+        /// solution.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
@@ -103,74 +153,95 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets description of the solution.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the solution is visible outside of
+        /// the platform.
         /// </summary>
         [JsonProperty(PropertyName = "isvisible")]
         public bool? Isvisible { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the parent solution. Should only
+        /// be non-null if this solution is a patch.
         /// </summary>
         [JsonProperty(PropertyName = "_parentsolutionid_value")]
         public string _parentsolutionidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets identifier of the publisher of this solution in
+        /// Microsoft Pinpoint.
         /// </summary>
         [JsonProperty(PropertyName = "pinpointpublisherid")]
         public long? Pinpointpublisherid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// solution.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets identifier of the solution in Microsoft Pinpoint.
         /// </summary>
         [JsonProperty(PropertyName = "pinpointsolutionid")]
         public long? Pinpointsolutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets solution package source organization version
         /// </summary>
         [JsonProperty(PropertyName = "solutionpackageversion")]
         public string Solutionpackageversion { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who created the
+        /// solution.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the solution was
+        /// installed/upgraded.
         /// </summary>
         [JsonProperty(PropertyName = "installedon")]
         public System.DateTimeOffset? Installedon { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the solution.
         /// </summary>
         [JsonProperty(PropertyName = "solutionid")]
         public string Solutionid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time when the solution was last modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets the unique name of this solution
         /// </summary>
         [JsonProperty(PropertyName = "uniquename")]
         public string Uniquename { get; set; }
 
         /// <summary>
+        /// Gets or sets user display name for the solution.
         /// </summary>
         [JsonProperty(PropertyName = "friendlyname")]
         public string Friendlyname { get; set; }
@@ -181,21 +252,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Pinpointassetid { get; set; }
 
         /// <summary>
+        /// Gets or sets solution Type
         /// </summary>
         [JsonProperty(PropertyName = "solutiontype")]
         public int? Solutiontype { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated with
+        /// the solution.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets indicates whether the solution is managed or
+        /// unmanaged.
         /// </summary>
         [JsonProperty(PropertyName = "ismanaged")]
         public bool? Ismanaged { get; set; }
 
         /// <summary>
+        /// Gets or sets solution version, used to identify a solution for
+        /// upgrades and hotfixes.
         /// </summary>
         [JsonProperty(PropertyName = "version")]
         public string Version { get; set; }

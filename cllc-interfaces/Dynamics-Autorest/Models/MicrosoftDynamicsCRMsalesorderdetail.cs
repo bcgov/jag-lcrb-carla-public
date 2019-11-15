@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// salesorderdetail
+    /// Microsoft.Dynamics.CRM.salesorderdetail
     /// </summary>
     public partial class MicrosoftDynamicsCRMsalesorderdetail
     {
@@ -29,7 +29,168 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMsalesorderdetail class.
         /// </summary>
-        public MicrosoftDynamicsCRMsalesorderdetail(string owningbusinessunit = default(string), string shiptoCity = default(string), int? lineitemnumber = default(int?), object quantity = default(object), bool? isproductoverridden = default(bool?), int? pricingerrorcode = default(int?), string parentbundleid = default(string), string shiptoCountry = default(string), string productdescription = default(string), string shiptoContactname = default(string), int? shiptoFreighttermscode = default(int?), int? importsequencenumber = default(int?), string owninguser = default(string), object manualdiscountamountBase = default(object), string _productidValue = default(string), bool? iscopied = default(bool?), string shiptoLine1 = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? propertyconfigurationstatus = default(int?), object extendedamount = default(object), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), object quantityshipped = default(object), bool? salesorderispricelocked = default(bool?), string _uomidValue = default(string), int? utcconversiontimezonecode = default(int?), int? producttypecode = default(int?), string salesorderdetailid = default(string), bool? ispriceoverridden = default(bool?), object volumediscountamountBase = default(object), object baseamountBase = default(object), object tax = default(object), object baseamount = default(object), string shiptoLine3 = default(string), string productassociationid = default(string), string shiptoLine2 = default(string), int? sequencenumber = default(int?), string shiptoAddressid = default(string), string _modifiedbyValue = default(string), object quantitycancelled = default(object), string _salesrepidValue = default(string), string _salesorderidValue = default(string), object exchangerate = default(object), string shiptoFax = default(string), string shiptoStateorprovince = default(string), string shiptoTelephone = default(string), string _createdonbehalfbyValue = default(string), object priceperunitBase = default(object), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), object quantitybackordered = default(object), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string shiptoName = default(string), object extendedamountBase = default(object), object manualdiscountamount = default(object), string shiptoPostalcode = default(string), object priceperunit = default(object), int? timezoneruleversionnumber = default(int?), int? salesorderstatecode = default(int?), long? versionnumber = default(long?), bool? willcall = default(bool?), object taxBase = default(object), object volumediscountamount = default(object), string _owneridValue = default(string), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorderdetail parentbundleidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), IList<MicrosoftDynamicsCRMsalesorderdetail> salesorderdetailParentSalesorderdetail = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> salesOrderDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> salesOrderDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesOrderDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> salesOrderDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
+        /// <param name="owningbusinessunit">Unique identifier of the business
+        /// unit that owns the order product.</param>
+        /// <param name="shiptoCity">Type the city for the customer's shipping
+        /// address.</param>
+        /// <param name="lineitemnumber">Type the line item number for the
+        /// order product to easily identify the product in the order and make
+        /// sure it's listed in the correct sequence.</param>
+        /// <param name="quantity">Type the amount or quantity of the product
+        /// ordered by the customer.</param>
+        /// <param name="isproductoverridden">Select whether the product exists
+        /// in the Microsoft Dynamics 365 product catalog or is a write-in
+        /// product specific to the order.</param>
+        /// <param name="pricingerrorcode">Select the type of pricing error,
+        /// such as a missing or invalid product, or missing quantity.</param>
+        /// <param name="parentbundleid">Choose the parent bundle associated
+        /// with this product</param>
+        /// <param name="shiptoCountry">Type the country or region for the
+        /// customer's shipping address.</param>
+        /// <param name="productdescription">Type a name or description to
+        /// identify the type of write-in product included in the
+        /// order.</param>
+        /// <param name="shiptoContactname">Type the primary contact name at
+        /// the customer's shipping address.</param>
+        /// <param name="shiptoFreighttermscode">Select the freight terms to
+        /// make sure shipping orders are processed correctly.</param>
+        /// <param name="importsequencenumber">Unique identifier of the data
+        /// import or data migration that created this record.</param>
+        /// <param name="owninguser">Unique identifier of the user who owns the
+        /// order product.</param>
+        /// <param name="manualdiscountamountBase">Shows the Manual Discount
+        /// field converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="_productidValue">Choose the product to include on the
+        /// order to link the product's pricing and other information to the
+        /// parent order.</param>
+        /// <param name="iscopied">Select whether the invoice line item is
+        /// copied from another item or data source.</param>
+        /// <param name="shiptoLine1">Type the first line of the customer's
+        /// shipping address.</param>
+        /// <param name="description">Type additional information to describe
+        /// the order product, such as manufacturing details or acceptable
+        /// substitutions.</param>
+        /// <param name="createdon">Shows the date and time when the record was
+        /// created. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.</param>
+        /// <param name="_modifiedonbehalfbyValue">Shows who last updated the
+        /// record on behalf of another user.</param>
+        /// <param name="propertyconfigurationstatus">Status of the property
+        /// configuration.</param>
+        /// <param name="extendedamount">Shows the total amount due for the
+        /// order product, based on the sum of the unit price, quantity,
+        /// discounts, and tax.</param>
+        /// <param name="modifiedon">Shows the date and time when the record
+        /// was last updated. The date and time are displayed in the time zone
+        /// selected in Microsoft Dynamics 365 options.</param>
+        /// <param name="quantityshipped">Type the amount or quantity of the
+        /// product that was shipped for the order.</param>
+        /// <param name="salesorderispricelocked">Tells whether product pricing
+        /// is locked for the order.</param>
+        /// <param name="_uomidValue">Choose the unit of measurement for the
+        /// base unit quantity for this purchase, such as each or
+        /// dozen.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="producttypecode">Product Type</param>
+        /// <param name="salesorderdetailid">Unique identifier of the product
+        /// specified in the order.</param>
+        /// <param name="ispriceoverridden">Select whether the price per unit
+        /// is fixed at the value in the specified price list or can be
+        /// overridden by users who have edit rights to the order
+        /// product.</param>
+        /// <param name="volumediscountamountBase">Shows the Volume Discount
+        /// field converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="baseamountBase">Shows the Amount field converted to
+        /// the system's default base currency. The calculation uses the
+        /// exchange rate specified in the Currencies area.</param>
+        /// <param name="tax">Type the tax amount for the order
+        /// product.</param>
+        /// <param name="baseamount">Shows the total price of the order
+        /// product, based on the price per unit, volume discount, and
+        /// quantity.</param>
+        /// <param name="shiptoLine3">Type the third line of the shipping
+        /// address.</param>
+        /// <param name="productassociationid">Unique identifier of the product
+        /// line item association with bundle in the sales order</param>
+        /// <param name="shiptoLine2">Type the second line of the customer's
+        /// shipping address.</param>
+        /// <param name="sequencenumber">Shows the ID of the data that
+        /// maintains the sequence.</param>
+        /// <param name="shiptoAddressid">Unique identifier of the shipping
+        /// address.</param>
+        /// <param name="_modifiedbyValue">Shows who last updated the
+        /// record.</param>
+        /// <param name="quantitycancelled">Type the amount or quantity of the
+        /// product that was canceled.</param>
+        /// <param name="_salesrepidValue">Choose the user responsible for the
+        /// sale of the order product.</param>
+        /// <param name="_salesorderidValue">Shows the order for the product.
+        /// The ID is used to link product pricing and other details to the
+        /// total amounts and other information on the order.</param>
+        /// <param name="exchangerate">Shows the conversion rate of the
+        /// record's currency. The exchange rate is used to convert all money
+        /// fields in the record from the local currency to the system's
+        /// default currency.</param>
+        /// <param name="shiptoFax">Type the fax number for the customer's
+        /// shipping address.</param>
+        /// <param name="shiptoStateorprovince">Type the state or province for
+        /// the shipping address.</param>
+        /// <param name="shiptoTelephone">Type the phone number for the
+        /// customer's shipping address.</param>
+        /// <param name="_createdonbehalfbyValue">Shows who created the record
+        /// on behalf of another user.</param>
+        /// <param name="priceperunitBase">Shows the Price Per Unit field
+        /// converted to the system's default base currency for reporting
+        /// purposes. The calculation uses the exchange rate specified in the
+        /// Currencies area.</param>
+        /// <param name="requestdeliveryby">Enter the delivery date requested
+        /// by the customer for the order product.</param>
+        /// <param name="quantitybackordered">Type the amount or quantity of
+        /// the product that is back ordered for the order.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="shiptoName">Type a name for the customer's shipping
+        /// address, such as "Headquarters" or "Field office", to identify the
+        /// address.</param>
+        /// <param name="extendedamountBase">Shows the Extended Amount field
+        /// converted to the system's default base currency. The calculation
+        /// uses the exchange rate specified in the Currencies area.</param>
+        /// <param name="manualdiscountamount">Type the manual discount amount
+        /// for the order product to deduct any negotiated or other savings
+        /// from the product total on the order.</param>
+        /// <param name="shiptoPostalcode">Type the ZIP Code or postal code for
+        /// the shipping address.</param>
+        /// <param name="priceperunit">Type the price per unit of the order
+        /// product. The default is the value in the price list specified on
+        /// the order for existing products.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="salesorderstatecode">Shows the status of the order
+        /// that the order detail is associated with.</param>
+        /// <param name="versionnumber">Version number of the sales order
+        /// detail.</param>
+        /// <param name="willcall">Select whether the order product should be
+        /// shipped to the specified address or held until the customer calls
+        /// with further pick up or delivery instructions.</param>
+        /// <param name="taxBase">Shows the Tax field converted to the system's
+        /// default base currency for reporting purposes. The calculation uses
+        /// the exchange rate specified in the Currencies area.</param>
+        /// <param name="volumediscountamount">Shows the discount amount per
+        /// unit if a specified volume is purchased. Configure volume discounts
+        /// in the Product Catalog in the Settings area.</param>
+        /// <param name="_owneridValue">Enter the user or team who is assigned
+        /// to manage the record. This field is updated every time the record
+        /// is assigned to a different user.</param>
+        /// <param name="_transactioncurrencyidValue">Choose the local currency
+        /// for the record to make sure budgets are reported in the correct
+        /// currency.</param>
+        /// <param name="_createdbyValue">Shows who created the record.</param>
+        public MicrosoftDynamicsCRMsalesorderdetail(string owningbusinessunit = default(string), string shiptoCity = default(string), int? lineitemnumber = default(int?), decimal? quantity = default(decimal?), bool? isproductoverridden = default(bool?), int? pricingerrorcode = default(int?), string parentbundleid = default(string), string shiptoCountry = default(string), string productdescription = default(string), string shiptoContactname = default(string), int? shiptoFreighttermscode = default(int?), int? importsequencenumber = default(int?), string owninguser = default(string), decimal? manualdiscountamountBase = default(decimal?), string _productidValue = default(string), bool? iscopied = default(bool?), string shiptoLine1 = default(string), string description = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? propertyconfigurationstatus = default(int?), decimal? extendedamount = default(decimal?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), decimal? quantityshipped = default(decimal?), bool? salesorderispricelocked = default(bool?), string _uomidValue = default(string), int? utcconversiontimezonecode = default(int?), int? producttypecode = default(int?), string salesorderdetailid = default(string), bool? ispriceoverridden = default(bool?), decimal? volumediscountamountBase = default(decimal?), decimal? baseamountBase = default(decimal?), decimal? tax = default(decimal?), decimal? baseamount = default(decimal?), string shiptoLine3 = default(string), string productassociationid = default(string), string shiptoLine2 = default(string), int? sequencenumber = default(int?), string shiptoAddressid = default(string), string _modifiedbyValue = default(string), decimal? quantitycancelled = default(decimal?), string _salesrepidValue = default(string), string _salesorderidValue = default(string), decimal? exchangerate = default(decimal?), string shiptoFax = default(string), string shiptoStateorprovince = default(string), string shiptoTelephone = default(string), string _createdonbehalfbyValue = default(string), decimal? priceperunitBase = default(decimal?), System.DateTimeOffset? requestdeliveryby = default(System.DateTimeOffset?), decimal? quantitybackordered = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string shiptoName = default(string), decimal? extendedamountBase = default(decimal?), decimal? manualdiscountamount = default(decimal?), string shiptoPostalcode = default(string), decimal? priceperunit = default(decimal?), int? timezoneruleversionnumber = default(int?), int? salesorderstatecode = default(int?), string versionnumber = default(string), bool? willcall = default(bool?), decimal? taxBase = default(decimal?), decimal? volumediscountamount = default(decimal?), string _owneridValue = default(string), string _transactioncurrencyidValue = default(string), string _createdbyValue = default(string), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsalesorderdetail parentbundleidSalesorderdetail = default(MicrosoftDynamicsCRMsalesorderdetail), IList<MicrosoftDynamicsCRMsalesorderdetail> salesorderdetailParentSalesorderdetail = default(IList<MicrosoftDynamicsCRMsalesorderdetail>), MicrosoftDynamicsCRMuom uomid = default(MicrosoftDynamicsCRMuom), MicrosoftDynamicsCRMproductassociation productassociationidProductassociation = default(MicrosoftDynamicsCRMproductassociation), MicrosoftDynamicsCRMsalesorder salesorderid = default(MicrosoftDynamicsCRMsalesorder), IList<MicrosoftDynamicsCRMasyncoperation> salesOrderDetailAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser salesrepid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> salesOrderDetailDynamicpropertyinstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMproduct productid = default(MicrosoftDynamicsCRMproduct), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> salesOrderDetailBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMsyncerror> salesOrderDetailSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>))
         {
             Owningbusinessunit = owningbusinessunit;
             ShiptoCity = shiptoCity;
@@ -122,331 +283,469 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the business unit that owns the
+        /// order product.
         /// </summary>
         [JsonProperty(PropertyName = "owningbusinessunit")]
         public string Owningbusinessunit { get; set; }
 
         /// <summary>
+        /// Gets or sets type the city for the customer's shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_city")]
         public string ShiptoCity { get; set; }
 
         /// <summary>
+        /// Gets or sets type the line item number for the order product to
+        /// easily identify the product in the order and make sure it's listed
+        /// in the correct sequence.
         /// </summary>
         [JsonProperty(PropertyName = "lineitemnumber")]
         public int? Lineitemnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets type the amount or quantity of the product ordered by
+        /// the customer.
         /// </summary>
         [JsonProperty(PropertyName = "quantity")]
-        public object Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the product exists in the Microsoft
+        /// Dynamics 365 product catalog or is a write-in product specific to
+        /// the order.
         /// </summary>
         [JsonProperty(PropertyName = "isproductoverridden")]
         public bool? Isproductoverridden { get; set; }
 
         /// <summary>
+        /// Gets or sets select the type of pricing error, such as a missing or
+        /// invalid product, or missing quantity.
         /// </summary>
         [JsonProperty(PropertyName = "pricingerrorcode")]
         public int? Pricingerrorcode { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the parent bundle associated with this product
         /// </summary>
         [JsonProperty(PropertyName = "parentbundleid")]
         public string Parentbundleid { get; set; }
 
         /// <summary>
+        /// Gets or sets type the country or region for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_country")]
         public string ShiptoCountry { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name or description to identify the type of
+        /// write-in product included in the order.
         /// </summary>
         [JsonProperty(PropertyName = "productdescription")]
         public string Productdescription { get; set; }
 
         /// <summary>
+        /// Gets or sets type the primary contact name at the customer's
+        /// shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_contactname")]
         public string ShiptoContactname { get; set; }
 
         /// <summary>
+        /// Gets or sets select the freight terms to make sure shipping orders
+        /// are processed correctly.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_freighttermscode")]
         public int? ShiptoFreighttermscode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the data import or data migration
+        /// that created this record.
         /// </summary>
         [JsonProperty(PropertyName = "importsequencenumber")]
         public int? Importsequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the user who owns the order
+        /// product.
         /// </summary>
         [JsonProperty(PropertyName = "owninguser")]
         public string Owninguser { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Manual Discount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "manualdiscountamount_base")]
-        public object ManualdiscountamountBase { get; set; }
+        public decimal? ManualdiscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the product to include on the order to link the
+        /// product's pricing and other information to the parent order.
         /// </summary>
         [JsonProperty(PropertyName = "_productid_value")]
         public string _productidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the invoice line item is copied from
+        /// another item or data source.
         /// </summary>
         [JsonProperty(PropertyName = "iscopied")]
         public bool? Iscopied { get; set; }
 
         /// <summary>
+        /// Gets or sets type the first line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line1")]
         public string ShiptoLine1 { get; set; }
 
         /// <summary>
+        /// Gets or sets type additional information to describe the order
+        /// product, such as manufacturing details or acceptable substitutions.
         /// </summary>
         [JsonProperty(PropertyName = "description")]
         public string Description { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was created.
+        /// The date and time are displayed in the time zone selected in
+        /// Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "createdon")]
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets status of the property configuration.
         /// </summary>
         [JsonProperty(PropertyName = "propertyconfigurationstatus")]
         public int? Propertyconfigurationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total amount due for the order product,
+        /// based on the sum of the unit price, quantity, discounts, and tax.
         /// </summary>
         [JsonProperty(PropertyName = "extendedamount")]
-        public object Extendedamount { get; set; }
+        public decimal? Extendedamount { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the date and time when the record was last
+        /// updated. The date and time are displayed in the time zone selected
+        /// in Microsoft Dynamics 365 options.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type the amount or quantity of the product that was
+        /// shipped for the order.
         /// </summary>
         [JsonProperty(PropertyName = "quantityshipped")]
-        public object Quantityshipped { get; set; }
+        public decimal? Quantityshipped { get; set; }
 
         /// <summary>
+        /// Gets or sets tells whether product pricing is locked for the order.
         /// </summary>
         [JsonProperty(PropertyName = "salesorderispricelocked")]
         public bool? Salesorderispricelocked { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the unit of measurement for the base unit
+        /// quantity for this purchase, such as each or dozen.
         /// </summary>
         [JsonProperty(PropertyName = "_uomid_value")]
         public string _uomidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
         /// </summary>
         [JsonProperty(PropertyName = "utcconversiontimezonecode")]
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
+        /// Gets or sets product Type
         /// </summary>
         [JsonProperty(PropertyName = "producttypecode")]
         public int? Producttypecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the product specified in the
+        /// order.
         /// </summary>
         [JsonProperty(PropertyName = "salesorderdetailid")]
         public string Salesorderdetailid { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the price per unit is fixed at the
+        /// value in the specified price list or can be overridden by users who
+        /// have edit rights to the order product.
         /// </summary>
         [JsonProperty(PropertyName = "ispriceoverridden")]
         public bool? Ispriceoverridden { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Volume Discount field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "volumediscountamount_base")]
-        public object VolumediscountamountBase { get; set; }
+        public decimal? VolumediscountamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Amount field converted to the system's
+        /// default base currency. The calculation uses the exchange rate
+        /// specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "baseamount_base")]
-        public object BaseamountBase { get; set; }
+        public decimal? BaseamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the tax amount for the order product.
         /// </summary>
         [JsonProperty(PropertyName = "tax")]
-        public object Tax { get; set; }
+        public decimal? Tax { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the total price of the order product, based on
+        /// the price per unit, volume discount, and quantity.
         /// </summary>
         [JsonProperty(PropertyName = "baseamount")]
-        public object Baseamount { get; set; }
+        public decimal? Baseamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type the third line of the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line3")]
         public string ShiptoLine3 { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the product line item association
+        /// with bundle in the sales order
         /// </summary>
         [JsonProperty(PropertyName = "productassociationid")]
         public string Productassociationid { get; set; }
 
         /// <summary>
+        /// Gets or sets type the second line of the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_line2")]
         public string ShiptoLine2 { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the ID of the data that maintains the sequence.
         /// </summary>
         [JsonProperty(PropertyName = "sequencenumber")]
         public int? Sequencenumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_addressid")]
         public string ShiptoAddressid { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who last updated the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets type the amount or quantity of the product that was
+        /// canceled.
         /// </summary>
         [JsonProperty(PropertyName = "quantitycancelled")]
-        public object Quantitycancelled { get; set; }
+        public decimal? Quantitycancelled { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the user responsible for the sale of the order
+        /// product.
         /// </summary>
         [JsonProperty(PropertyName = "_salesrepid_value")]
         public string _salesrepidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the order for the product. The ID is used to
+        /// link product pricing and other details to the total amounts and
+        /// other information on the order.
         /// </summary>
         [JsonProperty(PropertyName = "_salesorderid_value")]
         public string _salesorderidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the conversion rate of the record's currency.
+        /// The exchange rate is used to convert all money fields in the record
+        /// from the local currency to the system's default currency.
         /// </summary>
         [JsonProperty(PropertyName = "exchangerate")]
-        public object Exchangerate { get; set; }
+        public decimal? Exchangerate { get; set; }
 
         /// <summary>
+        /// Gets or sets type the fax number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_fax")]
         public string ShiptoFax { get; set; }
 
         /// <summary>
+        /// Gets or sets type the state or province for the shipping address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_stateorprovince")]
         public string ShiptoStateorprovince { get; set; }
 
         /// <summary>
+        /// Gets or sets type the phone number for the customer's shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_telephone")]
         public string ShiptoTelephone { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record on behalf of another
+        /// user.
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Price Per Unit field converted to the
+        /// system's default base currency for reporting purposes. The
+        /// calculation uses the exchange rate specified in the Currencies
+        /// area.
         /// </summary>
         [JsonProperty(PropertyName = "priceperunit_base")]
-        public object PriceperunitBase { get; set; }
+        public decimal? PriceperunitBase { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the delivery date requested by the customer for
+        /// the order product.
         /// </summary>
         [JsonProperty(PropertyName = "requestdeliveryby")]
         public System.DateTimeOffset? Requestdeliveryby { get; set; }
 
         /// <summary>
+        /// Gets or sets type the amount or quantity of the product that is
+        /// back ordered for the order.
         /// </summary>
         [JsonProperty(PropertyName = "quantitybackordered")]
-        public object Quantitybackordered { get; set; }
+        public decimal? Quantitybackordered { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
         [JsonProperty(PropertyName = "overriddencreatedon")]
         public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
+        /// Gets or sets type a name for the customer's shipping address, such
+        /// as "Headquarters" or "Field office", to identify the address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_name")]
         public string ShiptoName { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Extended Amount field converted to the
+        /// system's default base currency. The calculation uses the exchange
+        /// rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "extendedamount_base")]
-        public object ExtendedamountBase { get; set; }
+        public decimal? ExtendedamountBase { get; set; }
 
         /// <summary>
+        /// Gets or sets type the manual discount amount for the order product
+        /// to deduct any negotiated or other savings from the product total on
+        /// the order.
         /// </summary>
         [JsonProperty(PropertyName = "manualdiscountamount")]
-        public object Manualdiscountamount { get; set; }
+        public decimal? Manualdiscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets type the ZIP Code or postal code for the shipping
+        /// address.
         /// </summary>
         [JsonProperty(PropertyName = "shipto_postalcode")]
         public string ShiptoPostalcode { get; set; }
 
         /// <summary>
+        /// Gets or sets type the price per unit of the order product. The
+        /// default is the value in the price list specified on the order for
+        /// existing products.
         /// </summary>
         [JsonProperty(PropertyName = "priceperunit")]
-        public object Priceperunit { get; set; }
+        public decimal? Priceperunit { get; set; }
 
         /// <summary>
+        /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the status of the order that the order detail is
+        /// associated with.
         /// </summary>
         [JsonProperty(PropertyName = "salesorderstatecode")]
         public int? Salesorderstatecode { get; set; }
 
         /// <summary>
+        /// Gets or sets version number of the sales order detail.
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
-        public long? Versionnumber { get; set; }
+        public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets select whether the order product should be shipped to
+        /// the specified address or held until the customer calls with further
+        /// pick up or delivery instructions.
         /// </summary>
         [JsonProperty(PropertyName = "willcall")]
         public bool? Willcall { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the Tax field converted to the system's default
+        /// base currency for reporting purposes. The calculation uses the
+        /// exchange rate specified in the Currencies area.
         /// </summary>
         [JsonProperty(PropertyName = "tax_base")]
-        public object TaxBase { get; set; }
+        public decimal? TaxBase { get; set; }
 
         /// <summary>
+        /// Gets or sets shows the discount amount per unit if a specified
+        /// volume is purchased. Configure volume discounts in the Product
+        /// Catalog in the Settings area.
         /// </summary>
         [JsonProperty(PropertyName = "volumediscountamount")]
-        public object Volumediscountamount { get; set; }
+        public decimal? Volumediscountamount { get; set; }
 
         /// <summary>
+        /// Gets or sets enter the user or team who is assigned to manage the
+        /// record. This field is updated every time the record is assigned to
+        /// a different user.
         /// </summary>
         [JsonProperty(PropertyName = "_ownerid_value")]
         public string _owneridValue { get; set; }
 
         /// <summary>
+        /// Gets or sets choose the local currency for the record to make sure
+        /// budgets are reported in the correct currency.
         /// </summary>
         [JsonProperty(PropertyName = "_transactioncurrencyid_value")]
         public string _transactioncurrencyidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets shows who created the record.
         /// </summary>
         [JsonProperty(PropertyName = "_createdby_value")]
         public string _createdbyValue { get; set; }

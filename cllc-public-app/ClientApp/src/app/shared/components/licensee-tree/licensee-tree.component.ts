@@ -9,7 +9,6 @@ import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-an
 import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
 import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { ApplicationDataService } from '@services/application-data.service';
 import { FormBase } from '@shared/form-base';
 import { Application } from '@models/application.model';
 
@@ -21,9 +20,7 @@ import { Application } from '@models/application.model';
 })
 export class LicenseeTreeComponent extends FormBase implements OnInit {
   @Input() treeRoot: LicenseeChangeLog;
-  @Input() currentLegalEntityTree: LegalEntity;
   @Input() enableEditing = true;
-  @Output() editedTree: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
   treeControl = new NestedTreeControl<LicenseeChangeLog>(node => node.children);
   dataSource = new MatTreeNestedDataSource<any>();
   @ViewChild('tree', { static: false }) tree: MatTree<any>;
@@ -32,49 +29,19 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
-  applicationId: string;
-  application: Application;
 
   constructor(public dialog: MatDialog,
     private route: ActivatedRoute) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
   hasChild = (_: number, node: LicenseeChangeLog) => !!node.children && node.children.length > 0;
 
   ngOnInit() {
-    // this.treeRoot = this.processLegalEntityTree(this.currentLegalEntityTree);
-    // this.editedTree.emit(this.treeRoot);
-    // this.treeRoot.isRoot = true;
-    // this.changeTree = this.treeRoot;
     this.dataSource.data = [this.treeRoot];
     this.refreshTreeAndChangeTables();
     this.treeControl.dataNodes = this.dataSource.data;
     this.treeControl.expandAll();
-  }
-
-  /**
-    * Finds a node in the tree where the compare predicate returns true
-    * @param node 'Node in tree to search from'
-    * @param compareFn 'a predicate to search for a node by
-    */
-  findNodeInTree(node: LicenseeChangeLog, compareFn: (node: LicenseeChangeLog) => boolean): LicenseeChangeLog {
-    let result = null;
-
-    if (compareFn(node)) {
-      result = node;
-    } else {
-      const children = node.children || [];
-      for (const child of children) {
-        const res = this.findNodeInTree(child, compareFn);
-        if (res) {
-          result = res;
-          break;
-        }
-      }
-    }
-    return result;
   }
 
   /**
@@ -83,13 +50,13 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    */
   editAssociate(node: LicenseeChangeLog) {
     if (node.isShareholderNew || node.isRoot) {
-      this.openShareholderDialog(node, '')
+      this.openShareholderDialog(node, '', 'edit')
         .pipe(filter(data => !!data))
         .subscribe((formData: LicenseeChangeLog) => {
           if (node.changeType !== LicenseeChangeType.addBusinessShareholder
             && node.changeType !== LicenseeChangeType.addIndividualShareholder) {
             formData.changeType = formData.isIndividual ? LicenseeChangeType.updateIndividualShareholder
-              : LicenseeChangeType.updateIndividualShareholder;
+              : LicenseeChangeType.updateBusinessShareholder;
           }
           node = Object.assign(node, formData);
           this.refreshTreeAndChangeTables();
@@ -122,6 +89,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         parentNode.children = parentNode.children || [];
         parentNode.children.push(formData);
         this.refreshTreeAndChangeTables();
+        this.treeControl.expandAll();
       }
       );
   }
@@ -131,7 +99,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
    */
   addShareholder(parentNode: LicenseeChangeLog) {
-    this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew)
+    this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew, 'add')
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
         if (formData.isIndividual) {
@@ -142,6 +110,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         parentNode.children = parentNode.children || [];
         parentNode.children.push(formData);
         this.refreshTreeAndChangeTables();
+        this.treeControl.expandAll();
       }
       );
   }
@@ -182,7 +151,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * Opens dialog for adding and editting shareholders
    * @param leader 'A LicenseeChangeLog'
    */
-  openShareholderDialog(shareholder: LicenseeChangeLog, parentName: string) {
+  openShareholderDialog(shareholder: LicenseeChangeLog, parentName: string, action: string) {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
@@ -191,7 +160,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       data: {
         businessType: 'PrivateCorporation',
         shareholder: shareholder,
-        parentName
+        parentName,
+        action
       }
     };
 
@@ -227,6 +197,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * Repopulates the licensee tree and the change tables
    */
   refreshTreeAndChangeTables() {
+    this.computeSharePercentages(this.treeRoot);
     // change reference of the dataSource.data to cause the tree to re-render
     const data = [...this.dataSource.data];
     this.dataSource.data = [];
@@ -256,6 +227,18 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.organizationShareholderChanges.sort(sortByChangeType);
     this.leadershipChanges.sort(sortByChangeType);
 
+  }
+
+  computeSharePercentages(node: LicenseeChangeLog) {
+    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.totalSharesNew && node.numberofSharesNew) {
+      node.percentageShares = node.numberofSharesNew / node.parentLinceseeChangeLog.totalSharesNew * 100;
+      node.percentageShares = Math.round(node.percentageShares* 100) / 100 ; // round to two decimal places
+    }
+
+    node.children = node.children || [];
+    node.children.forEach(child => {
+      this.computeSharePercentages(child);
+    })
   }
 
   /**
@@ -293,4 +276,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
       });
     }
   }
+
+  cancelChange(node: LicenseeChangeLog) {
+
+  }
 }
+
