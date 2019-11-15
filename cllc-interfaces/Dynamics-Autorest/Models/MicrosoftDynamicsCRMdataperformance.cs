@@ -10,7 +10,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
     using System.Linq;
 
     /// <summary>
-    /// dataperformance
+    /// Microsoft.Dynamics.CRM.dataperformance
     /// </summary>
     public partial class MicrosoftDynamicsCRMdataperformance
     {
@@ -27,7 +27,47 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMdataperformance class.
         /// </summary>
-        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), int? count = default(int?), object optimizationstorage = default(object), bool? anyoptimizationavailable = default(bool?), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), object weight = default(object), string entity = default(string), object mediantime = default(object), object estimatedoptimizationimpact = default(object), string solution = default(string), string executionperiod = default(string), object mintime = default(object), string optimizationstatus = default(string), object maxtime = default(object), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
+        /// <param name="_organizationidValue">Unique identifier of the
+        /// organization associated.</param>
+        /// <param name="count">Number of times a queries were executed
+        /// (Aggregated)</param>
+        /// <param name="optimizationstorage">Storage consumed by the
+        /// optimization. (MB)</param>
+        /// <param name="anyoptimizationavailable">An internal state which
+        /// indicates whether at least one optimization is available for this
+        /// record.</param>
+        /// <param name="dataperformanceid">Unique identifier of the
+        /// performance suggestion.</param>
+        /// <param name="lastactionresult">An internal state which shows the
+        /// result of the last action that was taken on this record.</param>
+        /// <param name="component">Name of the component</param>
+        /// <param name="weight">Query Weight of the component. Factored with
+        /// the Optimization Impact to determine the overall importance of
+        /// applying an optimization. (P2)</param>
+        /// <param name="entity">Primary entity</param>
+        /// <param name="mediantime">Average execution time in seconds.
+        /// (Aggregated)</param>
+        /// <param name="estimatedoptimizationimpact">The expected average cost
+        /// benefit of an optimization.</param>
+        /// <param name="solution">Name of the solution that owns the
+        /// component</param>
+        /// <param name="executionperiod">The execution period for which the
+        /// performance metrics are calculated.</param>
+        /// <param name="mintime">Minimum execution time in seconds.
+        /// (Aggregated)</param>
+        /// <param name="optimizationstatus">Current optimization status of the
+        /// record, showed to the customer.</param>
+        /// <param name="maxtime">Maximum execution time in seconds.
+        /// (Aggregated)</param>
+        /// <param name="anyoptimizationapplied">An internal state which
+        /// indicates whether at least one optimization is applied.</param>
+        /// <param name="realizedoptimizationimpact">Actual performance change
+        /// after taking an optimization action on the record.</param>
+        /// <param name="lastoptimizationdate">Last time an optimization was
+        /// applied.</param>
+        /// <param name="operation">Data operation that triggered the query
+        /// (Retrieve Multiple, etc.)</param>
+        public MicrosoftDynamicsCRMdataperformance(string _organizationidValue = default(string), int? count = default(int?), decimal? optimizationstorage = default(decimal?), bool? anyoptimizationavailable = default(bool?), string dataperformanceid = default(string), string lastactionresult = default(string), string component = default(string), decimal? weight = default(decimal?), string entity = default(string), decimal? mediantime = default(decimal?), decimal? estimatedoptimizationimpact = default(decimal?), string solution = default(string), string executionperiod = default(string), decimal? mintime = default(decimal?), string optimizationstatus = default(string), decimal? maxtime = default(decimal?), bool? anyoptimizationapplied = default(bool?), string realizedoptimizationimpact = default(string), System.DateTimeOffset? lastoptimizationdate = default(System.DateTimeOffset?), string operation = default(string), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization))
         {
             this._organizationidValue = _organizationidValue;
             Count = count;
@@ -59,101 +99,130 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets unique identifier of the organization associated.
         /// </summary>
         [JsonProperty(PropertyName = "_organizationid_value")]
         public string _organizationidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets number of times a queries were executed (Aggregated)
         /// </summary>
         [JsonProperty(PropertyName = "count")]
         public int? Count { get; set; }
 
         /// <summary>
+        /// Gets or sets storage consumed by the optimization. (MB)
         /// </summary>
         [JsonProperty(PropertyName = "optimizationstorage")]
-        public object Optimizationstorage { get; set; }
+        public decimal? Optimizationstorage { get; set; }
 
         /// <summary>
+        /// Gets or sets an internal state which indicates whether at least one
+        /// optimization is available for this record.
         /// </summary>
         [JsonProperty(PropertyName = "anyoptimizationavailable")]
         public bool? Anyoptimizationavailable { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier of the performance suggestion.
         /// </summary>
         [JsonProperty(PropertyName = "dataperformanceid")]
         public string Dataperformanceid { get; set; }
 
         /// <summary>
+        /// Gets or sets an internal state which shows the result of the last
+        /// action that was taken on this record.
         /// </summary>
         [JsonProperty(PropertyName = "lastactionresult")]
         public string Lastactionresult { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the component
         /// </summary>
         [JsonProperty(PropertyName = "component")]
         public string Component { get; set; }
 
         /// <summary>
+        /// Gets or sets query Weight of the component. Factored with the
+        /// Optimization Impact to determine the overall importance of applying
+        /// an optimization. (P2)
         /// </summary>
         [JsonProperty(PropertyName = "weight")]
-        public object Weight { get; set; }
+        public decimal? Weight { get; set; }
 
         /// <summary>
+        /// Gets or sets primary entity
         /// </summary>
         [JsonProperty(PropertyName = "entity")]
         public string Entity { get; set; }
 
         /// <summary>
+        /// Gets or sets average execution time in seconds. (Aggregated)
         /// </summary>
         [JsonProperty(PropertyName = "mediantime")]
-        public object Mediantime { get; set; }
+        public decimal? Mediantime { get; set; }
 
         /// <summary>
+        /// Gets or sets the expected average cost benefit of an optimization.
         /// </summary>
         [JsonProperty(PropertyName = "estimatedoptimizationimpact")]
-        public object Estimatedoptimizationimpact { get; set; }
+        public decimal? Estimatedoptimizationimpact { get; set; }
 
         /// <summary>
+        /// Gets or sets name of the solution that owns the component
         /// </summary>
         [JsonProperty(PropertyName = "solution")]
         public string Solution { get; set; }
 
         /// <summary>
+        /// Gets or sets the execution period for which the performance metrics
+        /// are calculated.
         /// </summary>
         [JsonProperty(PropertyName = "executionperiod")]
         public string Executionperiod { get; set; }
 
         /// <summary>
+        /// Gets or sets minimum execution time in seconds. (Aggregated)
         /// </summary>
         [JsonProperty(PropertyName = "mintime")]
-        public object Mintime { get; set; }
+        public decimal? Mintime { get; set; }
 
         /// <summary>
+        /// Gets or sets current optimization status of the record, showed to
+        /// the customer.
         /// </summary>
         [JsonProperty(PropertyName = "optimizationstatus")]
         public string Optimizationstatus { get; set; }
 
         /// <summary>
+        /// Gets or sets maximum execution time in seconds. (Aggregated)
         /// </summary>
         [JsonProperty(PropertyName = "maxtime")]
-        public object Maxtime { get; set; }
+        public decimal? Maxtime { get; set; }
 
         /// <summary>
+        /// Gets or sets an internal state which indicates whether at least one
+        /// optimization is applied.
         /// </summary>
         [JsonProperty(PropertyName = "anyoptimizationapplied")]
         public bool? Anyoptimizationapplied { get; set; }
 
         /// <summary>
+        /// Gets or sets actual performance change after taking an optimization
+        /// action on the record.
         /// </summary>
         [JsonProperty(PropertyName = "realizedoptimizationimpact")]
         public string Realizedoptimizationimpact { get; set; }
 
         /// <summary>
+        /// Gets or sets last time an optimization was applied.
         /// </summary>
         [JsonProperty(PropertyName = "lastoptimizationdate")]
         public System.DateTimeOffset? Lastoptimizationdate { get; set; }
 
         /// <summary>
+        /// Gets or sets data operation that triggered the query (Retrieve
+        /// Multiple, etc.)
         /// </summary>
         [JsonProperty(PropertyName = "operation")]
         public string Operation { get; set; }

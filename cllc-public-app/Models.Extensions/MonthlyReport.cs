@@ -21,6 +21,11 @@ namespace Gov.Lclb.Cllb.Public.Models
     {
         public static MonthlyReport ToViewModel(this MicrosoftDynamicsCRMadoxioCannabismonthlyreport dynamicsMonthlyReport, IDynamicsClient dynamicsClient)
         {
+            if (dynamicsMonthlyReport == null)
+            {
+                return null;
+            }
+
             MonthlyReport monthlyReportVM = new MonthlyReport()
             {
                 licenseId = dynamicsMonthlyReport._adoxioLicenceidValue,
@@ -70,15 +75,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                     lostReductions = inventoryReport.AdoxioQtyloststolen,
                     otherReductions = inventoryReport.AdoxioOtherreductions,
                     closingNumber = inventoryReport.AdoxioClosinginventory,
-                    closingValue = (double)inventoryReport.AdoxioValueofclosinginventory,
+                    closingValue = inventoryReport.AdoxioValueofclosinginventory.Value,
                     totalSalesToConsumerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumber),
-                    totalSalesToConsumerValue = (double)inventoryReport.AdoxioTotalvalue,
+                    totalSalesToConsumerValue = inventoryReport.AdoxioTotalvalue.Value,
                     totalSalesToRetailerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumberretailer),
-                    totalSalesToRetailerValue = (double)inventoryReport.AdoxioTotalvalueretailer,
+                    totalSalesToRetailerValue = inventoryReport.AdoxioTotalvalueretailer.Value,
                 };
                 if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
                 {
-                    inv.closingWeight = (double)inventoryReport.AdoxioWeightofclosinginventory;
+                    inv.closingWeight = inventoryReport.AdoxioWeightofclosinginventory.Value;
                 }
                 if (product.AdoxioName == "Seeds")
                 {

@@ -17,6 +17,7 @@
     },
     "odata2openapi": {
       "commandName": "Project",
+      "commandLineArgs": "adoxio",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

@@ -1,0 +1,15 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: templates/federal-reporting-service/federal-reporting-service.deploy.json
+#=========================================================
+# NAME=federal-reporting-service.deploy
+# SOURCE_IMAGE_NAME=federal-reporting-service
+# IMAGE_NAMESPACE=lclb-cllc-tools
+TAG_NAME=test
+# ASPNETCORE_ENVIRONMENT=Production
+# CPU_LIMIT=1
+# MEMORY_LIMIT=4Gi
+# CPU_REQUEST=100m
+# MEMORY_REQUEST=2Gi
+# APPLICATION_DOMAIN=federal-reporting-service-lclb-cllc-test.pathfinder.gov.bc.ca

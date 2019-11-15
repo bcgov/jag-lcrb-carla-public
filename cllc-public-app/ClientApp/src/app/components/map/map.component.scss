@@ -1,0 +1,43 @@
+
+#search-map {
+  padding-top: 100%;
+  border: solid 1px transparent;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  height: 600px;
+  width: 800px;
+}
+
+.map-container {
+
+}
+
+.map-scroll-helper {
+  
+}
+
+@media all and (max-width: 900px) {
+
+  .map-container {
+    width: 100vw;
+    height: 100vh;
+    padding-left: 10px
+  }
+
+  .map-scroll-helper {
+    width: 5%;
+    height: 100%;
+    display: inline-block;
+  }
+
+  #search-map {
+    padding: 0;
+    width: 95%;
+    height: 100%;
+    border: solid 1px transparent;
+    margin-left: 0;
+    margin-right: 0;
+    display: inline-block;
+  }
+}
