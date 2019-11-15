@@ -127,6 +127,14 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
             }
+            else
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .CreateLogger();
+            }
 
         }
 

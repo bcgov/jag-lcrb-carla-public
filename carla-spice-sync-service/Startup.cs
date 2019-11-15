@@ -193,7 +193,6 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
                 )
             {
-                // enable Splunk logger using Serilog
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
@@ -211,6 +210,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     .CreateLogger();
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
+            }
+            else
+            {
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .CreateLogger();
             }
         }
 
