@@ -10,7 +10,10 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Public.Models;
+using Hangfire;
+using Hangfire.Console;
+using Hangfire.Server;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -41,12 +44,12 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         /// Generate a csv with the federal tracking report for a given reporting period
         /// </summary>
         /// <returns></returns>
-        public async Task GenerateFederalTrackingReport()
+        public async Task GenerateFederalTrackingReport(PerformContext hangfireContext)
         {
             try
             {
-                var previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"});
-                int currentExportId = (previousReport.Value.Count > 0) ? previousReport.Value[0].AdoxioCsvexportid.Value + 1 : 1;
+                MicrosoftDynamicsCRMadoxioCannabismonthlyreport previousReport = _dynamicsClient.Cannabismonthlyreports.Get(top: 1, orderby: new List<string> {"adoxio_csvexportid desc"}).Value.FirstOrDefault();
+                int currentExportId = (previousReport != null && previousReport.AdoxioCsvexportid != null) ? (int)previousReport.AdoxioCsvexportid + 1 : 1;
 
                 // Submitted reports
                 string filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
@@ -88,6 +91,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     _dynamicsClient.Cannabismonthlyreports.Update(report.AdoxioCannabismonthlyreportid, patchRecord);
                     
                 }
+                hangfireContext.WriteLine($"Found {monthlyReports.Count} monthly reports to export.");
+                _logger.LogInformation($"Found {monthlyReports.Count} monthly reports to export.");
                 if (monthlyReports.Count > 0)
                 {
                     string filePath = "";
@@ -103,18 +108,19 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                         string filename = $"{currentExportId.ToString("0000")}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
                         bool result = _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv").GetAwaiter().GetResult();
                         string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
-                        filePath = _configuration["SHAREPOINT_NATIVE_BASE_URI"] + "/" + url + filename;
                     }
-
-                _logger.LogInformation($"Successfully exported Federal Reporting CSV {currentExportId}.");
+                    hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {currentExportId}.");
+                    _logger.LogInformation($"Successfully exported Federal Reporting CSV {currentExportId}.");
                 }
             }
             catch (HttpOperationException httpOperationException)
             {
+                hangfireContext.WriteLine("Error creating federal tracking CSV");
                 _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
             }
             catch (SharePointRestException e)
             {
+                hangfireContext.WriteLine("Error saving csv to sharepoint");
                 _logger.LogError(e, "Error saving csv to sharepoint");
             }
         }
