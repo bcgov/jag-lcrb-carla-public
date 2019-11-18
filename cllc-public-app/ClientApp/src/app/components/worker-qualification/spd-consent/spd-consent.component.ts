@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material';
 import { ContactDataService } from '@services/contact-data.service';
 import { Contact } from '@models/contact.model';
 import { resolve } from 'url';
+import { FeatureFlagService } from '@services/feature-flag.service';
 
 @Component({
   selector: 'app-spd-consent',
@@ -34,6 +35,7 @@ export class SpdConsentComponent implements OnInit {
   uploadedDocuments = 0;
   submitting: boolean;
   contact: Contact;
+  noWetSignature: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +43,7 @@ export class SpdConsentComponent implements OnInit {
     private userDataService: UserDataService,
     private paymentDataService: PaymentDataService,
     private contactDataService: ContactDataService,
+    private featureFlagService: FeatureFlagService,
     public snackBar: MatSnackBar,
     private route: ActivatedRoute) {
     this.route.paramMap.subscribe(params => {
@@ -49,6 +52,9 @@ export class SpdConsentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.featureFlagService.featureOn('NoWetSignature')
+      .subscribe(x => this.noWetSignature = x);
+
     this.form = this.fb.group({
       id: [],
       contact: this.fb.group({
@@ -72,7 +78,7 @@ export class SpdConsentComponent implements OnInit {
       });
 
     this.busy = this.workerDataService.getWorker(this.workerId).subscribe(res => {
-      if(res.consentValidated){
+      if (res.consentValidated) {
         res.consentValidated = true;
       } else {
         res.consentValidated = false;
@@ -87,10 +93,10 @@ export class SpdConsentComponent implements OnInit {
   isValid(): boolean {
     this.showValidationMessages = false;
     let valid = true;
-    if (!this.isFileUploadValid()) {
+    if (!this.noWetSignature && !this.isFileUploadValid()) {
       valid = false;
     }
-    if (!this.isDeclarationValid()) {
+    if (!this.noWetSignature && !this.isDeclarationValid()) {
       valid = false;
     }
     if (!this.isCriminalBackgroundValid()) {
@@ -136,7 +142,7 @@ export class SpdConsentComponent implements OnInit {
     const subResult = new Subject<boolean>();
     const worker = this.form.value;
     worker.selfdisclosure = worker.contact.selfDisclosure;
-    if(worker.consentValidated) {
+    if (worker.consentValidated) {
       worker.consentValidated = 'Yes';
     }
 
