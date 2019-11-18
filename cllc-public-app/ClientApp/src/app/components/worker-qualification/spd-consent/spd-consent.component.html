@@ -94,6 +94,10 @@
               <span style="text-decoration: underline;">{{contact?.firstname}} {{contact?.lastname}} </span>
               have read the above declaration and conset to collection and disclosure of information related
               to security screening.</span>
+            <div *ngIf="!isConcentValidatedValid() && form.get('consentValidated').touched" style="color: #A12622;  margin-top: 2px;">
+              ! Please provide your consent to proceed -- a security screening is required in order to become a
+              qualified cannabis worker.
+            </div>
             <p></p>
           </div>
           <div appRemoveIfFeatureOn="NoWetSignature">
