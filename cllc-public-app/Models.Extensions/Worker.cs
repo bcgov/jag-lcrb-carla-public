@@ -68,6 +68,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.ConsentToSecurityScreening = worker.AdoxioConsenttosecurityscreening;
                 result.CertifyInformationIsCorrect = worker.AdoxioCertifyinformationiscorrect;
                 result.ElectronicSignature = worker.AdoxioElectronicsignature;
+                result.ConsentValidated = (ViewModels.ConsentValidatedValue?)worker.AdoxioConsentvalidated;
             }
             return result;
         }
@@ -136,6 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioConsenttosecurityscreening = from.ConsentToSecurityScreening;
             to.AdoxioCertifyinformationiscorrect = from.CertifyInformationIsCorrect;
             to.AdoxioElectronicsignature = from.ElectronicSignature;
+            to.AdoxioConsentvalidated = (int?)from.ConsentValidated;
         }
     }
 }

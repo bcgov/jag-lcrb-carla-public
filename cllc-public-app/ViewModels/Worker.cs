@@ -25,6 +25,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Expired = 845280001,
     }
 
+    public enum ConsentValidatedValue {
+        Yes = 845280000,
+        No = 845280001,
+        Error = 845280002,
+        Refused = 845280003,
+    }
+
     public class Worker
     {
         public string id { get; set; }
@@ -54,6 +61,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         [JsonConverter(typeof(StringEnumConverter))]
         public StatusCode StateCode { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public ConsentValidatedValue? ConsentValidated {get; set;}
 
         public bool? ConsentToSecurityScreening { get; set; }
         public bool? CertifyInformationIsCorrect { get; set; }
