@@ -9,6 +9,8 @@ import { Subscription, Observable, Subject, forkJoin } from 'rxjs';
 import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
 import { MatSnackBar } from '@angular/material';
 import { ContactDataService } from '@services/contact-data.service';
+import { Contact } from '@models/contact.model';
+import { resolve } from 'url';
 
 @Component({
   selector: 'app-spd-consent',
@@ -31,6 +33,7 @@ export class SpdConsentComponent implements OnInit {
   workerStatus: string;
   uploadedDocuments = 0;
   submitting: boolean;
+  contact: Contact;
 
   constructor(
     private fb: FormBuilder,
@@ -55,6 +58,7 @@ export class SpdConsentComponent implements OnInit {
       consentToSecurityScreening: [],
       certifyInformationIsCorrect: [],
       electronicSignature: [],
+      consentValidated: [false],
     });
     this.reloadUser();
 
@@ -68,7 +72,13 @@ export class SpdConsentComponent implements OnInit {
       });
 
     this.busy = this.workerDataService.getWorker(this.workerId).subscribe(res => {
+      if(res.consentValidated){
+        res.consentValidated = true;
+      } else {
+        res.consentValidated = false;
+      }
       this.form.patchValue(res);
+      this.contact = res.contact;
       this.workerStatus = res.status;
       this.saveFormData = this.form.value;
     });
@@ -126,6 +136,9 @@ export class SpdConsentComponent implements OnInit {
     const subResult = new Subject<boolean>();
     const worker = this.form.value;
     worker.selfdisclosure = worker.contact.selfDisclosure;
+    if(worker.consentValidated) {
+      worker.consentValidated = 'Yes';
+    }
 
     const busy = forkJoin(
       this.contactDataService.updateContact(this.form.value.contact),
