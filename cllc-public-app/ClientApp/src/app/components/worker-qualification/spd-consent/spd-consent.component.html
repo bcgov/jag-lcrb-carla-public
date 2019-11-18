@@ -48,7 +48,8 @@
             a collected pursuant to section 8(1) fo the Privacy Act of Canada, and Section s.26(c) and 33.1(1)(b) of the
             British Columbia Freedom of Information and Protection of Privacy Act (FOIPPA).
           </p>
-          <div *ngIf="showValidationMessages && !isDeclarationValid()" style="color: #A12622; margin-top: 2px;">
+          <div appRemoveIfFeatureOn="NoWetSignature" *ngIf="showValidationMessages && !isDeclarationValid()"
+            style="color: #A12622; margin-top: 2px;">
             <div *ngIf="!name.valid && name.touched ">
               Please read the declaration and consent and select the check boxes.
             </div>
@@ -92,12 +93,7 @@
               I
               <span style="text-decoration: underline;">{{contact?.firstname}} {{contact?.lastname}} </span>
               have read the above declaration and conset to collection and disclosure of information related
-              to security screening</span>
-            <div *ngIf="!name.valid && name.touched" style="color: #A12622; width: 350px; margin-top: 2px;">
-              <div *ngIf="!name.valid && name.touched ">
-                Please enter your full legal name.
-              </div>
-            </div>
+              to security screening.</span>
             <p></p>
           </div>
           <div appRemoveIfFeatureOn="NoWetSignature">
