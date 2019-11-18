@@ -26,4 +26,5 @@ export interface Worker {
     consentToSecurityScreening: boolean;
     certifyInformationIsCorrect: boolean;
     electronicSignature: string;
+    consentValidated: string | boolean;
 }
