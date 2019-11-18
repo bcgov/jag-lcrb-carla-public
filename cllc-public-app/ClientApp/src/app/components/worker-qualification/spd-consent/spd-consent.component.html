@@ -81,8 +81,7 @@
           </div>
           <label for="">Applicant Name</label>
           <br>
-          <input type="text" class="form-control" required formControlName="electronicSignature"
-            [ngModelOptions]="{standalone: true}" style="width: 350px" #name=>
+          <input type="text" class="form-control" required formControlName="electronicSignature" style="width: 350px" #name>
           <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs" style="color: #A12622;"></i>
           <i *ngIf="!name.valid && name.touched" class="fas fa-chevron-left fa-xs"
             style="color: #A12622; margin-left: -6px;"></i>
