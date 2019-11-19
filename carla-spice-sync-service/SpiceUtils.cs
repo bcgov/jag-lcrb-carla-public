@@ -52,6 +52,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 try
                 {
                     string contactId;
+                    // 3 different ways to send an identifier 😷
                     if (workerResponse.RecordIdentifier == null)
                     {
                         MicrosoftDynamicsCRMcontact contact = _dynamicsClient.Contacts.Get(filter: $"adoxio_spdjobid eq {workerResponse.SpdJobId}").Value[0];
@@ -76,12 +77,18 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         // update the record.
                         MicrosoftDynamicsCRMadoxioWorker patchRecord = new MicrosoftDynamicsCRMadoxioWorker()
                         {
-                            Statuscode = (int?)TranslateStatus.WorkerResultSpiceToLCRBStatusCode(workerResponse.Result),
-                            AdoxioSecuritystatus = (int?)TranslateStatus.WorkerResultSpiceToLCRB(workerResponse.Result),
+                            Statuscode = workerResponse.ScreeningResult switch
+                            {
+                                WorkerSecurityStatus.Pass => (int)WorkerSecurityStatusCode.Active,
+                                WorkerSecurityStatus.Fail => (int)WorkerSecurityStatusCode.Rejected,
+                                WorkerSecurityStatus.Withdrawn => (int)WorkerSecurityStatus.Withdrawn
+                            },
+                            AdoxioSecuritystatus = (int)workerResponse.ScreeningResult,
                             AdoxioSecuritycompletedon = DateTimeOffset.Now
                         };
 
-                        if (workerResponse.Result == SpiceApplicationStatus.Cleared)
+                        // Do passed worker things
+                        if (workerResponse.ScreeningResult == WorkerSecurityStatus.Pass)
                         {
                             patchRecord.AdoxioExpirydate = DateTimeOffset.Now.AddYears(2);
                         }
@@ -143,7 +150,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                     MicrosoftDynamicsCRMadoxioApplication patchRecord = new MicrosoftDynamicsCRMadoxioApplication()
                     {
                         AdoxioDatereceivedspd = DateTimeOffset.Now,
-                        AdoxioChecklistsecurityclearancestatus = (int?)TranslateStatus.BusinessResultSpiceToLCRB(applicationResponse.Result)
+                        AdoxioChecklistsecurityclearancestatus = (int?)applicationResponse.Result
                     };
 
                     try
@@ -229,7 +236,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 {
                     MicrosoftDynamicsCRMadoxioApplication update = new MicrosoftDynamicsCRMadoxioApplication()
                     {
-                        AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.Sending
+                        AdoxioChecklistsecurityclearancestatus = (int?)ApplicationSecurityStatus.Sending
                     };
                     _dynamicsClient.Applications.Update(applicationId.ToString(), update);
 
@@ -243,7 +250,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                         update = new MicrosoftDynamicsCRMadoxioApplication()
                         {
                             AdoxioSecurityclearancegenerateddate = DateTimeOffset.UtcNow,
-                            AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.Sent
+                            AdoxioChecklistsecurityclearancestatus = (int?)ApplicationSecurityStatus.Sent
                         };
                         _dynamicsClient.Applications.Update(applicationId.ToString(), update);
                         return true;
@@ -262,7 +269,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _dynamicsClient.Applications.Update(applicationId.ToString(), new MicrosoftDynamicsCRMadoxioApplication()
             {
                 AdoxioSecurityclearancegenerateddate = DateTimeOffset.Now,
-                AdoxioChecklistsecurityclearancestatus = (int?)LCRBApplicationSecurityStatus.Incomplete
+                AdoxioChecklistsecurityclearancestatus = (int?)ApplicationSecurityStatus.Incomplete
             });
             return false;
         }
@@ -870,7 +877,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             _logger.LogError($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
             hangfireContext.WriteLine($"Starting SendFoundApplications Job for {selectedAppTypes.Count} application types");
 
-            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + (int?)LCRBApplicationSecurityStatus.NotSent;
+            string sendFilter = "adoxio_checklistsenttospd eq 1 and adoxio_checklistsecurityclearancestatus eq " + (int?)ApplicationSecurityStatus.NotSent;
 
             var applications = _dynamicsClient.Applications.Get(filter: sendFilter).Value.Where(a => appTypes.Contains(a._adoxioApplicationtypeidValue));
             _logger.LogError($"Found {applications.Count()} applications to send to SPD.");
