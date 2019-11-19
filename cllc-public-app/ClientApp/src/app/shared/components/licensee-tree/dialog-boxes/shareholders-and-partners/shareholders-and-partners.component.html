@@ -66,8 +66,8 @@
         <input type="text" [readonly]="shareholder?.isRoot" class="form-control" formControlName="emailNew">
       </app-field>
       <app-field *ngIf="form.get('isIndividual').value" class="col-md-6" label="Date of Birth"
-        [valid]="!isTouchedAndInvalid('dateofBirthNew')" errorMessage="This is required">
-        <input type="text" [readonly]="shareholder?.isRoot" formControlName='dateofBirthNew' style="background-color: #fff;" autocomplete="false"
+        [valid]="!isTouchedAndInvalid('dateofBirthNew')" errorMessage="This is required. The associate should be 19 years or older.">
+        <input type="text" [readonly]="shareholder?.isRoot" [max]="maxDate19" formControlName='dateofBirthNew' style="background-color: #fff;" autocomplete="false"
           placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
           (click)="picker.open()">
         <mat-datepicker #picker></mat-datepicker>
