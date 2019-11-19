@@ -4,12 +4,8 @@ using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
-using Gov.Lclb.Cllb.Interfaces;
-using System.Linq;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
 {
@@ -37,13 +33,14 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         /// </summary>
         /// <returns>OK if successful</returns>
         [HttpPost("receive")]
-        public ActionResult ReceiveWorkerScreeningResults([FromBody] List<CompletedWorkerScreening> results)
+        
+        public ActionResult ReceiveWorkerScreeningResults([FromBody] List<CompletedWorkerScreening> completedScreenings)
         {
             // Process the updates received from the SPICE system.
-            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveWorkerImportJob(null, results));
+            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveWorkerImportJob(null, completedScreenings));
             _logger.LogInformation("Started receive completed worker screening job");
             return Ok();
-        }       
+        }
 
         /// <summary>
         /// Send a worker record to SPICE for event driven processing.
