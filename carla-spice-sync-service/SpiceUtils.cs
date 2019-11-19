@@ -81,7 +81,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                             {
                                 WorkerSecurityStatus.Pass => (int)WorkerSecurityStatusCode.Active,
                                 WorkerSecurityStatus.Fail => (int)WorkerSecurityStatusCode.Rejected,
-                                WorkerSecurityStatus.Withdrawn => (int)WorkerSecurityStatus.Withdrawn
+                                WorkerSecurityStatus.Withdrawn => (int)WorkerSecurityStatusCode.Withdrawn
                             },
                             AdoxioSecuritystatus = (int)workerResponse.ScreeningResult,
                             AdoxioSecuritycompletedon = DateTimeOffset.Now
