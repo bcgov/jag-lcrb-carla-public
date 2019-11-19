@@ -7,6 +7,22 @@
     "creationTimestamp": null
   },
   "objects": [
+  {
+    "kind": "NetworkSecurityPolicy",
+	"apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
+	"metadata": 	
+	{
+		"name": "pods-to-external-network",
+		"labels": { "name": "pods-to-external-network",
+		"env": "${ENV_NAME}"
+	},
+	"spec": {"description": "Allow the builds to access the internet.\n    This only needs to be specified once per environment.",
+	"source": " - - $namespace=apndkr-${ENV_NAME}",
+	"destination": " - - ext:network=any"
+    }
+  },
+
+  
     {
       "kind": "ImageStream",
       "apiVersion": "v1",
