@@ -10,7 +10,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
-    public class EnumTypeParameterFilter : IParameterFilter
+    public class AutoRestParameterFilter : IParameterFilter
     {
         public void Apply(OpenApiParameter parameter, ParameterFilterContext context)
         {
@@ -18,11 +18,13 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             if (type.IsEnum)
             {
-                var obj = new OpenApiObject();
-                obj["name"] = new OpenApiString(type.Name);
-                obj["modelAsString"] = new OpenApiBoolean (false);
+                // parameter.Extensions.Add( "x-ms-enum", new { name = type.Name, modelAsString = false });
+                var obj = new OpenApiObject
+                {
+                    ["name"] = new OpenApiString(type.Name),
+                    ["modelAsString"] = new OpenApiBoolean(false)
+                };
                 parameter.Extensions.Add("x-ms-enum", obj);
-                
             }
         }
     }

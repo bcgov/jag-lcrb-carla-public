@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using System.Text.Json.Serialization;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
 {
@@ -8,8 +7,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         public string SpdJobId { get; set; }
         public string RecordIdentifier { get; set; }
         
-        [JsonConverter(typeof(StringEnumConverter))]
-        public SpiceApplicationStatus Result { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public WorkerSecurityStatus ScreeningResult { get; set; }
         public Worker Worker { get; set; }
     }
 }
