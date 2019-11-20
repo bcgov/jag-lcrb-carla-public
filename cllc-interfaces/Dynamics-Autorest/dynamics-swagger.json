@@ -10974,6 +10974,152 @@
         }
       }
     },
+    "/adoxio_legalentities({adoxio_legalentityid})/adoxio_legalentity_task_LegalEntity": {
+      "get": {
+        "tags": [
+          "legalentity_task_legalentity"
+        ],
+        "summary": "Get adoxio_legalentity_task_LegalEntity from adoxio_legalentities",
+        "operationId": "legalentitytasklegalentity_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_legalentityid",
+            "description": "key: adoxio_legalentityid of adoxio_legalentity",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.taskCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_legalentities({adoxio_legalentityid})/adoxio_legalentity_task_LegalEntity({activityid})": {
+      "get": {
+        "tags": [
+          "legalentity_task_legalentity"
+        ],
+        "summary": "Get adoxio_legalentity_task_LegalEntity from adoxio_legalentities",
+        "operationId": "legalentitytasklegalentity_Getadoxio_legalentity_task_LegalEntityByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_legalentityid",
+            "description": "key: adoxio_legalentityid of adoxio_legalentity",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "activityid",
+            "description": "key: activityid of task",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_licenceses": {
       "get": {
         "tags": [
@@ -17840,6 +17986,236 @@
         }
       }
     },
+    "/leads": {
+      "get": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Get entities from leads",
+        "operationId": "leads_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.leadCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Add new entity to leads",
+        "operationId": "leads_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/leads({leadid})": {
+      "get": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Get entity from leads by key",
+        "operationId": "leads_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "leadid",
+            "description": "key: leadid of lead",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Update entity in leads",
+        "operationId": "leads_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "leadid",
+            "description": "key: leadid of lead",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Delete entity from leads",
+        "operationId": "leads_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "leadid",
+            "description": "key: leadid of lead",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/savedqueries": {
       "get": {
         "tags": [
@@ -19304,6 +19680,58 @@
             "description": "Retrieved navigation property",
             "schema": {
               "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_exhibit"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/tasks({activityid})/adoxio_LegalEntity_Task": {
+      "get": {
+        "tags": [
+          "legalentity_task"
+        ],
+        "summary": "Get adoxio_LegalEntity_Task from tasks",
+        "operationId": "legalentitytask_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activityid",
+            "description": "key: activityid of task",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
             }
           },
           "default": {
@@ -23257,6 +23685,10 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_establishmentaddressstreet": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_checklistfloorplanassess": {
           "format": "int32",
           "description": "",
@@ -23613,7 +24045,7 @@
           "description": "The name of the custom entity.",
           "type": "string"
         },
-        "adoxio_checklistassociatesconsentreceived": {
+        "adoxio_checklistassociatescontacted": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -23813,10 +24245,6 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_establishmentaddressstreet": {
-          "description": "",
-          "type": "string"
-        },
         "_slainvokedid_value": {
           "description": "For internal use only.",
           "type": "string"
@@ -23981,11 +24409,6 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_uploadedfloorplans": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_establishmentopeningdate": {
           "format": "date",
           "description": "",
@@ -24005,10 +24428,10 @@
           "description": "",
           "type": "integer"
         },
-        "lastonholdtime": {
-          "format": "date-time",
-          "description": "Contains the date and time stamp of the last on-hold time",
-          "type": "string"
+        "adoxio_uploadedfloorplans": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "_adoxio_applyingperson_value": {
           "description": "",
@@ -24084,6 +24507,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_appchecklistchangesapplied": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_signaturedate": {
           "format": "date",
           "description": "",
@@ -24103,10 +24531,10 @@
           "description": "BPF Refactoring 1.17.2019",
           "type": "integer"
         },
-        "adoxio_checklistassociatescontacted": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
+        "lastonholdtime": {
+          "format": "date-time",
+          "description": "Contains the date and time stamp of the last on-hold time",
+          "type": "string"
         },
         "adoxio_renewalzoning": {
           "format": "int32",
@@ -24413,6 +24841,11 @@
           "type": "integer"
         },
         "adoxio_initialcapassessmenttrigger": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_checklistassociatesconsentreceived": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -26749,6 +27182,10 @@
           "format": "int32",
           "description": "Status of the Cannabis Monthly Report",
           "type": "integer"
+        },
+        "adoxio_isexportnow": {
+          "description": "",
+          "type": "boolean"
         },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -33215,6 +33652,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licenseechangelog"
           }
+        },
+        "adoxio_legalentity_task_LegalEntity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
         }
       }
     },
@@ -34228,6 +34671,11 @@
         "adoxio_isdirectornew": {
           "description": "",
           "type": "boolean"
+        },
+        "adoxio_businesstype": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_isofficernew": {
           "description": "",
@@ -89723,6 +90171,10 @@
           "description": "Type the percentage complete value for the task to track tasks to completion.",
           "type": "integer"
         },
+        "_adoxio_legalentity_value": {
+          "description": "",
+          "type": "string"
+        },
         "crmtaskassigneduniqueid": {
           "description": "Assigned Task Unique Id",
           "type": "string"
@@ -89921,6 +90373,9 @@
         },
         "regardingobjectid_adoxio_complianceinvestigation_task": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
+        },
+        "adoxio_LegalEntity_Task": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
         }
       }
     },
@@ -95564,6 +96019,19 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.taskCollection": {
+      "title": "Collection of task",
+      "description": "Microsoft.Dynamics.CRM.taskCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_licencesCollection": {
       "title": "Collection of adoxio_licences",
       "description": "Microsoft.Dynamics.CRM.adoxio_licencesCollection",
@@ -95911,6 +96379,19 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.leadCollection": {
+      "title": "Collection of lead",
+      "description": "Microsoft.Dynamics.CRM.leadCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
           }
         }
       }
