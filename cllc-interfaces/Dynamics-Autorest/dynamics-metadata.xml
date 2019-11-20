@@ -2870,6 +2870,9 @@
         <Property Name="adoxio_checklistunreportedsaleofbusiness" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_establishmentaddressstreet" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_checklistfloorplanassess" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3122,7 +3125,7 @@
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
         </Property>
-        <Property Name="adoxio_checklistassociatesconsentreceived" Type="Edm.Int32">
+        <Property Name="adoxio_checklistassociatescontacted" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentpropsedname" Type="Edm.String" Unicode="false">
@@ -3266,9 +3269,6 @@
         <Property Name="adoxio_holdsotherlicencesoptionset" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_establishmentaddressstreet" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="_slainvokedid_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
           <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
@@ -3401,9 +3401,6 @@
         <Property Name="adoxio_sharepointlocationdummyfield" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_uploadedfloorplans" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_establishmentopeningdate" Type="Edm.Date">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3416,8 +3413,8 @@
         <Property Name="adoxio_servicehoursmondayopen" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="lastonholdtime" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Contains the date and time stamp of the last on-hold time" />
+        <Property Name="adoxio_uploadedfloorplans" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_adoxio_applyingperson_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3494,6 +3491,9 @@
         <Property Name="adoxio_servicehourssundayopen" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_appchecklistchangesapplied" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_signaturedate" Type="Edm.Date">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3506,8 +3506,8 @@
         <Property Name="adoxio_checklisttiedhouseassessed" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
-        <Property Name="adoxio_checklistassociatescontacted" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        <Property Name="lastonholdtime" Type="Edm.DateTimeOffset">
+          <Annotation Term="Org.OData.Core.V1.Description" String="Contains the date and time stamp of the last on-hold time" />
         </Property>
         <Property Name="adoxio_renewalzoning" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3729,6 +3729,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_initialcapassessmenttrigger" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_checklistassociatesconsentreceived" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklistsitemapassessed" Type="Edm.Int32">
@@ -5557,6 +5560,9 @@
         </Property>
         <Property Name="statecode" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Status of the Cannabis Monthly Report" />
+        </Property>
+        <Property Name="adoxio_isexportnow" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <NavigationProperty Name="createdbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_cannabismonthlyreport_createdby">
           <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
@@ -11008,6 +11014,7 @@
         <NavigationProperty Name="adoxio_legalentity_personalhistorysummaries" Type="Collection(mscrm.adoxio_personalhistorysummary)" Partner="adoxio_LegalEntityId" />
         <NavigationProperty Name="adoxio_parentlegalentity_changelogs" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_ParentLegalEntityId" />
         <NavigationProperty Name="adoxio_legalentity_changelogs" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_LegalEntityId" />
+        <NavigationProperty Name="adoxio_legalentity_task_LegalEntity" Type="Collection(mscrm.task)" Partner="adoxio_LegalEntity_Task" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Hold shareholders/owners and company structure" />
       </EntityType>
       <EntityType Name="adoxio_licences" BaseType="mscrm.crmbaseentity">
@@ -11802,6 +11809,9 @@
           </Annotation>
         </Property>
         <Property Name="adoxio_isdirectornew" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_businesstype" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_isofficernew" Type="Edm.Boolean">
@@ -54159,6 +54169,13 @@
         <Property Name="percentcomplete" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the percentage complete value for the task to track tasks to completion." />
         </Property>
+        <Property Name="_adoxio_legalentity_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="crmtaskassigneduniqueid" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Assigned Task Unique Id" />
         </Property>
@@ -54213,6 +54230,9 @@
         <NavigationProperty Name="regardingobjectid_adoxio_licences_task" Type="mscrm.adoxio_licences" Nullable="false" Partner="adoxio_licences_Tasks" />
         <NavigationProperty Name="regardingobjectid_adoxio_worker_task" Type="mscrm.adoxio_worker" Nullable="false" Partner="adoxio_worker_Tasks" />
         <NavigationProperty Name="regardingobjectid_adoxio_complianceinvestigation_task" Type="mscrm.adoxio_complianceinvestigation" Nullable="false" Partner="adoxio_complianceinvestigation_Tasks" />
+        <NavigationProperty Name="adoxio_LegalEntity_Task" Type="mscrm.adoxio_legalentity" Nullable="false" Partner="adoxio_legalentity_task_LegalEntity">
+          <ReferentialConstraint Property="_adoxio_legalentity_value" ReferencedProperty="adoxio_legalentityid" />
+        </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Generic activity representing work needed to be done." />
       </EntityType>
       <EntityType Name="teammembership" BaseType="mscrm.crmbaseentity">
@@ -63967,6 +63987,7 @@
           <NavigationPropertyBinding Path="adoxio_legalentity_personalhistorysummaries" Target="adoxio_personalhistorysummaries" />
           <NavigationPropertyBinding Path="adoxio_parentlegalentity_changelogs" Target="adoxio_licenseechangelogs" />
           <NavigationPropertyBinding Path="adoxio_legalentity_changelogs" Target="adoxio_licenseechangelogs" />
+          <NavigationPropertyBinding Path="adoxio_legalentity_task_LegalEntity" Target="tasks" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -76073,6 +76094,7 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_licences_task" Target="adoxio_licenceses" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_worker_task" Target="adoxio_workers" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_complianceinvestigation_task" Target="adoxio_complianceinvestigations" />
+          <NavigationPropertyBinding Path="adoxio_LegalEntity_Task" Target="adoxio_legalentities" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">

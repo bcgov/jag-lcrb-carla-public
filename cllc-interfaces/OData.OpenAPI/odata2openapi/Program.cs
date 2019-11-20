@@ -219,7 +219,7 @@ namespace odata2openapi
             bool enableOdataExtension = false;
 
             // True if we get metadata from Dynamics
-            bool getMetadata = false;
+            bool getMetadata = true;
 
             // True if we use strings instead of guids primary keys.
             bool useStringForGuid = true;
@@ -366,6 +366,7 @@ namespace odata2openapi
                         if (firstTagLower.Equals("contacts") ||
                             firstTagLower.Equals("accounts") ||
                             firstTagLower.Equals("invoices") ||
+                            firstTagLower.Equals("leads") ||
                             firstTagLower.Equals("sharepointsites") ||
                             firstTagLower.Equals("savedqueries") ||
                             firstTagLower.Equals("sharepointdocumentlocations") ||
@@ -400,7 +401,7 @@ namespace odata2openapi
                         prefix = firstTagLower;
                         // Capitalize the first character.
 
-                        if (prefix.Length > 0)
+                        if (prefix.Length > 0  && prefix.Length > solutionPrefix.Length)
                         {
                             if (prefix.ToUpper().Substring(0,solutionPrefix.Length) == solutionPrefix.ToUpper())
                             {
