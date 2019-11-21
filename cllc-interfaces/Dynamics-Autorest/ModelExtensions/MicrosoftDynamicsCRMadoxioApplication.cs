@@ -1,7 +1,18 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
-    using Newtonsoft.Json;
+    class MicrosoftDynamicsCRMadoxioApplicationMetadata
+    {
+        //format date here
+        [JsonProperty(PropertyName = "adoxio_establishmentopeningdate")]
+        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
+        public System.DateTimeOffset? AdoxioEstablishmentopeningdate { get; set; }
+    }
 
+    [MetadataType(typeof(MicrosoftDynamicsCRMadoxioApplicationMetadata))]
     public partial class MicrosoftDynamicsCRMadoxioApplication
     {
 
@@ -26,14 +37,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_Invoice@odata.bind")]
         public string AdoxioInvoiceODataBind { get; set; }
 
-
         [JsonProperty(PropertyName = "adoxio_AssignedLicence@odata.bind")]
         public string AdoxioAssignedLicenceODataBind { get; set; }
 
-
         [JsonProperty(PropertyName = "adoxio_application_SharePointDocumentLocations@odata.bind")]
         public string[] AdoxioApplicationSharePointDocumentLocationsODataBind { get; set; }
-
 
         [JsonProperty(PropertyName = "adoxio_localgovindigenousnationid@odata.bind")]
         public string AdoxioLocalgovindigenousnationidODataBind { get; set; }
@@ -42,10 +50,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioLicenceEstablishmentODataBind { get; set; }
 
 
-        //format date here
-        [JsonProperty(PropertyName = "adoxio_establishmentopeningdate")]
-        [JsonConverter(typeof(DateFormatConverter), "yyyy-MM-dd")]
-        public System.DateTimeOffset? AdoxioEstablishmentopeningdate { get; set; }
+        
 
 
 

@@ -92,7 +92,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="latitude">Latitude for the publisher address.</param>
         /// <param name="stateorprovince">State or province in the publisher
         /// address.</param>
-        public MicrosoftDynamicsCRMpublisheraddress(string line2 = default(string), string name = default(string), string fax = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string postofficebox = default(string), string _modifiedbyValue = default(string), int? freighttermscode = default(int?), string longitude = default(string), string postalcode = default(string), int? addresstypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), int? shippingmethodcode = default(int?), string upszone = default(string), string telephone2 = default(string), int? addressnumber = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string telephone3 = default(string), string line1 = default(string), int? utcoffset = default(int?), string primarycontactname = default(string), string _modifiedonbehalfbyValue = default(string), string county = default(string), int? utcconversiontimezonecode = default(int?), string _parentidValue = default(string), string city = default(string), string publisheraddressid = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string line3 = default(string), string telephone1 = default(string), string latitude = default(string), string stateorprovince = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher parentid = default(MicrosoftDynamicsCRMpublisher), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMpublisheraddress(string line2 = default(string), string name = default(string), string fax = default(string), string versionnumber = default(string), int? timezoneruleversionnumber = default(int?), string postofficebox = default(string), string _modifiedbyValue = default(string), int? freighttermscode = default(int?), decimal? longitude = default(decimal?), string postalcode = default(string), int? addresstypecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string country = default(string), int? shippingmethodcode = default(int?), string upszone = default(string), string telephone2 = default(string), int? addressnumber = default(int?), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string telephone3 = default(string), string line1 = default(string), int? utcoffset = default(int?), string primarycontactname = default(string), string _modifiedonbehalfbyValue = default(string), string county = default(string), int? utcconversiontimezonecode = default(int?), string _parentidValue = default(string), string city = default(string), string publisheraddressid = default(string), int? importsequencenumber = default(int?), string _createdonbehalfbyValue = default(string), string line3 = default(string), string telephone1 = default(string), decimal? latitude = default(decimal?), string stateorprovince = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMpublisher parentid = default(MicrosoftDynamicsCRMpublisher), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Line2 = line2;
             Name = name;
@@ -194,7 +194,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets longitude for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "longitude")]
-        public string Longitude { get; set; }
+        public decimal? Longitude { get; set; }
 
         /// <summary>
         /// Gets or sets ZIP Code or postal code in the publisher address.
@@ -354,7 +354,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets latitude for the publisher address.
         /// </summary>
         [JsonProperty(PropertyName = "latitude")]
-        public string Latitude { get; set; }
+        public decimal? Latitude { get; set; }
 
         /// <summary>
         /// Gets or sets state or province in the publisher address.
