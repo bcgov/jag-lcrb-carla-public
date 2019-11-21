@@ -1,6 +1,7 @@
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
     using Newtonsoft.Json;
+    using System.ComponentModel.DataAnnotations;
 
     public enum SecurityStatusPicklist
     {
@@ -9,6 +10,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         WITHDRAWN = 845280003
     }
 
+    class MicrosoftDynamicsCRMadoxioWorkerMetadata
+    {
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dateofbirth")]
+        [JsonConverter(typeof(SimpleDateTimeConverter))]
+        public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
+    }
+
+    [MetadataType(typeof(MicrosoftDynamicsCRMadoxioWorkerMetadata))]
     public partial class MicrosoftDynamicsCRMadoxioWorker
     {
 
@@ -16,11 +27,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_ContactId@odata.bind")]
         public string ContactIdAccountODataBind { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateofbirth")]
-        [JsonConverter(typeof(SimpleDateTimeConverter))]
-        public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
+        
     }
 }
