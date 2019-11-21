@@ -22,7 +22,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     @Inject(MAT_DIALOG_DATA) public data: any, ) {
     super();
     this.shareholder = data.shareholder;
-    this.action = data.action;    
+    this.action = data.action;
     this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate();
   }
 
@@ -65,6 +65,14 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     if (this.data.shareholder) {
       this.form.patchValue(this.data.shareholder);
     }
+  }
+
+  isValid(): boolean {
+    let valid = (!this.shareholder.isRoot && !this.form.valid)
+      || (this.shareholder.isRoot && !this.form.get('totalSharesNew').value);
+    if (this.shareholder.parentLicenseeChangeLog)
+
+      return valid;
   }
 
   save() {

@@ -47,7 +47,18 @@ export class LicenseeChangeLog {
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
-  percentageShares: number; // This in only used on the client side
+
+
+  public get percentageShares(): number {
+    let percent = 0;
+    if (this.parentLinceseeChangeLog && this.parentLinceseeChangeLog.totalSharesNew && this.numberofSharesNew) {
+      percent = this.numberofSharesNew / this.parentLinceseeChangeLog.totalSharesNew * 100;
+      percent = Math.round(this.percentageShares * 100) / 100; // round to two decimal places
+    }
+    return percent;
+  }
+
+
 
   /**
    * Create from LegalEntity
