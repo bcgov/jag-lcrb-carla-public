@@ -55,6 +55,7 @@ export class LicenseeChangeLog {
   constructor(legalEntity: LegalEntity = null) {
     if (legalEntity) {
       this.legalEntityId = legalEntity.id;
+      this.businessAccountType = legalEntity.legalentitytype;
       this.isIndividual = legalEntity.isindividual;
       this.parentLegalEntityId = legalEntity.parentLegalEntityId;
       this.changeType = 'unchanged';
@@ -405,7 +406,7 @@ export class LicenseeChangeLog {
 
     //notice of articles
     const needsNoticeOfArticels = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
-      && (node.businessAccountType === 'PrivateCorporation' || node.businessAccountType === 'PublicCorporation'));
+      && (node.businessAccountType === 'PublicCorporation'));
     result.noticeOfArticles = LicenseeChangeLog.findNodesInTree(treeRoot, needsNoticeOfArticels);
 
     //central securities register
