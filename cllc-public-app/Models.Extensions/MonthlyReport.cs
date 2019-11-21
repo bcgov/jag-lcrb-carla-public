@@ -75,15 +75,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                     lostReductions = inventoryReport.AdoxioQtyloststolen,
                     otherReductions = inventoryReport.AdoxioOtherreductions,
                     closingNumber = inventoryReport.AdoxioClosinginventory,
-                    closingValue = inventoryReport.AdoxioValueofclosinginventory.Value,
+                    closingValue = (inventoryReport.AdoxioValueofclosinginventory != null) ? inventoryReport.AdoxioValueofclosinginventory.Value : 0,
                     totalSalesToConsumerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumber),
-                    totalSalesToConsumerValue = inventoryReport.AdoxioTotalvalue.Value,
+                    totalSalesToConsumerValue = (inventoryReport.AdoxioTotalvalue != null) ? inventoryReport.AdoxioTotalvalue.Value : 0,
                     totalSalesToRetailerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumberretailer),
-                    totalSalesToRetailerValue = inventoryReport.AdoxioTotalvalueretailer.Value,
+                    totalSalesToRetailerValue = (inventoryReport.AdoxioTotalvalueretailer != null) ? inventoryReport.AdoxioTotalvalueretailer.Value : 0
                 };
                 if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
                 {
-                    inv.closingWeight = inventoryReport.AdoxioWeightofclosinginventory.Value;
+                    inv.closingWeight = (inventoryReport.AdoxioWeightofclosinginventory != null) ? inventoryReport.AdoxioWeightofclosinginventory.Value : 0;
                 }
                 if (product.AdoxioName == "Seeds")
                 {
