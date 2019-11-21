@@ -104,8 +104,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 SetupHangfireJobs(app, loggerFactory);
             }
 
-            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
+            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
                 )
             {
                 // enable Splunk logger using Serilog
