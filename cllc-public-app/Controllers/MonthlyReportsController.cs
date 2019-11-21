@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -159,10 +160,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             try
             {
                 var filter = $"adoxio_cannabismonthlyreportid eq {reportId}";
-                var monthlyReportResp = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
-                if (monthlyReportResp.Value.Count == 1 && CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReportResp.Value[0]._adoxioLicenseeidValue))
+                MicrosoftDynamicsCRMadoxioCannabismonthlyreport monthlyReport = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter).Value.FirstOrDefault();
+                if (monthlyReport != null && CurrentUserHasAccessToMonthlyReportOwnedBy(monthlyReport._adoxioLicenseeidValue))
                 {
-                    return new JsonResult(monthlyReportResp.Value);
+                    return new JsonResult(monthlyReport.ToViewModel(_dynamicsClient));
                 }
             }
             catch (HttpOperationException ex)
