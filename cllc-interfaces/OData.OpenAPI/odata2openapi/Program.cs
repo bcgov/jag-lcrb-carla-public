@@ -891,6 +891,12 @@ namespace odata2openapi
                     {
                         foreach (var property in definition.Value.Properties)
                         {
+                            // convert all dates to datetimeoffset.
+                            // special handling of the Dynamics "DATE (YYYY-MM-DD)" fields will need to be done with extensions.
+                            if (property.Value.Format != null && property.Value.Format == "date")
+                            {
+                                property.Value.Format = "date-time";
+                            }
                             if (property.Value.Type == null)
                             {
                                 property.Value.Type = "string";
@@ -900,11 +906,8 @@ namespace odata2openapi
                             if (property.Value != null && property.Value.Format != null && property.Value.Format.Equals("double"))
                             {
                                 property.Value.Format = "decimal";
-                            }
-                            if (property.Key.Equals("adoxio_birthdate"))
-                            {
-                                property.Value.Format = "date";
-                            }
+                                property.Value.Type = "number";
+                            }                            
                             if (property.Key.Equals("totalamount"))
                             {
                                 property.Value.Type = "number";
