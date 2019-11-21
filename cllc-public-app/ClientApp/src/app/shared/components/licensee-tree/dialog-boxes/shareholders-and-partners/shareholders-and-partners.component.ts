@@ -39,7 +39,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       // partnerType: ['', Validators.required],
       isIndividual: [true],
       isShareholderNew: [true],
-      legalentitytype: [''],
+      businessAccountType: [''],
       dateIssued: [''],
     });
 
@@ -86,8 +86,6 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       this.dialogRef.close(formData);
     }
   }
-
-
 
   close() {
     this.dialogRef.close();
