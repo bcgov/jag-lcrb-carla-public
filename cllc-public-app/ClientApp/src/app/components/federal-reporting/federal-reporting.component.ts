@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Subscription, forkJoin } from 'rxjs';
@@ -18,6 +18,8 @@ export class FederalReportingComponent implements OnInit {
   shownMonthlyReports: MonthlyReport[] = [];
   selectedMonthlyReport: MonthlyReport = null;
   busy: Subscription;
+  reportIsDisabled = false;
+  reportIsClosed = false;
 
   metaForm = this.fb.group({
     licence: ['', [Validators.required]],
@@ -74,13 +76,12 @@ export class FederalReportingComponent implements OnInit {
 
   save(submit = false) {
     // main report fields
+    const statusCode = submit ? this.monthlyReportStatusEnum.Submitted : this.monthlyReportStatusEnum.Draft;
     const updateRequest = {
       ...this.reportForm.value,
-      inventorySalesReports: []
+      inventorySalesReports: [],
+      statusCode: statusCode
     };
-    if (submit) {
-      updateRequest.statusCode = this.monthlyReportStatusEnum.Submitted;
-    }
 
     // add product fields
     let invalidProduct = false;
@@ -90,7 +91,8 @@ export class FederalReportingComponent implements OnInit {
       }
       updateRequest.inventorySalesReports.push({...f.value});
     });
-    if (!this.reportForm.valid || invalidProduct) {
+    if ((!this.reportForm.valid || invalidProduct) && !this.reportIsDisabled) {
+      // TODO display validation errors
       console.log("invalid report or product form");
       return false;
     }
@@ -98,38 +100,70 @@ export class FederalReportingComponent implements OnInit {
     this.busy = forkJoin(
       this.monthlyReportDataService.updateMonthlyReport(updateRequest)
     )
-    .subscribe(() => {
-      console.log("saved!");
+    .subscribe(([report]) => {
+      const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
+      this.monthlyReports[index] = report;
+      this.selectedMonthlyReport = report;
+      this.handleMonthlyReportChanged();
     });
   }
 
   periodChanged(event) {
+    this.productForms = [];
     this.selectedMonthlyReport = this.monthlyReports.find(rep => rep.monthlyReportId === event.target.value);
 
+    if (this.selectedMonthlyReport === undefined) {
+      return;
+    }
+    this.handleMonthlyReportChanged();
+  }
+
+  handleMonthlyReportChanged() {
     // Update product forms
     this.productForms = this.selectedMonthlyReport.inventorySalesReports.map((report) => {
-      return new FormGroup({
-        'inventoryReportId': new FormControl(report.inventoryReportId, []),
-        'product': new FormControl(report.product, []),
-        'openingInventory': new FormControl(report.openingInventory, []),
-        'domesticAdditions': new FormControl(report.domesticAdditions, []),
-        'returnsAdditions': new FormControl(report.returnsAdditions, []),
-        'otherAdditions': new FormControl(report.otherAdditions, []),
-        'domesticReductions': new FormControl(report.domesticReductions, []),
-        'returnsReductions': new FormControl(report.returnsReductions, []),
-        'destroyedReductions': new FormControl(report.destroyedReductions, []),
-        'lostReductions': new FormControl(report.lostReductions, []),
-        'otherReductions': new FormControl(report.otherReductions, []),
-        'closingNumber': new FormControl(report.closingNumber, []),
-        'closingValue': new FormControl(report.closingValue, []),
-        'closingWeight': new FormControl(report.closingWeight, []),
-        'totalSeeds': new FormControl(report.totalSeeds, []),
-        'totalSalesToConsumerQty': new FormControl(report.totalSalesToConsumerQty, []),
-        'totalSalesToConsumerValue': new FormControl(report.totalSalesToConsumerValue, []),
-        'totalSalesToRetailerQty': new FormControl(report.totalSalesToRetailerQty, []),
-        'totalSalesToRetailerValue': new FormControl(report.totalSalesToRetailerValue, []),
+      return this.fb.group({
+        inventoryReportId: [report.inventoryReportId, []],
+        product: [report.product, []],
+        openingInventory: [report.openingInventory, []],
+        domesticAdditions: [report.domesticAdditions, []],
+        returnsAdditions: [report.returnsAdditions, []],
+        otherAdditions: [report.otherAdditions, []],
+        domesticReductions: [report.domesticReductions, []],
+        returnsReductions: [report.returnsReductions, []],
+        destroyedReductions: [report.destroyedReductions, []],
+        lostReductions: [report.lostReductions, []],
+        otherReductions: [report.otherReductions, []],
+        closingNumber: [report.closingNumber, []],
+        closingValue: [report.closingValue, []],
+        closingWeight: [report.closingWeight, []],
+        totalSeeds: [report.totalSeeds, []],
+        totalSalesToConsumerQty: [report.totalSalesToConsumerQty, []],
+        totalSalesToConsumerValue: [report.totalSalesToConsumerValue, []],
+        totalSalesToRetailerQty: [report.totalSalesToRetailerQty, []],
+        totalSalesToRetailerValue: [report.totalSalesToRetailerValue, []],
       });
     });
+
+    switch (this.selectedMonthlyReport.statusCode) {
+      case monthlyReportStatus.Closed:
+        this.reportIsDisabled = true;
+        this.reportIsClosed = true;
+        this.reportForm.disable();
+        this.productForms.forEach((report) => { report.disable(); });
+        break;
+      case monthlyReportStatus.Submitted:
+        this.reportIsDisabled = true;
+        this.reportIsClosed = false;
+        this.reportForm.disable();
+        this.productForms.forEach((report) => { report.disable(); });
+        break;
+      default:
+          this.reportIsDisabled = false;
+          this.reportIsClosed = false;
+          this.reportForm.enable();
+          this.productForms.forEach((report) => { report.enable(); });
+        break;
+    }
 
     // Update monthly report form
     this.reportForm.patchValue({

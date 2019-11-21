@@ -69,9 +69,12 @@
       </app-field>
     </div>
     <app-product-inventory-sales-report [productForm]="productForm" *ngFor="let productForm of productForms"></app-product-inventory-sales-report>
-    <div class="row">
-      <button (click)="save()">Save</button>
+    <div class="row" *ngIf="!reportIsDisabled">
+      <button (click)="save(false)">Save</button>
       <button (click)="save(true)">Submit</button>
+    </div>
+    <div class="row" *ngIf="reportIsDisabled && !reportIsClosed">
+      <button (click)="save(false)">Unsubmit</button>
     </div>
   </form>
 </div>
