@@ -59,9 +59,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             services.AddSwaggerGen(c =>
             {
+                c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB SPD Transfer Service", Version = "v1" });
                 c.DescribeAllEnumsAsStrings();
-                c.SchemaFilter<EnumTypeSchemaFilter>();
+                c.ParameterFilter<AutoRestParameterFilter>();
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -182,7 +183,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
 
             app.UseAuthentication();
             app.UseMvc();
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "JAG LCRB SPD Transfer Service");
