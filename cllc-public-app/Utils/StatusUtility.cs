@@ -62,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
                     {
                         shownStatus = "Relocation Application Under Review";
                     }
-                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "CRS Location Change")
+                    else if (application.AdoxioApplicationTypeId != null && application.AdoxioApplicationTypeId.AdoxioName == "Licensee Changes")
                     {
                         shownStatus = "Licensee Change Under Review";
                     }
