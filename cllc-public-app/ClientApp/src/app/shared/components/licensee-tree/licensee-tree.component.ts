@@ -197,7 +197,6 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * Repopulates the licensee tree and the change tables
    */
   refreshTreeAndChangeTables() {
-    this.computeSharePercentages(this.treeRoot);
     // change reference of the dataSource.data to cause the tree to re-render
     const data = [...this.dataSource.data];
     this.dataSource.data = [];
@@ -227,18 +226,6 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     this.organizationShareholderChanges.sort(sortByChangeType);
     this.leadershipChanges.sort(sortByChangeType);
 
-  }
-
-  computeSharePercentages(node: LicenseeChangeLog) {
-    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.totalSharesNew && node.numberofSharesNew) {
-      node.percentageShares = node.numberofSharesNew / node.parentLinceseeChangeLog.totalSharesNew * 100;
-      node.percentageShares = Math.round(node.percentageShares* 100) / 100 ; // round to two decimal places
-    }
-
-    node.children = node.children || [];
-    node.children.forEach(child => {
-      this.computeSharePercentages(child);
-    })
   }
 
   /**
