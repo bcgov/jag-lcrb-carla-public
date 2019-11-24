@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
             foreach (Newsletter Newsletter in seedNewsletters)
             {
-                context.UpdateSeedNewsletterInfo(Newsletter);
+                _dynamicsClient.UpdateSeedNewsletterInfo(Newsletter);
             }
 
             AddInitialNewsletters(context);
@@ -47,7 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Seeders
                 // default to sample data, which is stored in the "SeedData" directory.
                 NewsletterInitializationFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeedData" + Path.DirectorySeparatorChar + "Newsletters.json");
             }
-            context.AddInitialNewslettersFromFile(NewsletterInitializationFile);
+            _dynamicsClient.AddInitialNewslettersFromFile(NewsletterInitializationFile);
         }
 
         private List<Newsletter> GetSeedNewsletters()

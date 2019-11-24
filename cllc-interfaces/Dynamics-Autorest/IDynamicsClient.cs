@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top90 { get; set; }
+        int? Top92 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip17 { get; set; }
+        int? Skip18 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count90 { get; set; }
+        bool? Count92 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter90 { get; set; }
+        string Filter92 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search17 { get; set; }
+        string Search18 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -463,6 +463,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContacts Contacts { get; }
 
         /// <summary>
+        /// Gets the IContacttaskcontact.
+        /// </summary>
+        IContacttaskcontact Contacttaskcontact { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
@@ -491,6 +496,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILeads.
         /// </summary>
         ILeads Leads { get; }
+
+        /// <summary>
+        /// Gets the ILists.
+        /// </summary>
+        ILists Lists { get; }
 
         /// <summary>
         /// Gets the ISavedqueries.
@@ -531,6 +541,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         IUseradoxioexhibit Useradoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IContacttask.
+        /// </summary>
+        IContacttask Contacttask { get; }
 
         /// <summary>
         /// Gets the ILegalentitytask.
