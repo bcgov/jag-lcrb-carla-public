@@ -2898,12 +2898,8 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
-        <Property Name="_adoxio_casemanager_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
+        <Property Name="adoxio_checklistresolutionassessment" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
         <Property Name="adoxio_appchecklistvalidinterestreceived" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Tied to the Revised WFs?" />
@@ -2919,9 +2915,6 @@
         </Property>
         <Property Name="adoxio_triggertogeneratesecurityclearance" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_checklistresolutionassessment" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
         <Property Name="traversedpath" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="A comma separated list of string values representing the unique identifiers of stages in a Business Process Flow Instance in the order that they occur." />
@@ -3006,6 +2999,9 @@
         </Property>
         <Property Name="importsequencenumber" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Sequence number of the import that created this record." />
+        </Property>
+        <Property Name="adoxio_personalhistoryinstructionfield" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_uploadedsitemap" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3498,9 +3494,6 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_progressstatus" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_personalhistoryinstructionfield" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_checklisttiedhouseassessed" Type="Edm.Int32">
@@ -4005,9 +3998,6 @@
         </NavigationProperty>
         <NavigationProperty Name="adoxio_SLA" Type="mscrm.slakpiinstance" Nullable="false" Partner="adoxio_slakpiinstance_adoxio_application_SLA">
           <ReferentialConstraint Property="_adoxio_sla_value" ReferencedProperty="slakpiinstanceid" />
-        </NavigationProperty>
-        <NavigationProperty Name="adoxio_CaseManager" Type="mscrm.systemuser" Nullable="false" Partner="adoxio_systemuser_adoxio_application_CaseManager">
-          <ReferentialConstraint Property="_adoxio_casemanager_value" ReferencedProperty="systemuserid" />
         </NavigationProperty>
         <NavigationProperty Name="adoxio_CaseManagerSupervisor" Type="mscrm.systemuser" Nullable="false" Partner="adoxio_systemuser_adoxio_application_CaseManagerSupervisor">
           <ReferentialConstraint Property="_adoxio_casemanagersupervisor_value" ReferencedProperty="systemuserid" />
@@ -10262,6 +10252,9 @@
         <Property Name="adoxio_productionofrecords" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_statuscommentsinvestigatorsonly" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
         </Property>
@@ -10393,6 +10386,9 @@
           </Annotation>
         </Property>
         <Property Name="adoxio_manufacturingendorsement" Type="Edm.Boolean">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_lastdocumentuploaddate" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentaddresscity" Type="Edm.String" Unicode="false">
@@ -23414,6 +23410,7 @@
         <NavigationProperty Name="adoxio_individual_documents" Type="Collection(mscrm.adoxio_document)" Partner="adoxio_IndividualId" />
         <NavigationProperty Name="contact_SharePointDocumentLocations" Type="Collection(mscrm.sharepointdocumentlocation)" Partner="regardingobjectid_contact" />
         <NavigationProperty Name="adoxio_licenseechangelog_Contact" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="adoxio_Contact" />
+        <NavigationProperty Name="adoxio_contact_task_Contact" Type="Collection(mscrm.task)" Partner="adoxio_Contact_Task" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Person with whom a business unit has a relationship, such as customer, supplier, and colleague." />
       </EntityType>
       <EntityType Name="contractdetail" BaseType="mscrm.crmbaseentity">
@@ -53983,7 +53980,6 @@
         <NavigationProperty Name="lk_adoxio_workerinvoicehistory_modifiedonbehalfby" Type="Collection(mscrm.adoxio_workerinvoicehistory)" Partner="modifiedonbehalfbyname" />
         <NavigationProperty Name="user_adoxio_workerinvoicehistory" Type="Collection(mscrm.adoxio_workerinvoicehistory)" Partner="owninguser" />
         <NavigationProperty Name="adoxio_inspection_inspectors" Type="Collection(mscrm.incident)" Partner="adoxio_inspection_inspectors" />
-        <NavigationProperty Name="adoxio_systemuser_adoxio_application_CaseManager" Type="Collection(mscrm.adoxio_application)" Partner="adoxio_CaseManager" />
         <NavigationProperty Name="adoxio_systemuser_adoxio_application_CaseManagerSupervisor" Type="Collection(mscrm.adoxio_application)" Partner="adoxio_CaseManagerSupervisor" />
         <NavigationProperty Name="adoxio_systemuser_adoxio_application_Inspector" Type="Collection(mscrm.adoxio_application)" Partner="adoxio_Inspector" />
         <NavigationProperty Name="adoxio_systemuser_adoxio_area_PrimaryInspector" Type="Collection(mscrm.adoxio_area)" Partner="adoxio_PrimaryInspector" />
@@ -54169,6 +54165,13 @@
         <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
         </Property>
+        <Property Name="_adoxio_contact_value" Type="Edm.Guid">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
+          <Annotation Term="Org.OData.Core.V1.Permissions">
+            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
+          </Annotation>
+        </Property>
         <Property Name="percentcomplete" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Type the percentage complete value for the task to track tasks to completion." />
         </Property>
@@ -54235,6 +54238,9 @@
         <NavigationProperty Name="regardingobjectid_adoxio_complianceinvestigation_task" Type="mscrm.adoxio_complianceinvestigation" Nullable="false" Partner="adoxio_complianceinvestigation_Tasks" />
         <NavigationProperty Name="adoxio_LegalEntity_Task" Type="mscrm.adoxio_legalentity" Nullable="false" Partner="adoxio_legalentity_task_LegalEntity">
           <ReferentialConstraint Property="_adoxio_legalentity_value" ReferencedProperty="adoxio_legalentityid" />
+        </NavigationProperty>
+        <NavigationProperty Name="adoxio_Contact_Task" Type="mscrm.contact" Nullable="false" Partner="adoxio_contact_task_Contact">
+          <ReferentialConstraint Property="_adoxio_contact_value" ReferencedProperty="contactid" />
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="Generic activity representing work needed to be done." />
       </EntityType>
@@ -62411,7 +62417,6 @@
           <NavigationPropertyBinding Path="adoxio_localgovindigenousnationid" Target="adoxio_localgovindigenousnations" />
           <NavigationPropertyBinding Path="adoxio_PoliceJurisdictionId" Target="adoxio_policejurisdictions" />
           <NavigationPropertyBinding Path="adoxio_SLA" Target="slakpiinstances" />
-          <NavigationPropertyBinding Path="adoxio_CaseManager" Target="systemusers" />
           <NavigationPropertyBinding Path="adoxio_CaseManagerSupervisor" Target="systemusers" />
           <NavigationPropertyBinding Path="adoxio_Inspector" Target="systemusers" />
           <NavigationPropertyBinding Path="bpf_adoxio_application_adoxio_applicationbpfmvpv2" Target="adoxio_applicationbpfmvpv2s" />
@@ -67458,6 +67463,7 @@
           <NavigationPropertyBinding Path="adoxio_individual_documents" Target="adoxio_documents" />
           <NavigationPropertyBinding Path="contact_SharePointDocumentLocations" Target="sharepointdocumentlocations" />
           <NavigationPropertyBinding Path="adoxio_licenseechangelog_Contact" Target="adoxio_licenseechangelogs" />
+          <NavigationPropertyBinding Path="adoxio_contact_task_Contact" Target="tasks" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
@@ -75859,7 +75865,6 @@
           <NavigationPropertyBinding Path="lk_adoxio_workerinvoicehistory_modifiedonbehalfby" Target="adoxio_workerinvoicehistories" />
           <NavigationPropertyBinding Path="user_adoxio_workerinvoicehistory" Target="adoxio_workerinvoicehistories" />
           <NavigationPropertyBinding Path="adoxio_inspection_inspectors" Target="incidents" />
-          <NavigationPropertyBinding Path="adoxio_systemuser_adoxio_application_CaseManager" Target="adoxio_applications" />
           <NavigationPropertyBinding Path="adoxio_systemuser_adoxio_application_CaseManagerSupervisor" Target="adoxio_applications" />
           <NavigationPropertyBinding Path="adoxio_systemuser_adoxio_application_Inspector" Target="adoxio_applications" />
           <NavigationPropertyBinding Path="adoxio_systemuser_adoxio_area_PrimaryInspector" Target="adoxio_areas" />
@@ -76098,6 +76103,7 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_worker_task" Target="adoxio_workers" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_complianceinvestigation_task" Target="adoxio_complianceinvestigations" />
           <NavigationPropertyBinding Path="adoxio_LegalEntity_Task" Target="adoxio_legalentities" />
+          <NavigationPropertyBinding Path="adoxio_Contact_Task" Target="contacts" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
           <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
