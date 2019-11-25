@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { FormBase } from '@shared/form-base';
 import { Application } from '@models/application.model';
+import { Account } from '@models/account.model';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
+  Account = Account;
 
   constructor(public dialog: MatDialog,
     private route: ActivatedRoute) {
