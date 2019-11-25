@@ -53,13 +53,18 @@ export class LicenseeChangeLog {
     let percent = 0;
     if (this.parentLinceseeChangeLog && this.parentLinceseeChangeLog.totalSharesNew && this.numberofSharesNew) {
       percent = this.numberofSharesNew / this.parentLinceseeChangeLog.totalSharesNew * 100;
-      percent = Math.round(this.percentageShares * 100) / 100; // round to two decimal places
+      percent = Math.round(percent * 100) / 100; // round to two decimal places
     }
     return percent;
   }
 
 
-
+public get totalChildShares(): number {
+  let totalShares = 0;
+  this.children = this.children || [];
+  totalShares = this.children.map(v => v.numberofSharesNew || 0).reduce((previous, current) => previous + current);
+  return totalShares;
+}
   /**
    * Create from LegalEntity
    */
