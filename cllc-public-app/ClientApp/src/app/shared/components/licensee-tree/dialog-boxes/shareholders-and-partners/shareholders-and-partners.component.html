@@ -87,7 +87,7 @@
       </app-field>
       <app-field class="col-md-12" *ngIf="!shareholder?.isRoot"
         label="Number of Voting Shares in {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}"
-        [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required">
+        [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required. Maximum allowed is {{availableParentShares}}">
         <input type="number" [readonly]="shareholder?.isRoot" class="form-control" formControlName="numberofSharesNew">
       </app-field>
     </section>
