@@ -224,3 +224,7 @@ hr {
     padding-left: 15px;
     margin-bottom: 20px;
   }
+
+::ng-deep .multiline-tooltip {
+  white-space: pre-line;
+}

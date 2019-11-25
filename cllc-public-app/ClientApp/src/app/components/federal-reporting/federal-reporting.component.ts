@@ -17,9 +17,11 @@ export class FederalReportingComponent implements OnInit {
   monthlyReports: MonthlyReport[] = [];
   shownMonthlyReports: MonthlyReport[] = [];
   selectedMonthlyReport: MonthlyReport = null;
+  selectedLicence: ApplicationLicenseSummary = null;
+  visibleInventoryReports = [];
   busy: Subscription;
-  reportIsDisabled = false;
-  reportIsClosed = false;
+  reportIsDisabled = true;
+  reportIsClosed = true;
 
   metaForm = this.fb.group({
     licence: ['', [Validators.required]],
@@ -63,8 +65,11 @@ export class FederalReportingComponent implements OnInit {
   licenceChanged(event) {
     if (event.target.value === '') {
       this.shownMonthlyReports = [];
+      this.selectedLicence = null;
       return;
     }
+    this.selectedLicence = this.licenses.find(l => l.licenseId === event.target.value);
+
     this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === event.target.value);
     this.busy = forkJoin(
       this.monthlyReportDataService.getMonthlyReportsByLicence(event.target.value)
@@ -169,5 +174,18 @@ export class FederalReportingComponent implements OnInit {
     this.reportForm.patchValue({
       ...this.selectedMonthlyReport
     });
+  }
+
+  toggleProductVisibility(id: string) {
+    if (this.visibleInventoryReports.indexOf(id) > -1) {
+      this.visibleInventoryReports.splice(this.visibleInventoryReports.indexOf(id), 1);
+    } else {
+      this.visibleInventoryReports.push(id);
+    }
+    console.log(this.visibleInventoryReports);
+  }
+
+  findProductForm(id: string): FormGroup {
+    return this.productForms.find(f => f.value.inventoryReportId === id);
   }
 }
