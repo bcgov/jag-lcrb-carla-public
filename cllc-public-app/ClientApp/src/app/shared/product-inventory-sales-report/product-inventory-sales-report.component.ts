@@ -8,6 +8,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class ProductInventorySalesReportComponent implements OnInit {
   @Input() productForm: FormGroup;
+
   constructor() { }
 
   ngOnInit() {
