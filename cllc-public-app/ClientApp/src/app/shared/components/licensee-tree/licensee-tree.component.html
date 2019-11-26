@@ -42,40 +42,53 @@
     <section>
       <span class="tree-label" *ngIf="node.isShareholderNew && !node.isRoot" style="margin-right: 5px">
         <i *ngIf="node.isIndividual" class="fas fa-user-tie"></i>
-        <i *ngIf="!node.isIndividual" class="fas fa-building"></i> </span>
+        <i *ngIf="!node.isIndividual" class="fas fa-building"></i>
+      </span>
       <span class="tree-label" *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px"> <i
-          class="fa fa-user" style="margin-right: 5px"></i> {{node.getNewLeadershipPosition()}} </span>
+          class="fa fa-user" style="margin-right: 5px"></i>
+        <!-- {{node.getNewLeadershipPosition()}}  -->
+      </span>
       <span *ngIf="!(enableEditing && !node.isRemoveChangeType())" class="tree-label"
         [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}">
         {{node.businessNameNew}}
       </span>
-      <a *ngIf="enableEditing && !node.isRemoveChangeType()" class="tree-label" href="javascript:void(0)"
+      <span *ngIf="enableEditing && !node.isRemoveChangeType()" class="tree-label"
         [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}"
-        style="margin-right: 10px;" (click)="!node.isRemoveChangeType() && editAssociate(node)">
+        style="margin-right: 10px;">
         {{node.businessNameNew}}
-      </a>
-      <a *ngIf="!node.isRoot && node.percentageShares" (click)="!node.isRemoveChangeType() && editAssociate(node)"
-        [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}"
-        href="javascript:void(0)">
-        {{node.percentageShares}} %
-      </a>&nbsp;
-      <span *ngIf="!node.isRoot && node.percentageShares">
-        <span class="shares-label"> shareholder of {{node?.parentLinceseeChangeLog?.businessNameNew}} </span>
       </span>
-    </section>
-    <section>
-      &nbsp; &nbsp;
-      <a *ngIf="enableEditing && !node.isIndividual && !node.isRemoveChangeType()" href="javascript:void(0)"
+      <ng-container *ngIf="enableEditing && node.isRoot">
+        <span>({{Account.getBusinessTypeFromName(node.businessAccountType)}})</span>
+        &nbsp;
+        <span *ngIf="node.totalSharesNew"> {{node.totalSharesNew}} total Shares </span>
+      </ng-container>
+      <ng-container *ngIf="!node.isRoot">
+        <span *ngIf="!node.isRoot && node.percentageShares"
+          [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}">
+          {{node.percentageShares}} %
+        </span>&nbsp;
+        <span *ngIf="!node.isRoot && node.percentageShares">
+          <span class="shares-label"> shareholder of {{node?.parentLinceseeChangeLog?.businessNameNew}} </span>
+        </span>
+      </ng-container>
+
+      <a *ngIf="enableEditing && !node.isRemoveChangeType()" href="javascript:void(0)" class="action-link" style="margin-right: 10px;"
+        (click)="!node.isRemoveChangeType() && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>&nbsp;Edit</a>
+      <a *ngIf="enableEditing && !node.isIndividual && !node.isRemoveChangeType()" class="action-link" href="javascript:void(0)"
         style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add Associate</a>
       <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node)">Shareholder</button>
         <button mat-menu-item (click)="!node.isRemoveChangeType() && addLeadership(node)">Leadership</button>
       </mat-menu>
-      <div *ngIf="!(enableEditing && !node.isRoot && !node.isRemoveChangeType())"
-        style="display: inline-block; width: 15px;"></div>
-      <i *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()"
-        (click)="!node.isRemoveChangeType() && deleteAssociate(node)" class="fas fa-trash-alt" style="color: #A12622"
-        (click)="chancelChange(item)"></i>
+    </section>
+    <section>
+      &nbsp; &nbsp;
+      <a href="javascript: void(0);" class="action-link" style="color: #ee220e"
+        (click)="!node.isRemoveChangeType() && deleteAssociate(node)">
+        <i *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()" class="fas fa-trash-alt"
+          (click)="chancelChange(item)"></i>
+        <span *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()">&nbsp;Remove</span>
+      </a>
     </section>
   </div>
 </ng-template>
@@ -84,16 +97,16 @@
   <div class="row">
     <div class="col-md-8 col-sm-12">
       <ng-container *ngTemplateOutlet="treeTemplate"></ng-container>
-      <!-- </mat-card> -->
     </div>
     <div class="col-md-4 col-sm-12">
       <h3>Key:</h3>
+      <span class="tree-label"> <i class="fas fa-user"></i></span> -- Leadership (Directors, Officers, Senior Managers,
+      Partners)<br>
+      <span class="tree-label"> <i class="fas fa-building"></i></span> -- Business Shareholder <br>
+      <span class="tree-label"> <i class="fas fa-user-tie"></i></span> -- Individual Shareholder <br>
       Edited Associate -- <span class="edited-node">Orange</span> <br>
       Added Associate -- <span class="added-node">Green</span> <br>
       Deleted Associate -- <span class="deleted-node">Red Strikethough</span> <br>
-      <span class="tree-label"> <i class="fas fa-building"></i></span> -- Business Shareholder <br>
-      <span class="tree-label"> <i class="fas fa-user-tie"></i></span> -- Individual Shareholder <br>
-      <span class="tree-label"> <i class="fas fa-user"></i></span> -- Leadership<br>
     </div>
   </div>
 
@@ -132,7 +145,7 @@
             [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">{{item.numberofSharesNew}}</span>
         </td>
         <td>
-          <i class="fas fa-trash-alt" style="color: #A12622" (click)="chancelChange(item)"></i>
+          <i class="fas fa-trash-alt" style="color: #ee220e" (click)="chancelChange(item)"></i>
         </td>
       </tr>
     </table>
@@ -173,7 +186,7 @@
             [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">{{item.numberofSharesNew}}</span>
         </td>
         <td>
-          <i class="fas fa-trash-alt" style="color: #A12622" (click)="chancelChange(item)"></i>
+          <i class="fas fa-trash-alt" style="color: #ee220e" (click)="chancelChange(item)"></i>
         </td>
       </tr>
     </table>
@@ -213,7 +226,7 @@
             [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">{{item.getNewLeadershipPosition()}}</span>
         </td>
         <td>
-          <i class="fas fa-trash-alt" style="color: #A12622" (click)="chancelChange(item)"></i>
+          <i class="fas fa-trash-alt" style="color: #ee220e" (click)="chancelChange(item)"></i>
         </td>
       </tr>
     </table>

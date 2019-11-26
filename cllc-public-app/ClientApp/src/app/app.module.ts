@@ -38,7 +38,8 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule
+  MatTreeModule,
+  MatBadgeModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
 
@@ -301,6 +302,7 @@ import { ProductInventoryPackagedComponent } from '@shared/components/product-in
     MatStepperModule,
     MatTooltipModule,
     MatTreeModule,
+    MatBadgeModule,
     NgBusyModule,
     NgxFileDropModule,
     ReactiveFormsModule,
@@ -352,7 +354,8 @@ import { ProductInventoryPackagedComponent } from '@shared/components/product-in
     MatTreeModule,
     MatStepperModule,
     NgxFileDropModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatBadgeModule
   ],
   providers: [
     AccountDataService,
