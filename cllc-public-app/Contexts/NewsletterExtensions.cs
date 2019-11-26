@@ -22,16 +22,22 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             MicrosoftDynamicsCRMlist list = null;
             try
             {
-                list = context.Lists.Get(filter: filter).Value.FirstOrDefault();
+                var lists = context.Lists.Get(filter: filter).Value;
 
-                result = new Newsletter()
+                if (lists != null && lists.Count > 0)
                 {
-                    Slug = list.Purpose,
-                    Id = Guid.Parse(list.Listid),
-                    Title = list.Listname,
-                    Description = list.Description
+                    list = lists.FirstOrDefault();
+                    result = new Newsletter()
+                    {
+                        Slug = list.Purpose,
+                        Id = Guid.Parse(list.Listid),
+                        Title = list.Listname,
+                        Description = list.Description
 
-                };
+                    };
+                }
+
+                
             }
             catch (HttpOperationException)
             {
@@ -83,7 +89,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     // add the new subscriber
                     MicrosoftDynamicsCRMlead newLead = new MicrosoftDynamicsCRMlead()
                     {
-                        Emailaddress1 = email
+                        Emailaddress1 = email,
+                        Firstname = email                        
                     };
 
                     try
@@ -107,6 +114,19 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     // add the subscriber to the newsletter (Marketing List)
 
                     // need to check to determine if it is there already.
+                    MicrosoftDynamicsCRMlist updateList = new MicrosoftDynamicsCRMlist()
+                    {
+                        Listlead_associationODataBind = dynamicsClient.GetEntityURI ("leads",subscriber.Leadid)
+                    };
+                    try
+                    {
+                        
+                        dynamicsClient.Lists.Update(newsletter.Id.ToString(), updateList);
+                    }
+                    catch (HttpOperationException)
+                    {
+
+                    }
                 }
             }
         }
@@ -143,7 +163,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 {
                     Purpose = newsletter.Slug,
                     Description = newsletter.Description,
-                    Listname = newsletter.Title
+                    Listname = newsletter.Title,
+                    Createdfromcode = 4 // Lead
                 };
                 list = context.Lists.Create(list);
 
@@ -183,7 +204,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// Adds a jurisdiction to the system, only if it does not exist.
         /// </summary>
         private static void AddInitialNewsletter(this IDynamicsClient context, ViewModels.Newsletter initialNewsletter)
-        {
+        {         
             Newsletter newsletter = context.GetNewsletterBySlug(initialNewsletter.slug);
             if (newsletter != null)
             {

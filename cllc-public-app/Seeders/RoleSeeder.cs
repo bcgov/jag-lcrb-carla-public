@@ -24,8 +24,12 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected override void Invoke(AppDbContext context)
         {
-            UpdateRoles(context);
-            context.SaveChanges();
+            if (context != null)
+            {
+                UpdateRoles(context);
+                context.SaveChanges();
+            }
+            
         }
 
         private void UpdateRoles(AppDbContext context)
