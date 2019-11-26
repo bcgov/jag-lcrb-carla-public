@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { FormBase } from '@shared/form-base';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-organization-leadership',
@@ -13,11 +14,13 @@ export class OrganizationLeadershipComponent extends FormBase {
   form: FormGroup;
   businessType: string;
   parentName: string;
+  maxDate19: Date;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<OrganizationLeadershipComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
+    this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate();
     this.parentName = data.parentName;
     this.form = fb.group({
       id: [''],

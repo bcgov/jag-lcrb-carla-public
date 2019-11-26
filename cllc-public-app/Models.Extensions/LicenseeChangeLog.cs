@@ -12,6 +12,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioLicenseechangelog toDynamics, LicenseeChangeLog fromVM)
         {
             toDynamics.AdoxioChangetype = (int?)fromVM.ChangeType;
+            toDynamics.AdoxioBusinessaccounttype = (int?)fromVM.BusinessAccountType;
             toDynamics.AdoxioIsdirectornew = fromVM.IsDirectorNew;
             toDynamics.AdoxioIsdirectorold = fromVM.IsDirectorOld;
             toDynamics.AdoxioIsmanagernew = fromVM.IsManagerNew;
@@ -45,6 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 Id = changeLog.AdoxioLicenseechangelogid,
                 ChangeType = (LicenseeChangeType?)changeLog.AdoxioChangetype,
+                BusinessAccountType = (AdoxioApplicantTypeCodes?)changeLog.AdoxioBusinessaccounttype,
                 IsDirectorNew = changeLog.AdoxioIsdirectornew,
                 IsDirectorOld = changeLog.AdoxioIsdirectorold,
                 IsManagerNew = changeLog.AdoxioIsmanagernew,

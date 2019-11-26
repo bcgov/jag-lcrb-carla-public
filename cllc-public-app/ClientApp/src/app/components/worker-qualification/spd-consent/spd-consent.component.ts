@@ -103,6 +103,10 @@ export class SpdConsentComponent implements OnInit {
       valid = false;
     }
 
+    if(this.noWetSignature && !this.isConcentValidatedValid()){
+      valid = false;
+    }
+
     return valid;
   }
 
@@ -118,6 +122,10 @@ export class SpdConsentComponent implements OnInit {
 
   isFileUploadValid(): boolean {
     return (this.uploadedDocuments === 1);
+  }
+
+  isConcentValidatedValid(): boolean {
+    return this.form.get('consentValidated').value;
   }
 
 
