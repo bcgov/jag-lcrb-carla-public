@@ -89,16 +89,11 @@ export class FederalReportingComponent implements OnInit {
     };
 
     // add product fields
-    let invalidProduct = false;
+    const invalidProduct = this.hasInvalidProductForm();
     this.productForms.forEach((f) => {
-      if (!f.valid) {
-        invalidProduct = true;
-      }
       updateRequest.inventorySalesReports.push({...f.value});
     });
     if ((!this.reportForm.valid || invalidProduct) && !this.reportIsDisabled) {
-      // TODO display validation errors
-      console.log("invalid report or product form");
       return false;
     }
 
@@ -121,15 +116,6 @@ export class FederalReportingComponent implements OnInit {
       return;
     }
 
-    this.selectedMonthlyReport.inventorySalesReports = this.selectedMonthlyReport.inventorySalesReports.sort((r1, r2) => {
-      const nameA = r1.product.toLowerCase(), nameB = r2.product.toLowerCase();
-      if (nameA < nameB) {
-        return -1;
-      } else if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    });
     this.handleMonthlyReportChanged();
   }
 
@@ -172,7 +158,6 @@ export class FederalReportingComponent implements OnInit {
         closingValue: [report.closingValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
         closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
         totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        // tslint:disable-next-line: max-line-length
         totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
         totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
         totalSalesToRetailerQty: [report.totalSalesToRetailerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
@@ -200,6 +185,17 @@ export class FederalReportingComponent implements OnInit {
           this.productForms.forEach((report) => { report.enable(); });
         break;
     }
+
+    // Sort inventory reports
+    this.productForms = this.productForms.sort((r1, r2) => {
+      const nameA = r1.value.product.toLowerCase(), nameB = r2.value.product.toLowerCase();
+      if (nameA < nameB) {
+        return -1;
+      } else if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
 
     // Update monthly report form
     this.reportForm.patchValue({
@@ -247,5 +243,15 @@ export class FederalReportingComponent implements OnInit {
 
   isFieldInvalid(field: string) {
     return !this.reportForm.get(field).valid && (this.reportForm.get(field).dirty || this.reportForm.get(field).touched);
+  }
+
+  hasInvalidProductForm() {
+    let invalidProduct = false;
+    this.productForms.forEach((f) => {
+      if (!f.valid) {
+        invalidProduct = true;
+      }
+    });
+    return invalidProduct;
   }
 }

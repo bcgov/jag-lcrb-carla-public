@@ -1,4 +1,4 @@
-<div class="product-inventory-sales-report">
+<div class="product-inventory-sales-report" *ngIf="visibleInventoryReports.indexOf(productForm.value.inventoryReportId) > -1">
   <form [formGroup]="productForm">
     <div class="row">
       <h4 class="col-xs-12">{{productForm?.value?.product}} Inventory - Packaged</h4>
