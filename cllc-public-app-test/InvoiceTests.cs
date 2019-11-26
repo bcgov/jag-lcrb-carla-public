@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 invoicenumber = "12345",
                 statecode = (int?)Adoxio_invoicestates.New,
                 statuscode = (int?)Adoxio_invoicestatuses.New,
-                totalamount = 7500.00
+                totalamount = 7500.00M
 			};
 
 			string jsonString = JsonConvert.SerializeObject(viewmodel_invoice);
