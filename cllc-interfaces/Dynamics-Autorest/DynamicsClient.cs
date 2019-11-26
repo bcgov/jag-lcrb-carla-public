@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top88 { get; set; }
+        public int? Top90 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip16 { get; set; }
+        public int? Skip17 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count88 { get; set; }
+        public bool? Count90 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter88 { get; set; }
+        public string Filter90 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search16 { get; set; }
+        public string Search17 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -321,6 +321,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILegalentities Legalentities { get; private set; }
 
         /// <summary>
+        /// Gets the ILegalentitytasklegalentity.
+        /// </summary>
+        public virtual ILegalentitytasklegalentity Legalentitytasklegalentity { get; private set; }
+
+        /// <summary>
         /// Gets the ILicenceses.
         /// </summary>
         public virtual ILicenceses Licenceses { get; private set; }
@@ -486,6 +491,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IInvoices Invoices { get; private set; }
 
         /// <summary>
+        /// Gets the ILeads.
+        /// </summary>
+        public virtual ILeads Leads { get; private set; }
+
+        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         public virtual ISavedqueries Savedqueries { get; private set; }
@@ -524,6 +534,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         public virtual IUseradoxioexhibit Useradoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the ILegalentitytask.
+        /// </summary>
+        public virtual ILegalentitytask Legalentitytask { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioexhibit.
@@ -822,6 +837,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Investigationreactivationhistories = new Investigationreactivationhistories(this);
             Investigations = new Investigations(this);
             Legalentities = new Legalentities(this);
+            Legalentitytasklegalentity = new Legalentitytasklegalentity(this);
             Licenceses = new Licenceses(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
@@ -855,6 +871,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Invoices = new Invoices(this);
+            Leads = new Leads(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
@@ -863,6 +880,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioexhibitmodifiedby = new Lkadoxioexhibitmodifiedby(this);
             Lkadoxioexhibitmodifiedonbehalfby = new Lkadoxioexhibitmodifiedonbehalfby(this);
             Useradoxioexhibit = new Useradoxioexhibit(this);
+            Legalentitytask = new Legalentitytask(this);
             Teamadoxioexhibit = new Teamadoxioexhibit(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
