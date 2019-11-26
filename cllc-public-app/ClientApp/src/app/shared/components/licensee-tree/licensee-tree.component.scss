@@ -12,16 +12,16 @@
   padding: 0 0 0 20px !important;
 }
 .edited-node {
-  color: orange;
+  color: #e6940b;
 }
 
 .added-node {
-  color: green;
+  color: #00d600;
 }
 
 .deleted-node {
   text-decoration: line-through;
-  color: red;
+  color: #ee220e;
 }
 
 .old-value {
@@ -103,5 +103,13 @@
 }
 
 .tree-node:hover{
-  background-color: #F1F4FA;
+  background-color: #e1f3fc;
+}
+
+.tree-node{
+  padding: 2px;
+}
+
+.action-link:hover{
+font-weight: 800;
 }
