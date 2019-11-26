@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
 import { FormBase } from '@shared/form-base';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-shareholders-and-partners',
@@ -14,6 +15,8 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
   parentName: any;
   shareholder: any;
   action = 'add';
+  maxDate19: Date;
+  availableParentShares: number = 0;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<ShareholdersAndPartnersComponent>,
@@ -21,6 +24,15 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     super();
     this.shareholder = data.shareholder;
     this.action = data.action;
+    this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate();
+
+    debugger;
+    if (this.shareholder.parentLinceseeChangeLog) {
+      this.availableParentShares = this.shareholder.parentLinceseeChangeLog.totalSharesNew
+        - this.shareholder.parentLinceseeChangeLog.totalChildShares
+        + (this.shareholder.numberofSharesNew || 0);
+    }
+
   }
 
   ngOnInit() {
@@ -31,12 +43,12 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       lastNameNew: ['', Validators.required],
       dateofBirthNew: ['', Validators.required],
       emailNew: ['', [Validators.email, Validators.required]],
-      numberofSharesNew: ['', Validators.required],
+      numberofSharesNew: ['', [Validators.required, Validators.max(this.availableParentShares)]],
       totalSharesNew: [],
       // partnerType: ['', Validators.required],
       isIndividual: [true],
       isShareholderNew: [true],
-      legalentitytype: [''],
+      businessAccountType: [''],
       dateIssued: [''],
     });
 
@@ -64,8 +76,22 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     }
   }
 
+  isValid(): boolean {
+    let valid = (!this.shareholder.isRoot && this.form.valid)
+      || (this.shareholder.isRoot && this.form.get('totalSharesNew').value);
+
+    const formData = this.data.shareholder || {};
+    if (this.shareholder.parentLinceseeChangeLog) {
+      const value = Object.assign(new LicenseeChangeLog(), formData, this.form.value);
+      if (value.percentageShares > 100) {
+        valid = false;
+      }
+    }
+    return valid;
+  }
+
   save() {
-    if ((!this.shareholder.isRoot && !this.form.valid) || (this.shareholder.isRoot && !this.form.get('totalSharesNew').value)) {
+    if (!this.isValid()) {
       Object.keys(this.form.controls).forEach(field => {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
@@ -83,8 +109,6 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       this.dialogRef.close(formData);
     }
   }
-
-
 
   close() {
     this.dialogRef.close();
