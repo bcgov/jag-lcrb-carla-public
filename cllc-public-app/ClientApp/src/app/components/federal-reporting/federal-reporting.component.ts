@@ -5,6 +5,7 @@ import { ApplicationLicenseSummary } from '@models/application-license-summary.m
 import { Subscription, forkJoin } from 'rxjs';
 import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-federal-reporting',
@@ -44,20 +45,25 @@ export class FederalReportingComponent implements OnInit {
   });
 
   productForms: FormGroup[];
+  defaultValue: any;
 
   constructor(
     public fb: FormBuilder,
     private licenceDataService: LicenseDataService,
+    private route: ActivatedRoute,
     private monthlyReportDataService: MonthlyReportDataService
-  ) { }
+  ) {
+    this.defaultValue = window.history.state.data;
+    debugger;
+  }
 
   ngOnInit() {
     this.busy = forkJoin(
       this.licenceDataService.getAllCurrentLicenses()
     )
-    .subscribe(([licenses]) => {
-      this.licenses = licenses;
-    });
+      .subscribe(([licenses]) => {
+        this.licenses = licenses;
+      });
   }
 
   licenceChanged(event) {
@@ -69,9 +75,9 @@ export class FederalReportingComponent implements OnInit {
     this.busy = forkJoin(
       this.monthlyReportDataService.getMonthlyReportsByLicence(event.target.value)
     )
-    .subscribe(([monthlyReports]) => {
-      this.monthlyReports = monthlyReports;
-    });
+      .subscribe(([monthlyReports]) => {
+        this.monthlyReports = monthlyReports;
+      });
   }
 
   save(submit = false) {
@@ -89,7 +95,7 @@ export class FederalReportingComponent implements OnInit {
       if (!f.valid) {
         invalidProduct = true;
       }
-      updateRequest.inventorySalesReports.push({...f.value});
+      updateRequest.inventorySalesReports.push({ ...f.value });
     });
     if ((!this.reportForm.valid || invalidProduct) && !this.reportIsDisabled) {
       // TODO display validation errors
@@ -100,12 +106,12 @@ export class FederalReportingComponent implements OnInit {
     this.busy = forkJoin(
       this.monthlyReportDataService.updateMonthlyReport(updateRequest)
     )
-    .subscribe(([report]) => {
-      const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
-      this.monthlyReports[index] = report;
-      this.selectedMonthlyReport = report;
-      this.handleMonthlyReportChanged();
-    });
+      .subscribe(([report]) => {
+        const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
+        this.monthlyReports[index] = report;
+        this.selectedMonthlyReport = report;
+        this.handleMonthlyReportChanged();
+      });
   }
 
   periodChanged(event) {
@@ -158,10 +164,10 @@ export class FederalReportingComponent implements OnInit {
         this.productForms.forEach((report) => { report.disable(); });
         break;
       default:
-          this.reportIsDisabled = false;
-          this.reportIsClosed = false;
-          this.reportForm.enable();
-          this.productForms.forEach((report) => { report.enable(); });
+        this.reportIsDisabled = false;
+        this.reportIsClosed = false;
+        this.reportForm.enable();
+        this.productForms.forEach((report) => { report.enable(); });
         break;
     }
 
