@@ -44,8 +44,8 @@
       </div>
     <section class="row">
       <app-field class="col-md-6" label="Date of Birth" [valid]="!isTouchedAndInvalid('dateofBirthNew')"
-        errorMessage="This is required">
-        <input type="text" formControlName='dateofBirthNew' style="width: 200px; background-color: #fff;"
+        errorMessage="This is required. The associate should be 19 years or older.">
+        <input type="text" formControlName='dateofBirthNew' [max]="maxDate19" style="width: 200px; background-color: #fff;"
           autocomplete="false" placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
           (focus)="picker.open()" (click)="picker.open()">
         <mat-datepicker #picker></mat-datepicker>
