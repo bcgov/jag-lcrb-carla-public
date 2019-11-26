@@ -107,7 +107,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // check that the slugs match.
                 if (slug.Equals(newsletterConfirmation.slug))
                 {
-                    _dynamicsClient.AddNewsletterSubscriber(slug, newsletterConfirmation.email);
+                    _dynamicsClient.AddNewsletterSubscriber(slug, newsletterConfirmation.email.ToLower());
                     result = "Success";
                 }
             }
