@@ -174,7 +174,7 @@
     <div class="row">
       <h4 class="col-xs-12">Sales Packaged</h4>
     </div>
-    <p class="row">
+    <div class="row">
       <div class="col-md-2 col-xs-12 text-center bg-grey pt-4 px-0 border border-right-0 border-blue">
         <label class="d-block">Direct to Consumer</label>
         <label>(retail)</label>
@@ -201,10 +201,10 @@
           </div>
         </div>
       </div>
-      <p class="col-md-2 col-xs-12 text-center bg-grey pt-4 px-0 border border-blue">
+      <div class="col-md-2 col-xs-12 text-center bg-grey pt-4 px-0 border border-blue">
         <label class="d-block">To Retailer</label>
         <label>(wholesale)</label>
-        <p class="d-flex">
+        <div class="d-flex">
           <div class="flex-fill p-4">
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="totalSalesToRetailerQty">
@@ -215,7 +215,7 @@
             </div>
             <p class="text-right">(units)</p>
           </div>
-          <p class="flex-fill p-4">
+          <div class="flex-fill p-4">
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="totalSalesToRetailerValue">
               <div *ngIf="isFieldInvalid('totalSalesToRetailerValue')" style="flex: 0 0 25px;">
@@ -224,9 +224,9 @@
               </div>
             </div>
             <p class="text-right">($)</p>
-          </p>
-        </p>
-      </p>
-    </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </form>
-</p>
+</div>
