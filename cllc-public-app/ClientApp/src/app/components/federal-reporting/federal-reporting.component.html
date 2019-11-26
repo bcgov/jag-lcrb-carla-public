@@ -145,7 +145,7 @@
             Save for Later
           </span>
         </button>
-        <button class="btn btn-primary mt-5" (click)="save(true)">Submit Monthly Report</button>
+        <button class="btn btn-primary mt-5" (click)="submitApplication()">Submit Monthly Report</button>
       </div>
       <div class="row" *ngIf="reportIsDisabled && !reportIsClosed">
         <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">Reopen Monthly Report</button>

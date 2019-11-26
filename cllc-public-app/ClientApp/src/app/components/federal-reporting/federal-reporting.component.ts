@@ -6,6 +6,9 @@ import { Subscription, forkJoin } from 'rxjs';
 import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ModalComponent } from '@shared/components/modal/modal.component';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-federal-reporting',
@@ -53,10 +56,10 @@ export class FederalReportingComponent implements OnInit {
     public fb: FormBuilder,
     private licenceDataService: LicenseDataService,
     private route: ActivatedRoute,
-    private monthlyReportDataService: MonthlyReportDataService
+    private monthlyReportDataService: MonthlyReportDataService,
+    public dialog: MatDialog
   ) {
     this.defaultValue = window.history.state.data;
-    debugger;
   }
 
   ngOnInit() {
@@ -259,5 +262,32 @@ export class FederalReportingComponent implements OnInit {
       }
     });
     return invalidProduct;
+  }
+
+  submitApplication() {
+    const completedProductForms = this.productForms.filter(f => this.visibleInventoryReports.indexOf(f.value.inventoryReportId) > -1);
+    const body = completedProductForms.length > 0 ?
+      'Are you sure you want to submit this report?' :
+      'You have not entered any inventory information. Are you sure you want to submit this report?';
+
+    const dialogConfig = {
+      disableClose: true,
+      autoFocus: true,
+      width: '400px',
+      height: '200px',
+      data: {
+        title: 'Confirm Submission',
+        body: body
+      }
+    };
+
+    // open dialog, get reference and process returned data from dialog
+    const dialogRef = this.dialog.open(ModalComponent, dialogConfig);
+    dialogRef.afterClosed()
+      .subscribe(submitApplication => {
+        if (submitApplication) {
+          this.save(true);
+        }
+      });
   }
 }

@@ -1,10 +1,13 @@
-<div class="product-inventory-sales-report" *ngIf="visibleInventoryReports.indexOf(productForm.value.inventoryReportId) > -1">
+<div class="product-inventory-sales-report mb-5" *ngIf="visibleInventoryReports.indexOf(productForm.value.inventoryReportId) > -1">
   <form [formGroup]="productForm">
-    <div class="row">
-      <h4 class="col-xs-12">{{productForm?.value?.product}} Inventory - Packaged</h4>
+    <div class="row bg-blue border-bottom border-blue">
+      <h4 class="col-xs-12 font-weight-bold">{{productForm?.value?.product}}</h4>
     </div>
     <div class="row">
-      <app-field class="col-md-1 col-xs-12 no-gutter text-center bg-blue pt-4 pl-0 pr-0" [isFullWidth]="true">
+      <h4 class="col-xs-12">Inventory Packaged</h4>
+    </div>
+    <div class="row">
+      <div class="col-md-1 col-xs-12 text-center bg-grey pt-4 px-0 border border-right-0 border-blue">
         <label class="d-block">Opening</label>
         <label>Inventory</label>
         <div class="d-flex">
@@ -19,8 +22,8 @@
             <p class="text-right">(units)</p>
           </div>
         </div>
-      </app-field>
-      <app-field class="col-md-3 col-xs-12 no-gutter text-center bg-green pt-4 pl-0 pr-0" [isFullWidth]="true">
+      </div>
+      <div class="col-md-3 col-xs-12 text-center bg-green pt-4 px-0 border border-right-0 border-blue">
         <label>Additions to Inventory</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
@@ -57,8 +60,8 @@
             <p class="text-right">(units)</p>
           </div>
         </div>
-      </app-field>
-      <app-field class="col-md-5 col-xs-12 no-gutter text-center bg-red pt-4 pl-0 pr-0" [isFullWidth]="true">
+      </div>
+      <div class="col-md-5 col-xs-12 text-center bg-red pt-4 px-0 border border-right-0 border-blue">
         <label>Reductions to Inventory</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
@@ -117,11 +120,11 @@
             <p class="text-right">(units)</p>
           </div>
         </div>
-      </app-field>
-      <app-field class="col-md-3 col-xs-12 no-gutter text-center bg-grey pt-4 pl-0 pr-0" [isFullWidth]="true">
+      </div>
+      <div class="col-md-3 col-xs-12 text-center bg-grey pt-4 px-0 border border-blue">
         <label>Closing Inventory</label>
         <div class="d-flex">
-          <div class="flex-fill p-4 bg-blue">
+          <div class="flex-fill p-4">
             <label>Quantity</label>
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="closingNumber">
@@ -132,7 +135,7 @@
             </div>
             <p class="text-right">(units)</p>
           </div>
-          <div class="flex-fill p-4 bg-purple">
+          <div class="flex-fill p-4">
             <label>Value</label>
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="number" min="0" step="0.01" formControlName="closingValue">
@@ -143,7 +146,7 @@
             </div>
             <p class="text-right">($)</p>
           </div>
-          <div class="flex-fill p-4 bg-yellow" *ngIf="productForm?.value?.product !== 'Seeds'">
+          <div class="flex-fill p-4" *ngIf="productForm?.value?.product !== 'Seeds'">
             <label>Weight</label>
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="number" min="0" step="0.001" formControlName="closingWeight">
@@ -154,7 +157,7 @@
             </div>
             <p class="text-right">(kg)</p>
           </div>
-          <div class="flex-fill p-4 bg-yellow" *ngIf="productForm?.value?.product === 'Seeds'">
+          <div class="flex-fill p-4" *ngIf="productForm?.value?.product === 'Seeds'">
             <label># of Seeds</label>
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="totalSeeds">
@@ -166,13 +169,13 @@
             <p class="text-right">(units)</p>
           </div>
         </div>
-      </app-field>
+      </div>
     </div>
     <div class="row">
-      <h4 class="col-xs-12">{{productForm?.value?.product}} Sales - Packaged</h4>
+      <h4 class="col-xs-12">Sales Packaged</h4>
     </div>
-    <div class="row">
-      <app-field class="col-md-2 col-xs-12 no-gutter text-center bg-grey pt-4 pl-0 pr-0" [isFullWidth]="true">
+    <p class="row">
+      <div class="col-md-2 col-xs-12 text-center bg-grey pt-4 px-0 border border-right-0 border-blue">
         <label class="d-block">Direct to Consumer</label>
         <label>(retail)</label>
         <div class="d-flex">
@@ -197,11 +200,11 @@
             <p class="text-right">($)</p>
           </div>
         </div>
-      </app-field>
-      <app-field class="col-md-2 col-xs-12 no-gutter text-center bg-grey pt-4 pl-0 pr-0" [isFullWidth]="true">
+      </div>
+      <p class="col-md-2 col-xs-12 text-center bg-grey pt-4 px-0 border border-blue">
         <label class="d-block">To Retailer</label>
         <label>(wholesale)</label>
-        <div class="d-flex">
+        <p class="d-flex">
           <div class="flex-fill p-4">
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="totalSalesToRetailerQty">
@@ -212,7 +215,7 @@
             </div>
             <p class="text-right">(units)</p>
           </div>
-          <div class="flex-fill p-4">
+          <p class="flex-fill p-4">
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="totalSalesToRetailerValue">
               <div *ngIf="isFieldInvalid('totalSalesToRetailerValue')" style="flex: 0 0 25px;">
@@ -221,9 +224,9 @@
               </div>
             </div>
             <p class="text-right">($)</p>
-          </div>
-        </div>
-      </app-field>
-    </div>
+          </p>
+        </p>
+      </p>
+    </p>
   </form>
-</div>
+</p>

@@ -169,9 +169,11 @@ import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponen
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { ProductInventoryPackagedComponent } from '@shared/components/product-inventory-packaged/product-inventory-packaged.component.ts';
+import { ModalComponent } from '@shared/components/modal/modal.component';
 
 @NgModule({
   declarations: [
+    ModalComponent,
     AccordionComponent,
     AppComponent,
     ApplicationCancellationDialogComponent,
@@ -400,7 +402,8 @@ import { ProductInventoryPackagedComponent } from '@shared/components/product-in
     ShareholderDialogComponent,
     ShareholdersAndPartnersComponent,
     OrganizationLeadershipComponent,
-    VersionInfoDialogComponent
+    VersionInfoDialogComponent,
+    ModalComponent
   ],
   bootstrap: [AppComponent]
 })
