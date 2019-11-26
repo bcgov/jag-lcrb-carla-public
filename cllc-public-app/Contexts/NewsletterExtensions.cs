@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         public static Newsletter GetNewsletterBySlug(this IDynamicsClient context, string slug)
         {
             // Newsletter is now Marketing List            
-            string filter = $"purpose eq '{slug}'";
+            string filter = $"listname eq '{slug}'";
             Newsletter result = null;
             MicrosoftDynamicsCRMlist list = null;
             try
@@ -57,11 +57,12 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             string emailEscaped = email.Replace("'", "''");
 
             // see if the lead exists.
-            string filter = $"email eq '{emailEscaped}'";
-
+            string filter = $"emailaddress1 eq '{emailEscaped}'";
+            // get the lists associated with this lead.
+            string[] expand = { "listlead_association" };
             try
             {
-                result = context.Leads.Get(filter: filter).Value.FirstOrDefault();
+                result = context.Leads.Get(filter: filter, expand: expand).Value.FirstOrDefault();
             }
             catch (HttpOperationException)
             {
@@ -73,7 +74,6 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
 
             return result;
-
 
         }
 
@@ -113,20 +113,37 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 {
                     // add the subscriber to the newsletter (Marketing List)
 
-                    // need to check to determine if it is there already.
-                    MicrosoftDynamicsCRMlist updateList = new MicrosoftDynamicsCRMlist()
-                    {
-                        Listlead_associationODataBind = dynamicsClient.GetEntityURI ("leads",subscriber.Leadid)
-                    };
-                    try
-                    {
-                        
-                        dynamicsClient.Lists.Update(newsletter.Id.ToString(), updateList);
-                    }
-                    catch (HttpOperationException)
-                    {
+                    // check to determine if it is there already. 
+                    bool notFound = true;
 
+                    if (subscriber.ListleadAssociation != null)
+                    {
+                        foreach (var item in subscriber.ListleadAssociation)
+                        {
+                            if (item.Listid == newsletter.Id.ToString())
+                            {
+                                notFound = false;
+                            }
+                        }
                     }
+
+                    if (notFound)
+                    {
+                        try
+                        {
+                            EntityIdReference oDataId = new EntityIdReference()
+                            {
+                                EntityId = subscriber.Leadid
+                            };
+                            dynamicsClient.Lists.AddMember(newsletter.Id.ToString(), oDataId);
+
+                        }
+                        catch (HttpOperationException)
+                        {
+                            throw;
+                        }
+                    }
+                    
                 }
             }
         }
@@ -161,9 +178,9 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             {
                 MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist()
                 {
-                    Purpose = newsletter.Slug,
+                    Purpose = newsletter.Title,
                     Description = newsletter.Description,
-                    Listname = newsletter.Title,
+                    Listname = newsletter.Slug,
                     Createdfromcode = 4 // Lead
                 };
                 list = context.Lists.Create(list);
@@ -239,9 +256,9 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                 // update Newsletter.
                 MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist()
                 {
-                    Purpose = newsletterInfo.Slug,
+                    Purpose = newsletterInfo.Title,
                     Description = newsletterInfo.Description,
-                    Listname = newsletterInfo.Title
+                    Listname = newsletterInfo.Slug
                 };
 
                 context.Lists.Update(newsletter.Id.ToString(), list);
