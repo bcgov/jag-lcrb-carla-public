@@ -8,12 +8,13 @@ import { FormGroup } from '@angular/forms';
 })
 export class ProductInventorySalesReportComponent implements OnInit {
   @Input() productForm: FormGroup;
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  validateIsInteger() {
+  isFieldInvalid(fieldName: string) {
+    return !this.productForm.get(fieldName).valid && (this.productForm.get(fieldName).dirty || this.productForm.get(fieldName).touched);
   }
-
 }
