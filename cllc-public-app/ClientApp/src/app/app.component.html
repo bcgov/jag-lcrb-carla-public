@@ -11,7 +11,7 @@
           <a href="http://www2.gov.bc.ca/" tabindex="1">
             <img class="header-logo" alt="B.C. Government Logo" src="assets/bc-logo.svg">
           </a>
-         <span class="title" role="banner">
+          <span class="title" role="banner">
             Cannabis Licensing&nbsp;
             <span class="label label-beta">Beta</span>
           </span>
@@ -37,13 +37,11 @@
 
     <div *ngIf="showBceidTermsOfUse()">
       <main class="app-content">
-        <app-bceid-confirmation (reloadUser)="reloadUser()"
-          [currentUser]="currentUser"></app-bceid-confirmation>
+        <app-bceid-confirmation (reloadUser)="reloadUser()" [currentUser]="currentUser"></app-bceid-confirmation>
       </main>
     </div>
 
-    <div
-      *ngIf="!showBceidTermsOfUse()">
+    <div *ngIf="!showBceidTermsOfUse()">
       <!-- /NAVBAR -->
       <div class="navigationRibbon" *ngIf="!currentUser">
         <div class="level2Navigation">
@@ -62,37 +60,35 @@
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                       routerLink="/policy-document/cannabis-retail-licence">
+                      routerLink="/policy-document/cannabis-retail-licence">
                       Licence
                       Types
                     </a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                       routerLink="/policy-document/application-timelines">Application Requirements</a>
+                      routerLink="/policy-document/application-timelines">Application Requirements</a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                       routerLink="/policy-document/worker-qualification-training">Worker Information</a>
+                      routerLink="/policy-document/worker-qualification-training">Worker Information</a>
                   </li>
                   <li class="nav-item">
-                    <a (click)="toggleButton.click()" tabindex="2"
-                       routerLink="/policy-document/ordering-cannabis">
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/policy-document/ordering-cannabis">
                       Ordering
                       Cannabis
                     </a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                       routerLink="/policy-document/reporting-sales">Reporting</a>
+                      routerLink="/policy-document/reporting-sales">Reporting</a>
                   </li>
                   <li class="nav-item">
                     <a (click)="toggleButton.click()" tabindex="2"
-                       routerLink="/policy-document/application-stats">Application Statistics</a>
+                      routerLink="/policy-document/application-stats">Application Statistics</a>
                   </li>
                   <li class="nav-item" *ngIf="showMap">
-                    <a (click)="toggleButton.click()" tabindex="2"
-                       routerLink="/map">Map of Cannabis Stores
+                    <a (click)="toggleButton.click()" tabindex="2" routerLink="/map">Map of Cannabis Stores
                     </a>
                   </li>
                 </ul>
@@ -105,7 +101,7 @@
 
       <section *ngIf="currentUser && !isAssociate" class="navigationRibbon">
         <div class="level2Navigation ">
-          <div class="">
+          <div class="d-flex justify-content-between align-items-center">
             <nav class="navbar navbar-expand-md navbar-light justify-content-end"
               style="margin-bottom: 0;  width: 100%;">
               <button class="navbar-toggler btn-mobile" type="button" data-toggle="collapse" style="float: right"
@@ -120,17 +116,32 @@
                       class="nav-link" routerLink="/dashboard">Dashboard</a>
                     <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
-                    <a *ngIf="currentUser.userType == 'Business' && showFederalReporting" (click)="toggleButtonLoggedIn.click()"
-                      class="nav-link" routerLink="/federal-reporting">Federal Reporting</a>
+                    <a *ngIf="currentUser.userType == 'Business' && showFederalReporting"
+                      (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/federal-reporting">Federal
+                      Reporting</a>
                   </li>
                 </ul>
               </div>
             </nav>
+            <span appRemoveIfFeatureOff="FederalReporting" (click)="showMessageCenterContent = !showMessageCenterContent"
+              style="padding: 10px; cursor: pointer;">
+              <button color="primary" style="background-color: transparent; color: #FFF; padding: 0; border: none; margin-top: 20px; margin-right: 10px;"
+                MatBadgeSize='small' matBadge="!" matBadgePosition="after" matBadgeColor="warn">
+                <i class="fas fa-lg fa-bell"></i>&nbsp;&nbsp;&nbsp;
+              </button>
+            </span>
           </div>
         </div>
       </section>
       <!-- /NAVBAR END -->
-
+      <section *ngIf="showMessageCenterContent" style="padding: 10px; background-color: #FFF;">
+        <mat-card>
+          <i class="fas fa-2x fa-business-time"></i> &nbsp;
+          <strong>Federal Sales Reporting</strong> for <strong>November 2019</strong> has not been submitted for all of
+          your Cannabis Retail Store Licences. Reporting is due on the 15th of each month.
+          <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent" [routerLink]="['/federal-reporting']" [state] ="{data: linkedFederalReport}">Click to action</a>.
+        </mat-card>
+      </section>
       <main class="app-content">
         <app-insert id="sidebar-left" class="sidebar-left"></app-insert>
 
@@ -149,23 +160,24 @@
           <ul class="navbar-nav">
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/disclaimer" target="_blank" rel="noopener noreferrer"
-                 title="Goes to BC Gov Disclaimer Page">Disclaimer</a>
+                title="Goes to BC Gov Disclaimer Page">Disclaimer</a>
             </li>
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/privacy" target="_blank" rel="noopener noreferrer"
-                 title="Goes to BC Gov Privacy Page">Privacy</a>
+                title="Goes to BC Gov Privacy Page">Privacy</a>
             </li>
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank" rel="noopener noreferrer"
-                 title="Goes to BC Gov Accessibility Page">Accessibility</a>
+                title="Goes to BC Gov Accessibility Page">Accessibility</a>
             </li>
             <li class="c2">
               <a href="https://www2.gov.bc.ca/gov/content/home/copyright" target="_blank" rel="noopener noreferrer"
-                 title="Goes to BC Gov Copyright Page">Copyright</a>
+                title="Goes to BC Gov Copyright Page">Copyright</a>
             </li>
           </ul>
         </div>
-        <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()" class="nav-link version-info">{{versionInfo.fileVersion}}</a>
+        <a *ngIf="versionInfo && versionInfo.fileVersion" (click)="openVersionInfoDialog()"
+          class="nav-link version-info">{{versionInfo.fileVersion}}</a>
       </nav>
     </footer>
   </div>
