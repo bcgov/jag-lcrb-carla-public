@@ -279,8 +279,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        //[JsonProperty(PropertyName = "adoxio_dateofbirth")]
-        //public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
+        [JsonProperty(PropertyName = "adoxio_dateofbirth")]
+        public System.DateTimeOffset? AdoxioDateofbirth { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Contact associated with Worker
