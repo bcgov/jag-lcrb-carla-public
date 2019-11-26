@@ -40,31 +40,61 @@
       <div class="form-group row" style="width: 100%">
         <label class="col-md-2 col-form-label">Management:</label>
         <div class="col-md-1">
-          <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="employeesManagement">
+          <div style="display: flex; align-items: center;">
+            <input class="form-control" type="text" formControlName="employeesManagement">
+            <div *ngIf="isFieldInvalid('employeesManagement')" style="flex: 0 0 25px;">
+              <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
+              <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group row" style="width: 100%">
         <label class="col-md-2 col-form-label">Administrative:</label>
         <div class="col-md-1">
-          <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="employeesAdministrative">
+          <div style="display: flex; align-items: center;">
+            <input class="form-control" type="text" formControlName="employeesAdministrative">
+            <div *ngIf="isFieldInvalid('employeesAdministrative')" style="flex: 0 0 25px;">
+              <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
+              <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group row" style="width: 100%">
         <label class="col-md-2 col-form-label">Sales:</label>
         <div class="col-md-1">
-          <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="employeesSales">
+          <div style="display: flex; align-items: center;">
+            <input class="form-control" type="text" formControlName="employeesSales">
+            <div *ngIf="isFieldInvalid('employeesSales')" style="flex: 0 0 25px;">
+              <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
+              <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group row" style="width: 100%">
         <label class="col-md-2 col-form-label">Production:</label>
         <div class="col-md-1">
-          <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="employeesProduction">
+          <div style="display: flex; align-items: center;">
+            <input class="form-control" type="text" formControlName="employeesProduction">
+            <div *ngIf="isFieldInvalid('employeesProduction')" style="flex: 0 0 25px;">
+              <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
+              <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group row" style="width: 100%">
         <label class="col-md-2 col-form-label">Other:</label>
         <div class="col-md-1">
-          <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="employeesOther">
+          <div style="display: flex; align-items: center;">
+            <input class="form-control" type="text" formControlName="employeesOther">
+            <div *ngIf="isFieldInvalid('employeesOther')" style="flex: 0 0 25px;">
+              <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
+              <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -97,16 +127,16 @@
     </div>
     <div class="submit">
       <div class="row" *ngIf="!reportIsDisabled">
-        <button class="btn btn-primary" (click)="save(false)">
+        <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">
           <span>
             <i class="fa fa-save" style="color: #fff;"></i>
-            SAVE FOR LATER
+            Save for Later
           </span>
         </button>
-        <button class="btn btn-primary" (click)="save(true)">SUBMIT</button>
+        <button class="btn btn-primary mt-5" (click)="save(true)">Submit Monthly Report</button>
       </div>
       <div class="row" *ngIf="reportIsDisabled && !reportIsClosed">
-        <button class="btn btn-primary" (click)="save(false)">UNSUBMIT</button>
+        <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">Reopen Monthly Report</button>
       </div>
     </div>
   </form>

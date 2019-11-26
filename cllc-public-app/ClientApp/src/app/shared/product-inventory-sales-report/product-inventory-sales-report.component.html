@@ -1,16 +1,22 @@
 <div class="product-inventory-sales-report">
   <form [formGroup]="productForm">
     <div class="row">
-      <h3 class="col-xs-12">{{productForm?.value?.product}} Inventory - Packaged</h3>
+      <h4 class="col-xs-12">{{productForm?.value?.product}} Inventory - Packaged</h4>
     </div>
     <div class="row">
       <app-field class="col-md-1 col-xs-12 no-gutter text-center bg-blue pt-4 pl-0 pr-0" [isFullWidth]="true">
-        <label>Opening</label>
+        <label class="d-block">Opening</label>
         <label>Inventory</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="openingInventory">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="openingInventory">
+              <div *ngIf="isFieldInvalid('openingInventory')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
         </div>
       </app-field>
@@ -19,18 +25,36 @@
         <div class="d-flex">
           <div class="flex-fill p-4">
             <label>Domestic</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="domesticAdditions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="domesticAdditions">
+              <div *ngIf="isFieldInvalid('domesticAdditions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
             <label>Returns</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="returnsAdditions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="returnsAdditions">
+              <div *ngIf="isFieldInvalid('returnsAdditions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
             <label>Other</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="otherAdditions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="otherAdditions">
+              <div *ngIf="isFieldInvalid('otherAdditions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
         </div>
       </app-field>
@@ -39,28 +63,58 @@
         <div class="d-flex">
           <div class="flex-fill p-4">
             <label>Domestic</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="domesticReductions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="domesticReductions">
+              <div *ngIf="isFieldInvalid('domesticReductions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
             <label>Returns</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="returnsReductions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="returnsReductions">
+              <div *ngIf="isFieldInvalid('returnsReductions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
             <label>Destroyed</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="destroyedReductions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="destroyedReductions">
+              <div *ngIf="isFieldInvalid('destroyedReductions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
             <label>Lost/Stolen</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="lostReductions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="lostReductions">
+              <div *ngIf="isFieldInvalid('lostReductions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
             <label>Other</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="otherReductions">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="otherReductions">
+              <div *ngIf="isFieldInvalid('otherReductions')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
         </div>
       </app-field>
@@ -69,56 +123,104 @@
         <div class="d-flex">
           <div class="flex-fill p-4 bg-blue">
             <label>Quantity</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="closingNumber">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="closingNumber">
+              <div *ngIf="isFieldInvalid('closingNumber')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4 bg-purple">
             <label>Value</label>
-            <input class="form-control" type="number" min="0" step="0.01" formControlName="closingValue">
-            <p>($)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="number" min="0" step="0.01" formControlName="closingValue">
+              <div *ngIf="isFieldInvalid('closingValue')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">($)</p>
           </div>
           <div class="flex-fill p-4 bg-yellow" *ngIf="productForm?.value?.product !== 'Seeds'">
             <label>Weight</label>
-            <input class="form-control" type="number" min="0" step="0.001" formControlName="closingWeight">
-            <p>(kg)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="number" min="0" step="0.001" formControlName="closingWeight">
+              <div *ngIf="isFieldInvalid('closingWeight')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(kg)</p>
           </div>
           <div class="flex-fill p-4 bg-yellow" *ngIf="productForm?.value?.product === 'Seeds'">
             <label># of Seeds</label>
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="totalSeeds">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="totalSeeds">
+              <div *ngIf="isFieldInvalid('totalSeeds')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
         </div>
       </app-field>
     </div>
     <div class="row">
-      <h3 class="col-xs-12">{{productForm?.value?.product}} Sales - Packaged</h3>
+      <h4 class="col-xs-12">{{productForm?.value?.product}} Sales - Packaged</h4>
     </div>
     <div class="row">
-      <app-field class="col-md-3 col-xs-12 no-gutter text-center bg-grey pt-4 pl-0 pr-0" [isFullWidth]="true">
-        <label>Direct to Consumer</label>
+      <app-field class="col-md-2 col-xs-12 no-gutter text-center bg-grey pt-4 pl-0 pr-0" [isFullWidth]="true">
+        <label class="d-block">Direct to Consumer</label>
         <label>(retail)</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="totalSalesToConsumerQty">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="totalSalesToConsumerQty">
+              <div *ngIf="isFieldInvalid('totalSalesToConsumerQty')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
-            <input class="form-control" type="number" min="0" step="0.01" formControlName="totalSalesToConsumerValue">
-            <p>($)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="totalSalesToConsumerValue">
+              <div *ngIf="isFieldInvalid('totalSalesToConsumerValue')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">($)</p>
           </div>
         </div>
       </app-field>
-      <app-field class="col-md-3 col-xs-12 no-gutter text-center bg-grey pt-4 pl-0 pr-0" [isFullWidth]="true">
-        <label>To retailer</label>
+      <app-field class="col-md-2 col-xs-12 no-gutter text-center bg-grey pt-4 pl-0 pr-0" [isFullWidth]="true">
+        <label class="d-block">To Retailer</label>
         <label>(wholesale)</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
-            <input class="form-control" type="number" min="0" step="1" pattern="\d*" formControlName="totalSalesToRetailerQty">
-            <p>(#)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="totalSalesToRetailerQty">
+              <div *ngIf="isFieldInvalid('totalSalesToRetailerQty')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">(units)</p>
           </div>
           <div class="flex-fill p-4">
-            <input class="form-control" type="number" min="0" step="0.01" formControlName="totalSalesToRetailerValue">
-            <p>($)</p>
+            <div style="display: flex; align-items: center;">
+              <input class="form-control" type="text" formControlName="totalSalesToRetailerValue">
+              <div *ngIf="isFieldInvalid('totalSalesToRetailerValue')" style="flex: 0 0 25px;">
+                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
+                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
+              </div>
+            </div>
+            <p class="text-right">($)</p>
           </div>
         </div>
       </app-field>
