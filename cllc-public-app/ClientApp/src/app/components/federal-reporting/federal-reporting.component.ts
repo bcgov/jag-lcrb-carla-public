@@ -119,8 +119,8 @@ export class FederalReportingComponent implements OnInit {
     )
       .subscribe(([report]) => {
         const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
-        // this.monthlyReports[index] = report;
-        this.selectedMonthlyReportIndex = index;
+        this.monthlyReports[index] = report;
+        // this.selectedMonthlyReportIndex = index;
         this.handleMonthlyReportChanged();
       });
   }
@@ -131,13 +131,10 @@ export class FederalReportingComponent implements OnInit {
 
   selectMonthlyReport(index) {
     this.productForms = [];
-    // this.selectedMonthlyReportIndex = this.monthlyReports.findIndex(rep => rep.monthlyReportId === index);
     this.selectedMonthlyReportIndex = index;
     if (this.selectedMonthlyReportIndex === undefined) {
       return;
     }
-
-    console.log(this.selectedMonthlyReportIndex);
 
     this.handleMonthlyReportChanged();
   }
