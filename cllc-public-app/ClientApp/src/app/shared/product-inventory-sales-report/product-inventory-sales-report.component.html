@@ -1,13 +1,10 @@
 <div class="product-inventory-sales-report mb-5" *ngIf="visibleInventoryReports.indexOf(productForm.value.inventoryReportId) > -1">
   <form [formGroup]="productForm">
-    <div class="row bg-blue border-bottom border-blue">
+    <div class="row mx-0 bg-blue">
       <h4 class="col-xs-12 font-weight-bold">{{productForm?.value?.product}}</h4>
     </div>
-    <div class="row">
-      <h4 class="col-xs-12">Inventory Packaged</h4>
-    </div>
-    <div class="row">
-      <div class="col-md-1 col-xs-12 text-center bg-grey pt-4 px-0 border border-right-0 border-blue">
+    <div class="row mx-0 d-flex flex-nowrap">
+      <div class="text-center bg-grey pt-4 px-0 border border-right-0 border-blue flex-fill">
         <label class="d-block">Opening</label>
         <label>Inventory</label>
         <div class="d-flex">
@@ -23,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-xs-12 text-center bg-green pt-4 px-0 border border-right-0 border-blue">
+      <div class="text-center bg-green pt-4 px-0 border border-right-0 border-blue flex-fill">
         <label>Additions to Inventory</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
@@ -61,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-5 col-xs-12 text-center bg-red pt-4 px-0 border border-right-0 border-blue">
+      <div class="text-center bg-red pt-4 px-0 border border-right-0 border-blue flex-fill">
         <label>Reductions to Inventory</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
@@ -121,7 +118,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-xs-12 text-center bg-grey pt-4 px-0 border border-blue">
+      <div class="text-center bg-grey pt-4 px-0 border border-blue border-right-0 flex-fill">
         <label>Closing Inventory</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
@@ -170,13 +167,8 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <h4 class="col-xs-12">Sales Packaged</h4>
-    </div>
-    <div class="row">
-      <div class="col-md-2 col-xs-12 text-center bg-grey pt-4 px-0 border border-right-0 border-blue">
-        <label class="d-block">Direct to Consumer</label>
+      <div class="text-center bg-purple pt-4 px-0 border border-blue flex-fill">
+        <label class="d-block">Sales to Consumer</label>
         <label>(retail)</label>
         <div class="d-flex">
           <div class="flex-fill p-4">
@@ -193,32 +185,6 @@
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="totalSalesToConsumerValue">
               <div *ngIf="isFieldInvalid('totalSalesToConsumerValue')" style="flex: 0 0 25px;">
-                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
-                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
-              </div>
-            </div>
-            <p class="text-right">($)</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2 col-xs-12 text-center bg-grey pt-4 px-0 border border-blue">
-        <label class="d-block">To Retailer</label>
-        <label>(wholesale)</label>
-        <div class="d-flex">
-          <div class="flex-fill p-4">
-            <div style="display: flex; align-items: center;">
-              <input class="form-control" type="text" formControlName="totalSalesToRetailerQty">
-              <div *ngIf="isFieldInvalid('totalSalesToRetailerQty')" style="flex: 0 0 25px;">
-                <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
-                <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
-              </div>
-            </div>
-            <p class="text-right">(units)</p>
-          </div>
-          <div class="flex-fill p-4">
-            <div style="display: flex; align-items: center;">
-              <input class="form-control" type="text" formControlName="totalSalesToRetailerValue">
-              <div *ngIf="isFieldInvalid('totalSalesToRetailerValue')" style="flex: 0 0 25px;">
                 <i class="fas fa-chevron-left error-states" style="margin-left: -10px"></i>
                 <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
               </div>
