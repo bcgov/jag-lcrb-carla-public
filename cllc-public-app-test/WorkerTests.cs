@@ -133,8 +133,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Get, $"/api/{service}/" + workerVM.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
-            var worker3 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
-            Assert.Null(worker3);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             await Logout();
         }
@@ -214,9 +213,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             // should get a 404 if we try a get now.
             request = new HttpRequestMessage(HttpMethod.Get, "/api/worker/" + workerVM.id);
             response = await _client.SendAsync(request);
-            jsonString = await response.Content.ReadAsStringAsync();
-            var worker3 = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
-            Assert.Null(worker3);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
             await Logout();
         }
     }
