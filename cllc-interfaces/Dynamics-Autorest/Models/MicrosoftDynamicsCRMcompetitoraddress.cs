@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// competitor.</param>
         /// <param name="postofficebox">Post office box number in the
         /// competitor address.</param>
-        public MicrosoftDynamicsCRMcompetitoraddress(string stateorprovince = default(string), int? utcoffset = default(int?), string composite = default(string), string upszone = default(string), int? addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string postalcode = default(string), string latitude = default(string), string versionnumber = default(string), string telephone1 = default(string), string name = default(string), string telephone2 = default(string), string county = default(string), int? addressnumber = default(int?), string city = default(string), string longitude = default(string), string telephone3 = default(string), string country = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string fax = default(string), string _parentidValue = default(string), string line1 = default(string), string line3 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string competitoraddressid = default(string), string _modifiedbyValue = default(string), int? shippingmethodcode = default(int?), string postofficebox = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> competitorAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor parentid = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMcompetitoraddress(string stateorprovince = default(string), int? utcoffset = default(int?), string composite = default(string), string upszone = default(string), int? addresstypecode = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string postalcode = default(string), decimal? latitude = default(decimal?), string versionnumber = default(string), string telephone1 = default(string), string name = default(string), string telephone2 = default(string), string county = default(string), int? addressnumber = default(int?), string city = default(string), decimal? longitude = default(decimal?), string telephone3 = default(string), string country = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string fax = default(string), string _parentidValue = default(string), string line1 = default(string), string line3 = default(string), string line2 = default(string), string _createdonbehalfbyValue = default(string), string competitoraddressid = default(string), string _modifiedbyValue = default(string), int? shippingmethodcode = default(int?), string postofficebox = default(string), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsyncerror> competitorAddressSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMcompetitor parentid = default(MicrosoftDynamicsCRMcompetitor), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Stateorprovince = stateorprovince;
             Utcoffset = utcoffset;
@@ -191,7 +191,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets latitude for the competitor address.
         /// </summary>
         [JsonProperty(PropertyName = "latitude")]
-        public string Latitude { get; set; }
+        public decimal? Latitude { get; set; }
 
         /// <summary>
         /// Gets or sets version number of the competitor address.
@@ -240,7 +240,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets longitude for the address for the competitor.
         /// </summary>
         [JsonProperty(PropertyName = "longitude")]
-        public string Longitude { get; set; }
+        public decimal? Longitude { get; set; }
 
         /// <summary>
         /// Gets or sets third telephone number for the competitor address.
