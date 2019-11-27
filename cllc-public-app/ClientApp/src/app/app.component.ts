@@ -15,6 +15,7 @@ import { Account } from '@models/account.model';
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfo } from '@models/version-info.model';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
+import { MonthlyReportDataService } from '@services/monthly-report.service';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,8 @@ export class AppComponent extends FormBase implements OnInit {
   public versionInfo: VersionInfo;
   isAssociate = false;
   account: Account;
+  showMessageCenterContent = false;
+  linkedFederalReport: { licenseId: string; monthlyReportId: string; };
 
   constructor(
     public dialog: MatDialog,
@@ -41,6 +44,7 @@ export class AppComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
     public featureFlagService: FeatureFlagService,
+    private monthlyReportDataService: MonthlyReportDataService,
     private versionInfoDataService: VersionInfoDataService,
   ) {
     super();
@@ -49,6 +53,16 @@ export class AppComponent extends FormBase implements OnInit {
 
     featureFlagService.featureOn('FederalReporting')
       .subscribe(x => this.showFederalReporting = x);
+
+      monthlyReportDataService.getAllCurrentMonthlyReports()
+      .subscribe(data => {
+        if(data && data.length){
+          this.linkedFederalReport = {
+            licenseId: data[0].licenseId,
+            monthlyReportId: data[0].monthlyReportId
+          };
+        }
+      })
 
     this.isDevMode = isDevMode();
     this.router.events

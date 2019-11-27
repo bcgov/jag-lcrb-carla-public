@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// created the importJob.</param>
         /// <param name="createdon">Date and time when the import job record
         /// was created.</param>
-        public MicrosoftDynamicsCRMimportjob(string importjobid = default(string), string _organizationidValue = default(string), string data = default(string), int? utcconversiontimezonecode = default(int?), string solutionname = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), string progress = default(string), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
+        public MicrosoftDynamicsCRMimportjob(string importjobid = default(string), string _organizationidValue = default(string), string data = default(string), int? utcconversiontimezonecode = default(int?), string solutionname = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string name = default(string), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), decimal? progress = default(decimal?), string _modifiedonbehalfbyValue = default(string), string _createdonbehalfbyValue = default(string), string _modifiedbyValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser))
         {
             Importjobid = importjobid;
             this._organizationidValue = _organizationidValue;
@@ -154,7 +154,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets import Progress Percentage.
         /// </summary>
         [JsonProperty(PropertyName = "progress")]
-        public string Progress { get; set; }
+        public decimal? Progress { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
