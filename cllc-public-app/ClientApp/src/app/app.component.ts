@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { User } from '@models/user.model';
 import { MatTableDataSource, MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { isDevMode } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, resultMemoize } from '@ngrx/store';
 import { AppState } from './app-state/models/app-state';
 import { filter, takeWhile, map } from 'rxjs/operators';
 import { FeatureFlagService } from '@services/feature-flag.service';
@@ -16,6 +16,10 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfo } from '@models/version-info.model';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
+import { MonthlyReport } from '@models/monthly-report.model';
+
+const Months = [ 'January', 'February', 'March', 'April', 'May', 'June', 
+           'July', 'August', 'September', 'October', 'November', 'December' ];
 
 @Component({
   selector: 'app-root',
@@ -35,7 +39,9 @@ export class AppComponent extends FormBase implements OnInit {
   isAssociate = false;
   account: Account;
   showMessageCenterContent = false;
-  linkedFederalReport: { licenseId: string; monthlyReportId: string; };
+  linkedFederalReports: MonthlyReport[];
+  Months = Months;  // make available in template
+  parseInt = parseInt; // make available in template
 
   constructor(
     public dialog: MatDialog,
@@ -54,15 +60,10 @@ export class AppComponent extends FormBase implements OnInit {
     featureFlagService.featureOn('FederalReporting')
       .subscribe(x => this.showFederalReporting = x);
 
-      monthlyReportDataService.getAllCurrentMonthlyReports()
+    monthlyReportDataService.getAllCurrentMonthlyReports()
       .subscribe(data => {
-        if(data && data.length){
-          this.linkedFederalReport = {
-            licenseId: data[0].licenseId,
-            monthlyReportId: data[0].monthlyReportId
-          };
-        }
-      })
+        this.linkedFederalReports = data;
+      });
 
     this.isDevMode = isDevMode();
     this.router.events
