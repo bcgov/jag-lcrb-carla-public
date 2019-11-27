@@ -367,6 +367,7 @@ namespace odata2openapi
                             firstTagLower.Equals("accounts") ||
                             firstTagLower.Equals("invoices") ||
                             firstTagLower.Equals("leads") ||
+                            firstTagLower.Equals("lists") ||
                             firstTagLower.Equals("sharepointsites") ||
                             firstTagLower.Equals("savedqueries") ||
                             firstTagLower.Equals("sharepointdocumentlocations") ||
