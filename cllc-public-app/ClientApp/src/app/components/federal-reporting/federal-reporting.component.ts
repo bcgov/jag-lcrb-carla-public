@@ -20,8 +20,8 @@ export class FederalReportingComponent implements OnInit {
   licenses: ApplicationLicenseSummary[] = [];
   monthlyReports: MonthlyReport[] = [];
   shownMonthlyReports: MonthlyReport[] = [];
-  selectedMonthlyReport: MonthlyReport = null;
-  selectedLicence: ApplicationLicenseSummary = null;
+  selectedMonthlyReportIndex = null;
+  selectedLicenceIndex = null;
   visibleInventoryReports = [];
   busy: Subscription;
   reportIsDisabled = true;
@@ -68,23 +68,31 @@ export class FederalReportingComponent implements OnInit {
     )
       .subscribe(([licenses]) => {
         this.licenses = licenses;
+        this.changeLicence(this.licenses[0].licenseId);
       });
   }
 
-  licenceChanged(event) {
+  handleLicenceChanged(event) {
     if (event.target.value === '') {
       this.shownMonthlyReports = [];
-      this.selectedLicence = null;
+      this.selectedLicenceIndex = null;
       return;
     }
-    this.selectedLicence = this.licenses.find(l => l.licenseId === event.target.value);
+    this.changeLicence(event.target.value);
+  }
 
-    this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === event.target.value);
+  changeLicence(licenceId) {
+    this.selectedLicenceIndex = this.licenses.findIndex(l => l.licenseId === licenceId);
+
     this.busy = forkJoin(
-      this.monthlyReportDataService.getMonthlyReportsByLicence(event.target.value)
+      this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
     )
       .subscribe(([monthlyReports]) => {
         this.monthlyReports = monthlyReports;
+        this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
+        if (this.shownMonthlyReports.length > 0) {
+          this.selectMonthlyReport(0);
+        }
       });
   }
 
@@ -112,16 +120,19 @@ export class FederalReportingComponent implements OnInit {
       .subscribe(([report]) => {
         const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
         this.monthlyReports[index] = report;
-        this.selectedMonthlyReport = report;
+        // this.selectedMonthlyReportIndex = index;
         this.handleMonthlyReportChanged();
       });
   }
 
-  periodChanged(event) {
-    this.productForms = [];
-    this.selectedMonthlyReport = this.monthlyReports.find(rep => rep.monthlyReportId === event.target.value);
+  handleMonthlyReportTabChanged(event) {
+    this.selectMonthlyReport(event.index);
+  }
 
-    if (this.selectedMonthlyReport === undefined) {
+  selectMonthlyReport(index) {
+    this.productForms = [];
+    this.selectedMonthlyReportIndex = index;
+    if (this.selectedMonthlyReportIndex === undefined) {
       return;
     }
 
@@ -131,7 +142,7 @@ export class FederalReportingComponent implements OnInit {
   handleMonthlyReportChanged() {
     // Update product forms
     this.visibleInventoryReports = [];
-    this.productForms = this.selectedMonthlyReport.inventorySalesReports.map((report) => {
+    this.productForms = this.monthlyReports[this.selectedMonthlyReportIndex].inventorySalesReports.map((report) => {
       if ((report.openingInventory !== null && report.openingInventory !== 0) ||
           (report.domesticAdditions !== null && report.domesticAdditions !== 0) ||
           (report.returnsAdditions !== null && report.returnsAdditions !== 0) ||
@@ -174,7 +185,7 @@ export class FederalReportingComponent implements OnInit {
       });
     });
 
-    switch (this.selectedMonthlyReport.statusCode) {
+    switch (this.monthlyReports[this.selectedMonthlyReportIndex].statusCode) {
       case monthlyReportStatus.Closed:
         this.reportIsDisabled = true;
         this.reportIsClosed = true;
@@ -208,7 +219,7 @@ export class FederalReportingComponent implements OnInit {
 
     // Update monthly report form
     this.reportForm.patchValue({
-      ...this.selectedMonthlyReport
+      ...this.monthlyReports[this.selectedMonthlyReportIndex]
     });
   }
 
@@ -252,6 +263,10 @@ export class FederalReportingComponent implements OnInit {
 
   isFieldInvalid(field: string) {
     return !this.reportForm.get(field).valid && (this.reportForm.get(field).dirty || this.reportForm.get(field).touched);
+  }
+
+  isProductSelected(id: string) {
+    return this.visibleInventoryReports.indexOf(id) > -1;
   }
 
   hasInvalidProductForm() {
