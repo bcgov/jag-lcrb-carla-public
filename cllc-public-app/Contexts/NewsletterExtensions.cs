@@ -1,7 +1,10 @@
 ﻿
+using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Rest;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,38 +14,147 @@ namespace Gov.Lclb.Cllb.Public.Contexts
     public static class NewsletterExtensions
     {
 
-        public static Newsletter GetNewsletterBySlug(this AppDbContext context, string slug)
+        public static Newsletter GetNewsletterBySlug(this IDynamicsClient context, string slug)
         {
-            Models.Newsletter newsletter = context.Newsletters.Include(x => x.Subscribers).FirstOrDefault(x => x.Slug == slug);
-            return newsletter;
+            // Newsletter is now Marketing List            
+            string filter = $"listname eq '{slug}'";
+            Newsletter result = null;
+            MicrosoftDynamicsCRMlist list = null;
+            try
+            {
+                var lists = context.Lists.Get(filter: filter).Value;
+
+                if (lists != null && lists.Count > 0)
+                {
+                    list = lists.FirstOrDefault();
+                    result = new Newsletter()
+                    {
+                        Slug = list.Purpose,
+                        Id = Guid.Parse(list.Listid),
+                        Title = list.Listname,
+                        Description = list.Description
+
+                    };
+                }
+
+                
+            }
+            catch (HttpOperationException)
+            {
+                list = null;
+            }
+            catch (Exception)
+            {
+                list = null;
+            }
+
+            return result;
         }
 
-        public static void AddNewsletterSubscriber(this AppDbContext context, string slug, string email)
+        public static MicrosoftDynamicsCRMlead GetSubscriberByEmail(this IDynamicsClient context, string email)
         {
-            Newsletter newsletter = context.GetNewsletterBySlug(slug);
+            MicrosoftDynamicsCRMlead result = null;
+            string emailEscaped = email.Replace("'", "''");
+
+            // see if the lead exists.
+            string filter = $"emailaddress1 eq '{emailEscaped}'";
+            // get the lists associated with this lead.
+            string[] expand = { "listlead_association" };
+            try
+            {
+                result = context.Leads.Get(filter: filter, expand: expand).Value.FirstOrDefault();
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            catch (Exception)
+            {
+                result = null;
+            }
+
+            return result;
+
+        }
+
+        public static void AddNewsletterSubscriber(this IDynamicsClient dynamicsClient, string slug, string email)
+        {
+            bool newSubscriber = false;
+            Newsletter newsletter = dynamicsClient.GetNewsletterBySlug(slug);
             if (newsletter != null)
             {
-                Subscriber existing = newsletter.Subscribers.FirstOrDefault(x => x.Email == email);
-                if (existing == null)
+                MicrosoftDynamicsCRMlead subscriber = dynamicsClient.GetSubscriberByEmail(email);
+                if (subscriber == null)
                 {
-                    Subscriber newSubscriber = new Subscriber(email);
-                    if (newsletter.Subscribers == null)
+                    // add the new subscriber
+                    MicrosoftDynamicsCRMlead newLead = new MicrosoftDynamicsCRMlead()
                     {
-                        newsletter.Subscribers = new List<Subscriber>();
+                        Emailaddress1 = email,
+                        Firstname = email                        
+                    };
+
+                    try
+                    {
+
+                        subscriber = dynamicsClient.Leads.Create(newLead);
+                        newSubscriber = true;
                     }
-                    newsletter.Subscribers.Add(newSubscriber);
-                    context.Newsletters.Update(newsletter);
-                    context.SaveChanges();
+                    catch (HttpOperationException)
+                    {
+                        subscriber = null;
+                    }
+                    catch (Exception)
+                    {
+                        subscriber = null;
+                    }
+                }
+
+                if (subscriber != null)
+                {
+                    // add the subscriber to the newsletter (Marketing List)
+
+                    // check to determine if it is there already. 
+                    bool notFound = true;
+
+                    if (subscriber.ListleadAssociation != null)
+                    {
+                        foreach (var item in subscriber.ListleadAssociation)
+                        {
+                            if (item.Listid == newsletter.Id.ToString())
+                            {
+                                notFound = false;
+                            }
+                        }
+                    }
+
+                    if (notFound)
+                    {
+                        try
+                        {
+                            EntityIdReference oDataId = new EntityIdReference()
+                            {
+                                EntityId = subscriber.Leadid
+                            };
+                            dynamicsClient.Lists.AddMember(newsletter.Id.ToString(), oDataId);
+
+                        }
+                        catch (HttpOperationException)
+                        {
+                            throw;
+                        }
+                    }
+                    
                 }
             }
         }
 
 
-        public static void RemoveNewsletterSubscriber(this AppDbContext context, string slug, string email)
+        public static void RemoveNewsletterSubscriber(this IDynamicsClient context, string slug, string email)
         {
             Newsletter newsletter = context.GetNewsletterBySlug(slug);
             if (newsletter != null)
             {
+                /*
                 Subscriber existing = newsletter.Subscribers.FirstOrDefault(x => x.Email == email);
                 if (existing != null)
                 {
@@ -50,20 +162,29 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     context.Newsletters.Update(newsletter);
                     context.SaveChanges();
                 }
+                */
             }
         }
+
 
         /// <summary>
         /// Add a newsletter
         /// </summary>
         /// <param name="context"></param>
         /// <param name="newsletter"></param>
-        public static void AddNewsletter(this AppDbContext context, Newsletter newsletter)
+        public static void AddNewsletter(this IDynamicsClient context, Newsletter newsletter)
         {
-            if (newsletter != null)
+            if (newsletter != null && context != null)
             {
-                context.Newsletters.Add(newsletter);
-                context.SaveChanges();
+                MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist()
+                {
+                    Purpose = newsletter.Title,
+                    Description = newsletter.Description,
+                    Listname = newsletter.Slug,
+                    Createdfromcode = 4 // Lead
+                };
+                list = context.Lists.Create(list);
+
             }
         }
 
@@ -72,7 +193,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// </summary>
         /// <param name="context"></param>
         /// <param name="NewsletterJsonPath"></param>
-        public static void AddInitialNewslettersFromFile(this AppDbContext context, string NewsletterJsonPath)
+        public static void AddInitialNewslettersFromFile(this IDynamicsClient context, string NewsletterJsonPath)
         {
             if (!string.IsNullOrEmpty(NewsletterJsonPath) && File.Exists(NewsletterJsonPath))
             {
@@ -81,7 +202,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
         }
 
-        private static void AddInitialNewsletters(this AppDbContext context, string NewsletterJson)
+        private static void AddInitialNewsletters(this IDynamicsClient context, string NewsletterJson)
         {
             List<ViewModels.Newsletter> Newsletters = JsonConvert.DeserializeObject<List<ViewModels.Newsletter>>(NewsletterJson);
 
@@ -91,7 +212,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
         }
 
-        private static void AddInitialNewsletters(this AppDbContext context, List<ViewModels.Newsletter> Newsletters)
+        private static void AddInitialNewsletters(this IDynamicsClient context, List<ViewModels.Newsletter> Newsletters)
         {
             Newsletters.ForEach(context.AddInitialNewsletter);
         }
@@ -99,8 +220,8 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// <summary>
         /// Adds a jurisdiction to the system, only if it does not exist.
         /// </summary>
-        private static void AddInitialNewsletter(this AppDbContext context, ViewModels.Newsletter initialNewsletter)
-        {
+        private static void AddInitialNewsletter(this IDynamicsClient context, ViewModels.Newsletter initialNewsletter)
+        {         
             Newsletter newsletter = context.GetNewsletterBySlug(initialNewsletter.slug);
             if (newsletter != null)
             {
@@ -123,7 +244,7 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// </summary>
         /// <param name="context"></param>
         /// <param name="regionInfo"></param>
-        public static void UpdateSeedNewsletterInfo(this AppDbContext context, Models.Newsletter newsletterInfo)
+        public static void UpdateSeedNewsletterInfo(this IDynamicsClient context, Models.Newsletter newsletterInfo)
         {
             Newsletter newsletter = context.GetNewsletterBySlug(newsletterInfo.Slug);
             if (newsletter == null)
@@ -132,11 +253,18 @@ namespace Gov.Lclb.Cllb.Public.Contexts
             }
             else
             {
-                newsletter.Description = newsletterInfo.Description;
-                newsletter.Title = newsletterInfo.Title;
-                context.Newsletters.Update(newsletter);
-                context.SaveChanges();
+                // update Newsletter.
+                MicrosoftDynamicsCRMlist list = new MicrosoftDynamicsCRMlist()
+                {
+                    Purpose = newsletterInfo.Title,
+                    Description = newsletterInfo.Description,
+                    Listname = newsletterInfo.Slug
+                };
+
+                context.Lists.Update(newsletter.Id.ToString(), list);
             }
         }
+
+
     }
 }

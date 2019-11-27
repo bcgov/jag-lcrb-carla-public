@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top90 { get; set; }
+        public int? Top92 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip17 { get; set; }
+        public int? Skip18 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count90 { get; set; }
+        public bool? Count92 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter90 { get; set; }
+        public string Filter92 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search17 { get; set; }
+        public string Search18 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -466,6 +466,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacts Contacts { get; private set; }
 
         /// <summary>
+        /// Gets the IContacttaskcontact.
+        /// </summary>
+        public virtual IContacttaskcontact Contacttaskcontact { get; private set; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         public virtual IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; private set; }
@@ -494,6 +499,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILeads.
         /// </summary>
         public virtual ILeads Leads { get; private set; }
+
+        /// <summary>
+        /// Gets the ILists.
+        /// </summary>
+        public virtual ILists Lists { get; private set; }
 
         /// <summary>
         /// Gets the ISavedqueries.
@@ -534,6 +544,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         public virtual IUseradoxioexhibit Useradoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IContacttask.
+        /// </summary>
+        public virtual IContacttask Contacttask { get; private set; }
 
         /// <summary>
         /// Gets the ILegalentitytask.
@@ -866,12 +881,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             Regardingobjectidadoxioexhibit = new Regardingobjectidadoxioexhibit(this);
             Businessunitadoxioexhibit = new Businessunitadoxioexhibit(this);
             Contacts = new Contacts(this);
+            Contacttaskcontact = new Contacttaskcontact(this);
             Baserecordidadoxioexhibit = new Baserecordidadoxioexhibit(this);
             Duplicaterecordidadoxioexhibit = new Duplicaterecordidadoxioexhibit(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Invoices = new Invoices(this);
             Leads = new Leads(this);
+            Lists = new Lists(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
@@ -880,6 +897,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioexhibitmodifiedby = new Lkadoxioexhibitmodifiedby(this);
             Lkadoxioexhibitmodifiedonbehalfby = new Lkadoxioexhibitmodifiedonbehalfby(this);
             Useradoxioexhibit = new Useradoxioexhibit(this);
+            Contacttask = new Contacttask(this);
             Legalentitytask = new Legalentitytask(this);
             Teamadoxioexhibit = new Teamadoxioexhibit(this);
             BaseUri = new System.Uri("http://localhost");
