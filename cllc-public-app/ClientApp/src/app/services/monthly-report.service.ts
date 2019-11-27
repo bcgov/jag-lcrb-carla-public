@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { MonthlyReport } from '@models/monthly-report.model';
@@ -34,7 +34,7 @@ export class MonthlyReportDataService extends DataService {
   }
 
   updateMonthlyReport(monthlyReport: MonthlyReport) {
-    return this.http.put(
+    return this.http.put<MonthlyReport>(
       this.apiPath + monthlyReport.monthlyReportId,
       monthlyReport,
       { headers: this.headers })

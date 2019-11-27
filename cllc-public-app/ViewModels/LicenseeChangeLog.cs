@@ -24,6 +24,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string Id { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public LicenseeChangeType? ChangeType { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public AdoxioApplicantTypeCodes? BusinessAccountType { get; set; }
         public bool? IsDirectorNew { get; set; }
         public bool? IsDirectorOld { get; set; }
         public bool? IsManagerNew { get; set; }
@@ -34,7 +36,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsShareholderOld { get; set; }
         public bool? IsTrusteeNew { get; set; }
         public bool? IsTrusteeOld { get; set; }
-        public string BusinessAccountType { get; set; }
         public int? NumberofSharesNew { get; set; }
         public int? NumberofSharesOld { get; set; }
         public int? TotalSharesNew { get; set; }

@@ -1,3 +1,6 @@
+// change to a #define to enable MSSQL
+#undef USE_MSSQL
+
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
@@ -37,10 +40,15 @@ using System.Collections.Generic;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
+
+
 namespace Gov.Lclb.Cllb.Public
 {
     public class Startup
     {
+
+        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -54,7 +62,7 @@ namespace Gov.Lclb.Cllb.Public
         public void ConfigureServices(IServiceCollection services)
         {
             // add a singleton for data access.
-
+#if (USE_MSSQL)
             string connectionString = DatabaseTools.GetConnectionString(Configuration);
             string databaseName = DatabaseTools.GetDatabaseName(Configuration);
 
@@ -62,7 +70,7 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(connectionString));
-
+#endif
             // add singleton to allow Controllers to query the Request object
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -123,9 +131,11 @@ namespace Gov.Lclb.Cllb.Public
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
             services.RegisterPermissionHandler();
-
-            // setup key ring to persist in storage.
-            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(Configuration["KEY_RING_DIRECTORY"]));
+            if (string.IsNullOrEmpty (Configuration["KEY_RING_DIRECTORY"]))
+            {
+                // setup key ring to persist in storage.
+                services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(Configuration["KEY_RING_DIRECTORY"]));
+            }
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -147,7 +157,9 @@ namespace Gov.Lclb.Cllb.Public
             services.AddHealthChecks()
                 .AddCheck("cllc_public_app", () => HealthCheckResult.Healthy())
                 // No longer checking SQL Server in health checks as the SQL components are no longer active.
-                //.AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+#if (USE_MSSQL)
+                .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
+#endif
                 .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics")
                 .AddCheck<GeocoderHealthCheck>("Geocoder");
@@ -245,6 +257,9 @@ namespace Gov.Lclb.Cllb.Public
             var log = loggerFactory.CreateLogger("Startup");
 
             string connectionString = "unknown.";
+
+#if (USE_MSSQL)
+
             if (!string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
             {
 
@@ -282,6 +297,25 @@ namespace Gov.Lclb.Cllb.Public
                 }
 
             }
+#else
+            // seed for newsletter.
+
+            using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                log.LogDebug("Fetching the application's MS Dynamics interface ...");
+                IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
+                // run the database seeders
+                log.LogDebug("Adding/Updating seed data ...");
+                Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, dynamicsClient);
+                seederFactory.Seed(null);
+                log.LogDebug("Seeding operations are complete.");
+            }
+
+#endif
+
+
+
+
             string pathBase = Configuration["BASE_PATH"];
 
             if (!string.IsNullOrEmpty(pathBase))
