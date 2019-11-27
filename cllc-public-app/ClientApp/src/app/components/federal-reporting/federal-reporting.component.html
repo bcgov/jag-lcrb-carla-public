@@ -37,6 +37,11 @@
         <h3 class="blue-header col-xs-12">Part 1 - Employee Reporting</h3>
       </div>
       <p>Enter the number of employees who worked at your store under each positions listed below in the previous month.</p>
+      <div *ngIf="reportForm.invalid">
+        <ul>
+          <li class="error-states">Number of employees must be a whole number less than 10000.</li>
+        </ul>
+      </div>
       <div class="form-group row" style="width: 100%">
         <label class="col-md-2 col-form-label">Management:</label>
         <div class="col-md-1">
@@ -103,13 +108,13 @@
         <h3 class="blue-header col-xs-12">Part 2 - Cannabis Product Inventory</h3>
       </div>
       <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
-      <div class="form-check" *ngFor="let inventoryReport of selectedMonthlyReport.inventorySalesReports">
+      <div class="form-check" *ngFor="let productForm of productForms">
         <input class="form-check-input" type="checkbox"
-          [checked]="visibleInventoryReports.indexOf(inventoryReport.inventoryReportId) > -1"
-          (change)="toggleProductVisibility(inventoryReport.inventoryReportId)"
-          id="{{inventoryReport.inventoryReportId}}-check">
-        <label class="form-check-label" for="{{inventoryReport.inventoryReportId}}-check">
-          {{inventoryReport.product}}
+          [checked]="visibleInventoryReports.indexOf(productForm.value.inventoryReportId) > -1"
+          (change)="toggleProductVisibility(productForm.value.inventoryReportId)"
+          id="{{productForm.value.inventoryReportId}}-check">
+        <label class="form-check-label" for="{{productForm.value.inventoryReportId}}-check">
+          {{productForm.value.product}}
         </label>
       </div>
     </div>
@@ -119,11 +124,18 @@
       </div>
       <p *ngIf="visibleInventoryReports.length > 0">Enter the inventory details of the cannabis product inventory you identified above:</p>
       <p *ngIf="visibleInventoryReports.length === 0">You have not identified any cannabis product inventory to report in the previous month.</p>
-      <ng-container *ngFor="let inventoryReport of visibleInventoryReports">
-        <app-product-inventory-sales-report
-          [productForm]="findProductForm(inventoryReport)"
-        ></app-product-inventory-sales-report>
-      </ng-container>
+      <div *ngIf="hasInvalidProductForm()">
+        <ul>
+          <li class="error-states">Units must be a whole number less than 10000000.</li>
+          <li class="error-states">Dollars must be a number less than 1000000000 with up to 2 decimal places.</li>
+          <li class="error-states">Weight must be a number less than 10000000 with up to 3 decimal places.</li>
+        </ul>
+      </div>
+      <app-product-inventory-sales-report
+        [productForm]="productForm"
+        [visibleInventoryReports]="visibleInventoryReports"
+        *ngFor="let productForm of productForms"
+      ></app-product-inventory-sales-report>
     </div>
     <div class="submit">
       <div class="row" *ngIf="!reportIsDisabled">
@@ -133,7 +145,7 @@
             Save for Later
           </span>
         </button>
-        <button class="btn btn-primary mt-5" (click)="save(true)">Submit Monthly Report</button>
+        <button class="btn btn-primary mt-5" (click)="submitApplication()">Submit Monthly Report</button>
       </div>
       <div class="row" *ngIf="reportIsDisabled && !reportIsClosed">
         <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">Reopen Monthly Report</button>

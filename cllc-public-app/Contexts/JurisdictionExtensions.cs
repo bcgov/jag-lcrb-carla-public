@@ -78,20 +78,24 @@ namespace Gov.Lclb.Cllb.Public.Contexts
         /// </summary>
         private static void AddInitialJurisdiction(this AppDbContext context, Jurisdiction initialJurisdiction)
         {
-            Jurisdiction jurisdiction = context.GetJurisdictionByName(initialJurisdiction.Name);
-            if (jurisdiction != null)
+            if (context != null)
             {
-                return;
+                Jurisdiction jurisdiction = context.GetJurisdictionByName(initialJurisdiction.Name);
+                if (jurisdiction != null)
+                {
+                    return;
+                }
+
+                jurisdiction = new Jurisdiction
+                (
+                    initialJurisdiction.Id,
+                    initialJurisdiction.Name,
+                    initialJurisdiction.SelectMessage
+                );
+
+                context.AddJurisdiction(jurisdiction);
+
             }
-
-            jurisdiction = new Jurisdiction
-            (
-                initialJurisdiction.Id,
-                initialJurisdiction.Name,
-                initialJurisdiction.SelectMessage
-            );
-
-            context.AddJurisdiction(jurisdiction);
         }
 
 
