@@ -116,9 +116,6 @@
                       class="nav-link" routerLink="/dashboard">Dashboard</a>
                     <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
-                    <a *ngIf="currentUser.userType == 'Business' && showFederalReporting"
-                      (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/federal-reporting">Federal
-                      Reporting</a>
                   </li>
                 </ul>
               </div>
