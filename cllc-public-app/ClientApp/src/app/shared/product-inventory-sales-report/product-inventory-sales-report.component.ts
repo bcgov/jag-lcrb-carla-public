@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ValidationErrors } from '@angular/forms';
+import { validationErrors } from './validation-errors';
 
 @Component({
   selector: 'app-product-inventory-sales-report',
@@ -15,7 +16,24 @@ export class ProductInventorySalesReportComponent implements OnInit {
   ngOnInit() {
   }
 
+  getFormValidationErrors() {
+    const errorStrings = [];
+    Object.keys(this.productForm.controls).forEach(key => {
+      const controlErrors: ValidationErrors = this.productForm.get(key).errors;
+      if (controlErrors != null) {
+        Object.keys(controlErrors).forEach(keyError => {
+          const error = validationErrors[key].find(e => e.type === keyError);
+          if (errorStrings.findIndex(e => e === error.message) === -1) {
+            errorStrings.push(error.message);
+            console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
+          }
+        });
+      }
+    });
+    return errorStrings;
+  }
+
   isFieldInvalid(fieldName: string) {
-    return !this.productForm.get(fieldName).valid && (this.productForm.get(fieldName).dirty || this.productForm.get(fieldName).touched);
+    return !this.productForm.get(fieldName).valid && (this.productForm.dirty || this.productForm.touched);
   }
 }
