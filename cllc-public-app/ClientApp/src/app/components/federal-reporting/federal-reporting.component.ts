@@ -34,6 +34,7 @@ export class FederalReportingComponent implements OnInit {
   reportIsDisabled = true;
   reportIsClosed = true;
   routeParams: Observable<FederalReportingParams>;
+  loadingMonthlyReports = false;
 
   metaForm = this.fb.group({
     licence: ['', [Validators.required]],
@@ -82,7 +83,7 @@ export class FederalReportingComponent implements OnInit {
   ngOnInit() {
     this.routeParams.subscribe(params => {
       // no licences loaded (probably first load)
-      if (this.selectedLicenceIndex === null || this.licenses.length < 1) {
+      if (this.selectedLicenceIndex === null && this.licenses.length < 1) {
         this.licencesBusy = forkJoin(
           this.licenceDataService.getAllCurrentLicenses()
         )
@@ -112,27 +113,23 @@ export class FederalReportingComponent implements OnInit {
   }
 
   getMonthlyReports(licenceId, monthlyReportId = null) {
+    this.loadingMonthlyReports = true;
     this.monthlyReportsBusy = forkJoin(
       this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
     )
     .subscribe(([monthlyReports]) => {
       this.monthlyReports = monthlyReports;
-      this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
       if (monthlyReportId !== null) {
+        this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
         this.selectedMonthlyReportIndex = this.shownMonthlyReports.findIndex(r => r.monthlyReportId === monthlyReportId);
-      } else {
-        this.selectedMonthlyReportIndex = 0;
+      } else if (this.monthlyReports.length > 0) {
+        this.router.navigate([
+          `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[0].monthlyReportId}`
+        ]);
       }
       this.renderMonthlyReport();
+      this.loadingMonthlyReports = false;
     });
-  }
-
-  handleLicenceChanged(event) {
-    if (event.target.value === '') {
-      this.shownMonthlyReports = [];
-      this.selectedLicenceIndex = null;
-      return;
-    }
   }
 
   save(submit = false) {
@@ -153,12 +150,16 @@ export class FederalReportingComponent implements OnInit {
       return false;
     }
 
+    this.loadingMonthlyReports = true;
     this.monthlyReportsBusy = forkJoin(
       this.monthlyReportDataService.updateMonthlyReport(updateRequest)
     )
       .subscribe(([report]) => {
-        const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
-        this.monthlyReports[index] = report;
+        const fullListIndex = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
+        this.monthlyReports[fullListIndex] = report;
+        this.shownMonthlyReports[this.selectedMonthlyReportIndex] = report;
+        this.renderMonthlyReport();
+        this.loadingMonthlyReports = false;
       });
   }
 

@@ -2,10 +2,11 @@
   <div [ngBusy]="[licencesBusy, monthlyReportsBusy]"></div>
 
   <div class="row">
-    <h1>Monthly Federal Tracking Report <ng-container *ngIf="selectedLicenceIndex !== null">for {{ licenses[selectedLicenceIndex].establishmentName }}</ng-container></h1>
+    <h1>Federal Reporting</h1>
   </div>
 
   <div class="row" style="width: 100%">
+    <h4>Select Licence</h4>
     <mat-tab-group
       style="width: 100%;"
       [selectedIndex]="licenses?.length > 0 ? selectedLicenceIndex : 0"
@@ -14,11 +15,14 @@
         <ng-template mat-tab-label>
           {{ licence.licenseNumber }} - {{ licence.establishmentName }}
         </ng-template>
-        <h3 *ngIf="shownMonthlyReports.length < 1">There is not yet any monthly reports to report on. Please check back later.</h3>
+        <h3 *ngIf="shownMonthlyReports.length < 1; else elseBlock" [class.hidden]="loadingMonthlyReports">There is not yet any monthly reports to report on. Please check back later.</h3>
+        <ng-template #elseBlock><h4>Select Monthly Report</h4></ng-template>
         <mat-tab-group
           [selectedIndex]="0"
           (selectedTabChange)="handleMonthlyReportTabChanged($event);"
-          *ngIf="shownMonthlyReports.length > 0">
+          *ngIf="shownMonthlyReports.length > 0"
+          [class.hidden]="loadingMonthlyReports"
+        >
           <mat-tab *ngFor="let report of shownMonthlyReports; index as tabIndex;">
             <ng-template mat-tab-label>
               <i class="fas" style="margin-right: 10px;"
@@ -30,17 +34,20 @@
             </ng-template>
             <ng-template matTabContent>
               <form [formGroup]="reportForm">
-                <div class="report-status">
+                <div class="report-details">
                   <div class="row mx-0">
-                    <h3 class="blue-header col-xs-12">Report Status</h3>
+                    <h3>{{getMonthName(report.reportingPeriodMonth)}}, {{report.reportingPeriodYear}} monthly report for {{licence.establishmentName}}</h3>
                   </div>
-                  <div class="row mx-0">
-                    <p>Status: <span style="margin-left: 10px; font-weight: bold;">{{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}</span>
+                  <div class="row mx-0 d-flex align-items-baseline">
+                    <h3>Status: <span style="margin-left: 10px; font-weight: bold;">
+                      <i class="fas" style="margin-right: 10px;"
+                        [class.fa-exclamation-triangle]="report.statusCode === monthlyReportStatusEnum.Draft"
+                        [class.fa-check-square]="report.statusCode !== monthlyReportStatusEnum.Draft"
+                      >
+                      </i>{{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
+                    </span>
                       <i data-html="true" style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></i>
-                    </p>
-                  </div>
-                  <div class="row mx-0">
-                    <button class="btn btn-primary mt-5 mr-5" (click)="save(false)" *ngIf="reportIsDisabled">Reopen Monthly Report</button>
+                    </h3><a [routerLink]="" (click)="save(false)" *ngIf="reportIsDisabled">Reopen Monthly Report</a>
                   </div>
                 </div>
                 <div class="employee-reporting">
@@ -151,7 +158,7 @@
                   </button>
                   <button class="btn btn-primary mt-5" (click)="submitApplication()">Submit Monthly Report</button>
                 </div>
-                <div class="row mx-0" *ngIf="reportIsDisabled && !reportIsClosed">
+                <div class="row mx-0" *ngIf="reportIsDisabled">
                   <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">Reopen Monthly Report</button>
                 </div>
               </form>
