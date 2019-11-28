@@ -13,8 +13,15 @@
         <mat-tab-group
           [selectedIndex]="monthlyReports?.length > 0 ? selectedMonthlyReportIndex : 0"
           (selectedTabChange)="handleMonthlyReportTabChanged($event);">
-          <mat-tab *ngFor="let report of monthlyReports; index as tabIndex;"
-            [label]="report.reportingPeriodMonth + ' - ' + report.reportingPeriodYear">
+          <mat-tab *ngFor="let report of monthlyReports; index as tabIndex;">
+            <ng-template mat-tab-label>
+              <i class="fas" style="margin-right: 10px;"
+                [class.fa-exclamation-triangle]="report.statusCode === monthlyReportStatusEnum.Draft"
+                [class.fa-check-square]="report.statusCode !== monthlyReportStatusEnum.Draft"
+              >
+              </i>
+              {{getMonthName(report.reportingPeriodMonth)}}, {{report.reportingPeriodYear}}
+            </ng-template>
             <ng-template matTabContent>
               <form [formGroup]="reportForm" *ngIf="selectedMonthlyReportIndex === tabIndex">
                 <div class="report-status">
