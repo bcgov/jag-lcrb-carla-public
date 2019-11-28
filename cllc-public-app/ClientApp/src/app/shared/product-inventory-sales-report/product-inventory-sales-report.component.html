@@ -167,7 +167,7 @@
           </div>
         </div>
       </div>
-      <div class="text-center bg-purple pt-4 px-0 border border-blue flex-fill">
+      <div class="text-center bg-dark-grey pt-4 px-0 border border-blue flex-fill">
         <label class="d-block">Sales to Consumer</label>
         <label>(retail)</label>
         <div class="d-flex">
@@ -193,6 +193,11 @@
           </div>
         </div>
       </div>
+    </div>
+    <div *ngIf="productForm.invalid && !productForm.disabled">
+      <ul>
+        <li class="error-states" *ngFor="let error of getFormValidationErrors();">{{error}}</li>
+      </ul>
     </div>
   </form>
 </div>
