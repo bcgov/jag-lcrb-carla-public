@@ -1,5 +1,5 @@
 <div class="form-wrapper" style="position: relative;">
-  <div [ngBusy]="busy"></div>
+  <div [ngBusy]="[licencesBusy, monthlyReportsBusy]"></div>
 
   <div class="row">
     <h1>Monthly Federal Tracking Report <ng-container *ngIf="selectedLicenceIndex !== null">for {{ licenses[selectedLicenceIndex].establishmentName }}</ng-container></h1>
@@ -8,12 +8,18 @@
   <div class="row" style="width: 100%">
     <mat-tab-group
       style="width: 100%;"
-      [selectedIndex]="licenses?.length > 0 ? selectedLicenceIndex : 0">
-      <mat-tab [label]="licence.licenseNumber + ' - ' + licence.establishmentName" *ngFor="let licence of licenses;">
+      [selectedIndex]="licenses?.length > 0 ? selectedLicenceIndex : 0"
+      (selectedTabChange)="handleLicenceTabChanged($event)">
+      <mat-tab *ngFor="let licence of licenses;">
+        <ng-template mat-tab-label>
+          {{ licence.licenseNumber }} - {{ licence.establishmentName }}
+        </ng-template>
+        <h3 *ngIf="shownMonthlyReports.length < 1">There is not yet any monthly reports to report on. Please check back later.</h3>
         <mat-tab-group
-          [selectedIndex]="monthlyReports?.length > 0 ? selectedMonthlyReportIndex : 0"
-          (selectedTabChange)="handleMonthlyReportTabChanged($event);">
-          <mat-tab *ngFor="let report of monthlyReports; index as tabIndex;">
+          [selectedIndex]="0"
+          (selectedTabChange)="handleMonthlyReportTabChanged($event);"
+          *ngIf="shownMonthlyReports.length > 0">
+          <mat-tab *ngFor="let report of shownMonthlyReports; index as tabIndex;">
             <ng-template mat-tab-label>
               <i class="fas" style="margin-right: 10px;"
                 [class.fa-exclamation-triangle]="report.statusCode === monthlyReportStatusEnum.Draft"
@@ -23,13 +29,13 @@
               {{getMonthName(report.reportingPeriodMonth)}}, {{report.reportingPeriodYear}}
             </ng-template>
             <ng-template matTabContent>
-              <form [formGroup]="reportForm" *ngIf="selectedMonthlyReportIndex === tabIndex">
+              <form [formGroup]="reportForm">
                 <div class="report-status">
                   <div class="row mx-0">
                     <h3 class="blue-header col-xs-12">Report Status</h3>
                   </div>
                   <div class="row mx-0">
-                    <p>Status: <span style="margin-left: 10px; font-weight: bold;">{{monthlyReportStatusEnum[monthlyReports[selectedMonthlyReportIndex].statusCode] | uppercase}}</span>
+                    <p>Status: <span style="margin-left: 10px; font-weight: bold;">{{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}</span>
                       <i data-html="true" style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></i>
                     </p>
                   </div>
