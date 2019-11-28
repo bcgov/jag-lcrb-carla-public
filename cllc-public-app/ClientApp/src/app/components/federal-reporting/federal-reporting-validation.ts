@@ -1,3 +1,5 @@
+import { ValidatorFn, FormGroup } from '@angular/forms';
+
 const wholeNumberMessage = 'Units must be a whole number less than 10000000.';
 const wholeNumberError = [
   { type: 'min', message: wholeNumberMessage },
@@ -41,4 +43,37 @@ export const validationErrors = {
     { type: 'totalSalesToConsumerQty', message: 'Sales quantity must equal domestic reductions' }
   ],
   'totalSalesToConsumerValue': valueError
+};
+
+export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
+  const additions = [
+    +fg.get('openingInventory').value,
+    +fg.get('domesticAdditions').value,
+    +fg.get('returnsAdditions').value,
+    +fg.get('otherAdditions').value
+  ];
+  const reductions = [
+    +fg.get('domesticReductions').value,
+    +fg.get('returnsReductions').value,
+    +fg.get('destroyedReductions').value,
+    +fg.get('lostReductions').value,
+    +fg.get('otherReductions').value
+  ];
+
+  const total = additions.reduce((n, curr) => n + curr, 0) - reductions.reduce((n, curr) => n + curr, 0);
+  if (total !== +fg.get('closingNumber').value) {
+    fg.get('closingNumber').setErrors({ closingNumberMismatch: true });
+  } else {
+    fg.get('closingNumber').setErrors(null);
+  }
+  return null;
+};
+
+export const SalesValidator: ValidatorFn = (fg: FormGroup) => {
+  if (+fg.get('totalSalesToConsumerQty').value !== +fg.get('domesticReductions').value) {
+    fg.get('totalSalesToConsumerQty').setErrors({ salesMismatch: true });
+  } else {
+    fg.get('totalSalesToConsumerQty').setErrors(null);
+  }
+  return null;
 };
