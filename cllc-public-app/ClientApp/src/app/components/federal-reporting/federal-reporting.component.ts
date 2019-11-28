@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, ValidatorFn } from '@angular/forms';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Subscription, forkJoin } from 'rxjs';
@@ -8,7 +8,39 @@ import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { ModalComponent } from '@shared/components/modal/modal.component';
-import { takeWhile } from 'rxjs/operators';
+
+const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
+  const additions = [
+    +fg.get('openingInventory').value,
+    +fg.get('domesticAdditions').value,
+    +fg.get('returnsAdditions').value,
+    +fg.get('otherAdditions').value
+  ];
+  const reductions = [
+    +fg.get('domesticReductions').value,
+    +fg.get('returnsReductions').value,
+    +fg.get('destroyedReductions').value,
+    +fg.get('lostReductions').value,
+    +fg.get('otherReductions').value
+  ];
+
+  const total = additions.reduce((n, curr) => n + curr, 0) - reductions.reduce((n, curr) => n + curr, 0);
+  if (total !== +fg.get('closingNumber').value) {
+    fg.get('closingNumber').setErrors({ closingNumberMismatch: true });
+  } else {
+    fg.get('closingNumber').setErrors(null);
+  }
+  return null;
+};
+
+const SalesValidator: ValidatorFn = (fg: FormGroup) => {
+  if (+fg.get('totalSalesToConsumerQty').value !== +fg.get('domesticReductions').value) {
+    fg.get('totalSalesToConsumerQty').setErrors({ salesMismatch: true });
+  } else {
+    fg.get('totalSalesToConsumerQty').setErrors(null);
+  }
+  return null;
+};
 
 @Component({
   selector: 'app-federal-reporting',
@@ -120,7 +152,6 @@ export class FederalReportingComponent implements OnInit {
       .subscribe(([report]) => {
         const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
         this.monthlyReports[index] = report;
-        // this.selectedMonthlyReportIndex = index;
         this.handleMonthlyReportChanged();
       });
   }
@@ -162,27 +193,7 @@ export class FederalReportingComponent implements OnInit {
           (report.totalSalesToRetailerValue !== null && report.totalSalesToRetailerValue !== 0)) {
             this.visibleInventoryReports.push(report.inventoryReportId);
       }
-      return this.fb.group({
-        inventoryReportId: [report.inventoryReportId, []],
-        product: [report.product, []],
-        openingInventory: [report.openingInventory, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        domesticAdditions: [report.domesticAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        returnsAdditions: [report.returnsAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        otherAdditions: [report.otherAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        domesticReductions: [report.domesticReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        returnsReductions: [report.returnsReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        destroyedReductions: [report.destroyedReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        lostReductions: [report.lostReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        otherReductions: [report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        closingNumber: [report.closingNumber, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        closingValue: [report.closingValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-        closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
-        totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-        totalSalesToRetailerQty: [report.totalSalesToRetailerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        totalSalesToRetailerValue: [report.totalSalesToRetailerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-      });
+      return this.createProductForm(report);
     });
 
     switch (this.monthlyReports[this.selectedMonthlyReportIndex].statusCode) {
@@ -273,6 +284,7 @@ export class FederalReportingComponent implements OnInit {
     let invalidProduct = false;
     this.productForms.forEach((f) => {
       if (!f.valid) {
+        console.log(f);
         invalidProduct = true;
       }
     });
@@ -311,5 +323,27 @@ export class FederalReportingComponent implements OnInit {
       'July', 'August', 'September', 'October', 'November', 'December'
     ];
     return monthNames[Number(monthNumber) - 1];
+  }
+
+  createProductForm(report) {
+    return this.fb.group({
+      inventoryReportId: [report.inventoryReportId, []],
+      product: [report.product, []],
+      openingInventory: [report.openingInventory, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      domesticAdditions: [report.domesticAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      returnsAdditions: [report.returnsAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      otherAdditions: [report.otherAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      domesticReductions: [report.domesticReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      returnsReductions: [report.returnsReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      destroyedReductions: [report.destroyedReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      lostReductions: [report.lostReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      otherReductions: [report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      closingNumber: [report.closingNumber, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      closingValue: [report.closingValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
+      closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
+      totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]]
+    }, { validators: [ClosingInventoryValidator, SalesValidator] });
   }
 }
