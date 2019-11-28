@@ -16,9 +16,9 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfo } from '@models/version-info.model';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
-import { MonthlyReport } from '@models/monthly-report.model';
+import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
 
-const Months = [ 'January', 'February', 'March', 'April', 'May', 'June', 
+const Months = [ 'January', 'February', 'March', 'April', 'May', 'June',
            'July', 'August', 'September', 'October', 'November', 'December' ];
 
 @Component({
@@ -62,7 +62,7 @@ export class AppComponent extends FormBase implements OnInit {
 
     monthlyReportDataService.getAllCurrentMonthlyReports()
       .subscribe(data => {
-        this.linkedFederalReports = data;
+        this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
       });
 
     this.isDevMode = isDevMode();
