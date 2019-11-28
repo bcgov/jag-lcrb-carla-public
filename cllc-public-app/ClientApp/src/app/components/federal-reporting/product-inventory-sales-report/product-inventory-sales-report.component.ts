@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
-import { validationErrors } from './validation-errors';
+import { validationErrors } from '../federal-reporting-validation';
 
 @Component({
   selector: 'app-product-inventory-sales-report',
