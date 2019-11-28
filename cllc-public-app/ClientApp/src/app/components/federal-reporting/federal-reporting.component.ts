@@ -305,4 +305,11 @@ export class FederalReportingComponent implements OnInit {
         }
       });
   }
+
+  getMonthName(monthNumber): string {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return monthNames[Number(monthNumber) - 1];
+  }
 }
