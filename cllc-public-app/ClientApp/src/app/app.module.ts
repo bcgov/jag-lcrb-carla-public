@@ -151,7 +151,7 @@ import { MapComponent } from '@components/map/map.component';
 import { AccountPickerComponent } from '@shared/components/account-picker/account-picker.component';
 import { ApplicationCancelOwnershipTransferComponent } from '@components/applications/application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
 import { ApplicationOwnershipTransferComponent } from '@components/applications/application-ownership-transfer/application-ownership-transfer.component';
-import { ProductInventorySalesReportComponent } from '@shared/product-inventory-sales-report/product-inventory-sales-report.component';
+import { ProductInventorySalesReportComponent } from '@components/federal-reporting/product-inventory-sales-report/product-inventory-sales-report.component';
 import { LicenseeTreeComponent } from '@shared/components/licensee-tree/licensee-tree.component';
 import {
   OrganizationLeadershipComponent
@@ -168,7 +168,6 @@ import { ApplicationsComponent } from '@components/applications/applications.com
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
-import { ProductInventoryPackagedComponent } from '@shared/components/product-inventory-packaged/product-inventory-packaged.component.ts';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 
 @NgModule({
@@ -259,8 +258,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     ApplicationLicenseeChangesComponent,
     VersionInfoDialogComponent,
     LicencesComponent,
-    ApplicationsComponent,
-    ProductInventoryPackagedComponent
+    ApplicationsComponent
   ],
   imports: [
     ChartsModule,
