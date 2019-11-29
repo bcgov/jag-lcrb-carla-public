@@ -63,6 +63,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private static string GetWorkerFolderName(MicrosoftDynamicsCRMadoxioWorker worker)
         {
             string applicationIdCleaned = worker.AdoxioWorkerid.ToString().ToUpper().Replace("-", "");
+            
             string folderName = $"{worker.AdoxioName}_{applicationIdCleaned}";
             return folderName;
         }
@@ -143,8 +144,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string headers = LoggingEvents.GetHeaders(Request);
             try
             {
-                await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
-
+                fileName = await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
+                result = new ViewModels.FileSystemItem()
+                {
+                    name = fileName
+                };
 
                 _logger.LogInformation($"SUCCESS in uploading file {fileName} to folder {folderName} Headers: {headers} ");
             }

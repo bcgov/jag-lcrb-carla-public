@@ -5,7 +5,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         // Won't change
         public string inventoryReportId { get; set; }
         public string product { get; set; }
-        
+
         // Will change
         public int? openingInventory { get; set; }
         public int? domesticAdditions { get; set; }
@@ -27,5 +27,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public decimal totalSalesToConsumerValue { get; set; }
         public int? totalSalesToRetailerQty { get; set; }
         public decimal totalSalesToRetailerValue { get; set; }
+
+        public int? ProductDisplayOrder { get; set; }
+        public string ProductDescription { get; set; }
     }
 }

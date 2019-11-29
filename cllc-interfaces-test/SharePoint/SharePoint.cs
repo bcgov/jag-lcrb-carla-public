@@ -145,6 +145,72 @@ namespace SharePoint.Tests
 
 
         [Fact]
+        public async void LongFilenameTest()
+        {
+            // set file and folder settings
+
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
+            string documentType = "Document Type";
+
+            int maxLen = 255 - 4; // Windows allows for a maximum of 255 characters for a given file; subtract 4 for the extension.
+
+            string fileName = documentType + "__" + "test-file-name"; 
+            maxLen -= fileName.Length;
+            for (int i = 0; i < maxLen; i++)
+            {
+                string r = rnd.Next().ToString();
+                fileName += r[0];
+            }                
+
+            fileName += ".txt";
+
+            string folderName = "test-folder-name" + rnd.Next();
+            string path = "/";
+            if (!string.IsNullOrEmpty(sharePointFileManager.WebName))
+            {
+                path += $"{sharePointFileManager.WebName}/";
+            }
+            
+            string contentType = "text/plain";
+            string testData = "This is just a test.";
+            MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
+
+            // add file to SP
+
+            fileName = await sharePointFileManager.AddFile(folderName, fileName, fileData, contentType);
+
+            path += SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
+
+            // get file details list in SP folder
+
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            //only one file should be returned
+            Assert.Single(fileDetailsList);
+            // validate that file name uploaded and listed are the same
+            string serverRelativeUrl = null;
+            foreach (var fileDetails in fileDetailsList)
+            {
+                Assert.Equal(fileName, fileDetails.Name);
+                serverRelativeUrl = fileDetails.ServerRelativeUrl;
+            }
+
+            // verify that we can download the same file.
+
+            byte[] data = await sharePointFileManager.DownloadFile(path);
+            string stringData = System.Text.Encoding.ASCII.GetString(data);
+            Assert.Equal(stringData, testData);
+
+            // delete file from SP
+
+            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentUrlTitle, folderName, fileName);
+
+            // delete folder from SP
+
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
+        }
+
+
+        [Fact]
         public async void FileNameWithApostropheTest()
         {
             // set file and folder settings
