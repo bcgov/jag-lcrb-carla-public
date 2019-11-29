@@ -28,6 +28,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string WorkertDocumentListTitle = "Worker Qualification";
         public const string WorkertDocumentUrlTitle = "adoxio_worker";
 
+        private const int MaxUrlLength = 260; // default maximum URL length.
+
         private AuthenticationResult authenticationResult;
 
         public string OdataUri { get; set; }
@@ -230,7 +232,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return null;
             }
 
-            folderName = FixFilename(folderName);
+            folderName = FixFoldername(folderName);
 
             string serverRelativeUrl = "";
             // ensure the webname has a slash.
@@ -314,13 +316,37 @@ namespace Gov.Lclb.Cllb.Interfaces
             return fileDetailsList;
         }
 
-        public string FixFilename(string filename)
+        public string RemoveInvalidCharacters(string filename)
         {
             string invalidChars = System.Text.RegularExpressions.Regex.Escape(new string(System.IO.Path.GetInvalidFileNameChars()));
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
             // Get the validated file name string
             string result = Regex.Replace(filename, invalidRegStr, "_");
+
+            // SharePoint requires that the filename is less than 128 characters.            
+
+            return result;
+        }
+
+        public string FixFoldername(string foldername)
+        {
+            string result = RemoveInvalidCharacters(foldername);
+
+            return result;
+        }
+
+        public string FixFilename(string filename, int maxLength = 128)
+        {
+            string result = RemoveInvalidCharacters(filename);
+
+            if (result.Length >= maxLength)
+            {
+                string extension = Path.GetExtension(result);
+                result = Path.GetFileNameWithoutExtension(result).Substring(0, maxLength - extension.Length);
+                result += extension;                
+            }
+
             return result;
         }
 
@@ -337,7 +363,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return;
             }
 
-            folderName = FixFilename(folderName);
+            folderName = FixFoldername(folderName);
 
             string relativeUrl = EscapeApostrophe($"/{listTitle}/{folderName}");
 
@@ -529,7 +555,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return false;
             }
 
-            folderName = FixFilename(folderName);
+            folderName = FixFoldername(folderName);
 
             bool result = false;
             // Delete is very similar to a GET.
@@ -601,7 +627,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 return null;
             }
-            folderName = FixFilename(folderName);
+            folderName = FixFoldername(folderName);
 
             Object result = null;
             string serverRelativeUrl = "/";
@@ -670,16 +696,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public async Task AddFile(String folderName, String fileName, Stream fileData, string contentType)
+        public async Task<string> AddFile(String folderName, String fileName, Stream fileData, string contentType)
         {
-            await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
+            return await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
         }
 
 
 
-        public async Task AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
+        public async Task<string> AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
         {
-            folderName = FixFilename(folderName);
+            folderName = FixFoldername(folderName);
             bool folderExists = await this.FolderExists(documentLibrary, folderName);
             if (!folderExists)
             {
@@ -688,13 +714,15 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // now add the file to the folder.
 
-            await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
+            fileName = await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
+
+            return fileName;
 
         }
 
         public string GetServerRelativeURL(string listTitle, string folderName)
         {
-            folderName = FixFilename(folderName);
+            folderName = FixFoldername(folderName);
             string serverRelativeUrl = "";
             if (!string.IsNullOrEmpty(WebName))
             {
@@ -706,67 +734,83 @@ namespace Gov.Lclb.Cllb.Interfaces
             return serverRelativeUrl;
         }
 
+
+        private string GenerateUploadRequestUriString (string folderServerRelativeUrl, string fileName)
+        {
+            string requestUriString = ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(folderServerRelativeUrl) + "')/Files/add(url='"
+                + EscapeApostrophe(fileName) + "',overwrite=true)";
+            return requestUriString;
+        }
+
         /// <summary>
         /// Upload a file
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="fileName"></param>
         /// <param name="listTitle"></param>
         /// <param name="folderName"></param>
         /// <param name="fileData"></param>
         /// <param name="contentType"></param>
-        /// <returns></returns>
-        public async Task<bool> UploadFile(string name, string listTitle, string folderName, Stream fileData, string contentType)
+        /// <returns>Uploaded Filename, or Null if not successful.</returns>
+        public async Task<string> UploadFile(string fileName, string listTitle, string folderName, Stream fileData, string contentType)
         {
-            if (!IsValid())
-            {
-                return false;
-            }
-            bool result = false;
+            string result = null;
+            if (IsValid())
+            {                            
+                int maxLength = 128;
+                folderName = FixFoldername(folderName);
+                fileName = FixFilename(fileName, maxLength);
+           
+                string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
-            folderName = FixFilename(folderName);
+                string requestUriString = GenerateUploadRequestUriString ( serverRelativeUrl, fileName);
 
-            // Delete is very similar to a GET.
-            string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
-
-            HttpRequestMessage endpointRequest = new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/Files/add(url='"
-   + EscapeApostrophe(name) + "',overwrite=true)"),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
-            };
-
-            // convert the stream into a byte array.
-            MemoryStream ms = new MemoryStream();
-            fileData.CopyTo(ms);
-            Byte[] data = ms.ToArray();
-            ByteArrayContent byteArrayContent = new ByteArrayContent(data);
-            byteArrayContent.Headers.Add(@"content-length", data.Length.ToString());
-            endpointRequest.Content = byteArrayContent;
-
-            // make the request.
-            var response = await _Client.SendAsync(endpointRequest);
-
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                result = true;
-            }
-            else
-            {
-                string _responseContent = null;
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
-                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
-                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
-
-                endpointRequest.Dispose();
-                if (response != null)
+                if (requestUriString.Length > MaxUrlLength)
                 {
-                    response.Dispose();
+                    int delta = requestUriString.Length - MaxUrlLength;
+                    maxLength -= delta;
+                    fileName = FixFilename(fileName, maxLength);
+                    requestUriString = GenerateUploadRequestUriString(serverRelativeUrl, fileName);
                 }
-                throw ex;
+
+                HttpRequestMessage endpointRequest = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri(requestUriString),
+                    Headers = {
+                        { "Accept", "application/json" }
+                    }
+                };
+
+                // convert the stream into a byte array.
+                MemoryStream ms = new MemoryStream();
+                fileData.CopyTo(ms);
+                Byte[] data = ms.ToArray();
+                ByteArrayContent byteArrayContent = new ByteArrayContent(data);
+                byteArrayContent.Headers.Add(@"content-length", data.Length.ToString());
+                endpointRequest.Content = byteArrayContent;
+
+                // make the request.
+                var response = await _Client.SendAsync(endpointRequest);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    result = fileName;
+                }
+                else
+                {
+                    string _responseContent = null;
+                    var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                    _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                    ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                    endpointRequest.Dispose();
+                    if (response != null)
+                    {
+                        response.Dispose();
+                    }
+                    throw ex;
+                }
             }
             return result;
         }
@@ -857,7 +901,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 serverRelativeUrl += $"{WebName}/";
             }
 
-            folderName = FixFilename(folderName);
+            folderName = FixFoldername(folderName);
 
             serverRelativeUrl += $"/{listTitle}/{folderName}/{fileName}";
 
