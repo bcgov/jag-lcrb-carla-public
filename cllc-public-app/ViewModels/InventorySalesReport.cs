@@ -29,6 +29,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public decimal totalSalesToRetailerValue { get; set; }
 
         public int? ProductDisplayOrder { get; set; }
-        public string ProductDiscription { get; set; }
+        public string ProductDescription { get; set; }
     }
 }
