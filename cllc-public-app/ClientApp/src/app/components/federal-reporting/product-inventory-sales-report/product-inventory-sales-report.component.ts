@@ -25,7 +25,6 @@ export class ProductInventorySalesReportComponent implements OnInit {
           const error = validationErrors[key].find(e => e.type === keyError);
           if (errorStrings.findIndex(e => e === error.message) === -1) {
             errorStrings.push(error.message);
-            console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
           }
         });
       }
