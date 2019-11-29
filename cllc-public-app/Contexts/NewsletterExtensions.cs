@@ -29,9 +29,9 @@ namespace Gov.Lclb.Cllb.Public.Contexts
                     list = lists.FirstOrDefault();
                     result = new Newsletter()
                     {
-                        Slug = list.Purpose,
+                        Slug = list.Listname,
                         Id = Guid.Parse(list.Listid),
-                        Title = list.Listname,
+                        Title = list.Purpose,
                         Description = list.Description
 
                     };
