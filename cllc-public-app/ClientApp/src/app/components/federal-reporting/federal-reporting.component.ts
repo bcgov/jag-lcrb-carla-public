@@ -337,7 +337,6 @@ export class FederalReportingComponent implements OnInit {
   }
 
   createProductForm(report) {
-    console.log(report);
     return this.fb.group({
       inventoryReportId: [report.inventoryReportId, []],
       product: [report.product, []],
