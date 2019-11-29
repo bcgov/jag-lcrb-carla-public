@@ -3,7 +3,7 @@
     <div class="row mx-0 bg-blue">
       <h4 class="col-xs-12 font-weight-bold">{{productForm?.value?.product}}</h4>
     </div>
-    <div class="row mx-0 d-flex flex-nowrap">
+    <div class="row mx-0 d-flex nowrap">
       <div class="text-center bg-grey pt-4 px-0 border border-right-0 border-blue flex-fill">
         <label class="d-block">Opening</label>
         <label>Inventory</label>
@@ -155,7 +155,7 @@
             <p class="text-right">(kg)</p>
           </div>
           <div class="flex-fill p-4" *ngIf="productForm?.value?.product === 'Seeds'">
-            <label># of Seeds</label>
+            <label>Seeds</label>
             <div style="display: flex; align-items: center;">
               <input class="form-control" type="text" formControlName="totalSeeds">
               <div *ngIf="isFieldInvalid('totalSeeds')" style="flex: 0 0 25px;">
@@ -163,7 +163,7 @@
                 <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
               </div>
             </div>
-            <p class="text-right">(units)</p>
+            <p class="text-right">(#)</p>
           </div>
         </div>
       </div>
