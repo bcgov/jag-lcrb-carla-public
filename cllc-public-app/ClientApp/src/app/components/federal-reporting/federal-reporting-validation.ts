@@ -40,7 +40,7 @@ export const validationErrors = {
   'totalSeeds': wholeNumberError,
   'totalSalesToConsumerQty': [
     ...wholeNumberError,
-    { type: 'totalSalesToConsumerQty', message: 'Sales quantity must equal domestic reductions' }
+    { type: 'salesMismatch', message: 'Sales quantity must equal domestic reductions' }
   ],
   'totalSalesToConsumerValue': valueError
 };

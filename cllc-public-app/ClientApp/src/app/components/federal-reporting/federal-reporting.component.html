@@ -25,11 +25,7 @@
         >
           <mat-tab *ngFor="let report of shownMonthlyReports; index as tabIndex;">
             <ng-template mat-tab-label>
-              <i class="fas" style="margin-right: 10px;"
-                [class.fa-exclamation-triangle]="report.statusCode === monthlyReportStatusEnum.Draft"
-                [class.fa-check-square]="report.statusCode !== monthlyReportStatusEnum.Draft"
-              >
-              </i>
+              <i class="fas fa-exclamation-triangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></i>
               {{getMonthName(report.reportingPeriodMonth)}}, {{report.reportingPeriodYear}}
             </ng-template>
             <ng-template matTabContent>
@@ -40,11 +36,8 @@
                   </div>
                   <div class="row mx-0 d-flex align-items-baseline">
                     <h3>Status: <span style="margin-left: 10px; font-weight: bold;">
-                      <i class="fas" style="margin-right: 10px;"
-                        [class.fa-exclamation-triangle]="report.statusCode === monthlyReportStatusEnum.Draft"
-                        [class.fa-check-square]="report.statusCode !== monthlyReportStatusEnum.Draft"
-                      >
-                      </i>{{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
+                      <i class="fas fa-exclamation-triangle" style="margin-right: 10px;" *ngIf="report.statusCode === monthlyReportStatusEnum.Draft"></i>
+                      {{monthlyReportStatusEnum[shownMonthlyReports[tabIndex].statusCode] | uppercase}}
                     </span>
                       <i data-html="true" style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltipClass="multiline-tooltip" matTooltip="DRAFT: The monthly report has not be completed&#13;SUBMITTED: The monthly report has been completed and is ready to be sent to CTLS&#13;CLOSED: The monthly report has been sent to CTLS"></i>
                     </h3><a [routerLink]="" (click)="save(false)" *ngIf="reportIsDisabled">Reopen Monthly Report</a>
@@ -127,14 +120,11 @@
                   </div>
                   <p>Identify the cannabis products you have ordered, sold, returned or have managed the inventory of in the previous month.</p>
                   <div class="form-check" *ngFor="let productForm of productForms">
-                    <input class="form-check-input" type="checkbox"
+                    <mat-checkbox
                       [checked]="isProductSelected(productForm.value.inventoryReportId)"
                       (click)="toggleProductVisibility(productForm.value.inventoryReportId);"
-                      id="{{productForm.value.inventoryReportId}}-check"
-                      [disabled]="reportIsDisabled">
-                    <label class="form-check-label" for="{{productForm.value.inventoryReportId}}-check">
-                      {{productForm.value.product}}
-                    </label>
+                      [disabled]="reportIsDisabled">{{productForm.value.product}}</mat-checkbox>
+                    <i data-html="true" style="color: #38598a; margin-left: 10px;" class="fas fa-question-circle" matTooltipClass="multiline-tooltip" matTooltip="{{productForm.value.productDescription}}"></i>
                   </div>
                 </div>
                 <div class="product-reporting">
@@ -156,10 +146,7 @@
                       Save for Later
                     </span>
                   </button>
-                  <button class="btn btn-primary mt-5" (click)="submitApplication()">Submit Monthly Report</button>
-                </div>
-                <div class="row mx-0" *ngIf="reportIsDisabled">
-                  <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">Reopen Monthly Report</button>
+                  <button class="btn btn-primary mt-5" (click)="submitApplication()" [disabled]="!checkIfReportValid()">Submit Monthly Report</button>
                 </div>
               </form>
             </ng-template>
