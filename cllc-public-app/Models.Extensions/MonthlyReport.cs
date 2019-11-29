@@ -64,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 InventorySalesReport inv = new InventorySalesReport()
                 {
                     product = product.AdoxioName,
-                    ProductDiscription = product.AdoxioDescription,
+                    ProductDescription = product.AdoxioDescription,
                     ProductDisplayOrder = product.AdoxioDisplayorder,
                     inventoryReportId = inventoryReport.AdoxioCannabisinventoryreportid,
                     openingInventory = inventoryReport.AdoxioOpeninginventory,
