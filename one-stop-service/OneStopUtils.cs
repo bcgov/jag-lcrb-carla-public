@@ -311,17 +311,24 @@ namespace Gov.Lclb.Cllb.OneStopService
             foreach (var item in result)
             {
                 // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
-                if (currentItem < MAX_LICENCES_PER_INTERVAL && item.AdoxioEstablishment != null)
+                if (item.AdoxioEstablishment != null)
                 {
                     string licenceId = item.AdoxioLicencesid;
-                    await SendLicenceCreationMessageREST(hangfireContext, licenceId, "001");
+                    string programAccountCode = "001";
+                    if (item.AdoxioBusinessprogramaccountreferencenumber != null)
+                    {
+                        programAccountCode = item.AdoxioBusinessprogramaccountreferencenumber;
+                    }
+
+                    await SendLicenceCreationMessageREST(hangfireContext, licenceId, programAccountCode);
                     currentItem++;
                 }
-                else
+
+                if (currentItem > MAX_LICENCES_PER_INTERVAL)
                 {
-                    break; // exit foreach.
+                    break; // exit foreach    
                 }
-                
+                                
             }
 
             hangfireContext.WriteLine("End of check for new licences for onestop job.");
