@@ -288,7 +288,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             try
             {
                 string filter = $"adoxio_businessprogramaccountreferencenumber eq null and statuscode eq 1";
-                result = _dynamics.Licenceses.Get(filter: filter).Value;                
+                string[] expand = { "adoxio_establishment" };
+                result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;                
             }
             catch (HttpOperationException odee)
             {
@@ -309,7 +310,8 @@ namespace Gov.Lclb.Cllb.OneStopService
             // now for each one process it.
             foreach (var item in result)
             {
-                if (currentItem < MAX_LICENCES_PER_INTERVAL)
+                // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
+                if (currentItem < MAX_LICENCES_PER_INTERVAL && item.AdoxioEstablishment != null)
                 {
                     string licenceId = item.AdoxioLicencesid;
                     await SendLicenceCreationMessageREST(hangfireContext, licenceId, "001");
