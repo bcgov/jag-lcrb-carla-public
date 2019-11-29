@@ -6,20 +6,23 @@ import { Subscription, forkJoin, of, Observable } from 'rxjs';
 import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { ClosingInventoryValidator, SalesValidator } from './federal-reporting-validation';
 import { switchMap } from 'rxjs/operators';
 
 interface FederalReportingParams {
   licenceId: string;
-  monthlyReportId: string
+  monthlyReportId: string;
 }
 
 @Component({
   selector: 'app-federal-reporting',
   templateUrl: './federal-reporting.component.html',
-  styleUrls: ['./federal-reporting.component.scss']
+  styleUrls: ['./federal-reporting.component.scss'],
+  providers: [
+    { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' }
+  ]
 })
 export class FederalReportingComponent implements OnInit {
   monthlyReportStatusEnum = monthlyReportStatus;
@@ -142,11 +145,10 @@ export class FederalReportingComponent implements OnInit {
     };
 
     // add product fields
-    const invalidProduct = this.hasInvalidProductForm();
     this.productForms.forEach((f) => {
       updateRequest.inventorySalesReports.push({ ...f.value });
     });
-    if ((!this.reportForm.valid || invalidProduct) && !this.reportIsDisabled) {
+    if (!this.checkIfReportValid()) {
       return false;
     }
 
@@ -335,9 +337,11 @@ export class FederalReportingComponent implements OnInit {
   }
 
   createProductForm(report) {
+    console.log(report);
     return this.fb.group({
       inventoryReportId: [report.inventoryReportId, []],
       product: [report.product, []],
+      productDescription: [report.productDescription, []],
       openingInventory: [report.openingInventory, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       domesticAdditions: [report.domesticAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       returnsAdditions: [report.returnsAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
@@ -354,5 +358,9 @@ export class FederalReportingComponent implements OnInit {
       totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]]
     }, { validators: [ClosingInventoryValidator, SalesValidator] });
+  }
+
+  checkIfReportValid() {
+    return this.reportForm.valid && !this.hasInvalidProductForm() || this.reportIsDisabled;
   }
 }
