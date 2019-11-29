@@ -116,16 +116,14 @@
                       class="nav-link" routerLink="/dashboard">Dashboard</a>
                     <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
-                    <a *ngIf="currentUser.userType == 'Business' && showFederalReporting"
-                      (click)="toggleButtonLoggedIn.click()" class="nav-link" routerLink="/federal-reporting">Federal
-                      Reporting</a>
                   </li>
                 </ul>
               </div>
             </nav>
-            <span appRemoveIfFeatureOff="FederalReporting" (click)="showMessageCenterContent = !showMessageCenterContent"
-              style="padding: 10px; cursor: pointer;">
-              <button color="primary" style="background-color: transparent; color: #FFF; padding: 0; border: none; margin-top: 20px; margin-right: 10px;"
+            <span *ngIf="linkedFederalReports && linkedFederalReports.length" appRemoveIfFeatureOff="FederalReporting"
+              (click)="showMessageCenterContent = !showMessageCenterContent" style="padding: 10px; cursor: pointer;">
+              <button color="primary"
+                style="background-color: transparent; color: #FFF; padding: 0; border: none; margin-top: 20px; margin-right: 10px;"
                 MatBadgeSize='small' matBadge="!" matBadgePosition="after" matBadgeColor="warn">
                 <i class="fas fa-lg fa-bell"></i>&nbsp;&nbsp;&nbsp;
               </button>
@@ -135,11 +133,13 @@
       </section>
       <!-- /NAVBAR END -->
       <section *ngIf="showMessageCenterContent" style="padding: 10px; background-color: #FFF;">
-        <mat-card>
+        <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
           <i class="fas fa-2x fa-business-time"></i> &nbsp;
-          <strong>Federal Sales Reporting</strong> for <strong>November 2019</strong> has not been submitted for all of
-          your Cannabis Retail Store Licences. Reporting is due on the 15th of each month.
-          <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent" [routerLink]="['/federal-reporting']" [state] ="{data: linkedFederalReport}">Click to action</a>.
+          <strong>Federal Tracking Report</strong> for <strong>{{item.establishmentName}}</strong> for
+          <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not been submitted. The report
+          is due on the 10th of each month.
+          <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
+            [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">Click to action</a>.
         </mat-card>
       </section>
       <main class="app-content">

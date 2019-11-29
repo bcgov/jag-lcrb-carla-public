@@ -31,11 +31,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
 
             Newsletter newsletter = null;
-            if (!string.IsNullOrEmpty(_configuration["DB_USER"]))
-            {
-                newsletter = _dynamicsClient.GetNewsletterBySlug(slug);
-            }
-
+            newsletter = _dynamicsClient.GetNewsletterBySlug(slug);
+            
             if (newsletter == null)
             {
                 return new NotFoundResult();

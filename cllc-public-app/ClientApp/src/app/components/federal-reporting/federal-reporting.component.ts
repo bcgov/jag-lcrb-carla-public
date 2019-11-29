@@ -2,30 +2,42 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
-import { Subscription, forkJoin } from 'rxjs';
+import { Subscription, forkJoin, of, Observable } from 'rxjs';
 import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { MatDialog, MAT_CHECKBOX_CLICK_ACTION } from '@angular/material';
 import { ModalComponent } from '@shared/components/modal/modal.component';
-import { takeWhile } from 'rxjs/operators';
+import { ClosingInventoryValidator, SalesValidator } from './federal-reporting-validation';
+import { switchMap } from 'rxjs/operators';
+
+interface FederalReportingParams {
+  licenceId: string;
+  monthlyReportId: string;
+}
 
 @Component({
   selector: 'app-federal-reporting',
   templateUrl: './federal-reporting.component.html',
-  styleUrls: ['./federal-reporting.component.scss']
+  styleUrls: ['./federal-reporting.component.scss'],
+  providers: [
+    { provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'noop' }
+  ]
 })
 export class FederalReportingComponent implements OnInit {
   monthlyReportStatusEnum = monthlyReportStatus;
   licenses: ApplicationLicenseSummary[] = [];
   monthlyReports: MonthlyReport[] = [];
   shownMonthlyReports: MonthlyReport[] = [];
-  selectedMonthlyReport: MonthlyReport = null;
-  selectedLicence: ApplicationLicenseSummary = null;
+  selectedMonthlyReportIndex = null;
+  selectedLicenceIndex = null;
   visibleInventoryReports = [];
-  busy: Subscription;
+  licencesBusy: Subscription;
+  monthlyReportsBusy: Subscription;
   reportIsDisabled = true;
   reportIsClosed = true;
+  routeParams: Observable<FederalReportingParams>;
+  loadingMonthlyReports = false;
 
   metaForm = this.fb.group({
     licence: ['', [Validators.required]],
@@ -56,36 +68,71 @@ export class FederalReportingComponent implements OnInit {
     public fb: FormBuilder,
     private licenceDataService: LicenseDataService,
     private route: ActivatedRoute,
+    private router: Router,
     private monthlyReportDataService: MonthlyReportDataService,
     public dialog: MatDialog
   ) {
     this.defaultValue = window.history.state.data;
+    this.routeParams = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        of({
+          licenceId: params.get('licenceId'),
+          monthlyReportId: params.get('monthlyReportId')
+        })
+      )
+    );
   }
 
   ngOnInit() {
-    this.busy = forkJoin(
-      this.licenceDataService.getAllCurrentLicenses()
-    )
-      .subscribe(([licenses]) => {
-        this.licenses = licenses;
-      });
+    this.routeParams.subscribe(params => {
+      // no licences loaded (probably first load)
+      if (this.selectedLicenceIndex === null && this.licenses.length < 1) {
+        this.licencesBusy = forkJoin(
+          this.licenceDataService.getAllCurrentLicenses()
+        )
+        .subscribe(([licenses]) => {
+          this.licenses = licenses;
+          this.selectedLicenceIndex = this.licenses.findIndex(l => l.licenseId === params.licenceId);
+          // no monthly report chosen
+          if (params.monthlyReportId === null) {
+            this.getMonthlyReports(params.licenceId);
+          } else {
+            this.getMonthlyReports(params.licenceId, params.monthlyReportId);
+          }
+        });
+      } else {
+        const index = this.licenses.findIndex(l => l.licenseId === params.licenceId);
+         // licence has changed
+        if (index !== this.selectedLicenceIndex) {
+          this.selectedLicenceIndex = index;
+          this.getMonthlyReports(params.licenceId, params.monthlyReportId);
+        } else {
+          // monthly report has changed
+          this.selectedMonthlyReportIndex = this.shownMonthlyReports.findIndex(r => r.monthlyReportId === params.monthlyReportId);
+          this.renderMonthlyReport();
+        }
+      }
+    });
   }
 
-  licenceChanged(event) {
-    if (event.target.value === '') {
-      this.shownMonthlyReports = [];
-      this.selectedLicence = null;
-      return;
-    }
-    this.selectedLicence = this.licenses.find(l => l.licenseId === event.target.value);
-
-    this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === event.target.value);
-    this.busy = forkJoin(
-      this.monthlyReportDataService.getMonthlyReportsByLicence(event.target.value)
+  getMonthlyReports(licenceId, monthlyReportId = null) {
+    this.loadingMonthlyReports = true;
+    this.monthlyReportsBusy = forkJoin(
+      this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
     )
-      .subscribe(([monthlyReports]) => {
-        this.monthlyReports = monthlyReports;
-      });
+    .subscribe(([monthlyReports]) => {
+      this.monthlyReports = monthlyReports;
+      if (monthlyReportId !== null) {
+        this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
+        this.selectedMonthlyReportIndex = this.shownMonthlyReports.findIndex(r => r.monthlyReportId === monthlyReportId);
+      } else if (this.monthlyReports.length > 0) {
+        this.router.navigate([
+          `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[0].monthlyReportId}`
+        ]);
+      }
+      this.renderMonthlyReport();
+      this.loadingMonthlyReports = false;
+    });
   }
 
   save(submit = false) {
@@ -98,40 +145,47 @@ export class FederalReportingComponent implements OnInit {
     };
 
     // add product fields
-    const invalidProduct = this.hasInvalidProductForm();
     this.productForms.forEach((f) => {
       updateRequest.inventorySalesReports.push({ ...f.value });
     });
-    if ((!this.reportForm.valid || invalidProduct) && !this.reportIsDisabled) {
+    if (!this.checkIfReportValid()) {
       return false;
     }
 
-    this.busy = forkJoin(
+    this.loadingMonthlyReports = true;
+    this.monthlyReportsBusy = forkJoin(
       this.monthlyReportDataService.updateMonthlyReport(updateRequest)
     )
       .subscribe(([report]) => {
-        const index = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
-        this.monthlyReports[index] = report;
-        this.selectedMonthlyReport = report;
-        this.handleMonthlyReportChanged();
+        const fullListIndex = this.monthlyReports.findIndex(rep => rep.monthlyReportId === report.monthlyReportId);
+        this.monthlyReports[fullListIndex] = report;
+        this.shownMonthlyReports[this.selectedMonthlyReportIndex] = report;
+        this.renderMonthlyReport();
+        this.loadingMonthlyReports = false;
       });
   }
 
-  periodChanged(event) {
-    this.productForms = [];
-    this.selectedMonthlyReport = this.monthlyReports.find(rep => rep.monthlyReportId === event.target.value);
-
-    if (this.selectedMonthlyReport === undefined) {
-      return;
-    }
-
-    this.handleMonthlyReportChanged();
+  handleMonthlyReportTabChanged(event) {
+    this.router.navigate([
+      `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[event.index].monthlyReportId}`
+    ]);
   }
 
-  handleMonthlyReportChanged() {
+  handleLicenceTabChanged(event) {
+    if (this.selectedLicenceIndex !== event.index) {
+      this.router.navigate([
+        `/federal-reporting/${this.licenses[event.index].licenseId}`
+      ]);
+    }
+  }
+
+  renderMonthlyReport() {
+    if (this.shownMonthlyReports.length < 1) {
+      return;
+    }
     // Update product forms
     this.visibleInventoryReports = [];
-    this.productForms = this.selectedMonthlyReport.inventorySalesReports.map((report) => {
+    this.productForms = this.shownMonthlyReports[this.selectedMonthlyReportIndex].inventorySalesReports.map((report) => {
       if ((report.openingInventory !== null && report.openingInventory !== 0) ||
           (report.domesticAdditions !== null && report.domesticAdditions !== 0) ||
           (report.returnsAdditions !== null && report.returnsAdditions !== 0) ||
@@ -151,30 +205,10 @@ export class FederalReportingComponent implements OnInit {
           (report.totalSalesToRetailerValue !== null && report.totalSalesToRetailerValue !== 0)) {
             this.visibleInventoryReports.push(report.inventoryReportId);
       }
-      return this.fb.group({
-        inventoryReportId: [report.inventoryReportId, []],
-        product: [report.product, []],
-        openingInventory: [report.openingInventory, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        domesticAdditions: [report.domesticAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        returnsAdditions: [report.returnsAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        otherAdditions: [report.otherAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        domesticReductions: [report.domesticReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        returnsReductions: [report.returnsReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        destroyedReductions: [report.destroyedReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        lostReductions: [report.lostReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        otherReductions: [report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        closingNumber: [report.closingNumber, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        closingValue: [report.closingValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-        closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
-        totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-        totalSalesToRetailerQty: [report.totalSalesToRetailerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-        totalSalesToRetailerValue: [report.totalSalesToRetailerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-      });
+      return this.createProductForm(report);
     });
 
-    switch (this.selectedMonthlyReport.statusCode) {
+    switch (this.shownMonthlyReports[this.selectedMonthlyReportIndex].statusCode) {
       case monthlyReportStatus.Closed:
         this.reportIsDisabled = true;
         this.reportIsClosed = true;
@@ -208,7 +242,7 @@ export class FederalReportingComponent implements OnInit {
 
     // Update monthly report form
     this.reportForm.patchValue({
-      ...this.selectedMonthlyReport
+      ...this.shownMonthlyReports[this.selectedMonthlyReportIndex]
     });
   }
 
@@ -254,6 +288,10 @@ export class FederalReportingComponent implements OnInit {
     return !this.reportForm.get(field).valid && (this.reportForm.get(field).dirty || this.reportForm.get(field).touched);
   }
 
+  isProductSelected(id: string) {
+    return this.visibleInventoryReports.indexOf(id) > -1;
+  }
+
   hasInvalidProductForm() {
     let invalidProduct = false;
     this.productForms.forEach((f) => {
@@ -289,5 +327,40 @@ export class FederalReportingComponent implements OnInit {
           this.save(true);
         }
       });
+  }
+
+  getMonthName(monthNumber): string {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return monthNames[Number(monthNumber) - 1];
+  }
+
+  createProductForm(report) {
+    console.log(report);
+    return this.fb.group({
+      inventoryReportId: [report.inventoryReportId, []],
+      product: [report.product, []],
+      productDescription: [report.productDescription, []],
+      openingInventory: [report.openingInventory, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      domesticAdditions: [report.domesticAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      returnsAdditions: [report.returnsAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      otherAdditions: [report.otherAdditions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      domesticReductions: [report.domesticReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      returnsReductions: [report.returnsReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      destroyedReductions: [report.destroyedReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      lostReductions: [report.lostReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      otherReductions: [report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      closingNumber: [report.closingNumber, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      closingValue: [report.closingValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
+      closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
+      totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
+      totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]]
+    }, { validators: [ClosingInventoryValidator, SalesValidator] });
+  }
+
+  checkIfReportValid() {
+    return this.reportForm.valid && !this.hasInvalidProductForm() || this.reportIsDisabled;
   }
 }
