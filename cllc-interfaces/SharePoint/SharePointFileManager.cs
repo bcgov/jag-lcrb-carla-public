@@ -322,9 +322,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
 
             // Get the validated file name string
-            string result = Regex.Replace(filename, invalidRegStr, "_");
-
-            // SharePoint requires that the filename is less than 128 characters.            
+            string result = Regex.Replace(filename, invalidRegStr, "_");                    
 
             return result;
         }
@@ -339,6 +337,8 @@ namespace Gov.Lclb.Cllb.Interfaces
         public string FixFilename(string filename, int maxLength = 128)
         {
             string result = RemoveInvalidCharacters(filename);
+
+            // SharePoint requires that the filename is less than 128 characters.    
 
             if (result.Length >= maxLength)
             {
@@ -700,8 +700,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             return await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
         }
-
-
 
         public async Task<string> AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
         {
