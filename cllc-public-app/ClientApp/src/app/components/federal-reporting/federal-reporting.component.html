@@ -7,6 +7,8 @@
 
   <div class="row">
     <h4 class="bold">Select Licence:</h4>
+  </div>
+  <div class="row">
     <mat-tab-group
       [selectedIndex]="licenses?.length > 0 ? selectedLicenceIndex : 0"
       (selectedTabChange)="handleLicenceTabChanged($event)">
