@@ -60,7 +60,7 @@
                     <div class="col-xs-2 col-lg-1">
                       <div style="display: flex; align-items: center;">
                         <input class="form-control" type="text" formControlName="employeesManagement">
-                        <div *ngIf="isFieldInvalid('employeesManagement')" style="flex: 0 0 25px;">
+                        <div *ngIf="isFieldInvalid('employeesManagement') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
                           <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
                         </div>
@@ -72,7 +72,7 @@
                     <div class="col-xs-2 col-lg-1">
                       <div style="display: flex; align-items: center;">
                         <input class="form-control" type="text" formControlName="employeesAdministrative">
-                        <div *ngIf="isFieldInvalid('employeesAdministrative')" style="flex: 0 0 25px;">
+                        <div *ngIf="isFieldInvalid('employeesAdministrative') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
                           <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
                         </div>
@@ -84,7 +84,7 @@
                     <div class="col-xs-2 col-lg-1">
                       <div style="display: flex; align-items: center;">
                         <input class="form-control" type="text" formControlName="employeesSales">
-                        <div *ngIf="isFieldInvalid('employeesSales')" style="flex: 0 0 25px;">
+                        <div *ngIf="isFieldInvalid('employeesSales') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
                           <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
                         </div>
@@ -96,7 +96,7 @@
                     <div class="col-xs-2 col-lg-1">
                       <div style="display: flex; align-items: center;">
                         <input class="form-control" type="text" formControlName="employeesProduction">
-                        <div *ngIf="isFieldInvalid('employeesProduction')" style="flex: 0 0 25px;">
+                        <div *ngIf="isFieldInvalid('employeesProduction') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
                           <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
                         </div>
@@ -108,7 +108,7 @@
                     <div class="col-xs-2 col-lg-1">
                       <div style="display: flex; align-items: center;">
                         <input class="form-control" type="text" formControlName="employeesOther">
-                        <div *ngIf="isFieldInvalid('employeesOther')" style="flex: 0 0 25px;">
+                        <div *ngIf="isFieldInvalid('employeesOther') && !reportIsDisabled" style="flex: 0 0 25px;">
                           <i class="fas fa-chevron-left error-states" style="margin-left: 3px"></i>
                           <i class="fas fa-chevron-left error-states" style="margin-left: -3px"></i>
                         </div>
