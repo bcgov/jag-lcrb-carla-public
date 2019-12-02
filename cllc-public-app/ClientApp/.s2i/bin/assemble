@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# S2I Assemble Script
+#
+# This script is based on the S2I assemble script for dotnet 2, with the following extra features:
+#
+# 1. A Sonarqube scan can be done on the source
+# 2. A Snyk scan can be done on the source
+# 3. Dotnet tests can be done
+# 4. Or a regular build for production of an application image can be done.
+
+set -e
+# Include filenames beginning with a '.' when installing the application source code.
+shopt -s dotglob
+
+if [ -n "${DOTNET_VERBOSITY}" ]; then
+  echo "---> Environment:"
+  env | sort
+  VERBOSITY_OPTION="-v ${DOTNET_VERBOSITY}"
+else
+  VERBOSITY_OPTION=""
+fi
+
+echo "---> Installing application source..."
+if [ -d /tmp/src ]; then
+  mv /tmp/src/* ./
+fi
+
+
+if [ ! -z $NPM_MIRROR ]; then
+  echo "---> Setting npm mirror"
+  npm config set registry $NPM_MIRROR
+fi
+
+# build the application.
+
+ng build --base-href /cannabislicensing/ --deploy-url /cannabislicensing/ --prod
+
+# fix permissions
+fix-permissions /opt/app-root/dist
+
+
+
+
