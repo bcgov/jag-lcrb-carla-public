@@ -72,7 +72,6 @@ export class FederalReportingComponent implements OnInit {
     private monthlyReportDataService: MonthlyReportDataService,
     public dialog: MatDialog
   ) {
-    this.defaultValue = window.history.state.data;
     this.routeParams = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         of({
