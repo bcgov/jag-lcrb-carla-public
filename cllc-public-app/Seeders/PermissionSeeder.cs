@@ -21,14 +21,17 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected override void Invoke(AppDbContext context)
         {
-            UpdatePermissions(context);
-            context.SaveChanges();
-
-            Logger.LogDebug("Listing permissions ...");
-            foreach (var p in context.Permissions.ToList())
+            if (context != null)
             {
-                Logger.LogDebug($"{p.Code}");
-            }
+                UpdatePermissions(context);
+                context.SaveChanges();
+
+                Logger.LogDebug("Listing permissions ...");
+                foreach (var p in context.Permissions.ToList())
+                {
+                    Logger.LogDebug($"{p.Code}");
+                }
+            }            
         }
 
         private void UpdatePermissions(AppDbContext context)

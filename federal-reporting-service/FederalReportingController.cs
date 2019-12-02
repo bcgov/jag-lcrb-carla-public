@@ -106,7 +106,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                         writer.Flush();
                         mem.Position = 0;
                         string filename = $"{currentExportId.ToString("0000")}_{DateTime.Now.ToString("yyy-MM-dd")}-CannabisTrackingReport.csv";
-                        bool result = _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv").GetAwaiter().GetResult();
+                        string sharepointFilename = await _sharepoint.UploadFile(filename, DOCUMENT_LIBRARY, "", mem, "text/csv");
                         string url = _sharepoint.GetServerRelativeURL(DOCUMENT_LIBRARY, "");
                     }
                     hangfireContext.WriteLine($"Successfully exported Federal Reporting CSV {currentExportId}.");

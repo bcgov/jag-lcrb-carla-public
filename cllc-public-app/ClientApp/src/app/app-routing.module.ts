@@ -48,7 +48,13 @@ const routes: Routes = [
     data: { feature: 'FederalReporting' }
   },
   {
-    path: 'federal-reporting',
+    path: 'federal-reporting/:licenceId',
+    component: FederalReportingComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'FederalReporting' }
+  },
+  {
+    path: 'federal-reporting/:licenceId/:monthlyReportId',
     component: FederalReportingComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'FederalReporting' }
