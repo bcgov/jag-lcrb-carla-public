@@ -27754,6 +27754,10 @@
           "description": "Reason for the status of the Cannabis Product Admin",
           "type": "integer"
         },
+        "adoxio_description": {
+          "description": "",
+          "type": "string"
+        },
         "createdon": {
           "format": "date-time",
           "description": "Date and time when the record was created.",
@@ -27771,6 +27775,11 @@
         "_modifiedby_value": {
           "description": "Unique identifier of the user who modified the record.",
           "type": "string"
+        },
+        "adoxio_displayorder": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -34911,6 +34920,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_interestpercentageold": {
+          "format": "decimal",
+          "description": "",
+          "type": "number"
+        },
         "createdon": {
           "format": "date-time",
           "description": "Date and time when the record was created.",
@@ -35020,6 +35034,11 @@
         "adoxio_isshareholderold": {
           "description": "",
           "type": "boolean"
+        },
+        "adoxio_interestpercentagenew": {
+          "format": "decimal",
+          "description": "",
+          "type": "number"
         },
         "adoxio_businesnameold": {
           "description": "",

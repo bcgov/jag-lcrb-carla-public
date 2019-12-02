@@ -135,9 +135,9 @@
       <section *ngIf="showMessageCenterContent" style="padding: 10px; background-color: #FFF;">
         <mat-card *ngFor="let item of linkedFederalReports" style="margin-bottom: 5px;">
           <i class="fas fa-2x fa-business-time"></i> &nbsp;
-          <strong>Federal Sales Reporting</strong> for <strong>{{item.establishmentName}}</strong> for
-          <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not been submitted. Reporting
-          is due on the 10th of each month
+          <strong>Federal Tracking Report</strong> for <strong>{{item.establishmentName}}</strong> for
+          <strong>{{Months[parseInt(item.reportingPeriodMonth, 10) -1]}} {{item.reportingPeriodYear}}</strong> has not been submitted. The report
+          is due on the 10th of each month.
           <a style="color: #1a5a96;" (click)="showMessageCenterContent = !showMessageCenterContent"
             [routerLink]="['/federal-reporting/' + item.licenseId + '/' + item.monthlyReportId]">Click to action</a>.
         </mat-card>

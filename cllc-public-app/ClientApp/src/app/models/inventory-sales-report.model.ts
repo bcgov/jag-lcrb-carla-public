@@ -18,4 +18,7 @@ export class InventorySalesReport {
   totalSalesToConsumerValue: number;
   totalSalesToRetailerQty: number;
   totalSalesToRetailerValue: number;
+
+  productDisplayOrder: number;
+  productDescription: string;
 }

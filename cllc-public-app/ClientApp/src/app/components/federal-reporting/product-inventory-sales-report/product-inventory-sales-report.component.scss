@@ -16,10 +16,19 @@
 .bg-grey {
   background-color: #D4D4D4;
 }
+.bg-dark-grey {
+  background-color: #BBB;
+}
 
 input {
   text-align: right;
 }
 .border-blue {
   border-color: #38598A !important;
+}
+
+@media (min-width: 1250px) {
+  .nowrap {
+    flex-wrap: nowrap !important;
+  }
 }

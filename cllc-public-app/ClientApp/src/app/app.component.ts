@@ -16,9 +16,9 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfo } from '@models/version-info.model';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
-import { MonthlyReport } from '@models/monthly-report.model';
+import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
 
-const Months = [ 'January', 'February', 'March', 'April', 'May', 'June', 
+const Months = [ 'January', 'February', 'March', 'April', 'May', 'June',
            'July', 'August', 'September', 'October', 'November', 'December' ];
 
 @Component({
@@ -38,7 +38,7 @@ export class AppComponent extends FormBase implements OnInit {
   public versionInfo: VersionInfo;
   isAssociate = false;
   account: Account;
-  showMessageCenterContent = false;
+  showMessageCenterContent = true;
   linkedFederalReports: MonthlyReport[];
   Months = Months;  // make available in template
   parseInt = parseInt; // make available in template
@@ -60,10 +60,7 @@ export class AppComponent extends FormBase implements OnInit {
     featureFlagService.featureOn('FederalReporting')
       .subscribe(x => this.showFederalReporting = x);
 
-    monthlyReportDataService.getAllCurrentMonthlyReports()
-      .subscribe(data => {
-        this.linkedFederalReports = data;
-      });
+
 
     this.isDevMode = isDevMode();
     this.router.events
@@ -128,6 +125,12 @@ export class AppComponent extends FormBase implements OnInit {
         if (this.currentUser && this.currentUser.accountid && this.currentUser.accountid !== '00000000-0000-0000-0000-000000000000') {
           this.accountDataService.loadCurrentAccountToStore(this.currentUser.accountid)
             .subscribe(() => { });
+
+          // load federal reports after the user logs in
+            this.monthlyReportDataService.getAllCurrentMonthlyReports()
+            .subscribe(data => {
+              this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
+            });
         } else {
           this.store.dispatch(new SetCurrentAccountAction(null));
         }
