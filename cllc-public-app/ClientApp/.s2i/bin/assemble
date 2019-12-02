@@ -33,6 +33,7 @@ if [ ! -z $NPM_MIRROR ]; then
 fi
 
 # build the application.
+npm install -g @angular/cli@8.3.12
 npm install
 mkdir /opt/app-root/dist
 ng build --base-href /cannabislicensing/ --deploy-url /cannabislicensing/ --prod --outputPath=/opt/app-root/dist
