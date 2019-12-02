@@ -23,8 +23,10 @@ namespace Gov.Lclb.Cllb.Public.Seeders
 
         protected override void Invoke(AppDbContext context)
         {
-            UpdateVoteQuestions(context);
-
+            if (context != null)
+            {
+                UpdateVoteQuestions(context);
+            }           
         }
 
         private void UpdateVoteQuestions(AppDbContext context)

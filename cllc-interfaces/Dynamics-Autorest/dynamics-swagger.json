@@ -10974,6 +10974,152 @@
         }
       }
     },
+    "/adoxio_legalentities({adoxio_legalentityid})/adoxio_legalentity_task_LegalEntity": {
+      "get": {
+        "tags": [
+          "legalentity_task_legalentity"
+        ],
+        "summary": "Get adoxio_legalentity_task_LegalEntity from adoxio_legalentities",
+        "operationId": "legalentitytasklegalentity_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_legalentityid",
+            "description": "key: adoxio_legalentityid of adoxio_legalentity",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.taskCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/adoxio_legalentities({adoxio_legalentityid})/adoxio_legalentity_task_LegalEntity({activityid})": {
+      "get": {
+        "tags": [
+          "legalentity_task_legalentity"
+        ],
+        "summary": "Get adoxio_legalentity_task_LegalEntity from adoxio_legalentities",
+        "operationId": "legalentitytasklegalentity_Getadoxio_legalentity_task_LegalEntityByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adoxio_legalentityid",
+            "description": "key: adoxio_legalentityid of adoxio_legalentity",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "activityid",
+            "description": "key: activityid of task",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/adoxio_licenceses": {
       "get": {
         "tags": [
@@ -17026,6 +17172,152 @@
         }
       }
     },
+    "/contacts({contactid})/adoxio_contact_task_Contact": {
+      "get": {
+        "tags": [
+          "contact_task_contact"
+        ],
+        "summary": "Get adoxio_contact_task_Contact from contacts",
+        "operationId": "contacttaskcontact_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactid",
+            "description": "key: contactid of contact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$search",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.taskCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/contacts({contactid})/adoxio_contact_task_Contact({activityid})": {
+      "get": {
+        "tags": [
+          "contact_task_contact"
+        ],
+        "summary": "Get adoxio_contact_task_Contact from contacts",
+        "operationId": "contacttaskcontact_Getadoxio_contact_task_ContactByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contactid",
+            "description": "key: contactid of contact",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "activityid",
+            "description": "key: activityid of task",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/duplicaterecords({duplicateid})/baserecordid_adoxio_exhibit": {
       "get": {
         "tags": [
@@ -17820,6 +18112,466 @@
             "in": "path",
             "name": "invoiceid",
             "description": "key: invoiceid of invoice",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/leads": {
+      "get": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Get entities from leads",
+        "operationId": "leads_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.leadCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Add new entity to leads",
+        "operationId": "leads_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/leads({leadid})": {
+      "get": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Get entity from leads by key",
+        "operationId": "leads_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "leadid",
+            "description": "key: leadid of lead",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Update entity in leads",
+        "operationId": "leads_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "leadid",
+            "description": "key: leadid of lead",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "leads.lead"
+        ],
+        "summary": "Delete entity from leads",
+        "operationId": "leads_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "leadid",
+            "description": "key: leadid of lead",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "If-Match",
+            "description": "ETag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/lists": {
+      "get": {
+        "tags": [
+          "lists.list"
+        ],
+        "summary": "Get entities from lists",
+        "operationId": "lists_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "description": "Order items by property values",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.listCollection"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "lists.list"
+        ],
+        "summary": "Add new entity to lists",
+        "operationId": "lists_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Prefer",
+            "description": "Required in order for the service to return a JSON representation of the object.",
+            "type": "string",
+            "default": "return=representation"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.list"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.list"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/lists({listid})": {
+      "get": {
+        "tags": [
+          "lists.list"
+        ],
+        "summary": "Get entity from lists by key",
+        "operationId": "lists_GetByKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "listid",
+            "description": "key: listid of list",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved entity",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.list"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "lists.list"
+        ],
+        "summary": "Update entity in lists",
+        "operationId": "lists_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "listid",
+            "description": "key: listid of list",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New property values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.list"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "lists.list"
+        ],
+        "summary": "Delete entity from lists",
+        "operationId": "lists_Delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "listid",
+            "description": "key: listid of list",
             "required": true,
             "type": "string"
           },
@@ -19312,6 +20064,110 @@
         }
       }
     },
+    "/tasks({activityid})/adoxio_Contact_Task": {
+      "get": {
+        "tags": [
+          "contact_task"
+        ],
+        "summary": "Get adoxio_Contact_Task from tasks",
+        "operationId": "contacttask_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activityid",
+            "description": "key: activityid of task",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
+    "/tasks({activityid})/adoxio_LegalEntity_Task": {
+      "get": {
+        "tags": [
+          "legalentity_task"
+        ],
+        "summary": "Get adoxio_LegalEntity_Task from tasks",
+        "operationId": "legalentitytask_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activityid",
+            "description": "key: activityid of task",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "description": "Select properties to be returned",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "Expand related entities",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved navigation property",
+            "schema": {
+              "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+            }
+          },
+          "default": {
+            "description": "OData Error"
+          }
+        }
+      }
+    },
     "/teams({ownerid})/team_adoxio_exhibit": {
       "get": {
         "tags": [
@@ -20166,7 +21022,7 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "address2_composite": {
           "description": "Shows the complete secondary address.",
@@ -20313,7 +21169,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "_defaultpricelevelid_value": {
           "description": "Choose the default price list associated with the account to make sure the correct product prices for this customer are applied in sales opportunities, quotes, and orders.",
@@ -20510,7 +21366,7 @@
         "address1_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "adoxio_bcincorporationnumber": {
           "description": "",
@@ -20750,7 +21606,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "modifiedon": {
           "format": "date-time",
@@ -21840,7 +22696,7 @@
         "effort": {
           "format": "decimal",
           "description": "Amount of effort used by the resource in a service appointment activity.",
-          "type": "string"
+          "type": "number"
         },
         "instancetypecode": {
           "format": "int32",
@@ -23257,6 +24113,10 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_establishmentaddressstreet": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_checklistfloorplanassess": {
           "format": "int32",
           "description": "",
@@ -23288,9 +24148,10 @@
           "description": "Unique identifier of the delegate user who modified the record.",
           "type": "string"
         },
-        "_adoxio_casemanager_value": {
-          "description": "",
-          "type": "string"
+        "adoxio_checklistresolutionassessment": {
+          "format": "int32",
+          "description": "BPF Refactoring 1.17.2019",
+          "type": "integer"
         },
         "adoxio_appchecklistvalidinterestreceived": {
           "format": "int32",
@@ -23314,11 +24175,6 @@
         "adoxio_triggertogeneratesecurityclearance": {
           "description": "",
           "type": "boolean"
-        },
-        "adoxio_checklistresolutionassessment": {
-          "format": "int32",
-          "description": "BPF Refactoring 1.17.2019",
-          "type": "integer"
         },
         "traversedpath": {
           "description": "A comma separated list of string values representing the unique identifiers of stages in a Business Process Flow Instance in the order that they occur.",
@@ -23441,6 +24297,10 @@
           "format": "int32",
           "description": "Sequence number of the import that created this record.",
           "type": "integer"
+        },
+        "adoxio_personalhistoryinstructionfield": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_uploadedsitemap": {
           "format": "int32",
@@ -23613,7 +24473,7 @@
           "description": "The name of the custom entity.",
           "type": "string"
         },
-        "adoxio_checklistassociatesconsentreceived": {
+        "adoxio_checklistassociatescontacted": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -23813,10 +24673,6 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_establishmentaddressstreet": {
-          "description": "",
-          "type": "string"
-        },
         "_slainvokedid_value": {
           "description": "For internal use only.",
           "type": "string"
@@ -23981,13 +24837,8 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_uploadedfloorplans": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_establishmentopeningdate": {
-          "format": "date",
+          "format": "date-time",
           "description": "",
           "type": "string"
         },
@@ -24005,10 +24856,10 @@
           "description": "",
           "type": "integer"
         },
-        "lastonholdtime": {
-          "format": "date-time",
-          "description": "Contains the date and time stamp of the last on-hold time",
-          "type": "string"
+        "adoxio_uploadedfloorplans": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "_adoxio_applyingperson_value": {
           "description": "",
@@ -24084,8 +24935,13 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_appchecklistchangesapplied": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_signaturedate": {
-          "format": "date",
+          "format": "date-time",
           "description": "",
           "type": "string"
         },
@@ -24094,19 +24950,15 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_personalhistoryinstructionfield": {
-          "description": "",
-          "type": "string"
-        },
         "adoxio_checklisttiedhouseassessed": {
           "format": "int32",
           "description": "BPF Refactoring 1.17.2019",
           "type": "integer"
         },
-        "adoxio_checklistassociatescontacted": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
+        "lastonholdtime": {
+          "format": "date-time",
+          "description": "Contains the date and time stamp of the last on-hold time",
+          "type": "string"
         },
         "adoxio_renewalzoning": {
           "format": "int32",
@@ -24165,7 +25017,7 @@
           "type": "string"
         },
         "adoxio_dateappealed": {
-          "format": "date",
+          "format": "date-time",
           "description": "",
           "type": "string"
         },
@@ -24417,6 +25269,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_checklistassociatesconsentreceived": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_checklistsitemapassessed": {
           "format": "int32",
           "description": "BPF Refactoring 1.17.2019",
@@ -24448,6 +25305,10 @@
           "format": "int32",
           "description": "",
           "type": "integer"
+        },
+        "adoxio_investigationstatuscomment": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_paymentmethod": {
           "format": "int32",
@@ -24928,9 +25789,6 @@
         },
         "adoxio_SLA": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.slakpiinstance"
-        },
-        "adoxio_CaseManager": {
-          "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         },
         "adoxio_CaseManagerSupervisor": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -26750,6 +27608,10 @@
           "description": "Status of the Cannabis Monthly Report",
           "type": "integer"
         },
+        "adoxio_isexportnow": {
+          "description": "",
+          "type": "boolean"
+        },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
         },
@@ -26892,6 +27754,10 @@
           "description": "Reason for the status of the Cannabis Product Admin",
           "type": "integer"
         },
+        "adoxio_description": {
+          "description": "",
+          "type": "string"
+        },
         "createdon": {
           "format": "date-time",
           "description": "Date and time when the record was created.",
@@ -26909,6 +27775,11 @@
         "_modifiedby_value": {
           "description": "Unique identifier of the user who modified the record.",
           "type": "string"
+        },
+        "adoxio_displayorder": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "createdbyname": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.systemuser"
@@ -30225,7 +31096,7 @@
         "adoxio_longitude": {
           "format": "decimal",
           "description": "",
-          "type": "string"
+          "type": "number"
         },
         "_ownerid_value": {
           "description": "Owner Id",
@@ -30275,7 +31146,7 @@
         "adoxio_latitude": {
           "format": "decimal",
           "description": "",
-          "type": "string"
+          "type": "number"
         },
         "adoxio_parcelid": {
           "description": "",
@@ -32205,10 +33076,6 @@
           "description": "",
           "type": "boolean"
         },
-        "adoxio_conclusioncomments": {
-          "description": "",
-          "type": "string"
-        },
         "adoxio_investigationentity": {
           "format": "int32",
           "description": "",
@@ -32225,6 +33092,10 @@
         "adoxio_productionofrecords": {
           "description": "",
           "type": "boolean"
+        },
+        "adoxio_statuscommentsinvestigatorsonly": {
+          "description": "",
+          "type": "string"
         },
         "adoxio_name": {
           "description": "The name of the custom entity.",
@@ -32269,6 +33140,10 @@
         },
         "_adoxio_establishment_value": {
           "description": "",
+          "type": "string"
+        },
+        "adoxio_statuscomments": {
+          "description": "This information will be displayed to Licensing on the application record.",
           "type": "string"
         },
         "adoxio_establishmentaddresspostalcode": {
@@ -32359,6 +33234,11 @@
         "adoxio_manufacturingendorsement": {
           "description": "",
           "type": "boolean"
+        },
+        "adoxio_lastdocumentuploaddate": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
         },
         "adoxio_establishmentaddresscity": {
           "description": "",
@@ -33215,6 +34095,12 @@
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licenseechangelog"
           }
+        },
+        "adoxio_legalentity_task_LegalEntity": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
         }
       }
     },
@@ -34034,6 +34920,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_interestpercentageold": {
+          "format": "decimal",
+          "description": "",
+          "type": "number"
+        },
         "createdon": {
           "format": "date-time",
           "description": "Date and time when the record was created.",
@@ -34144,6 +35035,11 @@
           "description": "",
           "type": "boolean"
         },
+        "adoxio_interestpercentagenew": {
+          "format": "decimal",
+          "description": "",
+          "type": "number"
+        },
         "adoxio_businesnameold": {
           "description": "",
           "type": "string"
@@ -34228,6 +35124,11 @@
         "adoxio_isdirectornew": {
           "description": "",
           "type": "boolean"
+        },
+        "adoxio_businesstype": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_isofficernew": {
           "description": "",
@@ -34840,7 +35741,7 @@
           "type": "string"
         },
         "adoxio_birthdate": {
-          "format": "date",
+          "format": "date-time",
           "description": "",
           "type": "string"
         },
@@ -36322,7 +37223,6 @@
           "type": "string"
         },
         "adoxio_birthdate": {
-          "format": "date",
           "description": "",
           "type": "string"
         },
@@ -39453,7 +40353,7 @@
         "executiontimespan": {
           "format": "decimal",
           "description": "Time that the system job has taken to execute.",
-          "type": "string"
+          "type": "number"
         },
         "modifiedon": {
           "format": "date-time",
@@ -43071,7 +43971,7 @@
         "creditlimit": {
           "format": "decimal",
           "description": "Credit limit for the business unit.",
-          "type": "string"
+          "type": "number"
         },
         "exchangerate": {
           "format": "decimal",
@@ -43129,7 +44029,7 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Latitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "name": {
           "description": "Name of the business unit.",
@@ -43221,7 +44121,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Longitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "address1_shippingmethodcode": {
           "format": "int32",
@@ -43231,7 +44131,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Latitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "inheritancemask": {
           "format": "int32",
@@ -43270,7 +44170,7 @@
         "address1_longitude": {
           "format": "decimal",
           "description": "Longitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "address2_upszone": {
           "description": "United Parcel Service (UPS) zone for address 2.",
@@ -44344,7 +45244,7 @@
         "effort": {
           "format": "decimal",
           "description": "Effort available for a resource during the time described by the calendar rule.",
-          "type": "string"
+          "type": "number"
         },
         "starttime": {
           "format": "date-time",
@@ -45895,7 +46795,7 @@
         "latitude": {
           "format": "decimal",
           "description": "Latitude for the competitor address.",
-          "type": "string"
+          "type": "number"
         },
         "versionnumber": {
           "format": "int64",
@@ -45930,7 +46830,7 @@
         "longitude": {
           "format": "decimal",
           "description": "Longitude for the address for the competitor.",
-          "type": "string"
+          "type": "number"
         },
         "telephone3": {
           "description": "Third telephone number for the competitor address.",
@@ -46042,7 +46942,7 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "address2_upszone": {
           "description": "Type the UPS zone of the secondary address to make sure shipping charges are calculated correctly and deliveries are made promptly , if shipped by UPS.",
@@ -46143,7 +47043,7 @@
         "winpercentage": {
           "format": "decimal",
           "description": "Type the percentage of your organization's lost opportunities that are won by the competitor to identify your strongest competitors.",
-          "type": "string"
+          "type": "number"
         },
         "address2_county": {
           "description": "Type the county for the secondary address.",
@@ -46258,7 +47158,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "address1_telephone2": {
           "description": "Type a second phone number associated with the primary address.",
@@ -46304,7 +47204,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "address2_fax": {
           "description": "Type the fax number associated with the secondary address.",
@@ -46372,7 +47272,7 @@
         "address1_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "leadcompetitors_association": {
           "type": "array",
@@ -47324,7 +48224,7 @@
         "address1_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "accountrolecode": {
           "format": "int32",
@@ -47369,7 +48269,7 @@
           "type": "string"
         },
         "anniversary": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the date of the contact's wedding or service anniversary for use in customer gift programs or other communications.",
           "type": "string"
         },
@@ -47438,7 +48338,7 @@
           "type": "string"
         },
         "birthdate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the contact's birthday for use in customer gift programs or other communications.",
           "type": "string"
         },
@@ -47480,7 +48380,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "modifiedon": {
           "format": "date-time",
@@ -47531,7 +48431,7 @@
         "address3_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the third address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "mobilephone": {
           "description": "Type the mobile phone number for the contact.",
@@ -47642,7 +48542,7 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "adoxio_gendercode": {
           "format": "int32",
@@ -47661,7 +48561,7 @@
         "address3_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the third address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "callback": {
           "description": "Type a callback phone number for this contact.",
@@ -47881,7 +48781,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "statuscode": {
           "format": "int32",
@@ -48818,6 +49718,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_licenseechangelog"
+          }
+        },
+        "adoxio_contact_task_Contact": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
           }
         }
       }
@@ -50144,7 +51050,7 @@
         "longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the customer's address, for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "objecttypecode": {
           "description": "Shows the type code of the customer record to indicate whether the address belongs to a customer account or contact.",
@@ -50217,7 +51123,7 @@
         "latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the customer's address, for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "_ownerid_value": {
           "description": "Enter the user or team who is assigned to manage the record. This field is updated every time the record is assigned to a different user.",
@@ -51721,7 +52627,7 @@
         "maxvaluedouble": {
           "format": "decimal",
           "description": "Shows the maximum allowed value of the property for a double data type.",
-          "type": "string"
+          "type": "number"
         },
         "_modifiedby_value": {
           "description": "Shows who last updated the record.",
@@ -51766,7 +52672,7 @@
         "defaultvaluedouble": {
           "format": "decimal",
           "description": "Shows the default value of the property for a double data type.",
-          "type": "string"
+          "type": "number"
         },
         "overwrittendynamicpropertyid": {
           "description": "Shows the related overwritten property.",
@@ -51780,7 +52686,7 @@
         "minvaluedouble": {
           "format": "decimal",
           "description": "Shows the minimum allowed value of the property for a double data type.",
-          "type": "string"
+          "type": "number"
         },
         "_defaultvalueoptionset_value": {
           "description": "Shows the default value of the property.",
@@ -52012,7 +52918,7 @@
         "valuedouble": {
           "format": "decimal",
           "description": "Shows the double value of the property.",
-          "type": "string"
+          "type": "number"
         },
         "valuedecimal": {
           "format": "decimal",
@@ -56542,7 +57448,7 @@
         "progress": {
           "format": "decimal",
           "description": "Import Progress Percentage.",
-          "type": "string"
+          "type": "number"
         },
         "_modifiedonbehalfby_value": {
           "description": "Unique identifier of the delegate user who modified the import job record.",
@@ -57180,7 +58086,7 @@
         "influencescore": {
           "format": "decimal",
           "description": "Will contain the Influencer score coming from NetBreeze.",
-          "type": "string"
+          "type": "number"
         },
         "_kbarticleid_value": {
           "description": "Choose the article that contains additional information or a resolution for the case, for reference during research or follow up with the customer.",
@@ -57807,7 +58713,7 @@
           "type": "integer"
         },
         "adoxio_noeasentdate": {
-          "format": "date",
+          "format": "date-time",
           "description": "",
           "type": "string"
         },
@@ -58163,7 +59069,7 @@
         "sentimentvalue": {
           "format": "decimal",
           "description": "Value derived after assessing words commonly associated with a negative, neutral, or positive sentiment that occurs in a social post. Sentiment information can also be reported as numeric values.",
-          "type": "string"
+          "type": "number"
         },
         "adoxio_inspchecklistcannabisregisternotes": {
           "description": "",
@@ -59562,7 +60468,7 @@
           "type": "number"
         },
         "duedate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the date by which the invoice should be paid by the customer.",
           "type": "string"
         },
@@ -61390,7 +62296,7 @@
         "latitude": {
           "format": "decimal",
           "description": "Latitude for the address for the lead.",
-          "type": "string"
+          "type": "number"
         },
         "postofficebox": {
           "description": "Post office box number in the address for the lead.",
@@ -61449,7 +62355,7 @@
         "longitude": {
           "format": "decimal",
           "description": "Longitude for the address for the lead.",
-          "type": "string"
+          "type": "number"
         },
         "city": {
           "description": "City name in the address for the lead.",
@@ -61560,7 +62466,7 @@
         "estimatedvalue": {
           "format": "decimal",
           "description": "Type a numeric value of the lead's estimated value, such as a product quantity, if no revenue amount can be specified in the Est. Value field. This can be used for sales forecasting and planning.",
-          "type": "string"
+          "type": "number"
         },
         "lastusedincampaign": {
           "format": "date-time",
@@ -61595,7 +62501,7 @@
           "type": "integer"
         },
         "estimatedclosedate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the expected close date for the lead, so that the sales team can schedule timely follow-up meetings to move the prospect to the next sales stage.",
           "type": "string"
         },
@@ -61829,7 +62735,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "schedulefollowup_qualify": {
           "format": "date-time",
@@ -61839,7 +62745,7 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Type the latitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "address1_line2": {
           "description": "Type the second line of the primary address.",
@@ -62067,7 +62973,7 @@
         "address1_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the primary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "yomifullname": {
           "description": "Combines and shows the lead's Yomi first and last names so the full phonetic name can be displayed in views and reports.",
@@ -62110,7 +63016,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Type the longitude value for the secondary address for use in mapping and other applications.",
-          "type": "string"
+          "type": "number"
         },
         "_owningbusinessunit_value": {
           "description": "Unique identifier of the business unit that owns the lead.",
@@ -65095,7 +66001,7 @@
           "type": "integer"
         },
         "actualclosedate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Shows the date and time when the opportunity was closed or canceled.",
           "type": "string"
         },
@@ -65213,7 +66119,7 @@
           "type": "string"
         },
         "estimatedclosedate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the expected closing date of the opportunity to help make accurate revenue forecasts.",
           "type": "string"
         },
@@ -65325,7 +66231,7 @@
           "type": "string"
         },
         "finaldecisiondate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the date and time when the final decision of the opportunity was made.",
           "type": "string"
         },
@@ -71559,7 +72465,7 @@
           "type": "string"
         },
         "validtodate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Date to which this product is valid.",
           "type": "string"
         },
@@ -71568,7 +72474,7 @@
           "type": "string"
         },
         "validfromdate": {
-          "format": "date",
+          "format": "date-time",
           "description": "Date from which this product is valid.",
           "type": "string"
         },
@@ -72182,7 +73088,7 @@
         "longitude": {
           "format": "decimal",
           "description": "Longitude for the publisher address.",
-          "type": "string"
+          "type": "number"
         },
         "postalcode": {
           "description": "ZIP Code or postal code in the publisher address.",
@@ -72291,7 +73197,7 @@
         "latitude": {
           "format": "decimal",
           "description": "Latitude for the publisher address.",
-          "type": "string"
+          "type": "number"
         },
         "stateorprovince": {
           "description": "State or province in the publisher address.",
@@ -72440,7 +73346,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Longitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "address1_telephone3": {
           "description": "Third telephone number associated with address 1.",
@@ -72474,7 +73380,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Latitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "_createdonbehalfby_value": {
           "description": "Unique identifier of the delegate user who created the publisher.",
@@ -72559,7 +73465,7 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Latitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "address2_stateorprovince": {
           "description": "State or province for address 2.",
@@ -72572,7 +73478,7 @@
         "address1_longitude": {
           "format": "decimal",
           "description": "Longitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "address2_upszone": {
           "description": "United Parcel Service (UPS) zone for address 2.",
@@ -73934,7 +74840,7 @@
           "type": "string"
         },
         "expireson": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the date a decision or order is due from the customer to indicate the expiration date of the quote.",
           "type": "string"
         },
@@ -73948,7 +74854,7 @@
           "type": "boolean"
         },
         "closedon": {
-          "format": "date",
+          "format": "date-time",
           "description": "Enter the date when the quote was closed to indicate the expiration, revision, or cancellation date.",
           "type": "string"
         },
@@ -75899,7 +76805,7 @@
         "effortrequired": {
           "format": "decimal",
           "description": "Number that specifies the minimal effort required from resources.",
-          "type": "string"
+          "type": "number"
         },
         "_modifiedby_value": {
           "description": "Unique identifier of the user who last modified the resource specification.",
@@ -79987,12 +80893,12 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Latitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "address1_longitude": {
           "format": "decimal",
           "description": "Longitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "organizationid": {
           "description": "Unique identifier of the organization with which the site is associated.",
@@ -80113,7 +81019,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Latitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "address2_telephone3": {
           "description": "Third telephone number associated with address 2.",
@@ -80122,7 +81028,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Longitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "address2_line2": {
           "description": "Second line for entering address 2 information.",
@@ -81105,7 +82011,7 @@
         "sentimentvalue": {
           "format": "decimal",
           "description": "Value derived after assessing words commonly associated with a negative, neutral, or positive sentiment that occurs in a social post. Sentiment information can also be reported as numeric values.",
-          "type": "string"
+          "type": "number"
         },
         "_postfromprofileid_value": {
           "description": "Shows the author of the post on the corresponding social channel.",
@@ -81354,7 +82260,7 @@
         "influencescore": {
           "format": "decimal",
           "description": "Shows the score that determines the online social influence of the social profile.",
-          "type": "string"
+          "type": "number"
         },
         "statecode": {
           "format": "int32",
@@ -82241,7 +83147,7 @@
         "address1_longitude": {
           "format": "decimal",
           "description": "Longitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "sharepointemailaddress": {
           "description": "SharePoint Work Email Address",
@@ -82313,7 +83219,7 @@
         "address2_latitude": {
           "format": "decimal",
           "description": "Latitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "mobilephone": {
           "description": "Mobile phone number for the user.",
@@ -82334,7 +83240,7 @@
         "address1_latitude": {
           "format": "decimal",
           "description": "Latitude for address 1.",
-          "type": "string"
+          "type": "number"
         },
         "accessmode": {
           "format": "int32",
@@ -82407,7 +83313,7 @@
         "address2_longitude": {
           "format": "decimal",
           "description": "Longitude for address 2.",
-          "type": "string"
+          "type": "number"
         },
         "salutation": {
           "description": "Salutation for correspondence with the user.",
@@ -88880,12 +89786,6 @@
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.incident"
           }
         },
-        "adoxio_systemuser_adoxio_application_CaseManager": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_application"
-          }
-        },
         "adoxio_systemuser_adoxio_application_CaseManagerSupervisor": {
           "type": "array",
           "items": {
@@ -89718,10 +90618,18 @@
           "description": "Date and time that the record was migrated.",
           "type": "string"
         },
+        "_adoxio_contact_value": {
+          "description": "",
+          "type": "string"
+        },
         "percentcomplete": {
           "format": "int32",
           "description": "Type the percentage complete value for the task to track tasks to completion.",
           "type": "integer"
+        },
+        "_adoxio_legalentity_value": {
+          "description": "",
+          "type": "string"
         },
         "crmtaskassigneduniqueid": {
           "description": "Assigned Task Unique Id",
@@ -89921,6 +90829,12 @@
         },
         "regardingobjectid_adoxio_complianceinvestigation_task": {
           "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_complianceinvestigation"
+        },
+        "adoxio_LegalEntity_Task": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.adoxio_legalentity"
+        },
+        "adoxio_Contact_Task": {
+          "$ref": "#/definitions/Microsoft.Dynamics.CRM.contact"
         }
       }
     },
@@ -95564,6 +96478,19 @@
         }
       }
     },
+    "Microsoft.Dynamics.CRM.taskCollection": {
+      "title": "Collection of task",
+      "description": "Microsoft.Dynamics.CRM.taskCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.task"
+          }
+        }
+      }
+    },
     "Microsoft.Dynamics.CRM.adoxio_licencesCollection": {
       "title": "Collection of adoxio_licences",
       "description": "Microsoft.Dynamics.CRM.adoxio_licencesCollection",
@@ -95911,6 +96838,32 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Microsoft.Dynamics.CRM.invoice"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.leadCollection": {
+      "title": "Collection of lead",
+      "description": "Microsoft.Dynamics.CRM.leadCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.lead"
+          }
+        }
+      }
+    },
+    "Microsoft.Dynamics.CRM.listCollection": {
+      "title": "Collection of list",
+      "description": "Microsoft.Dynamics.CRM.listCollection",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Microsoft.Dynamics.CRM.list"
           }
         }
       }

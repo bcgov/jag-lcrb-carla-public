@@ -59,12 +59,16 @@ export class Account {
     return isPublicCorp;
   }
 
-  getBusinessTypeName() {
-    if (!this.businessType) {
+  getBusinessTypeName(): string {
+    return Account.getBusinessTypeFromName(this.businessType);
+  }
+
+  public static getBusinessTypeFromName(businessType: string): string {
+    if (!businessType) {
       return '';
     }
     let name = '';
-    switch (this.businessType) {
+    switch (businessType) {
       case 'GeneralPartnership':
       case 'LimitedPartnership"':
       case 'LimitedLiabilityPartnership':
@@ -85,7 +89,7 @@ export class Account {
         name = 'Private Corporation';
         break;
       default:
-        name = this.businessType;
+        name = businessType;
         break;
     }
     return name;

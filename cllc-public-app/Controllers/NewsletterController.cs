@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Public.Contexts;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
 using Microsoft.AspNetCore.Authorization;
@@ -15,14 +16,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class NewsletterController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly AppDbContext _db;
         private readonly string _encryptionKey;
+        private readonly IDynamicsClient _dynamicsClient;
 
-        public NewsletterController(AppDbContext db, IConfiguration configuration)
+        public NewsletterController(IConfiguration configuration, IDynamicsClient dynamicsClient)
         {
             _configuration = configuration;
-            _db = db;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
+            _dynamicsClient = dynamicsClient;
         }
         [HttpGet("{slug}")]
         [AllowAnonymous]
@@ -30,11 +31,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
 
             Newsletter newsletter = null;
-            if (!string.IsNullOrEmpty(_configuration["DB_USER"]))
-            {
-                newsletter = _db.GetNewsletterBySlug(slug);
-            }
-
+            newsletter = _dynamicsClient.GetNewsletterBySlug(slug);
+            
             if (newsletter == null)
             {
                 return new NotFoundResult();
@@ -106,7 +104,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // check that the slugs match.
                 if (slug.Equals(newsletterConfirmation.slug))
                 {
-                    _db.AddNewsletterSubscriber(slug, newsletterConfirmation.email);
+                    _dynamicsClient.AddNewsletterSubscriber(slug, newsletterConfirmation.email.ToLower());
                     result = "Success";
                 }
             }
@@ -117,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public JsonResult UnSubscribe(string slug, [FromQuery] string email)
         {
-            _db.RemoveNewsletterSubscriber(slug, email);
+            _dynamicsClient.RemoveNewsletterSubscriber(slug, email);
             return new JsonResult("Ok");
         }
 
