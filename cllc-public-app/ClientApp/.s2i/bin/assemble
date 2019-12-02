@@ -33,12 +33,10 @@ if [ ! -z $NPM_MIRROR ]; then
 fi
 
 # build the application.
-
-ng build --base-href /cannabislicensing/ --deploy-url /cannabislicensing/ --prod
+npm install
+mkdir /opt/app-root/dist
+ng build --base-href /cannabislicensing/ --deploy-url /cannabislicensing/ --prod --outputPath=/opt/app-root/dist
 
 # fix permissions
 fix-permissions /opt/app-root/dist
-
-
-
 
