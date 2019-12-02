@@ -26,8 +26,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     this.action = data.action;
     this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate();
 
-    debugger;
-    if (this.shareholder.parentLinceseeChangeLog) {
+    if (this.shareholder && this.shareholder.parentLinceseeChangeLog) {
       this.availableParentShares = this.shareholder.parentLinceseeChangeLog.totalSharesNew
         - this.shareholder.parentLinceseeChangeLog.totalChildShares
         + (this.shareholder.numberofSharesNew || 0);
