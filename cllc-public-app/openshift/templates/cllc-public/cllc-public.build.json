@@ -17,7 +17,7 @@
 				  }
 	},
 	"spec": {"description": "Allow the builds to access the internet.\n    This only needs to be specified once per environment.",
-	"source": " - - $namespace=apndkr-${ENV_NAME}",
+	"source": " - - $namespace=yuumcs-${ENV_NAME}",
 	"destination": " - - ext:network=any"
     }
   },
