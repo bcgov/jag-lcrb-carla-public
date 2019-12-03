@@ -44,6 +44,8 @@ export class LicenseeChangeLog {
   parentLinceseeChangeLogId: string;
   children: LicenseeChangeLog[];
   parentLinceseeChangeLog: LicenseeChangeLog;
+  interestPercentageNew: number;
+  interestPercentageOld: number;
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
