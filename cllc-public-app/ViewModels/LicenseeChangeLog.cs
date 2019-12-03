@@ -25,7 +25,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public LicenseeChangeType? ChangeType { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
-        public AdoxioApplicantTypeCodes? BusinessAccountType { get; set; }
+        public AdoxioApplicantTypeCodes? BusinessType { get; set; }
         public bool? IsDirectorNew { get; set; }
         public bool? IsDirectorOld { get; set; }
         public bool? IsManagerNew { get; set; }

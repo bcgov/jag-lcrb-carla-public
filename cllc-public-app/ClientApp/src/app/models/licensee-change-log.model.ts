@@ -17,7 +17,7 @@ export class LicenseeChangeLog {
   isShareholderOld: boolean;
   isTrusteeNew: boolean;
   isTrusteeOld: boolean;
-  businessAccountType: string;
+  businessType: string;
   numberofSharesNew: number;
   numberofSharesOld: number;
   totalSharesNew: number;
@@ -61,19 +61,20 @@ export class LicenseeChangeLog {
   }
 
 
-public get totalChildShares(): number {
-  let totalShares = 0;
-  this.children = this.children || [];
-  totalShares = this.children.map(v => v.numberofSharesNew || 0).reduce((previous, current) => previous + current);
-  return totalShares;
-}
+  public get totalChildShares(): number {
+    let totalShares = 0;
+    if (this.children && this.children.length) {
+      totalShares = this.children.map(v => v.numberofSharesNew || 0).reduce((previous, current) => previous + current);
+    }
+    return totalShares;
+  }
   /**
    * Create from LegalEntity
    */
   constructor(legalEntity: LegalEntity = null) {
     if (legalEntity) {
       this.legalEntityId = legalEntity.id;
-      this.businessAccountType = legalEntity.legalentitytype;
+      this.businessType = legalEntity.legalentitytype;
       this.isIndividual = legalEntity.isindividual;
       this.parentLegalEntityId = legalEntity.parentLegalEntityId;
       this.changeType = 'unchanged';
@@ -88,7 +89,7 @@ public get totalChildShares(): number {
       this.isTrusteeNew = legalEntity.isTrustee;
       this.isTrusteeOld = legalEntity.isTrustee;
       if (legalEntity.account) {
-        this.businessAccountType = legalEntity.account.businessType;
+        this.businessType = legalEntity.account.businessType;
       }
       this.numberofSharesNew = legalEntity.commonvotingshares;
       this.numberofSharesOld = legalEntity.commonvotingshares;
@@ -316,7 +317,7 @@ public get totalChildShares(): number {
   cancelChange(node: LicenseeChangeLog) {
     // delete change log record
     // ??What to do with children when their parent add is cancelled
-    // 
+    //
   }
 
   /**
@@ -424,22 +425,22 @@ public get totalChildShares(): number {
 
     //notice of articles
     const needsNoticeOfArticels = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
-      && (node.businessAccountType === 'PublicCorporation'));
+      && (node.businessType === 'PublicCorporation'));
     result.noticeOfArticles = LicenseeChangeLog.findNodesInTree(treeRoot, needsNoticeOfArticels);
 
     //central securities register
     const needsCentralSecuritiesRegister = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
-      && node.businessAccountType === 'PrivateCorporation');
+      && node.businessType === 'PrivateCorporation');
     result.centralSecuritiesResgister = LicenseeChangeLog.findNodesInTree(treeRoot, needsCentralSecuritiesRegister);
 
     //shareholder record
     const needsShareholderRecord = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
-      && node.businessAccountType === 'PublicCorporation');
+      && node.businessType === 'PublicCorporation');
     result.shareholderList = LicenseeChangeLog.findNodesInTree(treeRoot, needsShareholderRecord);
 
     //partnership agreement
     const needsParnershipAgreement = (node: LicenseeChangeLog) => (node.changeType === LicenseeChangeType.addBusinessShareholder
-      && node.businessAccountType === 'Partnership');
+      && node.businessType === 'Partnership');
     result.partnershipAgreement = LicenseeChangeLog.findNodesInTree(treeRoot, needsParnershipAgreement);
 
     return result;
