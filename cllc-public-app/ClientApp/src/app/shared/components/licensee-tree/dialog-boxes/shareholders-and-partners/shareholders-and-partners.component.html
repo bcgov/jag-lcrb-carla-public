@@ -1,7 +1,13 @@
 <h2 mat-dialog-title>
-  <span *ngIf="action === 'add'">Add Shareholder of {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}
+  <span *ngIf="action === 'add' ">
+    <span *ngIf="formType !== 'partnership'">Add Shareholder of </span>
+    <span *ngIf="formType === 'partnership'">Add Partner to </span>
+    {{shareholder?.parentLinceseeChangeLog?.businessNameNew }}
   </span>
-  <span *ngIf="action === 'edit'">Edit Shareholder</span>
+  <span *ngIf="action === 'edit'">
+    <span *ngIf="formType !== 'partnership'">Edit Shareholder</span>
+    <span *ngIf="formType === 'partnership'">Edit Partner</span>
+  </span>
 </h2>
 <mat-dialog-content>
   <form [formGroup]='form' class="form-horizontal">
@@ -19,24 +25,24 @@
       <span>Organization or Indigenous Nation</span> <br>
     </app-field>
 
-    <section class="row" *ngIf="!form.get('isIndividual').value && !shareholder?.isRoot">
+    <section class="row" *ngIf="!form.get('isIndividual').value && !shareholder?.isRoot && formType === 'shareholder'">
       <app-field class="col-md-12" label="What type of organization is the shareholder?" [showChevrons]="false"
-        [valid]="!isTouchedAndInvalid('businessAccountType')"
+        [valid]="!isTouchedAndInvalid('businessType')"
         errorMessage="Please select a business type from the dropdown list">
-        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessAccountType"
-          formControlName="businessAccountType" value="PrivateCorporation">
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessType"
+          formControlName="businessType" value="PrivateCorporation">
         <span>Private Corporation</span> <br>
-        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessAccountType"
-          formControlName="businessAccountType" value="PublicCorporation">
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessType"
+          formControlName="businessType" value="PublicCorporation">
         <span>Public Corporation</span> <br>
-        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessAccountType"
-          formControlName="businessAccountType" value="Partnership">
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessType"
+          formControlName="businessType" value="Partnership">
         <span>Partnership</span> <br>
-        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessAccountType"
-          formControlName="businessAccountType" value="Society">
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessType"
+          formControlName="businessType" value="Society">
         <span>Society</span> <br>
-        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessAccountType"
-          formControlName="businessAccountType" value="IndigenousNation">
+        <input type="radio" [readonly]="shareholder?.isRoot" style="margin-right: 5px;" group="businessType"
+          formControlName="businessType" value="IndigenousNation">
         <span>Indigenous nation</span> <br>
       </app-field>
     </section>
@@ -79,16 +85,27 @@
       </app-field>
     </section>
 
-    <section class="row">
-      <app-field class="col-md-12"
-        *ngIf="shareholder?.isRoot || form.get('businessAccountType').value === 'PrivateCorporation' || form.get('businessAccountType').value === 'PublicCorporation'"
+    <section *ngIf="formType === 'shareholder'" class="row">
+      <app-field  class="col-md-12"
+        *ngIf="shareholder?.isRoot || form.get('businessType').value === 'PrivateCorporation' || form.get('businessType').value === 'PublicCorporation'"
         label="Total Shares Issued" [valid]="!isTouchedAndInvalid('totalSharesNew')" errorMessage="This is required">
         <input type="number" class="form-control" formControlName="totalSharesNew">
       </app-field>
       <app-field class="col-md-12" *ngIf="!shareholder?.isRoot"
         label="Number of Voting Shares in {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}"
-        [valid]="!isTouchedAndInvalid('numberofSharesNew')" errorMessage="This is required. Maximum allowed is {{availableParentShares}}">
-        <input type="number" [readonly]="shareholder?.isRoot" class="form-control" style="width: auto;" formControlName="numberofSharesNew"> of {{shareholder?.parentLinceseeChangeLog?.totalSharesNew}}
+        [valid]="!isTouchedAndInvalid('numberofSharesNew')"
+        errorMessage="This is required. Maximum allowed is {{availableParentShares}}">
+        <input type="number" [readonly]="shareholder?.isRoot" class="form-control" style="width: auto;"
+          formControlName="numberofSharesNew"> of {{shareholder?.parentLinceseeChangeLog?.totalSharesNew}}
+      </app-field>
+    </section>
+    <section *ngIf="formType === 'partnership' && !shareholder?.isRoot" class="row">
+      <app-field class="col-md-12"
+        label="Ownership percentage"
+        [valid]="!isTouchedAndInvalid('numberofSharesNew')"
+        errorMessage="This is required. Maximum allowed is {{availableParentShares}}">
+        <input type="number" [readonly]="shareholder?.isRoot" class="form-control" style="width: auto;"
+          formControlName="numberofSharesNew"> of {{shareholder?.parentLinceseeChangeLog?.totalSharesNew}}
       </app-field>
     </section>
   </form>

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
 import { FormBase } from '@shared/form-base';
 import * as moment from 'moment';
+import { Account } from '@models/account.model';
 
 @Component({
   selector: 'app-shareholders-and-partners',
@@ -17,6 +18,8 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
   action = 'add';
   maxDate19: Date;
   availableParentShares: number = 0;
+  Account = Account;
+  formType: 'shareholder' | 'partnership';
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<ShareholdersAndPartnersComponent>,
@@ -24,6 +27,8 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     super();
     this.shareholder = data.shareholder;
     this.action = data.action;
+
+    this.formType = data.rootBusinessType;
     this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate();
 
     if (this.shareholder && this.shareholder.parentLinceseeChangeLog) {
@@ -42,14 +47,28 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
       lastNameNew: ['', Validators.required],
       dateofBirthNew: ['', Validators.required],
       emailNew: ['', [Validators.email, Validators.required]],
-      numberofSharesNew: ['', [Validators.required, Validators.max(this.availableParentShares)]],
+      numberofSharesNew: [''],
       totalSharesNew: [],
-      // partnerType: ['', Validators.required],
+      interestPercentageNew: [''],
       isIndividual: [true],
       isShareholderNew: [true],
-      businessAccountType: [''],
+      businessType: [''],
       dateIssued: [''],
     });
+
+    this.addFormValidation();
+
+    if (this.data.shareholder) {
+      this.form.patchValue(this.data.shareholder);
+    }
+  }
+
+  addFormValidation() {
+    if (this.formType === 'partnership') {
+      this.form.get('interestPercentageNew').setValidators([Validators.required]);
+    } else if (this.formType === 'shareholder') {
+      this.form.get('numberofSharesNew').setValidators([Validators.required, Validators.max(this.availableParentShares)]);
+    }
 
     this.form.get('isIndividual').valueChanges
       .subscribe(value => {
@@ -69,10 +88,6 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
           this.form.get('businessNameNew').setValidators([Validators.required]);
         }
       });
-
-    if (this.data.shareholder) {
-      this.form.patchValue(this.data.shareholder);
-    }
   }
 
   isValid(): boolean {
@@ -81,7 +96,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
 
     const formData = this.data.shareholder || {};
     if (this.shareholder.parentLinceseeChangeLog) {
-      const value = Object.assign(new LicenseeChangeLog(), formData, this.form.value);
+      const value = Object.assign(this.shareholder, new LicenseeChangeLog(), formData, this.form.value);
       if (value.percentageShares > 100) {
         valid = false;
       }

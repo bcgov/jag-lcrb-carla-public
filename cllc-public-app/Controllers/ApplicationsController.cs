@@ -172,10 +172,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
                 filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
 
-                var adoxioLicencetype = _dynamicsClient.GetAdoxioLicencetypeByName("Cannabis Retail Store");
-                if (adoxioLicencetype != null)
+                var applicationType = _dynamicsClient.GetApplicationTypeByName("Cannabis Retail Store");
+                if (applicationType != null)
                 {
-                    filter += $" and _adoxio_licencetype_value eq {adoxioLicencetype.AdoxioLicencetypeid} ";
+                    filter += $" and _adoxio_licencetype_value eq {applicationType.AdoxioApplicationtypeid} ";
                 }
 
                 try
