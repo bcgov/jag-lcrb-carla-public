@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
 import { FormBase } from '@shared/form-base';
 import * as moment from 'moment';
+import { Account } from '@models/account.model';
 
 @Component({
   selector: 'app-shareholders-and-partners',
@@ -17,6 +18,8 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
   action = 'add';
   maxDate19: Date;
   availableParentShares: number = 0;
+  Account = Account;
+  formType: string;
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<ShareholdersAndPartnersComponent>,
@@ -24,6 +27,8 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     super();
     this.shareholder = data.shareholder;
     this.action = data.action;
+    debugger;
+    this.formType = data.rootBusinessType;
     this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate();
 
     if (this.shareholder && this.shareholder.parentLinceseeChangeLog) {

@@ -72,13 +72,21 @@
         </span>
       </ng-container>
 
-      <a *ngIf="enableEditing && !node.isRemoveChangeType()" href="javascript:void(0)" class="action-link" style="margin-right: 10px;"
+
+      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessAccountType) !== 'Partnership' && !node.isRemoveChangeType()" href="javascript:void(0)" class="action-link" style="margin-right: 10px;"
         (click)="!node.isRemoveChangeType() && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>&nbsp;Edit</a>
-      <a *ngIf="enableEditing && !node.isIndividual && !node.isRemoveChangeType()" class="action-link" href="javascript:void(0)"
-        style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add Associate</a>
+      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessAccountType) !== 'Partnership' && !node.isIndividual && !node.isRemoveChangeType()" class="action-link" href="javascript:void(0)"
+        style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;
+        Add Associate
+      </a>
+      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessAccountType) === 'Partnership' && !node.isIndividual && !node.isRemoveChangeType()" 
+      class="action-link" href="javascript:void(0)" (click)="!node.isRemoveChangeType() && addShareholder(node)"
+        style="margin-right: 10px;" > <i class="fas fa-plus"></i>&nbsp;
+        Add Partner        
+      </a>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node)">Shareholder</button>
-        <button mat-menu-item (click)="!node.isRemoveChangeType() && addLeadership(node)">Leadership</button>
+        <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node, 'shareholder')">Shareholder</button>
+        <button mat-menu-item (click)="!node.isRemoveChangeType() && addLeadership(node, 'partner')">Leadership</button>
       </mat-menu>
     </section>
     <section>

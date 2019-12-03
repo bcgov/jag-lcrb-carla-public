@@ -37,6 +37,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.AdoxioBusinesnameold = fromVM.BusinessNameOld;
             toDynamics.AdoxioDateofbirthnew = fromVM.DateofBirthNew;
             toDynamics.AdoxioDateofbirthold = fromVM.DateofBirthOld;
+            toDynamics.AdoxioInterestpercentagenew = fromVM.InterestPercentageNew;
+            toDynamics.AdoxioInterestpercentageold = fromVM.InterestPercentageOld;
 
         }
 
