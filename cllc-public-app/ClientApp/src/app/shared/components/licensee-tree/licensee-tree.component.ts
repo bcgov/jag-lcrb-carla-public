@@ -52,7 +52,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    */
   editAssociate(node: LicenseeChangeLog) {
     let rootBusinessType = 'shareholder';
-    if (Account.getBusinessTypeFromName(this.treeRoot.businessAccountType) === 'Partnership') {
+    if (Account.getBusinessTypeFromName(this.treeRoot.businessType) === 'Partnership') {
       rootBusinessType = 'partnership';
     }
     if (node.isShareholderNew || node.isRoot) {
@@ -105,9 +105,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
    */
   addShareholder(parentNode: LicenseeChangeLog) {
-    debugger;
     let rootBusinessType = 'shareholder';
-    if (Account.getBusinessTypeFromName(this.treeRoot.businessAccountType) === 'Partnership') {
+    if (Account.getBusinessTypeFromName(this.treeRoot.businessType) === 'Partnership') {
       rootBusinessType = 'partnership';
     }
     this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew, 'add', rootBusinessType)
