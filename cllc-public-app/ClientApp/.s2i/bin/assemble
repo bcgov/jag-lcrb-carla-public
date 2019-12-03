@@ -36,7 +36,7 @@ fi
 npm install @angular/cli@8.3.12
 npm install
 mkdir /opt/app-root/dist
-npm ng build --base-href /cannabislicensing/ --deploy-url /cannabislicensing/ --prod --outputPath=/opt/app-root/dist
+ng build --base-href /cannabislicensing/ --deploy-url /cannabislicensing/ --prod --outputPath=/opt/app-root/dist
 
 # fix permissions
 fix-permissions /opt/app-root/dist
