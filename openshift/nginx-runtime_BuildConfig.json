@@ -1,0 +1,49 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "image.openshift.io/v1",
+            "kind": "ImageStream",
+            "metadata": {
+                "name": "nginx-runtime"
+            }
+        },
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "labels": {
+                    "app": "nginx-runtime"
+                },
+                "name": "nginx-runtime"
+            },
+            "spec": {
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "nginx-runtime:latest"
+                    }
+                },
+                "runPolicy": "Serial",
+                "source": {
+                    "contextDir": "cllc-public-app/openshift/templates/nginx-runtime/",
+                    "git": {
+                        "ref": "master",
+                        "uri": "https://github.com/bcgov/jag-lcrb-carla-public"
+                    },
+                    "type": "Git"
+                },
+                "strategy": {
+                    "type": "Docker"
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    }
+                ]
+            }
+        }
+    ]
+}
