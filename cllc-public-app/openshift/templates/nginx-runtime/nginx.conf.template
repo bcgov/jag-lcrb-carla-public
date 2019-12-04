@@ -72,12 +72,12 @@ http {
         add_header X-Frame-Options DENY;
 
         # Forward URL if not using path prefix
-        if ($request_uri !~ "^/protection-order/") {
-            return 301 $real_scheme://$http_host/protection-order$request_uri;
+        if ($request_uri !~ "^/cannabislicensing/") {
+            return 301 $real_scheme://$http_host/cannabislicensing$request_uri;
         }
 
         # Remove path prefix when handling files
-        rewrite ^/protection-order/(.*)$ /$1 last;
+        rewrite ^/cannabislicensing/(.*)$ /$1 last;
 
         %API_CONFIG_SECTION%
 
