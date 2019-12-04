@@ -75,7 +75,7 @@
       "displayName": "Source Context Directory",
       "description": "The source context directory.",
       "required": true,
-      "value": "cllc-public-app/openshift/templates/nginx-runtime/"
+      "value": "cllc-public-app/openshift/templates/nginx-runtime"
     },
     {
       "name": "OUTPUT_IMAGE_TAG",
