@@ -19,7 +19,6 @@ import { FeatureFlagService } from '@services/feature-flag.service';
   styleUrls: ['./spd-consent.component.scss']
 })
 export class SpdConsentComponent implements OnInit {
-  @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
   @ViewChild('name', { static: true }) nameInputRef: NgForm;
   currentUser: any;
   workerId: string;
