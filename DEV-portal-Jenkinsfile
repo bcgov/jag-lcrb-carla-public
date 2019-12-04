@@ -1,18 +1,28 @@
 node('master') {
-
-    stage('Startup') {
-        // stop pending builds.
-        sh 'oc cancel-build bc/cllc-public'
-        sh 'oc cancel-build bc/cllc-public-sonar'
-    }
+    
+	
+	
     stage('Build') {        
         parallel('SonarQube Scan' : {
             echo "Running SonarQube static code analysis..."
-    openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
-        }, 'Application Image' : {
+			sh 'oc cancel-build bc/cllc-public-sonar'
+			openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
+        }, 'Portal Build' : {
+		    parallel ('Angular' : {
+			   when { changeset "cllc-public-app/ClientApp/*"}
+			   sh 'oc cancel-build bc/cllc-public-angular'
+			   openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
+			}, 'API' : {
+			  when { changeset "cllc-public-app/*"}
+			  sh 'oc cancel-build bc/cllc-public-api'
+			  openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
+			}
+			)
+		
+		    
             echo "Building Application image..."
-            openshiftBuild bldCfg: 'cllc-public', showBuildLogs: 'true'
-            openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
+            openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true'
+            openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
         })
     }
 
