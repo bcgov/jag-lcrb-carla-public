@@ -1,0 +1,66 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "image.openshift.io/v1",
+            "kind": "ImageStream",
+            "metadata": {
+                "name": "cllc-public-angular"
+            }
+        },
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "labels": {
+                    "build": "cllc-public-angular-build"
+                },
+                "name": "cllc-public-angular-build"
+            },
+            "spec": {
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "cllc-public-angular:latest"
+                    }
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "1",
+                        "memory": "4Gi"
+                    },
+                    "requests": {
+                        "cpu": "250m",
+                        "memory": "2Gi"
+                    }
+                },
+                "runPolicy": "Serial",
+                "source": {
+                    "contextDir": "cllc-public-app/ClientApp",
+                    "git": {
+                        "ref": "master",
+                        "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+                    },
+                    "type": "Git"
+                },
+                "strategy": {
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "dotnet-30-rhel7:latest",
+                            "namespace": "openshift"
+                        }
+                    },
+                    "type": "Source"
+                },
+                "triggers": [
+                    {
+                        "type": "ConfigChange"
+                    }
+                ]
+            }
+        }
+    ]
+}
