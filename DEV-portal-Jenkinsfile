@@ -1,5 +1,7 @@
 node('master') {
-    
+    stage('Startup') {
+        sh 'oc cancel-build bc/cllc-public-api'
+    }
 	
 	
     stage('Build') {        
@@ -8,33 +10,30 @@ node('master') {
 			sh 'oc cancel-build bc/cllc-public-sonar'
 			openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
         }, 'Portal Build' : {
-		    parallel ('Angular' : {
-			   when { changeset "cllc-public-app/ClientApp/*"}
-			   sh 'oc cancel-build bc/cllc-public-angular'
-			   openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
-			}, 'API' : {
-			  when { changeset "cllc-public-app/*"}
-			  sh 'oc cancel-build bc/cllc-public-api'
-			  openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
-			}
+				parallel ('Angular' : {
+				   if ( changeset "cllc-public-app/ClientApp/*" )
+				   {
+				     sh 'oc cancel-build bc/cllc-public-angular'
+				     openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
+				   }
+				}, 'C# API' : {
+				  if ( changeset "cllc-public-app/*" )
+				  {
+				    sh 'oc cancel-build bc/cllc-public-api'
+				    openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
+				  }
+				}
 			)
-		
-		    
+				    
             echo "Building Application image..."
             openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true'
-            openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: '$BUILD_ID', srcStream: 'cllc-public', srcTag: 'latest'
+            openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public', srcTag: 'latest'
         })
     }
-
-    stage('Deploy on Dev') {
-        echo "Deploying to dev..."
-        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
-        //Sleeping for a while to wait deployment completes
-        sh 'sleep 1m'
-    }
+    
 }
 
-// ZAP security scan. commented out due to issues with Pathfinder OpenShift
+// ZAP security scan
 
 podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', cloud: 'openshift', containers: [
     containerTemplate(
