@@ -30,3 +30,7 @@ node_modules/
 /openshift/cllc-public-api.build_BuildConfig.json
 /openshift/cllc-public-angular-build_BuildConfig.json
 /openshift/angular-build_BuildConfig.json
+/openshift/cllc-public-frontend-deploy_DeploymentConfig.json
+/openshift/cllc-public-deploy_DeploymentConfig.json
+/openshift/cllc-public-api-deploy_DeploymentConfig.json
+/openshift/carla-spice-sync-service-deploy_DeploymentConfig.json
