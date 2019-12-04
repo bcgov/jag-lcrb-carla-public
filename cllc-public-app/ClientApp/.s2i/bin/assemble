@@ -36,7 +36,7 @@ fi
 npm install @angular/cli@8.3.12
 npm install
 mkdir /opt/app-root/dist
-npm run build --prod --outputPath=/opt/app-root/dist
+npm run build -- --prod --outputPath=/opt/app-root/src/dist
 
 # fix permissions
 fix-permissions /opt/app-root/dist
