@@ -334,7 +334,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<EstablishmentMapData> result = establishmentMapData.ToList();
 
             // add LDB stores
-            result.AddRange(GetLDBStores());
+            result.AddRange(GetLDBStores(search));
 
             // sort the establishment list by the city alphabetically 
             result = result.OrderBy(o => o.AddressCity).ToList();
@@ -346,7 +346,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// Get the list of LDB stores.
         /// </summary>
         /// <returns></returns>
-        private List<EstablishmentMapData> GetLDBStores()
+        private List<EstablishmentMapData> GetLDBStores(string search)
         {
             List<EstablishmentMapData> result = new List<EstablishmentMapData>();
             // find master account.
@@ -369,7 +369,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             Latitude = establishment.AdoxioLatitude.Value,
                             Longitude = establishment.AdoxioLongitude.Value
                         };
-                        result.Add(data);
+                        if (
+                                search == null || (establishment.AdoxioAddresscity != null &&
+                                                   establishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper())) 
+                           )
+                        {
+                            result.Add(data);
+                        }                        
                     }
                 }
             }
