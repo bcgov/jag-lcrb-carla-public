@@ -1,0 +1,126 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
+            "kind": "NetworkSecurityPolicy",
+            "metadata": {
+                "labels": {
+                    "env": "tools",
+                    "name": "pods-to-external-network"
+                },
+                "name": "pods-to-external-network"
+            },
+            "spec": {
+                "description": "Allow the builds to access the internet.\n    This only needs to be specified once per environment.",
+                "destination": " - - ext:network=any",
+                "source": " - - $namespace=yuumcs-${ENV_NAME}"
+            }
+        },
+        {
+            "apiVersion": "image.openshift.io/v1",
+            "kind": "ImageStream",
+            "metadata": {
+                "name": "cllc-public-api"
+            }
+        },
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "labels": {
+                    "app": "cllc-public-api"
+                },
+                "name": "cllc-public-api"
+            },
+            "spec": {
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "cllc-public-api:latest"
+                    }
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "1",
+                        "memory": "6Gi"
+                    },
+                    "requests": {
+                        "cpu": "1",
+                        "memory": "4Gi"
+                    }
+                },
+                "runPolicy": "Serial",
+                "source": {
+                    "contextDir": "",
+                    "git": {
+                        "ref": "develop",
+                        "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+                    },
+                    "type": "Git"
+                },
+                "strategy": {
+                    "sourceStrategy": {
+                        "env": [
+                            {
+                                "name": "DOTNET_STARTUP_PROJECT",
+                                "value": "cllc-public-app/cllc-public-app.csproj"
+                            },
+                            {
+                                "name": "UAT_BUILD",
+                                "value": ""
+                            },
+                            {
+                                "name": "PROD_BUILD",
+                                "value": ""
+                            },
+                            {
+                                "name": "DOTNET_SDK_VERSION",
+                                "value": "latest"
+                            },
+                            {
+                                "name": "MSBuildEmitSolution",
+                                "value": "1"
+                            },
+                            {
+                                "name": "VERSION_PREFIX",
+                                "value": "2.10.0"
+                            },
+                            {
+                                "name": "DOTNET_CONFIGURATION",
+                                "value": "Debug"
+                            },
+                            {
+                                "name": "MSBuildEmitSolution",
+                                "value": "1"
+                            },
+                            {
+                                "name": "DOTNET_INCREMENTAL",
+                                "value": "true"
+                            },
+                            {
+                                "name": "NPM_MIRROR",
+                                "value": "http://nexus/nexus/content/repositories/npm-registry"
+                            }
+                        ],
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "name": "dotnet-30-rhel7:latest"
+                        }
+                    },
+                    "type": "Source"
+                },
+                "triggers": [
+                    {
+                        "type": "ImageChange"
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ]
+            }
+        }
+    ]
+}
