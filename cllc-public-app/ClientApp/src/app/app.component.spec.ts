@@ -14,6 +14,7 @@ import { of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component';
+import { MonthlyReportDataService } from '@services/monthly-report.service';
 
 let accountDataServiceStub: Partial<AccountDataService>;
 let featureFlagServiceStub: Partial<FeatureFlagService>;
@@ -42,6 +43,7 @@ describe('AppComponent', () => {
       providers: [
         provideMockStore({ initialState }),
         { provide: VersionInfoDataService, useValue: {getVersionInfo: () => of({})} },
+        { provide: MonthlyReportDataService, useValue: {getAllCurrentMonthlyReports: () => of([])} },
         { provide: MatDialog, useValue: {} },
         { provide: FeatureFlagService, useValue: featureFlagServiceStub },
         { provide: AccountDataService, useValue: accountDataServiceStub }
