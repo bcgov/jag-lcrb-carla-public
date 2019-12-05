@@ -30,7 +30,8 @@
       <br>
       <label for="">Notice of Articles for [Account Name]</label>
       <ul>
-        <li *ngFor="let item of LicenseeChangeLog.getListNeedingSupportingDocument(changeTree)?.noticeOfArticles">{{item.firstNameNew}}
+        <li *ngFor="let item of LicenseeChangeLog.getListNeedingSupportingDocument(changeTree)?.noticeOfArticles">
+          {{item.firstNameNew}}
           {{item.lastNameNew}}
           <a href="">{{item.emailNew}}</a></li>
       </ul>
@@ -483,6 +484,7 @@
   </div>
 
   <section style="position: relative; margin-top: 20px;">
+    <div [ngBusy]="busySave"></div>
     <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
       <span>
         <i class="fa fa-save" style="color: #fff;"></i>
@@ -498,7 +500,5 @@
         </a>
       </span>
     </span>
-
-    <div [ngBusy]="busy"></div>
   </section>
 </div>
