@@ -14,13 +14,13 @@ export class OrganizationLeadershipComponent extends FormBase {
   form: FormGroup;
   businessType: string;
   parentName: string;
-  maxDate19: Date;
+  maxDate19: Date; // used to limit the birth date control to make sure the user is 19 years or older
 
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<OrganizationLeadershipComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     super();
-    this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate();
+    this.maxDate19 = moment(new Date()).startOf('day').subtract(19, 'year').toDate(); // 19 years in the past
     this.parentName = data.parentName;
     this.form = fb.group({
       id: [''],
@@ -57,6 +57,9 @@ export class OrganizationLeadershipComponent extends FormBase {
     };
   }
 
+  /**
+   * returns form data on dialog close
+   */
   save() {
     let formData = this.data.person || {};
     formData = (<any>Object).assign(new LicenseeChangeLog(), formData, this.form.value);
@@ -72,12 +75,10 @@ export class OrganizationLeadershipComponent extends FormBase {
     }
   }
 
+  /**
+   * returns true if the form is valid
+   */
   close() {
     this.dialogRef.close();
-  }
-
-  isFieldError(field: string) {
-    const isError = !this.form.get(field).valid && this.form.get(field).touched;
-    return isError;
   }
 }

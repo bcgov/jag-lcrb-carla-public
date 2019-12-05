@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
-import { MatTreeNestedDataSource, MatTree, MatDialog } from '@angular/material';
+import { MatTreeNestedDataSource, MatTree, MatDialog, MatSnackBar } from '@angular/material';
 import { Application } from '@models/application.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -38,9 +38,11 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   editedTree: LicenseeChangeLog;
   LicenseeChangeLog = LicenseeChangeLog;
   busy: any;
+  busySave: any;
   numberOfNonTerminatedApplications: number;
 
   constructor(public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     private fb: FormBuilder,
     public cd: ChangeDetectorRef,
     public router: Router,
@@ -122,12 +124,16 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         });
   }
 
+  /**
+   * Sends data to dynamics
+   */
   save() {
     const data = this.cleanSaveData(this.changeTree);
-    forkJoin(
+    this.busySave = forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId))
       .subscribe(() => {
+        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         this.loadData();
       });
   }
