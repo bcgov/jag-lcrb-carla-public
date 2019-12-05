@@ -13,6 +13,7 @@
   <form [formGroup]='form' class="form-horizontal">
     <p>List all the corporation’s <strong>voting</strong> shareholders.
     </p>
+    {{form.get('businessType').value}}
 
     <app-field *ngIf="!shareholder?.isRoot"
       label="Is the shareholder a person, an organization or an Indigenous nation?" [valid]="true"
@@ -25,7 +26,7 @@
       <span>Organization or Indigenous Nation</span> <br>
     </app-field>
 
-    <section class="row" *ngIf="!form.get('isIndividual').value && !shareholder?.isRoot && formType === 'shareholder'">
+    <section class="row" *ngIf="!form.get('isIndividual').value && !shareholder?.isRoot">
       <app-field class="col-md-12" label="What type of organization is the shareholder?" [showChevrons]="false"
         [valid]="!isTouchedAndInvalid('businessType')"
         errorMessage="Please select a business type from the dropdown list">
@@ -85,13 +86,13 @@
       </app-field>
     </section>
 
-    <section *ngIf="formType === 'shareholder'" class="row">
-      <app-field  class="col-md-12"
+    <section class="row">
+      <app-field class="col-md-12"
         *ngIf="shareholder?.isRoot || form.get('businessType').value === 'PrivateCorporation' || form.get('businessType').value === 'PublicCorporation'"
         label="Total Shares Issued" [valid]="!isTouchedAndInvalid('totalSharesNew')" errorMessage="This is required">
         <input type="number" class="form-control" formControlName="totalSharesNew">
       </app-field>
-      <app-field class="col-md-12" *ngIf="!shareholder?.isRoot"
+      <app-field *ngIf="formType === 'shareholder' && !shareholder?.isRoot" class="col-md-12"
         label="Number of Voting Shares in {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}"
         [valid]="!isTouchedAndInvalid('numberofSharesNew')"
         errorMessage="This is required. Maximum allowed is {{availableParentShares}}">
@@ -102,10 +103,10 @@
     <section *ngIf="formType === 'partnership' && !shareholder?.isRoot" class="row">
       <app-field class="col-md-12"
         label="Ownership percentage"
-        [valid]="!isTouchedAndInvalid('numberofSharesNew')"
-        errorMessage="This is required. Maximum allowed is {{availableParentShares}}">
+        [valid]="!isTouchedAndInvalid('interestPercentageNew')"
+        errorMessage="This is required">
         <input type="number" [readonly]="shareholder?.isRoot" class="form-control" style="width: auto;"
-          formControlName="numberofSharesNew"> of {{shareholder?.parentLinceseeChangeLog?.totalSharesNew}}
+          formControlName="interestPercentageNew">
       </app-field>
     </section>
   </form>

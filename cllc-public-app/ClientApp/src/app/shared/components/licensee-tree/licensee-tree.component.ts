@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
 import { LegalEntity } from '@models/legal-entity.model';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
 import { MatDialog } from '@angular/material';
 import { ShareholdersAndPartnersComponent } from './dialog-boxes/shareholders-and-partners/shareholders-and-partners.component';
 import { OrganizationLeadershipComponent } from './dialog-boxes/organization-leadership/organization-leadership.component';
 import { filter } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
 import { FormBase } from '@shared/form-base';
-import { Application } from '@models/application.model';
 import { Account } from '@models/account.model';
 
 
@@ -31,9 +28,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
   Account = Account;
+  cancelledChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
 
-  constructor(public dialog: MatDialog,
-    private route: ActivatedRoute) {
+  constructor(public dialog: MatDialog) {
     super();
   }
 
@@ -52,7 +49,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    */
   editAssociate(node: LicenseeChangeLog) {
     let rootBusinessType = 'shareholder';
-    if (Account.getBusinessTypeFromName(this.treeRoot.businessType) === 'Partnership') {
+    if (node.isRoot && Account.getBusinessTypeFromName(node.businessType) === 'Partnership') {
+      rootBusinessType = 'partnership';
+    } else if (!node.isRoot && node.parentLinceseeChangeLog && Account.getBusinessTypeFromName(node.parentLinceseeChangeLog.businessType) === 'Partnership') {
       rootBusinessType = 'partnership';
     }
     if (node.isShareholderNew || node.isRoot) {
@@ -105,8 +104,11 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
    */
   addShareholder(parentNode: LicenseeChangeLog) {
+    debugger;
     let rootBusinessType = 'shareholder';
-    if (Account.getBusinessTypeFromName(this.treeRoot.businessType) === 'Partnership') {
+    if (parentNode.isRoot && Account.getBusinessTypeFromName(parentNode.businessType) === 'Partnership') {
+      rootBusinessType = 'partnership';
+    } else if (!parentNode.isRoot && parentNode.parentLinceseeChangeLog && Account.getBusinessTypeFromName(parentNode.businessType) === 'Partnership') {
       rootBusinessType = 'partnership';
     }
     this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew, 'add', rootBusinessType)
@@ -130,12 +132,16 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param node 'A LicenseeChangeLog to mark for delete'
    */
   deleteAssociate(node: LicenseeChangeLog) {
-    if (node.isShareholderNew && node.isIndividual) {
-      node.changeType = LicenseeChangeType.removeIndividualShareholder;
-    } else if (node.isShareholderNew) {
-      node.changeType = LicenseeChangeType.removeBusinessShareholder;
-    } else if (node.isShareholderNew) {
-      node.changeType = LicenseeChangeType.removeLeadership;
+    if (node.legalEntityId) {
+      if (node.isShareholderNew && node.isIndividual) {
+        node.changeType = LicenseeChangeType.removeIndividualShareholder;
+      } else if (node.isShareholderNew) {
+        node.changeType = LicenseeChangeType.removeBusinessShareholder;
+      } else if (node.isShareholderNew) {
+        node.changeType = LicenseeChangeType.removeLeadership;
+      }
+    } else {
+      this.cancelChange(node);
     }
 
     this.refreshTreeAndChangeTables();
@@ -276,7 +282,30 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   }
 
   cancelChange(node: LicenseeChangeLog) {
-
+    this.cancelledChanges.emit(node);
+    if (!node.isRoot) {
+      if (!node.legalEntityId) {
+        const index = node.parentLinceseeChangeLog.children.indexOf(node);
+        node.parentLinceseeChangeLog.children.splice(index, 1)
+      } else {
+        node.changeType = 'unchanged';
+        node.businessNameNew = node.nameOld;
+        node.isDirectorNew = node.isDirectorOld;
+        node.isManagerNew = node.isManagerOld;
+        node.isOfficerNew = node.isOfficerOld;
+        node.isShareholderNew = node.isShareholderOld;
+        node.isTrusteeNew = node.isTrusteeOld;
+        node.numberofSharesNew = node.numberofSharesOld;
+        node.totalSharesNew = node.totalSharesOld;
+        node.emailNew = node.emailOld;
+        node.firstNameNew = node.firstNameOld;
+        node.lastNameNew = node.lastNameOld;
+        node.businessNameNew = node.businessNameOld;
+        node.dateofBirthNew = node.dateofBirthOld;
+        node.titleNew = node.titleOld;
+      }
+    }
+    this.refreshTreeAndChangeTables();
   }
 }
 
