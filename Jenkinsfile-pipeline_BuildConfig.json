@@ -1,0 +1,57 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "creationTimestamp": null,
+                "labels": {
+                    "app": "development-pipeline",
+                    "name": "development-pipeline",
+                    "template": "development-pipeline"
+                },
+                "name": "development-pipeline"
+            },
+            "spec": {
+                "output": {},
+                "postCommit": {},
+                "resources": {},
+                "runPolicy": "Parallel",
+                "source": {
+                    "contextDir": "",
+                    "git": {
+                        "ref": "master",
+                        "uri": "https://github.com/bcgov/ag-lclb-cllc-public.git"
+                    },
+                    "type": "Git"
+                },
+                "strategy": {
+                    "jenkinsPipelineStrategy": {
+                        "jenkinsfilePath": "Jenkinsfile"
+                    },
+                    "type": "JenkinsPipeline"
+                },
+                "triggers": [
+                    {
+                        "github": {
+                            "secret": "42ofxuBXy8vfgHwYUEA2xRIVNbKVpEod0ISXn3Ki"
+                        },
+                        "type": "GitHub"
+                    },
+                    {
+                        "generic": {
+                            "secret": "TH4w3CPAgnkrdfkGhDk874BaBc2uH6LOsxikY60y"
+                        },
+                        "type": "Generic"
+                    }
+                ]
+            },
+            "status": {
+                "lastVersion": 0
+            }
+        }
+    ]
+}

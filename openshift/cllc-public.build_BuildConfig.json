@@ -1,0 +1,110 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "apiVersion": "image.openshift.io/v1",
+            "kind": "ImageStream",
+            "metadata": {
+                "name": "cllc-public"
+            }
+        },
+        {
+            "apiVersion": "build.openshift.io/v1",
+            "kind": "BuildConfig",
+            "metadata": {
+                "labels": {
+                    "app": "cllc-public"
+                },
+                "name": "cllc-public"
+            },
+            "spec": {
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "cllc-public:latest"
+                    }
+                },
+                "resources": {
+                    "limits": {
+                        "cpu": "1",
+                        "memory": "6Gi"
+                    },
+                    "requests": {
+                        "cpu": "1",
+                        "memory": "4Gi"
+                    }
+                },
+                "runPolicy": "Serial",
+                "source": {
+                    "contextDir": "",
+                    "git": {
+                        "ref": "develop",
+                        "uri": "https://github.com/bcgov/jag-lcrb-carla-public.git"
+                    },
+                    "type": "Git"
+                },
+                "strategy": {
+                    "sourceStrategy": {
+                        "env": [
+                            {
+                                "name": "DOTNET_STARTUP_PROJECT",
+                                "value": "cllc-public-app/cllc-public-app.csproj"
+                            },
+                            {
+                                "name": "UAT_BUILD",
+                                "value": ""
+                            },
+                            {
+                                "name": "PROD_BUILD",
+                                "value": ""
+                            },
+                            {
+                                "name": "DOTNET_SDK_VERSION",
+                                "value": "latest"
+                            },
+                            {
+                                "name": "MSBuildEmitSolution",
+                                "value": "1"
+                            },
+                            {
+                                "name": "VERSION_PREFIX",
+                                "value": "2.10.0"
+                            },
+                            {
+                                "name": "DOTNET_CONFIGURATION",
+                                "value": "Debug"
+                            },
+                            {
+                                "name": "MSBuildEmitSolution",
+                                "value": "1"
+                            },
+                            {
+                                "name": "DOTNET_INCREMENTAL",
+                                "value": "true"
+                            },
+                            {
+                                "name": "NPM_MIRROR",
+                                "value": "http://nexus/nexus/content/repositories/npm-registry"
+                            }
+                        ],
+                        "from": {
+                            "kind": "DockerImage",
+                            "name": "registry.access.redhat.com/dotnet/dotnet-22-rhel7:latest"
+                        }
+                    },
+                    "type": "Source"
+                },
+                "triggers": [
+                    {
+                        "type": "ImageChange"
+                    },
+                    {
+                        "type": "ConfigChange"
+                    }
+                ]
+            }
+        }
+    ]
+}

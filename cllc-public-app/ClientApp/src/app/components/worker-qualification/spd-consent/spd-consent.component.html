@@ -146,7 +146,7 @@
           <section>
             <app-file-uploader *ngIf="workerId" documentType="SPD Signature" fileTypes="FILE MUST BE IN PDF FORMAT."
               (numberOfUploadedFiles)="uploadedDocuments = $event" [multipleFiles]="false" entityName="worker"
-              [entityId]="workerId" #mainForm></app-file-uploader>
+              [entityId]="workerId"></app-file-uploader>
           </section>
           <div *ngIf="showValidationMessages &&  (uploadedDocuments < 1)"
             style="color: #A12622; width: 700px; margin: auto; margin-top: 2px;">

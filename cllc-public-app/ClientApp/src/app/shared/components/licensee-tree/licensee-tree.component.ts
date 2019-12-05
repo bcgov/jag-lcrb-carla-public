@@ -51,8 +51,12 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param node 'A LicenseeChangeLog to edit'
    */
   editAssociate(node: LicenseeChangeLog) {
+    let rootBusinessType = 'shareholder';
+    if (Account.getBusinessTypeFromName(this.treeRoot.businessType) === 'Partnership') {
+      rootBusinessType = 'partnership';
+    }
     if (node.isShareholderNew || node.isRoot) {
-      this.openShareholderDialog(node, '', 'edit')
+      this.openShareholderDialog(node, '', 'edit', rootBusinessType)
         .pipe(filter(data => !!data))
         .subscribe((formData: LicenseeChangeLog) => {
           if (node.changeType !== LicenseeChangeType.addBusinessShareholder
@@ -101,7 +105,11 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * @param parentNode 'A LicenseeChangeLog to add the shareholder to'
    */
   addShareholder(parentNode: LicenseeChangeLog) {
-    this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew, 'add')
+    let rootBusinessType = 'shareholder';
+    if (Account.getBusinessTypeFromName(this.treeRoot.businessType) === 'Partnership') {
+      rootBusinessType = 'partnership';
+    }
+    this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew, 'add', rootBusinessType)
       .pipe(filter(data => !!data))
       .subscribe((formData: LicenseeChangeLog) => {
         if (formData.isIndividual) {
@@ -153,7 +161,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
    * Opens dialog for adding and editting shareholders
    * @param leader 'A LicenseeChangeLog'
    */
-  openShareholderDialog(shareholder: LicenseeChangeLog, parentName: string, action: string) {
+  openShareholderDialog(shareholder: LicenseeChangeLog, parentName: string, action: string, rootBusinessType: string) {
     // set dialogConfig settings
     const dialogConfig = {
       disableClose: true,
@@ -163,7 +171,8 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         businessType: 'PrivateCorporation',
         shareholder: shareholder,
         parentName,
-        action
+        action,
+        rootBusinessType
       }
     };
 
