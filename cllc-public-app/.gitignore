@@ -27,6 +27,10 @@ Bin/
 obj/
 Obj/
 
+!openshift/templates/nginx-runtime/s2i/bin
+!openshift/templates/nginx-runtime/s2i/Bin
+
+
 # Visual Studio 2015 cache/options directory
 .vs/
 
@@ -238,3 +242,4 @@ _Pvt_Extensions
 
 # e2e screenshots and reports
 /cllc-public-app/ClientApp/e2e-reports
+
