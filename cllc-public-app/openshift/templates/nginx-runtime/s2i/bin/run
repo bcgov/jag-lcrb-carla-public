@@ -20,23 +20,23 @@ getApiProxyConfigSection (){
 # proxy requests to the API
 
         location /api/ {
-            proxy_pass ${_API_URL};
+            proxy_pass ${1};
         }
 		
 		location /login/ {
-            proxy_pass ${_LOGIN_URL};
+            proxy_pass ${1};
         }
 		
 		location /logout/ {
-            proxy_pass ${_LOGOUT_URL};
+            proxy_pass ${1};
         }
 		
 		location /bcservice/ {
-            proxy_pass ${_BCSERVICE_URL};
+            proxy_pass ${1};
         }
 		
 		location /hc/ {
-            proxy_pass ${_HEALTH_CHECK_URL};
+            proxy_pass ${1};
         }
 		
 EOF
