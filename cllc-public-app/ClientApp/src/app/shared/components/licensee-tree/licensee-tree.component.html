@@ -58,7 +58,7 @@
         {{node.businessNameNew}}
       </span>
       <ng-container *ngIf="enableEditing && node.isRoot">
-        <span>({{Account.getBusinessTypeFromName(node.businessAccountType)}})</span>
+        <span>({{Account.getBusinessTypeFromName(node.businessType)}})</span>
         &nbsp;
         <span *ngIf="node.totalSharesNew"> {{node.totalSharesNew}} total Shares </span>
       </ng-container>
@@ -72,13 +72,21 @@
         </span>
       </ng-container>
 
-      <a *ngIf="enableEditing && !node.isRemoveChangeType()" href="javascript:void(0)" class="action-link" style="margin-right: 10px;"
+
+      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessType) !== 'Partnership' && !node.isRemoveChangeType()" href="javascript:void(0)" class="action-link" style="margin-right: 10px;"
         (click)="!node.isRemoveChangeType() && editAssociate(node)"> <i class="fas fa-pencil-alt"></i>&nbsp;Edit</a>
-      <a *ngIf="enableEditing && !node.isIndividual && !node.isRemoveChangeType()" class="action-link" href="javascript:void(0)"
-        style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;Add Associate</a>
+      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessType) !== 'Partnership' && !node.isIndividual && !node.isRemoveChangeType()" class="action-link" href="javascript:void(0)"
+        style="margin-right: 10px;" [matMenuTriggerFor]="menu"> <i class="fas fa-plus"></i>&nbsp;
+        Add Associate
+      </a>
+      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessType) === 'Partnership' && !node.isIndividual && !node.isRemoveChangeType()"
+      class="action-link" href="javascript:void(0)" (click)="!node.isRemoveChangeType() && addShareholder(node)"
+        style="margin-right: 10px;" > <i class="fas fa-plus"></i>&nbsp;
+        Add Partner
+      </a>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node)">Shareholder</button>
-        <button mat-menu-item (click)="!node.isRemoveChangeType() && addLeadership(node)">Leadership</button>
+        <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node, 'shareholder')">Shareholder</button>
+        <button mat-menu-item (click)="!node.isRemoveChangeType() && addLeadership(node, 'partner')">Leadership</button>
       </mat-menu>
     </section>
     <section>
@@ -100,8 +108,7 @@
     </div>
     <div class="col-md-4 col-sm-12">
       <h3>Key:</h3>
-      <span class="tree-label"> <i class="fas fa-user"></i></span> -- Leadership (Directors, Officers, Senior Managers,
-      Partners)<br>
+      <span class="tree-label"> <i class="fas fa-user"></i></span> -- Leadership (Directors, Officers and Senior Managers)<br>
       <span class="tree-label"> <i class="fas fa-building"></i></span> -- Business Shareholder <br>
       <span class="tree-label"> <i class="fas fa-user-tie"></i></span> -- Individual Shareholder <br>
       Edited Associate -- <span class="edited-node">Orange</span> <br>
