@@ -574,7 +574,7 @@
           "name": "${NAME}"
         },
         "minReplicas": 2,
-        "maxReplicas": 6
+        "maxReplicas": 2
       }
     },
     {
@@ -601,21 +601,21 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "cllc-public"
+      "value": "cllc-public-api"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the image to use for this resource.",
       "required": true,
-      "value": "cllc-public"
+      "value": "cllc-public-api"
     },
     {
       "name": "IMAGE_NAMESPACE",
       "displayName": "Image Namespace",
       "description": "The namespace of the OpenShift project containing the imagestream for the application.",
       "required": true,
-      "value": "lclb-cllc-tools"
+      "value": "yuumcs-tools"
     },
     {
       "name": "TAG_NAME",

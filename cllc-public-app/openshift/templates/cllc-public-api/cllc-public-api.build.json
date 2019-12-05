@@ -144,7 +144,7 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "cllc-public-api"
+      "value": "cllc-public"
     },
     {
       "name": "GIT_REPO_URL",
@@ -172,14 +172,14 @@
       "displayName": "Source Image Kind",
       "description": "The 'kind' (type) of the  source image; typically ImageStreamTag, or DockerImage.",
       "required": true,
-      "value": "ImageStreamTag"
+      "value": "DockerImage"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the source image.",
       "required": true,
-      "value": "dotnet-30-rhel7"
+      "value": "registry.access.redhat.com/dotnet/dotnet-22-rhel7"
     },
     {
       "name": "SOURCE_IMAGE_TAG",
