@@ -144,7 +144,7 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "cllc-public"
+      "value": "cllc-public-api"
     },
     {
       "name": "GIT_REPO_URL",
