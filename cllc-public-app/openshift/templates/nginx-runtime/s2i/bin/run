@@ -10,34 +10,58 @@ getApiProxyConfigSection (){
 #  - The URL for the API endpoint.
 # ================================================================================
 
-_API_URL = "${1}/api"
-_LOGIN_URL = "${1}/login"
-_HEALTH_CHECK_URL = "${1}/hc"
-_LOGOUT_URL = "${1}/logout"
-_BCSERVICE_URL = "${1}/bcservice"
+  _API_URL="${1}api/"
+  _LOGIN_URL="${1}login/"
+  _HEALTH_CHECK_URL="${1}hc/"
+  _LOGOUT_URL="${1}logout/"
+  _BCSERVICE_URL="${1}/bcservice/"
 
-read -r -d '' _CONFIG_SECTION << EOF
+  read -r -d '' _CONFIG_SECTION << EOF
 # proxy requests to the API
 
         location /api/ {
             proxy_pass ${_API_URL};
         }
 		
-		location /login/ {
+		location /login {
             proxy_pass ${_LOGIN_URL};
         }
 		
-		location /logout/ {
+		location /logout {
             proxy_pass ${_LOGOUT_URL};
         }
 		
-		location /bcservice/ {
+		location /bcservice {
             proxy_pass ${_BCSERVICE_URL};
+        }
+		
+		location /hc/ {
+            proxy_pass ${_HEALTH_CHECK_URL};
+        }
+		
+		location ${1}api/ {
+            proxy_pass ${_API_URL};
+        }
+		
+		location ${1}login {
+            proxy_pass ${_LOGIN_URL};
+        }
+		
+		location ${1}logout {
+            proxy_pass ${_LOGOUT_URL};
+        }
+		
+		location ${1}bcservice {
+            proxy_pass ${_BCSERVICE_URL};
+        }
+		
+		location ${1}hc/ {
+            proxy_pass ${_HEALTH_CHECK_URL};
         }
 		
 EOF
 
-echo "${_CONFIG_SECTION}"
+  echo "${_CONFIG_SECTION}"
 }
 
 getApiUrl (){
