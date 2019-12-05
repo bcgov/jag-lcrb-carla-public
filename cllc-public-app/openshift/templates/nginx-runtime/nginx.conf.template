@@ -11,6 +11,8 @@ http {
     include       /etc/nginx/mime.types;
     default_type  application/octet-stream;
     server_tokens off;
+	
+	ignore_invalid_headers off;
 
     # ip filtering
     %IpFilterRules%
