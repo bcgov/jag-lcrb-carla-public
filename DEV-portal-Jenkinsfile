@@ -11,13 +11,13 @@ node('master') {
 			openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
         }, 'Portal Build' : {
 				parallel ('Angular' : {
-				   if ( changeset "cllc-public-app/ClientApp/*" )
+				   if ( changeset ("cllc-public-app/ClientApp/*") )
 				   {
 				     sh 'oc cancel-build bc/cllc-public-angular'
 				     openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
 				   }
 				}, 'C# API' : {
-				  if ( changeset "cllc-public-app/*" )
+				  if ( changeset ("cllc-public-app/*") )
 				  {
 				    sh 'oc cancel-build bc/cllc-public-api'
 				    openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
