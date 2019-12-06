@@ -106,7 +106,7 @@
       "displayName": "Source Image Namespace",
       "description": "The namespace containing the source image.",
       "required": true,
-      "value": "openshift"
+      "value": "lclb-cllc-tools"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
