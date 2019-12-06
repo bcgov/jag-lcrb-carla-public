@@ -139,7 +139,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             fileName = illegalInFileName.Replace(fileName, "-");
 
             fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
-            string folderName = await GetFolderName(entityName, entityId, _dynamicsClient);
+            string folderName = null;
+
+            folderName = await GetEntitySharePointDocumentationLocation(entityName, entityId);
+
+            if (folderName == null)
+            {
+                folderName = await GetFolderName(entityName, entityId, _dynamicsClient);
+            }
             SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
             string headers = LoggingEvents.GetHeaders(Request);
             try
@@ -162,6 +169,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} Unexpected Exception {e.ToString()} {e.Message} {e.StackTrace.ToString()}");
             }
             return new JsonResult(result);
+        }
+
+        private async Task<string> GetEntitySharePointDocumentationLocation(string entityName, string entityId)
+        {
+            string result = null;
+            var id = Guid.Parse(entityId);
+            switch (entityName.ToLower())
+            {
+                case "worker":
+                    var worker = await _dynamicsClient.GetWorkerByIdWithChildren(entityId);
+                    var location = worker.AdoxioWorkerSharePointDocumentLocations.FirstOrDefault();
+                    if (location != null && ! string.IsNullOrEmpty(location.Relativeurl))
+                    {
+                        result = location.Relativeurl;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return result;
         }
 
         private async Task<bool> CanAccessEntity(string entityName, string entityId)
