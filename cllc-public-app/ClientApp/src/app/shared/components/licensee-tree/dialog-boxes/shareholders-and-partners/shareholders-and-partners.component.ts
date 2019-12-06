@@ -63,16 +63,34 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     }
   }
 
+  /**
+   * Adds dynamic (based on data) validataion to the form
+   */
   addFormValidation() {
+
+    // partnership vs shaholder validation 
     if (this.formType === 'partnership') {
       this.form.get('interestPercentageNew').setValidators([Validators.required]);
     } else if (this.formType === 'shareholder') {
       this.form.get('numberofSharesNew').setValidators([Validators.required, Validators.max(this.availableParentShares)]);
     }
 
+    this.form.get('businessType').valueChanges
+      .subscribe(value => {
+        if (value === 'PublicCorporation' || value === 'PrivateCorporation') {
+          this.form.get('totalSharesNew').setValidators([Validators.required, Validators.max(this.availableParentShares)]);
+        } else {
+          this.form.get('totalSharesNew').clearValidators();
+          this.form.get('totalSharesNew').reset();
+        }
+      });
+
+    // individual vs corporation/business validation
     this.form.get('isIndividual').valueChanges
       .subscribe(value => {
         if (value) {
+          this.form.get('businessType').clearValidators();
+          this.form.get('businessType').reset();
           this.form.get('businessNameNew').clearValidators();
           this.form.get('businessNameNew').reset();
           this.form.get('firstNameNew').setValidators([Validators.required]);
@@ -85,11 +103,15 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
           this.form.get('lastNameNew').reset();
           this.form.get('dateofBirthNew').clearValidators();
           this.form.get('dateofBirthNew').reset();
+          this.form.get('businessType').setValidators([Validators.required]);
           this.form.get('businessNameNew').setValidators([Validators.required]);
         }
       });
   }
 
+  /**
+   * returns true if the form is valid
+   */
   isValid(): boolean {
     let valid = (!this.shareholder.isRoot && this.form.valid)
       || (this.shareholder.isRoot && this.form.get('totalSharesNew').value);
@@ -97,13 +119,16 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     const formData = this.data.shareholder || {};
     if (this.shareholder.parentLinceseeChangeLog) {
       const value = Object.assign(this.shareholder, new LicenseeChangeLog(), formData, this.form.value);
-      if (value.percentageShares > 100) {
+      if (this.formType === 'shareholder' && value.percentageShares > 100) {
         valid = false;
       }
     }
     return valid;
   }
 
+  /**
+   * returns form data on dialog close
+   */
   save() {
     if (!this.isValid()) {
       Object.keys(this.form.controls).forEach(field => {
@@ -124,6 +149,9 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     }
   }
 
+  /**
+   * closes the dialog box and returns no data (cancels the add or edit)
+   */
   close() {
     this.dialogRef.close();
   }

@@ -319,7 +319,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             try
             {
                 // fetch from Dynamics.
-                string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses" };
+                string[] expand = { "adoxio_ContactId", "adoxio_worker_aliases", "adoxio_worker_previousaddresses", "adoxio_worker_SharePointDocumentLocations" };
                 result = await this.Workers.GetByKeyAsync(adoxioWorkerid: id, expand: expand);
             }
             catch (HttpOperationException)

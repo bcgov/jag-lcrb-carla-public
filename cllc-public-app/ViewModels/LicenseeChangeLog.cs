@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string ParentLinceseeChangeLogId { get; set; }
         public IList<LicenseeChangeLog> Children { get; set; }
 
-        public int? InterestPercentageOld { get; set; }
-        public int? InterestPercentageNew { get; set; }
+        public decimal? InterestPercentageOld { get; set; }
+        public decimal? InterestPercentageNew { get; set; }
     }
 }

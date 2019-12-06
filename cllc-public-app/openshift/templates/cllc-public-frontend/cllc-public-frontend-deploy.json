@@ -1,0 +1,397 @@
+{
+  "apiVersion": "v1",
+  "kind": "Template",
+  "metadata": {
+    "annotations": {
+      "description": "Deployment template for a angular on nginx",
+      "tags": "angular,nginx"
+    },
+    "name": "cllc-public-frontend"
+  },
+  "objects": [
+    {
+      "kind": "NetworkSecurityPolicy",
+      "apiVersion": "secops.pathfinder.gov.bc.ca/v1alpha1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "name": "${NAME}",
+          "app": "${APP_NAME}",
+          "env": "${TAG_NAME}"
+        }
+      },
+      "spec": {
+        "description": "Allow the frontend (web) to talk to the api pod.\n",
+        "source": [
+          "- role=${ROLE}\n- app=${APP_NAME}\n- env=${TAG_NAME}"
+        ],
+        "destination": [
+          "- role=api\n- app=${APP_NAME}\n- env=${TAG_NAME}"
+        ]
+      }
+    },
+    {
+      "kind": "DeploymentConfig",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "name": "${NAME}",
+          "app": "${APP_NAME}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
+        }
+      },
+      "spec": {
+        "replicas": 2,
+        "selector": {
+          "name": "${NAME}"
+        },
+        "strategy": {
+          "rollingParams": {
+            "intervalSeconds": 1,
+            "maxSurge": "25%",
+            "maxUnavailable": "25%",
+            "timeoutSeconds": 600,
+            "updatePeriodSeconds": 1
+          },
+          "type": "Rolling"
+        },
+        "template": {
+          "metadata": {
+            "name": "${NAME}",
+            "labels": {
+              "name": "${NAME}",
+              "app": "${APP_NAME}",
+              "role": "${ROLE}",
+              "env": "${TAG_NAME}"
+            }
+          },
+          "spec": {
+            "nodeSelector": {
+              "aporeto-enforcerd": "true"
+            },
+            "containers": [
+              {
+                "image": "${NAME}",
+                "imagePullPolicy": "Always",
+                "name": "${NAME}",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "API_URL",
+                    "value": "${API_URL}"
+                  },
+                  {
+                    "name": "API_SERVICE_NAME",
+                    "value": "${API_SERVICE_NAME}"
+                  },
+                  {
+                    "name": "API_PATH",
+                    "value": "${API_PATH}"
+                  },
+                  {
+                    "name": "RealIpFrom",
+                    "value": "${REAL_IP_FROM}"
+                  },
+                  {
+                    "name": "AdditionalRealIpFromRules",
+                    "value": "${AdditionalRealIpFromRules}"
+                  },
+                  {
+                    "name": "IpFilterRules",
+                    "value": "${IpFilterRules}"
+                  },
+                  {
+                    "name": "HTTP_BASIC",
+                    "value": "${HTTP_BASIC}"
+                  },
+                  {
+                    "name": "HTTP_BASIC_USERNAME",
+                    "value": "${HTTP_BASIC_USERNAME}"
+                  },
+                  {
+                    "name": "HTTP_BASIC_PASSWORD",
+                    "value": "${HTTP_BASIC_PASSWORD}"
+                  }
+                ],
+                "resources": {
+                  "requests": {
+                    "cpu": "${CPU_REQUEST}",
+                    "memory": "${MEMORY_REQUEST}"
+                  },
+                  "limits": {
+                    "cpu": "${CPU_LIMIT}",
+                    "memory": "${MEMORY_LIMIT}"
+                  }
+                },
+                "livenessProbe": {
+                  "httpGet": {
+                    "path": "/nginx_status",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 30,
+                  "timeoutSeconds": 60,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                },
+                "readinessProbe": {
+                  "httpGet": {
+                    "path": "/nginx_status",
+                    "port": 8080,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 10,
+                  "timeoutSeconds": 60,
+                  "periodSeconds": 10,
+                  "successThreshold": 1,
+                  "failureThreshold": 3
+                }
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "securityContext": {},
+            "terminationGracePeriodSeconds": 30
+          }
+        },
+        "test": false,
+        "triggers": [
+          {
+            "type": "ConfigChange"
+          },
+          {
+            "type": "ImageChange",
+            "imageChangeParams": {
+              "automatic": true,
+              "containerNames": [
+                "${NAME}"
+              ],
+              "from": {
+                "kind": "ImageStreamTag",
+                "namespace": "${IMAGE_NAMESPACE}",
+                "name": "${NAME}:${TAG_NAME}"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "Service",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "name": "${NAME}",
+          "app": "${APP_NAME}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "8080-tcp",
+            "port": 8080,
+            "protocol": "TCP",
+            "targetPort": 8080
+          }
+        ],
+        "selector": {
+          "name": "${NAME}"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      }
+    },
+    {
+      "kind": "Route",
+      "apiVersion": "v1",
+      "metadata": {
+        "name": "${NAME}-siteminder-route",
+        "labels": {
+          "name": "${NAME}-siteminder-route",
+          "app": "${APP_NAME}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
+        },
+        "annotations": {
+          "haproxy.router.openshift.io/ip_whitelist": "${SITEMINDER_WHITE_LIST}"
+        }
+      },
+      "spec": {
+        "host": "${SITEMINDER_APPLICATION_DOMAIN}",
+        "port": {
+          "targetPort": "8080-tcp"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "${NAME}",
+          "weight": 100
+        }
+      }
+    },
+    {
+      "kind": "HorizontalPodAutoscaler",
+      "apiVersion": "autoscaling/v1",
+      "metadata": {
+        "name": "${NAME}",
+        "labels": {
+          "name": "${NAME}",
+          "app": "${APP_NAME}",
+          "role": "${ROLE}",
+          "env": "${TAG_NAME}"
+        }
+      },
+      "spec": {
+        "scaleTargetRef": {
+          "kind": "DeploymentConfig",
+          "name": "${NAME}"
+        },
+        "minReplicas": 2,
+        "maxReplicas": 6
+      }
+    }
+  ],
+  "parameters": [
+    {
+      "description": "The name assigned to all of the openshift objects defined in this template. It is also the name of runtime image you want.",
+      "displayName": "Name",
+      "name": "NAME",
+      "required": true,
+      "value": "cllc-public-frontend"
+    },
+    {
+      "name": "APP_NAME",
+      "displayName": "App Name",
+      "description": "App Name",
+      "required": true,
+      "value": "cllc-public"
+    },
+    {
+      "name": "ROLE",
+      "displayName": "Role",
+      "description": "Role",
+      "required": true,
+      "value": "web"
+    },
+    {
+      "description": "The namespace where to get the above image name",
+      "displayName": "Image Namespace",
+      "name": "IMAGE_NAMESPACE",
+      "required": true,
+      "value": "yuumcs-tools"
+    },
+    {
+      "description": "OpenShift cluster private IP range in CIDR notation, used by Nginx ngx_http_realip_module.",
+      "displayName": "OpenShift Cluster IP Range",
+      "name": "REAL_IP_FROM",
+      "required": true,
+      "value": "172.51.0.0/16"
+    },
+    {
+      "description": "The default URL to use when proxying requests to the application's API.  The value here will be overridden if a API_SERVICE_NAME is defined.",
+      "displayName": "API URL",
+      "name": "API_URL",
+      "required": true,
+      "value": "http://cllc-public-api:8080/api"
+    },
+    {
+      "description": "The name of the service endpoint for the API.  Used to wire up to an API endpoint within the same project; overriding the URL defined by API_URL.",
+      "displayName": "API Service Name",
+      "name": "API_SERVICE_NAME",
+      "required": false,
+      "value": "cllc-public-api"
+    },
+    {
+      "description": "The root path for the API.  Used in conjunction with API_SERVICE_NAME.",
+      "displayName": "API Path",
+      "name": "API_PATH",
+      "required": true,
+      "value": "/api/"
+    },
+    {
+      "description": "Additional known and trusted reverse proxy ips conforming to nginx set_real_ip_from directive syntax. Multiple directives are allowed, separated by semicolon.",
+      "displayName": "Additional real_ip_from Rules",
+      "name": "AdditionalRealIpFromRules"
+    },
+    {
+      "description": "Nginx ngx_http_access_module ip filter rules",
+      "displayName": "Ip Filter Rules",
+      "name": "IpFilterRules",
+      "value": ""
+    },
+    {
+      "description": "The endpoint used for SiteMinder routed access to the application.",
+      "displayName": "SiteMinder Application Domain",
+      "name": "SITEMINDER_APPLICATION_DOMAIN",
+      "value": "protection-order-dev.pathfinder.bcgov"
+    },
+    {
+      "name": "SITEMINDER_WHITE_LIST",
+      "displayName": "SiteMinder Whitelist",
+      "description": "The whitelist containing all of the trusted siteminder IPs.",
+      "required": false
+    },
+    {
+      "description": "The TAG name for this environment, e.g., dev, test, prod",
+      "displayName": "Env TAG name",
+      "name": "TAG_NAME",
+      "value": "dev"
+    },
+    {
+      "description": "For very simple HTTP Basic authentication, use %HTTP_BASIC% in your nginx config and provide the value here that you want in nginx config, e.g., auth_basic 'restricted';",
+      "displayName": "HTTP Basic Nginx Config Line",
+      "name": "HTTP_BASIC",
+      "value": ""
+    },
+    {
+      "description": "For very simple HTTP Basic authentication, the username of the ONE user",
+      "displayName": "HTTP Basic Username",
+      "name": "HTTP_BASIC_USERNAME",
+      "value": ""
+    },
+    {
+      "description": "For very simple HTTP Basic authentication, the password of the ONE user",
+      "displayName": "HTTP Basic Password",
+      "name": "HTTP_BASIC_PASSWORD",
+      "value": ""
+    },
+    {
+      "name": "CPU_REQUEST",
+      "displayName": "Resources CPU Request",
+      "description": "The resources CPU request (in cores) for this build.",
+      "required": true,
+      "value": "10m"
+    },
+    {
+      "name": "CPU_LIMIT",
+      "displayName": "Resources CPU Limit",
+      "description": "The resources CPU limit (in cores) for this build.",
+      "required": true,
+      "value": "512m"
+    },
+    {
+      "name": "MEMORY_REQUEST",
+      "displayName": "Resources Memory Request",
+      "description": "The resources Memory request (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "64Mi"
+    },
+    {
+      "name": "MEMORY_LIMIT",
+      "displayName": "Resources Memory Limit",
+      "description": "The resources Memory limit (in Mi, Gi, etc) for this build.",
+      "required": true,
+      "value": "256Mi"
+    }
+  ]
+}
