@@ -39,7 +39,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             toDynamics.AdoxioDateofbirthold = fromVM.DateofBirthOld;
             toDynamics.AdoxioInterestpercentagenew = fromVM.InterestPercentageNew;
             toDynamics.AdoxioInterestpercentageold = fromVM.InterestPercentageOld;
-
         }
 
         public static LicenseeChangeLog ToViewModel(this MicrosoftDynamicsCRMadoxioLicenseechangelog changeLog)

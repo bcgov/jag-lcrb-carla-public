@@ -40,6 +40,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   busy: any;
   busySave: any;
   numberOfNonTerminatedApplications: number;
+  cancelledLicenseeChanges: LicenseeChangeLog[] = [];
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -131,18 +132,23 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     const data = this.cleanSaveData(this.changeTree);
     this.busySave = forkJoin(
       this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId))
+      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
+      this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
       .subscribe(() => {
         this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
         this.loadData();
       });
   }
 
+  addCancelledChange(change: LicenseeChangeLog) {
+    this.cancelledLicenseeChanges.push(change);
+  }
+
   cancelApplication() {
   }
 
   /**
-   * Returns true if there is an ongoing or approved (but not terminated) 
+   * Returns true if there is an ongoing or approved (but not terminated)
    * CRS application
    */
   aNonTerminatedCrsApplicationExistOnAccount(): boolean {
