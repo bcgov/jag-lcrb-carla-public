@@ -67,8 +67,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
    * Adds dynamic (based on data) validataion to the form
    */
   addFormValidation() {
-
-    // partnership vs shaholder validation 
+    // partnership vs shaholder validation
     if (this.formType === 'partnership') {
       this.form.get('interestPercentageNew').setValidators([Validators.required]);
     } else if (this.formType === 'shareholder') {
