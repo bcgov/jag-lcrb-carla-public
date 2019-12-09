@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, ValidationErrors } from '@angular/forms';
-import { validationErrors } from '../federal-reporting-validation';
+import { fieldValidationErrors, formValidationErrors, ClosingInventoryValidator, SalesValidator } from '../federal-reporting-validation';
 
 @Component({
   selector: 'app-product-inventory-sales-report',
@@ -14,15 +14,16 @@ export class ProductInventorySalesReportComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.productForm.setValidators([ClosingInventoryValidator, SalesValidator]);
   }
 
-  getFormValidationErrors() {
+  getFieldValidationErrors() {
     const errorStrings = [];
     Object.keys(this.productForm.controls).forEach(key => {
       const controlErrors: ValidationErrors = this.productForm.get(key).errors;
       if (controlErrors != null) {
         Object.keys(controlErrors).forEach(keyError => {
-          const error = validationErrors[key].find(e => e.type === keyError);
+          const error = fieldValidationErrors[key].find(e => e.type === keyError);
           if (errorStrings.findIndex(e => e === error.message) === -1) {
             errorStrings.push(error.message);
           }
@@ -30,6 +31,16 @@ export class ProductInventorySalesReportComponent implements OnInit {
       }
     });
     return errorStrings;
+  }
+
+  getFormValidationErrors() {
+    const alertStrings = [];
+    if (this.productForm.errors !== null) {
+      Object.keys(this.productForm.errors).forEach(key => {
+        alertStrings.push(formValidationErrors[key]);
+      });
+    }
+    return alertStrings;
   }
 
   isFieldInvalid(fieldName: string) {
