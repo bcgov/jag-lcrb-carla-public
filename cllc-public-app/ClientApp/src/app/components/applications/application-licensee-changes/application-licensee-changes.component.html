@@ -20,7 +20,7 @@
       supply
       additional information.
     </p>
-    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" [enableEditing]="true">
+    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" (cancelledChanges)="addCancelledChange($even)" [enableEditing]="true">
     </app-licensee-tree>
   </div>
 

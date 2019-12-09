@@ -60,7 +60,16 @@ export class LegalEntityDataService extends DataService {
    * @param applicationId - The application to associte to the change logs
    */
   saveLicenseeChanges(changeTree: LicenseeChangeLog, applicationId: string) {
-    return this.http.post<LegalEntity>(`api/legalentities/save-change-tree/${applicationId}`, changeTree, { headers: this.headers })
+    return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/${applicationId}`, changeTree, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   *  Deletes cancelled change logs
+   * @param changes - A list of cancelled change logs
+   */
+  cancelLicenseeChanges(changes: LicenseeChangeLog[]) {
+    return this.http.post(`api/legalentities/cancel-change-logs`, changes, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
