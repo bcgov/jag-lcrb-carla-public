@@ -528,6 +528,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok();
         }
 
+        [HttpPost("cancel-change-logs")]
+        public IActionResult CancelLicenseeChangeLogs(List<LicenseeChangeLog> changeLogs)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            foreach (var change in changeLogs)
+            {
+                if (!String.IsNullOrEmpty(change.Id))
+                {
+                    try
+                    {
+                        _dynamicsClient.Licenseechangelogs.Delete(change.Id);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, $"Error deleting LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, $"Unexpected Exception while deleteing LicenseeChangeLog");
+                    }
+                }
+            }
+            return Ok();
+        }
+
         private void SaveChangeObjects(LicenseeChangeLog node, string applicationId, string parentLegalEntityId = null, string parentChangeLogId = null)
         {
             if (node.ChangeType != LicenseeChangeType.unchanged)
@@ -608,7 +636,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
+                        _logger.LogError(e, $"Unexpected Exception while saving LicenseeChangeLog");
                     }
                 }
             }
