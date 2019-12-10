@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Gov.Lclb.Cllb.Interfaces.Files";
+
+package files;
+
+// The files service definition.
+service Files { 
+
+  // Delete file
+  rpc DeleteFile (DeleteFileRequest) returns (DeleteFileReply);
+
+  // Download File
+  rpc DownloadFile (DownloadFileRequest) returns (DownloadFileReply);
+
+  // Upload File
+  rpc UploadFile (UploadFileRequest) returns (UploadFileReply);
+
+  // Get files in a given folder.
+  rpc FolderFiles (FolderFilesRequest) returns (FolderFilesReply);
+
+}
+
+enum ResultStatus {
+    Fail = 0;
+    Success = 1;
+}
+
+message DeleteFileRequest {
+    string serverRelativeUrl = 1;
+}
+
+message DeleteFileReply {
+    ResultStatus resultStatus = 1;
+    string errorDetail = 2;
+}
+
+message DownloadFileRequest {
+    string serverRelativeUrl = 1;
+}
+
+message DownloadFileReply {
+    bytes data = 1;
+    ResultStatus resultStatus = 2;
+    string errorDetail = 3;
+}
+
+// Individual File
+message FileSystemItem {
+  string id = 1; 
+  string name = 2;
+  string documenttype = 3; 
+  int64 size = 4;
+  string serverrelativeurl = 5;
+  google.protobuf.Timestamp timecreated = 6;
+  google.protobuf.Timestamp timelastmodified = 7;
+}
+
+message FolderFilesRequest {
+    string entityId = 1;
+    string entityName = 2; 
+    string documentType = 3;
+}
+
+// collection of files
+message FolderFilesReply {
+    repeated FileSystemItem files = 1;
+    ResultStatus resultStatus = 2;
+    string errorDetail = 3;
+}
+
+
+message UploadFileRequest {
+    string documentLibrary = 1;
+    string folderName = 2;
+    string fileName = 3;
+    string contentType = 4;
+    bytes data = 5;
+}
+
+message UploadFileReply {
+    ResultStatus resultStatus = 1;
+    string errorDetail = 2;
+}
+
+
