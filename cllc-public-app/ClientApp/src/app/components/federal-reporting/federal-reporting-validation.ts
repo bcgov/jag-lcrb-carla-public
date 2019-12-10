@@ -21,7 +21,7 @@ const weightError = [
   { type: 'pattern', message: weightMessage }
 ];
 
-export const validationErrors = {
+export const fieldValidationErrors = {
   'openingInventory': wholeNumberError,
   'domesticAdditions': wholeNumberError,
   'returnsAdditions': wholeNumberError,
@@ -31,18 +31,17 @@ export const validationErrors = {
   'destroyedReductions': wholeNumberError,
   'lostReductions': wholeNumberError,
   'otherReductions': wholeNumberError,
-  'closingNumber': [
-    ...wholeNumberError,
-    { type: 'closingNumberMismatch', message: 'Closing Inventory must be equal to (Opening Inventory + Additions - Reductions)' }
-  ],
+  'closingNumber': wholeNumberError,
   'closingValue': valueError,
   'closingWeight': weightError,
   'totalSeeds': wholeNumberError,
-  'totalSalesToConsumerQty': [
-    ...wholeNumberError,
-    { type: 'salesMismatch', message: 'Sales quantity must equal domestic reductions' }
-  ],
+  'totalSalesToConsumerQty': wholeNumberError,
   'totalSalesToConsumerValue': valueError
+};
+
+export const formValidationErrors = {
+  'closingNumberMismatch': 'Closing Inventory must be equal to (Opening Inventory + Additions - Reductions)',
+  'salesMismatch': 'Sales quantity must equal domestic reductions'
 };
 
 export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
@@ -62,18 +61,14 @@ export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
 
   const total = additions.reduce((n, curr) => n + curr, 0) - reductions.reduce((n, curr) => n + curr, 0);
   if (total !== +fg.get('closingNumber').value) {
-    fg.get('closingNumber').setErrors({ closingNumberMismatch: true });
-  } else {
-    fg.get('closingNumber').setErrors(null);
+    return { closingNumberMismatch: true };
   }
   return null;
 };
 
 export const SalesValidator: ValidatorFn = (fg: FormGroup) => {
   if (+fg.get('totalSalesToConsumerQty').value !== +fg.get('domesticReductions').value) {
-    fg.get('totalSalesToConsumerQty').setErrors({ salesMismatch: true });
-  } else {
-    fg.get('totalSalesToConsumerQty').setErrors(null);
+    return { salesMismatch: true };
   }
   return null;
 };
