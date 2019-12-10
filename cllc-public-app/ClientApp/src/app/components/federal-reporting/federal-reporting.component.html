@@ -51,9 +51,7 @@
                   </div>
                   <p>Enter the number of employees who worked at your store in {{getMonthName(report.reportingPeriodMonth)}} {{report.reportingPeriodYear}} for each position listed below.</p>
                   <div *ngIf="reportForm.invalid && (reportForm.dirty || reportForm.touched)">
-                    <ul>
-                      <li class="error-states">Number of employees must be a whole number less than 10000.</li>
-                    </ul>
+                    <div class="alert alert-danger">Number of employees must be a whole number less than 10000.</div>
                   </div>
                   <div class="form-group row mx-0" >
                     <label class="col-xl-1 col-xs-3 col-form-label">Management:</label>
@@ -142,7 +140,7 @@
                   ></app-product-inventory-sales-report>
                 </div>
                 <div class="row mx-0" *ngIf="!reportIsDisabled">
-                  <button class="btn btn-primary mt-5 mr-5" (click)="save(false)">
+                  <button class="btn btn-primary mt-5 mr-5" (click)="save(false)" [disabled]="!checkIfReportSaveable()">
                     <span>
                       <i class="fa fa-save" style="color: #fff;"></i>
                       Save for Later
