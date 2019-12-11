@@ -351,7 +351,7 @@ export class FederalReportingComponent implements OnInit {
       otherReductions: [report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       closingNumber: [report.closingNumber, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       closingValue: [report.closingValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-      closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
+      closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(1000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
       totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]]
