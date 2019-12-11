@@ -1,20 +1,20 @@
 import { ValidatorFn, FormGroup } from '@angular/forms';
 
-const wholeNumberMessage = 'Units must be a whole number less than 10000000.';
+const wholeNumberMessage = 'Units must be a whole number less than 10,000,000.';
 const wholeNumberError = [
   { type: 'min', message: wholeNumberMessage },
   { type: 'max', message: wholeNumberMessage },
   { type: 'pattern', message: wholeNumberMessage }
 ];
 
-const valueMessage = 'Value must be a less than 1000000000 and have 2 decimal places.';
+const valueMessage = 'Value must be less than $1,000,000,000 and have 2 decimal places.';
 const valueError = [
   { type: 'min', message: valueMessage },
   { type: 'max', message: valueMessage },
   { type: 'pattern', message: valueMessage }
 ];
 
-const weightMessage = 'Value must be a less than 10000000 and have 3 decimal places.';
+const weightMessage = 'Weight must be less than 1,000kg and have 3 decimal places.';
 const weightError = [
   { type: 'min', message: weightMessage },
   { type: 'max', message: weightMessage },
