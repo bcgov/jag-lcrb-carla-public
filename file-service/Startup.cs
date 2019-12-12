@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Gov.Lclb.Cllb.Interfaces.Files
+namespace Gov.Lclb.Cllb.Services.FileManager
 {
     public class Startup
     {
@@ -31,7 +31,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Files
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<FileService>();
+                endpoints.MapGrpcService<FileManagerService>();
 
                 endpoints.MapGet("/", async context =>
                 {

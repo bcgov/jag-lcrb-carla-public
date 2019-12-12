@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Gov.Lclb.Cllb.Interfaces.Files
+namespace Gov.Lclb.Cllb.Services.FileManager
 {
     public class Program
     {
