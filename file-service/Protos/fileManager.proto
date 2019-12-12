@@ -2,12 +2,12 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-option csharp_namespace = "Gov.Lclb.Cllb.Interfaces.Files";
+option csharp_namespace = "Gov.Lclb.Cllb.Services.FileManager";
 
-package files;
+package filemanager;
 
 // The files service definition.
-service Files { 
+service FileManager { 
 
   // Delete file
   rpc DeleteFile (DeleteFileRequest) returns (DeleteFileReply);
@@ -71,9 +71,8 @@ message FolderFilesReply {
     string errorDetail = 3;
 }
 
-
 message UploadFileRequest {
-    string documentLibrary = 1;
+    string entityName = 1;
     string folderName = 2;
     string fileName = 3;
     string contentType = 4;
@@ -83,6 +82,7 @@ message UploadFileRequest {
 message UploadFileReply {
     ResultStatus resultStatus = 1;
     string errorDetail = 2;
+    string fileName = 3;
 }
 
 
