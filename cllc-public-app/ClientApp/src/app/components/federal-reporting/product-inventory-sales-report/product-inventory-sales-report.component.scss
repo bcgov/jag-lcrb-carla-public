@@ -32,3 +32,21 @@ input {
     flex-wrap: nowrap !important;
   }
 }
+
+.alert {
+  padding: 10px;
+  margin-bottom: 0;
+  margin-top: 3px;
+}
+.input-group {
+  position: relative;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+  display: flex;
+}
+
+.form-control {
+  width: 1%;
+  font-size: 11px;
+}

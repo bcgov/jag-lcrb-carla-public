@@ -135,6 +135,7 @@ import { AccountProfileComponent } from '@components/account-profile/account-pro
 import { FieldComponent } from '@shared/components/field/field.component';
 import { AppRemoveIfFeatureOnDirective } from './directives/remove-if-feature-on.directive';
 import { AppRemoveIfFeatureOffDirective } from './directives/remove-if-feature-off.directive';
+import { InputThousandsDirective } from './directives/input-thousands.directive';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppState } from '@app/app-state/models/app-state';
 import { SetCurrentUserAction } from '@app/app-state/actions/current-user.action';
@@ -237,6 +238,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     AccountProfileComponent,
     AppRemoveIfFeatureOnDirective,
     AppRemoveIfFeatureOffDirective,
+    InputThousandsDirective,
     AssociateContentComponent,
     ConnectionToNonMedicalStoresComponent,
     KeyPersonnelDialogComponent,

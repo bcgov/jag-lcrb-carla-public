@@ -23,7 +23,8 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentaddressstreet = from.EstablishmentAddressStreet;
             to.AdoxioEstablishmentaddresscity = from.EstablishmentAddressCity;
             to.AdoxioEstablishmentaddresspostalcode = from.EstablishmentAddressPostalCode;
-            to.AdoxioAddresscity = from.EstablishmentAddressCity;
+            // 12-10-2019 - Removed the update to AdoxioAddressCity as the Dynamics workflow handles that.
+
             to.AdoxioEstablishmentparcelid = from.EstablishmentParcelId;
             to.AdoxioEstablishmentphone = from.EstablishmentPhone;
             to.AdoxioEstablishmentemail = from.EstablishmentEmail;
@@ -151,9 +152,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             // copy establishment information
             if (copyAddress)
             {
-                to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
+                // 12-10-2019 - Removed set to AdoxioAddressCity as it is set by Dynamics Workflow, not the portal                
                 to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
-                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
+                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;                            
                 to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
             }
 

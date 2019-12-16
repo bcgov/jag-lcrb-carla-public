@@ -147,9 +147,6 @@ export class FederalReportingComponent implements OnInit {
     this.productForms.forEach((f) => {
       updateRequest.inventorySalesReports.push({ ...f.value });
     });
-    if (!this.checkIfReportValid()) {
-      return false;
-    }
 
     this.loadingMonthlyReports = true;
     this.monthlyReportsBusy = forkJoin(
@@ -246,6 +243,9 @@ export class FederalReportingComponent implements OnInit {
   }
 
   toggleProductVisibility(id: string) {
+    if (this.reportIsDisabled) {
+      return false;
+    }
     if (this.visibleInventoryReports.indexOf(id) > -1) {
       this.visibleInventoryReports.splice(this.visibleInventoryReports.indexOf(id), 1);
       this.clearProductForm(id);
@@ -351,7 +351,7 @@ export class FederalReportingComponent implements OnInit {
       otherReductions: [report.otherReductions, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       closingNumber: [report.closingNumber, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       closingValue: [report.closingValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
-      closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
+      closingWeight: [report.closingWeight, [Validators.min(0), Validators.max(1000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
       totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]]
@@ -360,5 +360,30 @@ export class FederalReportingComponent implements OnInit {
 
   checkIfReportValid() {
     return this.reportForm.valid && !this.hasInvalidProductForm() || this.reportIsDisabled;
+  }
+
+  checkIfReportSaveable() {
+    if (!this.checkIfReportValid()) {
+      let hasFieldError = false;
+      this.productForms.forEach((form) => {
+        Object.keys(form.controls).forEach(key => {
+          if (form.controls[key].errors !== null) {
+            hasFieldError = true;
+          }
+        });
+        if (hasFieldError) {
+          return;
+        }
+      });
+      if (hasFieldError) {
+        return false;
+      }
+    }
+
+    if (!this.reportForm.valid) {
+      return false;
+    }
+
+    return true;
   }
 }

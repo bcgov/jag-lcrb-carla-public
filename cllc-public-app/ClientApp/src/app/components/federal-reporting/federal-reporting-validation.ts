@@ -1,27 +1,27 @@
 import { ValidatorFn, FormGroup } from '@angular/forms';
 
-const wholeNumberMessage = 'Units must be a whole number less than 10000000.';
+const wholeNumberMessage = 'Units must be a whole number less than 10,000,000.';
 const wholeNumberError = [
   { type: 'min', message: wholeNumberMessage },
   { type: 'max', message: wholeNumberMessage },
   { type: 'pattern', message: wholeNumberMessage }
 ];
 
-const valueMessage = 'Value must be a less than 1000000000 and have 2 decimal places.';
+const valueMessage = 'Value must be less than $1,000,000,000 and have 2 decimal places.';
 const valueError = [
   { type: 'min', message: valueMessage },
   { type: 'max', message: valueMessage },
   { type: 'pattern', message: valueMessage }
 ];
 
-const weightMessage = 'Value must be a less than 10000000 and have 3 decimal places.';
+const weightMessage = 'Weight must be less than 1,000kg and have 3 decimal places.';
 const weightError = [
   { type: 'min', message: weightMessage },
   { type: 'max', message: weightMessage },
   { type: 'pattern', message: weightMessage }
 ];
 
-export const validationErrors = {
+export const fieldValidationErrors = {
   'openingInventory': wholeNumberError,
   'domesticAdditions': wholeNumberError,
   'returnsAdditions': wholeNumberError,
@@ -31,18 +31,17 @@ export const validationErrors = {
   'destroyedReductions': wholeNumberError,
   'lostReductions': wholeNumberError,
   'otherReductions': wholeNumberError,
-  'closingNumber': [
-    ...wholeNumberError,
-    { type: 'closingNumberMismatch', message: 'Closing Inventory must be equal to (Opening Inventory + Additions - Reductions)' }
-  ],
+  'closingNumber': wholeNumberError,
   'closingValue': valueError,
   'closingWeight': weightError,
   'totalSeeds': wholeNumberError,
-  'totalSalesToConsumerQty': [
-    ...wholeNumberError,
-    { type: 'salesMismatch', message: 'Sales quantity must equal domestic reductions' }
-  ],
+  'totalSalesToConsumerQty': wholeNumberError,
   'totalSalesToConsumerValue': valueError
+};
+
+export const formValidationErrors = {
+  'closingNumberMismatch': 'Closing Inventory must be equal to (Opening Inventory + Additions - Reductions)',
+  'salesMismatch': 'Sales quantity must equal domestic reductions'
 };
 
 export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
@@ -62,18 +61,14 @@ export const ClosingInventoryValidator: ValidatorFn = (fg: FormGroup) => {
 
   const total = additions.reduce((n, curr) => n + curr, 0) - reductions.reduce((n, curr) => n + curr, 0);
   if (total !== +fg.get('closingNumber').value) {
-    fg.get('closingNumber').setErrors({ closingNumberMismatch: true });
-  } else {
-    fg.get('closingNumber').setErrors(null);
+    return { closingNumberMismatch: true };
   }
   return null;
 };
 
 export const SalesValidator: ValidatorFn = (fg: FormGroup) => {
   if (+fg.get('totalSalesToConsumerQty').value !== +fg.get('domesticReductions').value) {
-    fg.get('totalSalesToConsumerQty').setErrors({ salesMismatch: true });
-  } else {
-    fg.get('totalSalesToConsumerQty').setErrors(null);
+    return { salesMismatch: true };
   }
   return null;
 };
