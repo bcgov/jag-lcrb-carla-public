@@ -122,8 +122,8 @@
 
 
   <ItemGroup>
-    <Protobuf Include="..\file-service\Protos\file.proto" GrpcServices="Client">
-      <Link>gRPC Prototypes\file.proto</Link>
+    <Protobuf Include="..\file-manager-service\Protos\fileManager.proto" GrpcServices="Client">
+      <Link>gRPC Prototypes\fileManager.proto</Link>
     </Protobuf>
   </ItemGroup>
 
