@@ -33,7 +33,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
-        private readonly FileManagerClient _fileClient;
+        private readonly FileManagerClient _fileManagerClient;
 
 
         public FileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
@@ -43,10 +43,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(FileController));
 
-            _fileClient = fileClient;
+            _fileManagerClient = fileClient;
         }
-
-
 
         private static string GetAccountFolderName(MicrosoftDynamicsCRMaccount account)
         {
@@ -164,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                  FolderName = folderName
             };
 
-            var uploadResult = _fileClient.UploadFile(uploadRequest);
+            var uploadResult = _fileManagerClient.UploadFile(uploadRequest);
 
             if (uploadResult.ResultStatus == ResultStatus.Success)
             {
@@ -232,9 +230,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             var result = await CanAccessEntity(entityName, entityId);
             //get list of files for entity
-            var files = await getFileDetailsListInFolder(entityId, entityName, documentType);
-            //confirm the serverRelativeUrl is in one of the files
-            var hasFile = files.Any(f => f.serverrelativeurl == serverRelativeUrl);
+            bool hasFile = false;
+            
+            var fileExistsRequest = new FileExistsRequest()
+            {
+                DocumentType = documentType,
+                EntityId = entityId,
+                EntityName = entityName,
+                ServerRelativeUrl = serverRelativeUrl
+            };
+            
+            var hasFileResult = _fileManagerClient.FileExists( fileExistsRequest );
+
+            if (hasFileResult.ResultStatus == FileExistStatus.Exist)
+            {
+                // Update modifiedon to current time
+                hasFile = true;
+            }
+            else
+            {
+                _logger.LogError($"Unexpected error - Unable to validate file - {serverRelativeUrl}");                
+            }
+            
             return result && hasFile;
         }
 
@@ -298,7 +315,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _logger.LogError(httpOperationException, "Error updating Contact");
                         // fail if we can't create.
-                        throw (httpOperationException);
+                        throw;
                     }
                     break;
                 case "worker":
@@ -311,7 +328,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         _logger.LogError(httpOperationException, "Error updating Contact");
                         // fail if we can't create.
-                        throw (httpOperationException);
+                        throw;
                     }
                     break;
 
@@ -346,11 +363,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-            byte[] fileContents = await _sharePointFileManager.DownloadFile(serverRelativeUrl);
-            return new FileContentResult(fileContents, "application/octet-stream")
+
+            // call the web service
+            var downloadRequest = new DownloadFileRequest()
             {
+                 ServerRelativeUrl = serverRelativeUrl
             };
+
+            var downloadResult = _fileManagerClient.DownloadFile(downloadRequest);
+
+            if (downloadResult.ResultStatus == ResultStatus.Success)
+            {
+                // Update modifiedon to current time
+                UpdateEntityModifiedOnDate(entityName, entityId, true);
+                _logger.LogInformation($"SUCCESS in getting file {serverRelativeUrl}");
+                byte[] fileContents = downloadResult.Data.ToByteArray();
+                return new FileContentResult(fileContents, "application/octet-stream")
+                {
+                };
+            }
+            else
+            {
+                _logger.LogError($"ERROR in getting file {serverRelativeUrl} - {downloadResult.ErrorDetail}");
+                throw new Exception($"ERROR in getting file {serverRelativeUrl} - {downloadResult.ErrorDetail}");
+            }
 
         }
 
@@ -404,7 +440,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     FolderName = await GetFolderName(entityName, entityId, _dynamicsClient) 
             };
 
-                var result = _fileClient.FolderFiles(request);
+                var result = _fileManagerClient.FolderFiles(request);
 
                 if (result.ResultStatus == ResultStatus.Success)
                 {
@@ -436,12 +472,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("Error getting SharePoint File List");
-
-                _logger.LogError(e.Message);
+                _logger.LogError(e, "Error getting SharePoint File List");
             }
-
-
 
             return fileSystemItemVMList;
         }
@@ -473,14 +505,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // Update modifiedon to current time
             UpdateEntityModifiedOnDate(entityName, entityId);
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-            var result = await _sharePointFileManager.DeleteFile(serverRelativeUrl);
-            if (result)
+
+            // call the web service
+            var deleteRequest = new DeleteFileRequest()
             {
+                ServerRelativeUrl = serverRelativeUrl
+            };
+
+            var deleteResult = _fileManagerClient.DeleteFile(deleteRequest);
+
+            if (deleteResult.ResultStatus == ResultStatus.Success)
+            {
+                // Update modifiedon to current time
+                UpdateEntityModifiedOnDate(entityName, entityId, true);
+                _logger.LogInformation($"SUCCESS in deleting file {serverRelativeUrl}");
                 return new OkResult();
             }
-
-            return new NotFoundResult();
+            else
+            {
+                _logger.LogError($"ERROR in deleting file {serverRelativeUrl} - {deleteResult.ErrorDetail}");
+                throw new Exception($"ERROR in deleting file {serverRelativeUrl} - {deleteResult.ErrorDetail}");
+            }
+            
         }
 
         /// <summary>
