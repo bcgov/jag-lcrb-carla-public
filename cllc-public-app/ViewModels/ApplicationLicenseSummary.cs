@@ -28,10 +28,15 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         public string LicenseId { get; set; }
         public string ApplicationId { get; set; }
+        public string EstablishmentId {get; set; }
         public string EstablishmentName { get; set; }
         public string EstablishmentAddressStreet { get; set; }
         public string EstablishmentAddressCity { get; set; }
         public string EstablishmentAddressPostalCode { get; set; }
+
+        public string EstablishmentPhoneNumber { get; set; }
+
+        public string EstablishmentEmail { get; set; }
         public string LicenseNumber { get; set; }
         public List<ApplicationType> AllowedActions { get; set; }
         public string LicenceTypeName { get; set; }

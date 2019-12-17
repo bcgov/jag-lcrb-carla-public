@@ -1,0 +1,7 @@
+<ng-container>
+  <a href="#" class="editable-field" *ngIf="!isEditing; else elseBlock">{{value === '' ? emptyText : value}}</a>
+  <ng-template #elseBlock>
+    <input [value]="value" #inputField (focusout)="focusOut($event)" (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="10">
+  </ng-template>
+</ng-container>
+
