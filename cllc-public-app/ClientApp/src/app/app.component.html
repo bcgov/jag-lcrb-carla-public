@@ -116,6 +116,8 @@
                       class="nav-link" routerLink="/dashboard">Dashboard</a>
                     <a *ngIf="currentUser.userType == 'VerifiedIndividual'" (click)="toggleButtonLoggedIn.click()"
                       class="nav-link" routerLink="/worker-qualification/dashboard">Dashboard</a>
+                    <a *ngIf="currentUser.userType == 'Business'" (click)="toggleButtonLoggedIn.click()"
+                      class="nav-link" routerLink="/licences">Licences</a>
                   </li>
                 </ul>
               </div>
