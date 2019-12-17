@@ -15,6 +15,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Grpc.Core;
+using Gov.Lclb.Cllb.Services.FileManager;
+using System.IO;
+using Google.Protobuf;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -28,13 +33,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly FileManagerClient _fileClient;
 
-        public FileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+
+        public FileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(FileController));
+
+            _fileClient = fileClient;
         }
 
 
@@ -120,17 +129,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return BadRequest();
             }
-
-            await CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
-
             var hasAccess = await CanAccessEntity(entityName, entityId);
             if (!hasAccess)
             {
                 return new NotFoundResult();
             }
-
-            // Update modifiedon to current time
-            UpdateEntityModifiedOnDate(entityName, entityId, true);
 
             // Sanitize file name
             Regex illegalInFileName = new Regex(@"[#%*<>?{}~¿""]");
@@ -147,27 +150,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 folderName = await GetFolderName(entityName, entityId, _dynamicsClient);
             }
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-            string headers = LoggingEvents.GetHeaders(Request);
-            try
-            {
-                fileName = await _sharePointFileManager.AddFile(GetDocumentTemplateUrlPart(entityName), folderName, fileName, file.OpenReadStream(), file.ContentType);
-                result = new ViewModels.FileSystemItem()
-                {
-                    name = fileName
-                };
 
-                _logger.LogInformation($"SUCCESS in uploading file {fileName} to folder {folderName} Headers: {headers} ");
-            }
-            catch (SharePointRestException ex)
+            MemoryStream ms = new MemoryStream();
+            file.OpenReadStream().CopyTo(ms);
+            byte[] data = ms.ToArray();
+
+            // call the web service
+            var uploadRequest = new UploadFileRequest() { 
+                 ContentType = file.ContentType,
+                 Data = ByteString.CopyFrom(data),
+                 EntityName = entityName,
+                 FileName = fileName,
+                 FolderName = folderName
+            };
+
+            var uploadResult = _fileClient.UploadFile(uploadRequest);
+
+            if (uploadResult.ResultStatus == ResultStatus.Success)
             {
-                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} - SharePointRestException - {ex.Message} {ex.Response.Content}");
-                return new NotFoundResult();
+                // Update modifiedon to current time
+                UpdateEntityModifiedOnDate(entityName, entityId, true);
+                _logger.LogInformation($"SUCCESS in uploading file {fileName} to folder {folderName}");
             }
-            catch (Exception e)
+            else
             {
-                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName} Headers: {headers} Unexpected Exception {e.ToString()} {e.Message} {e.StackTrace.ToString()}");
+                _logger.LogError($"ERROR in uploading file {fileName} to folder {folderName}");
+                throw new Exception($"ERROR in uploading file {fileName} to folder {folderName}");
             }
+
             return new JsonResult(result);
         }
 
@@ -360,7 +370,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             ValidateSession();
 
-            List<ViewModels.FileSystemItem> fileSystemItemVMList = await getFileDetailsListInFolder(entityId, entityName, documentType);
+            List<ViewModels.FileSystemItem> fileSystemItemVMList = await GetListFilesInFolder(entityId, entityName, documentType);
 
             var hasAccess = await CanAccessEntity(entityName, entityId);
             if (!hasAccess)
@@ -371,7 +381,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(fileSystemItemVMList);
         }
 
-        private async Task<List<ViewModels.FileSystemItem>> getFileDetailsListInFolder(string entityId, string entityName, string documentType)
+        private async Task<List<ViewModels.FileSystemItem>> GetListFilesInFolder(string entityId, string entityName, string documentType)
         {
             List<ViewModels.FileSystemItem> fileSystemItemVMList = new List<ViewModels.FileSystemItem>();
 
@@ -385,40 +395,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                await CreateDocumentLibraryIfMissing(GetDocumentListTitle(entityName), GetDocumentTemplateUrlPart(entityName));
+                // call the web service
+                var request = new FolderFilesRequest()
+                {
+                    DocumentType = documentType,
+                    EntityId = entityId,
+                    EntityName = entityName,
+                    FolderName = await GetFolderName(entityName, entityId, _dynamicsClient) 
+            };
 
-                string folderName = await GetFolderName(entityName, entityId, _dynamicsClient); ;
-                // Get the file details list in folder
-                List<Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = null;
-                SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-                try
-                {
-                    fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(entityName), folderName, documentType);
-                }
-                catch (SharePointRestException spre)
-                {
-                    _logger.LogError(spre, "Error getting SharePoint File List");
-                    throw new Exception("Unable to get Sharepoint File List.");
-                }
+                var result = _fileClient.FolderFiles(request);
 
-                if (fileDetailsList != null)
+                if (result.ResultStatus == ResultStatus.Success)
                 {
-                    foreach (Interfaces.SharePointFileManager.FileDetailsList fileDetails in fileDetailsList)
+                    // convert the results to the view model.
+                    foreach (var fileDetails in result.Files)
                     {
                         ViewModels.FileSystemItem fileSystemItemVM = new ViewModels.FileSystemItem()
                         {
                             // remove the document type text from file name
                             name = fileDetails.Name.Substring(fileDetails.Name.IndexOf("__") + 2),
                             // convert size from bytes (original) to KB
-                            size = int.Parse(fileDetails.Length),
+                            size = fileDetails.Size,
                             serverrelativeurl = fileDetails.ServerRelativeUrl,
-                            timelastmodified = DateTime.Parse(fileDetails.TimeLastModified),
+                            timelastmodified = fileDetails.TimeLastModified.ToDateTime(),
                             documenttype = fileDetails.DocumentType
                         };
 
                         fileSystemItemVMList.Add(fileSystemItemVM);
                     }
+
                 }
+                else
+                {
+                    _logger.LogError($"ERROR in getting folder files for entity {entityName}, entityId {entityId}, docuemnt type {documentType} ");                    
+                }
+
+
+                
             }
             catch (Exception e)
             {
@@ -433,51 +447,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        public static string GetDocumentListTitle(string entityName)
-        {
-            var listTitle = "";
-            switch (entityName.ToLower())
-            {
-                case "account":
-                    listTitle = SharePointFileManager.DefaultDocumentListTitle;
-                    break;
-                case "application":
-                    listTitle = SharePointFileManager.ApplicationDocumentListTitle;
-                    break;
-                case "contact":
-                    listTitle = SharePointFileManager.ContactDocumentListTitle;
-                    break;
-                case "worker":
-                    listTitle = SharePointFileManager.WorkertDocumentListTitle;
-                    break;
-                default:
-                    break;
-            }
-            return listTitle;
-        }
-
-        public static string GetDocumentTemplateUrlPart(string entityName)
-        {
-            var listTitle = "";
-            switch (entityName.ToLower())
-            {
-                case "account":
-                    listTitle = SharePointFileManager.DefaultDocumentListTitle;
-                    break;
-                case "application":
-                    listTitle = "adoxio_application";
-                    break;
-                case "contact":
-                    listTitle = SharePointFileManager.ContactDocumentListTitle;
-                    break;
-                case "worker":
-                    listTitle = "adoxio_worker";
-                    break;
-                default:
-                    break;
-            }
-            return listTitle;
-        }
 
         /// <summary>
         /// Delete a file.
@@ -557,14 +526,5 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        private async Task CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
-        {
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-            var exists = await _sharePointFileManager.DocumentLibraryExists(listTitle);
-            if (!exists)
-            {
-                await _sharePointFileManager.CreateDocumentLibrary(listTitle, documentTemplateUrl);
-            }
-        }
     }
 }

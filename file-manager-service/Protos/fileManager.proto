@@ -51,17 +51,18 @@ message DownloadFileReply {
 message FileSystemItem {
   string id = 1; 
   string name = 2;
-  string documenttype = 3; 
+  string documentType = 3; 
   int64 size = 4;
-  string serverrelativeurl = 5;
-  google.protobuf.Timestamp timecreated = 6;
-  google.protobuf.Timestamp timelastmodified = 7;
+  string serverRelativeUrl = 5;
+  google.protobuf.Timestamp timeCreated = 6;
+  google.protobuf.Timestamp timeLastModified = 7;
 }
 
 message FolderFilesRequest {
     string entityId = 1;
     string entityName = 2; 
     string documentType = 3;
+    string folderName = 4;
 }
 
 // collection of files

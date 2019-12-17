@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
 using Gov.Lclb.Cllb.Interfaces;
 using Grpc.Core;
 using Microsoft.Extensions.Configuration;
@@ -128,6 +129,43 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         public override Task<FolderFilesReply> FolderFiles(FolderFilesRequest request, ServerCallContext context)
         {
             var result = new FolderFilesReply();
+
+            
+            // Get the file details list in folder
+            List<Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = null;
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
+            try
+            {
+                fileDetailsList = _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(request.EntityName), request.FolderName, request.DocumentType).GetAwaiter().GetResult();
+                if (fileDetailsList != null)
+
+                {
+                    // gRPC ensures that the collection has space to accept new data; no need to call a constructor
+                    foreach (var item in fileDetailsList)
+                    {
+                        FileSystemItem newItem = new FileSystemItem()
+                        {
+                             DocumentType = item.DocumentType,
+                             Name = item.Name,
+                              ServerRelativeUrl = item.ServerRelativeUrl,
+//                             TimeLastModified =  Timestamp.Parser.ParseFrom ( item.TimeLastModified ),
+                             Size = int.Parse (item.Length)
+                        };
+
+                        result.Files.Add (newItem)
+                        
+                        
+
+                    }
+                }
+                
+
+            }
+            catch (SharePointRestException spre)
+            {
+                _logger.LogError(spre, "Error getting SharePoint File List");
+                throw new Exception("Unable to get Sharepoint File List.");
+            }
 
             return Task.FromResult(result);
         }

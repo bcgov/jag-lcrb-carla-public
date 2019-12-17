@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>Gov.Lclb.Cllb.OneStopService.Program</StartupObject>
     <UserSecretsId>a8fa37fc-67d7-43f2-b3fe-d44dfeed50ee</UserSecretsId>
   </PropertyGroup>

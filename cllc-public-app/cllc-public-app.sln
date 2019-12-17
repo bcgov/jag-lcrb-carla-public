@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeocoderClient", "..\cllc-i
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cllc-public-app", "cllc-public-app.csproj", "{8FE0A3D0-B466-41E3-91A9-3AB6207C15E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "file-manager-service", "..\file-service\file-manager-service.csproj", "{6C2AA35D-B845-4D43-AB06-D3DB0C80E39B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "file-manager-service", "..\file-manager-service\file-manager-service.csproj", "{6C2AA35D-B845-4D43-AB06-D3DB0C80E39B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
