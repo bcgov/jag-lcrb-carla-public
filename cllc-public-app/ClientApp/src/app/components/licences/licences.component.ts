@@ -17,6 +17,9 @@ import { AppState } from '@app/app-state/models/app-state';
 import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
+import { EstablishmentDataService } from '@services/establishment-data.service';
+import { Establishment } from '@models/establishment.model';
+import { License } from '@models/license.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -34,7 +37,7 @@ const RENEWAL_DUE = 'Renewal Due';
   styleUrls: ['./licences.component.scss']
 })
 export class LicencesComponent extends FormBase implements OnInit {
-  inProgressApplications: ApplicationSummary[] = [];
+  applications: ApplicationSummary[] = [];
   licensedApplications: ApplicationLicenseSummary[] = [];
 
   readonly ACTIVE = ACTIVE;
@@ -58,6 +61,7 @@ export class LicencesComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
     private paymentService: PaymentDataService,
+    private establishmentService: EstablishmentDataService,
     public featureFlagService: FeatureFlagService) {
     super();
     featureFlagService.featureOn('LicenceTransfer')
@@ -75,38 +79,20 @@ export class LicencesComponent extends FormBase implements OnInit {
    *
    * */
   private displayApplications() {
-    this.inProgressApplications = [];
     this.licensedApplications = [];
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
       ).pipe(takeWhile(() => this.componentActive))
         .subscribe(([applications, licenses]) => {
-          this.checkIndigenousNationState(applications);
-
+          this.applications = applications;
           licenses.forEach((licence: ApplicationLicenseSummary) => {
-            licence.actionApplications = [];
-            const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
-            relatedApplications.forEach(app => {
-              licence.actionApplications.push({
-                applicationId: app.id,
-                applicationTypeName: app.applicationTypeName,
-                applicationStatus: app.applicationStatus,
-                isPaid: app.isPaid
-              });
-            });
-            this.licensedApplications.push(licence);
+            this.addOrUpdateLicence(licence);
           });
         });
   }
 
   uploadMoreFiles(application: Application) {
     this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
-  }
-
-  checkIndigenousNationState(applications: ApplicationSummary[]) {
-    if (applications.find((a) => a.isIndigenousNation)) {
-      this.store.dispatch(new SetIndigenousNationModeAction(true));
-    }
   }
 
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
@@ -132,6 +118,7 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   planStoreOpening(licence: ApplicationLicenseSummary) {
+    console.log(licence.actionApplications);
     const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
     if (crsApplication) {
       this.router.navigate([`/store-opening/${crsApplication.applicationId}`]);
@@ -193,4 +180,43 @@ export class LicencesComponent extends FormBase implements OnInit {
     return expiry < now;
   }
 
+  submitFieldUpdate(licenceId, establishmentId, establishmentFieldName, licenceFieldName, value) {
+    const establishment = {
+      id: establishmentId,
+    };
+    establishment[establishmentFieldName] = value;
+
+    const licence = Object.assign( new ApplicationLicenseSummary(), {
+      licenseId: licenceId
+    });
+    licence[licenceFieldName] = value;
+
+    this.busy = forkJoin(
+      this.establishmentService.upEstablishment(establishment),
+      this.licenceDataService.updateLicenceEstablishment(licenceId, licence)
+      )
+    .subscribe(([establishmentResp, licenceResp]) => {
+      this.addOrUpdateLicence(licenceResp);
+    });
+  }
+
+  addOrUpdateLicence(licence: ApplicationLicenseSummary) {
+    licence.actionApplications = [];
+    const relatedApplications = this.applications.filter(l => l.licenceId === licence.licenseId);
+    relatedApplications.forEach(app => {
+      licence.actionApplications.push({
+        applicationId: app.id,
+        applicationTypeName: app.applicationTypeName,
+        applicationStatus: app.applicationStatus,
+        isPaid: app.isPaid
+      });
+    });
+
+    const licenceIndex = this.licensedApplications.findIndex(l => l.licenseId === licence.licenseId);
+    if (licenceIndex >= 0) {
+      this.licensedApplications[licenceIndex] = licence;
+    } else {
+      this.licensedApplications.push(licence);
+    }
+  }
 }
