@@ -147,15 +147,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         {
                              DocumentType = item.DocumentType,
                              Name = item.Name,
-                              ServerRelativeUrl = item.ServerRelativeUrl,
+                             ServerRelativeUrl = item.ServerRelativeUrl,
 //                             TimeLastModified =  Timestamp.Parser.ParseFrom ( item.TimeLastModified ),
                              Size = int.Parse (item.Length)
                         };
 
-                        result.Files.Add (newItem)
-                        
-                        
-
+                        result.Files.Add(newItem);
+                                              
                     }
                 }
                 

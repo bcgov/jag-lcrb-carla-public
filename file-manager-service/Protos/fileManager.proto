@@ -15,17 +15,25 @@ service FileManager {
   // Download File
   rpc DownloadFile (DownloadFileRequest) returns (DownloadFileReply);
 
+  // File Exists
+  rpc FileExists (FileExistsRequest) returns (FileExistsReply);
+
   // Upload File
   rpc UploadFile (UploadFileRequest) returns (UploadFileReply);
 
   // Get files in a given folder.
   rpc FolderFiles (FolderFilesRequest) returns (FolderFilesReply);
-
 }
 
 enum ResultStatus {
     Fail = 0;
     Success = 1;
+}
+
+enum FileExistStatus {
+    Error = 0;
+    NotExist = 1;
+    Exist = 2;
 }
 
 message DeleteFileRequest {
@@ -45,6 +53,18 @@ message DownloadFileReply {
     bytes data = 1;
     ResultStatus resultStatus = 2;
     string errorDetail = 3;
+}
+
+message FileExistsRequest {
+    string entityName = 1; 
+    string entityId = 2; 
+    string documentType = 3; 
+    string serverRelativeUrl = 4;
+}
+
+message FileExistsReply {
+    FileExistStatus resultStatus = 1;
+    string errorDetail = 2;
 }
 
 // Individual File
@@ -85,5 +105,3 @@ message UploadFileReply {
     string errorDetail = 2;
     string fileName = 3;
 }
-
-
