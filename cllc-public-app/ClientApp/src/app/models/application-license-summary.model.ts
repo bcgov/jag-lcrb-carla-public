@@ -10,6 +10,7 @@ export class ApplicationLicenseSummary {
   establishmentAddressPostalCode: string;
   establishmentPhoneNumber: string;
   establishmentEmail: string;
+  establishmentIsOpen: boolean;
 
   status: string;
   licenseId: string;

@@ -28,6 +28,11 @@ namespace Gov.Lclb.Cllb.Public.Models
                 to.AdoxioPhone = from.Phone;
             }
 
+            if (from.IsOpen != null)
+            {
+                to.AdoxioIsopen = from.IsOpen;
+            }
+
         }
 
         /// <summary>
@@ -100,6 +105,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.StateCode = adoxio_establishment.Statecode;
                 result.Timezoneruleversionnumber = adoxio_establishment.Timezoneruleversionnumber;
                 result.Utcconversiontimezonecode = adoxio_establishment.Utcconversiontimezonecode;
+                result.IsOpen = adoxio_establishment.AdoxioIsopen;
                 if (adoxio_establishment.Versionnumber != null)
                 {
                     result.Versionnumber = adoxio_establishment.Versionnumber;
@@ -179,6 +185,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Timezoneruleversionnumber = from.Timezoneruleversionnumber;
                 result.Utcconversiontimezonecode = from.Utcconversiontimezonecode;
                 result.Versionnumber = from.Versionnumber;
+                result.AdoxioIsopen = from.IsOpen;
             }
             return result;
         }
