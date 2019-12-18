@@ -97,6 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (licence.AdoxioEstablishment != null)
             {
                 licenseSummary.EstablishmentName = licence.AdoxioEstablishment.AdoxioName;
+                licenseSummary.EstablishmentIsOpen = licence.AdoxioEstablishment.AdoxioIsopen;
             }
 
             var mainApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();

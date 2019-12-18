@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { ApplicationDataService } from '@app/services/application-data.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
 import { Application } from '@models/application.model';
 import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationTypeNames } from '@models/application-type.model';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
@@ -14,17 +14,13 @@ import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
-import { Establishment } from '@models/establishment.model';
-import { License } from '@models/license.model';
+import { FormBuilder } from '@angular/forms';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
-// export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
-// export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
 
 
 const ACTIVE = 'Active';
@@ -39,12 +35,11 @@ const RENEWAL_DUE = 'Renewal Due';
 export class LicencesComponent extends FormBase implements OnInit {
   applications: ApplicationSummary[] = [];
   licensedApplications: ApplicationLicenseSummary[] = [];
+  licenceForms = {};
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
-  // readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
-  // readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
@@ -62,7 +57,8 @@ export class LicencesComponent extends FormBase implements OnInit {
     private snackBar: MatSnackBar,
     private paymentService: PaymentDataService,
     private establishmentService: EstablishmentDataService,
-    public featureFlagService: FeatureFlagService) {
+    public featureFlagService: FeatureFlagService,
+    public fb: FormBuilder) {
     super();
     featureFlagService.featureOn('LicenceTransfer')
       .pipe(takeWhile(() => this.componentActive))
@@ -118,7 +114,6 @@ export class LicencesComponent extends FormBase implements OnInit {
   }
 
   planStoreOpening(licence: ApplicationLicenseSummary) {
-    console.log(licence.actionApplications);
     const crsApplication = licence.actionApplications.find(app => app.applicationTypeName === ApplicationTypeNames.CannabisRetailStore);
     if (crsApplication) {
       this.router.navigate([`/store-opening/${crsApplication.applicationId}`]);
@@ -180,16 +175,16 @@ export class LicencesComponent extends FormBase implements OnInit {
     return expiry < now;
   }
 
-  submitFieldUpdate(licenceId, establishmentId, establishmentFieldName, licenceFieldName, value) {
+  submitFieldUpdate(licenceId, establishmentId, establishmentFieldName, licenceFieldName, event) {
     const establishment = {
       id: establishmentId,
     };
-    establishment[establishmentFieldName] = value;
+    establishment[establishmentFieldName] = event.target.value;
 
     const licence = Object.assign( new ApplicationLicenseSummary(), {
       licenseId: licenceId
     });
-    licence[licenceFieldName] = value;
+    licence[licenceFieldName] = event.target.value;
 
     this.busy = forkJoin(
       this.establishmentService.upEstablishment(establishment),
@@ -218,5 +213,23 @@ export class LicencesComponent extends FormBase implements OnInit {
     } else {
       this.licensedApplications.push(licence);
     }
+    this.licenceForms[licence.licenseId] = this.fb.group({
+      phone: [licence.establishmentPhoneNumber],
+      email: [licence.establishmentEmail]
+    });
+  }
+
+  toggleStoreOpen(index: number, establishmentId: string, isOpen: boolean) {
+    const establishment = {
+      id: establishmentId,
+      isOpen: isOpen
+    };
+
+    this.busy = forkJoin(
+      this.establishmentService.upEstablishment(establishment)
+      )
+    .subscribe(([establishmentResp]) => {
+      this.licensedApplications[index].establishmentIsOpen = establishmentResp.isOpen;
+    });
   }
 }

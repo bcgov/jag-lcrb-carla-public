@@ -37,6 +37,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EstablishmentPhoneNumber { get; set; }
 
         public string EstablishmentEmail { get; set; }
+        public bool? EstablishmentIsOpen { get; set; }
         public string LicenseNumber { get; set; }
         public List<ApplicationType> AllowedActions { get; set; }
         public string LicenceTypeName { get; set; }
