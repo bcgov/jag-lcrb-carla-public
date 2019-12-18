@@ -42,7 +42,6 @@ import {
   MatBadgeModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
-
 import { AccountDataService } from '@services/account-data.service';
 import { ContactDataService } from '@services/contact-data.service';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -148,7 +147,6 @@ import { AssociatePageComponent } from '@components/associate-page/associate-pag
 import { LicenceRenewalStepsComponent } from '@components/licences/licence-renewal-steps/licence-renewal-steps.component';
 import { ApplicationRenewalComponent } from '@components/applications/application-renewal/application-renewal.component';
 import { MoreLessContentComponent } from '@shared/components/more-less-content/more-less-content.component';
-import { EditableFieldComponent } from '@shared/components/editable-field/editable-field.component';
 import { MapComponent } from '@components/map/map.component';
 import { AccountPickerComponent } from '@shared/components/account-picker/account-picker.component';
 import { ApplicationCancelOwnershipTransferComponent } from '@components/applications/application-cancel-ownership-transfer/application-cancel-ownership-transfer.component';
@@ -171,6 +169,7 @@ import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponen
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
+import { PhoneMaskDirective } from './directives/phone-mask.directive';
 
 @NgModule({
   declarations: [
@@ -193,7 +192,6 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     DirectorsAndOfficersComponent,
     DynamicsFormComponent,
     EditShareholdersComponent,
-    EditableFieldComponent,
     FieldComponent,
     FileUploaderComponent,
     FinancialInformationComponent,
@@ -241,6 +239,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     AppRemoveIfFeatureOnDirective,
     AppRemoveIfFeatureOffDirective,
     InputThousandsDirective,
+    PhoneMaskDirective,
     AssociateContentComponent,
     ConnectionToNonMedicalStoresComponent,
     KeyPersonnelDialogComponent,
@@ -271,6 +270,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     BrowserModule,
     CdkTableModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatAutocompleteModule,
     MatButtonModule,
@@ -359,7 +359,8 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     MatStepperModule,
     NgxFileDropModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    PhoneMaskDirective
   ],
   providers: [
     AccountDataService,
