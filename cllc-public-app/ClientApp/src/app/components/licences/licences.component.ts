@@ -18,6 +18,7 @@ import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
 import { EstablishmentDataService } from '@services/establishment-data.service';
 import { FormBuilder } from '@angular/forms';
+import { Establishment } from '@models/establishment.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -175,26 +176,6 @@ export class LicencesComponent extends FormBase implements OnInit {
     return expiry < now;
   }
 
-  submitFieldUpdate(licenceId, establishmentId, establishmentFieldName, licenceFieldName, event) {
-    const establishment = {
-      id: establishmentId,
-    };
-    establishment[establishmentFieldName] = event.target.value;
-
-    const licence = Object.assign( new ApplicationLicenseSummary(), {
-      licenseId: licenceId
-    });
-    licence[licenceFieldName] = event.target.value;
-
-    this.busy = forkJoin(
-      this.establishmentService.upEstablishment(establishment),
-      this.licenceDataService.updateLicenceEstablishment(licenceId, licence)
-      )
-    .subscribe(([establishmentResp, licenceResp]) => {
-      this.addOrUpdateLicence(licenceResp);
-    });
-  }
-
   addOrUpdateLicence(licence: ApplicationLicenseSummary) {
     licence.actionApplications = [];
     const relatedApplications = this.applications.filter(l => l.licenceId === licence.licenseId);
@@ -219,10 +200,67 @@ export class LicencesComponent extends FormBase implements OnInit {
     });
   }
 
+  updateEmail(licenceId: string, establishmentId: string, event: any) {
+    if (event.target.value === null) {
+      return false;
+    }
+
+    const establishment = {
+      id: establishmentId,
+      email: event.target.value,
+      phone: null,
+      isOpen: null
+    };
+
+    const licence = Object.assign( new ApplicationLicenseSummary(), {
+      licenseId: licenceId,
+      establishmentEmail: event.target.value
+    });
+
+    this.updateEstablishment(establishment);
+    this.updateLicence(licence);
+  }
+
+  updatePhone(licenceId: string, establishmentId: string, event: any) {
+    if (event.target.value === null) {
+      return false;
+    }
+
+    const establishment = {
+      id: establishmentId,
+      email: null,
+      phone: event.target.value,
+      isOpen: null
+    };
+
+    const licence = Object.assign( new ApplicationLicenseSummary(), {
+      licenseId: licenceId,
+      establishmentPhoneNumber: event.target.value
+    });
+
+    this.updateEstablishment(establishment);
+    this.updateLicence(licence);
+  }
+
+  updateLicence(licence: ApplicationLicenseSummary) {
+    this.busy = forkJoin(
+      this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
+      )
+    .subscribe(([licenceResp]) => {
+      this.addOrUpdateLicence(licenceResp);
+    });
+  }
+
+  updateEstablishment(establishment: Establishment) {
+    this.busy = this.establishmentService.upEstablishment(establishment).subscribe();
+  }
+
   toggleStoreOpen(index: number, establishmentId: string, isOpen: boolean) {
     const establishment = {
       id: establishmentId,
-      isOpen: isOpen
+      isOpen: isOpen,
+      phone: null,
+      email: null
     };
 
     this.busy = forkJoin(
