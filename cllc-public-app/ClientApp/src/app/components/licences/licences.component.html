@@ -39,11 +39,11 @@
                   {{item?.establishmentAddressCity}} BC {{item?.establishmentAddressPostalCode}}<br>
                   <input type="text" formControlName="phone" appPhoneMask
                   placeholder="Store Phone Number"
-                    (focusout)="submitFieldUpdate(item?.licenseId, item?.establishmentId, 'phone', 'establishmentPhoneNumber', $event)"
+                    (focusout)="updatePhone(item?.licenseId, item?.establishmentId, $event)"
                   > <br>
                   <input type="text" formControlName="email"
                     placeholder="Store Email Address"
-                    (focusout)="submitFieldUpdate(item?.licenseId, item?.establishmentId, 'email', 'establishmentEmail', $event)"
+                    (focusout)="updateEmail(item?.licenseId, item?.establishmentId, $event)"
                   > <br>
               </div>
               <div *ngIf="item?.licenceTypeName === 'Marketer'">
