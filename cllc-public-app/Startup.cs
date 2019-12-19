@@ -314,8 +314,6 @@ namespace Gov.Lclb.Cllb.Public
 #endif
 
 
-
-
             string pathBase = Configuration["BASE_PATH"];
 
             if (!string.IsNullOrEmpty(pathBase))
