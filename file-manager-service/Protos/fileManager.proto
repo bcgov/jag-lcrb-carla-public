@@ -23,7 +23,13 @@ service FileManager {
 
   // Get files in a given folder.
   rpc FolderFiles (FolderFilesRequest) returns (FolderFilesReply);
+
+  // Get a token given a secret.
+  rpc GetToken (TokenRequest) returns (TokenReply);
+
 }
+
+
 
 enum ResultStatus {
     Fail = 0;
@@ -89,6 +95,16 @@ message FolderFilesRequest {
 message FolderFilesReply {
     repeated FileSystemItem files = 1;
     ResultStatus resultStatus = 2;
+    string errorDetail = 3;
+}
+
+message TokenRequest {
+    string secret = 1;
+}
+
+message TokenReply {    
+    ResultStatus resultStatus = 1;
+    string token = 2;
     string errorDetail = 3;
 }
 

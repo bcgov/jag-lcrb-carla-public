@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using Gov.Lclb.Cllb.Interfaces;
 using Grpc.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
+    // Default to require authorization
+    [Authorize]
     public class FileManagerService : FileManager.FileManagerBase
     {
         private readonly ILogger<FileManagerService> _logger;
@@ -21,6 +27,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             _logger = logger;
         }
 
+        
         private string GetDocumentListTitle(string entityName)
         {
             var listTitle = "";
@@ -165,6 +172,33 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 throw new Exception("Unable to get Sharepoint File List.");
             }
 
+            return Task.FromResult(result);
+        }
+
+        public override Task<TokenReply> GetToken(TokenRequest request, ServerCallContext context)
+        {
+            TokenReply result = new TokenReply();
+            result.ResultStatus = ResultStatus.Fail;
+
+            string configuredSecret = _configuration["JWT_TOKEN_KEY"];
+            if (configuredSecret.Equals(request.Secret))
+            {
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuredSecret));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var jwtSecurityToken = new JwtSecurityToken(
+                    _configuration["JWT_VALID_ISSUER"],
+                    _configuration["JWT_VALID_AUDIENCE"],
+                    expires: DateTime.UtcNow.AddYears(5),
+                    signingCredentials: creds
+                    );                
+                result.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken) + " Expires:" + jwtSecurityToken.ValidTo.ToShortDateString();
+                result.ResultStatus = ResultStatus.Success;
+            }
+            else
+            {
+                result.ErrorDetail = "Bad Request";
+            }
             return Task.FromResult(result);
         }
     }
