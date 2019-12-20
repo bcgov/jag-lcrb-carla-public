@@ -175,6 +175,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             return Task.FromResult(result);
         }
 
+        [AllowAnonymous]
         public override Task<TokenReply> GetToken(TokenRequest request, ServerCallContext context)
         {
             TokenReply result = new TokenReply();
