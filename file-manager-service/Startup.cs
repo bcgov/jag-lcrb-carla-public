@@ -13,6 +13,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using System.Text;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Net.Mime;
+using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -55,6 +59,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
 
             services.AddGrpc();
+
+            // health checks. 
+            services.AddHealthChecks()
+                 .AddCheck("file-manager-service", () => HealthCheckResult.Healthy("OK"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +74,34 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
 
             app.UseRouting();
+
+            var healthCheckOptions = new HealthCheckOptions
+            {
+                ResponseWriter = async (c, r) =>
+                {
+                    c.Response.ContentType = MediaTypeNames.Application.Json;
+                    var result = JsonConvert.SerializeObject(
+                       new
+                       {
+                           checks = r.Entries.Select(e =>
+                      new {
+                          description = e.Key,
+                          status = e.Value.Status.ToString(),
+                          responseTime = e.Value.Duration.TotalMilliseconds
+                      }),
+                           totalResponseTime = r.TotalDuration.TotalMilliseconds
+                       });
+                    await c.Response.WriteAsync(result);
+                }
+            };
+
+            app.UseHealthChecks("/hc/ready", healthCheckOptions);
+
+            app.UseHealthChecks("/hc/live", new HealthCheckOptions
+            {
+                // Exclude all checks and return a 200-Ok.
+                Predicate = (_) => false
+            });
 
             app.UseAuthentication();
 
