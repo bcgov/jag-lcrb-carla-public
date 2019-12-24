@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
@@ -22,6 +23,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddEnvironmentVariables();
+            });
     }
 }
