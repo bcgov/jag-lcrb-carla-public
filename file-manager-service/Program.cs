@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Serilog;
 using System;
+using System.Net;
 using System.Reflection;
 
 
@@ -19,8 +20,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 .ConfigureKestrel(options =>
                 {
                     // Setup a HTTP/2 endpoint without TLS.
-                    options.ListenLocalhost(8080, o => o.Protocols =
-                        HttpProtocols.Http1AndHttp2);
+                    options.Listen(IPAddress.Any, 8080, o =>
+                    {
+                        o.Protocols =
+                            HttpProtocols.Http1AndHttp2;
+                        o.UseConnectionLogging();
+                        o.UseHttps();
+                    });
                 })
                 .Build()
                 .Run();
