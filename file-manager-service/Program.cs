@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Serilog;
+using System;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -18,15 +17,21 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
         // Additional configuration is required to successfully run gRPC on macOS.
         // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+        public static IWebHostBuilder CreateHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    webBuilder.UseStartup<Startup>();
+
+                    config.AddEnvironmentVariables();
                 })
-            .ConfigureAppConfiguration((hostingContext, config) =>
-            {
-                config.AddEnvironmentVariables();
-            });
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Debug);
+                    logging.AddDebug();
+                    logging.AddEventSourceLogger();
+                })
+                .UseSerilog()
+                .UseStartup<Startup>();
     }
 }
