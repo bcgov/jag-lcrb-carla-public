@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\cllc-public-app</DockerfileContext>
+    <UserSecretsId>fe2fd249-51a1-4055-93ed-3f64fd3176a7</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
