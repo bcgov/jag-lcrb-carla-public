@@ -6,6 +6,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Serilog;
 using System;
+using System.Reflection;
+
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -28,8 +30,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-
+                    config.AddUserSecrets(Assembly.GetExecutingAssembly());
                     config.AddEnvironmentVariables();
+                    
                 })
 
                 .ConfigureLogging((hostingContext, logging) =>
