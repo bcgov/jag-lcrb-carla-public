@@ -193,7 +193,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     expires: DateTime.UtcNow.AddYears(5),
                     signingCredentials: creds
                     );                
-                result.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken) + " Expires:" + jwtSecurityToken.ValidTo.ToShortDateString();
+                result.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
                 result.ResultStatus = ResultStatus.Success;
             }
             else
