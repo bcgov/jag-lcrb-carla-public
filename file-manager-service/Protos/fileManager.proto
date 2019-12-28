@@ -65,7 +65,8 @@ message FileExistsRequest {
     string entityName = 1; 
     string entityId = 2; 
     string documentType = 3; 
-    string serverRelativeUrl = 4;
+    string folderName = 4;
+    string serverRelativeUrl = 5;
 }
 
 message FileExistsReply {
