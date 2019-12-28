@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Net.Mime;
 using Newtonsoft.Json;
+using Serilog;
+using Serilog.Exceptions;
 
 namespace Gov.Lclb.Cllb.Services.FileManager
 {
@@ -58,6 +60,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 });
             }
 
+            services.AddAuthorization();
+
             services.AddGrpc();
 
             // health checks. 
@@ -74,6 +78,11 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+
 
             var healthCheckOptions = new HealthCheckOptions
             {
@@ -103,8 +112,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 Predicate = (_) => false
             });
 
-            app.UseAuthentication();
-
+  
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<FileManagerService>();
@@ -114,6 +122,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
                 });
             });
+
+            Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .Enrich.WithExceptionDetails()
+                    .WriteTo.Console()
+                    .CreateLogger();
         }
     }
 }
