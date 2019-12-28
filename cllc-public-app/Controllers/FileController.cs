@@ -237,6 +237,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 DocumentType = documentType,
                 EntityId = entityId,
                 EntityName = entityName,
+                FolderName = await GetFolderName(entityName, entityId, _dynamicsClient),
                 ServerRelativeUrl = serverRelativeUrl
             };
             
@@ -361,7 +362,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var hasAccess = await CanAccessEntityFile(entityName, entityId, documentType, serverRelativeUrl);
             if (!hasAccess)
             {
-                return new NotFoundResult();
+                return BadRequest();
             }
 
             // call the web service

@@ -37,7 +37,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             List<Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = null;
             try
             {
-                fileDetailsList = _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(request.EntityName), request.EntityId, request.DocumentType).GetAwaiter().GetResult();
+                fileDetailsList = _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(request.EntityName), request.FolderName, request.DocumentType).GetAwaiter().GetResult();
                 if (fileDetailsList != null)
 
                 {
