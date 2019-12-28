@@ -28,7 +28,49 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             _logger = logger;
         }
 
-        
+        public override Task<FileExistsReply> FileExists(FileExistsRequest request, ServerCallContext context)
+        {
+            var result = new FileExistsReply();
+
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
+
+            List<Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = null;
+            try
+            {
+                fileDetailsList = _sharePointFileManager.GetFileDetailsListInFolder(GetDocumentTemplateUrlPart(request.EntityName), request.EntityId, request.DocumentType).GetAwaiter().GetResult();
+                if (fileDetailsList != null)
+
+                {
+                    var hasFile = fileDetailsList.Any(f => f.ServerRelativeUrl == request.ServerRelativeUrl);
+
+                    if (hasFile)
+                    {
+                        result.ResultStatus = FileExistStatus.Exist;
+                    }
+                    else
+                    {
+                        result.ResultStatus = FileExistStatus.NotExist;
+                    }
+                    
+                }
+            }
+            catch (SharePointRestException spre)
+            {
+                _logger.LogError(spre, "Error determining if file exists");
+                result.ResultStatus = result.ResultStatus = FileExistStatus.Error;
+                result.ErrorDetail = "Error determining if file exists";
+            }
+
+            catch (Exception e)
+            {
+                result.ResultStatus =  FileExistStatus.Error;
+                result.ErrorDetail = $"Error determining if file exists";
+                _logger.LogError(e, result.ErrorDetail);
+            }
+
+            return Task.FromResult(result);
+        }
+
         private string GetDocumentListTitle(string entityName)
         {
             var listTitle = "";
