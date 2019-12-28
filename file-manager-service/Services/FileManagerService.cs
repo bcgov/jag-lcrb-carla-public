@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
 using Gov.Lclb.Cllb.Interfaces;
 using Grpc.Core;
@@ -88,12 +89,76 @@ namespace Gov.Lclb.Cllb.Services.FileManager
         {
             var result = new DeleteFileReply();
 
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
+
+            try
+            {
+                bool success = _sharePointFileManager.DeleteFile(request.ServerRelativeUrl).GetAwaiter().GetResult();
+
+                if (success)
+                {
+                    result.ResultStatus = ResultStatus.Success;
+                }
+                else
+                {
+                    result.ResultStatus = ResultStatus.Fail;
+
+                }
+
+            }
+            catch (SharePointRestException ex)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"ERROR in deleting file {request.ServerRelativeUrl}";
+                _logger.LogError(ex, result.ErrorDetail);
+
+            }
+            catch (Exception e)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"ERROR in deleting file {request.ServerRelativeUrl}";
+                _logger.LogError(e, result.ErrorDetail);
+            }
+
             return Task.FromResult(result);
         }
 
         public override Task<DownloadFileReply> DownloadFile(DownloadFileRequest request, ServerCallContext context)
         {
             var result = new DownloadFileReply();
+
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
+
+            try
+            {
+                byte[] data = _sharePointFileManager.DownloadFile(request.ServerRelativeUrl).GetAwaiter().GetResult();
+
+                if (data != null)
+                {
+                    result.ResultStatus = ResultStatus.Success;
+                    result.Data = ByteString.CopyFrom(data);
+                }
+                else
+                {
+                    result.ResultStatus = ResultStatus.Fail;
+
+                }
+
+            }
+            catch (SharePointRestException ex)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"ERROR in downloading file {request.ServerRelativeUrl}";
+                _logger.LogError(ex, result.ErrorDetail);
+
+            }
+            catch (Exception e)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"ERROR in downloading file {request.ServerRelativeUrl}";
+                _logger.LogError(e, result.ErrorDetail);
+            }
+
 
             return Task.FromResult(result);
         }
@@ -114,7 +179,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     request.FileName, 
                     request.Data.ToByteArray(), request.ContentType).GetAwaiter().GetResult();
                 
-                result.FileName = fileName;                               
+                result.FileName = fileName;
+                result.ResultStatus = ResultStatus.Success;
             }
             catch (SharePointRestException ex)
             {
