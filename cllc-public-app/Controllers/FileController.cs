@@ -454,7 +454,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             // convert size from bytes (original) to KB
                             size = fileDetails.Size,
                             serverrelativeurl = fileDetails.ServerRelativeUrl,
-                            timelastmodified = fileDetails.TimeLastModified.ToDateTime(),
+                            //timelastmodified = fileDetails.TimeLastModified.ToDateTime(),
                             documenttype = fileDetails.DocumentType
                         };
 
