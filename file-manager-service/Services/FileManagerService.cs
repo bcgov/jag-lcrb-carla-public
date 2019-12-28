@@ -221,13 +221,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                              DocumentType = item.DocumentType,
                              Name = item.Name,
                              ServerRelativeUrl = item.ServerRelativeUrl,
-//                             TimeLastModified =  Timestamp.Parser.ParseFrom ( item.TimeLastModified ),
                              Size = int.Parse (item.Length)
                         };
 
                         result.Files.Add(newItem);
                                               
                     }
+                    result.ResultStatus = ResultStatus.Success;
                 }
                 
 
@@ -235,7 +235,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException spre)
             {
                 _logger.LogError(spre, "Error getting SharePoint File List");
-                throw new Exception("Unable to get Sharepoint File List.");
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = "Error getting SharePoint File List";
             }
 
             return Task.FromResult(result);
