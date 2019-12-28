@@ -19,11 +19,11 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             CreateWebHostBuilder(args)
                 .ConfigureKestrel(options =>
                 {
-                    // Setup a HTTP/2 endpoint without TLS.
+                    // Setup a HTTP/2 endpoint.
                     options.Listen(IPAddress.Any, 8080, o =>
                     {
                         o.Protocols =
-                            HttpProtocols.Http1AndHttp2;
+                            HttpProtocols.Http2;
                         o.UseConnectionLogging();
                         o.UseHttps();
                     });
