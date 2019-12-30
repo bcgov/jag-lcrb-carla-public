@@ -91,8 +91,18 @@
 				  {
                     "name": "SHAREPOINT_ODATA_URI",
                     "value": ""
-                  }
+                  },
+				  {
+					"name": "DOTNET_SSL_DIRS",
+					"value": "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+				  }
                 ],
+				"volumeMounts": [
+                                    {
+                                        "mountPath": "/var/run/secrets/service-cert",
+                                        "name": "service-cert"
+                                    }
+                                ],
                 "resources": {
                   "limits": {
                     "cpu": "${CPU_LIMIT}",
@@ -105,9 +115,9 @@
                 },
                 "readinessProbe": {
                   "httpGet": {
-                    "path": "/hc",
+                    "path": "/hc/ready",
                     "port": 8080,
-                    "scheme": "HTTP"
+                    "scheme": "HTTPS"
                   },
                   "initialDelaySeconds": 10,
                   "timeoutSeconds": 1,
@@ -117,9 +127,9 @@
                 },
                 "liveinessProbe": {
                   "httpGet": {
-                    "path": "/hc",
+                    "path": "/hc/live",
                     "port": 8080,
-                    "scheme": "HTTP"
+                    "scheme": "HTTPS"
                   },
                   "initialDelaySeconds": 10,
                   "timeoutSeconds": 1,
@@ -128,8 +138,17 @@
                   "failureThreshold": 3
                 }
               }
-            ]
-          }
+            ],
+          "volumes": [
+                            {
+                                "name": "service-cert",
+                                "secret": {
+                                    "defaultMode": 420,
+                                    "secretName": "${NAME}-cert"
+                                }
+                            }
+                        ]
+		  }
         }
       }
     },
@@ -142,7 +161,8 @@
           "template": "${NAME}-deployment"
         },
         "annotations": {
-          "description": "Exposes and load balances the application pods."
+          "description": "Exposes and load balances the application pods.",
+		  "service.alpha.openshift.io/serving-cert-secret-name": "${NAME}-cert"
         }
       },
       "spec": {
