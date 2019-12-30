@@ -16,18 +16,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)
-                .ConfigureKestrel(options =>
-                {
-                    // Setup a HTTP/2 endpoint.
-                    options.Listen(IPAddress.Any, 8080, o =>
-                    {
-                        o.Protocols =
-                            HttpProtocols.Http2;
-                        o.UseConnectionLogging();
-                        o.UseHttps();
-                    });
-                })
+            CreateWebHostBuilder(args)                
                 .Build()
                 .Run();
         }
