@@ -260,9 +260,10 @@ namespace Gov.Lclb.Cllb.Public
             {
                 var httpClientHandler = new HttpClientHandler();
                 // Return `true` to allow certificates that are untrusted/invalid
-                
+                /* No need to ignore certificate errors, as the certificate should be valid.
                 httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                    */
                 var httpClient = new HttpClient(httpClientHandler);
                 // set default request to Version 2.
                 httpClient.DefaultRequestVersion = HttpVersion.Version20;
