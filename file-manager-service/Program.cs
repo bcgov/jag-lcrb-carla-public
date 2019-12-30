@@ -40,7 +40,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     config.AddEnvironmentVariables();
                     
                 })
-
                 .ConfigureLogging((hostingContext, logging) =>
                 {
                     logging.ClearProviders();
@@ -49,6 +48,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     logging.AddEventSourceLogger();
                 })
                 .UseSerilog()
+                .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                 .UseStartup<Startup>();
     }
 }
