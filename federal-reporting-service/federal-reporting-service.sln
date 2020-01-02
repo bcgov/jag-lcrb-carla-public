@@ -1,16 +1,37 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{e87dfe0d-afd7-4422-8f21-1cbbd674b71c}") = "federal-reporting-service", "federal-reporting-service.csproj", "{73677CB7-DA65-4E34-B139-FF22506E8AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "federal-reporting-service", "federal-reporting-service.csproj", "{73677CB7-DA65-4E34-B139-FF22506E8AF2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{73677CB7-DA65-4E34-B139-FF22506E8AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73677CB7-DA65-4E34-B139-FF22506E8AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73677CB7-DA65-4E34-B139-FF22506E8AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73677CB7-DA65-4E34-B139-FF22506E8AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58E98A7B-E367-4CF7-A189-7C3374DD4C65}
 	EndGlobalSection
 EndGlobal
