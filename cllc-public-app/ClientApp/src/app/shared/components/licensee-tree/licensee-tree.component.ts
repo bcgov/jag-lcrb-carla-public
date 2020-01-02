@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource, MatTree } from '@angular/material/tree';
 import { LegalEntity } from '@models/legal-entity.model';
@@ -28,7 +28,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
   Account = Account;
-  cancelledChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
+  @Output() cancelledChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
 
   constructor(public dialog: MatDialog) {
     super();
@@ -288,7 +288,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
 
     if (!node.isRoot) {
       if (!node.legalEntityId) {
-        const index = node.parentLinceseeChangeLog.children.indexOf(node);
+        const index = node.parentLinceseeChangeLog.children.indexOf(node); 
         node.parentLinceseeChangeLog.children.splice(index, 1)
       } else {
         node.changeType = 'unchanged';
