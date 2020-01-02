@@ -718,6 +718,28 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         }
 
+        public async Task<string> AddFile(String folderName, String fileName, byte[] fileData, string contentType)
+        {
+            return await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
+        }
+
+        public async Task<string> AddFile(String documentLibrary, String folderName, String fileName, byte[] fileData, string contentType)
+        {
+            folderName = FixFoldername(folderName);
+            bool folderExists = await this.FolderExists(documentLibrary, folderName);
+            if (!folderExists)
+            {
+                await this.CreateFolder(documentLibrary, folderName);
+            }
+
+            // now add the file to the folder.
+
+            fileName = await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
+
+            return fileName;
+
+        }
+
         public string GetServerRelativeURL(string listTitle, string folderName)
         {
             folderName = FixFoldername(folderName);
@@ -753,14 +775,37 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             string result = null;
             if (IsValid())
-            {                            
+            {
+                // convert the stream into a byte array.
+                MemoryStream ms = new MemoryStream();
+                fileData.CopyTo(ms);
+                byte[] data = ms.ToArray();
+                return await UploadFile(fileName, listTitle, folderName, data, contentType);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Upload a file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="listTitle"></param>
+        /// <param name="folderName"></param>
+        /// <param name="fileData"></param>
+        /// <param name="contentType"></param>
+        /// <returns>Uploaded Filename, or Null if not successful.</returns>
+        public async Task<string> UploadFile(string fileName, string listTitle, string folderName, byte[] data, string contentType)
+        {
+            string result = null;
+            if (IsValid())
+            {
                 int maxLength = 128;
                 folderName = FixFoldername(folderName);
                 fileName = FixFilename(fileName, maxLength);
-           
+
                 string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
 
-                string requestUriString = GenerateUploadRequestUriString ( serverRelativeUrl, fileName);
+                string requestUriString = GenerateUploadRequestUriString(serverRelativeUrl, fileName);
 
                 if (requestUriString.Length > MaxUrlLength)
                 {
@@ -779,10 +824,6 @@ namespace Gov.Lclb.Cllb.Interfaces
                     }
                 };
 
-                // convert the stream into a byte array.
-                MemoryStream ms = new MemoryStream();
-                fileData.CopyTo(ms);
-                Byte[] data = ms.ToArray();
                 ByteArrayContent byteArrayContent = new ByteArrayContent(data);
                 byteArrayContent.Headers.Add(@"content-length", data.Length.ToString());
                 endpointRequest.Content = byteArrayContent;
@@ -812,6 +853,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             return result;
         }
+
 
         /// <summary>
         /// Download a file

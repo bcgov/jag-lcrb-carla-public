@@ -39,8 +39,10 @@ using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-
-
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Grpc.Net.Client;
+using Gov.Lclb.Cllb.Services.FileManager;
+using System.Net;
 
 namespace Gov.Lclb.Cllb.Public
 {
@@ -80,6 +82,7 @@ namespace Gov.Lclb.Cllb.Public
                 SetupServices(services);
             }
 
+            
             // Add a memory cache
             services.AddMemoryCache();
 
@@ -239,7 +242,7 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid,
                 bcep_base_uri + bcep_base_path + bcep_conf_path));
-
+          
             // add the PDF client.
             string pdf_service_base_uri = Configuration["PDF_SERVICE_BASE_URI"];
             string bearer_token = $"Bearer {Configuration["PDF_JWT_TOKEN"]}";
@@ -249,6 +252,52 @@ namespace Gov.Lclb.Cllb.Public
             // add the GeoCoder Client.
 
             services.AddTransient<GeocoderClient>(_ => new GeocoderClient(Configuration));
+
+            // add the file manager.
+            string fileManagerURI = Configuration["FILE_MANAGER_URI"];
+
+            if (!string.IsNullOrEmpty (fileManagerURI))
+            {
+                var httpClientHandler = new HttpClientHandler();
+                // Return `true` to allow certificates that are untrusted/invalid
+                /* No need to ignore certificate errors, as the certificate should be valid.
+                httpClientHandler.ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+                    */
+                var httpClient = new HttpClient(httpClientHandler);
+                // set default request to Version 2.
+                httpClient.DefaultRequestVersion = HttpVersion.Version20;
+              
+                var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
+                
+                var initialClient = new FileManagerClient(initialChannel);
+                // call the token service to get a token.
+                var tokenRequest = new TokenRequest()
+                {
+                    Secret = Configuration["FILE_MANAGER_SECRET"]
+                };
+
+                var tokenReply = initialClient.GetToken(tokenRequest);
+
+                if (tokenReply != null && tokenReply.ResultStatus == ResultStatus.Success)
+                {
+                    // Add the bearer token to the client.
+                    
+                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
+
+                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });                   
+
+                    services.AddTransient<FileManagerClient>(_ => new FileManagerClient(channel));
+
+                }
+
+
+            }
+            
+            
+            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
