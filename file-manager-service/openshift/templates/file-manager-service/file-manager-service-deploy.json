@@ -69,33 +69,13 @@
                     "value": "${ASPNETCORE_ENVIRONMENT}"
                   },
                   {
-                    "name": "SMTP_HOST",
-                    "value": "${SMTP_HOST}"
-                  },
-                  {
                     "name": "SSG_USERNAME",
                     "value": "${SSG_USERNAME}"
                   },
                   {
                     "name": "SSG_PASSWORD",
                     "value": "${SSG_PASSWORD}"
-                  },                 
-                  {
-                    "name": "DYNAMICS_ODATA_URI",
-                    "value": "${DYNAMICS_ODATA_URI}"
-                  },
-				  {
-                    "name": "DYNAMICS_CLIENT_KEY",
-                    "value": "${DYNAMICS_CLIENT_KEY}"
-                  },
-				  {
-                    "name": "DYNAMICS_AAD_TENANT_ID",
-                    "value": "${DYNAMICS_AAD_TENANT_ID}"
-                  },
-				  {
-                    "name": "DYNAMICS_CLIENT_ID",
-                    "value": "${DYNAMICS_CLIENT_ID}"
-                  },
+                  },                                   
 				  {
                     "name": "JWT_VALID_ISSUER",
                     "value": "${JWT_VALID_ISSUER}"
@@ -109,18 +89,20 @@
                     "value": "${JWT_TOKEN_KEY}"
                   },
 				  {
-                    "name": "ENABLE_HANGFIRE_JOBS",
-                    "value": ""
-                  },
-				  {
                     "name": "SHAREPOINT_ODATA_URI",
                     "value": ""
                   },
 				  {
-                    "name": "SPD_EXPORT_EMAIL",
-                    "value": "${SPD_EXPORT_EMAIL}"
-                  }				                    
+					"name": "DOTNET_SSL_DIRS",
+					"value": "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"
+				  }
                 ],
+				"volumeMounts": [
+                                    {
+                                        "mountPath": "/var/run/secrets/service-cert",
+                                        "name": "service-cert"
+                                    }
+                                ],
                 "resources": {
                   "limits": {
                     "cpu": "${CPU_LIMIT}",
@@ -133,9 +115,9 @@
                 },
                 "readinessProbe": {
                   "httpGet": {
-                    "path": "/hc",
+                    "path": "/hc/ready",
                     "port": 8080,
-                    "scheme": "HTTP"
+                    "scheme": "HTTPS"
                   },
                   "initialDelaySeconds": 10,
                   "timeoutSeconds": 1,
@@ -145,9 +127,9 @@
                 },
                 "liveinessProbe": {
                   "httpGet": {
-                    "path": "/hc",
+                    "path": "/hc/live",
                     "port": 8080,
-                    "scheme": "HTTP"
+                    "scheme": "HTTPS"
                   },
                   "initialDelaySeconds": 10,
                   "timeoutSeconds": 1,
@@ -156,8 +138,17 @@
                   "failureThreshold": 3
                 }
               }
-            ]
-          }
+            ],
+          "volumes": [
+                            {
+                                "name": "service-cert",
+                                "secret": {
+                                    "defaultMode": 420,
+                                    "secretName": "${NAME}-cert"
+                                }
+                            }
+                        ]
+		  }
         }
       }
     },
@@ -170,7 +161,8 @@
           "template": "${NAME}-deployment"
         },
         "annotations": {
-          "description": "Exposes and load balances the application pods."
+          "description": "Exposes and load balances the application pods.",
+		  "service.alpha.openshift.io/serving-cert-secret-name": "${NAME}-cert"
         }
       },
       "spec": {
@@ -196,14 +188,14 @@
       "displayName": "Name",
       "description": "The name assigned to all of the resources defined in this template.",
       "required": true,
-      "value": "spd-sync-service"
+      "value": "file-manager-service"
     },
     {
       "name": "SOURCE_IMAGE_NAME",
       "displayName": "Source Image Name",
       "description": "The name of the image to use for this resource.",
       "required": true,
-      "value": "spd-sync-service"
+      "value": "file-manager-service"
     },
     {
       "name": "IMAGE_NAMESPACE",
@@ -249,88 +241,34 @@
       "displayName": "Memory Request",
       "description": "Starting amount of memory the container can use.",
       "value": "512Mi"
-    },   
-    {
-      "description": "Field for a test email.",
-      "displayName": "Test Email",
-      "name": "TEST_EMAIL"
-    },
-    {
-      "description": "URL for SMTP Host, e.g., apps.smtp.gov.bc.ca, if left blank a value will be defaulted.",
-      "displayName": "SMTP Host",
-      "name": "SMTP_HOST",
-      "required": true,
-      "value": "apps.smtp.gov.bc.ca"
-    },    
-    {
-      "description": "Username for SSG, e.g., clb_uat, if left blank a value will be defaulted.",
-      "displayName": "SSG Username",
-      "name": "SSG_USERNAME",
-      "required": true,
-      "value": "clb_uat"
-    },
-    {
-      "description": "Password for SSG.",
-      "displayName": "SSG Password",
-      "name": "SSG_PASSWORD",
-      "required": true,
-	  "value": " "
-    },
-    {
-      "description": "URI for Dynamics OData, e.g., https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/, if left blank a value will be defaulted.",
-      "displayName": "Dynamics OData URI",
-      "name": "DYNAMICS_ODATA_URI",
-      "required": true,
-      "value": "https://lclbcannabisdev.crm3.dynamics.com/api/data/v8.2/"
-    },
-	{
-		"description": "ADFS Dynamics Client Key (Property of an application user)",
-		"displayName": "DYNAMICS CLIENT KEY",
-		"name": "DYNAMICS_CLIENT_KEY",
-		"required": true,
-		"value": ""
-	},
-	{
-		"description": "ADFS Dynamics Tenant ID",
-		"displayName": "DYNAMICS AAD TENANT ID",
-		"name": "DYNAMICS_AAD_TENANT_ID",
-		"required": true,
-        "value": ""
-	},
-	{
-		"description": "ADFS Dynamics Client ID",
-		"displayName": "DYNAMICS CLIENT ID",
-		"name": "DYNAMICS_CLIENT_ID",
-		"required": true,
-        "value": ""
-    },
+    }, 
     {
 		"description": "String used to identify the issuer.  Usually a URL to a website.",
 		"displayName": "JWT VALID ISSUER",
         "name": "JWT_VALID_ISSUER",
 		"required": true,
-        "value": ""
+        "value": "CHANGEME"
     },
     {
 		"description": "String used to identify the audience.",
 		"displayName": "JWT VALID AUDIENCE",
         "name": "JWT_VALID_AUDIENCE",
 		"required": true,
-        "value": ""
+        "value": "CHANGEME"
     },
     {
 		"description": "Secret/Key used to generate tokens.  Can be any text string, including the text form of a GUID.",
 		"displayName": "JWT Token Key",
 		"name": "JWT_TOKEN_KEY",
 		"required": true,
-		"value": ""
-    },
+		"value": "CHANGEME"
+    },	
 	{
-		"description": "Email address where exports will be sent to.",
-		"displayName": "SPD EXPORT EMAIL",
-        "name": "SPD_EXPORT_EMAIL",
+		"description": "Dynamics native URI",
+		"displayName": "DYNAMICS_NATIVE_ODATA_URI",
+		"name": "DYNAMICS_NATIVE_ODATA_URI",
 		"required": true,
-        "value": ""
-	}
+		"value": "CHANGEME"
+    }	
   ]
 }
