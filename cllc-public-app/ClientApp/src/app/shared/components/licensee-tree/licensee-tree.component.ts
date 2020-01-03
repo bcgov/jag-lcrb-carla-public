@@ -57,14 +57,24 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     if (node.isShareholderNew || node.isRoot) {
       this.openShareholderDialog(node, '', 'edit', rootBusinessType)
         .pipe(filter(data => !!data))
-        .subscribe((formData: LicenseeChangeLog) => {
-          if (node.changeType !== LicenseeChangeType.addBusinessShareholder
-            && node.changeType !== LicenseeChangeType.addIndividualShareholder) {
-            formData.changeType = formData.isIndividual ? LicenseeChangeType.updateIndividualShareholder
-              : LicenseeChangeType.updateBusinessShareholder;
+        .subscribe((data: LicenseeChangeLog | { updateTotalShares: boolean }) => {
+          if ((<{ updateTotalShares: boolean }>data).updateTotalShares === true) {
+            this.editAssociate(this.treeRoot);
+          } else {
+            const formData = <LicenseeChangeLog>data;
+            if (node.changeType !== LicenseeChangeType.addBusinessShareholder
+              && node.changeType !== LicenseeChangeType.addIndividualShareholder) {
+              formData.changeType = formData.isIndividual ? LicenseeChangeType.updateIndividualShareholder
+                : LicenseeChangeType.updateBusinessShareholder;
+            }
+            node = Object.assign(node, formData);
+            if (node.parentLinceseeChangeLog) {
+              node.parentLinceseeChangeLog.children = node.parentLinceseeChangeLog.children.sort((a, b) => {
+                return a.numberofSharesNew - b.numberofSharesNew;
+              });
+            }
+            this.refreshTreeAndChangeTables();
           }
-          node = Object.assign(node, formData);
-          this.refreshTreeAndChangeTables();
         }
         );
     } else {
@@ -113,16 +123,24 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
     }
     this.openShareholderDialog({ parentLinceseeChangeLog: parentNode } as LicenseeChangeLog, parentNode.businessNameNew, 'add', rootBusinessType)
       .pipe(filter(data => !!data))
-      .subscribe((formData: LicenseeChangeLog) => {
-        if (formData.isIndividual) {
-          formData.changeType = LicenseeChangeType.addIndividualShareholder;
+      .subscribe((data: LicenseeChangeLog | { updateTotalShares: boolean }) => {
+        if ((<{ updateTotalShares: boolean }>data).updateTotalShares === true) {
+          this.editAssociate(this.treeRoot);
         } else {
-          formData.changeType = LicenseeChangeType.addBusinessShareholder;
+          const formData = <LicenseeChangeLog>data;
+          if (formData.isIndividual) {
+            formData.changeType = LicenseeChangeType.addIndividualShareholder;
+          } else {
+            formData.changeType = LicenseeChangeType.addBusinessShareholder;
+          }
+          parentNode.children = parentNode.children || [];
+          parentNode.children.push(formData);
+          parentNode.children = parentNode.children.sort((a, b) => {
+            return a.numberofSharesNew - b.numberofSharesNew;
+          });
+          this.refreshTreeAndChangeTables();
+          this.treeControl.expandAll();
         }
-        parentNode.children = parentNode.children || [];
-        parentNode.children.push(formData);
-        this.refreshTreeAndChangeTables();
-        this.treeControl.expandAll();
       }
       );
   }
@@ -158,6 +176,9 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
         const childNode = this.processLegalEntityTree(child);
         childNode.parentLinceseeChangeLog = newNode;
         newNode.children.push(childNode);
+      });
+      newNode.children.sort((a, b) => {
+        return a.totalSharesNew - b.totalSharesNew;
       });
     }
     return newNode;
@@ -288,7 +309,7 @@ export class LicenseeTreeComponent extends FormBase implements OnInit {
 
     if (!node.isRoot) {
       if (!node.legalEntityId) {
-        const index = node.parentLinceseeChangeLog.children.indexOf(node); 
+        const index = node.parentLinceseeChangeLog.children.indexOf(node);
         node.parentLinceseeChangeLog.children.splice(index, 1)
       } else {
         node.changeType = 'unchanged';
