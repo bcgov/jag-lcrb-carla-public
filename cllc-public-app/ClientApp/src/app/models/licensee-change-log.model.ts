@@ -164,6 +164,9 @@ export class LicenseeChangeLog {
         childNode.parentLinceseeChangeLog = newNode;
         newNode.children.push(childNode);
       });
+      newNode.children.sort((a, b) => {
+        return a.totalSharesNew - b.totalSharesNew;
+      });
     }
     return newNode;
   }
