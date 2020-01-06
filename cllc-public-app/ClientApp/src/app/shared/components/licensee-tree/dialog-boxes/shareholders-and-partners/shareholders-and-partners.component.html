@@ -94,16 +94,17 @@
       </app-field>
       <app-field *ngIf="formType === 'shareholder' && !shareholder?.isRoot" class="col-md-12"
         label="Number of Voting Shares in {{shareholder?.parentLinceseeChangeLog?.businessNameNew}}"
-        [valid]="!isTouchedAndInvalid('numberofSharesNew')"
-        errorMessage="This is required. Maximum allowed is {{availableParentShares}}">
+        [valid]="!isTouchedAndInvalid('numberofSharesNew')">
         <input type="number" [readonly]="shareholder?.isRoot" class="form-control" style="width: auto;"
-          formControlName="numberofSharesNew"> of {{shareholder?.parentLinceseeChangeLog?.totalSharesNew}}
+          formControlName="numberofSharesNew"> of {{shareholder?.parentLinceseeChangeLog?.totalSharesNew}} <br>
       </app-field>
+      <span style="padding-left: 15px; margin-top: -15px; z-index: 1;" class="error-states" *ngIf="isTouchedAndInvalid('numberofSharesNew')">Have you issued more shares? If so,
+        <a href="javascript:void(0)" (click)="updateTotalShares()">update the Total
+          Shares</a> before increasing individual shares. Otherwise, remove or update shareholders that have sold their
+        shares before increasing</span>
     </section>
     <section *ngIf="formType === 'partnership' && !shareholder?.isRoot" class="row">
-      <app-field class="col-md-12"
-        label="Ownership percentage"
-        [valid]="!isTouchedAndInvalid('interestPercentageNew')"
+      <app-field class="col-md-12" label="Ownership percentage" [valid]="!isTouchedAndInvalid('interestPercentageNew')"
         errorMessage="This is required">
         <input type="number" [readonly]="shareholder?.isRoot" class="form-control" style="width: auto;"
           formControlName="interestPercentageNew">

@@ -20,7 +20,7 @@
       supply
       additional information.
     </p>
-    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" (cancelledChanges)="addCancelledChange($even)" [enableEditing]="true">
+    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" (cancelledChanges)="addCancelledChange($event)" [enableEditing]="true">
     </app-licensee-tree>
   </div>
 
@@ -485,7 +485,7 @@
 
   <section style="position: relative; margin-top: 20px;">
     <div [ngBusy]="busySave"></div>
-    <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+    <button class="btn btn-primary" style="margin-right:10px;" (click)="save()">
       <span>
         <i class="fa fa-save" style="color: #fff;"></i>
         SAVE FOR LATER
