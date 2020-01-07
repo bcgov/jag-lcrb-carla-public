@@ -172,6 +172,15 @@ select.form-control:not([size]):not([multiple]) {
     font-weight: semi-bold;
 }
 
+.grey-header {
+    background-color: #F1F4FA;
+    color: #38598A;
+    padding: 7px 5px 5px 15px;
+    font-size: 14px;
+    font-weight: semi-bold;
+    text-transform: uppercase;
+}
+
 hr {
     display: block;
     height: 1px;
