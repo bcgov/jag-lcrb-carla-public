@@ -75,13 +75,17 @@ internal class KestrelOptionsSetup : IConfigureOptions<KestrelServerOptions>
                 options.ListenAnyIP(8080, configureListen => {
                         configureListen.UseHttps(_certificateLoader.ServiceCertificate);
                         // enable Http2, for gRPC
-                        configureListen.Protocols = HttpProtocols.Http2;
+                        configureListen.Protocols = HttpProtocols.Http1AndHttp2;
                         configureListen.UseConnectionLogging();
                     });
         }
         else
         {
-            options.ListenAnyIP(8080);
+            options.ListenAnyIP(8080, configureListen => {                
+                // enable Http2, for gRPC
+                configureListen.Protocols = HttpProtocols.Http2;
+                configureListen.UseConnectionLogging();
+            });
         }
     }
 }
