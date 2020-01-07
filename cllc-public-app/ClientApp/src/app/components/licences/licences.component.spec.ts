@@ -12,6 +12,8 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from '@app/app-state/models/app-state';
 import { Store } from '@ngrx/store';
 import { Account } from '@models/account.model';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 const applicationDataServiceStub: Partial<ApplicationDataService> = {
   getAllCurrentApplications: () => of([]),
@@ -23,6 +25,7 @@ const paymentServiceStub: Partial<PaymentDataService> = {};
 const snackBarStub: Partial<MatSnackBar> = {};
 const featureFlagServiceStub: Partial<FeatureFlagService> = { featureOn: () => of(true) };
 const dialogStub: Partial<MatDialog> = {}
+
 describe('LicencesComponent', () => {
   let component: LicencesComponent;
   let fixture: ComponentFixture<LicencesComponent>;
@@ -40,6 +43,7 @@ describe('LicencesComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LicencesComponent],
+      imports: [HttpClientTestingModule, ReactiveFormsModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: ApplicationDataService, useValue: applicationDataServiceStub },
