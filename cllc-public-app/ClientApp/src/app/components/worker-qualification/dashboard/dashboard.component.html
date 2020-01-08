@@ -150,6 +150,22 @@
             </td>
           </tr>
         </table>
+        <div class="information">
+          <p>The following information has been provided from Service BC for use in your Worker Qualification.</p>
+          <table mat-table [dataSource]="dataTable" style="width: 100%;">
+
+            <ng-container matColumnDef="key">
+              <td mat-cell *matCellDef="let field"> {{field.key}} </td>
+            </ng-container>
+            <ng-container matColumnDef="value">
+              <td mat-cell *matCellDef="let field"> {{field.value}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderCellDef></tr>
+            <tr mat-footer-row *matFooterCellDef></tr>
+            <tr mat-row *matRowDef="let row; columns: ['key','value'];"></tr>
+          </table>
+        </div>
         <div class="submit-content">
           <p>
             If you find an error in your personal information, please contact <a style="color:#fff"
