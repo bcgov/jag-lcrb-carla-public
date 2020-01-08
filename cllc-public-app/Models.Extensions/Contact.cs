@@ -165,10 +165,8 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             // birthdate is YYYY-MM-DD
             string smgov_birthdate = headers["smgov_birthdate"];
-            smgov_birthdate = "1989-02-21";
             // Male / Female / Unknown. 
             string smgov_sex = headers["smgov_sex"];
-            smgov_sex = "Female";
             string smgov_givenname = headers["smgov_givenname"];
             string smgov_givennames = headers["smgov_givennames"];
             string smgov_surname = headers["smgov_surname"];
