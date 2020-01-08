@@ -152,9 +152,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             // copy establishment information
             if (copyAddress)
             {
-                to.AdoxioAddresscity = from.AdoxioEstablishmentaddresscity;
-                // 12-10-2019 - Removed set to AdoxioAddressCity as it is set by Dynamics Workflow, not the portal
-                to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;                
+                // 12-10-2019 - Removed set to AdoxioAddressCity as it is set by Dynamics Workflow, not the portal                
+                to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
+                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;                            
                 to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
             }
 

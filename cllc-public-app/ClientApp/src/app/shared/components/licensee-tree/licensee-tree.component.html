@@ -63,6 +63,7 @@
         <span>({{Account.getBusinessTypeFromName(node.businessType)}})</span>
         &nbsp;
         <span *ngIf="node.totalSharesNew"> {{node.totalSharesNew}} total Shares </span>
+        <span *ngIf="node.totalSharesNew && (node.totalSharesNew - node.totalChildShares) > 0">({{node.totalSharesNew - node.totalChildShares}} Unallocated) </span>
       </ng-container>
       <ng-container *ngIf="!node.isRoot">
         <span *ngIf="!node.isRoot && node.percentageShares"
