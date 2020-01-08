@@ -2,6 +2,7 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -809,6 +810,60 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
+        }
+
+        [HttpPut("{licenceId}/establishment")]
+        public async Task<IActionResult> UpdateLicenceEstablishment([FromBody] ViewModels.ApplicationLicenseSummary item, string licenceId)
+        {
+            if (item == null || string.IsNullOrEmpty(licenceId) || licenceId != item.LicenseId)
+            {
+                return BadRequest();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            if (licence == null)
+            {
+                return NotFound();
+            }
+
+            if (!CurrentUserHasAccessToLicenseOwnedBy(licence.AdoxioLicencee.Accountid))
+            {
+                return Forbid();
+            }
+
+            MicrosoftDynamicsCRMadoxioLicences patchObject = new MicrosoftDynamicsCRMadoxioLicences()
+            {
+                AdoxioEstablishmentphone = item.EstablishmentPhoneNumber,
+                AdoxioEstablishmentaddresscity = item.EstablishmentAddressCity,
+                AdoxioEstablishmentaddressstreet = item.EstablishmentAddressStreet,
+                AdoxioEstablishmentaddresspostalcode = item.EstablishmentAddressPostalCode
+            };
+
+            try
+            {
+                await _dynamicsClient.Licenceses.UpdateAsync(licenceId, patchObject);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating licence establishment");
+                throw new Exception("Unable to update licence establishment");
+            }
+
+            try
+            {
+                licence = _dynamicsClient.GetLicenceByIdWithChildren(licenceId);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error getting licence");
+                throw new Exception("Unable to get licence after update");
+            }
+
+            IEnumerable<MicrosoftDynamicsCRMadoxioApplication> applicationsInProgress = _dynamicsClient.GetApplicationsForLicenceByApplicant(licence.AdoxioLicencee.Accountid);
+            var applications = applicationsInProgress.Where(app => app._adoxioAssignedlicenceValue == licence.AdoxioLicencesid).ToList();
+
+            licence.AdoxioLicenceType = ApplicationExtensions.GetCachedLicenceType(licence._adoxioLicencetypeValue, _dynamicsClient, _cache);
+            return new JsonResult(licence.ToLicenseSummaryViewModel(applications));
         }
 
         /// <summary>

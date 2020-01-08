@@ -155,4 +155,8 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     this.dialogRef.close();
   }
 
+  updateTotalShares(){
+    this.dialogRef.close({updateTotalShares: true});
+  }
+
 }
