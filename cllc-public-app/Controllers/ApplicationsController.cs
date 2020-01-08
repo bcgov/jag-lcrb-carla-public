@@ -175,7 +175,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var applicationType = _dynamicsClient.GetApplicationTypeByName("Cannabis Retail Store");
                 if (applicationType != null)
                 {
-                    filter += $" and _adoxio_licencetype_value eq {applicationType.AdoxioApplicationtypeid} ";
+                    filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
                 }
 
                 try

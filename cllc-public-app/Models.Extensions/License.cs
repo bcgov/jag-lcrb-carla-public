@@ -84,6 +84,9 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentAddressStreet = licence.AdoxioEstablishmentaddressstreet,
                 EstablishmentAddressCity = licence.AdoxioEstablishmentaddresscity,
                 EstablishmentAddressPostalCode = licence.AdoxioEstablishmentaddresspostalcode,
+                EstablishmentPhoneNumber = licence.AdoxioEstablishmentphone,
+                EstablishmentEmail = licence.AdoxioEstablishment?.AdoxioEmail,
+                EstablishmentId = licence.AdoxioEstablishment?.AdoxioEstablishmentid,
                 ExpiryDate = licence.AdoxioExpirydate,
                 Status = StatusUtility.GetLicenceStatus(licence, applications),
                 AllowedActions = new List<ApplicationType>(),
@@ -94,6 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (licence.AdoxioEstablishment != null)
             {
                 licenseSummary.EstablishmentName = licence.AdoxioEstablishment.AdoxioName;
+                licenseSummary.EstablishmentIsOpen = licence.AdoxioEstablishment.AdoxioIsopen;
             }
 
             var mainApplication = applications.Where(app => app.Statuscode == (int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved).FirstOrDefault();

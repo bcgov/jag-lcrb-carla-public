@@ -26,8 +26,8 @@ export class EstablishmentDataService extends DataService {
       .pipe(catchError(this.handleError));
     }
 
-    upEstablishment(establishment: Establishment) {
-      return this.http.put(this.apiPath + '/' + establishment.id, establishment, { headers: this.headers })
+    public upEstablishment(establishment: Establishment): Observable<Establishment> {
+      return this.http.put<Establishment>(this.apiPath + '/' + establishment.id, establishment, { headers: this.headers })
         .pipe(catchError(this.handleError));
     }
 

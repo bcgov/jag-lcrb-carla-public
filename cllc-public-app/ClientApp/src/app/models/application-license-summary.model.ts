@@ -3,10 +3,14 @@ import { ApplicationType } from './application-type.model';
 
 export class ApplicationLicenseSummary {
 
+  establishmentId: string;
   establishmentName: string;
   establishmentAddressStreet: string;
   establishmentAddressCity: string;
   establishmentAddressPostalCode: string;
+  establishmentPhoneNumber: string;
+  establishmentEmail: string;
+  establishmentIsOpen: boolean;
 
   status: string;
   licenseId: string;
