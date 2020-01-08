@@ -165,6 +165,7 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
+import { LicenceEventComponent} from '@components/licences/licence-event/licence-event.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
@@ -201,6 +202,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     InsertComponent,
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
+    LicenceEventComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
@@ -260,7 +262,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     ApplicationLicenseeChangesComponent,
     VersionInfoDialogComponent,
     LicencesComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
   ],
   imports: [
     ChartsModule,
