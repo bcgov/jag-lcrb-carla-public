@@ -42,7 +42,6 @@ import {
   MatBadgeModule
 } from '@angular/material';
 import { CdkTableModule } from '@angular/cdk/table';
-
 import { AccountDataService } from '@services/account-data.service';
 import { ContactDataService } from '@services/contact-data.service';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -171,6 +170,7 @@ import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponen
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
+import { PhoneMaskDirective } from './directives/phone-mask.directive';
 
 @NgModule({
   declarations: [
@@ -241,6 +241,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     AppRemoveIfFeatureOnDirective,
     AppRemoveIfFeatureOffDirective,
     InputThousandsDirective,
+    PhoneMaskDirective,
     AssociateContentComponent,
     ConnectionToNonMedicalStoresComponent,
     KeyPersonnelDialogComponent,
@@ -271,6 +272,7 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     BrowserModule,
     CdkTableModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatAutocompleteModule,
     MatButtonModule,
@@ -359,7 +361,8 @@ import { ModalComponent } from '@shared/components/modal/modal.component';
     MatStepperModule,
     NgxFileDropModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    PhoneMaskDirective
   ],
   providers: [
     AccountDataService,

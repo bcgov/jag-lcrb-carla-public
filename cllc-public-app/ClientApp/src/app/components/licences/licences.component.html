@@ -1,11 +1,9 @@
 <div class="form-wrapper">
-    <div [ngBusy]="busy"></div>
-    <h1>Licences</h1>
+  <div [ngBusy]="busy"></div>
+  <h1>Licences</h1>
+  <section>
     <section>
           <section>
-              <p *ngIf="licensedApplications?.length > 0">
-                  <span>Here are your current approved Licences.</span>
-              </p>
               <p *ngIf="licensedApplications?.length == 0">
                   <span>You do not have any Licences.</span>
               </p>
@@ -124,6 +122,5 @@
           <p>&nbsp;</p>
         </form>
       </section>
-    
-  </div>
+
   

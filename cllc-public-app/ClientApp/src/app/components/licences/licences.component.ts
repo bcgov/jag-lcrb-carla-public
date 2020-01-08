@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { forkJoin, Subscription } from 'rxjs';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { ApplicationDataService } from '@app/services/application-data.service';
 import { LicenseDataService } from '@app/services/license-data.service';
 import { Router } from '@angular/router';
 import { Application } from '@models/application.model';
 import { ApplicationSummary } from '@models/application-summary.model';
-import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { ApplicationTypeNames } from '@models/application-type.model';
 import { Account } from '@models/account.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { FormBase } from '@shared/form-base';
@@ -14,14 +14,14 @@ import { takeWhile } from 'rxjs/operators';
 import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { SetIndigenousNationModeAction } from '@app/app-state/actions/app-state.action';
 import * as moment from 'moment';
 import { PaymentDataService } from '@services/payment-data.service';
+import { EstablishmentDataService } from '@services/establishment-data.service';
+import { FormBuilder } from '@angular/forms';
+import { Establishment } from '@models/establishment.model';
 
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
-// export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
-// export const CHANGE_OF_LOCATION_MODE = 'ChangeOfLocationMode';
 
 
 const ACTIVE = 'Active';
@@ -34,14 +34,13 @@ const RENEWAL_DUE = 'Renewal Due';
   styleUrls: ['./licences.component.scss']
 })
 export class LicencesComponent extends FormBase implements OnInit {
-  inProgressApplications: ApplicationSummary[] = [];
+  applications: ApplicationSummary[] = [];
   licensedApplications: ApplicationLicenseSummary[] = [];
+  licenceForms = {};
 
   readonly ACTIVE = ACTIVE;
   readonly PAYMENT_REQUIRED = PAYMENT_REQUIRED;
   readonly RENEWAL_DUE = RENEWAL_DUE;
-  // readonly TRANSFER_LICENCE_MODE = TRANSFER_LICENCE_MODE;
-  // readonly CHANGE_OF_LOCATION_MODE = CHANGE_OF_LOCATION_MODE;
 
   busy: Subscription;
   @Input() applicationInProgress: boolean;
@@ -58,7 +57,9 @@ export class LicencesComponent extends FormBase implements OnInit {
     private store: Store<AppState>,
     private snackBar: MatSnackBar,
     private paymentService: PaymentDataService,
-    public featureFlagService: FeatureFlagService) {
+    private establishmentService: EstablishmentDataService,
+    public featureFlagService: FeatureFlagService,
+    public fb: FormBuilder) {
     super();
     featureFlagService.featureOn('LicenceTransfer')
       .pipe(takeWhile(() => this.componentActive))
@@ -75,38 +76,20 @@ export class LicencesComponent extends FormBase implements OnInit {
    *
    * */
   private displayApplications() {
-    this.inProgressApplications = [];
     this.licensedApplications = [];
     this.busy =
       forkJoin(this.applicationDataService.getAllCurrentApplications(), this.licenceDataService.getAllCurrentLicenses()
       ).pipe(takeWhile(() => this.componentActive))
         .subscribe(([applications, licenses]) => {
-          this.checkIndigenousNationState(applications);
-
+          this.applications = applications;
           licenses.forEach((licence: ApplicationLicenseSummary) => {
-            licence.actionApplications = [];
-            const relatedApplications = applications.filter(l => l.licenceId === licence.licenseId);
-            relatedApplications.forEach(app => {
-              licence.actionApplications.push({
-                applicationId: app.id,
-                applicationTypeName: app.applicationTypeName,
-                applicationStatus: app.applicationStatus,
-                isPaid: app.isPaid
-              });
-            });
-            this.licensedApplications.push(licence);
+            this.addOrUpdateLicence(licence);
           });
         });
   }
 
   uploadMoreFiles(application: Application) {
     this.router.navigate([`/application/${application.id}`, { mode: UPLOAD_FILES_MODE }]);
-  }
-
-  checkIndigenousNationState(applications: ApplicationSummary[]) {
-    if (applications.find((a) => a.isIndigenousNation)) {
-      this.store.dispatch(new SetIndigenousNationModeAction(true));
-    }
   }
 
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
@@ -193,4 +176,98 @@ export class LicencesComponent extends FormBase implements OnInit {
     return expiry < now;
   }
 
+  addOrUpdateLicence(licence: ApplicationLicenseSummary) {
+    licence.actionApplications = [];
+    const relatedApplications = this.applications.filter(l => l.licenceId === licence.licenseId);
+    relatedApplications.forEach(app => {
+      licence.actionApplications.push({
+        applicationId: app.id,
+        applicationTypeName: app.applicationTypeName,
+        applicationStatus: app.applicationStatus,
+        isPaid: app.isPaid
+      });
+    });
+
+    const licenceIndex = this.licensedApplications.findIndex(l => l.licenseId === licence.licenseId);
+    if (licenceIndex >= 0) {
+      this.licensedApplications[licenceIndex] = licence;
+    } else {
+      this.licensedApplications.push(licence);
+    }
+    this.licenceForms[licence.licenseId] = this.fb.group({
+      phone: [licence.establishmentPhoneNumber],
+      email: [licence.establishmentEmail]
+    });
+  }
+
+  updateEmail(licenceId: string, establishmentId: string, event: any) {
+    if (event.target.value === null) {
+      return false;
+    }
+
+    const establishment = {
+      id: establishmentId,
+      email: event.target.value,
+      phone: null,
+      isOpen: null
+    };
+
+    const licence = Object.assign( new ApplicationLicenseSummary(), {
+      licenseId: licenceId,
+      establishmentEmail: event.target.value
+    });
+
+    this.updateEstablishment(establishment);
+    this.updateLicence(licence);
+  }
+
+  updatePhone(licenceId: string, establishmentId: string, event: any) {
+    if (event.target.value === null) {
+      return false;
+    }
+
+    const establishment = {
+      id: establishmentId,
+      email: null,
+      phone: event.target.value,
+      isOpen: null
+    };
+
+    const licence = Object.assign( new ApplicationLicenseSummary(), {
+      licenseId: licenceId,
+      establishmentPhoneNumber: event.target.value
+    });
+
+    this.updateEstablishment(establishment);
+    this.updateLicence(licence);
+  }
+
+  updateLicence(licence: ApplicationLicenseSummary) {
+    this.busy = forkJoin(
+      this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
+      )
+    .subscribe(([licenceResp]) => {
+      this.addOrUpdateLicence(licenceResp);
+    });
+  }
+
+  updateEstablishment(establishment: Establishment) {
+    this.busy = this.establishmentService.upEstablishment(establishment).subscribe();
+  }
+
+  toggleStoreOpen(index: number, establishmentId: string, isOpen: boolean) {
+    const establishment = {
+      id: establishmentId,
+      isOpen: isOpen,
+      phone: null,
+      email: null
+    };
+
+    this.busy = forkJoin(
+      this.establishmentService.upEstablishment(establishment)
+      )
+    .subscribe(([establishmentResp]) => {
+      this.licensedApplications[index].establishmentIsOpen = establishmentResp.isOpen;
+    });
+  }
 }

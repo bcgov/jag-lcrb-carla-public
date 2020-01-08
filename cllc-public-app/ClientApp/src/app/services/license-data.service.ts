@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DataService } from './data.service';
 import { License } from '@models/license.model';
+import { Establishment } from '@models/establishment.model';
 
 @Injectable()
 export class LicenseDataService extends DataService {
@@ -41,6 +42,10 @@ export class LicenseDataService extends DataService {
   createApplicationForActionType(licenseId: string, applicationType: string): Observable<Application> {
     const url = `${this.apiPath}${licenseId}/create-action-application/${encodeURIComponent(applicationType)}`;
     return this.http.post<Application>(url, null, { headers: this.headers });
+  }
+
+  updateLicenceEstablishment(licenceId: string, licence: ApplicationLicenseSummary): Observable<ApplicationLicenseSummary> {
+    return this.http.put<ApplicationLicenseSummary>(this.apiPath + licenceId + '/establishment', licence, { headers: this.headers });
   }
 
 }
