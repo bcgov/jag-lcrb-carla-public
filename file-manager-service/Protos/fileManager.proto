@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Gov.Lclb.Cllb.Services.FileManager";
+
+package filemanager;
+
+// The files service definition.
+service FileManager { 
+
+  // Delete file
+  rpc DeleteFile (DeleteFileRequest) returns (DeleteFileReply);
+
+  // Download File
+  rpc DownloadFile (DownloadFileRequest) returns (DownloadFileReply);
+
+  // File Exists
+  rpc FileExists (FileExistsRequest) returns (FileExistsReply);
+
+  // Upload File
+  rpc UploadFile (UploadFileRequest) returns (UploadFileReply);
+
+  // Get files in a given folder.
+  rpc FolderFiles (FolderFilesRequest) returns (FolderFilesReply);
+
+  // Get a token given a secret.
+  rpc GetToken (TokenRequest) returns (TokenReply);
+
+}
+
+
+
+enum ResultStatus {
+    Fail = 0;
+    Success = 1;
+}
+
+enum FileExistStatus {
+    Error = 0;
+    NotExist = 1;
+    Exist = 2;
+}
+
+message DeleteFileRequest {
+    string serverRelativeUrl = 1;
+}
+
+message DeleteFileReply {
+    ResultStatus resultStatus = 1;
+    string errorDetail = 2;
+}
+
+message DownloadFileRequest {
+    string serverRelativeUrl = 1;
+}
+
+message DownloadFileReply {
+    bytes data = 1;
+    ResultStatus resultStatus = 2;
+    string errorDetail = 3;
+}
+
+message FileExistsRequest {
+    string entityName = 1; 
+    string entityId = 2; 
+    string documentType = 3; 
+    string folderName = 4;
+    string serverRelativeUrl = 5;
+}
+
+message FileExistsReply {
+    FileExistStatus resultStatus = 1;
+    string errorDetail = 2;
+}
+
+// Individual File
+message FileSystemItem {
+  string id = 1; 
+  string name = 2;
+  string documentType = 3; 
+  int64 size = 4;
+  string serverRelativeUrl = 5;
+  google.protobuf.Timestamp timeCreated = 6;
+  google.protobuf.Timestamp timeLastModified = 7;
+}
+
+message FolderFilesRequest {
+    string entityId = 1;
+    string entityName = 2; 
+    string documentType = 3;
+    string folderName = 4;
+}
+
+// collection of files
+message FolderFilesReply {
+    repeated FileSystemItem files = 1;
+    ResultStatus resultStatus = 2;
+    string errorDetail = 3;
+}
+
+message TokenRequest {
+    string secret = 1;
+}
+
+message TokenReply {    
+    ResultStatus resultStatus = 1;
+    string token = 2;
+    string errorDetail = 3;
+}
+
+message UploadFileRequest {
+    string entityName = 1;
+    string folderName = 2;
+    string fileName = 3;
+    string contentType = 4;
+    bytes data = 5;
+}
+
+message UploadFileReply {
+    ResultStatus resultStatus = 1;
+    string errorDetail = 2;
+    string fileName = 3;
+}

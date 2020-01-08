@@ -20,74 +20,71 @@
       supply
       additional information.
     </p>
-    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" (cancelledChanges)="addCancelledChange($even)" [enableEditing]="true">
+    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" (cancelledChanges)="addCancelledChange($event)"
+      [enableEditing]="true">
     </app-licensee-tree>
   </div>
 
-  <h3 class="blue-header">SUPPORTING DOCUMENTS</h3>
-  <section class="padded-section">
-    <div>
-      <br>
-      <label for="">Notice of Articles for [Account Name]</label>
-      <ul>
-        <li *ngFor="let item of LicenseeChangeLog.getListNeedingSupportingDocument(changeTree)?.noticeOfArticles">
-          {{item.firstNameNew}}
-          {{item.lastNameNew}}
-          <a href="">{{item.emailNew}}</a></li>
-      </ul>
-      <br>
-      <p>Please provide a copy of the Shareholder List for [Account Name].</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Notice of Articles"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
+  <ng-container *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).changeLogsPresent">
+    <h3 class="blue-header">SUPPORTING DOCUMENTS</h3>
+    <section class="padded-section">
+      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).noticeOfArticles.length">
+        <h4 class="grey-header">Notice of Articles for {{ changeTree?.businessNameNew}}</h4>
+        <section class="padded-section">
+          <p>Please provide a copy of the Notice of Articles for {{ changeTree?.businessNameNew}}.</p>
+          <section>
+            <app-file-uploader *ngIf="applicationId" documentType="Notice of Articles"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+              (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+            </app-file-uploader>
+          </section>
+        </section>
+      </div>
 
-    <div>
-      <br>
-      <label for="">Shareholder List for [Account Name]</label>
-      <br>
-      <p>Please provide a copy of the Shareholder List for [Account Name].</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Shareholder List" fileTypes="FILE MUST BE IN PDF FORMAT."
-          [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
+      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).shareholderList.length">
+        <h4 class="grey-header">Shareholder List for {{ changeTree?.businessNameNew}}</h4>
+        <section class="padded-section">
+          <p>Please provide a copy of the Shareholder List for {{ changeTree?.businessNameNew}}.</p>
+          <section>
+            <app-file-uploader *ngIf="applicationId" documentType="Shareholder List"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+              (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+              [uploadHeader]="'TO UPLOAD SHAREHOLDER LIST, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+            </app-file-uploader>
+          </section>
+        </section>
+      </div>
 
-    <div>
-      <hr><br>
-      <label for="">Central Securities Register for [Account Name].</label>
-      <br>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
+      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).centralSecuritiesResgister.length">
+        <hr><br>
+        <label for="">Central Securities Register for {{ changeTree?.businessNameNew}}.</label>
+        <br>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+      </div>
 
-    <div>
-      <hr><br>
-      <label for="">Partnership Agreement for [Account Name].</label>
-      <br>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Partnership Agreement"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-  </section>
+      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).partnershipAgreement.length">
+        <hr><br>
+        <label for="">Partnership Agreement for {{ changeTree?.businessNameNew}}.</label>
+        <br>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Partnership Agreement"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+      </div>
+    </section>
+  </ng-container>
 
   <h3 class="blue-header">AMALGAMATION</h3>
   <section class="padded-section">
@@ -102,195 +99,174 @@
         </mat-button-toggle-group>
       </div>
     </section>
+
     <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
-      <hr><br>
-      <label for="">Certificate of Amalgamation</label>
-      <br>
-      <p>
-        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
-        illo.
-      </p>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+      <h4 class="grey-header">Certificate of Amalgamation</h4>
+      <section class="padded-section">
+        <p>
+          Because you have indicated that you have performed an internal amalgamation of shares, you must upload your
+          official record of this amalgamation.
+        </p>
+
+        <app-file-uploader *ngIf="applicationId" documentType="Certificate of Amal"
           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
           (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILE HERE OR'" #financialIntegrityDocuments>
         </app-file-uploader>
       </section>
-    </div>
-    <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
-      <hr><br>
-      <label for="">Central Securities Register of the Amalgamated Company</label>
-      <br>
-      <p>
-        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
-        illo.
-      </p>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+
+      <h4 class="grey-header">Central Securities Register of the Amalgamated Company</h4>
+      <section class="padded-section">
+        <p>
+          You must also upload the Central Securities Register of the Amalgamated Company.
+        </p>
+        <app-file-uploader *ngIf="applicationId" documentType="Amalgamated Central Securities Register"
           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
           (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          [uploadHeader]="'TO UPLOAD FINANCIAL CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'" #financialIntegrityDocuments>
         </app-file-uploader>
       </section>
-    </div>
-    <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
-      <hr><br>
-      <label for="">Notice of Articles for the amalgamated company.</label>
-      <br>
-      <p>
-        Officia dolorum eum nesciunt officiis dignissimos et vero. Corporis quis natus ex voluptate rem
-        illo.
-      </p>
-      <p>Upload the completed form below.</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+
+      <h4 class="grey-header">Notice of Articles for the amalgamated company.</h4>
+      <section class="padded-section">
+        <p>
+          You must also provide a copy of the Notice of Articles for the Amalgamated Company.
+        </p>
+        <app-file-uploader *ngIf="applicationId" documentType="Amalgated Notice of Articles"
           fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
           (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGATED COMPANY, DRAG FILE HERE OR'"
+          #financialIntegrityDocuments>
         </app-file-uploader>
       </section>
+
     </div>
   </section>
 
-  <h3 class="blue-header">NEW SHAREHOLDER ORGANIZATION ASSOCIATIONS</h3>
-  <section class="padded-section">
-    <div>
-      <hr><br>
-      <label for="">Notice of Articles for [Account Name].</label>
-      <br>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-    <div>
-      <hr><br>
-      <label for="">Central Securities Register for [Account Name].</label>
-      <br>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-    <div>
-      <hr><br>
-      <label for="">Partnership agreement for [Account Name].</label>
-      <br>
-      <p>Please provide a copy of the Shareholder List forr [Added Organization Name].</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-    <div>
-      <hr><br>
-      <label for="">Central Securities Register for [Account Name].</label>
-      <br>
-      <p>Please provide a copy of the partnership agreement for [Added Organization Name].</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-  </section>
-  <h3 class="blue-header">NEW INDIVIDUAL ASSOCIATES</h3>
-  <section class="padded-section">
-    <div>
-      <hr><br>
-      <label for="">Notice of Articles for [Account Name].</label>
-      <br>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-    <div>
-      <hr><br>
-      <label for="">Central Securities Register for [Account Name].</label>
-      <br>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-    <div>
-      <hr><br>
-      <label for="">Partnership agreement for [Account Name].</label>
-      <br>
-      <p>Please provide a copy of the Shareholder List forr [Added Organization Name].</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-    <div>
-      <hr><br>
-      <label for="">Central Securities Register for [Account Name].</label>
-      <br>
-      <p>Please provide a copy of the partnership agreement for [Added Organization Name].</p>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
-  </section>
-  <h3 class="blue-header">NAME CHANGES</h3>
-  <section class="padded-section">
-    <p>Because you identified new individual shareholders, please note that the following individuals will be contacted
-      as part of this process:</p>
-    <ul>
-      <li *ngFor="let item of LicenseeChangeLog.getIndivialNameChanges(changeTree)">{{item.firstNameNew}}
-        {{item.lastNameNew}}
-        <a href="">{{item.emailNew}}</a></li>
-    </ul>
+  <ng-container *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).changeLogsPresent">
+    <h3 class="blue-header">NEW SHAREHOLDER ORGANIZATION ASSOCIATIONS</h3>
+    <section class="padded-section">
+      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).noticeOfArticles.length">
+        <h4 class="grey-header">Notice of Articles for new Shareholder Organizations</h4>
+        <section class="padded-section">
+          <div>
+            Please provide a copy of the Notice of Articles for the following organizations:
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).noticeOfArticles">
+                {{ item?.businessNameNew}}
+              </li>
+            </ul>
+          </div>
+          <app-file-uploader *ngIf="applicationId" documentType="Notice of Articles"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+      </div>
 
-    <div>
-      <hr><br>
-      <label for="">Central Securities Register for [Account Name].</label>
-      <br>
-      <p>Please provide name change documents for the people identified in this list: </p>
+      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).shareholderList.length">
+        <h4 class="grey-header">Shareholder List for new Shareholder Organizations</h4>
+        <section class="padded-section">
+          <div>Please provide a copy of the Shareholder List for the following organizations:
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).shareholderList">
+                {{ item?.businessNameNew}}
+              </li>
+            </ul>
+          </div>
+          <app-file-uploader *ngIf="applicationId" documentType="Shareholder List"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD SHAREHOLDER LIST, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+      </div>
+
+      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).centralSecuritiesResgister.length">
+        <h4 class="grey-header">Central Securities Register for new Shareholder Organizations</h4>
+        <div>
+          Please provide a copy of the Central Securities Register for the following organizations:
+          <ul>
+            <li
+              *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).centralSecuritiesResgister">
+              {{ item?.businessNameNew}}
+            </li>
+          </ul>
+        </div>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+      </div>
+
+      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).partnershipAgreement.length">
+        <h4 class="grey-header">Partnership Agreement for new Shareholder Organizations</h4>
+        <div>
+          Please provide a copy of the Partnership Agreement for the following organizations:
+          <ul>
+            <li *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).partnershipAgreement">
+              {{ item?.businessNameNew}}
+            </li>
+          </ul>
+        </div>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Partnership Agreement"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+      </div>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf=" LicenseeChangeLog.getNewIndividualAssociateList(changeTree).length">
+    <h3 class="blue-header">NEW INDIVIDUAL ASSOCIATES</h3>
+    <section class="padded-section">
+      <p>
+        Because you identified new individual shareholders, please note that the following individuals will be
+        contacted
+        as part of this process:
+      </p>
       <ul>
-        <li *ngFor="let item of LicenseeChangeLog.getIndivialNameChanges(changeTree)">{{item.firstNameNew}}
-          {{item.lastNameNew}}
-          <a href="">{{item.emailNew}}</a></li>
+        <li *ngFor="let item of LicenseeChangeLog.getNewIndividualAssociateList(changeTree)">
+          {{item.firstNameNew}} {{item.lastNameNew}} <a href="">{{item.emailNew}}</a>
+        </li>
       </ul>
-      <section>
-        <app-file-uploader *ngIf="applicationId" documentType="Name Change Documents"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-    </div>
+    </section>
+  </ng-container>
 
-  </section>
+  <ng-container *ngIf="LicenseeChangeLog.getIndivialNameChanges(changeTree).length">
+    <h3 class="blue-header">NAME CHANGES</h3>
+    <section class="padded-section">
+      <p>Please provide name change documents for the people identified in this list: </p>
+      <table>
+        <tr class="eq-table">
+          <th>Previous Name</th>
+          <th>Upadated Name</th>
+        </tr>
+        <tr [ngClass]="{'alt-row': i%2 === 0}"
+          *ngFor="let item of LicenseeChangeLog.getIndivialNameChanges(changeTree); let i = index;">
+          <td> {{item.firstNameOld}} {{item.lastNameOld}}</td>
+          <td> {{item.firstNameNew}} {{item.lastNameNew}}</td>
+        </tr>
+      </table>
+
+      <div>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Name Change Documents"
+            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
+            [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILE HERE OR'">
+          </app-file-uploader>
+        </section>
+      </div>
+    </section>
+  </ng-container>
 
   <!-- Contact Details -->
   <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
@@ -485,7 +461,7 @@
 
   <section style="position: relative; margin-top: 20px;">
     <div [ngBusy]="busySave"></div>
-    <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/dashboard'])">
+    <button class="btn btn-primary" style="margin-right:10px;" (click)="save()">
       <span>
         <i class="fa fa-save" style="color: #fff;"></i>
         SAVE FOR LATER
