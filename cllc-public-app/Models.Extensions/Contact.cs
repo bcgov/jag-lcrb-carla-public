@@ -114,6 +114,10 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 to.Address1Country = smgov_country;
             }
+            if (!string.IsNullOrEmpty(smgov_sex))
+            {
+                to.Gendercode = GetIntGenderCode(smgov_sex);
+            }
         }
 
 
