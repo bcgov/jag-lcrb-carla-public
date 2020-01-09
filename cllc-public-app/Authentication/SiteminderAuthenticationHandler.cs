@@ -577,9 +577,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker() {
                         AdoxioFirstname = worker.firstname,
                         AdoxioLastname = worker.lastname,
-                        AdoxioMiddlename = worker.middlename,
-                        AdoxioGendercode = (int)worker.gender
+                        AdoxioMiddlename = worker.middlename
                     };
+                    if (worker.gender != 0) {
+                        patchWorker.AdoxioGendercode = (int)worker.gender;
+                    }
+                    
                     _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
                     
                 }
