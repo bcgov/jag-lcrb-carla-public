@@ -305,3 +305,19 @@ button.btn-mobile {
 button:focus {
     outline: none !important;
 }
+
+::ng-deep {
+    .mat-calendar-body-selected {
+    background-color: #337AB7;
+    color: #000 !important;
+}
+
+.mat-calendar-body-cell-content {
+    color: #54708b;
+}
+
+.mat-calendar-header {
+    background-color: #337AB7;
+    color: #fff;
+}
+}
