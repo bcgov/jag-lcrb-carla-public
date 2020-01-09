@@ -5,7 +5,7 @@ export class Contact {
   lastname: string;
   emailaddress1: string;
   telephone1: string;
-  address1_street1: string;
+  address1_line1: string;
   address1_city: string;
   address1_stateorprovince: string;
   address1_country: string;

@@ -27,6 +27,7 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
   id: string;
   firstName: string;
   lastName: string;
+  dataTable: any[];
 
   busy: Subscription;
   currentApplication: Worker;
@@ -51,8 +52,20 @@ export class WorkerDashboardComponent extends FormBase implements OnInit {
     this.dataLoaded = true;
     if (this.currentUser && this.currentUser.contactid) {
       this.busy = this.workerDataService.getWorkerByContactId(this.currentUser.contactid).subscribe(res => {
+        console.log(res);
         this.dataSource = res;
         this.currentApplication = res[0];
+        this.dataTable = [
+          {key: 'First', value: this.currentApplication.firstname},
+          {key: 'Middle', value: this.currentApplication.middlename},
+          {key: 'Last', value: this.currentApplication.lastname},
+          {key: 'Sex', value: this.currentApplication.gender},
+          {key: 'Street Address', value: this.currentApplication.contact.address1_line1},
+          {key: 'State or Province', value: this.currentApplication.contact.address1_stateorprovince},
+          {key: 'Postal Code', value: this.currentApplication.contact.address1_postalcode},
+          {key: 'Country', value: this.currentApplication.contact.address1_country},
+        ];
+
         this.setClientSideStatus(this.currentApplication);
 
         this.applicationStatus = this.getStatus(res);
