@@ -25,6 +25,9 @@ import { ConnectionToNonMedicalStoresComponent } from '@components/account-profi
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 
+import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
+import { DynamicsForm } from '@models/dynamics-form.model';
+
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
   // '03:15', '03:30', '03:45', '04:00', '04:15', '04:30', '04:45', '05:00', '05:15', '05:30', '05:45', '06:00', '06:15',
@@ -77,6 +80,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   mode: string;
   account: Account;
 
+  dynamicsForm: DynamicsForm;
+
   uploadedSupportingDocuments = 0;
   uploadedFinancialIntegrityDocuments: 0;
   uploadedAssociateDocuments: 0;
@@ -97,7 +102,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
-    public establishmentWatchWordsService: EstablishmentWatchWordsService) {
+    public establishmentWatchWordsService: EstablishmentWatchWordsService,
+    private dynamicsFormDataService: DynamicsFormDataService
+  ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
     this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
@@ -179,7 +186,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
-    // get the application form 72c82432-bbb5-402a-8c4b-fb7e995a2721
+      // get the application form 72c82432-bbb5-402a-8c4b-fb7e995a2721
+      this.dynamicsFormDataService.getDynamicsForm('72c82432-bbb5-402a-8c4b-fb7e995a2721')
+          .pipe(takeWhile(() => this.componentActive))
+          .subscribe(value => this.dynamicsForm = value);
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
