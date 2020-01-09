@@ -7,6 +7,27 @@
       <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
     </div>
 
+    <div *ngIf="dynamicsForm">
+
+      <div *ngFor="let formSection of dynamicsForm.sections; let i = index;">
+        <h3>{{formSection.name}}</h3> 
+        <section class="padded-section">
+           <div *ngFor ="let formField of formSection.fields">
+             <app-field [label]="{{formField.name}}" [required]="{{formField.required}}">
+
+
+             </app-field>
+             <input class="form-control" style="width: 500px;" type="text" formControlName="formField.datafieldname" id="formField.datafieldname" />
+
+           </div>
+        </section>
+
+      </div>
+
+    </div>
+
+    <hr />
+
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
