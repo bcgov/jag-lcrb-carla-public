@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top92 { get; set; }
+        int? Top186 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip18 { get; set; }
+        int? Skip105 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count92 { get; set; }
+        bool? Count186 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter92 { get; set; }
+        string Filter186 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search18 { get; set; }
+        string Search105 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -78,6 +78,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         IAliases Aliases { get; }
 
         /// <summary>
+        /// Gets the IAllowedfileextensions.
+        /// </summary>
+        IAllowedfileextensions Allowedfileextensions { get; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionasyncoperations.
+        /// </summary>
+        IAllowedfileextensionasyncoperations Allowedfileextensionasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionbulkdeletefailures.
+        /// </summary>
+        IAllowedfileextensionbulkdeletefailures Allowedfileextensionbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionduplicatebaserecord.
+        /// </summary>
+        IAllowedfileextensionduplicatebaserecord Allowedfileextensionduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionduplicatematchingrecord.
+        /// </summary>
+        IAllowedfileextensionduplicatematchingrecord Allowedfileextensionduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionsyncerrors.
+        /// </summary>
+        IAllowedfileextensionsyncerrors Allowedfileextensionsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IFileextensionid.
+        /// </summary>
+        IFileextensionid Fileextensionid { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadid.
+        /// </summary>
+        IFormelementuploadid Formelementuploadid { get; }
+
+        /// <summary>
         /// Gets the IApplicationbpfmvpv2s.
         /// </summary>
         IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; }
@@ -93,14 +133,139 @@ namespace Gov.Lclb.Cllb.Interfaces
         IApplicationinvoicehistories Applicationinvoicehistories { get; }
 
         /// <summary>
+        /// Gets the IApplicationlicenseechangesv10s.
+        /// </summary>
+        IApplicationlicenseechangesv10s Applicationlicenseechangesv10s { get; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10asyncoperations.
+        /// </summary>
+        IApplicationlicenseechangesv10asyncoperations Applicationlicenseechangesv10asyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10bulkdeletefailures.
+        /// </summary>
+        IApplicationlicenseechangesv10bulkdeletefailures Applicationlicenseechangesv10bulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10syncerrors.
+        /// </summary>
+        IApplicationlicenseechangesv10syncerrors Applicationlicenseechangesv10syncerrors { get; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10workflowlogs.
+        /// </summary>
+        IApplicationlicenseechangesv10workflowlogs Applicationlicenseechangesv10workflowlogs { get; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationid.
+        /// </summary>
+        IBpfadoxioapplicationid Bpfadoxioapplicationid { get; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1s.
+        /// </summary>
+        IApplicationrelocationv1s Applicationrelocationv1s { get; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1asyncoperations.
+        /// </summary>
+        IApplicationrelocationv1asyncoperations Applicationrelocationv1asyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1bulkdeletefailures.
+        /// </summary>
+        IApplicationrelocationv1bulkdeletefailures Applicationrelocationv1bulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1syncerrors.
+        /// </summary>
+        IApplicationrelocationv1syncerrors Applicationrelocationv1syncerrors { get; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1workflowlogs.
+        /// </summary>
+        IApplicationrelocationv1workflowlogs Applicationrelocationv1workflowlogs { get; }
+
+        /// <summary>
         /// Gets the IApplications.
         /// </summary>
         IApplications Applications { get; }
 
         /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        IBpfadoxioapplicationadoxioapplicationlicenseechangesv10 Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 { get; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationrelocationv1.
+        /// </summary>
+        IBpfadoxioapplicationadoxioapplicationrelocationv1 Bpfadoxioapplicationadoxioapplicationrelocationv1 { get; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationstructurechangev1.
+        /// </summary>
+        IBpfadoxioapplicationadoxioapplicationstructurechangev1 Bpfadoxioapplicationadoxioapplicationstructurechangev1 { get; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationtransferownershipv1.
+        /// </summary>
+        IBpfadoxioapplicationadoxioapplicationtransferownershipv1 Bpfadoxioapplicationadoxioapplicationtransferownershipv1 { get; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1s.
+        /// </summary>
+        IApplicationstructurechangev1s Applicationstructurechangev1s { get; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1asyncoperations.
+        /// </summary>
+        IApplicationstructurechangev1asyncoperations Applicationstructurechangev1asyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1bulkdeletefailures.
+        /// </summary>
+        IApplicationstructurechangev1bulkdeletefailures Applicationstructurechangev1bulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1syncerrors.
+        /// </summary>
+        IApplicationstructurechangev1syncerrors Applicationstructurechangev1syncerrors { get; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1workflowlogs.
+        /// </summary>
+        IApplicationstructurechangev1workflowlogs Applicationstructurechangev1workflowlogs { get; }
+
+        /// <summary>
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1s.
+        /// </summary>
+        IApplicationtransferownershipv1s Applicationtransferownershipv1s { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1asyncoperations.
+        /// </summary>
+        IApplicationtransferownershipv1asyncoperations Applicationtransferownershipv1asyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1bulkdeletefailures.
+        /// </summary>
+        IApplicationtransferownershipv1bulkdeletefailures Applicationtransferownershipv1bulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1syncerrors.
+        /// </summary>
+        IApplicationtransferownershipv1syncerrors Applicationtransferownershipv1syncerrors { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1workflowlogs.
+        /// </summary>
+        IApplicationtransferownershipv1workflowlogs Applicationtransferownershipv1workflowlogs { get; }
 
         /// <summary>
         /// Gets the IApplicationtypecontents.
@@ -111,6 +276,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         IApplicationtypes Applicationtypes { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeformelementuploadfields.
+        /// </summary>
+        IApplicationtypeformelementuploadfields Applicationtypeformelementuploadfields { get; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -146,11 +316,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ICitydistricts.
         /// </summary>
         ICitydistricts Citydistricts { get; }
-
-        /// <summary>
-        /// Gets the IComplaintpublicbpfs.
-        /// </summary>
-        IComplaintpublicbpfs Complaintpublicbpfs { get; }
 
         /// <summary>
         /// Gets the IComplaints.
@@ -266,6 +431,81 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFiainvestigationlogs.
         /// </summary>
         IFiainvestigationlogs Fiainvestigationlogs { get; }
+
+        /// <summary>
+        /// Gets the IFileextensions.
+        /// </summary>
+        IFileextensions Fileextensions { get; }
+
+        /// <summary>
+        /// Gets the IFileextensionallowedfileextensions.
+        /// </summary>
+        IFileextensionallowedfileextensions Fileextensionallowedfileextensions { get; }
+
+        /// <summary>
+        /// Gets the IFileextensionasyncoperations.
+        /// </summary>
+        IFileextensionasyncoperations Fileextensionasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IFileextensionbulkdeletefailures.
+        /// </summary>
+        IFileextensionbulkdeletefailures Fileextensionbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IFileextensionduplicatebaserecord.
+        /// </summary>
+        IFileextensionduplicatebaserecord Fileextensionduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IFileextensionduplicatematchingrecord.
+        /// </summary>
+        IFileextensionduplicatematchingrecord Fileextensionduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IFileextensionsyncerrors.
+        /// </summary>
+        IFileextensionsyncerrors Fileextensionsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfields.
+        /// </summary>
+        IFormelementuploadfields Formelementuploadfields { get; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeid.
+        /// </summary>
+        IApplicationtypeid Applicationtypeid { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldallowedextensions.
+        /// </summary>
+        IFormelementuploadfieldallowedextensions Formelementuploadfieldallowedextensions { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldasyncoperations.
+        /// </summary>
+        IFormelementuploadfieldasyncoperations Formelementuploadfieldasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldbulkdeletefailures.
+        /// </summary>
+        IFormelementuploadfieldbulkdeletefailures Formelementuploadfieldbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldduplicatebaserecord.
+        /// </summary>
+        IFormelementuploadfieldduplicatebaserecord Formelementuploadfieldduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldduplicatematchingrecord.
+        /// </summary>
+        IFormelementuploadfieldduplicatematchingrecord Formelementuploadfieldduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldsyncerrors.
+        /// </summary>
+        IFormelementuploadfieldsyncerrors Formelementuploadfieldsyncerrors { get; }
 
         /// <summary>
         /// Gets the IFundingsources.
@@ -448,14 +688,64 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWorkers Workers { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioallowedfileextension.
+        /// </summary>
+        IRegardingobjectidadoxioallowedfileextension Regardingobjectidadoxioallowedfileextension { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        IRegardingobjectidadoxioapplicationlicenseechangesv10 Regardingobjectidadoxioapplicationlicenseechangesv10 { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationrelocationv1.
+        /// </summary>
+        IRegardingobjectidadoxioapplicationrelocationv1 Regardingobjectidadoxioapplicationrelocationv1 { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationstructurechangev1.
+        /// </summary>
+        IRegardingobjectidadoxioapplicationstructurechangev1 Regardingobjectidadoxioapplicationstructurechangev1 { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationtransferownershipv1.
+        /// </summary>
+        IRegardingobjectidadoxioapplicationtransferownershipv1 Regardingobjectidadoxioapplicationtransferownershipv1 { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioexhibit.
         /// </summary>
         IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiofileextension.
+        /// </summary>
+        IRegardingobjectidadoxiofileextension Regardingobjectidadoxiofileextension { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioformelementuploadfield.
+        /// </summary>
+        IRegardingobjectidadoxioformelementuploadfield Regardingobjectidadoxioformelementuploadfield { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioallowedfileextension.
+        /// </summary>
+        IBusinessunitadoxioallowedfileextension Businessunitadoxioallowedfileextension { get; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxioexhibit.
         /// </summary>
         IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiofileextension.
+        /// </summary>
+        IBusinessunitadoxiofileextension Businessunitadoxiofileextension { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioformelementuploadfield.
+        /// </summary>
+        IBusinessunitadoxioformelementuploadfield Businessunitadoxioformelementuploadfield { get; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -468,14 +758,44 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContacttaskcontact Contacttaskcontact { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioallowedfileextension.
+        /// </summary>
+        IBaserecordidadoxioallowedfileextension Baserecordidadoxioallowedfileextension { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxiofileextension.
+        /// </summary>
+        IBaserecordidadoxiofileextension Baserecordidadoxiofileextension { get; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioformelementuploadfield.
+        /// </summary>
+        IBaserecordidadoxioformelementuploadfield Baserecordidadoxioformelementuploadfield { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioallowedfileextension.
+        /// </summary>
+        IDuplicaterecordidadoxioallowedfileextension Duplicaterecordidadoxioallowedfileextension { get; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioexhibit.
         /// </summary>
         IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiofileextension.
+        /// </summary>
+        IDuplicaterecordidadoxiofileextension Duplicaterecordidadoxiofileextension { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioformelementuploadfield.
+        /// </summary>
+        IDuplicaterecordidadoxioformelementuploadfield Duplicaterecordidadoxioformelementuploadfield { get; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -503,6 +823,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILists Lists { get; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        IOrganizationadoxioapplicationlicenseechangesv10 Organizationadoxioapplicationlicenseechangesv10 { get; }
+
+        /// <summary>
+        /// Gets the IOrganizationadoxioapplicationrelocationv1.
+        /// </summary>
+        IOrganizationadoxioapplicationrelocationv1 Organizationadoxioapplicationrelocationv1 { get; }
+
+        /// <summary>
+        /// Gets the IOrganizationadoxioapplicationstructurechangev1.
+        /// </summary>
+        IOrganizationadoxioapplicationstructurechangev1 Organizationadoxioapplicationstructurechangev1 { get; }
+
+        /// <summary>
+        /// Gets the IOrganizationadoxioapplicationtransferownershipv1.
+        /// </summary>
+        IOrganizationadoxioapplicationtransferownershipv1 Organizationadoxioapplicationtransferownershipv1 { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10activestageid.
+        /// </summary>
+        ILkadoxioapplicationlicenseechangesv10activestageid Lkadoxioapplicationlicenseechangesv10activestageid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1activestageid.
+        /// </summary>
+        ILkadoxioapplicationrelocationv1activestageid Lkadoxioapplicationrelocationv1activestageid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1activestageid.
+        /// </summary>
+        ILkadoxioapplicationstructurechangev1activestageid Lkadoxioapplicationstructurechangev1activestageid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1activestageid.
+        /// </summary>
+        ILkadoxioapplicationtransferownershipv1activestageid Lkadoxioapplicationtransferownershipv1activestageid { get; }
+
+        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         ISavedqueries Savedqueries { get; }
@@ -516,6 +876,111 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         ISharepointsites Sharepointsites { get; }
+
+        /// <summary>
+        /// Gets the ISystemforms.
+        /// </summary>
+        ISystemforms Systemforms { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensioncreatedby.
+        /// </summary>
+        ILkadoxioallowedfileextensioncreatedby Lkadoxioallowedfileextensioncreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensioncreatedonbehalfby.
+        /// </summary>
+        ILkadoxioallowedfileextensioncreatedonbehalfby Lkadoxioallowedfileextensioncreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensionmodifiedby.
+        /// </summary>
+        ILkadoxioallowedfileextensionmodifiedby Lkadoxioallowedfileextensionmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensionmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioallowedfileextensionmodifiedonbehalfby Lkadoxioallowedfileextensionmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10createdby.
+        /// </summary>
+        ILkadoxioapplicationlicenseechangesv10createdby Lkadoxioapplicationlicenseechangesv10createdby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10createdonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationlicenseechangesv10createdonbehalfby Lkadoxioapplicationlicenseechangesv10createdonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10modifiedby.
+        /// </summary>
+        ILkadoxioapplicationlicenseechangesv10modifiedby Lkadoxioapplicationlicenseechangesv10modifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby Lkadoxioapplicationlicenseechangesv10modifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1createdby.
+        /// </summary>
+        ILkadoxioapplicationrelocationv1createdby Lkadoxioapplicationrelocationv1createdby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1createdonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationrelocationv1createdonbehalfby Lkadoxioapplicationrelocationv1createdonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1modifiedby.
+        /// </summary>
+        ILkadoxioapplicationrelocationv1modifiedby Lkadoxioapplicationrelocationv1modifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1modifiedonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationrelocationv1modifiedonbehalfby Lkadoxioapplicationrelocationv1modifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1createdby.
+        /// </summary>
+        ILkadoxioapplicationstructurechangev1createdby Lkadoxioapplicationstructurechangev1createdby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1createdonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationstructurechangev1createdonbehalfby Lkadoxioapplicationstructurechangev1createdonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1modifiedby.
+        /// </summary>
+        ILkadoxioapplicationstructurechangev1modifiedby Lkadoxioapplicationstructurechangev1modifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1modifiedonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationstructurechangev1modifiedonbehalfby Lkadoxioapplicationstructurechangev1modifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1createdby.
+        /// </summary>
+        ILkadoxioapplicationtransferownershipv1createdby Lkadoxioapplicationtransferownershipv1createdby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1createdonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationtransferownershipv1createdonbehalfby Lkadoxioapplicationtransferownershipv1createdonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1modifiedby.
+        /// </summary>
+        ILkadoxioapplicationtransferownershipv1modifiedby Lkadoxioapplicationtransferownershipv1modifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1modifiedonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationtransferownershipv1modifiedonbehalfby Lkadoxioapplicationtransferownershipv1modifiedonbehalfby { get; }
 
         /// <summary>
         /// Gets the ILkadoxioexhibitcreatedby.
@@ -538,9 +1003,64 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxiofileextensioncreatedby.
+        /// </summary>
+        ILkadoxiofileextensioncreatedby Lkadoxiofileextensioncreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiofileextensioncreatedonbehalfby.
+        /// </summary>
+        ILkadoxiofileextensioncreatedonbehalfby Lkadoxiofileextensioncreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiofileextensionmodifiedby.
+        /// </summary>
+        ILkadoxiofileextensionmodifiedby Lkadoxiofileextensionmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxiofileextensionmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxiofileextensionmodifiedonbehalfby Lkadoxiofileextensionmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldcreatedby.
+        /// </summary>
+        ILkadoxioformelementuploadfieldcreatedby Lkadoxioformelementuploadfieldcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioformelementuploadfieldcreatedonbehalfby Lkadoxioformelementuploadfieldcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldmodifiedby.
+        /// </summary>
+        ILkadoxioformelementuploadfieldmodifiedby Lkadoxioformelementuploadfieldmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioformelementuploadfieldmodifiedonbehalfby Lkadoxioformelementuploadfieldmodifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioallowedfileextension.
+        /// </summary>
+        IUseradoxioallowedfileextension Useradoxioallowedfileextension { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         IUseradoxioexhibit Useradoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxiofileextension.
+        /// </summary>
+        IUseradoxiofileextension Useradoxiofileextension { get; }
+
+        /// <summary>
+        /// Gets the IUseradoxioformelementuploadfield.
+        /// </summary>
+        IUseradoxioformelementuploadfield Useradoxioformelementuploadfield { get; }
 
         /// <summary>
         /// Gets the IContacttask.
@@ -553,9 +1073,64 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILegalentitytask Legalentitytask { get; }
 
         /// <summary>
+        /// Gets the ITeamadoxioallowedfileextension.
+        /// </summary>
+        ITeamadoxioallowedfileextension Teamadoxioallowedfileextension { get; }
+
+        /// <summary>
         /// Gets the ITeamadoxioexhibit.
         /// </summary>
         ITeamadoxioexhibit Teamadoxioexhibit { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiofileextension.
+        /// </summary>
+        ITeamadoxiofileextension Teamadoxiofileextension { get; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioformelementuploadfield.
+        /// </summary>
+        ITeamadoxioformelementuploadfield Teamadoxioformelementuploadfield { get; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        IAsyncoperationidadoxioapplicationlicenseechangesv10 Asyncoperationidadoxioapplicationlicenseechangesv10 { get; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationrelocationv1.
+        /// </summary>
+        IAsyncoperationidadoxioapplicationrelocationv1 Asyncoperationidadoxioapplicationrelocationv1 { get; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationstructurechangev1.
+        /// </summary>
+        IAsyncoperationidadoxioapplicationstructurechangev1 Asyncoperationidadoxioapplicationstructurechangev1 { get; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationtransferownershipv1.
+        /// </summary>
+        IAsyncoperationidadoxioapplicationtransferownershipv1 Asyncoperationidadoxioapplicationtransferownershipv1 { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10processid.
+        /// </summary>
+        ILkadoxioapplicationlicenseechangesv10processid Lkadoxioapplicationlicenseechangesv10processid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1processid.
+        /// </summary>
+        ILkadoxioapplicationrelocationv1processid Lkadoxioapplicationrelocationv1processid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1processid.
+        /// </summary>
+        ILkadoxioapplicationstructurechangev1processid Lkadoxioapplicationstructurechangev1processid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1processid.
+        /// </summary>
+        ILkadoxioapplicationtransferownershipv1processid Lkadoxioapplicationtransferownershipv1processid { get; }
 
     }
 }
