@@ -372,7 +372,9 @@ namespace odata2openapi
                             firstTagLower.Equals("savedqueries") ||
                             firstTagLower.Equals("sharepointdocumentlocations") ||
                             firstTagLower.Equals("entitydefinitions") ||
-                            firstTagLower.Equals("globaloptionsetdefinitions")
+                            firstTagLower.Equals("globaloptionsetdefinitions") ||
+                            firstTagLower.Equals("systemforms") 
+                            
                             )
                         {
                             ok2Delete = false;
