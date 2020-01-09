@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             SiteMinderUserNameKey = ConstSiteMinderUserNameKey;
             SiteMinderUserDisplayNameKey = ConstSiteMinderUserDisplayNameKey;
             SiteMinderUserTypeKey = ConstSiteMinderUserType;
-            SiteMinderBirthDate = ConstSiteMinderUserType;
+            SiteMinderBirthDate = ConstSiteMinderBirthDate;
             MissingSiteMinderUserIdError = ConstMissingSiteMinderUserIdError;
             MissingSiteMinderUserTypeError = ConstMissingSiteMinderUserIdError;
             MissingSiteMinderGuidError = ConstMissingSiteMinderGuidError;
@@ -548,8 +548,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings.NewContact = new ViewModels.Contact();
                     userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
                 }
-                else
+                else if (siteMinderUserType == "VerifiedIndividual")
                 {
+                    // Verified individual is from BC Service Card which means it's a worker
                     // Update contact and worker with latest info from BC Service Card
                     ViewModels.Contact contact = new ViewModels.Contact();
                     contact.CopyHeaderValues(context.Request.Headers);
