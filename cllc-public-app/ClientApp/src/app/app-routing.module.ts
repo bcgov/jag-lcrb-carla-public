@@ -34,6 +34,7 @@ import { FederalReportingComponent } from '@components/federal-reporting/federal
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
+import { PersonalHistorySummaryComponent } from '@shared/components/personal-history-summary/personal-history-summary.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
     path: '',
     component: HomeComponent
   },
+  // {
+  //   path: 'personal-history-summary/:applicationId',
+  //   component: PersonalHistorySummaryComponent
+  // },
   {
     path: 'licences',
     component: LicencesComponent,

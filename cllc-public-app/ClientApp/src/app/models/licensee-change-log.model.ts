@@ -49,6 +49,7 @@ export class LicenseeChangeLog {
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
+  edit: boolean; // This is only used on the client side
 
 
   public get percentageShares(): number {
