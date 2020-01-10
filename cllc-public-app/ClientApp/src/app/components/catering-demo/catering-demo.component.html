@@ -1,0 +1,287 @@
+<div class="dashboard-spacing">
+  <h1>Catering Demo</h1>
+  <div class="row">
+    <div class="col-lg-7 col-sm-12">
+      <section class="small-screen-only">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ACCOUNT PROFILE</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <strong>{{account?.name}}</strong> <br>
+          <p></p>
+          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <p></p>
+          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <p></p>
+          <p>
+            Click below to view your complete account profile, and to update your address or contact
+            details.
+          </p>
+          <div>
+            <a routerLink="/account-profile" style="float: right;" id="editAccountProfile">
+              <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Account Profile
+            </a>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </section>
+      <p></p>
+      <p>
+        This service allows applicants to submit an application for a non-medical cannabis licence (cannabis retail
+        store or marketing licence) in British Columbia.
+      </p>
+
+      <p>
+        Please note that the Liquor and Cannabis Regulation Branch (LCRB) will only process complete applications.
+        Applications which are submitted without all required information or documents will not be processed. Applicants
+        will be contacted and provided the opportunity to submit missing information. Once applicants provide all
+        required documents to the LCRB, the application will be processed.
+      </p>
+
+      <p>
+        Inquires related to your application can be directed to <a href="mailto:lcrbcannabis@gov.bc.ca">lcrbcannabis@gov.bc.ca</a>.
+      </p>
+      <p></p>
+
+
+
+
+
+      <div class="form-wrapper">
+        <div [ngBusy]="busy"></div>
+        <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0;">APPLICATIONS AND LICENCES</h3>
+        <section style="border: 1px solid #ccc; padding: 10px;  border-bottom: 4px solid #FFCC00;">
+          <section>
+            <div>
+              <p>Submit an Application and track the status below.</p>
+              <section>
+                <table class="start-application">
+                  <tr>
+                    <th colspan=2>LICENCE</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                  <tr>
+                    <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"></td>
+                    <td>
+                      <h3>Catering Licence</h3>
+                    </td>
+                    <td>
+                      <button class="btn btn-primary" (click)="startCatering()" id="startCatering">START APPLICATION</button>
+                    </td>
+                  </tr>
+                </table>
+              </section>
+            </div>
+
+            <mat-tab-group [selectedIndex]="(inProgressApplications?.length > 0 || licensedApplications?.length == 0) ? 0 : 1">
+              <mat-tab label="In Progress Applications" id="inProgressApplications">
+                <section *ngIf="inProgressApplications?.length > 0">
+                  <label>Please note:</label> <br>
+                  <p>
+                    Due to the high volume of applications, we ask that you limit questions about the status of your
+                    application
+                    as much as possible. Answering fewer questions provides us more capacity to process applications.
+                  </p>
+                  <p>
+                    We will contact you regarding your application as soon as we have an update to communicate, have
+                    information
+                    that you will need to know, or are requesting additional information from you.
+                  </p>
+                  <p>Thank you for your patience.</p>
+                </section>
+                <p *ngIf="inProgressApplications?.length == 0 ">
+                  You do not have any In Progress Applications.
+                </p>
+                <table *ngIf="inProgressApplications?.length > 0" class="eq-table">
+                  <tr>
+                    <th colspan=2>Application</th>
+                    <!-- <th style="width: 95px">Last Updated</th> -->
+                    <th style="width: 235px">Status</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr *ngFor="let item of inProgressApplications; let i = index;" style="border: 1px solid #ccc; ">
+                    <td style="background-color: #E1E8F2; padding: 10px; width: 15px;"><span>{{i+1}}</span></td>
+                    <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+                      <span style="font-weight: 600">{{item.establishmentName}}</span> <br>
+                      <span>{{item.portallabel}}</span> <br>
+                      <span>Application No: </span> <i>{{item.jobNumber}}</i> <br>
+                      <span>Reference #: {{item.name}} </span> <span></span> <br>
+                    </td>
+                    <!--
+                      <td style="padding: 10px; width: 110px;">
+                        {{item.modifiedon | date:'mediumDate'}}
+                      </td>
+                    -->
+                    <td style="background-color: #E1E8F2; padding: 10px;">
+                      <div style="text-transform: uppercase; font-weight: 600;">{{item.applicationStatus}}</div>
+                      <p *ngIf="item.applicationStatus === 'Not Submitted'">
+                        This application has not yet been submitted.
+                      </p>
+                      <p *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                        This relocation application has not yet been submitted
+                      </p>
+                      <p *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                        This transfer application has not yet been submitted
+                      </p>
+                      <p *ngIf="item.applicationStatus === 'Application Under Review'">
+                        Your application has been received and is being reviewed by the LCRB.
+                      </p>
+                      <p *ngIf="item.applicationStatus === 'Transfer Application Under Review'">
+                        Your transfer application has been received and is being reviewed by the LCRB.
+                      </p>
+                      <p *ngIf="item.applicationStatus === 'Relocation Application Under Review'">
+                        Your relocation application has been received and is being reviewed by the LCRB.
+                      </p>
+
+                      <p *ngIf="item.applicationStatus === 'Application Incomplete'">
+                        Your application is incomplete. You must provide additional information for it to be processed.
+                      </p>
+                      <p *ngIf="item.applicationStatus === 'Pending External Review'">
+                        Your application has been sent for local government, financial integrity, and security screening
+                        reviews.
+                      </p>
+                      <p *ngIf="item.applicationStatus === 'Approved In Principle'">
+                        Your application has been approved in principle. An inspector will be contacting you to organize a
+                        final inspection.
+                      </p>
+                    </td>
+                    <td style="background-color: #E1E8F2; padding: 10px;">
+                      <div *ngIf="item.applicationStatus === 'Not Submitted'">
+                        <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal && item.applicationTypeName !== ApplicationTypeNames.Catering"
+                           routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
+                          <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Complete Application</span>
+                        </a>
+                        <a *ngIf="item.applicationTypeName === ApplicationTypeNames.Catering"
+                           [routerLink]="['/account-profile/' + item.id, { mode: 'catering' }]">
+                          <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Complete Catering Application</span>
+                        </a>
+                        <a *ngIf="item.applicationTypeName === ApplicationTypeNames.CRSRenewal "
+                           routerLink="/renew-crs-licence/application/{{item.id}}">
+                          <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Complete Renewal</span>
+                        </a>
+                      </div>
+                      <div *ngIf="item.applicationStatus === 'Relocation Initiated'">
+                        <a [routerLink]="['/account-profile/' + item.id, { mode: CHANGE_OF_LOCATION_MODE }]">
+                          <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Complete Relocation</span>
+                        </a>
+                      </div>
+                      <div *ngIf="item.applicationStatus === 'Transfer Initiated'">
+                        <a [routerLink]="['/account-profile/' + item.id, { mode: TRANSFER_LICENCE_MODE }]">
+                          <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Complete Transfer</span>
+                        </a>
+                      </div>
+                      <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'">
+                        <a [routerLink]="['/licensee-changes/' + item.id]">
+                          <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Complete Licensee Change</span>
+                        </a>
+                      </div>
+                      <div *ngIf="item.applicationStatus === 'Not Submitted'" style="margin-top: 5px;"
+                           (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                        <a href="javascript: void(0)">
+                          <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Cancel Application</span>
+                        </a>
+                      </div>
+                      <div *ngIf="item.applicationStatus === 'Relocation Initiated'" style="margin-top: 5px;"
+                           (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                        <a href="javascript: void(0)">
+                          <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Cancel Relocation</span>
+                        </a>
+                      </div>
+                      <div *ngIf="item.applicationStatus === 'Transfer Initiated'" style="margin-top: 5px;"
+                           (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                        <a href="javascript: void(0)">
+                          <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Cancel Transfer</span>
+                        </a>
+                      </div>
+                      <div *ngIf="item.applicationStatus === 'Licensee Change Initiated'" style="margin-top: 5px;"
+                           (click)="cancelApplication(item.id, item.establishmentName, item.name)">
+                        <a href="javascript: void(0)">
+                          <i class="fas fa-trash-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Cancel Licensee Change</span>
+                        </a>
+                      </div>
+                      <div *ngIf="['Relocation Application Under Review','Transfer Application Under Review', 'Application Under Review', 'Pending External Review'].indexOf(item.applicationStatus) !== -1">
+                        <a style="margin-top: 5px;" href="javascript:void(0);" (click)="uploadMoreFiles(item)">
+                          <i class="fas fa-plus" style="color: #1a5a96; margin-right: 10px;"></i>
+                          <span>Add Supporting Documents</span>
+                        </a>
+                      </div>
+                  </tr>
+                </table>
+                <p></p>
+              </mat-tab>
+            </mat-tab-group>
+          </section>
+        </section>
+      </div>
+
+
+
+
+    </div>
+    <div class="col-lg-4 col-sm-12" style="position: relative">
+      <section class="large-screen-only">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ACCOUNT PROFILE</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <strong>{{account?.name}}</strong> <br>
+          <p></p>
+          <strong>Business Phone:</strong>&nbsp; <span>{{account?.contactPhone}}</span> <br>
+          <p></p>
+          <strong>Business Email: </strong>&nbsp; <span>{{account?.contactEmail}}</span> <br>
+          <p></p>
+          <p>
+            Click below to view your complete account profile, and to update your address or contact
+            details.
+          </p>
+          <div>
+            <a routerLink="/account-profile" style="float: right;">
+              <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Edit Account Profile
+            </a>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </section>
+      <p></p>
+      <section appRemoveIfFeatureOff="LicenseeChanges">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
+
+        <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <app-licensee-tree *ngIf="tree" [treeRoot]="tree" [enableEditing]="false"></app-licensee-tree>
+          <br>
+          <br>
+          <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
+            <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Start Licensee Change Application
+          </a>
+          <div style="clear: both;"></div>
+        </div>
+      </section>
+      <p></p>
+      <app-associate-content [account]="account" [isIndigenousNation]="indigenousNationModeActive">
+      </app-associate-content>
+      <p></p>
+    </div>
+  </div>
+  <section style="margin-top: 20px;">
+    <p apappRRemoveIfFeatureOn="Marketer">
+      All cannabis retail store licence holders must follow the terms and conditions
+      of
+      their licence as set out in
+      the
+      <a href="https://www2.gov.bc.ca/assets/download/B459B70AC1F246E4A4D58C103A94C6C8">
+        Retail Store Licence Terms and
+        Conditions
+        Handbook
+      </a>.
+    </p>
+  </section>
+</div>
+
