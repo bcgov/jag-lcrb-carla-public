@@ -25,6 +25,10 @@ import { ConnectionToNonMedicalStoresComponent } from '@components/account-profi
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 
+import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
+import { DynamicsForm } from '@models/dynamics-form.model';
+
+
 const ServiceHours = [
   // '00:00', '00:15', '00:30', '00:45', '01:00', '01:15', '01:30', '01:45', '02:00', '02:15', '02:30', '02:45', '03:00',
   // '03:15', '03:30', '03:45', '04:00', '04:15', '04:30', '04:45', '05:00', '05:15', '05:30', '05:45', '06:00', '06:15',
@@ -45,13 +49,15 @@ export class ApplicationHTMLContent {
   nextSteps: string;
 }
 
+
 @Component({
-  selector: 'app-application',
-  templateUrl: './application.component.html',
-  styleUrls: ['./application.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-dynamic-application',
+  templateUrl: './dynamic-application.component.html',
+  styleUrls: ['./dynamic-application.component.scss']
 })
-export class ApplicationComponent extends FormBase implements OnInit {
+
+export class DynamicApplicationComponent extends FormBase implements OnInit {
+
   establishmentWatchWords: KeyValue<string, boolean>[];
   application: Application;
   @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
@@ -59,6 +65,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
+  form2: FormGroup;
   savedFormData: any;
   applicationId: string;
   busy: Subscription;
@@ -76,6 +83,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
   FormControlState = FormControlState;
   mode: string;
   account: Account;
+
+  dynamicsForm: DynamicsForm;
 
   uploadedSupportingDocuments = 0;
   uploadedFinancialIntegrityDocuments: 0;
@@ -97,7 +106,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
     private fb: FormBuilder,
     private tiedHouseService: TiedHouseConnectionsDataService,
     public dialog: MatDialog,
-    public establishmentWatchWordsService: EstablishmentWatchWordsService) {
+    public establishmentWatchWordsService: EstablishmentWatchWordsService,
+    private dynamicsFormDataService: DynamicsFormDataService
+  ) {
     super();
     this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
     this.route.paramMap.subscribe(pmap => this.mode = pmap.get('mode'));
@@ -105,6 +116,54 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
+      id: [''],
+      assignedLicence: this.fb.group({
+        id: [''],
+        establishmentAddressStreet: [''],
+        establishmentAddressCity: [''],
+        establishmentAddressPostalCode: [''],
+        establishmentParcelId: ['']
+      }),
+      establishmentName: ['', [
+        Validators.required,
+        this.establishmentWatchWordsService.forbiddenNameValidator()
+      ]],
+      establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+      contactPersonFirstName: ['', Validators.required],
+      contactPersonLastName: ['', Validators.required],
+      contactPersonRole: [''],
+      contactPersonEmail: ['', Validators.required],
+      contactPersonPhone: ['', Validators.required],
+      establishmentAddressStreet: ['', Validators.required],
+      establishmentAddressCity: ['', Validators.required],
+      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
+      establishmentEmail: ['', Validators.email],
+      establishmentPhone: [''],
+      serviceHoursSundayOpen: ['', Validators.required],
+      serviceHoursMondayOpen: ['', Validators.required],
+      serviceHoursTuesdayOpen: ['', Validators.required],
+      serviceHoursWednesdayOpen: ['', Validators.required],
+      serviceHoursThursdayOpen: ['', Validators.required],
+      serviceHoursFridayOpen: ['', Validators.required],
+      serviceHoursSaturdayOpen: ['', Validators.required],
+      serviceHoursSundayClose: ['', Validators.required],
+      serviceHoursMondayClose: ['', Validators.required],
+      serviceHoursTuesdayClose: ['', Validators.required],
+      serviceHoursWednesdayClose: ['', Validators.required],
+      serviceHoursThursdayClose: ['', Validators.required],
+      serviceHoursFridayClose: ['', Validators.required],
+      serviceHoursSaturdayClose: ['', Validators.required],
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
+      applyAsIndigenousNation: [false],
+      indigenousNationId: [{ value: null, disabled: true }, Validators.required],
+      federalProducerNames: ['', Validators.required],
+      applicantType: ['', Validators.required],
+      description1: ['', [Validators.required]],
+      proposedChange: ['', [Validators.required]],
+    });
+
+    this.form2 = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
         id: [''],
@@ -179,6 +238,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
+    // get the application form 72c82432-bbb5-402a-8c4b-fb7e995a2721
+    this.dynamicsFormDataService.getDynamicsForm('72c82432-bbb5-402a-8c4b-fb7e995a2721')
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(value => this.dynamicsForm = value);
 
     this.busy = this.applicationDataService.getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
@@ -557,5 +620,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
     return [FormControlState.Show.toString(), FormControlState.Reaonly.toString()]
       .indexOf(state) !== -1;
   }
+
 
 }

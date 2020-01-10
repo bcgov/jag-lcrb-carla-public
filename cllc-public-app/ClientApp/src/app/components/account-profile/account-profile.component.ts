@@ -301,11 +301,22 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);
         } else if (this.applicationId) {
-          const route: any[] = [`/application/${this.applicationId}`];
-          if (this.applicationMode) {
-            route.push({ mode: this.applicationMode });
+          alert(this.applicationMode);
+          // divert catering.
+          if (this.applicationMode === 'catering') {
+            const route: any[] = [`/application/catering/${this.applicationId}`];
+            if (this.applicationMode) {
+              route.push({ mode: this.applicationMode });
+            }
+            this.router.navigate(route);
           }
-          this.router.navigate(route);
+          else {
+            const route: any[] = [`/application/${this.applicationId}`];
+            if (this.applicationMode) {
+              route.push({ mode: this.applicationMode });
+            }
+            this.router.navigate(route);
+          }
         } else {
           this.router.navigate(['/dashboard']);
         }

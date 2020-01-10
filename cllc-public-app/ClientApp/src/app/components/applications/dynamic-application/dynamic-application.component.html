@@ -7,6 +7,64 @@
       <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
     </div>
 
+    <div [formGroup]="form2" *ngIf="dynamicsForm" class="application-wrapper">
+
+      <div *ngFor="let formSection of dynamicsForm.sections; let i = index;">
+        <h3>{{formSection.name}}</h3>
+        <section class="padded-section">
+          <div *ngFor="let formField of formSection.fields">
+            <div *ngIf="formField.visible">
+
+
+              <app-field *ngIf="formField.controltype == 'TextBoxControl'" [label]="formField.name" [required]="formField.required">
+                <input class="form-control" style="width: 500px;" type="text" />
+
+              </app-field>
+
+
+              <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required">
+                <input type="text" style="width: 200px; background-color: #fff;"
+                       placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [max]="currentDate"
+                       [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                <mat-datepicker #picker></mat-datepicker>
+              </app-field>
+
+
+
+              <app-field *ngIf="formField.controltype == 'PicklistControl'" [label]="formField.name" [required]="formField.required">
+                Picklist
+              </app-field>
+
+
+              <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name" [required]="formField.required">
+                Lookup
+              </app-field>
+
+              <app-field *ngIf="formField.controltype == 'RadioControl'" [label]="formField.name" [required]="formField.required">
+                Radio
+              </app-field>
+
+
+
+
+
+
+
+            </div>
+
+
+            <!-- <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" id="{{formField.datafieldname}}" />-->
+
+
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+    <hr />
+
     <div [formGroup]="form" class="application-wrapper">
       <!-- Preamble -->
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
@@ -1241,3 +1299,4 @@
   <ng-container *ngTemplateOutlet="applicationContent">
   </ng-container>
 </div>
+
