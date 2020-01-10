@@ -114,9 +114,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             FormField formField = new FormField();
                             // get cell visibility and showlabel
-                            Boolean cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
-                            Boolean cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
+                            bool cellShowLabel = cell.Attribute("showlabel").DynamicsAttributeToBoolean();
+                            bool cellVisible = cell.Attribute("visible").DynamicsAttributeToBoolean();
 
+                            // set the cell to visible if it is not hidden.
+                            if (cell.Attribute("visible") == null)
+                            {
+                                cellVisible = true;
+                            }
 
                             formField.showlabel = cellShowLabel;
                             formField.visible = cellVisible;
