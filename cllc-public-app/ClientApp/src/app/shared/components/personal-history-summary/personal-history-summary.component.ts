@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
 import { Application } from '@models/application.model';
 import { LegalEntity } from '@models/legal-entity.model';
@@ -21,9 +21,13 @@ import { LicenseeTreeComponent } from '../licensee-tree/licensee-tree.component'
   styleUrls: ['./personal-history-summary.component.scss']
 })
 export class PersonalHistorySummaryComponent extends FormBase implements OnInit {
-  personalHistoryItems: LicenseeChangeLog[] = [];
+  @Input() personalHistoryItems: LicenseeChangeLog[] = [];
+  @Input() rootNode: LicenseeChangeLog;
+  @Input() changeTypeSuffix: string;
+  @Input() addLabel: string = 'Add Associate';
   businessType: string = 'Society';
-  account: Account;
+  @Input() account: Account;
+  @Output() childAdded = new EventEmitter<LicenseeChangeLog>();
   applicationId: string;
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
@@ -63,38 +67,37 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
+    // this.store.select(state => state.currentAccountState.currentAccount)
+    //   .pipe(takeWhile(() => this.componentActive))
+    //   .pipe(filter(account => !!account))
+    //   .subscribe((account) => {
+    //     this.account = account;
+    //   });
 
-    this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(account => !!account))
-      .subscribe((account) => {
-        this.account = account;
-      });
-
-    this.loadData();
+    // this.loadData();
   }
 
-  loadData() {
-    this.busy = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
-      this.legalEntityDataService.getChangeLogs(this.applicationId),
-      this.legalEntityDataService.getCurrentHierachy())
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
-        this.application = data[0];
-        const currentChangeLogs = data[1] || [];
-        const currentLegalEntities = data[2];
-        const tree = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
-        tree.isRoot = true;
-        tree.applySavedChangeLogs(currentChangeLogs);
-        //flatten the tree
-        this.personalHistoryItems = this.flattenChangeLogs(tree);
+  // loadData() {
+  //   // this.busy = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
+  //   //   this.legalEntityDataService.getChangeApplicationLogs(this.applicationId),
+  //   //   this.legalEntityDataService.getCurrentHierachy())
+  //   //   .pipe(takeWhile(() => this.componentActive))
+  //   //   .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
+  //   //     this.application = data[0];
+  //   //     const currentChangeLogs = data[1] || [];
+  //   //     const currentLegalEntities = data[2];
+  //   //     const tree = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
+  //   //     tree.isRoot = true;
+  //   //     tree.applySavedChangeLogs(currentChangeLogs);
+  //   //     //flatten the tree
+  //   //     this.personalHistoryItems = this.flattenChangeLogs(tree);
 
-      },
-        () => {
-          console.log('Error occured');
-        }
-      );
-  }
+  //   //   },
+  //   //     () => {
+  //   //       console.log('Error occured');
+  //   //     }
+  //   //   );
+  // }
 
   flattenChangeLogs(node: LicenseeChangeLog): LicenseeChangeLog[] {
     let flatNodes: LicenseeChangeLog[] = [];
@@ -111,7 +114,9 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
   addAssociate() {
     const associate = new LicenseeChangeLog();
     associate.edit = true;
-    this.personalHistoryItems.push(associate);
+    associate.changeType = `add${this.changeTypeSuffix}`;
+    this.childAdded.emit(associate);
+
   }
 
   showPosition(): boolean {

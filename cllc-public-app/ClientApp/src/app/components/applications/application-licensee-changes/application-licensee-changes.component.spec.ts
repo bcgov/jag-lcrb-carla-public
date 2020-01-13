@@ -30,7 +30,7 @@ describe('ApplicationLicenseeChangesComponent', () => {
         provideMockStore({ }),
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub({}) },
         { provide: Router, useValue: {}},
-        { provide: LegalEntityDataService, useValue: {getChangeLogs: () => of([]), getCurrentHierachy: () => of({})} },
+        { provide: LegalEntityDataService, useValue: {getChangeApplicationLogs: () => of([]), getCurrentHierachy: () => of({})} },
         { provide: ApplicationDataService, useValue: {getApplicationById: () => of({}), getAllCurrentApplications: () => of([]) } },
       ]
     })
