@@ -35,6 +35,7 @@ import { ApplicationLicenseeChangesComponent } from '@components/applications/ap
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { PersonalHistorySummaryComponent } from '@shared/components/personal-history-summary/personal-history-summary.component';
+import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,10 @@ const routes: Routes = [
   //   path: 'personal-history-summary/:applicationId',
   //   component: PersonalHistorySummaryComponent
   // },
+  {
+    path: 'org-structure',
+    component: OrganizationStructureComponent
+  },
   {
     path: 'licences',
     component: LicencesComponent,
