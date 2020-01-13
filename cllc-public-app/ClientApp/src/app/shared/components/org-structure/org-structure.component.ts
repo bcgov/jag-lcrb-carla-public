@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { Account } from '@models/account.model';
 
 @Component({
   selector: 'app-org-structure',
@@ -8,6 +9,7 @@ import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 })
 export class OrgStructureComponent implements OnInit {
   @Input() node: LicenseeChangeLog;
+  @Input() account: Account;
 
   constructor() { }
 
