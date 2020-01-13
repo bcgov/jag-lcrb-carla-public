@@ -301,7 +301,6 @@ export class AccountProfileComponent extends FormBase implements OnInit {
         if (this.useInStepperMode) {
           this.saveComplete.emit(true);
         } else if (this.applicationId) {
-          alert(this.applicationMode);
           // divert catering.
           if (this.applicationMode === 'catering') {
             const route: any[] = [`/application/catering/${this.applicationId}`];
