@@ -26,31 +26,13 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
   businessType: string = 'Society';
-  @Input() account: Account;
   @Output() childAdded = new EventEmitter<LicenseeChangeLog>();
-  applicationId: string;
-  application: Application;
-  currentChangeLogs: LicenseeChangeLog[];
-  currentLegalEntities: LegalEntity;
 
-  editedTree: LicenseeChangeLog;
   LicenseeChangeLog = LicenseeChangeLog;
   busy: any;
-  busySave: any;
-  numberOfNonTerminatedApplications: number;
-  cancelledLicenseeChanges: LicenseeChangeLog[] = [];
 
-  constructor(public dialog: MatDialog,
-    public snackBar: MatSnackBar,
-    private fb: FormBuilder,
-    public cd: ChangeDetectorRef,
-    public router: Router,
-    private store: Store<AppState>,
-    private route: ActivatedRoute,
-    private applicationDataService: ApplicationDataService,
-    private legalEntityDataService: LegalEntityDataService) {
+  constructor(private fb: FormBuilder) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
   }
 
 
@@ -66,49 +48,6 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
-
-    // this.store.select(state => state.currentAccountState.currentAccount)
-    //   .pipe(takeWhile(() => this.componentActive))
-    //   .pipe(filter(account => !!account))
-    //   .subscribe((account) => {
-    //     this.account = account;
-    //   });
-
-    // this.loadData();
-  }
-
-  // loadData() {
-  //   // this.busy = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
-  //   //   this.legalEntityDataService.getChangeApplicationLogs(this.applicationId),
-  //   //   this.legalEntityDataService.getCurrentHierachy())
-  //   //   .pipe(takeWhile(() => this.componentActive))
-  //   //   .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
-  //   //     this.application = data[0];
-  //   //     const currentChangeLogs = data[1] || [];
-  //   //     const currentLegalEntities = data[2];
-  //   //     const tree = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
-  //   //     tree.isRoot = true;
-  //   //     tree.applySavedChangeLogs(currentChangeLogs);
-  //   //     //flatten the tree
-  //   //     this.personalHistoryItems = this.flattenChangeLogs(tree);
-
-  //   //   },
-  //   //     () => {
-  //   //       console.log('Error occured');
-  //   //     }
-  //   //   );
-  // }
-
-  flattenChangeLogs(node: LicenseeChangeLog): LicenseeChangeLog[] {
-    let flatNodes: LicenseeChangeLog[] = [];
-
-    if (node.children) {
-      flatNodes = flatNodes.concat(node.children);
-      node.children.forEach(child => {
-        flatNodes = flatNodes.concat(this.flattenChangeLogs(child));
-      });
-    }
-    return flatNodes;
   }
 
   addAssociate() {
