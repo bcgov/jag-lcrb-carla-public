@@ -171,6 +171,7 @@ import { ApplicationAndLicenceFeeComponent } from '@components/applications/appl
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
 import { PersonalHistorySummaryComponent } from './shared/components/personal-history-summary/personal-history-summary.component';
+import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
 
 @NgModule({
   declarations: [
@@ -263,7 +264,8 @@ import { PersonalHistorySummaryComponent } from './shared/components/personal-hi
     VersionInfoDialogComponent,
     LicencesComponent,
     ApplicationsComponent,
-    PersonalHistorySummaryComponent
+    PersonalHistorySummaryComponent,
+    OrgStructureComponent
   ],
   imports: [
     ChartsModule,

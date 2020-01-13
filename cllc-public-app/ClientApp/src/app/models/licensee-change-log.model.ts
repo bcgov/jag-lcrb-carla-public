@@ -69,6 +69,22 @@ export class LicenseeChangeLog {
     }
     return totalShares;
   }
+
+  public get keyPersonnelChildren(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => item.isIndividual && !item.isShareholderNew);
+    return leaders;
+  }
+
+  public get individualShareholderChildren(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => item.isIndividual && item.isShareholderNew);
+    return leaders;
+  }
+
+  public get businessShareholderChildren(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => !item.isIndividual && item.isShareholderNew);
+    return leaders;
+  }
+
   /**
    * Create from LegalEntity
    */
@@ -106,8 +122,6 @@ export class LicenseeChangeLog {
       this.dateofBirthOld = legalEntity.dateofbirth;
       this.titleNew = legalEntity.jobTitle;
       this.titleOld = legalEntity.jobTitle;
-
-
     }
   }
 
@@ -492,8 +506,8 @@ export class LicenseeChangeLog {
     //notice of articles predicate
     const needsNoticeOfArticels = (node: LicenseeChangeLog): boolean =>
       (
-          (node.businessType === 'PublicCorporation' || node.businessType === 'PrivateCorporation') &&
-          node.changeType === LicenseeChangeType.addBusinessShareholder
+        (node.businessType === 'PublicCorporation' || node.businessType === 'PrivateCorporation') &&
+        node.changeType === LicenseeChangeType.addBusinessShareholder
       );
     result.noticeOfArticles = LicenseeChangeLog.findNodesInTree(treeRoot, needsNoticeOfArticels);
 
@@ -540,13 +554,13 @@ export class LicenseeChangeLog {
     return result;
   }
 
-  public static getNewIndividualAssociateList(treeRoot: LicenseeChangeLog):  LicenseeChangeLog[]{
+  public static getNewIndividualAssociateList(treeRoot: LicenseeChangeLog): LicenseeChangeLog[] {
     let result = [];
 
     //new individual associate predicate
     const newIndividualAssociate = (node: LicenseeChangeLog): boolean =>
       (
-          node.changeType === LicenseeChangeType.addIndividualShareholder
+        node.changeType === LicenseeChangeType.addIndividualShareholder
       );
     result = LicenseeChangeLog.findNodesInTree(treeRoot, newIndividualAssociate);
     debugger;

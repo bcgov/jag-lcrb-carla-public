@@ -1,5 +1,5 @@
 <div>
-    <ng-container>
+    <!-- <ng-container>
         <input type="radio" name="bt" value="Society" [(ngModel)]="businessType"> Society <br>
         <input type="radio" name="bt" value="SoleProprietor" [(ngModel)]="businessType"> Sole Prop <br>
         <input type="radio" name="bt" value="PublicCorporation" [(ngModel)]="businessType"> Public Corporation <br>
@@ -34,62 +34,162 @@
                 </ul>
             </li>
         </ul>
-    </section>
+    </section> -->
     <button class="btn btn-primary" (click)="addAssociate()">
         <i class="fas fa-plus"></i>
-        Add Associate</button>
+        {{addLabel}}</button>
 
     <table class="eq-table" style="margin-top: 10px;">
-        <tr>
-            <th style="width: 200px;">First Name</th>
-            <th style="width: 200px;">Last Name</th>
-            <th *ngIf="showPosition()" style="width: 200px;">Position</th>
-            <th style="width: 200px;">Email</th>
-            <th style="width: 150px;">Date of Birth</th>
-            <th>Level 1 Personal History Summary </th>
-            <th>Level 2 Personal History Summary </th>
-            <th style="background-color: transparent;"></th>
-        </tr>
-        <tr *ngFor="let item of personalHistoryItems">
-            <td>
-                <span *ngIf="!item.edit">{{item.firstNameNew}}</span>
-                <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.firstNameNew">
-            </td>
-            <td>
-                <span *ngIf="!item.edit">{{item.lastNameNew}}</span>
-                <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.lastNameNew">
-            </td>
-            <td *ngIf="showPosition()">
-                <span *ngIf="!item.edit">{{item.getNewLeadershipPosition()}}</span>
-                <ng-container *ngIf="item.edit">
-                    <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isDirectorNew"> <label
-                        style="padding-right: 10px;" for="">Director</label>
-                    <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isOfficerNew"> <label
-                        style="padding-right: 10px;" for="">Officer</label>
-                    <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isManagerNew"> <label
-                        style="padding-right: 10px;" for="">Senior Manager</label>
-                </ng-container>
 
-            </td>
-            <td>
-                <span *ngIf="!item.edit">{{item.emailNew}}</span>
-                <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
-            </td>
-            <td>
-                <span *ngIf="!item.edit">{{item.dateofBirthNew | date}}</span>
-                <input *ngIf="item.edit" type="text" [(ngModel)]='item.dateofBirthNew'
-                    style="width: 100px; background-color: #fff;" autocomplete="false" placeholder="yyyy-mm-dd"
-                    class="form-control" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
-                <mat-datepicker #picker></mat-datepicker>
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-                <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
-                    <i class="fas fa-pencil-alt"></i>&nbsp;Edit
-                </button>
-                <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
-            </td>
-        </tr>
+        <ng-container *ngIf="changeTypeSuffix === 'Leadership'">
+            <tr>
+                <th style="width: 200px;">First Name</th>
+                <th style="width: 200px;">Last Name</th>
+                <th *ngIf="showPosition()" style="width: 200px;">Position</th>
+                <th style="width: 200px;">Email</th>
+                <th style="width: 150px;">Date of Birth</th>
+                <th>Level 1 Personal History Summary </th>
+                <th>Level 2 Personal History Summary </th>
+                <th style="background-color: transparent;"></th>
+            </tr>
+            <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
+                <tr [ngClass]="{'alt-row': i%2 === 0}">
+                    <td>
+                        <span *ngIf="!item.edit">{{item.firstNameNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.firstNameNew">
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.lastNameNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.lastNameNew">
+                    </td>
+                    <td *ngIf="showPosition()">
+                        <span *ngIf="!item.edit">{{item.getNewLeadershipPosition()}}</span>
+                        <ng-container *ngIf="item.edit">
+                            <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isDirectorNew"> <label
+                                style="padding-right: 10px;" for="">Director</label> <br>
+                            <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isOfficerNew"> <label
+                                style="padding-right: 10px;" for="">Officer</label><br>
+                            <input *ngIf="rootNode?.businessType !== 'Society'" type="checkbox"
+                                style="margin-right: 5px;" [(ngModel)]="item.isManagerNew"> <label
+                                style="padding-right: 10px;" for="">Senior Manager</label>
+                        </ng-container>
+
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.emailNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.dateofBirthNew | date}}</span>
+                        <input *ngIf="item.edit" type="text" [(ngModel)]='item.dateofBirthNew'
+                            style="width: 100px; background-color: #fff;" autocomplete="false" placeholder="yyyy-mm-dd"
+                            class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
+                            (click)="picker.open()">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
+                            <i class="fas fa-pencil-alt"></i>&nbsp;Edit
+                        </button>
+                        <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
+                    </td>
+
+                </tr>
+            </ng-container>
+        </ng-container *ngIf="changeTypeSuffix === 'Leadership'">
+
+        <ng-container *ngIf="changeTypeSuffix === 'IndividualShareholder'">
+            <tr>
+                <th style="width: 200px;">First Name</th>
+                <th style="width: 200px;">Last Name</th>
+                <th style="width: 200px;">Shares (%)</th>
+                <th style="width: 150px;">Date of Birth</th>
+                <th style="width: 200px;">Email</th>
+                <th>Liquor Associate Status </th>
+                <th>Cannabis Associate Status </th>
+                <th style="background-color: transparent;"></th>
+            </tr>
+            <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
+                <tr [ngClass]="{'alt-row': i%2 === 0}">
+                    <td>
+                        <span *ngIf="!item.edit">{{item.firstNameNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.firstNameNew">
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.lastNameNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.lastNameNew">
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.numberofSharesNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.numberofSharesNew">
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.dateofBirthNew | date}}</span>
+                        <input *ngIf="item.edit" type="text" [(ngModel)]='item.dateofBirthNew'
+                            style="width: 100px; background-color: #fff;" autocomplete="false" placeholder="yyyy-mm-dd"
+                            class="form-control" [matDatepicker]="picker" (focus)="picker.open()"
+                            (click)="picker.open()">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.emailNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
+                            <i class="fas fa-pencil-alt"></i>&nbsp;Edit
+                        </button>
+                        <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
+                    </td>
+                </tr>
+            </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="changeTypeSuffix === 'BusinessShareholder'">
+            <tr>
+                <th style="width: 200px;">Business Name</th>
+                <th style="width: 200px;">Shares (%)</th>
+                <th style="width: 200px;">Business Type</th>
+                <th style="width: 200px;">Email</th>
+                <th>Liquor Associate Status </th>
+                <th>Cannabis Associate Status </th>
+                <th style="background-color: transparent;"></th>
+            </tr>
+            <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
+
+                <tr [ngClass]="{'alt-row': i%2 === 0}">
+                    <td>
+                        <span *ngIf="!item.edit">{{item.businessNameNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.businessNameNew">
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.numberofSharesNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.numberofSharesNew">
+                    </td>
+                    <td>
+                        <span *ngIf="!item.edit">{{item.emailNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
+                            <i class="fas fa-pencil-alt"></i>&nbsp;Edit
+                        </button>
+                        <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="10" style="background-color: transparent;">
+                        <app-org-structure [node]="item"></app-org-structure>
+                    </td>
+                </tr>
+            </ng-container>
+        </ng-container>
     </table>
 </div>

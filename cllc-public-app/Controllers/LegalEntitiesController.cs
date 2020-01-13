@@ -121,11 +121,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(legalEntity);
         }
 
-        [HttpGet("legal-entity-change-logs/{applicationId}")]
+        [HttpGet("legal-entity-change-logs/application/{applicationId}")]
         public ActionResult GetChangeLogsForApplication(string applicationId)
         {
             var result = new List<LicenseeChangeLog>();
             var filter = "_adoxio_application_value eq " + applicationId;
+            try
+            {
+                var response = _dynamicsClient.Licenseechangelogs.Get(filter: filter).Value.ToList();
+                foreach (var item in response)
+                {
+                    result.Add(item.ToViewModel());
+                }
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, $"Error reading LegalEntityChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Unexpected Exception while reading LegalEntityChangeLogy");
+            }
+            return new JsonResult(result);
+        }
+
+        [HttpGet("legal-entity-change-logs/account/{accountId}")]
+        public ActionResult GetChangeLogsForAccount(string accountId)
+        {
+            var result = new List<LicenseeChangeLog>();
+            var filter = "_adoxio_businessaccount_value eq " + accountId;
             try
             {
                 var response = _dynamicsClient.Licenseechangelogs.Get(filter: filter).Value.ToList();
