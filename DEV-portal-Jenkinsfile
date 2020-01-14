@@ -69,7 +69,7 @@ stage('Automated Tests and code analysis') {
                 openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
             }
         }, 'Angular': {
-            node('nodejs') {
+            node('nodejs') 
                 {
                     //the checkout is mandatory, otherwise functional test would fail
                     echo "checking out source"
