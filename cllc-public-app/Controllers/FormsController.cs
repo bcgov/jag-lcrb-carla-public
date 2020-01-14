@@ -23,6 +23,7 @@ using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Gov.Lclb.Cllb.Public.Mapping;
 
 // from https://raw.githubusercontent.com/bcgov/jag-lcrb-carla-public/446c4f15f159c7f569e03ac138abce3d81aa3f92/cllc-public-app/Controllers/SystemFormController.cs
 
@@ -51,7 +52,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{formid}")]
         public async Task<JsonResult> GetSystemForm(string formid)
         {
+            // get the application mapping.
 
+            ApplicationMapping applicationMapping = new ApplicationMapping();
             var systemForm = _dynamicsClient.Systemforms.GetByKey(formid);
 
                 /*
@@ -92,6 +95,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
                         Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
+                        if (section.Attribute("visible") == null)
+                        {
+                            sectionVisible = true; // default visibility to true if it is not specified.
+                        }
+
 
                         FormSection formSection = new FormSection();
                         formSection.fields = new List<FormField>();
@@ -140,7 +148,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             {
                                 formField.classid = control.Attribute("classid").Value;
                                 formField.controltype = formField.classid.DynamicsControlClassidToName();
-                                formField.datafieldname = control.Attribute("datafieldname").Value;
+                                string datafieldname = control.Attribute("datafieldname").Value;
+                                // translate the data field name
+                                formField.datafieldname = applicationMapping.GetViewModelKey(datafieldname);
+
                                 formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
                                 formSection.fields.Add(formField);
                             }
