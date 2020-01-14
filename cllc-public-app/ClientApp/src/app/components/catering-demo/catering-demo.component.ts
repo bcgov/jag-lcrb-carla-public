@@ -20,6 +20,7 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { LegalEntity } from '../../models/legal-entity.model';
 import { LicenseeChangeLog } from '../../models/licensee-change-log.model';
 import { LegalEntityDataService } from '../../services/legal-entity-data.service';
+import { ApplicationCancellationDialogComponent } from '../dashboard/applications-and-licences/applications-and-licences.component';
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
 // export const TRANSFER_LICENCE_MODE = 'TransferLicenceMode';
@@ -315,6 +316,10 @@ export class CateringDemoComponent extends FormBase  implements OnInit {
     }
   }
 
+  startLicenseeChangeApplication() {
+    // TODO: Bring this function into the demo.
+  }
+
   isAboutToExpire(expiryDate: string) {
     const now = moment(new Date()).startOf('day');
     const expiry = moment(expiryDate).startOf('day');
@@ -330,31 +335,5 @@ export class CateringDemoComponent extends FormBase  implements OnInit {
 
 }
 
-
-@Component({
-  selector: 'app-application-cancellation-dialog',
-  templateUrl: 'application-cancellation-dialog.html',
-})
-export class ApplicationCancellationDialogComponent {
-
-  establishmentName: string;
-  applicationName: string;
-
-  constructor(
-    public dialogRef: MatDialogRef<ApplicationCancellationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.applicationName = data.applicationName;
-    this.establishmentName = data.establishmentName;
-  }
-
-  close() {
-    this.dialogRef.close(false);
-  }
-
-  cancel() {
-    this.dialogRef.close(true);
-  }
-
-}
 
 
