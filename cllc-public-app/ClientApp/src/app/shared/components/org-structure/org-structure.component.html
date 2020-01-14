@@ -1,0 +1,184 @@
+<h1 style="margin-top: 0"> {{node?.businessNameNew}} Organization Structure</h1>
+
+<span>{{node?.businessType}}</span> <br><br>
+
+
+
+<ng-template #treeNode let-node="node" let-account="account">
+  <ng-container *ngIf="node">
+    <input type="radio" name="bt" value="Society" [(ngModel)]="node.businessType"> Society <br>
+    <input type="radio" name="bt" value="SoleProprietor" [(ngModel)]="node.businessType"> Sole Prop <br>
+    <input type="radio" name="bt" value="PublicCorporation" [(ngModel)]="node.businessType"> Public Corporation <br>
+    <input type="radio" name="bt" value="PrivateCorporation" [(ngModel)]="node.businessType"> Private Corporation <br>
+  </ng-container>
+
+
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+    <h3 class="blue-header">Notice of Articles</h3>
+    <section class="padded-section">
+      <p>Please provide a copy of the Notice of Articles for {{account?.name}}.</p>
+      <section>
+        <app-file-uploader *ngIf="account?.id" documentType="Notice of Articles" fileTypes="FILE MUST BE IN PDF FORMAT."
+          [multipleFiles]="false" entityName="account"
+          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
+          [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        </app-file-uploader>
+      </section>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
+    <h3 class="blue-header">Central Securities Register</h3>
+    <section class="padded-section">
+      <p>Central Securities Register for {{account?.name}}.</p>
+      <app-file-uploader *ngIf="account?.id" documentType="Central Securities Register"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
+        [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+
+    <h3 class="blue-header">Special Rights and Restrictions (if applicable)</h3>
+    <section class="padded-section">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ante metus dictum at tempor commodo
+        ullamcorper. Eget nulla facilisi etiam dignissim diam. Facilisis sed odio morbi quis commodo odio. Etiam
+        dignissim diam quis enim lobortis scelerisque fermentum dui.
+        Accumsan lacus vel facilisis volutpat est velit egestas dui. Leo duis ut diam quam nulla porttitor massa id.
+        Penatibus et magnis dis parturient montes nascetur ridiculus. Mi
+        eget mauris pharetra et ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
+      </p>
+      <app-file-uploader *ngIf="account?.id" documentType="Special Rights and Restrictions"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
+        [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'Partnership'">
+    <h3 class="blue-header">Partnership Agreement</h3>
+    <section class="padded-section">
+      <p>Partnership Agreement for {{account?.name}}.</p>
+      <app-file-uploader *ngIf="account?.id" documentType="Partnership Agreement"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
+        [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      </app-file-uploader>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'Society'">
+    <app-field label="Annual Membership Fee">
+      <input type="text" class="form-control">
+    </app-field>
+    <app-field label="Number of Members">
+      <input type="text" class="form-control">
+    </app-field>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
+    <app-personal-history-summary [personalHistoryItems]="node.keyPersonnelChildren" [rootNode]="node"
+      (childAdded)="addChild(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader"></app-personal-history-summary>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+    <h3 class="blue-header">Key Personnel</h3>
+    <section class="padded-section">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna
+        aliqua. Ante metus dictum at tempor
+        commodo ullamcorper. Eget nulla facilisi etiam dignissim diam. Facilisis sed odio morbi quis commodo odio. Etiam
+        dignissim diam quis enim lobortis
+        scelerisque fermentum dui. Accumsan lacus vel facilisis volutpat est velit egestas dui. Leo duis ut diam quam
+        nulla
+        porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
+        ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
+      </p>
+      <app-personal-history-summary [personalHistoryItems]="node.keyPersonnelChildren"  [rootNode]="node"
+        (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-personal-history-summary>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'Society'">
+    <h3 class="blue-header">Directors and Officers</h3>
+    <section class="padded-section">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna
+        aliqua. Ante metus dictum at tempor
+        commodo ullamcorper. Eget nulla facilisi etiam dignissim diam. Facilisis sed odio morbi quis commodo odio. Etiam
+        dignissim diam quis enim lobortis
+        scelerisque fermentum dui. Accumsan lacus vel facilisis volutpat est velit egestas dui. Leo duis ut diam quam
+        nulla
+        porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
+        ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
+      </p>
+      <app-personal-history-summary [personalHistoryItems]="node.keyPersonnelChildren"  [rootNode]="node"
+      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Diretor or Officer"></app-personal-history-summary>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'Partnership'">
+    <h3 class="blue-header">Partners</h3>
+    <section class="padded-section">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna
+        aliqua. Ante metus dictum at tempor
+        commodo ullamcorper. Eget nulla facilisi etiam dignissim diam. Facilisis sed odio morbi quis commodo odio. Etiam
+        dignissim diam quis enim lobortis
+        scelerisque fermentum dui. Accumsan lacus vel facilisis volutpat est velit egestas dui. Leo duis ut diam quam
+        nulla
+        porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
+        ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
+      </p>
+    </section>
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'Society'">
+  </ng-container>
+
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+    <h3 class="blue-header">Shareholders</h3>
+    <h4 class="grey-header">Individual Shareholders</h4>
+    <section class="padded-section">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna
+        aliqua. Ante metus dictum at tempor
+        commodo ullamcorper. Eget nulla facilisi etiam dignissim diam. Facilisis sed odio morbi quis commodo odio. Etiam
+        dignissim diam quis enim lobortis
+        scelerisque fermentum dui. Accumsan lacus vel facilisis volutpat est velit egestas dui. Leo duis ut diam quam
+        nulla
+        porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
+        ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
+      </p>
+      <app-personal-history-summary [personalHistoryItems]="node.individualShareholderChildren"  [rootNode]="node"
+        (childAdded)="addChild(node, $event, 'AddIndividualShareholder')" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-personal-history-summary>
+    </section>
+    <h4 class="grey-header">Business Shareholders</h4>
+      <section class="padded-section">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+          magna
+          aliqua. Ante metus dictum at tempor
+          commodo ullamcorper. Eget nulla facilisi etiam dignissim diam. Facilisis sed odio morbi quis commodo odio. Etiam
+          dignissim diam quis enim lobortis
+          scelerisque fermentum dui. Accumsan lacus vel facilisis volutpat est velit egestas dui. Leo duis ut diam quam
+          nulla
+          porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
+          ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
+        </p>
+        <app-personal-history-summary [personalHistoryItems]="node.businessShareholderChildren"  [rootNode]="node"
+          (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-personal-history-summary>
+      </section>
+  </ng-container>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="treeNode; context: { node: node, account: account }"></ng-container>
