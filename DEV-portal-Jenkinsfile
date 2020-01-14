@@ -25,7 +25,7 @@ node('master') {
         echo "Building Application image..."
         openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true'
         openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public-frontend', srcTag: 'latest'
-    })
+    }
 }
 
 
