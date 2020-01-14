@@ -16,13 +16,13 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureLogging((Action<WebHostBuilderContext, ILoggingBuilder>)((hostingContext, logging) =>
+            .ConfigureLogging((hostingContext, logging) =>
             {
-                logging.AddConfiguration((IConfiguration)hostingContext.Configuration.GetSection("Logging"));
+                logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
                 logging.AddConsole(x => x.TimestampFormat = "yyyy-MM-dd HH:mm:ss ");
                 logging.AddDebug();
                 logging.AddEventSourceLogger();
-            }))                   
+            })                   
             .ConfigureAppConfiguration((hostingContext, config) =>
                     {
                 config.AddEnvironmentVariables();
