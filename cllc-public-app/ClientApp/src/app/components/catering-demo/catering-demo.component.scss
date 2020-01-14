@@ -1,0 +1,162 @@
+.eq-table {
+  border-spacing: 1px 3px;
+  border-collapse: separate;
+  width: 100%;
+
+  td,
+  th {
+    background-color: #F1F4FA;
+    color: #000;
+    padding: 10px;
+  }
+
+  th {
+    text-align: center;
+  }
+}
+
+.start-application {
+  border-spacing: 1px 3px;
+  border-collapse: separate;
+  width: 100%;
+  margin-bottom: 20px;
+
+  td,
+  th {
+    background-color: #F1F4FA;
+    color: #000;
+    padding: 10px;
+  }
+
+  th {
+    text-align: center;
+  }
+}
+
+::ng-deep .mat-tab-label {
+  background-color: #E1E8F2 !important;
+  color: #000;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  opacity: 1 !important;
+  padding: 0 10px !important;
+  height: 35px !important;
+  min-width: 100px !important;
+}
+
+::ng-deep .mat-tab-label-active {
+  background-color: #38598A !important;
+  color: #fff;
+}
+
+::ng-deep .mat-tab-header {
+  border-bottom: 4px solid #38598A !important;
+  margin-bottom: 15px;
+}
+
+::ng-deep .mat-ink-bar {
+  display: none;
+}
+
+.lead-column {
+  background-color: #E1E8F2;
+  padding: 5px;
+}
+
+
+td.licence-expired {
+  background-color: #E1E8F2 !important;
+  padding: 10px;
+  color: red !important;
+  text-align: center;
+}
+
+// FROM DASHBOARD
+
+.submitted-header {
+    background-color: rgba(56, 89, 138, 1);
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    color: #fff !important;
+}
+
+.submitted-header h2 {
+    color: #fff !important;
+}
+
+.submitted-content {
+    background-color: #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.submit-container {
+    background-color: #38598A;
+    border-bottom: solid 4px #FFCC00;
+    color: #fff;
+    margin-bottom: 20px;
+    padding: 30px;
+    padding-top: 20px;
+    h2 {
+        color: #fff;
+    }
+}
+
+ul {
+    list-style-type: none;
+}
+
+li::before {
+    color: #1E4176;
+    content: "\25AA";
+    display: inline-block;
+    font-size: 34px;
+    line-height: 0;
+    vertical-align: middle;
+    width: 0.5em;
+    margin-left: -16px;
+}
+
+li {
+    margin: 10px auto;
+    margin-left: 16px;
+}
+
+.li-header {
+    margin-left: 40px;
+}
+
+.dashboard-spacing {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.small-screen-only {
+    display: none;
+}
+.large-screen-only {
+    display: block;
+}
+
+@media (max-width: 575.98px) {
+    .dashboard-spacing {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .small-screen-only {
+        display: block;
+    }
+    .large-screen-only {
+        display: none;
+    }
+}
+
+

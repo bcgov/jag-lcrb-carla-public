@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top92 { get; set; }
+        public int? Top186 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip18 { get; set; }
+        public int? Skip105 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count92 { get; set; }
+        public bool? Count186 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter92 { get; set; }
+        public string Filter186 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search18 { get; set; }
+        public string Search105 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -81,6 +81,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IAliases Aliases { get; private set; }
 
         /// <summary>
+        /// Gets the IAllowedfileextensions.
+        /// </summary>
+        public virtual IAllowedfileextensions Allowedfileextensions { get; private set; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionasyncoperations.
+        /// </summary>
+        public virtual IAllowedfileextensionasyncoperations Allowedfileextensionasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionbulkdeletefailures.
+        /// </summary>
+        public virtual IAllowedfileextensionbulkdeletefailures Allowedfileextensionbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionduplicatebaserecord.
+        /// </summary>
+        public virtual IAllowedfileextensionduplicatebaserecord Allowedfileextensionduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionduplicatematchingrecord.
+        /// </summary>
+        public virtual IAllowedfileextensionduplicatematchingrecord Allowedfileextensionduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IAllowedfileextensionsyncerrors.
+        /// </summary>
+        public virtual IAllowedfileextensionsyncerrors Allowedfileextensionsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensionid.
+        /// </summary>
+        public virtual IFileextensionid Fileextensionid { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadid.
+        /// </summary>
+        public virtual IFormelementuploadid Formelementuploadid { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationbpfmvpv2s.
         /// </summary>
         public virtual IApplicationbpfmvpv2s Applicationbpfmvpv2s { get; private set; }
@@ -96,14 +136,139 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IApplicationinvoicehistories Applicationinvoicehistories { get; private set; }
 
         /// <summary>
+        /// Gets the IApplicationlicenseechangesv10s.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10s Applicationlicenseechangesv10s { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10asyncoperations.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10asyncoperations Applicationlicenseechangesv10asyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10bulkdeletefailures.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10bulkdeletefailures Applicationlicenseechangesv10bulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10syncerrors.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10syncerrors Applicationlicenseechangesv10syncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationlicenseechangesv10workflowlogs.
+        /// </summary>
+        public virtual IApplicationlicenseechangesv10workflowlogs Applicationlicenseechangesv10workflowlogs { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationid.
+        /// </summary>
+        public virtual IBpfadoxioapplicationid Bpfadoxioapplicationid { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1s.
+        /// </summary>
+        public virtual IApplicationrelocationv1s Applicationrelocationv1s { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1asyncoperations.
+        /// </summary>
+        public virtual IApplicationrelocationv1asyncoperations Applicationrelocationv1asyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1bulkdeletefailures.
+        /// </summary>
+        public virtual IApplicationrelocationv1bulkdeletefailures Applicationrelocationv1bulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1syncerrors.
+        /// </summary>
+        public virtual IApplicationrelocationv1syncerrors Applicationrelocationv1syncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationrelocationv1workflowlogs.
+        /// </summary>
+        public virtual IApplicationrelocationv1workflowlogs Applicationrelocationv1workflowlogs { get; private set; }
+
+        /// <summary>
         /// Gets the IApplications.
         /// </summary>
         public virtual IApplications Applications { get; private set; }
 
         /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        public virtual IBpfadoxioapplicationadoxioapplicationlicenseechangesv10 Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationrelocationv1.
+        /// </summary>
+        public virtual IBpfadoxioapplicationadoxioapplicationrelocationv1 Bpfadoxioapplicationadoxioapplicationrelocationv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationstructurechangev1.
+        /// </summary>
+        public virtual IBpfadoxioapplicationadoxioapplicationstructurechangev1 Bpfadoxioapplicationadoxioapplicationstructurechangev1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationtransferownershipv1.
+        /// </summary>
+        public virtual IBpfadoxioapplicationadoxioapplicationtransferownershipv1 Bpfadoxioapplicationadoxioapplicationtransferownershipv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1s.
+        /// </summary>
+        public virtual IApplicationstructurechangev1s Applicationstructurechangev1s { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1asyncoperations.
+        /// </summary>
+        public virtual IApplicationstructurechangev1asyncoperations Applicationstructurechangev1asyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1bulkdeletefailures.
+        /// </summary>
+        public virtual IApplicationstructurechangev1bulkdeletefailures Applicationstructurechangev1bulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1syncerrors.
+        /// </summary>
+        public virtual IApplicationstructurechangev1syncerrors Applicationstructurechangev1syncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationstructurechangev1workflowlogs.
+        /// </summary>
+        public virtual IApplicationstructurechangev1workflowlogs Applicationstructurechangev1workflowlogs { get; private set; }
+
+        /// <summary>
         /// Gets the IApplicationtermsconditionslimitations.
         /// </summary>
         public virtual IApplicationtermsconditionslimitations Applicationtermsconditionslimitations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1s.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1s Applicationtransferownershipv1s { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1asyncoperations.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1asyncoperations Applicationtransferownershipv1asyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1bulkdeletefailures.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1bulkdeletefailures Applicationtransferownershipv1bulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1syncerrors.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1syncerrors Applicationtransferownershipv1syncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtransferownershipv1workflowlogs.
+        /// </summary>
+        public virtual IApplicationtransferownershipv1workflowlogs Applicationtransferownershipv1workflowlogs { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationtypecontents.
@@ -114,6 +279,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypes.
         /// </summary>
         public virtual IApplicationtypes Applicationtypes { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeformelementuploadfields.
+        /// </summary>
+        public virtual IApplicationtypeformelementuploadfields Applicationtypeformelementuploadfields { get; private set; }
 
         /// <summary>
         /// Gets the IAreas.
@@ -149,11 +319,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ICitydistricts.
         /// </summary>
         public virtual ICitydistricts Citydistricts { get; private set; }
-
-        /// <summary>
-        /// Gets the IComplaintpublicbpfs.
-        /// </summary>
-        public virtual IComplaintpublicbpfs Complaintpublicbpfs { get; private set; }
 
         /// <summary>
         /// Gets the IComplaints.
@@ -269,6 +434,81 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IFiainvestigationlogs.
         /// </summary>
         public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensions.
+        /// </summary>
+        public virtual IFileextensions Fileextensions { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensionallowedfileextensions.
+        /// </summary>
+        public virtual IFileextensionallowedfileextensions Fileextensionallowedfileextensions { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensionasyncoperations.
+        /// </summary>
+        public virtual IFileextensionasyncoperations Fileextensionasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensionbulkdeletefailures.
+        /// </summary>
+        public virtual IFileextensionbulkdeletefailures Fileextensionbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensionduplicatebaserecord.
+        /// </summary>
+        public virtual IFileextensionduplicatebaserecord Fileextensionduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensionduplicatematchingrecord.
+        /// </summary>
+        public virtual IFileextensionduplicatematchingrecord Fileextensionduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IFileextensionsyncerrors.
+        /// </summary>
+        public virtual IFileextensionsyncerrors Fileextensionsyncerrors { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfields.
+        /// </summary>
+        public virtual IFormelementuploadfields Formelementuploadfields { get; private set; }
+
+        /// <summary>
+        /// Gets the IApplicationtypeid.
+        /// </summary>
+        public virtual IApplicationtypeid Applicationtypeid { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldallowedextensions.
+        /// </summary>
+        public virtual IFormelementuploadfieldallowedextensions Formelementuploadfieldallowedextensions { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldasyncoperations.
+        /// </summary>
+        public virtual IFormelementuploadfieldasyncoperations Formelementuploadfieldasyncoperations { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldbulkdeletefailures.
+        /// </summary>
+        public virtual IFormelementuploadfieldbulkdeletefailures Formelementuploadfieldbulkdeletefailures { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldduplicatebaserecord.
+        /// </summary>
+        public virtual IFormelementuploadfieldduplicatebaserecord Formelementuploadfieldduplicatebaserecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldduplicatematchingrecord.
+        /// </summary>
+        public virtual IFormelementuploadfieldduplicatematchingrecord Formelementuploadfieldduplicatematchingrecord { get; private set; }
+
+        /// <summary>
+        /// Gets the IFormelementuploadfieldsyncerrors.
+        /// </summary>
+        public virtual IFormelementuploadfieldsyncerrors Formelementuploadfieldsyncerrors { get; private set; }
 
         /// <summary>
         /// Gets the IFundingsources.
@@ -451,14 +691,64 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioallowedfileextension.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioallowedfileextension Regardingobjectidadoxioallowedfileextension { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationlicenseechangesv10 Regardingobjectidadoxioapplicationlicenseechangesv10 { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationrelocationv1.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationrelocationv1 Regardingobjectidadoxioapplicationrelocationv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationstructurechangev1.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationstructurechangev1 Regardingobjectidadoxioapplicationstructurechangev1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationtransferownershipv1.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioapplicationtransferownershipv1 Regardingobjectidadoxioapplicationtransferownershipv1 { get; private set; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioexhibit.
         /// </summary>
         public virtual IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; private set; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxiofileextension.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiofileextension Regardingobjectidadoxiofileextension { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxioformelementuploadfield.
+        /// </summary>
+        public virtual IRegardingobjectidadoxioformelementuploadfield Regardingobjectidadoxioformelementuploadfield { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioallowedfileextension.
+        /// </summary>
+        public virtual IBusinessunitadoxioallowedfileextension Businessunitadoxioallowedfileextension { get; private set; }
+
+        /// <summary>
         /// Gets the IBusinessunitadoxioexhibit.
         /// </summary>
         public virtual IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxiofileextension.
+        /// </summary>
+        public virtual IBusinessunitadoxiofileextension Businessunitadoxiofileextension { get; private set; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioformelementuploadfield.
+        /// </summary>
+        public virtual IBusinessunitadoxioformelementuploadfield Businessunitadoxioformelementuploadfield { get; private set; }
 
         /// <summary>
         /// Gets the IContacts.
@@ -471,14 +761,44 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacttaskcontact Contacttaskcontact { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioallowedfileextension.
+        /// </summary>
+        public virtual IBaserecordidadoxioallowedfileextension Baserecordidadoxioallowedfileextension { get; private set; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         public virtual IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; private set; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxiofileextension.
+        /// </summary>
+        public virtual IBaserecordidadoxiofileextension Baserecordidadoxiofileextension { get; private set; }
+
+        /// <summary>
+        /// Gets the IBaserecordidadoxioformelementuploadfield.
+        /// </summary>
+        public virtual IBaserecordidadoxioformelementuploadfield Baserecordidadoxioformelementuploadfield { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioallowedfileextension.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioallowedfileextension Duplicaterecordidadoxioallowedfileextension { get; private set; }
+
+        /// <summary>
         /// Gets the IDuplicaterecordidadoxioexhibit.
         /// </summary>
         public virtual IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxiofileextension.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxiofileextension Duplicaterecordidadoxiofileextension { get; private set; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioformelementuploadfield.
+        /// </summary>
+        public virtual IDuplicaterecordidadoxioformelementuploadfield Duplicaterecordidadoxioformelementuploadfield { get; private set; }
 
         /// <summary>
         /// Gets the IEntitydefinitions.
@@ -506,6 +826,46 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILists Lists { get; private set; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        public virtual IOrganizationadoxioapplicationlicenseechangesv10 Organizationadoxioapplicationlicenseechangesv10 { get; private set; }
+
+        /// <summary>
+        /// Gets the IOrganizationadoxioapplicationrelocationv1.
+        /// </summary>
+        public virtual IOrganizationadoxioapplicationrelocationv1 Organizationadoxioapplicationrelocationv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IOrganizationadoxioapplicationstructurechangev1.
+        /// </summary>
+        public virtual IOrganizationadoxioapplicationstructurechangev1 Organizationadoxioapplicationstructurechangev1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IOrganizationadoxioapplicationtransferownershipv1.
+        /// </summary>
+        public virtual IOrganizationadoxioapplicationtransferownershipv1 Organizationadoxioapplicationtransferownershipv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10activestageid.
+        /// </summary>
+        public virtual ILkadoxioapplicationlicenseechangesv10activestageid Lkadoxioapplicationlicenseechangesv10activestageid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1activestageid.
+        /// </summary>
+        public virtual ILkadoxioapplicationrelocationv1activestageid Lkadoxioapplicationrelocationv1activestageid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1activestageid.
+        /// </summary>
+        public virtual ILkadoxioapplicationstructurechangev1activestageid Lkadoxioapplicationstructurechangev1activestageid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1activestageid.
+        /// </summary>
+        public virtual ILkadoxioapplicationtransferownershipv1activestageid Lkadoxioapplicationtransferownershipv1activestageid { get; private set; }
+
+        /// <summary>
         /// Gets the ISavedqueries.
         /// </summary>
         public virtual ISavedqueries Savedqueries { get; private set; }
@@ -519,6 +879,111 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointsites.
         /// </summary>
         public virtual ISharepointsites Sharepointsites { get; private set; }
+
+        /// <summary>
+        /// Gets the ISystemforms.
+        /// </summary>
+        public virtual ISystemforms Systemforms { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensioncreatedby.
+        /// </summary>
+        public virtual ILkadoxioallowedfileextensioncreatedby Lkadoxioallowedfileextensioncreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensioncreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioallowedfileextensioncreatedonbehalfby Lkadoxioallowedfileextensioncreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensionmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioallowedfileextensionmodifiedby Lkadoxioallowedfileextensionmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioallowedfileextensionmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioallowedfileextensionmodifiedonbehalfby Lkadoxioallowedfileextensionmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10createdby.
+        /// </summary>
+        public virtual ILkadoxioapplicationlicenseechangesv10createdby Lkadoxioapplicationlicenseechangesv10createdby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10createdonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationlicenseechangesv10createdonbehalfby Lkadoxioapplicationlicenseechangesv10createdonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10modifiedby.
+        /// </summary>
+        public virtual ILkadoxioapplicationlicenseechangesv10modifiedby Lkadoxioapplicationlicenseechangesv10modifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby Lkadoxioapplicationlicenseechangesv10modifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1createdby.
+        /// </summary>
+        public virtual ILkadoxioapplicationrelocationv1createdby Lkadoxioapplicationrelocationv1createdby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1createdonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationrelocationv1createdonbehalfby Lkadoxioapplicationrelocationv1createdonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1modifiedby.
+        /// </summary>
+        public virtual ILkadoxioapplicationrelocationv1modifiedby Lkadoxioapplicationrelocationv1modifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1modifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationrelocationv1modifiedonbehalfby Lkadoxioapplicationrelocationv1modifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1createdby.
+        /// </summary>
+        public virtual ILkadoxioapplicationstructurechangev1createdby Lkadoxioapplicationstructurechangev1createdby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1createdonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationstructurechangev1createdonbehalfby Lkadoxioapplicationstructurechangev1createdonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1modifiedby.
+        /// </summary>
+        public virtual ILkadoxioapplicationstructurechangev1modifiedby Lkadoxioapplicationstructurechangev1modifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1modifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationstructurechangev1modifiedonbehalfby Lkadoxioapplicationstructurechangev1modifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1createdby.
+        /// </summary>
+        public virtual ILkadoxioapplicationtransferownershipv1createdby Lkadoxioapplicationtransferownershipv1createdby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1createdonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationtransferownershipv1createdonbehalfby Lkadoxioapplicationtransferownershipv1createdonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1modifiedby.
+        /// </summary>
+        public virtual ILkadoxioapplicationtransferownershipv1modifiedby Lkadoxioapplicationtransferownershipv1modifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1modifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioapplicationtransferownershipv1modifiedonbehalfby Lkadoxioapplicationtransferownershipv1modifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioexhibitcreatedby.
@@ -541,9 +1006,64 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; private set; }
 
         /// <summary>
+        /// Gets the ILkadoxiofileextensioncreatedby.
+        /// </summary>
+        public virtual ILkadoxiofileextensioncreatedby Lkadoxiofileextensioncreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiofileextensioncreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiofileextensioncreatedonbehalfby Lkadoxiofileextensioncreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiofileextensionmodifiedby.
+        /// </summary>
+        public virtual ILkadoxiofileextensionmodifiedby Lkadoxiofileextensionmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxiofileextensionmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxiofileextensionmodifiedonbehalfby Lkadoxiofileextensionmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldcreatedby.
+        /// </summary>
+        public virtual ILkadoxioformelementuploadfieldcreatedby Lkadoxioformelementuploadfieldcreatedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldcreatedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioformelementuploadfieldcreatedonbehalfby Lkadoxioformelementuploadfieldcreatedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldmodifiedby.
+        /// </summary>
+        public virtual ILkadoxioformelementuploadfieldmodifiedby Lkadoxioformelementuploadfieldmodifiedby { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioformelementuploadfieldmodifiedonbehalfby.
+        /// </summary>
+        public virtual ILkadoxioformelementuploadfieldmodifiedonbehalfby Lkadoxioformelementuploadfieldmodifiedonbehalfby { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioallowedfileextension.
+        /// </summary>
+        public virtual IUseradoxioallowedfileextension Useradoxioallowedfileextension { get; private set; }
+
+        /// <summary>
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         public virtual IUseradoxioexhibit Useradoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxiofileextension.
+        /// </summary>
+        public virtual IUseradoxiofileextension Useradoxiofileextension { get; private set; }
+
+        /// <summary>
+        /// Gets the IUseradoxioformelementuploadfield.
+        /// </summary>
+        public virtual IUseradoxioformelementuploadfield Useradoxioformelementuploadfield { get; private set; }
 
         /// <summary>
         /// Gets the IContacttask.
@@ -556,9 +1076,64 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILegalentitytask Legalentitytask { get; private set; }
 
         /// <summary>
+        /// Gets the ITeamadoxioallowedfileextension.
+        /// </summary>
+        public virtual ITeamadoxioallowedfileextension Teamadoxioallowedfileextension { get; private set; }
+
+        /// <summary>
         /// Gets the ITeamadoxioexhibit.
         /// </summary>
         public virtual ITeamadoxioexhibit Teamadoxioexhibit { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxiofileextension.
+        /// </summary>
+        public virtual ITeamadoxiofileextension Teamadoxiofileextension { get; private set; }
+
+        /// <summary>
+        /// Gets the ITeamadoxioformelementuploadfield.
+        /// </summary>
+        public virtual ITeamadoxioformelementuploadfield Teamadoxioformelementuploadfield { get; private set; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationlicenseechangesv10.
+        /// </summary>
+        public virtual IAsyncoperationidadoxioapplicationlicenseechangesv10 Asyncoperationidadoxioapplicationlicenseechangesv10 { get; private set; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationrelocationv1.
+        /// </summary>
+        public virtual IAsyncoperationidadoxioapplicationrelocationv1 Asyncoperationidadoxioapplicationrelocationv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationstructurechangev1.
+        /// </summary>
+        public virtual IAsyncoperationidadoxioapplicationstructurechangev1 Asyncoperationidadoxioapplicationstructurechangev1 { get; private set; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationtransferownershipv1.
+        /// </summary>
+        public virtual IAsyncoperationidadoxioapplicationtransferownershipv1 Asyncoperationidadoxioapplicationtransferownershipv1 { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationlicenseechangesv10processid.
+        /// </summary>
+        public virtual ILkadoxioapplicationlicenseechangesv10processid Lkadoxioapplicationlicenseechangesv10processid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationrelocationv1processid.
+        /// </summary>
+        public virtual ILkadoxioapplicationrelocationv1processid Lkadoxioapplicationrelocationv1processid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationstructurechangev1processid.
+        /// </summary>
+        public virtual ILkadoxioapplicationstructurechangev1processid Lkadoxioapplicationstructurechangev1processid { get; private set; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationtransferownershipv1processid.
+        /// </summary>
+        public virtual ILkadoxioapplicationtransferownershipv1processid Lkadoxioapplicationtransferownershipv1processid { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DynamicsClient class.
@@ -804,13 +1379,47 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accounts = new Accounts(this);
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
+            Allowedfileextensions = new Allowedfileextensions(this);
+            Allowedfileextensionasyncoperations = new Allowedfileextensionasyncoperations(this);
+            Allowedfileextensionbulkdeletefailures = new Allowedfileextensionbulkdeletefailures(this);
+            Allowedfileextensionduplicatebaserecord = new Allowedfileextensionduplicatebaserecord(this);
+            Allowedfileextensionduplicatematchingrecord = new Allowedfileextensionduplicatematchingrecord(this);
+            Allowedfileextensionsyncerrors = new Allowedfileextensionsyncerrors(this);
+            Fileextensionid = new Fileextensionid(this);
+            Formelementuploadid = new Formelementuploadid(this);
             Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
             Applicationbpfv3s = new Applicationbpfv3s(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
+            Applicationlicenseechangesv10s = new Applicationlicenseechangesv10s(this);
+            Applicationlicenseechangesv10asyncoperations = new Applicationlicenseechangesv10asyncoperations(this);
+            Applicationlicenseechangesv10bulkdeletefailures = new Applicationlicenseechangesv10bulkdeletefailures(this);
+            Applicationlicenseechangesv10syncerrors = new Applicationlicenseechangesv10syncerrors(this);
+            Applicationlicenseechangesv10workflowlogs = new Applicationlicenseechangesv10workflowlogs(this);
+            Bpfadoxioapplicationid = new Bpfadoxioapplicationid(this);
+            Applicationrelocationv1s = new Applicationrelocationv1s(this);
+            Applicationrelocationv1asyncoperations = new Applicationrelocationv1asyncoperations(this);
+            Applicationrelocationv1bulkdeletefailures = new Applicationrelocationv1bulkdeletefailures(this);
+            Applicationrelocationv1syncerrors = new Applicationrelocationv1syncerrors(this);
+            Applicationrelocationv1workflowlogs = new Applicationrelocationv1workflowlogs(this);
             Applications = new Applications(this);
+            Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 = new Bpfadoxioapplicationadoxioapplicationlicenseechangesv10(this);
+            Bpfadoxioapplicationadoxioapplicationrelocationv1 = new Bpfadoxioapplicationadoxioapplicationrelocationv1(this);
+            Bpfadoxioapplicationadoxioapplicationstructurechangev1 = new Bpfadoxioapplicationadoxioapplicationstructurechangev1(this);
+            Bpfadoxioapplicationadoxioapplicationtransferownershipv1 = new Bpfadoxioapplicationadoxioapplicationtransferownershipv1(this);
+            Applicationstructurechangev1s = new Applicationstructurechangev1s(this);
+            Applicationstructurechangev1asyncoperations = new Applicationstructurechangev1asyncoperations(this);
+            Applicationstructurechangev1bulkdeletefailures = new Applicationstructurechangev1bulkdeletefailures(this);
+            Applicationstructurechangev1syncerrors = new Applicationstructurechangev1syncerrors(this);
+            Applicationstructurechangev1workflowlogs = new Applicationstructurechangev1workflowlogs(this);
             Applicationtermsconditionslimitations = new Applicationtermsconditionslimitations(this);
+            Applicationtransferownershipv1s = new Applicationtransferownershipv1s(this);
+            Applicationtransferownershipv1asyncoperations = new Applicationtransferownershipv1asyncoperations(this);
+            Applicationtransferownershipv1bulkdeletefailures = new Applicationtransferownershipv1bulkdeletefailures(this);
+            Applicationtransferownershipv1syncerrors = new Applicationtransferownershipv1syncerrors(this);
+            Applicationtransferownershipv1workflowlogs = new Applicationtransferownershipv1workflowlogs(this);
             Applicationtypecontents = new Applicationtypecontents(this);
             Applicationtypes = new Applicationtypes(this);
+            Applicationtypeformelementuploadfields = new Applicationtypeformelementuploadfields(this);
             Areas = new Areas(this);
             Auditlogrequests = new Auditlogrequests(this);
             Businessaccounts = new Businessaccounts(this);
@@ -818,7 +1427,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Cannabismonthlyreports = new Cannabismonthlyreports(this);
             Cannabisproductadmins = new Cannabisproductadmins(this);
             Citydistricts = new Citydistricts(this);
-            Complaintpublicbpfs = new Complaintpublicbpfs(this);
             Complaints = new Complaints(this);
             Complianceinvestigations = new Complianceinvestigations(this);
             Investigationexhibits = new Investigationexhibits(this);
@@ -842,6 +1450,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             Exhibitsyncerrors = new Exhibitsyncerrors(this);
             Investigationid = new Investigationid(this);
             Fiainvestigationlogs = new Fiainvestigationlogs(this);
+            Fileextensions = new Fileextensions(this);
+            Fileextensionallowedfileextensions = new Fileextensionallowedfileextensions(this);
+            Fileextensionasyncoperations = new Fileextensionasyncoperations(this);
+            Fileextensionbulkdeletefailures = new Fileextensionbulkdeletefailures(this);
+            Fileextensionduplicatebaserecord = new Fileextensionduplicatebaserecord(this);
+            Fileextensionduplicatematchingrecord = new Fileextensionduplicatematchingrecord(this);
+            Fileextensionsyncerrors = new Fileextensionsyncerrors(this);
+            Formelementuploadfields = new Formelementuploadfields(this);
+            Applicationtypeid = new Applicationtypeid(this);
+            Formelementuploadfieldallowedextensions = new Formelementuploadfieldallowedextensions(this);
+            Formelementuploadfieldasyncoperations = new Formelementuploadfieldasyncoperations(this);
+            Formelementuploadfieldbulkdeletefailures = new Formelementuploadfieldbulkdeletefailures(this);
+            Formelementuploadfieldduplicatebaserecord = new Formelementuploadfieldduplicatebaserecord(this);
+            Formelementuploadfieldduplicatematchingrecord = new Formelementuploadfieldduplicatematchingrecord(this);
+            Formelementuploadfieldsyncerrors = new Formelementuploadfieldsyncerrors(this);
             Fundingsources = new Fundingsources(this);
             Incidentadoxiolicencetypeset = new Incidentadoxiolicencetypeset(this);
             Inspectioninspectorsset = new Inspectioninspectorsset(this);
@@ -878,28 +1501,95 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
+            Regardingobjectidadoxioallowedfileextension = new Regardingobjectidadoxioallowedfileextension(this);
+            Regardingobjectidadoxioapplicationlicenseechangesv10 = new Regardingobjectidadoxioapplicationlicenseechangesv10(this);
+            Regardingobjectidadoxioapplicationrelocationv1 = new Regardingobjectidadoxioapplicationrelocationv1(this);
+            Regardingobjectidadoxioapplicationstructurechangev1 = new Regardingobjectidadoxioapplicationstructurechangev1(this);
+            Regardingobjectidadoxioapplicationtransferownershipv1 = new Regardingobjectidadoxioapplicationtransferownershipv1(this);
             Regardingobjectidadoxioexhibit = new Regardingobjectidadoxioexhibit(this);
+            Regardingobjectidadoxiofileextension = new Regardingobjectidadoxiofileextension(this);
+            Regardingobjectidadoxioformelementuploadfield = new Regardingobjectidadoxioformelementuploadfield(this);
+            Businessunitadoxioallowedfileextension = new Businessunitadoxioallowedfileextension(this);
             Businessunitadoxioexhibit = new Businessunitadoxioexhibit(this);
+            Businessunitadoxiofileextension = new Businessunitadoxiofileextension(this);
+            Businessunitadoxioformelementuploadfield = new Businessunitadoxioformelementuploadfield(this);
             Contacts = new Contacts(this);
             Contacttaskcontact = new Contacttaskcontact(this);
+            Baserecordidadoxioallowedfileextension = new Baserecordidadoxioallowedfileextension(this);
             Baserecordidadoxioexhibit = new Baserecordidadoxioexhibit(this);
+            Baserecordidadoxiofileextension = new Baserecordidadoxiofileextension(this);
+            Baserecordidadoxioformelementuploadfield = new Baserecordidadoxioformelementuploadfield(this);
+            Duplicaterecordidadoxioallowedfileextension = new Duplicaterecordidadoxioallowedfileextension(this);
             Duplicaterecordidadoxioexhibit = new Duplicaterecordidadoxioexhibit(this);
+            Duplicaterecordidadoxiofileextension = new Duplicaterecordidadoxiofileextension(this);
+            Duplicaterecordidadoxioformelementuploadfield = new Duplicaterecordidadoxioformelementuploadfield(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
             Invoices = new Invoices(this);
             Leads = new Leads(this);
             Lists = new Lists(this);
+            Organizationadoxioapplicationlicenseechangesv10 = new Organizationadoxioapplicationlicenseechangesv10(this);
+            Organizationadoxioapplicationrelocationv1 = new Organizationadoxioapplicationrelocationv1(this);
+            Organizationadoxioapplicationstructurechangev1 = new Organizationadoxioapplicationstructurechangev1(this);
+            Organizationadoxioapplicationtransferownershipv1 = new Organizationadoxioapplicationtransferownershipv1(this);
+            Lkadoxioapplicationlicenseechangesv10activestageid = new Lkadoxioapplicationlicenseechangesv10activestageid(this);
+            Lkadoxioapplicationrelocationv1activestageid = new Lkadoxioapplicationrelocationv1activestageid(this);
+            Lkadoxioapplicationstructurechangev1activestageid = new Lkadoxioapplicationstructurechangev1activestageid(this);
+            Lkadoxioapplicationtransferownershipv1activestageid = new Lkadoxioapplicationtransferownershipv1activestageid(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
+            Systemforms = new Systemforms(this);
+            Lkadoxioallowedfileextensioncreatedby = new Lkadoxioallowedfileextensioncreatedby(this);
+            Lkadoxioallowedfileextensioncreatedonbehalfby = new Lkadoxioallowedfileextensioncreatedonbehalfby(this);
+            Lkadoxioallowedfileextensionmodifiedby = new Lkadoxioallowedfileextensionmodifiedby(this);
+            Lkadoxioallowedfileextensionmodifiedonbehalfby = new Lkadoxioallowedfileextensionmodifiedonbehalfby(this);
+            Lkadoxioapplicationlicenseechangesv10createdby = new Lkadoxioapplicationlicenseechangesv10createdby(this);
+            Lkadoxioapplicationlicenseechangesv10createdonbehalfby = new Lkadoxioapplicationlicenseechangesv10createdonbehalfby(this);
+            Lkadoxioapplicationlicenseechangesv10modifiedby = new Lkadoxioapplicationlicenseechangesv10modifiedby(this);
+            Lkadoxioapplicationlicenseechangesv10modifiedonbehalfby = new Lkadoxioapplicationlicenseechangesv10modifiedonbehalfby(this);
+            Lkadoxioapplicationrelocationv1createdby = new Lkadoxioapplicationrelocationv1createdby(this);
+            Lkadoxioapplicationrelocationv1createdonbehalfby = new Lkadoxioapplicationrelocationv1createdonbehalfby(this);
+            Lkadoxioapplicationrelocationv1modifiedby = new Lkadoxioapplicationrelocationv1modifiedby(this);
+            Lkadoxioapplicationrelocationv1modifiedonbehalfby = new Lkadoxioapplicationrelocationv1modifiedonbehalfby(this);
+            Lkadoxioapplicationstructurechangev1createdby = new Lkadoxioapplicationstructurechangev1createdby(this);
+            Lkadoxioapplicationstructurechangev1createdonbehalfby = new Lkadoxioapplicationstructurechangev1createdonbehalfby(this);
+            Lkadoxioapplicationstructurechangev1modifiedby = new Lkadoxioapplicationstructurechangev1modifiedby(this);
+            Lkadoxioapplicationstructurechangev1modifiedonbehalfby = new Lkadoxioapplicationstructurechangev1modifiedonbehalfby(this);
+            Lkadoxioapplicationtransferownershipv1createdby = new Lkadoxioapplicationtransferownershipv1createdby(this);
+            Lkadoxioapplicationtransferownershipv1createdonbehalfby = new Lkadoxioapplicationtransferownershipv1createdonbehalfby(this);
+            Lkadoxioapplicationtransferownershipv1modifiedby = new Lkadoxioapplicationtransferownershipv1modifiedby(this);
+            Lkadoxioapplicationtransferownershipv1modifiedonbehalfby = new Lkadoxioapplicationtransferownershipv1modifiedonbehalfby(this);
             Lkadoxioexhibitcreatedby = new Lkadoxioexhibitcreatedby(this);
             Lkadoxioexhibitcreatedonbehalfby = new Lkadoxioexhibitcreatedonbehalfby(this);
             Lkadoxioexhibitmodifiedby = new Lkadoxioexhibitmodifiedby(this);
             Lkadoxioexhibitmodifiedonbehalfby = new Lkadoxioexhibitmodifiedonbehalfby(this);
+            Lkadoxiofileextensioncreatedby = new Lkadoxiofileextensioncreatedby(this);
+            Lkadoxiofileextensioncreatedonbehalfby = new Lkadoxiofileextensioncreatedonbehalfby(this);
+            Lkadoxiofileextensionmodifiedby = new Lkadoxiofileextensionmodifiedby(this);
+            Lkadoxiofileextensionmodifiedonbehalfby = new Lkadoxiofileextensionmodifiedonbehalfby(this);
+            Lkadoxioformelementuploadfieldcreatedby = new Lkadoxioformelementuploadfieldcreatedby(this);
+            Lkadoxioformelementuploadfieldcreatedonbehalfby = new Lkadoxioformelementuploadfieldcreatedonbehalfby(this);
+            Lkadoxioformelementuploadfieldmodifiedby = new Lkadoxioformelementuploadfieldmodifiedby(this);
+            Lkadoxioformelementuploadfieldmodifiedonbehalfby = new Lkadoxioformelementuploadfieldmodifiedonbehalfby(this);
+            Useradoxioallowedfileextension = new Useradoxioallowedfileextension(this);
             Useradoxioexhibit = new Useradoxioexhibit(this);
+            Useradoxiofileextension = new Useradoxiofileextension(this);
+            Useradoxioformelementuploadfield = new Useradoxioformelementuploadfield(this);
             Contacttask = new Contacttask(this);
             Legalentitytask = new Legalentitytask(this);
+            Teamadoxioallowedfileextension = new Teamadoxioallowedfileextension(this);
             Teamadoxioexhibit = new Teamadoxioexhibit(this);
+            Teamadoxiofileextension = new Teamadoxiofileextension(this);
+            Teamadoxioformelementuploadfield = new Teamadoxioformelementuploadfield(this);
+            Asyncoperationidadoxioapplicationlicenseechangesv10 = new Asyncoperationidadoxioapplicationlicenseechangesv10(this);
+            Asyncoperationidadoxioapplicationrelocationv1 = new Asyncoperationidadoxioapplicationrelocationv1(this);
+            Asyncoperationidadoxioapplicationstructurechangev1 = new Asyncoperationidadoxioapplicationstructurechangev1(this);
+            Asyncoperationidadoxioapplicationtransferownershipv1 = new Asyncoperationidadoxioapplicationtransferownershipv1(this);
+            Lkadoxioapplicationlicenseechangesv10processid = new Lkadoxioapplicationlicenseechangesv10processid(this);
+            Lkadoxioapplicationrelocationv1processid = new Lkadoxioapplicationrelocationv1processid(this);
+            Lkadoxioapplicationstructurechangev1processid = new Lkadoxioapplicationstructurechangev1processid(this);
+            Lkadoxioapplicationtransferownershipv1processid = new Lkadoxioapplicationtransferownershipv1processid(this);
             BaseUri = new System.Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
