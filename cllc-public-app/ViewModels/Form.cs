@@ -14,5 +14,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public List<FormTab> tabs { get; set; }
 
+        public List<FormSection> sections { get; set; }
+
     }
 }

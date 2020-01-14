@@ -34,6 +34,8 @@ import { FederalReportingComponent } from '@components/federal-reporting/federal
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
+import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
+import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { PersonalHistorySummaryComponent } from '@shared/components/personal-history-summary/personal-history-summary.component';
 import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 
@@ -52,11 +54,16 @@ const routes: Routes = [
     component: OrganizationStructureComponent
   },
   {
+    path: 'catering-demo',
+    component: CateringDemoComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
     path: 'licences',
     component: LicencesComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'FederalReporting' }
-  },
+  },  
   {
     path: 'federal-reporting/:licenceId',
     component: FederalReportingComponent,
@@ -108,6 +115,12 @@ const routes: Routes = [
   {
     path: 'application/:applicationId',
     component: ApplicationComponent,
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'application/:formmName/:applicationId',
+    component: DynamicApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },
