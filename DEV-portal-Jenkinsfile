@@ -97,5 +97,5 @@ stage('Automated Tests and code analysis') {
                     }
                 }
             }
-    })
+    )
 }
