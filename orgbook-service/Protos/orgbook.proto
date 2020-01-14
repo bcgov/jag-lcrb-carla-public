@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option csharp_namespace = "Gov.Lclb.Cllb.OrgbookService";
+
+package orgbook;
+
+service Orgbook {
+    rpc SyncOrgbookToAccounts (GenericRequest) returns (MessageResult);
+    rpc SyncLicencesToOrgbook (GenericRequest) returns (MessageResult);
+    rpc SyncOrgbookToLicences (GenericRequest) returns (MessageResult);
+    rpc IssueLicenceCredential (IssueLicenceCredentialMessage) returns (MessageResult);
+}
+
+message GenericRequest {
+    string id = 1;
+}
+
+message IssueLicenceCredentialMessage {
+    string registrationId = 1;
+    string licenceId = 2;
+    string licenceType = 3;
+}
+
+message MessageResult {
+    bool success = 1;
+}
