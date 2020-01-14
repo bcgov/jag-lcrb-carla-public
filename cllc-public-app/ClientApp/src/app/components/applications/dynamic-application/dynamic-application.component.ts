@@ -238,8 +238,8 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
-    // get the application form 72c82432-bbb5-402a-8c4b-fb7e995a2721
-    this.dynamicsFormDataService.getDynamicsForm('72c82432-bbb5-402a-8c4b-fb7e995a2721')
+    // get the application form 
+    this.dynamicsFormDataService.getDynamicsForm('df0e3410-b8d4-46f8-bcef-1b20a01a66d7') // catering form for demo
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.dynamicsForm = value);
 
