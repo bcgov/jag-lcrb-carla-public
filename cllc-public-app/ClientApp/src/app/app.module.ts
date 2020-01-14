@@ -55,6 +55,8 @@ import { GeneralDataService } from './general-data.service';
 import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DynamicsFormComponent } from '@components/dynamics-form/dynamics-form.component';
+import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
+
 import {
   EditShareholdersComponent, ShareholderDialogComponent,
 } from '@components/account-profile/tabs/shareholders/shareholders.component';
@@ -171,6 +173,11 @@ import { AssociateContentComponent } from '@components/dashboard/associate-conte
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
+import { PersonalHistorySummaryComponent } from './shared/components/personal-history-summary/personal-history-summary.component';
+import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
+import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
+import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
+
 
 @NgModule({
   declarations: [
@@ -191,7 +198,7 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     DashboardComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
-    DynamicsFormComponent,
+    DynamicsFormComponent,    
     EditShareholdersComponent,
     FieldComponent,
     FileUploaderComponent,
@@ -264,6 +271,10 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     VersionInfoDialogComponent,
     LicencesComponent,
     ApplicationsComponent,
+    PersonalHistorySummaryComponent,
+    OrgStructureComponent,    
+    DynamicApplicationComponent,
+    CateringDemoComponent
   ],
   imports: [
     ChartsModule,
@@ -375,6 +386,7 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     CanDeactivateGuard,
     ContactDataService,
     DynamicsDataService,
+    DynamicsFormDataService,
     GeneralDataService,
     InsertService,
     NewsletterDataService,

@@ -42,6 +42,7 @@ export enum FormControlState {
 }
 
 export enum ApplicationTypeNames {
+  Catering = 'Catering Licence',
   CRSEstablishmentNameChange = 'CRS Establishment Name Change',
   CRSLocationChange = 'CRS Location Change',
   CRSRenewal = 'CRS Renewal',
