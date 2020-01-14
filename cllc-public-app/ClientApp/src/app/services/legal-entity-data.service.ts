@@ -47,8 +47,18 @@ export class LegalEntityDataService extends DataService {
   /**
    * Gets the list of change logs for an application
    */
-  getChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
+  getApplicationChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
     const apiPath = `api/legalentities/legal-entity-change-logs/${applicationId}`;
+    return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+
+  }
+
+  /**
+   * Gets the list of change logs for an application
+   */
+  getAccountChangeLogs(accountId: string): Observable<LicenseeChangeLog[]> {
+    const apiPath = `api/legalentities/legal-entity-change-logs/account/${accountId}`;
     return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
 
