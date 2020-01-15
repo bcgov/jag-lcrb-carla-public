@@ -6,19 +6,19 @@
 
 <ng-template #treeNode let-node="node" let-account="account">
   <ng-container *ngIf="node">
-    <input type="radio" name="bt" value="Society" [(ngModel)]="node.businessType"> Society <br>
-    <input type="radio" name="bt" value="SoleProprietor" [(ngModel)]="node.businessType"> Sole Prop <br>
-    <input type="radio" name="bt" value="PublicCorporation" [(ngModel)]="node.businessType"> Public Corporation <br>
-    <input type="radio" name="bt" value="PrivateCorporation" [(ngModel)]="node.businessType"> Private Corporation <br>
+    <input type="radio" name="bt" value="Society" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Society <br>
+    <input type="radio" name="bt" value="SoleProprietor" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Sole Prop <br>
+    <input type="radio" name="bt" value="PublicCorporation" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Public Corporation <br>
+    <input type="radio" name="bt" value="PrivateCorporation" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Private Corporation <br>
   </ng-container>
 
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
     <h3 class="blue-header">Notice of Articles</h3>
     <section class="padded-section">
-      <p>Please provide a copy of the Notice of Articles for {{account?.name}}.</p>
+      <p>Please provide a copy of the Notice of Articles for {{node?.businessNameNew}}.</p>
       <section>
-        <app-file-uploader *ngIf="account?.id" documentType="Notice of Articles" fileTypes="FILE MUST BE IN PDF FORMAT."
+        <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Notice of Articles" fileTypes="FILE MUST BE IN PDF FORMAT."
           [multipleFiles]="false" entityName="account"
           (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
           [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -30,8 +30,8 @@
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
     <h3 class="blue-header">Central Securities Register</h3>
     <section class="padded-section">
-      <p>Central Securities Register for {{account?.name}}.</p>
-      <app-file-uploader *ngIf="account?.id" documentType="Central Securities Register"
+      <p>Central Securities Register for {{node?.businessNameNew}}.</p>
+      <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Central Securities Register"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
         (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
         [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -49,7 +49,7 @@
         Penatibus et magnis dis parturient montes nascetur ridiculus. Mi
         eget mauris pharetra et ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-file-uploader *ngIf="account?.id" documentType="Special Rights and Restrictions"
+      <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Special Rights and Restrictions"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
         (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
         [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -60,8 +60,8 @@
   <ng-container *ngIf="node?.businessType === 'Partnership'">
     <h3 class="blue-header">Partnership Agreement</h3>
     <section class="padded-section">
-      <p>Partnership Agreement for {{account?.name}}.</p>
-      <app-file-uploader *ngIf="account?.id" documentType="Partnership Agreement"
+      <p>Partnership Agreement for {{node?.businessNameNew}}.</p>
+      <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Partnership Agreement"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
         (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
         [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -79,7 +79,7 @@
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
-    <app-personal-history-summary [personalHistoryItems]="node.keyPersonnelChildren" [rootNode]="node"
+    <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
       (childAdded)="addChild(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader"></app-personal-history-summary>
   </ng-container>
 
@@ -97,7 +97,7 @@
         porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
         ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="node.keyPersonnelChildren"  [rootNode]="node"
+      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
         (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-personal-history-summary>
     </section>
   </ng-container>
@@ -116,7 +116,7 @@
         porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
         ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="node.keyPersonnelChildren"  [rootNode]="node"
+      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
       (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Diretor or Officer"></app-personal-history-summary>
     </section>
   </ng-container>
@@ -159,7 +159,7 @@
         porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
         ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="node.individualShareholderChildren"  [rootNode]="node"
+      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [rootNode]="node"
         (childAdded)="addChild(node, $event, 'AddIndividualShareholder')" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-personal-history-summary>
     </section>
     <h4 class="grey-header">Business Shareholders</h4>
@@ -175,7 +175,7 @@
           porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
           ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
         </p>
-        <app-personal-history-summary [personalHistoryItems]="node.businessShareholderChildren"  [rootNode]="node"
+        <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node"
           (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-personal-history-summary>
       </section>
   </ng-container>
