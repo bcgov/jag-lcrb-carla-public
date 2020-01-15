@@ -1,9 +1,13 @@
-using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Serilog;
+using System;
+using System.Net;
+using System.Reflection;
 
 namespace Gov.Lclb.Cllb.OrgbookService
 {
@@ -11,20 +15,27 @@ namespace Gov.Lclb.Cllb.OrgbookService
     {
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
-            host.Run();
+            CreateWebHostBuilder(args)
+                .Build()
+                .Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
+                    config.AddUserSecrets(Assembly.GetExecutingAssembly());
                     config.AddEnvironmentVariables();
                 })
-                .ConfigureKestrel(options =>
+                .ConfigureLogging((hostingContext, logging) =>
                 {
-                    options.ListenLocalhost(5023, o => o.Protocols = HttpProtocols.Http2);
+                    logging.ClearProviders();
+                    logging.SetMinimumLevel(LogLevel.Debug);
+                    logging.AddDebug();
+                    logging.AddEventSourceLogger();
                 })
+                .UseSerilog()
+                .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                 .UseStartup<Startup>();
     }
 }
