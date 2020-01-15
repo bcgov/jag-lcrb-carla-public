@@ -28,6 +28,63 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             _logger = logger;
         }
 
+        public override Task<CreateFolderReply> CreateFolder(CreateFolderRequest request, ServerCallContext context)
+        {
+            var result = new CreateFolderReply();
+            string listTitle = GetDocumentListTitle(request.EntityName);
+
+            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
+
+            CreateDocumentLibraryIfMissing(listTitle, GetDocumentTemplateUrlPart(request.EntityName));
+
+            bool folderExists = false;
+            try
+            {
+                var folder = _sharePointFileManager.GetFolder(listTitle, request.FolderName).GetAwaiter().GetResult();
+                if (folder != null)
+                {
+                    folderExists = true;
+                }
+            }
+            catch (Exception)
+            {
+                folderExists = false;
+            }
+
+            if (folderExists)
+            {
+                result.ResultStatus = ResultStatus.Success;
+            }
+            else
+            {
+                try
+                {
+                    _sharePointFileManager.CreateFolder(GetDocumentListTitle(request.EntityName), request.FolderName).GetAwaiter().GetResult();
+                    var folder = _sharePointFileManager.GetFolder(listTitle, request.FolderName).GetAwaiter().GetResult();
+                    if (folder != null)
+                    {
+                        result.ResultStatus = ResultStatus.Success;
+                    }                    
+                }
+                catch (SharePointRestException ex)
+                {
+                    result.ResultStatus = ResultStatus.Fail;
+                    result.ErrorDetail = $"ERROR in creating folder {request.FolderName}";
+                    _logger.LogError(ex, result.ErrorDetail);
+
+                }
+                catch (Exception e)
+                {
+                    result.ResultStatus = ResultStatus.Fail;
+                    result.ErrorDetail = $"ERROR in creating folder {request.FolderName}";
+                    _logger.LogError(e, result.ErrorDetail);
+                }
+
+            }
+
+            return Task.FromResult(result);
+        }
+
         public override Task<FileExistsReply> FileExists(FileExistsRequest request, ServerCallContext context)
         {
             var result = new FileExistsReply();
