@@ -34,6 +34,7 @@ import { FederalReportingComponent } from '@components/federal-reporting/federal
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
+import { LicenceEventComponent } from '@components/licences/licence-event/licence-event.component';
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { PersonalHistorySummaryComponent } from '@shared/components/personal-history-summary/personal-history-summary.component';
@@ -64,6 +65,12 @@ const routes: Routes = [
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'FederalReporting' }
   },  
+  {
+    path: 'licence-event',
+    component: LicenceEventComponent,
+    canActivate: [BCeidAuthGuard],
+  
+  },
   {
     path: 'federal-reporting/:licenceId',
     component: FederalReportingComponent,
