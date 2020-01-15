@@ -15,6 +15,8 @@ using Microsoft.Extensions.Hosting;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Services.FileManager;
+using System.Collections.Generic;
+using Microsoft.Extensions.Primitives;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -355,7 +357,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (string.IsNullOrEmpty(userId))
                 {
-                    _logger.LogDebug("Getting user data from headers");
+                    _logger.LogInformation("Getting user data from headers");
+                    foreach (KeyValuePair<string, StringValues> kvp in context.Request.Headers)
+                    {
+                        _logger.LogInformation("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+                    }
 
                     userId = context.Request.Headers[options.SiteMinderUserNameKey];
                     if (string.IsNullOrEmpty(userId))
