@@ -351,7 +351,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
-                _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
+                _logger.LogInformation("Parsing the HTTP headers for SiteMinder authentication credential");
 
                 // At this point userID would only be set if we are logging in through as a DEV user
 
