@@ -351,17 +351,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Authenticate based on SiteMinder Headers
                 // **************************************************
-                _logger.LogInformation("Parsing the HTTP headers for SiteMinder authentication credential");
+                _logger.LogDebug("Parsing the HTTP headers for SiteMinder authentication credential");
 
                 // At this point userID would only be set if we are logging in through as a DEV user
 
                 if (string.IsNullOrEmpty(userId))
                 {
-                    _logger.LogInformation("Getting user data from headers");
-                    foreach (KeyValuePair<string, StringValues> kvp in context.Request.Headers)
-                    {
-                        _logger.LogInformation("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-                    }
+                    _logger.LogDebug("Getting user data from headers");
 
                     userId = context.Request.Headers[options.SiteMinderUserNameKey];
                     if (string.IsNullOrEmpty(userId))
