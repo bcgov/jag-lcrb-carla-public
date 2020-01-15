@@ -57,7 +57,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ApplicationMapping applicationMapping = new ApplicationMapping();
             var systemForm = _dynamicsClient.Systemforms.GetByKey(formid);
 
-                /*
+            /*
             string entityKey = "SystemForm_" + id + "_Entity";
             string nameKey = "SystemForm_" + id + "_Name";
             string xmlKey = "SystemForm_" + id + "_FormXML";
@@ -153,7 +153,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 formField.datafieldname = applicationMapping.GetViewModelKey(datafieldname);
 
                                 formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
-                                formSection.fields.Add(formField);
+
+                                if (formField.controltype.Equals ("PicklistControl"))
+                                {
+                                    // get the options.
+                                    //var options = _dynamicsClient.Entitydefinitions.()
+
+                                    formField.options = new List<OptionMetadata>();
+                                    formField.options.Add(new OptionMetadata() { label = "Yes", value = 0 });
+                                    formField.options.Add(new OptionMetadata() { label = "No", value = 1 });
+                                }
+                                if (formField.datafieldname != null)
+                                {
+                                    formSection.fields.Add(formField);
+                                }                                
                             }
 
                         }

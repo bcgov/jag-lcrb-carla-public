@@ -65,7 +65,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
-  form2: FormGroup;
   savedFormData: any;
   applicationId: string;
   busy: Subscription;
@@ -116,54 +115,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [''],
-      assignedLicence: this.fb.group({
-        id: [''],
-        establishmentAddressStreet: [''],
-        establishmentAddressCity: [''],
-        establishmentAddressPostalCode: [''],
-        establishmentParcelId: ['']
-      }),
-      establishmentName: ['', [
-        Validators.required,
-        this.establishmentWatchWordsService.forbiddenNameValidator()
-      ]],
-      establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
-      contactPersonFirstName: ['', Validators.required],
-      contactPersonLastName: ['', Validators.required],
-      contactPersonRole: [''],
-      contactPersonEmail: ['', Validators.required],
-      contactPersonPhone: ['', Validators.required],
-      establishmentAddressStreet: ['', Validators.required],
-      establishmentAddressCity: ['', Validators.required],
-      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
-      establishmentEmail: ['', Validators.email],
-      establishmentPhone: [''],
-      serviceHoursSundayOpen: ['', Validators.required],
-      serviceHoursMondayOpen: ['', Validators.required],
-      serviceHoursTuesdayOpen: ['', Validators.required],
-      serviceHoursWednesdayOpen: ['', Validators.required],
-      serviceHoursThursdayOpen: ['', Validators.required],
-      serviceHoursFridayOpen: ['', Validators.required],
-      serviceHoursSaturdayOpen: ['', Validators.required],
-      serviceHoursSundayClose: ['', Validators.required],
-      serviceHoursMondayClose: ['', Validators.required],
-      serviceHoursTuesdayClose: ['', Validators.required],
-      serviceHoursWednesdayClose: ['', Validators.required],
-      serviceHoursThursdayClose: ['', Validators.required],
-      serviceHoursFridayClose: ['', Validators.required],
-      serviceHoursSaturdayClose: ['', Validators.required],
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
-      applyAsIndigenousNation: [false],
-      indigenousNationId: [{ value: null, disabled: true }, Validators.required],
-      federalProducerNames: ['', Validators.required],
-      applicantType: ['', Validators.required],
-      description1: ['', [Validators.required]],
-      proposedChange: ['', [Validators.required]],
-    });
-
-    this.form2 = this.fb.group({
       id: [''],
       assignedLicence: this.fb.group({
         id: [''],
