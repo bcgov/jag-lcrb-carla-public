@@ -53,5 +53,4 @@ export enum ApplicationTypeNames {
   CannabisRetailStore = 'Cannabis Retail Store',
   LicenseeChanges = 'Licensee Changes',
   Marketer = 'Marketing',
-  Catering = 'Catering'
 }
