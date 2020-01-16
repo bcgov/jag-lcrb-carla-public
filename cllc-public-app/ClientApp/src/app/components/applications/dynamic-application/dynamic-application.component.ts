@@ -114,8 +114,15 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+
+    // todo - create this from the form metadata.
+
     this.form = this.fb.group({
       id: [''],
+      previousLicenceApplication: ['', Validators.required],      
+      previousLicenceApplicationDetails: [''],
+      ruralAgencyStoreAppointment: ['', Validators.required],
+      liquorIndustryConnections: ['', Validators.required],
       assignedLicence: this.fb.group({
         id: [''],
         establishmentAddressStreet: [''],
@@ -128,6 +135,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],

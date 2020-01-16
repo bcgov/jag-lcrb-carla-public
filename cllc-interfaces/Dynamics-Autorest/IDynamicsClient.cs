@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top186 { get; set; }
+        int? Top158 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip105 { get; set; }
+        int? Skip79 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count186 { get; set; }
+        bool? Count158 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter186 { get; set; }
+        string Filter158 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search105 { get; set; }
+        string Search79 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -76,46 +76,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAliases.
         /// </summary>
         IAliases Aliases { get; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensions.
-        /// </summary>
-        IAllowedfileextensions Allowedfileextensions { get; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionasyncoperations.
-        /// </summary>
-        IAllowedfileextensionasyncoperations Allowedfileextensionasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionbulkdeletefailures.
-        /// </summary>
-        IAllowedfileextensionbulkdeletefailures Allowedfileextensionbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionduplicatebaserecord.
-        /// </summary>
-        IAllowedfileextensionduplicatebaserecord Allowedfileextensionduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionduplicatematchingrecord.
-        /// </summary>
-        IAllowedfileextensionduplicatematchingrecord Allowedfileextensionduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionsyncerrors.
-        /// </summary>
-        IAllowedfileextensionsyncerrors Allowedfileextensionsyncerrors { get; }
-
-        /// <summary>
-        /// Gets the IFileextensionid.
-        /// </summary>
-        IFileextensionid Fileextensionid { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadid.
-        /// </summary>
-        IFormelementuploadid Formelementuploadid { get; }
 
         /// <summary>
         /// Gets the IApplicationbpfmvpv2s.
@@ -433,41 +393,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IFiainvestigationlogs Fiainvestigationlogs { get; }
 
         /// <summary>
-        /// Gets the IFileextensions.
-        /// </summary>
-        IFileextensions Fileextensions { get; }
-
-        /// <summary>
-        /// Gets the IFileextensionallowedfileextensions.
-        /// </summary>
-        IFileextensionallowedfileextensions Fileextensionallowedfileextensions { get; }
-
-        /// <summary>
-        /// Gets the IFileextensionasyncoperations.
-        /// </summary>
-        IFileextensionasyncoperations Fileextensionasyncoperations { get; }
-
-        /// <summary>
-        /// Gets the IFileextensionbulkdeletefailures.
-        /// </summary>
-        IFileextensionbulkdeletefailures Fileextensionbulkdeletefailures { get; }
-
-        /// <summary>
-        /// Gets the IFileextensionduplicatebaserecord.
-        /// </summary>
-        IFileextensionduplicatebaserecord Fileextensionduplicatebaserecord { get; }
-
-        /// <summary>
-        /// Gets the IFileextensionduplicatematchingrecord.
-        /// </summary>
-        IFileextensionduplicatematchingrecord Fileextensionduplicatematchingrecord { get; }
-
-        /// <summary>
-        /// Gets the IFileextensionsyncerrors.
-        /// </summary>
-        IFileextensionsyncerrors Fileextensionsyncerrors { get; }
-
-        /// <summary>
         /// Gets the IFormelementuploadfields.
         /// </summary>
         IFormelementuploadfields Formelementuploadfields { get; }
@@ -476,11 +401,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypeid.
         /// </summary>
         IApplicationtypeid Applicationtypeid { get; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldallowedextensions.
-        /// </summary>
-        IFormelementuploadfieldallowedextensions Formelementuploadfieldallowedextensions { get; }
 
         /// <summary>
         /// Gets the IFormelementuploadfieldasyncoperations.
@@ -688,11 +608,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         IWorkers Workers { get; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxioallowedfileextension.
-        /// </summary>
-        IRegardingobjectidadoxioallowedfileextension Regardingobjectidadoxioallowedfileextension { get; }
-
-        /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
         /// </summary>
         IRegardingobjectidadoxioapplicationlicenseechangesv10 Regardingobjectidadoxioapplicationlicenseechangesv10 { get; }
@@ -718,29 +633,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxiofileextension.
-        /// </summary>
-        IRegardingobjectidadoxiofileextension Regardingobjectidadoxiofileextension { get; }
-
-        /// <summary>
         /// Gets the IRegardingobjectidadoxioformelementuploadfield.
         /// </summary>
         IRegardingobjectidadoxioformelementuploadfield Regardingobjectidadoxioformelementuploadfield { get; }
 
         /// <summary>
-        /// Gets the IBusinessunitadoxioallowedfileextension.
-        /// </summary>
-        IBusinessunitadoxioallowedfileextension Businessunitadoxioallowedfileextension { get; }
-
-        /// <summary>
         /// Gets the IBusinessunitadoxioexhibit.
         /// </summary>
         IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiofileextension.
-        /// </summary>
-        IBusinessunitadoxiofileextension Businessunitadoxiofileextension { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioformelementuploadfield.
@@ -758,19 +658,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContacttaskcontact Contacttaskcontact { get; }
 
         /// <summary>
-        /// Gets the IBaserecordidadoxioallowedfileextension.
-        /// </summary>
-        IBaserecordidadoxioallowedfileextension Baserecordidadoxioallowedfileextension { get; }
-
-        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiofileextension.
-        /// </summary>
-        IBaserecordidadoxiofileextension Baserecordidadoxiofileextension { get; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxioformelementuploadfield.
@@ -778,19 +668,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBaserecordidadoxioformelementuploadfield Baserecordidadoxioformelementuploadfield { get; }
 
         /// <summary>
-        /// Gets the IDuplicaterecordidadoxioallowedfileextension.
-        /// </summary>
-        IDuplicaterecordidadoxioallowedfileextension Duplicaterecordidadoxioallowedfileextension { get; }
-
-        /// <summary>
         /// Gets the IDuplicaterecordidadoxioexhibit.
         /// </summary>
         IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiofileextension.
-        /// </summary>
-        IDuplicaterecordidadoxiofileextension Duplicaterecordidadoxiofileextension { get; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioformelementuploadfield.
@@ -881,26 +761,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemforms.
         /// </summary>
         ISystemforms Systemforms { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensioncreatedby.
-        /// </summary>
-        ILkadoxioallowedfileextensioncreatedby Lkadoxioallowedfileextensioncreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensioncreatedonbehalfby.
-        /// </summary>
-        ILkadoxioallowedfileextensioncreatedonbehalfby Lkadoxioallowedfileextensioncreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensionmodifiedby.
-        /// </summary>
-        ILkadoxioallowedfileextensionmodifiedby Lkadoxioallowedfileextensionmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensionmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxioallowedfileextensionmodifiedonbehalfby Lkadoxioallowedfileextensionmodifiedonbehalfby { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10createdby.
@@ -1003,26 +863,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; }
 
         /// <summary>
-        /// Gets the ILkadoxiofileextensioncreatedby.
-        /// </summary>
-        ILkadoxiofileextensioncreatedby Lkadoxiofileextensioncreatedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofileextensioncreatedonbehalfby.
-        /// </summary>
-        ILkadoxiofileextensioncreatedonbehalfby Lkadoxiofileextensioncreatedonbehalfby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofileextensionmodifiedby.
-        /// </summary>
-        ILkadoxiofileextensionmodifiedby Lkadoxiofileextensionmodifiedby { get; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofileextensionmodifiedonbehalfby.
-        /// </summary>
-        ILkadoxiofileextensionmodifiedonbehalfby Lkadoxiofileextensionmodifiedonbehalfby { get; }
-
-        /// <summary>
         /// Gets the ILkadoxioformelementuploadfieldcreatedby.
         /// </summary>
         ILkadoxioformelementuploadfieldcreatedby Lkadoxioformelementuploadfieldcreatedby { get; }
@@ -1043,19 +883,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioformelementuploadfieldmodifiedonbehalfby Lkadoxioformelementuploadfieldmodifiedonbehalfby { get; }
 
         /// <summary>
-        /// Gets the IUseradoxioallowedfileextension.
-        /// </summary>
-        IUseradoxioallowedfileextension Useradoxioallowedfileextension { get; }
-
-        /// <summary>
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         IUseradoxioexhibit Useradoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the IUseradoxiofileextension.
-        /// </summary>
-        IUseradoxiofileextension Useradoxiofileextension { get; }
 
         /// <summary>
         /// Gets the IUseradoxioformelementuploadfield.
@@ -1073,19 +903,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILegalentitytask Legalentitytask { get; }
 
         /// <summary>
-        /// Gets the ITeamadoxioallowedfileextension.
-        /// </summary>
-        ITeamadoxioallowedfileextension Teamadoxioallowedfileextension { get; }
-
-        /// <summary>
         /// Gets the ITeamadoxioexhibit.
         /// </summary>
         ITeamadoxioexhibit Teamadoxioexhibit { get; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiofileextension.
-        /// </summary>
-        ITeamadoxiofileextension Teamadoxiofileextension { get; }
 
         /// <summary>
         /// Gets the ITeamadoxioformelementuploadfield.
