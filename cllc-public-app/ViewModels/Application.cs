@@ -346,6 +346,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioFinalDecisionCodes AppChecklistFinalDecision { get; set; } //adoxioFinaldecision
 
+        public GeneralYesNo PreviousLicenceApplication { get; set; }
+        public String PreviousLicenceApplicationDetails { get; set; }
+        public GeneralYesNo RuralAgencyStoreAppointment { get; set; }
+        public GeneralYesNo LiquorIndustryConnections { get; set; }
+
         public GeneralYesNo AdoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
         public ViewModels.Account Applicant { get; set; }
         public ViewModels.License AssignedLicence { get; set; }
