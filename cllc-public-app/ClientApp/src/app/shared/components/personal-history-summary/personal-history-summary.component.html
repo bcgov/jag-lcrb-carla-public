@@ -93,6 +93,7 @@
                             <i class="fas fa-pencil-alt"></i>&nbsp;Edit
                         </button>
                         <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
+                        <button class="btn btn-secondary" (click)="deleteChange(item)">Delete</button>
                     </td>
 
                 </tr>
@@ -143,6 +144,7 @@
                             <i class="fas fa-pencil-alt"></i>&nbsp;Edit
                         </button>
                         <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
+                        <button class="btn btn-secondary" (click)="deleteChange(item)">Delete</button>
                     </td>
                 </tr>
             </ng-container>
@@ -170,6 +172,16 @@
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.numberofSharesNew">
                     </td>
                     <td>
+                        <select class="form-control" style="width: 250px;" [(ngModel)]="item.businessType">
+                            <option value="">Choose the organization type</option>
+                            <option value="PrivateCorporation">Private Corporation</option>
+                            <option value="PublicCorporation">Public Corporation</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="SoleProprietor">Sole Proprietor</option>
+                            <option value="Society">Society</option>
+                        </select>
+                    </td>
+                    <td>
                         <span *ngIf="!item.edit">{{item.emailNew}}</span>
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
                     </td>
@@ -180,6 +192,7 @@
                             <i class="fas fa-pencil-alt"></i>&nbsp;Edit
                         </button>
                         <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
+                        <button class="btn btn-secondary" (click)="deleteChange(item)">Delete</button>
                     </td>
 
                 </tr>

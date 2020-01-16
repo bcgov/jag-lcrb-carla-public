@@ -84,6 +84,35 @@ export class LicenseeChangeLog {
     const leaders = (this.children || []).filter(item => !item.isIndividual && item.isShareholderNew);
     return leaders;
   }
+  // construct file name prefix from name and names of parents
+  public get fileUploadPrefix(): string {
+    let prefix = this.nameToFilePrefix();
+    let parent = this.parentLinceseeChangeLog;
+    while (parent) {
+      prefix = `${parent.nameToFilePrefix()} ${prefix}`;
+      parent = parent.parentLinceseeChangeLog;
+    }
+
+    return prefix;
+  }
+
+  // construct file name prefix from name
+  private nameToFilePrefix(): string {
+    const MAX_SIZE = 12;
+    let prefix = '';
+    if (this.isIndividual) {
+      prefix = `${this.firstNameNew} ${this.lastNameNew}`;
+    } else {
+      if ((this.businessNameNew ||'').length  <= MAX_SIZE) {
+        prefix = this.businessNameNew || '';
+      } else {
+        const length = (this.businessNameNew || '').length;
+        // First 8 Characters + Last 4 characters, unless name is less than 12 characters, then show whole name
+        prefix = this.businessNameNew.substring(0, 8) + this.businessNameNew.substring(length - 4);
+      }
+    }
+    return prefix;
+  }
 
   /**
    * Create from LegalEntity
@@ -563,7 +592,6 @@ export class LicenseeChangeLog {
         node.changeType === LicenseeChangeType.addIndividualShareholder
       );
     result = LicenseeChangeLog.findNodesInTree(treeRoot, newIndividualAssociate);
-    debugger;
     return result;
   }
 }
