@@ -52,8 +52,9 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
 
   addAssociate() {
     const associate = new LicenseeChangeLog();
-    associate.edit = true;
     associate.changeType = `add${this.changeTypeSuffix}`;
+    associate.parentLinceseeChangeLog = this.rootNode;
+    associate.edit = true;
     this.childAdded.emit(associate);
 
   }

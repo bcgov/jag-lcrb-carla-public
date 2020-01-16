@@ -5,21 +5,14 @@
 
 
 <ng-template #treeNode let-node="node" let-account="account">
-  <ng-container *ngIf="node">
-    <input type="radio" name="bt" value="Society" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Society <br>
-    <input type="radio" name="bt" value="SoleProprietor" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Sole Prop <br>
-    <input type="radio" name="bt" value="PublicCorporation" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Public Corporation <br>
-    <input type="radio" name="bt" value="PrivateCorporation" [(ngModel)]="asLicenseeChangeLog(node).businessType"> Private Corporation <br>
-  </ng-container>
-
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
     <h3 class="blue-header">Notice of Articles</h3>
     <section class="padded-section">
-      <p>Please provide a copy of the Notice of Articles for {{node?.businessNameNew}}.</p>
+      <p>Please provide a copy of the Notice of Articles for {{node?.businessNameNew}}.</p> {{asLicenseeChangeLog(node).fileUploadPrefix}}
       <section>
-        <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Notice of Articles" fileTypes="FILE MUST BE IN PDF FORMAT."
-          [multipleFiles]="false" entityName="account"
+        <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
+          [multipleFiles]="false" entityName="account" [useDocumentTypeForName]="true"
           (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
           [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
         </app-file-uploader>
@@ -31,7 +24,7 @@
     <h3 class="blue-header">Central Securities Register</h3>
     <section class="padded-section">
       <p>Central Securities Register for {{node?.businessNameNew}}.</p>
-      <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Central Securities Register"
+      <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SECREG"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
         (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
         [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'" #financialIntegrityDocuments>
@@ -49,8 +42,8 @@
         Penatibus et magnis dis parturient montes nascetur ridiculus. Mi
         eget mauris pharetra et ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Special Rights and Restrictions"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+      <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SRANDR"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"  [useDocumentTypeForName]="true"
         (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
         [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'" #financialIntegrityDocuments>
       </app-file-uploader>
@@ -61,8 +54,8 @@
     <h3 class="blue-header">Partnership Agreement</h3>
     <section class="padded-section">
       <p>Partnership Agreement for {{node?.businessNameNew}}.</p>
-      <app-file-uploader *ngIf="account?.id" documentType="{{node?.businessNameNew}} Partnership Agreement"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+      <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Partnership Agreement"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"  [useDocumentTypeForName]="true"
         (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
         [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'" #financialIntegrityDocuments>
       </app-file-uploader>
@@ -175,7 +168,7 @@
           porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
           ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
         </p>
-        <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node"
+        <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node" [account]="account"
           (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-personal-history-summary>
       </section>
   </ng-container>
