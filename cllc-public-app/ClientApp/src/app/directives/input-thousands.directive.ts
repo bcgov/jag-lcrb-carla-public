@@ -26,12 +26,25 @@ export class InputThousandsDirective {
 
   addCommas(target) {
     const tmp = target.value.replace(/,/g, '');
-    const val = Number(tmp).toLocaleString('en-CA');
+
+    // count trailing zeros
+    let trailingZeros = 0;
+    if (tmp.indexOf('.') > 0) {
+      for (let elem of tmp.split('').reverse()) {
+        if (elem === '0') {
+          trailingZeros++;
+        } else {
+          break;
+        }
+      }
+    }
+
+    let val = Number(tmp).toLocaleString('en-CA');
 
     if (tmp === '') {
       target.value = '';
     } else if (val !== 'NaN') {
-      target.value = val;
+      target.value = val.toString() + '0'.repeat(trailingZeros);
     }
   }
 
