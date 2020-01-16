@@ -65,7 +65,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
-  form2: FormGroup;
   savedFormData: any;
   applicationId: string;
   busy: Subscription;
@@ -115,8 +114,15 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   }
 
   ngOnInit() {
+
+    // todo - create this from the form metadata.
+
     this.form = this.fb.group({
       id: [''],
+      previousLicenceApplication: ['', Validators.required],      
+      previousLicenceApplicationDetails: [''],
+      ruralAgencyStoreAppointment: ['', Validators.required],
+      liquorIndustryConnections: ['', Validators.required],
       assignedLicence: this.fb.group({
         id: [''],
         establishmentAddressStreet: [''],
@@ -129,54 +135,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
         this.establishmentWatchWordsService.forbiddenNameValidator()
       ]],
       establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
-      contactPersonFirstName: ['', Validators.required],
-      contactPersonLastName: ['', Validators.required],
-      contactPersonRole: [''],
-      contactPersonEmail: ['', Validators.required],
-      contactPersonPhone: ['', Validators.required],
-      establishmentAddressStreet: ['', Validators.required],
-      establishmentAddressCity: ['', Validators.required],
-      establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
-      establishmentEmail: ['', Validators.email],
-      establishmentPhone: [''],
-      serviceHoursSundayOpen: ['', Validators.required],
-      serviceHoursMondayOpen: ['', Validators.required],
-      serviceHoursTuesdayOpen: ['', Validators.required],
-      serviceHoursWednesdayOpen: ['', Validators.required],
-      serviceHoursThursdayOpen: ['', Validators.required],
-      serviceHoursFridayOpen: ['', Validators.required],
-      serviceHoursSaturdayOpen: ['', Validators.required],
-      serviceHoursSundayClose: ['', Validators.required],
-      serviceHoursMondayClose: ['', Validators.required],
-      serviceHoursTuesdayClose: ['', Validators.required],
-      serviceHoursWednesdayClose: ['', Validators.required],
-      serviceHoursThursdayClose: ['', Validators.required],
-      serviceHoursFridayClose: ['', Validators.required],
-      serviceHoursSaturdayClose: ['', Validators.required],
-      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
-      applyAsIndigenousNation: [false],
-      indigenousNationId: [{ value: null, disabled: true }, Validators.required],
-      federalProducerNames: ['', Validators.required],
-      applicantType: ['', Validators.required],
-      description1: ['', [Validators.required]],
-      proposedChange: ['', [Validators.required]],
-    });
 
-    this.form2 = this.fb.group({
-      id: [''],
-      assignedLicence: this.fb.group({
-        id: [''],
-        establishmentAddressStreet: [''],
-        establishmentAddressCity: [''],
-        establishmentAddressPostalCode: [''],
-        establishmentParcelId: ['']
-      }),
-      establishmentName: ['', [
-        Validators.required,
-        this.establishmentWatchWordsService.forbiddenNameValidator()
-      ]],
-      establishmentParcelId: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
       contactPersonFirstName: ['', Validators.required],
       contactPersonLastName: ['', Validators.required],
       contactPersonRole: [''],
@@ -238,8 +197,8 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     this.dynamicsDataService.getRecord('indigenousnations', '')
       .subscribe(data => this.indigenousNations = data);
 
-    // get the application form 72c82432-bbb5-402a-8c4b-fb7e995a2721
-    this.dynamicsFormDataService.getDynamicsForm('72c82432-bbb5-402a-8c4b-fb7e995a2721')
+    // get the application form 
+    this.dynamicsFormDataService.getDynamicsForm('df0e3410-b8d4-46f8-bcef-1b20a01a66d7') // catering form for demo
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => this.dynamicsForm = value);
 
