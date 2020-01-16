@@ -2384,155 +2384,6 @@
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
-      <EntityType Name="adoxio_allowedfileextension" BaseType="mscrm.crmbaseentity">
-        <Key>
-          <PropertyRef Name="adoxio_allowedfileextensionid" />
-        </Key>
-        <Property Name="_owninguser_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the user that owns the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_createdby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_adoxio_fileextensionid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for File Extension associated with Allowed File Extension." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_createdonbehalfby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who created the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="importsequencenumber" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Sequence number of the import that created this record." />
-        </Property>
-        <Property Name="_owningbusinessunit_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the business unit that owns the record" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_modifiedby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who modified the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
-        </Property>
-        <Property Name="_owningteam_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the team that owns the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="createdon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was created." />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="adoxio_allowedfileextensionid" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
-        </Property>
-        <Property Name="modifiedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was modified." />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="The name of the custom entity." />
-        </Property>
-        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
-        </Property>
-        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who modified the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
-        </Property>
-        <Property Name="statuscode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Reason for the status of the Allowed File Extension" />
-        </Property>
-        <Property Name="statecode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Status of the Allowed File Extension" />
-        </Property>
-        <Property Name="_adoxio_formelementuploadid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for Form Element Upload Field associated with Allowed File Extension." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_ownerid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Owner Id" />
-        </Property>
-        <NavigationProperty Name="createdbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_allowedfileextension_createdby">
-          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="createdonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_allowedfileextension_createdonbehalfby">
-          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="modifiedbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_allowedfileextension_modifiedby">
-          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="modifiedonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_allowedfileextension_modifiedonbehalfby">
-          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="owninguser" Type="mscrm.systemuser" Nullable="false" Partner="user_adoxio_allowedfileextension">
-          <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="owningteam" Type="mscrm.team" Nullable="false" Partner="team_adoxio_allowedfileextension">
-          <ReferentialConstraint Property="_owningteam_value" ReferencedProperty="teamid" />
-        </NavigationProperty>
-        <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_adoxio_allowedfileextension">
-          <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
-        </NavigationProperty>
-        <NavigationProperty Name="owningbusinessunit" Type="mscrm.businessunit" Nullable="false" Partner="business_unit_adoxio_allowedfileextension">
-          <ReferentialConstraint Property="_owningbusinessunit_value" ReferencedProperty="businessunitid" />
-        </NavigationProperty>
-        <NavigationProperty Name="adoxio_allowedfileextension_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_adoxio_allowedfileextension" />
-        <NavigationProperty Name="adoxio_allowedfileextension_DuplicateMatchingRecord" Type="Collection(mscrm.duplicaterecord)" Partner="duplicaterecordid_adoxio_allowedfileextension" />
-        <NavigationProperty Name="adoxio_allowedfileextension_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_adoxio_allowedfileextension" />
-        <NavigationProperty Name="adoxio_allowedfileextension_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_allowedfileextension" />
-        <NavigationProperty Name="adoxio_allowedfileextension_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_allowedfileextension" />
-        <NavigationProperty Name="adoxio_FileExtensionId" Type="mscrm.adoxio_fileextension" Nullable="false" Partner="adoxio_fileextension_allowedfileextensions">
-          <ReferentialConstraint Property="_adoxio_fileextensionid_value" ReferencedProperty="adoxio_fileextensionid" />
-        </NavigationProperty>
-        <NavigationProperty Name="adoxio_FormElementUploadId" Type="mscrm.adoxio_formelementuploadfield" Nullable="false" Partner="adoxio_formelementuploadfield_allowedextensions">
-          <ReferentialConstraint Property="_adoxio_formelementuploadid_value" ReferencedProperty="adoxio_formelementuploadfieldid" />
-        </NavigationProperty>
-        <Annotation Term="Org.OData.Core.V1.Description" String="" />
-      </EntityType>
       <EntityType Name="adoxio_applicationbpfmvpv2" BaseType="mscrm.crmbaseentity">
         <Key>
           <PropertyRef Name="businessprocessflowinstanceid" />
@@ -3343,8 +3194,8 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
-        <Property Name="adoxio_checklistresolutionassessment" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
+        <Property Name="adoxio_otherbusinesssamelocationdetails" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_appchecklistvalidinterestreceived" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="Tied to the Revised WFs?" />
@@ -3360,6 +3211,9 @@
         </Property>
         <Property Name="adoxio_triggertogeneratesecurityclearance" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_checklistresolutionassessment" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
         <Property Name="traversedpath" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="A comma separated list of string values representing the unique identifiers of stages in a Business Process Flow Instance in the order that they occur." />
@@ -3463,13 +3317,10 @@
         <Property Name="adoxio_checklistestablishmentrenderings" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_invoicetrigger" Type="Edm.Int32">
+        <Property Name="adoxio_isreadyretailarea" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentalreadyopen" Type="Edm.Boolean">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
-        <Property Name="adoxio_isreadyretailarea" Type="Edm.Boolean">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_establishmentaddresscountry" Type="Edm.String" Unicode="false">
@@ -3478,10 +3329,16 @@
         <Property Name="adoxio_dateaipexpiredlongdatestring" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_liquorindustryconnections" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_description1" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_applicanttype" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_previouslicenceapplicationdetails" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_renewalvalidinterest" Type="Edm.Int32">
@@ -3505,6 +3362,9 @@
         </Property>
         <Property Name="adoxio_checklistsignageexamples" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_checklistsenttolgin" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
         <Property Name="adoxio_checklistverifybusinessprofile" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
@@ -3569,6 +3429,9 @@
         <Property Name="adoxio_checklistassociatescontacted" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_finalcapassessment" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_establishmentpropsedname" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3618,6 +3481,9 @@
         <Property Name="adoxio_phone" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
+        <Property Name="adoxio_checklistkeypersonnelbuilt" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_checklistphotosreceived" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
@@ -3637,7 +3503,7 @@
         <Property Name="adoxio_dateaipdecisionlettersent" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_servicehourswednesdayclose" Type="Edm.Int32">
+        <Property Name="adoxio_liquorindustryconnectionsdetails" Type="Edm.String" Unicode="false">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_isreadyvalidinterest" Type="Edm.Boolean">
@@ -3730,6 +3596,9 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="adoxio_servicehourswednesdayclose" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_areyouthemaincontactforapplication" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3781,6 +3650,9 @@
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
         </Property>
+        <Property Name="adoxio_invoicetrigger" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
         <Property Name="adoxio_appchecklistlicencefeecollected" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
@@ -3826,9 +3698,6 @@
           <Annotation Term="Org.OData.Core.V1.Permissions">
             <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
           </Annotation>
-        </Property>
-        <Property Name="adoxio_checklistkeypersonnelbuilt" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_datefirstyearpaymentreceived" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
@@ -3884,8 +3753,8 @@
         <Property Name="adoxio_servicehoursthursdayopen" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
-        <Property Name="adoxio_checklistsenttolgin" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
+        <Property Name="adoxio_ruralagencystoreappointment" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="_createdby_value" Type="Edm.Guid">
           <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
@@ -4252,9 +4121,6 @@
         <Property Name="adoxio_establishmentdeclarationoption3" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="At the time the licence is issued, the applicant will be:&#xA;The owner of the place or premises that forms the establishment, or&#xA;The lessee of the place or premises that forms the establishment (term" />
         </Property>
-        <Property Name="adoxio_finalcapassessment" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="" />
-        </Property>
         <Property Name="adoxio_checklisttermsconditionsadded" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="BPF Refactoring 1.17.2019" />
         </Property>
@@ -4316,6 +4182,9 @@
           <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
         </Property>
         <Property Name="adoxio_contactpersonlastname" Type="Edm.String" Unicode="false">
+          <Annotation Term="Org.OData.Core.V1.Description" String="" />
+        </Property>
+        <Property Name="adoxio_previouslicenceapplication" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="" />
         </Property>
         <Property Name="adoxio_onlinedocumentupload" Type="Edm.Int32">
@@ -9828,136 +9697,6 @@
         </NavigationProperty>
         <Annotation Term="Org.OData.Core.V1.Description" String="" />
       </EntityType>
-      <EntityType Name="adoxio_fileextension" BaseType="mscrm.crmbaseentity">
-        <Key>
-          <PropertyRef Name="adoxio_fileextensionid" />
-        </Key>
-        <Property Name="_owningteam_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the team that owns the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="createdon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was created." />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="statecode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Status of the File Extension" />
-        </Property>
-        <Property Name="overriddencreatedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time that the record was migrated." />
-        </Property>
-        <Property Name="modifiedon" Type="Edm.DateTimeOffset">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was modified." />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="adoxio_name" Type="Edm.String" Unicode="false">
-          <Annotation Term="Org.OData.Core.V1.Description" String="E.g. .txt .xls .pdf" />
-        </Property>
-        <Property Name="importsequencenumber" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Sequence number of the import that created this record." />
-        </Property>
-        <Property Name="_createdonbehalfby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who created the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="versionnumber" Type="Edm.Int64" ConcurrencyMode="Fixed">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Version Number" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_owningbusinessunit_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the business unit that owns the record" />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_createdby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who created the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="_modifiedby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the user who modified the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="statuscode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Reason for the status of the File Extension" />
-        </Property>
-        <Property Name="_owninguser_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for the user that owns the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="utcconversiontimezonecode" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Time zone code that was in use when the record was created." />
-        </Property>
-        <Property Name="_ownerid_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Owner Id" />
-        </Property>
-        <Property Name="_modifiedonbehalfby_value" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier of the delegate user who modified the record." />
-          <Annotation Term="Org.OData.Core.V1.Computed" Bool="true" />
-          <Annotation Term="Org.OData.Core.V1.Permissions">
-            <EnumMember>Org.OData.Core.V1.PermissionType/Read</EnumMember>
-          </Annotation>
-        </Property>
-        <Property Name="adoxio_fileextensionid" Type="Edm.Guid">
-          <Annotation Term="Org.OData.Core.V1.Description" String="Unique identifier for entity instances" />
-        </Property>
-        <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
-          <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
-        </Property>
-        <NavigationProperty Name="createdbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_fileextension_createdby">
-          <ReferentialConstraint Property="_createdby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="createdonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_fileextension_createdonbehalfby">
-          <ReferentialConstraint Property="_createdonbehalfby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="modifiedbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_fileextension_modifiedby">
-          <ReferentialConstraint Property="_modifiedby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="modifiedonbehalfbyname" Type="mscrm.systemuser" Nullable="false" Partner="lk_adoxio_fileextension_modifiedonbehalfby">
-          <ReferentialConstraint Property="_modifiedonbehalfby_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="owninguser" Type="mscrm.systemuser" Nullable="false" Partner="user_adoxio_fileextension">
-          <ReferentialConstraint Property="_owninguser_value" ReferencedProperty="systemuserid" />
-        </NavigationProperty>
-        <NavigationProperty Name="owningteam" Type="mscrm.team" Nullable="false" Partner="team_adoxio_fileextension">
-          <ReferentialConstraint Property="_owningteam_value" ReferencedProperty="teamid" />
-        </NavigationProperty>
-        <NavigationProperty Name="ownerid" Type="mscrm.principal" Nullable="false" Partner="owner_adoxio_fileextension">
-          <ReferentialConstraint Property="_ownerid_value" ReferencedProperty="ownerid" />
-        </NavigationProperty>
-        <NavigationProperty Name="owningbusinessunit" Type="mscrm.businessunit" Nullable="false" Partner="business_unit_adoxio_fileextension">
-          <ReferentialConstraint Property="_owningbusinessunit_value" ReferencedProperty="businessunitid" />
-        </NavigationProperty>
-        <NavigationProperty Name="adoxio_fileextension_SyncErrors" Type="Collection(mscrm.syncerror)" Partner="regardingobjectid_adoxio_fileextension" />
-        <NavigationProperty Name="adoxio_fileextension_DuplicateMatchingRecord" Type="Collection(mscrm.duplicaterecord)" Partner="duplicaterecordid_adoxio_fileextension" />
-        <NavigationProperty Name="adoxio_fileextension_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_adoxio_fileextension" />
-        <NavigationProperty Name="adoxio_fileextension_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_fileextension" />
-        <NavigationProperty Name="adoxio_fileextension_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_fileextension" />
-        <NavigationProperty Name="adoxio_fileextension_allowedfileextensions" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="adoxio_FileExtensionId" />
-        <Annotation Term="Org.OData.Core.V1.Description" String="" />
-      </EntityType>
       <EntityType Name="adoxio_formelementuploadfield" BaseType="mscrm.crmbaseentity">
         <Key>
           <PropertyRef Name="adoxio_formelementuploadfieldid" />
@@ -10019,6 +9758,9 @@
         </Property>
         <Property Name="timezoneruleversionnumber" Type="Edm.Int32">
           <Annotation Term="Org.OData.Core.V1.Description" String="For internal use only." />
+        </Property>
+        <Property Name="adoxio_allowedfileextensions" Type="Edm.Int32">
+          <Annotation Term="Org.OData.Core.V1.Description" String="CW: Replace this with multiselect when v9.0 is introduced." />
         </Property>
         <Property Name="modifiedon" Type="Edm.DateTimeOffset">
           <Annotation Term="Org.OData.Core.V1.Description" String="Date and time when the record was modified." />
@@ -10113,7 +9855,6 @@
         <NavigationProperty Name="adoxio_formelementuploadfield_DuplicateBaseRecord" Type="Collection(mscrm.duplicaterecord)" Partner="baserecordid_adoxio_formelementuploadfield" />
         <NavigationProperty Name="adoxio_formelementuploadfield_AsyncOperations" Type="Collection(mscrm.asyncoperation)" Partner="regardingobjectid_adoxio_formelementuploadfield" />
         <NavigationProperty Name="adoxio_formelementuploadfield_BulkDeleteFailures" Type="Collection(mscrm.bulkdeletefailure)" Partner="regardingobjectid_adoxio_formelementuploadfield" />
-        <NavigationProperty Name="adoxio_formelementuploadfield_allowedextensions" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="adoxio_FormElementUploadId" />
         <NavigationProperty Name="adoxio_ApplicationTypeId" Type="mscrm.adoxio_applicationtype" Nullable="false" Partner="adoxio_applicationtype_formelementuploadfields">
           <ReferentialConstraint Property="_adoxio_applicationtypeid_value" ReferencedProperty="adoxio_applicationtypeid" />
         </NavigationProperty>
@@ -17815,12 +17556,6 @@
         <NavigationProperty Name="regardingobjectid_adoxio_applicationtransferownershipv1" Type="mscrm.adoxio_applicationtransferownershipv1" Nullable="false" Partner="adoxio_applicationtransferownershipv1_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="businessprocessflowinstanceid" />
         </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_fileextension" Type="mscrm.adoxio_fileextension" Nullable="false" Partner="adoxio_fileextension_AsyncOperations">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_fileextensionid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_allowedfileextension" Type="mscrm.adoxio_allowedfileextension" Nullable="false" Partner="adoxio_allowedfileextension_AsyncOperations">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_allowedfileextensionid" />
-        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_formelementuploadfield" Type="mscrm.adoxio_formelementuploadfield" Nullable="false" Partner="adoxio_formelementuploadfield_AsyncOperations">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_formelementuploadfieldid" />
         </NavigationProperty>
@@ -19833,12 +19568,6 @@
         <NavigationProperty Name="regardingobjectid_adoxio_applicationtransferownershipv1" Type="mscrm.adoxio_applicationtransferownershipv1" Nullable="false" Partner="adoxio_applicationtransferownershipv1_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="businessprocessflowinstanceid" />
         </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_fileextension" Type="mscrm.adoxio_fileextension" Nullable="false" Partner="adoxio_fileextension_BulkDeleteFailures">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_fileextensionid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_allowedfileextension" Type="mscrm.adoxio_allowedfileextension" Nullable="false" Partner="adoxio_allowedfileextension_BulkDeleteFailures">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_allowedfileextensionid" />
-        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_formelementuploadfield" Type="mscrm.adoxio_formelementuploadfield" Nullable="false" Partner="adoxio_formelementuploadfield_BulkDeleteFailures">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_formelementuploadfieldid" />
         </NavigationProperty>
@@ -20737,8 +20466,6 @@
         <NavigationProperty Name="business_unit_adoxio_licenseechangelog" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="owningbusinessunit" />
         <NavigationProperty Name="business_unit_adoxio_auditlogrequest" Type="Collection(mscrm.adoxio_auditlogrequest)" Partner="owningbusinessunit" />
         <NavigationProperty Name="business_unit_adoxio_exhibit" Type="Collection(mscrm.adoxio_exhibit)" Partner="owningbusinessunit" />
-        <NavigationProperty Name="business_unit_adoxio_fileextension" Type="Collection(mscrm.adoxio_fileextension)" Partner="owningbusinessunit" />
-        <NavigationProperty Name="business_unit_adoxio_allowedfileextension" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="owningbusinessunit" />
         <NavigationProperty Name="business_unit_adoxio_formelementuploadfield" Type="Collection(mscrm.adoxio_formelementuploadfield)" Partner="owningbusinessunit" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Business, division, or department in the Microsoft Dynamics 365 database." />
       </EntityType>
@@ -26961,18 +26688,6 @@
         </NavigationProperty>
         <NavigationProperty Name="baserecordid_adoxio_exhibit" Type="mscrm.adoxio_exhibit" Nullable="false" Partner="adoxio_exhibit_DuplicateBaseRecord">
           <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="adoxio_exhibitid" />
-        </NavigationProperty>
-        <NavigationProperty Name="duplicaterecordid_adoxio_fileextension" Type="mscrm.adoxio_fileextension" Nullable="false" Partner="adoxio_fileextension_DuplicateMatchingRecord">
-          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="adoxio_fileextensionid" />
-        </NavigationProperty>
-        <NavigationProperty Name="baserecordid_adoxio_fileextension" Type="mscrm.adoxio_fileextension" Nullable="false" Partner="adoxio_fileextension_DuplicateBaseRecord">
-          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="adoxio_fileextensionid" />
-        </NavigationProperty>
-        <NavigationProperty Name="duplicaterecordid_adoxio_allowedfileextension" Type="mscrm.adoxio_allowedfileextension" Nullable="false" Partner="adoxio_allowedfileextension_DuplicateMatchingRecord">
-          <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="adoxio_allowedfileextensionid" />
-        </NavigationProperty>
-        <NavigationProperty Name="baserecordid_adoxio_allowedfileextension" Type="mscrm.adoxio_allowedfileextension" Nullable="false" Partner="adoxio_allowedfileextension_DuplicateBaseRecord">
-          <ReferentialConstraint Property="_baserecordid_value" ReferencedProperty="adoxio_allowedfileextensionid" />
         </NavigationProperty>
         <NavigationProperty Name="duplicaterecordid_adoxio_formelementuploadfield" Type="mscrm.adoxio_formelementuploadfield" Nullable="false" Partner="adoxio_formelementuploadfield_DuplicateMatchingRecord">
           <ReferentialConstraint Property="_duplicaterecordid_value" ReferencedProperty="adoxio_formelementuploadfieldid" />
@@ -41304,8 +41019,6 @@
         <NavigationProperty Name="owner_adoxio_licenseechangelog" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="ownerid" />
         <NavigationProperty Name="owner_adoxio_auditlogrequest" Type="Collection(mscrm.adoxio_auditlogrequest)" Partner="ownerid" />
         <NavigationProperty Name="owner_adoxio_exhibit" Type="Collection(mscrm.adoxio_exhibit)" Partner="ownerid" />
-        <NavigationProperty Name="owner_adoxio_fileextension" Type="Collection(mscrm.adoxio_fileextension)" Partner="ownerid" />
-        <NavigationProperty Name="owner_adoxio_allowedfileextension" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="ownerid" />
         <NavigationProperty Name="owner_adoxio_formelementuploadfield" Type="Collection(mscrm.adoxio_formelementuploadfield)" Partner="ownerid" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Group of undeleted system users and undeleted teams. Owners can be used to control access to specific objects." />
       </EntityType>
@@ -53213,12 +52926,6 @@
         <NavigationProperty Name="regardingobjectid_adoxio_applicationtransferownershipv1" Type="mscrm.adoxio_applicationtransferownershipv1" Nullable="false" Partner="adoxio_applicationtransferownershipv1_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="businessprocessflowinstanceid" />
         </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_fileextension" Type="mscrm.adoxio_fileextension" Nullable="false" Partner="adoxio_fileextension_SyncErrors">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_fileextensionid" />
-        </NavigationProperty>
-        <NavigationProperty Name="regardingobjectid_adoxio_allowedfileextension" Type="mscrm.adoxio_allowedfileextension" Nullable="false" Partner="adoxio_allowedfileextension_SyncErrors">
-          <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_allowedfileextensionid" />
-        </NavigationProperty>
         <NavigationProperty Name="regardingobjectid_adoxio_formelementuploadfield" Type="mscrm.adoxio_formelementuploadfield" Nullable="false" Partner="adoxio_formelementuploadfield_SyncErrors">
           <ReferentialConstraint Property="_regardingobjectid_value" ReferencedProperty="adoxio_formelementuploadfieldid" />
         </NavigationProperty>
@@ -55146,16 +54853,6 @@
         <NavigationProperty Name="lk_adoxio_applicationtransferownershipv1_createdonbehalfby" Type="Collection(mscrm.adoxio_applicationtransferownershipv1)" Partner="createdonbehalfbyname" />
         <NavigationProperty Name="lk_adoxio_applicationtransferownershipv1_modifiedby" Type="Collection(mscrm.adoxio_applicationtransferownershipv1)" Partner="modifiedbyname" />
         <NavigationProperty Name="lk_adoxio_applicationtransferownershipv1_modifiedonbehalfby" Type="Collection(mscrm.adoxio_applicationtransferownershipv1)" Partner="modifiedonbehalfbyname" />
-        <NavigationProperty Name="lk_adoxio_fileextension_createdby" Type="Collection(mscrm.adoxio_fileextension)" Partner="createdbyname" />
-        <NavigationProperty Name="lk_adoxio_fileextension_createdonbehalfby" Type="Collection(mscrm.adoxio_fileextension)" Partner="createdonbehalfbyname" />
-        <NavigationProperty Name="lk_adoxio_fileextension_modifiedby" Type="Collection(mscrm.adoxio_fileextension)" Partner="modifiedbyname" />
-        <NavigationProperty Name="lk_adoxio_fileextension_modifiedonbehalfby" Type="Collection(mscrm.adoxio_fileextension)" Partner="modifiedonbehalfbyname" />
-        <NavigationProperty Name="user_adoxio_fileextension" Type="Collection(mscrm.adoxio_fileextension)" Partner="owninguser" />
-        <NavigationProperty Name="lk_adoxio_allowedfileextension_createdby" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="createdbyname" />
-        <NavigationProperty Name="lk_adoxio_allowedfileextension_createdonbehalfby" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="createdonbehalfbyname" />
-        <NavigationProperty Name="lk_adoxio_allowedfileextension_modifiedby" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="modifiedbyname" />
-        <NavigationProperty Name="lk_adoxio_allowedfileextension_modifiedonbehalfby" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="modifiedonbehalfbyname" />
-        <NavigationProperty Name="user_adoxio_allowedfileextension" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="owninguser" />
         <NavigationProperty Name="lk_adoxio_formelementuploadfield_createdby" Type="Collection(mscrm.adoxio_formelementuploadfield)" Partner="createdbyname" />
         <NavigationProperty Name="lk_adoxio_formelementuploadfield_createdonbehalfby" Type="Collection(mscrm.adoxio_formelementuploadfield)" Partner="createdonbehalfbyname" />
         <NavigationProperty Name="lk_adoxio_formelementuploadfield_modifiedby" Type="Collection(mscrm.adoxio_formelementuploadfield)" Partner="modifiedbyname" />
@@ -55699,8 +55396,6 @@
         <NavigationProperty Name="team_adoxio_licenseechangelog" Type="Collection(mscrm.adoxio_licenseechangelog)" Partner="owningteam" />
         <NavigationProperty Name="team_adoxio_auditlogrequest" Type="Collection(mscrm.adoxio_auditlogrequest)" Partner="owningteam" />
         <NavigationProperty Name="team_adoxio_exhibit" Type="Collection(mscrm.adoxio_exhibit)" Partner="owningteam" />
-        <NavigationProperty Name="team_adoxio_fileextension" Type="Collection(mscrm.adoxio_fileextension)" Partner="owningteam" />
-        <NavigationProperty Name="team_adoxio_allowedfileextension" Type="Collection(mscrm.adoxio_allowedfileextension)" Partner="owningteam" />
         <NavigationProperty Name="team_adoxio_formelementuploadfield" Type="Collection(mscrm.adoxio_formelementuploadfield)" Partner="owningteam" />
         <Annotation Term="Org.OData.Core.V1.Description" String="Collection of system users that routinely collaborate. Teams can be used to simplify record sharing and provide team members with common access to organization data when team members belong to different Business Units." />
       </EntityType>
@@ -63305,47 +63000,6 @@
             </Record>
           </Annotation>
         </EntitySet>
-        <EntitySet Name="adoxio_allowedfileextensions" EntityType="Microsoft.Dynamics.CRM.adoxio_allowedfileextension">
-          <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="modifiedbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="modifiedonbehalfbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
-          <NavigationPropertyBinding Path="owningteam" Target="teams" />
-          <NavigationPropertyBinding Path="ownerid" Target="owners" />
-          <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
-          <NavigationPropertyBinding Path="adoxio_allowedfileextension_SyncErrors" Target="syncerrors" />
-          <NavigationPropertyBinding Path="adoxio_allowedfileextension_DuplicateMatchingRecord" Target="duplicaterecords" />
-          <NavigationPropertyBinding Path="adoxio_allowedfileextension_DuplicateBaseRecord" Target="duplicaterecords" />
-          <NavigationPropertyBinding Path="adoxio_allowedfileextension_AsyncOperations" Target="asyncoperations" />
-          <NavigationPropertyBinding Path="adoxio_allowedfileextension_BulkDeleteFailures" Target="bulkdeletefailures" />
-          <NavigationPropertyBinding Path="adoxio_FileExtensionId" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="adoxio_FormElementUploadId" Target="adoxio_formelementuploadfields" />
-          <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
-          <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
-          <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
-            <Record>
-              <PropertyValue Property="Searchable" Bool="false" />
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
-            <Record>
-              <PropertyValue Property="Countable" Bool="true" />
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.NavigationRestrictions">
-            <Record>
-              <PropertyValue Property="Navigability">
-                <EnumMember>Org.OData.Capabilities.V1.NavigationType/Single</EnumMember>
-              </PropertyValue>
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
-            <Record>
-              <PropertyValue Property="Supported" Bool="true" />
-            </Record>
-          </Annotation>
-        </EntitySet>
         <EntitySet Name="adoxio_applicationbpfmvpv2s" EntityType="Microsoft.Dynamics.CRM.adoxio_applicationbpfmvpv2">
           <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
           <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
@@ -64823,46 +64477,6 @@
             </Record>
           </Annotation>
         </EntitySet>
-        <EntitySet Name="adoxio_fileextensions" EntityType="Microsoft.Dynamics.CRM.adoxio_fileextension">
-          <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="modifiedbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="modifiedonbehalfbyname" Target="systemusers" />
-          <NavigationPropertyBinding Path="owninguser" Target="systemusers" />
-          <NavigationPropertyBinding Path="owningteam" Target="teams" />
-          <NavigationPropertyBinding Path="ownerid" Target="owners" />
-          <NavigationPropertyBinding Path="owningbusinessunit" Target="businessunits" />
-          <NavigationPropertyBinding Path="adoxio_fileextension_SyncErrors" Target="syncerrors" />
-          <NavigationPropertyBinding Path="adoxio_fileextension_DuplicateMatchingRecord" Target="duplicaterecords" />
-          <NavigationPropertyBinding Path="adoxio_fileextension_DuplicateBaseRecord" Target="duplicaterecords" />
-          <NavigationPropertyBinding Path="adoxio_fileextension_AsyncOperations" Target="asyncoperations" />
-          <NavigationPropertyBinding Path="adoxio_fileextension_BulkDeleteFailures" Target="bulkdeletefailures" />
-          <NavigationPropertyBinding Path="adoxio_fileextension_allowedfileextensions" Target="adoxio_allowedfileextensions" />
-          <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
-          <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
-          <Annotation Term="Org.OData.Capabilities.V1.SearchRestrictions">
-            <Record>
-              <PropertyValue Property="Searchable" Bool="false" />
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.CountRestrictions">
-            <Record>
-              <PropertyValue Property="Countable" Bool="true" />
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.NavigationRestrictions">
-            <Record>
-              <PropertyValue Property="Navigability">
-                <EnumMember>Org.OData.Capabilities.V1.NavigationType/Single</EnumMember>
-              </PropertyValue>
-            </Record>
-          </Annotation>
-          <Annotation Term="Org.OData.Capabilities.V1.ChangeTracking">
-            <Record>
-              <PropertyValue Property="Supported" Bool="true" />
-            </Record>
-          </Annotation>
-        </EntitySet>
         <EntitySet Name="adoxio_formelementuploadfields" EntityType="Microsoft.Dynamics.CRM.adoxio_formelementuploadfield">
           <NavigationPropertyBinding Path="createdbyname" Target="systemusers" />
           <NavigationPropertyBinding Path="createdonbehalfbyname" Target="systemusers" />
@@ -64877,7 +64491,6 @@
           <NavigationPropertyBinding Path="adoxio_formelementuploadfield_DuplicateBaseRecord" Target="duplicaterecords" />
           <NavigationPropertyBinding Path="adoxio_formelementuploadfield_AsyncOperations" Target="asyncoperations" />
           <NavigationPropertyBinding Path="adoxio_formelementuploadfield_BulkDeleteFailures" Target="bulkdeletefailures" />
-          <NavigationPropertyBinding Path="adoxio_formelementuploadfield_allowedextensions" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="adoxio_ApplicationTypeId" Target="adoxio_applicationtypes" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
@@ -66813,8 +66426,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationrelocationv1" Target="adoxio_applicationrelocationv1s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationstructurechangev1" Target="adoxio_applicationstructurechangev1s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtransferownershipv1" Target="adoxio_applicationtransferownershipv1s" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_formelementuploadfield" Target="adoxio_formelementuploadfields" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
@@ -67414,8 +67025,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationrelocationv1" Target="adoxio_applicationrelocationv1s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationstructurechangev1" Target="adoxio_applicationstructurechangev1s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtransferownershipv1" Target="adoxio_applicationtransferownershipv1s" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_formelementuploadfield" Target="adoxio_formelementuploadfields" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
@@ -67757,8 +67366,6 @@
           <NavigationPropertyBinding Path="business_unit_adoxio_licenseechangelog" Target="adoxio_licenseechangelogs" />
           <NavigationPropertyBinding Path="business_unit_adoxio_auditlogrequest" Target="adoxio_auditlogrequests" />
           <NavigationPropertyBinding Path="business_unit_adoxio_exhibit" Target="adoxio_exhibits" />
-          <NavigationPropertyBinding Path="business_unit_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="business_unit_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="business_unit_adoxio_formelementuploadfield" Target="adoxio_formelementuploadfields" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
@@ -69446,10 +69053,6 @@
           <NavigationPropertyBinding Path="baserecordid_adoxio_auditlogrequest" Target="adoxio_auditlogrequests" />
           <NavigationPropertyBinding Path="duplicaterecordid_adoxio_exhibit" Target="adoxio_exhibits" />
           <NavigationPropertyBinding Path="baserecordid_adoxio_exhibit" Target="adoxio_exhibits" />
-          <NavigationPropertyBinding Path="duplicaterecordid_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="baserecordid_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="duplicaterecordid_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
-          <NavigationPropertyBinding Path="baserecordid_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="duplicaterecordid_adoxio_formelementuploadfield" Target="adoxio_formelementuploadfields" />
           <NavigationPropertyBinding Path="baserecordid_adoxio_formelementuploadfield" Target="adoxio_formelementuploadfields" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
@@ -76010,8 +75613,6 @@
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationrelocationv1" Target="adoxio_applicationrelocationv1s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationstructurechangev1" Target="adoxio_applicationstructurechangev1s" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_applicationtransferownershipv1" Target="adoxio_applicationtransferownershipv1s" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="regardingobjectid_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="regardingobjectid_adoxio_formelementuploadfield" Target="adoxio_formelementuploadfields" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
@@ -77346,16 +76947,6 @@
           <NavigationPropertyBinding Path="lk_adoxio_applicationtransferownershipv1_createdonbehalfby" Target="adoxio_applicationtransferownershipv1s" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationtransferownershipv1_modifiedby" Target="adoxio_applicationtransferownershipv1s" />
           <NavigationPropertyBinding Path="lk_adoxio_applicationtransferownershipv1_modifiedonbehalfby" Target="adoxio_applicationtransferownershipv1s" />
-          <NavigationPropertyBinding Path="lk_adoxio_fileextension_createdby" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="lk_adoxio_fileextension_createdonbehalfby" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="lk_adoxio_fileextension_modifiedby" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="lk_adoxio_fileextension_modifiedonbehalfby" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="user_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="lk_adoxio_allowedfileextension_createdby" Target="adoxio_allowedfileextensions" />
-          <NavigationPropertyBinding Path="lk_adoxio_allowedfileextension_createdonbehalfby" Target="adoxio_allowedfileextensions" />
-          <NavigationPropertyBinding Path="lk_adoxio_allowedfileextension_modifiedby" Target="adoxio_allowedfileextensions" />
-          <NavigationPropertyBinding Path="lk_adoxio_allowedfileextension_modifiedonbehalfby" Target="adoxio_allowedfileextensions" />
-          <NavigationPropertyBinding Path="user_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="lk_adoxio_formelementuploadfield_createdby" Target="adoxio_formelementuploadfields" />
           <NavigationPropertyBinding Path="lk_adoxio_formelementuploadfield_createdonbehalfby" Target="adoxio_formelementuploadfields" />
           <NavigationPropertyBinding Path="lk_adoxio_formelementuploadfield_modifiedby" Target="adoxio_formelementuploadfields" />
@@ -77722,8 +77313,6 @@
           <NavigationPropertyBinding Path="team_adoxio_licenseechangelog" Target="adoxio_licenseechangelogs" />
           <NavigationPropertyBinding Path="team_adoxio_auditlogrequest" Target="adoxio_auditlogrequests" />
           <NavigationPropertyBinding Path="team_adoxio_exhibit" Target="adoxio_exhibits" />
-          <NavigationPropertyBinding Path="team_adoxio_fileextension" Target="adoxio_fileextensions" />
-          <NavigationPropertyBinding Path="team_adoxio_allowedfileextension" Target="adoxio_allowedfileextensions" />
           <NavigationPropertyBinding Path="team_adoxio_formelementuploadfield" Target="adoxio_formelementuploadfields" />
           <Annotation Term="Org.OData.Capabilities.V1.IndexableByKey" Bool="true" />
           <Annotation Term="Org.OData.Capabilities.V1.SkipSupported" Bool="false" />
