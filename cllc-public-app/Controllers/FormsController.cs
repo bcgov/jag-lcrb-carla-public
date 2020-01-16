@@ -23,6 +23,7 @@ using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Gov.Lclb.Cllb.Public.Mapping;
 
 // from https://raw.githubusercontent.com/bcgov/jag-lcrb-carla-public/446c4f15f159c7f569e03ac138abce3d81aa3f92/cllc-public-app/Controllers/SystemFormController.cs
 
@@ -51,10 +52,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{formid}")]
         public async Task<JsonResult> GetSystemForm(string formid)
         {
+            // get the picklists.
 
+            List<MicrosoftDynamicsCRMpicklistAttributeMetadata> picklistMetadata = null;
+
+            try
+            {
+                picklistMetadata = _dynamicsClient.Entitydefinitions.GetEntityPicklists("adoxio_application").Value;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "ERROR getting accounts picklist metadata");
+            }
+
+            // get the application mapping.
+
+            ApplicationMapping applicationMapping = new ApplicationMapping();
             var systemForm = _dynamicsClient.Systemforms.GetByKey(formid);
 
-                /*
+            /*
             string entityKey = "SystemForm_" + id + "_Entity";
             string nameKey = "SystemForm_" + id + "_Name";
             string xmlKey = "SystemForm_" + id + "_FormXML";
@@ -92,6 +108,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         Boolean sectionShowLabel = section.Attribute("showlabel").DynamicsAttributeToBoolean();
                         Boolean sectionVisible = section.Attribute("visible").DynamicsAttributeToBoolean();
+                        if (section.Attribute("visible") == null)
+                        {
+                            sectionVisible = true; // default visibility to true if it is not specified.
+                        }
+
 
                         FormSection formSection = new FormSection();
                         formSection.fields = new List<FormField>();
@@ -140,9 +161,59 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             {
                                 formField.classid = control.Attribute("classid").Value;
                                 formField.controltype = formField.classid.DynamicsControlClassidToName();
-                                formField.datafieldname = control.Attribute("datafieldname").Value;
+                                string datafieldname = control.Attribute("datafieldname").Value;
+                                // translate the data field name
+                                formField.datafieldname = applicationMapping.GetViewModelKey(datafieldname);
+
                                 formField.required = control.Attribute("isrequired").DynamicsAttributeToBoolean();
-                                formSection.fields.Add(formField);
+
+                                if (formField.controltype.Equals ("PicklistControl"))
+                                {
+                                    // get the options.
+                                    var metadata = picklistMetadata.FirstOrDefault(x => x.LogicalName == datafieldname);
+
+                                    formField.options = new List<OptionMetadata>();
+
+                                    if (metadata == null)
+                                    {
+                                        formField.options.Add(new OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                    }
+                                    else
+                                    {
+                                        MicrosoftDynamicsCRMoptionSet optionSet = null;
+                                        // could be an OptionSet or a globalOptionSet.
+                                        if (metadata.OptionSet != null)
+                                        {
+                                            optionSet = metadata.OptionSet;
+                                        }
+                                        else
+                                        {
+                                            optionSet = metadata.GlobalOptionSet;
+                                        }
+                                        if (optionSet!= null)
+                                        {
+                                            foreach (var option in optionSet.Options)
+                                            {
+                                                int? value = option.Value;
+                                                string label = option.Label?.UserLocalizedLabel?.Label;
+                                                if (value == null || label == null)
+                                                {
+                                                    formField.options.Add(new OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                                }
+                                                else
+                                                {
+                                                    formField.options.Add(new OptionMetadata() { label = label, value = value.Value });
+                                                }
+
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                                if (formField.datafieldname != null)
+                                {
+                                    formSection.fields.Add(formField);
+                                }                                
                             }
 
                         }
