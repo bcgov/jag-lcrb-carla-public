@@ -72,13 +72,13 @@ internal class KestrelOptionsSetup : IConfigureOptions<KestrelServerOptions>
     {
         if (_options.Value.UseHttps)
         {                
-                options.ListenAnyIP(8080, configureListen => {
-                        configureListen.UseHttps(_certificateLoader.ServiceCertificate);
-                        // enable Http2, for gRPC
-                        configureListen.Protocols = HttpProtocols.Http2;
-                        configureListen.UseConnectionLogging();
-                    });           
-            }
+            options.ListenAnyIP(8080, configureListen => {
+                    configureListen.UseHttps(_certificateLoader.ServiceCertificate);
+                    // enable Http2, for gRPC
+                    configureListen.Protocols = HttpProtocols.Http2;
+                    configureListen.UseConnectionLogging();
+                });           
+        }
         else
         {
             options.ListenAnyIP(8080, configureListen => {                
@@ -93,7 +93,6 @@ internal class KestrelOptionsSetup : IConfigureOptions<KestrelServerOptions>
         options.ListenAnyIP(8088, configureListen => {
             configureListen.Protocols = HttpProtocols.Http1;
         });
-        }
     }
 }
 
