@@ -51,17 +51,20 @@ namespace Gov.Lclb.Cllb.Public
 
         
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            _configuration = configuration;
+            _env = env;
         }
 
         readonly string MyAllowSpecificOrigins = "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://apis.google.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://code.jquery.com https://stackpath.bootstrapcdn.com https://fonts.googleapis.com";
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
+
+        public IWebHostEnvironment _env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services )
         {
             // add a singleton for data access.
 #if (USE_MSSQL)
@@ -77,7 +80,7 @@ namespace Gov.Lclb.Cllb.Public
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // determine if we wire up Dynamics.
-            if (!string.IsNullOrEmpty(Configuration["DYNAMICS_ODATA_URI"]))
+            if (!string.IsNullOrEmpty(_configuration["DYNAMICS_ODATA_URI"]))
             {
                 SetupServices(services);
             }
@@ -134,10 +137,10 @@ namespace Gov.Lclb.Cllb.Public
                                   policy.RequireClaim(User.UserTypeClaim, "Business"));
             });
             services.RegisterPermissionHandler();
-            if (string.IsNullOrEmpty (Configuration["KEY_RING_DIRECTORY"]))
+            if (string.IsNullOrEmpty (_configuration["KEY_RING_DIRECTORY"]))
             {
                 // setup key ring to persist in storage.
-                services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(Configuration["KEY_RING_DIRECTORY"]));
+                services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]));
             }
 
             // In production, the Angular files will be served from this directory
@@ -173,14 +176,14 @@ namespace Gov.Lclb.Cllb.Public
         private void SetupServices(IServiceCollection services)
         {
 
-            string dynamicsOdataUri = Configuration["DYNAMICS_ODATA_URI"];
-            string aadTenantId = Configuration["DYNAMICS_AAD_TENANT_ID"];
-            string serverAppIdUri = Configuration["DYNAMICS_SERVER_APP_ID_URI"];
-            string clientKey = Configuration["DYNAMICS_CLIENT_KEY"];
-            string clientId = Configuration["DYNAMICS_CLIENT_ID"];
+            string dynamicsOdataUri = _configuration["DYNAMICS_ODATA_URI"];
+            string aadTenantId = _configuration["DYNAMICS_AAD_TENANT_ID"];
+            string serverAppIdUri = _configuration["DYNAMICS_SERVER_APP_ID_URI"];
+            string clientKey = _configuration["DYNAMICS_CLIENT_KEY"];
+            string clientId = _configuration["DYNAMICS_CLIENT_ID"];
 
-            string ssgUsername = Configuration["SSG_USERNAME"];
-            string ssgPassword = Configuration["SSG_PASSWORD"];
+            string ssgUsername = _configuration["SSG_USERNAME"];
+            string ssgPassword = _configuration["SSG_PASSWORD"];
 
             AuthenticationResult authenticationResult = null;
             // authenticate using ADFS.
@@ -213,59 +216,63 @@ namespace Gov.Lclb.Cllb.Public
             services.AddTransient(new Func<IServiceProvider, IDynamicsClient>((serviceProvider) =>
             {
 
-                IDynamicsClient client = DynamicsSetupUtil.SetupDynamics(Configuration);
+                IDynamicsClient client = DynamicsSetupUtil.SetupDynamics(_configuration);
 
                 return client;
             }));
 
             // add SharePoint.
 
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(Configuration));
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
 
             // add BCeID Web Services
 
-            string bceidUrl = Configuration["BCEID_SERVICE_URL"];
-            string bceidSvcId = Configuration["BCEID_SERVICE_SVCID"];
-            string bceidUserid = Configuration["BCEID_SERVICE_USER"];
-            string bceidPasswd = Configuration["BCEID_SERVICE_PASSWD"];
+            string bceidUrl = _configuration["BCEID_SERVICE_URL"];
+            string bceidSvcId = _configuration["BCEID_SERVICE_SVCID"];
+            string bceidUserid = _configuration["BCEID_SERVICE_USER"];
+            string bceidPasswd = _configuration["BCEID_SERVICE_PASSWD"];
 
             services.AddTransient<BCeIDBusinessQuery>(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
             // add BCEP services
 
-            var bcep_svc_url = Configuration["BCEP_SERVICE_URL"];
-            var bcep_svc_svcid = Configuration["BCEP_MERCHANT_ID"];
-            var bcep_svc_hashid = Configuration["BCEP_HASH_KEY"];
-            var bcep_base_uri = Configuration["BASE_URI"];
-            var bcep_base_path = Configuration["BASE_PATH"];
-            var bcep_conf_path = Configuration["BCEP_CONF_PATH"];
+            var bcep_svc_url = _configuration["BCEP_SERVICE_URL"];
+            var bcep_svc_svcid = _configuration["BCEP_MERCHANT_ID"];
+            var bcep_svc_hashid = _configuration["BCEP_HASH_KEY"];
+            var bcep_base_uri = _configuration["BASE_URI"];
+            var bcep_base_path = _configuration["BASE_PATH"];
+            var bcep_conf_path = _configuration["BCEP_CONF_PATH"];
 
             services.AddTransient<BCEPWrapper>(_ => new BCEPWrapper(bcep_svc_url, bcep_svc_svcid, bcep_svc_hashid,
                 bcep_base_uri + bcep_base_path + bcep_conf_path));
           
             // add the PDF client.
-            string pdf_service_base_uri = Configuration["PDF_SERVICE_BASE_URI"];
-            string bearer_token = $"Bearer {Configuration["PDF_JWT_TOKEN"]}";
+            string pdf_service_base_uri = _configuration["PDF_SERVICE_BASE_URI"];
+            string bearer_token = $"Bearer {_configuration["PDF_JWT_TOKEN"]}";
 
             services.AddTransient<PdfClient>(_ => new PdfClient(pdf_service_base_uri, bearer_token));
 
             // add the GeoCoder Client.
 
-            services.AddTransient<GeocoderClient>(_ => new GeocoderClient(Configuration));
+            services.AddTransient<GeocoderClient>(_ => new GeocoderClient(_configuration));
 
             // add the file manager.
-            string fileManagerURI = Configuration["FILE_MANAGER_URI"];
+            string fileManagerURI = _configuration["FILE_MANAGER_URI"];
 
             if (!string.IsNullOrEmpty (fileManagerURI))
             {
                 var httpClientHandler = new HttpClientHandler();
-                // Return `true` to allow certificates that are untrusted/invalid
-                /* No need to ignore certificate errors, as the certificate should be valid.
-                httpClientHandler.ServerCertificateCustomValidationCallback =
+                
+                if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.  
+                                         // This allows you to use OpenShift self-signed certificates for testing.
+                {
+                    // Return `true` to allow certificates that are untrusted/invalid
+                    httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                    */
+                }      
+                
                 var httpClient = new HttpClient(httpClientHandler);
-                // set default request to Version 2.
+                // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
                 httpClient.DefaultRequestVersion = HttpVersion.Version20;
               
                 var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
@@ -274,7 +281,7 @@ namespace Gov.Lclb.Cllb.Public
                 // call the token service to get a token.
                 var tokenRequest = new TokenRequest()
                 {
-                    Secret = Configuration["FILE_MANAGER_SECRET"]
+                    Secret = _configuration["FILE_MANAGER_SECRET"]
                 };
 
                 var tokenReply = initialClient.GetToken(tokenRequest);
@@ -292,11 +299,7 @@ namespace Gov.Lclb.Cllb.Public
                 }
 
 
-            }
-            
-            
-            
-
+            }            
 
         }
 
@@ -355,7 +358,7 @@ namespace Gov.Lclb.Cllb.Public
                 IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
                 // run the database seeders
                 log.LogDebug("Adding/Updating seed data ...");
-                Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, dynamicsClient);
+                Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(_configuration, env, loggerFactory, dynamicsClient);
                 seederFactory.Seed(null);
                 log.LogDebug("Seeding operations are complete.");
             }
@@ -363,7 +366,7 @@ namespace Gov.Lclb.Cllb.Public
 #endif
 
 
-            string pathBase = Configuration["BASE_PATH"];
+            string pathBase = _configuration["BASE_PATH"];
 
             if (!string.IsNullOrEmpty(pathBase))
             {
@@ -469,17 +472,17 @@ namespace Gov.Lclb.Cllb.Public
             });
 
             // enable Splunk logger using Serilog
-            if (!string.IsNullOrEmpty(Configuration["SPLUNK_COLLECTOR_URL"]) &&
-                !string.IsNullOrEmpty(Configuration["SPLUNK_TOKEN"])
+            if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
+                !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
                 )
             {
 
                 Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
-                if (!string.IsNullOrEmpty (Configuration["SPLUNK_CHANNEL"]))
+                if (!string.IsNullOrEmpty (_configuration["SPLUNK_CHANNEL"]))
                 {
-                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
+                    fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", _configuration["SPLUNK_CHANNEL"]));
                 }
-                var splunkUri = new Uri(Configuration["SPLUNK_COLLECTOR_URL"]);
+                var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
                 var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
 
                 // Fix for bad SSL issues 
@@ -489,8 +492,8 @@ namespace Gov.Lclb.Cllb.Public
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
-                    .WriteTo.EventCollector( splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                    .WriteTo.EventCollector( splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: _configuration["SPLUNK_TOKEN"], 
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()

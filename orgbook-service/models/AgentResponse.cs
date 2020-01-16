@@ -1,6 +1,4 @@
-using System;
-
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Lclb.Cllb.OrgbookService
 {
   public class AgentResponse
   {
