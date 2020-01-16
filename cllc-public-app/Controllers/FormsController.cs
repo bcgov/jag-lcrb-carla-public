@@ -52,6 +52,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{formid}")]
         public async Task<JsonResult> GetSystemForm(string formid)
         {
+            // get the picklists.
+
+            List<MicrosoftDynamicsCRMpicklistAttributeMetadata> picklistMetadata = null;
+
+            try
+            {
+                picklistMetadata = _dynamicsClient.Entitydefinitions.GetEntityPicklists("adoxio_application").Value;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "ERROR getting accounts picklist metadata");
+            }
+
             // get the application mapping.
 
             ApplicationMapping applicationMapping = new ApplicationMapping();
@@ -157,11 +170,45 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 if (formField.controltype.Equals ("PicklistControl"))
                                 {
                                     // get the options.
-                                    //var options = _dynamicsClient.Entitydefinitions.()
+                                    var metadata = picklistMetadata.FirstOrDefault(x => x.LogicalName == datafieldname);
 
                                     formField.options = new List<OptionMetadata>();
-                                    formField.options.Add(new OptionMetadata() { label = "Yes", value = 0 });
-                                    formField.options.Add(new OptionMetadata() { label = "No", value = 1 });
+
+                                    if (metadata == null)
+                                    {
+                                        formField.options.Add(new OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                    }
+                                    else
+                                    {
+                                        MicrosoftDynamicsCRMoptionSet optionSet = null;
+                                        // could be an OptionSet or a globalOptionSet.
+                                        if (metadata.OptionSet != null)
+                                        {
+                                            optionSet = metadata.OptionSet;
+                                        }
+                                        else
+                                        {
+                                            optionSet = metadata.GlobalOptionSet;
+                                        }
+                                        if (optionSet!= null)
+                                        {
+                                            foreach (var option in optionSet.Options)
+                                            {
+                                                int? value = option.Value;
+                                                string label = option.Label?.UserLocalizedLabel?.Label;
+                                                if (value == null || label == null)
+                                                {
+                                                    formField.options.Add(new OptionMetadata() { label = "INVALID PICKLIST", value = 0 });
+                                                }
+                                                else
+                                                {
+                                                    formField.options.Add(new OptionMetadata() { label = label, value = value.Value });
+                                                }
+
+                                            }
+                                        }
+                                        
+                                    }
                                 }
                                 if (formField.datafieldname != null)
                                 {

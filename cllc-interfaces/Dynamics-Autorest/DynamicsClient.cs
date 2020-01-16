@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top186 { get; set; }
+        public int? Top158 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip105 { get; set; }
+        public int? Skip79 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count186 { get; set; }
+        public bool? Count158 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter186 { get; set; }
+        public string Filter158 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search105 { get; set; }
+        public string Search79 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -79,46 +79,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAliases.
         /// </summary>
         public virtual IAliases Aliases { get; private set; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensions.
-        /// </summary>
-        public virtual IAllowedfileextensions Allowedfileextensions { get; private set; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionasyncoperations.
-        /// </summary>
-        public virtual IAllowedfileextensionasyncoperations Allowedfileextensionasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionbulkdeletefailures.
-        /// </summary>
-        public virtual IAllowedfileextensionbulkdeletefailures Allowedfileextensionbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionduplicatebaserecord.
-        /// </summary>
-        public virtual IAllowedfileextensionduplicatebaserecord Allowedfileextensionduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionduplicatematchingrecord.
-        /// </summary>
-        public virtual IAllowedfileextensionduplicatematchingrecord Allowedfileextensionduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IAllowedfileextensionsyncerrors.
-        /// </summary>
-        public virtual IAllowedfileextensionsyncerrors Allowedfileextensionsyncerrors { get; private set; }
-
-        /// <summary>
-        /// Gets the IFileextensionid.
-        /// </summary>
-        public virtual IFileextensionid Fileextensionid { get; private set; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadid.
-        /// </summary>
-        public virtual IFormelementuploadid Formelementuploadid { get; private set; }
 
         /// <summary>
         /// Gets the IApplicationbpfmvpv2s.
@@ -436,41 +396,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IFiainvestigationlogs Fiainvestigationlogs { get; private set; }
 
         /// <summary>
-        /// Gets the IFileextensions.
-        /// </summary>
-        public virtual IFileextensions Fileextensions { get; private set; }
-
-        /// <summary>
-        /// Gets the IFileextensionallowedfileextensions.
-        /// </summary>
-        public virtual IFileextensionallowedfileextensions Fileextensionallowedfileextensions { get; private set; }
-
-        /// <summary>
-        /// Gets the IFileextensionasyncoperations.
-        /// </summary>
-        public virtual IFileextensionasyncoperations Fileextensionasyncoperations { get; private set; }
-
-        /// <summary>
-        /// Gets the IFileextensionbulkdeletefailures.
-        /// </summary>
-        public virtual IFileextensionbulkdeletefailures Fileextensionbulkdeletefailures { get; private set; }
-
-        /// <summary>
-        /// Gets the IFileextensionduplicatebaserecord.
-        /// </summary>
-        public virtual IFileextensionduplicatebaserecord Fileextensionduplicatebaserecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IFileextensionduplicatematchingrecord.
-        /// </summary>
-        public virtual IFileextensionduplicatematchingrecord Fileextensionduplicatematchingrecord { get; private set; }
-
-        /// <summary>
-        /// Gets the IFileextensionsyncerrors.
-        /// </summary>
-        public virtual IFileextensionsyncerrors Fileextensionsyncerrors { get; private set; }
-
-        /// <summary>
         /// Gets the IFormelementuploadfields.
         /// </summary>
         public virtual IFormelementuploadfields Formelementuploadfields { get; private set; }
@@ -479,11 +404,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IApplicationtypeid.
         /// </summary>
         public virtual IApplicationtypeid Applicationtypeid { get; private set; }
-
-        /// <summary>
-        /// Gets the IFormelementuploadfieldallowedextensions.
-        /// </summary>
-        public virtual IFormelementuploadfieldallowedextensions Formelementuploadfieldallowedextensions { get; private set; }
 
         /// <summary>
         /// Gets the IFormelementuploadfieldasyncoperations.
@@ -691,11 +611,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IWorkers Workers { get; private set; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxioallowedfileextension.
-        /// </summary>
-        public virtual IRegardingobjectidadoxioallowedfileextension Regardingobjectidadoxioallowedfileextension { get; private set; }
-
-        /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationlicenseechangesv10.
         /// </summary>
         public virtual IRegardingobjectidadoxioapplicationlicenseechangesv10 Regardingobjectidadoxioapplicationlicenseechangesv10 { get; private set; }
@@ -721,29 +636,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; private set; }
 
         /// <summary>
-        /// Gets the IRegardingobjectidadoxiofileextension.
-        /// </summary>
-        public virtual IRegardingobjectidadoxiofileextension Regardingobjectidadoxiofileextension { get; private set; }
-
-        /// <summary>
         /// Gets the IRegardingobjectidadoxioformelementuploadfield.
         /// </summary>
         public virtual IRegardingobjectidadoxioformelementuploadfield Regardingobjectidadoxioformelementuploadfield { get; private set; }
 
         /// <summary>
-        /// Gets the IBusinessunitadoxioallowedfileextension.
-        /// </summary>
-        public virtual IBusinessunitadoxioallowedfileextension Businessunitadoxioallowedfileextension { get; private set; }
-
-        /// <summary>
         /// Gets the IBusinessunitadoxioexhibit.
         /// </summary>
         public virtual IBusinessunitadoxioexhibit Businessunitadoxioexhibit { get; private set; }
-
-        /// <summary>
-        /// Gets the IBusinessunitadoxiofileextension.
-        /// </summary>
-        public virtual IBusinessunitadoxiofileextension Businessunitadoxiofileextension { get; private set; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioformelementuploadfield.
@@ -761,19 +661,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IContacttaskcontact Contacttaskcontact { get; private set; }
 
         /// <summary>
-        /// Gets the IBaserecordidadoxioallowedfileextension.
-        /// </summary>
-        public virtual IBaserecordidadoxioallowedfileextension Baserecordidadoxioallowedfileextension { get; private set; }
-
-        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         public virtual IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; private set; }
-
-        /// <summary>
-        /// Gets the IBaserecordidadoxiofileextension.
-        /// </summary>
-        public virtual IBaserecordidadoxiofileextension Baserecordidadoxiofileextension { get; private set; }
 
         /// <summary>
         /// Gets the IBaserecordidadoxioformelementuploadfield.
@@ -781,19 +671,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual IBaserecordidadoxioformelementuploadfield Baserecordidadoxioformelementuploadfield { get; private set; }
 
         /// <summary>
-        /// Gets the IDuplicaterecordidadoxioallowedfileextension.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxioallowedfileextension Duplicaterecordidadoxioallowedfileextension { get; private set; }
-
-        /// <summary>
         /// Gets the IDuplicaterecordidadoxioexhibit.
         /// </summary>
         public virtual IDuplicaterecordidadoxioexhibit Duplicaterecordidadoxioexhibit { get; private set; }
-
-        /// <summary>
-        /// Gets the IDuplicaterecordidadoxiofileextension.
-        /// </summary>
-        public virtual IDuplicaterecordidadoxiofileextension Duplicaterecordidadoxiofileextension { get; private set; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioformelementuploadfield.
@@ -884,26 +764,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISystemforms.
         /// </summary>
         public virtual ISystemforms Systemforms { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensioncreatedby.
-        /// </summary>
-        public virtual ILkadoxioallowedfileextensioncreatedby Lkadoxioallowedfileextensioncreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensioncreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioallowedfileextensioncreatedonbehalfby Lkadoxioallowedfileextensioncreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensionmodifiedby.
-        /// </summary>
-        public virtual ILkadoxioallowedfileextensionmodifiedby Lkadoxioallowedfileextensionmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxioallowedfileextensionmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxioallowedfileextensionmodifiedonbehalfby Lkadoxioallowedfileextensionmodifiedonbehalfby { get; private set; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10createdby.
@@ -1006,26 +866,6 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioexhibitmodifiedonbehalfby Lkadoxioexhibitmodifiedonbehalfby { get; private set; }
 
         /// <summary>
-        /// Gets the ILkadoxiofileextensioncreatedby.
-        /// </summary>
-        public virtual ILkadoxiofileextensioncreatedby Lkadoxiofileextensioncreatedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofileextensioncreatedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiofileextensioncreatedonbehalfby Lkadoxiofileextensioncreatedonbehalfby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofileextensionmodifiedby.
-        /// </summary>
-        public virtual ILkadoxiofileextensionmodifiedby Lkadoxiofileextensionmodifiedby { get; private set; }
-
-        /// <summary>
-        /// Gets the ILkadoxiofileextensionmodifiedonbehalfby.
-        /// </summary>
-        public virtual ILkadoxiofileextensionmodifiedonbehalfby Lkadoxiofileextensionmodifiedonbehalfby { get; private set; }
-
-        /// <summary>
         /// Gets the ILkadoxioformelementuploadfieldcreatedby.
         /// </summary>
         public virtual ILkadoxioformelementuploadfieldcreatedby Lkadoxioformelementuploadfieldcreatedby { get; private set; }
@@ -1046,19 +886,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILkadoxioformelementuploadfieldmodifiedonbehalfby Lkadoxioformelementuploadfieldmodifiedonbehalfby { get; private set; }
 
         /// <summary>
-        /// Gets the IUseradoxioallowedfileextension.
-        /// </summary>
-        public virtual IUseradoxioallowedfileextension Useradoxioallowedfileextension { get; private set; }
-
-        /// <summary>
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         public virtual IUseradoxioexhibit Useradoxioexhibit { get; private set; }
-
-        /// <summary>
-        /// Gets the IUseradoxiofileextension.
-        /// </summary>
-        public virtual IUseradoxiofileextension Useradoxiofileextension { get; private set; }
 
         /// <summary>
         /// Gets the IUseradoxioformelementuploadfield.
@@ -1076,19 +906,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILegalentitytask Legalentitytask { get; private set; }
 
         /// <summary>
-        /// Gets the ITeamadoxioallowedfileextension.
-        /// </summary>
-        public virtual ITeamadoxioallowedfileextension Teamadoxioallowedfileextension { get; private set; }
-
-        /// <summary>
         /// Gets the ITeamadoxioexhibit.
         /// </summary>
         public virtual ITeamadoxioexhibit Teamadoxioexhibit { get; private set; }
-
-        /// <summary>
-        /// Gets the ITeamadoxiofileextension.
-        /// </summary>
-        public virtual ITeamadoxiofileextension Teamadoxiofileextension { get; private set; }
 
         /// <summary>
         /// Gets the ITeamadoxioformelementuploadfield.
@@ -1379,14 +1199,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Accounts = new Accounts(this);
             Adoxiolicencetypeadoxioinvestigationset = new Adoxiolicencetypeadoxioinvestigationset(this);
             Aliases = new Aliases(this);
-            Allowedfileextensions = new Allowedfileextensions(this);
-            Allowedfileextensionasyncoperations = new Allowedfileextensionasyncoperations(this);
-            Allowedfileextensionbulkdeletefailures = new Allowedfileextensionbulkdeletefailures(this);
-            Allowedfileextensionduplicatebaserecord = new Allowedfileextensionduplicatebaserecord(this);
-            Allowedfileextensionduplicatematchingrecord = new Allowedfileextensionduplicatematchingrecord(this);
-            Allowedfileextensionsyncerrors = new Allowedfileextensionsyncerrors(this);
-            Fileextensionid = new Fileextensionid(this);
-            Formelementuploadid = new Formelementuploadid(this);
             Applicationbpfmvpv2s = new Applicationbpfmvpv2s(this);
             Applicationbpfv3s = new Applicationbpfv3s(this);
             Applicationinvoicehistories = new Applicationinvoicehistories(this);
@@ -1450,16 +1262,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             Exhibitsyncerrors = new Exhibitsyncerrors(this);
             Investigationid = new Investigationid(this);
             Fiainvestigationlogs = new Fiainvestigationlogs(this);
-            Fileextensions = new Fileextensions(this);
-            Fileextensionallowedfileextensions = new Fileextensionallowedfileextensions(this);
-            Fileextensionasyncoperations = new Fileextensionasyncoperations(this);
-            Fileextensionbulkdeletefailures = new Fileextensionbulkdeletefailures(this);
-            Fileextensionduplicatebaserecord = new Fileextensionduplicatebaserecord(this);
-            Fileextensionduplicatematchingrecord = new Fileextensionduplicatematchingrecord(this);
-            Fileextensionsyncerrors = new Fileextensionsyncerrors(this);
             Formelementuploadfields = new Formelementuploadfields(this);
             Applicationtypeid = new Applicationtypeid(this);
-            Formelementuploadfieldallowedextensions = new Formelementuploadfieldallowedextensions(this);
             Formelementuploadfieldasyncoperations = new Formelementuploadfieldasyncoperations(this);
             Formelementuploadfieldbulkdeletefailures = new Formelementuploadfieldbulkdeletefailures(this);
             Formelementuploadfieldduplicatebaserecord = new Formelementuploadfieldduplicatebaserecord(this);
@@ -1501,27 +1305,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             Witnesses = new Witnesses(this);
             Workerinvoicehistories = new Workerinvoicehistories(this);
             Workers = new Workers(this);
-            Regardingobjectidadoxioallowedfileextension = new Regardingobjectidadoxioallowedfileextension(this);
             Regardingobjectidadoxioapplicationlicenseechangesv10 = new Regardingobjectidadoxioapplicationlicenseechangesv10(this);
             Regardingobjectidadoxioapplicationrelocationv1 = new Regardingobjectidadoxioapplicationrelocationv1(this);
             Regardingobjectidadoxioapplicationstructurechangev1 = new Regardingobjectidadoxioapplicationstructurechangev1(this);
             Regardingobjectidadoxioapplicationtransferownershipv1 = new Regardingobjectidadoxioapplicationtransferownershipv1(this);
             Regardingobjectidadoxioexhibit = new Regardingobjectidadoxioexhibit(this);
-            Regardingobjectidadoxiofileextension = new Regardingobjectidadoxiofileextension(this);
             Regardingobjectidadoxioformelementuploadfield = new Regardingobjectidadoxioformelementuploadfield(this);
-            Businessunitadoxioallowedfileextension = new Businessunitadoxioallowedfileextension(this);
             Businessunitadoxioexhibit = new Businessunitadoxioexhibit(this);
-            Businessunitadoxiofileextension = new Businessunitadoxiofileextension(this);
             Businessunitadoxioformelementuploadfield = new Businessunitadoxioformelementuploadfield(this);
             Contacts = new Contacts(this);
             Contacttaskcontact = new Contacttaskcontact(this);
-            Baserecordidadoxioallowedfileextension = new Baserecordidadoxioallowedfileextension(this);
             Baserecordidadoxioexhibit = new Baserecordidadoxioexhibit(this);
-            Baserecordidadoxiofileextension = new Baserecordidadoxiofileextension(this);
             Baserecordidadoxioformelementuploadfield = new Baserecordidadoxioformelementuploadfield(this);
-            Duplicaterecordidadoxioallowedfileextension = new Duplicaterecordidadoxioallowedfileextension(this);
             Duplicaterecordidadoxioexhibit = new Duplicaterecordidadoxioexhibit(this);
-            Duplicaterecordidadoxiofileextension = new Duplicaterecordidadoxiofileextension(this);
             Duplicaterecordidadoxioformelementuploadfield = new Duplicaterecordidadoxioformelementuploadfield(this);
             Entitydefinitions = new Entitydefinitions(this);
             Globaloptionsetdefinitions = new Globaloptionsetdefinitions(this);
@@ -1540,10 +1336,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
-            Lkadoxioallowedfileextensioncreatedby = new Lkadoxioallowedfileextensioncreatedby(this);
-            Lkadoxioallowedfileextensioncreatedonbehalfby = new Lkadoxioallowedfileextensioncreatedonbehalfby(this);
-            Lkadoxioallowedfileextensionmodifiedby = new Lkadoxioallowedfileextensionmodifiedby(this);
-            Lkadoxioallowedfileextensionmodifiedonbehalfby = new Lkadoxioallowedfileextensionmodifiedonbehalfby(this);
             Lkadoxioapplicationlicenseechangesv10createdby = new Lkadoxioapplicationlicenseechangesv10createdby(this);
             Lkadoxioapplicationlicenseechangesv10createdonbehalfby = new Lkadoxioapplicationlicenseechangesv10createdonbehalfby(this);
             Lkadoxioapplicationlicenseechangesv10modifiedby = new Lkadoxioapplicationlicenseechangesv10modifiedby(this);
@@ -1564,23 +1356,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioexhibitcreatedonbehalfby = new Lkadoxioexhibitcreatedonbehalfby(this);
             Lkadoxioexhibitmodifiedby = new Lkadoxioexhibitmodifiedby(this);
             Lkadoxioexhibitmodifiedonbehalfby = new Lkadoxioexhibitmodifiedonbehalfby(this);
-            Lkadoxiofileextensioncreatedby = new Lkadoxiofileextensioncreatedby(this);
-            Lkadoxiofileextensioncreatedonbehalfby = new Lkadoxiofileextensioncreatedonbehalfby(this);
-            Lkadoxiofileextensionmodifiedby = new Lkadoxiofileextensionmodifiedby(this);
-            Lkadoxiofileextensionmodifiedonbehalfby = new Lkadoxiofileextensionmodifiedonbehalfby(this);
             Lkadoxioformelementuploadfieldcreatedby = new Lkadoxioformelementuploadfieldcreatedby(this);
             Lkadoxioformelementuploadfieldcreatedonbehalfby = new Lkadoxioformelementuploadfieldcreatedonbehalfby(this);
             Lkadoxioformelementuploadfieldmodifiedby = new Lkadoxioformelementuploadfieldmodifiedby(this);
             Lkadoxioformelementuploadfieldmodifiedonbehalfby = new Lkadoxioformelementuploadfieldmodifiedonbehalfby(this);
-            Useradoxioallowedfileextension = new Useradoxioallowedfileextension(this);
             Useradoxioexhibit = new Useradoxioexhibit(this);
-            Useradoxiofileextension = new Useradoxiofileextension(this);
             Useradoxioformelementuploadfield = new Useradoxioformelementuploadfield(this);
             Contacttask = new Contacttask(this);
             Legalentitytask = new Legalentitytask(this);
-            Teamadoxioallowedfileextension = new Teamadoxioallowedfileextension(this);
             Teamadoxioexhibit = new Teamadoxioexhibit(this);
-            Teamadoxiofileextension = new Teamadoxiofileextension(this);
             Teamadoxioformelementuploadfield = new Teamadoxioformelementuploadfield(this);
             Asyncoperationidadoxioapplicationlicenseechangesv10 = new Asyncoperationidadoxioapplicationlicenseechangesv10(this);
             Asyncoperationidadoxioapplicationrelocationv1 = new Asyncoperationidadoxioapplicationrelocationv1(this);

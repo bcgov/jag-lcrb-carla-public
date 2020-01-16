@@ -83,10 +83,10 @@
                         {{formField.name}}
                       </div>
                       <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('proposedChange')}"
-                                                 aria-label="Font Style">
-                          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-                          <mat-button-toggle value="No">No</mat-button-toggle>
+                        <mat-button-toggle-group 
+                                                 aria-label="Font Style" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                          
+                          <mat-button-toggle *ngFor="let option of formField.options" value="option.value">{{option.label}}</mat-button-toggle>                          
                         </mat-button-toggle-group>
                       </div>
                     </section>
