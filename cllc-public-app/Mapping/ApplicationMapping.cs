@@ -15,7 +15,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
                 { "adoxio_previouslicenceapplication","previousLicenceApplication" },
                 { "adoxio_previouslicenceapplicationdetails","previousLicenceApplicationDetails" },
                 { "adoxio_ruralagencystoreappointment","ruralAgencyStoreAppointment" },
-                { "adoxio_liquorindustryconnections","LiquorIndustryConnections" },
+                { "adoxio_liquorindustryconnections","liquorIndustryConnections" },
 
                 {"adoxio_name","name" },
                 {"adoxio_establishmentpropsedname","establishmentName" },
