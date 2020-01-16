@@ -1,6 +1,6 @@
 ﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using System;
-
+using System.Linq;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -9,16 +9,65 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class AccountExtensions
     {
+        const string AccountDocumentListTitle = "account";
 
-        /// <summary>
-        /// Copy values from a ViewModel to a Dynamics Account.
-        /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
-        /// updateIfNull defaults to true
-        /// </summary>
-        /// <param name="toDynamics"></param>
-        /// <param name="fromVM"></param>
-        /// <param name="copyIfNull"></param>
-        public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM, Boolean copyIfNull)
+        private static string GetServerRelativeURL(string listTitle, string folderName)
+        {
+            string serverRelativeUrl = Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            return serverRelativeUrl;
+        }
+
+        public static string GetServerUrl(this MicrosoftDynamicsCRMaccount account)
+        {
+            string result = "";
+            // use the account document location if it exists.
+            if (account.AccountSharepointDocumentLocation != null && account.AccountSharepointDocumentLocation.Count > 0)
+            {
+                var location = account.AccountSharepointDocumentLocation.FirstOrDefault();
+                if (location != null)
+                {
+                    if (string.IsNullOrEmpty(location.Relativeurl))
+                    {
+                        if (!string.IsNullOrEmpty(location.Absoluteurl))
+                        {
+                            result = location.Absoluteurl;
+                        }
+                    }
+                    else
+                    {
+                        string serverRelativeUrl = "";
+
+                        serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, location.Relativeurl);
+
+                        result = serverRelativeUrl;
+                    }
+                }
+            }
+            if (string.IsNullOrEmpty(result))
+            {
+                string serverRelativeUrl = "";
+string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
+                string folderName = $"_{accountIdCleaned}";
+
+                serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, folderName);
+
+                result = serverRelativeUrl;
+
+            }
+            return result;
+        }
+
+    
+
+    /// <summary>
+    /// Copy values from a ViewModel to a Dynamics Account.
+    /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
+    /// updateIfNull defaults to true
+    /// </summary>
+    /// <param name="toDynamics"></param>
+    /// <param name="fromVM"></param>
+    /// <param name="copyIfNull"></param>
+    public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM, Boolean copyIfNull)
         {
             if (copyIfNull || (!copyIfNull && fromVM.name != null))
             {

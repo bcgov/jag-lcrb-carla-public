@@ -791,10 +791,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     var templateName = "cannabis_licence";
-                    if (adoxioLicense.AdoxioLicenceType.AdoxioName == "Marketing")
-                    {
-                        templateName = "cannabis_marketer_licence";
+
+                    switch(adoxioLicense.AdoxioLicenceType.AdoxioName) {
+                        case "Marketing":
+                            templateName = "cannabis_marketer_licence";
+                            break;
+                        case "Catering Licence":
+                            templateName = "catering_licence";
+                            break;
+                        case "Wine Store Licence":
+                            templateName ="wine_store_licence";
+                            break;
                     }
+                    
                     byte[] data = await _pdfClient.GetPdf(parameters, templateName);
                     return File(data, "application/pdf", $"{adoxioLicense.AdoxioLicencenumber}.pdf");
                 }
