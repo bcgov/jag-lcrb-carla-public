@@ -75,6 +75,16 @@ export class LegalEntityDataService extends DataService {
   }
 
   /**
+   *  Saves the legal entity change log tree againt and Account
+   * @param changeTree - The root of the change tree (This is the change tree)
+   * @param accountId - The application to associte to the change logs
+   */
+  saveAccountLicenseeChanges(changeTree: LicenseeChangeLog, accountId: string) {
+    return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/account/${accountId}`, changeTree, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
    *  Deletes cancelled change logs
    * @param changes - A list of cancelled change logs
    */
