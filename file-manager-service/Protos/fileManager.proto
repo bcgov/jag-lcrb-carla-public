@@ -9,6 +9,9 @@ package filemanager;
 // The files service definition.
 service FileManager { 
 
+  // Create Folder.  Note that this will only send the create folder command if the folder does not exist.
+  rpc CreateFolder (CreateFolderRequest) returns (CreateFolderReply);
+
   // Delete file
   rpc DeleteFile (DeleteFileRequest) returns (DeleteFileReply);
 
@@ -29,7 +32,16 @@ service FileManager {
 
 }
 
+message CreateFolderRequest {    
+    string entityName = 1;     
+    string folderName = 2;
+}
 
+// collection of files
+message CreateFolderReply {    
+    ResultStatus resultStatus = 1;
+    string errorDetail = 2;
+}
 
 enum ResultStatus {
     Fail = 0;
@@ -41,6 +53,7 @@ enum FileExistStatus {
     NotExist = 1;
     Exist = 2;
 }
+
 
 message DeleteFileRequest {
     string serverRelativeUrl = 1;

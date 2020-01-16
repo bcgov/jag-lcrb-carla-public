@@ -6,7 +6,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Gov.Lclb.Cllb.OneStopService
+namespace Gov.Lclb.Cllb.OrgbookService
 {
     public class VonAgentClient
     {
