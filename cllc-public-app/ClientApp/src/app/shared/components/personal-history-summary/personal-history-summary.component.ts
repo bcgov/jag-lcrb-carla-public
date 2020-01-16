@@ -13,7 +13,6 @@ import { takeWhile, filter } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
-import { LicenseeTreeComponent } from '../licensee-tree/licensee-tree.component';
 
 @Component({
   selector: 'app-personal-history-summary',
@@ -23,6 +22,7 @@ import { LicenseeTreeComponent } from '../licensee-tree/licensee-tree.component'
 export class PersonalHistorySummaryComponent extends FormBase implements OnInit {
   @Input() personalHistoryItems: LicenseeChangeLog[] = [];
   @Input() rootNode: LicenseeChangeLog;
+  @Input() account: Account;
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
   businessType: string = 'Society';
@@ -52,10 +52,38 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
 
   addAssociate() {
     const associate = new LicenseeChangeLog();
-    associate.edit = true;
     associate.changeType = `add${this.changeTypeSuffix}`;
+    associate.parentLinceseeChangeLog = this.rootNode;
+    associate.edit = true;
     this.childAdded.emit(associate);
 
+  }
+
+  deleteChange(node: LicenseeChangeLog) {
+    node.businessNameNew = node.nameOld;
+    node.isDirectorNew = node.isDirectorOld;
+    node.isManagerNew = node.isManagerOld;
+    node.isOfficerNew = node.isOfficerOld;
+    node.isShareholderNew = node.isShareholderOld;
+    node.isTrusteeNew = node.isTrusteeOld;
+    node.numberofSharesNew = node.numberofSharesOld;
+    node.totalSharesNew = node.totalSharesOld;
+    node.emailNew = node.emailOld;
+    node.firstNameNew = node.firstNameOld;
+    node.lastNameNew = node.lastNameOld;
+    node.businessNameNew = node.businessNameOld;
+    node.dateofBirthNew = node.dateofBirthOld;
+    node.titleNew = node.titleOld;
+
+    if (!node.id && !node.legalEntityId) {
+      const index = node.parentLinceseeChangeLog.children.indexOf(node);
+      node.parentLinceseeChangeLog.children.splice(index, 1);
+    } else if (node.id && !node.legalEntityId) {
+      node.changeType = 'unchanged';
+    } else if (!node.isRoot && node.legalEntityId) {
+      node.changeType = 'deleted';
+
+    }
   }
 
   showPosition(): boolean {
