@@ -107,13 +107,13 @@
     </section>
   </ng-container>
 
-  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Society'">
   </ng-container>
 
-  <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
+  <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
     <h3 class="plain-header">Identify Shareholders</h3>
     <h4 class="plain-header">Individual Shareholders</h4>
     <section class="padded-section">
