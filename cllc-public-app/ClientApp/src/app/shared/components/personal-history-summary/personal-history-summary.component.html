@@ -35,9 +35,7 @@
             </li>
         </ul>
     </section> -->
-    <button class="btn btn-primary" (click)="addAssociate()">
-        <i class="fas fa-plus"></i>
-        {{addLabel}}</button>
+
 
     <table class="eq-table" style="margin-top: 10px;">
         <ng-container *ngIf="changeTypeSuffix === 'Leadership'">
@@ -142,7 +140,7 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
+                        <button *ngIf="!item.edit" class="btn btn-secondary" (click)="item.edit = true">
                             <i class="fas fa-pencil-alt"></i>&nbsp;Edit
                         </button>
                         <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
@@ -208,4 +206,7 @@
             </ng-container>
         </ng-container>
     </table>
+    <button class="btn btn-secondary" (click)="addAssociate()">
+            <i class="fas fa-plus"></i>
+            {{addLabel}}</button>
 </div>
