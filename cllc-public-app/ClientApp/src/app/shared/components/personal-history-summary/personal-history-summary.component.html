@@ -89,11 +89,11 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
-                            <i class="fas fa-pencil-alt"></i>&nbsp;Edit
-                        </button>
-                        <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
-                        <button class="btn btn-secondary" (click)="deleteChange(item)">Delete</button>
+                        <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
+                            class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false;"
+                            style="margin-right: 10px; color: green;"></i>
+                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style="color: red;"></i>
                     </td>
 
                 </tr>
@@ -140,11 +140,11 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
-                            <i class="fas fa-pencil-alt"></i>&nbsp;Edit
-                        </button>
-                        <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
-                        <button class="btn btn-secondary" (click)="deleteChange(item)">Delete</button>
+                        <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
+                            class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false;"
+                            style="margin-right: 10px; color: green;"></i>
+                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style="color: red;"></i>
                     </td>
                 </tr>
             </ng-container>
@@ -164,6 +164,10 @@
 
                 <tr [ngClass]="{'alt-row': i%2 === 0}">
                     <td>
+                        <i class="fas fa-plus" *ngIf="item.collapse && !item.edit" (click)="item.collapse = false;"
+                            style="margin-right: 10px;"></i>
+                        <i class="fas fa-minus" *ngIf="!item.collapse && !item.edit" (click)="item.collapse = true;"
+                            style="margin-right: 10px;"></i>
                         <span *ngIf="!item.edit">{{item.businessNameNew}}</span>
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.businessNameNew">
                     </td>
@@ -188,15 +192,15 @@
                     <td></td>
                     <td></td>
                     <td>
-                        <button *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true">
-                            <i class="fas fa-pencil-alt"></i>&nbsp;Edit
-                        </button>
-                        <button *ngIf="item.edit" class="btn btn-secondary" (click)="item.edit = false">Update</button>
-                        <button class="btn btn-secondary" (click)="deleteChange(item)">Delete</button>
+                        <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true; item.collapse = true;"
+                            class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false; item.collapse = false;"
+                            style="margin-right: 10px; color: green;"></i>
+                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style="color: red;"></i>
                     </td>
 
                 </tr>
-                <tr>
+                <tr *ngIf="!item.collapse;">
                     <td colspan="10" style="background-color: transparent;">
                         <app-org-structure [node]="item" [account]="account"></app-org-structure>
                     </td>
