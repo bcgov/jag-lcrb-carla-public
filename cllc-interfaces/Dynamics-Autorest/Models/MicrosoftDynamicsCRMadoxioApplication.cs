@@ -41,8 +41,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Refactoring 1.17.2019</param>
         /// <param name="_owningbusinessunitValue">Unique identifier for the
         /// business unit that owns the record</param>
-        /// <param name="adoxioChecklistfloorplanreceived">BPF Refactoring
-        /// 1.17.2019</param>
+        /// <param name="adoxioServicehourspatronparticipation">Patron
+        /// Participation Entertainment - dancing, karaoke or other types of
+        /// entertainment that involve patron participation in the
+        /// service area</param>
         /// <param name="adoxioEstablishmentparcelid">The PID is a nine-digit
         /// number permanently assigned to a parcel of land.
         /// • The legal description and PID may be found on a Land Title
@@ -57,6 +59,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="adoxioAppchecklistvalidinterestreceived">Tied to the
         /// Revised WFs?</param>
         /// <param name="adoxioChecklistaipdecision">BPF Refactoring
+        /// 1.17.2019</param>
+        /// <param name="adoxioChecklistverifybusinessprofile">BPF Refactoring
         /// 1.17.2019</param>
         /// <param name="adoxioChecklistresolutionassessment">BPF Refactoring
         /// 1.17.2019</param>
@@ -80,8 +84,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 1.17.2019</param>
         /// <param name="adoxioChecklistsenttolgin">BPF Refactoring
         /// 1.17.2019</param>
-        /// <param name="adoxioChecklistverifybusinessprofile">BPF Refactoring
-        /// 1.17.2019</param>
         /// <param name="versionnumber">Version Number</param>
         /// <param name="overriddencreatedon">Date and time that the record was
         /// migrated.</param>
@@ -90,15 +92,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// record was on hold</param>
         /// <param name="adoxioChecklistphotosreceived">BPF Refactoring
         /// 1.17.2019</param>
+        /// <param name="adoxioChecklistfloorplanassessed">BPF Refactoring
+        /// 1.17.2019</param>
         /// <param name="adoxioInspectionchecklistdate">Used to store the date
         /// that the Inspector conducted the checklist and the notes were added
         /// to the parent application. Applicable only for AIP
         /// inspections.</param>
         /// <param name="_slainvokedidValue">For internal use only.</param>
-        /// <param name="adoxioServicehourspatronparticipation">Patron
-        /// Participation Entertainment - dancing, karaoke or other types of
-        /// entertainment that involve patron participation in the
-        /// service area</param>
         /// <param name="adoxioChecklistfloorplanlined">BPF Refactoring
         /// 1.17.2019</param>
         /// <param name="_modifiedbyValue">Unique identifier of the user who
@@ -142,8 +142,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Application Type associated with Application.</param>
         /// <param name="adoxioChecklistfloorplanapproved">BPF Refactoring
         /// 1.17.2019</param>
-        /// <param name="adoxioChecklistfloorplanassessed">BPF Refactoring
-        /// 1.17.2019</param>
         /// <param name="adoxioChecklistsitemapreceived">BPF Refactoring
         /// 1.17.2019</param>
         /// <param name="adoxioChecklistbrandingassessed">BPF Refactoring
@@ -152,8 +150,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 1.17.2019</param>
         /// <param name="adoxioChecklistlicencefeepaid">BPF Refactoring
         /// 1.17.2019</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
+        /// <param name="adoxioChecklistfloorplanreceived">BPF Refactoring
+        /// 1.17.2019</param>
         /// <param name="adoxioEstablishmentdeclarationoption3">At the time the
         /// licence is issued, the applicant will be:
         /// The owner of the place or premises that forms the establishment, or
@@ -165,7 +163,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// 1.17.2019</param>
         /// <param name="utcconversiontimezonecode">Time zone code that was in
         /// use when the record was created.</param>
-        public MicrosoftDynamicsCRMadoxioApplication(string adoxioNameofapplicant = default(string), int? adoxioChecklistfinintegrityreceived = default(int?), int? adoxioEstablishmentdeclarationoption2 = default(int?), int? adoxioChecklistinspectionresultsassessed = default(int?), string _owningbusinessunitValue = default(string), int? adoxioServicehourstuesdayclose = default(int?), int? adoxioServicehoursfridayclose = default(int?), int? adoxioChecklistlicencecapassessedfinal = default(int?), int? adoxioChecklistfloorplanreceived = default(int?), string adoxioInspectorsnotes = default(string), int? adoxioChecklistunreportedsaleofbusiness = default(int?), string adoxioEstablishmentaddressstreet = default(string), int? adoxioChecklistfloorplanassess = default(int?), int? adoxioServicehoursmondayclose = default(int?), string adoxioEstablishmentotherbusinessnature = default(string), string adoxioEstablishmentparcelid = default(string), int? adoxioAiptype = default(int?), bool? adoxioEstablishmentlayoutsubmitfloorplans = default(bool?), string _modifiedonbehalfbyValue = default(string), string adoxioOtherbusinesssamelocationdetails = default(string), int? adoxioAppchecklistvalidinterestreceived = default(int?), int? adoxioChecklistaipdecision = default(int?), int? adoxioChecklistestabrenderingsassessed = default(int?), bool? adoxioEstablishmentlayoutapplyingforpatio = default(bool?), bool? adoxioTriggertogeneratesecurityclearance = default(bool?), int? adoxioChecklistresolutionassessment = default(int?), string traversedpath = default(string), int? adoxioChecklistfinaldecisionlettersent = default(int?), int? adoxioLginresolutionresult = default(int?), bool? adoxioEstablishment = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioFiaconclusioncomments = default(string), int? adoxioRenewaloutstandingfines = default(int?), string adoxioSharepointanchorforcommunicationtab = default(string), string adoxioDescription3 = default(string), int? adoxioFileuploadedfromportal = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string processid = default(string), int? statecode = default(int?), string adoxioSecurityscreeningcompleteness = default(string), bool? adoxioInspectioncomplete = default(bool?), int? adoxioChecklistassociatesfireceived = default(int?), int? adoxioInvestigationstatus = default(int?), int? adoxioChecklistlicencehistorycheck = default(int?), int? adoxioChecklistvalidinterestreceived = default(int?), int? adoxioOccupationcapacity = default(int?), int? adoxioChecklistorgstructure = default(int?), int? adoxioBrandingnameresult = default(int?), int? adoxioValidinterestfinalstatus = default(int?), int? adoxioChecklistlebuilt = default(int?), int? adoxioTiedhouseresult = default(int?), int? importsequencenumber = default(int?), string adoxioPersonalhistoryinstructionfield = default(string), int? adoxioUploadedsitemap = default(int?), int? adoxioRenewalconcluded = default(int?), int? adoxioChecklistphotosassessed = default(int?), int? adoxioUploadedevidenceofvalidinterest = default(int?), int? adoxioChecklistestablishmentrenderings = default(int?), bool? adoxioIsreadyretailarea = default(bool?), bool? adoxioEstablishmentalreadyopen = default(bool?), string adoxioEstablishmentaddresscountry = default(string), string adoxioDateaipexpiredlongdatestring = default(string), int? adoxioLiquorindustryconnections = default(int?), string adoxioDescription1 = default(string), int? adoxioApplicanttype = default(int?), string adoxioPreviouslicenceapplicationdetails = default(string), int? adoxioRenewalvalidinterest = default(int?), int? adoxioServicehourssaturdayopen = default(int?), string _adoxioInspectorValue = default(string), bool? adoxioIsreadylockedstorage = default(bool?), System.DateTimeOffset? adoxioDatelicencecapassessed = default(System.DateTimeOffset?), int? adoxioChecklistsignageexamples = default(int?), int? adoxioChecklistsenttolgin = default(int?), int? adoxioChecklistverifybusinessprofile = default(int?), string adoxioRole = default(string), bool? adoxioServicehoursstandardhours = default(bool?), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDatesentspd = default(System.DateTimeOffset?), string adoxioSignaturename = default(string), int? adoxioServicehourssaturdayclose = default(int?), System.DateTimeOffset? adoxioDatelicencecapassessedfinal = default(System.DateTimeOffset?), string adoxioDateaiplongdatestring = default(string), string adoxioBusinessnumber = default(string), string adoxioRefusedreason = default(string), int? adoxioPolicedecision = default(int?), System.DateTimeOffset? adoxioDatesecurityscreeningcompletenessassessed = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioFinalcapassessmentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDateinspectioncomplete = default(System.DateTimeOffset?), int? adoxioFinalcapassessmenttrigger = default(int?), int? adoxioFinaldecision = default(int?), string adoxioName = default(string), int? adoxioChecklistassociatescontacted = default(int?), string adoxioFinalcapassessment = default(string), string adoxioEstablishmentpropsedname = default(string), string _adoxioRegionValue = default(string), int? adoxioChecklistshareholdersbuilt = default(int?), int? adoxioEstablishmentproposalneedsmailsent = default(int?), int? adoxioChecklistfinancialdocuments = default(int?), string adoxioAddressstreet = default(string), int? adoxioChecklistorgleadershipbuilt = default(int?), int? adoxioLicencefeeinvoicetrigger = default(int?), bool? adoxioEstablishmenthasstandalonepatio = default(bool?), int? onholdtime = default(int?), System.DateTimeOffset? adoxioDatereceivedspd = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDatesentlgin = default(System.DateTimeOffset?), int? adoxioRenewalbusinesstype = default(int?), string adoxioPhone = default(string), int? adoxioChecklistkeypersonnelbuilt = default(int?), int? adoxioChecklistphotosreceived = default(int?), string _adoxioSlaValue = default(string), System.DateTimeOffset? adoxioDatesentinvestigations = default(System.DateTimeOffset?), string adoxioAddresscity = default(string), System.DateTimeOffset? adoxioDateaipdecisionlettersent = default(System.DateTimeOffset?), string adoxioLiquorindustryconnectionsdetails = default(string), bool? adoxioIsreadyvalidinterest = default(bool?), System.DateTimeOffset? adoxioInspectionchecklistdate = default(System.DateTimeOffset?), bool? adoxioFitandpropercomplete = default(bool?), System.DateTimeOffset? adoxioInitialcapassessmentdate = default(System.DateTimeOffset?), int? adoxioChecklistsuitabilitylettersent = default(int?), int? adoxioChecklistfinancialcheckpassed = default(int?), bool? adoxioPaymentrecieved = default(bool?), int? adoxioChecklistdecisionlettersentaip = default(int?), int? adoxioChecklisttiedhouseassess = default(int?), string adoxioSharepointanchorforpersonalhistory = default(string), int? adoxioChecklistzoningaip = default(int?), int? adoxioUploadedimageofestablishment = default(int?), int? adoxioEstablishmentcomplytozoningregulations = default(int?), string adoxioEstablishmentaddress = default(string), System.DateTimeOffset? adoxioSecurityclearancegenerateddate = default(System.DateTimeOffset?), string adoxioJobnumber = default(string), int? adoxioRenewalsitemap = default(int?), bool? adoxioEstablishmentotheroption1 = default(bool?), bool? adoxioEstablishmentotheroption2 = default(bool?), int? adoxioUploadeddriversabstract = default(int?), int? adoxioLocalgovermentfirstnationdecision = default(int?), int? adoxioHoldsotherlicencesoptionset = default(int?), string _slainvokedidValue = default(string), int? adoxioServicehourswednesdayopen = default(int?), int? adoxioChecklistfloorplanlinedaip = default(int?), string _adoxioLicenceestablishmentValue = default(string), int? adoxioServicehourswednesdayclose = default(int?), int? adoxioAreyouthemaincontactforapplication = default(int?), bool? adoxioServicehourspatronparticipation = default(bool?), int? adoxioRenewaltiedhousefederalinterest = default(int?), int? adoxioChecklistfloorplanlined = default(int?), string adoxioBusinessinfoemail = default(string), string _modifiedbyValue = default(string), string adoxioInitialcapassessment = default(string), string adoxioSignatureposition = default(string), int? adoxioChecklistaipdecisionmade = default(int?), int? adoxioChecklistmarketcapacity = default(int?), string _adoxioLicencetypeValue = default(string), System.DateTimeOffset? adoxioDateassignedtosla = default(System.DateTimeOffset?), string _slaidValue = default(string), int? adoxioInvoicetrigger = default(int?), int? adoxioAppchecklistlicencefeecollected = default(int?), int? adoxioChecklislginresolutionassess = default(int?), string adoxioEstablishmentemail = default(string), int? adoxioAreyouthemaincontactafterlicensing = default(int?), string adoxioAdditionalpropertyinformation = default(string), int? adoxioChecklistassociateformreceived = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), int? adoxioRegisteredestablishment = default(int?), System.DateTimeOffset? adoxioInspectiondate = default(System.DateTimeOffset?), int? adoxioServicehourstuesdayopen = default(int?), int? adoxioAppchecklistinspectionresults = default(int?), bool? adoxioIsreadystorage = default(bool?), string _adoxioCasemanagersupervisorValue = default(string), System.DateTimeOffset? adoxioDatefirstyearpaymentreceived = default(System.DateTimeOffset?), bool? adoxioIsreadylockedcases = default(bool?), string adoxioEstablishmentotherbusinessname = default(string), System.DateTimeOffset? adoxioEstablishmentopeningdate = default(System.DateTimeOffset?), string adoxioContactpersonfirstname = default(string), int? adoxioChecklistvalidinterestassess = default(int?), int? adoxioServicehoursmondayopen = default(int?), int? adoxioUploadedfloorplans = default(int?), string _adoxioApplyingpersonValue = default(string), string _createdonbehalfbyValue = default(string), string adoxioFederalproducernames = default(string), string _adoxioPolicejurisdictionidValue = default(string), int? adoxioServicehourssundayclose = default(int?), int? adoxioServicehoursthursdayopen = default(int?), int? adoxioRuralagencystoreappointment = default(int?), string _createdbyValue = default(string), string _stageidValue = default(string), bool? adoxioSignatureagreement = default(bool?), int? adoxioFloorplanresult = default(int?), string _owninguserValue = default(string), bool? adoxioLicencefeeinvoicepaid = default(bool?), string adoxioOtherapplicanttype = default(string), string _adoxioLocalgovindigenousnationidValue = default(string), int? adoxioIsapplicationcomplete = default(int?), int? adoxioServicehourssundayopen = default(int?), int? adoxioAppchecklistchangesapplied = default(int?), System.DateTimeOffset? adoxioSignaturedate = default(System.DateTimeOffset?), int? adoxioProgressstatus = default(int?), int? adoxioChecklisttiedhouseassessed = default(int?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), int? adoxioRenewalzoning = default(int?), System.DateTimeOffset? adoxioDatelicenceapproved = default(System.DateTimeOffset?), bool? adoxioIsreadydisplays = default(bool?), bool? adoxioIsreadyfirealarm = default(bool?), bool? adoxioIsreadyentranceexit = default(bool?), int? adoxioChecklistfinaldecisionmade = default(int?), int? adoxioValidinterestinitialstatus = default(int?), int? adoxioChecklistsignageassessed = default(int?), int? adoxioChecklistverifyapplication = default(int?), int? adoxioEstablishmentdeclarationoption1 = default(int?), int? adoxioAppchecklistfinaldecision = default(int?), string adoxioPaymentanchorfield = default(string), System.DateTimeOffset? adoxioDateappealed = default(System.DateTimeOffset?), int? adoxioChecklistspdconsentreceived = default(int?), string adoxioApplicationid = default(string), int? adoxioCheckinspectionstatus = default(int?), bool? adoxioIsreadynamebranding = default(bool?), int? adoxioChecklistvalidinterestfinalassessed = default(int?), string _adoxioLicencefeeinvoiceValue = default(string), string _owneridValue = default(string), string _adoxioAreaValue = default(string), string _adoxioAssignedlicenceValue = default(string), int? adoxioIsoninland = default(int?), System.DateTimeOffset? adoxioDaterefused = default(System.DateTimeOffset?), string adoxioEmail = default(string), int? adoxioRenewalkeypersonnel = default(int?), int? adoxioChecklistnoticeofarcticlesreceived = default(int?), int? adoxioChecklistspdapproved = default(int?), int? adoxioAppchecklistpaymentreceived = default(int?), int? adoxioAppchecklistvalidinterestreceivedfinal = default(int?), System.DateTimeOffset? adoxioDateaip = default(System.DateTimeOffset?), bool? adoxioIsreadysurveillancenotice = default(bool?), int? adoxioChecklistverifypostalcode = default(int?), int? adoxioChecklistsitemapassess = default(int?), string adoxioEstablishmentaddresspostalcode = default(string), int? adoxioSitemapresult = default(int?), int? adoxioChecklistbrandingassess = default(int?), string _adoxioApplicationtypeidValue = default(string), int? adoxioChecklistverifypidpin = default(int?), int? adoxioChecklistfloorplanapproved = default(int?), int? adoxioChecklistfinalreviewcomplete = default(int?), string adoxioContactpersonfullname = default(string), int? adoxioRenewalshareholders = default(int?), string adoxioTerminatereason = default(string), int? adoxioChecklistfloorplanassessed = default(int?), System.DateTimeOffset? adoxioDatereceivedinvestigations = default(System.DateTimeOffset?), string _adoxioApplicantValue = default(string), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), bool? adoxioEstablishmentlocatedatwinery = default(bool?), int? adoxioRenewalbranding = default(int?), int? adoxioChecklistsitemapreceived = default(int?), System.DateTimeOffset? adoxioDateaipexpired = default(System.DateTimeOffset?), int? adoxioChecklistlginapproval = default(int?), int? adoxioRenewalorgleadership = default(int?), System.DateTimeOffset? adoxioDatereceivedlgin = default(System.DateTimeOffset?), int? adoxioSecurityscreeningcompletenesstrigger = default(int?), string adoxioContactmiddlename = default(string), int? adoxioOtherbusinessesatthesamelocation = default(int?), int? adoxioChecklistbrandingassessed = default(int?), int? adoxioChecklistnoticeofarticles = default(int?), string adoxioAddresscountry = default(string), System.DateTimeOffset? adoxioLicenceexpiry = default(System.DateTimeOffset?), int? adoxioChecklistsecurityclearancestatus = default(int?), int? adoxioChecklistestablishmentaddressassessed = default(int?), int? adoxioInitialcapassessmenttrigger = default(int?), int? adoxioChecklistassociatesconsentreceived = default(int?), int? adoxioChecklistsitemapassessed = default(int?), int? adoxioChecklistlicencefeepaid = default(int?), bool? adoxioAuthorizedtosubmit = default(bool?), string _owningteamValue = default(string), bool? adoxioIsreadyperimeter = default(bool?), int? adoxioRenewalunreportedsaleofbusiness = default(int?), int? adoxioChecklistsecuritiesregister = default(int?), string adoxioInvestigationstatuscomment = default(string), int? adoxioPaymentmethod = default(int?), int? adoxioRenewaltiedhouse = default(int?), System.DateTimeOffset? adoxioInspectionscheduleddate = default(System.DateTimeOffset?), bool? adoxioEstablishmentlocatedatfirstnationland = default(bool?), bool? adoxioIsreadyproductnotvisibleoutside = default(bool?), int? adoxioRenewalsignage = default(int?), string adoxioPin = default(string), int? adoxioRenewalfloorplan = default(int?), string adoxioAddressprovince = default(string), int? adoxioUploadedlegalentitystructure = default(int?), int? adoxioAppchecklistinspectionreviewcomplete = default(int?), string _adoxioInvoiceValue = default(string), System.DateTimeOffset? adoxioDatefileuploadfromportalnotified = default(System.DateTimeOffset?), string adoxioBusinessstructureinstructionfield = default(string), int? adoxioChecklistassociateslist = default(int?), bool? adoxioIsreadyworkers = default(bool?), string adoxioDescription2 = default(string), int? adoxioEstablishmentdeclarationoption3 = default(int?), int? adoxioChecklisttermsconditionsadded = default(int?), int? adoxioRenewalcriminaloffencecheck = default(int?), bool? adoxioIsreadyintruderalarm = default(bool?), int? adoxioRenewalestablishmentaddress = default(int?), int? adoxioChecklistsecuritiesregisterreceived = default(int?), int? adoxioChecklistsenttospd = default(int?), int? adoxioOccupationload = default(int?), int? adoxioServicehoursfridayopen = default(int?), int? adoxioFitandproperstatus = default(int?), int? adoxioServicehoursthursdayclose = default(int?), int? adoxioChecklistlgindefined = default(int?), int? adoxioHastiedhouseassociations = default(int?), int? adoxioChecklistvalidmailingaddress = default(int?), int? adoxioEstablishmentcomplytoallbylaws = default(int?), int? adoxioChecklistvalidinterestassessed = default(int?), string adoxioContactpersonphone = default(string), bool? adoxioCasemanagerassigned = default(bool?), string adoxioEstablishmentphone = default(string), string adoxioEstablishmentaddresscity = default(string), int? utcconversiontimezonecode = default(int?), string adoxioContactpersonlastname = default(string), int? adoxioPreviouslicenceapplication = default(int?), int? adoxioOnlinedocumentupload = default(int?), int? adoxioFloorplanresultfinal = default(int?), string adoxioContactpersonname = default(string), int? adoxioChecklistsentforfisla = default(int?), int? adoxioChecklistvalidestablishmentaddress = default(int?), string adoxioAddresspostalcode = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioApplicationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioApplicationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioApplicationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioApplicationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioApplicationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioApplicationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioApplicationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioApplicationTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioApplicationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioApplicationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioApplicationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivityparty> adoxioApplicationActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioApplicationSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> adoxioApplicationQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioApplicationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMknowledgebaserecord> adoxioApplicationKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgearticle> msdynAdoxioApplicationKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedid = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMslakpiinstance> adoxioApplicationSLAKPIInstances = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMaccount adoxioApplicant = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioApplicationAdoxioInvestigationApplication = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioApplicationAdoxioLegalentityRelatedApplication = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioAdoxioApplicationAdoxioPersonalhistory = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> adoxioAdoxioApplicationAdoxioTiedhouseasso = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioApplicationContact = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioApplicationIncidentApplication = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioEstablishment adoxioLicenceEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioAssignedLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> adoxioApplicationAdoxioApplicationinvoicehistoryApplication = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioApplicationAdoxioTiedhouseconnectionApplication = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> adoxioApplicationCorporatehistorysummaries = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMcontact adoxioApplyingPerson = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMinvoice adoxioLicenceFeeInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLocalgovindigenousnationid = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPoliceJurisdictionId = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), MicrosoftDynamicsCRMslakpiinstance adoxioSLA = default(MicrosoftDynamicsCRMslakpiinstance), MicrosoftDynamicsCRMsystemuser adoxioCaseManagerSupervisor = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> bpfAdoxioApplicationAdoxioApplicationbpfmvpv2 = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioApplicationDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> bpfAdoxioApplicationAdoxioApplicationbpfv3 = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioLicenseechangelogApplication = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10> bpfAdoxioApplicationAdoxioApplicationlicenseechangesv10 = default(IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10>), IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1> bpfAdoxioApplicationAdoxioApplicationrelocationv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1>), IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1> bpfAdoxioApplicationAdoxioApplicationstructurechangev1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1>), IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1> bpfAdoxioApplicationAdoxioApplicationtransferownershipv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1>))
+        /// <param name="_owningteamValue">Unique identifier for the team that
+        /// owns the record.</param>
+        public MicrosoftDynamicsCRMadoxioApplication(string adoxioNameofapplicant = default(string), int? adoxioChecklistfinintegrityreceived = default(int?), int? adoxioEstablishmentdeclarationoption2 = default(int?), int? adoxioChecklistinspectionresultsassessed = default(int?), string _owningbusinessunitValue = default(string), int? adoxioServicehourstuesdayclose = default(int?), int? adoxioServicehoursfridayclose = default(int?), int? adoxioChecklistlicencecapassessedfinal = default(int?), bool? adoxioServicehourspatronparticipation = default(bool?), string adoxioInspectorsnotes = default(string), int? adoxioChecklistunreportedsaleofbusiness = default(int?), int? adoxioEstablishmentcomplytozoningregulations = default(int?), string adoxioEstablishmentaddressstreet = default(string), int? adoxioChecklistfloorplanassess = default(int?), int? adoxioServicehoursmondayclose = default(int?), string adoxioEstablishmentotherbusinessnature = default(string), string adoxioEstablishmentparcelid = default(string), int? adoxioAiptype = default(int?), bool? adoxioEstablishmentlayoutsubmitfloorplans = default(bool?), int? adoxioChecklistcorporatedocsreceived = default(int?), string _modifiedonbehalfbyValue = default(string), string adoxioOtherbusinesssamelocationdetails = default(string), int? adoxioAppchecklistvalidinterestreceived = default(int?), int? adoxioChecklistaipdecision = default(int?), int? adoxioChecklistestabrenderingsassessed = default(int?), bool? adoxioEstablishmentlayoutapplyingforpatio = default(bool?), int? adoxioChecklistverifybusinessprofile = default(int?), int? adoxioChecklistresolutionassessment = default(int?), string traversedpath = default(string), int? adoxioChecklistfinaldecisionlettersent = default(int?), int? adoxioLginresolutionresult = default(int?), bool? adoxioEstablishment = default(bool?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioFiaconclusioncomments = default(string), int? adoxioRenewaloutstandingfines = default(int?), string adoxioSharepointanchorforcommunicationtab = default(string), string adoxioDescription3 = default(string), int? adoxioFileuploadedfromportal = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string processid = default(string), int? statecode = default(int?), string adoxioSecurityscreeningcompleteness = default(string), bool? adoxioInspectioncomplete = default(bool?), int? adoxioChecklistassociatesfireceived = default(int?), int? adoxioChecklistpersonalhistoryreceived = default(int?), int? adoxioInvestigationstatus = default(int?), int? adoxioChecklistlicencehistorycheck = default(int?), int? adoxioChecklistvalidinterestreceived = default(int?), int? adoxioChecklistcriminalrecordsassessed = default(int?), int? adoxioOccupationcapacity = default(int?), int? adoxioChecklistorgstructure = default(int?), int? adoxioBrandingnameresult = default(int?), int? adoxioValidinterestfinalstatus = default(int?), int? adoxioChecklistlebuilt = default(int?), int? adoxioTiedhouseresult = default(int?), int? importsequencenumber = default(int?), string adoxioPersonalhistoryinstructionfield = default(string), int? adoxioUploadedsitemap = default(int?), int? adoxioRenewalconcluded = default(int?), int? adoxioChecklistphotosassessed = default(int?), int? adoxioUploadedevidenceofvalidinterest = default(int?), int? adoxioChecklistestablishmentrenderings = default(int?), bool? adoxioIsreadyretailarea = default(bool?), bool? adoxioEstablishmentalreadyopen = default(bool?), string adoxioEstablishmentaddresscountry = default(string), System.DateTimeOffset? adoxioDateaipdecisionlettersent = default(System.DateTimeOffset?), string adoxioDateaipexpiredlongdatestring = default(string), string _adoxioLicencefeeinvoiceValue = default(string), int? adoxioLiquorindustryconnections = default(int?), string adoxioDescription1 = default(string), int? adoxioApplicanttype = default(int?), string adoxioPreviouslicenceapplicationdetails = default(string), int? adoxioRenewalvalidinterest = default(int?), int? adoxioServicehourssaturdayopen = default(int?), string _adoxioInspectorValue = default(string), bool? adoxioIsreadylockedstorage = default(bool?), System.DateTimeOffset? adoxioDatelicencecapassessed = default(System.DateTimeOffset?), int? adoxioChecklistsignageexamples = default(int?), int? adoxioChecklistsenttolgin = default(int?), string adoxioRole = default(string), string versionnumber = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDatesentspd = default(System.DateTimeOffset?), string adoxioSignaturename = default(string), int? adoxioServicehourssaturdayclose = default(int?), System.DateTimeOffset? adoxioDatelicencecapassessedfinal = default(System.DateTimeOffset?), string adoxioDateaiplongdatestring = default(string), string adoxioBusinessnumber = default(string), int? adoxioCriminalrecordsresult = default(int?), int? adoxioPolicedecision = default(int?), System.DateTimeOffset? adoxioDatesecurityscreeningcompletenessassessed = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioFinalcapassessmentdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDateinspectioncomplete = default(System.DateTimeOffset?), int? adoxioFinalcapassessmenttrigger = default(int?), string adoxioName = default(string), int? adoxioChecklistassociatescontacted = default(int?), string adoxioEstablishmentpropsedname = default(string), string _adoxioRegionValue = default(string), int? adoxioChecklistshareholdersbuilt = default(int?), int? adoxioEstablishmentproposalneedsmailsent = default(int?), int? adoxioChecklistfinancialdocuments = default(int?), string adoxioAddressstreet = default(string), int? adoxioChecklistorgleadershipbuilt = default(int?), int? adoxioLicencefeeinvoicetrigger = default(int?), bool? adoxioEstablishmenthasstandalonepatio = default(bool?), int? onholdtime = default(int?), System.DateTimeOffset? adoxioDatereceivedspd = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioDatesentlgin = default(System.DateTimeOffset?), int? adoxioRenewalbusinesstype = default(int?), string adoxioPhone = default(string), int? adoxioChecklistphotosreceived = default(int?), string _adoxioSlaValue = default(string), System.DateTimeOffset? adoxioDatesentinvestigations = default(System.DateTimeOffset?), string adoxioAddresscity = default(string), int? adoxioChecklistfloorplanassessed = default(int?), string adoxioLiquorindustryconnectionsdetails = default(string), bool? adoxioTriggertogeneratesecurityclearance = default(bool?), bool? adoxioIsreadyvalidinterest = default(bool?), System.DateTimeOffset? adoxioInspectionchecklistdate = default(System.DateTimeOffset?), string adoxioSharepointanchorforpersonalhistory = default(string), System.DateTimeOffset? adoxioInitialcapassessmentdate = default(System.DateTimeOffset?), int? adoxioChecklistsuitabilitylettersent = default(int?), int? adoxioChecklistfinancialcheckpassed = default(int?), System.DateTimeOffset? adoxioDatelicenceapproved = default(System.DateTimeOffset?), bool? adoxioPaymentrecieved = default(bool?), int? adoxioChecklistdecisionlettersentaip = default(int?), int? adoxioChecklisttiedhouseassess = default(int?), string adoxioContactpersonfullname = default(string), int? adoxioChecklistzoningaip = default(int?), int? adoxioUploadedimageofestablishment = default(int?), int? adoxioChecklistsentforfisla = default(int?), string adoxioEstablishmentaddress = default(string), bool? adoxioFitandpropercomplete = default(bool?), string adoxioJobnumber = default(string), int? adoxioRenewalsitemap = default(int?), bool? adoxioEstablishmentotheroption1 = default(bool?), bool? adoxioEstablishmentotheroption2 = default(bool?), int? adoxioUploadeddriversabstract = default(int?), int? adoxioLocalgovermentfirstnationdecision = default(int?), int? adoxioHoldsotherlicencesoptionset = default(int?), string _slainvokedidValue = default(string), int? adoxioServicehourswednesdayopen = default(int?), int? adoxioChecklistfloorplanlinedaip = default(int?), string _adoxioLicenceestablishmentValue = default(string), int? adoxioChecklistseparationissuesassessed = default(int?), int? adoxioServicehourswednesdayclose = default(int?), int? adoxioAreyouthemaincontactforapplication = default(int?), bool? adoxioServicehoursstandardhours = default(bool?), int? adoxioRenewaltiedhousefederalinterest = default(int?), int? adoxioChecklistfloorplanlined = default(int?), string adoxioBusinessinfoemail = default(string), string _modifiedbyValue = default(string), string adoxioInitialcapassessment = default(string), string adoxioSignatureposition = default(string), int? adoxioSeparationissuesresult = default(int?), int? adoxioChecklistaipdecisionmade = default(int?), int? adoxioChecklistmarketcapacity = default(int?), string _adoxioLicencetypeValue = default(string), System.DateTimeOffset? adoxioDateassignedtosla = default(System.DateTimeOffset?), string _slaidValue = default(string), string adoxioRefusedreason = default(string), int? adoxioInvoicetrigger = default(int?), int? adoxioAppchecklistlicencefeecollected = default(int?), int? adoxioChecklislginresolutionassess = default(int?), string adoxioEstablishmentemail = default(string), int? adoxioAreyouthemaincontactafterlicensing = default(int?), string adoxioAdditionalpropertyinformation = default(string), int? adoxioChecklistassociateformreceived = default(int?), int? statuscode = default(int?), int? adoxioCorporatedocsassessmentresult = default(int?), int? timezoneruleversionnumber = default(int?), int? adoxioRegisteredestablishment = default(int?), System.DateTimeOffset? adoxioInspectiondate = default(System.DateTimeOffset?), int? adoxioServicehourstuesdayopen = default(int?), int? adoxioAppchecklistinspectionresults = default(int?), bool? adoxioIsreadystorage = default(bool?), string _adoxioCasemanagersupervisorValue = default(string), int? adoxioChecklistkeypersonnelbuilt = default(int?), System.DateTimeOffset? adoxioDatefirstyearpaymentreceived = default(System.DateTimeOffset?), bool? adoxioIsreadylockedcases = default(bool?), int? adoxioChecklistdrivingrecordcomplete = default(int?), string adoxioEstablishmentotherbusinessname = default(string), System.DateTimeOffset? adoxioEstablishmentopeningdate = default(System.DateTimeOffset?), string adoxioContactpersonfirstname = default(string), int? adoxioChecklistvalidinterestassess = default(int?), int? adoxioServicehoursmondayopen = default(int?), string adoxioFederalproducernames = default(string), int? adoxioUploadedfloorplans = default(int?), string _adoxioApplyingpersonValue = default(string), string _createdonbehalfbyValue = default(string), string _adoxioPolicejurisdictionidValue = default(string), int? adoxioServicehourssundayclose = default(int?), int? adoxioServicehoursthursdayopen = default(int?), int? adoxioRuralagencystoreappointment = default(int?), string _createdbyValue = default(string), string _stageidValue = default(string), bool? adoxioSignatureagreement = default(bool?), int? adoxioFloorplanresult = default(int?), string _owninguserValue = default(string), bool? adoxioLicencefeeinvoicepaid = default(bool?), string adoxioOtherapplicanttype = default(string), string _adoxioLocalgovindigenousnationidValue = default(string), int? adoxioIsapplicationcomplete = default(int?), int? adoxioSuitabilityassessmentresult = default(int?), int? adoxioServicehourssundayopen = default(int?), int? adoxioAppchecklistchangesapplied = default(int?), System.DateTimeOffset? adoxioSignaturedate = default(System.DateTimeOffset?), int? adoxioProgressstatus = default(int?), int? adoxioChecklisttiedhouseassessed = default(int?), System.DateTimeOffset? lastonholdtime = default(System.DateTimeOffset?), int? adoxioRenewalzoning = default(int?), bool? adoxioIsreadydisplays = default(bool?), bool? adoxioIsreadyfirealarm = default(bool?), bool? adoxioIsreadyentranceexit = default(bool?), int? adoxioChecklistfinaldecisionmade = default(int?), int? adoxioValidinterestinitialstatus = default(int?), int? adoxioChecklistsignageassessed = default(int?), int? adoxioChecklistverifyapplication = default(int?), int? adoxioEstablishmentdeclarationoption1 = default(int?), int? adoxioAppchecklistfinaldecision = default(int?), string adoxioPaymentanchorfield = default(string), int? adoxioChecklistcriminalrecordscomplete = default(int?), int? adoxioChecklistspdconsentreceived = default(int?), string adoxioApplicationid = default(string), int? adoxioCheckinspectionstatus = default(int?), bool? adoxioIsreadynamebranding = default(bool?), int? adoxioChecklistvalidinterestfinalassessed = default(int?), string _owneridValue = default(string), string _adoxioAreaValue = default(string), string _adoxioAssignedlicenceValue = default(string), int? adoxioIsoninland = default(int?), System.DateTimeOffset? adoxioDaterefused = default(System.DateTimeOffset?), string adoxioEmail = default(string), int? adoxioEligibilityassessmentresult = default(int?), int? adoxioRenewalkeypersonnel = default(int?), int? adoxioChecklistnoticeofarcticlesreceived = default(int?), int? adoxioChecklistspdapproved = default(int?), int? adoxioAppchecklistpaymentreceived = default(int?), int? adoxioAppchecklistvalidinterestreceivedfinal = default(int?), System.DateTimeOffset? adoxioDateaip = default(System.DateTimeOffset?), bool? adoxioIsreadysurveillancenotice = default(bool?), int? adoxioChecklistverifypostalcode = default(int?), int? adoxioChecklistsitemapassess = default(int?), string adoxioEstablishmentaddresspostalcode = default(string), int? adoxioSitemapresult = default(int?), int? adoxioChecklistbrandingassess = default(int?), string _adoxioApplicationtypeidValue = default(string), int? adoxioChecklistverifypidpin = default(int?), int? adoxioChecklistfloorplanapproved = default(int?), int? adoxioChecklistfinalreviewcomplete = default(int?), int? adoxioChecklistcorporatedocsassessed = default(int?), int? adoxioRenewalshareholders = default(int?), string adoxioTerminatereason = default(string), int? adoxioSignageassessmentresult = default(int?), System.DateTimeOffset? adoxioDatereceivedinvestigations = default(System.DateTimeOffset?), int? adoxioChecklistsuitabilityassessed = default(int?), string _adoxioApplicantValue = default(string), System.DateTimeOffset? adoxioPaymentreceiveddate = default(System.DateTimeOffset?), bool? adoxioEstablishmentlocatedatwinery = default(bool?), int? adoxioRenewalbranding = default(int?), int? adoxioChecklistsitemapreceived = default(int?), System.DateTimeOffset? adoxioDateaipexpired = default(System.DateTimeOffset?), int? adoxioChecklistlginapproval = default(int?), int? adoxioRenewalorgleadership = default(int?), System.DateTimeOffset? adoxioDatereceivedlgin = default(System.DateTimeOffset?), int? adoxioSecurityscreeningcompletenesstrigger = default(int?), string adoxioContactmiddlename = default(string), int? adoxioOtherbusinessesatthesamelocation = default(int?), int? adoxioChecklistbrandingassessed = default(int?), int? adoxioChecklistnoticeofarticles = default(int?), string adoxioAddresscountry = default(string), System.DateTimeOffset? adoxioLicenceexpiry = default(System.DateTimeOffset?), int? adoxioChecklistsecurityclearancestatus = default(int?), int? adoxioChecklistestablishmentaddressassessed = default(int?), int? adoxioInitialcapassessmenttrigger = default(int?), System.DateTimeOffset? adoxioDateappealed = default(System.DateTimeOffset?), int? adoxioChecklistassociatesconsentreceived = default(int?), int? adoxioChecklistsitemapassessed = default(int?), int? adoxioChecklistlicencefeepaid = default(int?), bool? adoxioAuthorizedtosubmit = default(bool?), int? adoxioChecklisteligibilityassessed = default(int?), bool? adoxioIsreadyperimeter = default(bool?), int? adoxioRenewalunreportedsaleofbusiness = default(int?), System.DateTimeOffset? adoxioSecurityclearancegenerateddate = default(System.DateTimeOffset?), int? adoxioChecklistsecuritiesregister = default(int?), string adoxioInvestigationstatuscomment = default(string), int? adoxioPaymentmethod = default(int?), int? adoxioRenewaltiedhouse = default(int?), System.DateTimeOffset? adoxioInspectionscheduleddate = default(System.DateTimeOffset?), bool? adoxioEstablishmentlocatedatfirstnationland = default(bool?), bool? adoxioIsreadyproductnotvisibleoutside = default(bool?), int? adoxioRenewalsignage = default(int?), string adoxioPin = default(string), int? adoxioRenewalfloorplan = default(int?), string adoxioAddressprovince = default(string), int? adoxioUploadedlegalentitystructure = default(int?), int? adoxioAppchecklistinspectionreviewcomplete = default(int?), string _adoxioInvoiceValue = default(string), System.DateTimeOffset? adoxioDatefileuploadfromportalnotified = default(System.DateTimeOffset?), string adoxioBusinessstructureinstructionfield = default(string), int? adoxioChecklistfloorplanreceived = default(int?), int? adoxioChecklistassociateslist = default(int?), bool? adoxioIsreadyworkers = default(bool?), string adoxioDescription2 = default(string), int? adoxioEstablishmentdeclarationoption3 = default(int?), string adoxioFinalcapassessment = default(string), int? adoxioChecklisttermsconditionsadded = default(int?), int? adoxioRenewalcriminaloffencecheck = default(int?), bool? adoxioIsreadyintruderalarm = default(bool?), int? adoxioRenewalestablishmentaddress = default(int?), int? adoxioChecklistsecuritiesregisterreceived = default(int?), int? adoxioChecklistsenttospd = default(int?), int? adoxioOccupationload = default(int?), int? adoxioServicehoursfridayopen = default(int?), int? adoxioFitandproperstatus = default(int?), int? adoxioServicehoursthursdayclose = default(int?), int? adoxioChecklistlgindefined = default(int?), int? adoxioHastiedhouseassociations = default(int?), int? adoxioChecklistvalidmailingaddress = default(int?), int? adoxioEstablishmentcomplytoallbylaws = default(int?), int? adoxioChecklistvalidinterestassessed = default(int?), string adoxioContactpersonphone = default(string), bool? adoxioCasemanagerassigned = default(bool?), string adoxioEstablishmentphone = default(string), string adoxioEstablishmentaddresscity = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioFinaldecision = default(int?), string adoxioContactpersonlastname = default(string), int? adoxioPreviouslicenceapplication = default(int?), string _owningteamValue = default(string), int? adoxioOnlinedocumentupload = default(int?), int? adoxioFloorplanresultfinal = default(int?), string adoxioContactpersonname = default(string), int? adoxioChecklistdeclarationchargescomplete = default(int?), int? adoxioChecklistvalidestablishmentaddress = default(int?), string adoxioAddresspostalcode = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMactivitypointer> adoxioApplicationActivityPointers = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> adoxioApplicationAppointments = default(IList<MicrosoftDynamicsCRMappointment>), IList<MicrosoftDynamicsCRMemail> adoxioApplicationEmails = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMfax> adoxioApplicationFaxes = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMletter> adoxioApplicationLetters = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMphonecall> adoxioApplicationPhoneCalls = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMserviceappointment> adoxioApplicationServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMtask> adoxioApplicationTasks = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> adoxioApplicationRecurringAppointmentMasters = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMsocialactivity> adoxioApplicationSocialActivities = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> adoxioApplicationAbsScheduledprocessexecutions = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMsyncerror> adoxioApplicationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMactivityparty> adoxioApplicationActivityParties = default(IList<MicrosoftDynamicsCRMactivityparty>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioApplicationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioApplicationSharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMqueueitem> adoxioApplicationQueueItems = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMannotation> adoxioApplicationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioApplicationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioApplicationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMprocessstage stageid = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMknowledgebaserecord> adoxioApplicationKnowledgebaserecord = default(IList<MicrosoftDynamicsCRMknowledgebaserecord>), IList<MicrosoftDynamicsCRMknowledgearticle> msdynAdoxioApplicationKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMsla slaid = default(MicrosoftDynamicsCRMsla), MicrosoftDynamicsCRMsla slainvokedid = default(MicrosoftDynamicsCRMsla), IList<MicrosoftDynamicsCRMslakpiinstance> adoxioApplicationSLAKPIInstances = default(IList<MicrosoftDynamicsCRMslakpiinstance>), MicrosoftDynamicsCRMaccount adoxioApplicant = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> adoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioInvestigation> adoxioAdoxioApplicationAdoxioInvestigationApplication = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioApplicationAdoxioLegalentityRelatedApplication = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> adoxioAdoxioApplicationAdoxioPersonalhistory = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> adoxioAdoxioApplicationAdoxioTiedhouseasso = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMcontact> adoxioAdoxioApplicationContact = default(IList<MicrosoftDynamicsCRMcontact>), IList<MicrosoftDynamicsCRMincident> adoxioAdoxioApplicationIncidentApplication = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioEstablishment adoxioLicenceEstablishment = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioAssignedLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> adoxioApplicationAdoxioApplicationinvoicehistoryApplication = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> adoxioApplicationAdoxioTiedhouseconnectionApplication = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> adoxioApplicationCorporatehistorysummaries = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), MicrosoftDynamicsCRMadoxioArea adoxioArea = default(MicrosoftDynamicsCRMadoxioArea), MicrosoftDynamicsCRMcontact adoxioApplyingPerson = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMinvoice adoxioInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMinvoice adoxioLicenceFeeInvoice = default(MicrosoftDynamicsCRMinvoice), MicrosoftDynamicsCRMadoxioLicencetype adoxioLicenceType = default(MicrosoftDynamicsCRMadoxioLicencetype), MicrosoftDynamicsCRMadoxioLocalgovindigenousnation adoxioLocalgovindigenousnationid = default(MicrosoftDynamicsCRMadoxioLocalgovindigenousnation), MicrosoftDynamicsCRMadoxioPolicejurisdiction adoxioPoliceJurisdictionId = default(MicrosoftDynamicsCRMadoxioPolicejurisdiction), MicrosoftDynamicsCRMslakpiinstance adoxioSLA = default(MicrosoftDynamicsCRMslakpiinstance), MicrosoftDynamicsCRMsystemuser adoxioCaseManagerSupervisor = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2> bpfAdoxioApplicationAdoxioApplicationbpfmvpv2 = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2>), IList<MicrosoftDynamicsCRMadoxioDocument> adoxioApplicationDocuments = default(IList<MicrosoftDynamicsCRMadoxioDocument>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype), IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3> bpfAdoxioApplicationAdoxioApplicationbpfv3 = default(IList<MicrosoftDynamicsCRMadoxioApplicationbpfv3>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> adoxioLicenseechangelogApplication = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10> bpfAdoxioApplicationAdoxioApplicationlicenseechangesv10 = default(IList<MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10>), IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1> bpfAdoxioApplicationAdoxioApplicationrelocationv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationrelocationv1>), IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1> bpfAdoxioApplicationAdoxioApplicationstructurechangev1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationstructurechangev1>), IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1> bpfAdoxioApplicationAdoxioApplicationtransferownershipv1 = default(IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1>), IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpf> bpfAdoxioApplicationAdoxioApplicationliquorbpf = default(IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpf>))
         {
             AdoxioNameofapplicant = adoxioNameofapplicant;
             AdoxioChecklistfinintegrityreceived = adoxioChecklistfinintegrityreceived;
@@ -175,9 +175,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioServicehourstuesdayclose = adoxioServicehourstuesdayclose;
             AdoxioServicehoursfridayclose = adoxioServicehoursfridayclose;
             AdoxioChecklistlicencecapassessedfinal = adoxioChecklistlicencecapassessedfinal;
-            AdoxioChecklistfloorplanreceived = adoxioChecklistfloorplanreceived;
+            AdoxioServicehourspatronparticipation = adoxioServicehourspatronparticipation;
             AdoxioInspectorsnotes = adoxioInspectorsnotes;
             AdoxioChecklistunreportedsaleofbusiness = adoxioChecklistunreportedsaleofbusiness;
+            AdoxioEstablishmentcomplytozoningregulations = adoxioEstablishmentcomplytozoningregulations;
             AdoxioEstablishmentaddressstreet = adoxioEstablishmentaddressstreet;
             AdoxioChecklistfloorplanassess = adoxioChecklistfloorplanassess;
             AdoxioServicehoursmondayclose = adoxioServicehoursmondayclose;
@@ -185,13 +186,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioEstablishmentparcelid = adoxioEstablishmentparcelid;
             AdoxioAiptype = adoxioAiptype;
             AdoxioEstablishmentlayoutsubmitfloorplans = adoxioEstablishmentlayoutsubmitfloorplans;
+            AdoxioChecklistcorporatedocsreceived = adoxioChecklistcorporatedocsreceived;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioOtherbusinesssamelocationdetails = adoxioOtherbusinesssamelocationdetails;
             AdoxioAppchecklistvalidinterestreceived = adoxioAppchecklistvalidinterestreceived;
             AdoxioChecklistaipdecision = adoxioChecklistaipdecision;
             AdoxioChecklistestabrenderingsassessed = adoxioChecklistestabrenderingsassessed;
             AdoxioEstablishmentlayoutapplyingforpatio = adoxioEstablishmentlayoutapplyingforpatio;
-            AdoxioTriggertogeneratesecurityclearance = adoxioTriggertogeneratesecurityclearance;
+            AdoxioChecklistverifybusinessprofile = adoxioChecklistverifybusinessprofile;
             AdoxioChecklistresolutionassessment = adoxioChecklistresolutionassessment;
             Traversedpath = traversedpath;
             AdoxioChecklistfinaldecisionlettersent = adoxioChecklistfinaldecisionlettersent;
@@ -209,9 +211,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioSecurityscreeningcompleteness = adoxioSecurityscreeningcompleteness;
             AdoxioInspectioncomplete = adoxioInspectioncomplete;
             AdoxioChecklistassociatesfireceived = adoxioChecklistassociatesfireceived;
+            AdoxioChecklistpersonalhistoryreceived = adoxioChecklistpersonalhistoryreceived;
             AdoxioInvestigationstatus = adoxioInvestigationstatus;
             AdoxioChecklistlicencehistorycheck = adoxioChecklistlicencehistorycheck;
             AdoxioChecklistvalidinterestreceived = adoxioChecklistvalidinterestreceived;
+            AdoxioChecklistcriminalrecordsassessed = adoxioChecklistcriminalrecordsassessed;
             AdoxioOccupationcapacity = adoxioOccupationcapacity;
             AdoxioChecklistorgstructure = adoxioChecklistorgstructure;
             AdoxioBrandingnameresult = adoxioBrandingnameresult;
@@ -228,7 +232,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioIsreadyretailarea = adoxioIsreadyretailarea;
             AdoxioEstablishmentalreadyopen = adoxioEstablishmentalreadyopen;
             AdoxioEstablishmentaddresscountry = adoxioEstablishmentaddresscountry;
+            AdoxioDateaipdecisionlettersent = adoxioDateaipdecisionlettersent;
             AdoxioDateaipexpiredlongdatestring = adoxioDateaipexpiredlongdatestring;
+            this._adoxioLicencefeeinvoiceValue = _adoxioLicencefeeinvoiceValue;
             AdoxioLiquorindustryconnections = adoxioLiquorindustryconnections;
             AdoxioDescription1 = adoxioDescription1;
             AdoxioApplicanttype = adoxioApplicanttype;
@@ -240,9 +246,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioDatelicencecapassessed = adoxioDatelicencecapassessed;
             AdoxioChecklistsignageexamples = adoxioChecklistsignageexamples;
             AdoxioChecklistsenttolgin = adoxioChecklistsenttolgin;
-            AdoxioChecklistverifybusinessprofile = adoxioChecklistverifybusinessprofile;
             AdoxioRole = adoxioRole;
-            AdoxioServicehoursstandardhours = adoxioServicehoursstandardhours;
             Versionnumber = versionnumber;
             Overriddencreatedon = overriddencreatedon;
             AdoxioDatesentspd = adoxioDatesentspd;
@@ -251,16 +255,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioDatelicencecapassessedfinal = adoxioDatelicencecapassessedfinal;
             AdoxioDateaiplongdatestring = adoxioDateaiplongdatestring;
             AdoxioBusinessnumber = adoxioBusinessnumber;
-            AdoxioRefusedreason = adoxioRefusedreason;
+            AdoxioCriminalrecordsresult = adoxioCriminalrecordsresult;
             AdoxioPolicedecision = adoxioPolicedecision;
             AdoxioDatesecurityscreeningcompletenessassessed = adoxioDatesecurityscreeningcompletenessassessed;
             AdoxioFinalcapassessmentdate = adoxioFinalcapassessmentdate;
             AdoxioDateinspectioncomplete = adoxioDateinspectioncomplete;
             AdoxioFinalcapassessmenttrigger = adoxioFinalcapassessmenttrigger;
-            AdoxioFinaldecision = adoxioFinaldecision;
             AdoxioName = adoxioName;
             AdoxioChecklistassociatescontacted = adoxioChecklistassociatescontacted;
-            AdoxioFinalcapassessment = adoxioFinalcapassessment;
             AdoxioEstablishmentpropsedname = adoxioEstablishmentpropsedname;
             this._adoxioRegionValue = _adoxioRegionValue;
             AdoxioChecklistshareholdersbuilt = adoxioChecklistshareholdersbuilt;
@@ -275,28 +277,29 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioDatesentlgin = adoxioDatesentlgin;
             AdoxioRenewalbusinesstype = adoxioRenewalbusinesstype;
             AdoxioPhone = adoxioPhone;
-            AdoxioChecklistkeypersonnelbuilt = adoxioChecklistkeypersonnelbuilt;
             AdoxioChecklistphotosreceived = adoxioChecklistphotosreceived;
             this._adoxioSlaValue = _adoxioSlaValue;
             AdoxioDatesentinvestigations = adoxioDatesentinvestigations;
             AdoxioAddresscity = adoxioAddresscity;
-            AdoxioDateaipdecisionlettersent = adoxioDateaipdecisionlettersent;
+            AdoxioChecklistfloorplanassessed = adoxioChecklistfloorplanassessed;
             AdoxioLiquorindustryconnectionsdetails = adoxioLiquorindustryconnectionsdetails;
+            AdoxioTriggertogeneratesecurityclearance = adoxioTriggertogeneratesecurityclearance;
             AdoxioIsreadyvalidinterest = adoxioIsreadyvalidinterest;
             AdoxioInspectionchecklistdate = adoxioInspectionchecklistdate;
-            AdoxioFitandpropercomplete = adoxioFitandpropercomplete;
+            AdoxioSharepointanchorforpersonalhistory = adoxioSharepointanchorforpersonalhistory;
             AdoxioInitialcapassessmentdate = adoxioInitialcapassessmentdate;
             AdoxioChecklistsuitabilitylettersent = adoxioChecklistsuitabilitylettersent;
             AdoxioChecklistfinancialcheckpassed = adoxioChecklistfinancialcheckpassed;
+            AdoxioDatelicenceapproved = adoxioDatelicenceapproved;
             AdoxioPaymentrecieved = adoxioPaymentrecieved;
             AdoxioChecklistdecisionlettersentaip = adoxioChecklistdecisionlettersentaip;
             AdoxioChecklisttiedhouseassess = adoxioChecklisttiedhouseassess;
-            AdoxioSharepointanchorforpersonalhistory = adoxioSharepointanchorforpersonalhistory;
+            AdoxioContactpersonfullname = adoxioContactpersonfullname;
             AdoxioChecklistzoningaip = adoxioChecklistzoningaip;
             AdoxioUploadedimageofestablishment = adoxioUploadedimageofestablishment;
-            AdoxioEstablishmentcomplytozoningregulations = adoxioEstablishmentcomplytozoningregulations;
+            AdoxioChecklistsentforfisla = adoxioChecklistsentforfisla;
             AdoxioEstablishmentaddress = adoxioEstablishmentaddress;
-            AdoxioSecurityclearancegenerateddate = adoxioSecurityclearancegenerateddate;
+            AdoxioFitandpropercomplete = adoxioFitandpropercomplete;
             AdoxioJobnumber = adoxioJobnumber;
             AdoxioRenewalsitemap = adoxioRenewalsitemap;
             AdoxioEstablishmentotheroption1 = adoxioEstablishmentotheroption1;
@@ -308,20 +311,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioServicehourswednesdayopen = adoxioServicehourswednesdayopen;
             AdoxioChecklistfloorplanlinedaip = adoxioChecklistfloorplanlinedaip;
             this._adoxioLicenceestablishmentValue = _adoxioLicenceestablishmentValue;
+            AdoxioChecklistseparationissuesassessed = adoxioChecklistseparationissuesassessed;
             AdoxioServicehourswednesdayclose = adoxioServicehourswednesdayclose;
             AdoxioAreyouthemaincontactforapplication = adoxioAreyouthemaincontactforapplication;
-            AdoxioServicehourspatronparticipation = adoxioServicehourspatronparticipation;
+            AdoxioServicehoursstandardhours = adoxioServicehoursstandardhours;
             AdoxioRenewaltiedhousefederalinterest = adoxioRenewaltiedhousefederalinterest;
             AdoxioChecklistfloorplanlined = adoxioChecklistfloorplanlined;
             AdoxioBusinessinfoemail = adoxioBusinessinfoemail;
             this._modifiedbyValue = _modifiedbyValue;
             AdoxioInitialcapassessment = adoxioInitialcapassessment;
             AdoxioSignatureposition = adoxioSignatureposition;
+            AdoxioSeparationissuesresult = adoxioSeparationissuesresult;
             AdoxioChecklistaipdecisionmade = adoxioChecklistaipdecisionmade;
             AdoxioChecklistmarketcapacity = adoxioChecklistmarketcapacity;
             this._adoxioLicencetypeValue = _adoxioLicencetypeValue;
             AdoxioDateassignedtosla = adoxioDateassignedtosla;
             this._slaidValue = _slaidValue;
+            AdoxioRefusedreason = adoxioRefusedreason;
             AdoxioInvoicetrigger = adoxioInvoicetrigger;
             AdoxioAppchecklistlicencefeecollected = adoxioAppchecklistlicencefeecollected;
             AdoxioChecklislginresolutionassess = adoxioChecklislginresolutionassess;
@@ -330,6 +336,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAdditionalpropertyinformation = adoxioAdditionalpropertyinformation;
             AdoxioChecklistassociateformreceived = adoxioChecklistassociateformreceived;
             Statuscode = statuscode;
+            AdoxioCorporatedocsassessmentresult = adoxioCorporatedocsassessmentresult;
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioRegisteredestablishment = adoxioRegisteredestablishment;
             AdoxioInspectiondate = adoxioInspectiondate;
@@ -337,17 +344,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAppchecklistinspectionresults = adoxioAppchecklistinspectionresults;
             AdoxioIsreadystorage = adoxioIsreadystorage;
             this._adoxioCasemanagersupervisorValue = _adoxioCasemanagersupervisorValue;
+            AdoxioChecklistkeypersonnelbuilt = adoxioChecklistkeypersonnelbuilt;
             AdoxioDatefirstyearpaymentreceived = adoxioDatefirstyearpaymentreceived;
             AdoxioIsreadylockedcases = adoxioIsreadylockedcases;
+            AdoxioChecklistdrivingrecordcomplete = adoxioChecklistdrivingrecordcomplete;
             AdoxioEstablishmentotherbusinessname = adoxioEstablishmentotherbusinessname;
             AdoxioEstablishmentopeningdate = adoxioEstablishmentopeningdate;
             AdoxioContactpersonfirstname = adoxioContactpersonfirstname;
             AdoxioChecklistvalidinterestassess = adoxioChecklistvalidinterestassess;
             AdoxioServicehoursmondayopen = adoxioServicehoursmondayopen;
+            AdoxioFederalproducernames = adoxioFederalproducernames;
             AdoxioUploadedfloorplans = adoxioUploadedfloorplans;
             this._adoxioApplyingpersonValue = _adoxioApplyingpersonValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioFederalproducernames = adoxioFederalproducernames;
             this._adoxioPolicejurisdictionidValue = _adoxioPolicejurisdictionidValue;
             AdoxioServicehourssundayclose = adoxioServicehourssundayclose;
             AdoxioServicehoursthursdayopen = adoxioServicehoursthursdayopen;
@@ -361,6 +370,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioOtherapplicanttype = adoxioOtherapplicanttype;
             this._adoxioLocalgovindigenousnationidValue = _adoxioLocalgovindigenousnationidValue;
             AdoxioIsapplicationcomplete = adoxioIsapplicationcomplete;
+            AdoxioSuitabilityassessmentresult = adoxioSuitabilityassessmentresult;
             AdoxioServicehourssundayopen = adoxioServicehourssundayopen;
             AdoxioAppchecklistchangesapplied = adoxioAppchecklistchangesapplied;
             AdoxioSignaturedate = adoxioSignaturedate;
@@ -368,7 +378,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioChecklisttiedhouseassessed = adoxioChecklisttiedhouseassessed;
             Lastonholdtime = lastonholdtime;
             AdoxioRenewalzoning = adoxioRenewalzoning;
-            AdoxioDatelicenceapproved = adoxioDatelicenceapproved;
             AdoxioIsreadydisplays = adoxioIsreadydisplays;
             AdoxioIsreadyfirealarm = adoxioIsreadyfirealarm;
             AdoxioIsreadyentranceexit = adoxioIsreadyentranceexit;
@@ -379,19 +388,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioEstablishmentdeclarationoption1 = adoxioEstablishmentdeclarationoption1;
             AdoxioAppchecklistfinaldecision = adoxioAppchecklistfinaldecision;
             AdoxioPaymentanchorfield = adoxioPaymentanchorfield;
-            AdoxioDateappealed = adoxioDateappealed;
+            AdoxioChecklistcriminalrecordscomplete = adoxioChecklistcriminalrecordscomplete;
             AdoxioChecklistspdconsentreceived = adoxioChecklistspdconsentreceived;
             AdoxioApplicationid = adoxioApplicationid;
             AdoxioCheckinspectionstatus = adoxioCheckinspectionstatus;
             AdoxioIsreadynamebranding = adoxioIsreadynamebranding;
             AdoxioChecklistvalidinterestfinalassessed = adoxioChecklistvalidinterestfinalassessed;
-            this._adoxioLicencefeeinvoiceValue = _adoxioLicencefeeinvoiceValue;
             this._owneridValue = _owneridValue;
             this._adoxioAreaValue = _adoxioAreaValue;
             this._adoxioAssignedlicenceValue = _adoxioAssignedlicenceValue;
             AdoxioIsoninland = adoxioIsoninland;
             AdoxioDaterefused = adoxioDaterefused;
             AdoxioEmail = adoxioEmail;
+            AdoxioEligibilityassessmentresult = adoxioEligibilityassessmentresult;
             AdoxioRenewalkeypersonnel = adoxioRenewalkeypersonnel;
             AdoxioChecklistnoticeofarcticlesreceived = adoxioChecklistnoticeofarcticlesreceived;
             AdoxioChecklistspdapproved = adoxioChecklistspdapproved;
@@ -408,11 +417,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioChecklistverifypidpin = adoxioChecklistverifypidpin;
             AdoxioChecklistfloorplanapproved = adoxioChecklistfloorplanapproved;
             AdoxioChecklistfinalreviewcomplete = adoxioChecklistfinalreviewcomplete;
-            AdoxioContactpersonfullname = adoxioContactpersonfullname;
+            AdoxioChecklistcorporatedocsassessed = adoxioChecklistcorporatedocsassessed;
             AdoxioRenewalshareholders = adoxioRenewalshareholders;
             AdoxioTerminatereason = adoxioTerminatereason;
-            AdoxioChecklistfloorplanassessed = adoxioChecklistfloorplanassessed;
+            AdoxioSignageassessmentresult = adoxioSignageassessmentresult;
             AdoxioDatereceivedinvestigations = adoxioDatereceivedinvestigations;
+            AdoxioChecklistsuitabilityassessed = adoxioChecklistsuitabilityassessed;
             this._adoxioApplicantValue = _adoxioApplicantValue;
             AdoxioPaymentreceiveddate = adoxioPaymentreceiveddate;
             AdoxioEstablishmentlocatedatwinery = adoxioEstablishmentlocatedatwinery;
@@ -432,13 +442,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioChecklistsecurityclearancestatus = adoxioChecklistsecurityclearancestatus;
             AdoxioChecklistestablishmentaddressassessed = adoxioChecklistestablishmentaddressassessed;
             AdoxioInitialcapassessmenttrigger = adoxioInitialcapassessmenttrigger;
+            AdoxioDateappealed = adoxioDateappealed;
             AdoxioChecklistassociatesconsentreceived = adoxioChecklistassociatesconsentreceived;
             AdoxioChecklistsitemapassessed = adoxioChecklistsitemapassessed;
             AdoxioChecklistlicencefeepaid = adoxioChecklistlicencefeepaid;
             AdoxioAuthorizedtosubmit = adoxioAuthorizedtosubmit;
-            this._owningteamValue = _owningteamValue;
+            AdoxioChecklisteligibilityassessed = adoxioChecklisteligibilityassessed;
             AdoxioIsreadyperimeter = adoxioIsreadyperimeter;
             AdoxioRenewalunreportedsaleofbusiness = adoxioRenewalunreportedsaleofbusiness;
+            AdoxioSecurityclearancegenerateddate = adoxioSecurityclearancegenerateddate;
             AdoxioChecklistsecuritiesregister = adoxioChecklistsecuritiesregister;
             AdoxioInvestigationstatuscomment = adoxioInvestigationstatuscomment;
             AdoxioPaymentmethod = adoxioPaymentmethod;
@@ -455,10 +467,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._adoxioInvoiceValue = _adoxioInvoiceValue;
             AdoxioDatefileuploadfromportalnotified = adoxioDatefileuploadfromportalnotified;
             AdoxioBusinessstructureinstructionfield = adoxioBusinessstructureinstructionfield;
+            AdoxioChecklistfloorplanreceived = adoxioChecklistfloorplanreceived;
             AdoxioChecklistassociateslist = adoxioChecklistassociateslist;
             AdoxioIsreadyworkers = adoxioIsreadyworkers;
             AdoxioDescription2 = adoxioDescription2;
             AdoxioEstablishmentdeclarationoption3 = adoxioEstablishmentdeclarationoption3;
+            AdoxioFinalcapassessment = adoxioFinalcapassessment;
             AdoxioChecklisttermsconditionsadded = adoxioChecklisttermsconditionsadded;
             AdoxioRenewalcriminaloffencecheck = adoxioRenewalcriminaloffencecheck;
             AdoxioIsreadyintruderalarm = adoxioIsreadyintruderalarm;
@@ -479,12 +493,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioEstablishmentphone = adoxioEstablishmentphone;
             AdoxioEstablishmentaddresscity = adoxioEstablishmentaddresscity;
             Utcconversiontimezonecode = utcconversiontimezonecode;
+            AdoxioFinaldecision = adoxioFinaldecision;
             AdoxioContactpersonlastname = adoxioContactpersonlastname;
             AdoxioPreviouslicenceapplication = adoxioPreviouslicenceapplication;
+            this._owningteamValue = _owningteamValue;
             AdoxioOnlinedocumentupload = adoxioOnlinedocumentupload;
             AdoxioFloorplanresultfinal = adoxioFloorplanresultfinal;
             AdoxioContactpersonname = adoxioContactpersonname;
-            AdoxioChecklistsentforfisla = adoxioChecklistsentforfisla;
+            AdoxioChecklistdeclarationchargescomplete = adoxioChecklistdeclarationchargescomplete;
             AdoxioChecklistvalidestablishmentaddress = adoxioChecklistvalidestablishmentaddress;
             AdoxioAddresspostalcode = adoxioAddresspostalcode;
             Createdbyname = createdbyname;
@@ -554,6 +570,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             BpfAdoxioApplicationAdoxioApplicationrelocationv1 = bpfAdoxioApplicationAdoxioApplicationrelocationv1;
             BpfAdoxioApplicationAdoxioApplicationstructurechangev1 = bpfAdoxioApplicationAdoxioApplicationstructurechangev1;
             BpfAdoxioApplicationAdoxioApplicationtransferownershipv1 = bpfAdoxioApplicationAdoxioApplicationtransferownershipv1;
+            BpfAdoxioApplicationAdoxioApplicationliquorbpf = bpfAdoxioApplicationAdoxioApplicationliquorbpf;
             CustomInit();
         }
 
@@ -613,10 +630,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioChecklistlicencecapassessedfinal { get; set; }
 
         /// <summary>
-        /// Gets or sets BPF Refactoring 1.17.2019
+        /// Gets or sets patron Participation Entertainment - dancing, karaoke
+        /// or other types of entertainment that involve patron participation
+        /// in the
+        /// service area
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistfloorplanreceived")]
-        public int? AdoxioChecklistfloorplanreceived { get; set; }
+        [JsonProperty(PropertyName = "adoxio_servicehourspatronparticipation")]
+        public bool? AdoxioServicehourspatronparticipation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -627,6 +647,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistunreportedsaleofbusiness")]
         public int? AdoxioChecklistunreportedsaleofbusiness { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_establishmentcomplytozoningregulations")]
+        public int? AdoxioEstablishmentcomplytozoningregulations { get; set; }
 
         /// <summary>
         /// </summary>
@@ -672,6 +697,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? AdoxioEstablishmentlayoutsubmitfloorplans { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcorporatedocsreceived")]
+        public int? AdoxioChecklistcorporatedocsreceived { get; set; }
+
+        /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
         /// the record.
         /// </summary>
@@ -706,9 +736,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? AdoxioEstablishmentlayoutapplyingforpatio { get; set; }
 
         /// <summary>
+        /// Gets or sets BPF Refactoring 1.17.2019
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_triggertogeneratesecurityclearance")]
-        public bool? AdoxioTriggertogeneratesecurityclearance { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistverifybusinessprofile")]
+        public int? AdoxioChecklistverifybusinessprofile { get; set; }
 
         /// <summary>
         /// Gets or sets BPF Refactoring 1.17.2019
@@ -807,6 +838,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistpersonalhistoryreceived")]
+        public int? AdoxioChecklistpersonalhistoryreceived { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_investigationstatus")]
         public int? AdoxioInvestigationstatus { get; set; }
 
@@ -820,6 +856,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistvalidinterestreceived")]
         public int? AdoxioChecklistvalidinterestreceived { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistcriminalrecordsassessed")]
+        public int? AdoxioChecklistcriminalrecordsassessed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -906,8 +947,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dateaipdecisionlettersent")]
+        public System.DateTimeOffset? AdoxioDateaipdecisionlettersent { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_dateaipexpiredlongdatestring")]
         public string AdoxioDateaipexpiredlongdatestring { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_licencefeeinvoice_value")]
+        public string _adoxioLicencefeeinvoiceValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -966,20 +1017,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioChecklistsenttolgin { get; set; }
 
         /// <summary>
-        /// Gets or sets BPF Refactoring 1.17.2019
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistverifybusinessprofile")]
-        public int? AdoxioChecklistverifybusinessprofile { get; set; }
-
-        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_role")]
         public string AdoxioRole { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_servicehoursstandardhours")]
-        public bool? AdoxioServicehoursstandardhours { get; set; }
 
         /// <summary>
         /// Gets or sets version Number
@@ -1025,8 +1065,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_refusedreason")]
-        public string AdoxioRefusedreason { get; set; }
+        [JsonProperty(PropertyName = "adoxio_criminalrecordsresult")]
+        public int? AdoxioCriminalrecordsresult { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1054,11 +1094,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioFinalcapassessmenttrigger { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_finaldecision")]
-        public int? AdoxioFinaldecision { get; set; }
-
-        /// <summary>
         /// Gets or sets the name of the custom entity.
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_name")]
@@ -1068,11 +1103,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistassociatescontacted")]
         public int? AdoxioChecklistassociatescontacted { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_finalcapassessment")]
-        public string AdoxioFinalcapassessment { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1147,11 +1177,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioPhone { get; set; }
 
         /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistkeypersonnelbuilt")]
-        public int? AdoxioChecklistkeypersonnelbuilt { get; set; }
-
-        /// <summary>
         /// Gets or sets BPF Refactoring 1.17.2019
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistphotosreceived")]
@@ -1173,14 +1198,20 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioAddresscity { get; set; }
 
         /// <summary>
+        /// Gets or sets BPF Refactoring 1.17.2019
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateaipdecisionlettersent")]
-        public System.DateTimeOffset? AdoxioDateaipdecisionlettersent { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistfloorplanassessed")]
+        public int? AdoxioChecklistfloorplanassessed { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_liquorindustryconnectionsdetails")]
         public string AdoxioLiquorindustryconnectionsdetails { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_triggertogeneratesecurityclearance")]
+        public bool? AdoxioTriggertogeneratesecurityclearance { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1197,8 +1228,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_fitandpropercomplete")]
-        public bool? AdoxioFitandpropercomplete { get; set; }
+        [JsonProperty(PropertyName = "adoxio_sharepointanchorforpersonalhistory")]
+        public string AdoxioSharepointanchorforpersonalhistory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1217,6 +1248,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_datelicenceapproved")]
+        public System.DateTimeOffset? AdoxioDatelicenceapproved { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_paymentrecieved")]
         public bool? AdoxioPaymentrecieved { get; set; }
 
@@ -1232,8 +1268,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sharepointanchorforpersonalhistory")]
-        public string AdoxioSharepointanchorforpersonalhistory { get; set; }
+        [JsonProperty(PropertyName = "adoxio_contactpersonfullname")]
+        public string AdoxioContactpersonfullname { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1247,8 +1283,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentcomplytozoningregulations")]
-        public int? AdoxioEstablishmentcomplytozoningregulations { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistsentforfisla")]
+        public int? AdoxioChecklistsentforfisla { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1257,8 +1293,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_securityclearancegenerateddate")]
-        public System.DateTimeOffset? AdoxioSecurityclearancegenerateddate { get; set; }
+        [JsonProperty(PropertyName = "adoxio_fitandpropercomplete")]
+        public bool? AdoxioFitandpropercomplete { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1318,6 +1354,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistseparationissuesassessed")]
+        public int? AdoxioChecklistseparationissuesassessed { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_servicehourswednesdayclose")]
         public int? AdoxioServicehourswednesdayclose { get; set; }
 
@@ -1327,13 +1368,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? AdoxioAreyouthemaincontactforapplication { get; set; }
 
         /// <summary>
-        /// Gets or sets patron Participation Entertainment - dancing, karaoke
-        /// or other types of entertainment that involve patron participation
-        /// in the
-        /// service area
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_servicehourspatronparticipation")]
-        public bool? AdoxioServicehourspatronparticipation { get; set; }
+        [JsonProperty(PropertyName = "adoxio_servicehoursstandardhours")]
+        public bool? AdoxioServicehoursstandardhours { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1369,6 +1406,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_separationissuesresult")]
+        public int? AdoxioSeparationissuesresult { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistaipdecisionmade")]
         public int? AdoxioChecklistaipdecisionmade { get; set; }
 
@@ -1393,6 +1435,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_slaid_value")]
         public string _slaidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_refusedreason")]
+        public string AdoxioRefusedreason { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1437,6 +1484,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? Statuscode { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_corporatedocsassessmentresult")]
+        public int? AdoxioCorporatedocsassessmentresult { get; set; }
+
+        /// <summary>
         /// Gets or sets for internal use only.
         /// </summary>
         [JsonProperty(PropertyName = "timezoneruleversionnumber")]
@@ -1474,6 +1526,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistkeypersonnelbuilt")]
+        public int? AdoxioChecklistkeypersonnelbuilt { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_datefirstyearpaymentreceived")]
         public System.DateTimeOffset? AdoxioDatefirstyearpaymentreceived { get; set; }
 
@@ -1481,6 +1538,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_isreadylockedcases")]
         public bool? AdoxioIsreadylockedcases { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistdrivingrecordcomplete")]
+        public int? AdoxioChecklistdrivingrecordcomplete { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1509,6 +1571,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_federalproducernames")]
+        public string AdoxioFederalproducernames { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_uploadedfloorplans")]
         public int? AdoxioUploadedfloorplans { get; set; }
 
@@ -1523,11 +1590,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "_createdonbehalfby_value")]
         public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_federalproducernames")]
-        public string AdoxioFederalproducernames { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Police Jurisdiction associated
@@ -1604,6 +1666,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_suitabilityassessmentresult")]
+        public int? AdoxioSuitabilityassessmentresult { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_servicehourssundayopen")]
         public int? AdoxioServicehourssundayopen { get; set; }
 
@@ -1639,11 +1706,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_renewalzoning")]
         public int? AdoxioRenewalzoning { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_datelicenceapproved")]
-        public System.DateTimeOffset? AdoxioDatelicenceapproved { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1700,8 +1762,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_dateappealed")]
-        public System.DateTimeOffset? AdoxioDateappealed { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistcriminalrecordscomplete")]
+        public int? AdoxioChecklistcriminalrecordscomplete { get; set; }
 
         /// <summary>
         /// Gets or sets BPF Refactoring 1.17.2019
@@ -1729,11 +1791,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistvalidinterestfinalassessed")]
         public int? AdoxioChecklistvalidinterestfinalassessed { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_licencefeeinvoice_value")]
-        public string _adoxioLicencefeeinvoiceValue { get; set; }
 
         /// <summary>
         /// Gets or sets owner Id
@@ -1765,6 +1822,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_email")]
         public string AdoxioEmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_eligibilityassessmentresult")]
+        public int? AdoxioEligibilityassessmentresult { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1852,8 +1914,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_contactpersonfullname")]
-        public string AdoxioContactpersonfullname { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistcorporatedocsassessed")]
+        public int? AdoxioChecklistcorporatedocsassessed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1866,15 +1928,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioTerminatereason { get; set; }
 
         /// <summary>
-        /// Gets or sets BPF Refactoring 1.17.2019
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistfloorplanassessed")]
-        public int? AdoxioChecklistfloorplanassessed { get; set; }
+        [JsonProperty(PropertyName = "adoxio_signageassessmentresult")]
+        public int? AdoxioSignageassessmentresult { get; set; }
 
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_datereceivedinvestigations")]
         public System.DateTimeOffset? AdoxioDatereceivedinvestigations { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistsuitabilityassessed")]
+        public int? AdoxioChecklistsuitabilityassessed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1975,6 +2041,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_dateappealed")]
+        public System.DateTimeOffset? AdoxioDateappealed { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistassociatesconsentreceived")]
         public int? AdoxioChecklistassociatesconsentreceived { get; set; }
 
@@ -1996,10 +2067,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public bool? AdoxioAuthorizedtosubmit { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklisteligibilityassessed")]
+        public int? AdoxioChecklisteligibilityassessed { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2010,6 +2080,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_renewalunreportedsaleofbusiness")]
         public int? AdoxioRenewalunreportedsaleofbusiness { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_securityclearancegenerateddate")]
+        public System.DateTimeOffset? AdoxioSecurityclearancegenerateddate { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2092,6 +2167,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioBusinessstructureinstructionfield { get; set; }
 
         /// <summary>
+        /// Gets or sets BPF Refactoring 1.17.2019
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_checklistfloorplanreceived")]
+        public int? AdoxioChecklistfloorplanreceived { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_checklistassociateslist")]
         public int? AdoxioChecklistassociateslist { get; set; }
@@ -2115,6 +2196,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_establishmentdeclarationoption3")]
         public int? AdoxioEstablishmentdeclarationoption3 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_finalcapassessment")]
+        public string AdoxioFinalcapassessment { get; set; }
 
         /// <summary>
         /// Gets or sets BPF Refactoring 1.17.2019
@@ -2222,6 +2308,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_finaldecision")]
+        public int? AdoxioFinaldecision { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_contactpersonlastname")]
         public string AdoxioContactpersonlastname { get; set; }
 
@@ -2229,6 +2320,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_previouslicenceapplication")]
         public int? AdoxioPreviouslicenceapplication { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for the team that owns the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2247,8 +2344,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_checklistsentforfisla")]
-        public int? AdoxioChecklistsentforfisla { get; set; }
+        [JsonProperty(PropertyName = "adoxio_checklistdeclarationchargescomplete")]
+        public int? AdoxioChecklistdeclarationchargescomplete { get; set; }
 
         /// <summary>
         /// </summary>
@@ -2594,6 +2691,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "bpf_adoxio_application_adoxio_applicationtransferownershipv1")]
         public IList<MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1> BpfAdoxioApplicationAdoxioApplicationtransferownershipv1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "bpf_adoxio_application_adoxio_applicationliquorbpf")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationliquorbpf> BpfAdoxioApplicationAdoxioApplicationliquorbpf { get; set; }
 
     }
 }
