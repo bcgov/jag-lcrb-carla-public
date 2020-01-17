@@ -1,25 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
-import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
-import { Application } from '@models/application.model';
-import { LegalEntity } from '@models/legal-entity.model';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/app-state/models/app-state';
-import { ApplicationDataService } from '@services/application-data.service';
-import { LegalEntityDataService } from '@services/legal-entity-data.service';
-import { takeWhile, filter } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
 
 @Component({
-  selector: 'app-personal-history-summary',
-  templateUrl: './personal-history-summary.component.html',
-  styleUrls: ['./personal-history-summary.component.scss']
+  selector: 'app-associate-list',
+  templateUrl: './associate-list.component.html',
+  styleUrls: ['./associate-list.component.scss']
 })
-export class PersonalHistorySummaryComponent extends FormBase implements OnInit {
+export class AssociateListComponent extends FormBase implements OnInit {
   @Input() personalHistoryItems: LicenseeChangeLog[] = [];
   @Input() rootNode: LicenseeChangeLog;
   @Input() account: Account;
@@ -34,7 +24,6 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
   constructor(private fb: FormBuilder) {
     super();
   }
-
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -57,7 +46,6 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
     associate.edit = true;
     associate.collapse = true;
     this.childAdded.emit(associate);
-
   }
 
   deleteChange(node: LicenseeChangeLog) {
@@ -83,7 +71,6 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
       node.changeType = 'unchanged';
     } else if (!node.isRoot && node.legalEntityId) {
       node.changeType = 'deleted';
-
     }
   }
 

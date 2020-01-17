@@ -72,8 +72,8 @@
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
-    <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-      (childAdded)="addChild(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader"></app-personal-history-summary>
+    <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
+      (childAdded)="addChild(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader"></app-associate-list>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
@@ -90,8 +90,8 @@
         porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
         ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-        (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-personal-history-summary>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
+        (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-associate-list>
     </section>
   </ng-container>
 
@@ -109,8 +109,8 @@
         porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
         ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Diretor or Officer"></app-personal-history-summary>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
+      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Diretor or Officer"></app-associate-list>
     </section>
   </ng-container>
 
@@ -152,8 +152,8 @@
         porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
         ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [rootNode]="node"
-        (childAdded)="addChild(node, $event, 'AddIndividualShareholder')" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-personal-history-summary>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [rootNode]="node"
+        (childAdded)="addChild(node, $event, 'AddIndividualShareholder')" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-associate-list>
     </section>
     <h4 class="grey-header">Business Shareholders</h4>
       <section class="padded-section">
@@ -168,8 +168,8 @@
           porttitor massa id. Penatibus et magnis dis parturient montes nascetur ridiculus. Mi eget mauris pharetra et
           ultrices neque ornare. Leo duis ut diam quam nulla porttitor massa id.
         </p>
-        <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node" [account]="account"
-          (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-personal-history-summary>
+        <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node" [account]="account"
+          (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
       </section>
   </ng-container>
 </ng-template>

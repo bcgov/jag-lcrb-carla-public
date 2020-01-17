@@ -173,7 +173,7 @@ import { AssociateContentComponent } from '@components/dashboard/associate-conte
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
-import { PersonalHistorySummaryComponent } from './shared/components/personal-history-summary/personal-history-summary.component';
+import { AssociateListComponent } from './shared/components/associate-list/associate-list.component';
 import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
@@ -271,7 +271,7 @@ import { CateringDemoComponent } from './components/catering-demo/catering-demo.
     VersionInfoDialogComponent,
     LicencesComponent,
     ApplicationsComponent,
-    PersonalHistorySummaryComponent,
+    AssociateListComponent,
     OrgStructureComponent,    
     DynamicApplicationComponent,
     CateringDemoComponent
