@@ -52,13 +52,14 @@
     </section>
   </ng-container>
 
-  <ng-container *ngIf="node?.businessType === 'Society'">
+  <ng-container *ngIf="node?.businessType === 'Society'"><section class="padded-section">
     <app-field label="Annual Membership Fee">
       <input type="text" class="form-control">
     </app-field>
     <app-field label="Number of Members">
       <input type="text" class="form-control">
     </app-field>
+  </section>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
@@ -89,7 +90,7 @@
             required to provide security screening related information.
           </p>
       <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Diretor or Officer"></app-personal-history-summary>
+      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-personal-history-summary>
     </section>
   </ng-container>
 
