@@ -123,6 +123,12 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       previousLicenceApplicationDetails: [''],
       ruralAgencyStoreAppointment: ['', Validators.required],
       liquorIndustryConnections: ['', Validators.required],
+
+      liquorIndustryConnectionsDetails: [''],
+      otherBusinessesAtTheSameLocation: ['', Validators.required],
+      otherBusinessSameLocationDetails: [''],
+
+
       assignedLicence: this.fb.group({
         id: [''],
         establishmentAddressStreet: [''],

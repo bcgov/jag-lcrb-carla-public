@@ -86,7 +86,7 @@
                         <mat-button-toggle-group 
                                                  aria-label="Font Style" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                           
-                          <mat-button-toggle *ngFor="let option of formField.options" value="option.value">{{option.label}}</mat-button-toggle>                          
+                          <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">{{option.label}}</mat-button-toggle>                          
                         </mat-button-toggle-group>
                       </div>
                     </section>
