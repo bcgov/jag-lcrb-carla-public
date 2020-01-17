@@ -21,141 +21,111 @@
       <div *ngFor="let formTab of dynamicsForm.tabs">
         <h3 class="blue-header">{{formTab.name}}</h3>
 
-        <div *ngIf="formTab.name == 'Additional Requirements and Information'">
-
-          <label for="">Provide a sketch or renderings of the proposed business signage. Signs and business name are subject to LCRB approval</label>
-          <br>
-          <p><b>Note:</b> Signs should not be ordered prior to approval of the business name by the Liquor Control and Licensing Branch.</p>         
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Signage"
-                               fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-                               (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [enableFileDeletion]="true"
-                               [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'"
-                               #signageDocuments>
-            </app-file-uploader>
-          </section>
-          <i>
-            <p>At the time of final inspection, the liquor inspector will confirm that your business location meets the requirements of a catering licence by verifying the following eligibility requirements:</p>
-            <ul><li>The primary business of the applicant is the preparation and serving of food.</li>
-                <li>The applicant has the personnel and infrastructure necessary to prepare and serve food atevents hosted by others. This includes a requirement to have a full commercial kitchen atthe applicant's business location</li>
-            </ul>
-            <p>If at the time of final inspection the liquor inspector is not satisfied with your kitchen equipment,food selection, advertising and staffing, you may be required to make changes and schedule asecond (2nd) inspection to confirm you meet the requirements of a catering licence.
-            A fee of $200 will be charged if a second (2nd) inspection is required</p>
-            
-          </i>
-        </div>
-
-
-        <div *ngFor="let formSection of formTab.sections; let i = index;">
-          <div *ngIf="formSection.visible">
+        <div *ngIf="formTab.name == 'Additional Requirements and Information'; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
             <section class="padded-section">
-              <div *ngFor="let formField of formSection.fields">
-                <div *ngIf="formField.visible">
-                  <app-field *ngIf="formField.controltype == 'TextBoxControl'" [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname">
-                    <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" />
-                  </app-field>
+              <label for="">Provide a sketch or renderings of the proposed business signage. Signs and business name are subject to LCRB approval</label>
+              <br>
+              <p><b>Note:</b> Signs should not be ordered prior to approval of the business name by the Liquor Control and Licensing Branch.</p>
+              <section>
+                <app-file-uploader *ngIf="applicationId" documentType="Signage"
+                                   fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+                                   (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [enableFileDeletion]="true"
+                                   [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'"
+                                   #signageDocuments>
+                </app-file-uploader>
+              </section>
+              <i>
+                <p>At the time of final inspection, the liquor inspector will confirm that your business location meets the requirements of a catering licence by verifying the following eligibility requirements:</p>
+                <ul>
+                  <li>The primary business of the applicant is the preparation and serving of food.</li>
+                  <li>The applicant has the personnel and infrastructure necessary to prepare and serve food atevents hosted by others. This includes a requirement to have a full commercial kitchen atthe applicant's business location</li>
+                </ul>
+                <p>
+                  If at the time of final inspection the liquor inspector is not satisfied with your kitchen equipment,food selection, advertising and staffing, you may be required to make changes and schedule asecond (2nd) inspection to confirm you meet the requirements of a catering licence.
+                  A fee of $200 will be charged if a second (2nd) inspection is required
+                </p>
 
-                  <app-field *ngIf="formField.controltype == 'TextAreaControl'" [label]="formField.name" [required]="formField.required"  [id]="formField.datafieldname" [isFullWidth]="true"
-                     [showChevrons]="false" [valid]="isValidOrNotTouched('description1')">
-                    <textarea rows="8" style="width: 100%;" maxlength="5000"
-                              minlength="10" [formControlName]="formField.datafieldname"></textarea>
+              </i>
+          </section>
+        </ng-template>
+        <ng-template #elseBlock>
+          <div *ngFor="let formSection of formTab.sections; let i = index;">
+            <div *ngIf="formSection.visible">
+              <section class="padded-section">
+                <label for="" *ngIf="formSection.name">{{formSection.name}}</label>
+                <div *ngFor="let formField of formSection.fields">
+                  <div *ngIf="formField.visible">
+                    <app-field *ngIf="formField.controltype == 'TextBoxControl'" [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname">
+                      <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" />
+                    </app-field>
 
-                  </app-field>
+                    <app-field *ngIf="formField.controltype == 'TextAreaControl'" [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname" [isFullWidth]="true"
+                               [showChevrons]="false" [valid]="isValidOrNotTouched('description1')">
+                      <textarea rows="8" style="width: 100%;" maxlength="5000"
+                                minlength="10" [formControlName]="formField.datafieldname"></textarea>
 
-                  <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-                    <input type="text" style="width: 200px; background-color: #fff;"
-                           placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [max]="currentDate"
-                           [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
-                    <mat-datepicker #picker></mat-datepicker>
-                  </app-field>
+                    </app-field>
 
+                    <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                      <input type="text" style="width: 200px; background-color: #fff;"
+                             placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [max]="currentDate"
+                             [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                      <mat-datepicker #picker></mat-datepicker>
+                    </app-field>
+                    
+                    <mat-card *ngIf="formField.controltype == 'PicklistControl'"
+                              class="mat-elevation-z0" style="margin-bottom: 10px;">
+                      <section style="display: flex; justify-content: space-between; width: 100%;">
+                        <div class="question-label">
+                          {{formField.name}}
+                        </div>
+                        <div style="flex: 0 0 85px;">
+                          <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
 
-                  <!--
-  <app-field *ngIf="formField.controltype == 'PicklistControl'" [label]="formField.name" [required]="formField.required">
+                            <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">{{option.label}}</mat-button-toggle>
+                          </mat-button-toggle-group>
+                        </div>
+                      </section>
+                    </mat-card>
 
-  </app-field>
+                    <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name" [required]="formField.required">
+                      Lookup
+                    </app-field>
 
-  -->
-                  <mat-card *ngIf="formField.controltype == 'PicklistControl'"
-                            class="mat-elevation-z0" style="margin-bottom: 10px;">
-                    <section style="display: flex; justify-content: space-between; width: 100%;">
-                      <div class="question-label">
-                        {{formField.name}}
-                      </div>
-                      <div style="flex: 0 0 85px;">
-                        <mat-button-toggle-group 
-                                                 aria-label="Font Style" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-                          
-                          <mat-button-toggle *ngFor="let option of formField.options" value="option.value">{{option.label}}</mat-button-toggle>                          
-                        </mat-button-toggle-group>
-                      </div>
-                    </section>
-                  </mat-card>
+                    <app-field *ngIf="formField.controltype == 'RadioControl'" [valid]="!showValidationMessages || form.get(formField.datafieldname).valid"
+                               errorMessage=""
+                               [showChevrons]="false">
+                      <section style="display: flex">
+                        <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                        <span class="error-states">*</span>
+                        <div style="padding-left: 10px;">
+                          {{formField.name}}
+                        </div>
+                      </section>
+                    </app-field>
 
-                  <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name" [required]="formField.required">
-                    Lookup
-                  </app-field>                  
+                  </div>
 
-                  <app-field *ngIf="formField.controltype == 'RadioControl'" [valid]="!showValidationMessages || form.get(formField.datafieldname).valid"
-                             errorMessage=""
-                             [showChevrons]="false">
-                    <section style="display: flex">
-                      <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-                      <span class="error-states">*</span>
-                      <div style="padding-left: 10px;">
-                        {{formField.name}}
-                      </div>
-                    </section>
-                  </app-field>
-
-
-                  <!--
-  <app-field *ngIf="formField.controltype == 'TextBoxControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname" >
-    <input class="form-control" style="width: 500px;" type="text" />
-
-  </app-field>
-  <app-field *ngIf="formField.controltype == 'TextAreaControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-    <textarea rows="8" style="width: 100%;" maxlength="5000"
-              minlength="10"></textarea>
-
-  </app-field>
-
-  <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-    <input type="text" style="width: 200px; background-color: #fff;"
-           placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [max]="currentDate"
-           [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
-    <mat-datepicker #picker></mat-datepicker>
-  </app-field>
-
-
-
-  <app-field *ngIf="formField.controltype == 'PicklistControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-    Picklist
-  </app-field>
-
-
-  <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-    Lookup
-  </app-field>
-
-  <app-field *ngIf="formField.controltype == 'RadioControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-    Radio
-  </app-field>
-
-    -->
                 </div>
 
+              </section>
+            </div>
 
-                <!-- <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" id="{{formField.datafieldname}}" />-->
-
-
-              </div>
-
-            </section>
           </div>
+        </ng-template>
+</div>
 
-        </div>
-      </div>
+      <p>Proceed to pay online using a credit card through the secure web portal.</p>
+
+      <p>
+        <i>
+          <b>Please note:</b> Applications which are submitted without all required information or documents will
+          not be
+          processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+          applicants provide all required documents to the LCRB, the application will be processed.
+        </i>
+      </p>
 
       <section class="error" *ngIf="showValidationMessages">
         <p *ngFor="let message of validationMessages">

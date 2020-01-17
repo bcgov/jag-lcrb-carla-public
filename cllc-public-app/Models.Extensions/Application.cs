@@ -125,6 +125,16 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             to.AdoxioApplicanttype = (int?)from.ApplicantType;
 
+            // catering fields
+
+            to.AdoxioPreviouslicenceapplication = from.PreviousLicenceApplication;
+            to.AdoxioPreviouslicenceapplicationdetails = from.PreviousLicenceApplicationDetails;
+            to.AdoxioRuralagencystoreappointment = from.RuralAgencyStoreAppointment;
+            to.AdoxioLiquorindustryconnections = from.LiquorIndustryConnections;
+            to.AdoxioLiquorindustryconnectionsdetails = from.LiquorIndustryConnectionsDetails;
+            to.AdoxioOtherbusinessesatthesamelocation = from.OtherBusinessesAtTheSameLocation;
+            to.AdoxioOtherbusinesssamelocationdetails = from.OtherBusinessSameLocationDetails;
+
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
 
@@ -307,7 +317,35 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate,
                 IsReadyValidInterest = dynamicsApplication.AdoxioIsreadyvalidinterest,
 
-            };
+                // Catering fields.
+
+                PreviousLicenceApplicationDetails = dynamicsApplication.AdoxioPreviouslicenceapplicationdetails,
+                
+                LiquorIndustryConnectionsDetails = dynamicsApplication.AdoxioLiquorindustryconnectionsdetails,
+
+                OtherBusinessSameLocationDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
+        };
+
+            // Catering yes / no fields
+            if (dynamicsApplication.AdoxioPreviouslicenceapplication != null)
+            {
+                applicationVM.PreviousLicenceApplication = dynamicsApplication.AdoxioPreviouslicenceapplication;
+            }
+
+            if (dynamicsApplication.AdoxioRuralagencystoreappointment != null)
+            {
+                applicationVM.RuralAgencyStoreAppointment = dynamicsApplication.AdoxioRuralagencystoreappointment;
+            }
+
+            if (dynamicsApplication.AdoxioLiquorindustryconnections != null)
+            {
+                applicationVM.LiquorIndustryConnections = dynamicsApplication.AdoxioLiquorindustryconnections;
+            }
+            
+            if (dynamicsApplication.AdoxioOtherbusinessesatthesamelocation != null)
+            {
+                applicationVM.OtherBusinessesAtTheSameLocation = dynamicsApplication.AdoxioOtherbusinessesatthesamelocation;
+            }
 
 
             // id

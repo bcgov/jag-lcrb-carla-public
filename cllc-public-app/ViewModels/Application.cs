@@ -346,10 +346,14 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioFinalDecisionCodes AppChecklistFinalDecision { get; set; } //adoxioFinaldecision
 
-        public GeneralYesNo PreviousLicenceApplication { get; set; }
-        public String PreviousLicenceApplicationDetails { get; set; }
-        public GeneralYesNo RuralAgencyStoreAppointment { get; set; }
-        public GeneralYesNo LiquorIndustryConnections { get; set; }
+        public int? PreviousLicenceApplication { get; set; }
+        public string PreviousLicenceApplicationDetails { get; set; }
+        public int? RuralAgencyStoreAppointment { get; set; }
+        public int? LiquorIndustryConnections { get; set; }
+        public string LiquorIndustryConnectionsDetails { get; set; }
+        public int? OtherBusinessesAtTheSameLocation { get; set; }
+        public string OtherBusinessSameLocationDetails { get; set; }
+
 
         public GeneralYesNo AdoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
         public ViewModels.Account Applicant { get; set; }
