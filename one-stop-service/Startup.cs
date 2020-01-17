@@ -33,6 +33,7 @@ namespace Gov.Lclb.Cllb.OneStopService
     public class Startup
     {
         private readonly ILoggerFactory _loggerFactory;
+        public IConfiguration Configuration { get; }
 
         public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
@@ -53,7 +54,6 @@ namespace Gov.Lclb.Cllb.OneStopService
 
         }
 
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -239,11 +239,6 @@ namespace Gov.Lclb.Cllb.OneStopService
 
                     Microsoft.Extensions.Logging.ILogger oneStopLog = loggerFactory.CreateLogger(typeof(OneStopUtils));
                     RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, oneStopLog).CheckForNewLicences(null), Cron.Hourly());
-
-                    Microsoft.Extensions.Logging.ILogger orbookLog = loggerFactory.CreateLogger(typeof(OrgBookUtils));
-                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForNewLicences(null), Cron.Hourly());
-                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForMissingCredentials(null), Cron.Hourly());
-                    RecurringJob.AddOrUpdate(() => new OrgBookUtils(Configuration, orbookLog).CheckForOrgbookLinks(null), Cron.Daily());
 
                     log.LogInformation("Hangfire License issuance check jobs setup.");
                 }

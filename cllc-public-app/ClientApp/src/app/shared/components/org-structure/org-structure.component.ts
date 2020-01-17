@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { Account } from '@models/account.model';
 
@@ -10,11 +10,14 @@ import { Account } from '@models/account.model';
 export class OrgStructureComponent implements OnInit {
   @Input() node: LicenseeChangeLog;
   @Input() account: Account;
+  @Output() deletedChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
 
   constructor() { }
 
   ngOnInit() {
   }
+
+  asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
 
   addChild(node: LicenseeChangeLog, child: LicenseeChangeLog, changeType: string) {
     node.children = node.children || [];
@@ -28,7 +31,6 @@ export class OrgStructureComponent implements OnInit {
       child.isShareholderNew = true;
       child.isIndividual = false
     }
-
     node.children.push(child);
   }
 
