@@ -41,7 +41,8 @@
 
     <table class="eq-table" style="margin-top: 10px;">
         <ng-container *ngIf="changeTypeSuffix === 'Leadership'">
-            <tr>
+        
+            <tr *ngIf="personalHistoryItems.length > 0">
                 <th style="width: 200px;">First Name</th>
                 <th style="width: 200px;">Last Name</th>
                 <th *ngIf="showPosition()" style="width: 200px;">Position</th>
@@ -101,7 +102,7 @@
         </ng-container>
 
         <ng-container *ngIf="changeTypeSuffix === 'IndividualShareholder'">
-            <tr>
+            <tr *ngIf="personalHistoryItems.length > 0">
                 <th style="width: 200px;">First Name</th>
                 <th style="width: 200px;">Last Name</th>
                 <th style="width: 200px;">Shares (%)</th>
@@ -111,6 +112,7 @@
                 <th>Cannabis Associate Status </th>
                 <th style="background-color: transparent;"></th>
             </tr>
+            
             <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
                 <tr [ngClass]="{'alt-row': i%2 === 0}">
                     <td>
@@ -151,7 +153,8 @@
         </ng-container>
 
         <ng-container *ngIf="changeTypeSuffix === 'BusinessShareholder'">
-            <tr>
+
+            <tr *ngIf="personalHistoryItems.length > 0">
                 <th style="width: 200px;">Business Name</th>
                 <th style="width: 200px;">Shares (%)</th>
                 <th style="width: 200px;">Business Type</th>
@@ -160,6 +163,7 @@
                 <th>Cannabis Associate Status </th>
                 <th style="background-color: transparent;"></th>
             </tr>
+            
             <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
 
                 <tr [ngClass]="{'alt-row': i%2 === 0}">
