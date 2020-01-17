@@ -1,6 +1,6 @@
-<h1 style="margin-top: 0"> {{node?.businessNameNew}} Organization Structure</h1>
+<h2 style="margin-top: 0"> {{node?.businessNameNew}} Organization Structure</h2>
 
-<span>{{node?.businessType}}</span> <br><br>
+<span>{{Account.getBusinessTypeFromName(node?.businessType)}}</span> <br><br>
 
 
 
@@ -9,7 +9,7 @@
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
     <h3 class="blue-header">Notice of Articles</h3>
     <section class="padded-section">
-      <p>Please provide a copy of the Notice of Articles for {{node?.businessNameNew}}.</p> {{asLicenseeChangeLog(node).fileUploadPrefix}}
+      <p>Please provide a copy of the Notice of Articles for {{node?.businessNameNew}}.</p>
       <section>
         <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
           [multipleFiles]="false" entityName="account" [useDocumentTypeForName]="true"

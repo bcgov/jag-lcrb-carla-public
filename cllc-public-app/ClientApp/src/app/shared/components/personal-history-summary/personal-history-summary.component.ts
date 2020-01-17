@@ -55,6 +55,7 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
     associate.changeType = `add${this.changeTypeSuffix}`;
     associate.parentLinceseeChangeLog = this.rootNode;
     associate.edit = true;
+    associate.collapse = true;
     this.childAdded.emit(associate);
 
   }
