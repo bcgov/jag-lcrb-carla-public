@@ -72,17 +72,27 @@ internal class KestrelOptionsSetup : IConfigureOptions<KestrelServerOptions>
     {
         if (_options.Value.UseHttps)
         {                
-                options.ListenAnyIP(8080, configureListen => {
-                        configureListen.UseHttps(_certificateLoader.ServiceCertificate);
-                        // enable Http2, for gRPC
-                        configureListen.Protocols = HttpProtocols.Http2;
-                        configureListen.UseConnectionLogging();
-                    });
+            options.ListenAnyIP(8080, configureListen => {
+                    configureListen.UseHttps(_certificateLoader.ServiceCertificate);
+                    // enable Http2, for gRPC
+                    configureListen.Protocols = HttpProtocols.Http2;
+                    configureListen.UseConnectionLogging();
+                });           
         }
         else
         {
-            options.ListenAnyIP(8080);
+            options.ListenAnyIP(8080, configureListen => {                
+                // enable Http2, for gRPC
+                configureListen.Protocols = HttpProtocols.Http2;
+                configureListen.UseConnectionLogging();
+            });                
         }
+
+        // Also listen on port 8088 for health checks. Note that you won't be able to do gRPC calls on this port; 
+        // it is only required because the OpenShift 3.11 health check system does not seem to be compatible with HTTP2.
+        options.ListenAnyIP(8088, configureListen => {
+            configureListen.Protocols = HttpProtocols.Http1;
+        });
     }
 }
 
