@@ -177,6 +177,7 @@ import { AssociateListComponent } from './shared/components/associate-list/assoc
 import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
+import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
 
 
 @NgModule({
@@ -274,7 +275,8 @@ import { CateringDemoComponent } from './components/catering-demo/catering-demo.
     AssociateListComponent,
     OrgStructureComponent,    
     DynamicApplicationComponent,
-    CateringDemoComponent
+    CateringDemoComponent,
+    PersonalHistorySummaryComponent
   ],
   imports: [
     ChartsModule,
