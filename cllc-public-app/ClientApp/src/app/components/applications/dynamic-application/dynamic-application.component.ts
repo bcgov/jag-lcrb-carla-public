@@ -152,26 +152,12 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       establishmentAddressPostalCode: ['', [Validators.required, Validators.pattern(CanadaPostalRegex)]],
       establishmentEmail: ['', Validators.email],
       establishmentPhone: [''],
-      serviceHoursSundayOpen: ['', Validators.required],
-      serviceHoursMondayOpen: ['', Validators.required],
-      serviceHoursTuesdayOpen: ['', Validators.required],
-      serviceHoursWednesdayOpen: ['', Validators.required],
-      serviceHoursThursdayOpen: ['', Validators.required],
-      serviceHoursFridayOpen: ['', Validators.required],
-      serviceHoursSaturdayOpen: ['', Validators.required],
-      serviceHoursSundayClose: ['', Validators.required],
-      serviceHoursMondayClose: ['', Validators.required],
-      serviceHoursTuesdayClose: ['', Validators.required],
-      serviceHoursWednesdayClose: ['', Validators.required],
-      serviceHoursThursdayClose: ['', Validators.required],
-      serviceHoursFridayClose: ['', Validators.required],
-      serviceHoursSaturdayClose: ['', Validators.required],
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
       applyAsIndigenousNation: [false],
       indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
-      applicantType: ['', Validators.required],
+      applicantType: [''],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
     });
@@ -266,22 +252,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentPhone').disable();
     }
 
-    if (!this.application.applicationType.showHoursOfSale) {
-      this.form.get('serviceHoursSundayOpen').disable();
-      this.form.get('serviceHoursMondayOpen').disable();
-      this.form.get('serviceHoursTuesdayOpen').disable();
-      this.form.get('serviceHoursWednesdayOpen').disable();
-      this.form.get('serviceHoursThursdayOpen').disable();
-      this.form.get('serviceHoursFridayOpen').disable();
-      this.form.get('serviceHoursSaturdayOpen').disable();
-      this.form.get('serviceHoursSundayClose').disable();
-      this.form.get('serviceHoursMondayClose').disable();
-      this.form.get('serviceHoursTuesdayClose').disable();
-      this.form.get('serviceHoursWednesdayClose').disable();
-      this.form.get('serviceHoursThursdayClose').disable();
-      this.form.get('serviceHoursFridayClose').disable();
-      this.form.get('serviceHoursSaturdayClose').disable();
-    }
 
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
@@ -515,12 +485,25 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     if (!this.form.valid) {
       this.validationMessages.push('Some required fields have not been completed');
     }
+
+    /* Invalid field check
+    const invalid = [];
+    const controls = this.form.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
+    }
+
+    alert(invalid);
+    */
+
     return valid && this.form.valid;
   }
 
 
   /**
-   * Dialog to confirm the application cancellation (status changed to "Termindated")
+   * Dialog to confirm the application cancellation (status changed to "Terminated")
    */
   cancelApplication() {
 

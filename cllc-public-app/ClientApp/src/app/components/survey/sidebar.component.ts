@@ -1,6 +1,6 @@
 import { Component, Injector, Input } from '@angular/core';
 import { SurveyComponent } from './survey.component';
-import { SurveyModel } from 'survey-angular';
+//import { SurveyModel } from 'survey-angular';
 
 @Component({
   selector: 'survey-sidebar',
@@ -11,7 +11,7 @@ export class SurveySidebarComponent  {
   title: string;
   links: any[];
   private survey: SurveyComponent;
-
+  /*
   constructor(private injector : Injector) {
     // survey will be passed by the injector when instantiated by InsertComponent
     this.survey = <SurveyComponent>this.injector.get('survey');
@@ -33,7 +33,7 @@ export class SurveySidebarComponent  {
       this.links = links;
     }
   }
-
+  */
   changePage(pageNo: number) {
     //this.survey.changePage(pageNo);
   }
