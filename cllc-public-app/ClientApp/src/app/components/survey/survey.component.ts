@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import * as Survey from 'survey-angular';
+//import * as Survey from 'survey-angular';
 import { InsertService } from '../insert/insert.service';
 import { addQuestionTypes } from './question-types';
 import { BehaviorSubject } from 'rxjs';
@@ -13,6 +13,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SurveyComponent {
   @Input() jsonData: any;
   @Input() onComplete: Function;
+
+  /*
   public surveyModel: Survey.SurveyModel;
   public onPageUpdate: BehaviorSubject<Survey.SurveyModel> = new BehaviorSubject<Survey.SurveyModel>(null);
   private clientId: string;
@@ -73,7 +75,8 @@ export class SurveyComponent {
     //changePage(pageNo: number) {
     //  this.surveyModel.currentPageNo = pageNo;
     //}
-
+ 
   }
+     */
 
 }

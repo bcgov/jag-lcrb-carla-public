@@ -14,7 +14,7 @@ node('master') {
         parallel('Angular': {
 
             if (changeset("cllc-public-app/ClientApp/*")) {
-                openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
+                openshiftBuild bldCfg: 'cllc-public-angular-build', showBuildLogs: 'true'
             }
         }, 'C# API': {
             if (changeset("cllc-public-app/*")) {
