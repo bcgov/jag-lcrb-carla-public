@@ -11,6 +11,7 @@ export class OrgStructureComponent implements OnInit {
   @Input() node: LicenseeChangeLog;
   @Input() account: Account;
   @Output() deletedChanges: EventEmitter<LicenseeChangeLog> = new EventEmitter<LicenseeChangeLog>();
+  Account = Account;
 
   constructor() { }
 
