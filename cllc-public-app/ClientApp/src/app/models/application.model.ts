@@ -5,6 +5,15 @@ import { ApplicationType } from './application-type.model';
 import { TiedHouseConnection } from './tied-house-connection.model';
 
 export class Application {
+
+  previousLicenceApplication: number;
+  previousLicenceApplicationDetails: string;
+  ruralAgencyStoreAppointment: number;
+  liquorIndustryConnections: number;
+  liquorIndustryConnectionsDetails: string;
+  otherBusinessesAtTheSameLocation: number;
+  otherBusinessSameLocationDetails: string;
+
   id: string;
   account: Account;
   additionalPropertyInformation: string;

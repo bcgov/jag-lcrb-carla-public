@@ -60,6 +60,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Contact Contact { get; set; }
         public Account ParentBusinessAccount { get; set; }
         public string ApplicationId { get; set; }
+        public string BusinessAccountId { get; set; }
         public string ParentLegalEntityId { get; set; }
         public string LegalEntityId { get; set; }
         public string ParentLinceseeChangeLogId { get; set; }

@@ -1,37 +1,33 @@
+// The builds.
+
 node('master') {
     stage('Startup') {
-        sh 'oc cancel-build bc/cllc-public-api'
+        if (changeset("cllc-public-app/ClientApp/*")) {
+                sh 'oc cancel-build bc/cllc-public-angular'                
+            }
+        if (changeset("cllc-public-app/*")) {
+                sh 'oc cancel-build bc/cllc-public-api'        
+        }
     }
-	
-	
-    stage('Build') {        
-        parallel('SonarQube Scan' : {
-            echo "Running SonarQube static code analysis..."
-			sh 'oc cancel-build bc/cllc-public-sonar'
-			openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
-        }, 'Portal Build' : {
-				parallel ('Angular' : {
-				   if ( changeset ("cllc-public-app/ClientApp/*") )
-				   {
-				     sh 'oc cancel-build bc/cllc-public-angular'
-				     openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
-				   }
-				}, 'C# API' : {
-				  if ( changeset ("cllc-public-app/*") )
-				  {
-				    sh 'oc cancel-build bc/cllc-public-api'
-				    openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
-				  }
-				}
-			)
-				    
-            echo "Building Application image..."
-            openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true'
-            openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public', srcTag: 'latest'
+
+    stage('Build') {
+        parallel('Angular': {
+
+            if (changeset("cllc-public-app/ClientApp/*")) {
+                openshiftBuild bldCfg: 'cllc-public-angular-build', showBuildLogs: 'true'
+            }
+        }, 'C# API': {
+            if (changeset("cllc-public-app/*")) {
+                openshiftBuild bldCfg: 'cllc-public-api', showBuildLogs: 'true'
+            }
         })
+
+        echo "Building Application image..."
+        openshiftBuild bldCfg: 'cllc-public-frontend', showBuildLogs: 'true'
+        openshiftTag destStream: 'cllc-public-frontend', verbose: 'true', destTag: 'dev', srcStream: 'cllc-public-frontend', srcTag: 'latest'
     }
-    
 }
+
 
 // ZAP security scan
 
@@ -47,10 +43,8 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
         command: '',
         args: '${computer.jnlpmac} ${computer.name}'
     )
-])
-{
-    stage('ZAP Security Scan')
-    {
+]) {
+    stage('ZAP Security Scan') {
         node('owasp-zap2') {
             //the checkout is mandatory
             echo "checking out source"
@@ -66,40 +60,42 @@ podTemplate(label: 'owasp-zap2', name: 'owasp-zap2', serviceAccount: 'jenkins', 
         }
     }
 }
+stage('Automated Tests and code analysis') {
 
-node('nodejs') {
-    stage('Angular Unit Tests') {
-        //the checkout is mandatory, otherwise functional test would fail
-        echo "checking out source"
-        echo "Build: ${BUILD_ID}"
-        checkout scm
-        dir('cllc-public-app/ClientApp') {
-            try {
-                // sh 'Xvfb :1 -screen 0 1024x768x24 &'
-                // sh 'export DISPLAY=:1'
-                sh 'npm install -g @angular/cli'
-                sh 'npm install'				                
-				sh 'npm run test-headless'
-            } finally {
-                archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
-                junit 'junit.xml'
-                publishHTML(target: [
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: false,
-                    keepAll: true,
-                    reportDir: '.',
-                    reportFiles: 'unit-tests.html',
-                    reportName: "Unit Test Report"
-                ])
+    parallel('SonarQube Scan': {
+            node('master') {
+                echo "Running SonarQube static code analysis..."
+                sh 'oc cancel-build bc/cllc-public-sonar'
+                openshiftBuild bldCfg: 'cllc-public-sonar', showBuildLogs: 'true'
             }
-        }
-    }
+        }, 'Angular': {
+            node('nodejs') 
+                {
+                    //the checkout is mandatory, otherwise functional test would fail
+                    echo "checking out source"
+                    echo "Build: ${BUILD_ID}"
+                    checkout scm
+                    dir('cllc-public-app/ClientApp') {
+                        try {
+                            // sh 'Xvfb :1 -screen 0 1024x768x24 &'
+                            // sh 'export DISPLAY=:1'
+                            sh 'npm install -g @angular/cli'
+                            sh 'npm install'
+                            sh 'npm run test-headless'
+                        } finally {
+                            archiveArtifacts allowEmptyArchive: true, artifacts: '*.xml'
+                            junit 'junit.xml'
+                            publishHTML(target: [
+                                allowMissing: false,
+                                alwaysLinkToLastBuild: false,
+                                keepAll: true,
+                                reportDir: '.',
+                                reportFiles: 'unit-tests.html',
+                                reportName: "Unit Test Report"
+                            ])
+                        }
+                    }
+                }
+            }
+    )
 }
-
-
-stage('Deploy on Test') {
-    node('master') {
-        openshiftTag destStream: 'cllc-public', verbose: 'true', destTag: 'test', srcStream: 'cllc-public', srcTag: '$BUILD_ID'
-    }
-}
-

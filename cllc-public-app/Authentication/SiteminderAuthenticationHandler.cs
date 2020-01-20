@@ -12,6 +12,11 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using Gov.Lclb.Cllb.Interfaces.Models;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using Gov.Lclb.Cllb.Services.FileManager;
+using System.Collections.Generic;
+using Microsoft.Extensions.Primitives;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -64,7 +69,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             SiteMinderUserNameKey = ConstSiteMinderUserNameKey;
             SiteMinderUserDisplayNameKey = ConstSiteMinderUserDisplayNameKey;
             SiteMinderUserTypeKey = ConstSiteMinderUserType;
-            SiteMinderBirthDate = ConstSiteMinderUserType;
+            SiteMinderBirthDate = ConstSiteMinderBirthDate;
             MissingSiteMinderUserIdError = ConstMissingSiteMinderUserIdError;
             MissingSiteMinderUserTypeError = ConstMissingSiteMinderUserIdError;
             MissingSiteMinderGuidError = ConstMissingSiteMinderGuidError;
@@ -230,6 +235,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 ClaimsPrincipal principal;
                 HttpContext context = Request.HttpContext;
                 IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
+
+                FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
                 IWebHostEnvironment hostingEnv = (IWebHostEnvironment)context.RequestServices.GetService(typeof(IWebHostEnvironment));
 
@@ -472,6 +479,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         {
                             userSettings.AccountId = account.Accountid;
                             userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
+
+                            // ensure that the given account has a documents folder.
+                            await CreateAccountDocumentLocation(_dynamicsClient, _fileManagerClient, account);
                         }
                     }
                 }
@@ -539,17 +549,52 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 }
 
                 // add the worker settings if it is a new user.
-                if (userSettings.IsNewUserRegistration && userSettings.NewWorker == null)
+                if (userSettings.IsNewUserRegistration)
                 {
                     userSettings.NewWorker = new ViewModels.Worker();
                     userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
-                }
 
-                // add the worker settings if it is a new user.
-                if (userSettings.IsNewUserRegistration && userSettings.NewContact == null)
-                {
                     userSettings.NewContact = new ViewModels.Contact();
                     userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+                }
+                else if (siteMinderUserType == "VerifiedIndividual")
+                {
+                    // Verified individual is from BC Service Card which means it's a worker
+                    // Update contact and worker with latest info from BC Service Card
+                    ViewModels.Contact contact = new ViewModels.Contact();
+                    contact.CopyHeaderValues(context.Request.Headers);
+
+                    MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
+                    if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1) {
+                        MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress() {
+                            AdoxioStreetaddress = savedContact.Address1Line1,
+                            AdoxioProvstate = savedContact.Address1Stateorprovince,
+                            AdoxioCity = savedContact.Address1City,
+                            AdoxioCountry = savedContact.Address1Country,
+                            AdoxioPostalcode = savedContact.Address1Postalcode,
+                            ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", savedContact.Contactid)
+                        };
+                        _dynamicsClient.Previousaddresses.Create(prevAddress);
+                    }
+
+                    
+                    _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());
+                    
+
+                    ViewModels.Worker worker = new ViewModels.Worker();
+                    worker.CopyHeaderValues(context.Request.Headers);
+                    MicrosoftDynamicsCRMadoxioWorker savedWorker = _dynamicsClient.Workers.Get(filter: $"_adoxio_contactid_value eq {userSettings.ContactId}").Value[0];
+                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker() {
+                        AdoxioFirstname = worker.firstname,
+                        AdoxioLastname = worker.lastname,
+                        AdoxioMiddlename = worker.middlename
+                    };
+                    if (worker.gender != 0) {
+                        patchWorker.AdoxioGendercode = (int)worker.gender;
+                    }
+                    
+                    _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
+                    
                 }
 
                 // **************************************************
@@ -564,9 +609,126 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             catch (Exception exception)
             {
                 _logger.LogError(exception.Message);
-                Console.WriteLine(exception);
                 throw;
             }
+        }
+
+
+
+        private async Task CreateAccountDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
+        {
+            string name = "";
+            try
+            {
+                string serverRelativeUrl = account.GetServerUrl();                
+
+                if (string.IsNullOrEmpty(account.Name))
+                {
+                    name = account.Accountid;
+                }
+                else
+                {
+                    name = account.Name;
+                }
+
+                name += " Account Files";
+
+                string folderName = $"{account.Name}_{account.Accountid}";
+                
+
+                var createFolderRequest = new CreateFolderRequest()
+                {
+                    EntityName = "account",
+                    FolderName = folderName
+                };
+
+                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+
+                if (createFolderResult.ResultStatus == ResultStatus.Fail)
+                {
+                    _logger.LogError($"Error creating folder for account {name}. Error is {createFolderResult.ErrorDetail}");
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating folder for account {name}");
+            }
+            
+
+            /*
+            // now create a document location to link them.
+
+            // Create the SharePointDocumentLocation entity
+            MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+            {
+                Relativeurl = folderName,
+                Description = "Account Files",
+                Name = name
+            };
+
+
+            try
+            {
+                mdcsdl = _dynamicsClient.Sharepointdocumentlocations.Create(mdcsdl);
+            }
+            catch (OdataerrorException odee)
+            {
+                _logger.LogError("Error creating SharepointDocumentLocation");
+                _logger.LogError("Request:");
+                _logger.LogError(odee.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(odee.Response.Content);
+                mdcsdl = null;
+            }
+            if (mdcsdl != null)
+            {
+
+                // set the parent document library.
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL("account");
+
+                string accountUri = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
+                // add a regardingobjectid.
+                var patchSharePointDocumentLocationIncident = new MicrosoftDynamicsCRMsharepointdocumentlocation()
+                {
+                    RegardingobjectIdAccountODataBind = accountUri,
+                    ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference),
+                    Relativeurl = folderName,
+                    Description = "Account Files",
+                };
+
+                try
+                {
+                    _dynamicsClient.Sharepointdocumentlocations.Update(mdcsdl.Sharepointdocumentlocationid, patchSharePointDocumentLocationIncident);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error adding reference SharepointDocumentLocation to account");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+
+                string sharePointLocationData = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", mdcsdl.Sharepointdocumentlocationid);
+
+                OdataId oDataId = new OdataId()
+                {
+                    OdataIdProperty = sharePointLocationData
+                };
+                try
+                {
+                    _dynamicsClient.Accounts.AddReference(account.Accountid, "Account_SharepointDocumentLocation", oDataId);
+                }
+                catch (OdataerrorException odee)
+                {
+                    _logger.LogError("Error adding reference to SharepointDocumentLocation");
+                    _logger.LogError("Request:");
+                    _logger.LogError(odee.Request.Content);
+                    _logger.LogError("Response:");
+                    _logger.LogError(odee.Response.Content);
+                }
+            }
+            */
         }
     }
 }

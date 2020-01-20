@@ -1,0 +1,416 @@
+<ng-template #applicationContent>
+
+  <div *ngIf="account?.businessType" [ngClass]="{'hide': mode === UPLOAD_FILES_MODE}">
+
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <!-- Title -->
+      <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
+    </div>
+    <div [formGroup]="form" class="application-wrapper" *ngIf="dynamicsForm && form">
+      <!-- Preamble -->
+      <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
+
+      <!-- Before Starting -->
+      <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">
+        BEFORE STARTING
+        THE APPLICATION
+      </h3>
+      <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
+        <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
+      </section>
+      <div *ngFor="let formTab of dynamicsForm.tabs">
+        <h3 class="blue-header">{{formTab.name}}</h3>
+
+        <div *ngIf="formTab.name == 'Additional Requirements and Information'; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <section class="padded-section">
+              <label for="">Provide a sketch or renderings of the proposed business signage. Signs and business name are subject to LCRB approval</label>
+              <br>
+              <p><b>Note:</b> Signs should not be ordered prior to approval of the business name by the Liquor Control and Licensing Branch.</p>
+              <section>
+                <app-file-uploader *ngIf="applicationId" documentType="Signage"
+                                   fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+                                   (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [enableFileDeletion]="true"
+                                   [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'"
+                                   #signageDocuments>
+                </app-file-uploader>
+              </section>
+              <i>
+                <p>At the time of final inspection, the liquor inspector will confirm that your business location meets the requirements of a catering licence by verifying the following eligibility requirements:</p>
+                <ul>
+                  <li>The primary business of the applicant is the preparation and serving of food.</li>
+                  <li>The applicant has the personnel and infrastructure necessary to prepare and serve food atevents hosted by others. This includes a requirement to have a full commercial kitchen atthe applicant's business location</li>
+                </ul>
+                <p>
+                  If at the time of final inspection the liquor inspector is not satisfied with your kitchen equipment,food selection, advertising and staffing, you may be required to make changes and schedule asecond (2nd) inspection to confirm you meet the requirements of a catering licence.
+                  A fee of $200 will be charged if a second (2nd) inspection is required
+                </p>
+
+              </i>
+          </section>
+        </ng-template>
+        <ng-template #elseBlock>
+          <div *ngFor="let formSection of formTab.sections; let i = index;">
+            <div *ngIf="formSection.visible">
+              <section class="padded-section">
+                <label for="" *ngIf="formSection.name">{{formSection.name}}</label>
+                <div *ngFor="let formField of formSection.fields">
+                  <div *ngIf="formField.visible">
+
+                    <div *ngIf="formField.datafieldname === 'establishmentParcelId'">
+                      <div class="light-blue-bg" style="display: flex;">
+                        <div style="flex: 0 0 210px;">
+                          <app-field label="Parcel Identifier (PID)" [valid]="isValidOrNotTouched('establishmentParcelId')"
+                                     errorMessage="Please enter the Parcel Identifier (format: 9 digits)" [required]="true">
+                            <input type="text" class="form-control" style="width: 200px;"
+                                   (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength=9 formControlName="establishmentParcelId" id="establishmentParcelId">
+                          </app-field>
+                        </div>
+                        <div style="flex: 1; font-size: 11px;">
+                          <span>
+
+                            <span>
+                              <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>The property’s PID may be
+                              found
+                              on
+                            </span> <br>
+                            <ul style="display: inline-block">
+                              <li>The title to the property</li>
+                              <li>Through the B.C. Land Title and Survey Authority</li>
+                              <li>The tax assessment notice from BC Assessment</li>
+                            </ul>
+                          </span>
+
+                          <ul style="display: inline-block">
+                            <li>BC Assessment’s e-valueBC website </li>
+                            <li>The municipal tax notice</li>
+                            <li>The property lease</li>
+                          </ul>
+                        </div>
+                      </div>
+                      &nbsp;<br />
+                    </div>
+                    
+                    <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'  " [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname">
+                      <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" />                      
+                    </app-field>
+
+                    <app-field *ngIf="formField.controltype == 'TextAreaControl'" [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname" [isFullWidth]="true"
+                               [showChevrons]="false" [valid]="isValidOrNotTouched('description1')">
+                      <textarea rows="8" style="width: 100%;" maxlength="5000"
+                                minlength="10" [formControlName]="formField.datafieldname"></textarea>
+
+                    </app-field>
+
+                    <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                      <input type="text" style="width: 200px; background-color: #fff;"
+                             placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [max]="currentDate"
+                             [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                      <mat-datepicker #picker></mat-datepicker>
+                    </app-field>
+                    
+                    <mat-card *ngIf="formField.controltype == 'PicklistControl'"
+                              class="mat-elevation-z0" style="margin-bottom: 10px;">
+                      <section style="display: flex; justify-content: space-between; width: 100%;">
+                        <div class="question-label">
+                          {{formField.name}}
+                        </div>
+                        <div style="flex: 0 0 85px;">
+                          <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+
+                            <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">{{option.label}}</mat-button-toggle>
+                          </mat-button-toggle-group>
+                        </div>
+                      </section>
+                    </mat-card>
+
+                    <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name" [required]="formField.required">
+                      Lookup
+                    </app-field>
+
+                    <app-field *ngIf="formField.controltype == 'RadioControl'" [valid]="!showValidationMessages || form.get(formField.datafieldname).valid"
+                               errorMessage=""
+                               [showChevrons]="false">
+                      <section style="display: flex">
+                        <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                        <span class="error-states">*</span>
+                        <div style="padding-left: 10px;">
+                          {{formField.name}}
+                        </div>
+                      </section>
+                    </app-field>
+
+                  </div>
+
+                </div>
+
+              </section>
+            </div>
+
+          </div>
+        </ng-template>
+</div>
+
+      <p>Proceed to pay online using a credit card through the secure web portal.</p>
+
+      <p>
+        <i>
+          <b>Please note:</b> Applications which are submitted without all required information or documents will
+          not be
+          processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
+          applicants provide all required documents to the LCRB, the application will be processed.
+        </i>
+      </p>
+
+      <section class="error" *ngIf="showValidationMessages">
+        <p *ngFor="let message of validationMessages">
+          <span class="app-cancel">
+            <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
+            {{message}}
+          </span>
+        </p>
+      </section>
+
+      <div class="light-blue-bg">
+        <p>
+          The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised
+          that
+          once an application is submitted, you will be unable to upload additional documentation. For questions on
+          the
+          LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
+        </p>
+      </div>
+
+      <section style="position: relative; margin-top: 20px;">
+        <button class="btn btn-primary" style="margin-right:10px;" (click)="router.navigate(['/catering-demo'])">
+          <span>
+            <i class="fa fa-save" style="color: #fff;"></i>
+            SAVE FOR LATER
+          </span>
+        </button>
+        <button class="btn btn-primary" (click)="submit_application()">SUBMIT &amp; PAY</button>
+        <span style="float: right; color: #1a5a96; padding-top: 10px;">
+          <span (click)="cancelApplication()">
+            <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
+            <a href="javascript: void(0)" id="cancelApp">
+              Cancel Application
+            </a>
+          </span>
+        </span>
+
+        <div [ngBusy]="busy"></div>
+      </section>
+
+    </div>
+
+    
+  </div>
+ 
+
+  <div [ngClass]="{'normal-mode': mode !== UPLOAD_FILES_MODE}">
+    <div [formGroup]="form" style="padding-left: 45px; position: relative">
+      <div [ngBusy]="busy"></div>
+      <h1 *ngIf="application">Add More files to the Application</h1>
+    </div>
+    <div *ngIf="application" class="application-wrapper">
+      <label for="">Establishment Name</label>:
+      <span style="color: #1a5a96;">{{form.controls['establishmentName'].value}}</span>
+      <br>
+
+      <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">
+
+        <label for="">Associates Form</label>
+        <br>
+        <i>
+          Please download
+          <a *ngIf="account?.businessType === 'SoleProprietor'"
+             href="https://www2.gov.bc.ca/assets/download/A61C46EE12464E76BE9594B674CADB93" download target="_blank" rel="noopener noreferrer">
+            and complete
+          </a>
+          <a *ngIf="account?.businessType === 'Society'"
+             href="https://www2.gov.bc.ca/assets/download/44B8FA4AA8974880AA1A7392ACC1E406" download target="_blank" rel="noopener noreferrer">
+            and complete
+          </a>
+          <a *ngIf="businessTypeIsPartnership()"
+             href="https://www2.gov.bc.ca/assets/download/1002E9464D8349EC8894407AF057446B" download target="_blank" rel="noopener noreferrer">
+            and complete
+          </a>
+          <a *ngIf=" businessTypeIsPrivateCorporation()"
+             href="https://www2.gov.bc.ca/assets/download/1212A58A8CE34365BD566AB2B1382AD5" download target="_blank" rel="noopener noreferrer">
+            and complete
+          </a>
+          &nbsp;the Associate Form..
+        </i>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Associates"
+                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                             (numberOfUploadedFiles)="uploadedAssociateDocuments = $event" [enableFileDeletion]="false"
+                             [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ASSOCIATE FORM, DRAG FILE HERE OR'" #mainForm>
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+        <br>
+
+        <label for="">Financial Integrity Form</label>
+        <br>
+        <i>
+          Please download <a href="https://www2.gov.bc.ca/assets/download/E840994D9D304AFE8D56A50666281B9D" download
+                             target="_blank" rel="noopener noreferrer">and complete</a> the financial integrity form.
+        </i>
+        <p>Upload the completed form below.</p>
+        <section>
+          <app-file-uploader *ngIf="applicationId" documentType="Licence Application Financial Integrity"
+                             fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                             (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [enableFileDeletion]="false"
+                             [entityId]="applicationId" [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'"
+                             #financialIntegrityDocuments>
+          </app-file-uploader>
+        </section>
+        <br>
+        <hr>
+      </div>
+      <label for="">Supporting Documents</label>
+      <br>
+      <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+        Please download the
+        <span *ngIf=" application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
+          <a *ngIf="account?.businessType === 'SoleProprietor'"
+             href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf="account?.businessType === 'Society'"
+             href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf="account?.businessType === 'IndigenousNation'"
+             href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf="businessTypeIsPartnership()"
+             href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf=" businessTypeIsPrivateCorporation()"
+             href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+        </span>
+        <span *ngIf=" application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
+          <a *ngIf="account?.businessType === 'SoleProprietor'"
+             href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf="account?.businessType === 'Society'"
+             href="https://www2.gov.bc.ca/assets/download/9CC0BA56735E466AB09FEAEE3241F46C" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf="account?.businessType === 'IndigenousNation'"
+             href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf="businessTypeIsPartnership()"
+             href="https://www2.gov.bc.ca/assets/download/9A8C9C2E49564C54A2232E60F5B266DB" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+          <a *ngIf=" businessTypeIsPrivateCorporation()"
+             href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank" rel="noopener noreferrer">
+            Document Checklist
+          </a>
+        </span>
+        <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSLocationChange">
+          and assemble
+          all
+          required documents.
+        </span>
+        <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
+          and assemble
+          all
+          required documents listed in the 'Documents
+          Related to the Proposed Store' section.
+        </span>
+      </p>
+      <section *ngIf="ApplicationTypeNames.Marketer === application?.applicationType?.name">
+        <p *ngIf="account?.businessType === 'Society'">
+          Please upload the society’s Statement of Directors and Registered Office.
+        </p>
+        <!-- <p *ngIf="account?.businessType === 'PublicCorporation'">
+          Please upload the society’s Statement of Directors and Registered Office.
+        </p> -->
+        <p *ngIf="businessTypeIsPartnership()">
+          Please upload the Partnership Agreement.
+        </p>
+        <div *ngIf="businessTypeIsPrivateCorporation()">
+          <p>Please upload: </p>
+          <ul>
+            <li>Notice of Articles</li>
+            <li>Central Securities Register</li>
+          </ul>
+        </div>
+
+      </section>
+      <section>
+        <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
+                           fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+                           [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
+                           [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
+        </app-file-uploader>
+      </section>
+      <br>
+      <hr>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #indigenousContent>
+  <section class="large-screen-only">
+    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">INDIGENOUS NATION</h3>
+
+    <div [formGroup]="form" class="submitted-content"
+         style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+      <app-field label="Is this application for an Indigenous Nation?" [valid]="true">
+        <mat-button-toggle-group formControlName="applyAsIndigenousNation" aria-label="Font Style">
+          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
+          <mat-button-toggle [value]="false">No</mat-button-toggle>
+        </mat-button-toggle-group>
+      </app-field>
+
+      <div *ngIf="form.get('applyAsIndigenousNation').value" style="margin-top: 10px; margin-bottom: 10px;">
+        Third party agents or consultants cannot apply on behalf of an Indigenous nation. The application and all
+        supporting documents will be connected to the BCeID used at log-in.
+      </div>
+
+      <app-field label="Select the Indigenous nation" [valid]="isValidOrNotTouched('indigenousNationId')"
+                 *ngIf="form.get('applyAsIndigenousNation').value" errorMessage="Please select the Indigenous nation">
+        <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
+          <option value=""></option>
+          <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
+        </select>
+      </app-field>
+    </div>
+  </section>
+  <app-associate-content [account]="account" [showBothContents]="false"
+                         [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
+</ng-template>
+
+<div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
+  <div [ngBusy]="busy"></div>
+  <div class="row">
+    <div class="col-md-7 col-sm-12">
+      <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
+    </div>
+    <div class="col-md-4 col-sm-12"
+         *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
+      <h1>&nbsp;</h1>
+      <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
+    </div>
+  </div>
+</div>
+
+<div appRemoveIfFeatureOn="IndigenousNation">
+  <div [ngBusy]="busy"></div>
+  <ng-container *ngTemplateOutlet="applicationContent">
+  </ng-container>
+</div>
+

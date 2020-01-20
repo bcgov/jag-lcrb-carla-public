@@ -211,7 +211,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// be deleted.
         /// </summary>
         [JsonProperty(PropertyName = "canbedeleted")]
-        public string Canbedeleted { get; set; }
+        public object Canbedeleted { get; set; }
 
         /// <summary>
         /// </summary>
@@ -253,8 +253,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Gets or sets information that specifies whether this component can
         /// be customized.
         /// </summary>
-        [JsonProperty(PropertyName = "iscustomizable")]
-        public string Iscustomizable { get; set; }
+        //[JsonProperty(PropertyName = "iscustomizable")]
+        public object Iscustomizable { get; set; }
 
         /// <summary>
         /// Gets or sets name of the form.
