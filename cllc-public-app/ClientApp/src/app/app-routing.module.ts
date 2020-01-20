@@ -46,13 +46,11 @@ const routes: Routes = [
     path: '',
     component: HomeComponent
   },
-  // {
-  //   path: 'associate-list/:applicationId',
-  //   component: AssociateListComponent
-  // },
   {
     path: 'org-structure',
-    component: OrganizationStructureComponent
+    component: OrganizationStructureComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'OrgStructure' }
   },
   {
     path: 'catering-demo',
