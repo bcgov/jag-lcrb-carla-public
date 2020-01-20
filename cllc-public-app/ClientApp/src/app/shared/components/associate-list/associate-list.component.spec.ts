@@ -1,16 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonalHistorySummaryComponent } from './personal-history-summary.component';
+import { AssociateListComponent } from './associate-list.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-describe('PersonalHistorySummaryComponent', () => {
-  let component: PersonalHistorySummaryComponent;
-  let fixture: ComponentFixture<PersonalHistorySummaryComponent>;
+describe('AssociateListComponent', () => {
+  let component: AssociateListComponent;
+  let fixture: ComponentFixture<AssociateListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PersonalHistorySummaryComponent ],
+      declarations: [ AssociateListComponent ],
       imports: [ReactiveFormsModule, FormsModule ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -18,7 +18,7 @@ describe('PersonalHistorySummaryComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PersonalHistorySummaryComponent);
+    fixture = TestBed.createComponent(AssociateListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
