@@ -49,6 +49,8 @@ export class LicenseeChangeLog {
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
+  edit: boolean; // This is only used on the client side
+  collapse: boolean; // This is only used on the client side
 
 
   public get percentageShares(): number {
@@ -68,6 +70,51 @@ export class LicenseeChangeLog {
     }
     return totalShares;
   }
+
+  public get keyPersonnelChildren(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => item.isIndividual && !item.isShareholderNew);
+    return leaders;
+  }
+
+  public get individualShareholderChildren(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => item.isIndividual && item.isShareholderNew);
+    return leaders;
+  }
+
+  public get businessShareholderChildren(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => !item.isIndividual && item.isShareholderNew);
+    return leaders;
+  }
+  // construct file name prefix from name and names of parents
+  public get fileUploadPrefix(): string {
+    let prefix = this.nameToFilePrefix();
+    // let parent = this.parentLinceseeChangeLog;
+    // while (parent) {
+    //   prefix = `${parent.nameToFilePrefix()} ${prefix}`;
+    //   parent = parent.parentLinceseeChangeLog;
+    // }
+
+    return prefix;
+  }
+
+  // construct file name prefix from name
+  private nameToFilePrefix(): string {
+    const MAX_SIZE = 12;
+    let prefix = '';
+    if (this.isIndividual) {
+      prefix = `${this.firstNameNew} ${this.lastNameNew}`;
+    } else {
+      if ((this.businessNameNew ||'').length  <= MAX_SIZE) {
+        prefix = this.businessNameNew || '';
+      } else {
+        const length = (this.businessNameNew || '').length;
+        // First 8 Characters + Last 4 characters, unless name is less than 12 characters, then show whole name
+        prefix = this.businessNameNew.substring(0, 8) + this.businessNameNew.substring(length - 4);
+      }
+    }
+    return prefix;
+  }
+
   /**
    * Create from LegalEntity
    */
@@ -105,8 +152,6 @@ export class LicenseeChangeLog {
       this.dateofBirthOld = legalEntity.dateofbirth;
       this.titleNew = legalEntity.jobTitle;
       this.titleOld = legalEntity.jobTitle;
-
-
     }
   }
 
@@ -491,8 +536,8 @@ export class LicenseeChangeLog {
     //notice of articles predicate
     const needsNoticeOfArticels = (node: LicenseeChangeLog): boolean =>
       (
-          (node.businessType === 'PublicCorporation' || node.businessType === 'PrivateCorporation') &&
-          node.changeType === LicenseeChangeType.addBusinessShareholder
+        (node.businessType === 'PublicCorporation' || node.businessType === 'PrivateCorporation') &&
+        node.changeType === LicenseeChangeType.addBusinessShareholder
       );
     result.noticeOfArticles = LicenseeChangeLog.findNodesInTree(treeRoot, needsNoticeOfArticels);
 
@@ -539,16 +584,15 @@ export class LicenseeChangeLog {
     return result;
   }
 
-  public static getNewIndividualAssociateList(treeRoot: LicenseeChangeLog):  LicenseeChangeLog[]{
+  public static getNewIndividualAssociateList(treeRoot: LicenseeChangeLog): LicenseeChangeLog[] {
     let result = [];
 
     //new individual associate predicate
     const newIndividualAssociate = (node: LicenseeChangeLog): boolean =>
       (
-          node.changeType === LicenseeChangeType.addIndividualShareholder
+        node.changeType === LicenseeChangeType.addIndividualShareholder
       );
     result = LicenseeChangeLog.findNodesInTree(treeRoot, newIndividualAssociate);
-    debugger;
     return result;
   }
 }

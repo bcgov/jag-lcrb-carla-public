@@ -34,6 +34,11 @@ import { FederalReportingComponent } from '@components/federal-reporting/federal
 import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
 import { LicencesComponent } from '@components/licences/licences.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
+import { LicenceEventComponent } from '@components/licences/licence-event/licence-event.component';
+import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
+import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
+import { AssociateListComponent } from '@shared/components/associate-list/associate-list.component';
+import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 
 
 const routes: Routes = [
@@ -42,10 +47,27 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'org-structure',
+    component: OrganizationStructureComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'OrgStructure' }
+  },
+  {
+    path: 'catering-demo',
+    component: CateringDemoComponent,
+    canActivate: [BCeidAuthGuard]
+  },
+  {
     path: 'licences',
     component: LicencesComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'FederalReporting' }
+  },  
+  {
+    path: 'licence-event',
+    component: LicenceEventComponent,
+    canActivate: [BCeidAuthGuard],
+  
   },
   {
     path: 'federal-reporting/:licenceId',
@@ -98,6 +120,12 @@ const routes: Routes = [
   {
     path: 'application/:applicationId',
     component: ApplicationComponent,
+    canDeactivate: [CanDeactivateGuard],
+    canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'application/:formmName/:applicationId',
+    component: DynamicApplicationComponent,
     canDeactivate: [CanDeactivateGuard],
     canActivate: [BCeidAuthGuard]
   },

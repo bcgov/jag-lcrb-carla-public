@@ -14,6 +14,9 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_Application@odata.bind")]
         public string ApplicationOdataBind { get; set; }
 
+        [JsonProperty(PropertyName = "adoxio_BusinessAccount@odata.bind")]
+        public string BusinessAccountOdataBind { get; set; }
+
         [JsonProperty(PropertyName = "adoxio_ParentLinceseeChangeLogId@odata.bind")]
         public string ParentLinceseeChangeLogOdataBind { get; set; }
 

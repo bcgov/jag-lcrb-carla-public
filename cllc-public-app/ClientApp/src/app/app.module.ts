@@ -55,6 +55,8 @@ import { GeneralDataService } from './general-data.service';
 import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component';
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DynamicsFormComponent } from '@components/dynamics-form/dynamics-form.component';
+import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
+
 import {
   EditShareholdersComponent, ShareholderDialogComponent,
 } from '@components/account-profile/tabs/shareholders/shareholders.component';
@@ -164,12 +166,19 @@ import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { LicencesComponent } from '@components/licences/licences.component';
+import { LicenceEventComponent} from '@components/licences/licence-event/licence-event.component';
 import { ApplicationsComponent } from '@components/applications/applications.component';
 import { ApplicationCancellationDialogComponent, ApplicationsAndLicencesComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { ApplicationAndLicenceFeeComponent } from '@components/applications/application-and-licence-fee/application-and-licence-fee.component';
 import { ModalComponent } from '@shared/components/modal/modal.component';
 import { PhoneMaskDirective } from './directives/phone-mask.directive';
+import { AssociateListComponent } from './shared/components/associate-list/associate-list.component';
+import { OrgStructureComponent } from './shared/components/org-structure/org-structure.component';
+import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
+import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
+import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
+
 
 @NgModule({
   declarations: [
@@ -190,7 +199,7 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     DashboardComponent,
     DirectorAndOfficerPersonDialogComponent,
     DirectorsAndOfficersComponent,
-    DynamicsFormComponent,
+    DynamicsFormComponent,    
     EditShareholdersComponent,
     FieldComponent,
     FileUploaderComponent,
@@ -201,6 +210,7 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     InsertComponent,
     KeyPersonnelComponent,
     LicenceFeePaymentConfirmationComponent,
+    LicenceEventComponent,
     NewsletterConfirmationComponent,
     NewsletterSignupComponent,
     NotFoundComponent,
@@ -261,7 +271,12 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     ApplicationLicenseeChangesComponent,
     VersionInfoDialogComponent,
     LicencesComponent,
-    ApplicationsComponent
+    ApplicationsComponent,
+    AssociateListComponent,
+    OrgStructureComponent,    
+    DynamicApplicationComponent,
+    CateringDemoComponent,
+    PersonalHistorySummaryComponent
   ],
   imports: [
     ChartsModule,
@@ -373,6 +388,7 @@ import { PhoneMaskDirective } from './directives/phone-mask.directive';
     CanDeactivateGuard,
     ContactDataService,
     DynamicsDataService,
+    DynamicsFormDataService,
     GeneralDataService,
     InsertService,
     NewsletterDataService,
