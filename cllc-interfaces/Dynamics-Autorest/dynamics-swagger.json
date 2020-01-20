@@ -49020,6 +49020,10 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_contactphone": {
+          "description": "",
+          "type": "string"
+        },
         "statecode": {
           "format": "int32",
           "description": "Status of the Event",
@@ -49035,6 +49039,14 @@
         },
         "adoxio_dateoutcomed": {
           "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
+        "adoxio_contactname": {
+          "description": "",
+          "type": "string"
+        },
+        "adoxio_contactemail": {
           "description": "",
           "type": "string"
         },
@@ -66054,6 +66066,10 @@
           "description": "Whether is only for marketing",
           "type": "boolean"
         },
+        "address1_telephone3": {
+          "description": "Type a third phone number associated with the primary address.",
+          "type": "string"
+        },
         "pager": {
           "description": "Type the pager number for the contact.",
           "type": "string"
@@ -66122,6 +66138,10 @@
           "description": "Shows the combined Yomi first and last names of the contact so that the full phonetic name can be displayed in views and reports.",
           "type": "string"
         },
+        "adoxio_phsconnectionsdetails": {
+          "description": "",
+          "type": "string"
+        },
         "createdon": {
           "format": "date-time",
           "description": "Shows the date and time when the record was created. The date and time are displayed in the time zone selected in Microsoft Dynamics 365 options.",
@@ -66143,9 +66163,10 @@
           "description": "Select whether the contact accepts bulk postal mail sent through marketing campaigns or quick campaigns. If Do Not Allow is selected, the contact can be added to marketing lists, but will be excluded from the letters.",
           "type": "boolean"
         },
-        "address1_telephone3": {
-          "description": "Type a third phone number associated with the primary address.",
-          "type": "string"
+        "adoxio_phslivesincanada": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "birthdate": {
           "format": "date-time",
@@ -66172,6 +66193,10 @@
         "lastusedincampaign": {
           "format": "date-time",
           "description": "Shows the date when the contact was last included in a marketing campaign or quick campaign.",
+          "type": "string"
+        },
+        "_parentcustomerid_value": {
+          "description": "Select the parent account or parent contact for the contact to provide a quick link to additional details, such as financial information, activities, and opportunities.",
           "type": "string"
         },
         "address2_country": {
@@ -66226,10 +66251,6 @@
           "description": "Unique identifier of the account with which the contact is associated.",
           "type": "string"
         },
-        "_parentcustomerid_value": {
-          "description": "Select the parent account or parent contact for the contact to provide a quick link to additional details, such as financial information, activities, and opportunities.",
-          "type": "string"
-        },
         "_parentcontactid_value": {
           "description": "Unique identifier of the parent contact.",
           "type": "string"
@@ -66242,6 +66263,11 @@
           "format": "decimal",
           "description": "Type the longitude value for the third address for use in mapping and other applications.",
           "type": "number"
+        },
+        "adoxio_phshaslivedincanada": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "mobilephone": {
           "description": "Type the mobile phone number for the contact.",
@@ -66258,6 +66284,11 @@
         "shippingmethodcode": {
           "format": "int32",
           "description": "Select a shipping method for deliveries sent to this address.",
+          "type": "integer"
+        },
+        "adoxio_phsexpired": {
+          "format": "int32",
+          "description": "",
           "type": "integer"
         },
         "adoxio_isauthorizedrepresentative": {
@@ -66431,6 +66462,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_phscomplete": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "gendercode": {
           "format": "int32",
           "description": "Select the contact's gender to make sure the contact is addressed correctly in sales calls, email, and marketing campaigns.",
@@ -66551,6 +66587,11 @@
         "educationcode": {
           "format": "int32",
           "description": "Select the contact's highest level of education for use in segmentation and analysis.",
+          "type": "integer"
+        },
+        "adoxio_phsconnectionstootherlicences": {
+          "format": "int32",
+          "description": "",
           "type": "integer"
         },
         "address2_telephone3": {
@@ -66774,6 +66815,11 @@
           "description": "the country or region for the 3rd address.",
           "type": "string"
         },
+        "adoxio_phscanadiandrugalchoholdrivingoffence": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "_preferredequipmentid_value": {
           "description": "Choose the contact's preferred service facility or equipment to make sure services are scheduled correctly for the customer.",
           "type": "string"
@@ -66910,9 +66956,19 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_phsdatesubmitted": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
         "address2_freighttermscode": {
           "format": "int32",
           "description": "Select the freight terms for the secondary address to make sure shipping orders are processed correctly.",
+          "type": "integer"
+        },
+        "adoxio_phsforeigndrugalchoholoffence": {
+          "format": "int32",
+          "description": "",
           "type": "integer"
         },
         "aging60_base": {
@@ -75910,11 +75966,21 @@
           "description": "Will contain the Influencer score coming from NetBreeze.",
           "type": "number"
         },
+        "adoxio_checklisttakeandsendphotos": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "_kbarticleid_value": {
           "description": "Choose the article that contains additional information or a resolution for the case, for reference during research or follow up with the customer.",
           "type": "string"
         },
         "adoxio_servicehourswednesdayclose": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_checklistaccordancewithaipletter": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -75980,6 +76046,10 @@
           "description": "For internal use only.",
           "type": "string"
         },
+        "adoxio_inspchecklistsecurityoperationalnotes": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_disorderlyorunlawfulactivities": {
           "format": "int32",
           "description": "",
@@ -75997,6 +76067,11 @@
         "_modifiedonbehalfby_value": {
           "description": "Shows who last updated the record on behalf of another user.",
           "type": "string"
+        },
+        "adoxio_inspchecklistdepictsaipfloorplan": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_inspchecklistnootherbusinessnotes": {
           "description": "",
@@ -76047,6 +76122,11 @@
           "type": "string"
         },
         "adoxio_mktrchecklistonsiterequirementsreviewed": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_parentinspectiontype": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76207,6 +76287,16 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_checklistproductnoselfservice": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_inspectiontimeinhh": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_inspectionovercrowding": {
           "format": "int32",
           "description": "",
@@ -76220,11 +76310,6 @@
         "_createdby_value": {
           "description": "Shows who created the record.",
           "type": "string"
-        },
-        "adoxio_discussedmapprogram": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
         },
         "adoxio_pschecklistunlawfulcannabis": {
           "format": "int32",
@@ -76384,6 +76469,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_checklistsignandlogomeetsrequirements": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "_adoxio_reactivateby_value": {
           "description": "",
           "type": "string"
@@ -76488,6 +76578,11 @@
           "description": "Type additional information to describe the case to assist the service team in reaching a resolution.",
           "type": "string"
         },
+        "adoxio_inspectiondate": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
         "adoxio_inspchecklistproductnotvisible": {
           "format": "int32",
           "description": "",
@@ -76543,6 +76638,11 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_checklistnootherbusinessassociated": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_inspectiontimeoutmm": {
           "format": "int32",
           "description": "",
@@ -76552,17 +76652,17 @@
           "description": "For internal use only.",
           "type": "string"
         },
-        "overriddencreatedon": {
-          "format": "date-time",
-          "description": "Date and time that the record was migrated.",
-          "type": "string"
-        },
         "adoxio_inspectiontimeouthh": {
           "format": "int32",
           "description": "",
           "type": "integer"
         },
         "adoxio_inspectiontimeinmm": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_checklistproductnotvisible": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76582,6 +76682,11 @@
           "description": "Time zone code that was in use when the record was created.",
           "type": "integer"
         },
+        "adoxio_discussedmapprogram": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_inspchecklistsignmeetsrequirements": {
           "format": "int32",
           "description": "",
@@ -76592,6 +76697,11 @@
           "type": "string"
         },
         "adoxio_servicehourstuesdayclose": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_checklistphysicalsecurityoperating": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76629,6 +76739,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_checklistdepictsaipfloorplan": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "followuptaskcreated": {
           "description": "This attribute is used for Sample Service Business Processes.",
           "type": "boolean"
@@ -76647,9 +76762,9 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_inspectiondate": {
+        "overriddencreatedon": {
           "format": "date-time",
-          "description": "",
+          "description": "Date and time that the record was migrated.",
           "type": "string"
         },
         "adoxio_inspectionredlinefloorplan": {
@@ -76824,11 +76939,6 @@
           "description": "Indicates the date and time when the case was escalated.",
           "type": "string"
         },
-        "adoxio_inspectiontimeinhh": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_inspectionliquorregister": {
           "format": "int32",
           "description": "",
@@ -76861,11 +76971,6 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_inspchecklistdepictsaipfloorplan": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
         "adoxio_inspectionoccurrence": {
           "format": "int32",
           "description": "",
@@ -76894,10 +76999,6 @@
           "type": "number"
         },
         "adoxio_inspchecklistcannabisregisternotes": {
-          "description": "",
-          "type": "string"
-        },
-        "adoxio_inspchecklistsecurityoperationalnotes": {
           "description": "",
           "type": "string"
         },
