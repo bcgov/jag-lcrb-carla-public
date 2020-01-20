@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="_asyncoperationidValue">Unique identifier of the
         /// parent record.</param>
         /// <param name="errorcode">Error code related to process.</param>
-        public MicrosoftDynamicsCRMworkflowlog(string stepname = default(string), string _childworkflowinstanceidValue = default(string), string _owneridValue = default(string), string message = default(string), int? duration = default(int?), string activityname = default(string), string _owningbusinessunitValue = default(string), string interactionactivityresult = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string workflowlogid = default(string), string stagename = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? status = default(int?), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), string description = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _asyncoperationidValue = default(string), int? errorcode = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMasyncoperation childworkflowinstanceidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMleadtoopportunitysalesprocess leadToOpportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMleadtoopportunitysalesprocess), MicrosoftDynamicsCRMexpiredprocess expiredProcessAsyncoperationid = default(MicrosoftDynamicsCRMexpiredprocess), MicrosoftDynamicsCRMtranslationprocess translationProcessAsyncoperationid = default(MicrosoftDynamicsCRMtranslationprocess), MicrosoftDynamicsCRMopportunitysalesprocess opportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMopportunitysalesprocess), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMphonetocaseprocess phoneToCaseProcessAsyncoperationid = default(MicrosoftDynamicsCRMphonetocaseprocess), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMnewprocess newProcessAsyncoperationid = default(MicrosoftDynamicsCRMnewprocess), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2 asyncoperationidAdoxioApplicationbpfmvpv2 = default(MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2), MicrosoftDynamicsCRMadoxioComplaintpublicbpf asyncoperationidAdoxioComplaintpublicbpf = default(MicrosoftDynamicsCRMadoxioComplaintpublicbpf), MicrosoftDynamicsCRMadoxioApplicationbpfv3 asyncoperationidAdoxioApplicationbpfv3 = default(MicrosoftDynamicsCRMadoxioApplicationbpfv3))
+        public MicrosoftDynamicsCRMworkflowlog(string stepname = default(string), string _childworkflowinstanceidValue = default(string), string _owneridValue = default(string), string message = default(string), int? duration = default(int?), string activityname = default(string), string _owningbusinessunitValue = default(string), string interactionactivityresult = default(string), string _owninguserValue = default(string), string _createdbyValue = default(string), System.DateTimeOffset? completedon = default(System.DateTimeOffset?), string workflowlogid = default(string), string stagename = default(string), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), int? status = default(int?), string _modifiedonbehalfbyValue = default(string), string _owningteamValue = default(string), string description = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? startedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _asyncoperationidValue = default(string), int? errorcode = default(int?), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMasyncoperation childworkflowinstanceidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMleadtoopportunitysalesprocess leadToOpportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMleadtoopportunitysalesprocess), MicrosoftDynamicsCRMexpiredprocess expiredProcessAsyncoperationid = default(MicrosoftDynamicsCRMexpiredprocess), MicrosoftDynamicsCRMtranslationprocess translationProcessAsyncoperationid = default(MicrosoftDynamicsCRMtranslationprocess), MicrosoftDynamicsCRMopportunitysalesprocess opportunitySalesProcessAsyncoperationid = default(MicrosoftDynamicsCRMopportunitysalesprocess), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMphonetocaseprocess phoneToCaseProcessAsyncoperationid = default(MicrosoftDynamicsCRMphonetocaseprocess), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), MicrosoftDynamicsCRMasyncoperation asyncoperationidAsyncoperation = default(MicrosoftDynamicsCRMasyncoperation), MicrosoftDynamicsCRMnewprocess newProcessAsyncoperationid = default(MicrosoftDynamicsCRMnewprocess), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2 asyncoperationidAdoxioApplicationbpfmvpv2 = default(MicrosoftDynamicsCRMadoxioApplicationbpfmvpv2), MicrosoftDynamicsCRMadoxioApplicationbpfv3 asyncoperationidAdoxioApplicationbpfv3 = default(MicrosoftDynamicsCRMadoxioApplicationbpfv3), MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10 asyncoperationidAdoxioApplicationlicenseechangesv10 = default(MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10), MicrosoftDynamicsCRMadoxioApplicationrelocationv1 asyncoperationidAdoxioApplicationrelocationv1 = default(MicrosoftDynamicsCRMadoxioApplicationrelocationv1), MicrosoftDynamicsCRMadoxioApplicationstructurechangev1 asyncoperationidAdoxioApplicationstructurechangev1 = default(MicrosoftDynamicsCRMadoxioApplicationstructurechangev1), MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1 asyncoperationidAdoxioApplicationtransferownershipv1 = default(MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1), MicrosoftDynamicsCRMadoxioApplicationliquorbpf asyncoperationidAdoxioApplicationliquorbpf = default(MicrosoftDynamicsCRMadoxioApplicationliquorbpf))
         {
             Stepname = stepname;
             this._childworkflowinstanceidValue = _childworkflowinstanceidValue;
@@ -115,8 +115,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             NewProcessAsyncoperationid = newProcessAsyncoperationid;
             Createdby = createdby;
             AsyncoperationidAdoxioApplicationbpfmvpv2 = asyncoperationidAdoxioApplicationbpfmvpv2;
-            AsyncoperationidAdoxioComplaintpublicbpf = asyncoperationidAdoxioComplaintpublicbpf;
             AsyncoperationidAdoxioApplicationbpfv3 = asyncoperationidAdoxioApplicationbpfv3;
+            AsyncoperationidAdoxioApplicationlicenseechangesv10 = asyncoperationidAdoxioApplicationlicenseechangesv10;
+            AsyncoperationidAdoxioApplicationrelocationv1 = asyncoperationidAdoxioApplicationrelocationv1;
+            AsyncoperationidAdoxioApplicationstructurechangev1 = asyncoperationidAdoxioApplicationstructurechangev1;
+            AsyncoperationidAdoxioApplicationtransferownershipv1 = asyncoperationidAdoxioApplicationtransferownershipv1;
+            AsyncoperationidAdoxioApplicationliquorbpf = asyncoperationidAdoxioApplicationliquorbpf;
             CustomInit();
         }
 
@@ -365,13 +369,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "asyncoperationid_adoxio_complaintpublicbpf")]
-        public MicrosoftDynamicsCRMadoxioComplaintpublicbpf AsyncoperationidAdoxioComplaintpublicbpf { get; set; }
+        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationbpfv3")]
+        public MicrosoftDynamicsCRMadoxioApplicationbpfv3 AsyncoperationidAdoxioApplicationbpfv3 { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationbpfv3")]
-        public MicrosoftDynamicsCRMadoxioApplicationbpfv3 AsyncoperationidAdoxioApplicationbpfv3 { get; set; }
+        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationlicenseechangesv10")]
+        public MicrosoftDynamicsCRMadoxioApplicationlicenseechangesv10 AsyncoperationidAdoxioApplicationlicenseechangesv10 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationrelocationv1")]
+        public MicrosoftDynamicsCRMadoxioApplicationrelocationv1 AsyncoperationidAdoxioApplicationrelocationv1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationstructurechangev1")]
+        public MicrosoftDynamicsCRMadoxioApplicationstructurechangev1 AsyncoperationidAdoxioApplicationstructurechangev1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationtransferownershipv1")]
+        public MicrosoftDynamicsCRMadoxioApplicationtransferownershipv1 AsyncoperationidAdoxioApplicationtransferownershipv1 { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "asyncoperationid_adoxio_applicationliquorbpf")]
+        public MicrosoftDynamicsCRMadoxioApplicationliquorbpf AsyncoperationidAdoxioApplicationliquorbpf { get; set; }
 
     }
 }

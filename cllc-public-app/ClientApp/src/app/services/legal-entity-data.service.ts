@@ -47,8 +47,18 @@ export class LegalEntityDataService extends DataService {
   /**
    * Gets the list of change logs for an application
    */
-  getChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
+  getApplicationChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
     const apiPath = `api/legalentities/legal-entity-change-logs/${applicationId}`;
+    return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+
+  }
+
+  /**
+   * Gets the list of change logs for an application
+   */
+  getAccountChangeLogs(accountId: string): Observable<LicenseeChangeLog[]> {
+    const apiPath = `api/legalentities/legal-entity-change-logs/account/${accountId}`;
     return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
 
@@ -61,6 +71,16 @@ export class LegalEntityDataService extends DataService {
    */
   saveLicenseeChanges(changeTree: LicenseeChangeLog, applicationId: string) {
     return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/${applicationId}`, changeTree, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
+   *  Saves the legal entity change log tree againt and Account
+   * @param changeTree - The root of the change tree (This is the change tree)
+   * @param accountId - The application to associte to the change logs
+   */
+  saveAccountLicenseeChanges(changeTree: LicenseeChangeLog, accountId: string) {
+    return this.http.post<LicenseeChangeLog>(`api/legalentities/save-change-tree/account/${accountId}`, changeTree, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

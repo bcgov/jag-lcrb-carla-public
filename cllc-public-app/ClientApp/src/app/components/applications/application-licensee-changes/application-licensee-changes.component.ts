@@ -84,7 +84,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     this.GetNotTerminatedCRSApplicationCount();
 
     this.busy = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
-      this.legalEntityDataService.getChangeLogs(this.applicationId),
+      this.legalEntityDataService.getApplicationChangeLogs(this.applicationId),
       this.legalEntityDataService.getCurrentHierachy())
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
