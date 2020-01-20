@@ -14,8 +14,9 @@ const valueError = [
   { type: 'pattern', message: valueMessage }
 ];
 
-const weightMessage = 'Weight must be less than 1,000kg and have 3 decimal places.';
+const weightMessage = 'Weight is required and must be less than 1,000kg and have 3 decimal places.';
 const weightError = [
+  { type: 'required', message: weightMessage },
   { type: 'min', message: weightMessage },
   { type: 'max', message: weightMessage },
   { type: 'pattern', message: weightMessage }
