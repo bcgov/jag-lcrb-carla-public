@@ -22,4 +22,13 @@ export class Contact {
   selfDisclosure: string;
   secondaryIdentificationType: string;
   primaryIdentificationType: string;
+
+  PhsConnectionsDetails: string;
+  PhsLivesInCanada: string;
+  PhsExpired: string;
+  PhsComplete: string;
+  PhsConnectionsToOtherLicences: string;
+  PhsCanadianDrugAlchoholDrivingOffence: string;
+  PhsDateSubmitted: Date;
+  PhsForeignDrugAlchoholOffence: string;
 }
