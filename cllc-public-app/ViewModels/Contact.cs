@@ -9,6 +9,12 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         DriversLicence = 845280000,
         BCIdCard = 845280005
     }
+
+    public enum YesNoOptions {
+        Yes = 845280000,
+        No = 845280001
+    }
+
     public class Contact
     {
         public string id { get; set; }
@@ -64,16 +70,42 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
 
         public string BirthPlace { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public Gender? Gender { get; set; }
+
         public string MobilePhone { get; set; }
         public string PrimaryIdNumber { get; set; }
         public string SecondaryIdNumber { get; set; }
         public bool? IsWorker { get; set; }
         public int? SelfDisclosure { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public IdentificationType? SecondaryIdentificationType { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         public IdentificationType? PrimaryIdentificationType { get; set; }
+
+        public string PhsConnectionsDetails { get; set; }
+        public DateTimeOffset? PhsDateSubmitted { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? PhsLivesInCanada { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? PhsExpired { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? PhsComplete { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? PhsConnectionsToOtherLicences { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? PhsCanadianDrugAlchoholDrivingOffence { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? PhsForeignDrugAlchoholOffence { get; set; }
+        
     }
 }

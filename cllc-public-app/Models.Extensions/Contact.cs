@@ -57,6 +57,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SecondaryIdentificationType = (IdentificationType?)contact.AdoxioSecondaryidentificationtype;
                 result.IsWorker = contact.AdoxioIsworker;
                 result.SelfDisclosure = contact.AdoxioSelfdisclosure;
+                result.PhsConnectionsDetails = contact.AdoxioPhsconnectionsdetails;
+                result.PhsLivesInCanada = (YesNoOptions?)contact.AdoxioPhslivesincanada;
+                result.PhsExpired = (YesNoOptions?)contact.AdoxioPhsexpired;
+                result.PhsComplete = (YesNoOptions?)contact.AdoxioPhscomplete;
+                result.PhsConnectionsToOtherLicences = (YesNoOptions?)contact.AdoxioPhsconnectionstootherlicences;
+                result.PhsCanadianDrugAlchoholDrivingOffence = (YesNoOptions?)contact.AdoxioPhscanadiandrugalchoholdrivingoffence;
+                result.PhsDateSubmitted = contact.AdoxioPhsdatesubmitted;
+                result.PhsForeignDrugAlchoholOffence = (YesNoOptions?)contact.AdoxioPhsforeigndrugalchoholoffence;
             }
             return result;
         }
@@ -345,6 +353,14 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.AdoxioCansignpermanentchangeapplications = contact.adoxio_cansignpermanentchangeapplications;
                 result.AdoxioCansigntemporarychangeapplications = contact.adoxio_cansigntemporarychangeapplications;
                 result.Telephone1 = contact.telephone1;
+
+                result.AdoxioPhslivesincanada = (int?)contact.PhsLivesInCanada;
+                result.AdoxioPhsexpired = (int?)contact.PhsExpired;
+                result.AdoxioPhscomplete = (int?)contact.PhsComplete;
+                result.AdoxioPhsconnectionstootherlicences = (int?)contact.PhsConnectionsToOtherLicences;
+                result.AdoxioPhscanadiandrugalchoholdrivingoffence = (int?)contact.PhsCanadianDrugAlchoholDrivingOffence;
+                result.AdoxioPhsdatesubmitted = contact.PhsDateSubmitted;
+                result.AdoxioPhsforeigndrugalchoholoffence = (int?)contact.PhsForeignDrugAlchoholOffence;
 
 
                 if (string.IsNullOrEmpty(result.Fullname) && (!string.IsNullOrEmpty(result.Firstname) || !string.IsNullOrEmpty(result.Lastname)))
