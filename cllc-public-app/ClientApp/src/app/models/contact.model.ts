@@ -23,12 +23,13 @@ export class Contact {
   secondaryIdentificationType: string;
   primaryIdentificationType: string;
 
-  PhsConnectionsDetails: string;
-  PhsLivesInCanada: string;
-  PhsExpired: string;
-  PhsComplete: string;
-  PhsConnectionsToOtherLicences: string;
-  PhsCanadianDrugAlchoholDrivingOffence: string;
-  PhsDateSubmitted: Date;
-  PhsForeignDrugAlchoholOffence: string;
+  phsConnectionsDetails: string;
+  phsLivesInCanada: string;
+  phsHasLivedInCanada: string;
+  phsExpired: string;
+  phsComplete: string;
+  phsConnectionsToOtherLicences: string;
+  phsCanadianDrugAlchoholDrivingOffence: string;
+  phsDateSubmitted: Date;
+  phsForeignDrugAlchoholOffence: string;
 }
