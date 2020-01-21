@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top158 { get; set; }
+        int? Top187 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip79 { get; set; }
+        int? Skip106 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count158 { get; set; }
+        bool? Count187 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter158 { get; set; }
+        string Filter187 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search79 { get; set; }
+        string Search106 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -66,6 +66,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAccounts.
         /// </summary>
         IAccounts Accounts { get; }
+
+        /// <summary>
+        /// Gets the IAccountadoxioeventlicensee.
+        /// </summary>
+        IAccountadoxioeventlicensee Accountadoxioeventlicensee { get; }
 
         /// <summary>
         /// Gets the IAdoxiolicencetypeadoxioinvestigationset.
@@ -123,6 +128,31 @@ namespace Gov.Lclb.Cllb.Interfaces
         IBpfadoxioapplicationid Bpfadoxioapplicationid { get; }
 
         /// <summary>
+        /// Gets the IApplicationliquorbpfs.
+        /// </summary>
+        IApplicationliquorbpfs Applicationliquorbpfs { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfasyncoperations.
+        /// </summary>
+        IApplicationliquorbpfasyncoperations Applicationliquorbpfasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfbulkdeletefailures.
+        /// </summary>
+        IApplicationliquorbpfbulkdeletefailures Applicationliquorbpfbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfsyncerrors.
+        /// </summary>
+        IApplicationliquorbpfsyncerrors Applicationliquorbpfsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IApplicationliquorbpfworkflowlogs.
+        /// </summary>
+        IApplicationliquorbpfworkflowlogs Applicationliquorbpfworkflowlogs { get; }
+
+        /// <summary>
         /// Gets the IApplicationrelocationv1s.
         /// </summary>
         IApplicationrelocationv1s Applicationrelocationv1s { get; }
@@ -156,6 +186,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBpfadoxioapplicationadoxioapplicationlicenseechangesv10.
         /// </summary>
         IBpfadoxioapplicationadoxioapplicationlicenseechangesv10 Bpfadoxioapplicationadoxioapplicationlicenseechangesv10 { get; }
+
+        /// <summary>
+        /// Gets the IBpfadoxioapplicationadoxioapplicationliquorbpf.
+        /// </summary>
+        IBpfadoxioapplicationadoxioapplicationliquorbpf Bpfadoxioapplicationadoxioapplicationliquorbpf { get; }
 
         /// <summary>
         /// Gets the IBpfadoxioapplicationadoxioapplicationrelocationv1.
@@ -353,6 +388,51 @@ namespace Gov.Lclb.Cllb.Interfaces
         IEstablishmentwatchwords Establishmentwatchwords { get; }
 
         /// <summary>
+        /// Gets the IEvents.
+        /// </summary>
+        IEvents Events { get; }
+
+        /// <summary>
+        /// Gets the IAccount.
+        /// </summary>
+        IAccount Account { get; }
+
+        /// <summary>
+        /// Gets the IEventasyncoperations.
+        /// </summary>
+        IEventasyncoperations Eventasyncoperations { get; }
+
+        /// <summary>
+        /// Gets the IEventbulkdeletefailures.
+        /// </summary>
+        IEventbulkdeletefailures Eventbulkdeletefailures { get; }
+
+        /// <summary>
+        /// Gets the IEventduplicatebaserecord.
+        /// </summary>
+        IEventduplicatebaserecord Eventduplicatebaserecord { get; }
+
+        /// <summary>
+        /// Gets the IEventduplicatematchingrecord.
+        /// </summary>
+        IEventduplicatematchingrecord Eventduplicatematchingrecord { get; }
+
+        /// <summary>
+        /// Gets the IEventsyncerrors.
+        /// </summary>
+        IEventsyncerrors Eventsyncerrors { get; }
+
+        /// <summary>
+        /// Gets the IInspector.
+        /// </summary>
+        IInspector Inspector { get; }
+
+        /// <summary>
+        /// Gets the ILicence.
+        /// </summary>
+        ILicence Licence { get; }
+
+        /// <summary>
         /// Gets the IExhibits.
         /// </summary>
         IExhibits Exhibits { get; }
@@ -488,6 +568,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILicenceses Licenceses { get; }
 
         /// <summary>
+        /// Gets the ILicencesadoxioeventlicence.
+        /// </summary>
+        ILicencesadoxioeventlicence Licencesadoxioeventlicence { get; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         ILicencetypes Licencetypes { get; }
@@ -613,6 +698,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioapplicationlicenseechangesv10 Regardingobjectidadoxioapplicationlicenseechangesv10 { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioapplicationliquorbpf.
+        /// </summary>
+        IRegardingobjectidadoxioapplicationliquorbpf Regardingobjectidadoxioapplicationliquorbpf { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioapplicationrelocationv1.
         /// </summary>
         IRegardingobjectidadoxioapplicationrelocationv1 Regardingobjectidadoxioapplicationrelocationv1 { get; }
@@ -628,6 +718,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IRegardingobjectidadoxioapplicationtransferownershipv1 Regardingobjectidadoxioapplicationtransferownershipv1 { get; }
 
         /// <summary>
+        /// Gets the IRegardingobjectidadoxioevent.
+        /// </summary>
+        IRegardingobjectidadoxioevent Regardingobjectidadoxioevent { get; }
+
+        /// <summary>
         /// Gets the IRegardingobjectidadoxioexhibit.
         /// </summary>
         IRegardingobjectidadoxioexhibit Regardingobjectidadoxioexhibit { get; }
@@ -636,6 +731,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IRegardingobjectidadoxioformelementuploadfield.
         /// </summary>
         IRegardingobjectidadoxioformelementuploadfield Regardingobjectidadoxioformelementuploadfield { get; }
+
+        /// <summary>
+        /// Gets the IBusinessunitadoxioevent.
+        /// </summary>
+        IBusinessunitadoxioevent Businessunitadoxioevent { get; }
 
         /// <summary>
         /// Gets the IBusinessunitadoxioexhibit.
@@ -658,6 +758,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IContacttaskcontact Contacttaskcontact { get; }
 
         /// <summary>
+        /// Gets the IBaserecordidadoxioevent.
+        /// </summary>
+        IBaserecordidadoxioevent Baserecordidadoxioevent { get; }
+
+        /// <summary>
         /// Gets the IBaserecordidadoxioexhibit.
         /// </summary>
         IBaserecordidadoxioexhibit Baserecordidadoxioexhibit { get; }
@@ -666,6 +771,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IBaserecordidadoxioformelementuploadfield.
         /// </summary>
         IBaserecordidadoxioformelementuploadfield Baserecordidadoxioformelementuploadfield { get; }
+
+        /// <summary>
+        /// Gets the IDuplicaterecordidadoxioevent.
+        /// </summary>
+        IDuplicaterecordidadoxioevent Duplicaterecordidadoxioevent { get; }
 
         /// <summary>
         /// Gets the IDuplicaterecordidadoxioexhibit.
@@ -708,6 +818,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         IOrganizationadoxioapplicationlicenseechangesv10 Organizationadoxioapplicationlicenseechangesv10 { get; }
 
         /// <summary>
+        /// Gets the IOrganizationadoxioapplicationliquorbpf.
+        /// </summary>
+        IOrganizationadoxioapplicationliquorbpf Organizationadoxioapplicationliquorbpf { get; }
+
+        /// <summary>
         /// Gets the IOrganizationadoxioapplicationrelocationv1.
         /// </summary>
         IOrganizationadoxioapplicationrelocationv1 Organizationadoxioapplicationrelocationv1 { get; }
@@ -726,6 +841,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioapplicationlicenseechangesv10activestageid.
         /// </summary>
         ILkadoxioapplicationlicenseechangesv10activestageid Lkadoxioapplicationlicenseechangesv10activestageid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfactivestageid.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfactivestageid Lkadoxioapplicationliquorbpfactivestageid { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationrelocationv1activestageid.
@@ -763,6 +883,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISystemforms Systemforms { get; }
 
         /// <summary>
+        /// Gets the ISystemuseradoxioeventinspector.
+        /// </summary>
+        ISystemuseradoxioeventinspector Systemuseradoxioeventinspector { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioapplicationlicenseechangesv10createdby.
         /// </summary>
         ILkadoxioapplicationlicenseechangesv10createdby Lkadoxioapplicationlicenseechangesv10createdby { get; }
@@ -781,6 +906,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby.
         /// </summary>
         ILkadoxioapplicationlicenseechangesv10modifiedonbehalfby Lkadoxioapplicationlicenseechangesv10modifiedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfcreatedby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfcreatedby Lkadoxioapplicationliquorbpfcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfcreatedonbehalfby Lkadoxioapplicationliquorbpfcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfmodifiedby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfmodifiedby Lkadoxioapplicationliquorbpfmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfmodifiedonbehalfby Lkadoxioapplicationliquorbpfmodifiedonbehalfby { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationrelocationv1createdby.
@@ -843,6 +988,26 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioapplicationtransferownershipv1modifiedonbehalfby Lkadoxioapplicationtransferownershipv1modifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the ILkadoxioeventcreatedby.
+        /// </summary>
+        ILkadoxioeventcreatedby Lkadoxioeventcreatedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventcreatedonbehalfby.
+        /// </summary>
+        ILkadoxioeventcreatedonbehalfby Lkadoxioeventcreatedonbehalfby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventmodifiedby.
+        /// </summary>
+        ILkadoxioeventmodifiedby Lkadoxioeventmodifiedby { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioeventmodifiedonbehalfby.
+        /// </summary>
+        ILkadoxioeventmodifiedonbehalfby Lkadoxioeventmodifiedonbehalfby { get; }
+
+        /// <summary>
         /// Gets the ILkadoxioexhibitcreatedby.
         /// </summary>
         ILkadoxioexhibitcreatedby Lkadoxioexhibitcreatedby { get; }
@@ -883,6 +1048,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILkadoxioformelementuploadfieldmodifiedonbehalfby Lkadoxioformelementuploadfieldmodifiedonbehalfby { get; }
 
         /// <summary>
+        /// Gets the IUseradoxioevent.
+        /// </summary>
+        IUseradoxioevent Useradoxioevent { get; }
+
+        /// <summary>
         /// Gets the IUseradoxioexhibit.
         /// </summary>
         IUseradoxioexhibit Useradoxioexhibit { get; }
@@ -903,6 +1073,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ILegalentitytask Legalentitytask { get; }
 
         /// <summary>
+        /// Gets the ITeamadoxioevent.
+        /// </summary>
+        ITeamadoxioevent Teamadoxioevent { get; }
+
+        /// <summary>
         /// Gets the ITeamadoxioexhibit.
         /// </summary>
         ITeamadoxioexhibit Teamadoxioexhibit { get; }
@@ -916,6 +1091,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the IAsyncoperationidadoxioapplicationlicenseechangesv10.
         /// </summary>
         IAsyncoperationidadoxioapplicationlicenseechangesv10 Asyncoperationidadoxioapplicationlicenseechangesv10 { get; }
+
+        /// <summary>
+        /// Gets the IAsyncoperationidadoxioapplicationliquorbpf.
+        /// </summary>
+        IAsyncoperationidadoxioapplicationliquorbpf Asyncoperationidadoxioapplicationliquorbpf { get; }
 
         /// <summary>
         /// Gets the IAsyncoperationidadoxioapplicationrelocationv1.
@@ -936,6 +1116,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ILkadoxioapplicationlicenseechangesv10processid.
         /// </summary>
         ILkadoxioapplicationlicenseechangesv10processid Lkadoxioapplicationlicenseechangesv10processid { get; }
+
+        /// <summary>
+        /// Gets the ILkadoxioapplicationliquorbpfprocessid.
+        /// </summary>
+        ILkadoxioapplicationliquorbpfprocessid Lkadoxioapplicationliquorbpfprocessid { get; }
 
         /// <summary>
         /// Gets the ILkadoxioapplicationrelocationv1processid.

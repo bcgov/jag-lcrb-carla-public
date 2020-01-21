@@ -61,6 +61,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 features.Add("NoWetSignature");
             }
 
+            if (!string.IsNullOrEmpty(_configuration["FEATURE_ORG_STRUCTURE"]))
+            {
+                features.Add("OrgStructure");
+            }
+
             return new JsonResult(features);
         }
 
