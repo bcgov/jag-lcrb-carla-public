@@ -16,6 +16,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using Gov.Lclb.Cllb.Public.Utility;
+using System.Net.Mail;
+using System.Net;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -25,6 +28,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly string _encryptionKey;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
@@ -37,6 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(ContactController));
             _env = env;
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];
         }
 
 
@@ -489,6 +494,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return result;
+        }
+
+        
+        [HttpGet("phs-link/{contactId}")]
+        [AllowAnonymous]
+        public JsonResult Subscribe(string contactId)
+        {
+            string confirmationEmailLink = GetPhsLink(contactId);
+            // string bclogo = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/assets/bc-logo.svg";
+            // /* send the user an email confirmation. */
+            // string body = "<img src='" + bclogo + "'/><br><h2>Confirm your email address</h2><p>Thank you for signing up to receive updates about cannabis stores in B.C. We’ll send you updates as new rules and regulations are released about selling cannabis.</p>"
+            //     + "<p>To confirm your request and begin receiving updates by email, click here:</p>"
+            //     + "<a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a>";
+
+            // // send the email.
+            // SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
+
+            // // Specify the message content.
+            // MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
+            // message.Subject = "BC LCLB Cannabis Licensing Newsletter Subscription Confirmation";
+            // message.Body = body;
+            // message.IsBodyHtml = true;
+            // client.Send(message);
+
+            return new JsonResult(confirmationEmailLink);
+        }
+
+        private string GetPhsLink(string contactId)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] +  "/personal-history-summary/";
+            result += WebUtility.UrlEncode(EncryptionUtility.EncryptString(contactId, _encryptionKey));
+            return result;
+        }
+
+        [HttpGet("phs/{code}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Verify(string code)
+        {
+            string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
+           var contact = await GetContact(decrypted);
+           return contact;
         }
     }
 }

@@ -59,6 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SelfDisclosure = contact.AdoxioSelfdisclosure;
                 result.PhsConnectionsDetails = contact.AdoxioPhsconnectionsdetails;
                 result.PhsLivesInCanada = (YesNoOptions?)contact.AdoxioPhslivesincanada;
+                result.PhsHasLivedInCanada = (YesNoOptions?)contact.AdoxioPhshaslivedincanada;
                 result.PhsExpired = (YesNoOptions?)contact.AdoxioPhsexpired;
                 result.PhsComplete = (YesNoOptions?)contact.AdoxioPhscomplete;
                 result.PhsConnectionsToOtherLicences = (YesNoOptions?)contact.AdoxioPhsconnectionstootherlicences;
@@ -355,6 +356,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.Telephone1 = contact.telephone1;
 
                 result.AdoxioPhslivesincanada = (int?)contact.PhsLivesInCanada;
+                result.AdoxioPhshaslivedincanada = (int?)contact.PhsHasLivedInCanada;
                 result.AdoxioPhsexpired = (int?)contact.PhsExpired;
                 result.AdoxioPhscomplete = (int?)contact.PhsComplete;
                 result.AdoxioPhsconnectionstootherlicences = (int?)contact.PhsConnectionsToOtherLicences;

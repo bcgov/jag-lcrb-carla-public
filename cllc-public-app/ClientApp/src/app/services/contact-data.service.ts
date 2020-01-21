@@ -20,6 +20,16 @@ export class ContactDataService extends DataService {
     .pipe(catchError(this.handleError));
   }
 
+  public getContactPhsLink(contactId: string) {
+    return this.http.get<Contact>(`${this.apiPath}phs-link/${contactId}`, { headers: this.headers })
+    .pipe(catchError(this.handleError));
+  }
+
+  public getContactByPhsToken(token: string) {
+    return this.http.get<Contact>(`${this.apiPath}phs/${encodeURIComponent(token)}`, { headers: this.headers })
+    .pipe(catchError(this.handleError));
+  }
+
   public createContact(contact: Contact) {
     return this.http.post<Contact>(this.apiPath, contact, { headers: this.headers })
     .pipe(catchError(this.handleError));
