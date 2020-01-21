@@ -149,12 +149,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                             // get the cell label. 
 
-
-                            var cellLabels = cell.XPathSelectElements("labels/label");
-                            foreach (var cellLabel in cellLabels)
+                            if (formField.showlabel)
                             {
-                                formField.name = cellLabel.Attribute("description").Value;
+                                var cellLabels = cell.XPathSelectElements("labels/label");
+                                foreach (var cellLabel in cellLabels)
+                                {
+                                    formField.name = cellLabel.Attribute("description").Value;
+                                }
                             }
+                            else
+                            {
+                                // use the section name.
+                                formField.name = formSection.name;
+                                formSection.name = ""; 
+                            }
+
+                            
                             // get the form field name.
                             var control = cell.XPathSelectElement("control");
                             if (!string.IsNullOrEmpty(formField.name) && control != null && control.Attribute("datafieldname") != null)

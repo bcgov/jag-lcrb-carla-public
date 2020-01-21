@@ -50,6 +50,7 @@ export class LicenseeChangeLog {
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
   edit: boolean; // This is only used on the client side
+  collapse: boolean; // This is only used on the client side
 
 
   public get percentageShares(): number {
@@ -87,11 +88,11 @@ export class LicenseeChangeLog {
   // construct file name prefix from name and names of parents
   public get fileUploadPrefix(): string {
     let prefix = this.nameToFilePrefix();
-    let parent = this.parentLinceseeChangeLog;
-    while (parent) {
-      prefix = `${parent.nameToFilePrefix()} ${prefix}`;
-      parent = parent.parentLinceseeChangeLog;
-    }
+    // let parent = this.parentLinceseeChangeLog;
+    // while (parent) {
+    //   prefix = `${parent.nameToFilePrefix()} ${prefix}`;
+    //   parent = parent.parentLinceseeChangeLog;
+    // }
 
     return prefix;
   }

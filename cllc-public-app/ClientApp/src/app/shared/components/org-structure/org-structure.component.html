@@ -62,8 +62,8 @@
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
-    <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-      (childAdded)="addChild(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader"></app-personal-history-summary>
+    <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
+      (childAdded)="addChild(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader"></app-associate-list>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
@@ -75,8 +75,8 @@
         In order to complete an application for a liquor or cannabis licence, they will each be required to provide security screening
         related information.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-        (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-personal-history-summary>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
+        (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-associate-list>
     </section>
   </ng-container>
 
@@ -88,8 +88,8 @@
             full legal name, date of birth and email address. In order to complete an application for a liquor or cannabis licence, they will each be 
             required to provide security screening related information.
           </p>
-      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-personal-history-summary>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
+      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-associate-list>
     </section>
   </ng-container>
 
@@ -119,8 +119,8 @@
       <p>
         Please list any individual shareholders including their full legal name, date of birth, percentage of shares owned, and email address.
       </p>
-      <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [rootNode]="node"
-        (childAdded)="addChild(node, $event, 'AddIndividualShareholder')" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-personal-history-summary>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [rootNode]="node"
+        (childAdded)="addChild(node, $event, 'AddIndividualShareholder')" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-associate-list>
     </section>
     <h4 class="plain-header">Business Shareholders</h4>
       <section class="padded-section">
@@ -128,8 +128,8 @@
               Please list any business shareholders including their name, type of business, percentage of shares owned, and email address. Depending on
               the type of business shareholder, additional supporting documents will be required.
             </p>
-        <app-personal-history-summary [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node" [account]="account"
-          (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-personal-history-summary>
+        <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node" [account]="account"
+          (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
       </section>
   </ng-container>
 </ng-template>
