@@ -1,6 +1,13 @@
-<h1 class="plain-header"> {{node?.businessNameNew}} Detailed Organization Information</h1>
-<ng-template #treeNode let-node="node" let-account="account">
 
+
+<h1 *ngIf="node?.isRoot" class="plain-header">{{node?.businessNameNew}} Detailed Organization Information</h1>
+<h2 *ngIf="!node?.isRoot" class="plain-header">
+  
+  {{node?.businessNameNew}} Shareholder Business Information </h2>
+<p *ngIf="!node?.businessType">Please select a shareholder <strong>Business Type</strong> above.</p>
+
+<ng-template #treeNode let-node="node" let-account="account">
+  <h3 class="blue-header">Provide Corporate Documents</h3>
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
     <h3 class="plain-header">Notice of Articles</h3>
     <section class="padded-section">
@@ -21,6 +28,7 @@
       <p>Please upload the {{node?.businessNameNew}} Central Securities Register.</p>
       <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SECREG"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+        [useDocumentTypeForName]="true"
         (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
         [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'" #financialIntegrityDocuments>
       </app-file-uploader>
@@ -67,7 +75,8 @@
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
-    <h3 class="plain-header">List Key Personnel</h3>
+    
+    <h3 class="blue-header">List Key Personnel</h3>
     <section class="padded-section">
       <p>
         Please add the complete list of directors, officers and senior managers for {{node?.businessNameNew}}, including their 
@@ -81,7 +90,7 @@
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Society'">
-    <h3 class="plain-header">List Directors and Officers</h3>
+    <h3 class="blue-header">List Directors and Officers</h3>
     <section class="padded-section">
         <p>
             Please add the complete list of directors and officers for {{node?.businessNameNew}}, including their 
@@ -94,7 +103,7 @@
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Partnership'">
-    <h3 class="plain-header">List Partners</h3>
+    <h3 class="blue-header">List Partners</h3>
     <section class="padded-section">
         <p>
             Please add the complete list of partners for {{node?.businessNameNew}}, including their 
@@ -113,7 +122,7 @@
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation'">
-    <h3 class="plain-header">Identify Shareholders</h3>
+    <h3 class="blue-header">Identify Shareholders</h3>
     <h4 class="plain-header">Individual Shareholders</h4>
     <section class="padded-section">
       <p>
@@ -135,3 +144,4 @@
 </ng-template>
 
 <ng-container *ngTemplateOutlet="treeNode; context: { node: node, account: account }"></ng-container>
+<hr>
