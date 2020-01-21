@@ -1,0 +1,186 @@
+<h3>Personal History Summary</h3>
+<p>
+    Lorem ipsum here
+</p>
+<app-field label="Fist Name">
+    <input type="text">
+</app-field>
+
+<app-field label="Last Name">
+    <input type="text">
+</app-field>
+
+<app-field label="Date of Birth">
+    <input type="text">
+</app-field>
+
+<app-field label="Gender">
+    <input type="text">
+</app-field>
+
+<h3>Name at birth</h3>
+<input type="checkbox" name="" id=""><label for="">I had the same name at birth</label>
+<app-field label="Fist Name">
+    <input type="text">
+</app-field>
+
+<app-field label="Last Name">
+    <input type="text">
+</app-field>
+
+<h3>Other Last Names Used</h3>
+<app-field label="Last Name">
+    <input type="text">
+</app-field>
+
+<button class="btn btn-primary">Add Last Name</button>
+
+<h3 class="blue-header" style="margin-left: -15px;">CURRENT ADDRESS</h3>
+<address class="row">
+    <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
+        <input class="form-control" type="text">
+    </app-field>
+    <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
+        <input class="form-control" type="text">
+    </app-field>
+    <section class="col-md-4 col-xs-12">
+        <app-field label="Province" [isFullWidth]="true">
+            <input class="form-control" type="text" value="British Columbia">
+        </app-field>
+    </section>
+    <section class="col-md-4 col-xs-12">
+        <app-field label="Postal Code">
+            <input class="form-control" type="text">
+        </app-field>
+    </section>
+    <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
+        <input class="form-control" autocomplete="country-name" type="text" value="Canada">
+    </app-field>
+</address>
+
+<!-- Contact Details -->
+<h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
+
+<address class="padded-section">
+    <app-field label="Phone Number (main)" [required]="true"
+        errorMessage="Please enter the business contact's 10-digit phone number">
+        <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel" type="text">
+    </app-field>
+
+    <app-field label="Email" [required]="true" errorMessage="Please enter the business contact's email address"
+        afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
+        <input class="form-control" style="width: 350px;" type="text" autocomplete="email">
+    </app-field>
+</address>
+
+
+<h3 class="blue-header">QUESTIONNAIRE</h3>
+<mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="question-label">
+            1. Do you live in Canada?
+        </div>
+        <div style="flex: 0 0 85px;">
+            <mat-button-toggle-group aria-label="Font Style">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="No">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </section>
+</mat-card>
+
+<mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="question-label">
+            1b. Have you ever lived in Canada?
+        </div>
+        <div style="flex: 0 0 85px;">
+            <mat-button-toggle-group aria-label="Font Style">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="No">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </section>
+</mat-card>
+
+<ng-container>
+    <h2>Your Completed Criminal Record Check</h2>
+    <p>
+        To have been completed withing the last 4 months, by contacting your local RCMP detachment or police department.
+    </p>
+    <section>
+        <app-file-uploader documentType="Signage" [useDocumentTypeForName]="true"
+            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+            [entityId]="1" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
+        </app-file-uploader>
+    </section>
+</ng-container>
+
+<mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="question-label">
+            2. Have you ever been charged with, or convicted of, a criminal or drug/alcohol related offence under the
+            laws of any country outside of Canada, or the laws or bylaws of any provincial, state or local government?
+        </div>
+        <div style="flex: 0 0 85px;">
+            <mat-button-toggle-group aria-label="Font Style">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="No">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </section>
+</mat-card>
+
+<mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="question-label">
+            3. Have you received any alcohol/drug related driving infractions in the past 5 years in Canada or under the
+            laws of any other country or jurisdiction?
+        </div>
+        <div style="flex: 0 0 85px;">
+            <mat-button-toggle-group aria-label="Font Style">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="No">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </section>
+</mat-card>
+
+<ng-container>
+    <h3>Statutory Declaration</h3>
+    <p>
+        Please upload a statutory declaration, signed by a lawyer, Notary Public or Commissioner for Taking Affidavits:
+    </p>
+    <ol>
+        <li>stating you have not been charged with, or convicted of a criminal or drug/alcohol offence under the laws of
+            any country or the laws/bylaws of any provincial, government; OR</li>
+        <li>providing details (date, disposition, sentence or fine) of any charges/convictions/sentences; AND/OR</li>
+        <li>providing details of any alcohol/drug related driving infractions in the past 5 years</li>
+    </ol>
+    <section>
+        <app-file-uploader documentType="Signage" [useDocumentTypeForName]="true"
+            fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+            [extensions]="['jpg', 'jpeg', 'png', 'pdf']"
+            [entityId]="1" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
+        </app-file-uploader>
+    </section>
+</ng-container>
+
+<mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+    <section style="display: flex; justify-content: space-between; width: 100%;">
+        <div class="question-label">
+           4. Have you ever held, or do you or your immeditate family members currently hold, any ownership or interest in a B.C. liquour licence?
+        </div>
+        <div style="flex: 0 0 85px;">
+            <mat-button-toggle-group aria-label="Font Style">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="No">No</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+    </section>
+</mat-card>
+
+<app-field label="Please provide details of the licence(s) or application(s).">
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+</app-field>

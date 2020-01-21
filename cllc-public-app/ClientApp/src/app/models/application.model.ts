@@ -6,10 +6,13 @@ import { TiedHouseConnection } from './tied-house-connection.model';
 
 export class Application {
 
-  previousLicenceApplication: boolean;
+  previousLicenceApplication: number;
   previousLicenceApplicationDetails: string;
-  ruralAgencyStoreAppointment: boolean;
-  liquorIndustryConnections: boolean;
+  ruralAgencyStoreAppointment: number;
+  liquorIndustryConnections: number;
+  liquorIndustryConnectionsDetails: string;
+  otherBusinessesAtTheSameLocation: number;
+  otherBusinessSameLocationDetails: string;
 
   id: string;
   account: Account;
