@@ -6,6 +6,7 @@
       <!-- Title -->
       <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
     </div>
+    
     <div [formGroup]="form" class="application-wrapper" *ngIf="dynamicsForm && form">
       <!-- Preamble -->
       <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
@@ -48,6 +49,7 @@
 
               </i>
           </section>
+
         </ng-template>
         <ng-template #elseBlock>
           <div *ngFor="let formSection of formTab.sections; let i = index;">
@@ -363,54 +365,54 @@
   </div>
 </ng-template>
 
-<ng-template #indigenousContent>
+<ng-template #accountCompleteness>
   <section class="large-screen-only">
-    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">INDIGENOUS NATION</h3>
+    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Account Completeness</h3>
 
     <div [formGroup]="form" class="submitted-content"
          style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-      <app-field label="Is this application for an Indigenous Nation?" [valid]="true">
-        <mat-button-toggle-group formControlName="applyAsIndigenousNation" aria-label="Font Style">
-          <mat-button-toggle [value]="true">Yes</mat-button-toggle>
-          <mat-button-toggle [value]="false">No</mat-button-toggle>
-        </mat-button-toggle-group>
-      </app-field>
-
-      <div *ngIf="form.get('applyAsIndigenousNation').value" style="margin-top: 10px; margin-bottom: 10px;">
-        Third party agents or consultants cannot apply on behalf of an Indigenous nation. The application and all
-        supporting documents will be connected to the BCeID used at log-in.
-      </div>
-
-      <app-field label="Select the Indigenous nation" [valid]="isValidOrNotTouched('indigenousNationId')"
-                 *ngIf="form.get('applyAsIndigenousNation').value" errorMessage="Please select the Indigenous nation">
-        <select class="form-control" formControlName="indigenousNationId" style="width: 250px;">
-          <option value=""></option>
-          <option [value]="item.id" *ngFor="let item of indigenousNations">{{item.name}}</option>
-        </select>
-      </app-field>
+         <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following items:</p>
+         <div>
+            <a [routerLink]="[ '/account-profile/']" class="completeness">
+              <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+                  </i>Account Profile - Complete
+              </a> <br>
+                     
+         </div>
+         <div>
+            <a [routerLink]="[ '/org-structure/']" class="completeness">
+              <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
+                  </i>Organization Information - Missing
+              </a><br>
+              
+         </div>
+         <div>
+            <a [routerLink]="[ '/org-structure/']" class="completeness">
+              <i class="far fa-times-circle" style="margin-right: 10px; color:red;">
+                  </i>Personal History Summary Forms - Not Received
+              </a>    <br>          
+          
+         </div>
     </div>
   </section>
-  <app-associate-content [account]="account" [showBothContents]="false"
-                         [isIndigenousNation]="form.get('applyAsIndigenousNation').value"></app-associate-content>
+  
 </ng-template>
 
-<div class="dashboard-spacing" style="position: relative" appRemoveIfFeatureOff="IndigenousNation">
+
+
+
+<div class="dashboard-spacing" style="position: relative">
   <div [ngBusy]="busy"></div>
   <div class="row">
     <div class="col-md-7 col-sm-12">
       <ng-container *ngTemplateOutlet="applicationContent"></ng-container>
     </div>
-    <div class="col-md-4 col-sm-12"
-         *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
+    <div class="col-md-4 col-sm-12">
       <h1>&nbsp;</h1>
-      <ng-container *ngTemplateOutlet="indigenousContent"></ng-container>
+      <ng-container *ngTemplateOutlet="accountCompleteness"></ng-container>
     </div>
   </div>
 </div>
 
-<div appRemoveIfFeatureOn="IndigenousNation">
-  <div [ngBusy]="busy"></div>
-  <ng-container *ngTemplateOutlet="applicationContent">
-  </ng-container>
-</div>
+
 
