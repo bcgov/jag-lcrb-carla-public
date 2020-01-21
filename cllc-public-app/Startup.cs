@@ -166,7 +166,6 @@ namespace Gov.Lclb.Cllb.Public
 #if (USE_MSSQL)
                 .AddSqlServer(DatabaseTools.GetConnectionString(Configuration), name: "Sql server")
 #endif
-                .AddCheck<SharepointHealthCheck>("Sharepoint")
                 .AddCheck<DynamicsHealthCheck>("Dynamics")
                 .AddCheck<GeocoderHealthCheck>("Geocoder");
 
@@ -220,10 +219,7 @@ namespace Gov.Lclb.Cllb.Public
 
                 return client;
             }));
-
-            // add SharePoint.
-
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
+            
 
             // add BCeID Web Services
 
