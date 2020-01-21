@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -30,6 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IOrgBookClient _orgBookclient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly FileManagerClient _fileManagerClient;
 
         public AccountsController(IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor,
@@ -364,8 +366,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var exists = false;
             var accountIdCleaned = accountId.ToUpper().Replace("-", "");
             var folderName = $"{accountName}_{accountIdCleaned}";
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-            var fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+
+            var fileDetailsList = _fileManagerClient.GetFileDetailsListInFolder(_logger, AccountDocumentUrlTitle, folderName);
             if (fileDetailsList != null)
             {
                 exists = fileDetailsList.Count() > 0;
