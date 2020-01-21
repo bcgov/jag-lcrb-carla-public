@@ -50,7 +50,7 @@ const routes: Routes = [
     path: 'org-structure',
     component: OrganizationStructureComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: 'OrgStructure' }
+
   },
   {
     path: 'catering-demo',
