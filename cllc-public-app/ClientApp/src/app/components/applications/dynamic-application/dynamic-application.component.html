@@ -91,7 +91,7 @@
                       &nbsp;<br />
                     </div>
                     
-                    <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'  " [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname">
+                    <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'" [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname">
                       <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" />                      
                     </app-field>
 

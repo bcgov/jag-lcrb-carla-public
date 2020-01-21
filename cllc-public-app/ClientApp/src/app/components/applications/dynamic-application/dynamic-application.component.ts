@@ -119,7 +119,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
 
     this.form = this.fb.group({
       id: [''],
-      previousLicenceApplication: ['', Validators.required],      
+      previousLicenceApplication: ['', Validators.required],
       previousLicenceApplicationDetails: [''],
       ruralAgencyStoreAppointment: ['', Validators.required],
       liquorIndustryConnections: ['', Validators.required],
@@ -127,15 +127,6 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       liquorIndustryConnectionsDetails: [''],
       otherBusinessesAtTheSameLocation: ['', Validators.required],
       otherBusinessSameLocationDetails: [''],
-
-
-      assignedLicence: this.fb.group({
-        id: [''],
-        establishmentAddressStreet: [''],
-        establishmentAddressCity: [''],
-        establishmentAddressPostalCode: [''],
-        establishmentParcelId: ['']
-      }),
       establishmentName: ['', [
         Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
