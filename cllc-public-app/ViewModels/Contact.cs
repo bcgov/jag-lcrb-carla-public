@@ -93,6 +93,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public YesNoOptions? PhsLivesInCanada { get; set; }
         
         [JsonConverter(typeof(StringEnumConverter))]
+        public YesNoOptions? PhsHasLivedInCanada { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsExpired { get; set; }
         
         [JsonConverter(typeof(StringEnumConverter))]
