@@ -443,7 +443,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 if (application.AdoxioApplicant != null && application.AdoxioApplicant.AdoxioBusinesstype != null)
                 {
                     BusinessType businessType = (BusinessType)application.AdoxioApplicant.AdoxioBusinesstype;
-                    screeningRequest.ApplicantAccount = new Account()
+                    screeningRequest.ApplicantAccount = new Interfaces.Spice.Models.Account()
                     {
                         AccountId = application.AdoxioApplicant.Accountid,
                         Name = application.AdoxioApplicant.Name,
@@ -718,7 +718,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 if (legalEntity._adoxioShareholderaccountidValue != null)
                 {
                     var account = _dynamicsClient.Accounts.Get(filter: "accountid eq " + legalEntity._adoxioShareholderaccountidValue).Value;
-                    associate.Account = new Account()
+                    associate.Account = new Interfaces.Spice.Models.Account()
                     {
                         AccountId = account[0].Accountid,
                         Name = account[0].Name,
@@ -729,7 +729,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 }
                 else if (legalEntity.AdoxioAccount != null)
                 {
-                    associate.Account = new Account()
+                    associate.Account = new Interfaces.Spice.Models.Account()
                     {
                         AccountId = legalEntity.AdoxioAccount.Accountid,
                         Name = legalEntity.AdoxioAccount.Name,
@@ -741,7 +741,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 else
                 {
                     _logger.LogError("Failed to find a shareholder account found");
-                    associate.Account = new Account();
+                    associate.Account = new Interfaces.Spice.Models.Account();
                 }
                 associate.IsIndividual = false;
             }
