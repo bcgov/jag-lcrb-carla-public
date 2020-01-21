@@ -19,6 +19,8 @@ using Microsoft.Extensions.Hosting;
 using Gov.Lclb.Cllb.Public.Utility;
 using System.Net.Mail;
 using System.Net;
+using Google.Protobuf;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,8 +35,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IWebHostEnvironment _env;
+        private readonly FileManagerClient _fileManagerClient;
 
-        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IWebHostEnvironment env)
+        public ContactController(IConfiguration configuration, IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IWebHostEnvironment env, FileManagerClient fileManagerClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
@@ -42,6 +45,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger = loggerFactory.CreateLogger(typeof(ContactController));
             _env = env;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
+            _fileManagerClient = fileManagerClient;
         }
 
 
@@ -361,24 +365,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string folderName = await FileController.GetFolderName("worker", worker.AdoxioWorkerid, _dynamicsClient);
             string name = worker.AdoxioWorkerid + " Files";
 
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
 
-            // Create the folder
-            bool folderExists = await _sharePointFileManager.FolderExists(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
-            if (!folderExists)
-            {
-                try
-                {
-                    await _sharePointFileManager.CreateFolder(SharePointFileManager.WorkertDocumentUrlTitle, folderName);
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError("Error creating Sharepoint Folder");
-                    _logger.LogError($"List is: {SharePointFileManager.WorkertDocumentUrlTitle}");
-                    _logger.LogError($"FolderName is: {folderName}");
-                    throw e;
-                }
-            }
+
+            _fileManagerClient.CreateFolderIfNotExist(_logger, WorkerDocumentUrlTitle, folderName);
 
             // Create the SharePointDocumentLocation entity
             MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
@@ -409,7 +398,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var patchSharePointDocumentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation();
                 patchSharePointDocumentLocation.RegardingobjectidWorkerApplicationODataBind = workerReference;
                 // set the parent document library.
-                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL(SharePointFileManager.WorkertDocumentUrlTitle);
+                string parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL(WorkerDocumentUrlTitle);
                 patchSharePointDocumentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI("sharepointdocumentlocations", parentDocumentLibraryReference);
 
                 try
