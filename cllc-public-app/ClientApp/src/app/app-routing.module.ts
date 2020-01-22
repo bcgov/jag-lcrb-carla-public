@@ -40,6 +40,7 @@ import { DynamicApplicationComponent } from './components/applications/dynamic-a
 import { AssociateListComponent } from '@shared/components/associate-list/associate-list.component';
 import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
+import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
 
 
 const routes: Routes = [
@@ -54,9 +55,15 @@ const routes: Routes = [
 
   },
   {
+    path: 'personal-history-summary/confirmation',
+    component: PhsConfirmationComponent,
+    canActivate: [FeatureGuard],
+    data: { feature: 'OrgStructure' }
+  },
+  {
     path: 'personal-history-summary/:token',
     component: PersonalHistorySummaryComponent,
-    canActivate: [BCeidAuthGuard, FeatureGuard],
+    canActivate: [FeatureGuard],
     data: { feature: 'OrgStructure' }
   },
   {
@@ -69,12 +76,12 @@ const routes: Routes = [
     component: LicencesComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
     data: { feature: 'FederalReporting' }
-  },  
+  },
   {
     path: 'licence-event',
     component: LicenceEventComponent,
     canActivate: [BCeidAuthGuard],
-  
+
   },
   {
     path: 'federal-reporting/:licenceId',
@@ -144,13 +151,13 @@ const routes: Routes = [
   },
   {
     path: 'ownership-cancel-transfer/:licenceId',
-      component: ApplicationCancelOwnershipTransferComponent,
+    component: ApplicationCancelOwnershipTransferComponent,
     canActivate: [BCeidAuthGuard]
   },
   {
-      path: 'ownership-transfer/:licenceId',
-      component: ApplicationOwnershipTransferComponent,
-      canActivate: [BCeidAuthGuard]
+    path: 'ownership-transfer/:licenceId',
+    component: ApplicationOwnershipTransferComponent,
+    canActivate: [BCeidAuthGuard]
   },
   {
     path: 'worker-qualification/home',
