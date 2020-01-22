@@ -24,7 +24,7 @@ import { FileUploaderComponent } from '@shared/components/file-uploader/file-upl
 import { ConnectionToNonMedicalStoresComponent } from '@components/account-profile/tabs/connection-to-non-medical-stores/connection-to-non-medical-stores.component';
 import { UPLOAD_FILES_MODE } from '@components/licences/licences.component';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
-
+import { AccountCompletenessComponent } from '@components/account-completeness/account-completeness.component'
 import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
 import { DynamicsForm } from '@models/dynamics-form.model';
 
@@ -63,6 +63,7 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
   @ViewChild('mainForm', { static: false }) mainForm: FileUploaderComponent;
   @ViewChild('financialIntegrityDocuments', { static: false }) financialIntegrityDocuments: FileUploaderComponent;
   @ViewChild('supportingDocuments', { static: false }) supportingDocuments: FileUploaderComponent;
+  @ViewChild('accountCompleteness', { static: false }) accountCompleteness: AccountCompletenessComponent;
   @ViewChild(ConnectionToNonMedicalStoresComponent, { static: false }) connectionsToProducers: ConnectionToNonMedicalStoresComponent;
   form: FormGroup;
   savedFormData: any;

@@ -33,27 +33,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        int? Top187 { get; set; }
+        int? Top188 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        int? Skip106 { get; set; }
+        int? Skip107 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        bool? Count187 { get; set; }
+        bool? Count188 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        string Filter187 { get; set; }
+        string Filter188 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        string Search106 { get; set; }
+        string Search107 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client
@@ -648,6 +648,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         ISpddatarows Spddatarows { get; }
 
         /// <summary>
+        /// Gets the ISpddatarowsharepointdocumentlocations.
+        /// </summary>
+        ISpddatarowsharepointdocumentlocations Spddatarowsharepointdocumentlocations { get; }
+
+        /// <summary>
         /// Gets the ISpdexportses.
         /// </summary>
         ISpdexportses Spdexportses { get; }
@@ -871,6 +876,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointdocumentlocations.
         /// </summary>
         ISharepointdocumentlocations Sharepointdocumentlocations { get; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiospddatarow.
+        /// </summary>
+        IRegardingobjectidadoxiospddatarow Regardingobjectidadoxiospddatarow { get; }
 
         /// <summary>
         /// Gets the ISharepointsites.

@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// <param name="_administratoridValue">Unique identifier of the user
         /// primary responsible for the team.</param>
         /// <param name="teamid">Unique identifier for the team.</param>
-        public MicrosoftDynamicsCRMteam(string _transactioncurrencyidValue = default(string), string versionnumber = default(string), string yominame = default(string), string _teamtemplateidValue = default(string), string _modifiedonbehalfbyValue = default(string), string traversedpath = default(string), string organizationid = default(string), string name = default(string), decimal? exchangerate = default(decimal?), int? importsequencenumber = default(int?), bool? systemmanaged = default(bool?), bool? isdefault = default(bool?), string description = default(string), string _createdbyValue = default(string), string emailaddress = default(string), string processid = default(string), string _businessunitidValue = default(string), string _queueidValue = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? teamtype = default(int?), string stageid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string _administratoridValue = default(string), string teamid = default(string), IList<MicrosoftDynamicsCRMsystemuser> teammembershipAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMexchangesyncidmapping> teamExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMinteractionforemail> teamNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMknowledgearticle> teamKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMsharepointsite> teamSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> teamSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMentitlement> teamEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMgoal> teamGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoalrollupquery> teamGoalrollupquery = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMmailbox> teamMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), MicrosoftDynamicsCRMteamtemplate associatedteamtemplateid = default(MicrosoftDynamicsCRMteamtemplate), IList<MicrosoftDynamicsCRMbookableresource> teamBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> teamBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> teamBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> teamBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> teamBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> teamBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> teamBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> teamBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcharacteristic> teamCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMratingmodel> teamRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> teamRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMduplicaterule> teamDuplicateRules = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMimport> teamImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMopportunity> teamOpportunities = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMpostfollow> owningTeamPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> teamRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMworkflowlog> teamWorkflowlog = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMconnection> teamConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMcontract> teamServiceContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMuserform> teamUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMcampaign> teamCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMquote> teamQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMasyncoperation> teamAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> teamSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMlead> leadOwningTeam = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMlist> teamList = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMincident> teamIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMduplicaterecord> teamDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMtask> teamTask = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMuserquery> teamUserquery = default(IList<MicrosoftDynamicsCRMuserquery>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsocialactivity> teamSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMuserqueryvisualization> teamUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMsyncerror> teamSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMimportmap> teamImportMaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMfax> teamFax = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMqueueitem> teamQueueitembaseWorkerid = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMpostregarding> teamPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMimportfile> importFileTeam = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMconnection> teamConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMtemplate> teamEmailTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMworkflow> teamWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMduplicaterecord> teamDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> teamDynamicPropertyInstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMemail> teamEmail = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMletter> teamLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMimportfile> teamImportFiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMcampaignresponse> teamCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMimportdata> teamImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMresourcespec> teamResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMasyncoperation> teamAsyncoperation = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcontact> teamContacts = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMresourcegroup> teamResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMinvoice> teamInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMemailserverprofile> teamEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMbulkoperation> teamBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> teamAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMimportlog> teamImportLogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMorderclose> teamOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMsla> teamSlaBase = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMphonecall> teamPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMcampaignactivity> teamCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMincidentresolution> teamIncidentresolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMrole> teamrolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMaccount> teamAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMserviceappointment> teamServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMquoteclose> teamQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMactivitypointer> teamActivity = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> teamAppointment = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsalesorder> teamOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMopportunityclose> teamOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), MicrosoftDynamicsCRMsystemuser administratorid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> teamBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMgoal> teamGoalGoalowner = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMabsScheduledprocess> teamAbsScheduledprocess = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionTeamOwningteam = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioAlias> teamAdoxioAlias = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioApplication> teamAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> teamAdoxioApplicationinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> teamAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioArea> teamAdoxioArea = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> teamAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> teamAdoxioCitydistrict = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioComplaint> teamAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioContravention> teamAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> teamAdoxioCorporatehistorysummary = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> teamAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioEstablishment> teamAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioFundingsource> teamAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioInterest> teamAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInvestigation> teamAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLegalentity> teamAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> teamAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> teamAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLoan> teamAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> teamAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> teamAdoxioPolicydocument = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioPostalcode> teamAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> teamAdoxioPreviousaddress = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioRegion> teamAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioSetting> teamAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> teamAdoxioSpddatarow = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpdexports> teamAdoxioSpdexports = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> teamAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> teamAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> teamAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> teamAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> teamAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioWorker> teamAdoxioWorker = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> teamAdoxioWorkerinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioDocument> teamAdoxioDocument = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioDocumentadmin> teamAdoxioDocumentadmin = default(IList<MicrosoftDynamicsCRMadoxioDocumentadmin>), IList<MicrosoftDynamicsCRMadoxioContraventionadmin> teamAdoxioContraventionadmin = default(IList<MicrosoftDynamicsCRMadoxioContraventionadmin>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> teamAdoxioCompliancemeeting = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> teamAdoxioInvestigationactivity = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> teamAdoxioComplianceinvestigation = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), IList<MicrosoftDynamicsCRMadoxioFiainvestigationlog> teamAdoxioFiainvestigationlog = default(IList<MicrosoftDynamicsCRMadoxioFiainvestigationlog>), IList<MicrosoftDynamicsCRMadoxioApplicationtype> teamAdoxioApplicationtype = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent> teamAdoxioApplicationtypecontent = default(IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent>), IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory> teamAdoxioInspectionreactivationhistory = default(IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory>), IList<MicrosoftDynamicsCRMadoxioRelatedparty> teamAdoxioRelatedparty = default(IList<MicrosoftDynamicsCRMadoxioRelatedparty>), IList<MicrosoftDynamicsCRMadoxioWitness> teamAdoxioWitness = default(IList<MicrosoftDynamicsCRMadoxioWitness>), IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> teamAdoxioInspectorcommentsrollup = default(IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup>), IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> teamAdoxioCannabismonthlyreport = default(IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport>), IList<MicrosoftDynamicsCRMadoxioCannabisproductadmin> teamAdoxioCannabisproductadmin = default(IList<MicrosoftDynamicsCRMadoxioCannabisproductadmin>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> teamAdoxioCannabisinventoryreport = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>), IList<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory> teamAdoxioInvestigationreactivationhistory = default(IList<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> teamAdoxioLicenseechangelog = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMadoxioAuditlogrequest> teamAdoxioAuditlogrequest = default(IList<MicrosoftDynamicsCRMadoxioAuditlogrequest>), IList<MicrosoftDynamicsCRMadoxioExhibit> teamAdoxioExhibit = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield> teamAdoxioFormelementuploadfield = default(IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield>), IList<MicrosoftDynamicsCRMadoxioEvent> teamAdoxioEvent = default(IList<MicrosoftDynamicsCRMadoxioEvent>))
+        public MicrosoftDynamicsCRMteam(string _transactioncurrencyidValue = default(string), string versionnumber = default(string), string yominame = default(string), string _teamtemplateidValue = default(string), string _modifiedonbehalfbyValue = default(string), string traversedpath = default(string), string organizationid = default(string), string name = default(string), decimal? exchangerate = default(decimal?), int? importsequencenumber = default(int?), bool? systemmanaged = default(bool?), bool? isdefault = default(bool?), string description = default(string), string _createdbyValue = default(string), string emailaddress = default(string), string processid = default(string), string _businessunitidValue = default(string), string _queueidValue = default(string), string _regardingobjectidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? teamtype = default(int?), string stageid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), string _createdonbehalfbyValue = default(string), string _administratoridValue = default(string), string teamid = default(string), IList<MicrosoftDynamicsCRMsystemuser> teammembershipAssociation = default(IList<MicrosoftDynamicsCRMsystemuser>), IList<MicrosoftDynamicsCRMexchangesyncidmapping> teamExchangesyncidmapping = default(IList<MicrosoftDynamicsCRMexchangesyncidmapping>), IList<MicrosoftDynamicsCRMinteractionforemail> teamNewInteractionforemail = default(IList<MicrosoftDynamicsCRMinteractionforemail>), IList<MicrosoftDynamicsCRMknowledgearticle> teamKnowledgearticle = default(IList<MicrosoftDynamicsCRMknowledgearticle>), MicrosoftDynamicsCRMknowledgearticle regardingobjectidKnowledgearticle = default(MicrosoftDynamicsCRMknowledgearticle), IList<MicrosoftDynamicsCRMsharepointsite> teamSharepointsite = default(IList<MicrosoftDynamicsCRMsharepointsite>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> teamSharepointdocumentlocation = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMentitlement> teamEntitlement = default(IList<MicrosoftDynamicsCRMentitlement>), IList<MicrosoftDynamicsCRMgoal> teamGoal = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMgoalrollupquery> teamGoalrollupquery = default(IList<MicrosoftDynamicsCRMgoalrollupquery>), IList<MicrosoftDynamicsCRMmailbox> teamMailbox = default(IList<MicrosoftDynamicsCRMmailbox>), MicrosoftDynamicsCRMteamtemplate associatedteamtemplateid = default(MicrosoftDynamicsCRMteamtemplate), IList<MicrosoftDynamicsCRMbookableresource> teamBookableresource = default(IList<MicrosoftDynamicsCRMbookableresource>), IList<MicrosoftDynamicsCRMbookableresourcebooking> teamBookableresourcebooking = default(IList<MicrosoftDynamicsCRMbookableresourcebooking>), IList<MicrosoftDynamicsCRMbookableresourcebookingheader> teamBookableresourcebookingheader = default(IList<MicrosoftDynamicsCRMbookableresourcebookingheader>), IList<MicrosoftDynamicsCRMbookableresourcecategory> teamBookableresourcecategory = default(IList<MicrosoftDynamicsCRMbookableresourcecategory>), IList<MicrosoftDynamicsCRMbookableresourcecategoryassn> teamBookableresourcecategoryassn = default(IList<MicrosoftDynamicsCRMbookableresourcecategoryassn>), IList<MicrosoftDynamicsCRMbookableresourcecharacteristic> teamBookableresourcecharacteristic = default(IList<MicrosoftDynamicsCRMbookableresourcecharacteristic>), IList<MicrosoftDynamicsCRMbookableresourcegroup> teamBookableresourcegroup = default(IList<MicrosoftDynamicsCRMbookableresourcegroup>), IList<MicrosoftDynamicsCRMbookingstatus> teamBookingstatus = default(IList<MicrosoftDynamicsCRMbookingstatus>), IList<MicrosoftDynamicsCRMcharacteristic> teamCharacteristic = default(IList<MicrosoftDynamicsCRMcharacteristic>), IList<MicrosoftDynamicsCRMratingmodel> teamRatingmodel = default(IList<MicrosoftDynamicsCRMratingmodel>), IList<MicrosoftDynamicsCRMratingvalue> teamRatingvalue = default(IList<MicrosoftDynamicsCRMratingvalue>), IList<MicrosoftDynamicsCRMduplicaterule> teamDuplicateRules = default(IList<MicrosoftDynamicsCRMduplicaterule>), IList<MicrosoftDynamicsCRMimport> teamImports = default(IList<MicrosoftDynamicsCRMimport>), IList<MicrosoftDynamicsCRMopportunity> teamOpportunities = default(IList<MicrosoftDynamicsCRMopportunity>), IList<MicrosoftDynamicsCRMpostfollow> owningTeamPostfollows = default(IList<MicrosoftDynamicsCRMpostfollow>), IList<MicrosoftDynamicsCRMrecurringappointmentmaster> teamRecurringappointmentmaster = default(IList<MicrosoftDynamicsCRMrecurringappointmentmaster>), IList<MicrosoftDynamicsCRMworkflowlog> teamWorkflowlog = default(IList<MicrosoftDynamicsCRMworkflowlog>), IList<MicrosoftDynamicsCRMconnection> teamConnections2 = default(IList<MicrosoftDynamicsCRMconnection>), MicrosoftDynamicsCRMprocessstage stageidProcessstage = default(MicrosoftDynamicsCRMprocessstage), IList<MicrosoftDynamicsCRMcontract> teamServiceContracts = default(IList<MicrosoftDynamicsCRMcontract>), IList<MicrosoftDynamicsCRMuserform> teamUserform = default(IList<MicrosoftDynamicsCRMuserform>), IList<MicrosoftDynamicsCRMcampaign> teamCampaigns = default(IList<MicrosoftDynamicsCRMcampaign>), IList<MicrosoftDynamicsCRMquote> teamQuotes = default(IList<MicrosoftDynamicsCRMquote>), IList<MicrosoftDynamicsCRMasyncoperation> teamAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMsyncerror> teamSyncError = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMlead> leadOwningTeam = default(IList<MicrosoftDynamicsCRMlead>), MicrosoftDynamicsCRMqueue queueid = default(MicrosoftDynamicsCRMqueue), IList<MicrosoftDynamicsCRMlist> teamList = default(IList<MicrosoftDynamicsCRMlist>), IList<MicrosoftDynamicsCRMincident> teamIncidents = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMduplicaterecord> teamDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMtask> teamTask = default(IList<MicrosoftDynamicsCRMtask>), IList<MicrosoftDynamicsCRMuserquery> teamUserquery = default(IList<MicrosoftDynamicsCRMuserquery>), MicrosoftDynamicsCRMsystemuser modifiedonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsocialactivity> teamSocialactivity = default(IList<MicrosoftDynamicsCRMsocialactivity>), IList<MicrosoftDynamicsCRMuserqueryvisualization> teamUserqueryvisualizations = default(IList<MicrosoftDynamicsCRMuserqueryvisualization>), IList<MicrosoftDynamicsCRMsyncerror> teamSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMimportmap> teamImportMaps = default(IList<MicrosoftDynamicsCRMimportmap>), IList<MicrosoftDynamicsCRMfax> teamFax = default(IList<MicrosoftDynamicsCRMfax>), IList<MicrosoftDynamicsCRMqueueitem> teamQueueitembaseWorkerid = default(IList<MicrosoftDynamicsCRMqueueitem>), IList<MicrosoftDynamicsCRMpostregarding> teamPostRegardings = default(IList<MicrosoftDynamicsCRMpostregarding>), MicrosoftDynamicsCRMbusinessunit businessunitid = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMimportfile> importFileTeam = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMconnection> teamConnections1 = default(IList<MicrosoftDynamicsCRMconnection>), IList<MicrosoftDynamicsCRMtemplate> teamEmailTemplates = default(IList<MicrosoftDynamicsCRMtemplate>), IList<MicrosoftDynamicsCRMworkflow> teamWorkflow = default(IList<MicrosoftDynamicsCRMworkflow>), IList<MicrosoftDynamicsCRMduplicaterecord> teamDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), MicrosoftDynamicsCRMorganization organizationidOrganization = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMdynamicpropertyinstance> teamDynamicPropertyInstance = default(IList<MicrosoftDynamicsCRMdynamicpropertyinstance>), IList<MicrosoftDynamicsCRMemail> teamEmail = default(IList<MicrosoftDynamicsCRMemail>), IList<MicrosoftDynamicsCRMletter> teamLetter = default(IList<MicrosoftDynamicsCRMletter>), IList<MicrosoftDynamicsCRMimportfile> teamImportFiles = default(IList<MicrosoftDynamicsCRMimportfile>), IList<MicrosoftDynamicsCRMcampaignresponse> teamCampaignresponse = default(IList<MicrosoftDynamicsCRMcampaignresponse>), IList<MicrosoftDynamicsCRMimportdata> teamImportData = default(IList<MicrosoftDynamicsCRMimportdata>), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), IList<MicrosoftDynamicsCRMresourcespec> teamResourceSpecs = default(IList<MicrosoftDynamicsCRMresourcespec>), IList<MicrosoftDynamicsCRMasyncoperation> teamAsyncoperation = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMcontact> teamContacts = default(IList<MicrosoftDynamicsCRMcontact>), MicrosoftDynamicsCRMopportunity regardingobjectidOpportunity = default(MicrosoftDynamicsCRMopportunity), IList<MicrosoftDynamicsCRMresourcegroup> teamResourceGroups = default(IList<MicrosoftDynamicsCRMresourcegroup>), MicrosoftDynamicsCRMsystemuser modifiedby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMinvoice> teamInvoices = default(IList<MicrosoftDynamicsCRMinvoice>), IList<MicrosoftDynamicsCRMemailserverprofile> teamEmailserverprofile = default(IList<MicrosoftDynamicsCRMemailserverprofile>), IList<MicrosoftDynamicsCRMbulkoperation> teamBulkOperation = default(IList<MicrosoftDynamicsCRMbulkoperation>), MicrosoftDynamicsCRMsystemuser createdby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMannotation> teamAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMimportlog> teamImportLogs = default(IList<MicrosoftDynamicsCRMimportlog>), IList<MicrosoftDynamicsCRMorderclose> teamOrderclose = default(IList<MicrosoftDynamicsCRMorderclose>), IList<MicrosoftDynamicsCRMsla> teamSlaBase = default(IList<MicrosoftDynamicsCRMsla>), IList<MicrosoftDynamicsCRMfieldsecurityprofile> teamprofilesAssociation = default(IList<MicrosoftDynamicsCRMfieldsecurityprofile>), IList<MicrosoftDynamicsCRMphonecall> teamPhonecall = default(IList<MicrosoftDynamicsCRMphonecall>), IList<MicrosoftDynamicsCRMcampaignactivity> teamCampaignactivity = default(IList<MicrosoftDynamicsCRMcampaignactivity>), IList<MicrosoftDynamicsCRMincidentresolution> teamIncidentresolution = default(IList<MicrosoftDynamicsCRMincidentresolution>), IList<MicrosoftDynamicsCRMrole> teamrolesAssociation = default(IList<MicrosoftDynamicsCRMrole>), IList<MicrosoftDynamicsCRMaccount> teamAccounts = default(IList<MicrosoftDynamicsCRMaccount>), IList<MicrosoftDynamicsCRMserviceappointment> teamServiceAppointments = default(IList<MicrosoftDynamicsCRMserviceappointment>), IList<MicrosoftDynamicsCRMquoteclose> teamQuoteclose = default(IList<MicrosoftDynamicsCRMquoteclose>), IList<MicrosoftDynamicsCRMactivitypointer> teamActivity = default(IList<MicrosoftDynamicsCRMactivitypointer>), IList<MicrosoftDynamicsCRMappointment> teamAppointment = default(IList<MicrosoftDynamicsCRMappointment>), MicrosoftDynamicsCRMsystemuser createdonbehalfby = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMsalesorder> teamOrders = default(IList<MicrosoftDynamicsCRMsalesorder>), IList<MicrosoftDynamicsCRMopportunityclose> teamOpportunityclose = default(IList<MicrosoftDynamicsCRMopportunityclose>), MicrosoftDynamicsCRMsystemuser administratorid = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMbulkdeletefailure> teamBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMgoal> teamGoalGoalowner = default(IList<MicrosoftDynamicsCRMgoal>), IList<MicrosoftDynamicsCRMadoxioApplication> teamAdoxioApplication = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> teamAdoxioApplicationtermsconditionslimitation = default(IList<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation>), IList<MicrosoftDynamicsCRMadoxioBusinessaccount> teamAdoxioBusinessaccount = default(IList<MicrosoftDynamicsCRMadoxioBusinessaccount>), IList<MicrosoftDynamicsCRMadoxioComplaint> teamAdoxioComplaint = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioContravention> teamAdoxioContravention = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioCorporaterole> teamAdoxioCorporaterole = default(IList<MicrosoftDynamicsCRMadoxioCorporaterole>), IList<MicrosoftDynamicsCRMadoxioEstablishment> teamAdoxioEstablishment = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioFundingsource> teamAdoxioFundingsource = default(IList<MicrosoftDynamicsCRMadoxioFundingsource>), IList<MicrosoftDynamicsCRMadoxioInterest> teamAdoxioInterest = default(IList<MicrosoftDynamicsCRMadoxioInterest>), IList<MicrosoftDynamicsCRMadoxioInvestigation> teamAdoxioInvestigation = default(IList<MicrosoftDynamicsCRMadoxioInvestigation>), IList<MicrosoftDynamicsCRMadoxioLegalentity> teamAdoxioLegalentity = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), IList<MicrosoftDynamicsCRMadoxioLicences> teamAdoxioLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioLicencetype> teamAdoxioLicencetype = default(IList<MicrosoftDynamicsCRMadoxioLicencetype>), IList<MicrosoftDynamicsCRMadoxioLoan> teamAdoxioLoan = default(IList<MicrosoftDynamicsCRMadoxioLoan>), IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary> teamAdoxioPersonalhistorysummary = default(IList<MicrosoftDynamicsCRMadoxioPersonalhistorysummary>), IList<MicrosoftDynamicsCRMadoxioPostalcode> teamAdoxioPostalcode = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMadoxioRegion> teamAdoxioRegion = default(IList<MicrosoftDynamicsCRMadoxioRegion>), IList<MicrosoftDynamicsCRMadoxioSetting> teamAdoxioSetting = default(IList<MicrosoftDynamicsCRMadoxioSetting>), IList<MicrosoftDynamicsCRMadoxioTaxandaccounting> teamAdoxioTaxandaccounting = default(IList<MicrosoftDynamicsCRMadoxioTaxandaccounting>), IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset> teamAdoxioTermsconditionslimitationspreset = default(IList<MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset>), IList<MicrosoftDynamicsCRMadoxioTerritory> teamAdoxioTerritory = default(IList<MicrosoftDynamicsCRMadoxioTerritory>), IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation> teamAdoxioTiedhouseassociation = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseassociation>), IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection> teamAdoxioTiedhouseconnection = default(IList<MicrosoftDynamicsCRMadoxioTiedhouseconnection>), IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> teamAdoxioApplicationinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioPreviousaddress> teamAdoxioPreviousaddress = default(IList<MicrosoftDynamicsCRMadoxioPreviousaddress>), IList<MicrosoftDynamicsCRMadoxioSpddatarow> teamAdoxioSpddatarow = default(IList<MicrosoftDynamicsCRMadoxioSpddatarow>), IList<MicrosoftDynamicsCRMadoxioSpdexports> teamAdoxioSpdexports = default(IList<MicrosoftDynamicsCRMadoxioSpdexports>), IList<MicrosoftDynamicsCRMadoxioPolicydocument> teamAdoxioPolicydocument = default(IList<MicrosoftDynamicsCRMadoxioPolicydocument>), IList<MicrosoftDynamicsCRMadoxioAlias> teamAdoxioAlias = default(IList<MicrosoftDynamicsCRMadoxioAlias>), IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> teamAdoxioCorporatehistorysummary = default(IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary>), IList<MicrosoftDynamicsCRMadoxioWorker> teamAdoxioWorker = default(IList<MicrosoftDynamicsCRMadoxioWorker>), IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> teamAdoxioWorkerinvoicehistory = default(IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory>), IList<MicrosoftDynamicsCRMadoxioArea> teamAdoxioArea = default(IList<MicrosoftDynamicsCRMadoxioArea>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> teamAdoxioCitydistrict = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMabsScheduledprocess> teamAbsScheduledprocess = default(IList<MicrosoftDynamicsCRMabsScheduledprocess>), IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> absScheduledprocessexecutionTeamOwningteam = default(IList<MicrosoftDynamicsCRMabsScheduledprocessexecution>), IList<MicrosoftDynamicsCRMadoxioDocument> teamAdoxioDocument = default(IList<MicrosoftDynamicsCRMadoxioDocument>), IList<MicrosoftDynamicsCRMadoxioDocumentadmin> teamAdoxioDocumentadmin = default(IList<MicrosoftDynamicsCRMadoxioDocumentadmin>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> teamAdoxioComplianceinvestigation = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), IList<MicrosoftDynamicsCRMadoxioCompliancemeeting> teamAdoxioCompliancemeeting = default(IList<MicrosoftDynamicsCRMadoxioCompliancemeeting>), IList<MicrosoftDynamicsCRMadoxioContraventionadmin> teamAdoxioContraventionadmin = default(IList<MicrosoftDynamicsCRMadoxioContraventionadmin>), IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> teamAdoxioInvestigationactivity = default(IList<MicrosoftDynamicsCRMadoxioInvestigationactivity>), IList<MicrosoftDynamicsCRMadoxioFiainvestigationlog> teamAdoxioFiainvestigationlog = default(IList<MicrosoftDynamicsCRMadoxioFiainvestigationlog>), IList<MicrosoftDynamicsCRMadoxioApplicationtype> teamAdoxioApplicationtype = default(IList<MicrosoftDynamicsCRMadoxioApplicationtype>), IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent> teamAdoxioApplicationtypecontent = default(IList<MicrosoftDynamicsCRMadoxioApplicationtypecontent>), IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory> teamAdoxioInspectionreactivationhistory = default(IList<MicrosoftDynamicsCRMadoxioInspectionreactivationhistory>), IList<MicrosoftDynamicsCRMadoxioRelatedparty> teamAdoxioRelatedparty = default(IList<MicrosoftDynamicsCRMadoxioRelatedparty>), IList<MicrosoftDynamicsCRMadoxioWitness> teamAdoxioWitness = default(IList<MicrosoftDynamicsCRMadoxioWitness>), IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup> teamAdoxioInspectorcommentsrollup = default(IList<MicrosoftDynamicsCRMadoxioInspectorcommentsrollup>), IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> teamAdoxioCannabisinventoryreport = default(IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport>), IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> teamAdoxioCannabismonthlyreport = default(IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport>), IList<MicrosoftDynamicsCRMadoxioCannabisproductadmin> teamAdoxioCannabisproductadmin = default(IList<MicrosoftDynamicsCRMadoxioCannabisproductadmin>), IList<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory> teamAdoxioInvestigationreactivationhistory = default(IList<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory>), IList<MicrosoftDynamicsCRMadoxioAuditlogrequest> teamAdoxioAuditlogrequest = default(IList<MicrosoftDynamicsCRMadoxioAuditlogrequest>), IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> teamAdoxioLicenseechangelog = default(IList<MicrosoftDynamicsCRMadoxioLicenseechangelog>), IList<MicrosoftDynamicsCRMadoxioExhibit> teamAdoxioExhibit = default(IList<MicrosoftDynamicsCRMadoxioExhibit>), MicrosoftDynamicsCRMaccount regardingobjectidAccount = default(MicrosoftDynamicsCRMaccount), IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield> teamAdoxioFormelementuploadfield = default(IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield>), IList<MicrosoftDynamicsCRMadoxioEvent> teamAdoxioEvent = default(IList<MicrosoftDynamicsCRMadoxioEvent>))
         {
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
             Versionnumber = versionnumber;
@@ -200,18 +200,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Administratorid = administratorid;
             TeamBulkDeleteFailures = teamBulkDeleteFailures;
             TeamGoalGoalowner = teamGoalGoalowner;
-            TeamAbsScheduledprocess = teamAbsScheduledprocess;
-            AbsScheduledprocessexecutionTeamOwningteam = absScheduledprocessexecutionTeamOwningteam;
-            TeamAdoxioAlias = teamAdoxioAlias;
             TeamAdoxioApplication = teamAdoxioApplication;
-            TeamAdoxioApplicationinvoicehistory = teamAdoxioApplicationinvoicehistory;
             TeamAdoxioApplicationtermsconditionslimitation = teamAdoxioApplicationtermsconditionslimitation;
-            TeamAdoxioArea = teamAdoxioArea;
             TeamAdoxioBusinessaccount = teamAdoxioBusinessaccount;
-            TeamAdoxioCitydistrict = teamAdoxioCitydistrict;
             TeamAdoxioComplaint = teamAdoxioComplaint;
             TeamAdoxioContravention = teamAdoxioContravention;
-            TeamAdoxioCorporatehistorysummary = teamAdoxioCorporatehistorysummary;
             TeamAdoxioCorporaterole = teamAdoxioCorporaterole;
             TeamAdoxioEstablishment = teamAdoxioEstablishment;
             TeamAdoxioFundingsource = teamAdoxioFundingsource;
@@ -222,26 +215,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             TeamAdoxioLicencetype = teamAdoxioLicencetype;
             TeamAdoxioLoan = teamAdoxioLoan;
             TeamAdoxioPersonalhistorysummary = teamAdoxioPersonalhistorysummary;
-            TeamAdoxioPolicydocument = teamAdoxioPolicydocument;
             TeamAdoxioPostalcode = teamAdoxioPostalcode;
-            TeamAdoxioPreviousaddress = teamAdoxioPreviousaddress;
             TeamAdoxioRegion = teamAdoxioRegion;
             TeamAdoxioSetting = teamAdoxioSetting;
-            TeamAdoxioSpddatarow = teamAdoxioSpddatarow;
-            TeamAdoxioSpdexports = teamAdoxioSpdexports;
             TeamAdoxioTaxandaccounting = teamAdoxioTaxandaccounting;
             TeamAdoxioTermsconditionslimitationspreset = teamAdoxioTermsconditionslimitationspreset;
             TeamAdoxioTerritory = teamAdoxioTerritory;
             TeamAdoxioTiedhouseassociation = teamAdoxioTiedhouseassociation;
             TeamAdoxioTiedhouseconnection = teamAdoxioTiedhouseconnection;
+            TeamAdoxioApplicationinvoicehistory = teamAdoxioApplicationinvoicehistory;
+            TeamAdoxioPreviousaddress = teamAdoxioPreviousaddress;
+            TeamAdoxioSpddatarow = teamAdoxioSpddatarow;
+            TeamAdoxioSpdexports = teamAdoxioSpdexports;
+            TeamAdoxioPolicydocument = teamAdoxioPolicydocument;
+            TeamAdoxioAlias = teamAdoxioAlias;
+            TeamAdoxioCorporatehistorysummary = teamAdoxioCorporatehistorysummary;
             TeamAdoxioWorker = teamAdoxioWorker;
             TeamAdoxioWorkerinvoicehistory = teamAdoxioWorkerinvoicehistory;
+            TeamAdoxioArea = teamAdoxioArea;
+            TeamAdoxioCitydistrict = teamAdoxioCitydistrict;
+            TeamAbsScheduledprocess = teamAbsScheduledprocess;
+            AbsScheduledprocessexecutionTeamOwningteam = absScheduledprocessexecutionTeamOwningteam;
             TeamAdoxioDocument = teamAdoxioDocument;
             TeamAdoxioDocumentadmin = teamAdoxioDocumentadmin;
-            TeamAdoxioContraventionadmin = teamAdoxioContraventionadmin;
-            TeamAdoxioCompliancemeeting = teamAdoxioCompliancemeeting;
-            TeamAdoxioInvestigationactivity = teamAdoxioInvestigationactivity;
             TeamAdoxioComplianceinvestigation = teamAdoxioComplianceinvestigation;
+            TeamAdoxioCompliancemeeting = teamAdoxioCompliancemeeting;
+            TeamAdoxioContraventionadmin = teamAdoxioContraventionadmin;
+            TeamAdoxioInvestigationactivity = teamAdoxioInvestigationactivity;
             TeamAdoxioFiainvestigationlog = teamAdoxioFiainvestigationlog;
             TeamAdoxioApplicationtype = teamAdoxioApplicationtype;
             TeamAdoxioApplicationtypecontent = teamAdoxioApplicationtypecontent;
@@ -249,13 +249,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             TeamAdoxioRelatedparty = teamAdoxioRelatedparty;
             TeamAdoxioWitness = teamAdoxioWitness;
             TeamAdoxioInspectorcommentsrollup = teamAdoxioInspectorcommentsrollup;
+            TeamAdoxioCannabisinventoryreport = teamAdoxioCannabisinventoryreport;
             TeamAdoxioCannabismonthlyreport = teamAdoxioCannabismonthlyreport;
             TeamAdoxioCannabisproductadmin = teamAdoxioCannabisproductadmin;
-            TeamAdoxioCannabisinventoryreport = teamAdoxioCannabisinventoryreport;
             TeamAdoxioInvestigationreactivationhistory = teamAdoxioInvestigationreactivationhistory;
-            TeamAdoxioLicenseechangelog = teamAdoxioLicenseechangelog;
             TeamAdoxioAuditlogrequest = teamAdoxioAuditlogrequest;
+            TeamAdoxioLicenseechangelog = teamAdoxioLicenseechangelog;
             TeamAdoxioExhibit = teamAdoxioExhibit;
+            RegardingobjectidAccount = regardingobjectidAccount;
             TeamAdoxioFormelementuploadfield = teamAdoxioFormelementuploadfield;
             TeamAdoxioEvent = teamAdoxioEvent;
             CustomInit();
@@ -928,28 +929,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "team_abs_scheduledprocess")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocess> TeamAbsScheduledprocess { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_team_owningteam")]
-        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionTeamOwningteam { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_alias")]
-        public IList<MicrosoftDynamicsCRMadoxioAlias> TeamAdoxioAlias { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_application")]
         public IList<MicrosoftDynamicsCRMadoxioApplication> TeamAdoxioApplication { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_applicationinvoicehistory")]
-        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> TeamAdoxioApplicationinvoicehistory { get; set; }
 
         /// <summary>
         /// </summary>
@@ -958,18 +939,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_area")]
-        public IList<MicrosoftDynamicsCRMadoxioArea> TeamAdoxioArea { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_businessaccount")]
         public IList<MicrosoftDynamicsCRMadoxioBusinessaccount> TeamAdoxioBusinessaccount { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_citydistrict")]
-        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> TeamAdoxioCitydistrict { get; set; }
 
         /// <summary>
         /// </summary>
@@ -980,11 +951,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_contravention")]
         public IList<MicrosoftDynamicsCRMadoxioContravention> TeamAdoxioContravention { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_corporatehistorysummary")]
-        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> TeamAdoxioCorporatehistorysummary { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1038,18 +1004,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_policydocument")]
-        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> TeamAdoxioPolicydocument { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_postalcode")]
         public IList<MicrosoftDynamicsCRMadoxioPostalcode> TeamAdoxioPostalcode { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_previousaddress")]
-        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> TeamAdoxioPreviousaddress { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1060,16 +1016,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_setting")]
         public IList<MicrosoftDynamicsCRMadoxioSetting> TeamAdoxioSetting { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_spddatarow")]
-        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> TeamAdoxioSpddatarow { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_spdexports")]
-        public IList<MicrosoftDynamicsCRMadoxioSpdexports> TeamAdoxioSpdexports { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1098,6 +1044,41 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_applicationinvoicehistory")]
+        public IList<MicrosoftDynamicsCRMadoxioApplicationinvoicehistory> TeamAdoxioApplicationinvoicehistory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_previousaddress")]
+        public IList<MicrosoftDynamicsCRMadoxioPreviousaddress> TeamAdoxioPreviousaddress { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_spddatarow")]
+        public IList<MicrosoftDynamicsCRMadoxioSpddatarow> TeamAdoxioSpddatarow { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_spdexports")]
+        public IList<MicrosoftDynamicsCRMadoxioSpdexports> TeamAdoxioSpdexports { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_policydocument")]
+        public IList<MicrosoftDynamicsCRMadoxioPolicydocument> TeamAdoxioPolicydocument { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_alias")]
+        public IList<MicrosoftDynamicsCRMadoxioAlias> TeamAdoxioAlias { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_corporatehistorysummary")]
+        public IList<MicrosoftDynamicsCRMadoxioCorporatehistorysummary> TeamAdoxioCorporatehistorysummary { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_worker")]
         public IList<MicrosoftDynamicsCRMadoxioWorker> TeamAdoxioWorker { get; set; }
 
@@ -1105,6 +1086,26 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_workerinvoicehistory")]
         public IList<MicrosoftDynamicsCRMadoxioWorkerinvoicehistory> TeamAdoxioWorkerinvoicehistory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_area")]
+        public IList<MicrosoftDynamicsCRMadoxioArea> TeamAdoxioArea { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_citydistrict")]
+        public IList<MicrosoftDynamicsCRMadoxioCitydistrict> TeamAdoxioCitydistrict { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "team_abs_scheduledprocess")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocess> TeamAbsScheduledprocess { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "abs_scheduledprocessexecution_team_owningteam")]
+        public IList<MicrosoftDynamicsCRMabsScheduledprocessexecution> AbsScheduledprocessexecutionTeamOwningteam { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1118,8 +1119,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_contraventionadmin")]
-        public IList<MicrosoftDynamicsCRMadoxioContraventionadmin> TeamAdoxioContraventionadmin { get; set; }
+        [JsonProperty(PropertyName = "team_adoxio_complianceinvestigation")]
+        public IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> TeamAdoxioComplianceinvestigation { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1128,13 +1129,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_investigationactivity")]
-        public IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> TeamAdoxioInvestigationactivity { get; set; }
+        [JsonProperty(PropertyName = "team_adoxio_contraventionadmin")]
+        public IList<MicrosoftDynamicsCRMadoxioContraventionadmin> TeamAdoxioContraventionadmin { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_complianceinvestigation")]
-        public IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> TeamAdoxioComplianceinvestigation { get; set; }
+        [JsonProperty(PropertyName = "team_adoxio_investigationactivity")]
+        public IList<MicrosoftDynamicsCRMadoxioInvestigationactivity> TeamAdoxioInvestigationactivity { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1173,6 +1174,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_cannabisinventoryreport")]
+        public IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> TeamAdoxioCannabisinventoryreport { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_cannabismonthlyreport")]
         public IList<MicrosoftDynamicsCRMadoxioCannabismonthlyreport> TeamAdoxioCannabismonthlyreport { get; set; }
 
@@ -1183,18 +1189,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_cannabisinventoryreport")]
-        public IList<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> TeamAdoxioCannabisinventoryreport { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_investigationreactivationhistory")]
         public IList<MicrosoftDynamicsCRMadoxioInvestigationreactivationhistory> TeamAdoxioInvestigationreactivationhistory { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "team_adoxio_licenseechangelog")]
-        public IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> TeamAdoxioLicenseechangelog { get; set; }
 
         /// <summary>
         /// </summary>
@@ -1203,8 +1199,18 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "team_adoxio_licenseechangelog")]
+        public IList<MicrosoftDynamicsCRMadoxioLicenseechangelog> TeamAdoxioLicenseechangelog { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "team_adoxio_exhibit")]
         public IList<MicrosoftDynamicsCRMadoxioExhibit> TeamAdoxioExhibit { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "regardingobjectid_account")]
+        public MicrosoftDynamicsCRMaccount RegardingobjectidAccount { get; set; }
 
         /// <summary>
         /// </summary>

@@ -178,6 +178,7 @@ import { OrgStructureComponent } from './shared/components/org-structure/org-str
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
+import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
 
 
 @NgModule({
@@ -276,7 +277,8 @@ import { PersonalHistorySummaryComponent } from './components/personal-history-s
     OrgStructureComponent,    
     DynamicApplicationComponent,
     CateringDemoComponent,
-    PersonalHistorySummaryComponent
+    PersonalHistorySummaryComponent,
+    AccountCompletenessComponent
   ],
   imports: [
     ChartsModule,

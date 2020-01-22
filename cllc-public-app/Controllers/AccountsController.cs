@@ -64,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(new Guid(accountId));
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
                 _logger.LogDebug(LoggingEvents.HttpGet, "Dynamics Account: " + JsonConvert.SerializeObject(account));
 
                 if (account == null)
@@ -211,7 +211,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(accountId);
                 if (account == null)
                 {
                     _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
@@ -562,7 +562,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fetch the account and get the created contact.
                 if (legalEntity.AdoxioAccount == null)
                 {
-                    legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountById(Guid.Parse(account.Accountid));
+                    legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(account.Accountid));
                 }
 
                 if (legalEntity.AdoxioAccount.Primarycontactid == null)
@@ -730,7 +730,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountById(accountId);
+            MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
             if (adoxioAccount == null)
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
@@ -784,7 +784,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // get the account
-            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(accountId);
             if (account == null)
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");

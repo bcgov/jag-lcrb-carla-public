@@ -29,75 +29,75 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioFormelementuploadfield class.
         /// </summary>
-        /// <param name="_owneridValue">Owner Id</param>
-        /// <param name="_owninguserValue">Unique identifier for the user that
-        /// owns the record.</param>
-        /// <param name="_adoxioApplicationtypeidValue">Unique identifier for
-        /// Application Type associated with Form Element Upload Field.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
         /// <param name="createdon">Date and time when the record was
         /// created.</param>
-        /// <param name="statuscode">Reason for the status of the Form Element
-        /// Upload Field</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
+        /// <param name="_owneridValue">Owner Id</param>
         /// <param name="timezoneruleversionnumber">For internal use
         /// only.</param>
-        /// <param name="adoxioAllowedfileextensions">CW: Replace this with
-        /// multiselect when v9.0 is introduced.</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="adoxioFormelementuploadfieldid">Unique identifier for
-        /// entity instances</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="adoxioName">The name of the custom entity.</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
+        /// <param name="statuscode">Reason for the status of the Form Element
+        /// Upload Field</param>
         /// <param name="utcconversiontimezonecode">Time zone code that was in
         /// use when the record was created.</param>
-        /// <param name="statecode">Status of the Form Element Upload
-        /// Field</param>
+        /// <param name="_owninguserValue">Unique identifier for the user that
+        /// owns the record.</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="adoxioFormelementuploadfieldid">Unique identifier for
+        /// entity instances</param>
+        /// <param name="adoxioName">The name of the custom entity.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record</param>
+        /// <param name="adoxioAllowedfileextensions">CW: Replace this with
+        /// multiselect when v9.0 is introduced.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
         /// <param name="versionnumber">Version Number</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
         /// <param name="_owningteamValue">Unique identifier for the team that
         /// owns the record.</param>
-        public MicrosoftDynamicsCRMadoxioFormelementuploadfield(int? adoxioMaxfiles = default(int?), bool? adoxioIsreadonly = default(bool?), string _owneridValue = default(string), string _owninguserValue = default(string), int? adoxioMaxfilesize = default(int?), string _adoxioApplicationtypeidValue = default(string), string _owningbusinessunitValue = default(string), int? importsequencenumber = default(int?), string _modifiedonbehalfbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? timezoneruleversionnumber = default(int?), int? adoxioAllowedfileextensions = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), bool? adoxioIsallowdownload = default(bool?), string adoxioFormelementuploadfieldid = default(string), string adoxioInstructions = default(string), bool? adoxioIsrequired = default(bool?), string _createdbyValue = default(string), string adoxioName = default(string), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), int? statecode = default(int?), string adoxioFileprefix = default(string), string versionnumber = default(string), string _owningteamValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFormelementuploadfieldSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFormelementuploadfieldAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFormelementuploadfieldBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype))
+        /// <param name="statecode">Status of the Form Element Upload
+        /// Field</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="_adoxioApplicationtypeidValue">Unique identifier for
+        /// Application Type associated with Form Element Upload Field.</param>
+        public MicrosoftDynamicsCRMadoxioFormelementuploadfield(bool? adoxioIsreadonly = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? adoxioMaxfilesize = default(int?), string _owneridValue = default(string), int? adoxioMaxfiles = default(int?), bool? adoxioIsrequired = default(bool?), string adoxioInstructions = default(string), int? timezoneruleversionnumber = default(int?), bool? adoxioIsallowdownload = default(bool?), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioFormelementuploadfieldid = default(string), string adoxioName = default(string), string _modifiedonbehalfbyValue = default(string), string _owningbusinessunitValue = default(string), int? adoxioAllowedfileextensions = default(int?), string _modifiedbyValue = default(string), string _createdbyValue = default(string), string adoxioFileprefix = default(string), string versionnumber = default(string), int? importsequencenumber = default(int?), string _owningteamValue = default(string), int? statecode = default(int?), string _createdonbehalfbyValue = default(string), string _adoxioApplicationtypeidValue = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioFormelementuploadfieldSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioFormelementuploadfieldDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioFormelementuploadfieldAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioFormelementuploadfieldBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplicationtype adoxioApplicationTypeId = default(MicrosoftDynamicsCRMadoxioApplicationtype))
         {
-            AdoxioMaxfiles = adoxioMaxfiles;
             AdoxioIsreadonly = adoxioIsreadonly;
-            this._owneridValue = _owneridValue;
-            this._owninguserValue = _owninguserValue;
-            AdoxioMaxfilesize = adoxioMaxfilesize;
-            this._adoxioApplicationtypeidValue = _adoxioApplicationtypeidValue;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Importsequencenumber = importsequencenumber;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Createdon = createdon;
-            Statuscode = statuscode;
-            Overriddencreatedon = overriddencreatedon;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioAllowedfileextensions = adoxioAllowedfileextensions;
-            Modifiedon = modifiedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioIsallowdownload = adoxioIsallowdownload;
-            AdoxioFormelementuploadfieldid = adoxioFormelementuploadfieldid;
-            AdoxioInstructions = adoxioInstructions;
+            AdoxioMaxfilesize = adoxioMaxfilesize;
+            this._owneridValue = _owneridValue;
+            AdoxioMaxfiles = adoxioMaxfiles;
             AdoxioIsrequired = adoxioIsrequired;
-            this._createdbyValue = _createdbyValue;
-            AdoxioName = adoxioName;
-            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioInstructions = adoxioInstructions;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioIsallowdownload = adoxioIsallowdownload;
+            Statuscode = statuscode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
-            Statecode = statecode;
+            this._owninguserValue = _owninguserValue;
+            Modifiedon = modifiedon;
+            Overriddencreatedon = overriddencreatedon;
+            AdoxioFormelementuploadfieldid = adoxioFormelementuploadfieldid;
+            AdoxioName = adoxioName;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioAllowedfileextensions = adoxioAllowedfileextensions;
+            this._modifiedbyValue = _modifiedbyValue;
+            this._createdbyValue = _createdbyValue;
             AdoxioFileprefix = adoxioFileprefix;
             Versionnumber = versionnumber;
+            Importsequencenumber = importsequencenumber;
             this._owningteamValue = _owningteamValue;
+            Statecode = statecode;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            this._adoxioApplicationtypeidValue = _adoxioApplicationtypeidValue;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -122,58 +122,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_maxfiles")]
-        public int? AdoxioMaxfiles { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_isreadonly")]
         public bool? AdoxioIsreadonly { get; set; }
-
-        /// <summary>
-        /// Gets or sets owner Id
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the user that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_maxfilesize")]
-        public int? AdoxioMaxfilesize { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Application Type associated with
-        /// Form Element Upload Field.
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_applicationtypeid_value")]
-        public string _adoxioApplicationtypeidValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was created.
@@ -182,16 +132,30 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets reason for the status of the Form Element Upload Field
         /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_maxfilesize")]
+        public int? AdoxioMaxfilesize { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
+        /// Gets or sets owner Id
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_maxfiles")]
+        public int? AdoxioMaxfiles { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isrequired")]
+        public bool? AdoxioIsrequired { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_instructions")]
+        public string AdoxioInstructions { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -200,63 +164,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets CW: Replace this with multiselect when v9.0 is
-        /// introduced.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_allowedfileextensions")]
-        public int? AdoxioAllowedfileextensions { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was modified.
-        /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_isallowdownload")]
         public bool? AdoxioIsallowdownload { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for entity instances
+        /// Gets or sets reason for the status of the Form Element Upload Field
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_formelementuploadfieldid")]
-        public string AdoxioFormelementuploadfieldid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_instructions")]
-        public string AdoxioInstructions { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isrequired")]
-        public bool? AdoxioIsrequired { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the custom entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -266,10 +182,67 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
-        /// Gets or sets status of the Form Element Upload Field
+        /// Gets or sets unique identifier for the user that owns the record.
         /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time when the record was modified.
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time that the record was migrated.
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for entity instances
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_formelementuploadfieldid")]
+        public string AdoxioFormelementuploadfieldid { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the custom entity.
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets CW: Replace this with multiselect when v9.0 is
+        /// introduced.
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_allowedfileextensions")]
+        public int? AdoxioAllowedfileextensions { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// </summary>
@@ -283,10 +256,37 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string Versionnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
         /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
         [JsonProperty(PropertyName = "_owningteam_value")]
         public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets status of the Form Element Upload Field
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for Application Type associated with
+        /// Form Element Upload Field.
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_applicationtypeid_value")]
+        public string _adoxioApplicationtypeidValue { get; set; }
 
         /// <summary>
         /// </summary>

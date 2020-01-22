@@ -1,0 +1,29 @@
+<section class="large-screen-only">
+  <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Account Completeness</h3>
+
+  <div [formGroup]="form" class="submitted-content"
+       style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+    <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following items:</p>
+    <div>
+      <a [routerLink]="[ '/account-profile/']" class="completeness">
+        <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+        </i>Account Profile - Complete
+      </a> <br>
+
+    </div>
+    <div>
+      <a [routerLink]="[ '/org-structure/']" class="completeness">
+        <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
+        </i>Organization Information - Missing
+      </a><br>
+
+    </div>
+    <div>
+      <a [routerLink]="[ '/org-structure/']" class="completeness">
+        <i class="far fa-times-circle" style="margin-right: 10px; color:red;">
+        </i>Personal History Summary Forms - Not Received
+      </a>    <br>
+
+    </div>
+  </div>
+</section>
