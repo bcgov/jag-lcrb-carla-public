@@ -26,7 +26,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(Guid id);
         MicrosoftDynamicsCRMadoxioLicencetype GetAdoxioLicencetypeById(string id);
 
-        Task<MicrosoftDynamicsCRMaccount> GetAccountById(Guid id);
+        Task<MicrosoftDynamicsCRMaccount> GetAccountByIdAsync(Guid id);
+        MicrosoftDynamicsCRMaccount GetAccountById(Guid id);
+        MicrosoftDynamicsCRMaccount GetAccountById(string id);
 
         MicrosoftDynamicsCRMaccount GetAccountByNameWithEstablishments(string name);
         Task<MicrosoftDynamicsCRMcontact> GetContactById(Guid id);

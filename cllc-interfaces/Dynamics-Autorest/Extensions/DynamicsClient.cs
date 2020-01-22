@@ -70,7 +70,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioApplicantValue != null)
                 {
-                    result.AdoxioApplicant = await GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                    result.AdoxioApplicant = await GetAccountByIdAsync(Guid.Parse(result._adoxioApplicantValue));
                 }
             }
             catch (HttpOperationException)
@@ -111,7 +111,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioApplicantValue != null)
                 {
-                    result.AdoxioApplicant = await GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                    result.AdoxioApplicant = await GetAccountByIdAsync(Guid.Parse(result._adoxioApplicantValue));
                 }
 
                 if (result.AdoxioAssignedLicence != null && result.AdoxioAssignedLicence._adoxioEstablishmentValue != null)
@@ -177,7 +177,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="system"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<MicrosoftDynamicsCRMaccount> GetAccountById(Guid id)
+        public async Task<MicrosoftDynamicsCRMaccount> GetAccountByIdAsync(Guid id)
         {
             MicrosoftDynamicsCRMaccount result;
             try
@@ -185,6 +185,34 @@ namespace Gov.Lclb.Cllb.Interfaces
                 string[] expand = { "primarycontactid" };
                 // fetch from Dynamics.
                 result = await Accounts.GetByKeyAsync(accountid: id.ToString(),expand:expand);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+
+            return result;
+        }
+
+        public MicrosoftDynamicsCRMaccount GetAccountById(Guid id)
+        {
+            return GetAccountById(id.ToString());
+        }
+
+        /// <summary>
+        /// Get a Account by their Guid
+        /// </summary>
+        /// <param name="system"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public MicrosoftDynamicsCRMaccount GetAccountById(string id)
+        {
+            MicrosoftDynamicsCRMaccount result;
+            try
+            {
+                string[] expand = { "primarycontactid" };
+                // fetch from Dynamics.
+                result = Accounts.GetByKey(accountid: id, expand: expand);
             }
             catch (HttpOperationException)
             {

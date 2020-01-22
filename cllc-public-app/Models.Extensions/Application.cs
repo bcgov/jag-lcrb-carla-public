@@ -371,7 +371,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             }
             if (dynamicsApplication._adoxioApplicantValue != null)
             {
-                var applicant = await dynamicsClient.GetAccountById(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
+                var applicant = await dynamicsClient.GetAccountByIdAsync(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
                 applicationVM.Applicant = applicant.ToViewModel();
             }
 

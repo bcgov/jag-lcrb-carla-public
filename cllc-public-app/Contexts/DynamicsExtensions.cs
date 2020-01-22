@@ -277,7 +277,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioApplicantValue != null)
                 {
-                    result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                    result.AdoxioApplicant = await system.GetAccountByIdAsync(Guid.Parse(result._adoxioApplicantValue));
                 }
             }
             catch (HttpOperationException)
@@ -305,7 +305,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
                 if (result._adoxioApplicantValue != null)
                 {
-                    result.AdoxioApplicant = await system.GetAccountById(Guid.Parse(result._adoxioApplicantValue));
+                    result.AdoxioApplicant = await system.GetAccountByIdAsync(Guid.Parse(result._adoxioApplicantValue));
                 }
 
                 if (result.AdoxioAssignedLicence != null && result.AdoxioAssignedLicence._adoxioEstablishmentValue != null)
