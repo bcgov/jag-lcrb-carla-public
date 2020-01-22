@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
+using System.Collections.Generic;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
@@ -109,6 +110,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsForeignDrugAlchoholOffence { get; set; }
+
+        public List<ViewModels.Alias> Aliases { get; set; }
         
     }
 }

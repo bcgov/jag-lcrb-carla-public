@@ -8,7 +8,7 @@
 
     <section formGroupName="contact">
         <app-field label="Name">
-            <input type="text" formControlName="shortName" readonly disabled>
+            <input class="form-control" type="text" formControlName="shortName" readonly disabled>
         </app-field>
 
         <app-field label="Date of Birth">
@@ -28,14 +28,19 @@
     </section>
 
     <h3 class="blue-header">Name at birth</h3>
-    <input type="checkbox" name="" id=""><label for="">I had the same name at birth</label>
-    <app-field label="Fist Name">
-        <input type="text" formControlName="firstNameAtBirth">
-    </app-field>
+    <section class="padded">
+        <mat-checkbox formControlName="sameNameAtBirth">I had the same name at birth</mat-checkbox>
 
-    <app-field label="Last Name">
-        <input type="text" formControlName="lastNameAtBirth">
-    </app-field>
+        <ng-container *ngIf="form.get('sameNameAtBirth').value === false">
+            <app-field label="Fist Name">
+                <input class="form-control" type="text" formControlName="firstNameAtBirth">
+            </app-field>
+
+            <app-field label="Last Name">
+                <input class="form-control" type="text" formControlName="lastNameAtBirth">
+            </app-field>
+        </ng-container>
+    </section>
 
     <h3 class="blue-header">Other Last Names Used</h3>
     <div formGroupName="contact">
@@ -43,7 +48,7 @@
             <div *ngFor="let alias of aliases.controls; let i = index">
                 <div [formGroupName]="i">
                     <app-field label="Last Name {{ i + 1}}">
-                        <input type="text" formControlName="lastname"> <i class="fas fa-trash-alt"
+                        <input class="form-control" type="text" formControlName="lastname"> <i class="fas fa-trash-alt"
                             (click)="deleteAlias(i)"></i>
                     </app-field>
                 </div>
@@ -114,7 +119,8 @@
             </section>
         </mat-card>
 
-        <mat-card *ngIf="form.get('contact.phsLivesInCanada').value === 'No'" class="mat-elevation-z0" style="margin-bottom: 10px;">
+        <mat-card *ngIf="form.get('contact.phsLivesInCanada').value === 'No'" class="mat-elevation-z0"
+            style="margin-bottom: 10px;">
             <section style="display: flex; justify-content: space-between; width: 100%;">
                 <div class="question-label">
                     1b. Have you ever lived in Canada?
@@ -128,7 +134,8 @@
             </section>
         </mat-card>
 
-        <ng-container  *ngIf="form.get('contact.phsLivesInCanada').value === 'Yes' || form.get('contact.phsHasLivedInCanada').value === 'Yes'">
+        <ng-container
+            *ngIf="form.get('contact.phsLivesInCanada').value === 'Yes' || form.get('contact.phsHasLivedInCanada').value === 'Yes'">
             <h2>Your Completed Criminal Record Check</h2>
             <p>
                 To have been completed withing the last 4 months, by contacting your local RCMP detachment or police
@@ -136,10 +143,10 @@
             </p>
             <section>
                 <app-file-uploader documentType="Signage" [useDocumentTypeForName]="true"
-                fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-                [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="1"
-                [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
-            </app-file-uploader>
+                    fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="1"
+                    [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
+                </app-file-uploader>
             </section>
         </ng-container>
 
@@ -170,7 +177,8 @@
                     laws of any other country or jurisdiction?
                 </div>
                 <div style="flex: 0 0 85px;">
-                    <mat-button-toggle-group  formControlName="phsCanadianDrugAlchoholDrivingOffence" aria-label="Font Style">
+                    <mat-button-toggle-group formControlName="phsCanadianDrugAlchoholDrivingOffence"
+                        aria-label="Font Style">
                         <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                         <mat-button-toggle value="No">No</mat-button-toggle>
                     </mat-button-toggle-group>
@@ -194,10 +202,10 @@
             </ol>
             <section>
                 <app-file-uploader documentType="Signage" [useDocumentTypeForName]="true"
-                fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-                [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="1"
-                [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
-            </app-file-uploader>
+                    fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
+                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="1"
+                    [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
+                </app-file-uploader>
             </section>
         </ng-container>
 
@@ -216,8 +224,10 @@
             </section>
         </mat-card>
 
-        <app-field [isFullWidth]="true" *ngIf="form.get('contact.phsConnectionsToOtherLicences').value === 'Yes'" label="Please provide details of the licence(s) or application(s).">
-            <textarea class="w-100" name="" id="" cols="30" rows="10"></textarea>
+        <app-field [isFullWidth]="true" *ngIf="form.get('contact.phsConnectionsToOtherLicences').value === 'Yes'"
+            label="Please provide details of the licence(s) or application(s).">
+            <textarea formControlName="phsConnectionsDetails" class="form-control w-100" rows="10"></textarea>
         </app-field>
     </section>
+    <button class="btn btn-primary" (click)="save()">Save</button>
 </div>

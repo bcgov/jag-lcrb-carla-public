@@ -323,6 +323,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSelfdisclosure = from.SelfDisclosure;
             to.AdoxioIdentificationtype = (int?)from.PrimaryIdentificationType;
             to.AdoxioSecondaryidentificationtype = (int?)from.SecondaryIdentificationType;
+            to.AdoxioPhslivesincanada = (int?)from.PhsLivesInCanada;
+            to.AdoxioPhshaslivedincanada = (int?)from.PhsHasLivedInCanada;
+            to.AdoxioPhsexpired = (int?)from.PhsExpired;
+            to.AdoxioPhscomplete = (int?)from.PhsComplete;
+            to.AdoxioPhsconnectionstootherlicences = (int?)from.PhsConnectionsToOtherLicences;
+            to.AdoxioPhscanadiandrugalchoholdrivingoffence = (int?)from.PhsCanadianDrugAlchoholDrivingOffence;
+            to.AdoxioPhsdatesubmitted = from.PhsDateSubmitted;
+            to.AdoxioPhsforeigndrugalchoholoffence = (int?)from.PhsForeignDrugAlchoholOffence;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
