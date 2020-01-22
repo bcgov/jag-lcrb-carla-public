@@ -85,6 +85,34 @@ export class LicenseeChangeLog {
     const leaders = (this.children || []).filter(item => !item.isIndividual && item.isShareholderNew);
     return leaders;
   }
+
+  public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    let children = changeLog.children || [];
+    let leaders = children.filter(item => item.isIndividual && !item.isShareholderNew && item.changeType !== 'unchanged');
+    children.forEach(child => {
+      leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
+    });
+    return leaders;
+  }
+
+  public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    let children = changeLog.children || [];
+    let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged');
+    children.forEach(child => {
+      shareholders = shareholders.concat(LicenseeChangeLog.GetIndividualShareholderDecendents(child));
+    });
+    return shareholders;
+  }
+
+  public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    let children = changeLog.children || [];
+    let shareholders = children.filter(item => !item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged');
+    children.forEach(child => {
+      shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
+    });
+    return shareholders;
+  }
+
   // construct file name prefix from name and names of parents
   public get fileUploadPrefix(): string {
     let prefix = this.nameToFilePrefix();
@@ -104,7 +132,7 @@ export class LicenseeChangeLog {
     if (this.isIndividual) {
       prefix = `${this.firstNameNew} ${this.lastNameNew}`;
     } else {
-      if ((this.businessNameNew ||'').length  <= MAX_SIZE) {
+      if ((this.businessNameNew || '').length <= MAX_SIZE) {
         prefix = this.businessNameNew || '';
       } else {
         const length = (this.businessNameNew || '').length;
@@ -359,6 +387,18 @@ export class LicenseeChangeLog {
       || this.changeType === LicenseeChangeType.removeBusinessShareholder
       || this.changeType === LicenseeChangeType.removeIndividualShareholder;
     return result;
+  }
+
+  getChageTypeVerb() {
+    let change = '';
+    if (this.isAddChangeType()) {
+      change = 'Added';
+    } else if (this.isRemoveChangeType()) {
+      change = 'Removed';
+    } else if (this.isUpdateChangeType()) {
+      change = 'Updated';
+    }
+    return change;
   }
 
 
