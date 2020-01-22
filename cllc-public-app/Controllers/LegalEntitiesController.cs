@@ -422,7 +422,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (result.account == null)
             {
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(userSettings.AccountId));
                 result.account = account.ToViewModel();
             }
 
@@ -499,7 +499,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // setup navigation properties.
             MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
             Guid accountId = Guid.Parse(userSettings.AccountId);
-            var userAccount = await _dynamicsClient.GetAccountById(accountId);
+            var userAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
             patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
 
             // patch the record.
