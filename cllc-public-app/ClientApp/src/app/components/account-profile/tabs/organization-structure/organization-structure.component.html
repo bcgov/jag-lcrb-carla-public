@@ -1,63 +1,78 @@
 <div class="form-wrapper row" style="position:relative;">
-        <div [ngBusy]="[busy]"></div>
-    <section class="col-md-8">
+  <div [ngBusy]="[busy]"></div>
+  <section class="col-md-8">
     <app-org-structure [node]="treeRoot" [account]="account"></app-org-structure>
 
-</section>
-<section class="col-md-4">
+  </section>
+  <section class="col-md-4">
     <h1>&nbsp;</h1><br>
 
-            <section class="large-screen-only">
-              <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information Completeness</h3>
-              <div [formGroup]="form" class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-              <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following items:</p>
-              <div style="font-size:20px;">
-                  <a [routerLink]="[ '/account-profile/']" class="completeness">
-                    <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-                        </i>Notice of Articles Uploaded
-                    </a> <br>
-                           
-               </div>
-               <div style="font-size:20px;">
-                  <a [routerLink]="[ '/org-structure/']" class="completeness">
-                    <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
-                        </i>Central Securities Register
-                    </a><br>
-                    
-               </div>
-               <div style="font-size:20px;">
-                  <a [routerLink]="[ '/org-structure/']" class="completeness">
-                    <i class="far fa-times-circle" style="margin-right: 10px; color:red;">
-                        </i>Blah Blah
-                    </a>    <br>          
-                
-               </div>
-                <br>
-                Summary of changes:<br>
-                * Key Personnel<br>
-                  * Added - First Last<br>
-                  * Updated - First Last<br>
-                  * Removed - First Last<br><br>
+    <section class="large-screen-only">
+      <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information
+        Completeness</h3>
+      <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+        <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following
+          items:</p>
+        <div style="font-size:20px;">
+          <a [routerLink]="[ '/account-profile/']" class="completeness">
+            <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+            </i>Notice of Articles Uploaded
+          </a> <br>
 
-                * Individual Shareholders<br>
-                * Added - First Last<br>
-                  * Updated - First Last<br>
-                  * Removed - First Last<br><br>
+        </div>
+        <div style="font-size:20px;">
+          <a [routerLink]="[ '/org-structure/']" class="completeness">
+            <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
+            </i>Central Securities Register
+          </a><br>
 
-                * Business Shareholders<br>
-                * Added - Business Name<br>
-                * Added - First Last<br>
-                <p>-----</p>
-                Types of changes:
+        </div>
+        <div style="font-size:20px;">
+          <a [routerLink]="[ '/org-structure/']" class="completeness">
+            <i class="far fa-times-circle" style="margin-right: 10px; color:red;">
+            </i>Blah Blah
+          </a> <br>
 
-                <p></p>
-                Total Cost:
+        </div>
+        <br>
+        <label>Summary of changes:</label>
+        <ul *ngIf="treeRoot">
+          <li>
+            Key Personnel<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
+              </li>
+            </ul>
+          </li>
+          <li>
+            Individual Shareholders<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
+              </li>
+            </ul>
+          </li>
+          <li>
+            Business Shareholders<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog.GetBusinessShareholderDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.businessNameNew}}
+              </li>
+            </ul>
+          </li>
+        </ul>
+        hr
+        Types of changes:
 
-                <div style="text-align:center;">
-                <button class="btn btn-primary" (click)="save()">Save</button>
-              </div>
-              </div>
-            </section>       
+        <p></p>
+        Total Cost:
 
-</section>
+        <div style="text-align:center;">
+          <button class="btn btn-primary" (click)="save()">Save</button>
+        </div>
+      </div>
+    </section>
+
+  </section>
 </div>
