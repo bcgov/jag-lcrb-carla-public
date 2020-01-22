@@ -16,6 +16,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using Gov.Lclb.Cllb.Public.Utility;
+using System.Net;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
@@ -27,6 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        private readonly string _encryptionKey;
         private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
@@ -40,6 +43,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(ContactController));
             _env = env;
+            _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _fileManagerClient = fileManagerClient;
         }
 
@@ -79,7 +83,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Update a legal entity
+        /// Update a contact
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
@@ -117,6 +121,100 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             contact = await _dynamicsClient.GetContactById(contactId);
             return new JsonResult(contact.ToViewModel());
+        }
+
+
+        /// <summary>
+        /// Update a contact using PHS token
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("phs/{token}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateContactByPHSToken([FromBody] ViewModels.Contact item, string token)
+        {
+            if (token == null || item == null)
+            {
+                return BadRequest();
+            }
+
+            // get the contact
+            string contactId = EncryptionUtility.DecryptString(token, _encryptionKey);
+            Guid contactGuid = Guid.Parse(contactId);
+
+            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactGuid);
+            if (contact == null)
+            {
+                return new NotFoundResult();
+            }
+            MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+            patchContact.CopyValues(item);
+            try
+            {
+                await _dynamicsClient.Contacts.UpdateAsync(contactGuid.ToString(), patchContact);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError("Error updating contact");
+                _logger.LogError("Request:");
+                _logger.LogError(httpOperationException.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(httpOperationException.Response.Content);
+            }
+
+            foreach (var alias in item.Aliases)
+            {
+                CreateAlias(alias, contactId);
+            }
+
+            contact = await _dynamicsClient.GetContactById(contactGuid);
+            return new JsonResult(contact.ToViewModel());
+        }
+
+        private async Task<IActionResult> CreateAlias(ViewModels.Alias item, string contactId)
+        {
+            if (item == null || String.IsNullOrEmpty(contactId))
+            {
+                return BadRequest();
+            }
+
+            // for association with current user
+            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+
+            MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias();
+            // copy received values to Dynamics Application
+            alias.CopyValues(item);
+            try
+            {
+                alias = _dynamicsClient.Aliases.Create(alias);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating application");
+                // fail if we can't create.
+                throw;
+            }
+
+
+            MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
+
+            // set contact association
+            try
+            {
+                patchAlias.ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", contactId);
+
+                await _dynamicsClient.Aliases.UpdateAsync(alias.AdoxioAliasid, patchAlias);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating application");
+                // fail if we can't create.
+                throw;
+            }
+
+            return new JsonResult(alias.ToViewModel());
         }
 
         /// <summary>
@@ -479,5 +577,67 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return result;
         }
+
+
+        [HttpGet("phs-link/{contactId}")]
+        public JsonResult GetPhsLinkForContactGuid(string contactId)
+        {
+            string confirmationEmailLink = null;
+            try
+            {
+                confirmationEmailLink = GetPhsLink(contactId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting personal history link");
+                _logger.LogError("Details:");
+                _logger.LogError(ex.Message);
+            }
+            return new JsonResult(confirmationEmailLink);
+        }
+
+        private string GetPhsLink(string contactId)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
+            result += WebUtility.UrlEncode(EncryptionUtility.EncryptString(contactId, _encryptionKey));
+            return result;
+        }
+
+        [HttpGet("phs/{code}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetContactByToken(string code)
+        {
+            string id = EncryptionUtility.DecryptString(code, _encryptionKey);
+            if (!string.IsNullOrEmpty(id))
+            {
+                Guid contactId = Guid.Parse(id);
+                // query the Dynamics system to get the contact record.
+                var contact = await _dynamicsClient.GetContactById(contactId);
+
+                if (contact != null)
+                {
+                    var result = new PHSContact
+                    {
+                        token = code,
+                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname)
+                    };
+                    return new JsonResult(result);
+                }
+                else
+                {
+                    return new NotFoundResult();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+    }
+
+    public class PHSContact
+    {
+        public string token { get; set; }
+        public string shortName { get; set; }
     }
 }
