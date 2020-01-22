@@ -33,3 +33,8 @@ export class Contact {
   phsDateSubmitted: Date;
   phsForeignDrugAlchoholOffence: string;
 }
+
+export class PHSContact {
+  token: string;
+  shortName: string;
+}

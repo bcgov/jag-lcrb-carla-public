@@ -485,7 +485,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        
+
         [HttpGet("phs-link/{contactId}")]
         [AllowAnonymous]
         public JsonResult Subscribe(string contactId)
@@ -512,18 +512,46 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private string GetPhsLink(string contactId)
         {
-            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] +  "/personal-history-summary/";
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
             result += WebUtility.UrlEncode(EncryptionUtility.EncryptString(contactId, _encryptionKey));
             return result;
         }
 
         [HttpGet("phs/{code}")]
         [AllowAnonymous]
-        public async Task<IActionResult> Verify(string code)
+        public async Task<IActionResult> GetContactByToken(string code)
         {
-            string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
-           var contact = await GetContact(decrypted);
-           return contact;
+            string id = EncryptionUtility.DecryptString(code, _encryptionKey);
+            if (!string.IsNullOrEmpty(id))
+            {
+                Guid contactId = Guid.Parse(id);
+                // query the Dynamics system to get the contact record.
+                var contact = await _dynamicsClient.GetContactById(contactId);
+
+                if (contact != null)
+                {
+                    var result = new PHSContact
+                    {
+                        token = code,
+                        shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname)
+                    };
+                    return new JsonResult(result);
+                }
+                else
+                {
+                    return new NotFoundResult();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
+    }
+
+    public class PHSContact
+    {
+        public string token { get; set; }
+        public string shortName { get; set; }
     }
 }

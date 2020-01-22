@@ -3,6 +3,7 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Alias } from '@models/alias.model';
 import { ActivatedRoute } from '@angular/router';
 import { ContactDataService } from '@services/contact-data.service';
+import { PHSContact } from '@models/contact.model';
 
 @Component({
   selector: 'app-personal-history-summary',
@@ -15,6 +16,7 @@ export class PersonalHistorySummaryComponent implements OnInit {
   form: FormGroup;
   contactToken: string;
   contactId: string;
+  contact: PHSContact;
 
   public get aliases(): FormArray {
     return this.form.get('contact.aliases') as FormArray;
@@ -34,8 +36,7 @@ export class PersonalHistorySummaryComponent implements OnInit {
       contact: this.fb.group({
         id: [''],
         fullname: [''],
-        firstname: [''],
-        lastname: [''],
+        shortName: [{ value: '', disabled: true}],
         emailaddress1: [''],
         telephone1: [''],
         address1_line1: [''],
@@ -69,9 +70,8 @@ export class PersonalHistorySummaryComponent implements OnInit {
 
     this.contactDataService.getContactByPhsToken(this.contactToken)
     .subscribe(contact => {
-      this.contactId = contact.id;
-      this.form.get('contact.firstname').setValue(contact.firstname);
-      this.form.get('contact.lastname').setValue(contact.lastname);
+      this.contact = contact;
+      this.form.get('contact.shortName').setValue(contact.shortName);
     })
 
   }
