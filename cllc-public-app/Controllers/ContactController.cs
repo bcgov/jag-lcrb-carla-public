@@ -84,7 +84,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         /// <summary>
-        /// Update a legal entity
+        /// Update a contact
         /// </summary>
         /// <param name="item"></param>
         /// <param name="id"></param>
@@ -122,6 +122,99 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             contact = await _dynamicsClient.GetContactById(contactId);
             return new JsonResult(contact.ToViewModel());
+        }
+
+
+        /// <summary>
+        /// Update a contact using PHS token
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("phs/{token}")]
+        public async Task<IActionResult> UpdateContactByPHSToken([FromBody] ViewModels.Contact item, string token)
+        {
+            if (token == null || item == null)
+            {
+                return BadRequest();
+            }
+
+            // get the contact
+            string contactId = EncryptionUtility.DecryptString(token, _encryptionKey);
+            Guid contactGuid = Guid.Parse(contactId);
+
+            MicrosoftDynamicsCRMcontact contact = await _dynamicsClient.GetContactById(contactGuid);
+            if (contact == null)
+            {
+                return new NotFoundResult();
+            }
+            MicrosoftDynamicsCRMcontact patchContact = new MicrosoftDynamicsCRMcontact();
+            patchContact.CopyValues(item);
+            try
+            {
+                await _dynamicsClient.Contacts.UpdateAsync(contactGuid.ToString(), patchContact);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError("Error updating contact");
+                _logger.LogError("Request:");
+                _logger.LogError(httpOperationException.Request.Content);
+                _logger.LogError("Response:");
+                _logger.LogError(httpOperationException.Response.Content);
+            }
+
+            foreach (var alias in item.Aliases)
+            {
+                CreateAlias(alias, contactId);
+            }
+
+            contact = await _dynamicsClient.GetContactById(contactGuid);
+            return new JsonResult(contact.ToViewModel());
+        }
+
+        private async Task<IActionResult> CreateAlias(ViewModels.Alias item, string contactId)
+        {
+            if (item == null || String.IsNullOrEmpty(contactId))
+            {
+                return BadRequest();
+            }
+
+            // for association with current user
+            string userJson = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
+
+            MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias();
+            // copy received values to Dynamics Application
+            alias.CopyValues(item);
+            try
+            {
+                alias = _dynamicsClient.Aliases.Create(alias);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error creating application");
+                // fail if we can't create.
+                throw;
+            }
+
+
+            MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
+
+            // set contac association
+            try
+            {
+                patchAlias.ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", contactId);
+
+                await _dynamicsClient.Aliases.UpdateAsync(alias.AdoxioAliasid, patchAlias);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                _logger.LogError(httpOperationException, "Error updating application");
+                // fail if we can't create.
+                throw;
+            }
+
+            return new JsonResult(alias.ToViewModel());
         }
 
         /// <summary>
@@ -487,26 +580,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpGet("phs-link/{contactId}")]
-        [AllowAnonymous]
         public JsonResult Subscribe(string contactId)
         {
-            string confirmationEmailLink = GetPhsLink(contactId);
-            // string bclogo = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/assets/bc-logo.svg";
-            // /* send the user an email confirmation. */
-            // string body = "<img src='" + bclogo + "'/><br><h2>Confirm your email address</h2><p>Thank you for signing up to receive updates about cannabis stores in B.C. We’ll send you updates as new rules and regulations are released about selling cannabis.</p>"
-            //     + "<p>To confirm your request and begin receiving updates by email, click here:</p>"
-            //     + "<a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a>";
-
-            // // send the email.
-            // SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
-
-            // // Specify the message content.
-            // MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
-            // message.Subject = "BC LCLB Cannabis Licensing Newsletter Subscription Confirmation";
-            // message.Body = body;
-            // message.IsBodyHtml = true;
-            // client.Send(message);
-
+            string confirmationEmailLink = null;
+            try
+            {
+                confirmationEmailLink = GetPhsLink(contactId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error getting personal history link");
+                _logger.LogError("Details:");
+                _logger.LogError(ex.Message);
+            }
             return new JsonResult(confirmationEmailLink);
         }
 

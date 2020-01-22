@@ -44,4 +44,9 @@ export class ContactDataService extends DataService {
     .pipe(catchError(this.handleError));
   }
 
+  public updatePHSContact(contact: Contact, token: string) {
+    return this.http.put<Contact>(this.apiPath + 'phs/' + encodeURIComponent(token), contact, { headers: this.headers })
+    .pipe(catchError(this.handleError));
+  }
+
 }
