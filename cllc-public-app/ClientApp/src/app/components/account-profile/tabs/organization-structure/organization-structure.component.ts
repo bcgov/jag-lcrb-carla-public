@@ -24,6 +24,7 @@ export class OrganizationStructureComponent extends FormBase implements OnInit {
   busySave: any;
   treeRoot: LicenseeChangeLog;
   cancelledLicenseeChanges: LicenseeChangeLog[];
+  LicenseeChangeLog = LicenseeChangeLog;
 
   constructor(private store: Store<AppState>,
     private snackBar: MatSnackBar,

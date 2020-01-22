@@ -48,6 +48,13 @@ export class AssociateListComponent extends FormBase implements OnInit {
     this.childAdded.emit(associate);
   }
 
+  saveLog(item: LicenseeChangeLog) {
+    item.edit = false;
+    if(!item.isAddChangeType()){
+      item.changeType = `update${this.changeTypeSuffix}`;
+    }
+  }
+
   deleteChange(node: LicenseeChangeLog) {
     node.businessNameNew = node.nameOld;
     node.isDirectorNew = node.isDirectorOld;

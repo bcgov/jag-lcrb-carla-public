@@ -96,7 +96,7 @@
                     <td>
                         <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
                             class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false;"
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item)"
                             style="margin-right: 10px;"></i>
                         <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
                     </td>
@@ -150,7 +150,7 @@
                     <td>
                         <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
                             class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false;"
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item)"
                             style="margin-right: 10px;"></i>
                         <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
                     </td>
@@ -205,7 +205,7 @@
                     <td>
                         <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true; item.collapse = true;"
                             class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false; item.collapse = false;"
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item); item.collapse = false;"
                             style="margin-right: 10px;"></i>
                         <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
                     </td>

@@ -22,4 +22,19 @@ export class Contact {
   selfDisclosure: string;
   secondaryIdentificationType: string;
   primaryIdentificationType: string;
+
+  phsConnectionsDetails: string;
+  phsLivesInCanada: string;
+  phsHasLivedInCanada: string;
+  phsExpired: string;
+  phsComplete: string;
+  phsConnectionsToOtherLicences: string;
+  phsCanadianDrugAlchoholDrivingOffence: string;
+  phsDateSubmitted: Date;
+  phsForeignDrugAlchoholOffence: string;
+}
+
+export class PHSContact {
+  token: string;
+  shortName: string;
 }
