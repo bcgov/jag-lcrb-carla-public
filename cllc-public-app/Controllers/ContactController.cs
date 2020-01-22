@@ -17,7 +17,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Gov.Lclb.Cllb.Public.Utility;
-using System.Net.Mail;
 using System.Net;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
@@ -132,6 +131,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("phs/{token}")]
+        [AllowAnonymous]
         public async Task<IActionResult> UpdateContactByPHSToken([FromBody] ViewModels.Contact item, string token)
         {
             if (token == null || item == null)
@@ -580,7 +580,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpGet("phs-link/{contactId}")]
-        public JsonResult Subscribe(string contactId)
+        public JsonResult GetPhsLinkForContactGuid(string contactId)
         {
             string confirmationEmailLink = null;
             try
