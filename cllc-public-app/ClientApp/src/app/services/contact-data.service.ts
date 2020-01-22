@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-import { Contact } from '@models/contact.model';
+import { Contact, PHSContact } from '@models/contact.model';
 import { DataService } from './data.service';
 import { catchError } from 'rxjs/operators';
 
@@ -21,12 +21,12 @@ export class ContactDataService extends DataService {
   }
 
   public getContactPhsLink(contactId: string) {
-    return this.http.get<Contact>(`${this.apiPath}phs-link/${contactId}`, { headers: this.headers })
+    return this.http.get<string>(`${this.apiPath}phs-link/${contactId}`, { headers: this.headers })
     .pipe(catchError(this.handleError));
   }
 
   public getContactByPhsToken(token: string) {
-    return this.http.get<Contact>(`${this.apiPath}phs/${encodeURIComponent(token)}`, { headers: this.headers })
+    return this.http.get<PHSContact>(`${this.apiPath}phs/${encodeURIComponent(token)}`, { headers: this.headers })
     .pipe(catchError(this.handleError));
   }
 
