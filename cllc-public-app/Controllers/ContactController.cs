@@ -200,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
 
-            // set contac association
+            // set contact association
             try
             {
                 patchAlias.ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", contactId);

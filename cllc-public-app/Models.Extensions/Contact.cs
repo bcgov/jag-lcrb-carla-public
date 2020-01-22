@@ -371,6 +371,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.AdoxioPhscanadiandrugalchoholdrivingoffence = (int?)contact.PhsCanadianDrugAlchoholDrivingOffence;
                 result.AdoxioPhsdatesubmitted = contact.PhsDateSubmitted;
                 result.AdoxioPhsforeigndrugalchoholoffence = (int?)contact.PhsForeignDrugAlchoholOffence;
+                result.AdoxioPhsconnectionsdetails = contact.PhsConnectionsDetails;
 
 
                 if (string.IsNullOrEmpty(result.Fullname) && (!string.IsNullOrEmpty(result.Firstname) || !string.IsNullOrEmpty(result.Lastname)))
