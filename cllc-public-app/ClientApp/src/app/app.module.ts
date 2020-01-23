@@ -56,6 +56,8 @@ import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DynamicsFormComponent } from '@components/dynamics-form/dynamics-form.component';
 import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
+import { FileDataService } from '@services/file-data.service';
+
 
 import {
   EditShareholdersComponent, ShareholderDialogComponent,
@@ -391,6 +393,7 @@ import { AccountCompletenessComponent } from './components/account-completeness/
     ContactDataService,
     DynamicsDataService,
     DynamicsFormDataService,
+    FileDataService,
     GeneralDataService,
     InsertService,
     NewsletterDataService,
