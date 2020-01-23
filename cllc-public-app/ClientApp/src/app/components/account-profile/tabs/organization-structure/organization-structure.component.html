@@ -36,10 +36,10 @@
               </i>Partnership Agreement Uploaded
             </a> <br>
           </div>
- 
-        <label *ngIf="LicenseeChangeLog.length > 0">Summary of changes:</label>
+          
+        <label *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">Summary of changes:</label>
         <ul *ngIf="treeRoot">
-          <li *ngIf="LicenseeChangeLog.length > 0">
+          <li *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0">
             Key Personnel<br>
             <ul>
               <li *ngFor="let item of LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot)">
@@ -49,7 +49,7 @@
           </li>
 
           <div *ngIf="account?.businessType === 'Private Corporation'">
-            <li *ngIf="LicenseeChangeLog.length > 0">
+            <li *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0">
               Individual Shareholders<br>
               <ul>
                 <li *ngFor="let item of LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot)">
@@ -69,10 +69,42 @@
           </div>
       </ul>
         <hr>
-        Types of changes:
+        <div *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
+          <table class="smallGridTable" style="font-size:10px;">
+            <thead>
+              <tr style="height:50px;">
+              <th>Type</th>
+              <th>Cannabis<br>Licences</th>
+              <th>Liquor<br>Licences</th>
+              <th>Total</th>
+            </tr>
+            </thead>
+            <tr *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0" style="height:50px;">
+              <td><strong>Leadership Changes</strong></td>
+              <td>$500 x 0 licences</td>
+              <td>$220 x 0 licences</td>
+              <td>$0</td>
+            </tr>
 
-        <p></p>
-        Total Cost:
+              <tr *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0" style="height:50px;">
+                  <td><strong>External Share Transfers</strong></td>
+                  <td>$500 x 0 licences</td>
+                  <td>$220 x 0 licences</td>
+                  <td>$0</td>
+                </tr>
+              <tfoot><tr>
+                <td colspan=3 style="text-align: right;">Total:</td>
+                <td><strong>$0</strong></td>
+              </tr>
+            </tfoot>
+          </table>
+          <p>&nbsp;</p>
+  
+
+        </div>
+        
+        
+        
 
         <div style="text-align:center;">
           <button class="btn btn-primary" (click)="save()">Save</button>
