@@ -34,6 +34,7 @@ export class LegalEntity {
   securityAssessmentEmailSentOn: Date;
   accountId: string;
   shareholderAccountId: string;
+  phsLink: string;
   // helper fields
   shareholderType: string;
   sendConsentRequest: boolean;

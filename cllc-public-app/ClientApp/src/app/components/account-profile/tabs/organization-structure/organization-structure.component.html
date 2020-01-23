@@ -47,6 +47,25 @@
               </li>
             </ul>
           </li>
+          <li>
+            Individual Shareholders<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
+              </li>
+            </ul>
+          </li>
+          <li>
+            Business Shareholders<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog.GetBusinessShareholderDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.businessNameNew}}
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+        Types of changes:
 
           <div *ngIf="account?.businessType === 'Private Corporation'">
             <li *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0">

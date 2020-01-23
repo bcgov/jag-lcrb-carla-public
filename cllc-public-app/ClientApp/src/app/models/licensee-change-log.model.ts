@@ -42,10 +42,13 @@ export class LicenseeChangeLog {
   legalEntityId: string;
   parentLegalEntityId: string;
   parentLinceseeChangeLogId: string;
+  parentBusinessAccountId: string;
+  businessAccountId: string;
   children: LicenseeChangeLog[];
   parentLinceseeChangeLog: LicenseeChangeLog;
   interestPercentageNew: number;
   interestPercentageOld: number;
+  phsLink: string;
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
@@ -153,6 +156,7 @@ export class LicenseeChangeLog {
   constructor(legalEntity: LegalEntity = null) {
     if (legalEntity) {
       this.legalEntityId = legalEntity.id;
+      this.businessAccountId = legalEntity.shareholderAccountId;
       this.businessType = legalEntity.legalentitytype;
       this.isIndividual = legalEntity.isindividual;
       this.parentLegalEntityId = legalEntity.parentLegalEntityId;
@@ -167,8 +171,11 @@ export class LicenseeChangeLog {
       this.isShareholderOld = legalEntity.isShareholder;
       this.isTrusteeNew = legalEntity.isTrustee;
       this.isTrusteeOld = legalEntity.isTrustee;
-      if (legalEntity.account) {
-        this.businessType = legalEntity.account.businessType;
+      if (legalEntity.isApplicant){
+        this.businessAccountId = legalEntity.accountId;
+      } else {
+        this.parentBusinessAccountId = legalEntity.accountId;
+        this.businessAccountId = legalEntity.shareholderAccountId;
       }
       this.numberofSharesNew = legalEntity.commonvotingshares;
       this.numberofSharesOld = legalEntity.commonvotingshares;
@@ -184,6 +191,7 @@ export class LicenseeChangeLog {
       this.dateofBirthOld = legalEntity.dateofbirth;
       this.titleNew = legalEntity.jobTitle;
       this.titleOld = legalEntity.jobTitle;
+      this.phsLink = legalEntity.phsLink;
     }
   }
 

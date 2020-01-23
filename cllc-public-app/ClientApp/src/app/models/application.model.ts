@@ -103,4 +103,5 @@ export class Application {
   isReadySurveillanceNotice: boolean;
   isReadyProductNotVisibleOutside: boolean;
   establishmentopeningdate: Date;
+  isApplicationComplete: string;
 }
