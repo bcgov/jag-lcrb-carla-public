@@ -37,12 +37,12 @@
             </a> <br>
           </div>
           
-        <label *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">Summary of changes:</label>
+        <label *ngIf="LicenseeChangeLog?.HasChanges(treeRoot)">Summary of changes:</label>
         <ul *ngIf="treeRoot">
-          <li *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0">
+          <li *ngIf="LicenseeChangeLog?.GetKeyPersonnelDecendents(treeRoot).length > 0">
             Key Personnel<br>
             <ul>
-              <li *ngFor="let item of LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot)">
+              <li *ngFor="let item of LicenseeChangeLog?.GetKeyPersonnelDecendents(treeRoot)">
                 {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
               </li>
             </ul>
@@ -50,7 +50,7 @@
           <li>
             Individual Shareholders<br>
             <ul>
-              <li *ngFor="let item of LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot)">
+              <li *ngFor="let item of LicenseeChangeLog?.GetIndividualShareholderDecendents(treeRoot)">
                 {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
               </li>
             </ul>
@@ -58,12 +58,12 @@
           <li>
             Business Shareholders<br>
             <ul>
-              <li *ngFor="let item of LicenseeChangeLog.GetBusinessShareholderDecendents(treeRoot)">
+              <li *ngFor="let item of LicenseeChangeLog?.GetBusinessShareholderDecendents(treeRoot)">
                 {{item.getChageTypeVerb()}} {{item.businessNameNew}}
               </li>
             </ul>
           </li>
-        </ul>
+        
         <hr>
         Types of changes:
 
