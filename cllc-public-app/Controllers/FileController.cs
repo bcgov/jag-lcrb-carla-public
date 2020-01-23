@@ -443,10 +443,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             
             if (folderName != null)
             {
-                var folderContents = _fileManagerClient.GetFileDetailsListInFolder(_logger, entityName, folderName);
+                var folderContents = _fileManagerClient.GetFileDetailsListInFolder(_logger, entityName, entityId, folderName);
 
                 // get any file form fields that are related to the form
                 var formFileFields = _dynamicsClient.Formelementuploadfields.GetDocumentFieldsByForm(formId);
+                
+                result = new List<ViewModels.DocumentTypeStatus>();
 
                 foreach (var formFileField in formFileFields)
                 {

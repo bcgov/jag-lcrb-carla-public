@@ -12,7 +12,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             IList<MicrosoftDynamicsCRMadoxioFormelementuploadfield> result = null;
             try
             {
-                string formFilter = "adoxio_formelementuploadfieldid eq '" + formId + "'";
+                string formFilter = "adoxio_formguid eq '" + formId + "'";
                 result = operations.Get(filter: formFilter).Value;                
             }
             catch (HttpOperationException)
