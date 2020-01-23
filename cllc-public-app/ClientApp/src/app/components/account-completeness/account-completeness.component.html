@@ -1,19 +1,13 @@
-<section class="large-screen-only">
-  <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Account Completeness</h3>
-  <div *ngIf="documentTypeStatusResult">
-    <div *ngFor="let documentTypeStatus of documentTypeStatusResult">
-      <a [routerLink]="[ '/account-profile/']" class="completeness">
-        <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-        </i>{{documentTypeStatus.name}} - <div *ngIf="documentTypeStatus.valid; then documentsCompleteBlock else documentsIncompleteBlock"></div>
-        <ng-template #documentsCompleteBlock>Complete</ng-template>
-        <ng-template #documentsIncompleteBlock>Missing</ng-template>
-      </a> <br>
-    </div>
+<div *ngIf="documentTypeStatusResult">
+  <div *ngFor="let documentTypeStatus of documentTypeStatusResult">
+    <a [routerLink]="[ '/account-profile/']" class="completeness">
+      <div *ngIf="documentTypeStatus.valid; then documentsCompleteBlock else documentsIncompleteBlock"></div>
+              <ng-template #documentsCompleteBlock>
+                <i class="far fa-check-circle" style="margin-right: 10px; color:green;"></i>{{documentTypeStatus.name}} - Complete
+              </ng-template>
+              <ng-template #documentsIncompleteBlock>
+                <i class="far fa-times-circle" style="margin-right: 10px; color: red;"></i>{{documentTypeStatus.name}} - Missing
+              </ng-template>
+    </a> <br>
   </div>
-  <div class="submitted-content"
-       style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-    <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following items:</p>
-    
-    
-  </div>
-</section>
+</div>
