@@ -95,6 +95,10 @@ export class LicenseeChangeLog {
     return leaders;
   }
 
+  public static HasChanges(changeLog: LicenseeChangeLog): Boolean {
+    return this.GetKeyPersonnelDecendents(changeLog).length > 0 || this.GetBusinessShareholderDecendents(changeLog).length > 0 || this.GetIndividualShareholderDecendents(changeLog).length > 0;
+  }
+
   public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     let children = changeLog.children || [];
     let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged');
