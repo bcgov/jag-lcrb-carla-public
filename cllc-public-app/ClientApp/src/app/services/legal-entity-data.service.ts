@@ -31,7 +31,6 @@ export class LegalEntityDataService extends DataService {
     const apiPath = 'api/legalentities/business-profile-summary/';
     return this.http.get<LegalEntity[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
-
   }
 
   /**
@@ -41,17 +40,15 @@ export class LegalEntityDataService extends DataService {
     const apiPath = 'api/legalentities/current-hierarchy';
     return this.http.get<LegalEntity>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
-
   }
 
   /**
    * Gets the list of change logs for an application
    */
   getApplicationChangeLogs(applicationId: string): Observable<LicenseeChangeLog[]> {
-    const apiPath = `api/legalentities/legal-entity-change-logs/${applicationId}`;
+    const apiPath = `api/legalentities/legal-entity-change-logs/application/${applicationId}`;
     return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
-
   }
 
   /**
@@ -61,7 +58,6 @@ export class LegalEntityDataService extends DataService {
     const apiPath = `api/legalentities/legal-entity-change-logs/account/${accountId}`;
     return this.http.get<LicenseeChangeLog[]>(apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
-
   }
 
   /**

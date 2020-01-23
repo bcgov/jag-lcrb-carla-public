@@ -3,6 +3,7 @@ import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormBase } from '@shared/form-base';
 import { Account } from '@models/account.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-associate-list',
@@ -21,7 +22,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
   LicenseeChangeLog = LicenseeChangeLog;
   busy: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+    public snackBar: MatSnackBar,) {
     super();
   }
 
@@ -53,6 +55,21 @@ export class AssociateListComponent extends FormBase implements OnInit {
     if(!item.isAddChangeType()){
       item.changeType = `update${this.changeTypeSuffix}`;
     }
+  }
+
+  copyMessage(val: string){
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.snackBar.open('The link is copied to the clipboard', '', { duration: 2500, panelClass: ['green-snackbar'] });
   }
 
   deleteChange(node: LicenseeChangeLog) {
