@@ -70,8 +70,8 @@ export class DashboardComponent extends FormBase implements OnInit {
         this.router.navigateByUrl(`/licensee-changes/${data.id}`);
       },
       () => {
-        this.snackBar.open('Error starting a New Marketer Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-        console.log('Error starting a New Marketer Application');
+        this.snackBar.open('Error starting a New Licensee Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a New Licensee Application');
       }
     );
   }
