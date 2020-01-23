@@ -582,10 +582,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("phs-link/{contactId}")]
         public JsonResult GetPhsLinkForContactGuid(string contactId)
         {
-            string confirmationEmailLink = null;
+            string phsLink = null;
             try
             {
-                confirmationEmailLink = GetPhsLink(contactId);
+                phsLink = ContactController.GetPhsLink(contactId, _configuration, _encryptionKey);
             }
             catch (Exception ex)
             {
@@ -593,10 +593,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogError("Details:");
                 _logger.LogError(ex.Message);
             }
-            return new JsonResult(confirmationEmailLink);
+            return new JsonResult(phsLink);
         }
 
-        private string GetPhsLink(string contactId)
+        public static string GetPhsLink(string contactId, IConfiguration _configuration, string _encryptionKey)
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
             result += WebUtility.UrlEncode(EncryptionUtility.EncryptString(contactId, _encryptionKey));

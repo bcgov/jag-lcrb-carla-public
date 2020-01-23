@@ -25,7 +25,7 @@ import { ApplicationTypeNames } from '@models/application-type.model';
 })
 export class ApplicationLicenseeChangesComponent extends FormBase implements OnInit {
   account: Account;
-  changeTree: LicenseeChangeLog;
+  treeRoot: LicenseeChangeLog;
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
@@ -91,10 +91,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.application = data[0];
         const currentChangeLogs = data[1] || [];
         const currentLegalEntities = data[2];
-        const tree = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
-        tree.isRoot = true;
-        tree.applySavedChangeLogs(currentChangeLogs);
-        this.changeTree = tree;
+        this.treeRoot = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
+        this.treeRoot.isRoot = true;
+        this.treeRoot.applySavedChangeLogs(currentChangeLogs);
 
         this.addDynamicContent();
         this.form.patchValue(this.application);
@@ -129,9 +128,9 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
-    const data = this.cleanSaveData(this.changeTree);
+    const data = this.cleanSaveData(this.treeRoot);
     this.busySave = forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }),
+      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
       this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
       this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
       .subscribe(() => {
@@ -162,9 +161,17 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   removeParentReferences(node: LicenseeChangeLog) {
+    //Form the parent account relationship
+    if (node.parentLinceseeChangeLog && node.parentLinceseeChangeLog.businessAccountId) {
+      node.parentBusinessAccountId = node.parentLinceseeChangeLog.businessAccountId;
+    }
+    // remove parent reference
     node.parentLinceseeChangeLog = undefined;
+
     if (node.children && node.children.length) {
-      node.children.forEach(child => this.removeParentReferences(child))
+      node.children.forEach(child => {
+        this.removeParentReferences(child)
+      })
     }
   }
 }

@@ -46,7 +46,7 @@
                 <th *ngIf="showPosition()" style="width: 200px;">Position</th>
                 <th style="width: 200px;">Email</th>
                 <th style="width: 150px;">Date of Birth</th>
-                <th *ngIf="1==2">Level 1 Personal History Summary </th>
+                <th>Level 1 Personal History Summary </th>
                 <th *ngIf="1==2">Level 2 Personal History Summary </th>
                 <th style="background-color: transparent;"></th>
             </tr>
@@ -91,7 +91,9 @@
                             (click)="picker.open()">
                         <mat-datepicker #picker></mat-datepicker>
                     </td>
-                    <td *ngIf="1==2"></td>
+                    <td>
+                        <button *ngIf="item.phsLink" class="btn btn-primary" (click)="copyMessage(item.phsLink)">Copy Link</button>
+                    </td>
                     <td *ngIf="1==2"></td>
                     <td>
                         <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
@@ -130,8 +132,8 @@
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.lastNameNew">
                     </td>
                     <td>
-                        <span *ngIf="!item.edit">{{item.numberofSharesNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.numberofSharesNew">
+                        <span *ngIf="!item.edit">{{item.interestPercentageNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.interestPercentageNew">
                     </td>
                     <td>
                         <span *ngIf="!item.edit">{{item.dateofBirthNew | date}}</span>
@@ -183,8 +185,8 @@
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.businessNameNew">
                     </td>
                     <td>
-                        <span *ngIf="!item.edit">{{item.numberofSharesNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.numberofSharesNew">
+                        <span *ngIf="!item.edit">{{item.interestPercentageNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.interestPercentageNew">
                     </td>
                     <td>
                         <select class="form-control" style="width: 250px;" [(ngModel)]="item.businessType">
