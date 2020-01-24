@@ -13,13 +13,13 @@ namespace Gov.Lclb.Cllb.Public.Mapping
             fieldMap = new Dictionary<string, string>
             {
                 // catering fields
-                { "adoxio_previouslicenceapplication","previousLicenceApplication" },
-                { "adoxio_previouslicenceapplicationdetails","previousLicenceApplicationDetails" },
+                { "adoxio_previouslicenceapplication","previousApplication" },
+                { "adoxio_previouslicenceapplicationdetails","previousApplicationDetails" },
                 { "adoxio_ruralagencystoreappointment","ruralAgencyStoreAppointment" },
                 { "adoxio_liquorindustryconnections","liquorIndustryConnections" },
                 { "adoxio_liquorindustryconnectionsdetails","liquorIndustryConnectionsDetails" },                
-                { "adoxio_otherbusinessesatthesamelocation","otherBusinessesAtTheSameLocation"},
-                { "adoxio_otherbusinesssamelocationdetails", "otherBusinessSameLocationDetails" },
+                { "adoxio_otherbusinessesatthesamelocation","otherBusinesses"},
+                { "adoxio_otherbusinesssamelocationdetails", "otherBusinessesDetails" },
 
 
                 {"adoxio_name","name" },
