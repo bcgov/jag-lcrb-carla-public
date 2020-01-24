@@ -29,65 +29,65 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioLocalgovindigenousnation class.
         /// </summary>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="createdon">Date and time when the record was
-        /// created.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
         /// <param name="statuscode">Reason for the status of the LG /
         /// IN</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="adoxioLocalgovindigenousnationid">Unique identifier
-        /// for entity instances</param>
-        /// <param name="statecode">Status of the LG / IN</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="versionnumber">Version Number</param>
-        /// <param name="adoxioName">The name of the custom entity.</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
         /// <param name="timezoneruleversionnumber">For internal use
         /// only.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="createdon">Date and time when the record was
+        /// created.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="versionnumber">Version Number</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
         /// <param name="_organizationidValue">Unique identifier for the
         /// organization</param>
+        /// <param name="adoxioLocalgovindigenousnationid">Unique identifier
+        /// for entity instances</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="adoxioName">The name of the custom entity.</param>
+        /// <param name="statecode">Status of the LG / IN</param>
         /// <param name="modifiedon">Date and time when the record was
         /// modified.</param>
-        public MicrosoftDynamicsCRMadoxioLocalgovindigenousnation(string _createdonbehalfbyValue = default(string), int? adoxioRequiresfitpropertorecommend = default(int?), int? adoxioIssuingcannabislicences = default(int?), string adoxioFaxnumber = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? statuscode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string adoxioLocalgovindigenousnationid = default(string), string adoxioPosition = default(string), int? statecode = default(int?), string _modifiedbyValue = default(string), System.DateTimeOffset? adoxioPendingdate = default(System.DateTimeOffset?), string versionnumber = default(string), int? adoxioComplexitylevel = default(int?), string adoxioName = default(string), string adoxioEmail = default(string), bool? adoxioIsindigenousnation = default(bool?), string adoxioPhonenumber = default(string), int? adoxioCommunicationsregion = default(int?), int? importsequencenumber = default(int?), int? timezoneruleversionnumber = default(int?), int? adoxioJurisdictioncode = default(int?), int? utcconversiontimezonecode = default(int?), string _organizationidValue = default(string), string adoxioContactname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioLocalgovindigenousnationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLocalgovindigenousnationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLocalgovindigenousnationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLocalgovindigenousnationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLocalgovindigenousnationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLocalgovindigenousnationApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMannotation> adoxioLocalgovindigenousnationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioLocalgovindigenousnationAdoxioEstablishmentLGIN = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioLocalgovindigenousnationAdoxioLicencesLGIN = default(IList<MicrosoftDynamicsCRMadoxioLicences>))
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        public MicrosoftDynamicsCRMadoxioLocalgovindigenousnation(int? adoxioComplexitylevel = default(int?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), string adoxioEmail = default(string), string _createdbyValue = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? importsequencenumber = default(int?), string versionnumber = default(string), string adoxioFaxnumber = default(string), string _modifiedbyValue = default(string), string adoxioPhonenumber = default(string), string _organizationidValue = default(string), bool? adoxioIsindigenousnation = default(bool?), string adoxioContactname = default(string), int? adoxioRequiresfitpropertorecommend = default(int?), int? adoxioJurisdictioncode = default(int?), string adoxioLocalgovindigenousnationid = default(string), string _createdonbehalfbyValue = default(string), string adoxioName = default(string), int? statecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioIssuingcannabislicences = default(int?), int? adoxioCommunicationsregion = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), string adoxioPosition = default(string), System.DateTimeOffset? adoxioPendingdate = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioLocalgovindigenousnationSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLocalgovindigenousnationDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioLocalgovindigenousnationDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMannotation> adoxioLocalgovindigenousnationAnnotations = default(IList<MicrosoftDynamicsCRMannotation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioLocalgovindigenousnationAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioLocalgovindigenousnationBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioLocalgovindigenousnationAdoxioEstablishmentLGIN = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioLocalgovindigenousnationAdoxioLicencesLGIN = default(IList<MicrosoftDynamicsCRMadoxioLicences>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioLocalgovindigenousnationApplications = default(IList<MicrosoftDynamicsCRMadoxioApplication>))
         {
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioRequiresfitpropertorecommend = adoxioRequiresfitpropertorecommend;
-            AdoxioIssuingcannabislicences = adoxioIssuingcannabislicences;
-            AdoxioFaxnumber = adoxioFaxnumber;
-            Createdon = createdon;
-            this._createdbyValue = _createdbyValue;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            Statuscode = statuscode;
-            Overriddencreatedon = overriddencreatedon;
-            AdoxioLocalgovindigenousnationid = adoxioLocalgovindigenousnationid;
-            AdoxioPosition = adoxioPosition;
-            Statecode = statecode;
-            this._modifiedbyValue = _modifiedbyValue;
-            AdoxioPendingdate = adoxioPendingdate;
-            Versionnumber = versionnumber;
             AdoxioComplexitylevel = adoxioComplexitylevel;
-            AdoxioName = adoxioName;
-            AdoxioEmail = adoxioEmail;
-            AdoxioIsindigenousnation = adoxioIsindigenousnation;
-            AdoxioPhonenumber = adoxioPhonenumber;
-            AdoxioCommunicationsregion = adoxioCommunicationsregion;
-            Importsequencenumber = importsequencenumber;
+            Statuscode = statuscode;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioJurisdictioncode = adoxioJurisdictioncode;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
+            AdoxioEmail = adoxioEmail;
+            this._createdbyValue = _createdbyValue;
+            Createdon = createdon;
+            Importsequencenumber = importsequencenumber;
+            Versionnumber = versionnumber;
+            AdoxioFaxnumber = adoxioFaxnumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            AdoxioPhonenumber = adoxioPhonenumber;
             this._organizationidValue = _organizationidValue;
+            AdoxioIsindigenousnation = adoxioIsindigenousnation;
             AdoxioContactname = adoxioContactname;
+            AdoxioRequiresfitpropertorecommend = adoxioRequiresfitpropertorecommend;
+            AdoxioJurisdictioncode = adoxioJurisdictioncode;
+            AdoxioLocalgovindigenousnationid = adoxioLocalgovindigenousnationid;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            AdoxioName = adoxioName;
+            Statecode = statecode;
             Modifiedon = modifiedon;
+            AdoxioIssuingcannabislicences = adoxioIssuingcannabislicences;
+            AdoxioCommunicationsregion = adoxioCommunicationsregion;
+            Overriddencreatedon = overriddencreatedon;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            AdoxioPosition = adoxioPosition;
+            AdoxioPendingdate = adoxioPendingdate;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -96,12 +96,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioLocalgovindigenousnationSyncErrors = adoxioLocalgovindigenousnationSyncErrors;
             AdoxioLocalgovindigenousnationDuplicateMatchingRecord = adoxioLocalgovindigenousnationDuplicateMatchingRecord;
             AdoxioLocalgovindigenousnationDuplicateBaseRecord = adoxioLocalgovindigenousnationDuplicateBaseRecord;
+            AdoxioLocalgovindigenousnationAnnotations = adoxioLocalgovindigenousnationAnnotations;
             AdoxioLocalgovindigenousnationAsyncOperations = adoxioLocalgovindigenousnationAsyncOperations;
             AdoxioLocalgovindigenousnationBulkDeleteFailures = adoxioLocalgovindigenousnationBulkDeleteFailures;
-            AdoxioLocalgovindigenousnationApplications = adoxioLocalgovindigenousnationApplications;
-            AdoxioLocalgovindigenousnationAnnotations = adoxioLocalgovindigenousnationAnnotations;
             AdoxioLocalgovindigenousnationAdoxioEstablishmentLGIN = adoxioLocalgovindigenousnationAdoxioEstablishmentLGIN;
             AdoxioLocalgovindigenousnationAdoxioLicencesLGIN = adoxioLocalgovindigenousnationAdoxioLicencesLGIN;
+            AdoxioLocalgovindigenousnationApplications = adoxioLocalgovindigenousnationApplications;
             CustomInit();
         }
 
@@ -111,129 +111,15 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_requiresfitpropertorecommend")]
-        public int? AdoxioRequiresfitpropertorecommend { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_issuingcannabislicences")]
-        public int? AdoxioIssuingcannabislicences { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_faxnumber")]
-        public string AdoxioFaxnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_complexitylevel")]
+        public int? AdoxioComplexitylevel { get; set; }
 
         /// <summary>
         /// Gets or sets reason for the status of the LG / IN
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for entity instances
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_localgovindigenousnationid")]
-        public string AdoxioLocalgovindigenousnationid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_position")]
-        public string AdoxioPosition { get; set; }
-
-        /// <summary>
-        /// Gets or sets status of the LG / IN
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_pendingdate")]
-        public System.DateTimeOffset? AdoxioPendingdate { get; set; }
-
-        /// <summary>
-        /// Gets or sets version Number
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complexitylevel")]
-        public int? AdoxioComplexitylevel { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the custom entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_email")]
-        public string AdoxioEmail { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isindigenousnation")]
-        public bool? AdoxioIsindigenousnation { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phonenumber")]
-        public string AdoxioPhonenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_communicationsregion")]
-        public int? AdoxioCommunicationsregion { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
 
         /// <summary>
         /// Gets or sets for internal use only.
@@ -243,15 +129,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_jurisdictioncode")]
-        public int? AdoxioJurisdictioncode { get; set; }
+        [JsonProperty(PropertyName = "adoxio_email")]
+        public string AdoxioEmail { get; set; }
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time when the record was created.
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets version Number
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_faxnumber")]
+        public string AdoxioFaxnumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_phonenumber")]
+        public string AdoxioPhonenumber { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for the organization
@@ -261,14 +181,94 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_isindigenousnation")]
+        public bool? AdoxioIsindigenousnation { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_contactname")]
         public string AdoxioContactname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_requiresfitpropertorecommend")]
+        public int? AdoxioRequiresfitpropertorecommend { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_jurisdictioncode")]
+        public int? AdoxioJurisdictioncode { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for entity instances
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_localgovindigenousnationid")]
+        public string AdoxioLocalgovindigenousnationid { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the custom entity.
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// Gets or sets status of the LG / IN
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_issuingcannabislicences")]
+        public int? AdoxioIssuingcannabislicences { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_communicationsregion")]
+        public int? AdoxioCommunicationsregion { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time that the record was migrated.
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_position")]
+        public string AdoxioPosition { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_pendingdate")]
+        public System.DateTimeOffset? AdoxioPendingdate { get; set; }
+
+        /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
 
         /// <summary>
         /// </summary>
@@ -312,6 +312,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_localgovindigenousnation_Annotations")]
+        public IList<MicrosoftDynamicsCRMannotation> AdoxioLocalgovindigenousnationAnnotations { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_localgovindigenousnation_AsyncOperations")]
         public IList<MicrosoftDynamicsCRMasyncoperation> AdoxioLocalgovindigenousnationAsyncOperations { get; set; }
 
@@ -322,16 +327,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_localgovindigenousnation_applications")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioLocalgovindigenousnationApplications { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_localgovindigenousnation_Annotations")]
-        public IList<MicrosoftDynamicsCRMannotation> AdoxioLocalgovindigenousnationAnnotations { get; set; }
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "adoxio_localgovindigenousnation_adoxio_establishment_LGIN")]
         public IList<MicrosoftDynamicsCRMadoxioEstablishment> AdoxioLocalgovindigenousnationAdoxioEstablishmentLGIN { get; set; }
 
@@ -339,6 +334,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_localgovindigenousnation_adoxio_licences_LGIN")]
         public IList<MicrosoftDynamicsCRMadoxioLicences> AdoxioLocalgovindigenousnationAdoxioLicencesLGIN { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_localgovindigenousnation_applications")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioLocalgovindigenousnationApplications { get; set; }
 
     }
 }

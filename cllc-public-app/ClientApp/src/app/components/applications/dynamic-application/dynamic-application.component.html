@@ -380,7 +380,7 @@
              style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
           <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following items:</p>
 
-          <app-account-completeness entityName="account" [entityId]="account?.id" formId="cccff382-2b92-467e-bf1b-3db179512af8" #accountCompleteness></app-account-completeness>
+          <app-account-completeness [account]="account" entityName="account" [entityId]="account?.id" formId="cccff382-2b92-467e-bf1b-3db179512af8" #accountCompleteness></app-account-completeness>
 
         </div>
       </section>

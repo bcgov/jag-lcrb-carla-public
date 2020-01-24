@@ -27,12 +27,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype class.
         /// </summary>
-        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(string versionnumber = default(string), string adoxioLicencetypeid = default(string), string adoxioIncidentAdoxioLicencetypeid = default(string), string incidentid = default(string))
+        public MicrosoftDynamicsCRMadoxioIncidentAdoxioLicencetype(string adoxioIncidentAdoxioLicencetypeid = default(string), string adoxioLicencetypeid = default(string), string incidentid = default(string), string versionnumber = default(string))
         {
-            Versionnumber = versionnumber;
-            AdoxioLicencetypeid = adoxioLicencetypeid;
             AdoxioIncidentAdoxioLicencetypeid = adoxioIncidentAdoxioLicencetypeid;
+            AdoxioLicencetypeid = adoxioLicencetypeid;
             Incidentid = incidentid;
+            Versionnumber = versionnumber;
             CustomInit();
         }
 
@@ -43,8 +43,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_incident_adoxio_licencetypeid")]
+        public string AdoxioIncidentAdoxioLicencetypeid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -53,13 +53,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_incident_adoxio_licencetypeid")]
-        public string AdoxioIncidentAdoxioLicencetypeid { get; set; }
+        [JsonProperty(PropertyName = "incidentid")]
+        public string Incidentid { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "incidentid")]
-        public string Incidentid { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
     }
 }

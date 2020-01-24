@@ -16,6 +16,7 @@ export class AccountCompletenessComponent extends FormBase implements OnInit {
   @Input('entityName') entityName: string;
   @Input('entityId') entityId: string;
   @Input('formId') formId: string;
+  @Input('account') account: Account;
 
   public documentTypeStatusResult: DocumentTypeStatus[] = []; 
 
