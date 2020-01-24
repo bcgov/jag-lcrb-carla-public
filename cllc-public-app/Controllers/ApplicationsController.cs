@@ -14,7 +14,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static Gov.Lclb.Cllb.Interfaces.SharePointFileManager;
+using Google.Protobuf;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -27,13 +29,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly FileManagerClient _fileManagerClient;
 
-        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
+            _fileManagerClient = fileClient;
         }
 
 
@@ -416,28 +420,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a SharePointDocumentLocation link
             string folderName = GetApplicationFolderName(adoxioApplication);
             string name = adoxioApplication.AdoxioJobnumber + " Files";
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-            // Create the folder
-            bool folderExists = await _sharePointFileManager.FolderExists(ApplicationDocumentUrlTitle, folderName);
-            if (!folderExists)
-            {
-                try
-                {
-                    await _sharePointFileManager.CreateFolder(ApplicationDocumentUrlTitle, folderName);
-                }
-                catch (SharePointRestException spre)
-                {
-                    _logger.LogError(spre, "Error creating Sharepoint Folder");
-                    throw spre;
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Error creating Sharepoint Folder");
-                    throw e;
-                }
 
-            }
-
+            _fileManagerClient.CreateFolderIfNotExist(_logger, ApplicationDocumentUrlTitle, folderName);
+            
             // Create the SharePointDocumentLocation entity
             MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
             {

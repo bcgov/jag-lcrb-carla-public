@@ -42,10 +42,13 @@ export class LicenseeChangeLog {
   legalEntityId: string;
   parentLegalEntityId: string;
   parentLinceseeChangeLogId: string;
+  parentBusinessAccountId: string;
+  businessAccountId: string;
   children: LicenseeChangeLog[];
   parentLinceseeChangeLog: LicenseeChangeLog;
   interestPercentageNew: number;
   interestPercentageOld: number;
+  phsLink: string;
 
   isRoot: boolean; // This is only used on the client side
   isIndividual: boolean; // This is only used on the client side
@@ -85,6 +88,34 @@ export class LicenseeChangeLog {
     const leaders = (this.children || []).filter(item => !item.isIndividual && item.isShareholderNew);
     return leaders;
   }
+
+  public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    let children = changeLog.children || [];
+    let leaders = children.filter(item => item.isIndividual && !item.isShareholderNew && item.changeType !== 'unchanged');
+    children.forEach(child => {
+      leaders = leaders.concat(LicenseeChangeLog.GetKeyPersonnelDecendents(child));
+    });
+    return leaders;
+  }
+
+  public static GetIndividualShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    let children = changeLog.children || [];
+    let shareholders = children.filter(item => item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged');
+    children.forEach(child => {
+      shareholders = shareholders.concat(LicenseeChangeLog.GetIndividualShareholderDecendents(child));
+    });
+    return shareholders;
+  }
+
+  public static GetBusinessShareholderDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
+    let children = changeLog.children || [];
+    let shareholders = children.filter(item => !item.isIndividual && item.isShareholderNew && item.changeType !== 'unchanged');
+    children.forEach(child => {
+      shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
+    });
+    return shareholders;
+  }
+
   // construct file name prefix from name and names of parents
   public get fileUploadPrefix(): string {
     let prefix = this.nameToFilePrefix();
@@ -104,7 +135,7 @@ export class LicenseeChangeLog {
     if (this.isIndividual) {
       prefix = `${this.firstNameNew} ${this.lastNameNew}`;
     } else {
-      if ((this.businessNameNew ||'').length  <= MAX_SIZE) {
+      if ((this.businessNameNew || '').length <= MAX_SIZE) {
         prefix = this.businessNameNew || '';
       } else {
         const length = (this.businessNameNew || '').length;
@@ -121,6 +152,7 @@ export class LicenseeChangeLog {
   constructor(legalEntity: LegalEntity = null) {
     if (legalEntity) {
       this.legalEntityId = legalEntity.id;
+      this.businessAccountId = legalEntity.shareholderAccountId;
       this.businessType = legalEntity.legalentitytype;
       this.isIndividual = legalEntity.isindividual;
       this.parentLegalEntityId = legalEntity.parentLegalEntityId;
@@ -135,8 +167,11 @@ export class LicenseeChangeLog {
       this.isShareholderOld = legalEntity.isShareholder;
       this.isTrusteeNew = legalEntity.isTrustee;
       this.isTrusteeOld = legalEntity.isTrustee;
-      if (legalEntity.account) {
-        this.businessType = legalEntity.account.businessType;
+      if (legalEntity.isApplicant){
+        this.businessAccountId = legalEntity.accountId;
+      } else {
+        this.parentBusinessAccountId = legalEntity.accountId;
+        this.businessAccountId = legalEntity.shareholderAccountId;
       }
       this.numberofSharesNew = legalEntity.commonvotingshares;
       this.numberofSharesOld = legalEntity.commonvotingshares;
@@ -152,6 +187,7 @@ export class LicenseeChangeLog {
       this.dateofBirthOld = legalEntity.dateofbirth;
       this.titleNew = legalEntity.jobTitle;
       this.titleOld = legalEntity.jobTitle;
+      this.phsLink = legalEntity.phsLink;
     }
   }
 
@@ -359,6 +395,18 @@ export class LicenseeChangeLog {
       || this.changeType === LicenseeChangeType.removeBusinessShareholder
       || this.changeType === LicenseeChangeType.removeIndividualShareholder;
     return result;
+  }
+
+  getChageTypeVerb() {
+    let change = '';
+    if (this.isAddChangeType()) {
+      change = 'Added';
+    } else if (this.isRemoveChangeType()) {
+      change = 'Removed';
+    } else if (this.isUpdateChangeType()) {
+      change = 'Updated';
+    }
+    return change;
   }
 
 
