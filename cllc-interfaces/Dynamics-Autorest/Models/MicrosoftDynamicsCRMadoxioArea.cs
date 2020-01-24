@@ -29,64 +29,64 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the MicrosoftDynamicsCRMadoxioArea
         /// class.
         /// </summary>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
         /// <param name="_modifiedbyValue">Unique identifier of the user who
         /// modified the record.</param>
-        /// <param name="_owneridValue">Owner Id</param>
         /// <param name="_owninguserValue">Unique identifier for the user that
         /// owns the record.</param>
         /// <param name="timezoneruleversionnumber">For internal use
         /// only.</param>
-        /// <param name="versionnumber">Version Number</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
         /// <param name="modifiedon">Date and time when the record was
         /// modified.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="statuscode">Reason for the status of the Area</param>
+        /// <param name="_owneridValue">Owner Id</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
         /// <param name="adoxioAreaid">Unique identifier for entity
         /// instances</param>
-        /// <param name="adoxioName">The name of the custom entity.</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
+        /// <param name="_owningteamValue">Unique identifier for the team that
+        /// owns the record.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
         /// <param name="_createdonbehalfbyValue">Unique identifier of the
         /// delegate user who created the record.</param>
+        /// <param name="versionnumber">Version Number</param>
+        /// <param name="statecode">Status of the Area</param>
+        /// <param name="statuscode">Reason for the status of the Area</param>
         /// <param name="utcconversiontimezonecode">Time zone code that was in
         /// use when the record was created.</param>
         /// <param name="createdon">Date and time when the record was
         /// created.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
-        /// <param name="statecode">Status of the Area</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        public MicrosoftDynamicsCRMadoxioArea(string _modifiedbyValue = default(string), string _owneridValue = default(string), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), string versionnumber = default(string), int? importsequencenumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioDescription = default(string), string _createdbyValue = default(string), int? statuscode = default(int?), string adoxioAreaid = default(string), string adoxioName = default(string), string _owningbusinessunitValue = default(string), string _createdonbehalfbyValue = default(string), string _adoxioRegionValue = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string _adoxioPrimaryinspectorValue = default(string), int? statecode = default(int?), string _modifiedonbehalfbyValue = default(string), int? adoxioNumber = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioAreaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAreaDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAreaDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAreaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAreaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> adoxioAreaAdoxioCitydistrictAreaId = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioPostalcode> adoxioAreaAdoxioPostalcodeArea = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMsystemuser adoxioPrimaryInspector = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMincident> adoxioAreaIncidentArea = default(IList<MicrosoftDynamicsCRMincident>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAreaAdoxioApplicationArea = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioAreaAdoxioEstablishmentArea = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioAreaComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioAreaContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioAreaInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAreaLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>))
+        /// <param name="adoxioName">The name of the custom entity.</param>
+        public MicrosoftDynamicsCRMadoxioArea(int? importsequencenumber = default(int?), string adoxioDescription = default(string), string _owningbusinessunitValue = default(string), string _adoxioPrimaryinspectorValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _modifiedbyValue = default(string), int? adoxioNumber = default(int?), string _owninguserValue = default(string), int? timezoneruleversionnumber = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owneridValue = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioAreaid = default(string), string _owningteamValue = default(string), string _createdbyValue = default(string), string _createdonbehalfbyValue = default(string), string versionnumber = default(string), int? statecode = default(int?), string _adoxioRegionValue = default(string), int? statuscode = default(int?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioName = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioAreaSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAreaDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioAreaDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioAreaAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioAreaBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), IList<MicrosoftDynamicsCRMadoxioApplication> adoxioAreaAdoxioApplicationArea = default(IList<MicrosoftDynamicsCRMadoxioApplication>), IList<MicrosoftDynamicsCRMadoxioCitydistrict> adoxioAreaAdoxioCitydistrictAreaId = default(IList<MicrosoftDynamicsCRMadoxioCitydistrict>), IList<MicrosoftDynamicsCRMadoxioEstablishment> adoxioAreaAdoxioEstablishmentArea = default(IList<MicrosoftDynamicsCRMadoxioEstablishment>), IList<MicrosoftDynamicsCRMadoxioPostalcode> adoxioAreaAdoxioPostalcodeArea = default(IList<MicrosoftDynamicsCRMadoxioPostalcode>), IList<MicrosoftDynamicsCRMincident> adoxioAreaIncidentArea = default(IList<MicrosoftDynamicsCRMincident>), MicrosoftDynamicsCRMadoxioRegion adoxioRegion = default(MicrosoftDynamicsCRMadoxioRegion), MicrosoftDynamicsCRMsystemuser adoxioPrimaryInspector = default(MicrosoftDynamicsCRMsystemuser), IList<MicrosoftDynamicsCRMadoxioComplaint> adoxioAreaComplaints = default(IList<MicrosoftDynamicsCRMadoxioComplaint>), IList<MicrosoftDynamicsCRMadoxioContravention> adoxioAreaContraventions = default(IList<MicrosoftDynamicsCRMadoxioContravention>), IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation> adoxioAreaInvestigations = default(IList<MicrosoftDynamicsCRMadoxioComplianceinvestigation>), IList<MicrosoftDynamicsCRMadoxioLicences> adoxioAreaLicences = default(IList<MicrosoftDynamicsCRMadoxioLicences>))
         {
+            Importsequencenumber = importsequencenumber;
+            AdoxioDescription = adoxioDescription;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._adoxioPrimaryinspectorValue = _adoxioPrimaryinspectorValue;
+            Overriddencreatedon = overriddencreatedon;
             this._modifiedbyValue = _modifiedbyValue;
-            this._owneridValue = _owneridValue;
+            AdoxioNumber = adoxioNumber;
             this._owninguserValue = _owninguserValue;
             Timezoneruleversionnumber = timezoneruleversionnumber;
-            Versionnumber = versionnumber;
-            Importsequencenumber = importsequencenumber;
             Modifiedon = modifiedon;
-            AdoxioDescription = adoxioDescription;
-            this._createdbyValue = _createdbyValue;
-            Statuscode = statuscode;
+            this._owneridValue = _owneridValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioAreaid = adoxioAreaid;
-            AdoxioName = adoxioName;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
+            this._owningteamValue = _owningteamValue;
+            this._createdbyValue = _createdbyValue;
             this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Versionnumber = versionnumber;
+            Statecode = statecode;
             this._adoxioRegionValue = _adoxioRegionValue;
+            Statuscode = statuscode;
             Utcconversiontimezonecode = utcconversiontimezonecode;
             Createdon = createdon;
-            Overriddencreatedon = overriddencreatedon;
-            this._owningteamValue = _owningteamValue;
-            this._adoxioPrimaryinspectorValue = _adoxioPrimaryinspectorValue;
-            Statecode = statecode;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioNumber = adoxioNumber;
+            AdoxioName = adoxioName;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -100,13 +100,13 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioAreaDuplicateBaseRecord = adoxioAreaDuplicateBaseRecord;
             AdoxioAreaAsyncOperations = adoxioAreaAsyncOperations;
             AdoxioAreaBulkDeleteFailures = adoxioAreaBulkDeleteFailures;
+            AdoxioAreaAdoxioApplicationArea = adoxioAreaAdoxioApplicationArea;
             AdoxioAreaAdoxioCitydistrictAreaId = adoxioAreaAdoxioCitydistrictAreaId;
+            AdoxioAreaAdoxioEstablishmentArea = adoxioAreaAdoxioEstablishmentArea;
             AdoxioAreaAdoxioPostalcodeArea = adoxioAreaAdoxioPostalcodeArea;
+            AdoxioAreaIncidentArea = adoxioAreaIncidentArea;
             AdoxioRegion = adoxioRegion;
             AdoxioPrimaryInspector = adoxioPrimaryInspector;
-            AdoxioAreaIncidentArea = adoxioAreaIncidentArea;
-            AdoxioAreaAdoxioApplicationArea = adoxioAreaAdoxioApplicationArea;
-            AdoxioAreaAdoxioEstablishmentArea = adoxioAreaAdoxioEstablishmentArea;
             AdoxioAreaComplaints = adoxioAreaComplaints;
             AdoxioAreaContraventions = adoxioAreaContraventions;
             AdoxioAreaInvestigations = adoxioAreaInvestigations;
@@ -120,16 +120,45 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_description")]
+        public string AdoxioDescription { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "_adoxio_primaryinspector_value")]
+        public string _adoxioPrimaryinspectorValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time that the record was migrated.
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets owner Id
         /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_number")]
+        public int? AdoxioNumber { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for the user that owns the record.
@@ -144,40 +173,23 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? Timezoneruleversionnumber { get; set; }
 
         /// <summary>
-        /// Gets or sets version Number
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
         /// Gets or sets date and time when the record was modified.
         /// </summary>
         [JsonProperty(PropertyName = "modifiedon")]
         public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
+        /// Gets or sets owner Id
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_description")]
-        public string AdoxioDescription { get; set; }
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets reason for the status of the Area
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for entity instances
@@ -186,17 +198,16 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioAreaid { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the custom entity.
+        /// Gets or sets unique identifier for the team that owns the record.
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
+        /// Gets or sets unique identifier of the user who created the record.
         /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who created the
@@ -206,9 +217,27 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string _createdonbehalfbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version Number
+        /// </summary>
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets status of the Area
+        /// </summary>
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "_adoxio_region_value")]
         public string _adoxioRegionValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets reason for the status of the Area
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// Gets or sets time zone code that was in use when the record was
@@ -224,39 +253,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public System.DateTimeOffset? Createdon { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time that the record was migrated.
+        /// Gets or sets the name of the custom entity.
         /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_primaryinspector_value")]
-        public string _adoxioPrimaryinspectorValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets status of the Area
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_number")]
-        public int? AdoxioNumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
 
         /// <summary>
         /// </summary>
@@ -325,13 +325,28 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_area_adoxio_application_Area")]
+        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioAreaAdoxioApplicationArea { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_area_adoxio_citydistrict_AreaId")]
         public IList<MicrosoftDynamicsCRMadoxioCitydistrict> AdoxioAreaAdoxioCitydistrictAreaId { get; set; }
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_area_adoxio_establishment_Area")]
+        public IList<MicrosoftDynamicsCRMadoxioEstablishment> AdoxioAreaAdoxioEstablishmentArea { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_area_adoxio_postalcode_Area")]
         public IList<MicrosoftDynamicsCRMadoxioPostalcode> AdoxioAreaAdoxioPostalcodeArea { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_area_incident_Area")]
+        public IList<MicrosoftDynamicsCRMincident> AdoxioAreaIncidentArea { get; set; }
 
         /// <summary>
         /// </summary>
@@ -342,21 +357,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_PrimaryInspector")]
         public MicrosoftDynamicsCRMsystemuser AdoxioPrimaryInspector { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_area_incident_Area")]
-        public IList<MicrosoftDynamicsCRMincident> AdoxioAreaIncidentArea { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_area_adoxio_application_Area")]
-        public IList<MicrosoftDynamicsCRMadoxioApplication> AdoxioAreaAdoxioApplicationArea { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_area_adoxio_establishment_Area")]
-        public IList<MicrosoftDynamicsCRMadoxioEstablishment> AdoxioAreaAdoxioEstablishmentArea { get; set; }
 
         /// <summary>
         /// </summary>

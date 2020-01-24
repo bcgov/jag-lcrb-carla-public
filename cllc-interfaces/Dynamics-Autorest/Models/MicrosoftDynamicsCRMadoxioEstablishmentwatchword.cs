@@ -29,55 +29,55 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioEstablishmentwatchword class.
         /// </summary>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="statuscode">Reason for the status of the Establishment
-        /// Watch Word</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="adoxioName">The name of the custom entity.</param>
         /// <param name="_modifiedbyValue">Unique identifier of the user who
         /// modified the record.</param>
-        /// <param name="adoxioEstablishmentwatchwordid">Unique identifier for
-        /// entity instances</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="_organizationidValue">Unique identifier for the
-        /// organization</param>
-        /// <param name="modifiedon">Date and time when the record was
-        /// modified.</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
         /// <param name="statecode">Status of the Establishment Watch
         /// Word</param>
+        /// <param name="_organizationidValue">Unique identifier for the
+        /// organization</param>
+        /// <param name="adoxioName">The name of the custom entity.</param>
         /// <param name="createdon">Date and time when the record was
         /// created.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="adoxioEstablishmentwatchwordid">Unique identifier for
+        /// entity instances</param>
+        /// <param name="statuscode">Reason for the status of the Establishment
+        /// Watch Word</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
         /// <param name="versionnumber">Version Number</param>
-        public MicrosoftDynamicsCRMadoxioEstablishmentwatchword(int? importsequencenumber = default(int?), bool? adoxioForbidden = default(bool?), int? statuscode = default(int?), int? timezoneruleversionnumber = default(int?), string _createdbyValue = default(string), string adoxioName = default(string), string _modifiedbyValue = default(string), string adoxioEstablishmentwatchwordid = default(string), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _createdonbehalfbyValue = default(string), string _organizationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _modifiedonbehalfbyValue = default(string), int? statecode = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string versionnumber = default(string), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioEstablishmentwatchwordSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentwatchwordDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentwatchwordDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEstablishmentwatchwordAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEstablishmentwatchwordBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="modifiedon">Date and time when the record was
+        /// modified.</param>
+        public MicrosoftDynamicsCRMadoxioEstablishmentwatchword(string _modifiedbyValue = default(string), int? statecode = default(int?), bool? adoxioForbidden = default(bool?), string _organizationidValue = default(string), string adoxioName = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _createdbyValue = default(string), string adoxioEstablishmentwatchwordid = default(string), int? statuscode = default(int?), string _modifiedonbehalfbyValue = default(string), string versionnumber = default(string), string _createdonbehalfbyValue = default(string), int? timezoneruleversionnumber = default(int?), int? importsequencenumber = default(int?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? utcconversiontimezonecode = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMorganization organizationid = default(MicrosoftDynamicsCRMorganization), IList<MicrosoftDynamicsCRMsyncerror> adoxioEstablishmentwatchwordSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentwatchwordDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEstablishmentwatchwordDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEstablishmentwatchwordAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEstablishmentwatchwordBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>))
         {
-            Importsequencenumber = importsequencenumber;
-            AdoxioForbidden = adoxioForbidden;
-            Statuscode = statuscode;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            this._createdbyValue = _createdbyValue;
-            AdoxioName = adoxioName;
             this._modifiedbyValue = _modifiedbyValue;
-            AdoxioEstablishmentwatchwordid = adoxioEstablishmentwatchwordid;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
-            Overriddencreatedon = overriddencreatedon;
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            this._organizationidValue = _organizationidValue;
-            Modifiedon = modifiedon;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Statecode = statecode;
+            AdoxioForbidden = adoxioForbidden;
+            this._organizationidValue = _organizationidValue;
+            AdoxioName = adoxioName;
             Createdon = createdon;
+            this._createdbyValue = _createdbyValue;
+            AdoxioEstablishmentwatchwordid = adoxioEstablishmentwatchwordid;
+            Statuscode = statuscode;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             Versionnumber = versionnumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            Importsequencenumber = importsequencenumber;
+            Overriddencreatedon = overriddencreatedon;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            Modifiedon = modifiedon;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -97,72 +97,21 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_forbidden")]
-        public bool? AdoxioForbidden { get; set; }
-
-        /// <summary>
-        /// Gets or sets reason for the status of the Establishment Watch Word
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets for internal use only.
-        /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the custom entity.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_name")]
-        public string AdoxioName { get; set; }
-
-        /// <summary>
         /// Gets or sets unique identifier of the user who modified the record.
         /// </summary>
         [JsonProperty(PropertyName = "_modifiedby_value")]
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets unique identifier for entity instances
+        /// Gets or sets status of the Establishment Watch Word
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentwatchwordid")]
-        public string AdoxioEstablishmentwatchwordid { get; set; }
+        [JsonProperty(PropertyName = "statecode")]
+        public int? Statecode { get; set; }
 
         /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
         /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_forbidden")]
+        public bool? AdoxioForbidden { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for the organization
@@ -171,10 +120,34 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string _organizationidValue { get; set; }
 
         /// <summary>
-        /// Gets or sets date and time when the record was modified.
+        /// Gets or sets the name of the custom entity.
         /// </summary>
-        [JsonProperty(PropertyName = "modifiedon")]
-        public System.DateTimeOffset? Modifiedon { get; set; }
+        [JsonProperty(PropertyName = "adoxio_name")]
+        public string AdoxioName { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time when the record was created.
+        /// </summary>
+        [JsonProperty(PropertyName = "createdon")]
+        public System.DateTimeOffset? Createdon { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for entity instances
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_establishmentwatchwordid")]
+        public string AdoxioEstablishmentwatchwordid { get; set; }
+
+        /// <summary>
+        /// Gets or sets reason for the status of the Establishment Watch Word
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
@@ -184,22 +157,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string _modifiedonbehalfbyValue { get; set; }
 
         /// <summary>
-        /// Gets or sets status of the Establishment Watch Word
-        /// </summary>
-        [JsonProperty(PropertyName = "statecode")]
-        public int? Statecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time when the record was created.
-        /// </summary>
-        [JsonProperty(PropertyName = "createdon")]
-        public System.DateTimeOffset? Createdon { get; set; }
-
-        /// <summary>
         /// Gets or sets version Number
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time that the record was migrated.
+        /// </summary>
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
+
+        /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// Gets or sets date and time when the record was modified.
+        /// </summary>
+        [JsonProperty(PropertyName = "modifiedon")]
+        public System.DateTimeOffset? Modifiedon { get; set; }
 
         /// <summary>
         /// </summary>
