@@ -120,13 +120,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioApplicanttype = (int?)from.ApplicantType;
 
             // catering fields
-            to.AdoxioPreviouslicenceapplication = from.PreviousLicenceApplication;
-            to.AdoxioPreviouslicenceapplicationdetails = from.PreviousLicenceApplicationDetails;
+            to.AdoxioPreviouslicenceapplication = from.PreviousApplication;
+            to.AdoxioPreviouslicenceapplicationdetails = from.PreviousApplicationDetails;
             to.AdoxioRuralagencystoreappointment = from.RuralAgencyStoreAppointment;
             to.AdoxioLiquorindustryconnections = from.LiquorIndustryConnections;
             to.AdoxioLiquorindustryconnectionsdetails = from.LiquorIndustryConnectionsDetails;
-            to.AdoxioOtherbusinessesatthesamelocation = from.OtherBusinessesAtTheSameLocation;
-            to.AdoxioOtherbusinesssamelocationdetails = from.OtherBusinessSameLocationDetails;
+            to.AdoxioOtherbusinessesatthesamelocation = from.OtherBusinesses;
+            to.AdoxioOtherbusinesssamelocationdetails = from.OtherBusinessesDetails;
             to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
@@ -312,17 +312,17 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 // Catering fields.
 
-                PreviousLicenceApplicationDetails = dynamicsApplication.AdoxioPreviouslicenceapplicationdetails,
+                PreviousApplicationDetails = dynamicsApplication.AdoxioPreviouslicenceapplicationdetails,
 
                 LiquorIndustryConnectionsDetails = dynamicsApplication.AdoxioLiquorindustryconnectionsdetails,
 
-                OtherBusinessSameLocationDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
+                OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
             };
 
             // Catering yes / no fields
             if (dynamicsApplication.AdoxioPreviouslicenceapplication != null)
             {
-                applicationVM.PreviousLicenceApplication = dynamicsApplication.AdoxioPreviouslicenceapplication;
+                applicationVM.PreviousApplication = dynamicsApplication.AdoxioPreviouslicenceapplication;
             }
 
             if (dynamicsApplication.AdoxioRuralagencystoreappointment != null)
@@ -337,7 +337,7 @@ namespace Gov.Lclb.Cllb.Public.Models
 
             if (dynamicsApplication.AdoxioOtherbusinessesatthesamelocation != null)
             {
-                applicationVM.OtherBusinessesAtTheSameLocation = dynamicsApplication.AdoxioOtherbusinessesatthesamelocation;
+                applicationVM.OtherBusinesses = dynamicsApplication.AdoxioOtherbusinessesatthesamelocation;
             }
 
 

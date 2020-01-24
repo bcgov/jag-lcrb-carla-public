@@ -120,14 +120,15 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
 
     this.form = this.fb.group({
       id: [''],
-      previousLicenceApplication: ['', Validators.required],
-      previousLicenceApplicationDetails: [''],
+      previousApplication: ['', Validators.required],
+      previousApplicationDetails: [''],
       ruralAgencyStoreAppointment: ['', Validators.required],
       liquorIndustryConnections: ['', Validators.required],
 
       liquorIndustryConnectionsDetails: [''],
-      otherBusinessesAtTheSameLocation: ['', Validators.required],
-      otherBusinessSameLocationDetails: [''],
+      otherBusinesses: ['', Validators.required],
+      otherBusinessesDetails: [''],
+
       establishmentName: ['', [
         Validators.required,
         this.establishmentWatchWordsService.forbiddenNameValidator()
@@ -147,12 +148,19 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
       applyAsIndigenousNation: [false],
-      indigenousNationId: [{ value: null, disabled: true }, Validators.required],
       federalProducerNames: ['', Validators.required],
-      applicantType: [''],
-      description1: ['', [Validators.required]],
-      proposedChange: ['', [Validators.required]],
+      applicantType: ['']
+           
     });
+
+    if (this.account === null) {
+      this.store.select((state) => state.currentAccountState.currentAccount)
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe((account) => {
+          this.account = account;
+          console.log("set account.");
+        });
+    }
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
       if (value === true) {
@@ -244,19 +252,10 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
       this.form.get('establishmentPhone').disable();
     }
 
-
     if (this.application.applicationType.name !== ApplicationTypeNames.Marketer) {
       this.form.get('federalProducerNames').disable();
     }
-
-    if (this.application.applicationType.name !== ApplicationTypeNames.CRSStructuralChange
-      && this.application.applicationType.name !== ApplicationTypeNames.CRSEstablishmentNameChange) {
-      this.form.get('proposedChange').disable();
-    }
-
-    if (!this.application.applicationType.showDescription1) {
-      this.form.get('description1').disable();
-    }
+    
   }
 
 
@@ -476,19 +475,20 @@ export class DynamicApplicationComponent extends FormBase implements OnInit {
     }
     if (!this.form.valid) {
       this.validationMessages.push('Some required fields have not been completed');
-    }
 
-    /* Invalid field check
-    const invalid = [];
-    const controls = this.form.controls;
-    for (const name in controls) {
-      if (controls[name].invalid) {
-        invalid.push(name);
-      }
+    /* Invalid field check */
+  const invalid = [];
+  const controls = this.form.controls;
+  for (const name in controls) {
+    if (!controls[name].valid) {
+      invalid.push(name);
     }
+  }
 
-    alert(invalid);
-    */
+      console.log("Invalid fields:");
+      console.log(invalid);
+  
+    }    
 
     return valid && this.form.valid;
   }
