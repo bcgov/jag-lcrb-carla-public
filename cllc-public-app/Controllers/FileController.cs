@@ -454,6 +454,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     string documentTypePrefix = formFileField.AdoxioFileprefix;
                     string documentTypeName = formFileField.AdoxioName;
+                    string routerLink = formFileField.AdoxioRouterlink;
 
                     bool valid = false;
 
@@ -466,7 +467,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         valid = true;
                     }
 
-                    result.Add(new ViewModels.DocumentTypeStatus() { DocumentType = documentTypePrefix, Name = documentTypeName, Valid = valid });
+                    result.Add(new ViewModels.DocumentTypeStatus() { DocumentType = documentTypePrefix, Name = documentTypeName, Valid = valid, RouterLink=routerLink });
                 }
 
             }
