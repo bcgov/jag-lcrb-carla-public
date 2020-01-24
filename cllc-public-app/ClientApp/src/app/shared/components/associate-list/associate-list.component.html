@@ -37,9 +37,9 @@
     </section> -->
 
 
-    <table class="eq-table" style="margin-top: 10px;">
+    <table class="greyGridTable">
         <ng-container *ngIf="changeTypeSuffix === 'Leadership'">
-        
+        <thead>
             <tr *ngIf="personalHistoryItems.length > 0">
                 <th style="width: 200px;">First Name</th>
                 <th style="width: 200px;">Last Name</th>
@@ -47,9 +47,10 @@
                 <th style="width: 200px;">Email</th>
                 <th style="width: 150px;">Date of Birth</th>
                 <th>Level 1 Personal History Summary </th>
-                <th>Level 2 Personal History Summary </th>
+                <th *ngIf="1==2">Level 2 Personal History Summary </th>
                 <th style="background-color: transparent;"></th>
             </tr>
+        </thead>
             <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
                 <tr [ngClass]="{'alt-row': i%2 === 0}">
                     <td>
@@ -63,13 +64,19 @@
                     <td *ngIf="showPosition()">
                         <span *ngIf="!item.edit">{{item.getNewLeadershipPosition()}}</span>
                         <ng-container *ngIf="item.edit">
+                            <table>
+                                <tr><td nowrap>
                             <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isDirectorNew"> <label
-                                style="padding-right: 10px;" for="">Director</label> <br>
+                                style="padding-right: 10px;" for="" style="font-size:10px;">Director</label> <br>
                             <input type="checkbox" style="margin-right: 5px;" [(ngModel)]="item.isOfficerNew"> <label
-                                style="padding-right: 10px;" for="">Officer</label><br>
-                            <div *ngIf="rootNode?.businessType !== 'Society'"> <input type="checkbox"
+                                style="padding-right: 10px; font-size:10px;" for="">Officer</label><br>
+                            </td><td nowrap>
+                                <div *ngIf="rootNode?.businessType !== 'Society'"> <input type="checkbox"
                                 style="margin-right: 5px;" [(ngModel)]="item.isManagerNew"> <label 
-                                style="padding-right: 10px;" for="">Senior Manager</label></div>
+                                style="padding-right: 10px; font-size:10px;" for="" >Senior Manager</label></div>
+                            </td>
+                            </tr>
+                            </table>
                         </ng-container>
                     </td>
                     <td>
@@ -84,13 +91,16 @@
                             (click)="picker.open()">
                         <mat-datepicker #picker></mat-datepicker>
                     </td>
-                    <td></td>
+                    <td>
+                        <button *ngIf="item.phsLink" class="btn btn-primary" (click)="copyMessage(item.phsLink)">Copy Link</button>
+                    </td>
+                    <td *ngIf="1==2"></td>
                     <td>
                         <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
                             class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false;"
-                            style="margin-right: 10px; color: green;"></i>
-                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style="color: red;"></i>
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item)"
+                            style="margin-right: 10px;"></i>
+                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
                     </td>
 
                 </tr>
@@ -98,16 +108,18 @@
         </ng-container>
 
         <ng-container *ngIf="changeTypeSuffix === 'IndividualShareholder'">
+            <thead>
             <tr *ngIf="personalHistoryItems.length > 0">
                 <th style="width: 200px;">First Name</th>
                 <th style="width: 200px;">Last Name</th>
                 <th style="width: 200px;">Shares (%)</th>
                 <th style="width: 150px;">Date of Birth</th>
                 <th style="width: 200px;">Email</th>
-                <th>Liquor Associate Status </th>
-                <th>Cannabis Associate Status </th>
+                <th *ngIf="1==2">Liquor Associate Status </th>
+                <th *ngIf="1==2">Cannabis Associate Status </th>
                 <th style="background-color: transparent;"></th>
             </tr>
+            </thead>
             
             <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
                 <tr [ngClass]="{'alt-row': i%2 === 0}">
@@ -120,8 +132,8 @@
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.lastNameNew">
                     </td>
                     <td>
-                        <span *ngIf="!item.edit">{{item.numberofSharesNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.numberofSharesNew">
+                        <span *ngIf="!item.edit">{{item.interestPercentageNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.interestPercentageNew">
                     </td>
                     <td>
                         <span *ngIf="!item.edit">{{item.dateofBirthNew | date}}</span>
@@ -135,45 +147,46 @@
                         <span *ngIf="!item.edit">{{item.emailNew}}</span>
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td *ngIf="1==2"></td>
+                    <td *ngIf="1==2"></td>
                     <td>
                         <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true;"
                             class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false;"
-                            style="margin-right: 10px; color: green;"></i>
-                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style="color: red;"></i>
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item)"
+                            style="margin-right: 10px;"></i>
+                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
                     </td>
                 </tr>
             </ng-container>
         </ng-container>
 
         <ng-container *ngIf="changeTypeSuffix === 'BusinessShareholder'">
-
+            <thead>
             <tr *ngIf="personalHistoryItems.length > 0">
                 <th style="width: 200px;">Business Name</th>
                 <th style="width: 200px;">Shares (%)</th>
                 <th style="width: 200px;">Business Type</th>
                 <th style="width: 200px;">Email</th>
-                <th>Liquor Associate Status </th>
-                <th>Cannabis Associate Status </th>
+                <th *ngIf="1==2">Liquor Associate Status </th>
+                <th *ngIf="1==2">Cannabis Associate Status </th>
                 <th style="background-color: transparent;"></th>
             </tr>
+            </thead>
             
             <ng-container *ngFor="let item of personalHistoryItems; let i = index;">
 
                 <tr [ngClass]="{'alt-row': i%2 === 0}">
                     <td>
-                        <i class="fas fa-plus" *ngIf="item.collapse && !item.edit" (click)="item.collapse = false;"
+                        <i class="far fa-caret-square-down" *ngIf="item.collapse && !item.edit" (click)="item.collapse = false;"
                             style="margin-right: 10px;"></i>
-                        <i class="fas fa-minus" *ngIf="!item.collapse && !item.edit" (click)="item.collapse = true;"
+                        <i class="far fa-caret-square-up" *ngIf="!item.collapse && !item.edit" (click)="item.collapse = true;"
                             style="margin-right: 10px;"></i>
                         <span *ngIf="!item.edit">{{item.businessNameNew}}</span>
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.businessNameNew">
                     </td>
                     <td>
-                        <span *ngIf="!item.edit">{{item.numberofSharesNew}}</span>
-                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.numberofSharesNew">
+                        <span *ngIf="!item.edit">{{item.interestPercentageNew}}</span>
+                        <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.interestPercentageNew">
                     </td>
                     <td>
                         <select class="form-control" style="width: 250px;" [(ngModel)]="item.businessType">
@@ -189,19 +202,19 @@
                         <span *ngIf="!item.edit">{{item.emailNew}}</span>
                         <input *ngIf="item.edit" class="form-control" type="text" [(ngModel)]="item.emailNew">
                     </td>
-                    <td></td>
-                    <td></td>
+                    <td *ngIf="1==2"></td>
+                    <td *ngIf="1==2"></td>
                     <td>
                         <i *ngIf="!item.edit" class="btn btn-primary" (click)="item.edit = true; item.collapse = true;"
                             class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
-                        <i class="fas fa-save" *ngIf="item.edit" (click)="item.edit = false; item.collapse = false;"
-                            style="margin-right: 10px; color: green;"></i>
-                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style="color: red;"></i>
+                        <i class="fas fa-save" *ngIf="item.edit" (click)="saveLog(item); item.collapse = false;"
+                            style="margin-right: 10px;"></i>
+                        <i class="fas fa-trash-alt" (click)="deleteChange(item)" style=""></i>
                     </td>
 
                 </tr>
                 <tr *ngIf="!item.collapse;">
-                    <td colspan="10" style="background-color: transparent;">
+                    <td colspan="10" style="background-color: transparent; text-align:left;">
                         <app-org-structure [node]="item" [account]="account"></app-org-structure>
                     </td>
                 </tr>
