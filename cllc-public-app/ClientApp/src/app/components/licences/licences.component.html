@@ -53,6 +53,7 @@
                 </div>
               </td>
               <td>
+                
                <div *ngIf="item?.licenceTypeName === ApplicationTypeNames.Catering">
                     <a [routerLink]="[ '/licence-event/' + item.licenseId]">
                       <i class="fas fa-calendar-alt" style="margin-right: 10px;">
@@ -95,7 +96,7 @@
               <td *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested !== 'Yes' || !licenceTransferFeatureOn)"
                   style="background-color: #E1E8F2; padding: 10px;">
                 <div *ngIf="item.status != PAYMENT_REQUIRED">
-                  <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore">
+                  <p *ngIf="item?.licenceTypeName === ApplicationTypeNames.CannabisRetailStore || item?.licenceTypeName === ApplicationTypeNames.Catering">
                     <a *ngIf="licenceTransferFeatureOn"
                         [routerLink]="[ '/ownership-transfer/' + item.licenseId]">
                         <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Transfer Ownership</span>

@@ -20,7 +20,7 @@
   table.greyGridTable {
   border: 2px solid #FFFFFF;
   width: 100%;
-  height: 200px;
+ 
   text-align: center;
   border-collapse: collapse;
 }
@@ -39,6 +39,14 @@ table.greyGridTable thead {
   background: #FFFFFF;
   border-bottom: 4px solid #333333;
 }
+thead.greyGridTable2 th {
+  font-size: 10px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  border-left: 2px solid #333333;
+}
+
 table.greyGridTable thead th {
   font-size: 15px;
   font-weight: bold;
@@ -46,10 +54,51 @@ table.greyGridTable thead th {
   text-align: center;
   border-left: 2px solid #333333;
 }
+
 table.greyGridTable thead th:first-child {
   border-left: none;
 }
 
 table.greyGridTable tfoot td {
+  font-size: 14px;
+}
+
+table.smallGridTable {
+  border: 2px solid #FFFFFF;
+  width: 100%;
+ 
+  text-align: center;
+  border-collapse: collapse;
+}
+table.smallGridTable td, table.smallGridTable th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 4px;
+}
+table.smallGridTable tbody td {
+  font-size: 13px;
+  font-weight: bold;
+}
+table.smallGridTable tr:nth-child(even) {
+  background: transparent;
+}
+table.smallGridTable thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+
+
+table.smallGridTable thead th {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333333;
+  text-align: center;
+  border-left: 2px solid #333333;
+}
+
+table.smallGridTable thead th:first-child {
+  border-left: none;
+}
+
+table.smallGridTable tfoot td {
   font-size: 14px;
 }
