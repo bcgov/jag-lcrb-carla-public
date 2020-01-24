@@ -43,7 +43,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager {
         }
 
 
-        public static List<Public.ViewModels.FileSystemItem> GetFileDetailsListInFolder(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string folderName)
+        public static List<Public.ViewModels.FileSystemItem> GetFileDetailsListInFolder(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName)
         {            
                 List<Public.ViewModels.FileSystemItem> fileSystemItemVMList = new List<Public.ViewModels.FileSystemItem>();
 
@@ -53,8 +53,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager {
                     // call the web service
                     var request = new FolderFilesRequest()
                     {
-                        DocumentType = null,
-                        EntityId = null,
+                        DocumentType = "",
+                        EntityId = entityId,
                         EntityName = entityName,
                         FolderName = folderName
                     };
