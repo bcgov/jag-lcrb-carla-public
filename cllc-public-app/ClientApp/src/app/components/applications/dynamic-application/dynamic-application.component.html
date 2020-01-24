@@ -31,7 +31,7 @@
               <section>
                 <app-file-uploader *ngIf="applicationId" documentType="Signage"
                                    fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-                                   (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [enableFileDeletion]="true"
+                                   (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [enableFileDeletion]="true" [useDocumentTypeForName]="true"
                                    [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'"
                                    #signageDocuments>
                 </app-file-uploader>

@@ -213,6 +213,11 @@
                     </td>
 
                 </tr>
+                <tr *ngIf="item.collapse;" style="height:20px;">
+                        <td colspan="10" style="background-color: black; text-align:left; color:white; font-size:9px;">
+                            Click to Expand Business Information
+                        </td>
+                    </tr>
                 <tr *ngIf="!item.collapse;">
                     <td colspan="10" style="background-color: transparent; text-align:left;">
                         <app-org-structure [node]="item" [account]="account"></app-org-structure>
