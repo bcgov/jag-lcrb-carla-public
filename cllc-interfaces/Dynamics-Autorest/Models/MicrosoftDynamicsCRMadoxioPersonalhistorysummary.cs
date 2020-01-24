@@ -29,104 +29,104 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Initializes a new instance of the
         /// MicrosoftDynamicsCRMadoxioPersonalhistorysummary class.
         /// </summary>
-        /// <param name="_createdonbehalfbyValue">Unique identifier of the
-        /// delegate user who created the record.</param>
-        /// <param name="_owninguserValue">Unique identifier for the user that
-        /// owns the record.</param>
-        /// <param name="adoxioCompletedon">Records when the security check was
-        /// flagged as completed.</param>
-        /// <param name="adoxioPersonalhistorysummaryid">Unique identifier for
-        /// entity instances</param>
-        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
-        /// delegate user who modified the record.</param>
-        /// <param name="_owneridValue">Owner Id</param>
-        /// <param name="_modifiedbyValue">Unique identifier of the user who
-        /// modified the record.</param>
-        /// <param name="statuscode">Reason for the status of the Personal
-        /// History Summary</param>
-        /// <param name="_owningbusinessunitValue">Unique identifier for the
-        /// business unit that owns the record</param>
-        /// <param name="overriddencreatedon">Date and time that the record was
-        /// migrated.</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
-        /// <param name="versionnumber">Version Number</param>
         /// <param name="_adoxioContactidValue">Unique identifier for Contact
         /// associated with Personal History Summary.</param>
         /// <param name="statecode">Status of the Personal History
         /// Summary</param>
-        /// <param name="adoxioName">The name of the custom entity.</param>
-        /// <param name="timezoneruleversionnumber">For internal use
-        /// only.</param>
-        /// <param name="importsequencenumber">Sequence number of the import
-        /// that created this record.</param>
-        /// <param name="_createdbyValue">Unique identifier of the user who
-        /// created the record.</param>
-        /// <param name="utcconversiontimezonecode">Time zone code that was in
-        /// use when the record was created.</param>
         /// <param name="_adoxioWorkeridValue">Unique identifier for Worker
         /// Registration associated with Personal History Summary.</param>
-        /// <param name="_adoxioApplicationidValue">Unique identifier for
-        /// Application associated with Personal History Summary.</param>
+        /// <param name="_owningbusinessunitValue">Unique identifier for the
+        /// business unit that owns the record</param>
+        /// <param name="adoxioName">The name of the custom entity.</param>
         /// <param name="modifiedon">Date and time when the record was
         /// modified.</param>
+        /// <param name="adoxioCompletedon">Records when the security check was
+        /// flagged as completed.</param>
+        /// <param name="_modifiedbyValue">Unique identifier of the user who
+        /// modified the record.</param>
+        /// <param name="utcconversiontimezonecode">Time zone code that was in
+        /// use when the record was created.</param>
+        /// <param name="_createdbyValue">Unique identifier of the user who
+        /// created the record.</param>
+        /// <param name="_owningteamValue">Unique identifier for the team that
+        /// owns the record.</param>
+        /// <param name="_modifiedonbehalfbyValue">Unique identifier of the
+        /// delegate user who modified the record.</param>
+        /// <param name="_owneridValue">Owner Id</param>
+        /// <param name="_createdonbehalfbyValue">Unique identifier of the
+        /// delegate user who created the record.</param>
+        /// <param name="statuscode">Reason for the status of the Personal
+        /// History Summary</param>
         /// <param name="createdon">Date and time when the record was
         /// created.</param>
+        /// <param name="timezoneruleversionnumber">For internal use
+        /// only.</param>
         /// <param name="_adoxioLegalentityidValue">Unique identifier for Legal
         /// Entity associated with Personal History Summary.</param>
-        public MicrosoftDynamicsCRMadoxioPersonalhistorysummary(string _createdonbehalfbyValue = default(string), int? adoxioSecuritystatus = default(int?), string _owninguserValue = default(string), System.DateTimeOffset? adoxioCompletedon = default(System.DateTimeOffset?), bool? adoxioSameasapplyingperson = default(bool?), string adoxioPersonalhistorysummaryid = default(string), System.DateTimeOffset? adoxioBirthdate = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioExpirydate = default(System.DateTimeOffset?), string adoxioResidenceaddressprovincecountry = default(string), string adoxioDriverslicencenumber = default(string), string _modifiedonbehalfbyValue = default(string), string adoxioMiddlename = default(string), string _owneridValue = default(string), string _modifiedbyValue = default(string), int? statuscode = default(int?), string _owningbusinessunitValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string adoxioPhonenumber = default(string), string adoxioEstablishmentparcelid = default(string), string adoxioResidenceaddresscity = default(string), string versionnumber = default(string), int? adoxioComplete = default(int?), string _adoxioContactidValue = default(string), int? statecode = default(int?), string adoxioAssociatejobnumber = default(string), string adoxioName = default(string), int? timezoneruleversionnumber = default(int?), string adoxioResidenceaddressstreet = default(string), string adoxioBirthmiddlename = default(string), int? importsequencenumber = default(int?), string adoxioBirthfirstname = default(string), int? adoxioLegalentityname = default(int?), string adoxioFullname = default(string), string _createdbyValue = default(string), int? utcconversiontimezonecode = default(int?), string _adoxioWorkeridValue = default(string), string _adoxioApplicationidValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioOtherlastnames = default(string), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string adoxioEmail = default(string), string _adoxioLegalentityidValue = default(string), string adoxioBirthlastname = default(string), string adoxioWorkerjobnumber = default(string), string adoxioResidenceaddresspostalcode = default(string), string adoxioLicenceorjobnumber = default(string), string adoxioEstablishmentname = default(string), string adoxioLastname = default(string), string adoxioFirstname = default(string), int? adoxioGender = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPersonalhistorysummarySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioPersonalhistorysummarySharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPersonalhistorysummaryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPersonalhistorysummaryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationid = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioPersonalhistorysummaryAdoxioLegalentityCorrespondingPersonalHistorySummary = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), MicrosoftDynamicsCRMcontact adoxioContactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioWorker adoxioWorkerId = default(MicrosoftDynamicsCRMadoxioWorker))
+        /// <param name="versionnumber">Version Number</param>
+        /// <param name="_adoxioApplicationidValue">Unique identifier for
+        /// Application associated with Personal History Summary.</param>
+        /// <param name="importsequencenumber">Sequence number of the import
+        /// that created this record.</param>
+        /// <param name="_owninguserValue">Unique identifier for the user that
+        /// owns the record.</param>
+        /// <param name="adoxioPersonalhistorysummaryid">Unique identifier for
+        /// entity instances</param>
+        /// <param name="overriddencreatedon">Date and time that the record was
+        /// migrated.</param>
+        public MicrosoftDynamicsCRMadoxioPersonalhistorysummary(string _adoxioContactidValue = default(string), int? statecode = default(int?), string _adoxioWorkeridValue = default(string), string adoxioBirthlastname = default(string), string _owningbusinessunitValue = default(string), string adoxioEmail = default(string), string adoxioBirthmiddlename = default(string), string adoxioName = default(string), string adoxioPhonenumber = default(string), string adoxioFirstname = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string adoxioEstablishmentname = default(string), System.DateTimeOffset? adoxioCompletedon = default(System.DateTimeOffset?), string adoxioResidenceaddresscity = default(string), string adoxioDriverslicencenumber = default(string), string _modifiedbyValue = default(string), int? utcconversiontimezonecode = default(int?), string adoxioMiddlename = default(string), string _createdbyValue = default(string), string _owningteamValue = default(string), string _modifiedonbehalfbyValue = default(string), string _owneridValue = default(string), string adoxioLastname = default(string), int? adoxioGender = default(int?), string adoxioAssociatejobnumber = default(string), string _createdonbehalfbyValue = default(string), int? statuscode = default(int?), string adoxioResidenceaddressprovincecountry = default(string), System.DateTimeOffset? adoxioExpirydate = default(System.DateTimeOffset?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), System.DateTimeOffset? adoxioBirthdate = default(System.DateTimeOffset?), bool? adoxioSameasapplyingperson = default(bool?), string adoxioFullname = default(string), int? adoxioLegalentityname = default(int?), string adoxioResidenceaddresspostalcode = default(string), string adoxioBirthfirstname = default(string), int? timezoneruleversionnumber = default(int?), int? adoxioSecuritystatus = default(int?), string adoxioResidenceaddressstreet = default(string), string _adoxioLegalentityidValue = default(string), string versionnumber = default(string), string adoxioWorkerjobnumber = default(string), string _adoxioApplicationidValue = default(string), int? adoxioComplete = default(int?), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string adoxioPersonalhistorysummaryid = default(string), string adoxioLicenceorjobnumber = default(string), string adoxioOtherlastnames = default(string), string adoxioEstablishmentparcelid = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioPersonalhistorysummarySyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioPersonalhistorysummaryDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMsharepointdocumentlocation> adoxioPersonalhistorysummarySharePointDocumentLocations = default(IList<MicrosoftDynamicsCRMsharepointdocumentlocation>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioPersonalhistorysummaryAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioPersonalhistorysummaryBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioApplication adoxioApplicationid = default(MicrosoftDynamicsCRMadoxioApplication), IList<MicrosoftDynamicsCRMadoxioLegalentity> adoxioAdoxioPersonalhistorysummaryAdoxioLegalentityCorrespondingPersonalHistorySummary = default(IList<MicrosoftDynamicsCRMadoxioLegalentity>), MicrosoftDynamicsCRMcontact adoxioContactid = default(MicrosoftDynamicsCRMcontact), MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntityId = default(MicrosoftDynamicsCRMadoxioLegalentity), MicrosoftDynamicsCRMadoxioWorker adoxioWorkerId = default(MicrosoftDynamicsCRMadoxioWorker))
         {
-            this._createdonbehalfbyValue = _createdonbehalfbyValue;
-            AdoxioSecuritystatus = adoxioSecuritystatus;
-            this._owninguserValue = _owninguserValue;
-            AdoxioCompletedon = adoxioCompletedon;
-            AdoxioSameasapplyingperson = adoxioSameasapplyingperson;
-            AdoxioPersonalhistorysummaryid = adoxioPersonalhistorysummaryid;
-            AdoxioBirthdate = adoxioBirthdate;
-            AdoxioExpirydate = adoxioExpirydate;
-            AdoxioResidenceaddressprovincecountry = adoxioResidenceaddressprovincecountry;
-            AdoxioDriverslicencenumber = adoxioDriverslicencenumber;
-            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
-            AdoxioMiddlename = adoxioMiddlename;
-            this._owneridValue = _owneridValue;
-            this._modifiedbyValue = _modifiedbyValue;
-            Statuscode = statuscode;
-            this._owningbusinessunitValue = _owningbusinessunitValue;
-            Overriddencreatedon = overriddencreatedon;
-            this._owningteamValue = _owningteamValue;
-            AdoxioPhonenumber = adoxioPhonenumber;
-            AdoxioEstablishmentparcelid = adoxioEstablishmentparcelid;
-            AdoxioResidenceaddresscity = adoxioResidenceaddresscity;
-            Versionnumber = versionnumber;
-            AdoxioComplete = adoxioComplete;
             this._adoxioContactidValue = _adoxioContactidValue;
             Statecode = statecode;
-            AdoxioAssociatejobnumber = adoxioAssociatejobnumber;
-            AdoxioName = adoxioName;
-            Timezoneruleversionnumber = timezoneruleversionnumber;
-            AdoxioResidenceaddressstreet = adoxioResidenceaddressstreet;
-            AdoxioBirthmiddlename = adoxioBirthmiddlename;
-            Importsequencenumber = importsequencenumber;
-            AdoxioBirthfirstname = adoxioBirthfirstname;
-            AdoxioLegalentityname = adoxioLegalentityname;
-            AdoxioFullname = adoxioFullname;
-            this._createdbyValue = _createdbyValue;
-            Utcconversiontimezonecode = utcconversiontimezonecode;
             this._adoxioWorkeridValue = _adoxioWorkeridValue;
-            this._adoxioApplicationidValue = _adoxioApplicationidValue;
-            Modifiedon = modifiedon;
-            AdoxioOtherlastnames = adoxioOtherlastnames;
-            Createdon = createdon;
-            AdoxioEmail = adoxioEmail;
-            this._adoxioLegalentityidValue = _adoxioLegalentityidValue;
             AdoxioBirthlastname = adoxioBirthlastname;
-            AdoxioWorkerjobnumber = adoxioWorkerjobnumber;
-            AdoxioResidenceaddresspostalcode = adoxioResidenceaddresspostalcode;
-            AdoxioLicenceorjobnumber = adoxioLicenceorjobnumber;
-            AdoxioEstablishmentname = adoxioEstablishmentname;
-            AdoxioLastname = adoxioLastname;
+            this._owningbusinessunitValue = _owningbusinessunitValue;
+            AdoxioEmail = adoxioEmail;
+            AdoxioBirthmiddlename = adoxioBirthmiddlename;
+            AdoxioName = adoxioName;
+            AdoxioPhonenumber = adoxioPhonenumber;
             AdoxioFirstname = adoxioFirstname;
+            Modifiedon = modifiedon;
+            AdoxioEstablishmentname = adoxioEstablishmentname;
+            AdoxioCompletedon = adoxioCompletedon;
+            AdoxioResidenceaddresscity = adoxioResidenceaddresscity;
+            AdoxioDriverslicencenumber = adoxioDriverslicencenumber;
+            this._modifiedbyValue = _modifiedbyValue;
+            Utcconversiontimezonecode = utcconversiontimezonecode;
+            AdoxioMiddlename = adoxioMiddlename;
+            this._createdbyValue = _createdbyValue;
+            this._owningteamValue = _owningteamValue;
+            this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
+            this._owneridValue = _owneridValue;
+            AdoxioLastname = adoxioLastname;
             AdoxioGender = adoxioGender;
+            AdoxioAssociatejobnumber = adoxioAssociatejobnumber;
+            this._createdonbehalfbyValue = _createdonbehalfbyValue;
+            Statuscode = statuscode;
+            AdoxioResidenceaddressprovincecountry = adoxioResidenceaddressprovincecountry;
+            AdoxioExpirydate = adoxioExpirydate;
+            Createdon = createdon;
+            AdoxioBirthdate = adoxioBirthdate;
+            AdoxioSameasapplyingperson = adoxioSameasapplyingperson;
+            AdoxioFullname = adoxioFullname;
+            AdoxioLegalentityname = adoxioLegalentityname;
+            AdoxioResidenceaddresspostalcode = adoxioResidenceaddresspostalcode;
+            AdoxioBirthfirstname = adoxioBirthfirstname;
+            Timezoneruleversionnumber = timezoneruleversionnumber;
+            AdoxioSecuritystatus = adoxioSecuritystatus;
+            AdoxioResidenceaddressstreet = adoxioResidenceaddressstreet;
+            this._adoxioLegalentityidValue = _adoxioLegalentityidValue;
+            Versionnumber = versionnumber;
+            AdoxioWorkerjobnumber = adoxioWorkerjobnumber;
+            this._adoxioApplicationidValue = _adoxioApplicationidValue;
+            AdoxioComplete = adoxioComplete;
+            Importsequencenumber = importsequencenumber;
+            this._owninguserValue = _owninguserValue;
+            AdoxioPersonalhistorysummaryid = adoxioPersonalhistorysummaryid;
+            AdoxioLicenceorjobnumber = adoxioLicenceorjobnumber;
+            AdoxioOtherlastnames = adoxioOtherlastnames;
+            AdoxioEstablishmentparcelid = adoxioEstablishmentparcelid;
+            Overriddencreatedon = overriddencreatedon;
             Createdbyname = createdbyname;
             Createdonbehalfbyname = createdonbehalfbyname;
             Modifiedbyname = modifiedbyname;
@@ -155,137 +155,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets unique identifier of the delegate user who created the
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
-        public string _createdonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_securitystatus")]
-        public int? AdoxioSecuritystatus { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the user that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owninguser_value")]
-        public string _owninguserValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets records when the security check was flagged as
-        /// completed.
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_completedon")]
-        public System.DateTimeOffset? AdoxioCompletedon { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_sameasapplyingperson")]
-        public bool? AdoxioSameasapplyingperson { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for entity instances
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_personalhistorysummaryid")]
-        public string AdoxioPersonalhistorysummaryid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_birthdate")]
-        public System.DateTimeOffset? AdoxioBirthdate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_expirydate")]
-        public System.DateTimeOffset? AdoxioExpirydate { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_residenceaddressprovincecountry")]
-        public string AdoxioResidenceaddressprovincecountry { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_driverslicencenumber")]
-        public string AdoxioDriverslicencenumber { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the delegate user who modified
-        /// the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
-        public string _modifiedonbehalfbyValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_middlename")]
-        public string AdoxioMiddlename { get; set; }
-
-        /// <summary>
-        /// Gets or sets owner Id
-        /// </summary>
-        [JsonProperty(PropertyName = "_ownerid_value")]
-        public string _owneridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who modified the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_modifiedby_value")]
-        public string _modifiedbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets reason for the status of the Personal History Summary
-        /// </summary>
-        [JsonProperty(PropertyName = "statuscode")]
-        public int? Statuscode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the business unit that owns the
-        /// record
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
-        public string _owningbusinessunitValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets date and time that the record was migrated.
-        /// </summary>
-        [JsonProperty(PropertyName = "overriddencreatedon")]
-        public System.DateTimeOffset? Overriddencreatedon { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_phonenumber")]
-        public string AdoxioPhonenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentparcelid")]
-        public string AdoxioEstablishmentparcelid { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_residenceaddresscity")]
-        public string AdoxioResidenceaddresscity { get; set; }
-
-        /// <summary>
-        /// Gets or sets version Number
-        /// </summary>
-        [JsonProperty(PropertyName = "versionnumber")]
-        public string Versionnumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_complete")]
-        public int? AdoxioComplete { get; set; }
-
-        /// <summary>
         /// Gets or sets unique identifier for Contact associated with Personal
         /// History Summary.
         /// </summary>
@@ -299,9 +168,33 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public int? Statecode { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for Worker Registration associated
+        /// with Personal History Summary.
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_associatejobnumber")]
-        public string AdoxioAssociatejobnumber { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_workerid_value")]
+        public string _adoxioWorkeridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_birthlastname")]
+        public string AdoxioBirthlastname { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for the business unit that owns the
+        /// record
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningbusinessunit_value")]
+        public string _owningbusinessunitValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_email")]
+        public string AdoxioEmail { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_birthmiddlename")]
+        public string AdoxioBirthmiddlename { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the custom entity.
@@ -310,69 +203,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioName { get; set; }
 
         /// <summary>
-        /// Gets or sets for internal use only.
         /// </summary>
-        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
-        public int? Timezoneruleversionnumber { get; set; }
+        [JsonProperty(PropertyName = "adoxio_phonenumber")]
+        public string AdoxioPhonenumber { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_residenceaddressstreet")]
-        public string AdoxioResidenceaddressstreet { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_birthmiddlename")]
-        public string AdoxioBirthmiddlename { get; set; }
-
-        /// <summary>
-        /// Gets or sets sequence number of the import that created this
-        /// record.
-        /// </summary>
-        [JsonProperty(PropertyName = "importsequencenumber")]
-        public int? Importsequencenumber { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_birthfirstname")]
-        public string AdoxioBirthfirstname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_legalentityname")]
-        public int? AdoxioLegalentityname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_fullname")]
-        public string AdoxioFullname { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier of the user who created the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_createdby_value")]
-        public string _createdbyValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets time zone code that was in use when the record was
-        /// created.
-        /// </summary>
-        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
-        public int? Utcconversiontimezonecode { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Worker Registration associated
-        /// with Personal History Summary.
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_workerid_value")]
-        public string _adoxioWorkeridValue { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for Application associated with
-        /// Personal History Summary.
-        /// </summary>
-        [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
-        public string _adoxioApplicationidValue { get; set; }
+        [JsonProperty(PropertyName = "adoxio_firstname")]
+        public string AdoxioFirstname { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was modified.
@@ -382,8 +220,106 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_otherlastnames")]
-        public string AdoxioOtherlastnames { get; set; }
+        [JsonProperty(PropertyName = "adoxio_establishmentname")]
+        public string AdoxioEstablishmentname { get; set; }
+
+        /// <summary>
+        /// Gets or sets records when the security check was flagged as
+        /// completed.
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_completedon")]
+        public System.DateTimeOffset? AdoxioCompletedon { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_residenceaddresscity")]
+        public string AdoxioResidenceaddresscity { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_driverslicencenumber")]
+        public string AdoxioDriverslicencenumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the user who modified the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedby_value")]
+        public string _modifiedbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets time zone code that was in use when the record was
+        /// created.
+        /// </summary>
+        [JsonProperty(PropertyName = "utcconversiontimezonecode")]
+        public int? Utcconversiontimezonecode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_middlename")]
+        public string AdoxioMiddlename { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the user who created the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdby_value")]
+        public string _createdbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for the team that owns the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the delegate user who modified
+        /// the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_modifiedonbehalfby_value")]
+        public string _modifiedonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets owner Id
+        /// </summary>
+        [JsonProperty(PropertyName = "_ownerid_value")]
+        public string _owneridValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_lastname")]
+        public string AdoxioLastname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_gender")]
+        public int? AdoxioGender { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_associatejobnumber")]
+        public string AdoxioAssociatejobnumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier of the delegate user who created the
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_createdonbehalfby_value")]
+        public string _createdonbehalfbyValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets reason for the status of the Personal History Summary
+        /// </summary>
+        [JsonProperty(PropertyName = "statuscode")]
+        public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_residenceaddressprovincecountry")]
+        public string AdoxioResidenceaddressprovincecountry { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_expirydate")]
+        public System.DateTimeOffset? AdoxioExpirydate { get; set; }
 
         /// <summary>
         /// Gets or sets date and time when the record was created.
@@ -393,8 +329,49 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_email")]
-        public string AdoxioEmail { get; set; }
+        [JsonProperty(PropertyName = "adoxio_birthdate")]
+        public System.DateTimeOffset? AdoxioBirthdate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_sameasapplyingperson")]
+        public bool? AdoxioSameasapplyingperson { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_fullname")]
+        public string AdoxioFullname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_legalentityname")]
+        public int? AdoxioLegalentityname { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_residenceaddresspostalcode")]
+        public string AdoxioResidenceaddresspostalcode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_birthfirstname")]
+        public string AdoxioBirthfirstname { get; set; }
+
+        /// <summary>
+        /// Gets or sets for internal use only.
+        /// </summary>
+        [JsonProperty(PropertyName = "timezoneruleversionnumber")]
+        public int? Timezoneruleversionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_securitystatus")]
+        public int? AdoxioSecuritystatus { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_residenceaddressstreet")]
+        public string AdoxioResidenceaddressstreet { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier for Legal Entity associated with
@@ -404,9 +381,10 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string _adoxioLegalentityidValue { get; set; }
 
         /// <summary>
+        /// Gets or sets version Number
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_birthlastname")]
-        public string AdoxioBirthlastname { get; set; }
+        [JsonProperty(PropertyName = "versionnumber")]
+        public string Versionnumber { get; set; }
 
         /// <summary>
         /// </summary>
@@ -414,9 +392,35 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string AdoxioWorkerjobnumber { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for Application associated with
+        /// Personal History Summary.
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_residenceaddresspostalcode")]
-        public string AdoxioResidenceaddresspostalcode { get; set; }
+        [JsonProperty(PropertyName = "_adoxio_applicationid_value")]
+        public string _adoxioApplicationidValue { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_complete")]
+        public int? AdoxioComplete { get; set; }
+
+        /// <summary>
+        /// Gets or sets sequence number of the import that created this
+        /// record.
+        /// </summary>
+        [JsonProperty(PropertyName = "importsequencenumber")]
+        public int? Importsequencenumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for the user that owns the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_owninguser_value")]
+        public string _owninguserValue { get; set; }
+
+        /// <summary>
+        /// Gets or sets unique identifier for entity instances
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_personalhistorysummaryid")]
+        public string AdoxioPersonalhistorysummaryid { get; set; }
 
         /// <summary>
         /// </summary>
@@ -425,23 +429,19 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_establishmentname")]
-        public string AdoxioEstablishmentname { get; set; }
+        [JsonProperty(PropertyName = "adoxio_otherlastnames")]
+        public string AdoxioOtherlastnames { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_lastname")]
-        public string AdoxioLastname { get; set; }
+        [JsonProperty(PropertyName = "adoxio_establishmentparcelid")]
+        public string AdoxioEstablishmentparcelid { get; set; }
 
         /// <summary>
+        /// Gets or sets date and time that the record was migrated.
         /// </summary>
-        [JsonProperty(PropertyName = "adoxio_firstname")]
-        public string AdoxioFirstname { get; set; }
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_gender")]
-        public int? AdoxioGender { get; set; }
+        [JsonProperty(PropertyName = "overriddencreatedon")]
+        public System.DateTimeOffset? Overriddencreatedon { get; set; }
 
         /// <summary>
         /// </summary>
