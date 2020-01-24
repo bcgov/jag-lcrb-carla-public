@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { Account } from '@models/account.model';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Alias } from '@models/alias.model';
 
 @Component({
   selector: 'app-org-structure',
@@ -16,6 +18,7 @@ export class OrgStructureComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
@@ -34,5 +37,4 @@ export class OrgStructureComponent implements OnInit {
     }
     node.children.push(child);
   }
-
 }
