@@ -1,480 +1,93 @@
-<div style="margin: 0 20px;" [formGroup]="form">
-  <div [ngBusy]="busy"></div>
-  <h1 class="ngtest-page-title">{{ htmlContent?.title }}</h1>
+<div class="form-wrapper row" style="position:relative;">
+  <div [ngBusy]="[busy]"></div>
+  <section class="col-md-8">
+    <app-org-structure [node]="treeRoot" [account]="account"></app-org-structure>
 
-  <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.preamble"></section>
-
-  <!-- Before Starting -->
-  <h3 *ngIf="htmlContent?.beforeStarting" class="blue-header">BEFORE STARTING
-    THE APPLICATION</h3>
-  <section *ngIf="htmlContent?.beforeStarting" class="padded-section">
-    <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
   </section>
+  <section class="col-md-4">
+    <h1>&nbsp;</h1><br>
 
-  <h3 class="blue-header">UPDATE YOUR ORGANIZATION STRUCTURE</h3>
-  <div class="padded-section">
-    <p>
-      The following organization structure is on file with LCRB. You can identify changes directly to the structure
-      using
-      the Add, Remove and Update links for each associate. Depending on the changes you make, you will be asked to
-      supply
-      additional information.
-    </p>
-    <app-licensee-tree *ngIf="changeTree" [treeRoot]="changeTree" (cancelledChanges)="addCancelledChange($event)"
-      [enableEditing]="true">
-    </app-licensee-tree>
-  </div>
-
-  <ng-container *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).changeLogsPresent">
-    <h3 class="blue-header">SUPPORTING DOCUMENTS</h3>
-    <section class="padded-section">
-      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).noticeOfArticles.length">
-        <h4 class="grey-header">Notice of Articles for {{ changeTree?.businessNameNew}}</h4>
-        <section class="padded-section">
-          <p>Please provide a copy of the Notice of Articles for {{ changeTree?.businessNameNew}}.</p>
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Notice of Articles"
-              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-              (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-            </app-file-uploader>
-          </section>
-        </section>
-      </div>
-
-      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).shareholderList.length">
-        <h4 class="grey-header">Shareholder List for {{ changeTree?.businessNameNew}}</h4>
-        <section class="padded-section">
-          <p>Please provide a copy of the Shareholder List for {{ changeTree?.businessNameNew}}.</p>
-          <section>
-            <app-file-uploader *ngIf="applicationId" documentType="Shareholder List"
-              fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-              (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-              [uploadHeader]="'TO UPLOAD SHAREHOLDER LIST, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-            </app-file-uploader>
-          </section>
-        </section>
-      </div>
-
-      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).centralSecuritiesResgister.length">
-        <hr><br>
-        <label for="">Central Securities Register for {{ changeTree?.businessNameNew}}.</label>
-        <br>
-        <p>Upload the completed form below.</p>
-        <section>
-          <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-          </app-file-uploader>
-        </section>
-      </div>
-
-      <div *ngIf="LicenseeChangeLog.getListNeedingSupportingDocument(changeTree).partnershipAgreement.length">
-        <hr><br>
-        <label for="">Partnership Agreement for {{ changeTree?.businessNameNew}}.</label>
-        <br>
-        <p>Upload the completed form below.</p>
-        <section>
-          <app-file-uploader *ngIf="applicationId" documentType="Partnership Agreement"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-          </app-file-uploader>
-        </section>
-      </div>
-    </section>
-  </ng-container>
-
-  <h3 class="blue-header">AMALGAMATION</h3>
-  <section class="padded-section">
-    <section style="display: flex; justify-content: space-between; width: 100%;">
-      <div class="question-label">
-        Has there been an internal amalgamation of shares?
-      </div>
-      <div style="flex: 0 0 85px;">
-        <mat-button-toggle-group formControlName="amalgamationDone" aria-label="Font Style">
-          <mat-button-toggle value="Yes">Yes</mat-button-toggle>
-          <mat-button-toggle value="No">No</mat-button-toggle>
-        </mat-button-toggle-group>
-      </div>
-    </section>
-
-    <div *ngIf="form.get('amalgamationDone').value === 'Yes'">
-      <h4 class="grey-header">Certificate of Amalgamation</h4>
-      <section class="padded-section">
-        <p>
-          Because you have indicated that you have performed an internal amalgamation of shares, you must upload your
-          official record of this amalgamation.
-        </p>
-
-        <app-file-uploader *ngIf="applicationId" documentType="Certificate of Amal"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD CERTIFICATE OF AMALGAMATION, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-
-      <h4 class="grey-header">Central Securities Register of the Amalgamated Company</h4>
-      <section class="padded-section">
-        <p>
-          You must also upload the Central Securities Register of the Amalgamated Company.
-        </p>
-        <app-file-uploader *ngIf="applicationId" documentType="Amalgamated Central Securities Register"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD FINANCIAL CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-
-      <h4 class="grey-header">Notice of Articles for the amalgamated company.</h4>
-      <section class="padded-section">
-        <p>
-          You must also provide a copy of the Notice of Articles for the Amalgamated Company.
-        </p>
-        <app-file-uploader *ngIf="applicationId" documentType="Amalgated Notice of Articles"
-          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-          [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES FOR AMALGATED COMPANY, DRAG FILE HERE OR'"
-          #financialIntegrityDocuments>
-        </app-file-uploader>
-      </section>
-
-    </div>
-  </section>
-
-  <ng-container *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).changeLogsPresent">
-    <h3 class="blue-header">NEW SHAREHOLDER ORGANIZATION ASSOCIATIONS</h3>
-    <section class="padded-section">
-      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).noticeOfArticles.length">
-        <h4 class="grey-header">Notice of Articles for new Shareholder Organizations</h4>
-        <section class="padded-section">
-          <div>
-            Please provide a copy of the Notice of Articles for the following organizations:
-            <ul>
-              <li *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).noticeOfArticles">
-                {{ item?.businessNameNew}}
-              </li>
-            </ul>
-          </div>
-          <app-file-uploader *ngIf="applicationId" documentType="Notice of Articles"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-          </app-file-uploader>
-        </section>
-      </div>
-
-      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).shareholderList.length">
-        <h4 class="grey-header">Shareholder List for new Shareholder Organizations</h4>
-        <section class="padded-section">
-          <div>Please provide a copy of the Shareholder List for the following organizations:
-            <ul>
-              <li *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).shareholderList">
-                {{ item?.businessNameNew}}
-              </li>
-            </ul>
-          </div>
-          <app-file-uploader *ngIf="applicationId" documentType="Shareholder List"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD SHAREHOLDER LIST, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-          </app-file-uploader>
-        </section>
-      </div>
-
-      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).centralSecuritiesResgister.length">
-        <h4 class="grey-header">Central Securities Register for new Shareholder Organizations</h4>
-        <div>
-          Please provide a copy of the Central Securities Register for the following organizations:
-          <ul>
-            <li
-              *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).centralSecuritiesResgister">
-              {{ item?.businessNameNew}}
-            </li>
-          </ul>
+    <section class="large-screen-only">
+      <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information
+        Completeness</h3>
+      <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
+        
+              <a [routerLink]="[ '/account-profile/']" class="completeness">
+                <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+                </i>Notice of Articles Uploaded
+              </a> <br>
+            </div>
+    
+            <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation'">
+              <a [routerLink]="[ '/org-structure/']" class="completeness">
+                <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
+                </i>Central Securities Register Uploaded
+              </a><br>
+            </div>
+            
+            <div style="font-size:20px;" *ngIf="account?.businessType === 'Partnership'">
+                
+                <a [routerLink]="[ '/account-profile/']" class="completeness">
+                  <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+                  </i>Partnership Agreement Uploaded
+                </a> <br>
+              </div>
+            <hr>
+            <div *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
+              <h4>You have identified the following changes:</h4>
+              <table class="smallGridTable" style="font-size:10px;">
+                <thead>
+                  <tr style="height:50px;">
+                  <th>Type</th>
+                  <th>Cannabis<br>Licences</th>
+                  <th>Liquor<br>Licences</th>
+                  <th>Total</th>
+                </tr>
+                </thead>
+                <tr *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0" style="height:50px;">
+                  <td><strong>Leadership Changes</strong></td>
+                  <td>$500 x 0 licences</td>
+                  <td>$220 x 0 licences</td>
+                  <td>$0</td>
+                </tr>
+    
+                  <tr *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0" style="height:50px;">
+                      <td><strong>External Share Transfers</strong></td>
+                      <td>$500 x 0 licences</td>
+                      <td>$220 x 0 licences</td>
+                      <td>$0</td>
+                    </tr>
+                  <tfoot><tr>
+                    <td colspan=3 style="text-align: right;">Total:</td>
+                    <td><strong>$0</strong></td>
+                  </tr>
+                </tfoot>
+              </table>
+              <p>&nbsp;</p>
+      
+    
+            </div>
+        <div style="text-align:center;" *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
+          <button class="btn btn-primary" (click)="save()">Save</button>
         </div>
-        <section>
-          <app-file-uploader *ngIf="applicationId" documentType="Central Securities Register"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-          </app-file-uploader>
-        </section>
       </div>
 
-      <div *ngIf="LicenseeChangeLog.getNewShareholderDocumentList(changeTree).partnershipAgreement.length">
-        <h4 class="grey-header">Partnership Agreement for new Shareholder Organizations</h4>
-        <div>
-          Please provide a copy of the Partnership Agreement for the following organizations:
-          <ul>
-            <li *ngFor="let item of LicenseeChangeLog.getNewShareholderDocumentList(changeTree).partnershipAgreement">
-              {{ item?.businessNameNew}}
-            </li>
-          </ul>
-        </div>
-        <section>
-          <app-file-uploader *ngIf="applicationId" documentType="Partnership Agreement"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY FORM, DRAG FILE HERE OR'" #financialIntegrityDocuments>
-          </app-file-uploader>
-        </section>
-      </div>
+
     </section>
-  </ng-container>
-
-  <ng-container *ngIf=" LicenseeChangeLog.getNewIndividualAssociateList(changeTree).length">
-    <h3 class="blue-header">NEW INDIVIDUAL ASSOCIATES</h3>
-    <section class="padded-section">
-      <p>
-        Because you identified new individual shareholders, please note that the following individuals will be
-        contacted
-        as part of this process:
-      </p>
-      <ul>
-        <li *ngFor="let item of LicenseeChangeLog.getNewIndividualAssociateList(changeTree)">
-          {{item.firstNameNew}} {{item.lastNameNew}} <a href="">{{item.emailNew}}</a>
-        </li>
-      </ul>
-    </section>
-  </ng-container>
-
-  <ng-container *ngIf="LicenseeChangeLog.getIndivialNameChanges(changeTree).length">
-    <h3 class="blue-header">NAME CHANGES</h3>
-    <section class="padded-section">
-      <p>Please provide name change documents for the people identified in this list: </p>
-      <table>
-        <tr class="eq-table">
-          <th>Previous Name</th>
-          <th>Upadated Name</th>
-        </tr>
-        <tr [ngClass]="{'alt-row': i%2 === 0}"
-          *ngFor="let item of LicenseeChangeLog.getIndivialNameChanges(changeTree); let i = index;">
-          <td> {{item.firstNameOld}} {{item.lastNameOld}}</td>
-          <td> {{item.firstNameNew}} {{item.lastNameNew}}</td>
-        </tr>
-      </table>
-
-      <div>
-        <section>
-          <app-file-uploader *ngIf="applicationId" documentType="Name Change Documents"
-            fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
-            (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="applicationId"
-            [uploadHeader]="'TO UPLOAD NAME CHANGE DOCUMENTS, DRAG FILE HERE OR'">
-          </app-file-uploader>
-        </section>
-      </div>
-    </section>
-  </ng-container>
-
-  <!-- Contact Details -->
-  <h3 class="blue-header">APPLICATION CONTACT DETAILS</h3>
-  <i *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-    The contact LCRB should communicate with regarding the application. The contact must be authorized to
-    represent
-    the applicant and have the authority to bind the applicant.
-  </i>
-  <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-    <i *ngIf="account?.businessType === 'SoleProprietor'">
-      The contact LCRB should communicate with regarding the application
-    </i>
-    <i *ngIf="account?.businessType === 'Society'">
-      The contact LCRB should communicate with regarding the application. The contact must be authorized to
-      represent the applicant and have the authority to bind the applicant.
-    </i>
-    <i *ngIf="businessTypeIsPartnership()">
-      The contact LCRB should communicate with regarding the application. The contact must be authorized to
-      represent the applicant and have the authority to bind the applicant.
-    </i>
-    <i *ngIf="account?.businessType !== 'PublicCorporation'">
-      The contact must be authorized to represent the applicant and have the authority to bind the applicant.
-    </i>
-    <i *ngIf="businessTypeIsPrivateCorporation()">
-      The contact LCRB should communicate with regarding the application. The contact must be authorized to
-      represent the applicant and have the authority to bind the applicant.
-    </i>
-  </div>
-  <address class="padded-section">
-
-    <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
-      errorMessage="Please enter the business contact's first name">
-      <input class="form-control" style="width: 350px;" type="text" autocomplete="given-name"
-        formControlName="contactPersonFirstName" id="contactPersonFirstName">
-    </app-field>
-
-    <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
-      errorMessage="Please enter the business contact's last name">
-      <input class="form-control" style="width: 350px;" type="text" autocomplete="family-name"
-        formControlName="contactPersonLastName" id="contactPersonLastName">
-    </app-field>
-
-    <app-field label="Title/ Position" [required]="false" [valid]="true">
-      <input class="form-control" style="width: 350px;" type="text" formControlName="contactPersonRole">
-    </app-field>
-
-    <app-field label="Phone Number (main)" [required]="true" [valid]="isValidOrNotTouched('contactPersonPhone')"
-      errorMessage="Please enter the business contact's 10-digit phone number">
-      <input class="form-control" style="width: 250px;" maxlength="10" autocomplete="tel"
-        (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone">
-    </app-field>
-
-    <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
-      errorMessage="Please enter the business contact's email address"
-      afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about your application.">
-      <input class="form-control" style="width: 350px;" type="text" autocomplete="email"
-        formControlName="contactPersonEmail" id="contactPersonEmail" (blur)="trimValue(form.get('contactPersonEmail'))">
-    </app-field>
-  </address>
-
-
-
-  <h3 class="blue-header ngtest-declarations" *ngIf="application?.applicationType?.showDeclarations">
-    DECLARATIONS
-  </h3>
-  <div class="padded-section" *ngIf="application?.applicationType?.showDeclarations">
-    <section>
-      <div *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
-        The application must only be submitted by an individual with the authority to bind the applicant. The
-        branch
-        relies on the applicant to ensure that the individual who submits this application is authorized to do
-        so.
-        Typically, an appropriate individual in a corporation will be a duly authorized signatory who will
-        usually
-        be
-        an officer or, in some cases, a director
-      </div>
-      <div *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-        <p *ngIf="account?.businessType === 'SoleProprietor'">
-          This application should be submitted the sole proprietor.
-        </p>
-        <p *ngIf="account?.businessType === 'Society'">
-          This application must only be submitted by an individual with the authority to bind the applicant. The
-          branch relies on the applicant to ensure that the individual who submits this application is
-          authorized to
-          do so. Typically, an appropriate individual for a society will be a director or a senior manager (as
-          defined in the Societies Act).
-        </p>
-        <p *ngIf="account?.businessType === 'PublicCorporation'">
-          This application must only be submitted by an individual with the authority to bind the applicant. The
-          branch relies on the applicant to ensure that the individual who submits this application is
-          authorized to
-          do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
-          will
-          usually be an officer or, in some cases, a director.
-        </p>
-        <div *ngIf="businessTypeIsPartnership()">
+    <section class="submit-container" style="background-color: #F2F2F2; color:#000; border: none;">
+        <h2 style="color: #000">Collection Notice:</h2>
+        <div class="submit-content">
           <p>
-            This application must only be submitted by an individual with the authority to bind the applicant.
-            The
-            branch relies on the applicant to ensure that the individual who submits this application is
-            authorized
-            to do so. Typically, an appropriate individual will be as follows:
+            The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under
+            Sections 26 (a) and (c) of the Freedom of Information and Protection of Privacy Act
+            for the purpose of cannabis licensing, compliance and enforcement matters in accordance with the Cannabis
+            Control and Licensing Act. Should you have any questions about the collection,
+            use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292
+            STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.
           </p>
-          <ul>
-            <li>If the applicant is a general partnership, one of the general partners</li>
-            <li>If the applicant is a limited partnership, the general partner of the partnership</li>
-          </ul>
-        </div>
-        <p *ngIf="businessTypeIsPrivateCorporation()">
-          The application must only be submitted by an individual with the authority to bind the applicant. The
-          branch relies on the applicant to ensure that the individual who submits this application is
-          authorized to
-          do so. Typically, an appropriate individual in a corporation will be a duly authorized signatory who
-          will
-          usually be an officer or, in some cases, a director.
-        </p>
-
-      </div>
-
-    </section>
-    <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">Note: A lawyer or
-      consultant,
-      may NOT submit this application on behalf of
-      the applicant.</p>
-    <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
-      <p *ngIf="businessTypeIsPrivateCorporation()">
-        Note: A lawyer or consultant, may NOT submit this application on behalf of the applicant.
-      </p>
-      <p *ngIf="!businessTypeIsPrivateCorporation()">
-        Note: A lawyer, licensee representative or third party operator may NOT submit this application on
-        behalf of
-        the applicant.
-      </p>
-    </section>
-    <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-      errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
-      <section style="display: flex">
-        <input type="checkbox" formControlName="authorizedToSubmit" id="authorizedToSubmit">
-        <span class="error-states">*</span>
-        <div style="padding-left: 10px;"> I understand and affirm that I am authorized to submit the application
         </div>
       </section>
-    </app-field>
-    <p>
-      Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
-      manager
-      an application, or
-      information or a record included as part of the application, that contains false or misleading
-      information, or
-      fails to disclose a material fact”.
-    </p>
-    <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
-      errorMessage="Please affirm that all of the information provided for this application is true and complete."
-      [showChevrons]="false">
-      <section style="display: flex">
-        <input type="checkbox" formControlName="signatureAgreement" id="signatureAgreement">
-        <span class="error-states">*</span>
-        <div style="padding-left: 10px;"> I understand and affirm that all of the information provided for this
-          application is true and complete
-        </div>
-      </section>
-    </app-field>
-  </div>
 
-  <p>Proceed to pay online using a credit card through the secure web portal.</p>
-
-  <p>
-    <i>
-      <b>Please note:</b> Applications which are submitted without all required information or documents will
-      not be
-      processed. Applicants will be contacted and provided the opportunity to submit missing information. Once
-      applicants provide all required documents to the LCRB, the application will be processed.
-    </i>
-  </p>
-
-  <div class="light-blue-bg">
-    <p>
-      The Province does not know how many application for a cannabis retail store licence will be received.
-      Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
-      processing, applicants must make sure the application is complete before submitting it.
-    </p>
-    <br>
-    <p>
-      The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised
-      that
-      once an application is submitted, you will be unable to upload additional documentation. For questions on
-      the
-      LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
-    </p>
-  </div>
-
-  <section style="position: relative; margin-top: 20px;">
-    <div [ngBusy]="busySave"></div>
-    <button class="btn btn-primary" style="margin-right:10px;" (click)="save()">
-      <span>
-        <i class="fa fa-save" style="color: #fff;"></i>
-        SAVE FOR LATER
-      </span>
-    </button>
-    <button class="btn btn-primary" (click)="save()">SUBMIT &amp; PAY</button>
-    <span style="float: right; color: #1a5a96; padding-top: 10px;">
-      <span (click)="cancelApplication()">
-        <i class="fas fa-trash-alt" style="color: #1a5a96;"></i>
-        <a href="javascript: void(0)" id="cancelApp">
-          Cancel Application
-        </a>
-      </span>
-    </span>
   </section>
 </div>

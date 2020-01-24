@@ -147,7 +147,6 @@ export class FederalReportingComponent implements OnInit {
     this.productForms.forEach((f) => {
       updateRequest.inventorySalesReports.push({ ...f.value });
     });
-
     this.loadingMonthlyReports = true;
     this.monthlyReportsBusy = forkJoin(
       this.monthlyReportDataService.updateMonthlyReport(updateRequest)
@@ -198,7 +197,8 @@ export class FederalReportingComponent implements OnInit {
           (report.totalSalesToConsumerQty !== null && report.totalSalesToConsumerQty !== 0) ||
           (report.totalSalesToConsumerValue !== null && report.totalSalesToConsumerValue !== 0) ||
           (report.totalSalesToRetailerQty !== null && report.totalSalesToRetailerQty !== 0) ||
-          (report.totalSalesToRetailerValue !== null && report.totalSalesToRetailerValue !== 0)) {
+          (report.totalSalesToRetailerValue !== null && report.totalSalesToRetailerValue !== 0) ||
+          (report.otherDescription !== null)) {
             this.visibleInventoryReports.push(report.inventoryReportId);
       }
       return this.createProductForm(report);
@@ -280,6 +280,7 @@ export class FederalReportingComponent implements OnInit {
       totalSalesToConsumerValue: 0,
       totalSalesToRetailerQty: 0,
       totalSalesToRetailerValue: 0,
+      otherDescription: null
     });
   }
 
@@ -294,7 +295,7 @@ export class FederalReportingComponent implements OnInit {
   hasInvalidProductForm() {
     let invalidProduct = false;
     this.productForms.forEach((f) => {
-      if (!f.valid) {
+      if (!f.valid && this.isProductSelected(f.value.inventoryReportId)) {
         invalidProduct = true;
       }
     });
@@ -354,7 +355,8 @@ export class FederalReportingComponent implements OnInit {
       closingWeight: [report.closingWeight, [Validators.required, Validators.min(0), Validators.max(1000), Validators.pattern('^[0-9]+(\.[0-9]{1,3})?$')]],
       totalSeeds: [report.totalSeeds, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
       totalSalesToConsumerQty: [report.totalSalesToConsumerQty, [Validators.min(0), Validators.max(10000000), Validators.pattern('^[0-9]*$')]],
-      totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]]
+      totalSalesToConsumerValue: [report.totalSalesToConsumerValue, [Validators.min(0), Validators.max(1000000000), Validators.pattern('^[0-9]+(\.[0-9]{1,2})?$')]],
+      otherDescription: ['Extracts - Other', 'Other'].indexOf(report.product) >= 0 ? [report.otherDescription, [Validators.required]] : null
     }, { validators: [ClosingInventoryValidator, SalesValidator] });
   }
 
@@ -380,10 +382,6 @@ export class FederalReportingComponent implements OnInit {
       }
     }
 
-    if (!this.reportForm.valid) {
-      return false;
-    }
-
-    return true;
+    return this.reportForm.valid;
   }
 }

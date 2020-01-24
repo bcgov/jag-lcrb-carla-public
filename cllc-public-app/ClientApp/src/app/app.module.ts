@@ -181,6 +181,7 @@ import { DynamicApplicationComponent } from './components/applications/dynamic-a
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
 import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
+import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
 
 
 @NgModule({
@@ -280,7 +281,8 @@ import { AccountCompletenessComponent } from './components/account-completeness/
     DynamicApplicationComponent,
     CateringDemoComponent,
     PersonalHistorySummaryComponent,
-    AccountCompletenessComponent
+    AccountCompletenessComponent,
+    PhsConfirmationComponent
   ],
   imports: [
     ChartsModule,

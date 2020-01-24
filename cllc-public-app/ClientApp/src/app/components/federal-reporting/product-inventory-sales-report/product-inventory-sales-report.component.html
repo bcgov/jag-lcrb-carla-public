@@ -1,7 +1,17 @@
 <div class="product-inventory-sales-report mb-5" *ngIf="visibleInventoryReports.indexOf(productForm?.value?.inventoryReportId) > -1">
   <form [formGroup]="productForm">
     <div class="row mx-0 bg-blue">
-      <h4 class="col-xs-12 font-weight-bold">{{productForm?.value?.product}}</h4>
+      <h4 class="col-xs-12 font-weight-bold">
+        {{productForm?.value?.product}}
+        <input
+          *ngIf="['Other', 'Extracts - Other'].indexOf(productForm?.value?.product) >= 0"
+          class="form-control px-1 mx-4"
+          style="min-width: 150px;"
+          type="text"
+          formControlName="otherDescription"
+        >
+      </h4>
+
     </div>
     <div class="row mx-0 d-flex nowrap">
       <div class="text-center bg-grey py-4 px-0 border border-right-0 border-blue flex-fill">
@@ -294,10 +304,10 @@
         </div>
       </div>
     </div>
-    <div *ngIf="productForm.invalid && !productForm.disabled" class="validation">
+    <div *ngIf="productForm.invalid && !productForm.disabled && productForm.dirty" class="validation">
       <div class="alert alert-danger" *ngFor="let error of getFieldValidationErrors();">{{error}}</div>
     </div>
-    <div class="validation">
+    <div class="validation && productForm.dirty">
       <div class="alert alert-warning" *ngFor="let alert of getFormValidationErrors();">{{alert}}</div>
     </div>
   </form>

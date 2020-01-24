@@ -57,6 +57,15 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.SecondaryIdentificationType = (IdentificationType?)contact.AdoxioSecondaryidentificationtype;
                 result.IsWorker = contact.AdoxioIsworker;
                 result.SelfDisclosure = contact.AdoxioSelfdisclosure;
+                result.PhsConnectionsDetails = contact.AdoxioPhsconnectionsdetails;
+                result.PhsLivesInCanada = (YesNoOptions?)contact.AdoxioPhslivesincanada;
+                result.PhsHasLivedInCanada = (YesNoOptions?)contact.AdoxioPhshaslivedincanada;
+                result.PhsExpired = (YesNoOptions?)contact.AdoxioPhsexpired;
+                result.PhsComplete = (YesNoOptions?)contact.AdoxioPhscomplete;
+                result.PhsConnectionsToOtherLicences = (YesNoOptions?)contact.AdoxioPhsconnectionstootherlicences;
+                result.PhsCanadianDrugAlchoholDrivingOffence = (YesNoOptions?)contact.AdoxioPhscanadiandrugalchoholdrivingoffence;
+                result.PhsDateSubmitted = contact.AdoxioPhsdatesubmitted;
+                result.PhsForeignDrugAlchoholOffence = (YesNoOptions?)contact.AdoxioPhsforeigndrugalchoholoffence;
             }
             return result;
         }
@@ -314,6 +323,14 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSelfdisclosure = from.SelfDisclosure;
             to.AdoxioIdentificationtype = (int?)from.PrimaryIdentificationType;
             to.AdoxioSecondaryidentificationtype = (int?)from.SecondaryIdentificationType;
+            to.AdoxioPhslivesincanada = (int?)from.PhsLivesInCanada;
+            to.AdoxioPhshaslivedincanada = (int?)from.PhsHasLivedInCanada;
+            to.AdoxioPhsexpired = (int?)from.PhsExpired;
+            to.AdoxioPhscomplete = (int?)from.PhsComplete;
+            to.AdoxioPhsconnectionstootherlicences = (int?)from.PhsConnectionsToOtherLicences;
+            to.AdoxioPhscanadiandrugalchoholdrivingoffence = (int?)from.PhsCanadianDrugAlchoholDrivingOffence;
+            to.AdoxioPhsdatesubmitted = from.PhsDateSubmitted;
+            to.AdoxioPhsforeigndrugalchoholoffence = (int?)from.PhsForeignDrugAlchoholOffence;
         }
 
         public static MicrosoftDynamicsCRMcontact ToModel(this ViewModels.Contact contact)
@@ -345,6 +362,16 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.AdoxioCansignpermanentchangeapplications = contact.adoxio_cansignpermanentchangeapplications;
                 result.AdoxioCansigntemporarychangeapplications = contact.adoxio_cansigntemporarychangeapplications;
                 result.Telephone1 = contact.telephone1;
+
+                result.AdoxioPhslivesincanada = (int?)contact.PhsLivesInCanada;
+                result.AdoxioPhshaslivedincanada = (int?)contact.PhsHasLivedInCanada;
+                result.AdoxioPhsexpired = (int?)contact.PhsExpired;
+                result.AdoxioPhscomplete = (int?)contact.PhsComplete;
+                result.AdoxioPhsconnectionstootherlicences = (int?)contact.PhsConnectionsToOtherLicences;
+                result.AdoxioPhscanadiandrugalchoholdrivingoffence = (int?)contact.PhsCanadianDrugAlchoholDrivingOffence;
+                result.AdoxioPhsdatesubmitted = contact.PhsDateSubmitted;
+                result.AdoxioPhsforeigndrugalchoholoffence = (int?)contact.PhsForeignDrugAlchoholOffence;
+                result.AdoxioPhsconnectionsdetails = contact.PhsConnectionsDetails;
 
 
                 if (string.IsNullOrEmpty(result.Fullname) && (!string.IsNullOrEmpty(result.Firstname) || !string.IsNullOrEmpty(result.Lastname)))
