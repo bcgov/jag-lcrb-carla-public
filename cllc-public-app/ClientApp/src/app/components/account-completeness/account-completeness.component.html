@@ -1,6 +1,6 @@
 <div *ngIf="documentTypeStatusResult">
   <div *ngFor="let documentTypeStatus of documentTypeStatusResult">
-    <a [routerLink]="[ '/account-profile/']" class="completeness">
+    <a [routerLink]="documentTypeStatus.routerLink" class="completeness">
       <div *ngIf="documentTypeStatus.valid; then documentsCompleteBlock else documentsIncompleteBlock"></div>
               <ng-template #documentsCompleteBlock>
                 <i class="far fa-check-circle" style="margin-right: 10px; color:green;"></i>{{documentTypeStatus.name}} - Complete
