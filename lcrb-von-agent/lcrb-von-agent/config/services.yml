@@ -47,7 +47,7 @@ issuers:
           input: registration_id
           from: claim
         type:
-          input: registration
+          input: registration.registries.ca
           from: value
       cardinality_fields:
         - licence_number
@@ -117,7 +117,7 @@ issuers:
           input: registration_id
           from: claim
         type:
-          input: registration
+          input: registration.registries.ca
           from: value
       cardinality_fields:
         - licence_number
@@ -171,59 +171,21 @@ issuers:
             value:
               input: effective_date
               from: claim
-        - model: attribute
+        - model: address
           fields:
-            type:
-              input: civic_address
-              from: value
-            format:
-              input: text
-              from: value
-            value:
+            civic_address:
               input: civic_address
               from: claim
-        - model: attribute
-          fields:
-            type:
-              input: city
-              from: value
-            format:
-              input: text
-              from: value
-            value:
+            city:
               input: city
               from: claim
-        - model: attribute
-          fields:
-            type:
-              input: province
-              from: value
-            format:
-              input: text
-              from: value
-            value:
+            province:
               input: province
               from: claim
-        - model: attribute
-          fields:
-            type:
-              input: postal_code
-              from: value
-            format:
-              input: text
-              from: value
-            value:
+            postal_code:
               input: postal_code
               from: claim
-        - model: attribute
-          fields:
-            type:
-              input: country
-              from: value
-            format:
-              input: text
-              from: value
-            value:
+            country:
               input: country
               from: claim
 
