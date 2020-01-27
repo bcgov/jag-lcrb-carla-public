@@ -44587,6 +44587,10 @@
           "description": "Unique identifier of the user who modified the record.",
           "type": "string"
         },
+        "_owningteam_value": {
+          "description": "Unique identifier for the team that owns the record.",
+          "type": "string"
+        },
         "adoxio_openinginventory": {
           "format": "int32",
           "description": "",
@@ -44613,6 +44617,10 @@
         "versionnumber": {
           "format": "int64",
           "description": "Version Number",
+          "type": "string"
+        },
+        "adoxio_otherdescription": {
+          "description": "",
           "type": "string"
         },
         "_modifiedonbehalfby_value": {
@@ -44651,10 +44659,6 @@
           "format": "int32",
           "description": "",
           "type": "integer"
-        },
-        "_owningteam_value": {
-          "description": "Unique identifier for the team that owns the record.",
-          "type": "string"
         },
         "adoxio_weightofclosinginventory": {
           "format": "decimal",
@@ -45627,6 +45631,11 @@
         "adoxio_city": {
           "description": "",
           "type": "string"
+        },
+        "adoxio_complaintcategory": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_investigationoutcome": {
           "format": "int32",
@@ -48990,6 +48999,11 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_liquorservicestartdate": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
+        },
         "adoxio_address": {
           "description": "",
           "type": "string"
@@ -49019,6 +49033,10 @@
         "adoxio_entertainmentdescription": {
           "description": "",
           "type": "string"
+        },
+        "adoxio_attendanceminors": {
+          "description": "",
+          "type": "boolean"
         },
         "adoxio_contactphone": {
           "description": "",
@@ -49107,6 +49125,11 @@
           "format": "int32",
           "description": "Reason for the status of the Event",
           "type": "integer"
+        },
+        "adoxio_liquorserviceenddate": {
+          "format": "date-time",
+          "description": "",
+          "type": "string"
         },
         "_ownerid_value": {
           "description": "Owner Id",
@@ -49605,6 +49628,10 @@
           "description": "Reason for the status of the Form Element Upload Field",
           "type": "integer"
         },
+        "adoxio_formguid": {
+          "description": "",
+          "type": "string"
+        },
         "overriddencreatedon": {
           "format": "date-time",
           "description": "Date and time that the record was migrated.",
@@ -49655,6 +49682,10 @@
         },
         "_modifiedby_value": {
           "description": "Unique identifier of the user who modified the record.",
+          "type": "string"
+        },
+        "adoxio_routerlink": {
+          "description": "",
           "type": "string"
         },
         "utcconversiontimezonecode": {
@@ -75994,6 +76025,10 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_inspchecklistsocialrespmaterialnotes": {
+          "description": "",
+          "type": "string"
+        },
         "adoxio_pschecklistotherobservationsnotes": {
           "description": "",
           "type": "string"
@@ -76064,6 +76099,10 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_duedatechangereason": {
+          "description": "",
+          "type": "string"
+        },
         "_modifiedonbehalfby_value": {
           "description": "Shows who last updated the record on behalf of another user.",
           "type": "string"
@@ -76102,6 +76141,10 @@
         "adoxio_createfollowup": {
           "description": "",
           "type": "boolean"
+        },
+        "adoxio_comments": {
+          "description": "",
+          "type": "string"
         },
         "billedserviceunits": {
           "format": "int32",
@@ -76163,7 +76206,17 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_inspectionintoxication": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_servicehoursfridayopen": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_routinechecklistservingitright": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76218,9 +76271,10 @@
           "description": "Choose the service level agreement (SLA) that you want to apply to the case record.",
           "type": "string"
         },
-        "adoxio_duedatechangereason": {
+        "adoxio_routinechecklistliquorregister": {
+          "format": "int32",
           "description": "",
-          "type": "string"
+          "type": "integer"
         },
         "adoxio_establishmentpostalcode": {
           "description": "",
@@ -76292,17 +76346,12 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_inspectiontimeinhh": {
+        "adoxio_checklistequipmentchecks": {
           "format": "int32",
           "description": "",
           "type": "integer"
         },
         "adoxio_inspectionovercrowding": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
-        "adoxio_inspchecklistfloorplanroutine": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76342,6 +76391,11 @@
         "_entitlementid_value": {
           "description": "Choose the entitlement that is applicable for the case.",
           "type": "string"
+        },
+        "adoxio_contraventionsadded": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_servicehourssaturdayopen": {
           "format": "int32",
@@ -76400,9 +76454,10 @@
           "description": "",
           "type": "integer"
         },
-        "adoxio_inspchecklistsocialrespmaterialnotes": {
+        "adoxio_routinechecklistpricingsizing": {
+          "format": "int32",
           "description": "",
-          "type": "string"
+          "type": "integer"
         },
         "checkemail": {
           "description": "This attribute is used for Sample Service Business Processes.",
@@ -76421,7 +76476,7 @@
           "description": "",
           "type": "string"
         },
-        "adoxio_drinksizesminpricing": {
+        "adoxio_discussedmapprogram": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76460,11 +76515,6 @@
           "type": "integer"
         },
         "adoxio_inspchecklistfollowupinspectionrequired": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
-        },
-        "adoxio_licencepostedroutine": {
           "format": "int32",
           "description": "",
           "type": "integer"
@@ -76552,6 +76602,11 @@
         "_contractid_value": {
           "description": "Choose the service contract that the case should be logged under to make sure the customer is eligible for support services.",
           "type": "string"
+        },
+        "adoxio_licencepostedroutine": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "_adoxio_region_value": {
           "description": "",
@@ -76648,6 +76703,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_routinechecklistliquorstorage": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "traversedpath": {
           "description": "For internal use only.",
           "type": "string"
@@ -76677,14 +76737,14 @@
           "description": "",
           "type": "string"
         },
+        "adoxio_checklistminorspatrons": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "utcconversiontimezonecode": {
           "format": "int32",
           "description": "Time zone code that was in use when the record was created.",
-          "type": "integer"
-        },
-        "adoxio_discussedmapprogram": {
-          "format": "int32",
-          "description": "",
           "type": "integer"
         },
         "adoxio_inspchecklistsignmeetsrequirements": {
@@ -76706,6 +76766,11 @@
           "description": "",
           "type": "integer"
         },
+        "adoxio_inspchecklistfloorplanroutine": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_inspchecklisttakeandsendphotos": {
           "format": "int32",
           "description": "",
@@ -76721,9 +76786,10 @@
           "description": "Select the type of case to identify the incident for use in case routing and analysis.",
           "type": "integer"
         },
-        "adoxio_comments": {
+        "adoxio_routinechecklisteventcontracts": {
+          "format": "int32",
           "description": "",
-          "type": "string"
+          "type": "integer"
         },
         "adoxio_contraventionsummary": {
           "description": "",
@@ -76756,6 +76822,11 @@
         "_ownerid_value": {
           "description": "Enter the user or team who is assigned to manage the record. This field is updated every time the record is assigned to a different user.",
           "type": "string"
+        },
+        "adoxio_checklistdiscusscateringrequirements": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "adoxio_inspectionsminors": {
           "format": "int32",
@@ -76823,6 +76894,11 @@
         "adoxio_inspchecklistphysicalsecuritynotes": {
           "description": "",
           "type": "string"
+        },
+        "adoxio_drinksizesminpricing": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
         },
         "incidentstagecode": {
           "format": "int32",
@@ -76939,6 +77015,11 @@
           "description": "Indicates the date and time when the case was escalated.",
           "type": "string"
         },
+        "adoxio_inspectiontimeinhh": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
         "adoxio_inspectionliquorregister": {
           "format": "int32",
           "description": "",
@@ -76961,11 +77042,6 @@
         "incidentid": {
           "description": "Unique identifier of the case.",
           "type": "string"
-        },
-        "adoxio_inspectionintoxication": {
-          "format": "int32",
-          "description": "",
-          "type": "integer"
         },
         "adoxio_pschecklistintoxicationidentifiednotes": {
           "description": "",
@@ -77022,6 +77098,11 @@
           "type": "integer"
         },
         "adoxio_servicehourstuesdayopen": {
+          "format": "int32",
+          "description": "",
+          "type": "integer"
+        },
+        "adoxio_routinechecklistcateringrecords": {
           "format": "int32",
           "description": "",
           "type": "integer"

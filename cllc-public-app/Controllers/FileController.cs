@@ -206,7 +206,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             switch (entityName.ToLower())
             {
                 case "account":
-                    var account = await _dynamicsClient.GetAccountById(id);
+                    var account = await _dynamicsClient.GetAccountByIdAsync(id);
                     result = account != null && CurrentUserHasAccessToApplicationOwnedBy(account.Accountid);
                     break;
                 case "application":
@@ -263,7 +263,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             switch (entityName.ToLower())
             {
                 case "account":
-                    var account = await _dynamicsClient.GetAccountById(Guid.Parse(entityId));
+                    var account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(entityId));
                     folderName = GetAccountFolderName(account);
                     break;
                 case "application":
@@ -416,6 +416,73 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             return new JsonResult(fileSystemItemVMList);
+        }
+
+        [HttpGet("{entityName}/{entityId}/documentStatus/{formId}")]
+        public async Task<IActionResult> GetDocumentTypeStatus (string entityName, string entityId, string formId)
+        {
+            List<ViewModels.DocumentTypeStatus> result = null;
+
+            if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(formId))
+            {
+                return BadRequest();
+            }
+
+            // lookup the entity
+            string folderName = null;
+            switch (entityName.ToLower())
+            {
+                case "account":
+                    MicrosoftDynamicsCRMaccount account = _dynamicsClient.GetAccountById(entityId);
+                    folderName = account.GetFolder();
+                    break;
+                
+                default:
+                    break;
+            }
+            
+            if (folderName != null)
+            {
+                var folderContents = _fileManagerClient.GetFileDetailsListInFolder(_logger, entityName, entityId, folderName);
+
+                // get any file form fields that are related to the form
+                var formFileFields = _dynamicsClient.Formelementuploadfields.GetDocumentFieldsByForm(formId);
+                
+                result = new List<ViewModels.DocumentTypeStatus>();
+
+                foreach (var formFileField in formFileFields)
+                {
+                    string documentTypePrefix = formFileField.AdoxioFileprefix;
+                    string documentTypeName = formFileField.AdoxioName;
+                    string routerLink = formFileField.AdoxioRouterlink;
+
+                    bool valid = false;
+
+                    // determine if there are any files with this prefix.
+
+                    var firstMatch = folderContents.FirstOrDefault(f => f.documenttype == documentTypePrefix);
+
+                    if (firstMatch != null)
+                    {
+                        valid = true;
+                    }
+
+                    result.Add(new ViewModels.DocumentTypeStatus() { DocumentType = documentTypePrefix, Name = documentTypeName, Valid = valid, RouterLink=routerLink });
+                }
+
+            }
+
+
+            // ensure that the entity has files.
+            if (result == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return new JsonResult(result);
+            }
+            
         }
 
         private async Task<List<ViewModels.FileSystemItem>> GetListFilesInFolder(string entityId, string entityName, string documentType)
