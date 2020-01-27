@@ -111,11 +111,17 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
                 string licenceId = item.AdoxioLicencesid;
                 string licenceType = item.AdoxioLicenceType?.AdoxioName;
-                await IssueLicenceCredential(new IssueLicenceCredentialMessage() {
-                    RegistrationId = registrationId,
-                    LicenceId = licenceId,
-                    LicenceType = licenceType
-                }, null);
+                if (string.IsNullOrEmpty(registrationId) || string.IsNullOrEmpty(licenceId) || string.IsNullOrEmpty(licenceType)) {
+                    _logger.LogError($"Not issuing licence credential to {licenceId}");
+                }
+                else
+                {
+                    await IssueLicenceCredential(new IssueLicenceCredentialMessage() {
+                        RegistrationId = registrationId,
+                        LicenceId = licenceId,
+                        LicenceType = licenceType
+                    }, null);
+                }
             }
 
             _logger.LogInformation("End of SyncLicencesToOrgbook");
