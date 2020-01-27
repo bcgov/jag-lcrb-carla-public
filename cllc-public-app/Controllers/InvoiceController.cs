@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (invoice._accountidValue != null)
                     {
                         Guid accountId = Guid.Parse(invoice._accountidValue);
-                        invoice.CustomeridAccount = await _dynamicsClient.GetAccountById(accountId);
+                        invoice.CustomeridAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
                     }
 
                     result = invoice.ToViewModel();
@@ -140,7 +140,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // setup navigation properties.
                 MicrosoftDynamicsCRMinvoice patchEntity = new MicrosoftDynamicsCRMinvoice();
                 Guid accountId = Guid.Parse(userSettings.AccountId);
-                var userAccount = await _dynamicsClient.GetAccountById(accountId);
+                var userAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
                 patchEntity.CustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
 
                 // patch the record.

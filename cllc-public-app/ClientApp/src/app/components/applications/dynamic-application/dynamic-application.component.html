@@ -58,7 +58,6 @@
                 <label for="" *ngIf="formSection.name">{{formSection.name}}</label>
                 <div *ngFor="let formField of formSection.fields">
                   <div *ngIf="formField.visible">
-
                     <div *ngIf="formField.datafieldname === 'establishmentParcelId'">
                       <div class="light-blue-bg" style="display: flex;">
                         <div style="flex: 0 0 210px;">
@@ -92,59 +91,59 @@
                       </div>
                       &nbsp;<br />
                     </div>
-                    
-                    <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'" [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname">
-                      <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" />                      
+
+                    <app-field *ngIf="formField.controltype == 'TextBoxControl' && formField.datafieldname !== 'establishmentParcelId'" [label]="formField.name" [required]="formField.required">
+                      <input class="form-control" style="width: 500px;" type="text" [formControlName]="formField.datafieldname" [id]="formField.datafieldname" />
                     </app-field>
+                    <div class="padded-section" *ngIf="formField.controltype == 'TextAreaControl'">
+                      <app-field  [label]="formField.name" [required]="formField.required" [isFullWidth]="true" [valid]="isValidOrNotTouched(formField.datafieldname)"
+                                 [showChevrons]="false">
+                        <textarea rows="8" style="width: 100%;" maxlength="5000"
+                                  [formControlName]="formField.datafieldname" [id]="formField.datafieldname"></textarea>
+                      </app-field>
+                      </div>
 
-                    <app-field *ngIf="formField.controltype == 'TextAreaControl'" [label]="formField.name" [required]="formField.required" [id]="formField.datafieldname" [isFullWidth]="true"
-                               [showChevrons]="false" [valid]="isValidOrNotTouched('description1')">
-                      <textarea rows="8" style="width: 100%;" maxlength="5000"
-                                minlength="10" [formControlName]="formField.datafieldname"></textarea>
+                      <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required">
+                        <input type="text" style="width: 200px; background-color: #fff;" [formControlName]="formField.datafieldname" [id]="formField.datafieldname"
+                               placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [max]="currentDate"
+                               [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
+                        <mat-datepicker #picker></mat-datepicker>
+                      </app-field>
 
-                    </app-field>
+                      <mat-card *ngIf="formField.controltype == 'PicklistControl'"
+                                class="mat-elevation-z0" style="margin-bottom: 10px;">
+                        <section style="display: flex; justify-content: space-between; width: 100%;">
+                          <div class="question-label">
+                            {{formField.name}}
+                          </div>
+                          <div style="flex: 0 0 85px;">
+                            <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
 
-                    <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.name" [required]="formField.required" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-                      <input type="text" style="width: 200px; background-color: #fff;"
-                             placeholder="yyyy-mm-dd" readonly class="form-control" [min]="minDate" [max]="currentDate"
-                             [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()">
-                      <mat-datepicker #picker></mat-datepicker>
-                    </app-field>
-                    
-                    <mat-card *ngIf="formField.controltype == 'PicklistControl'"
-                              class="mat-elevation-z0" style="margin-bottom: 10px;">
-                      <section style="display: flex; justify-content: space-between; width: 100%;">
-                        <div class="question-label">
-                          {{formField.name}}
-                        </div>
-                        <div style="flex: 0 0 85px;">
-                          <mat-button-toggle-group aria-label="Font Style" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                              <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">{{option.label}}</mat-button-toggle>
+                            </mat-button-toggle-group>
+                          </div>
+                        </section>
+                      </mat-card>
 
-                            <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">{{option.label}}</mat-button-toggle>
-                          </mat-button-toggle-group>
-                        </div>
-                      </section>
-                    </mat-card>
+                      <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name" [required]="formField.required">
+                        Lookup
+                      </app-field>
 
-                    <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.name" [required]="formField.required">
-                      Lookup
-                    </app-field>
+                      <app-field *ngIf="formField.controltype == 'RadioControl'" [valid]="!showValidationMessages || form.get(formField.datafieldname).valid"
+                                 errorMessage=""
+                                 [showChevrons]="false">
+                        <section style="display: flex">
+                          <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
+                          <span class="error-states">*</span>
+                          <div style="padding-left: 10px;">
+                            {{formField.name}}
+                          </div>
+                        </section>
+                      </app-field>
 
-                    <app-field *ngIf="formField.controltype == 'RadioControl'" [valid]="!showValidationMessages || form.get(formField.datafieldname).valid"
-                               errorMessage=""
-                               [showChevrons]="false">
-                      <section style="display: flex">
-                        <input type="checkbox" [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
-                        <span class="error-states">*</span>
-                        <div style="padding-left: 10px;">
-                          {{formField.name}}
-                        </div>
-                      </section>
-                    </app-field>
+                    </div>
 
                   </div>
-
-                </div>
 
               </section>
             </div>
@@ -365,41 +364,6 @@
   </div>
 </ng-template>
 
-<ng-template #accountCompleteness>
-  <section class="large-screen-only">
-    <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Account Completeness</h3>
-
-    <div [formGroup]="form" class="submitted-content"
-         style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
-         <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following items:</p>
-         <div>
-            <a [routerLink]="[ '/account-profile/']" class="completeness">
-              <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-                  </i>Account Profile - Complete
-              </a> <br>
-                     
-         </div>
-         <div>
-            <a [routerLink]="[ '/org-structure/']" class="completeness">
-              <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
-                  </i>Organization Information - Missing
-              </a><br>
-              
-         </div>
-         <div>
-            <a [routerLink]="[ '/org-structure/']" class="completeness">
-              <i class="far fa-times-circle" style="margin-right: 10px; color:red;">
-                  </i>Personal History Summary Forms - Not Received
-              </a>    <br>          
-          
-         </div>
-    </div>
-  </section>
-  
-</ng-template>
-
-
-
 
 <div class="dashboard-spacing" style="position: relative">
   <div [ngBusy]="busy"></div>
@@ -409,7 +373,18 @@
     </div>
     <div class="col-md-4 col-sm-12">
       <h1>&nbsp;</h1>
-      <ng-container *ngTemplateOutlet="accountCompleteness"></ng-container>
+      <section class="large-screen-only">
+        <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">Account Completeness</h3>        
+        <div class="submitted-content"
+             style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <p>Before submitting a {{application?.applicationType?.name}} application, you must complete the following items:</p>
+
+          <app-account-completeness [account]="account" entityName="account" [entityId]="account?.id" formId="cccff382-2b92-467e-bf1b-3db179512af8" #accountCompleteness></app-account-completeness>
+
+        </div>
+      </section>
+
+      
     </div>
   </div>
 </div>
