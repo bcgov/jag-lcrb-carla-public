@@ -22,6 +22,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         // only used for seeds
         public int? totalSeeds { get; set; }
 
+        // only used for extracts - other
+        public string? otherDescription { get; set; }
+
         // Sales
         public int? totalSalesToConsumerQty { get; set; }
         public decimal totalSalesToConsumerValue { get; set; }

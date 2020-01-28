@@ -796,7 +796,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         case "Marketing":
                             templateName = "cannabis_marketer_licence";
                             break;
-                        case "Catering Licence":
+                        case "Catering":
                             templateName = "catering_licence";
                             break;
                         case "Wine Store Licence":

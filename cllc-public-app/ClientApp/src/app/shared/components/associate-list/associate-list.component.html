@@ -292,6 +292,11 @@
                             <app-org-structure [node]="associate.value" [account]="account"></app-org-structure>
                         </td>
                     </tr>
+                    <tr *ngIf="associate.get('collapse').value;" style="height:20px;">
+                        <td colspan="10" style="background-color: black; text-align:left; color:white; font-size:9px;">
+                            Click to Expand Business Information
+                        </td>
+                    </tr>
                 </ng-container>
             </ng-container>
         </ng-container>

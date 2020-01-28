@@ -22,6 +22,11 @@ const weightError = [
   { type: 'pattern', message: weightMessage }
 ];
 
+const descriptionMessage = 'Description is required for this product type.';
+const descriptionError = [
+  { type: 'required', message: descriptionMessage }
+];
+
 export const fieldValidationErrors = {
   'openingInventory': wholeNumberError,
   'domesticAdditions': wholeNumberError,
@@ -37,7 +42,8 @@ export const fieldValidationErrors = {
   'closingWeight': weightError,
   'totalSeeds': wholeNumberError,
   'totalSalesToConsumerQty': wholeNumberError,
-  'totalSalesToConsumerValue': valueError
+  'totalSalesToConsumerValue': valueError,
+  'otherDescription': descriptionError
 };
 
 export const formValidationErrors = {

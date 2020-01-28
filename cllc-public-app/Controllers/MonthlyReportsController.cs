@@ -213,36 +213,42 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // Update inventory reports
                 if (item.inventorySalesReports != null && item.inventorySalesReports.Count > 0) {
-                  foreach (InventorySalesReport invReport in item.inventorySalesReports)
-                  {
-                      MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport()
-                      {
-                          AdoxioOpeninginventory = invReport.openingInventory,
-                          AdoxioQtyreceiveddomestic = invReport.domesticAdditions,
-                          AdoxioQtyreceivedreturns = invReport.returnsAdditions,
-                          AdoxioQtyreceivedother = invReport.otherAdditions,
-                          AdoxioQtyshippeddomestic = invReport.domesticReductions,
-                          AdoxioQtyshippedreturned = invReport.returnsReductions,
-                          AdoxioQtydestroyed = invReport.destroyedReductions,
-                          AdoxioQtyloststolen = invReport.lostReductions,
-                          AdoxioOtherreductions = invReport.otherReductions,
-                          AdoxioClosinginventory = invReport.closingNumber,
-                          AdoxioValueofclosinginventory = invReport.closingValue,
-                          AdoxioPackagedunitsnumber = invReport.totalSalesToConsumerQty,
-                          AdoxioTotalvalue = invReport.totalSalesToConsumerValue,
-                          AdoxioPackagedunitsnumberretailer = invReport.totalSalesToRetailerQty,
-                          AdoxioTotalvalueretailer = invReport.totalSalesToRetailerValue
-                      };
-                      if (invReport.product == "Seeds")
-                      {
-                          updateReport.AdoxioTotalnumberseeds = invReport.totalSeeds;
-                      }
-                      else if (invReport.product != "Vegetative Cannabis")
-                      {
-                          updateReport.AdoxioWeightofclosinginventory = invReport.closingWeight;
-                      }
-                      _dynamicsClient.Cannabisinventoryreports.Update(invReport.inventoryReportId, updateReport);
-                  }
+                    foreach (InventorySalesReport invReport in item.inventorySalesReports)
+                    {
+                        MicrosoftDynamicsCRMadoxioCannabisinventoryreport updateReport = new MicrosoftDynamicsCRMadoxioCannabisinventoryreport()
+                        {
+                            AdoxioOpeninginventory = invReport.openingInventory,
+                            AdoxioQtyreceiveddomestic = invReport.domesticAdditions,
+                            AdoxioQtyreceivedreturns = invReport.returnsAdditions,
+                            AdoxioQtyreceivedother = invReport.otherAdditions,
+                            AdoxioQtyshippeddomestic = invReport.domesticReductions,
+                            AdoxioQtyshippedreturned = invReport.returnsReductions,
+                            AdoxioQtydestroyed = invReport.destroyedReductions,
+                            AdoxioQtyloststolen = invReport.lostReductions,
+                            AdoxioOtherreductions = invReport.otherReductions,
+                            AdoxioClosinginventory = invReport.closingNumber,
+                            AdoxioValueofclosinginventory = invReport.closingValue,
+                            AdoxioPackagedunitsnumber = invReport.totalSalesToConsumerQty,
+                            AdoxioTotalvalue = invReport.totalSalesToConsumerValue,
+                            AdoxioPackagedunitsnumberretailer = invReport.totalSalesToRetailerQty,
+                            AdoxioTotalvalueretailer = invReport.totalSalesToRetailerValue
+                        };
+                        if (invReport.product == "Seeds")
+                        {
+                            updateReport.AdoxioTotalnumberseeds = invReport.totalSeeds;
+                        }
+                        else if (invReport.product == "Extracts - Other" || invReport.product == "Other")
+                        {
+                            updateReport.AdoxioOtherdescription = invReport.otherDescription;
+                        }
+
+                        if (invReport.product != "Vegetative Cannabis")
+                        {
+                            updateReport.AdoxioWeightofclosinginventory = invReport.closingWeight;
+                        }
+
+                        _dynamicsClient.Cannabisinventoryreports.Update(invReport.inventoryReportId, updateReport);
+                    }
                 }
             }
             catch (HttpOperationException httpOperationException)
