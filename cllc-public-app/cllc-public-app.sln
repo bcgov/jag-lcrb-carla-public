@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cllc-interfaces", "cllc-interfaces", "{0584B916-A0B9-44B4-97D3-1E9DBF16220E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{27F1F3AB-9F73-414C-ADD2-3CE032C49978}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BCeID", "..\cllc-interfaces\BCeID\BCeID.csproj", "{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{309D775B-CF5B-4194-9E63-3410A95D20F4}"
@@ -29,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27F1F3AB-9F73-414C-ADD2-3CE032C49978}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -70,7 +64,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{27F1F3AB-9F73-414C-ADD2-3CE032C49978} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 		{9B63A69E-E3C6-44BD-A24B-C6EC3A499E64} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 		{309D775B-CF5B-4194-9E63-3410A95D20F4} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}
 		{05301D75-ACF9-45D8-B572-AC052EAD4B54} = {0584B916-A0B9-44B4-97D3-1E9DBF16220E}

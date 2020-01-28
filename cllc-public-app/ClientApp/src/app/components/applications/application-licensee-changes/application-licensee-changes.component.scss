@@ -48,3 +48,43 @@
 .old-value {
     text-decoration: line-through;
 }
+
+table.smallGridTable {
+    border: 2px solid #FFFFFF;
+    width: 100%;
+   
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table.smallGridTable td, table.smallGridTable th {
+    border: 1px solid #FFFFFF;
+    padding: 3px 4px;
+  }
+  table.smallGridTable tbody td {
+    font-size: 13px;
+    font-weight: bold;
+  }
+  table.smallGridTable tr:nth-child(even) {
+    background: transparent;
+  }
+  table.smallGridTable thead {
+    background: #FFFFFF;
+    border-bottom: 2px solid #333333;
+  }
+  
+  
+  table.smallGridTable thead th {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333333;
+    text-align: center;
+    border-left: 2px solid #333333;
+  }
+  
+  table.smallGridTable thead th:first-child {
+    border-left: none;
+  }
+  
+  table.smallGridTable tfoot td {
+    font-size: 14px;
+  }

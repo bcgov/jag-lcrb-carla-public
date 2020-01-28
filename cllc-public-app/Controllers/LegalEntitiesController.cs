@@ -16,6 +16,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Google.Protobuf;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -29,14 +31,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly string _encryptionKey;
+        private readonly FileManagerClient _fileManagerClient;
 
-        public LegalEntitiesController(IConfiguration configuration, SharePointFileManager sharePointFileManager, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public LegalEntitiesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
         {
             _configuration = configuration;
             _dynamicsClient = dynamicsClient;
             _httpContextAccessor = httpContextAccessor;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _logger = loggerFactory.CreateLogger(typeof(LegalEntitiesController));
+            _fileManagerClient = fileClient;
         }
 
         /// <summary>
@@ -183,6 +187,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (legalEntity != null)
                 {
                     result = legalEntity.ToViewModel();
+                    if (!string.IsNullOrEmpty(result.contactId))
+                    {
+                        result.PhsLink = ContactController.GetPhsLink(result.contactId, _configuration, _encryptionKey);
+                    }
                     result.children = this.GetLegalEntityChildren(result.id);
                 }
             }
@@ -222,6 +230,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         processedEntities.Add(legalEntity.AdoxioLegalentityid);
                         viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
+                    }
+                    if (!string.IsNullOrEmpty(viewModel.contactId))
+                    {
+                        viewModel.PhsLink = ContactController.GetPhsLink(viewModel.contactId, _configuration, _encryptionKey);
                     }
 
                     result.Add(viewModel);
@@ -418,7 +430,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (result.account == null)
             {
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(Guid.Parse(userSettings.AccountId));
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(userSettings.AccountId));
                 result.account = account.ToViewModel();
             }
 
@@ -495,7 +507,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // setup navigation properties.
             MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
             Guid accountId = Guid.Parse(userSettings.AccountId);
-            var userAccount = await _dynamicsClient.GetAccountById(accountId);
+            var userAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
             patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
 
             // patch the record.
@@ -612,7 +624,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     // bind to Parent legal entity
                     if (!string.IsNullOrEmpty(node.ParentLegalEntityId))
                     {
-
                         patchEntity.ParentLegalEntityOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.ParentLegalEntityId);
                     }
                     // bind to legal entity
@@ -627,12 +638,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLinceseeChangeLogId);
                     }
 
-
                     // bind to application
                     if (!string.IsNullOrEmpty(node.ApplicationId))
                     {
                         patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
                         parentLegalEntityId = node.LegalEntityId;
+                    }
+
+                    // bind to parent account
+                    if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
+                    {
+                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
+                    }
+
+                    // bind to parent account
+                    if (!string.IsNullOrEmpty(node.BusinessAccountId))
+                    {
+                        patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
                     }
 
                     try
@@ -657,6 +679,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", node.ApplicationId);
                     }
 
+                    // bind to parent account
+                    if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
+                    {
+                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
+                    }
+
+                    // bind to parent account
+                    if (!string.IsNullOrEmpty(node.BusinessAccountId))
+                    {
+                        patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
+                    }
 
                     try
                     {
@@ -696,7 +729,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 MicrosoftDynamicsCRMadoxioLicenseechangelog patchEntity = new MicrosoftDynamicsCRMadoxioLicenseechangelog();
                 patchEntity.CopyValues(node);
-                node.BusinessAccountId = accountId;
+                node.ParentBusinessAccountId = accountId;
                 if (parentLegalEntityId != null)
                 {
                     node.ParentLegalEntityId = parentLegalEntityId;
@@ -734,6 +767,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         parentLegalEntityId = node.LegalEntityId;
                     }
 
+                    // bind to parent account
+                    if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
+                    {
+                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
+                    }
+
                     try
                     {
                         var result = _dynamicsClient.Licenseechangelogs.Create(patchEntity);
@@ -751,11 +790,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 else // update
                 {
                     // bind to account
-                    if (!string.IsNullOrEmpty(node.BusinessAccountId))
+                    if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
                     {
-                        patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
+                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
                     }
 
+                    // bind to parent account
+                    if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
+                    {
+                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
+                    }
 
                     try
                     {
@@ -784,10 +828,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var item in node.Children)
                 {
-                    SaveAccountChangeObjects(item, accountId, parentLegalEntityId, parentChangeLogId);
+                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, parentLegalEntityId, parentChangeLogId);
                 }
             }
         }
+
         /// <summary>
         /// Create a legal entity
         /// </summary>

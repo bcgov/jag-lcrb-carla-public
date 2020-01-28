@@ -56,6 +56,8 @@ import { BreadcrumbComponent } from '@components/breadcrumb/breadcrumb.component
 import { DynamicsDataService } from '@services/dynamics-data.service';
 import { DynamicsFormComponent } from '@components/dynamics-form/dynamics-form.component';
 import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
+import { FileDataService } from '@services/file-data.service';
+
 
 import {
   EditShareholdersComponent, ShareholderDialogComponent,
@@ -178,6 +180,8 @@ import { OrgStructureComponent } from './shared/components/org-structure/org-str
 import { DynamicApplicationComponent } from './components/applications/dynamic-application/dynamic-application.component';
 import { CateringDemoComponent } from './components/catering-demo/catering-demo.component';
 import { PersonalHistorySummaryComponent } from './components/personal-history-summary/personal-history-summary.component';
+import { AccountCompletenessComponent } from './components/account-completeness/account-completeness.component';
+import { PhsConfirmationComponent } from './components/phs-confirmation/phs-confirmation.component';
 
 
 @NgModule({
@@ -276,7 +280,9 @@ import { PersonalHistorySummaryComponent } from './components/personal-history-s
     OrgStructureComponent,    
     DynamicApplicationComponent,
     CateringDemoComponent,
-    PersonalHistorySummaryComponent
+    PersonalHistorySummaryComponent,
+    AccountCompletenessComponent,
+    PhsConfirmationComponent
   ],
   imports: [
     ChartsModule,
@@ -389,6 +395,7 @@ import { PersonalHistorySummaryComponent } from './components/personal-history-s
     ContactDataService,
     DynamicsDataService,
     DynamicsFormDataService,
+    FileDataService,
     GeneralDataService,
     InsertService,
     NewsletterDataService,
