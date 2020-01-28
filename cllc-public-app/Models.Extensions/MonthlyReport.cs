@@ -81,7 +81,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                     totalSalesToConsumerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumber),
                     totalSalesToConsumerValue = (inventoryReport.AdoxioTotalvalue != null) ? inventoryReport.AdoxioTotalvalue.Value : 0,
                     totalSalesToRetailerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumberretailer),
-                    totalSalesToRetailerValue = (inventoryReport.AdoxioTotalvalueretailer != null) ? inventoryReport.AdoxioTotalvalueretailer.Value : 0
+                    totalSalesToRetailerValue = (inventoryReport.AdoxioTotalvalueretailer != null) ? inventoryReport.AdoxioTotalvalueretailer.Value : 0,
+                    otherDescription = inventoryReport.AdoxioOtherdescription
                 };
                 if (product.AdoxioName != "Seeds" && product.AdoxioName != "Vegetative Cannabis")
                 {

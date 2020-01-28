@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -30,6 +31,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IOrgBookClient _orgBookclient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
+        private readonly FileManagerClient _fileManagerClient;
 
         public AccountsController(IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor,
@@ -62,7 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(new Guid(accountId));
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
                 _logger.LogDebug(LoggingEvents.HttpGet, "Dynamics Account: " + JsonConvert.SerializeObject(account));
 
                 if (account == null)
@@ -209,7 +211,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(accountId);
                 if (account == null)
                 {
                     _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
@@ -364,8 +366,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var exists = false;
             var accountIdCleaned = accountId.ToUpper().Replace("-", "");
             var folderName = $"{accountName}_{accountIdCleaned}";
-            SharePointFileManager _sharePointFileManager = new SharePointFileManager(_configuration);
-            var fileDetailsList = await _sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+
+            var fileDetailsList = _fileManagerClient.GetFileDetailsListInFolder(_logger, AccountDocumentUrlTitle, accountId, folderName);
             if (fileDetailsList != null)
             {
                 exists = fileDetailsList.Count() > 0;
@@ -560,7 +562,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // fetch the account and get the created contact.
                 if (legalEntity.AdoxioAccount == null)
                 {
-                    legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountById(Guid.Parse(account.Accountid));
+                    legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(account.Accountid));
                 }
 
                 if (legalEntity.AdoxioAccount.Primarycontactid == null)
@@ -728,7 +730,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountById(accountId);
+            MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
             if (adoxioAccount == null)
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
@@ -782,7 +784,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // get the account
-            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountById(accountId);
+            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(accountId);
             if (account == null)
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");

@@ -317,8 +317,25 @@ export class CateringDemoComponent extends FormBase  implements OnInit {
   }
 
   startLicenseeChangeApplication() {
-    // TODO: Bring this function into the demo.
+    const newLicenceApplicationData: Application = <Application>{
+      // licenseType: ApplicationTypeNames.LeaderhsipChange,
+      applicantType: this.account.businessType,
+      applicationType: <ApplicationType>{ name: ApplicationTypeNames.LicenseeChanges },
+      account: this.account,
+    };
+
+    this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
+      data => {
+        this.router.navigateByUrl(`/licensee-changes/${data.id}`);
+      },
+      () => {
+        this.snackBar.open('Error starting a New Licensee Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+        console.log('Error starting a New Licensee Application');
+      }
+    );
   }
+
+
 
   isAboutToExpire(expiryDate: string) {
     const now = moment(new Date()).startOf('day');

@@ -346,13 +346,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public AdoxioFinalDecisionCodes AppChecklistFinalDecision { get; set; } //adoxioFinaldecision
 
-        public int? PreviousLicenceApplication { get; set; }
-        public string PreviousLicenceApplicationDetails { get; set; }
+        public int? PreviousApplication { get; set; }
+        public string PreviousApplicationDetails { get; set; }
         public int? RuralAgencyStoreAppointment { get; set; }
         public int? LiquorIndustryConnections { get; set; }
         public string LiquorIndustryConnectionsDetails { get; set; }
-        public int? OtherBusinessesAtTheSameLocation { get; set; }
-        public string OtherBusinessSameLocationDetails { get; set; }
+        public int? OtherBusinesses { get; set; }
+        public string OtherBusinessesDetails { get; set; }
 
 
         public GeneralYesNo AdoxioInvoiceTrigger { get; set; } //adoxio_invoicetrigger
@@ -489,5 +489,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsReadyExtranceExit { get; set; }
         public bool? IsReadySurveillanceNotice { get; set; }
         public bool? IsReadyProductNotVisibleOutside { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public GeneralYesNo? IsApplicationComplete { get; set; }
     }
 }

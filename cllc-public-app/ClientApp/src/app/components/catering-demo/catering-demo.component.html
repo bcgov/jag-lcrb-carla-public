@@ -1,5 +1,5 @@
 <div class="dashboard-spacing">
-  <h1>Catering Demo</h1>
+  <h1>Welcome to Liquor and Cannabis Licensing</h1>
   <div class="row">
     <div class="col-lg-7 col-sm-12">
       <section class="small-screen-only">
@@ -255,19 +255,17 @@
         <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0">ASSOCIATES</h3>
 
         <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+          <p>The following associate information is on file for your business. You must provide notice to LCRB when there is a change to it.</p>
           <app-licensee-tree *ngIf="tree" [treeRoot]="tree" [enableEditing]="false"></app-licensee-tree>
           <br>
           <br>
           <a href="javascript: void(0);" (click)="startLicenseeChangeApplication()" style="float: right;">
-            <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Start Licensee Change Application
+            <i class="fas fa-pencil-alt" style="margin-right: 5px; "></i> Update your Associate Information
           </a>
           <div style="clear: both;"></div>
         </div>
       </section>
-      <p></p>
-      <app-associate-content [account]="account" [isIndigenousNation]="indigenousNationModeActive">
-      </app-associate-content>
-      <p></p>
+
     </div>
   </div>
   <section style="margin-top: 20px;">

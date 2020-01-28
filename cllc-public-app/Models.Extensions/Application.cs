@@ -14,7 +14,6 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class ApplicationExtensions
     {
-
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.Application from)
         {
             to.AdoxioName = from.Name;
@@ -38,9 +37,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioSignatureagreement = from.SignatureAgreement;
             to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
             to.AdoxioFederalproducernames = from.FederalProducerNames;
-
-
-
 
             // standard service hours are 9 to 11, 7 days a week.
             if (
@@ -118,22 +114,20 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioEstablishmentopeningdate = from.Establishmentopeningdate;
             to.AdoxioIsreadyvalidinterest = from.IsReadyValidInterest;
 
-
-
             to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
             to.AdoxioSignatureagreement = from.SignatureAgreement;
 
             to.AdoxioApplicanttype = (int?)from.ApplicantType;
 
             // catering fields
-
-            to.AdoxioPreviouslicenceapplication = from.PreviousLicenceApplication;
-            to.AdoxioPreviouslicenceapplicationdetails = from.PreviousLicenceApplicationDetails;
+            to.AdoxioPreviouslicenceapplication = from.PreviousApplication;
+            to.AdoxioPreviouslicenceapplicationdetails = from.PreviousApplicationDetails;
             to.AdoxioRuralagencystoreappointment = from.RuralAgencyStoreAppointment;
             to.AdoxioLiquorindustryconnections = from.LiquorIndustryConnections;
             to.AdoxioLiquorindustryconnectionsdetails = from.LiquorIndustryConnectionsDetails;
-            to.AdoxioOtherbusinessesatthesamelocation = from.OtherBusinessesAtTheSameLocation;
-            to.AdoxioOtherbusinesssamelocationdetails = from.OtherBusinessSameLocationDetails;
+            to.AdoxioOtherbusinessesatthesamelocation = from.OtherBusinesses;
+            to.AdoxioOtherbusinesssamelocationdetails = from.OtherBusinessesDetails;
+            to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
 
             // comment out this next line as it is causing all application updates to fail (moved to controller)
             //to.AdoxioApplicanttype = (int)Enum.ToObject(typeof(Gov.Lclb.Cllb.Public.ViewModels.Adoxio_applicanttypecodes), from.applicantType);
@@ -164,7 +158,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 // 12-10-2019 - Removed set to AdoxioAddressCity as it is set by Dynamics Workflow, not the portal                
                 to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
-                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;                            
+                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
                 to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
             }
 
@@ -233,6 +227,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
                 EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
                 FederalProducerNames = dynamicsApplication.AdoxioFederalproducernames,
+                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
 
                 ServicehHoursStandardHours = dynamicsApplication.AdoxioServicehoursstandardhours,
                 ServiceHoursSundayOpen = (ServiceHours?)dynamicsApplication.AdoxioServicehourssundayopen,
@@ -266,8 +261,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 RenewalFloorPlan = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfloorplan,
                 RenewalSiteMap = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalsitemap,
                 TiedhouseFederalInterest = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaltiedhousefederalinterest,
-
-
 
                 AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
                 SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
@@ -319,17 +312,17 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                 // Catering fields.
 
-                PreviousLicenceApplicationDetails = dynamicsApplication.AdoxioPreviouslicenceapplicationdetails,
-                
+                PreviousApplicationDetails = dynamicsApplication.AdoxioPreviouslicenceapplicationdetails,
+
                 LiquorIndustryConnectionsDetails = dynamicsApplication.AdoxioLiquorindustryconnectionsdetails,
 
-                OtherBusinessSameLocationDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
-        };
+                OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails
+            };
 
             // Catering yes / no fields
             if (dynamicsApplication.AdoxioPreviouslicenceapplication != null)
             {
-                applicationVM.PreviousLicenceApplication = dynamicsApplication.AdoxioPreviouslicenceapplication;
+                applicationVM.PreviousApplication = dynamicsApplication.AdoxioPreviouslicenceapplication;
             }
 
             if (dynamicsApplication.AdoxioRuralagencystoreappointment != null)
@@ -341,16 +334,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 applicationVM.LiquorIndustryConnections = dynamicsApplication.AdoxioLiquorindustryconnections;
             }
-            
+
             if (dynamicsApplication.AdoxioOtherbusinessesatthesamelocation != null)
             {
-                applicationVM.OtherBusinessesAtTheSameLocation = dynamicsApplication.AdoxioOtherbusinessesatthesamelocation;
+                applicationVM.OtherBusinesses = dynamicsApplication.AdoxioOtherbusinessesatthesamelocation;
             }
 
 
             // id
             if (dynamicsApplication.AdoxioApplicationid != null)
+            {
                 applicationVM.Id = dynamicsApplication.AdoxioApplicationid.ToString();
+            }
 
             if (dynamicsApplication.Statuscode != null)
             {
@@ -369,9 +364,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 var contact = await dynamicsClient.GetContactById(applyingPersonId);
                 applicationVM.ApplyingPerson = contact.Fullname;
             }
+            
             if (dynamicsApplication._adoxioApplicantValue != null)
             {
-                var applicant = await dynamicsClient.GetAccountById(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
+                var applicant = await dynamicsClient.GetAccountByIdAsync(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
                 applicationVM.Applicant = applicant.ToViewModel();
             }
 

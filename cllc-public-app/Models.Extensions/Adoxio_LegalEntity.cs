@@ -93,6 +93,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.commonvotingshares = adoxio_legalentity.AdoxioCommonvotingshares;
                 result.dateofbirth = adoxio_legalentity.AdoxioDateofbirth;
                 result.firstname = adoxio_legalentity.AdoxioFirstname;
+                result.contactId = adoxio_legalentity._adoxioContactValue ;
                 if (adoxio_legalentity.AdoxioInterestpercentage != null)
                 {
                     result.interestpercentage = Convert.ToDecimal(adoxio_legalentity.AdoxioInterestpercentage);

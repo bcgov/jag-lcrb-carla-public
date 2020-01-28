@@ -63,7 +63,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// delegate user who created the record.</param>
         /// <param name="versionnumber">Version Number</param>
         /// <param name="adoxioName">The name of the custom entity.</param>
-        public MicrosoftDynamicsCRMadoxioEvent(string _adoxioLicenceValue = default(string), string _adoxioInspectorValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string adoxioVenuedescription = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? adoxioStartdate = default(System.DateTimeOffset?), string adoxioAdditionallocationinformation = default(string), string adoxioAddress = default(string), string adoxioFoodservicedescription = default(string), int? importsequencenumber = default(int?), bool? adoxioCommunityapproval = default(bool?), System.DateTimeOffset? adoxioEnddate = default(System.DateTimeOffset?), string adoxioEventid = default(string), string adoxioEntertainmentdescription = default(string), string adoxioContactphone = default(string), int? statecode = default(int?), string _createdbyValue = default(string), string adoxioExternalid = default(string), System.DateTimeOffset? adoxioDateoutcomed = default(System.DateTimeOffset?), string adoxioContactname = default(string), string adoxioContactemail = default(string), bool? adoxioNotifyeventinspector = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioAccountValue = default(string), string adoxioOsSessionPk = default(string), string adoxioEventnumber = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioSpecificlocation = default(int?), string _owninguserValue = default(string), int? adoxioEventtype = default(int?), int? statuscode = default(int?), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioEntertainment = default(int?), string _createdonbehalfbyValue = default(string), int? adoxioClass = default(int?), string adoxioClienthostname = default(string), string versionnumber = default(string), string adoxioName = default(string), int? adoxioMaxattendance = default(int?), string adoxioEventtypedescription = default(string), int? adoxioFoodservice = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEventSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEventAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEventBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount adoxioAccount = default(MicrosoftDynamicsCRMaccount))
+        public MicrosoftDynamicsCRMadoxioEvent(string _adoxioLicenceValue = default(string), string _adoxioInspectorValue = default(string), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), string _owningteamValue = default(string), string adoxioVenuedescription = default(string), string _owningbusinessunitValue = default(string), System.DateTimeOffset? adoxioStartdate = default(System.DateTimeOffset?), string adoxioAdditionallocationinformation = default(string), System.DateTimeOffset? adoxioLiquorservicestartdate = default(System.DateTimeOffset?), string adoxioAddress = default(string), string adoxioFoodservicedescription = default(string), int? importsequencenumber = default(int?), bool? adoxioCommunityapproval = default(bool?), System.DateTimeOffset? adoxioEnddate = default(System.DateTimeOffset?), string adoxioEventid = default(string), string adoxioEntertainmentdescription = default(string), bool? adoxioAttendanceminors = default(bool?), string adoxioContactphone = default(string), int? statecode = default(int?), string _createdbyValue = default(string), string adoxioExternalid = default(string), System.DateTimeOffset? adoxioDateoutcomed = default(System.DateTimeOffset?), string adoxioContactname = default(string), string adoxioContactemail = default(string), bool? adoxioNotifyeventinspector = default(bool?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), string _adoxioAccountValue = default(string), string adoxioOsSessionPk = default(string), string adoxioEventnumber = default(string), int? utcconversiontimezonecode = default(int?), int? timezoneruleversionnumber = default(int?), string _modifiedbyValue = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioSpecificlocation = default(int?), string _owninguserValue = default(string), int? adoxioEventtype = default(int?), int? statuscode = default(int?), System.DateTimeOffset? adoxioLiquorserviceenddate = default(System.DateTimeOffset?), string _owneridValue = default(string), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), int? adoxioEntertainment = default(int?), string _createdonbehalfbyValue = default(string), int? adoxioClass = default(int?), string adoxioClienthostname = default(string), string versionnumber = default(string), string adoxioName = default(string), int? adoxioMaxattendance = default(int?), string adoxioEventtypedescription = default(string), int? adoxioFoodservice = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioEventSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioEventDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioEventAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioEventBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioLicences adoxioLicence = default(MicrosoftDynamicsCRMadoxioLicences), MicrosoftDynamicsCRMsystemuser adoxioInspector = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMaccount adoxioAccount = default(MicrosoftDynamicsCRMaccount))
         {
             this._adoxioLicenceValue = _adoxioLicenceValue;
             this._adoxioInspectorValue = _adoxioInspectorValue;
@@ -73,6 +73,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owningbusinessunitValue = _owningbusinessunitValue;
             AdoxioStartdate = adoxioStartdate;
             AdoxioAdditionallocationinformation = adoxioAdditionallocationinformation;
+            AdoxioLiquorservicestartdate = adoxioLiquorservicestartdate;
             AdoxioAddress = adoxioAddress;
             AdoxioFoodservicedescription = adoxioFoodservicedescription;
             Importsequencenumber = importsequencenumber;
@@ -80,6 +81,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioEnddate = adoxioEnddate;
             AdoxioEventid = adoxioEventid;
             AdoxioEntertainmentdescription = adoxioEntertainmentdescription;
+            AdoxioAttendanceminors = adoxioAttendanceminors;
             AdoxioContactphone = adoxioContactphone;
             Statecode = statecode;
             this._createdbyValue = _createdbyValue;
@@ -100,6 +102,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             this._owninguserValue = _owninguserValue;
             AdoxioEventtype = adoxioEventtype;
             Statuscode = statuscode;
+            AdoxioLiquorserviceenddate = adoxioLiquorserviceenddate;
             this._owneridValue = _owneridValue;
             Overriddencreatedon = overriddencreatedon;
             AdoxioEntertainment = adoxioEntertainment;
@@ -181,6 +184,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "adoxio_liquorservicestartdate")]
+        public System.DateTimeOffset? AdoxioLiquorservicestartdate { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "adoxio_address")]
         public string AdoxioAddress { get; set; }
 
@@ -216,6 +224,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_entertainmentdescription")]
         public string AdoxioEntertainmentdescription { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_attendanceminors")]
+        public bool? AdoxioAttendanceminors { get; set; }
 
         /// <summary>
         /// </summary>
@@ -328,6 +341,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "statuscode")]
         public int? Statuscode { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_liquorserviceenddate")]
+        public System.DateTimeOffset? AdoxioLiquorserviceenddate { get; set; }
 
         /// <summary>
         /// Gets or sets owner Id
