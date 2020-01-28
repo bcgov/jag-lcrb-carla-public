@@ -28,9 +28,9 @@
             <div [ngBusy]="busy"></div>
             <section *ngIf="application?.applicationType?.establishmentName === FormControlState.Show">
               <label for="">Establishment Name</label>
-              <br>
+              <br>              
 
-              <p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 A name cannot mislead the public about what kind of business the licensee operates. The name cannot
                 imply a
                 licensee is selling medical cannabis, and cannot include words in any form or combination or manner
@@ -40,12 +40,12 @@
                 Scheduling Act. Store names cannot also use language that encourages intoxication.
               </p>
 
-              <p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 Additionally, a name cannot imply an association with another business. This applies to signs,
                 trademarks and any type of branding.
               </p>
 
-              <p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 Establishment names will be reviewed for approval during the application process. For more
                 information,
                 please see the <a routerLink="/policy-document/store-name">
@@ -54,20 +54,31 @@
                 </a>.
               </p>
             </section>
-
-            <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                       [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
-                       [required]="true" [valid]="isValidOrNotTouched('establishmentName')"
-                       errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
-              <input class="form-control" style="width: 500px;" type="text"
-                     [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
-                     (change)="checkPossibleProblematicWords()" formControlName="establishmentName" id="establishmentName">
-            </app-field>
-            <div *ngIf="possibleProblematicNameWarning" class="warning-state">
-              Caution: The store name might contain at least one word that doesn’t comply with the naming
-              requirements.
-              Double check the store name before submitting the application.
+            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+                <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
+                          [label]="[ApplicationTypeNames.CRSTransferofOwnership, ApplicationTypeNames.CRSLocationChange].indexOf(application?.applicationType?.name) === -1 ? 'Establishment Name' : 'Name of the Proposed Establishment'"
+                          [required]="true" [valid]="isValidOrNotTouched('establishmentName')"
+                          errorMessage="{{form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName'] ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.' : 'Establishment Name is a required field'}}">
+                  <input class="form-control" style="width: 500px;" type="text"
+                        [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
+                        (change)="checkPossibleProblematicWords()" formControlName="establishmentName" id="establishmentName">
+                </app-field>
+                <div *ngIf="possibleProblematicNameWarning" class="warning-state">
+                  Caution: The store name might contain at least one word that doesn’t comply with the naming
+                  requirements.
+                  Double check the store name before submitting the application.
+                </div>
             </div>
+            <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+                <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
+                          [label]="Establishment"
+                          [required]="true">
+                  <input class="form-control" style="width: 500px;" type="text"
+                          [readonly]="application?.applicationType?.establishmentName === FormControlState.Reaonly"
+                          formControlName="establishmentName" id="establishmentName">
+                </app-field>
+            </div>
+
 
           </div>
           <div formGroupName="assignedLicence"
@@ -106,7 +117,7 @@
           <div class="ngtest-new-address"
                *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
             <h3 class="blue-header"
-                *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange">
+                *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSLocationChange || application?.applicationType?.name === ApplicationTypeNames.LiquorRelocation">
               PROPOSED ADDRESS
             </h3>
             &nbsp;
@@ -215,26 +226,25 @@
         <label for="">Photos or renderings of the store's signage</label>
         <br>
         <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
-          <app-more-less-content>
-            <p less>
+          
+            <p>
               The signage submitted must show the name of the store and all words, images and symbols used in the
               signage.
             </p>
-            <div more>
-              <p>
+            
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 Signage must not contain any pictures, images or symbols that imply the sale of medical cannabis (e.g. a
                 green cross).
               </p>
-              <p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 Signage must not imply an association with another business (other than another non-medical cannabis
                 retail
                 store).
               </p>
-              <p>
+              <p *ngIf="application?.licenseType == 'Cannabis Retail Store'">
                 If submitting renderings, renderings may be either printed or hand-drawn (as long as they are legible)
               </p>
-            </div>
-          </app-more-less-content>
+          
         </section>
 
         <p *ngIf="application?.applicationType?.signage === FormControlState.Reaonly">
@@ -272,14 +282,15 @@
       <div class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
         <hr>
         <br>
-        <label for="">Offer or Proof of Ownership, Lease or Sub-Lease</label>
+        <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">Offer or Proof of Ownership, Lease or Sub-Lease</label>
+        <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Proof of Valid Interest</label>
         <br>
         <section *ngIf="application?.applicationType?.validInterest === FormControlState.Show">
-          <app-more-less-content>
-            <p less>
+            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
+            <p>
               If the applicant currently owns or leases the proposed store location, submit Option 1.
             </p>
-            <div more>
+          
               <p>
                 If the applicant doesn't currently own or lease the proposed store location, submit Option 2.
               </p>
@@ -296,7 +307,17 @@
                 Option 1 will be required before the licence is issued.
               </p>
             </div>
-          </app-more-less-content>
+            <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+                <p>Any one of the following documents can be used to show valid interest in the property:</p>
+              <ul> 
+                <li>Certificate of Title in the licensee's name (as stated on the liquor licence)</li>
+                <li>A fully executed lease, an assignment or an offer of lease, which does not expire for at least 12 months. The tenant on the lease document must be the licensee (name the liquor licence is issued to). The lease or offer to lease must show rent paid, have a term and an expiry date, and be signed by the licensee and the landlord or property owner.</li>
+                <li>An offer or option to purchase the property and buildings in the licensee's name (as stated on the liquor licence). An offer or option must show price paid, have a term and expiry date and be signed by both the licensee and property owner. If a VQA store is relocating, the valid interest must be in the name of the third party operator. </li>
+                <p>&nbsp;</p>
+              </ul>
+              <p><strong>Note:</strong> Valid interest must be maintained at the current and proposed site until the relocation is finalized. LCRB may request a copy of valid interest at the current site during the relocation application process.</p>
+            </div>
+          
         </section>
 
         <p *ngIf="application?.applicationType?.validInterest === FormControlState.Reaonly">
@@ -317,8 +338,8 @@
         <label for="">Floor Plan</label>
         <br>
         <section *ngIf="application?.applicationType?.floorPlan === FormControlState.Show">
-          <app-more-less-content>
-            <span less>
+          
+          <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               <span>
                 A floor plan is a document, showing a view from above, of the dimensions and relationships between
                 rooms, spaces and other physical features on each floor of a structure. The document must measure at
@@ -345,12 +366,21 @@
                 <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
                      style="margin: auto; display: block;">
               </div>
-            </span>
-          </app-more-less-content>
+            
+          </div>
+          <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+            <p>The floor plans of the proposed establishment, which must meet the following requirements: </p>
+            <ul>
+              <li>Must be clear, legible and of sufficient detail and size (8.5" x 11") </li>
+              <li>Provide room size dimensions </li>
+              <li>Detail entrance, exit, washrooms, storage area, cash register area, coolers, any adjoining doors and other fixtures </li>
+              <li>Clearly identify the area proposed for licensing and any adjoining unlicensed areas</li>
+            </ul>
+          </div>
 
         </section>
         <p *ngIf="application?.applicationType?.floorPlan === FormControlState.Reaonly">
-          The below offer or proof of ownership, lease or sub-lease is on file.
+          The below floor plan is on file.
         </p>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Floor Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
@@ -384,8 +414,8 @@
         <label for="">Site Plan</label>
         <br>
         <div *ngIf="application?.applicationType?.sitePlan === FormControlState.Show">
-          <app-more-less-content>
-            <section less>
+          
+          <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               <span>
                 A site plan is a document showing any existing and proposed building footprints, pathways of
                 travel, parking, and landscaping elements, and the surrounding area. The document must measure at least
@@ -460,8 +490,16 @@
                   </p>
                 </div>
               </div>
-            </section>
-          </app-more-less-content>
+            </div>
+            <div *ngIf="application.licenseType != 'Cannnabis Retail Store'">
+              <p>A scaled site plan must show the following: </p>
+              <ul>
+                <li>location of the front entrance door of the proposed establishment</li>
+                <li>any other buildings/businesses around the proposed establishment and the entrances to those buildings</li>
+                <li>any relevant street names</li>
+              </ul>
+            </div>
+          
         </div>
         <section>
           <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
@@ -473,13 +511,14 @@
         </section>
       </div>
 
-      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings()">
+      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings() || (application.licenseType != 'Cannabis Retail Store' && application?.applicationType?.sitePlan === FormControlState.Show)">
         <hr>
-        <label for="">Photos or renderings of the store's proposed exterior changes </label>
+        <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">Photos or renderings of the store's proposed exterior changes </label>
+        <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Photographs</label>
         <br>
         <section>
-          <app-more-less-content>
-            <div less>
+          
+            <div *ngIf="application?.licenseType == 'Cannabis Retail Store'">
               <ul>
                 <li>Must show that cannabis is not visible from outside the store</li>
                 <li>
@@ -492,7 +531,11 @@
                 </li>
               </ul>
             </div>
-          </app-more-less-content>
+            <div *ngIf="application?.licenseType != 'Cannabis Retail Store'">
+              <p><u>Provide a minimum four (4) colour photographs of the proposed site, one facing each side of the building/property</u></p>
+              <p>These photos need to be current (taken by the licensee or representative within the past 90 days).  Pictures from internet sites will not be accepted. </p>
+            </div>
+          
         </section>
 
         <section>
@@ -949,7 +992,7 @@
             </div>
           </section>
         </app-field>
-        <p>
+        <p *ngIf="application?.licenseType == 'Cannabis Retail Store' || application?.licenseType == 'Marketer'">
           Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
           manager
           an application, or
@@ -957,6 +1000,10 @@
           information, or
           fails to disclose a material fact”.
         </p>
+        <p *ngIf="application?.licenseType != 'Cannabis Retail Store' && application?.licenseType != 'Marketer'">
+          Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the application or makes a false or misleading statement in the application."
+        </p>
+
         <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
                    errorMessage="Please affirm that all of the information provided for this application is true and complete."
                    [showChevrons]="false">
@@ -992,7 +1039,7 @@
       </section>
 
       <div class="light-blue-bg">
-        <p *ngIf="application?.applicationType?.name !== ApplicationTypeNames.Marketer">
+        <p *ngIf="application?.licenseType === 'Cannabis Retail Store'">
           The Province does not know how many application for a cannabis retail store licence will be received.
           Therefore, it is difficult to predict how long applications will take to process. To minimize delays in
           processing, applicants must make sure the application is complete before submitting it.
@@ -1003,13 +1050,11 @@
           it is difficult to predict how long applications will take to process. To minimize delays in processing,
           applicants must make sure the application is complete before submitting it.
         </p>
+        
         <br>
         <p>
-          The ‘save for later’ feature allows applicants to re-access an application in progress. Please be advised
-          that
-          once an application is submitted, you will be unable to upload additional documentation. For questions on
-          the
-          LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
+          The ‘save for later’ feature allows applicants to re-access an application in progress. 
+          For questions on the LCRB application process, please contact: <a href="javascript: void(0);">lcrbcannabis@gov.bc.ca</a>.
         </p>
       </div>
 
