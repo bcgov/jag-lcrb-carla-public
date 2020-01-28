@@ -39,6 +39,8 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Report</param>
         /// <param name="_modifiedbyValue">Unique identifier of the user who
         /// modified the record.</param>
+        /// <param name="_owningteamValue">Unique identifier for the team that
+        /// owns the record.</param>
         /// <param name="_adoxioProductidValue">Unique identifier for Cannabis
         /// Product Admin associated with Cannabis Inventory Report.</param>
         /// <param name="adoxioCannabisinventoryreportid">Unique identifier for
@@ -52,8 +54,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// delegate user who created the record.</param>
         /// <param name="modifiedon">Date and time when the record was
         /// modified.</param>
-        /// <param name="_owningteamValue">Unique identifier for the team that
-        /// owns the record.</param>
         /// <param name="overriddencreatedon">Date and time that the record was
         /// migrated.</param>
         /// <param name="adoxioValueofclosinginventoryBase">Value of the Value
@@ -86,7 +86,7 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// Report.</param>
         /// <param name="_createdbyValue">Unique identifier of the user who
         /// created the record.</param>
-        public MicrosoftDynamicsCRMadoxioCannabisinventoryreport(int? timezoneruleversionnumber = default(int?), int? adoxioTotalreductions = default(int?), decimal? adoxioTotalvalueretailerBase = default(decimal?), int? adoxioQtyreceiveddomestic = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), int? adoxioQtyshippedreturned = default(int?), decimal? adoxioPackagedunitsnumber = default(decimal?), string _modifiedbyValue = default(string), int? adoxioOpeninginventory = default(int?), string _adoxioProductidValue = default(string), int? adoxioQtyreceivedother = default(int?), int? adoxioClosinginventorycalculated = default(int?), string adoxioCannabisinventoryreportid = default(string), string versionnumber = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioQtydestroyed = default(int?), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), int? adoxioQtyreceivedtotal = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioClosinginventory = default(int?), int? adoxioQtyloststolen = default(int?), string _owningteamValue = default(string), decimal? adoxioWeightofclosinginventory = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? adoxioValueofclosinginventoryBase = default(decimal?), decimal? adoxioTotalvalueretailer = default(decimal?), string _owneridValue = default(string), string _adoxioLicenceidValue = default(string), string _adoxioEstablishmentidValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioTotalnumberseeds = default(int?), int? adoxioQtyreceivedreturns = default(int?), decimal? exchangerate = default(decimal?), string _adoxioLicenseeidValue = default(string), int? statuscode = default(int?), decimal? adoxioPackagedunitsnumberretailer = default(decimal?), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string adoxioName = default(string), string _owningbusinessunitValue = default(string), int? adoxioOtherreductions = default(int?), decimal? adoxioTotalvalueBase = default(decimal?), string _adoxioMonthlyreportidValue = default(string), int? adoxioQtyreceivedcalculated = default(int?), int? adoxioTotalreductionscalculated = default(int?), decimal? adoxioTotalvalue = default(decimal?), decimal? adoxioValueofclosinginventory = default(decimal?), string _createdbyValue = default(string), int? adoxioQtyshippeddomestic = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioCannabisinventoryreportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisinventoryreportDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisinventoryreportDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCannabisinventoryreportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCannabisinventoryreportBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioCannabismonthlyreport adoxioMonthlyReportId = default(MicrosoftDynamicsCRMadoxioCannabismonthlyreport), MicrosoftDynamicsCRMadoxioCannabisproductadmin adoxioProductId = default(MicrosoftDynamicsCRMadoxioCannabisproductadmin), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences))
+        public MicrosoftDynamicsCRMadoxioCannabisinventoryreport(int? timezoneruleversionnumber = default(int?), int? adoxioTotalreductions = default(int?), decimal? adoxioTotalvalueretailerBase = default(decimal?), int? adoxioQtyreceiveddomestic = default(int?), System.DateTimeOffset? createdon = default(System.DateTimeOffset?), int? statecode = default(int?), int? adoxioQtyshippedreturned = default(int?), decimal? adoxioPackagedunitsnumber = default(decimal?), string _modifiedbyValue = default(string), string _owningteamValue = default(string), int? adoxioOpeninginventory = default(int?), string _adoxioProductidValue = default(string), int? adoxioQtyreceivedother = default(int?), int? adoxioClosinginventorycalculated = default(int?), string adoxioCannabisinventoryreportid = default(string), string versionnumber = default(string), string adoxioOtherdescription = default(string), string _modifiedonbehalfbyValue = default(string), int? adoxioQtydestroyed = default(int?), string _transactioncurrencyidValue = default(string), string _createdonbehalfbyValue = default(string), int? adoxioQtyreceivedtotal = default(int?), System.DateTimeOffset? modifiedon = default(System.DateTimeOffset?), int? adoxioClosinginventory = default(int?), int? adoxioQtyloststolen = default(int?), decimal? adoxioWeightofclosinginventory = default(decimal?), System.DateTimeOffset? overriddencreatedon = default(System.DateTimeOffset?), decimal? adoxioValueofclosinginventoryBase = default(decimal?), decimal? adoxioTotalvalueretailer = default(decimal?), string _owneridValue = default(string), string _adoxioLicenceidValue = default(string), string _adoxioEstablishmentidValue = default(string), int? utcconversiontimezonecode = default(int?), int? adoxioTotalnumberseeds = default(int?), int? adoxioQtyreceivedreturns = default(int?), decimal? exchangerate = default(decimal?), string _adoxioLicenseeidValue = default(string), int? statuscode = default(int?), decimal? adoxioPackagedunitsnumberretailer = default(decimal?), int? importsequencenumber = default(int?), string _owninguserValue = default(string), string adoxioName = default(string), string _owningbusinessunitValue = default(string), int? adoxioOtherreductions = default(int?), decimal? adoxioTotalvalueBase = default(decimal?), string _adoxioMonthlyreportidValue = default(string), int? adoxioQtyreceivedcalculated = default(int?), int? adoxioTotalreductionscalculated = default(int?), decimal? adoxioTotalvalue = default(decimal?), decimal? adoxioValueofclosinginventory = default(decimal?), string _createdbyValue = default(string), int? adoxioQtyshippeddomestic = default(int?), MicrosoftDynamicsCRMsystemuser createdbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser createdonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser modifiedonbehalfbyname = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMsystemuser owninguser = default(MicrosoftDynamicsCRMsystemuser), MicrosoftDynamicsCRMteam owningteam = default(MicrosoftDynamicsCRMteam), MicrosoftDynamicsCRMprincipal ownerid = default(MicrosoftDynamicsCRMprincipal), MicrosoftDynamicsCRMbusinessunit owningbusinessunit = default(MicrosoftDynamicsCRMbusinessunit), IList<MicrosoftDynamicsCRMsyncerror> adoxioCannabisinventoryreportSyncErrors = default(IList<MicrosoftDynamicsCRMsyncerror>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisinventoryreportDuplicateMatchingRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMduplicaterecord> adoxioCannabisinventoryreportDuplicateBaseRecord = default(IList<MicrosoftDynamicsCRMduplicaterecord>), IList<MicrosoftDynamicsCRMasyncoperation> adoxioCannabisinventoryreportAsyncOperations = default(IList<MicrosoftDynamicsCRMasyncoperation>), IList<MicrosoftDynamicsCRMbulkdeletefailure> adoxioCannabisinventoryreportBulkDeleteFailures = default(IList<MicrosoftDynamicsCRMbulkdeletefailure>), MicrosoftDynamicsCRMadoxioCannabismonthlyreport adoxioMonthlyReportId = default(MicrosoftDynamicsCRMadoxioCannabismonthlyreport), MicrosoftDynamicsCRMadoxioCannabisproductadmin adoxioProductId = default(MicrosoftDynamicsCRMadoxioCannabisproductadmin), MicrosoftDynamicsCRMtransactioncurrency transactioncurrencyid = default(MicrosoftDynamicsCRMtransactioncurrency), MicrosoftDynamicsCRMaccount adoxioLicenseeId = default(MicrosoftDynamicsCRMaccount), MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishmentId = default(MicrosoftDynamicsCRMadoxioEstablishment), MicrosoftDynamicsCRMadoxioLicences adoxioLicenceId = default(MicrosoftDynamicsCRMadoxioLicences))
         {
             Timezoneruleversionnumber = timezoneruleversionnumber;
             AdoxioTotalreductions = adoxioTotalreductions;
@@ -97,12 +97,14 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             AdoxioQtyshippedreturned = adoxioQtyshippedreturned;
             AdoxioPackagedunitsnumber = adoxioPackagedunitsnumber;
             this._modifiedbyValue = _modifiedbyValue;
+            this._owningteamValue = _owningteamValue;
             AdoxioOpeninginventory = adoxioOpeninginventory;
             this._adoxioProductidValue = _adoxioProductidValue;
             AdoxioQtyreceivedother = adoxioQtyreceivedother;
             AdoxioClosinginventorycalculated = adoxioClosinginventorycalculated;
             AdoxioCannabisinventoryreportid = adoxioCannabisinventoryreportid;
             Versionnumber = versionnumber;
+            AdoxioOtherdescription = adoxioOtherdescription;
             this._modifiedonbehalfbyValue = _modifiedonbehalfbyValue;
             AdoxioQtydestroyed = adoxioQtydestroyed;
             this._transactioncurrencyidValue = _transactioncurrencyidValue;
@@ -111,7 +113,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
             Modifiedon = modifiedon;
             AdoxioClosinginventory = adoxioClosinginventory;
             AdoxioQtyloststolen = adoxioQtyloststolen;
-            this._owningteamValue = _owningteamValue;
             AdoxioWeightofclosinginventory = adoxioWeightofclosinginventory;
             Overriddencreatedon = overriddencreatedon;
             AdoxioValueofclosinginventoryBase = adoxioValueofclosinginventoryBase;
@@ -218,6 +219,12 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         public string _modifiedbyValue { get; set; }
 
         /// <summary>
+        /// Gets or sets unique identifier for the team that owns the record.
+        /// </summary>
+        [JsonProperty(PropertyName = "_owningteam_value")]
+        public string _owningteamValue { get; set; }
+
+        /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_openinginventory")]
         public int? AdoxioOpeninginventory { get; set; }
@@ -250,6 +257,11 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "versionnumber")]
         public string Versionnumber { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "adoxio_otherdescription")]
+        public string AdoxioOtherdescription { get; set; }
 
         /// <summary>
         /// Gets or sets unique identifier of the delegate user who modified
@@ -297,12 +309,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_qtyloststolen")]
         public int? AdoxioQtyloststolen { get; set; }
-
-        /// <summary>
-        /// Gets or sets unique identifier for the team that owns the record.
-        /// </summary>
-        [JsonProperty(PropertyName = "_owningteam_value")]
-        public string _owningteamValue { get; set; }
 
         /// <summary>
         /// </summary>

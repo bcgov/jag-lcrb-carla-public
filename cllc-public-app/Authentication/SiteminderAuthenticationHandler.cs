@@ -471,9 +471,17 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (userSettings.AuthenticatedUser != null)
                 {
                     userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
-
+                    // ensure that the given account has a documents folder.
+                    
                     if (siteMinderBusinessGuid != null) // BCeID user
                     {
+                        var contact = _dynamicsClient.GetContactByExternalId(userSettings.ContactId);
+                        if (contact != null && contact.Contactid != null)
+                        {
+                            await CreateContactDocumentLocation(_dynamicsClient, _fileManagerClient, contact);
+                        }
+
+
                         var account = await _dynamicsClient.GetAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
                         if (account != null && account.Accountid != null)
                         {
@@ -613,29 +621,41 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
+        private async Task CreateContactDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
+        {
+            string folderName = "";
+            try
+            { 
 
+                folderName = contact.GetDocumentFolderName();
+
+                var createFolderRequest = new CreateFolderRequest()
+                {
+                    EntityName = "contact",
+                    FolderName = folderName
+                };
+
+                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+
+                if (createFolderResult.ResultStatus == ResultStatus.Fail)
+                {
+                    _logger.LogError($"Error creating folder for contact {folderName}. Error is {createFolderResult.ErrorDetail}");
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Error creating folder for contact {folderName}");
+            }
+        }
 
         private async Task CreateAccountDocumentLocation(IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
         {
-            string name = "";
+            string folderName = "";
             try
-            {
-                string serverRelativeUrl = account.GetServerUrl();                
+            {                
 
-                if (string.IsNullOrEmpty(account.Name))
-                {
-                    name = account.Accountid;
-                }
-                else
-                {
-                    name = account.Name;
-                }
-
-                name += " Account Files";
-
-                string folderName = $"{account.Name}_{account.Accountid}";
-                
-
+                folderName = account.GetDocumentFolderName();
+               
                 var createFolderRequest = new CreateFolderRequest()
                 {
                     EntityName = "account",
@@ -646,12 +666,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.LogError($"Error creating folder for account {name}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.LogError($"Error creating folder for account {folderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, $"Error creating folder for account {name}");
+                _logger.LogError(e, $"Error creating folder for account {folderName}");
             }
             
 

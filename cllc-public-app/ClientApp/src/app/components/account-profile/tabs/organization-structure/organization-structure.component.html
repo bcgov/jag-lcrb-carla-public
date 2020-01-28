@@ -1,5 +1,135 @@
-<div class="form-wrapper">
+<div class="form-wrapper row" style="position:relative;">
+  <div [ngBusy]="[busy]"></div>
+  <section class="col-md-8">
     <app-org-structure [node]="treeRoot" [account]="account"></app-org-structure>
+  </section>
+  
+  <section class="col-md-4">
+  
+    <h1>&nbsp;</h1><br>
+  
+    <section class="large-screen-only">
 
-    <button class="btn btn-primary" (click)="save()">Save</button>
+      <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information Completeness</h3>
+
+      <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
+
+        <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
+        
+          <a [routerLink]="[ '/account-profile/']" class="completeness">
+            <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+            </i>Notice of Articles Uploaded
+          </a> <br>
+        </div>
+
+        <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation'">
+          <a [routerLink]="[ '/org-structure/']" class="completeness">
+            <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
+            </i>Central Securities Register Uploaded
+          </a><br>
+        </div>
+        
+        <div style="font-size:20px;" *ngIf="account?.businessType === 'Partnership'">
+            
+            <a [routerLink]="[ '/account-profile/']" class="completeness">
+              <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
+              </i>Partnership Agreement Uploaded
+            </a> <br>
+          </div>
+          
+        <label *ngIf="LicenseeChangeLog?.HasChanges(treeRoot)">Summary of changes:</label>
+        <ul *ngIf="treeRoot">
+          <li *ngIf="LicenseeChangeLog?.GetKeyPersonnelDecendents(treeRoot).length > 0">
+            Key Personnel<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog?.GetKeyPersonnelDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
+              </li>
+            </ul>
+          </li>
+          <li>
+            Individual Shareholders<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog?.GetIndividualShareholderDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
+              </li>
+            </ul>
+          </li>
+          <li>
+            Business Shareholders<br>
+            <ul>
+              <li *ngFor="let item of LicenseeChangeLog?.GetBusinessShareholderDecendents(treeRoot)">
+                {{item.getChageTypeVerb()}} {{item.businessNameNew}}
+              </li>
+            </ul>
+          </li>
+        
+        <hr>
+        Types of changes:
+
+          <div *ngIf="account?.businessType === 'Private Corporation'">
+            <li *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0">
+              Individual Shareholders<br>
+              <ul>
+                <li *ngFor="let item of LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot)">
+                  {{item.getChageTypeVerb()}} {{item.firstNameNew}} {{item.lastNameNew}}
+                </li>
+              </ul>
+            </li>
+            <li *ngIf="LicenseeChangeLog.length > 0">
+              Business Shareholders<br>
+              <ul>
+                <li *ngFor="let item of LicenseeChangeLog.GetBusinessShareholderDecendents(treeRoot)">
+                  {{item.getChageTypeVerb()}} {{item.businessNameNew}}
+                </li>
+              </ul>
+            </li>
+        
+          </div>
+      </ul>
+        <hr>
+        <div *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
+          <table class="smallGridTable" style="font-size:10px;">
+            <thead>
+              <tr style="height:50px;">
+              <th>Type</th>
+              <th>Cannabis<br>Licences</th>
+              <th>Liquor<br>Licences</th>
+              <th>Total</th>
+            </tr>
+            </thead>
+            <tr *ngIf="LicenseeChangeLog.GetKeyPersonnelDecendents(treeRoot).length > 0" style="height:50px;">
+              <td><strong>Leadership Changes</strong></td>
+              <td>$500 x 0 licences</td>
+              <td>$220 x 0 licences</td>
+              <td>$0</td>
+            </tr>
+
+              <tr *ngIf="LicenseeChangeLog.GetIndividualShareholderDecendents(treeRoot).length > 0" style="height:50px;">
+                  <td><strong>External Share Transfers</strong></td>
+                  <td>$500 x 0 licences</td>
+                  <td>$220 x 0 licences</td>
+                  <td>$0</td>
+                </tr>
+              <tfoot><tr>
+                <td colspan=3 style="text-align: right;">Total:</td>
+                <td><strong>$0</strong></td>
+              </tr>
+            </tfoot>
+          </table>
+          <p>&nbsp;</p>
+  
+
+        </div>
+        
+        
+        
+
+        <div style="text-align:center;">
+          <button class="btn btn-primary" (click)="save()">Save</button>
+        </div>
+      </div>
+    </section>
+
+  </section>
 </div>

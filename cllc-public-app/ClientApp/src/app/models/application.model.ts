@@ -6,13 +6,13 @@ import { TiedHouseConnection } from './tied-house-connection.model';
 
 export class Application {
 
-  previousLicenceApplication: number;
-  previousLicenceApplicationDetails: string;
+  previousApplication: number;
+  previousApplicationDetails: string;
   ruralAgencyStoreAppointment: number;
   liquorIndustryConnections: number;
   liquorIndustryConnectionsDetails: string;
-  otherBusinessesAtTheSameLocation: number;
-  otherBusinessSameLocationDetails: string;
+  otherBusinesses: number;
+  otherBusinessesDetails: string;
 
   id: string;
   account: Account;
@@ -103,4 +103,5 @@ export class Application {
   isReadySurveillanceNotice: boolean;
   isReadyProductNotVisibleOutside: boolean;
   establishmentopeningdate: Date;
+  isApplicationComplete: string;
 }
