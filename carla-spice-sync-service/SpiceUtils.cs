@@ -604,6 +604,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         private List<LegalEntity> CreateAssociatesForAccount(string accountId)
         {
             List<LegalEntity> newAssociates = new List<LegalEntity>();
+            if (string.IsNullOrEmpty(accountId))
+            {
+                _logger.LogError("CreateAssociatesForAccount received a null accountId");
+                return newAssociates;
+            }
             string entityFilter = "_adoxio_account_value eq " + accountId + " and _adoxio_profilename_value ne " + accountId;
             entityFilter += " and adoxio_isdonotsendtospd ne true";
             string[] expand = { "adoxio_Contact", "adoxio_Account"};
