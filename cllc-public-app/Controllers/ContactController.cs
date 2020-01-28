@@ -618,6 +618,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var result = new PHSContact
                     {
+                        Id = contact.Contactid,
                         token = code,
                         shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname)
                     };
@@ -637,6 +638,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     public class PHSContact
     {
+        public string Id { get; set; }
         public string token { get; set; }
         public string shortName { get; set; }
     }

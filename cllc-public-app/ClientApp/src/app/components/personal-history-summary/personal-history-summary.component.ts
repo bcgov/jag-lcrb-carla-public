@@ -16,7 +16,6 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
   aliasesToDelete: any;
   form: FormGroup;
   contactToken: string;
-  contactId: string;
   contact: PHSContact;
 
   public get aliases(): FormArray {

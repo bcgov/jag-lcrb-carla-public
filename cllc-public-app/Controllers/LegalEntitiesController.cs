@@ -179,7 +179,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var filter = "_adoxio_account_value eq " + accountId;
             filter += " and _adoxio_legalentityowned_value eq null";
 
-            var response = _dynamicsClient.Legalentities.Get(filter: filter);
+            var expand = new List<string>{
+                "adoxio_Contact"
+            };
+
+            var response = _dynamicsClient.Legalentities.Get(filter: filter, expand: expand);
 
             if (response != null && response.Value != null)
             {
