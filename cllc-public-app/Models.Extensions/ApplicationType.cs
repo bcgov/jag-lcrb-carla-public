@@ -20,25 +20,27 @@ namespace Gov.Lclb.Cllb.Public.Models
                     Id = applicationType.AdoxioApplicationtypeid,
 
                     ActionText = applicationType.AdoxioActiontext,
+
                     Name = applicationType.AdoxioName,
                     Title = applicationType.AdoxioTitletext,
-                    ShowAssociatesFormUpload = applicationType.AdoxioIsshowassociatesformupload,
-                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,
-                    ShowDeclarations = applicationType.AdoxioIsshowdeclarations,
-                    ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
-                    ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
-                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
-                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
-                    StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
                     EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,
-                    newEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
+                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
                     CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,
+                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,
+                    newEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
+                    StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
+                    ShowDescription1 = applicationType.AdoxioShowdescription1,
                     Signage = (FormControlState?)applicationType.AdoxioSignage,
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
                     FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
-                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,
-                    ShowDescription1 = applicationType.AdoxioShowdescription1,
+                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,                    
+                    ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
+                    ShowAssociatesFormUpload = applicationType.AdoxioIsshowassociatesformupload,
+                    ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload, 
+                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
+                    ShowDeclarations = applicationType.AdoxioIsshowdeclarations
+            
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
