@@ -46,35 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileClient;
         }
 
-        private static string GetAccountFolderName(MicrosoftDynamicsCRMaccount account)
-        {
-            string accountIdCleaned = account.Accountid.ToString().ToUpper().Replace("-", "");
-            string folderName = $"{account.Accountid}_{accountIdCleaned}";
-            return folderName;
-        }
-
-        private static string GetApplicationFolderName(MicrosoftDynamicsCRMadoxioApplication application)
-        {
-            string applicationIdCleaned = application.AdoxioApplicationid.ToString().ToUpper().Replace("-", "");
-            string folderName = $"{application.AdoxioJobnumber}_{applicationIdCleaned}";
-            return folderName;
-        }
-
-        private static string GetContactFolderName(MicrosoftDynamicsCRMcontact contact)
-        {
-            string applicationIdCleaned = contact.Contactid.ToString().ToUpper().Replace("-", "");
-            string folderName = $"contact_{applicationIdCleaned}";
-            return folderName;
-        }
-
-        private static string GetWorkerFolderName(MicrosoftDynamicsCRMadoxioWorker worker)
-        {
-            string applicationIdCleaned = worker.AdoxioWorkerid.ToString().ToUpper().Replace("-", "");
-            
-            string folderName = $"{worker.AdoxioName}_{applicationIdCleaned}";
-            return folderName;
-        }
-
+        
         /// <summary>
         /// Get a document location by reference
         /// </summary>
@@ -264,19 +236,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 case "account":
                     var account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(entityId));
-                    folderName = GetAccountFolderName(account);
+                    folderName = account.GetDocumentFolderName();
                     break;
                 case "application":
                     var application = await _dynamicsClient.GetApplicationById(Guid.Parse(entityId));
-                    folderName = GetApplicationFolderName(application);
+                    folderName = application.GetDocumentFolderName();
                     break;
                 case "contact":
                     var contact = await _dynamicsClient.GetContactById(Guid.Parse(entityId));
-                    folderName = GetContactFolderName(contact);
+                    folderName = contact.GetDocumentFolderName();
                     break;
                 case "worker":
                     var worker = await _dynamicsClient.GetWorkerById(Guid.Parse(entityId));
-                    folderName = GetWorkerFolderName(worker);
+                    folderName = worker.GetDocumentFolderName();
                     break;
                 default:
                     break;
