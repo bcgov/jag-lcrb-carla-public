@@ -511,7 +511,9 @@
         </section>
       </div>
 
-      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings() || (application.licenseType != 'Cannabis Retail Store' && application?.applicationType?.sitePlan === FormControlState.Show)">
+      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings() || 
+      (application.licenseType != 'Cannabis Retail Store' && 
+      application?.applicationType?.sitePlan === FormControlState.Show)">
         <hr>
         <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">Photos or renderings of the store's proposed exterior changes </label>
         <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Photographs</label>
