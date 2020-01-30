@@ -1,23 +1,22 @@
-
-
 <h1 *ngIf="node?.isRoot" class="plain-header">{{node?.businessNameNew}} Detailed Organization Information</h1>
 <h2 *ngIf="!node?.isRoot && node?.businessType" class="plain-header">
-  
+
   {{node?.businessNameNew}} Shareholder Business Information </h2>
 <p *ngIf="!node?.isRoot && !node?.businessType">Please select a shareholder <strong>Business Type</strong> above.</p>
 
 <ng-template #treeNode let-node="node" let-account="account">
-  
+
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
     <h3 class="blue-header">Provide Corporate Documents</h3>
     <h3 class="plain-header">Notice of Articles</h3>
     <section class="padded-section">
       <p>Please upload the {{node?.businessNameNew}} Corporation Notice of Articles.</p>
       <section>
-        <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} NOA" fileTypes="FILE MUST BE IN PDF FORMAT."
-          [multipleFiles]="false" entityName="account" [useDocumentTypeForName]="true"
-          (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
-          [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} NOA"
+          fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+          [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+          [entityId]="account?.id" [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILE HERE OR'"
+          #financialIntegrityDocuments>
         </app-file-uploader>
       </section>
     </section>
@@ -29,9 +28,9 @@
       <p>Please upload the {{node?.businessNameNew}} Central Securities Register.</p>
       <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SECREG"
         fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
-        [useDocumentTypeForName]="true"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
-        [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+        [entityId]="account?.id" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILE HERE OR'"
+        #financialIntegrityDocuments>
       </app-file-uploader>
     </section>
 
@@ -41,9 +40,10 @@
         provide them here.
       </p>
       <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} SRANDR"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"  [useDocumentTypeForName]="true"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
-        [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+        [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+        [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL RIGHTS AND RESTRICTIONS, DRAG FILE HERE OR'"
+        #financialIntegrityDocuments>
       </app-file-uploader>
     </section>
   </ng-container>
@@ -53,71 +53,83 @@
     <h3 class="plain-header">Partnership Agreement</h3>
     <section class="padded-section">
       <p>Partnership Agreement for {{node?.businessNameNew}}.</p>
-      <app-file-uploader *ngIf="account?.id" documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Partnership Agreement"
-        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"  [useDocumentTypeForName]="true"
-        (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event" [entityId]="account?.id"
-        [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'" #financialIntegrityDocuments>
+      <app-file-uploader *ngIf="account?.id"
+        documentType="{{asLicenseeChangeLog(node).fileUploadPrefix}} Partnership Agreement"
+        fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="account"
+        [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedFinancialIntegrityDocuments = $event"
+        [entityId]="account?.id" [uploadHeader]="'TO UPLOAD SPECIAL PARTNERSHIP AGREEMENT, DRAG FILE HERE OR'"
+        #financialIntegrityDocuments>
       </app-file-uploader>
     </section>
   </ng-container>
 
-  <ng-container *ngIf="node?.businessType === 'Society'"><section class="padded-section">
-    <h3 class="blue-header">Provide Society Information</h3>
-    <app-field label="Annual Membership Fee">
-      <input type="text" class="form-control">
-    </app-field>
-    <app-field label="Number of Members">
-      <input type="text" class="form-control">
-    </app-field>
-  </section>
+  <ng-container *ngIf="node?.businessType === 'Society'">
+    <section class="padded-section">
+      <h3 class="blue-header">Provide Society Information</h3>
+      <app-field label="Annual Membership Fee">
+        <input type="text" class="form-control">
+      </app-field>
+      <app-field label="Number of Members">
+        <input type="text" class="form-control">
+      </app-field>
+    </section>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
     <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-      (childAdded)="addChild(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader"></app-associate-list>
+      (personalHistoryItemsChange)="updateChildred(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader">
+    </app-associate-list>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'PrivateCorporation' || node?.businessType === 'PublicCorporation'">
-    
+
     <h3 class="blue-header">List Key Personnel</h3>
     <section class="padded-section">
       <p>
-        Please add the complete list of directors, officers and senior managers for {{node?.businessNameNew}}, including their 
-        full legal name, date of birth and email address. They will be reviewed by the LCRB against your Notice of Articles. 
-        In order to complete an application for a liquor or cannabis licence, they will each be required to provide security screening
+        Please add the complete list of directors, officers and senior managers for {{node?.businessNameNew}}, including
+        their
+        full legal name, date of birth and email address. They will be reviewed by the LCRB against your Notice of
+        Articles.
+        In order to complete an application for a liquor or cannabis licence, they will each be required to provide
+        security screening
         related information.
       </p>
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-        (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Key Personnel"></app-associate-list>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
+        (personalHistoryItemsChange)="updateChildred(node, $event, 'Leadership')" changeTypeSuffix="Leadership"
+        addLabel="Add Key Personnel"></app-associate-list>
     </section>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Society'">
     <h3 class="blue-header">List Directors and Officers</h3>
     <section class="padded-section">
-        <p>
-            Please add the complete list of directors and officers for {{node?.businessNameNew}}, including their 
-            full legal name, date of birth and email address. In order to complete an application for a liquor or cannabis licence, they will each be 
-            required to provide security screening related information.
-          </p>
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-      (childAdded)="addChild(node, $event, 'AddLeadership')" changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-associate-list>
+      <p>
+        Please add the complete list of directors and officers for {{node?.businessNameNew}}, including their
+        full legal name, date of birth and email address. In order to complete an application for a liquor or cannabis
+        licence, they will each be
+        required to provide security screening related information.
+      </p>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"
+        (personalHistoryItemsChange)="updateChildred(node, $event, 'Leadership')" [rootNode]="node"
+        changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-associate-list>
     </section>
   </ng-container>
 
   <ng-container *ngIf="node?.businessType === 'Partnership'">
     <h3 class="blue-header">List Partners</h3>
     <section class="padded-section">
-        <p>
-            Please add the complete list of partners for {{node?.businessNameNew}}, including their 
-            full legal name, date of birth, email address and percentage of ownership. They will be checked by LCRB against
-            the partnership agreement provided.
-            In order to complete an application for a liquor or cannabis licence, they will each be required to provide security screening
-            related information.
-          </p>
-          <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"  [rootNode]="node"
-          (childAdded)="addChild(node, $event, 'AddPartner')" changeTypeSuffix="Partners" addLabel="Add Partner"></app-associate-list>
-    
+      <p>
+        Please add the complete list of partners for {{node?.businessNameNew}}, including their
+        full legal name, date of birth, email address and percentage of ownership. They will be checked by LCRB against
+        the partnership agreement provided.
+        In order to complete an application for a liquor or cannabis licence, they will each be required to provide
+        security screening
+        related information.
+      </p>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"
+        (personalHistoryItemsChange)="updateChildred(node, $event, 'Partner')" [rootNode]="node"
+        changeTypeSuffix="Partners" addLabel="Add Partner"></app-associate-list>
+
     </section>
   </ng-container>
 
@@ -132,22 +144,26 @@
     <h4 class="plain-header">Individual Shareholders</h4>
     <section class="padded-section">
       <p>
-        Please list any individual shareholders including their full legal name, date of birth, percentage of shares owned, and email address.
+        Please list any individual shareholders including their full legal name, date of birth, percentage of shares
+        owned, and email address.
       </p>
-      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"  [rootNode]="node"
-        (childAdded)="addChild(node, $event, 'AddIndividualShareholder')" changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-associate-list>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
+        (personalHistoryItemsChange)="updateChildred(node, $event, 'IndividualShareholder')" [rootNode]="node"
+        changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-associate-list>
     </section>
     <h4 class="plain-header">Business Shareholders</h4>
-      <section class="padded-section">
-          <p>
-              Please list any business shareholders including their name, type of business, percentage of shares owned, and email address. Depending on
-              the type of business shareholder, additional supporting documents will be required.
-            </p>
-        <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"  [rootNode]="node" [account]="account"
-          (childAdded)="addChild(node, $event, 'AddBusinessShareholder')" changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
-      </section>
+    <section class="padded-section">
+      <p>
+        Please list any business shareholders including their name, type of business, percentage of shares owned, and
+        email address. Depending on
+        the type of business shareholder, additional supporting documents will be required.
+      </p>
+      <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
+        [rootNode]="node" [account]="account"
+        (personalHistoryItemsChange)="updateChildred(node, $event, 'BusinessShareholder')"
+        changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
+    </section>
   </ng-container>
 </ng-template>
 
 <ng-container *ngTemplateOutlet="treeNode; context: { node: node, account: account }"></ng-container>
-<hr>

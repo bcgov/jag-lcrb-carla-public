@@ -21,7 +21,7 @@
 }
 
 table.greyGridTable {
-  border: 2px solid #000000;
+  border: 2px solid #757575;
   width: 100%;
   
   text-align: center;
@@ -44,14 +44,14 @@ table.greyGridTable tr:nth-child(odd) {
 }
 table.greyGridTable thead {
   background: #FFFFFF;
-  border-bottom: 2px solid #333333;
+  border-bottom: 2px solid #757575;
 }
 table.greyGridTable thead th {
   font-size: 15px;
   font-weight: bold;
   color: #333333;
   text-align: center;
-  border-left: 2px solid #333333;
+  border-left: 2px solid #757575;
 }
 table.greyGridTable thead th:first-child {
   border-left: none;

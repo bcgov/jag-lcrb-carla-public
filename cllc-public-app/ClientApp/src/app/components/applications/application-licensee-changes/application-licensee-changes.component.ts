@@ -41,6 +41,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   busySave: any;
   numberOfNonTerminatedApplications: number;
   cancelledLicenseeChanges: LicenseeChangeLog[] = [];
+  validationErrors: string[];
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -124,19 +125,36 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         });
   }
 
+  validateNonIndividauls() {
+    this.validationErrors = this.validateRecursive(this.treeRoot);
+  }
+
+  validateRecursive(node: LicenseeChangeLog): string[] {
+    node = Object.assign(new LicenseeChangeLog, node);
+    let validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
+    node.children = node.children || [];
+    node.children.forEach((child: LicenseeChangeLog) => {
+      validationMessages = validationMessages.concat(this.validateRecursive(child));
+    });
+    return validationMessages;
+  }
+
   /**
    * Sends data to dynamics
    */
   save() {
-    const data = this.cleanSaveData(this.treeRoot);
-    this.busySave = forkJoin(
-      this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
-      this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
-      this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
-      .subscribe(() => {
-        this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
-        this.loadData();
-      });
+    this.validateNonIndividauls();
+    if (this.validationErrors.length === 0) {
+      const data = this.cleanSaveData(this.treeRoot);
+      this.busySave = forkJoin(
+        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value, isApplicationComplete: 'Yes' }),
+        this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId),
+        this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
+        .subscribe(() => {
+          this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.loadData();
+        });
+    }
   }
 
   addCancelledChange(change: LicenseeChangeLog) {
