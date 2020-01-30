@@ -1,46 +1,8 @@
 <div [formGroup]="form">
-    <!-- <ng-container>
-        <input type="radio" name="bt" value="Society" [(ngModel)]="businessType"> Society <br>
-        <input type="radio" name="bt" value="SoleProprietor" [(ngModel)]="businessType"> Sole Prop <br>
-        <input type="radio" name="bt" value="PublicCorporation" [(ngModel)]="businessType"> Public Corporation <br>
-    </ng-container>
-
-    <section *ngIf="businessType === 'Society'">
-        <ul>
-            <li>Society: <br>
-                <ul>
-                    <li>Annual membership fee</li>
-                    <li>Number of members</li>
-                    <li>Directors and Officers:</li>
-                </ul>
-            </li>
-        </ul>
-    </section>
-    <section  *ngIf="businessType === 'SoleProprietor'">
-        <ul>
-            <li>Sole Proprietorshiop: <br>
-                <ul>
-                    <li>Individual Personal History Summary:</li>
-                </ul>
-            </li>
-        </ul>
-    </section>
-    <section  *ngIf="businessType === 'Public Corporation'">
-        <ul>
-            <li>Public Corporation: <br>
-                <ul>
-                    <li>Indicate shares are publicly traded</li>
-                    <li>Directors and Officers:</li>
-                </ul>
-            </li>
-        </ul>
-    </section> -->
-
-
     <table class="greyGridTable">
         <ng-container *ngIf="changeTypeSuffix === 'Leadership'">
             <thead>
-                <tr *ngIf="personalHistoryItems.length > 0">
+                <tr *ngIf="associates?.length > 0">
                     <th style="width: 200px;">First Name</th>
                     <th style="width: 200px;">Last Name</th>
                     <th *ngIf="showPosition()" style="width: 200px;">Position</th>
@@ -53,7 +15,7 @@
             </thead>
             <ng-container formArrayName="associates">
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
-                    <tr *ngIf="associate?.value?.changeType !== 'deleted'" [formGroupName]="i"
+                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
                         [ngClass]="{'alt-row': i%2 === 0}">
                         <td>
                             <span *ngIf="!associate.get('edit').value || associate.get('saved').value">
@@ -142,7 +104,7 @@
                                 style="margin-right: 10px;"></i>
                             <i class="fas fa-save save" *ngIf="associate.get('edit').value"
                                 (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i> <br>
-                            <i class="fas fa-trash-alt" (click)="deleteChange(associate.value)" style=""></i>
+                            <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
                         </td>
                     </tr>
                 </ng-container>
@@ -151,7 +113,7 @@
 
         <ng-container *ngIf="changeTypeSuffix === 'IndividualShareholder'">
             <thead>
-                <tr *ngIf="personalHistoryItems.length > 0">
+                <tr *ngIf="associates?.length > 0">
                     <th style="width: 200px;">First Name</th>
                     <th style="width: 200px;">Last Name</th>
                     <th style="width: 200px;">Shares (%)</th>
@@ -164,7 +126,7 @@
             </thead>
             <ng-container formArrayName="associates">
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
-                    <tr *ngIf="associate?.value?.changeType !== 'deleted'" [formGroupName]="i"
+                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
                         [ngClass]="{'alt-row': i%2 === 0}">
                         <td>
                             <span *ngIf="!associate.get('edit').value">{{associate.get('firstNameNew').value}}</span>
@@ -218,7 +180,7 @@
                                 style="margin-right: 10px;"></i>
                             <i class="fas fa-save" *ngIf="associate.get('edit').value"
                                 (click)="saveLog(associate.value, i)" style="margin-right: 10px;"></i>
-                            <i class="fas fa-trash-alt" (click)="deleteChange(associates.value)" style=""></i>
+                            <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
                         </td>
                     </tr>
                 </ng-container>
@@ -227,7 +189,7 @@
 
         <ng-container *ngIf="changeTypeSuffix === 'BusinessShareholder'">
             <thead>
-                <tr *ngIf="personalHistoryItems.length > 0">
+                <tr *ngIf="associates?.length > 0">
                     <th style="width: 200px;">Business Name</th>
                     <th style="width: 200px;">Shares (%)</th>
                     <th style="width: 200px;">Business Type</th>
@@ -240,39 +202,51 @@
 
             <ng-container formArrayName="associates">
                 <ng-container *ngFor="let associate of associates.controls; let i = index;">
-                    <tr *ngIf="associate?.value?.changeType !== 'deleted'" [formGroupName]="i"
+                    <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
                         [ngClass]="{'alt-row': i%2 === 0}">
                         <td>
-                            <i class="far fa-caret-square-down"
-                                *ngIf="associate.get('collapse').value && !associate.get('edit').value"
-                                (click)="associate.get('collapse').value = false;" style="margin-right: 10px;"></i>
-                            <i class="far fa-caret-square-up"
-                                *ngIf="!associate.get('collapse').value && !associate.get('edit').value"
-                                (click)="associate.get('collapse').value = true;" style="margin-right: 10px;"></i>
                             <span *ngIf="!associate.get('edit').value">{{associate.get('businessNameNew').value}}</span>
-                            <input *ngIf="associate.get('edit').value" class="form-control" type="text"
-                                formControlName="businessNameNew">
+
+                            <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                [valid]="!associate.get('businessNameNew').touched || associate.get('businessNameNew').valid"
+                                errorMessage="Please enter Business Name">
+                                <input class="form-control" type="text" formControlName="businessNameNew">
+                            </app-field>
                         </td>
                         <td>
                             <span
                                 *ngIf="!associate.get('edit').value">{{associate.get('interestPercentageNew').value}}</span>
-                            <input *ngIf="associate.get('edit').value" class="form-control" type="text"
-                                formControlName="interestPercentageNew">
+                            <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                [valid]="!associate.get('interestPercentageNew').touched || associate.get('interestPercentageNew').valid"
+                                errorMessage="Please enter Shares">
+                                <input class="form-control" type="text" formControlName="interestPercentageNew">
+                            </app-field>
                         </td>
                         <td>
-                            <select class="form-control" style="width: 250px;" formControlName="businessType">
-                                <option value="">Choose the organization type</option>
-                                <option value="PrivateCorporation">Private Corporation</option>
-                                <option value="PublicCorporation">Public Corporation</option>
-                                <option value="Partnership">Partnership</option>
-                                <option value="SoleProprietor">Sole Proprietor</option>
-                                <option value="Society">Society</option>
-                            </select>
+                            <span  *ngIf="!associate.get('edit').value">
+                                {{getBusinessTypeName(associate.get('businessType').value)}}
+                            </span>
+                            <app-field [showChevrons]="false"  *ngIf="associate.get('edit').value"
+                                [valid]="!associate.get('businessType').touched || associate.get('businessType').valid"
+                                errorMessage="Please select Business Type">
+                                <select class="form-control" style="width: 250px;" formControlName="businessType">
+                                    <option value="">Choose the organization type</option>
+                                    <option value="PrivateCorporation">Private Corporation</option>
+                                    <option value="PublicCorporation">Public Corporation</option>
+                                    <option value="Partnership">Partnership</option>
+                                    <option value="SoleProprietor">Sole Proprietor</option>
+                                    <option value="Society">Society</option>
+                                </select>
+                            </app-field>
+
                         </td>
                         <td>
                             <span *ngIf="!associate.get('edit').value">{{associate.get('emailNew').value}}</span>
-                            <input *ngIf="associate.get('edit').value" class="form-control" type="text"
-                                formControlName="emailNew">
+                            <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                [valid]="!associate.get('emailNew').touched || associate.get('emailNew').valid"
+                                errorMessage="Please enter email">
+                                <input class="form-control" type="text" formControlName="emailNew">
+                            </app-field>
                         </td>
                         <td *ngIf="false"></td>
                         <td *ngIf="false"></td>
@@ -281,20 +255,31 @@
                                 (click)="associate.get('edit').value = true; associate.get('collapse').value = true;"
                                 class="fas fa-pencil-alt" style="margin-right: 10px;"></i>
                             <i class="fas fa-save" *ngIf="associate.get('edit').value"
-                                (click)="saveLog(associate.value); associate.get('collapse').value = false;"
+                                (click)="saveLog(associate.value, i); associate.get('collapse').value = false;"
                                 style="margin-right: 10px;"></i>
-                            <i class="fas fa-trash-alt" (click)="deleteChange(associates.value)" style=""></i>
+                            <i class="fas fa-trash-alt" (click)="deleteChange(associate.value, i)"></i>
                         </td>
 
                     </tr>
-                    <tr *ngIf="!associate.get('collapse').value;">
-                        <td colspan="10" style="background-color: transparent; text-align:left;">
-                            <app-org-structure [node]="associate.value" [account]="account"></app-org-structure>
-                        </td>
-                    </tr>
-                    <tr *ngIf="associate.get('collapse').value;" style="height:20px;">
-                        <td colspan="10" style="background-color: black; text-align:left; color:white; font-size:9px;">
-                            Click to Expand Business Information
+                    <tr style="height:20px;">
+                        <td colspan="5">
+                            <div (click)="associate.get('collapse').value = !associate.get('collapse').value"
+                                style="padding-left: 20px;">
+                                <mat-expansion-panel class="mat-elevation-z1">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            {{associate.get('businessNameNew').value}} Business Information
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            Click to expand or collapse
+                                        </mat-panel-description>
+                                    </mat-expansion-panel-header>
+                                    <section style="text-align: left;">
+                                        <app-org-structure [node]="associate.value" [account]="account">
+                                        </app-org-structure>
+                                    </section>
+                                </mat-expansion-panel>
+                            </div>
                         </td>
                     </tr>
                 </ng-container>

@@ -91,6 +91,30 @@ export class LicenseeChangeLog {
     return leaders;
   }
 
+  public get keyPersonnelChildrenNoRemoves(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => {
+      item = Object.assign(new LicenseeChangeLog, item);
+      return item.isIndividual && !item.isShareholderNew && !item.isRemoveChangeType();
+    });
+    return leaders;
+  }
+
+  public get individualShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => {
+      item = Object.assign(new LicenseeChangeLog, item);
+      return item.isIndividual && item.isShareholderNew && !item.isRemoveChangeType();
+    });
+    return leaders;
+  }
+
+  public get businessShareholderChildrenNoRemoves(): LicenseeChangeLog[] {
+    const leaders = (this.children || []).filter(item => {
+      item = Object.assign(new LicenseeChangeLog, item);
+      return !item.isIndividual && item.isShareholderNew && !item.isRemoveChangeType();
+    });
+    return leaders;
+  }
+
   public static GetKeyPersonnelDecendents(changeLog: LicenseeChangeLog): LicenseeChangeLog[] {
     let children = changeLog.children || [];
     let leaders = children.filter(item => item.isIndividual && !item.isShareholderNew && item.changeType !== 'unchanged');
@@ -120,6 +144,36 @@ export class LicenseeChangeLog {
       shareholders = shareholders.concat(LicenseeChangeLog.GetBusinessShareholderDecendents(child));
     });
     return shareholders;
+  }
+
+  public static ValidateNonIndividaul(node: LicenseeChangeLog): string[] {
+    let validationResult: string[] = [];
+    if (!node.isIndividual) {
+      if (node.businessType === 'PrivateCorporation' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+        validationResult.push(`${node.businessNameNew} needs to have one or more key personnel`);
+      }
+      if (node.businessType === 'PrivateCorporation'
+        && node.businessShareholderChildrenNoRemoves.length === 0
+        && node.individualShareholderChildrenNoRemoves.length === 0) {
+        validationResult.push(`${node.businessNameNew} needs to have one or more shareholders`);
+      }
+      if (node.businessType === 'PublicCorporation' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+        validationResult.push(`${node.businessNameNew} needs to have one or more key personnel`);
+      }
+      if (node.businessType === 'Society' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+        validationResult.push(`${node.businessNameNew} needs to have one or more  directors & officers`);
+      }
+      if (node.businessType === 'Partnership'
+        && node.keyPersonnelChildrenNoRemoves.length === 0
+        && node.businessShareholderChildrenNoRemoves.length === 0
+        && node.individualShareholderChildrenNoRemoves.length === 0) {
+        validationResult.push(`${node.businessNameNew} needs to have one or more shareholders`);
+      }
+      if (node.businessType === 'SoleProprietor' && node.keyPersonnelChildrenNoRemoves.length === 0) {
+        validationResult.push(`${node.businessNameNew} needs to have a leader`);
+      }
+    }
+    return validationResult;
   }
 
   // construct file name prefix from name and names of parents
@@ -173,7 +227,7 @@ export class LicenseeChangeLog {
       this.isShareholderOld = legalEntity.isShareholder;
       this.isTrusteeNew = legalEntity.isTrustee;
       this.isTrusteeOld = legalEntity.isTrustee;
-      if (legalEntity.isApplicant){
+      if (legalEntity.isApplicant) {
         this.businessAccountId = legalEntity.accountId;
       } else {
         this.parentBusinessAccountId = legalEntity.accountId;

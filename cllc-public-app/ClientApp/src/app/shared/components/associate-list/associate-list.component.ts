@@ -11,13 +11,17 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./associate-list.component.scss']
 })
 export class AssociateListComponent extends FormBase implements OnInit {
-  @Input() personalHistoryItems: LicenseeChangeLog[] = [];
   @Input() rootNode: LicenseeChangeLog;
   @Input() account: Account;
   @Input() changeTypeSuffix: string;
   @Input() addLabel: string = 'Add Associate';
   businessType: string = 'Society';
   @Output() childAdded = new EventEmitter<LicenseeChangeLog>();
+  items: LicenseeChangeLog[] = [];
+  @Input('personalHistoryItems') set personalHistoryItems(value: LicenseeChangeLog[]) {
+    this.items = value || [];
+  };
+  @Output() personalHistoryItemsChange = new EventEmitter<LicenseeChangeLog[]>();
 
   LicenseeChangeLog = LicenseeChangeLog;
   busy: any;
@@ -39,10 +43,12 @@ export class AssociateListComponent extends FormBase implements OnInit {
       associates: this.fb.array([])
     });
 
-    this.personalHistoryItems.forEach(item => {
+    this.items.forEach(item => {
       this.addFormArray(item);
     });
   }
+
+  asLicenseeChangeLog(val): LicenseeChangeLog { return Object.assign(new LicenseeChangeLog(), val); }
 
   addFormArray(item: LicenseeChangeLog = null) {
     item = item || <LicenseeChangeLog>{};
@@ -155,6 +161,17 @@ export class AssociateListComponent extends FormBase implements OnInit {
     this.addFormArray(associate);
   }
 
+  emitValue() {
+    let value = [];
+    const controls = this.associates.controls;
+    for (let control in controls) {
+      if (control) {
+        value.push(controls[control].value);
+      }
+    }
+    this.personalHistoryItemsChange.emit(value);
+  }
+
   saveLog(item: LicenseeChangeLog, index: number) {
     const valid = this.associates.at(index).valid;
     if (valid) {
@@ -164,6 +181,18 @@ export class AssociateListComponent extends FormBase implements OnInit {
       }
       this.associates.at(index).get('edit').setValue(false);
       this.associates.at(index).get('saved').setValue(true);
+
+      if (this.changeTypeSuffix === 'Leadership') {
+        this.associates.at(index).get('isIndividual').setValue(true);
+      } else if (this.changeTypeSuffix === 'IndividualShareholder') {
+        this.associates.at(index).get('isIndividual').setValue(true);
+        this.associates.at(index).get('isShareholderNew').setValue(true);
+      } else if (this.changeTypeSuffix === 'BusinessShareholder') {
+        this.associates.at(index).get('isIndividual').setValue(false);
+        this.associates.at(index).get('isShareholderNew').setValue(true);
+      }
+
+      this.emitValue();
     } else {
       // mark all contols as touched to show validation rules
       const controls = (<FormGroup>(this.associates.at(index))).controls;
@@ -191,7 +220,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     this.snackBar.open('The link is copied to the clipboard', '', { duration: 2500, panelClass: ['green-snackbar'] });
   }
 
-  deleteChange(node: LicenseeChangeLog) {
+  deleteChange(node: LicenseeChangeLog, index: number) {
     node.businessNameNew = node.nameOld;
     node.isDirectorNew = node.isDirectorOld;
     node.isManagerNew = node.isManagerOld;
@@ -207,14 +236,38 @@ export class AssociateListComponent extends FormBase implements OnInit {
     node.dateofBirthNew = node.dateofBirthOld;
     node.titleNew = node.titleOld;
 
-    if (!node.id && !node.legalEntityId) {
-      const index = node.parentLinceseeChangeLog.children.indexOf(node);
-      node.parentLinceseeChangeLog.children.splice(index, 1);
-    } else if (node.id && !node.legalEntityId) {
-      node.changeType = 'unchanged';
-    } else if (!node.isRoot && node.legalEntityId) {
-      node.changeType = 'deleted';
+    if (!node.id && !node.legalEntityId) { // added but never saved to dynamics. Just delete from client side
+      this.associates.removeAt(index);
+    } else if (!node.isRoot && (node.id || node.legalEntityId)) { // already saved to dynamics. Update changeType. This should be deleted by the API if there is no legalEntityId
+      if (this.changeTypeSuffix === 'Leadership') {
+        node.changeType = 'removeLeadership';
+      } else if (this.changeTypeSuffix === 'IndividualShareholder') {
+        node.changeType = 'removeIndividualShareholder';
+      } else if (this.changeTypeSuffix === 'BusinessShareholder') {
+        node.changeType = 'removeBusinessShareholder';
+      }
     }
+    this.emitValue();
+  }
+
+  getBusinessTypeName(typeValue: string) {
+    let typeName = '';
+
+    switch (typeValue) {
+      case 'PrivateCorporation':
+        typeName = 'Private Corporation';
+        break;
+      case 'PublicCorporation':
+        typeName = 'Public Corporation';
+        break;
+      case 'SoleProprietor':
+        typeName = 'Sole Proprietor';
+        break;
+      default:
+        typeName = typeValue;
+        break;
+    }
+    return typeName;
   }
 
   showPosition(): boolean {

@@ -134,7 +134,6 @@ export class PersonalHistorySummaryComponent extends FormBase implements OnInit 
 
     this.contactDataService.updatePHSContact(contact, this.contactToken)
       .subscribe(res => {
-        debugger;
       })
   }
 
