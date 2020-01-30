@@ -39,7 +39,7 @@ namespace bdd_tests
 
             configuration = new ConfigurationBuilder()
                 .AddEnvironmentVariables()
-                .AddUserSecrets("dc6f3b78-5234-4b46-96e3-75849fde4479")
+                .AddUserSecrets("a004e634-29c7-48b6-becc-87fe16be7538")
                 .Build();
 
             baseUri = configuration["baseUri"] ?? "https://dev.justice.gov.bc.ca/cannabislicensing";
@@ -48,20 +48,26 @@ namespace bdd_tests
         public void CarlaLogin()
         {
             // load the dashboard page
-            ngDriver.Navigate().GoToUrl($"{baseUri}");
-            NgWebElement butt = ngDriver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='OR'])[1]/following::strong[1]"));
+            string test_start = configuration["test_start"];
+            
+            ngDriver.Navigate().GoToUrl($"{baseUri}{test_start}");
 
-            butt.Click();
+            ngDriver.WaitForAngular();
 
-            IWebElement username = driver.FindElement(By.Id("user"));
-            username.SendKeys(configuration["testUser1"]);
-            IWebElement password = driver.FindElement(By.Id("password"));
+            //ngDriver.Navigate().GoToUrl($"{baseUri}");
+            //NgWebElement butt = ngDriver.FindElement(By.XPath("(.//*[normalize-space(text()) and normalize-space(.)='OR'])[1]/following::strong[1]"));
 
-            password.SendKeys(configuration["testPass1"]);
+            //butt.Click();
 
-            IWebElement sub = driver.FindElement(By.Name("btnSubmit"));
+            //IWebElement username = driver.FindElement(By.Id("user"));
+            //username.SendKeys(configuration["testUser1"]);
+            //IWebElement password = driver.FindElement(By.Id("password"));
 
-            sub.Click();
+            //password.SendKeys(configuration["testPass1"]);
+
+            //IWebElement sub = driver.FindElement(By.Name("btnSubmit"));
+
+            //sub.Click();
         }
     }
 }

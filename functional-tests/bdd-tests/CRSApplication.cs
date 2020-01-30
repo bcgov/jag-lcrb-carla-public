@@ -58,13 +58,17 @@ namespace bdd_tests
 
             ngDriver.WaitForAngular();
 
+            NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
+            
+            startApp_button.Click();
+
             // click start CRS application button
-            NgWebElement butt = ngDriver.FindElement(By.TagName("button"));
+            //NgWebElement butt = ngDriver.FindElement(By.TagName("button"));
 
-           // for (b)
+            // for (b)
 
 
-            butt.Click();
+            //butt.Click();
 
 
             //IWebElement startApp = driver.FindElementByXPath("(.//*[normalize-space(text()) and normalize-space(.)='APPLICATIONS AND LICENCES'])[1]/following::div[1]");
@@ -78,7 +82,17 @@ namespace bdd_tests
 
         }
 
-        [Then(@"I SEE Review Account Profile")]
+        [Then(@"I CLICK on Continue to Application")]
+        public void I_continue_to_application()
+        {
+            ngDriver.WaitForAngular();
+            
+            NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
+            
+            continueApp_button.Click();
+        }
+
+        [And(@"I SEE Review Account Profile")]
         public void see_account_profile()
         {
                 // on the update account profile page
