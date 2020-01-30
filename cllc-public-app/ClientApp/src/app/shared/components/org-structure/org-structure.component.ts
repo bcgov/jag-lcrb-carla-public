@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LicenseeChangeLog } from '@models/licensee-change-log.model';
 import { Account } from '@models/account.model';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Alias } from '@models/alias.model';
 
 @Component({
   selector: 'app-org-structure',
@@ -18,23 +16,27 @@ export class OrgStructureComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-
   }
 
   asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
 
-  addChild(node: LicenseeChangeLog, child: LicenseeChangeLog, changeType: string) {
-    node.children = node.children || [];
-    if (changeType === 'AddLeadership') {
-      child.isShareholderNew = false;
-      child.isIndividual = true
-    } else if (changeType === 'AddIndividualShareholder') {
-      child.isShareholderNew = true;
-      child.isIndividual = true
-    } else if (changeType === 'AddBusinessShareholder') {
-      child.isShareholderNew = true;
-      child.isIndividual = false
+  updateChildred(node: LicenseeChangeLog, children: LicenseeChangeLog[], changeType: string) {
+    children = children || [];
+    if (changeType === 'Leadership') {
+      node.children = [...children, 
+        ...this.asLicenseeChangeLog(node).individualShareholderChildren,  
+        ...this.asLicenseeChangeLog(node).businessShareholderChildren
+      ];
+    } else if (changeType === 'IndividualShareholder') {
+      node.children = [...children, 
+        ...this.asLicenseeChangeLog(node).keyPersonnelChildren,  
+        ...this.asLicenseeChangeLog(node).businessShareholderChildren
+      ];
+    } else if (changeType === 'BusinessShareholder') {
+      node.children = [...children, 
+        ...this.asLicenseeChangeLog(node).individualShareholderChildren,  
+        ...this.asLicenseeChangeLog(node).keyPersonnelChildren
+      ];
     }
-    node.children.push(child);
   }
 }
