@@ -43,6 +43,18 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public FormControlState? FloorPlan { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public FormControlState? SitePlan { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public FormControlState? ShowLiquorSitePlan { get; set; }
+        
+        [JsonConverter(typeof(StringEnumConverter))]
+        public FormControlState? SitePhotos { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public FormControlState? ConnectedGroceryStore { get; set; }
+
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public FormControlState? PublicCooler { get; set; }
 
         public bool? ShowDescription1 { get; set; }
 
