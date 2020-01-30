@@ -18,24 +18,25 @@ export class OrgStructureComponent implements OnInit {
   ngOnInit() {
   }
 
-  asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
+  asLicenseeChangeLog(val): LicenseeChangeLog { return val}; 
 
-  updateChildred(node: LicenseeChangeLog, children: LicenseeChangeLog[], changeType: string) {
+  updateChildred(children: LicenseeChangeLog[], changeType: string) {
     children = children || [];
+    this.node.children = this.node.children || [];
     if (changeType === 'Leadership') {
-      node.children = [...children, 
-        ...this.asLicenseeChangeLog(node).individualShareholderChildren,  
-        ...this.asLicenseeChangeLog(node).businessShareholderChildren
+      this.node.children = [...children, 
+        ...this.node.individualShareholderChildren,  
+        ...this.node.businessShareholderChildren
       ];
     } else if (changeType === 'IndividualShareholder') {
-      node.children = [...children, 
-        ...this.asLicenseeChangeLog(node).keyPersonnelChildren,  
-        ...this.asLicenseeChangeLog(node).businessShareholderChildren
+      this.node.children = [...children, 
+        ...this.node.keyPersonnelChildren,  
+        ...this.node.businessShareholderChildren
       ];
     } else if (changeType === 'BusinessShareholder') {
-      node.children = [...children, 
-        ...this.asLicenseeChangeLog(node).individualShareholderChildren,  
-        ...this.asLicenseeChangeLog(node).keyPersonnelChildren
+      this.node.children = [...children, 
+        ...this.node.individualShareholderChildren,  
+        ...this.node.keyPersonnelChildren
       ];
     }
   }

@@ -101,6 +101,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
       isIndividual: [''],
       edit: [''],
       collapse: [''],
+      refObject: [''], //used to preserve object references
       saved: [false]
     });
 
@@ -130,6 +131,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     }
 
     group.patchValue(item);
+    group.get('refObject').setValue(item);
     this.associates.push(group);
   }
 
@@ -157,6 +159,7 @@ export class AssociateListComponent extends FormBase implements OnInit {
     associate.parentLinceseeChangeLog = this.rootNode;
     associate.edit = true;
     associate.collapse = true;
+    associate.refObject = associate;
     this.childAdded.emit(associate);
     this.addFormArray(associate);
   }
@@ -166,7 +169,8 @@ export class AssociateListComponent extends FormBase implements OnInit {
     const controls = this.associates.controls;
     for (let control in controls) {
       if (control) {
-        value.push(controls[control].value);
+        let refValue = Object.assign(controls[control].value.refObject, controls[control].value);
+        value.push(controls[control].value.refObject);
       }
     }
     this.personalHistoryItemsChange.emit(value);
