@@ -77,7 +77,7 @@
 
   <ng-container *ngIf="node?.businessType === 'SoleProprietor'">
     <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-      (personalHistoryItemsChange)="updateChildred(node, $event)" changeTypeSuffix="Leadership" addLabel="Add Leader">
+      (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" changeTypeSuffix="Leadership" addLabel="Add Leader">
     </app-associate-list>
   </ng-container>
 
@@ -95,7 +95,7 @@
         related information.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren" [rootNode]="node"
-        (personalHistoryItemsChange)="updateChildred(node, $event, 'Leadership')" changeTypeSuffix="Leadership"
+        (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" changeTypeSuffix="Leadership"
         addLabel="Add Key Personnel"></app-associate-list>
     </section>
   </ng-container>
@@ -110,7 +110,7 @@
         required to provide security screening related information.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"
-        (personalHistoryItemsChange)="updateChildred(node, $event, 'Leadership')" [rootNode]="node"
+        (personalHistoryItemsChange)="updateChildred($event, 'Leadership')" [rootNode]="node"
         changeTypeSuffix="Leadership" addLabel="Add Director or Officer"></app-associate-list>
     </section>
   </ng-container>
@@ -127,7 +127,7 @@
         related information.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).keyPersonnelChildren"
-        (personalHistoryItemsChange)="updateChildred(node, $event, 'Partner')" [rootNode]="node"
+        (personalHistoryItemsChange)="updateChildred( $event, 'Partner')" [rootNode]="node"
         changeTypeSuffix="Partners" addLabel="Add Partner"></app-associate-list>
 
     </section>
@@ -148,7 +148,7 @@
         owned, and email address.
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).individualShareholderChildren"
-        (personalHistoryItemsChange)="updateChildred(node, $event, 'IndividualShareholder')" [rootNode]="node"
+        (personalHistoryItemsChange)="updateChildred($event, 'IndividualShareholder')" [rootNode]="node"
         changeTypeSuffix="IndividualShareholder" addLabel="Add Individual Shareholder"></app-associate-list>
     </section>
     <h4 class="plain-header">Business Shareholders</h4>
@@ -160,7 +160,7 @@
       </p>
       <app-associate-list [personalHistoryItems]="asLicenseeChangeLog(node).businessShareholderChildren"
         [rootNode]="node" [account]="account"
-        (personalHistoryItemsChange)="updateChildred(node, $event, 'BusinessShareholder')"
+        (personalHistoryItemsChange)="updateChildred($event, 'BusinessShareholder')"
         changeTypeSuffix="BusinessShareholder" addLabel="Add Business Shareholder"></app-associate-list>
     </section>
   </ng-container>

@@ -55,6 +55,7 @@ export class LicenseeChangeLog {
   isIndividual: boolean; // This is only used on the client side
   edit: boolean; // This is only used on the client side
   collapse: boolean; // This is only used on the client side
+  refObject: LicenseeChangeLog; // This is only used on the client side
   saved: boolean; // This is only used on the client side
 
 

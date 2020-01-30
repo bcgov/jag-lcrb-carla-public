@@ -675,6 +675,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         _logger.LogError(e, $"Unexpected Exception while adding LegalEntityOwned reference to legal entity");
                     }
                 }
+                else if (!string.IsNullOrEmpty(node.Id) && string.IsNullOrEmpty(node.LegalEntityId) && (
+                  node.ChangeType == LicenseeChangeType.removeBusinessShareholder ||
+                  node.ChangeType == LicenseeChangeType.removeIndividualShareholder ||
+                  node.ChangeType == LicenseeChangeType.removeLeadership))
+                { // delete from storage immediately
+                    try
+                    {
+                        _dynamicsClient.Licenseechangelogs.Delete(node.Id);
+                    }
+                    catch (HttpOperationException httpOperationException)
+                    {
+                        _logger.LogError(httpOperationException, $"Error deleting LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, $"Unexpected Exception while deleting LicenseeChangeLog");
+                    }
+                }
                 else // update
                 {
                     // bind to application

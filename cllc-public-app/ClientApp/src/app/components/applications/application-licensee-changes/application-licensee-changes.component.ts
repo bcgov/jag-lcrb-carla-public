@@ -131,11 +131,14 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
   validateRecursive(node: LicenseeChangeLog): string[] {
     node = Object.assign(new LicenseeChangeLog, node);
-    let validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
-    node.children = node.children || [];
-    node.children.forEach((child: LicenseeChangeLog) => {
-      validationMessages = validationMessages.concat(this.validateRecursive(child));
-    });
+    let validationMessages = [];
+    if (!node.isRemoveChangeType()) {
+      validationMessages = LicenseeChangeLog.ValidateNonIndividaul(node);
+      node.children = node.children || [];
+      node.children.forEach((child: LicenseeChangeLog) => {
+        validationMessages = validationMessages.concat(this.validateRecursive(child));
+      });
+    }
     return validationMessages;
   }
 
