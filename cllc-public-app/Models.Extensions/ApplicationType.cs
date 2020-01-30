@@ -23,24 +23,29 @@ namespace Gov.Lclb.Cllb.Public.Models
 
                     Name = applicationType.AdoxioName,
                     Title = applicationType.AdoxioTitletext,
+
                     ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
                     EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,
-                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
-                    CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,
-                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,
+                    CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,                    
+                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,                    
                     newEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
                     StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
                     ShowDescription1 = applicationType.AdoxioShowdescription1,
                     Signage = (FormControlState?)applicationType.AdoxioSignage,
                     ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
                     FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
-                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,                    
-                    ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
+                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,             
+                    ShowLiquorSitePlan = (FormControlState?)applicationType.AdoxioLiquorsiteplan,       
+                    SitePhotos = (FormControlState?)applicationType.AdoxioSitephotographs,
+                    PublicCooler = (FormControlState?)applicationType.AdoxioPubliccoolerspace,
+                    ConnectedGroceryStore = (FormControlState?)applicationType.AdoxioConnectedgrocerystore,
                     ShowAssociatesFormUpload = applicationType.AdoxioIsshowassociatesformupload,
-                    ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload, 
+                    ShowDeclarations = applicationType.AdoxioIsshowdeclarations,
+                    ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
+                    ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
-                    ShowDeclarations = applicationType.AdoxioIsshowdeclarations
-            
+                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
+                                       
                 };
 
                 if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
