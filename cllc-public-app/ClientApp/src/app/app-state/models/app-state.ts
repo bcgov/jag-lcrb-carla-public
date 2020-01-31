@@ -10,6 +10,7 @@ export interface AppState {
     currentApplicaitonState: CurrentApplicationState;
     currentLegalEntityState: CurrentLegalEntityState;
     currentUserState: CurrentUserState;
+    onGoingLicenseeChangesApplicationIdState: OnGoingLicenseeChangesApplicationIdState;
 }
 
 export interface LegalEntitiesState {
@@ -34,4 +35,8 @@ export interface CurrentApplicationState {
 
 export interface CurrentLegalEntityState {
     currentLegalEntity: LegalEntity;
+}
+
+export interface OnGoingLicenseeChangesApplicationIdState {
+    onGoingLicenseeChangesApplicationId: string;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormBase, CanadaPostalRegex } from '@shared/form-base';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { LicenseeChangeLog, LicenseeChangeType } from '@models/licensee-change-log.model';
@@ -29,11 +29,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   individualShareholderChanges: LicenseeChangeLog[];
   organizationShareholderChanges: LicenseeChangeLog[];
   leadershipChanges: LicenseeChangeLog[];
-  applicationId: string;
+  @Input() applicationId: string;
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
   currentLegalEntities: LegalEntity;
   @ViewChild(LicenseeTreeComponent, { static: false }) tree: LicenseeTreeComponent;
+  @Output() saveComplete: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   editedTree: LicenseeChangeLog;
   LicenseeChangeLog = LicenseeChangeLog;
@@ -42,6 +43,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   numberOfNonTerminatedApplications: number;
   cancelledLicenseeChanges: LicenseeChangeLog[] = [];
   validationErrors: string[];
+  thereIsExistingOrgStructure: boolean;
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -53,7 +55,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('applicationId'));
+    // this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get('licenseeChangeAppId'));
+
   }
 
 
@@ -70,15 +73,22 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       signatureAgreement: ['', [this.customRequiredCheckboxValidator()]],
     });
 
-
+    this.store.select(state => state.onGoingLicenseeChangesApplicationIdState.onGoingLicenseeChangesApplicationId)
+    .pipe(takeWhile(() => this.componentActive))
+    .pipe(filter(id => !!id))
+    .subscribe(id => {
+      this.applicationId = id;
+      this.loadData();
+    });
+    
     this.store.select(state => state.currentAccountState.currentAccount)
-      .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(account => !!account))
+    .pipe(takeWhile(() => this.componentActive))
+    .pipe(filter(account => !!account))
       .subscribe((account) => {
         this.account = account;
       });
 
-    this.loadData();
+    // this.loadData();
   }
 
   loadData() {
@@ -92,6 +102,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.application = data[0];
         const currentChangeLogs = data[1] || [];
         const currentLegalEntities = data[2];
+        this.thereIsExistingOrgStructure = currentLegalEntities.children.length > 0;
         this.treeRoot = LicenseeChangeLog.processLegalEntityTree(currentLegalEntities);
         this.treeRoot.isRoot = true;
         this.treeRoot.applySavedChangeLogs(currentChangeLogs);
@@ -103,6 +114,23 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
           console.log('Error occured');
         }
       );
+  }
+
+  getSaveLabel(): string {
+    let label = 'Save';
+    if (!this.thereIsExistingOrgStructure) {
+      label = 'Submit Org Structure';
+    }
+
+    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      label = 'Save Changes to Org Structure';
+    }
+
+    if (!this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      label = 'Confirm No Changes to Current Org Structure';
+    }
+
+    return label;
   }
 
 
@@ -155,6 +183,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
         this.legalEntityDataService.cancelLicenseeChanges(this.cancelledLicenseeChanges))
         .subscribe(() => {
           this.snackBar.open('Application has been saved', 'Success', { duration: 2500, panelClass: ['green-snackbar'] });
+          this.saveComplete.emit(true);
           this.loadData();
         });
     }
@@ -188,6 +217,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     }
     // remove parent reference
     node.parentLinceseeChangeLog = undefined;
+    node.refObject = undefined;
+
 
     if (node.children && node.children.length) {
       node.children.forEach(child => {
