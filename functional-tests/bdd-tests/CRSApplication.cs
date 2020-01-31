@@ -1,12 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Support;
-using OpenQA.Selenium.Support.UI;
 using Protractor;
-using System;
-using Xunit;
-using Xunit.Abstractions;
 using Xunit.Gherkin.Quick;
 
 /*
@@ -59,7 +52,7 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
 
             NgWebElement startApp_button = ngDriver.FindElement(By.XPath("//button[text()='START APPLICATION']"));
-            
+
             startApp_button.Click();
 
             // click start CRS application button
@@ -86,9 +79,9 @@ namespace bdd_tests
         public void I_continue_to_application()
         {
             ngDriver.WaitForAngular();
-            
+
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
-            
+
             continueApp_button.Click();
 
             ngDriver.WaitForAngular();
@@ -97,23 +90,78 @@ namespace bdd_tests
         [Then(@"I COMPLETE the Application")]
         public void I_complete_the_application()
         {
+            string estName = "Point Ellis Greenhouse";
+            string estAddress = "645 Tyee Rd";
+            string estCity = "Victoria";
+            string estPostal = "V9A6X5";
+            string estPID = "012345678";
+            string estEmail = "test@test.com";
+            string estPhone = "2505555555";
+            string conGiven = "Given";
+            string conSurname = "Surname";
+            string conRole = "CEO";
+            string conPhone = "2508888888";
 
-            //skipping down to end of page to troubleshoot timeout issue
+            NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
+            estabName.SendKeys(estName);
+
+            NgWebElement estabAddress = ngDriver.FindElement(By.Id("establishmentAddressStreet"));
+            estabAddress.SendKeys(estAddress);
+
+            NgWebElement estabCity = ngDriver.FindElement(By.Id("establishmentAddressCity"));
+            estabCity.SendKeys(estCity);
+
+            NgWebElement estabPostal = ngDriver.FindElement(By.Id("establishmentAddressPostalCode"));
+            estabPostal.SendKeys(estPostal);
+
+            NgWebElement estabPID = ngDriver.FindElement(By.Id("establishmentParcelId"));
+            estabPID.SendKeys(estPID);
+
+            NgWebElement estabEmail = ngDriver.FindElement(By.Id("establishmentEmail"));
+            estabEmail.SendKeys(estEmail);
+
+            NgWebElement estabPhone = ngDriver.FindElement(By.Id("establishmentPhone"));
+            estabPhone.SendKeys(estPhone);
+
+            NgWebElement contactGiven = ngDriver.FindElement(By.Id("contactPersonFirstName"));
+            contactGiven.SendKeys(conGiven);
+
+            NgWebElement contactSurname = ngDriver.FindElement(By.Id("contactPersonLastName"));
+            contactSurname.SendKeys(conSurname);
+            
+            NgWebElement contactRole = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonRole]"));
+            contactRole.SendKeys(conRole);
+
+            NgWebElement contactPhone = ngDriver.FindElement(By.CssSelector("input[formControlName=contactPersonPhone]"));
+            contactPhone.SendKeys(conPhone);
+
+            NgWebElement authorizedSubmit = ngDriver.FindElement(By.Id("authorizedToSubmit"));
+            authorizedSubmit.Click();
+
+            NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
+            signatureAgree.Click();
+
+            NgWebElement saveforlater_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE FOR LATER')]"));
+            saveforlater_button.Click();
+
+            //NgWebElement uploadAssociates = ngDriver.FindElement(By.XPath);
+            //uploadAssociates.SendKeys();
+
+            //NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath);
+            //uploadFinIntegrity.SendKeys();
+
+            //NgWebElement uploadChecklistDocs = ngDriver.FindElement(By.XPath);
+            //uploadFinIntegrity.SendKeys();
 
             //NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
-
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE FOR LATER')]"));
-
-
-            submitpay_button.Click();
-
+            //submitpay_button.Click();
         }
 
 
         [And(@"I SEE Review Account Profile")]
         public void see_account_profile()
         {
-                // on the update account profile page
+            // on the update account profile page
         }
 
         [And(@"a CRS Application exists")]
@@ -141,7 +189,7 @@ namespace bdd_tests
             // application is removed from dashboard
             // application is marked as terminated
         }
-   
+
         /*
         // Account Profile common activities
 
