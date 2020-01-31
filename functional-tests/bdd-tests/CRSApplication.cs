@@ -1,6 +1,15 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Extensions.Configuration;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Support;
+using OpenQA.Selenium.Support.UI;
 using Protractor;
+using System;
 using Xunit.Gherkin.Quick;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.IO;
 
 /*
 Feature: CRSApplication
@@ -87,7 +96,7 @@ namespace bdd_tests
             ngDriver.WaitForAngular();
         }
 
-        [Then(@"I COMPLETE the Application")]
+        [And(@"I COMPLETE the Application")]
         public void I_complete_the_application()
         {
             string estName = "Point Ellis Greenhouse";
@@ -101,6 +110,9 @@ namespace bdd_tests
             string conSurname = "Surname";
             string conRole = "CEO";
             string conPhone = "2508888888";
+            string path1 = "C:/LCRB/associates.pdf";
+            string path2 = "C:/LCRB/fin_integrity.pdf";
+            string path3 = "C:/LCRB/checklist.pdf";
 
             NgWebElement estabName = ngDriver.FindElement(By.Id("establishmentName"));
             estabName.SendKeys(estName);
@@ -141,20 +153,28 @@ namespace bdd_tests
             NgWebElement signatureAgree = ngDriver.FindElement(By.Id("signatureAgreement"));
             signatureAgree.Click();
 
+            //NgWebElement uploadAssociates = ngDriver.FindElement(By.CssSelector("input[type=file]"));
+            //uploadAssociates.SendKeys(path1);
+
+            //NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.CssSelector("input[type=file]"));
+            //uploadFinIntegrity.SendKeys(path2);
+
+            //NgWebElement uploadChecklistDocs = ngDriver.FindElement(By.CssSelector("input[type=file]"));
+            //uploadChecklistDocs.SendKeys(path3);
+        }
+
+        [Then(@"I CLICK on 'SUBMIT & PAY'")]
+        public void click_on_submit_and_pay()
+        {
+            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+            submitpay_button.Click();
+        }
+
+        [Then(@"I CLICK on 'SAVE FOR LATER'")]
+        public void click_on_save_for_later()
+        {
             NgWebElement saveforlater_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE FOR LATER')]"));
             saveforlater_button.Click();
-
-            //NgWebElement uploadAssociates = ngDriver.FindElement(By.XPath);
-            //uploadAssociates.SendKeys();
-
-            //NgWebElement uploadFinIntegrity = ngDriver.FindElement(By.XPath);
-            //uploadFinIntegrity.SendKeys();
-
-            //NgWebElement uploadChecklistDocs = ngDriver.FindElement(By.XPath);
-            //uploadFinIntegrity.SendKeys();
-
-            //NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
-            //submitpay_button.Click();
         }
 
 
