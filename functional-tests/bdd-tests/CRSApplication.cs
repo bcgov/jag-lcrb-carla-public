@@ -90,17 +90,21 @@ namespace bdd_tests
             NgWebElement continueApp_button = ngDriver.FindElement(By.Id("continueToApp"));
             
             continueApp_button.Click();
+
+            ngDriver.WaitForAngular();
         }
 
         [Then(@"I COMPLETE the Application")]
         public void I_complete_the_application()
         {
-            ngDriver.WaitForAngular();
-            
+
             //skipping down to end of page to troubleshoot timeout issue
 
-            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT & PAY']"));
-            
+            //NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SUBMIT & PAY')]"));
+
+            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[contains(.,'SAVE FOR LATER')]"));
+
+
             submitpay_button.Click();
 
         }
