@@ -33,7 +33,7 @@ namespace bdd_tests
 
             driver = new ChromeDriver(path);
             //driver = new FirefoxDriver(FirefoxDriverService);
-            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(15);
 
             ngDriver = new NgWebDriver(driver);
 
