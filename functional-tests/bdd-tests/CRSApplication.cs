@@ -82,7 +82,7 @@ namespace bdd_tests
 
         }
 
-        [Then(@"I CLICK on Continue to Application")]
+        [And(@"I CLICK on Continue to Application")]
         public void I_continue_to_application()
         {
             ngDriver.WaitForAngular();
@@ -91,6 +91,20 @@ namespace bdd_tests
             
             continueApp_button.Click();
         }
+
+        [Then(@"I COMPLETE the Application")]
+        public void I_complete_the_application()
+        {
+            ngDriver.WaitForAngular();
+            
+            //skipping down to end of page to troubleshoot timeout issue
+
+            NgWebElement submitpay_button = ngDriver.FindElement(By.XPath("//button[text()='SUBMIT & PAY']"));
+            
+            submitpay_button.Click();
+
+        }
+
 
         [And(@"I SEE Review Account Profile")]
         public void see_account_profile()
