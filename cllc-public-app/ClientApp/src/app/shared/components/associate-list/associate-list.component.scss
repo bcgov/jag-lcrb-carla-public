@@ -70,4 +70,12 @@ table.greyGridTable tfoot td {
   color: #ee220e;
 }
 
-
+::ng-deep {
+  mat-expansion-panel-header.mat-expanded:hover,
+  mat-expansion-panel-header:hover,
+  mat-expansion-panel-header:active,
+  mat-expansion-panel-header{
+    background-color: #F1F4FA !important;
+    height: 30px !important;
+  }
+}

@@ -1,0 +1,21 @@
+<div>
+    <h1></h1>
+    <mat-horizontal-stepper [linear]="true" (selectionChange)="selectionChange($event)" #stepper>
+        <ng-template matStepperIcon="edit">
+            <i class="fas fa-check"></i>
+        </ng-template>
+
+        <mat-step label="Review Account Profile">
+            <app-account-profile *ngIf="stepper.selectedIndex === 0" [useInStepperMode]="true" class="w-100"
+                (saveComplete)="stepper.selectedIndex = 1">
+            </app-account-profile>
+        </mat-step>
+        <mat-step label="Review Organization Structure">
+            <app-application-licensee-changes [applicationId]="licenseeApplicationId" *ngIf="stepper.selectedIndex === 1" class="w-100"
+                (saveComplete)="stepper.selectedIndex = 2"></app-application-licensee-changes>
+        </mat-step>
+        <mat-step label="Complete Application">
+            <app-application *ngIf="stepper.selectedIndex === 2" class="w-100"></app-application>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

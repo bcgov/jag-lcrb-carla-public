@@ -7,7 +7,9 @@
   <section class="col-md-4">
     <h1>&nbsp;</h1><br>
 
-    <section class="large-screen-only" *ngIf="treeRoot">
+    <section class="large-screen-only position-reletaive" *ngIf="treeRoot">
+      <div [ngBusy]="[busy]"></div>
+
       <h3 class="blue-header" style="margin-top: 0; margin-bottom: 0; padding-left:10px;">Organization Information
         Completeness</h3>
       <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
@@ -71,7 +73,7 @@
 
         </div>
         <div style="text-align:center;" *ngIf="LicenseeChangeLog.HasChanges(treeRoot)">
-          <button class="btn btn-primary" (click)="save()">Save</button>
+          <button class="btn btn-primary" (click)="save()">{{getSaveLabel()}}</button>
         </div>
       </div>
 
