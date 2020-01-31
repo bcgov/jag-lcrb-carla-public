@@ -426,7 +426,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage endpointRequest =
                 new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/Lists");
 
-            if (documentTemplateUrlTitle == null)
+            if (string.IsNullOrEmpty(documentTemplateUrlTitle))
             {
                 documentTemplateUrlTitle = listTitle;
             }
@@ -437,6 +437,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
             strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
             endpointRequest.Content = strContent;
+            // fix for bad request
+            endpointRequest.Headers.Add("odata-version", "3.0");
 
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
