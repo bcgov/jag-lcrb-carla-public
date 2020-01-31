@@ -11,12 +11,14 @@ import { LegalEntity } from '@models/legal-entity.model';
 import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
 import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
+import { SetOngoingLicenseeApplicationIdAction } from '@app/app-state/actions/ongoing-licensee-application-id.action';
 import { Account } from '@models/account.model';
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfo } from '@models/version-info.model';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
+import { ApplicationDataService } from '@services/application-data.service';
 
 const Months = [ 'January', 'February', 'March', 'April', 'May', 'June',
            'July', 'August', 'September', 'October', 'November', 'December' ];
@@ -49,6 +51,7 @@ export class AppComponent extends FormBase implements OnInit {
     private router: Router,
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
+    private applicationDataService: ApplicationDataService,
     public featureFlagService: FeatureFlagService,
     private monthlyReportDataService: MonthlyReportDataService,
     private versionInfoDataService: VersionInfoDataService,
@@ -131,6 +134,12 @@ export class AppComponent extends FormBase implements OnInit {
             .subscribe(data => {
               this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
             });
+
+            // load ongoing licensee changes application id
+            this.applicationDataService.getOngoingLicenseeChangeApplicationId()
+            .subscribe(res => {
+              this.store.dispatch(new SetOngoingLicenseeApplicationIdAction(res));
+            })
         } else {
           this.store.dispatch(new SetCurrentAccountAction(null));
         }

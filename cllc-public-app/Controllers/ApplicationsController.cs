@@ -145,7 +145,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 try
                 {
                     result = _dynamicsClient.Licenceses.Get(filter: filter).Value.Count;
-                   
+
                 }
                 catch (HttpOperationException)
                 {
@@ -217,6 +217,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // GET all applications in Dynamics by applicant using the account Id assigned to the user logged in
             List<ViewModels.ApplicationSummary> adoxioApplications = GetApplicationSummariesByApplicant(userSettings.AccountId);
             return new JsonResult(adoxioApplications);
+        }
+
+        /// GET all applications in Dynamics for the current user
+        [HttpGet("ongoing-licensee-application-id")]
+        public JsonResult GetOngoingLicenseeApplicationId()
+        {
+            // get the current user.
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            var result = "";
+
+            // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
+            var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and adoxio_paymentrecieved ne true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Denied}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Cancelled}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Approved}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.Refused}";
+            filter += $" and statuscode ne {(int)AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+
+            var applicationType = _dynamicsClient.GetApplicationTypeByName("Licensee Changes");
+            if (applicationType != null)
+            {
+                filter += $" and _adoxio_applicationtypeid_value eq {applicationType.AdoxioApplicationtypeid} ";
+            }
+
+            try
+            {
+                var application = _dynamicsClient.Applications.Get(filter: filter).Value.OrderBy(app => app.Createdon).FirstOrDefault();
+                if(application != null){
+                    result = application.AdoxioApplicationid;
+                }
+            }
+            catch (HttpOperationException)
+            {
+                result ="";
+            }
+            return new JsonResult(result);
         }
 
         /// GET submitted applications in Dynamics for the current user
@@ -339,7 +376,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(userJson);
             int count = GetSubmittedCountByApplicant(userSettings.AccountId);
             count += GetApprovedLicenceCountByApplicant(userSettings.AccountId);
-            
+
             if (count >= 8)
             {
                 return BadRequest("8 applications have already been submitted. Can not create more");
@@ -422,7 +459,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string name = adoxioApplication.AdoxioJobnumber + " Files";
 
             _fileManagerClient.CreateFolderIfNotExist(_logger, ApplicationDocumentUrlTitle, folderName);
-            
+
             // Create the SharePointDocumentLocation entity
             MicrosoftDynamicsCRMsharepointdocumentlocation mdcsdl = new MicrosoftDynamicsCRMsharepointdocumentlocation()
             {

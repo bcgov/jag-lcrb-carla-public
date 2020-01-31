@@ -41,6 +41,7 @@ import { AssociateListComponent } from '@shared/components/associate-list/associ
 import { OrganizationStructureComponent } from '@components/account-profile/tabs/organization-structure/organization-structure.component';
 import { PersonalHistorySummaryComponent } from '@components/personal-history-summary/personal-history-summary.component';
 import { PhsConfirmationComponent } from '@components/phs-confirmation/phs-confirmation.component';
+import { MultiStageApplicationFlowComponent } from '@components/multi-stage-application-flow/multi-stage-application-flow.component';
 
 
 const routes: Routes = [
@@ -110,6 +111,12 @@ const routes: Routes = [
     path: 'renew-crs-licence/application/:applicationId',
     component: LicenceRenewalStepsComponent,
     canActivate: [BCeidAuthGuard]
+  },
+  {
+    path: 'multi-step-application/:applicationId',
+    component: MultiStageApplicationFlowComponent,
+    canActivate: [BCeidAuthGuard, FeatureGuard],
+    data: { feature: 'OrgStructure' }
   },
   {
     path: 'account-profile/:applicationId',

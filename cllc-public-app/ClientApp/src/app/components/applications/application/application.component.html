@@ -491,7 +491,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="application.licenseType != 'Cannnabis Retail Store'">
+            <div *ngIf="application?.licenseType != 'Cannnabis Retail Store'">
               <p>A scaled site plan must show the following: </p>
               <ul>
                 <li>location of the front entrance door of the proposed establishment</li>
@@ -511,7 +511,7 @@
         </section>
       </div>
 
-      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings() || (application.licenseType != 'Cannabis Retail Store' && application?.applicationType?.sitePlan === FormControlState.Show)">
+      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings() || (application?.licenseType != 'Cannabis Retail Store' && application?.applicationType?.sitePlan === FormControlState.Show)">
         <hr>
         <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">Photos or renderings of the store's proposed exterior changes </label>
         <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Photographs</label>
