@@ -10,21 +10,21 @@ Background:
     And I click on the "CONTINUE TO APPLICATION" button on the account review page
 
 Scenario Outline: Submit and pay for application
-    When I enter an <establishment> on the application page
-    And I enter a <street_address> on the application page
-    And I enter a <city> on the application page
-    And I enter a <postal> on the application page
-    And I enter a <pid> on the application page
-    And I enter a <store_email> on the application page
-    And I enter a <store_phone> on the application page
+    When I enter an "<establishment>" on the application page
+    And I enter a "<street_address>" on the application page
+    And I enter a "<city>" on the application page
+    And I enter a "<postal>" on the application page
+    And I enter a "<pid>" on the application page
+    And I enter a "<store_email>" on the application page
+    And I enter a "<store_phone>" on the application page
     And I upload an Associates Form on the application page
     And I upload a Financial Integrity form on the application page
     And I upload a Supporting Document on the application page
-    And I enter a <contact_given> on the application page
-    And I enter a <contact_surname> on the application page
-    And I enter a <contact_title> on the application page
-    And I enter a <contact_phone> on the application page
-    And I enter a <contact_email> on the application page
+    And I enter a "<contact_given>" on the application page
+    And I enter a "<contact_surname>" on the application page
+    And I enter a "<contact_title>" on the application page
+    And I enter a "<contact_phone>" on the application page
+    And I enter a "<contact_email>" on the application page
     And I click on the Authorized to Submit checkbox on the application page
     And I click on the Signature Agreement checkbox on the application page
     And I click on the "SUBMIT & PAY" button on the application page
@@ -33,7 +33,7 @@ Scenario Outline: Submit and pay for application
     And the receipt page is displayed
     And the payment amount of "7,500.00" displayed on the receipt page
     And I click on the "Return to Dashboard" link on the receipt page
-    Then the application for <establishment> has a status of "APPLICATION UNDER REVIEW" on the licensing dashboard
+    Then the application for "<establishment>" has a status of "APPLICATION UNDER REVIEW" on the licensing dashboard
 
     Examples:
     | establishment        | street_address | city     | postal | pid       | store_email   | store_phone | contact_given | contact_surname | contact_title | contact_phone | contact_ email |
@@ -77,13 +77,12 @@ Scenario: Check required fields on application page
 
 
 Scenario Outline: Confirm establishment watch words verification
-    When I enter an <establishment> on the application page
-    Then the message 
-    """The store name contains at least one word that doesn’t comply with naming requirements. 
-    The application can’t be submitted until the prohibited word(s) are removed.""" is displayed
+    When I enter an "<watch_word>" on the application page
+    Then the message "The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed." is displayed
+   
 
     Examples:
-    | establishment |
+    | watch word    |
     | Antidote      |
     | Apothecary    |
     | Compassion    |
