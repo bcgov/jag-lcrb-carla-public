@@ -82,7 +82,7 @@ Scenario Outline: Confirm establishment watch words verification
    
 
     Examples:
-    | watch word    |
+    | watch_word    |
     | Antidote      |
     | Apothecary    |
     | Compassion    |
