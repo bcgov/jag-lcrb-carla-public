@@ -59,13 +59,13 @@ const routes: Routes = [
     path: 'personal-history-summary/confirmation',
     component: PhsConfirmationComponent,
     canActivate: [FeatureGuard],
-    data: { feature: 'OrgStructure' }
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'personal-history-summary/:token',
     component: PersonalHistorySummaryComponent,
     canActivate: [FeatureGuard],
-    data: { feature: 'OrgStructure' }
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'catering-demo',
@@ -116,7 +116,7 @@ const routes: Routes = [
     path: 'multi-step-application/:applicationId',
     component: MultiStageApplicationFlowComponent,
     canActivate: [BCeidAuthGuard, FeatureGuard],
-    data: { feature: 'OrgStructure' }
+    data: { feature: 'LicenseeChanges' }
   },
   {
     path: 'account-profile/:applicationId',
