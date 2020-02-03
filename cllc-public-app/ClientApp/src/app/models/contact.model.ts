@@ -35,6 +35,7 @@ export class Contact {
 }
 
 export class PHSContact {
+  id: string;
   token: string;
   shortName: string;
 }
