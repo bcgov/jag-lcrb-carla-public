@@ -46,6 +46,7 @@ export class AppComponent extends FormBase implements OnInit {
   linkedFederalReports: MonthlyReport[];
   Months = Months;  // make available in template
   parseInt = parseInt; // make available in template
+  licenseeChangeFeatureOn: boolean;
 
   constructor(
     private snackBar: MatSnackBar,
@@ -62,6 +63,9 @@ export class AppComponent extends FormBase implements OnInit {
     super();
     featureFlagService.featureOn('Maps')
       .subscribe(x => this.showMap = x);
+
+      featureFlagService.featureOn('LicenseeChanges')
+      .subscribe(x => this.licenseeChangeFeatureOn = x);
 
     featureFlagService.featureOn('FederalReporting')
       .subscribe(x => this.showFederalReporting = x);
@@ -146,7 +150,7 @@ export class AppComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(account => {
         this.account = account;
-        if (this.account) {
+        if (this.account && this.licenseeChangeFeatureOn) {
           // load ongoing licensee changes application id
           this.loadLicenseeApplication();
         }
