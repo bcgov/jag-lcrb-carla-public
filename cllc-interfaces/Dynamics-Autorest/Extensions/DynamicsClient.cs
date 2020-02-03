@@ -391,5 +391,36 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return result;
         }
+
+        public MicrosoftDynamicsCRMadoxioEvent GetEventByIdWithChildren(string id)
+        {
+            MicrosoftDynamicsCRMadoxioEvent result;
+            try
+            {
+                var expand = new List<string> { "adoxio_Account", "adoxio_Contact" };
+                result = this.Events.GetByKey(adoxioEventid: id, expand: expand);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            
+            return result;
+        }
+
+        public MicrosoftDynamicsCRMadoxioEvent GetEventById(string id)
+        {
+            MicrosoftDynamicsCRMadoxioEvent result;
+            try
+            {
+                result = this.Events.GetByKey(adoxioEventid: id);
+            }
+            catch (HttpOperationException)
+            {
+                result = null;
+            }
+            
+            return result;
+        }
     }
 }
