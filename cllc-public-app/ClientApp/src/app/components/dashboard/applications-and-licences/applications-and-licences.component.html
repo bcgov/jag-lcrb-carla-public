@@ -21,7 +21,8 @@
                   target="_blank" rel="noopener noreferrer">Learn more about this licence</a>
               </td>
               <td>
-                <button class="btn btn-primary" (click)="startNewLicenceApplication()" id="startCRS">START APPLICATION</button>
+                <button class="btn btn-primary" (click)="startNewLicenceApplication()" id="startCRS">START
+                  APPLICATION</button>
               </td>
             </tr>
             <tr *ngIf="!(nonMarketerExists || marketerExists)">
@@ -33,7 +34,8 @@
                   more about this licence</a>
               </td>
               <td>
-                <button class="btn btn-primary" (click)="startNewMarketerApplication()" id="startMarketing">START APPLICATION</button>
+                <button class="btn btn-primary" (click)="startNewMarketerApplication()" id="startMarketing">START
+                  APPLICATION</button>
               </td>
             </tr>
           </table>
@@ -114,7 +116,8 @@
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div *ngIf="item.applicationStatus === 'Not Submitted'">
                   <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal"
-                    routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
+                    routerLink="/multi-step-application/{{item.id}}"
+                    id="completeApp{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Application</span>
                   </a>
@@ -268,8 +271,9 @@
                 </div>
               </td>
               <td *ngIf="licenceHasExpired(item?.expiryDate)" class="licence-expired"> LICENCE EXPIRED</td>
-              <td *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
-                  class="licence-expired">
+              <td
+                *ngIf="!licenceHasExpired(item.expiryDate) && (item.transferRequested === 'Yes' && licenceTransferFeatureOn)"
+                class="licence-expired">
                 TRANSFER INITIATED <br />
                 <a [routerLink]="[ '/ownership-cancel-transfer/' + item.licenseId]">
                   <span><i class="fas fa-exchange-alt" style="margin-right: 10px;"></i>Cancel Transfer</span>
