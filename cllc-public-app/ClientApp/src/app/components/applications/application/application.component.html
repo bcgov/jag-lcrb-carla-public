@@ -278,7 +278,6 @@
         </section>
       </mat-card>
 
-
       <div class="ngtest-valid-interest" *ngIf="showFormControl(application?.applicationType?.validInterest)">
         <hr>
         <br>
@@ -511,9 +510,7 @@
         </section>
       </div>
 
-      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings() || 
-      (application.licenseType != 'Cannabis Retail Store' && 
-      application?.applicationType?.sitePlan === FormControlState.Show)">
+      <div class="ngtest-photos-renderings" *ngIf="showExteriorRenderings()">
         <hr>
         <label for="" *ngIf="application?.licenseType == 'Cannabis Retail Store'">Photos or renderings of the store's proposed exterior changes </label>
         <label for="" *ngIf="application?.licenseType != 'Cannabis Retail Store'">Photographs</label>
@@ -549,6 +546,29 @@
                              [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF THE STORE EXTERIOR, DRAG FILES HERE OR'">
           </app-file-uploader>
         </section>
+      </div>
+
+      <div class="ngtest-grocery-store" *ngIf="showFormControl(application?.applicationType?.connectedGroceryStore)">
+        <hr>
+        <mat-card class="mat-elevation-z0" style="margin-bottom: 10px;">
+          <section style="display: flex; justify-content: space-between; width: 100%;">
+            <div class="question-label">
+              Will the proposed structural alteration involve removing a wall shared with an eligible grocery store?
+            </div>
+
+            <div style="flex: 0 0 85px;">
+              <mat-button-toggle-group [ngClass]="{'invalid': isTouchedAndInvalid('connectedGrocery')}"
+                              formControlName="connectedGrocery" aria-label="Font Style">
+                <mat-button-toggle value="Yes">Yes</mat-button-toggle>
+                <mat-button-toggle value="No">No</mat-button-toggle>
+              </mat-button-toggle-group>
+            </div>
+          </section>
+        </mat-card>
+        <div *ngIf="showGroceryStore()">
+          Awwww shit
+        </div>
+
       </div>
 
       <!-- Hours of Sale -->
