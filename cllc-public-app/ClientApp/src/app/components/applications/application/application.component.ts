@@ -150,6 +150,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       applicantType: ['', Validators.required],
       description1: ['', [Validators.required]],
       proposedChange: ['', [Validators.required]],
+      connectedGrocery: ['',[Validators.required]],
     });
 
     this.form.get('applyAsIndigenousNation').valueChanges.subscribe((value: boolean) => {
@@ -327,6 +328,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
       (this.application.applicationType.name === ApplicationTypeNames.CRSEstablishmentNameChange
         || this.application.applicationType.name === ApplicationTypeNames.CRSStructuralChange);
     show = show && this.form.get('proposedChange').value === 'Yes';
+    return show;
+  }
+
+  showGroceryStore(){
+    let show = (this.application && this.showFormControl(this.application.applicationType.connectedGroceryStore));    
+    show = show && this.form.get('connectedGrocery').value == 'Yes';
     return show;
   }
 
