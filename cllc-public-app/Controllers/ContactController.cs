@@ -20,6 +20,7 @@ using Gov.Lclb.Cllb.Public.Utility;
 using System.Net;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using System.Web;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -455,10 +456,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task CreateSharepointDynamicsLink(MicrosoftDynamicsCRMadoxioWorker worker)
         {
             // create a SharePointDocumentLocation link
-            string folderName = await FileController.GetFolderName("worker", worker.AdoxioWorkerid, _dynamicsClient);
+            string folderName = worker.GetDocumentFolderName(); 
             string name = worker.AdoxioWorkerid + " Files";
-
-
 
             _fileManagerClient.CreateFolderIfNotExist(_logger, WorkerDocumentUrlTitle, folderName);
 
@@ -585,7 +584,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             string phsLink = null;
             try
             {
-                phsLink = ContactController.GetPhsLink(contactId, _configuration, _encryptionKey);
+                phsLink = GetPhsLink(contactId, _configuration, _encryptionKey);
             }
             catch (Exception ex)
             {
@@ -599,7 +598,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public static string GetPhsLink(string contactId, IConfiguration _configuration, string _encryptionKey)
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
-            result += WebUtility.UrlEncode(EncryptionUtility.EncryptString(contactId, _encryptionKey));
+            //var ba = Guid.Parse(contactId).ToByteArray();
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, _encryptionKey));
             return result;
         }
 
@@ -607,7 +607,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> GetContactByToken(string code)
         {
-            string id = EncryptionUtility.DecryptString(code, _encryptionKey);
+            string id = EncryptionUtility.DecryptStringHex(code, _encryptionKey);
             if (!string.IsNullOrEmpty(id))
             {
                 Guid contactId = Guid.Parse(id);
@@ -618,6 +618,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var result = new PHSContact
                     {
+                        Id = contact.Contactid,
                         token = code,
                         shortName = (contact.Firstname.First().ToString() + " " + contact.Lastname)
                     };
@@ -637,6 +638,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     public class PHSContact
     {
+        public string Id { get; set; }
         public string token { get; set; }
         public string shortName { get; set; }
     }

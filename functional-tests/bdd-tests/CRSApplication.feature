@@ -5,6 +5,6 @@
 Scenario: Start Application
     Given I SEE the Dashboard
     And I CLICK Start Application
-    Then I SEE Review Account Profile
-
-    
+    # And I SEE Review Account Profile - not needed
+    And I CLICK on Continue to Application
+    Then I COMPLETE the Application
