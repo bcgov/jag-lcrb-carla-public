@@ -155,8 +155,8 @@
             <section>
                 <app-file-uploader documentType="CRC" [useDocumentTypeForName]="true"
                     fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="contact"
-                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="contact.id"
-                    [uploadHeader]="'TO UPLOAD CRIMINAL RECORD CHECK, DRAG FILES HERE OR'">
+                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="contactToken"
+                    [uploadHeader]="'TO UPLOAD CRIMINAL RECORD CHECK, DRAG FILES HERE OR'" [publicAccess]="true">
                 </app-file-uploader>
             </section>
         </section>
@@ -213,10 +213,10 @@
                 <li>providing details of any alcohol/drug related driving infractions in the past 5 years</li>
             </ol>
             <section>
-                <app-file-uploader documentType="Signage" [useDocumentTypeForName]="true" *ngIf="contact"
+                <app-file-uploader documentType="Signage" [useDocumentTypeForName]="true"
                     fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="contact"
-                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="contact.id"
-                    [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
+                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="contactToken"
+                    [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'" [publicAccess]="true">
                 </app-file-uploader>
             </section>
         </ng-container>
