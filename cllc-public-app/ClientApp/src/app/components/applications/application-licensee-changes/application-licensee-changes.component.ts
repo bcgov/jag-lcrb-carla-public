@@ -44,6 +44,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   cancelledLicenseeChanges: LicenseeChangeLog[] = [];
   validationErrors: string[];
   thereIsExistingOrgStructure: boolean;
+  busyPromise: Promise<any>;
 
   constructor(public dialog: MatDialog,
     public snackBar: MatSnackBar,
@@ -94,11 +95,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   loadData() {
     this.GetNotTerminatedCRSApplicationCount();
 
-    this.busy = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
+    this.busyPromise = forkJoin(this.applicationDataService.getApplicationById(this.applicationId),
       this.legalEntityDataService.getApplicationChangeLogs(this.applicationId),
       this.legalEntityDataService.getCurrentHierachy())
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
+      .toPromise()
+      .then((data: [Application, LicenseeChangeLog[], LegalEntity]) => {
         this.application = data[0];
         const currentChangeLogs = data[1] || [];
         const currentLegalEntities = data[2];
@@ -109,11 +111,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
 
         this.addDynamicContent();
         this.form.patchValue(this.application);
-      },
-        () => {
-          console.log('Error occured');
-        }
-      );
+      }  );
   }
 
   getSaveLabel(): string {
