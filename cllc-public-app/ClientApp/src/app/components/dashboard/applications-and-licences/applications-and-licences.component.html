@@ -115,9 +115,13 @@
               </td>
               <td style="background-color: #E1E8F2; padding: 10px;">
                 <div *ngIf="item.applicationStatus === 'Not Submitted'">
-                  <a *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal"
-                    routerLink="/multi-step-application/{{item.id}}"
-                    id="completeApp{{item.id}}">
+                  <a appRemoveIfFeatureOff="LicenseeChanges" *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal"
+                    routerLink="/multi-step-application/{{item.id}}" id="completeApp{{item.id}}">
+                    <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
+                    <span>Complete Application</span>
+                  </a>
+                  <a appRemoveIfFeatureOn="LicenseeChanges" *ngIf="item.applicationTypeName !== ApplicationTypeNames.CRSRenewal"
+                    routerLink="/account-profile/{{item.id}}" id="completeApp{{item.id}}">
                     <i class="fas fa-pencil-alt" style="color: #1a5a96; margin-right: 10px;"></i>
                     <span>Complete Application</span>
                   </a>
