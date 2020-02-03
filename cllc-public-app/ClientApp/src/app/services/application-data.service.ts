@@ -40,7 +40,6 @@ export class ApplicationDataService extends DataService {
   }
 
   getOngoingLicenseeChangeApplicationId(): Observable<string> {
-    // return of('8aa5967c-633d-ea11-b816-00505683f8b8'); // todo: call api endpoint
     return this.http.get<string>(this.apiPath + 'ongoing-licensee-application-id', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
