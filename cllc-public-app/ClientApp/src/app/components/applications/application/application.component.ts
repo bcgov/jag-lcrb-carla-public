@@ -268,6 +268,12 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (!this.application.applicationType.showDescription1) {
       this.form.get('description1').disable();
     }
+    if (this.application.applicationType.connectedGroceryStore !== FormControlState.Show) {
+      this.form.get('connectedGrocery').clearValidators();
+    } else {
+      this.form.get('connectedGrocery').setValidators([Validators.required]);
+    }
+
   }
 
 
