@@ -102,8 +102,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string LicenceId { get; set; }
         public string AccountId { get; set; }
 
-
-        // Todo -> to real address
-        public string Address { get; set; }
+        public string Street1 { get; set; }
+        public string Street2 { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string PostalCode { get; set; }
     }
 }

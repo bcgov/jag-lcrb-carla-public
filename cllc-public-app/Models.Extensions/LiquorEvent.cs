@@ -8,6 +8,7 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class LiquorEventExtensions
     {
+        // Converts a dynamics entity into a view model
         public static ViewModels.LiquorEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item)
         {
             ViewModels.LiquorEvent result = null;
@@ -41,17 +42,20 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.MaxAttendance = item.AdoxioMaxattendance;
                 result.CommunityApproval = item.AdoxioCommunityapproval;
                 result.NotifyEventInspector = item.AdoxioNotifyeventinspector;
-                result.LicenceId = item.AdoxioLicence.AdoxioLicencesid;
-                result.AccountId = item.AdoxioAccount.Accountid;
-
-                // result.Address
-
+                result.LicenceId = item._adoxioLicenceValue;
+                result.AccountId = item._adoxioAccountValue;
+                result.Street1 = item.AdoxioStreet1;
+                result.Street2 = item.AdoxioStreet2;
+                result.City = item.AdoxioCity;
+                result.Province = item.AdoxioProvince;
+                result.PostalCode = item.AdoxioPostalcode;
             }
 
             return result;
         }
 
 
+        // Converts a view model into a dynamics entity
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioEvent to, ViewModels.LiquorEvent from)
         {
             to.AdoxioEventid = from.Id;
@@ -78,9 +82,11 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMaxattendance = from.MaxAttendance;
             to.AdoxioCommunityapproval = from.CommunityApproval;
             to.AdoxioNotifyeventinspector = from.NotifyEventInspector;
-            to.AdoxioAccount = from.AccountId
-            // to.AdoxioAccount
-            // to.AdoxioAddress = 
+            to.AdoxioStreet1 = from.Street1;
+            to.AdoxioStreet2 = from.Street2;
+            to.AdoxioCity = from.City;
+            to.AdoxioProvince = from.Province;
+            to.AdoxioPostalcode = from.PostalCode;
         }
     }
 }

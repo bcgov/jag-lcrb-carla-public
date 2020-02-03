@@ -1,7 +1,9 @@
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -48,10 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             ViewModels.LiquorEvent viewmodel_adoxio_event = new ViewModels.LiquorEvent()
             {
-                Name = initialName,
-                Account = new ViewModels.Account() {
-                    id = strId
-                }
+                Name = initialName
             };
             
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event);
@@ -120,6 +119,59 @@ namespace Gov.Lclb.Cllb.Public.Test
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+
+            await LogoutAndCleanupTestUser(strId);
+
+        }
+
+        [Fact]
+        public async System.Threading.Tasks.Task TestList()
+        {
+            string firstName = "firstName";
+            string secondName = "secondName";
+
+            var loginUser = randomNewUserName("NewLoginUser", 6);
+            var strId = await LoginAndRegisterAsNewUser(loginUser);
+
+            // C - Create first
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+
+            ViewModels.LiquorEvent viewmodel_adoxio_event = new ViewModels.LiquorEvent()
+            {
+                Name = firstName
+            };
+
+            string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event);
+
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response = await _client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            // Create second
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+
+            ViewModels.LiquorEvent viewmodel_adoxio_event2 = new ViewModels.LiquorEvent()
+            {
+                Name = secondName
+            };
+
+            jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event2);
+
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+            var response2 = await _client.SendAsync(request);
+            response2.EnsureSuccessStatusCode();
+
+            // List
+
+            var listRequest = new HttpRequestMessage(HttpMethod.Get, "/api/" + service);
+            var listResponse = await _client.SendAsync(listRequest);
+            listResponse.EnsureSuccessStatusCode();
+
+            jsonString = await response.Content.ReadAsStringAsync();
+
+            response.EnsureSuccessStatusCode();
 
             await LogoutAndCleanupTestUser(strId);
 
