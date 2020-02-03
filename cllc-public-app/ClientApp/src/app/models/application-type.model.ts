@@ -32,6 +32,11 @@ export class ApplicationType {
   validInterest: FormControlState;
   floorPlan: FormControlState;
   sitePlan: FormControlState;
+  connectedGroceryStore: FormControlState;
+  publicCooler: FormControlState;
+  showLiquorSitePlan: FormControlState;
+  
+
 
 }
 
