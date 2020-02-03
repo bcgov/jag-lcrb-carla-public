@@ -406,9 +406,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 case "account":
                     MicrosoftDynamicsCRMaccount account = _dynamicsClient.GetAccountById(entityId);
-                    folderName = account.GetFolder();
+                    folderName = account.GetDocumentFolderName();
                     break;
-                
+
+                case "application":
+                    var application = await _dynamicsClient.GetApplicationById(entityId);
+                    folderName = application.GetDocumentFolderName();
+                    break;
+
                 default:
                     break;
             }
