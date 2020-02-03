@@ -221,12 +221,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET all applications in Dynamics for the current user
         [HttpGet("ongoing-licensee-application-id")]
-        public JsonResult GetOngoingLicenseeApplicationId()
+        public IActionResult GetOngoingLicenseeApplicationId()
         {
             // get the current user.
             string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
             UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
-            var result = "";
+            IActionResult result = null;
 
             // GET all licensee change applications in Dynamics by applicant using the account Id assigned to the user logged in
             var filter = $"_adoxio_applicant_value eq {userSettings.AccountId} and adoxio_paymentrecieved ne true and statuscode ne {(int)AdoxioApplicationStatusCodes.Terminated}";
@@ -244,16 +244,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var application = _dynamicsClient.Applications.Get(filter: filter).Value.OrderBy(app => app.Createdon).FirstOrDefault();
+                var applications = _dynamicsClient.Applications.Get(filter: filter).Value.OrderBy(app => app.Createdon);
+                var application = applications.FirstOrDefault();
                 if(application != null){
-                    result = application.AdoxioApplicationid;
+                    result = new JsonResult(application.AdoxioApplicationid);
+                }else{
+                    result =  new JsonResult(null);
                 }
             }
-            catch (HttpOperationException)
+            catch (HttpOperationException e)
             {
-                result ="";
+                _logger.LogError(e, "Error getting licensee application");
+                throw;
             }
-            return new JsonResult(result);
+            return result;
         }
 
         /// GET submitted applications in Dynamics for the current user
