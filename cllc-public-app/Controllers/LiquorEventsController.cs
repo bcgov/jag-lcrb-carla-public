@@ -43,6 +43,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = new MicrosoftDynamicsCRMadoxioEvent();
             dynamicsEvent.CopyValues(item);
+
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+            dynamicsEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+
+            if (!string.IsNullOrEmpty(item.LicenceId)) {
+                dynamicsEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("licenses", item.LicenceId);
+            }
+            
             try
             {
                 dynamicsEvent = _dynamicsClient.Events.Create(dynamicsEvent);
@@ -94,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateLiquorEvent([FromBody] ViewModels.LiquorEvent item, string id)
         {
-            if (string.IsNullOrEmpty(id) || item.Id != id)
+            if (string.IsNullOrEmpty(id))
             {
                 return BadRequest();
             }
@@ -108,6 +117,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             MicrosoftDynamicsCRMadoxioEvent patchEvent = new MicrosoftDynamicsCRMadoxioEvent();
             patchEvent.CopyValues(item);
+            if (!string.IsNullOrEmpty(item.LicenceId) && item.LicenceId != dynamicsEvent._adoxioLicenceValue) {
+                patchEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("licenses", item.LicenceId);
+            }
             try
             {
                 _dynamicsClient.Events.Update(id, patchEvent);
@@ -165,7 +177,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetLiquorEventsList()
         {
-            return Ok();
+            string temp = _httpContextAccessor.HttpContext.Session.GetString("UserSettings");
+            UserSettings userSettings = JsonConvert.DeserializeObject<UserSettings>(temp);
+
+            MicrosoftDynamicsCRMadoxioEventCollection dynamicsEvents;
+            List<ViewModels.LiquorEvent> responseEvents = new List<ViewModels.LiquorEvent>();
+            
+            string filter = "_adoxio_account_value eq " + userSettings.AccountId;
+            try
+            {
+                dynamicsEvents = _dynamicsClient.Events.Get(filter: filter);
+            }
+            catch (HttpOperationException ex)
+            {
+                _logger.LogError(ex, "Error retrieving Events");
+                return new NotFoundResult();
+            }
+
+            if (dynamicsEvents.Value.Count > 0)
+            {
+                foreach (MicrosoftDynamicsCRMadoxioEvent evt in dynamicsEvents.Value)
+                {
+                    responseEvents.Add(evt.ToViewModel());
+                }
+            }
+
+            return new JsonResult(responseEvents);
         }
 
         private bool CurrentUserHasAccessToEventOwnedBy(string accountId)

@@ -397,7 +397,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             MicrosoftDynamicsCRMadoxioEvent result;
             try
             {
-                var expand = new List<string> { "adoxio_Account", "adoxio_Contact" };
+                var expand = new List<string> { "adoxio_Account", "adoxio_Licence" };
                 result = this.Events.GetByKey(adoxioEventid: id, expand: expand);
             }
             catch (HttpOperationException)
