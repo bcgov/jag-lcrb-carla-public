@@ -56,6 +56,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   ApplicationTypeNames = ApplicationTypeNames;
   licenceTransferFeatureOn = false;
 
+
   constructor(
     private applicationDataService: ApplicationDataService,
     private licenceDataService: LicenseDataService,
@@ -249,7 +250,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
-        this.router.navigateByUrl(`/account-profile/${data.id}`);
+        this.router.navigateByUrl(`/multi-step-application/${data.id}`);
       },
       () => {
         this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });

@@ -38,27 +38,27 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Show only the first n items
         /// </summary>
-        public int? Top187 { get; set; }
+        public int? Top188 { get; set; }
 
         /// <summary>
         /// Skip the first n items
         /// </summary>
-        public int? Skip106 { get; set; }
+        public int? Skip107 { get; set; }
 
         /// <summary>
         /// Include count of items
         /// </summary>
-        public bool? Count187 { get; set; }
+        public bool? Count188 { get; set; }
 
         /// <summary>
         /// Filter items by property values
         /// </summary>
-        public string Filter187 { get; set; }
+        public string Filter188 { get; set; }
 
         /// <summary>
         /// Search items by search phrases
         /// </summary>
-        public string Search106 { get; set; }
+        public string Search107 { get; set; }
 
         /// <summary>
         /// Subscription credentials which uniquely identify client subscription.
@@ -576,6 +576,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         public virtual ILicencesadoxioeventlicence Licencesadoxioeventlicence { get; private set; }
 
         /// <summary>
+        /// Gets the ILicencessharepointdocumentlocations.
+        /// </summary>
+        public virtual ILicencessharepointdocumentlocations Licencessharepointdocumentlocations { get; private set; }
+
+        /// <summary>
         /// Gets the ILicencetypes.
         /// </summary>
         public virtual ILicencetypes Licencetypes { get; private set; }
@@ -874,6 +879,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// Gets the ISharepointdocumentlocations.
         /// </summary>
         public virtual ISharepointdocumentlocations Sharepointdocumentlocations { get; private set; }
+
+        /// <summary>
+        /// Gets the IRegardingobjectidadoxiolicences.
+        /// </summary>
+        public virtual IRegardingobjectidadoxiolicences Regardingobjectidadoxiolicences { get; private set; }
 
         /// <summary>
         /// Gets the ISharepointsites.
@@ -1483,6 +1493,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Legalentitytasklegalentity = new Legalentitytasklegalentity(this);
             Licenceses = new Licenceses(this);
             Licencesadoxioeventlicence = new Licencesadoxioeventlicence(this);
+            Licencessharepointdocumentlocations = new Licencessharepointdocumentlocations(this);
             Licencetypes = new Licencetypes(this);
             Licencetypesapplicationtypesset = new Licencetypesapplicationtypesset(this);
             Licenseechangelogs = new Licenseechangelogs(this);
@@ -1543,6 +1554,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             Lkadoxioapplicationtransferownershipv1activestageid = new Lkadoxioapplicationtransferownershipv1activestageid(this);
             Savedqueries = new Savedqueries(this);
             Sharepointdocumentlocations = new Sharepointdocumentlocations(this);
+            Regardingobjectidadoxiolicences = new Regardingobjectidadoxiolicences(this);
             Sharepointsites = new Sharepointsites(this);
             Systemforms = new Systemforms(this);
             Systemuseradoxioeventinspector = new Systemuseradoxioeventinspector(this);

@@ -11,15 +11,19 @@ import { LegalEntity } from '@models/legal-entity.model';
 import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
 import { SetCurrentAccountAction } from '@app/app-state/actions/current-account.action';
+import { SetOngoingLicenseeApplicationIdAction } from '@app/app-state/actions/ongoing-licensee-application-id.action';
 import { Account } from '@models/account.model';
 import { VersionInfoDataService } from '@services/version-info-data.service';
 import { VersionInfo } from '@models/version-info.model';
 import { VersionInfoDialogComponent } from '@components/version-info/version-info-dialog.component';
 import { MonthlyReportDataService } from '@services/monthly-report.service';
 import { MonthlyReport, monthlyReportStatus } from '@models/monthly-report.model';
+import { ApplicationDataService } from '@services/application-data.service';
+import { Application } from '@models/application.model';
+import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
 
-const Months = [ 'January', 'February', 'March', 'April', 'May', 'June',
-           'July', 'August', 'September', 'October', 'November', 'December' ];
+const Months = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'];
 
 @Component({
   selector: 'app-root',
@@ -42,13 +46,16 @@ export class AppComponent extends FormBase implements OnInit {
   linkedFederalReports: MonthlyReport[];
   Months = Months;  // make available in template
   parseInt = parseInt; // make available in template
+  licenseeChangeFeatureOn: boolean;
 
   constructor(
+    private snackBar: MatSnackBar,
     public dialog: MatDialog,
     private renderer: Renderer2,
     private router: Router,
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
+    private applicationDataService: ApplicationDataService,
     public featureFlagService: FeatureFlagService,
     private monthlyReportDataService: MonthlyReportDataService,
     private versionInfoDataService: VersionInfoDataService,
@@ -56,6 +63,9 @@ export class AppComponent extends FormBase implements OnInit {
     super();
     featureFlagService.featureOn('Maps')
       .subscribe(x => this.showMap = x);
+
+      featureFlagService.featureOn('LicenseeChanges')
+      .subscribe(x => this.licenseeChangeFeatureOn = x);
 
     featureFlagService.featureOn('FederalReporting')
       .subscribe(x => this.showFederalReporting = x);
@@ -127,7 +137,7 @@ export class AppComponent extends FormBase implements OnInit {
             .subscribe(() => { });
 
           // load federal reports after the user logs in
-            this.monthlyReportDataService.getAllCurrentMonthlyReports()
+          this.monthlyReportDataService.getAllCurrentMonthlyReports()
             .subscribe(data => {
               this.linkedFederalReports = data.filter(report => report.statusCode === monthlyReportStatus.Draft);
             });
@@ -140,7 +150,29 @@ export class AppComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(account => {
         this.account = account;
+        if (this.account && this.licenseeChangeFeatureOn) {
+          // load ongoing licensee changes application id
+          this.loadLicenseeApplication();
+        }
       });
+  }
+
+  loadLicenseeApplication(retry: number = 1) {
+    this.applicationDataService.getOngoingLicenseeChangeApplicationId()
+      .subscribe(id => {
+        if (id) {
+          this.store.dispatch(new SetOngoingLicenseeApplicationIdAction(id));
+        } else if (retry > 0) {
+          const newLicenceApplicationData: Application = <Application>{
+            applicantType: this.account.businessType,
+            applicationType: <ApplicationType>{ name: ApplicationTypeNames.LicenseeChanges },
+            account: this.account,
+          };
+          // create licensee application and upload state
+          this.applicationDataService.createApplication(newLicenceApplicationData)
+            .subscribe(res => this.loadLicenseeApplication(retry - 1));
+        }
+      })
   }
 
   showBceidTermsOfUse(): boolean {

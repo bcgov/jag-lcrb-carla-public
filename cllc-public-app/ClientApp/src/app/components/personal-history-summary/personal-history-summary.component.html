@@ -154,9 +154,9 @@
             </p>
             <section>
                 <app-file-uploader documentType="CRC" [useDocumentTypeForName]="true"
-                    fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="account"
-                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="'e18c8dd7-939f-4c74-84f0-736b728c3c8f'"
-                    [uploadHeader]="'TO UPLOAD CRIMINAL RECORD CHECK, DRAG FILES HERE OR'">
+                    fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="contact"
+                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="contactToken"
+                    [uploadHeader]="'TO UPLOAD CRIMINAL RECORD CHECK, DRAG FILES HERE OR'" [publicAccess]="true">
                 </app-file-uploader>
             </section>
         </section>
@@ -214,9 +214,9 @@
             </ol>
             <section>
                 <app-file-uploader documentType="Signage" [useDocumentTypeForName]="true"
-                    fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="application"
-                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="1"
-                    [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'">
+                    fileTypes="FILE MUST BE IN PDF, JPG OR PNG FORMAT." [multipleFiles]="true" entityName="contact"
+                    [extensions]="['jpg', 'jpeg', 'png', 'pdf']" [entityId]="contactToken"
+                    [uploadHeader]="'TO UPLOAD PHOTOS OR RENDERINGS OF SIGNAGE, DRAG FILES HERE OR'" [publicAccess]="true">
                 </app-file-uploader>
             </section>
         </ng-container>
