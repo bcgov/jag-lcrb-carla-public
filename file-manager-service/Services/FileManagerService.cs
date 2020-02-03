@@ -146,6 +146,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     listTitle = SharePointFileManager.WorkertDocumentListTitle;
                     break;
                 default:
+                    listTitle = entityName;
                     break;
             }
             return listTitle;
