@@ -57,11 +57,17 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         public async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(Guid id)
         {
+            return await GetApplicationById(id.ToString());
+        }
+
+
+        public async Task<MicrosoftDynamicsCRMadoxioApplication> GetApplicationById(string id)
+        {
             MicrosoftDynamicsCRMadoxioApplication result;
             try
             {
                 // fetch from Dynamics.
-                result = await Applications.GetByKeyAsync(id.ToString());
+                result = await Applications.GetByKeyAsync(id);
 
                 if (result._adoxioLicencetypeValue != null)
                 {

@@ -12,18 +12,7 @@
         Completeness</h3>
       <div class="submitted-content" style="background-color: #F1F4FA; border-bottom: 4px solid #E4E4E4">
           <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation' || account?.businessType === 'PublicCorporation'">
-        
-              <a [routerLink]="[ '/account-profile/']" class="completeness">
-                <i class="far fa-check-circle" style="margin-right: 10px; color:green;">
-                </i>Notice of Articles Uploaded
-              </a> <br>
-            </div>
-    
-            <div style="font-size:20px;" *ngIf="account?.businessType === 'PrivateCorporation'">
-              <a [routerLink]="[ '/org-structure/']" class="completeness">
-                <i class="far fa-times-circle" style="margin-right: 10px; color: red;">
-                </i>Central Securities Register Uploaded
-              </a><br>
+            <app-account-completeness [account]="account" entityName="application" [entityId]="applicationId" formId="licensee-changes-corporation" #accountCompleteness></app-account-completeness>
             </div>
             
             <div style="font-size:20px;" *ngIf="account?.businessType === 'Partnership'">

@@ -19,7 +19,7 @@
     <PackageReference Include="Protractor.Net.Standard" Version="0.12.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="79.0.3945.3600" />
     <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="Xunit.Gherkin.Quick" Version="3.5.0" />
+    <PackageReference Include="Xunit.Gherkin.Quick" Version="4.0.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

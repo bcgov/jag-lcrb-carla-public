@@ -49,13 +49,5 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_LicenceEstablishment@odata.bind")]
         public string AdoxioLicenceEstablishmentODataBind { get; set; }
 
-
-        
-
-
-
-
-
-
     }
 }
