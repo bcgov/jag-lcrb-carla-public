@@ -31,7 +31,7 @@
                   </a>
                 </div>
                 <a href="javascript: void(0);" (click)="startRenewal(item)" appRemoveIfFeatureOff="CRS-Renewal"
-                  *ngIf="isAboutToExpire(item.expiryDate) && !item.relatedApplicationPaid"><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>Renew Licence</a>
+                  *ngIf="isAboutToExpire(item.expiryDate)"><i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>Renew Licence</a>
               </td>
               <td style="padding: 10px;">
                 <div *ngIf="item?.licenceTypeName !== 'Marketer'">

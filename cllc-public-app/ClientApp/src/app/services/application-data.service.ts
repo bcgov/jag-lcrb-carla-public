@@ -4,7 +4,7 @@ import { Application } from '@models/application.model';
 import { ApplicationSummary } from '@models/application-summary.model';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DataService } from './data.service';
 
 @Injectable()
@@ -36,6 +36,11 @@ export class ApplicationDataService extends DataService {
 
   getAllCurrentApplications(): Observable<ApplicationSummary[]> {
     return this.http.get<ApplicationSummary[]>(this.apiPath + 'current', { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getOngoingLicenseeChangeApplicationId(): Observable<string> {
+    return this.http.get<string>(this.apiPath + 'ongoing-licensee-application-id', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 

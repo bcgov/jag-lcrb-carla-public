@@ -47,5 +47,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(Guid id);
         MicrosoftDynamicsCRMadoxioLicences GetLicenceByIdWithChildren(string id);
+
+        MicrosoftDynamicsCRMadoxioEvent GetEventByIdWithChildren(string id);
+        MicrosoftDynamicsCRMadoxioEvent GetEventById(string id);
     }
 }
