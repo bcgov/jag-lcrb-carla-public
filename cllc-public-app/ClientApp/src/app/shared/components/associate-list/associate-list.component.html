@@ -18,22 +18,22 @@
                     <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
                         [ngClass]="{'alt-row': i%2 === 0}">
                         <td>
-                            <span *ngIf="!associate.get('edit').value || associate.get('saved').value">
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">
                                 {{associate.get('firstNameNew').value}}
                             </span>
                             <app-field [showChevrons]="false"
-                                *ngIf="associate.get('edit').value && !associate.get('saved').value"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('firstNameNew').touched || associate.get('firstNameNew').valid"
                                 errorMessage="Please enter First Name">
                                 <input class="form-control" type="text" formControlName="firstNameNew">
                             </app-field>
                         </td>
                         <td>
-                            <span *ngIf="!associate.get('edit').value || associate.get('saved').value">
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">
                                 {{associate.get('lastNameNew').value}}
                             </span>
                             <app-field [showChevrons]="false"
-                                *ngIf="associate.get('edit').value && !associate.get('saved').value"
+                                *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('lastNameNew').touched || associate.get('lastNameNew').valid"
                                 errorMessage="Please enter Last Name">
                                 <input class="form-control" type="text" formControlName="lastNameNew">
@@ -79,8 +79,8 @@
                         </td>
                         <td>
                             <span
-                                *ngIf="!associate.get('edit').value">{{associate.get('dateofBirthNew').value | date}}</span>
-                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                                *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('dateofBirthNew').value | date}}</span>
+                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
                                 errorMessage="Please enter Bith Date">
                                 <input type="text" formControlName="dateofBirthNew"
@@ -129,16 +129,16 @@
                     <tr *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()" [formGroupName]="i"
                         [ngClass]="{'alt-row': i%2 === 0}">
                         <td>
-                            <span *ngIf="!associate.get('edit').value">{{associate.get('firstNameNew').value}}</span>
-                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('firstNameNew').value}}</span>
+                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('firstNameNew').touched || associate.get('firstNameNew').valid"
                                 errorMessage="Please enter First Name">
                                 <input class="form-control" type="text" formControlName="firstNameNew">
                             </app-field>
                         </td>
                         <td>
-                            <span *ngIf="!associate.get('edit').value">{{associate.get('lastNameNew').value}}</span>
-                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">{{associate.get('lastNameNew').value}}</span>
+                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('lastNameNew').touched || associate.get('lastNameNew').valid"
                                 errorMessage="Please enter Last Name">
                                 <input class="form-control" type="text" formControlName="lastNameNew">
@@ -154,10 +154,11 @@
                             </app-field>
                         </td>
                         <td>
-                            <span
-                                *ngIf="!associate.get('edit').value">{{associate.get('dateofBirthNew').value | date}}</span>
+                            <span *ngIf="!associate.get('edit').value || associate.get('id').value">
+                                {{associate.get('dateofBirthNew').value | date}}
+                            </span>
 
-                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                            <app-field [showChevrons]="false" *ngIf="associate.get('edit').value && !associate.get('id').value"
                                 [valid]="!associate.get('dateofBirthNew').touched || associate.get('dateofBirthNew').valid"
                                 errorMessage="Please enter Birth Date">
                                 <input type="text" formControlName="dateofBirthNew"
@@ -205,10 +206,11 @@
                     <ng-container *ngIf="!asLicenseeChangeLog(associate?.value).isRemoveChangeType()">
                         <tr [formGroupName]="i" [ngClass]="{'alt-row': i%2 === 0}">
                             <td>
-                                <span
-                                    *ngIf="!associate.get('edit').value">{{associate.get('businessNameNew').value}}</span>
+                                <span *ngIf="!associate.get('edit').value || associate.get('id').value">
+                                    {{associate.get('businessNameNew').value}}
+                                </span>
 
-                                <app-field *ngIf="associate.get('edit').value" [showChevrons]="false"
+                                <app-field *ngIf="associate.get('edit').value && !associate.get('id').value" [showChevrons]="false"
                                     [valid]="!associate.get('businessNameNew').touched || associate.get('businessNameNew').valid"
                                     errorMessage="Please enter Business Name">
                                     <input class="form-control" type="text" formControlName="businessNameNew">
@@ -224,10 +226,10 @@
                                 </app-field>
                             </td>
                             <td>
-                                <span *ngIf="!associate.get('edit').value">
+                                <span *ngIf="!associate.get('edit').value || associate.get('id').value">
                                     {{getBusinessTypeName(associate.get('businessType').value)}}
                                 </span>
-                                <app-field [showChevrons]="false" *ngIf="associate.get('edit').value"
+                                <app-field [showChevrons]="false" *ngIf="associate.get('edit').value && !associate.get('id').value"
                                     [valid]="!associate.get('businessType').touched || associate.get('businessType').valid"
                                     errorMessage="Please select Business Type">
                                     <select class="form-control" style="width: 250px;" formControlName="businessType">

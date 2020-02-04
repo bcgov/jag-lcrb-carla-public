@@ -55,6 +55,7 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   nonMarketerExists: boolean;
   ApplicationTypeNames = ApplicationTypeNames;
   licenceTransferFeatureOn = false;
+  licenseeChangeFeatureOn: boolean;
 
 
   constructor(
@@ -79,6 +80,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     .subscribe((featureOn: boolean) => {
       this.licenceTransferFeatureOn = featureOn;
     });
+    featureFlagService.featureOn('LicenseeChanges')
+    .subscribe(x => this.licenseeChangeFeatureOn = x);
   }
 
   ngOnInit() {
@@ -250,7 +253,11 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // newLicenceApplicationData. = this.account.businessType;
     this.busy = this.applicationDataService.createApplication(newLicenceApplicationData).subscribe(
       data => {
+        if( this.licenseeChangeFeatureOn){
         this.router.navigateByUrl(`/multi-step-application/${data.id}`);
+        } else {
+          this.router.navigateByUrl(`/account-profile/${data.id}`);
+        }
       },
       () => {
         this.snackBar.open('Error starting a New Licence Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
