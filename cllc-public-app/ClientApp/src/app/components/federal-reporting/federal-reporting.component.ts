@@ -32,8 +32,7 @@ export class FederalReportingComponent implements OnInit {
   selectedMonthlyReportIndex = null;
   selectedLicenceIndex = null;
   visibleInventoryReports = [];
-  licencesBusy: Subscription;
-  monthlyReportsBusy: Subscription;
+  busy: Subscription;
   reportIsDisabled = true;
   reportIsClosed = true;
   routeParams: Observable<FederalReportingParams>;
@@ -83,48 +82,69 @@ export class FederalReportingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.busy = forkJoin([
+      this.licenceDataService.getAllCurrentLicenses(),
+      this.monthlyReportDataService.getAllCurrentMonthlyReports()
+    ])
+    .subscribe(results => {
+      this.licenses = results[0];
+      this.monthlyReports = results[1];
+
+      this.routeParams.subscribe(params => {
+        this.updateStateFromParams(params);
+      });
+    });
+
     this.routeParams.subscribe(params => {
-      // no licences loaded (probably first load)
-      if (this.selectedLicenceIndex === null && this.licenses.length < 1) {
-        this.licencesBusy = forkJoin(
-          this.licenceDataService.getAllCurrentLicenses()
-        )
-        .subscribe(([licenses]) => {
-          this.licenses = licenses;
-          this.selectedLicenceIndex = this.licenses.findIndex(l => l.licenseId === params.licenceId);
-          // no monthly report chosen
-          if (params.monthlyReportId === null) {
-            this.getMonthlyReports(params.licenceId);
-          } else {
-            this.getMonthlyReports(params.licenceId, params.monthlyReportId);
-          }
-        });
+      this.updateStateFromParams(params);
+    });
+  }
+
+  updateStateFromParams(params) {
+    const licenceIndex = (params.licenceId === null) ? 0 : this.licenses.findIndex(l => l.licenseId === params.licenceId);
+    if (licenceIndex !== -1) {
+      this.selectedLicenceIndex = licenceIndex;
+    }
+
+    this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === params.licenceId);
+
+    const reportIndex = (params.monthlyReportId === null) ? 0 : this.shownMonthlyReports.findIndex(r => r.monthlyReportId === params.monthlyReportId);
+    if (reportIndex !== -1) {
+      this.selectedMonthlyReportIndex = reportIndex;
+    }
+
+    this.renderMonthlyReport();
+  }
+
+
+  getLicences(licenceId: string, monthlyReportId = null) {
+    this.busy = forkJoin([
+      this.licenceDataService.getAllCurrentLicenses()
+    ])
+    .subscribe(([licenses]) => {
+      this.licenses = licenses;
+      this.selectedLicenceIndex = this.licenses.findIndex(l => l.licenseId === licenceId);
+      // no monthly report chosen
+      if (monthlyReportId === null) {
+        this.busy = this.getMonthlyReports(licenceId);
       } else {
-        const index = this.licenses.findIndex(l => l.licenseId === params.licenceId);
-         // licence has changed
-        if (index !== this.selectedLicenceIndex) {
-          this.selectedLicenceIndex = index;
-          this.getMonthlyReports(params.licenceId, params.monthlyReportId);
-        } else {
-          // monthly report has changed
-          this.selectedMonthlyReportIndex = this.shownMonthlyReports.findIndex(r => r.monthlyReportId === params.monthlyReportId);
-          this.renderMonthlyReport();
-        }
+        this.busy = this.getMonthlyReports(licenceId, monthlyReportId);
       }
     });
   }
 
   getMonthlyReports(licenceId, monthlyReportId = null) {
     this.loadingMonthlyReports = true;
-    this.monthlyReportsBusy = forkJoin(
+    return forkJoin([
       this.monthlyReportDataService.getMonthlyReportsByLicence(licenceId)
-    )
+    ])
     .subscribe(([monthlyReports]) => {
       this.monthlyReports = monthlyReports;
+      this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
       if (monthlyReportId !== null) {
-        this.shownMonthlyReports = this.monthlyReports.filter((rep) => rep.licenseId === licenceId);
         this.selectedMonthlyReportIndex = this.shownMonthlyReports.findIndex(r => r.monthlyReportId === monthlyReportId);
       } else if (this.monthlyReports.length > 0) {
+        this.selectedMonthlyReportIndex = 0;
         this.router.navigate([
           `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[0].monthlyReportId}`
         ]);
@@ -148,7 +168,7 @@ export class FederalReportingComponent implements OnInit {
       updateRequest.inventorySalesReports.push({ ...f.value });
     });
     this.loadingMonthlyReports = true;
-    this.monthlyReportsBusy = forkJoin(
+    this.busy = forkJoin(
       this.monthlyReportDataService.updateMonthlyReport(updateRequest)
     )
       .subscribe(([report]) => {
@@ -161,6 +181,7 @@ export class FederalReportingComponent implements OnInit {
   }
 
   handleMonthlyReportTabChanged(event) {
+    this.selectedMonthlyReportIndex = event.index;
     this.router.navigate([
       `/federal-reporting/${this.licenses[this.selectedLicenceIndex].licenseId}/${this.monthlyReports[event.index].monthlyReportId}`
     ]);
