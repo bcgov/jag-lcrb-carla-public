@@ -77,6 +77,9 @@ export class AppComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
+          if (event.url.search('federal-reporting') >= 0) {
+            this.showMessageCenterContent = false;
+          }
           const prevSlug = this.previousUrl;
           let nextSlug = event.url.slice(1);
           if (!nextSlug) { nextSlug = 'home'; }
