@@ -1,6 +1,6 @@
 # bash script to be sourced to set environment variables for OpenShift scripts
-#export PROJECT_NAMESPACE="yuumcs"
-export PROJECT_NAMESPACE="lclb-cllc"
+export PROJECT_NAMESPACE="yuumcs"
+#export PROJECT_NAMESPACE="lclb-cllc"
 
 export PROJECT_OS_DIR=${PROJECT_OS_DIR:-../../openshift}
 
