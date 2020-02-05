@@ -461,7 +461,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // create session info for the current user
                 userSettings.UserId = userId;
                 userSettings.UserAuthenticated = true;
-                userSettings.IsNewUserRegistration = (userSettings.AuthenticatedUser == null);
+                userSettings.IsNewUserRegistration = userSettings.AuthenticatedUser == null;
 
                 // set other session info
                 userSettings.SiteMinderGuid = siteMinderGuid;
@@ -569,40 +569,43 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     // Verified individual is from BC Service Card which means it's a worker
                     // Update contact and worker with latest info from BC Service Card
-                    ViewModels.Contact contact = new ViewModels.Contact();
-                    contact.CopyHeaderValues(context.Request.Headers);
+                    MicrosoftDynamicsCRMadoxioWorkerCollection workerCollection = _dynamicsClient.Workers.Get(filter: $"_adoxio_contactid_value eq {userSettings.ContactId}");
+                    if (workerCollection.Value.Count > 0) {
+                        MicrosoftDynamicsCRMadoxioWorker savedWorker = workerCollection.Value[0];
+                        ViewModels.Contact contact = new ViewModels.Contact();
+                        contact.CopyHeaderValues(context.Request.Headers);
 
-                    MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
-                    if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1) {
-                        MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress() {
-                            AdoxioStreetaddress = savedContact.Address1Line1,
-                            AdoxioProvstate = savedContact.Address1Stateorprovince,
-                            AdoxioCity = savedContact.Address1City,
-                            AdoxioCountry = savedContact.Address1Country,
-                            AdoxioPostalcode = savedContact.Address1Postalcode,
-                            ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", savedContact.Contactid)
+                        MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
+                        if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1) {
+                            MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress() {
+                                AdoxioStreetaddress = savedContact.Address1Line1,
+                                AdoxioProvstate = savedContact.Address1Stateorprovince,
+                                AdoxioCity = savedContact.Address1City,
+                                AdoxioCountry = savedContact.Address1Country,
+                                AdoxioPostalcode = savedContact.Address1Postalcode,
+                                ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", savedContact.Contactid)
+                            };
+                            _dynamicsClient.Previousaddresses.Create(prevAddress);
+                        }
+
+                        
+                        _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());
+                        
+
+                        ViewModels.Worker worker = new ViewModels.Worker();
+                        worker.CopyHeaderValues(context.Request.Headers);
+                        
+                        MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker() {
+                            AdoxioFirstname = worker.firstname,
+                            AdoxioLastname = worker.lastname,
+                            AdoxioMiddlename = worker.middlename
                         };
-                        _dynamicsClient.Previousaddresses.Create(prevAddress);
+                        if (worker.gender != 0) {
+                            patchWorker.AdoxioGendercode = (int)worker.gender;
+                        }
+                        
+                        _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
                     }
-
-                    
-                    _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());
-                    
-
-                    ViewModels.Worker worker = new ViewModels.Worker();
-                    worker.CopyHeaderValues(context.Request.Headers);
-                    MicrosoftDynamicsCRMadoxioWorker savedWorker = _dynamicsClient.Workers.Get(filter: $"_adoxio_contactid_value eq {userSettings.ContactId}").Value[0];
-                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker() {
-                        AdoxioFirstname = worker.firstname,
-                        AdoxioLastname = worker.lastname,
-                        AdoxioMiddlename = worker.middlename
-                    };
-                    if (worker.gender != 0) {
-                        patchWorker.AdoxioGendercode = (int)worker.gender;
-                    }
-                    
-                    _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
-                    
                 }
 
                 // **************************************************
